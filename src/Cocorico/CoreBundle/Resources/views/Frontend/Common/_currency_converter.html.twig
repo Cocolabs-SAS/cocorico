@@ -1,0 +1,32 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% if close is defined %}
+    <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+        <span class="hidden">Close</span>
+        <i class="icon-cancel"></i>
+    </a>
+{% endif %}
+<strong class="title">{{ 'listing.currency_convert.title'|trans }}</strong>
+
+<div class="field-row">
+    <div class="select-holder">
+        <select id="convert_currency_two" class="currency-list" title="currency-list">
+            {% for currency, symbol in currencies if currency != defaultCurrency %}
+                <option value="{{ currency }}">{{ symbol }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col">
+        <div class="field-holder">
+            <input type="text" id="convert_amount_one" class="numbers-only form-control" title="price"
+                   data-currency="{{ defaultCurrency }}" value="" placeholder="{{ currencies[defaultCurrency] }}"/>
+        </div>
+
+        <i class="ico resizer">{{ currencies[defaultCurrency] }} &hArr;</i>
+
+        <div class="field-holder">
+            <input type="text" class="numbers-only form-control" id="convert_amount_two"
+                   title="other price" data-currency="" value=""/>
+        </div>
+    </div>
+</div>

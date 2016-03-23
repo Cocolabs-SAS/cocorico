@@ -1,0 +1,34 @@
+<!-- post -->
+{#todo-ravi: order messages in entity via annotation instead here#}
+{% for message in thread.messages | reverse %}
+    {% set user = message.sender %}
+    {% set image_user = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    <article class="post">
+        <header class="head">
+            <div class="author-img">
+                <div class="img-holder">
+                    <img alt="{{ user.getName }}"
+                         src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
+                </div>
+                <a class="author-name" title="{{ user.getName }}"
+                   href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
+                    <strong>{{ user.getName }}</strong>
+                </a>
+            </div>
+            <div class="meta">
+                <time datetime="{{ message.createdAt |date("Y-m-d") }}">
+                    {{ message.createdAt |date("d/m/Y") }}
+                </time>
+            </div>
+        </header>
+        <div class="post-content">
+            <p>{{ message.body | nl2br }}</p>
+        </div>
+        <footer class="footer">
+            <span class="time">
+                <i class="icon-clock"></i> {{ message.createdAt |date("H") }}
+                h{{ message.createdAt |date("i") }} GMT
+            </span>
+        </footer>
+    </article>
+{% endfor %}

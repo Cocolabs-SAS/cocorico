@@ -1,0 +1,48 @@
+imports:
+    - { resource: admin.yml }
+
+services:
+    # review listener
+    cocorico.review.listener:
+        class: Cocorico\ReviewBundle\Entity\Listener\ReviewListener
+        tags:
+            - { name: doctrine.orm.entity_listener }
+            - { name: doctrine.orm.entity_listener, entity_manager: default }
+
+    # review manager
+    cocorico.review.manager:
+        class: Cocorico\ReviewBundle\Model\ReviewManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.review_max_per_page%"
+
+    # star rating type form type
+    cocorico.star_rating.form.type:
+        class: Cocorico\ReviewBundle\Form\Type\StarRatingType
+        tags:
+            - { name: form.type, alias: star_rating }
+
+    cocorico.form.type.review_new:
+        class: Cocorico\ReviewBundle\Form\Type\Frontend\ReviewType
+        tags:
+            - { name: form.type, alias: review_new }
+
+
+    cocorico.form.handler.review:
+        class: Cocorico\ReviewBundle\Form\Handler\Frontend\ReviewFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico.review.manager"
+
+    # star rating twig extension
+    cocorico.star_rating.twig.extension:
+        class: Cocorico\ReviewBundle\Extension\StarRatingTwigExtension
+        tags:
+            -  { name: twig.extension }
+
+    #Voters
+    security.access.review_voter:
+        class:      Cocorico\ReviewBundle\Security\Voter\ReviewVoter
+        public:     false
+        tags:
+           - { name: security.voter }

@@ -1,0 +1,323 @@
+parameters:
+    #### Environment independant parameters. Same values in dev, staging, prod environments  ####
+    #Site general infos
+    cocorico.site_name: Cocorico
+    cocorico.phone: +33(0) 1 43 79 86 30
+    cocorico.address: 67 rue de Provence, 75009
+    cocorico.short_description: 'Cocorico is collaborative consumption platform'
+    cocorico.contact_mail: contact@cocorico.io
+    #To obfuscate see http://wbwip.com/wbw/emailencoder.html
+    cocorico.contact_mail_obfuscated: "&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#099;&#111;&#099;&#111;&#114;&#105;&#099;&#111;&#046;&#105;&#111;"
+    cocorico.from_email: no-reply@cocorico.io
+    cocorico.webmaster_email: webmaster@cocorico.io
+    cocorico.vat_number: FR 12 123 456 789
+
+    #Languages
+    #For knp translatable
+    locale: en
+
+    cocorico.locale: en
+    cocorico.locales:
+            - en
+            - fr
+    cocorico.locales_string: en|fr
+    #Currencies
+    cocorico.currency: EUR
+    cocorico.currencies_for_lexik:
+        - EUR
+        - USD
+        - GBP
+        - CHF
+        - CAD
+        - JPY
+        - RUB
+        - AUD
+    cocorico.currencies:
+        EUR: €
+        USD: $
+        GBP: £
+        CHF: CHF
+        CAD: $ CAD
+        JPY: ¥
+        RUB: руб
+        AUD: $ AUD
+    cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
+    cocorico.currencies_json: %kernel.root_dir%/../web/json/currencies.json
+
+    #Does VAT is included in prices fixing
+    cocorico.include_vat: true
+    #Does the include/exclude tax is displayed
+    cocorico.display_vat: true
+
+    #VAT in percent
+    cocorico.vat: 0.2
+
+    #Does registration require email confirmation
+    cocorico.registration_confirmation: false
+
+    #Fees in %
+    cocorico.fee_as_asker: 0.1
+    cocorico.fee_as_offerer: 0.05
+
+    #Time unit in minute
+    cocorico.time_unit: 1440
+
+    #Is there a day flexibility for search. 0 For no else max days flexibility
+    cocorico.time_unit_flexibility: 0
+
+    #Used for display calendar :
+    #Unavailability is for all day or overlaps two consecutives days.
+    cocorico.time_unit_allday: true  #boolean
+
+    #Days display mode. (range or duration)
+    cocorico.days_display_mode: range
+
+    #Times display mode. (range or duration).
+    #No effect if time unit is day
+    cocorico.times_display_mode: duration
+
+    #Max search and booking days number.
+    #Min 1. If set to 1 and days_display_mode = duration then only start date is displayed
+    cocorico.days_max: 360
+
+    #Max availabilities edition days number
+    cocorico.days_max_edition: 180
+
+    #Max search, booking time unit number.
+    #Min 1. Max value of times max depends on time unit: 24 if time unit is hour. Not needed if time unit is day.
+    cocorico.times_max: 8 #ex: for 8 hours with time_unit equal to 60
+
+    #Default max items per page on dashboard list pages
+    cocorico.dashboard_max_per_page: 10 #default
+    cocorico.message_max_per_page: 10
+    cocorico.review_max_per_page: 10
+
+    #Is new listing published by default (0 or 1)
+    cocorico.listing_new_is_published: 1
+
+    #Countries : for all countries set it to ~
+    cocorico.listing_countries:
+        - FR
+        - GB
+        - FI
+    cocorico.listing_favorite_countries:
+        - FR
+
+    #Categories
+    cocorico.listing_category_min: 1
+
+    #Listing price precision. true or false for now
+    cocorico.listing_price_precision: 2
+
+    #Min listing price in euro cents
+    cocorico.listing_price_min: 500
+    #Max listing price in euro cents
+    cocorico.listing_price_max: 100000
+
+    #Add marker on listing show page if true or zone if false
+    cocorico.listing_map_display_marker: false
+
+    #Discounts
+    cocorico.listing_discount_min: 1
+    cocorico.listing_discount_max: 90
+
+    #List max per page
+    #Listing result per page
+    cocorico.listing_search_max_per_page: 10
+
+    #Listing search min result. Search is restarted in a largest zone if number of result is less than this limit.
+    cocorico.listing_search_min_result: 5
+
+    #Enable listing duplication
+    cocorico.listing.duplication: true
+
+    #Default listing availability status.
+    #See ListingAvailability $status for allowed values (available : 1 or unavailable : 2).
+    cocorico.listing_availability_status: 1
+
+    #Min booking price in euro cents
+    cocorico.booking_price_min: 500
+
+    #Does a booking request can be made with a start equal to end. If set to true end_day_included must be set to true
+    #Does a single day is allowed in search
+    cocorico.booking.allow_single_day: false
+
+    #Does a booking request include the end day in the booking duration.
+    #Does the end day is included in search.
+    cocorico.booking.end_day_included: false
+
+    #Minimum days between booking request and booking starting day
+    #Or Number of days to add to the current date to consider start date as valid
+    #Ex : 0 -> the booking can be requested and start the current day
+    #     1 -> the booking can be requested at least one day before it start.
+    cocorico.booking.min_start_delay: 0
+
+    #Minimum hours between booking request and booking starting time
+    #Or Number of hours to add to the current time to consider start time as valid
+    #Ex : 8 -> the booking can be requested at least eight hours before it start.
+    cocorico.booking.min_start_time_delay: 12
+
+    #Refund percentage rules depending on Listing Cancelation Policies
+    cocorico.booking.cancelation_policy:
+        flexible:
+            time_before_start: 86400
+            refund_min: 0.5
+            refund_max: 1
+        strict:
+            time_before_start: 86400
+            refund_min: 0
+            refund_max: 0.5
+
+
+    #ListingOption: none or Cocorico\ListingOptionBundle\Entity\ListingOption (without quotes!)
+    #BookingOption: none or Cocorico\ListingOptionBundle\Entity\BookingOption (without quotes!)
+    cocorico_listing_option.listing_option.entity_class: none
+    cocorico_listing_option.booking_option.entity_class: none
+    #ListingAlert: none or Cocorico\ListingAlertBundle\Entity\ListingAlert
+    cocorico_listing_alert.entity_class: none
+
+    #Config
+    cocorico_config.parameters_allowed:
+        - 'cocorico.fee_as_asker'
+        - 'cocorico.fee_as_offerer'
+
+    #Images
+    #User
+    #Max/Min images by user
+    cocorico.user_img_min: 1
+    cocorico.user_img_max: 6
+    cocorico.user_img_max_upload_size: 12 #MB
+
+    #User images sizes (px)
+    cocorico.user_img_xsmall_w: 60
+    cocorico.user_img_xsmall_h: 45
+    cocorico.user_img_small_w: 150
+    cocorico.user_img_small_h: 112
+    cocorico.user_img_medium_w: 200
+    cocorico.user_img_medium_h: 150
+    cocorico.user_img_contact_w: 213
+    cocorico.user_img_contact_h: 160
+    cocorico.user_img_profile_w: 308
+    cocorico.user_img_profile_h: 231
+
+    #Listing
+    #Max/Min images by listing
+    cocorico.listing_img_min: 1
+    cocorico.listing_img_max: 24
+    cocorico.listing_img_max_upload_size: 12 #MB
+
+    #Listing images sizes (px)
+    cocorico.listing_img_xsmall_w: 90
+    cocorico.listing_img_xsmall_h: 67
+    cocorico.listing_img_small_w: 100
+    cocorico.listing_img_small_h: 75
+    cocorico.listing_img_xxmedium_w: 150
+    cocorico.listing_img_xxmedium_h: 112
+    cocorico.listing_img_xmedium_w: 200
+    cocorico.listing_img_xmedium_h: 150
+    cocorico.listing_img_medium_w: 275
+    cocorico.listing_img_medium_h: 206
+    cocorico.listing_img_large_w: 384
+    cocorico.listing_img_large_h: 288
+    cocorico.listing_img_xlarge_w: 527
+    cocorico.listing_img_xlarge_h: 395
+    cocorico.listing_img_xxlarge_w: 680
+    cocorico.listing_img_xxlarge_h: 510
+    cocorico.upload_image_w: 120
+    cocorico.upload_image_h: 90
+
+    #Maps size (px)
+    cocorico.listing_new_map_w: 100
+    cocorico.listing_new_map_h: 300
+    cocorico.listing_edit_map_w: 100
+    cocorico.listing_edit_map_h: 418
+    cocorico.listing_show_map_w: 100
+    cocorico.listing_show_map_h: 480
+    cocorico.listing_search_map_w: 390
+    cocorico.listing_search_map_h: 1110
+
+
+    ################################### Environment dependant parameters. To override in parameters.yml ####
+    #Assets base url for email
+    cocorico.assets_base_urls: ~
+
+    #Request Context url for email send from command
+    router.request_context.host: ~
+    router.request_context.scheme: ~
+    router.request_context.base_url: ~
+
+    #Admin access
+    cocorico.admin: ~
+    #Admin Web JMS translations activation
+    cocorico.admin_translation: ~
+
+    #translator key
+    cocorico.translator.client.id: ~
+    cocorico.translator.secret.key: ~
+    cocorico.translator.translate.url: http://api.microsofttranslator.com/v2/Http.svc/TranslateArray
+    cocorico.translator.scope.url: http://api.microsofttranslator.com
+    cocorico.translator.token.url: https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/
+    cocorico.translator.grant.type: 'client_credentials'
+
+    #facebook
+    cocorico.facebook.app_id: ~
+    cocorico.facebook.secret: ~
+
+    #Image processing driver (liip_imagine_bundle): (gd, imagick, gmagick)
+    cocorico.image_driver: ~
+
+    #Google analytics code
+    cocorico.google_analytics: ~
+
+    #Google Tag Manager
+    cocorico.google_tag_manager: ~
+
+    #Google Place API Key (To set on prod)
+    cocorico_geo.google_place_api_key: ~
+    cocorico_geo.google_place_server_api_key: ~
+
+    #IpInfoDb Api key
+    cocorico_geo.ipinfodb_api_key: ~
+
+    #Deployment
+    cocorico.deploy.host: ~
+    cocorico.deploy.dir: ~
+    cocorico.deploy.user: ~
+
+    #### Environment dependant only to facilitate tests ####
+
+    #Booking expiration delay in minutes
+    cocorico.booking.expiration_delay: ~ #2880
+
+    #Expiring Bookings alert delay in minutes
+    cocorico.booking.alert_expiration_delay: ~ #120
+
+    #Imminent Bookings alert delay in minutes
+    cocorico.booking.alert_imminent_delay: ~ #1440
+
+    #Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
+    #after booking start date or booking end date.
+    cocorico.booking.validated_moment: ~ #'start'
+
+    #Time after or before the moment the booking is considered as validated (in minutes)
+    #If less than 0 the time is before the moment else time is after the moment
+    cocorico.booking.validated_delay: ~ #0
+
+    #Does the bank wire checking must be done really or simulated
+    #Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
+    #Set to false in prod env
+    cocorico.bankwire_checking_simulation: ~ #false
+
+    #### End Environment dependant ####
+
+
+    ################################# Optional bundles #################################
+
+    #SMS
+    cocorico_sms.enabled: false
+    cocorico_sms.ovh_endpoint_name:      "ovh-eu"
+    cocorico_sms.ovh_application_key:    ~
+    cocorico_sms.ovh_application_secret: ~
+    cocorico_sms.ovh_consumer_key:       ~
+    cocorico_sms.ovh_service_name:       ~
+    cocorico_sms.ovh_debug:              false

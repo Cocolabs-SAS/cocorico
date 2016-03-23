@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+#Mongo DB initialisation
+#Usage: ./bin/init-mongodb php --env=staging
+
+PHP_ARG="$1"
+ENV_ARG="$2"
+
+if [ "${PHP_ARG}" = "" ] || [ "${ENV_ARG}" = "" ]
+then
+	echo "Missing parameters PHP_ARG or/and ENV_ARG"
+	exit 1
+fi
+
+"${PHP_ARG}" app/console doctrine:mongodb:schema:drop "${ENV_ARG}"
+"${PHP_ARG}" app/console doctrine:mongodb:schema:create "${ENV_ARG}"
+

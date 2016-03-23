@@ -1,0 +1,56 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="status-form-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}
+          class="form-announcements">
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend class="hidden">announcements</legend>
+            <h2>
+                {{ form_label(form.status) }}
+            </h2>
+
+            {{ form_errors(form.status) }}
+
+            <div class="select-holder">
+                {{ form_widget(form.status, {
+                    'attr': {
+                        'class': 'no-arrow announcements-list',
+                        'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
+                    }
+                }) }}
+            </div>
+
+            <input type="submit" class="hidden" value="{{ 'listing.status_save'|trans }}">
+
+            {{ form_rest(form) }}
+        </fieldset>
+    </form>
+
+
+    <script>
+        $(function () {
+            $("#status-form-container").submitAjaxForm(
+                    function () {
+                        jcf.replaceAll("#status-form-container");
+                    }
+            );
+            var $statusSelectElt = $("#listing_status");
+            $statusSelectElt.change(function (e) {
+                $(this).closest('form').submit();
+            });
+
+            //Remove listing from list if its status is deleted
+            if ($statusSelectElt.val() == '{{ ListingConstants.STATUS_DELETED }}') {
+                window.location = '{{ path('cocorico_dashboard_listing') }}';
+            }
+        });
+    </script>
+
+</div>
+
+

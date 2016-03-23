@@ -1,0 +1,41 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% set edit_mode_class = "" %}
+{% if edit_mode %}
+    {% set edit_mode_class = "edit-mode" %}
+{% endif %}
+<div id="calendar-container" class="{{ edit_mode_class }}">
+    {% if timeUnitIsDay %}
+        {% set calendar_class = "time-unit-day" %}
+        {% if not timeUnitAllDay %}
+            {% set calendar_class = "time-unit-day time-unit-partial-day" %}
+        {% endif %}
+    {% else %}
+        {% set calendar_class = "time-unit-not-day" %}
+    {% endif %}
+
+    {% if listingDefaultStatus == ListingAvailabilityConstants.STATUS_AVAILABLE %}
+        {% set status_class = "available-by-default" %}
+    {% else %}
+        {% set status_class = "unavailable-by-default" %}
+    {% endif %}
+
+    <div id="fc-calendar" class="calendar-block {{ calendar_class }} {{ status_class }}"></div>
+
+    <ul class="legend no-list">
+        <li>
+            <em>
+                {{ 'listing.calendar.prices_help'|trans ~ " " ~ (0)|add_time_unit_text }}
+                {{ vatInclusionText(app.request.getLocale()) }}
+            </em>
+        </li>
+        <li>
+            <div class="cal-available-evt"></div>
+            {{ 'listing.calendar.available'|trans }}
+        </li>
+        <li>
+            <div class="cal-unavailable-evt"></div>
+            {{ 'listing.calendar.unavailable'|trans }}
+        </li>
+    </ul>
+</div>

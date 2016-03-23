@@ -1,0 +1,185 @@
+/*Calendar cells*/
+.fc-day-number {
+    font-size: 0.85em;
+}
+
+/** available **/
+.available-by-default .fc-today,
+.available-by-default .fc-today.cal-available-evt,
+.available-by-default td.fc-day,
+.available-by-default td.fc-day.cal-available-evt,
+.unavailable-by-default td.fc-day.cal-available-evt,
+.fc-time-grid-event.cal-available-evt,
+.fc-day-grid-event.cal-available-evt,
+.legend .cal-available-evt {
+    background-color: #f0f0f0;
+}
+
+.available-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt,
+.available-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-booked-evt {
+    background: #f0f0f0 url(../images/cal-evt-una-right.png) no-repeat top left;
+}
+
+.available-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt-next {
+    background: #f0f0f0 url(../images/cal-evt-una-left.png) no-repeat top left;
+}
+
+/** unavailable **/
+.unavailable-by-default .fc-today,
+.unavailable-by-default .fc-today.cal-unavailable-evt,
+.unavailable-by-default td.fc-day,
+.unavailable-by-default td.fc-day.cal-unavailable-evt,
+.available-by-default td.fc-day.cal-unavailable-evt,
+.unavailable-by-default td.fc-day.cal-booked-evt,
+.available-by-default td.fc-day.cal-booked-evt,
+.fc-h-event.cal-unavailable-evt,
+.fc-h-event.cal-booked-evt,
+.fc-time-grid-event.cal-unavailable-evt,
+.fc-day-grid-event.cal-unavailable-evt,
+.fc-time-grid-event.cal-booked-evt,
+.fc-day-grid-event.cal-booked-evt,
+.legend .cal-unavailable-evt {
+    background-color: #778899;
+}
+
+.unavailable-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt,
+.unavailable-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-booked-evt {
+    background: #778899 url(../images/cal-evt-una-right.png) no-repeat top left;
+}
+
+.unavailable-by-default.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt-next {
+    background: #778899 url(../images/cal-evt-una-left.png) no-repeat top left;
+}
+
+.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt-next.cal-unavailable-evt,
+.time-unit-day.time-unit-partial-day td.fc-day.cal-unavailable-evt-next.cal-booked-evt {
+    background: transparent url(../images/cal-evt-una.png) no-repeat top left;
+}
+
+/*Time unit is in day and in partial day mode */
+.fc-event, .cal-unavailable-evt-next .fc-event {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.fc-toolbar button {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.fc-body {
+    line-height: 1.428571429;
+}
+
+.fc-basic-view .fc-body .fc-row {
+    min-height: 78px;
+}
+
+.fc-basic-view .fc-event {
+    font-size: 1em;
+    text-align: center;
+    height: 72px;
+    vertical-align: middle;
+    margin-top: -21px;
+}
+
+.fc-basic-view .fc-day .fc-event {
+    margin-top: 0;
+}
+
+.fc-basic-view .fc-event .fc-content {
+    margin-top: 28px;
+}
+
+#calendar-container td {
+    border-color: #fff;
+}
+
+#calendar-container th {
+    background-color: #c7cdd3;
+    color: #ffffff;
+    border-color: #fff;
+    padding: 6px 0;
+    font-weight: normal;
+    text-transform: capitalize;
+}
+
+.fc-day-grid-event .fc-time {
+    font-weight: normal;
+}
+
+.fc-day-grid-event .fc-title, .fc-time-grid-event .fc-title {
+    font-weight: normal;
+    color: #3f3f3f;
+}
+
+.fc-past .fc-title-default, .fc-day-number.fc-past {
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+
+#calendar-container td.fc-past, #calendar-container a {
+    cursor: default;
+}
+
+#calendar-container.edit-mode td:not(.fc-past), #calendar-container.edit-mode td:not(.fc-past) > a {
+    cursor: pointer;
+}
+
+.fc-content-skeleton td {
+    cursor: inherit;
+}
+
+/** legend */
+#calendar-container .legend li div {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin: 10px 2px 0 0;
+    border: 1px solid #ddd;
+}
+
+ul.no-list {
+    padding-left: 0;
+}
+
+ul.no-list li {
+    list-style: none;
+}
+
+.date-slider .fc-toolbar .fc-center {
+    display: inline-block;
+}
+
+/** Time unit not day **/
+.time-unit-not-day .fc-h-event .fc-time, .fc-time-grid .fc-time {
+    color: #000;
+    font-style: italic;
+    font-size: smaller;
+}
+
+.time-unit-not-day .fc-h-event {
+    /*border-bottom: #ccc dotted 1px;*/
+    display: block;
+    margin-top: 2px;
+    height: 52px;
+    border: 1px dotted #ccc;
+}
+
+.time-unit-not-day .fc-h-event .fc-content {
+    padding: 10px 0;
+    height: 32px;
+    margin-top: 0;
+}
+
+.time-unit-not-day .fc-h-event .fc-title {
+    display: block;
+}
+
+.fc .fc-axis {
+    padding: 0;
+}
+
+.fc-time-grid-event {
+    border: #ccc dotted 1px;
+}

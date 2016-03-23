@@ -1,0 +1,179 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set image_user = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+{% set listing = booking.listing %}
+{% set translation = listing.translations[app.request.locale] %}
+{% set image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+{% set amount_total = amount_total | format_price(app.request.locale, 2) %}
+
+{% set booking_can_be_edited = (app.user == booking.user and booking.canBeCanceledByAsker) or
+(app.user == booking.listing.user and booking.status == BookingConstants.STATUS_NEW) %}
+
+{% set title =  'booking.modal.accept.title'|trans %}
+{% set action_title =   'booking.modal.action.accept'|trans %}
+{% set amount_label =   'booking.modal.price'|trans %}
+
+{% if type == 'refuse' %}
+    {% set title =  'booking.modal.refuse.title'|trans %}
+    {% set action_title =  'booking.modal.action.refuse'|trans %}
+{% elseif type == 'cancel' %}
+    {% set title =  'booking.modal.cancel.title'|trans %}
+    {% set action_title = 'booking.modal.action.cancel'|trans %}
+    {% set amount_label = 'booking.modal.amount_to_refund'|trans %}
+{% endif %}
+
+<!-- Modal -->
+<div id="booking-form-container">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong class="title">{{ title }}</strong>
+    </div>
+
+    <div class="modal-body">
+        {% if app.request.isXmlHttpRequest %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
+        {% endif %}
+
+        <div class="info-holder">
+            <div class="img-holder">
+                <a href="{{ path('cocorico_listing_show', { 'slug': translation.slug }) }}">
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image) | imagine_filter('listing_medium') }}"
+                         alt="{{ translation.title }}">
+                </a>
+            </div>
+            <div class="info-block">
+                <strong class="sub-title">{{ translation.title }}</strong>
+
+                <div class="meta">
+                    <span class="applicant">
+                        <strong>
+                            <a href="{{ path('cocorico_user_profile_show', {'id' : other_user.id}) }}">
+                                {{ other_user.firstName }}
+                            </a>
+                        </strong>
+                    </span>
+                    {% if other_user_rating %}
+                        {{ other_user_rating| cocorico_star_rating }}
+                    {% endif %}
+                </div>
+                <ul class="list-inline booking-detail">
+                    <li content="{{ booking.start|date('Y-m-d') }}">
+                        {{ 'booking.show.start:'|trans }}
+                        <time datetime="{{ booking.start|date('Y-m-d') }}">
+                            {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                        </time>
+                    </li>
+                    <li>
+                        {{ 'booking.show.end:'|trans }}
+                        <time datetime="{{ booking.end|date('Y-m-d') }}">
+                            {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                        </time>
+                    </li>
+                    {% if not timeUnitIsDay %}
+                        <li>
+                            {{ 'booking.show.start_time:'|trans }}
+                            <time datetime="{{ booking.startTime|date('H:i') }}">
+                                {{ booking.startTime|date('H:i') }}
+                            </time>
+                        </li>
+                        <li>
+                            {{ 'booking.show.end_time:'|trans }}
+                            <time datetime="{{ booking.endTime|date('H:i') }}">
+                                {{ booking.endTime|date('H:i') }}
+                            </time>
+                        </li>
+                    {% endif %}
+                </ul>
+
+                <strong class="booking-duration">
+                    {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+                    {{ 'booking.duration:'|trans }}
+                    <span class="normal-text">
+                        {{ booking_duration|add_time_unit_text }}
+                    </span>
+                </strong>
+
+                <div class="price-holder">
+                    <span class="sub-title">{{ amount_label }}</span>
+                    <strong class="price">
+                        <span data-id="booking-total">
+                            {{ amount_total }}
+                        </span>
+                        <sup>
+                            <small>{{ vat_inclusion_text }}</small>
+                        </sup>
+                    </strong>
+                </div>
+
+                {{ 'listing.show.cancellation_policy:'|trans({}, 'cocorico_listing') }}
+                <strong data-id="booking-policy">{{ booking.cancellationPolicyText|trans({}, 'cocorico_listing') }}</strong>
+                <button data-html="true" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                        type="button" data-original-title="{{ cancellationPolicies() }}"> ?
+                </button>
+            </div>
+        </div>
+
+        {% if (booking_can_be_edited) %}
+            {#{{ form_errors(form) }}#}
+            <form id="booking-edit-form" action="{{ form.vars.action }}" method="{{ form.vars.method }}"
+                  class="form-message" {{ form_enctype(form) }}>
+                <fieldset>
+                    <legend class="hidden">message form</legend>
+                    <div class="no-scroll">
+                        {{ form_errors(form.message) }}
+                        {{ form_widget(form.message) }}
+                    </div>
+                    <div class="agree">
+                        {{ form_errors(form.tac) }}
+                        {{ form_widget(form.tac) }}
+                        <span class="label">
+                            {{ form_label(form.tac, null, {'required': false} ) }}
+                            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                               target="_blank">
+                                {{ 'booking.new.tac.link'|trans }}
+                            </a>*
+                        </span>
+                    </div>
+                    <input type="submit" class="hidden">
+                    {{ form_rest(form) }}
+                </fieldset>
+            </form>
+
+            <div class="modal-footer">
+                <a id="booking-edit-return" href="#"
+                   class="btn btn-default">{{ 'booking.modal.action.return'|trans }}</a>
+                <a id="booking-edit-submit" href="#" class="btn btn-default">{{ action_title }}</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(function () {
+        jcf.replaceAll("#booking-form-container");
+
+        jQuery('[data-toggle="tooltip"]').tooltip({});
+
+        //Submit form
+        var $formContainer = $("#booking-form-container");
+        $formContainer.submitAjaxForm(function () {
+            jcf.replaceAll("#booking-form-container");
+        });
+
+        $("#booking-edit-submit").on("click", function (e) {
+            $(this).parent('.modal-footer').html('<img src="{{ asset('images/loading.gif') }}" />');
+            e.preventDefault();
+            $("#booking-edit-form").submit();
+            return false;
+        });
+
+        $("#booking-edit-return").on("click", function (e) {
+            e.preventDefault();
+            $("#modal").modal('hide');
+            return false;
+        });
+    });
+</script>

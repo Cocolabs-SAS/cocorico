@@ -1,0 +1,75 @@
+services:
+    #Twig
+    twig.text_extension:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - name: twig.extension
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    #Global twig variables
+    cocorico.twig.core_extension:
+        class: Cocorico\CoreBundle\Twig\CoreExtension
+        arguments:
+            - "@lexik_currency.currency_extension"
+            - "@translator"
+            - "%cocorico.locales%"
+            - "%cocorico.time_unit%"
+            - "%cocorico.time_unit_flexibility%"
+            - "%cocorico.time_unit_allday%"
+            - "%cocorico.days_display_mode%"
+            - "%cocorico.times_display_mode%"
+            - "%cocorico.booking.allow_single_day%"
+            - "%cocorico.booking.end_day_included%"
+            - "%cocorico.listing_availability_status%"
+            - "%cocorico.listing_price_precision%"
+            - "%cocorico.currencies%"
+            - "%cocorico.currency%"
+            - "%cocorico.listing_price_min%"
+            - "%cocorico.listing_price_max%"
+            - "%cocorico.fee_as_offerer%"
+            - "%cocorico.fee_as_asker%"
+            - "%cocorico.listing_map_display_marker%"
+            - "@session"
+            - "%cocorico.booking.expiration_delay%"
+            - "%cocorico.booking.validated_moment%"
+            - "%cocorico.booking.validated_delay%"
+            - "%cocorico.booking_price_min%"
+            - "@cocorico.helper.global"
+            - "%cocorico.vat%"
+            - "%cocorico.include_vat%"
+            - "%cocorico.display_vat%"
+            - "%cocorico.listing_search_min_result%"
+            - "%cocorico.listing.duplication%"
+            - "%cocorico.booking.min_start_delay%"
+            - "%cocorico.booking.min_start_time_delay%"
+        tags:
+            - { name: twig.extension }
+
+    lexik_currency.currency_extension:
+        class: %lexik_currency.currency_extension.class%
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: twig.extension }
+
+    cocorico.twig.language_extension:
+        class: Cocorico\CoreBundle\Twig\LanguageExtension
+        tags:
+            - { name: twig.extension }
+
+    cocorico.twig.country_extension:
+        class: Cocorico\CoreBundle\Twig\CountryExtension
+        tags:
+            - { name: twig.extension }
+#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+
+    cocorico.twig.extra_bundle_extension:
+        class: Cocorico\CoreBundle\Twig\ExtraBundleExtension
+        arguments:
+            - "%kernel.bundles%"
+        tags:
+            - { name: twig.extension }

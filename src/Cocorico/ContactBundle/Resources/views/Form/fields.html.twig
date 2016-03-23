@@ -1,0 +1,76 @@
+{% extends 'CocoricoCoreBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico_contact' %}
+
+{# Form Row #}
+{% block form_row %}
+    {% spaceless %}
+        <div class="field-row">
+            <span class="label">
+                {{ form_label(form) }}
+            </span>
+
+            <div class="field-holder">
+                {{ form_widget(form, {'attr':{'class':'form-control'}}) }}
+                {{ form_errors(form) }}
+            </div>
+        </div>
+    {% endspaceless %}
+{% endblock form_row %}
+
+
+{# Labels #}
+{#@formatter:off#}
+{% block form_label %}
+    {% spaceless %}
+        {% if label is not sameas(false) %}
+            {% if not compound %}
+                {% set label_attr = label_attr|merge({'for': id}) %}
+            {% endif %}
+
+            {% set label_required = "" %}
+            {% if required %}
+                {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+                {% set label_required %}
+                <span>*</span>
+                {% endset %}
+            {% endif %}
+
+            {% if label is empty %}
+                {% set label = name|humanize %}
+            {% endif %}
+
+            <label{% for attrname, attrvalue in label_attr %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
+            {% autoescape false %}{{ label|trans({}, translation_domain) }}{% endautoescape %} {{ label_required }}
+            </label>
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}
+{#@formatter:on#}
+
+
+{# Form Error #}
+{% block form_errors %}
+    {% spaceless %}
+        {% if errors|length > 0 %}
+            <div class="errors">
+                {% for error in errors %}
+                    <i class="icon-error-field"></i>
+                    {{ error.message|trans({}, 'cocorico_contact') }}<br/>
+                {% endfor %}
+            </div>
+        {% else %}
+            {% if not form.vars.valid %}
+                <div class="flashes">
+                    <div class="alert alert-error-new">
+                        <i class="ico icon-error"></i>
+
+                        <p>
+                            {{ 'form.error'|trans({}, 'cocorico_contact')|upper }}
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endspaceless %}
+{% endblock form_errors %}

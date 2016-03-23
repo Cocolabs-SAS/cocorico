@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <title>
+        {%- block meta_title -%}
+            {{ app.request.requestUri|slice(4)|replace({'/': " > ", '-': " ", '_': " "})|ucwords ~ " - " ~ cocorico_site_name }}
+        {%- endblock -%}
+    </title>
+    <meta name="description"
+          content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
+
+    {%- block open_graph_data -%}{%- endblock -%}
+
+    <meta charset="utf-8">
+    <!-- set the viewport width and initial-scale on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- include the Open and Raleway Sans google font -->
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic'
+          rel='stylesheet' type='text/css'>
+    <!-- include the Raleway google font -->
+    <link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet'
+          type='text/css'>
+
+    <!-- include HTML5 IE enabling script and stylesheet for IE -->
+    <!--[if lt IE 9]>
+    <link type="text/css" media="all" rel="stylesheet" href="{{ asset('css/ie.css') }}">
+    <script type="text/javascript" src="{{ asset('js/vendor/ie.js') }}"></script>
+    <![endif]-->
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+
+    {% block stylesheets %}
+        {% stylesheets
+        'css/all.css'
+        'css/all-override.css'
+        'css/vendor/bootstrap-multiselect.css'
+        filter='cssrewrite, ?minifycsscompressor' output='css/compiled/all.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all">
+        {% endstylesheets %}
+    {% endblock %}
+
+    {# Safely using .ready() before including jQuery #}
+    <script>
+        (function (w, d, u) {
+            w.readyQ = [];
+            w.bindReadyQ = [];
+            function p(x, y) {
+                if (x == "ready") {
+                    w.bindReadyQ.push(y);
+                } else {
+                    w.readyQ.push(x);
+                }
+            }
+
+            var a = {ready: p, bind: p};
+            w.$ = w.jQuery = function (f) {
+                if (f === d || f === u) {
+                    return a
+                } else {
+                    p(f)
+                }
+            }
+        })(window, document);
+    </script>
+
+    {% include '@CocoricoCore/Frontend/Common/js/_google_analytics_js.html.twig' only %}
+</head>
+
+<body class="loading {% block theme %}{% endblock %}">
+<!-- allow a user to go to the main content of the page -->
+<noscript>Javascript must be enabled for the correct page display</noscript>
+
+{% include '@CocoricoCore/Frontend/Common/js/_google_tag_manager_js.html.twig' only %}
+
+<div class="skip">
+    <a tabindex="1" href="#main">skip to content</a>
+</div>
+
+<div id="wrapper">
+    {% block layout %}{% endblock %}
+</div>
+
+<!-- allow a user to go to the top of the page -->
+<div class="skip">
+    <a href="#header">back to top</a>
+</div>
+
+{% block javascripts %}
+    <script>
+        //Global Javascript variables
+        var locale = '{{ app.request.locale }}';
+        var locales = {{ locales|json_encode|raw }};
+        var defaultCurrency = '{{ defaultCurrency }}';
+        var currentCurrency = '{{ currentCurrency }}';
+        //Does the app is in day mode or time mode
+        var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
+        var timeUnitAllDay = {{ timeUnitAllDay ? 'true' : 'false' }};
+        var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
+    </script>
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/i18n/jquery-ui-i18n.min.js"></script>
+
+    <script type="text/javascript">
+        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery.min.js') }}"><\/script>');
+        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"><\/script>');
+        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-ui-i18n.min.js') }}"><\/script>');
+        {#<script src="{{ asset('js/vendor/jquery.min.js') }}"></script>#}
+        {#<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>#}
+    </script>
+
+    {#Safely using .ready() before including jQuery #}
+    <script>
+        (function ($, d) {
+            $.each(readyQ, function (i, f) {
+                $(f)
+            });
+            $.each(bindReadyQ, function (i, f) {
+                $(d).bind("ready", f)
+            })
+        })(jQuery, document)
+    </script>
+
+    <script type="text/javascript"
+            src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $.fn.modal || document.write('<script src="{{ asset('js/vendor/bootstrap.min.js') }}"><\/script>');
+    </script>
+
+    {% javascripts
+    'js/vendor/bootstrap-multiselect.js'
+    'js/vendor/jquery.carouFredSel.min.js'
+    'js/vendor/jquery.cookie.js'
+    'js/common.js'
+    'js/vendor/json2.js'
+    'js/jquery.main.js'
+    'js/jquery.main-override.js'
+    'js/vendor/parsley.min.js'
+
+    output='js/compiled/all.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    <script type="text/javascript">
+        $(function () {
+            {% if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") %}
+            //Unread messages
+            getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
+            {% endif %}
+
+            //Handle Ajax Unauthorised access
+            handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
+        });
+    </script>
+
+{% endblock %}
+
+</body>
+</html>

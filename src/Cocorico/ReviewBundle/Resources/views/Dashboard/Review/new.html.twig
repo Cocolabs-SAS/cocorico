@@ -1,0 +1,127 @@
+{% extends 'CocoricoCoreBundle:Dashboard:layout.html.twig' %}
+
+{% set listing = booking.listing %}
+{% set translation = listing.translations[app.request.locale] %}
+{% set image_user = reviewTo.images|length ? reviewTo.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+
+{% trans_default_domain 'cocorico_review' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'comments' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% form_theme form 'CocoricoReviewBundle:Dashboard/Form:fields.html.twig' %}
+
+{% block main_dashboard -%}
+    <div class="tab-content no-border">
+        <!-- comments -->
+        <div role="tabpanel" class="tab-pane active" id="comments">
+            <!-- postarea -->
+            {{ form_errors(form) }}
+            <form action="{{ path('cocorico_dashboard_review_new', {'booking_id':booking.id}) }}" method="post"
+                  class="form-message alt">
+                <fieldset>
+                    <div class="post-area">
+                        <div class="img-holder">
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': reviewTo.id }) }}">
+                                <img alt="{{ reviewTo.firstName }}"
+                                     src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_small') }}">
+                            </a>
+                        </div>
+                        <div class="area">
+                            <h2>
+                                <a href="{{ path('cocorico_listing_show', { 'slug': translation.slug }) }}">
+                                    {{ translation.title }}
+                                </a>
+                            </h2>
+
+                            <p>{{ 'review.comment.ratings_to'| trans }} :
+                                <a href="{{ path('cocorico_user_profile_show', { 'id': reviewTo.id }) }}">
+                                    {{ reviewTo.getName }}
+                                </a>
+                            </p>
+                            <ul class="list-inline booking-detail">
+                                <li>
+                                    {{ 'review.comment.start_date'| trans }}:
+                                    <time datetime="{{ booking.start|date('Y-m-d') }}">
+                                        {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                                    </time>
+                                </li>
+                                <li>
+                                    {{ 'review.comment.end_date' | trans }} :
+                                    <time datetime="{{ booking.end|date('Y-m-d') }}">
+                                        {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                    </time>
+                                </li>
+                                {% if not timeUnitIsDay %}
+                                    <li>
+                                        {{ 'booking.show.start_time:'|trans({}, 'cocorico_booking') }}
+                                        <time datetime="{{ booking.startTime|date('H:i') }}">
+                                            {{ booking.startTime|date('H:i') }}
+                                        </time>
+                                    </li>
+                                    <li>
+                                        {{ 'booking.show.end_time:'|trans({}, 'cocorico_booking') }}
+                                        <time datetime="{{ booking.endTime|date('H:i') }}">
+                                            {{ booking.endTime|date('H:i') }}
+                                        </time>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    {{ form_errors(form.rating) }}
+
+                    <div class="user-rating">
+                        <strong class="title">{{ 'review.comment.rate_user' | trans }}:</strong>
+                        <ul id="user-rating-make" class="list-inline rating star-rating">
+                            <li class=" ">
+                                <a data-value="0" class="one-star a-star-rating">
+                                    <span class="hide">1</span>
+                                </a>
+                            </li>
+                            <li class=" ">
+                                <a data-value="1" class="two-stars a-star-rating">
+                                    <span class="hide">2</span>
+                                </a></li>
+                            <li class=" ">
+                                <a data-value="2" class="three-stars a-star-rating">
+                                    <span class="hide">3</span>
+                                </a></li>
+                            <li class=" ">
+                                <a data-value="3" class="four-stars a-star-rating">
+                                    <span class="hide">4</span>
+                                </a></li>
+                            <li class=" ">
+                                <a data-value="4" class="five-stars a-star-rating">
+                                    <span class="hide">5</span>
+                                </a>
+                            </li>
+                        </ul>
+                        {{ form_widget(form.rating) }}
+                    </div>
+
+                    <h3><label for="comment">{{ 'review.comment.your_comment'|trans }}:</label></h3>
+                    {{ form_errors(form.comment) }}
+                    <div class="no-scroll">
+                        {{ form_widget(form.comment, {
+                            'attr': {
+                                'placeholder': 'review.comment.textarea.placeholder'|trans,
+                            }
+                        }) }}
+                    </div>
+
+                    {{ form_rest(form) }}
+
+                    <div class="btn-block text-center">
+                        <input type="reset" class="btn btn-default" value="{{ "review.comment.cancel"|trans }}">
+                        <input type="submit" class="btn btn-default"
+                               value="{{ "review.comment.publish_this_comment"|trans }}">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+services:
+    #Subscribers
+    cocorico_message.booking.subscriber:
+        class: Cocorico\MessageBundle\Event\BookingSubscriber
+        arguments:
+            - "@cocorico_message.thread_manager"
+        tags:
+            - { name: kernel.event_subscriber}

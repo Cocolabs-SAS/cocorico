@@ -1,0 +1,17 @@
+############ MessageBundle ###############
+fos_message:
+    db_driver:              orm
+    thread_class:           Cocorico\MessageBundle\Entity\Thread
+    message_class:          Cocorico\MessageBundle\Entity\Message
+    composer:               cocorico_message.composer
+    new_thread_form:
+        factory:            fos_message.new_thread_form.factory.default # See FormFactory\NewThreadMessageFormFactory
+        type:               cocorico_message.new_thread.form.type    # See FormType\NewThreadMessageFormType
+        handler:            cocorico_message.new_thread.form.handler # See FormHandler\NewThreadMessageFormHandler
+        model:              Cocorico\MessageBundle\FormModel\NewThreadMessage
+        name:               message
+    reply_form:
+        factory:            fos_message.reply_form.factory.default      # See FormFactory\ReplyMessageFormFactory
+        type:               fos_message.reply_form.type.default         # See FormType\ReplyMessageFormType
+        handler:            fos_message.reply_form.handler.default      # See FormHandler\ReplyMessageFormHandler
+        name:               message

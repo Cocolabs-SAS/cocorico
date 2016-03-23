@@ -1,0 +1,337 @@
+{% extends '::base.html.twig' %}
+
+{% set voucherBundleEnabled = bundleExist('CocoricoVoucherBundle') %}
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+{% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+{% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+
+{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
+{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
+{#{% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}#}
+{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
+
+
+{% if optionBundleEnabled %}
+    {% set amount = (booking.amountDecimal - booking.amountOptionsDecimal) | format_price(app.request.locale, 2, false) %}
+{% endif %}
+
+{% set user = listing.user %}
+{% set user_image = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+
+{%- block meta_title -%}
+    {{ 'booking.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " : " ~  amount_total ~ " - " ~ cocorico_site_name }} }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'booking.new.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{% block layout %}
+
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_booking' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            <ol class="breadcrumb col-xs-12" xmlns="http://www.w3.org/1999/html">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pays</a></li>
+                <li><a href="#">Région</a></li>
+                <li><a href="#">Département</a></li>
+                <li><a href="#">Lieu dit</a></li>
+                <li>Code postale</li>
+            </ol>
+        {% endblock %}
+
+        {% block main %}
+            {#<a href="{{ path('cocorico_listing_show', {'slug':translation.slug} ) }}">#}
+            {#&lt; {{ 'booking.new.back'|trans }}#}
+            {#</a>#}
+            <!-- two-columns -->
+            <div class="twocolumns row alt">
+                <!-- contain the main content of the page -->
+                <div id="content" class="listing-area col-xs-12 col-md-9">
+                    <div class="content-holder">
+                        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                        <form id="booking-new" action="{{ form.vars.action }}"
+                              method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+
+                            <!-- alert -->
+                            <div role="alert" class="alert alert-success">
+                                <i class="ico lock">lock</i>
+
+                                <p>{{ 'booking.secured_message'|trans }}</p>
+                            </div>
+
+                            <!-- schedule -->
+                            {#{{ form_errors(form) }}#}
+                            {{ form_errors(form.date_range) }}
+                            <div class="price-area">
+                                <ul class="list-inline timing">
+                                    <li>
+                                        {{ form_errors(form.date_range.start) }}
+                                        {{ form_label(form.date_range.start) }}
+                                        <time datetime="{{ booking.start|date('Y-m-d') }}">
+                                            <i class="icon-calendar"></i>
+                                            {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                                        </time>
+                                        {{ form_widget(form.date_range.start, {
+                                            'type': 'hidden'
+                                        }) }}
+                                    </li>
+                                    <li>
+                                        {{ form_errors(form.date_range.end) }}
+                                        {{ form_label(form.date_range.end) }}
+
+                                        <time datetime="{{ booking.end|date('Y-m-d') }}">
+                                            <i class="icon-calendar"></i>
+                                            {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                        </time>
+                                        {{ form_widget(form.date_range.end, {
+                                            'type': 'hidden'
+                                        }) }}
+                                    </li>
+                                    <li>
+                                        <strong> {{ 'booking.duration:'|trans }}</strong>
+                                        {{ booking_duration|add_time_unit_text }}
+                                    </li>
+
+                                    {% if not timeUnitIsDay %}
+                                        <li>
+                                            {{ form_errors(form.time_range.start) }}
+                                            {{ form_label(form.time_range.start) }}
+                                            <time datetime="{{ booking.startTime|date('H:i') }}">
+                                                <i class="icon-calendar"></i>
+                                                {{ booking.startTime|date('H:i') }}
+                                            </time>
+                                            {{ form_widget(form.time_range.start, {
+                                                'type': 'hidden'
+                                            }) }}
+                                        </li>
+                                        <li>
+                                            {{ form_errors(form.time_range.end) }}
+                                            {{ form_label(form.time_range.end) }}
+                                            <time datetime="{{ booking.endTime|date('H:i') }}">
+                                                <i class="icon-calendar"></i>
+                                                {{ booking.endTime|date('H:i') }}
+                                            </time>
+                                            {{ form_widget(form.time_range.end, {
+                                                'type': 'hidden'
+                                            }) }}
+                                        </li>
+                                        <li>&nbsp;</li>
+                                    {% endif %}
+                                </ul>
+
+                                <ul class="list-inline price-list">
+                                    <li>
+                                        {{ 'booking.amount:'|trans }}
+                                        <strong data-id="booking-amount" class="price">
+                                            {{ amount }}
+                                            <sup>
+                                                <small>
+                                                    {{ vatInclusionText(app.request.getLocale(), true, true) }}
+                                                </small>
+                                            </sup>
+                                        </strong>
+                                        <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
+                                                data-toggle="tooltip" class="tooltip-button" type="button"
+                                                data-original-title="{{ 'booking.amount.help'|trans }}">?
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            {% if optionBundleEnabled %}
+                                <div class="hidden">{{ form_widget(form.options) }}</div>
+                                {% include '@CocoricoListingOption/Frontend/Booking/_edit_options.html.twig' with {'booking': booking} only %}
+                            {% endif %}
+
+                            {% if voucherBundleEnabled %}
+                                {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {'form': form, 'booking': booking} only %}
+                            {% endif %}
+
+                            <div class="total-reservation">
+                                <h3>{{ 'booking.total_amount'|trans }}</h3>
+
+                                <div class="alert alert-info">
+                                    <ul class="list-inline">
+
+                                        <li>
+                                            {{ 'booking.amount.total:'|trans }}
+                                            <strong data-id="total-amount" class="price">
+                                                {{ amount_total }}
+                                            </strong>
+
+                                            <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
+                                                    data-toggle="tooltip" class="tooltip-button" type="button"
+                                                    data-original-title="{{ 'booking.amount.help'|trans }}">?
+                                            </button>
+
+                                            <span class="price">
+                                                <small>
+                                                    (
+                                                    <strong>{{ 'booking.bill.title.vat'|trans }} : </strong>
+                                                    <span data-id="total-amount-vat">{{ amount_total_vat }}</span>
+                                                    )
+                                                </small>
+                                            </span>
+                                        </li>
+
+                                        <li>
+                                            {{ 'booking.fees.amount:'|trans }}
+                                            <strong data-id="fee-asker">{{ fee_as_asker }}</strong>
+                                            <button title="{{ 'booking.fees.help'|trans }}" data-placement="right"
+                                                    data-toggle="tooltip" class="tooltip-button" type="button"
+                                                    data-original-title="{{ 'booking.fees.help'|trans }}">?
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- /.alert alert-info -->
+                            </div>
+
+                            {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+                                <div class="form-signup validate-form alt">
+                                    <fieldset>
+                                        <legend class="hidden">form-signup</legend>
+                                        {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
+                                        'form_registration' : form.user,
+                                        'form_login': form.user_login
+                                        } only %}
+                                    </fieldset>
+                                </div>
+                            {% endif %}
+
+                            <div class="form-message">
+                                <fieldset>
+                                    <legend class="hidden">form-message</legend>
+                                    <h2>
+                                        {{ form_label(form.message) }}
+                                    </h2>
+
+                                    {{ form_errors(form.message) }}
+                                    <div class="no-scroll">
+                                        {{ form_widget(form.message,{
+                                            'attr': {
+                                                'placeholder': 'booking.new.message.placeholder'|trans
+                                            }
+                                        }) }}
+                                    </div>
+                                    <input type="submit" class="hidden" value="submit">
+                                </fieldset>
+                            </div>
+
+                            {% if mangopayBundleEnabled %}
+                                {% include '@CocoricoMangoPay/Frontend/Booking/_form_payment_card.html.twig' with {
+                                'form' : form
+                                } only %}
+                            {% endif %}
+
+                            <div class="btns-area">
+                                {{ form_errors(form.tac) }}
+                                <div class="agreement">
+                                    {{ form_widget(form.tac) }}
+                                    <span class="label">
+                                        {{ form_label(form.tac, null, {'required': false} ) }}
+                                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                                           target="_blank">
+                                            {{ 'booking.new.tac.link'|trans }}
+                                        </a>*
+                                    </span>
+                                </div>
+                                {{ form_rest(form) }}
+
+                                <input type="submit" value="{{ 'booking.new.validation.submit'|trans }}"
+                                       class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- contain sidebar of the page -->
+                <aside id="sidebar" class="col-xs-12 col-md-3">
+                    <div class="holder">
+                        <!-- widget article -->
+                        <section class="widget article">
+                            <div class="img-holder">
+
+                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_medium') }}"
+                                     alt="{{ listing_translation.title }}"/>
+                            </div>
+                            <h1>{{ 'booking.new.provider.title'|trans }}</h1>
+
+                            <div class="author-area">
+
+                                <div class="author-img">
+                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
+                                         alt="{{ user.firstName }}"/>
+                                </div>
+                                <div class="textbox">
+                                    <span class="author-name">
+                                        <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
+                                            {{ user.firstName }}
+                                        </a>
+                                    </span>
+                                    <!-- rating -->
+                                    {% if user.averageOffererRating %}
+                                        {{ user.averageOffererRating | cocorico_star_rating }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <!-- info-list -->
+                            <ul class="info-list">
+                                <li>
+                                    {{ 'listing.show.categories:'|trans({},'cocorico_listing') }}
+                                    <strong>
+                                        {% for category in listing.categories %}
+                                            {{ category.translations[app.request.locale].name }},
+                                        {% endfor %}
+                                    </strong>
+                                </li>
+                                <li>
+                                    {{ 'listing.show.location:'|trans({},'cocorico_listing') }}
+                                    <strong>{{ listing_location.city ~ ", " ~ listing_location.country }}</strong>
+                                </li>
+                                <li>
+                                    {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
+                                    <strong>{{ listing.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
+                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            data-html="true" type="button"
+                                            data-original-title="{{ cancellationPolicies() }}"> ?
+                                    </button>
+                                </li>
+                                <li>
+                                    <strong>{{ 'listing.show.rules:'|trans }} :</strong>
+                                    {{ listing_translation.rules }}
+                                </li>
+                            </ul>
+                        </section>
+                    </div>
+                </aside>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        //        $(function () {
+        //            //Disable submit button on click
+        //            $("[type=submit]").click(function (e) {
+        //                $(this).prop('disabled', true);
+        //            });
+        //        });
+    </script>
+{% endblock %}

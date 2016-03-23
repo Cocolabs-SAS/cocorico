@@ -1,0 +1,55 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% if listing_title == 0 or listing_desc == 0 or listing_price == 0 or listing_image == 0 or listing_characteristics == 0 or profile_photo == 0 or profile_desc == 0 %}
+    <!-- alert -->
+    <div role="alert" class="alert alert-warning">
+        <i class="ico exclamation">!</i>
+
+        <p>
+
+            {{ 'listing.edit.completion_notice'|trans }}
+
+            {% if listing_title == 0 %}
+                {{ 'listing.edit.completion_notice_title'|trans({
+                    '%listing_edit_presentation%': path('cocorico_dashboard_listing_edit_presentation', { 'id': listing_id })
+                })|raw }},
+            {% endif %}
+
+            {% if listing_desc == 0 %}
+                {{ 'listing.edit.completion_notice_desc'|trans({
+                    '%listing_edit_presentation%': path('cocorico_dashboard_listing_edit_presentation', { 'id': listing_id })
+                })|raw }},
+            {% endif %}
+
+            {% if listing_price == 0 %}
+                {{ 'listing.edit.completion_notice_price'|trans({
+                    '%listing_edit_price%': path('cocorico_dashboard_listing_edit_availabilities_prices', { 'listing_id': listing_id })
+                })|raw }},
+            {% endif %}
+
+            {% if listing_image == 0 %}
+                {{ 'listing.edit.completion_notice_imgage'|trans({
+                    '%listing_edit_image%': path('cocorico_dashboard_listing_edit_images', { 'id': listing_id })
+                })|raw }},
+            {% endif %}
+
+            {% if listing_characteristics == 0 %}
+                {{ 'listing.edit.completion_notice_characteristics'|trans({
+                    '%listing_edit_characteristic%': path('cocorico_dashboard_listing_edit_characteristic', { 'id': listing_id })
+                })|raw }},
+            {% endif %}
+
+            {% if profile_photo == 0 %}
+                {{ 'listing.edit.completion_notice_profile_photo'|trans({
+                    '%profile%': path('cocorico_user_dashboard_profile_edit_about_me')
+                })|raw }},
+            {% endif %}
+
+            {% if profile_desc == 0 %}
+                {{ 'listing.edit.completion_notice_profile_desc'|trans({
+                    '%profile%': path('cocorico_user_dashboard_profile_edit_about_me')
+                })|raw }}
+            {% endif %}
+        </p>
+    </div>
+{% endif %}

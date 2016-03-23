@@ -1,0 +1,9 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
+    {% set url =  path('admin_cocorico_core_booking_list', {'filter[codeVoucher][value]': object.codeVoucher}) %}
+
+    <a href="{{ url }}" target="_blank" class="btn btn-sm btn-default edit_link"
+       title="{{ 'list_booking_with_voucher'|trans({}, 'SonataAdminBundle') }}">
+        <i class="glyphicon glyphicon-share"> </i>
+        {{ 'list_booking_with_voucher'|trans({}, 'SonataAdminBundle') }}
+    </a>
+{% endif %}

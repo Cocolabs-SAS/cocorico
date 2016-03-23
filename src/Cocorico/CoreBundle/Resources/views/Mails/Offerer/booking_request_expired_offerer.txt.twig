@@ -1,0 +1,43 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'booking_request_expired_offerer.email.subject'|trans({'%booking_uid%': booking.id}, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'booking_request_expired_offerer.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%asker_name%': asker.name,
+        '%listing_title%': listing_title,
+        '%listing_public_url%': listing_public_url,
+        '%booking_start_date%': booking.start|localizeddate('short', 'none', 'fr'),
+        '%booking_end_date%': booking.end|localizeddate('short', 'none', 'fr'),
+        '%booking_time_range_title%': booking_time_range_title,
+        '%booking_time_range%': booking_time_range,
+        '%booking_duration%': booking.duration(endDayIncluded, timeUnit)|add_time_unit_text(user_locale),
+        '%booking_amount_offerer%': booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
+        '%booking_request_url%': booking_request_url
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--booking_request_expired_offerer-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

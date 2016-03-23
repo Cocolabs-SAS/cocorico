@@ -1,0 +1,263 @@
+parameters:
+    knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
+    knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
+
+imports:
+    - { resource: services.yml }
+    - { resource: "../../../../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml" }
+
+framework:
+     validation:
+        enabled: true
+        enable_annotations: true
+        api: 2.5-bc
+     templating:
+        assets_base_urls:
+            http: ["%cocorico.assets_base_urls%"]
+            ssl: ["%cocorico.assets_base_urls%"]
+     session:
+        gc_probability: 0
+
+twig:
+    globals:
+        #Identity
+        cocorico_site_name: "%cocorico.site_name%"
+        cocorico_phone: "%cocorico.phone%"
+        cocorico_address: "%cocorico.address%"
+        cocorico_short_description: "%cocorico.short_description%"
+        cocorico_contact_mail: "%cocorico.contact_mail%"
+        cocorico_contact_mail_obfuscated: "%cocorico.contact_mail_obfuscated%"
+        cocorico_from_email: "%cocorico.from_email%"
+        cocorico_vat_number: "%cocorico.vat_number%"
+        cocorico_facebook_id: "%cocorico.facebook.app_id%"
+        cocorico_google_analytics: "%cocorico.google_analytics%"
+        cocorico_google_tag_manager: "%cocorico.google_tag_manager%"
+        cocorico_admin_translation: "%cocorico.admin_translation%"
+        #Images sizes
+        listing_img_max: "%cocorico.listing_img_max%"
+        listing_img_max_upload_size: "%cocorico.listing_img_max_upload_size%"
+        listing_img_xsmall_w: "%cocorico.listing_img_xsmall_w%"
+        listing_img_xsmall_h: "%cocorico.listing_img_xsmall_h%"
+        listing_img_small_w: "%cocorico.listing_img_small_w%"
+        listing_img_small_h: "%cocorico.listing_img_small_h%"
+        listing_img_xxmedium_w: "%cocorico.listing_img_xxmedium_w%"
+        listing_img_xxmedium_h: "%cocorico.listing_img_xxmedium_h%"
+        listing_img_xmedium_w: "%cocorico.listing_img_xmedium_w%"
+        listing_img_xmedium_h: "%cocorico.listing_img_xmedium_h%"
+        listing_img_medium_w: "%cocorico.listing_img_medium_w%"
+        listing_img_medium_h: "%cocorico.listing_img_medium_h%"
+        listing_img_large_w: "%cocorico.listing_img_large_w%"
+        listing_img_large_h: "%cocorico.listing_img_large_h%"
+        listing_new_map_w: "%cocorico.listing_new_map_w%"
+        listing_new_map_h: "%cocorico.listing_new_map_h%"
+        listing_edit_map_w: "%cocorico.listing_edit_map_w%"
+        listing_edit_map_h: "%cocorico.listing_edit_map_h%"
+        listing_show_map_w: "%cocorico.listing_show_map_w%"
+        listing_show_map_h: "%cocorico.listing_show_map_h%"
+        listing_search_map_w: "%cocorico.listing_search_map_w%"
+        listing_search_map_h: "%cocorico.listing_search_map_h%"
+        upload_image_w: "%cocorico.upload_image_w%"
+        upload_image_h: "%cocorico.upload_image_h%"
+
+
+    #Forms customization
+    form:
+        resources:
+            - 'CocoricoCoreBundle:Form:fields.html.twig'
+            - 'SonataCoreBundle:Form:datepicker.html.twig'
+
+assetic:
+    bundles: ["CocoricoCoreBundle"]
+
+doctrine:
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        entity_managers:
+            default:
+#                metadata_cache_driver: apc
+#                result_cache_driver: apc
+#                query_cache_driver: apc
+                auto_mapping: true
+                mappings:
+                    gedmo_tree:
+                        type: annotation
+                        prefix: Gedmo\Tree\Entity
+                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
+                        alias: GedmoTree # this one is optional and will default to the name set for the mapping
+                        is_bundle: false
+                dql:
+                    datetime_functions:
+                        DATE_FORMAT: Cocorico\CoreBundle\DQL\DateFormatFunction
+                    numeric_functions:
+                        GEO_DISTANCE: Cocorico\CoreBundle\DQL\GeoDistanceFunction
+        resolve_target_entities:
+            #Don't put double quotes!
+            Cocorico\CoreBundle\Model\ListingOptionInterface: %cocorico_listing_option.listing_option.entity_class%
+            Cocorico\CoreBundle\Model\BookingOptionInterface: %cocorico_listing_option.booking_option.entity_class%
+
+    dbal:
+        types:
+            json: Sonata\Doctrine\Types\JsonType
+
+
+doctrine_mongodb:
+    document_managers:
+        default:
+            auto_mapping: true
+
+
+jms_i18n_routing:
+    default_locale: %cocorico.locale%
+    locales: %cocorico.locales%
+    strategy: prefix
+
+
+jms_translation:
+    configs:
+        cocorico:
+            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
+            output_dir: %kernel.root_dir%/Resources/translations
+#            ignored_domains: [routes]
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs, Tests]
+            extractors: [jms_i18n_routing, cocorico_breadcrumbs, sonata_admin ]
+
+
+a2lix_translation_form:
+    locales: %cocorico.locales%
+    #required_locales: [%cocorico.locale%]
+    manager_registry: doctrine
+    templating: "CocoricoCoreBundle:Form:translations.html.twig"
+
+
+stof_doctrine_extensions:
+    default_locale: %cocorico.locale%
+    orm:
+        default:
+            tree: true
+
+oneup_uploader:
+    mappings:
+        listing_images:
+            max_size: 10000000
+            frontend: blueimp
+            allowed_mimetypes: ["image/gif", "image/jpg", "image/jpeg", "image/png"]
+            enable_progress: true
+            namer: cocorico.namer.image_namer
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/listings/images/
+
+
+liip_imagine:
+    driver: %cocorico.image_driver%
+    cache: ~
+    filter_sets:
+        listing_xsmall:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_xsmall_w%, %cocorico.listing_img_xsmall_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                #thumbnail: { size: [%cocorico.listing_img_medium_w%, %cocorico.listing_img_medium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+        listing_small:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_small_w%, %cocorico.listing_img_small_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        listing_xxmedium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_xxmedium_w%, %cocorico.listing_img_xxmedium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+        listing_xmedium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_xmedium_w%, %cocorico.listing_img_xmedium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+        listing_medium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_medium_w%, %cocorico.listing_img_medium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+        listing_xxlarge:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.listing_img_xxlarge_w%, %cocorico.listing_img_xxlarge_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        listing_xlarge:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                upscale: { min: [%cocorico.listing_img_xlarge_w%, %cocorico.listing_img_xlarge_h%] }
+                thumbnail: { size: [%cocorico.listing_img_xlarge_w%, %cocorico.listing_img_xlarge_h%], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
+        listing_large:
+            quality: 85
+            filters:
+                auto_rotate: ~
+                upscale: { min: [%cocorico.listing_img_large_w%, %cocorico.listing_img_large_h%] }
+                thumbnail: { size: [%cocorico.listing_img_large_w%, %cocorico.listing_img_large_h%], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
+
+lexik_currency:
+    currencies:
+        default: %cocorico.currency%
+        managed: %cocorico.currencies_for_lexik%
+    decimal_part:
+        precision:  0                           # number of digits for the decimal part
+        round_mode: up                          # round mode to use (up|down|even|odd)
+    #currency_class: Cocorico\CurrencyBundle\Entity\Currency
+    #default_adapter: doctrine_currency_adapter  # service id OR tag alias, this is adapter used by the conversion service
+
+bazinga_geocoder:
+    providers:
+#        cache:
+#            adapter:              ~ # Required
+#            provider:             ~ # Required
+#            locale:               null
+#            lifetime:             86400
+        google_maps:
+            locale:               null
+            region:               null
+            use_ssl:              false
+            api_key:              null
+
+
+
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        sonata.admin.block.search_result:
+            contexts:   [admin]
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)
+        sonata.block.service.text:
+
+
+sonata_admin:
+    title:      %cocorico.site_name% administration
+    title_logo: /images/logo2.gif
+
+    templates:
+        layout: CocoricoSonataAdminBundle::standard_layout.html.twig
+        user_block: CocoricoSonataAdminBundle::user_block.html.twig
+#        show: SonataAdminBundle:CRUD:show.html.twig
+
+    dashboard:
+        blocks:
+            - position: left
+              type: sonata.admin.block.admin_list
+            - position: right
+              type: sonata.block.service.text
+              settings:
+                content: '<h2>Welcome</h2><p>...</p>'
+
+
+sonata_doctrine_orm_admin:
+    audit:
+        force: false
+
+simple_things_entity_audit:
+    audited_entities:
+        - CocoricoConfigBundle\Entity\Parameter

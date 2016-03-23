@@ -1,0 +1,92 @@
+imports:
+    - { resource: subscribers.yml }
+
+services:
+    #Disable Sonata Admin User Group
+    sonata.user.admin.group:
+        abstract: true
+        public: false
+
+    #Validators
+    cocorico_user.user.validator:
+        class: Cocorico\UserBundle\Validator\Constraints\UserValidator
+        arguments:
+            - %cocorico.user_img_max%
+            - %cocorico.user_img_min%
+        tags:
+            - { name: validator.constraint_validator, alias: user }
+
+    #Voters
+    security.access.user_image_voter:
+        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    cocorico_user.security.access.user_image_voter:
+        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    #Namers
+    cocorico_user.namer.image_namer:
+        class:  Cocorico\UserBundle\Namer\ImageNamer
+        tags:
+            - { name: image_namer }
+
+    #Listeners
+    cocorico_user.user_image_upload_listener:
+        class: Cocorico\UserBundle\Listener\UserImageUploadListener
+        arguments:
+            - "@cocorico_user.user_manager"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: "onUpload" }
+
+    cocorico_user.listing_image_upload_validation_listener:
+        class: Cocorico\UserBundle\Listener\UserImageUploadValidationListener
+        arguments:
+            - "%cocorico.user_img_max_upload_size%"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.validation, method: "onValidate" }
+
+    #Form Handler
+    cocorico_user.form.handler.registration:
+        class: Cocorico\UserBundle\Form\Handler\RegistrationFormHandler
+        arguments:
+            - "@fos_user.registration.form"
+            - "@request_stack"
+            - "@cocorico_user.user_manager"
+            - "@cocorico_user.mailer.twig_swift"
+            - "@fos_user.util.token_generator"
+            - "@cocorico_user.login_manager"
+            - "@event_dispatcher"
+        scope: request
+        public: false
+
+
+    cocorico_user.form.handler.edit_payment:
+        class: Cocorico\UserBundle\Form\Handler\EditPaymentFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_user.user_manager"
+            - "@event_dispatcher"
+        scope: request
+        public: true
+
+
+    #Managers
+    cocorico_user.login_manager:
+        class: Cocorico\UserBundle\Security\LoginManager
+        arguments:
+            - "@fos_user.user_manager"
+            - "@fos_user.security.login_manager"
+            - "@security.encoder_factory"
+            - "%fos_user.firewall_name%"
+
+    cocorico_user.oauth.user.provider.entity:
+        class: Cocorico\UserBundle\Security\OAuthUserProvider
+        arguments:
+            - "@cocorico_user.user_manager"
+
+

@@ -1,0 +1,34 @@
+cocorico_core_frontend:
+    resource: "@CocoricoCoreBundle/Controller/Frontend"
+    type:     annotation
+
+cocorico_core_dashboard:
+    resource: "@CocoricoCoreBundle/Controller/Dashboard"
+    type:     annotation
+    prefix: /dashboard
+
+cocorico_core_admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /%cocorico.admin%
+    options: { i18n: false }
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /%cocorico.admin%
+    options: { i18n: false }
+
+JMSTranslationBundle_ui:
+    resource: @JMSTranslationBundle/Controller/
+    type: annotation
+    #prefix: /_translations
+    prefix:   /%cocorico.admin%/__translations
+
+#upload bundle routing
+oneup_uploader:
+    resource: .
+    type: uploader
+
+#imagine bundle routing
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

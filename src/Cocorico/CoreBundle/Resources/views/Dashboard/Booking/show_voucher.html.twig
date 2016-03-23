@@ -1,0 +1,91 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% embed "@CocoricoCore/Dashboard/layout_show_bill.html.twig" %}
+    {% trans_default_domain 'cocorico_booking' %}
+    {% autoescape false %}
+
+    {% set listing = booking.listing %}
+    {% set asker = booking.user %}
+    {% set offerer = listing.user %}
+
+    {% set translation = listing.translations[app.request.locale] %}
+    {% set listing_address = listing.location.getCompleteAddress %}
+
+    {% block header %}
+        <h2>{{ 'booking.voucher.voucher' | trans }}</h2>
+        <br/>
+        <div>
+            <p>
+                <strong>{{ 'booking.voucher.booking_number' | trans }} : </strong>{{ booking.id }}
+                <br/>
+                <strong>{{ 'booking.voucher.client_name' | trans }} : </strong>
+                {{ asker.firstName ~ ' ' ~ asker.lastName }}
+            </p>
+        </div>
+    {% endblock %}
+
+    {% block content %}
+
+        <div>
+            <strong>{{ 'booking.voucher.address' | trans }} : </strong> {{ listing_address }}
+            <br/>
+            <strong>{{ 'booking.voucher.phone' | trans }} :</strong> {{ offerer.phone }}
+        </div>
+
+        <div>
+            <br/>
+            <strong>{{ 'booking.voucher.date' | trans }}
+                : </strong>{{ booking.start|localizeddate('short', 'none', 'fr') }}
+
+            {% if not timeUnitIsDay %}
+                <br/>
+                <strong>{{ 'booking.show.start_time:'|trans }} </strong>
+                {{ booking.startTime|date('H:i') }}
+                <br/>
+                <strong>{{ 'booking.show.end_time:'|trans }}</strong>
+                {{ booking.endTime|date('H:i') }}
+            {% endif %}
+
+            <br/>
+
+            <strong>{{ 'booking.voucher.duration' | trans }} :</strong>
+            {{ booking.duration(endDayIncluded, timeUnit, timeUnitIsDay) | add_time_unit_text }}
+        </div>
+
+
+        <div>
+            <br/>
+
+            <div>
+                <strong>{{ 'booking.voucher.title' | trans }} : {{ translation.title }}</strong>
+            </div>
+            <br/>
+
+            <div>
+                <strong>{{ 'booking.voucher.description' | trans }} : </strong>
+                <br/>
+                {{ translation.description }}
+            </div>
+        </div>
+
+
+        {% if bundleExist('CocoricoListingOptionBundle') %}
+            <div class="voucher">
+                {% include '@CocoricoListingOption/Dashboard/Booking/_booking_show_options.html.twig' with {
+                'booking': booking
+                } only %}
+            </div>
+        {% endif %}
+    {% endblock %}
+
+
+    {% block bill_info %}
+    {% endblock %}
+
+
+    {% block booking_info %}
+    {% endblock %}
+
+    {% endautoescape %}
+
+{% endembed %}

@@ -1,0 +1,40 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'wiretransfer_offerer.email.subject'|trans({
+        '%booking_amount_offerer%':  booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
+        '%booking_uid%': booking.id
+    }, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'wiretransfer_offerer.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%booking_uid%': booking.id,
+        '%booking_request_url%': booking_request_url,
+        '%offerer_payments_list%': offerer_payments_list,
+        '%booking_amount_offerer%':  booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--booking_bank_wire_transfer_offerer-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

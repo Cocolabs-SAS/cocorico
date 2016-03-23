@@ -1,0 +1,23 @@
+framework:
+     session:
+        gc_probability: 1
+
+doctrine_mongodb:
+    document_managers:
+        default:
+            logging: true
+
+deploy:
+    prod:
+        rsync-options: '-azC --force --delete --progress -h --checksum'
+        host: "%cocorico.deploy.host%"
+        dir: "%cocorico.deploy.dir%"
+        user: "%cocorico.deploy.user%"
+        port: 22
+        timeout: 120
+#        post_deploy_operations:
+#            - export SYMFONY_ENV=prod && php composer.phar install --no-dev --prefer-dist --optimize-autoloader
+##            - php composer.phar dump-autoload --optimize
+#            - php app/console cache:clear --env=prod
+#            - php app/console assets:install --env=prod
+#            - php app/console assetic:dump --env=prod

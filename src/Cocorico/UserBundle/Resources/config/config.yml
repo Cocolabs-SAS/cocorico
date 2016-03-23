@@ -1,0 +1,143 @@
+imports:
+    - { resource: services.yml }
+
+twig:
+    globals:
+        user_img_max: "%cocorico.user_img_max%"
+        user_img_max_upload_size: "%cocorico.user_img_max_upload_size%"       
+
+assetic:
+    bundles: ["CocoricoUserBundle"]
+
+
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Cocorico\UserBundle\Entity\User
+    group:
+        group_class: Cocorico\UserBundle\Entity\Group
+    service:
+        mailer: cocorico_user.mailer.twig_swift
+        user_manager: cocorico_user.user_manager
+    from_email:
+        address:        %cocorico.from_email%
+        sender_name:    %cocorico.site_name%
+    registration:
+        confirmation:
+            enabled:    %cocorico.registration_confirmation%
+        form:
+            type: user_registration
+            name: user_registration
+            validation_groups: [CocoricoRegistration]
+            handler: cocorico_user.form.handler.registration
+    resetting:
+        form:
+            type: user_resetting
+            name: user_resetting
+    profile:
+        form:
+            type: user_profile
+            name: user_profile
+            validation_groups: [CocoricoProfile]
+
+
+
+sonata_user:
+    security_acl: false
+    manager_type: orm
+    table:
+        user_group: "user_group"
+    class:
+        user: Cocorico\UserBundle\Entity\User
+        group: Cocorico\UserBundle\Entity\Group
+    profile:
+        form:
+            type: user_profile
+            name: user_profile
+            validation_groups: [CocoricoProfile]
+    admin:
+        user:
+          class: Cocorico\UserBundle\Admin\UserAdmin
+          controller: CocoricoUserBundle:Admin\UserAdmin
+        group:
+          class: Cocorico\UserBundle\Admin\GroupAdmin
+    impersonating:
+        route: cocorico_home
+
+#    google_authenticator:
+#        enabled: true
+#        server:  cocorico.dev
+
+doctrine:
+    orm:
+        entity_managers:
+            default:
+                mappings:
+                    #ApplicationSonataUserBundle: ~
+                    SonataUserBundle: ~
+        resolve_target_entities:
+            Cocorico\UserBundle\Model\ListingAlertInterface: %cocorico_listing_alert.entity_class%
+
+oneup_uploader:
+    mappings:
+        user_images:
+            max_size: 8000000
+            frontend: blueimp
+            allowed_mimetypes: ["image/gif", "image/jpeg", "image/png"]
+            enable_progress: true
+            namer: cocorico.namer.image_namer
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/users/images/
+
+liip_imagine:
+    cache: ~
+    filter_sets:
+        user_xsmall:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.user_img_xsmall_w%, %cocorico.user_img_xsmall_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        user_small:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.user_img_small_w%, %cocorico.user_img_small_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        user_medium:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.user_img_medium_w%, %cocorico.user_img_medium_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        user_contact:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.user_img_contact_w%, %cocorico.user_img_contact_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+        user_profile:
+            quality: 100
+            filters:
+                auto_rotate: ~
+                thumbnail: { size: [%cocorico.user_img_profile_w%, %cocorico.user_img_profile_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+
+hwi_oauth:
+    connect:
+        account_connector: cocorico_user.oauth.user.provider.entity
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           %cocorico.facebook.app_id%
+            client_secret:       %cocorico.facebook.secret%
+            #todo: Submit app review to facebook to get user_location user_hometown user_birthday
+            #scope:         "public_profile, user_birthday, user_friends, user_location, user_hometown"
+            #infos_url:     "https://graph.facebook.com/me?fields=id,link,name,email,first_name,last_name,verified,gender,birthday,locale,timezone,picture.height(500).width(500),address,location,hometown,friends"
+            scope:         "public_profile"
+            infos_url:     "https://graph.facebook.com/me?fields=id,link,name,email,first_name,last_name,verified,gender,locale,timezone,picture.height(500).width(500)"
+
+#            options:
+#                display: popup #dialog is optimized for popup window
+            paths:
+                profilepicture: picture.data.url
+
+

@@ -1,0 +1,2116 @@
+/*Favourite active class*/
+.listing-post .favourit {
+    cursor: pointer;
+}
+
+.listing-post .active, .tabset-holder .active .icon-heart {
+    text-decoration: none;
+    background: #c53f4e;
+}
+
+.listing-area, .listing-holder {
+    display: block !important;
+}
+
+.form-msg .btn-default {
+    display: block;
+    font-size: 16px;
+    margin: 0 auto 14px;
+    padding: 5px 14px;
+    text-transform: none;
+    width: 190px;
+}
+
+.form-msg {
+    background: none repeat scroll 0 0 #f7f7f7;
+    border-radius: 4px;
+    margin: 0 auto 14px;
+    padding: 0;
+    width: 190px;
+}
+
+.form-msg .form-holder {
+    color: #fff;
+    padding: 0;
+}
+
+/* user ratings */
+.form-message .booking-detail li {
+    width: 35%;
+}
+
+.form-message .user-rating {
+    margin: 0 0 26px;
+    box-shadow: none;
+    text-align: center;
+    border-color: #eaebec;
+    background: #f8f8f8;
+    padding: 11px 15px 13px 21px;
+}
+
+.form-message .user-rating .title {
+    display: inline-block;
+    vertical-align: top;
+    font-weight: 700;
+}
+
+.form-message .user-rating .rating li,
+.form-message .user-rating .rating li:first-child {
+    margin: 0 -11px 0 0;
+}
+
+.rating li.inactive {
+    color: #dedddd;
+}
+
+.hide-radio {
+    display: none;
+}
+
+.a-star-rating {
+    cursor: pointer;
+}
+
+.form-msg a.contact-opener, .form-msg .submit-contact {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* About translation css*/
+.form-area .about-translate {
+    max-width: 400px;
+}
+
+.form-area .about-translate .from-lang {
+    width: 80%;
+    float: left;
+}
+
+.form-area .about-translate .to-lang {
+    width: 80%;
+    float: left;
+}
+
+.form-area .about-translate .float-left {
+    float: left;
+}
+
+.form-area .about-info .language button[type="button"] {
+    background: none repeat scroll 0 0 #c7cdd3;
+    font-size: 14px;
+    height: 36px;
+    line-height: 17px;
+    padding: 0 5px;
+    text-transform: none;
+}
+
+.form-area .about-info .language button[type="button"] {
+    float: right;
+    margin: 0 0 0 10px;
+    min-width: 87px;
+}
+
+.posts-holder .author-name {
+    color: #58595b;
+    text-decoration: none;
+    word-wrap: normal;
+    float: right;
+    text-align: right;
+    padding-right: 12px;
+}
+
+/* Availabilities design dialog box */
+.ui-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+    border: 1px solid #dedede;
+    border-radius: 5px;
+    background: #ffffff;
+    z-index: 201;
+}
+
+.ui-widget-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #aaaaaa url("../images/ui-bg_flat_0_aaaaaa_40x100.png") 50% 50% repeat-x;
+    opacity: .3;
+    filter: Alpha(Opacity=30); /* support: IE8 */
+}
+
+.ui-dialog .form-area {
+    width: 100%;
+    float: left;
+}
+
+.ui-dialog .form-area .form-holder {
+    background: none repeat scroll 0 0 #ffffff;
+    border: none;
+    padding: 20px 30px 30px 30px;
+    position: relative;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-title {
+    font-size: 24px;
+    line-height: 27px;
+    color: #58595b;
+    font-family: inherit;
+    font-weight: 700;
+    /*padding: 80px;*/
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
+    float: right;
+    background: none repeat scroll 0 0 #ffffff;
+    border: 2px solid #c6ccd2;
+    border-radius: 100%;
+    color: #c6ccd2;
+    font-size: 20px;
+    height: 25px;
+    line-height: 20px;
+    position: absolute;
+    right: -12px;
+    text-align: center;
+    text-decoration: none;
+    top: -12px;
+    width: 25px;
+    z-index: 6;
+    cursor: pointer;
+}
+
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:before {
+    content: '\e808';
+}
+
+[class="ui-dialog-titlebar-close"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+}
+
+.ui-dialog .field-row {
+    padding: 0 0 20px 0;
+}
+
+.ui-dialog .alert {
+    padding: 13px 5px 13px 75px;
+    margin: 10px 0 0;
+}
+
+.ui-dialog .info {
+    float: right;
+    padding: 0 10px;
+    line-height: 36px;
+}
+
+.ui-dialog .label {
+    padding: 0 10px 0 0;
+    line-height: 36px;
+}
+
+.ui-dialog .field-holder {
+    margin-top: 0;
+}
+
+.ui-dialog .form-area .field-row:first-child {
+    margin: 0;
+}
+
+.posts-holder .border-black {
+    border-color: #000;
+}
+
+.topbar ul li.welcome-user {
+    float: right;
+    margin: 0;
+}
+
+/* Billing CSS Invoice  */
+
+.table-section-bottom {
+    padding-bottom: 45px !important;
+}
+
+.header-left-contain {
+    margin: 0 0 20px;
+    padding: 15px 19px 19px;
+}
+
+.text-color {
+    color: #58595b;
+}
+
+.main-tabs {
+    margin: 0 0 30px;
+}
+
+.table.table-detail tr {
+    border: #f7f5f5 solid 1px;
+}
+
+.second-paragraph-text {
+    color: #58595b;
+    padding-bottom: 55px;
+}
+
+.text-reminder-title {
+    padding-bottom: 5px;
+}
+
+.float-left {
+    float: left;
+    width: 85%;
+}
+
+.float-right {
+    float: right;
+    width: 15%;
+}
+
+/* END Billing CSS Invoice  */
+
+#photos .gallery-slider .gallery-slideset .slide {
+    height: 510px;
+    width: 680px;
+    display: none;
+}
+
+#photos .gallery-slider .gallery-slideset .slide:first-child {
+    display: block;
+}
+
+.gallery-slider .slide img,
+.gallery-small .slideset .slide img,
+#listing_images .files-list .img-thumbnail img,
+#images-new .image-upload-holder .img-holder img,
+#user_images .list-inline .img-thumbnail img,
+.listing-box .frame .post-content .alignleft img,
+#sidebar .holder .author-area .author-img img,
+.head .author-img .img-holder img,
+.area .box .author-detail .author-img img,
+#messaging .listing-detail .area .img-holder img,
+#properties .listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder img,
+#sidebar .holder .similar-ads .listing-holder .post .alignleft .listing-post img,
+#messaging .postarea .posts-holder .post .post-area .img-holder img,
+#reservations .postarea .posts-holder .post .post-area .img-holder img,
+#comments .postarea .posts-holder .post .img-holder img,
+.container .row .twocolumns .listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder img,
+.vertical-holder .vertical-slider .vertical-slideset .vertical-slide img,
+.listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder img {
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: auto;
+}
+
+#user_contact.gallery-small .slideset,
+#user_contact.gallery-small .slideset .slide {
+    width: 213px;
+    height: 160px;
+}
+
+#user_profile.gallery-small .slideset,
+#user_profile.gallery-small .slideset .slide {
+    width: 308px;
+    height: 231px;
+}
+
+/*Overriding all.css*/
+.form-area .maparea .map-box {
+    height: 420px;
+}
+
+/** Time fields **/
+.time-fields .errors {
+    display: block;
+}
+
+li.time-fields {
+    list-style: none;
+    margin-bottom: 36px;
+}
+
+.time-fields .jcf-select, .nb-days .jcf-select {
+    width: 50px;
+    margin-left: 3px;
+}
+
+.time-fields .jcf-select-opener, .nb-days .jcf-select-opener {
+    width: 16px;
+}
+
+.time-fields .col .title, .nb-days .col .title {
+    margin-bottom: 0;
+}
+
+.time-fields .jcf-select-text, .nb-days .jcf-select-text {
+    width: 20px;
+}
+
+.jcf-select-no-scroll .jcf-scrollbar {
+    display: none;
+    width: 0;
+}
+
+.jcf-select-no-scroll .jcf-list .jcf-option {
+    padding-left: 15px;
+}
+
+.time-fields label, .form-category .nb-days .title label {
+    line-height: 36px;
+    height: 33px;
+}
+
+.time-fields *, .time-ranges li * {
+    display: inline-block;
+}
+
+.time-field {
+    margin: 0 30px 0 10px;
+    line-height: 33px;
+}
+
+/* Price simulator */
+#price-simulator-form #start-date, #price-simulator-form #end-date {
+    width: 75%;
+}
+
+#price-simulator-form .price-area .add-on {
+    margin: 0 0 0 10px;
+}
+
+#price-simulator-form .price-area .col {
+    width: 50%;
+}
+
+#price-simulator-form .time-fields {
+    margin-top: 10px;
+    float: left;
+    width: 100%;
+}
+
+#price-simulator-form .time-fields .col {
+    width: 50%;
+}
+
+#price-simulator-form .time-fields .title {
+    margin-top: 0;
+}
+
+#price-simulator-form .time-field {
+    margin: 0;
+}
+
+/* Booking price */
+#booking-price-form .nb-days {
+    float: right;
+}
+
+#booking-price-form .time-field {
+    margin: 0;
+}
+
+#booking-price-form .time-fields {
+    clear: both;
+}
+
+#booking-price-form .time-fields .col .title {
+    clear: both;
+    margin-right: 35px;
+}
+
+#booking-price-form .time-fields label {
+    font-size: smaller;
+}
+
+.time-ranges .close {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    top: 0;
+    left: 0
+}
+
+.discount-list .close {
+    margin-bottom: 5px;
+}
+
+.discount-list {
+    max-width: 780px;
+}
+
+/*Edit_images.html.twig*/
+#listing_images .jcf-file, #user_images .jcf-file {
+    display: none;
+}
+
+/* file upload */
+.progress {
+    height: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+
+.progress-bar-success {
+    background-color: #5cb85c;
+}
+
+.progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #428bca;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+}
+
+#drop-zone {
+    border: 2px dotted #ccc;
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    font-size: 18px;
+    text-align: center;
+    margin: 10px 0;
+}
+
+/** edit_characteristic.html.twig **/
+.form-area #characteristics h3 {
+    margin-bottom: 0;
+}
+
+/** edit_payment.html.twig **/
+.price-field .sign {
+    float: right;
+    font-size: 16px;
+    margin: 6px 0 0 4px;
+}
+
+.price-field .label {
+    float: left;
+}
+
+/*form_search.html.twig */
+.cocorico-select-multiple .jcf-list-box {
+    overflow-y: scroll;
+    max-height: 36px;
+}
+
+/*Listing new.html.twig*/
+.btns-area.new-listing {
+    margin-bottom: 60px;
+}
+
+.price-box .field-row .info {
+    float: right;
+    margin: 8px 0 0 5px;
+    font-size: 16px;
+}
+
+.price-box .field-holder {
+    max-width: 120px;
+}
+
+/* user edit_payment.html.twig */
+.form-area .payment-info .field-day, .form-signup .field-day {
+    width: 29%;
+    float: left;
+    padding: 0 5px 0 0;
+}
+
+.form-area .payment-info .field-month, .form-signup .field-month {
+    width: 35.5%;
+    float: left;
+    padding: 0 5px 0 0;
+}
+
+.form-area .payment-info .field-year, .form-signup .field-year {
+    width: 35.5%;
+    float: left;
+}
+
+.postarea.alt3 .posts-holder .footer .btn {
+    text-transform: none;
+}
+
+/* form-contact */
+.form-contact {
+    color: #58595b;
+    margin: 0 0 38px;
+    border-radius: 5px;
+    border: #eaebec solid 1px;
+    padding: 20px 20px 10px 20px;
+}
+
+.form-contact h1 {
+    margin: 0 0 30px 0;
+}
+
+.form-contact form {
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-contact .field-row {
+    margin: 0 0 18px;
+}
+
+.form-contact .field-row:before,
+.form-contact .field-row:after {
+    content: " ";
+    display: table;
+}
+
+.form-contact .field-row:after {
+    clear: both;
+}
+
+.form-contact .field-row:before,
+.form-contact .field-row:after {
+    content: " ";
+    display: table;
+}
+
+.form-contact .field-row:after {
+    clear: both;
+}
+
+.form-contact .label {
+    float: left;
+    width: 120px;
+    margin: 7px 10px 0 0;
+}
+
+.form-contact .field-holder {
+    overflow: hidden;
+}
+
+.form-contact.alt {
+    border: 0;
+    padding: 0;
+    margin: 0 0 20px;
+}
+
+.form-contact.alt .tab-content {
+    padding: 28px 19px 11px;
+}
+
+.form-contact.alt .label {
+    width: 111px;
+}
+
+.form-contact.alt .tab-holder .column {
+    padding: 0 0 0 9.7%;
+}
+
+.form-contact.alt .tab-holder .column:first-child {
+    padding: 0 5% 0 0;
+}
+
+.form-contact.alt .tab-holder .column:before {
+    margin: 0 0 0 -15%;
+}
+
+.form-contact textarea {
+    height: 140px;
+}
+
+.form-contact button[type="submit"] {
+    float: right;
+    display: block;
+
+}
+
+.breadcrumb > li {
+    padding-right: 5px;
+}
+
+.form-area .features-area .features-list.list-unstyled {
+    padding-top: 10px;
+}
+
+.form-area #characteristics.features-area .features-list:last-child {
+    float: left;
+}
+
+/*Overriding all.css*/
+
+/** edit_availabilities_prices.html.twig **/
+.price-section .field-row {
+    margin: 0 0 18px;
+    max-width: 280px;
+}
+
+#price-form-container, #price-simulator-form-container {
+    min-height: 237px;
+}
+
+#prices-form .day-fields {
+    width: 64%;
+}
+
+.booking-policy {
+    padding-bottom: 18px;
+}
+
+.form-area .form-block .title {
+    width: 52px;
+}
+
+/** edit_availabilities_status.html.twig **/
+.form-area .form-block .field-row > .col.cell {
+    width: 25%;
+}
+
+.form-area .form-block .field-row .col.route {
+    width: 70%;
+}
+
+.form-area .block2 .field-row:nth-child(4) {
+    max-width: 681px;
+}
+
+.form-area a.validate-location, #form-registerlogin button[type="submit"] {
+    height: 36px;
+    padding: 8px 20px;
+    min-width: 150px;
+    margin: 10px 0 0 41px;
+    font-size: 14px;
+    line-height: 17px;
+    text-transform: none;
+}
+
+.jcf-select .jcf-select-text {
+    color: #58595b;
+}
+
+/** Listing/show.html.twig **/
+.widget.members-list h1 a {
+    color: #58595b;
+    text-decoration: none;
+}
+
+/** Common/_flash.html.twig **/
+
+.alert-error-new {
+    background: #fababa;
+    border-color: #b82422;
+    color: #BB2D2B;
+    padding: 16px 5px 16px 75px;
+}
+
+.alert-warning-new {
+    background: #ffe9ad;
+    border-color: #fab418;
+    color: #C58705;
+    padding: 26px 5px 28px 75px;
+}
+
+.alert-success-new {
+    background: #E1EFBB;
+    border-color: #AEBC85;
+    color: #708A29;
+    padding: 16px 5px 16px 75px;
+}
+
+.alert-info-new {
+    background: #DDF1F3;
+    border-color: #0A8FA1;
+    color: #89C1CA;
+    padding: 26px 5px 28px 75px;
+}
+
+.form-area .alert-warning {
+    padding: 26px 5px 28px 75px;
+}
+
+.form-area .alert-warning .ico.exclamation {
+    width: 41px;
+    height: 41px;
+    font-size: 34px;
+    line-height: 41px;
+}
+
+.ico.icon-success {
+    background: #fff url('../images/icon_success.png') no-repeat 11px 12px;
+}
+
+.ico.icon-error {
+    background: #fff url('../images/icon_error.png') no-repeat 14px 15px;
+}
+
+.ico.icon-warning {
+    background: #fff url('../images/icon_warning.png') no-repeat 11px 12px;
+}
+
+.ico.icon-info {
+    background: #fff url('../images/icon_info.png') no-repeat 11px 12px;
+}
+
+.flashes .alert .ico {
+    left: 18px;
+}
+
+/** form field error message **/
+.errors {
+    color: #d8292f;
+    font-size: 10px;
+    margin: 5px;
+}
+
+.errors .icon-error-field:before {
+    content: '\e814';
+    color: #d8292f;
+}
+
+/** register / login **/
+#form-registerlogin h1 {
+    margin: 0 0 23px 2px;
+    font-size: 30px;
+}
+
+/** Search ( characteristics ) **/
+#search-container .selection-holder {
+    width: 75%;
+}
+
+#search-container .range-area {
+    width: 25%;
+}
+
+#search-container .range-holder {
+    width: 100%;
+}
+
+#search-container .selection-holder > .select-holder:first-child {
+    width: 63%
+}
+
+#search-container li.field-row {
+    float: left;
+    width: 50%;
+}
+
+#search-container li.field-row .select-holder {
+    float: none;
+    width: 100%;
+    margin: 0 0 10px 0;
+}
+
+#categories, .multiselect .btn-group {
+    height: 34px;
+}
+
+.form-category .area .col .title {
+    text-align: right;
+    margin-right: 7px;
+}
+
+.form-category .area {
+    overflow: visible;
+}
+
+.form-category .form-holder .col.location .title {
+    width: auto;
+}
+
+.form-category .multiselect .btn-default {
+    top: 0;
+    right: 0;
+    padding: 6px 14px 6px;
+}
+
+.form-category .col {
+    width: 49%;
+}
+
+.form-category .display-duration .col, .form-category .col.display-duration {
+    width: auto;
+}
+
+.form-category .col.categories {
+    width: 27%;
+}
+
+.form-category .form-holder .col.time {
+    width: 47%;
+}
+
+.form-category .form-holder .col.time .col,
+.form-category .form-holder .col.time .col:first-child {
+    width: 49%;
+}
+
+.form-category .form-holder .col.time .col.day-fields:first-child,
+.form-category .form-holder .col.time .col.day-fields.display-range:first-child,
+.form-category .form-holder .col.time .col.day-fields.display-duration .col:first-child {
+    width: 99%;
+}
+
+.form-category .form-holder .col.time .col.day-fields.display-duration,
+.form-category .form-holder .col.time .col.day-fields.nb-days {
+    width: 49%;
+}
+
+.form-category .form-holder .col.time .time-fields {
+    float: left;
+    margin-left: 3px;
+    line-height: 36px;
+    height: 36px;
+    margin-top: 4px;
+}
+
+.form-category .form-holder .col.time .time-fields.col {
+    margin-top: 4px;
+    width: 99%;
+}
+
+.form-category .form-holder .col.time #time_range_start {
+    margin-right: 10px;
+}
+
+.form-category .form-holder .col.time .time-fields select,
+.form-category .form-holder .col.time .nb-days select {
+    display: inline-block;
+}
+
+.form-category .form-holder .col.time .time-fields .title,
+.form-category .form-holder .col.time .nb-days .title {
+    display: inline-block;
+    float: none;
+    position: relative;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.form-category .form-holder .col.time .flexibility {
+    width: 50%;
+    margin-top: 0;
+}
+
+.form-category .flexibility .input-append {
+    padding: 0 10px 0 0;
+    line-height: 36px;
+}
+
+.form-category .flexibility .jcf-select {
+    width: 60%;
+}
+
+.multiselect-container.dropdown-menu > .active > a, .multiselect-container .dropdown-menu > .active > a:hover,
+.multiselect-container .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    text-decoration: none;
+    outline: 0;
+    background-color: #afb8c0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.error-page {
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+    margin-top: 97px;
+}
+
+/** Cancellation Policy **/
+.info-policy {
+    float: right;
+    margin: 9px;
+}
+
+/*similar listing css*/
+section.similar-ads .listing-post {
+    margin-bottom: 0;
+}
+
+section.similar-ads .rating {
+    margin-bottom: 0;
+}
+
+section.similar-ads .rating li {
+    font-size: 14px;
+    display: inline-block;
+}
+
+section.similar-ads .listing-post .time-price {
+    margin: 1px 0 4px 6px;
+    text-shadow: rgb(252, 247, 247) 1px 1px 1px;
+}
+
+section.similar-ads ul.rating.list-inline {
+    position: relative;
+}
+
+section.similar-ads .listing-post .price {
+    font-size: 14px;
+    padding-bottom: 8px;
+    display: inline-block;
+    margin: 0 0 -10px;
+    line-height: 15px;
+}
+
+section.similar-ads .time-price p {
+    font-size: 10px;
+}
+
+section.similar-ads .alignleft img {
+    position: absolute;
+    width: auto;
+}
+
+/*end of similar listing css*/
+.listing-title {
+    margin-top: 0 !important;
+}
+
+.multiselect-container.dropdown-menu {
+    width: 100%;
+}
+
+img.loading {
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0 auto;
+}
+
+#modal .modal-dialog .home-content-body {
+    padding: 0 0 20px 0;
+    text-align: center;
+}
+
+/*
+images css for making it 4:3
+*/
+.vertical-slideset {
+    /*height: 450px !important;*/
+}
+
+.vertical-holder .vertical-slider .vertical-slideset .vertical-slide,
+.vertical-holder .vertical-slider .vertical-slideset .vertical-slide a {
+    width: 130px;
+    height: 104px;
+    position: relative;
+}
+
+#listing_images .files-list .img-thumbnail,
+#images-new .image-upload-holder .img-holder,
+#user_images .list-inline .img-thumbnail {
+    width: 150px;
+    height: 112px;
+    position: relative;
+}
+
+.listing-box .frame .post-content .alignleft,
+#sidebar .holder .author-area .author-img,
+.head .author-img .img-holder,
+.area .box .author-detail .author-img {
+    width: 60px;
+    height: 45px;
+    position: relative;
+}
+
+#comments .postarea .posts-holder .post .img-holder,
+#comments .postarea .posts-holder .post .img-holder a,
+#reservations .postarea .posts-holder .post .post-area .img-holder,
+#reservations .postarea .posts-holder .post .post-area .img-holder a,
+#messaging .postarea .posts-holder .post .post-area .img-holder,
+#messaging .postarea .posts-holder .post .post-area .img-holder a {
+    width: 200px;
+    height: 150px;
+    position: relative;
+}
+
+#messaging .listing-detail .area .img-holder {
+    width: 100px;
+    height: 75px;
+    position: relative;
+}
+
+#properties .listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder {
+    width: 527px;
+    height: 395px;
+    position: relative;
+}
+
+#sidebar .holder .similar-ads .listing-holder .post .alignleft,
+#sidebar .holder .similar-ads .listing-holder .post .alignleft a.listing-post {
+    width: 90px;
+    height: 67px;
+    position: relative;
+}
+
+.container .row .twocolumns .listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder,
+.listing-area .listing-holder .listing-post .listing-box .frame .post-info .img-holder {
+    width: 384px;
+    height: 288px;
+    position: relative;
+}
+
+.images-list li {
+    text-align: center;
+}
+
+.images-list li img {
+    cursor: default;
+}
+
+/** Pagination */
+.pagination > li > a.active {
+    color: #000000;
+    background-color: #e8e8e8;
+    border-color: #e8e8e8;
+}
+
+/** Price include / exclude text */
+.price small {
+    font-size: 60%;
+    color: inherit;
+}
+
+.price sup {
+    line-height: 0;
+    text-transform: uppercase;
+}
+
+.reservation .price small {
+    font-size: 20px;
+}
+
+.listing-post .price small {
+    font-size: 9px;
+}
+
+.price-section .info.price {
+    font-size: 16px;
+    display: inline-block;
+    margin: 0 0 0 2px;
+    line-height: normal;
+}
+
+/** Price simulator*/
+.price-section strong.price {
+    margin: 20px 0;
+}
+
+.price-section .column + .column .price-info {
+    margin: 20px 0 0 0;
+}
+
+/** Booking new time mode */
+.timing li {
+    height: 25px;
+}
+
+.timing li:nth-child(n+4) {
+    margin-top: 10px;
+}
+
+.timing li:nth-child(2) {
+    text-align: left;
+}
+
+.timing li:nth-child(3n+0) {
+    text-align: right;
+}
+
+.timing li label {
+    width: 80px;
+    display: inline-block;
+    text-align: right;
+}
+
+#booking-new .timing li label {
+    width: 115px;
+}
+
+.col.expiry input {
+    width: 49%;
+    display: inline-block;
+}
+
+/** Booking Accept/Cancel Modal */
+.modal .label {
+    display: inline-block;
+}
+
+.modal .jcf-checkbox {
+    display: inline-block;
+    float: none;
+}
+
+.modal .agree {
+    text-align: center;
+    line-height: 14px;
+}
+
+.modal .booking-duration {
+    margin-bottom: 10px;
+}
+
+.modal .price-holder .sub-title {
+    margin-left: 0;
+    line-height: 40px;
+}
+
+.modal .booking-detail li {
+    width: 40%;
+}
+
+/** Booking show **/
+.postarea .booking-detail ul li, .postarea .booking-detail ul li:last-child {
+    text-align: left;
+}
+
+/* Profile payment */
+.form-area .payment-info .field-row.alt + .field-row .field-holder {
+    padding: 0;
+}
+
+.form-area .payment-info .label {
+    width: 132px;
+}
+
+.form-area .payment-info .field-row:nth-child(3) .label {
+    width: 132px;
+    margin: 7px 7px 0 0;
+}
+
+.form-area .payment-info .same-height-right .field-row:nth-child(3) .label {
+    margin-right: 11px;
+}
+
+/** Contact */
+.form-area .contact-info .code + .tooltip-btn {
+    right: auto;
+}
+
+/* new menu for cocorico*/
+ul.menu-sub-tabs {
+    width: 100%;
+    /*display: -webkit-inline-box;*/
+    /*display: -moz-block-box;*/
+    margin-top: -6px;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li {
+    margin-right: 0px;
+    padding-bottom: 0px;
+    float: left;
+    margin-top: 1px;
+    background-color: #c6ccd2;
+}
+
+.navbar-default .navbar-nav > li > ul.dropdown-menu.display-sub-tabs:after {
+    left: 39px;
+}
+
+.navbar-default .navbar-nav > li > ul.dropdown-menu.display-sub-tabs:before {
+    left: 38px;
+}
+
+ul.dropdown-menu li.dropdown.open.display-tab ul {
+    width: 100%;
+    padding: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border: 0;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li a {
+    display: inline-block;
+    border: 0;
+    font-size: 14px;
+    border-radius: 0;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li.active a {
+    background: #fff;
+    color: #58595b;
+    font-size: 14px;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li a:hover {
+    background-color: #eeeeee;
+    border-top-right-radius: 4px;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li.firstTab a:hover {
+    border-top-right-radius: 0;
+}
+
+.navbar-nav > li > .dropdown-menu li + li.menu-second-tab {
+    border: 0;
+}
+
+ul.display-sub-tabs ul.dropdown-menu li a {
+    font-size: 14px;
+}
+
+li.dropdown.display-tab ul.dropdown-menu a {
+    padding: 7px 20px;
+}
+
+.navbar-default .navbar-nav > li > .dropdown-menu li + li.dropdown.display-tab {
+    border: 0;
+}
+
+ul.menu-sub-tabs > li.active > a,
+ul.menu-sub-tabs > li.active > a:hover,
+ul.menu-sub-tabs > li.active > a:focus {
+    border: 0;
+    background-color: #f7f7f7;
+}
+
+ul.nav.menu-sub-tabs li.menu-second-tab.secondTab {
+    width: 50%;
+    border-top-right-radius: 4px;
+    height: 100%;
+}
+
+ul.dropdown-menu ul.menu-sub-tabs li.firstTab {
+    width: 50%;
+    border-top-left-radius: 4px;
+    height: 100%;
+}
+
+.navbar-default .navbar-nav > li > .dropdown-menu {
+    width: 145%;
+}
+
+.navbar-default .navbar-nav li ul.display-sub-tabs li.tab-list a {
+    margin-left: 0;
+    width: 100%;
+    padding: 13.5px;
+}
+
+.navbar-default .navbar-nav li ul.display-sub-tabs li.tab-list li.firstTab a, li.firstTab.active a {
+    border-top-left-radius: 4px;
+}
+
+.navbar-default .navbar-nav li ul.display-sub-tabs li.menu-second-tab.secondTab a {
+    border-top-right-radius: 4px;
+}
+
+li.menu-second-tab.secondTab.active a {
+    width: 99.35%;
+}
+
+li.firstTab.active a:hover {
+    border-top-right-radius: 0;
+}
+
+ul.dropdown-menu li a {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+@-moz-document url-prefix() {
+    ul.dropdown-menu ul.menu-sub-tabs li.firstTab {
+        margin-left: 0;
+    }
+    .navbar-default .navbar-nav > li > .dropdown-menu {
+        width: 150%;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    ul.menu-sub-tabs {
+        width: auto;
+        margin-top: 0;
+    }
+
+    .navbar-default .navbar-nav > li > .dropdown-menu {
+        margin: 15px 0 0 0;
+        border: 0;
+        width: auto;
+    }
+
+    ul.menu-sub-tabs {
+        margin-top: -10px;
+        display: block;
+        width: 100%;
+    }
+
+    .navbar-default .navbar-nav li ul.display-sub-tabs li.tab-list a {
+        display: inline-block;
+        width: 100%;
+        border-top-right-radius: 4px;
+    }
+
+    ul.dropdown-menu ul.menu-sub-tabs li.firstTab,
+    ul.nav.menu-sub-tabs li.menu-second-tab.secondTab {
+        width: 50%;
+    }
+
+    ul.dropdown-menu ul.menu-sub-tabs li.firstTab a:hover,
+    .navbar-default .navbar-nav li ul.display-sub-tabs li.tab-list li.firstTab a {
+        border-top-right-radius: 0;
+    }
+
+    .navbar-default .navbar-nav li ul.display-sub-tabs li.firstTab a {
+        border-top-left-radius: 0;
+    }
+
+    .navbar-default .navbar-collapse.in {
+        overflow: visible;
+        display: initial;
+    }
+
+    ul.dropdown-menu li a {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+}
+
+/* end of new menu for cocorico*/
+
+/*  Phone  */
+@media screen and (max-width: 480px) {
+    .options-alpha-inner {
+        height: auto !important;
+    }
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    cursor: pointer;
+}
+
+.collection-add-block {
+    margin: 10px 0 28px 0;
+}
+
+.form-area .field-row.time {
+    max-width: none;
+}
+
+ul.collection {
+    padding: 0;
+}
+
+.postarea .booking-duration {
+    margin: 0;
+}
+
+#footer .by.credit {
+    margin-right: 10px;
+}
+
+.form-payment .form-holder .col.cvv {
+    width: 33.1%;
+}
+
+.form-payment .form-holder .col.cvv .field-holder {
+    width: 50%;
+}
+
+.form-payment .form-holder .col.cvv .tooltip-button {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: 0;
+}
+
+.btn.btn-default.multiselect-clear-filter {
+    display: none;
+}
+
+.btns-area {
+    text-align: center;
+    padding: 20px 0;
+    max-width: 800px;
+}
+
+.btns-area .btn-primary {
+    width: 33%;
+    margin: 0 auto;
+}
+
+/* ------------------------------------------------------------ *\
+	Scrollbal
+\* ------------------------------------------------------------ */
+.jcf-scrollbar {
+    background: none;
+    width: 9px;
+}
+
+.jcf-scrollbar-vertical .jcf-scrollbar-dec,
+.jcf-scrollbar-vertical .jcf-scrollbar-inc {
+    display: none;
+}
+
+.jcf-scrollbar-vertical .jcf-scrollbar-slider {
+    margin: 0;
+    background: #e9eae9;
+    height: 100% !important;
+    width: 9px;
+}
+
+.jcf-scrollbar-vertical .jcf-scrollbar-handle {
+    background: #ababab;
+    width: 9px;
+}
+
+/** Listing Options edition */
+.option-area {
+    margin: 0 0 21px;
+    border-radius: 5px;
+    padding: 11px 17px 18px;
+    border: #e6e6e6 solid 1px;
+}
+
+.option-area h2 {
+    font-size: 14px;
+    margin: 0 0 22px;
+}
+
+.option-area .listing-option-list {
+    border-radius: 5px;
+    padding: 17px 18px;
+    border: #e6e6e6 solid 1px;
+    margin-bottom: 20px;
+}
+
+.option-area .listing-option-list:nth-child(even) {
+    background-color: #f7f7f7;
+}
+
+.option-area .collection .pull-left:first-child {
+    width: 42%;
+    margin-right: 20px;
+}
+
+.option-area .collection .pull-left:first-child + .pull-left {
+    width: 54%;
+    border-radius: 5px;
+    padding: 22px 18px 7px;
+    border: #e6e6e6 solid 1px;
+    margin-top: 41px;
+    background-color: #fff;
+}
+
+.option-area .field-row .field-row {
+    width: 42%;
+    display: inline-block;
+    margin: 0 0 0;
+}
+
+.option-area .field-row .field-row:first-child {
+    width: 50%;
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.form-area .tab-content .option-area .tab-content {
+    padding-bottom: 0;
+}
+
+.option-area .close {
+    right: auto;
+    top: auto;
+}
+
+.option-area .sign {
+    float: right;
+    display: inline-block;
+    font-size: 16px;
+    margin: 0 0 0 2px;
+    line-height: 36px;
+}
+
+.option-area .btn-block button[type=submit] {
+    margin: 0;
+    min-width: 220px;
+}
+
+.option-area textarea {
+    height: 110px;
+}
+
+/* ------------------------------------------------------------ *\
+	Listing options show
+\* ------------------------------------------------------------ */
+.options-alpha {
+    padding: 20px;
+    position: relative;
+}
+
+.options-alpha-inner {
+    width: 100% !important;
+    height: 470px !important;
+    max-height: 470px !important;
+    padding-right: 20px;
+}
+
+/* ------------------------------------------------------------ *\
+	Booking Option
+\* ------------------------------------------------------------ */
+.option-reservation {
+    color: #58595b;
+    margin: 0 0 20px;
+    border-radius: 5px;
+    padding: 19px 19px 29px;
+    border: #eaebec solid 1px;
+}
+
+.option-reservation h2 {
+    margin: 0 10px 10px 0;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.option-reservation .options {
+    margin-top: 10px;
+    padding: 25px 80px 0 80px;
+}
+
+.option-alpha {
+    border-radius: 5px;
+    border: 1px solid #eaebec;
+    padding: 15px 20px;
+    background-color: #f7f6f6;
+    margin-bottom: 20px;
+}
+
+.option-inner:after, .option-alpha:after {
+    content: '';
+    line-height: 0;
+    display: table;
+    clear: both;
+}
+
+.option-alpha-secondary {
+    padding: 0;
+}
+
+.option-alpha-secondary .option-inner {
+    padding: 15px 20px;
+}
+
+.option-alpha .option-head {
+    padding-right: 20px;
+}
+
+.option-alpha .option-head h4 {
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 1.33;
+    font-size: 16px;
+}
+
+.option-alpha .option-head h4 span {
+    text-transform: lowercase;
+    font-weight: normal;
+}
+
+.option-alpha .option-trigger {
+    float: right;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 10px solid #ababab;
+}
+
+.option-alpha.expanded .option-trigger {
+    border-top: 0;
+    border-bottom: 10px solid #ababab;
+}
+
+.option-alpha .option-trigger:hover {
+    border-top-color: #58595b;
+}
+
+.option-alpha .option-body {
+    color: #58595b;
+    font-size: 14px;
+    line-height: 1.71;
+    max-height: 0;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.option-alpha.expanded .option-body {
+    max-height: 400px;
+    overflow: visible;
+}
+
+.option-alpha .option-body p {
+    padding-top: 10px;
+}
+
+.option-alpha-secondary .check-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.option-alpha-secondary .check-list li {
+    margin: 0;
+    position: relative;
+}
+
+.option-alpha-secondary .check-list .field-holder {
+    position: absolute;
+    top: 4px;
+    right: 10px;
+    width: 80px;
+}
+
+.option-alpha-secondary .check-list .label {
+    display: block;
+    padding: 12px 110px 12px 0;
+    background-color: #ababab;
+    border-radius: 0 0 5px 5px;
+    color: #fff;
+    transition: .2s;
+    text-align: right;
+}
+
+.option-alpha-secondary .label label {
+    padding: 0;
+    margin: 0;
+}
+
+.option-reservation .alert {
+    margin-bottom: 0;
+    text-align: center;
+    padding: 15px;
+}
+
+.option-reservation .alert-info-secondary {
+    background-color: #f7f6f6;
+    border: 1px solid #eaebec;
+}
+
+.option-reservation .alert p {
+    font-size: 22px;
+    line-height: 1.36;
+    font-weight: 500;
+    margin: 0;
+    color: #58595b;
+}
+
+/* ------------------------------------------------------------ *\
+	Voucher options
+\* ------------------------------------------------------------ */
+.voucher-block {
+    color: #58595b;
+    margin: 0 0 20px;
+    border-radius: 5px;
+    padding: 19px 19px 19px;
+    border: #eaebec solid 1px;
+}
+
+.voucher-block .row {
+    font-size: 18px;
+}
+
+.voucher-block .field-holder {
+    display: inline-block;
+    width: 50%;
+}
+
+.voucher-block .btn {
+    padding: 7px 14px 7px;
+}
+
+.voucher-block .col-md-5 {
+    line-height: 45px;
+    height: 45px;
+}
+
+.post-content.options {
+    margin-top: 14px;
+}
+
+.post-content.options h2 {
+    float: none;
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+
+.post-content.options li {
+    margin-bottom: 4px;
+}
+
+/* ------------------------------------------------------------ *\
+	Total Reservation
+\* ------------------------------------------------------------ */
+.total-reservation {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    border: 1px solid #eaebec;
+    margin-bottom: 20px;
+}
+
+.total-reservation h3 {
+    color: #58595b;
+    margin: 0;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.total-reservation .alert-info {
+    margin-bottom: 0;
+    padding: 15px;
+}
+
+.total-reservation .list-inline {
+    margin: 0;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+}
+
+.total-reservation .list-inline li {
+    width: 50%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.25;
+    color: #58595b;
+}
+
+.total-reservation .list-inline li .tooltip-button {
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+.price-list {
+    margin-bottom: 0;
+}
+
+.price-list li {
+    width: 100%;
+}
+
+.listing-post .time-price {
+    width: 120px;
+}
+
+.main-tabs .listing-post .time-price {
+    width: auto;
+    min-height: 77px;
+}
+
+.location-holder {
+    margin-bottom: 10px;
+}
+
+.postarea.alt3 .rating {
+    margin: -6px 0 0 -4px;
+}
+
+.postarea.alt3 .textbox {
+    padding-top: 0;
+    margin-bottom: 6px;
+}
+
+.postarea .post-content {
+    min-height: 45px;
+}
+
+/** Duplication **/
+.listing-post .info-btns.duplication li, .listing-post .info-btns.duplication li.select-holder {
+    width: 24%;
+}
+
+/* sf dev toolbar */
+.sf-toolbarreset {
+    min-height: 38px;
+    height: auto !important;
+}
+
+.min-height {
+    min-height: 300px;
+}
+
+/** Listing Alert**/
+.form-category .listing-alert {
+    float: left;
+    padding: 0 0 0 10px;
+    width: 10%;
+}
+
+.form-category .listing-alert a.btn {
+    text-transform: none;
+    padding: 6px 10px;
+}
+
+#listing-alerts td {
+    padding: 10px;
+    vertical-align: middle;
+    border-width: 0 0 0 1px;
+}
+
+#listing-alerts .col1 {
+    text-align: left;
+    width: 80%;
+}
+
+#listing-alerts .col1:first-letter {
+    text-transform: uppercase;
+}
+
+#listing-alerts .col2 {
+    text-align: center;
+    width: 10%;
+}
+
+#listing-alerts button[type=submit].close {
+    top: 0;
+    right: 0;
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    min-width: inherit;
+    padding: 0;
+    background: #fff;
+    cursor: pointer;
+}
+
+.form-area .about-info .label {
+    max-width: 190px;
+}
+
+.form-area .about-translate .from-lang .label,
+.form-area .about-translate .to-lang .label {
+    width: 185px;
+    text-align: left;
+}
+
+.form-area .about-translate .from-lang,
+.form-area .about-translate .to-lang {
+    width: 100%;
+}
+
+.form-area .about-info .language button[type="button"] {
+    margin: 10px 0 0 150px;
+    float: none;
+}
+
+.form-area .about-info .languages-block .language .label {
+    width: 150px;
+    max-width: 210px;
+}
+
+.form-area .about-info .from .label {
+    margin: 7px 11px 0 0;
+    width: 139px;
+}
+
+.newstyle {
+    border: 0;
+    margin: 15px 0;
+}
+
+.clear_input, .clear_input:hover {
+    text-decoration: none;
+    color: #c6ccd2;
+    transition: background 0.4s;
+    font-size: 36px;
+}
+
+.clear_input:hover {
+    color: #afb8c0;
+}
+
+.author-info a {
+    color: #808285;
+    text-decoration: none;
+}
+
+.form-area #characteristics h3 {
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.high-rank-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.infoarea {
+    padding-bottom: 0;
+}
+
+/* ------------------------------------------------------------ *\
+    Slider Secondary
+\* ------------------------------------------------------------ */
+.slider-secondary {
+    position: relative;
+}
+
+.slider-secondary .slides {
+    list-style-type: none;
+}
+
+.slider-secondary .slide {
+    float: left;
+}
+
+.slider-secondary .listing-post {
+    margin: auto;
+    margin-bottom: 0;
+}
+
+.slider-secondary .slider-secondary-actions a {
+    font-size: 0;
+    line-height: 0;
+    text-indent: -4000px;
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 47px;
+    height: 47px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    -webkit-background-size: 100% 100%;
+    background-size: 100% 100%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.slider-secondary .slider-secondary-actions a.slider-prev {
+    background-image: url(../images/arrow-left.png);
+    left: -30px;
+}
+
+.slider-secondary .slider-secondary-actions a.slider-next {
+    background-image: url(../images/arrow-right.png);
+    right: -13px;
+}
+
+.slider-secondary .slider-secondary-paging {
+    padding-top: 30px;
+    font-size: 0;
+    line-height: 0;
+    text-align: center;
+}
+
+.slider-secondary .slider-secondary-paging a {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
+    width: 13px;
+    height: 13px;
+    border-radius: 7px;
+    background-color: #fff;
+}
+
+.slider-secondary .slider-secondary-paging a.selected {
+    width: 39px;
+}
+
+.tips-section .slides, .testimonial-slider .slides {
+    padding: 5px 0;
+}
+
+.tips-section .listing-post .frame {
+    min-height: 327px;
+}
+
+.slider-secondary .slider-secondary-paging a {
+    border: 1px solid #58595b;
+}
+
+.slider-secondary .slider-secondary-paging {
+    padding-bottom: 30px;
+}
+
+.slider-secondary .slider-secondary-actions a {
+    width: 15px;
+    height: 25px;
+}
+
+.tips-section .slider-secondary .slider-secondary-paging a.selected {
+    width: 13px;
+    background: #58595b;
+}
+
+.tips-section .caroufredsel_wrapper,
+.tips-section .caroufredsel_wrapper .slides {
+    height: 380px !important;
+}
+
+.tips-section .listing-post .img-holder {
+    height: 268px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+
+}
+
+.tips-section .post-info {
+    display: table;
+    width: 100%;
+}
+
+.tips-section .slides .listing-content {
+    width: auto;
+    max-width: 380px;
+    position: relative;
+}
+
+.slider-secondary .slider-secondary-actions a.slider-prev {
+    left: -15px;
+}
+
+@media screen and (max-width: 767px) {
+    #booking-new .price-area .timing li {
+        height: auto;
+    }
+
+    #booking-new .timing li label {
+        width: auto;
+    }
+
+    #booking-new .timing li:nth-child(3n+0) {
+        text-align: center;
+    }
+
+    #booking-new .total-reservation .list-inline li {
+        width: 100%;
+    }
+}

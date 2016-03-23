@@ -1,0 +1,19 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% if currencies|length > 1 %}
+    <li class="dropdown">
+        <a href="#" tabindex="9" class="dropdown-toggle" data-toggle="dropdown" role="button"
+           aria-expanded="false">{{ currencies[currentCurrency] ~ " " ~ currentCurrency }}
+        </a>
+
+        <ul class="dropdown-menu" role="menu">
+            {%- for currency, symbol in currencies -%}
+                <li>
+                    <a href="{{ path('cocorico_currency_switch', { 'currency': currency }) }}">
+                        {{ symbol ~ " " ~ currency }}
+                    </a>
+                </li>
+            {%- endfor -%}
+        </ul>
+    </li>
+{% endif %}

@@ -1,0 +1,6 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+{% block field %}
+    <a title="Edit" class="edit_link" href="{{ admin.generateUrl('edit', {'id':object.id} ) }}">
+        {{ "View Thread"| trans }}
+    </a>
+{% endblock %}

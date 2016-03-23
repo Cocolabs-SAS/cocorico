@@ -1,0 +1,197 @@
+{#
+ Javascript calendar for listing edition and show
+ todo: Resolve small events display problem on week and day view
+ todo: Resolve problem about hidden default price on cal-unavailable-evt-next event in mode time unit day
+#}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{#Default cell content#}
+{% if listingDefaultStatus == ListingAvailabilityConstants.STATUS_AVAILABLE %}
+    {% set status_class = "cal-available-evt" %}
+{% else %}
+    {% if timeUnitAllDay %}
+        {% set status_class = "cal-unavailable-evt" %}
+    {% else %}
+        {% set status_class = "cal-unavailable-evt cal-unavailable-evt-next" %}
+    {% endif %}
+{% endif %}
+
+<div id="default-cell-content" style="display: none">
+    <a class="fc-day-grid-event fc-event fc-start fc-end {{ status_class }}">
+        <div class="fc-content">
+            <span class="fc-title fc-title-default">{{ default_price }}</span>
+        </div>
+    </a>
+</div>
+
+<div data-id="edit-event-dialog"></div>
+
+<script>
+    $(function () {
+
+        //FullCalendar
+        var headerCenter = 'title,month,agendaWeek,agendaDay';
+        var defaultAllDayEventDuration = null;
+        var allDay = false;
+        var eventAfterRender = function (event, element, view) {
+        };
+        var heightCal = 'auto';
+        //var prefixTitleEvent = "<br />";
+        var editable = {{ edit_mode ? 'true' : 'false' }};
+
+        //Time unit is in day mode
+        if (timeUnitIsDay) {
+            //prefixTitleEvent = "";
+            headerCenter = 'title';
+            defaultAllDayEventDuration = moment.duration('23:59');
+            allDay = true;
+            heightCal = null;
+            eventAfterRender = function (event, element, view) {
+                //Resize cells
+//                element.css("height", ($(".fc-day").height() - 3) + "px");
+//                element.css("top", "-" + ($(".fc-day-number").height() + 5) + "px");
+
+                //Remove old fc-bg event class then add new fc-bg event class
+                var dateEvt = moment(event.start);
+                var tdBg = $("td[data-date='" + dateEvt.format('YYYY-MM-DD') + "']");
+                if (event.className[0] == 'cal-unavailable-evt' || event.className[0] == 'cal-booked-evt') {
+                    tdBg.removeClass('cal-available-evt');
+                } else if (event.className[0] == 'cal-available-evt') {
+                    tdBg.removeClass('cal-unavailable-evt');
+                    tdBg.removeClass('cal-booked-evt');
+                }
+                tdBg.addClass(event.className[0]);
+
+                //Remove fc-event class
+                element.removeClass(event.className[0]);
+
+                if (!timeUnitAllDay) { //Add triangle bg images
+                    //todo: manage triangle bg images when cocorico.listing_availability_status = 2
+                    var dateEvtNext = dateEvt.add(1, "days");
+                    var tdNextBg = $("td[data-date='" + dateEvtNext.format('YYYY-MM-DD') + "']");
+                    if (event.className[0] == 'cal-unavailable-evt' || event.className[0] == 'cal-booked-evt') {
+                        tdNextBg.addClass('cal-unavailable-evt-next');
+                    } else if (event.className[0] == 'cal-available-evt') {
+                        tdNextBg.removeClass('cal-unavailable-evt-next');
+                    }
+                }
+            };
+        }
+
+
+        var calendar = $("{{ calendar_elt }}").fullCalendar({
+            header: {
+                left: 'prev',
+                center: headerCenter,
+                right: 'next'
+            },
+            height: heightCal,
+            allDay: allDay,
+            editable: editable,
+            lazyFetching: true,
+            lang: '{{ app.request.locale }}',
+            firstDay: 1,
+            displayEventEnd: true,
+            forceEventDuration: true,
+            defaultAllDayEventDuration: defaultAllDayEventDuration,
+            eventStartEditable: false,
+            eventDurationEditable: false,
+            allDaySlot: false,
+            timeFormat: {
+                month: 'H:mm',
+                week: 'H:mm',
+                day: 'H:mm'
+            },
+            dayRender: function (date, cell) {
+                cell.prepend($("#default-cell-content").html());
+            },
+            eventRender: function (event, element) {
+                var dateEvt = moment(event.start);
+                var tdBg = $(".fc-bg td[data-date='" + dateEvt.format('YYYY-MM-DD') + "']");
+                tdBg.empty();
+                element.find('.fc-title').html(event.title);
+            },
+            eventAfterRender: function (event, element, view) {
+                eventAfterRender(event, element, view);
+
+            },
+            events: function (start, end, timezone, callback) {
+                var url = "{{ path('cocorico_listing_availabilities',{
+                    'listing_id':  listing_id, 'start':'1971-05-29', 'end':'1971-05-30'
+                    })}}";
+                url = url.replace('1971-05-29', moment(start).format('YYYY-MM-DD'));
+                url = url.replace('1971-05-30', moment(end).format('YYYY-MM-DD'));
+
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (events) {
+                        callback(events);
+                    }
+                });
+            },
+            {% if edit_mode %}
+            {% if timeUnitIsDay %}
+            dayClick: function (date, jsEvent, view) {
+                var classList = jsEvent.target.classList;
+                var isNotEvent = $.inArray('cal-booked-evt', classList) == -1 &&
+                        $.inArray('cal-unavailable-evt', classList) == -1 &&
+                        $.inArray('cal-available-evt', classList) == -1;
+                //Edition allowed only for current day or future days
+                if (moment(date).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD') && isNotEvent) {
+                    var url = "{{ path('cocorico_dashboard_listing_new_availability_' ~ edit_type,{
+                            'listing_id': listing_id, 'day':'1971-05-29'
+                            })}}";
+                    url = url.replace('1971-05-29', moment(date).format('YYYY-MM-DD'));
+
+                    openEditEventDialog(url, moment(date).format("L"));
+                }
+            },
+            {% endif %}
+            eventClick: function (event, jsEvent, view) {
+                //Edition allowed only for current day or future days
+                if (moment(event.start).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD') &&
+                        $.inArray('cal-booked-evt', event.className) == -1
+                ) {
+                    var url = "{{ path('cocorico_dashboard_listing_edit_availability_' ~ edit_type,{
+                            'listing_id': listing_id, 'id':'availabilityid', 'start_time':'00:00', 'end_time':'00:01'
+                            })}}";
+
+                    url = url.replace('availabilityid', event.id.slice(0, -4));
+                    url = url.replace('00:00', moment(event.start).format("HH:mm"));
+                    url = url.replace('00:01', moment(event.end).subtract(1, 'minutes').format("HH:mm"));
+
+                    var title = moment(event.start).format("DD/MM/YYYY HH:mm") + "-" + moment(event.end).format("HH:mm");
+                    if (timeUnitIsDay) {
+                        title = moment(event.start).format("L");
+                    }
+                    openEditEventDialog(url, title);
+                }
+            }
+            {% endif %}
+        });
+        //End FullCalendar
+
+        {% if edit_mode %}
+        //Event Edition Dialog
+        var $dialog = $("div[data-id=edit-event-dialog]").initDialogForm(300, function () {
+            calendar.fullCalendar('refetchEvents');
+        });
+
+        function openEditEventDialog(url, title) {
+            $dialog.openDialog(url, title, function () {
+                initCustomForms();
+            });
+        }
+
+        //End Event Edition Dialog
+
+        //Time ranges form
+        $(".time-ranges").addFormToCollection("ul.collection", "li", function () {
+
+        });
+        {% endif %}
+    });
+</script>

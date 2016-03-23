@@ -1,0 +1,50 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'listings' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <div role="tabpanel" class="tab-pane active clearfix" id="properties">
+        <div role="tabpanel">
+
+            {% block nav_side_dashboard -%}
+                {% if listing is defined %}
+                    <div class="listing-title-block">
+                        <h1 class="listing-title">
+                            {{ listing.title }}
+
+                            <a target="_blank" class="btn btn-default"
+                               href="{{ path('cocorico_listing_show', {'slug':listing.translations[app.request.locale].slug} ) }}">
+                                {{ 'nav.listing.show.link'|trans }}
+                            </a>
+                        </h1>
+                    </div>
+                {% endif %}
+
+                {% include '@CocoricoCore/Dashboard/Listing/_nav_side.html.twig' with {
+                'nav_side_dashboard_current': nav_side_dashboard_current,
+                'listing': listing,
+                } only %}
+            {%- endblock %}
+
+            {% block content_dashboard %}{%- endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Currency conversion#}
+    <script>
+        $(function () {
+            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
+        });
+    </script>
+{% endblock %}

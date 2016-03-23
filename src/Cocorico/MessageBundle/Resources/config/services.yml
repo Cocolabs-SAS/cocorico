@@ -1,0 +1,58 @@
+imports:
+    - { resource: subscribers.yml }
+    - { resource: admin.yml }
+
+#FOS Message services overriden
+services:
+    cocorico_message.new_thread.form.type:
+        class: Cocorico\MessageBundle\Form\Type\Frontend\NewThreadMessageFormType
+        arguments: [%fos_message.thread_class%]
+        tags:
+        - { name: form.type, alias: cocorico_message_new_thread }
+        public: false
+        
+        
+    cocorico_message.new_thread.form.handler:
+        class: Cocorico\MessageBundle\FormHandler\NewThreadMessageFormHandler
+        arguments: 
+            - "@request"
+            - "@fos_message.composer"
+            - "@fos_message.sender"
+            - "@fos_message.participant_provider"
+        scope: request
+        public: false
+    
+
+    cocorico_message.reply.form.type:
+        class: Cocorico\MessageBundle\Form\Type\Frontend\ReplyMessageFormType
+        arguments: [%fos_message.thread_class%]
+        tags:
+        - { name: form.type, alias: cocorico_message_reply }
+        public: false
+        
+        
+    cocorico_message.reply.form.handler:
+        class: Cocorico\MessageBundle\FormHandler\ReplyMessageFormHandler
+        arguments: 
+            - "@request"
+            - "@fos_message.composer"
+            - "@fos_message.sender"
+            - "@fos_message.participant_provider"
+        scope: request
+        public: false
+        
+        
+    cocorico_message.composer:
+        class: Cocorico\MessageBundle\Composer\Composer
+        arguments: 
+            - "@fos_message.message_manager"
+            - "@fos_message.thread_manager"
+        public: false
+
+    cocorico_message.thread_manager:
+        class: Cocorico\MessageBundle\Model\ThreadManager
+        arguments: 
+            - "@fos_message.thread_manager"
+            - "@fos_message.message_manager"
+            - "%cocorico.message_max_per_page%"
+            - "@cocorico_user.mailer.twig_swift"

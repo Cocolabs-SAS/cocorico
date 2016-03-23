@@ -1,0 +1,543 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+{% set listing_user = listing.user %}
+
+{%- block meta_title -%}
+    {{ 'listing.show.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ " - " ~ listing_location.city ~ " - " ~ listing.priceDecimal ~ " " ~ currencySymbol(currentCurrency) ~ "/" ~  0|add_time_unit_text ~ " - " ~ cocorico_site_name }} }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'listing.show.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block open_graph_data -%}
+    <meta property="og:title" content="{{ listing_translation.title }}"/>
+    <meta property="og:description" content="{{ listing_translation.description|slice(0, 200, true) }}"/>
+    {% if listing.images|length %}
+        <meta property="og:image"
+              content="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing.images[0].name) | imagine_filter('listing_large') }}"/>
+    {% endif %}
+{%- endblock -%}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    'css/vendor/fullcalendar.min.css'
+    'css/fullcalendar-override.css'
+
+    filter='cssrewrite' output='css/compiled/fullcalendar.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_listing' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            <ol class="breadcrumb col-xs-12">
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="#" itemprop="url">
+                        <span itemprop="title">Home</span>
+                    </a>
+                </li>
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="#" itemprop="url">
+                        <span itemprop="title">Pays</span>
+                    </a>
+                </li>
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="#" itemprop="url">
+                        <span itemprop="title">Région</span>
+                    </a>
+                </li>
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="#" itemprop="url">
+                        <span itemprop="title">Département</span>
+                    </a>
+                </li>
+                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <a href="#" itemprop="url">
+                        <span itemprop="title">Lieu dit</span>
+                    </a>
+                </li>
+                <li>Code postal</li>
+            </ol>
+        {% endblock %}
+
+        {% block search_form %}
+            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
+        {% endblock %}
+
+        {% block main %}
+
+            <!-- two-columns -->
+            <div class="twocolumns row alt" itemscope itemtype="http://schema.org/Product">
+                <!-- contain the main content of the page -->
+                <div id="content" class="listing-area col-xs-12 col-md-9">
+                    <div class="content-holder">
+                        <!-- listing-container -->
+                        <div class="listing-container">
+                            <h1 itemprop="name">
+                                {{ listing_translation.title }}
+
+                                {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") and app.user == listing_user %}
+                                    <a class="btn btn-default"
+                                       href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
+                                        {{ 'listing.edit.edit'|trans }}
+                                    </a>
+                                {% endif %}
+                            </h1>
+                            <!-- tabs -->
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <nav class="tabset-holder">
+                                    <a href="#" class="opener">
+                                        <span class="hidden">opener</span>
+                                        <i class="icon-down-open-mini"></i>
+                                    </a>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#photos" data-toggle="tab" role="tab"
+                                               data-text="{{ 'listing.show.photos.title'|trans }}">
+                                                {{ 'listing.show.photos.title'|trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#map" data-toggle="tab" role="tab"
+                                               data-text="{{ 'listing.show.map'|trans }}">
+                                                {{ 'listing.show.map'|trans }}
+                                            </a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a href="#calendar" data-toggle="tab"
+                                               data-text="{{ 'listing.show.calendar'|trans }}">
+                                                {{ 'listing.show.calendar'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <a href="javascript:void(0)" id="favourite-{{ listing.id }}"
+                                       class="link-favourit favourit">
+                                        {{ 'listing.show.favorites.add'|trans }}
+                                        <i class="icon-heart"></i>
+                                    </a>
+                                </nav>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="photos">
+                                        <!-- gallery-slider -->
+                                        <div class="gallery-slider">
+                                            <div class="gallery-slideset">
+                                                {% for image in listing.images %}
+                                                    <!-- slide -->
+                                                    <div class="slide" {% if loop.index > 1 %} style="display:none;"{% endif %}>
+                                                        <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xxlarge') }}"
+                                                             alt="{{ listing_translation.title ~ " " ~ price }}"
+                                                             itemprop="image"/>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <!-- vertical-slider -->
+                                            <div class="vertical-holder">
+                                                <div class="vertical-slider">
+                                                    <div class="vertical-slideset">
+                                                        {% for image in listing.images %}
+                                                            <!-- vertical-slide -->
+                                                            <div class="vertical-slide">
+                                                                <a href="">
+                                                                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xxmedium') }}"
+                                                                         alt="{{ listing_translation.title ~ " " ~ price }}"/>
+                                                                </a>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="btn-prev">previous</a>
+                                            <a href="#" class="btn-next">next</a>
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="map">
+                                        <!-- maparea -->
+                                        <div class="maparea">
+                                            <div class="map-holder">
+                                                <div id="map-listing" class="map-canvas"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div role="tabpanel" class="tab-pane" id="calendar">
+                                        <div class="date-slider alt">
+                                            {% include '@CocoricoCore/Dashboard/Listing/_calendar.html.twig' with {'edit_mode': false} only %}
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <nav class="tabset-holder">
+                                    <a href="#" class="opener">
+                                        <span class="hidden">opener</span>
+                                        <i class="icon-down-open-mini"></i>
+                                    </a>
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li class="active">
+                                            <a href="#description" data-toggle="tab"
+                                               data-text="{{ 'listing.show.description'|trans }}">
+                                                {{ 'listing.show.description'|trans }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#conditions" data-toggle="tab"
+                                               data-text="{{ 'listing.show.rules'|trans }}">
+                                                {{ 'listing.show.rules'|trans }}
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#features" data-toggle="tab"
+                                               data-text="{{ 'listing.show.characteristics'|trans }}">
+                                                {{ 'listing.show.characteristics'|trans }}
+                                            </a>
+                                        </li>
+                                        {% if optionBundleEnabled %}
+                                            <li>
+                                                <a href="#options" data-toggle="tab"
+                                                   data-text="{{ 'listing.show.options'|trans }}">
+                                                    {{ 'listing.show.options'|trans }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="#comments" data-toggle="tab"
+                                               data-text="{{ 'listing.show.comments'|trans }}">
+                                                {{ 'listing.show.comments'|trans }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <!-- description -->
+                                    <div role="tabpanel" class="tab-pane active" id="description">
+                                        <p itemprop="description">{{ listing_translation.description|nl2br }}</p>
+                                    </div>
+                                    <!-- conditions -->
+                                    <div role="tabpanel" class="tab-pane" id="conditions">
+                                        <p>{{ listing_translation.rules|nl2br }}</p>
+                                    </div>
+                                    <!-- features -->
+                                    <div role="tabpanel" class="tab-pane" id="features">
+                                        <!-- features-area -->
+                                        <div class="features-area">
+                                            <!-- features-list -->
+                                            {#<ul class="list-unstyled features-list">#}
+                                            {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
+                                            <!--@formatter:off-->
+                                            {% for characteristic in listing.getListingListingCharacteristicsOrderedByGroup %}
+                                            {% set listingCharacteristic = characteristic.listingCharacteristic %}
+                                            {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
+                                            {% set listingCharacteristicValue = characteristic.listingCharacteristicValue %}
+                                            {% if listingCharacteristicValue %}
+                                            {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
+                                            {% if previousListingCharacteristicGroup %}
+                                            {{ "</ul>" }}
+                                            {% endif %}
+                                            <h3>{{ listingCharacteristicGroup }}</h3>
+                                            {{ "<ul>" }}
+                                            {% endif %}
+                                            <li>
+                                            {{ listingCharacteristic.getName() }} :
+                                            <strong>
+                                            {{ listingCharacteristicValue.getName() }}
+                                            {# {% else %}
+                                            ND #}
+                                            </strong>
+                                            {% if listingCharacteristic.getDescription() %}
+                                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button" data-original-title="{{ listingCharacteristic.getDescription() }}">?</button>
+                                            {% endif %}
+                                            </li>
+                                            {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
+                                            {% endif %}
+                                            {% endfor %}
+                                            <!--@formatter:on-->
+                                            {#</ul>#}
+                                        </div>
+                                    </div>
+
+                                    <!-- options -->
+                                    {% if optionBundleEnabled %}
+                                        <div role="tabpanel" class="tab-pane" id="options">
+                                            {% include '@CocoricoListingOption/Frontend/Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
+                                        </div>
+                                    {% endif %}
+
+                                    <!-- comments -->
+                                    <div role="tabpanel" class="tab-pane" id="comments">
+                                        <div class="blog">
+                                            <div class="head">
+                                                <h2>{{ 'listing.comments.header'|trans }}</h2>
+                                                <!-- rating -->
+                                                {% if listing.averageRating %}
+                                                    {{ listing.averageRating | cocorico_star_rating }}
+                                                {% endif %}
+                                            </div>
+                                            <div class="posts-holder">
+                                                <!-- post -->
+                                                {% include 'CocoricoCoreBundle:Dashboard/Listing:_rating_comments.html.twig' with {'reviews': reviews} only %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- contain sidebar of the page -->
+                <aside id="sidebar" class="col-xs-12 col-md-3">
+                    <div class="holder">
+                        <div class="sub-head" itemprop="aggregateRating" itemscope
+                             itemtype="http://schema.org/AggregateRating">
+                            <!-- social-networks -->
+                            {#{{ socialButtons({'title': translation.title}) }}#}
+                            {% include 'CocoricoCoreBundle:Frontend/SocialButton:all.html.twig' with {'title': listing_translation.title} only %}
+
+                            <!-- rating -->
+                            {% if listing.averageRating %}
+                                {{ listing.averageRating | cocorico_star_rating }}
+                            {% endif %}
+                            <span class="counter">
+                                (
+                                <span itemprop="reviewCount">{{ listing.commentCount }}</span>
+                                {{ 'listing.show.comments'|trans }})
+                            </span>
+                        </div>
+
+                        {#booking form#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
+                            'listing': listing
+                        })) }}
+
+                        <!-- members-list -->
+                        <section class="widget members-list" itemprop="offers" itemscope
+                                 itemtype="http://schema.org/Offer">
+
+                            <meta itemprop="priceCurrency" content="{{ defaultCurrency }}"/>
+                            <meta itemprop="price" content="{{ listing.priceDecimal }}"/>
+
+                            <!-- gallery-small -->
+                            <div id="user_contact" class="gallery-small slideshow">
+                                <div class="slideset">
+
+                                    {% if listing_user.images|length %}
+                                        {% for image in listing_user.images %}
+                                            <div class="slide">
+                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
+                                                     alt="{{ listing_user.firstName }}"/>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="slide">
+                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
+                                                 alt="{{ listing_user.firstName }}"/>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <a href="#" class="btn-prev">previous
+                                    <span></span>
+                                </a>
+                                <a href="#" class="btn-next">next
+                                    <span></span>
+                                </a>
+                            </div>
+                            <h1>
+                                <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
+                                    {{ listing_user.firstName }}
+                                </a>
+                            </h1>
+
+                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
+                                {# contact button and form #}
+                                {{ render(controller('CocoricoMessageBundle:Dashboard/Message:newThread',
+                                { 'listingId': listing.id } )) }}
+                                {# end of contact button and form #}
+                            {%- else -%}
+                                <a class="contact-opener btn btn-default no-margin"
+                                   href=" {{ path('cocorico_user_login') }}">
+                                    {{ 'listing.show.user.contact'|trans }}
+                                </a>
+                            {%- endif -%}
+
+                            <ul class="info-list">
+                                <li>
+                                    {% if listing_user.phoneVerified %}
+                                        <i class="icon-ok"></i>
+                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
+                                        <strong>{{ "verified"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
+                                        <strong>{{ "no_verified"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.phone_verified.help'|trans }}">?
+                                    </button>
+                                </li>
+
+                                <li>
+                                    {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.emailVerified %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "verified"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no_verified"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.email_verified.help'|trans }}">?
+                                    </button>
+                                </li>
+                                <li>
+                                    {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.idCardVerified %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "verified"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no_verified"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.id_card_verified.help'|trans }}">?
+                                    </button>
+                                </li>
+                                <li>
+                                    {{ 'form.user.has_booking:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.hasBooking %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "yes"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.has_booking.help'|trans }}">?
+                                    </button>
+                                </li>
+                                <li>
+                                    {{ 'listing.show.cancellation_policy:'|trans() }}
+                                    <strong>{{ listing.cancellationPolicyText|trans }}</strong>
+                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            data-html="true" type="button"
+                                            data-original-title="{{ cancellationPolicies() }}"> ?
+                                    </button>
+                                </li>
+                            </ul>
+                        </section>
+
+                        {# similar results#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:similarListing',
+                        { 'id': listing.id }
+                        )) }}
+
+                    </div>
+                </aside>
+            </div>
+        {% endblock %}
+        {% block modal %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock layout %}
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Calendar #}
+    {% javascripts
+    'js/vendor/fullcalendar/fullcalendar.min.js'
+    'js/vendor/fullcalendar/lang-all.js'
+
+    output='js/compiled/calendar.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% include '@CocoricoCore/Frontend/Listing/js/_calendar_js.html.twig' with {
+    'calendar_elt': '#fc-calendar',
+    'listing_id': listing.id,
+    'default_price': price,
+    'edit_mode': false,
+    'edit_type': false
+    } only %}
+
+
+    {#Map and Geocoding#}
+    {% set coordinate = listing.location.coordinate %}
+
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-listing',
+    'auto_complete_elt': '#location',
+    'default_lat': coordinate.lat,
+    'default_lng': coordinate.lng,
+    'default_zoom': 16,
+    'display_marker': displayMarker
+    } only %}
+
+    <script>
+        $(function () {
+            //Map
+            {% if not displayMarker %}
+            var circle = new google.maps.Circle({
+                map: map,
+                center: latlng,
+                strokeColor: '#0000EE',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#0000EE',
+                fillOpacity: 0.1,
+                radius: 200
+            });
+            {% endif %}
+
+            //Compute booking price when page load if booking dates exists
+            submitDatePickerAjaxForm(function () {
+                jcf.replaceAll("#booking-price-form");
+            });
+
+            // Set default favourites in the listing
+            setDefaultFavourites();
+
+            // Categories
+            initMultiSelect(
+                    '#categories',
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+            );
+        });
+    </script>
+{% endblock %}

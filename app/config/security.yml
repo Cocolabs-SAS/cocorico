@@ -1,0 +1,96 @@
+security:
+    encoders:
+        #@todo use bcrypt (need php 5.5)
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER, ROLE_SONATA_ADMIN]
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
+    providers:
+        fos_userbundle:
+#            id: fos_user.user_provider.username_email
+#            id: fos_user.user_provider.username
+             id: fos_user.user_manager
+    firewalls:
+        admin:
+            pattern:            ^/%cocorico.admin%/
+            context:            admin
+            form_login:
+                provider:       fos_userbundle
+                login_path:     /%cocorico.admin%/login
+                use_forward:    false
+                check_path:     /%cocorico.admin%/login_check
+                failure_path:   /%cocorico.admin%/login
+                default_target_path: /%cocorico.admin%/
+            logout:
+                path:           /%cocorico.admin%/logout
+                target:         /%cocorico.admin%/
+#                invalidate_session: false #uncomment it to avoid to logout from all firewall
+            anonymous:          true
+
+        main:
+            context: frontend
+            pattern: ^/(%cocorico.locales_string%)
+            #if some changes are done make same change in Cocorico/CoreBundle/Resources/config/Services/listeners.yml
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                csrf_parameter: _token
+                intention: authentication
+                login_path: cocorico_user_login
+                check_path: cocorico_user_login_check
+                use_referer: true
+                always_use_default_target_path: false
+                default_target_path: /
+                target_path_parameter: redirect_to
+                success_handler: cocorico.authentication_success_listener
+            oauth:
+                resource_owners:
+                    facebook:           "/%locale%/oauth/fb-login"
+                login_path:        cocorico_user_login
+                failure_path:      cocorico_user_login
+                check_path:        cocorico_user_login_check
+                use_referer: true
+                always_use_default_target_path: false
+                default_target_path: /
+                oauth_user_provider:
+                    service: cocorico_user.oauth.user.provider.entity
+
+            logout:
+                path: cocorico_user_logout
+                target: cocorico_home
+#                invalidate_session: false #uncomment it to avoid to logout from all firewall
+            anonymous:    true
+            switch_user: { role: ROLE_SUPER_ADMIN, parameter: _become_who_you_are }
+#            switch_user: true
+
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        default:
+            anonymous: ~
+
+    access_decision_manager:
+        # strategy can be: affirmative, unanimous or consensus
+        strategy: unanimous
+
+    access_control:
+        #Admin
+        - { path: ^/%cocorico.admin%/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%cocorico.admin%/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%cocorico.admin%/login-check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/%cocorico.admin%, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/efconnect, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+        - { path: ^/elfinder, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+
+        #Frontend
+        - { path: ^/(%cocorico.locales_string%)/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%cocorico.locales_string%)/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(%cocorico.locales_string%)/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #Oauth Logins
+        - { path: ^/(%cocorico.locales_string%)/oauth/fb-login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #Dashboard
+        - { path: ^/(%cocorico.locales_string%)/(dashboard|tableau-de-bord)/, role: IS_AUTHENTICATED_FULLY }
+
+        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

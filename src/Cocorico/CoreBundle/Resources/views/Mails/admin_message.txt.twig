@@ -1,0 +1,29 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ subject }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ admin_message }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|nl2br }}
+            {% endautoescape %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{% block layout %}
+    {% include '@CocoricoCore/Frontend/Common/_header.html.twig' only %}
+    <div class="error-page">
+        <h1>{{ 'page.error'|trans }} {{ status_code }} {{ status_text }}</h1>
+
+        <p></p>
+    </div>
+    {% include '@CocoricoCore/Frontend/Common/_footer.html.twig' only %}
+{% endblock %}

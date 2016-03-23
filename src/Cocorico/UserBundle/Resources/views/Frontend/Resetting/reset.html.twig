@@ -1,0 +1,54 @@
+{% extends '::base.html.twig' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            <div id="form-registerlogin" class="col-xs-12">
+                <form class="form-signup validate-form"
+                      action="{{ path('cocorico_user_resetting_reset', {'token': token}) }}"
+                        {{ form_enctype(form) }}  method="POST">
+                    <fieldset>
+                        <legend class="hidden">form-reset-password</legend>
+                        <h1>{{ 'user.reset.h1'|trans }}</h1>
+
+                        <div class="field-row">
+                            <span class="label">
+                                {{ form_label(form.new.first) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form.new.first, {
+                                    'attr': {
+                                        'class': "form-control"
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <span class="label">
+                                {{ form_label(form.new.second) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form.new.second, {
+                                    'attr': {
+                                        'class': "form-control"
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="btn-block text-center">
+                            {{ form_rest(form) }}
+                            <button type="submit" class="btn btn-default">{{ 'resetting.reset.submit'|trans }}</button>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

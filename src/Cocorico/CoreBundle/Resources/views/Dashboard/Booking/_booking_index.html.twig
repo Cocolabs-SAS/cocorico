@@ -1,0 +1,152 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% for booking in bookings.iterator %}
+
+    {% if app.user == booking.user %} {#asker#}
+        {% set other_user = booking.listing.user %}
+        {% set booking_show_route = 'cocorico_dashboard_booking_show_asker' %}
+        {% set amount_total = booking.amountToPayByAskerDecimal %}
+        {% set other_user_rating = other_user.averageOffererRating %}
+        {% set vat_inclusion_text = vatInclusionText(app.request.getLocale(), true, true ) %}
+    {% elseif app.user == booking.listing.user %}{#offerer#}
+        {% set other_user = booking.user %}
+        {% set booking_show_route = 'cocorico_dashboard_booking_show_offerer' %}
+        {% if includeVat %}
+            {% set amount_total = booking.amountToPayToOffererDecimal %}
+        {% else %}
+            {% set amount_total = booking.amountToPayToOffererExcludingVATDecimal(vatRate) %}
+        {% endif %}
+        {% set vat_inclusion_text = vatInclusionText(app.request.getLocale()) %}
+
+        {% set other_user_rating = other_user.averageAskerRating %}
+    {% endif %}
+
+    {% set user_image = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    {% set listing = booking.listing %}
+    {% set listing_translation = listing.translations[app.request.locale] %}
+    {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+    {% set amount_total = amount_total | format_price(app.request.locale, 2) %}
+
+    <!-- post -->
+    <article class="post">
+        <span class="hidden">{{ listing_translation.title }}</span>
+
+        <div class="post-area">
+            <div class="img-holder">
+                <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xmedium') }}"
+                         alt="{{ listing_translation.title }}">
+                </a>
+            </div>
+            <div class="area">
+                <header class="head">
+                    <div class="area">
+                        <h2>
+                            <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                                {{ listing_translation.title }}
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="meta pull-right">
+                        <span class="booking-info">
+                            {{ 'booking.show.number.title'|trans }} :
+                            <strong>
+                                {{ booking.id }}
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="booking-detail">
+                        <ul class="list-inline" id="booking-asker-date">
+                            <li content="{{ booking.start|date('Y-m-d') }}">
+                                {{ 'booking.show.start:'|trans }}
+                                <time datetime="{{ booking.start|date('Y-m-d') }}">
+                                    {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                                </time>
+                            </li>
+
+                            <li>
+                                {{ 'booking.show.end:'|trans }}
+                                <time datetime="{{ booking.end|date('Y-m-d') }}">
+                                    {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                </time>
+                            </li>
+
+                            {% if not timeUnitIsDay %}
+                                <li>
+                                    {{ 'booking.show.start_time:'|trans }}
+                                    <time datetime="{{ booking.startTime|date('H:i') }}">
+                                        {{ booking.startTime|date('H:i') }}
+                                    </time>
+                                </li>
+                                <li>
+                                    {{ 'booking.show.end_time:'|trans }}
+                                    <time datetime="{{ booking.endTime|date('H:i') }}">
+                                        {{ booking.endTime|date('H:i') }}
+                                    </time>
+                                </li>
+                            {% endif %}
+                            <li class="booking-duration">
+                                <strong>
+                                    {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+                                    {{ 'booking.duration:'|trans }}
+                                    <span class="normal-text">
+                                        {{ booking_duration|add_time_unit_text }}
+                                    </span>
+                                </strong>
+                            </li>
+                        </ul>
+                    </div>
+                </header>
+                <div class="post-content">
+                    <div class="author-img">
+                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
+                             alt="{{ other_user.firstName }}">
+                    </div>
+                    <div class="textbox">
+                        <span class="author-info">
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.firstName }}</strong></a>
+                        </span>
+                        {% if other_user_rating %}
+                            {{ other_user_rating|cocorico_star_rating }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <strong class="price">
+                <span>
+                    {{ amount_total }}
+                    <sup>
+                        <small>{{ vat_inclusion_text }}</small>
+                    </sup>
+                </span>
+                <button title="{{ 'booking.amount_total.help'|trans }}" data-placement="right" data-toggle="tooltip"
+                        class="tooltip-button" type="button">
+                    ?
+                </button>
+            </strong>
+
+
+            {% set status_class = bookingStatusClass[booking.status] %}
+            <span class="btn {{ status_class }}">
+                {{ 'booking.show.status.title'|trans }} {{ booking.statusText|trans }}
+            </span>
+
+
+            <a href="{{ path(booking_show_route, { 'id': booking.id}) }}" class="btn btn-default">
+                {{ 'booking.index.show'|trans }}
+            </a>
+
+            <strong class="expiry">
+                {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay) %}
+                {% if expiration > 0 %}
+                    {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}
+                {% endif %}
+            </strong>
+
+        </footer>
+    </article>
+
+{% endfor %}

@@ -1,0 +1,115 @@
+<script>
+    $(function () {
+
+        //Translations
+        $("#btn-translate").bind('click', function (e) {
+            e.preventDefault();
+            var from = $('#listing_fromLang').val();
+            var to = $('#listing_toLang').val();
+            var textData = [];
+            textData[0] = $('#listing_translations_' + from + '_title').val();
+            textData[1] = $('#listing_translations_' + from + '_description').val();
+            textData[2] = $('#listing_translations_' + from + '_rules').val();
+            if (to == from || (textData[0] == '' && textData[1] == '' && textData[2] == '')) {
+                $("#error").show();
+                $("#success").hide();
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: "{{ path('cocorico_language_translate') }}",
+                data: {from: from, to: to, textData: textData},
+                success: function (translateData) {
+                    var result = $.parseJSON(translateData);
+                    if (result.textData[0] == '' && result.textData[1] == '' && result.textData[2] == '') {
+                        $("#error").show();
+                        $("#success").hide();
+                    }
+                    else {
+                        $("#success").show();
+                        $("#error").hide();
+                    }
+
+                    translate(to, result, true);
+                }
+            });
+
+            return false;
+        });
+
+        /**
+         * Set translations fields values
+         *
+         * @param to string lang
+         * @param translations array
+         * @param replace boolean Replace existing translated text or set it only if it is empty
+         * @returns {boolean}
+         */
+        function translate(to, translations, replace) {
+            var $title = $('#listing_translations_' + to + '_title');
+            if ($title.length) {
+                if (replace || (!replace && !$title.val().trim())) {
+                    $title.val(translations.textData[0]);
+                }
+            }
+
+            var $description = $('#listing_translations_' + to + '_description');
+            if ($description.length) {
+                if (replace || (!replace && !$description.val().trim())) {
+                    $description.val(translations.textData[1]);
+                }
+            }
+
+            var $rules = $('#listing_translations_' + to + '_rules');
+            if ($rules.length) {
+                if (replace || (!replace && !$rules.val().trim())) {
+                    $rules.val(translations.textData[2]);
+                }
+            }
+
+            return true;
+        }
+
+
+        {#Auto Translations#}
+        $("[type=submit]").click(function (e) {
+            var $parent = $(this).parent('div');
+            if (!$parent.find('img.loading').length) {//to check: && (true === $(this).closest('form').parsley().validate()
+                $parent.prepend('<img class="loading" src="{{ asset('images/loading.gif') }}" /><br>');
+            }
+            var fromLocale = "{{ app.request.locale }}";
+            var locales = {{locales|json_encode|raw}};
+            for (var i in locales) {
+                if (locales[i] != fromLocale) {
+                    getTranslations(fromLocale, locales[i]);
+                }
+            }
+            return true;
+        });
+
+        function getTranslations(from, to) {
+            if ($('#listing_translations_' + to + '_title').val() == ''
+                    || $('#listing_translations_' + to + '_description').val() == ''
+                    || $('#listing_translations_' + to + '_rules').val() == ''
+            ) {
+                var textData = [];
+                textData[0] = $('#listing_translations_' + from + '_title').val();
+                textData[1] = $('#listing_translations_' + from + '_description').val();
+                textData[2] = $('#listing_translations_' + from + '_rules').val();
+
+                $.ajax({
+                    type: 'POST',
+                    async: false,
+                    url: "{{ path('cocorico_language_translate') }}",
+                    data: {from: from, to: to, textData: textData},
+                    success: function (translateData) {
+                        var result = $.parseJSON(translateData);
+                        translate(to, result, false);
+                    }
+                });
+            }
+        }
+
+
+    });
+</script>

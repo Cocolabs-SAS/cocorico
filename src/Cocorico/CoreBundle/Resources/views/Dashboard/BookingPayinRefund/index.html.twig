@@ -1,0 +1,102 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'payments' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <div class="tab-content no-border">
+        <!-- payments -->
+        <div role="tabpanel" class="tab-pane active">
+
+            {% include '@CocoricoCore/Dashboard/BookingPayin/_switcher.html.twig'  with {
+            'checked_payin': '',
+            'checked_refund': 'checked',
+            } only %}
+
+            <!-- table -->
+            <table class="table table-detail" title="table">
+                <thead>
+                <tr>
+                    <th class="col1">{{ "booking.show.number.title"| trans }}</th>
+                    <th class="col2">{{ "booking.payin.date.title"| trans }}</th>
+                    <th class="col3">{{ "booking.bank_wire.amount.title"| trans }}</th>
+                    <th class="col4">{{ "booking.payin.fees.title"| trans }}</th>
+                    <th class="col5">{{ "booking.bank_wire.status.title"| trans }}</th>
+                    <th class="col6">{{ "booking.bank_wire.bill.title"| trans }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cpt, booking_payin_refund in booking_payin_refunds.iterator %}
+                    {% set booking =  booking_payin_refund.booking %}
+                    {% set amount = booking_payin_refund.amountDecimal | format_price(app.request.locale, 2) %}
+
+                    {% set amount_fees = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2) %}
+
+                    {% set even = (cpt%2==0) ? '' : 'even' %}
+                    {% set is_payed = (booking_payin_refund.status == BookingPayinRefundConstants.STATUS_PAYED) ? true : false %}
+
+                    <tr class="{{ even }}">
+                        <td class="col1" data-label="{{ "booking.show.number.title"| trans }}">
+                            <div>{{ booking.id }}</div>
+                        </td>
+                        <td class="col2" data-label="{{ "booking.bank_wire.date.title"| trans }}">
+                            <div>
+                                {% if is_payed and booking_payin_refund.payedAt %}
+                                    {{ booking_payin_refund.payedAt|localizeddate('short', 'none', 'fr') }}
+                                {% endif %}
+                            </div>
+                        </td>
+                        <td class="col3" data-label="{{ "booking.bank_wire.amount.title"| trans }}">
+                            <div>
+                                {{ amount }}
+                                <sup>
+                                    <small>{{ vatInclusionText(app.request.getLocale(), true, true) }}</small>
+                                </sup>
+                            </div>
+                        </td>
+                        <td class="col4" data-label="{{ "booking.payin.fees.title"| trans }}">
+                            <div>
+                                {{ amount_fees }}
+                                <sup>
+                                    <small>{{ vatInclusionText(app.request.getLocale(), true, true) }}</small>
+                                </sup>
+                            </div>
+                        </td>
+                        <td class="col5" data-label="{{ "booking.bank_wire.status.title"| trans }}">
+                            <div>
+                                <span class="text">{{ booking_payin_refund.statusText|trans }}</span>
+                                <button title="{{ 'booking.bank_wire.status.help'|trans }}"
+                                        data-placement="right" data-toggle="tooltip"
+                                        class="tooltip-button" type="button">?
+                                </button>
+                            </div>
+                        </td>
+                        <td class="col6" data-label="{{ "booking.bank_wire.bill.title"| trans }}">
+                            <div>
+                                {% if is_payed %}
+                                    <a class="icon-pdf"
+                                       href="{{ path('cocorico_dashboard_booking_payin_refund_show_bill_asker',{'id': booking_payin_refund.id }) }}"
+                                       target="_blank">
+                                        <img alt="pdf" src="{{ asset('images/icon-pdf.png') }}">
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+            'pagination': pagination
+            } only %}
+
+        </div>
+    </div>
+{% endblock %}

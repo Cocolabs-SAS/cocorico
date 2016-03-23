@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'contact.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'contact.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% form_theme form 'CocoricoContactBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico_contact' %}
+
+{% block layout %}
+
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% block main %}
+
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
+
+            <div id="form-contact" class="form-contact validate-form">
+                <h1>{{ 'contact.new.form.title'|trans({},'cocorico_contact') }}</h1>
+
+                {{ form_start(form) }}
+
+                {{ form_widget(form) }}
+
+                <div class="field-row">
+                    <button type="submit" class="btn btn-primary right">
+                        {{ 'contact.form.submit.button'|trans({},'cocorico_contact') }}
+                    </button>
+                </div>
+
+                {{ form_end(form) }}
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

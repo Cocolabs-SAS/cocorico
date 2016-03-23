@@ -1,0 +1,11 @@
+services:
+    sonata.admin.contact:
+        class: Cocorico\ContactBundle\Admin\ContactAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Site", label: "Contact" }
+        arguments:
+            - ~
+            - Cocorico\ContactBundle\Entity\Contact
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]

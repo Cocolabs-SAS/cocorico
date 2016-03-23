@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2016-03-16T21:10:01Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
+                <jms:reference-file line="18">Form/Type/ProfileSwitchFormType.php</jms:reference-file>
+                <source>Asker</source>
+                <target>Demandeur</target>
+            </trans-unit>
+            <trans-unit id="7434fa918f1cff45a2f9455ad4b6d3de9edd5560" resname="BIC">
+                <jms:reference-file line="106">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>BIC</source>
+                <target>BIC</target>
+            </trans-unit>
+            <trans-unit id="0828f2267dede17e5cb43ef677550849ac50110b" resname="Bad credentials">
+                <source>Bad credentials</source>
+                <target>Identifiants erronés</target>
+            </trans-unit>
+            <trans-unit id="e81566a5d5243429545b3a76547f60514550632b" resname="IBAN">
+                <jms:reference-file line="98">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>IBAN</source>
+                <target>IBAN</target>
+            </trans-unit>
+            <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
+                <jms:reference-file line="18">Form/Type/ProfileSwitchFormType.php</jms:reference-file>
+                <source>Offerer</source>
+                <target>Offreur</target>
+            </trans-unit>
+            <trans-unit id="a5eba05921c11add89e9b68570149da22499c604" resname="change_password.submit">
+                <jms:reference-file line="13">Frontend/ChangePassword/changePassword.html.twig</jms:reference-file>
+                <source>change_password.submit</source>
+                <target>Modifier votre mot de passe</target>
+            </trans-unit>
+            <trans-unit id="d04312144cfa558660c1b402b1f2b022d40c8de4" resname="cocorico.en">
+                <source>cocorico.en</source>
+                <target>anglais</target>
+            </trans-unit>
+            <trans-unit id="2fb2ddb9f57ab2b67ab72abf22e14396095c042d" resname="cocorico.fr">
+                <source>cocorico.fr</source>
+                <target>français</target>
+            </trans-unit>
+            <trans-unit id="45ca7e55a6930d23560f13b43ba365b3152db8d0" resname="cocorico.from">
+                <jms:reference-file line="124">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
+                <source>cocorico.from</source>
+                <target>Traduire ce texte depuis</target>
+            </trans-unit>
+            <trans-unit id="35011389a9f3c0791c30cd5d75136a364ef89ee9" resname="cocorico.language">
+                <jms:reference-file line="92">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
+                <source>cocorico.language</source>
+                <target>Langues parlées</target>
+            </trans-unit>
+            <trans-unit id="7e3f78e586fb910d94501eefd6cd941c2590972b" resname="cocorico.motherTongue">
+                <jms:reference-file line="114">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
+                <source>cocorico.motherTongue</source>
+                <target>Langue maternelle</target>
+            </trans-unit>
+            <trans-unit id="2297600d92e3fb5924c0659e20e479b5b5515490" resname="cocorico.to">
+                <jms:reference-file line="133">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
+                <source>cocorico.to</source>
+                <target>vers</target>
+            </trans-unit>
+            <trans-unit id="7493734ead0bdedfe7aea277ad64272939c9c914" resname="form.address.address">
+                <jms:reference-file line="19">Form/Type/AddressFormType.php</jms:reference-file>
+                <source>form.address.address</source>
+                <target>Voie et numéro</target>
+            </trans-unit>
+            <trans-unit id="b28c4ad5e834b173a41fde062a04a1ee6456e5d3" resname="form.address.city">
+                <jms:reference-file line="27">Form/Type/AddressFormType.php</jms:reference-file>
+                <source>form.address.city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="02b8acf448f3cd8e8c6ca63d7047bfb91b59bca9" resname="form.address.country">
+                <jms:reference-file line="43">Form/Type/AddressFormType.php</jms:reference-file>
+                <source>form.address.country</source>
+                <target>Pays</target>
+            </trans-unit>
+            <trans-unit id="8e429cf6802a2864ffd2d99ad6110a91682010c8" resname="form.address.zip">
+                <jms:reference-file line="35">Form/Type/AddressFormType.php</jms:reference-file>
+                <source>form.address.zip</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="61b32eac6566d52a8d37c32bf81338f3353915fd" resname="form.contact.billingaddress.title">
+                <jms:reference-file line="110">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <source>form.contact.billingaddress.title</source>
+                <target>Adresse de facturation</target>
+            </trans-unit>
+            <trans-unit id="688577b0535ad8ca72e0c605e4b7eb69a8c90bcb" resname="form.contact.phone.help">
+                <jms:reference-file line="57">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <source>form.contact.phone.help</source>
+                <target>Saisissez d'abord votre indicatif puis votre téléphone</target>
+            </trans-unit>
+            <trans-unit id="7e6b12a7deb5f7315f025b8c49121130cd7798ad" resname="form.email">
+                <jms:reference-file line="45">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="db116776771da1cb379326d6d03fc8263c61d48d" resname="form.first_name">
+                <jms:reference-file line="40">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.first_name</source>
+                <target>Prénom :</target>
+            </trans-unit>
+            <trans-unit id="ad2644b8e49a53ebc956786823470bf19bf5d146" resname="form.last_name">
+                <jms:reference-file line="35">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.last_name</source>
+                <target>Nom :</target>
+            </trans-unit>
+            <trans-unit id="210f8b7cbd19367b2ca1332f3cd00b7a06f7e0a0" resname="form.new_password">
+                <jms:reference-file line="29">Form/Type/ResettingFormType.php</jms:reference-file>
+                <source>form.new_password</source>
+                <target>Nouveau mot de passe :</target>
+            </trans-unit>
+            <trans-unit id="9c550aa2c68f9be72e8c34c90d6c359178ab9a25" resname="form.new_password_confirmation">
+                <jms:reference-file line="30">Form/Type/ResettingFormType.php</jms:reference-file>
+                <source>form.new_password_confirmation</source>
+                <target>Vérification :</target>
+            </trans-unit>
+            <trans-unit id="6d384fb8ef3ca9318f0f9d983868842a211770f8" resname="form.password">
+                <jms:reference-file line="45">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="75">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.password</source>
+                <target>Mot de passe :</target>
+            </trans-unit>
+            <trans-unit id="30de94712c8550862006ed6a664870c398c9482d" resname="form.password_confirmation">
+                <jms:reference-file line="49">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="79">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.password_confirmation</source>
+                <target>Vérification :</target>
+            </trans-unit>
+            <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
+                <jms:reference-file line="72">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.annual_income</source>
+                <target>Revenus annuels</target>
+            </trans-unit>
+            <trans-unit id="d45413bab3db2bfb0f28eb800bb8cfc772c3ccfc" resname="form.user.bank_owner_address">
+                <jms:reference-file line="90">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.bank_owner_address</source>
+                <target>Votre adresse</target>
+            </trans-unit>
+            <trans-unit id="fb1370b89f5b24926ad82c569574ce9acc0bff61" resname="form.user.bank_owner_address.help">
+                <jms:reference-file line="156">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>form.user.bank_owner_address.help</source>
+                <target>Indiquez ici l'adresse de votre banque</target>
+            </trans-unit>
+            <trans-unit id="2ee502191b684c7674d67e6b430bbb723fee67ce" resname="form.user.bank_owner_name">
+                <jms:reference-file line="81">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.bank_owner_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="27dd741dbbd8e3b73c5ce3f06b593f86fe6d5f98" resname="form.user.bank_owner_name.help">
+                <jms:reference-file line="137">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>form.user.bank_owner_name.help</source>
+                <target>Indiquez votre nom tel qu'il apparait sur votre relevé de compte</target>
+            </trans-unit>
+            <trans-unit id="6f7b9ee80a117bcd055b3cbd5031d5a072f77b8b" resname="form.user.bic.help">
+                <jms:reference-file line="194">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>form.user.bic.help</source>
+                <target>Indiquez votre BIC</target>
+            </trans-unit>
+            <trans-unit id="011bec66fccef62851d9b5ff7f47641fac3b9987" resname="form.user.birthday">
+                <jms:reference-file line="33">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <jms:reference-file line="51">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.user.birthday</source>
+                <target>Date de naissance</target>
+            </trans-unit>
+            <trans-unit id="de7924085357b56b06a5cbfebff2d624266c5960" resname="form.user.countryOfResidence">
+                <jms:reference-file line="54">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <jms:reference-file line="62">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <source>form.user.countryOfResidence</source>
+                <target>Pays de résidence</target>
+            </trans-unit>
+            <trans-unit id="5bbad741fe8166df8f96758bac68e00f4d5fbca1" resname="form.user.email">
+                <jms:reference-file line="19">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <source>form.user.email</source>
+                <target>Mail</target>
+            </trans-unit>
+            <trans-unit id="ae11b812bf4bcad48349a871e85135eab39d7ba6" resname="form.user.first_name">
+                <jms:reference-file line="26">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.first_name</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="71a0ee542d8dd8e52918e89de48f0c7b509b0c70" resname="form.user.has_booking:">
+                <jms:reference-file line="434">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="216">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>form.user.has_booking:</source>
+                <target>A déjà fait une location :</target>
+            </trans-unit>
+            <trans-unit id="b49a5eab1bd7518f539a89511ac61053703eeda8" resname="form.user.iban.help">
+                <jms:reference-file line="175">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>form.user.iban.help</source>
+                <target>Renseignez ici votre IBAN</target>
+            </trans-unit>
+            <trans-unit id="e5558516d20ded5db5636ee40f8e0aca3e7925e7" resname="form.user.id_card:">
+                <jms:reference-file line="420">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="201">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>form.user.id_card:</source>
+                <target>CNI :</target>
+            </trans-unit>
+            <trans-unit id="bdee700ca1f92fc98ece74bc492d515d983c8978" resname="form.user.last_name">
+                <jms:reference-file line="19">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.last_name</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="a9ddf3450c6c2189750a388c61a246e1dc8f34ac" resname="form.user.nationality">
+                <jms:reference-file line="44">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.nationality</source>
+                <target>Nationalité</target>
+            </trans-unit>
+            <trans-unit id="148005ed10f2b75bbdb99c10f5b4d409245a2bf0" resname="form.user.phone">
+                <jms:reference-file line="34">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="61">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <source>form.user.phone</source>
+                <target>Téléphone :</target>
+            </trans-unit>
+            <trans-unit id="151cf4b1f11521a27811e8bad9ad07a73f2f1075" resname="form.user.phone:">
+                <jms:reference-file line="392">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="396">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="171">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="175">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>form.user.phone:</source>
+                <target>Téléphone :</target>
+            </trans-unit>
+            <trans-unit id="cabf749e9747455b9354ecd631958505631e7a30" resname="form.user.phone_prefix">
+                <jms:reference-file line="26">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <source>form.user.phone_prefix</source>
+                <target>Indicatif international :</target>
+            </trans-unit>
+            <trans-unit id="feb654da8645b3c7a91fb2b5e9c9b99f8fe06af8" resname="form.user.profession">
+                <jms:reference-file line="64">Form/Type/ProfilePaymentFormType.php</jms:reference-file>
+                <source>form.user.profession</source>
+                <target>Profession</target>
+            </trans-unit>
+            <trans-unit id="f912106675d47c1f3f01082da2f4b303de0a8d14" resname="form.user.username:">
+                <jms:reference-file line="406">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="186">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>form.user.username:</source>
+                <target>E-mail :</target>
+            </trans-unit>
+            <trans-unit id="9f92ae96e8c9f7661c8f46a371f6a85a487e8fd2" resname="nav.user.about_me.link">
+                <jms:reference-file line="16">Dashboard/Profile/_nav_side.html.twig</jms:reference-file>
+                <source>nav.user.about_me.link</source>
+                <target>A propos</target>
+            </trans-unit>
+            <trans-unit id="12f7ff7fd5e95aa477a2c47a4c8ac678a76fce00" resname="nav.user.contact.link">
+                <jms:reference-file line="28">Dashboard/Profile/_nav_side.html.twig</jms:reference-file>
+                <source>nav.user.contact.link</source>
+                <target>Coordonnées</target>
+            </trans-unit>
+            <trans-unit id="6eaa8c165b64a04bfe98d5753b40039c78298a33" resname="nav.user.listing_alert.link">
+                <jms:reference-file line="35">Dashboard/Profile/_nav_side.html.twig</jms:reference-file>
+                <source>nav.user.listing_alert.link</source>
+                <target state="new">Mes alertes</target>
+            </trans-unit>
+            <trans-unit id="02e456fb67efed6e081bdc28349d9e0bd5ef00c7" resname="nav.user.payment.link">
+                <jms:reference-file line="22">Dashboard/Profile/_nav_side.html.twig</jms:reference-file>
+                <source>nav.user.payment.link</source>
+                <target>Coordonnées bancaires</target>
+            </trans-unit>
+            <trans-unit id="9e7250f99e1915cc8289a01fc861a0ec76f9e325" resname="nav.user.show.link">
+                <jms:reference-file line="43">Dashboard/Profile/_nav_side.html.twig</jms:reference-file>
+                <source>nav.user.show.link</source>
+                <target state="new">Voir mon profil</target>
+            </trans-unit>
+            <trans-unit id="37bd2c15b89edf1a86ecac366e71a11a0c5a6401" resname="profile.drop.files">
+                <jms:reference-file line="55">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>profile.drop.files</source>
+                <target>Glissez vos images</target>
+            </trans-unit>
+            <trans-unit id="9741ffbcf8dbb31e1a2d32bd25cb0ccc5a6dea54" resname="profile.edit.submit">
+                <jms:reference-file line="165">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <jms:reference-file line="179">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <jms:reference-file line="214">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>profile.edit.submit</source>
+                <target>Mettre à jour</target>
+            </trans-unit>
+            <trans-unit id="6be8a7d1f21d0370f56f4f23c8c75ffddab3ccbc" resname="profile.images.to_upload.title">
+                <jms:reference-file line="62">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>profile.images.to_upload.title</source>
+                <target>Images à envoyer</target>
+            </trans-unit>
+            <trans-unit id="45a41d2099651dbd7df02437427e3748ba96b07a" resname="profile.languages.add">
+                <jms:reference-file line="93">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>profile.languages.add</source>
+                <target>Ajouter</target>
+            </trans-unit>
+            <trans-unit id="53a4c93891d17fd3483b6f6ce77ae09c1ffed517" resname="profile.languages.title">
+                <jms:reference-file line="73">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>profile.languages.title</source>
+                <target>Mes langues</target>
+            </trans-unit>
+            <trans-unit id="b9f867fdb018c329dd0452a22e07224cf7cfb0d4" resname="profile.moreinfo.title">
+                <jms:reference-file line="120">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>profile.moreinfo.title</source>
+                <target>A propos de vous</target>
+            </trans-unit>
+            <trans-unit id="1fa5b2873fe30be026b854f6a51503b86c6ac81a" resname="registration.back">
+                <jms:reference-file line="18">Frontend/Registration/confirmed.html.twig</jms:reference-file>
+                <source>registration.back</source>
+                <target>Retour à la page d'origine.</target>
+            </trans-unit>
+            <trans-unit id="85a4eff0132a6f92eae3057837f285b3aedf38b8" resname="registration.check_email">
+                <jms:reference-file line="15">Frontend/Registration/checkEmail.html.twig</jms:reference-file>
+                <source>registration.check_email</source>
+                <target>Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra
+                    cliquer afin d'activer votre compte.
+                </target>
+            </trans-unit>
+            <trans-unit id="7a0a8fbc70fe82997f8a2ff89090f523ee63f72a" resname="registration.confirmed">
+                <jms:reference-file line="12">Frontend/Registration/confirmed.html.twig</jms:reference-file>
+                <source>registration.confirmed</source>
+                <target>Félicitations %firstname%, votre compte est maintenant activé.</target>
+            </trans-unit>
+            <trans-unit id="d1ca8dda1d74badc546fbc979ffdab122995ef7a" resname="registration.confirmed.title">
+                <jms:reference-file line="10">Frontend/Registration/confirmed.html.twig</jms:reference-file>
+                <source>registration.confirmed.title</source>
+                <target>Inscription confirmée</target>
+            </trans-unit>
+            <trans-unit id="6362bc7b7a8f72b782ffd590744ab069327bbe4a" resname="registration.email.message">
+                <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+                <source>registration.email.message</source>
+                <target>Bonjour %firstname% !
+
+                    Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+
+                    Cordialement,
+                    L'équipe.
+                </target>
+            </trans-unit>
+            <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
+                <jms:reference-file line="5">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+                <source>registration.email.subject</source>
+                <target>Bienvenue %firstname% !</target>
+            </trans-unit>
+            <trans-unit id="4ef79d57e94b4b74349d6533a231e09dc5be0ce2" resname="registration.submit">
+                <jms:reference-file line="22">Frontend/Registration/register.html.twig</jms:reference-file>
+                <source>registration.submit</source>
+                <target>Enregistrer</target>
+            </trans-unit>
+            <trans-unit id="40c1a483571045e24d606bf00361cfd4d021ba05" resname="resetting.check_email">
+                <jms:reference-file line="16">Frontend/Resetting/checkEmail.html.twig</jms:reference-file>
+                <source>resetting.check_email</source>
+                <target>Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin
+                    de réinitialiser votre mot de passe.
+                </target>
+            </trans-unit>
+            <trans-unit id="f0b3476bec045fac67c256d17a54e4f8a8d05335" resname="resetting.password_already_requested">
+                <jms:reference-file line="16">Frontend/Resetting/passwordAlreadyRequested.html.twig</jms:reference-file>
+                <source>resetting.password_already_requested</source>
+                <target>Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
+                </target>
+            </trans-unit>
+            <trans-unit id="c3474ad1b73a0d0db019eec986ee675e8afaf640" resname="resetting.request.invalid_username">
+                <jms:reference-file line="18">Frontend/Resetting/request.html.twig</jms:reference-file>
+                <source>resetting.request.invalid_username</source>
+                <target>Le nom d'utilisateur ou l'adresse e-mail "%username%" n'existe pas.</target>
+            </trans-unit>
+            <trans-unit id="e1470b3c202d9a4fa8e1afa7ed8695917f060ccd" resname="resetting.request.submit">
+                <jms:reference-file line="31">Frontend/Resetting/request.html.twig</jms:reference-file>
+                <source>resetting.request.submit</source>
+                <target>Réinitialiser votre mot de passe</target>
+            </trans-unit>
+            <trans-unit id="7ad41bf8fb30013eb0f31ca027ca8d1dc7a3d96f" resname="resetting.request.username">
+                <jms:reference-file line="21">Frontend/Resetting/request.html.twig</jms:reference-file>
+                <source>resetting.request.username</source>
+                <target>Nom d'utilisateur ou adresse e-mail :</target>
+            </trans-unit>
+            <trans-unit id="921fd7a5cc7f9e46eab31822855a22d9808b0477" resname="resetting.reset.submit">
+                <jms:reference-file line="46">Frontend/Resetting/reset.html.twig</jms:reference-file>
+                <source>resetting.reset.submit</source>
+                <target>Modifier le mot de passe</target>
+            </trans-unit>
+            <trans-unit id="1774f9c08d7572712b2f70f583709279a062652e" resname="user.about.language.select">
+                <jms:reference-file line="94">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
+                <source>user.about.language.select</source>
+                <target>Sélectionner</target>
+            </trans-unit>
+            <trans-unit id="82c66c2ecd3dac3e9b3f58e6f21a6400785b8385" resname="user.about.title">
+                <jms:reference-file line="38">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>user.about.title</source>
+                <target>A propos</target>
+            </trans-unit>
+            <trans-unit id="402065379d29e63c00c0f2b0fdb6eed0b33d2a86" resname="user.change_password.success">
+                <jms:reference-file line="41">Controller/Frontend/ChangePasswordController.php</jms:reference-file>
+                <source>user.change_password.success</source>
+                <target>Votre mot de passe a été mis à jour</target>
+            </trans-unit>
+            <trans-unit id="7dc89a2a54d353e50b8465edabc9ea7c7af54898" resname="user.comments.count.label">
+                <jms:reference-file line="73">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>user.comments.count.label</source>
+                <target>Commentaires</target>
+            </trans-unit>
+            <trans-unit id="77f5d674daf5cf49d8fb2854a36b4cf9d3b46ba9" resname="user.edit.about_me.success">
+                <jms:reference-file line="53">Controller/Dashboard/ProfileController.php</jms:reference-file>
+                <source>user.edit.about_me.success</source>
+                <target>Votre profil a été mis à jour</target>
+            </trans-unit>
+            <trans-unit id="bde1a863d677579f32c5cb7e7c38c5a1f433c001" resname="user.edit.completion_notice">
+                <jms:reference-file line="8">Dashboard/Profile/_completion_notice.html.twig</jms:reference-file>
+                <source>user.edit.completion_notice</source>
+                <target>Améliorez vos annonces ou les chances que vos requêtes soient acceptées en renseignant les informations de votre profil</target>
+            </trans-unit>
+            <trans-unit id="e29f6e5f025f307e27bc9ee74f440833c2c2d4d6" resname="user.edit.contact.success">
+                <jms:reference-file line="198">Controller/Dashboard/ProfileController.php</jms:reference-file>
+                <source>user.edit.contact.success</source>
+                <target>Vos coordonnées ont étés mises à jour</target>
+            </trans-unit>
+            <trans-unit id="3143a7ea7f0d3fc25b984544c7cbd10a2a320db0" resname="user.edit.contact.title">
+                <jms:reference-file line="22">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <source>user.edit.contact.title</source>
+                <target>Coordonnées</target>
+            </trans-unit>
+            <trans-unit id="188656952e064ef65d8b746e5982adab1280f635" resname="user.edit.payment.error">
+                <jms:reference-file line="132">Controller/Dashboard/ProfileController.php</jms:reference-file>
+                <source>user.edit.payment.error</source>
+                <target>Veulliez vérifier que vos informations (IBAN, BIC, ...) sont correctes</target>
+            </trans-unit>
+            <trans-unit id="9e2ad4eafce25d9530561e144aca93f6c9898e99" resname="user.edit.payment.success">
+                <jms:reference-file line="121">Controller/Dashboard/ProfileController.php</jms:reference-file>
+                <source>user.edit.payment.success</source>
+                <target>Vos coordonnées bancaires ont étés mises à jour</target>
+            </trans-unit>
+            <trans-unit id="105d131485a81af70d0d02a14590716d6ea5a8ea" resname="user.edit.payment.title">
+                <jms:reference-file line="22">Dashboard/Profile/edit_payment.html.twig</jms:reference-file>
+                <source>user.edit.payment.title</source>
+                <target>Veuillez fournir vos coordonnées bancaires afin de recevoir vos paiements</target>
+            </trans-unit>
+            <trans-unit id="f9956945547d9d750f40d9a3ac33a4931d1839ae" resname="user.facebook.login">
+                <jms:reference-file line="46">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="146">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>user.facebook.login</source>
+                <target>Connexion avec Facebook</target>
+            </trans-unit>
+            <trans-unit id="d075f3f1f8a3430b41490ddd8497be9e9106102d" resname="user.facebook.login.title">
+                <jms:reference-file line="43">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="143">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>user.facebook.login.title</source>
+                <target>Ou connectez-vous avec votre compte Facebook</target>
+            </trans-unit>
+            <trans-unit id="b25f30d71bfa16486eb2ae7200fbd102f4a1274e" resname="user.login.password">
+                <jms:reference-file line="38">Form/Type/LoginFormType.php</jms:reference-file>
+                <source>user.login.password</source>
+                <target>Mot de passe</target>
+            </trans-unit>
+            <trans-unit id="1c071f50ed5b51710dbde298771b59c4306715ac" resname="user.login.submit">
+                <jms:reference-file line="28">Frontend/Security/login.html.twig</jms:reference-file>
+                <source>user.login.submit</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="52e4305c76c7f3b3cbb331cb5d6897698806284b" resname="user.login.subtitle">
+                <jms:reference-file line="11">Frontend/Common/_login.html.twig</jms:reference-file>
+                <source>user.login.subtitle</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="ff5d6a678286a111f27d198f70134b1d76bc5fc1" resname="user.login.username">
+                <jms:reference-file line="31">Form/Type/LoginFormType.php</jms:reference-file>
+                <source>user.login.username</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="af64838f08c8a579c32e7bbc8bb2514e78e17415" resname="user.password_forgotten">
+                <jms:reference-file line="23">Frontend/Security/login.html.twig</jms:reference-file>
+                <source>user.password_forgotten</source>
+                <target>Mot de passe oublié ?</target>
+            </trans-unit>
+            <trans-unit id="195e94dd9cc3f46f4ab609cea9bd81dc22c79c65" resname="user.profile.h1">
+                <jms:reference-file line="48">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>user.profile.h1</source>
+                <target>Bonjour et bienvenue sur ma page</target>
+            </trans-unit>
+            <trans-unit id="9e750f6979ebc1dbab4e2e37a1f3b8c1f9faa9c2" resname="user.profile.languages">
+                <jms:reference-file line="245">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>user.profile.languages</source>
+                <target>Langues parlées :</target>
+            </trans-unit>
+            <trans-unit id="329ffbfee377ed1f628c557cf8c1fe2c20dd5f14" resname="user.profile.my-listing">
+                <jms:reference-file line="258">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>user.profile.my-listing</source>
+                <target>Mes annonces</target>
+            </trans-unit>
+            <trans-unit id="6e0d3c3e10cb50874685c595bf6daaf767e8a548" resname="user.profile.subscribe-date.title">
+                <jms:reference-file line="161">Frontend/Profile/show.html.twig</jms:reference-file>
+                <source>user.profile.subscribe-date.title</source>
+                <target>Membre depuis le</target>
+            </trans-unit>
+            <trans-unit id="8b14373c89f426fb1db4d41571f9ab2718134368" resname="user.register.success">
+                <jms:reference-file line="53">Controller/Frontend/RegistrationController.php</jms:reference-file>
+                <source>user.register.success</source>
+                <target>Votre compte a été créé avec succès</target>
+            </trans-unit>
+            <trans-unit id="31e2cd9615198589f3489f7b13ce92bdc31c2ada" resname="user.request.h1">
+                <jms:reference-file line="9">Frontend/Registration/checkEmail.html.twig</jms:reference-file>
+                <jms:reference-file line="10">Frontend/Resetting/checkEmail.html.twig</jms:reference-file>
+                <jms:reference-file line="10">Frontend/Resetting/passwordAlreadyRequested.html.twig</jms:reference-file>
+                <jms:reference-file line="13">Frontend/Resetting/request.html.twig</jms:reference-file>
+                <source>user.request.h1</source>
+                <target>Demande de réinitialisation de mot de passe</target>
+            </trans-unit>
+            <trans-unit id="2f6250210fa7afc2a8dc26e65cfeabbc6f94463e" resname="user.reset.error">
+                <jms:reference-file line="16">Frontend/Resetting/passwordAlreadyRequested.html.twig</jms:reference-file>
+                <source>user.reset.error</source>
+                <target>Erreur</target>
+            </trans-unit>
+            <trans-unit id="92e3dab129b9d376e78720bc2a20d9f4b8c784cd" resname="user.reset.h1">
+                <jms:reference-file line="6">Frontend/ChangePassword/changePassword.html.twig</jms:reference-file>
+                <jms:reference-file line="16">Frontend/Resetting/reset.html.twig</jms:reference-file>
+                <source>user.reset.h1</source>
+                <target>Fixer un nouveau mot de passe</target>
+            </trans-unit>
+            <trans-unit id="c5c5e1c871acaa3cbb0a44b606288af5b145332b" resname="user.reset.success">
+                <jms:reference-file line="15">Frontend/Registration/checkEmail.html.twig</jms:reference-file>
+                <jms:reference-file line="16">Frontend/Resetting/checkEmail.html.twig</jms:reference-file>
+                <source>user.reset.success</source>
+                <target>Succès</target>
+            </trans-unit>
+            <trans-unit id="d7901331a60a975cec21d64d655c6aa8fba879cf" resname="user.resetting.success">
+                <jms:reference-file line="159">Controller/Frontend/ResettingController.php</jms:reference-file>
+                <source>user.resetting.success</source>
+                <target>Votre mot de passe a été mis à jour.</target>
+            </trans-unit>
+            <trans-unit id="f430c03121a935ccb7fb15e7a376f2add10abe32" resname="user.signin">
+                <jms:reference-file line="39">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <jms:reference-file line="40">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <jms:reference-file line="44">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <source>user.signin</source>
+                <target>Connexion</target>
+            </trans-unit>
+            <trans-unit id="e2cab8a005c1e82c97106b2ab60f2b155f979e8e" resname="user.signup">
+                <jms:reference-file line="27">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <jms:reference-file line="28">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <jms:reference-file line="32">Frontend/Common/_login_register.html.twig</jms:reference-file>
+                <source>user.signup</source>
+                <target>S'inscrire</target>
+            </trans-unit>
+            <trans-unit id="4bb58fc67702e6a49527f5e04ecf63b35fb773e7" resname="user.signup.title">
+                <jms:reference-file line="9">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>user.signup.title</source>
+                <target>Inscription</target>
+            </trans-unit>
+            <trans-unit id="09d7893d52caa3806811a4a82fd75ad169413f84" resname="user.translate.button">
+                <jms:reference-file line="154">Dashboard/Profile/edit_about_me.html.twig</jms:reference-file>
+                <source>user.translate.button</source>
+                <target>Traduire</target>
+            </trans-unit>
+            <trans-unit id="b55451c1697d951ccdd55692e6318f807690f7f6" resname="user_images.max {{ max_images }}">
+                <source>user_images.max {{ max_images }}</source>
+                <target>Max {{ max_images }}</target>
+            </trans-unit>
+            <trans-unit id="afbac2dc1997b8b4069b2984d0449147e97765e5" resname="user_images.min {{ min_images }}">
+                <source>user_images.min {{ min_images }}</source>
+                <target>Min {{ min_images }}</target>
+            </trans-unit>
+            <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13" resname="user_translations_en_description_placeholder">
+                <source>user_translations_en_description_placeholder</source>
+                <target>Introduction</target>
+            </trans-unit>
+            <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1" resname="user_translations_fr_description_placeholder">
+                <source>user_translations_fr_description_placeholder</source>
+                <target>Présentation</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

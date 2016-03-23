@@ -1,0 +1,342 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'listing.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'listing.new.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style>
+        #map-listing {
+            width: {{ listing_new_map_w }}%;
+            height: {{ listing_new_map_h }}px;
+        }
+    </style>
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_listing' %}
+
+        {% block breadcrumbs %}
+        {% endblock %}
+
+        {% block search_form %}
+        {% endblock %}
+
+        {% block main %}
+            <div class="col-xs-12">
+
+                <form class="form" action="{{ form.vars.action }}"
+                      method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+                    <div class="listing-section">
+                        <fieldset>
+                            <legend class="hidden">listing-section</legend>
+                            <!-- alert -->
+                            <div class="head">
+                                <h1>{{ 'listing.new.title'|trans }}</h1>
+
+                                <p><strong>{{ 'listing.new.publish.notice'|trans }}</strong></p>
+                            </div>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                            {{ form_errors(form) }}
+                            <div class="holder">
+                                <div class="form-selection">
+                                    <h2>{{ 'listing.new.categories.title'|trans }}</h2>
+
+                                    <div class="selection-area">
+                                        <div class="col">
+                                            <div class="jcf-select-drop">
+                                                <div class="jcf-select-drop-content">
+                                                    <div class="jcf-list">
+                                                        <div class="jcf-list-content jcf-scrollable">
+                                                            {{ form_errors(form.categories) }}
+                                                            {{ form_widget(form.categories) }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-listing-info">
+                                    <h2>{{ 'listing.description.title'|trans }}</h2>
+                                    {#For html customizations see views\form\translations.html.twig#}
+                                    {{ form_widget(form.translations) }}
+                                </div>
+                                <div class="file-selection">
+
+                                    <h2>{{ 'listing.edit.various_information.title'|trans }}</h2>
+                                    <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
+
+                                    <div class="area">
+                                        <div class="uploader">
+                                            <div id="images-new">
+                                                {{ form_errors(form.image.new) }}
+                                                {{ form_widget(form.image.new) }}
+
+                                                {{ form_errors(form.image.uploaded) }}
+                                                {{ form_widget(form.image.uploaded ) }}
+                                            </div>
+                                        </div>
+                                        <div class="detail">
+                                            <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                        <div id="drop-zone">
+                                            {{ 'listing.drop.files'|trans }}
+                                        </div>
+                                        {#<div id="progress" class="progress">#}
+                                        {#<div class="progress-bar progress-bar-success"></div>#}
+                                        {#</div>#}
+                                        <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                                        <ul id="files-to-upload" class="images-list"></ul>
+                                    </div>
+                                    <!-- files-list -->
+                                    <div class="files-list">
+                                        <ul class="images-list">
+                                            {% for image in listing.images %}
+                                                <li>
+                                                    <img src="{{ image.getWebPath | imagine_filter('listing_xsmall') }}"
+                                                         alt=""/>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="block">
+                                    <h2>{{ 'listing.new.price.title'|trans }}</h2>
+                                    <!-- price-box -->
+                                    <div class="area">
+                                        <div class="price-box">
+                                            <strong class="title">
+                                                {{ 'listing.new.price.rent'|trans }}
+                                            </strong>
+
+                                            <div class="field-row">
+                                                {{ form_errors(form.price) }}
+                                                <span class="label">
+                                                    {{ form_label(form.price, 0|add_time_unit_text|capitalize) }}
+                                                </span>
+                                                {{ form_widget(form.price, {
+                                                    'attr': {
+                                                        'class': 'numbers-only form-control',
+                                                        'help':  'listing.edit.price.help'|trans
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </div>
+                                        <!-- simulator -->
+                                        <div class="currency-converter">
+                                            {% include '@CocoricoCore/Frontend/Common/_currency_converter.html.twig' with {'close' : true} only %}
+                                        </div>
+                                    </div>
+                                    <!-- alert -->
+                                    <div role="alert" class="alert alert-warning">
+                                        <i class="ico exclamation">!</i>
+
+                                        <p>
+                                            {{ 'listing.new.price_notice'| trans }}
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="form-inquiry">
+                                    <div class="columns-holder">
+                                        <div class="column">
+                                            <h2>{{ 'listing.new.address.title'|trans }}</h2>
+
+                                            <p class="error"></p>
+                                            {{ form_errors(form.location.coordinate) }}
+                                            {{ form_widget(form.location.coordinate) }}
+
+                                            <div class="field-row">
+                                                {{ form_errors(form.location.country) }}
+                                                <span class="label">{{ form_label(form.location.country) }}</span>
+
+                                                <div class="select-holder">
+                                                    {{ form_widget(form.location.country) }}
+                                                </div>
+                                            </div>
+                                            <div class="field-row">
+                                                <div class="col location">
+                                                    {{ form_errors(form.location.city) }}
+                                                    <span class="label">{{ form_label(form.location.city) }}</span>
+
+                                                    <div class="field-holder">
+                                                        {{ form_widget(form.location.city, {
+                                                            'attr': {
+                                                                'class': "form-control"
+                                                            }
+                                                        }) }}
+                                                    </div>
+                                                </div>
+                                                <div class="col postel-code">
+                                                    {{ form_errors(form.location.zip) }}
+                                                    <span class="label">{{ form_label(form.location.zip) }}</span>
+
+                                                    <div class="field-holder">
+                                                        {{ form_widget(form.location.zip, {
+                                                            'attr': {
+                                                                'class': "form-control"
+                                                            }
+                                                        }) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="field-row">
+                                                <div class="col cell">
+                                                    {{ form_errors(form.location.street_number) }}
+                                                    <span class="label">
+                                                        {{ form_label(form.location.street_number) }}
+                                                        <button title="{{ 'listing.location.help'|trans }}"
+                                                                data-placement="right"
+                                                                data-toggle="tooltip" class="tooltip-button"
+                                                                type="button"
+                                                                data-original-title="{{ 'listing.location.help'|trans }}">
+                                                            ?
+                                                        </button>
+                                                    </span>
+
+
+                                                    <div class="field-holder">
+                                                        {{ form_widget(form.location.street_number, {
+                                                            'attr': {
+                                                                'class': "form-control"
+                                                            }
+                                                        }) }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col street">
+                                                    {{ form_errors(form.location.route) }}
+                                                    <span class="label">{{ form_label(form.location.route) }}</span>
+
+                                                    <div class="field-holder">
+                                                        {{ form_widget(form.location.route, {
+                                                            'attr': {
+                                                                'class': "form-control"
+                                                            }
+                                                        }) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p>
+                                                <a class="validate-location" href="javascript:void(0)">
+                                                    {{ 'listing.location.validate'|trans }}
+                                                </a>
+                                            </p>
+
+                                            <p>
+                                                <label> {{ 'listing.location.address_found'|trans }}</label>
+                                                <strong id="formatted-address">{{ 'listing.location.none'|trans }}</strong>
+                                            </p>
+
+                                            <div class="alert alert-info" role="alert">
+                                                <i class="ico arrow"></i>
+
+                                                <p>{{ 'listing.location.drag_message'|trans }}</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="column">
+                                            <div class="alert alert-success" role="alert">
+                                                <i class="ico"><i class="icon-location"></i></i>
+
+                                                <p>{{ 'listing.location.private_message'|trans }}</p>
+                                            </div>
+                                            <div id="map-listing" class="map-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+                        <div class="form-signup validate-form">
+                            <fieldset>
+                                <legend class="hidden">form signup</legend>
+                                <h2>{{ 'listing.new.signup.title'|trans }}</h2>
+                                {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
+                                'form_registration' : form.user,
+                                'form_login': form.user_login
+                                } only %}
+                            </fieldset>
+                        </div>
+                    {% endif %}
+                    <div class="btns-area new-listing">
+                        {{ form_errors(form.tac) }}
+                        <div class="agreement">
+                            {{ form_widget(form.tac) }}
+                            <span class="label">
+                                {{ form_label(form.tac, null, {'required': false} ) }}
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                                   target="_blank">
+                                    {{ 'listing.new.tac.link'|trans }}
+                                </a>*
+                            </span>
+                        </div>
+
+                        <div id="progress" class="progress">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+
+                        <div class="text-center">
+                            <input id="listing-new-save" type="submit" class="btn btn-primary"
+                                   value="{{ 'listing.new.save'|trans }}">
+                        </div>
+
+                    </div>
+                    {{ form_rest(form) }}
+                </form>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-listing',
+    'auto_complete_elt': '',
+    'marker_draggable': true
+    } only %}
+
+
+    <script>
+        $(function () {
+            {#Currency conversion#}
+            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
+
+            //Disable submit button on click
+            $("[type=submit]").click(function (e) {
+                $(this).prop('disabled', true);
+            });
+        });
+    </script>
+
+    {#Translations#}
+    {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
+
+
+    {#Files upload#}
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_js.html.twig' with {
+    'upload_elt': '#listing_image_new',
+    'upload_images': '#listing_image_uploaded',
+    'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
+    'upload_max': listing_img_max - listing.images.count,
+    } only %}
+
+{% endblock %}

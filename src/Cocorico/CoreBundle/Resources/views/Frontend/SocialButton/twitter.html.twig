@@ -1,0 +1,10 @@
+{% if url is not defined or url == null %}
+    {% set url = app.request.uri %}
+{% endif %}
+
+{% spaceless %}
+    <a href="http://twitter.com/intent/tweet?{{ {'status': url }|url_encode }}">
+        <i class="icon-twitter"></i>
+        <span class="hidden">twitter</span>
+    </a>
+{% endspaceless %}

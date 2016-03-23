@@ -1,0 +1,36 @@
+{% for review in reviews %}
+    {% set image_user = review.reviewBy.images|length ? review.reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    <article class="post" itemprop="review">
+        <header class="head">
+            <div class="author-img" itemprop="author" itemscope
+                 itemtype="http://schema.org/Person">
+                <div class="img-holder">
+                    <img alt="{{ review.reviewBy.firstName }}"
+                         src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
+                </div>
+                <a href="{{ path('cocorico_user_profile_show', { 'id': review.reviewBy.id }) }}" class="author-name"
+                   itemprop="name">{{ review.reviewBy.firstName }}</a>
+            </div>
+            <div class="meta">
+                {#todo dynamized 2014-02-24 #}
+                <meta itemprop="datePublished" content="{{ review.createdAt|date('Y-m-d') }}">
+                <time datetime="{{ review.createdAt|date('Y-m-d') }}">{{ review.createdAt|localizeddate('short', 'none', 'fr') }} </time>
+            </div>
+        </header>
+        <div class="post-content">
+            <p itemprop="reviewBody">
+                {{ review.comment | truncate(500, true, '...') }}
+            </p>
+        </div>
+        <footer class="footer">
+            <span class="time"><i class="icon-clock"></i>{{ review.createdAt |date("H") }}
+                h{{ review.createdAt |date("i") }}
+                GMT
+            </span>
+            <!-- rating -->
+            {% if review.rating %}
+                {{ review.rating |cocorico_star_rating }}
+            {% endif %}
+        </footer>
+    </article>
+{% endfor %}

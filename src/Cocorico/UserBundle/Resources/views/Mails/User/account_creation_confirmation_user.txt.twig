@@ -1,0 +1,32 @@
+{% trans_default_domain 'cocorico_user' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'registration.email.subject'|trans({'%firstname%': user.firstName, '%confirmationUrl%': confirmationUrl}, 'cocorico_user', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'registration.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%confirmationUrl%': confirmationUrl},
+    'cocorico_user', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

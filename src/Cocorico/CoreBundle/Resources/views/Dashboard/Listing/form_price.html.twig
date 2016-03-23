@@ -1,0 +1,102 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="price-form-container" class="column">
+    <h3>{{ 'listing.edit.price.default.title'|trans }}</h3>
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+
+        <div class="field-row">
+            {{ form_errors(form) }}
+            {{ form_errors(form.price) }}
+            <span class="label">
+                {{ form_label(form.price, form.price.vars.label|trans ~ " " ~ 0|add_time_unit_text) }}
+            </span>
+            {{ form_widget(form.price, {
+                'attr': {'class': 'numbers-only form-control' },
+                'help':  'listing.edit.price.help'|trans
+            }) }}
+        </div>
+
+        <ul class="list-unstyled price-info">
+            <li>
+                {{ 'listing.price_simulator.cash_in'|trans }}
+                <span class="info">
+                    {% if includeVat %}
+                        {% set amount_to_pay_to_offerer = listing.amountToPayToOffererDecimal(feeAsOfferer) %}
+                    {% else %}
+                        {% set amount_to_pay_to_offerer = listing.amountToPayToOffererForPriceExcludingVATDecimal(feeAsOfferer) %}
+                    {% endif %}
+                    {% set amount_to_pay_to_offerer = amount_to_pay_to_offerer | format_price(app.request.locale, 2) %}
+
+                    <span class="info price">
+                        {{ amount_to_pay_to_offerer }}
+                        <sup>
+                            <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                        </sup>
+                    </span>
+
+                    <button title="{{ 'listing.price_simulator.help'|trans }}"
+                            data-placement="right"
+                            data-toggle="tooltip"
+                            class="tooltip-button"
+                            type="button">?
+                    </button>
+                </span>
+            </li>
+            <li>
+                {{ 'listing.price_simulator.fee'|trans }}
+                <span class="info">
+                    {% if includeVat %}
+                        {% set amount_fee_as_offerer = listing.amountFeeAsOffererDecimal(feeAsOfferer) %}
+                    {% else %}
+                        {% set amount_fee_as_offerer = listing.amountFeeAsOffererForPriceExcludingVATDecimal(feeAsOfferer, vatRate) %}
+                    {% endif %}
+                    {% set amount_fee_as_offerer = amount_fee_as_offerer | format_price(app.request.locale, 2) %}
+                    <span class="info price">
+                        {{ amount_fee_as_offerer }}
+                        <sup>
+                            <small>{{ vatInclusionText(app.request.getLocale(), null, true) }}</small>
+                        </sup>
+                    </span>
+
+                    <button title="{{ 'listing.price_simulator.fee.help'|trans }}"
+                            data-placement="right"
+                            data-toggle="tooltip"
+                            class="tooltip-button"
+                            type="button">?
+                    </button>
+                </span>
+            </li>
+        </ul>
+
+        <div class="pull-right">
+            <button type="submit" class="btn btn-default">{{ 'listing.price_save'|trans }}</button>
+        </div>
+
+        {{ form_rest(form) }}
+    </form>
+
+
+    <script>
+        $(function () {
+            $("#price-form-container").submitAjaxForm(
+                    function () {
+                        //Replace price with new one on calendar
+                        var $titleElt = $('.fc-title-default');
+                        var $price = $("#listing_price");
+                        var newPrice = $price.val();
+                        newPrice = convertCurrency(newPrice, defaultCurrency, currentCurrency);
+                        $titleElt.html($titleElt.html().replace(/\d+(\.\d*)?|\.\d+/, newPrice));
+                        jcf.replaceAll("#price-form-container");
+
+                        $("#listing_availabilities_prices_price_custom").val($price.val());
+                    }
+            );
+            $("[data-toggle='tooltip']").tooltip();
+        });
+    </script>
+
+</div>

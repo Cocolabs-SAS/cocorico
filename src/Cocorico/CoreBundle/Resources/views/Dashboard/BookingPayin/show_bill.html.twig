@@ -1,0 +1,26 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% embed "@CocoricoCore/Dashboard/layout_show_bill.html.twig" %}
+    {% trans_default_domain 'cocorico_booking' %}
+
+    {#Currency values#}
+    {% set amount_dec = booking.amountToPayByAskerDecimal | currency_convert(currentCurrency, not listingPricePrecision) %}
+    {% set amount_fees_dec = booking.amountFeeAsAskerDecimal | currency_convert(currentCurrency, not listingPricePrecision) %}
+    {% set amount_excl_vat_dec = amount_fees_dec / (1 +  vatRate) %}
+    {% set amount_vat_dec = amount_fees_dec - amount_excl_vat_dec %}
+
+    {#Currency formated#}
+    {% set amount = amount_dec | currency_format(currentCurrency, listingPricePrecision) %}
+    {% set amount_fees = amount_fees_dec | currency_format(currentCurrency, listingPricePrecision) %}
+    {% set amount_vat = amount_vat_dec | currency_format(currentCurrency, listingPricePrecision) %}
+    {% set amount_excl_vat = amount_excl_vat_dec | currency_format(currentCurrency, listingPricePrecision) %}
+
+    {#Vars#}
+    {% set listing = booking.listing %}
+    {% set listing_translation = listing.translations[app.request.locale] %}
+    {% set user = booking.user %}
+    {% set user_address = user.getAddresses %}
+    {% set user_address = (user_address is empty) ? null : user_address[0] %}
+    {% set bill_date_title = 'booking.bill.date.title'|trans %}
+    {% set bill_date = booking.getPayedBookingAt|localizeddate('short', 'none', 'fr') %}
+{% endembed %}

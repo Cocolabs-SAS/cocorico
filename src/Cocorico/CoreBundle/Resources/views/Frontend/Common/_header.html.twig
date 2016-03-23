@@ -1,0 +1,106 @@
+{% trans_default_domain 'cocorico' %}
+
+<!-- header of the page -->
+<header id="header">
+    <!-- topbar -->
+    <div class="topbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="tel:{{ cocorico_phone|replace({'+': '', '(': '', ')': '', ' ': ''}) }}"
+                               tabindex="10">
+                                <i class="icon-phone"></i>{{ cocorico_phone }}
+                            </a>
+                        </li>
+                        <li>
+                            <a tabindex="11" href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
+                                <i class="icon-mail-alt"></i>{{ cocorico_contact_mail_obfuscated|raw }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- main navigation of the page -->
+                <nav class="navbar navbar-default">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                data-target="#bs-example-navbar-collapse-1" tabindex="2">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <!-- page logo -->
+                        <a class="navbar-brand" href="{{ path('cocorico_home') }}" tabindex="3">
+                            <img src="{{ asset('images/logo.png') }}" alt="{{ 'nav.home.link'|trans }}" width="190"
+                                 height="29">
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}"
+                                   tabindex="4">{{ 'nav.who_we_are.link'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('cocorico_listing_favourite') }}"
+                                   tabindex="5">{{ 'nav.favorites.link'|trans }}
+                                    <span id="fav-count"></span>
+                                </a>
+                            </li>
+
+                            {# User info #}
+                            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+                                <li id="dashboard-dropdown" class="dropdown">
+                                    <a id="dashboard-link" class="dropdown-toggle"
+                                       href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6"
+                                       title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        {{ 'nav.dashboard.link'|trans }} ({{ app.user.firstName | capitalize }})
+                                        <span id="nb-unread-msg"></span>
+                                        <span class="icon-down-open-mini"></span>
+                                    </a>
+                                    {% include '@CocoricoCore/Frontend/Common/_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                                </li>
+                            {%- else -%}
+                                <li>
+                                    <a href="{{ path('cocorico_user_register') }}" tabindex="6">
+                                        {{ 'nav.register.link'|trans }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('cocorico_user_login') }}" tabindex="7">
+                                        {{ 'nav.login.link'|trans }}
+                                    </a>
+                                </li>
+                            {%- endif -%}
+
+
+                            {# Language switcher. #}
+                            {{ render(controller('CocoricoCoreBundle:Frontend/Language:switch', {'request': app.request} )) }}
+
+                            {# Currency switcher #}
+                            {% include '@CocoricoCore/Frontend/Common/_currency_switcher.html.twig' only %}
+                        </ul>
+
+                        {# New listing link #}
+                        <a href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9">
+                            {{ 'nav.listing.new.link'|trans }}
+                        </a>
+                    </div>
+                    <!-- /.navbar-collapse -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

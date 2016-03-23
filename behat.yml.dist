@@ -1,0 +1,70 @@
+default:
+    autoload:
+        '': %paths.base%/features
+    formatters:
+        pretty: true
+
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                env: test
+                debug: true
+        Behat\MinkExtension:
+            base_url: 'http://cocorico.test.localhost/'
+            files_path: %paths.base%\features\_datas\
+            selenium2: ~
+            show_auto:    false
+            show_cmd: open %s
+            show_tmp_dir: %paths.base%\web\test\behat
+            sessions:
+                default:
+                    symfony2: ~
+            browser_name: chrome
+
+        VIPSoft\DoctrineDataFixturesExtension\Extension:
+            lifetime:    scenario
+            autoload:    true
+            directories: ~
+            fixtures:    ~
+            use_backup: true
+
+    suites:
+        default_features:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - UserContext
+                - PageContext
+            filters:
+                tags: "@default"
+        listing_features:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - UserContext
+                - PageContext
+                - ListingContext
+            filters:
+               tags: "@listing&&@javascript"
+        booking_features:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - UserContext
+                - PageContext
+                - ListingContext
+                - BookingContext
+            filters:
+               tags: "@booking&&@javascript"
+        command_features:
+            contexts:
+                - CommandContext
+                - UserContext
+            filters:
+               tags: "@command"
+        message_features:
+            contexts:
+                - Behat\MinkExtension\Context\MinkContext
+                - MessageContext
+                - UserContext
+                - PageContext
+                - ListingContext
+            filters:
+               tags: "@message&&@javascript"

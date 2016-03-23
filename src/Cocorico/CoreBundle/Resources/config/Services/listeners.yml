@@ -1,0 +1,32 @@
+parameters:
+    #Custom ResolveTargetEntityListener
+    doctrine.orm.listeners.resolve_target_entity.class: Cocorico\CoreBundle\Listener\ResolveTargetEntityListener
+
+services:
+    #Listeners
+    cocorico.listing_image_upload_listener:
+        class: Cocorico\CoreBundle\Listener\ListingImageUploadListener
+        arguments:
+            - "@cocorico.listing.manager"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: "onUpload"  }
+
+    cocorico.listing_image_upload_validation_listener:
+        class: Cocorico\CoreBundle\Listener\ListingImageUploadValidationListener
+        arguments:
+            - "%cocorico.listing_img_max_upload_size%"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.validation, method: "onValidate" }
+
+    cocorico.ajax.authentication_listener:
+        class: Cocorico\CoreBundle\Listener\AjaxAuthenticationListener
+        tags:
+          - { name: kernel.event_listener, event: kernel.exception, method: onCoreException, priority: 1000 }
+
+    cocorico.authentication_success_listener:
+        class: Cocorico\CoreBundle\Authentication\Handler\LoginSuccessHandler
+        arguments:
+            - @security.http_utils
+            #This must be the same that those in security.yml firewall main config
+            #todo: add to parameters this values
+            - { target_path_parameter: 'redirect_to', login_path: cocorico_user_login, use_referer: true }

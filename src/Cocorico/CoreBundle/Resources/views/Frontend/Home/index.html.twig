@@ -1,0 +1,122 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme 'home-page' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block search_form %}
+            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
+        {% endblock %}
+
+        {% block main %}
+            <!-- visual -->
+            <div class="visual text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-8 col-lg-push-2">
+                            <div class="title-holder">
+                                <div class="title-frame">
+                                    <h1>
+                                        <span class="thin-text">Lorem</span>
+                                        ipsum dolor
+                                        <span class="text">sit amet,</span>
+                                        consectetur suspendisse.
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- infoarea -->
+            <div class="infoarea container">
+                <div class="row">
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
+                        <img src="{{ asset('images/icon1.png') }}" alt="icon description" class="pull-left icon">
+
+                        <div class="textbox">
+                            <h2><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></h2>
+
+                            <p>
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                labore.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
+                        <img src="{{ asset('images/icon2.png') }}" alt="icon description" class="pull-left icon">
+
+                        <div class="textbox">
+                            <h2><a href="#">Lorem ipsum dolor sit amet ?</a></h2>
+
+                            <p>
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                labore.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clearfix visible-sm"></div>
+                    <!-- info-box -->
+                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
+                        <img src="{{ asset('images/icon3.png') }}" alt="icon description" class="pull-left icon">
+
+                        <div class="textbox">
+                            <h2><a href="#">Lorem ipsum dolor sit amet, consect</a></h2>
+
+                            <p>
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                labore.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{ render(controller('CocoricoCoreBundle:Frontend/Home:highRankListing', {'limit': 6 })) }}
+        {% endblock %}
+        {% block modal %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-listing-result',
+    'auto_complete_elt': '#location'
+    } only %}
+
+    <script>
+        // Categories
+        $(function () {
+
+            // Set default favourites in the listing
+            setDefaultFavourites();
+
+            initMultiSelect(
+                    '#categories',
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}',
+                    '250px'
+            );
+        });
+    </script>
+{% endblock %}

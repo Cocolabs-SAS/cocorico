@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2016-03-16T21:11:41Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="e3ba4ef34d2947832917f86d7a9bdac5d5b2bfa5" resname="About me">
+                <source>About me</source>
+                <target>About me</target>
+            </trans-unit>
+            <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
+                <jms:reference-file line="76">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <source>Asker</source>
+                <target>Asker</target>
+            </trans-unit>
+            <trans-unit id="135229c7beadb48dd31d1567028d035586fb41f3" resname="Bookings">
+                <jms:reference-file line="128">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <jms:reference-file line="133">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <source>Bookings</source>
+                <target>Bookings</target>
+            </trans-unit>
+            <trans-unit id="fce06e20e5f7f74aacccab40b59b75a56c8f7305" resname="Comments">
+                <jms:reference-file line="63">Controller/Dashboard/ReviewController.php</jms:reference-file>
+                <source>Comments</source>
+                <target>Comments</target>
+            </trans-unit>
+            <trans-unit id="a34b69fc46e7a278cf65c58bb347de6560fb046f" resname="Contact Information">
+                <source>Contact Information</source>
+                <target>Contact Information</target>
+            </trans-unit>
+            <trans-unit id="f698304ac534eb0140704d37cf1379f93172da13" resname="Discussion with %name%">
+                <jms:reference-file line="166">Controller/Dashboard/MessageController.php</jms:reference-file>
+                <source>Discussion with %name%</source>
+                <target>Discussion with %name%</target>
+            </trans-unit>
+            <trans-unit id="70f8bb9a8a5393ef080507a89e4b98d139000d65" resname="Home">
+                <jms:reference-file line="70">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <source>Home</source>
+                <target>Home</target>
+            </trans-unit>
+            <trans-unit id="a449cfcd6da83b2fd0daa2df4a9a96fc34009bc2" resname="Listing">
+                <jms:reference-file line="96">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <source>Listing</source>
+                <target>Listing</target>
+            </trans-unit>
+            <trans-unit id="f1702b4686278becffc88baabe6f4b7a8355532c" resname="Messages">
+                <jms:reference-file line="158">Controller/Dashboard/MessageController.php</jms:reference-file>
+                <source>Messages</source>
+                <target>Messages</target>
+            </trans-unit>
+            <trans-unit id="27a372ec5448ccccde2d678d3d8d2720d0cae107" resname="My Alerts">
+                <source>My Alerts</source>
+                <target state="new">My Alerts</target>
+            </trans-unit>
+            <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
+                <jms:reference-file line="81">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
+                <source>Offerer</source>
+                <target>Offerer</target>
+            </trans-unit>
+            <trans-unit id="88b8328c7c39e37b8d82a35c17ed0db8a89f16ca" resname="Payment Information">
+                <source>Payment Information</source>
+                <target>Payment Information</target>
+            </trans-unit>
+            <trans-unit id="44357ae55a217646f4d1c3bb7cb7b437fa838999" resname="Payments">
+                <source>Payments</source>
+                <target>Payments</target>
+            </trans-unit>
+            <trans-unit id="ff4fc0276e960c348647b647235f68200887c9d2" resname="Profile">
+                <source>Profile</source>
+                <target>Profile</target>
+            </trans-unit>
+            <trans-unit id="0b93bf5178a751618641797b695c219f0f2397f1" resname="Rating Made">
+                <source>Rating Made</source>
+                <target>Rating Made</target>
+            </trans-unit>
+            <trans-unit id="24d726538e16555f030eaf8b93f76971a1dff4f1" resname="Rating Received">
+                <source>Rating Received</source>
+                <target>Rating Received</target>
+            </trans-unit>
+            <trans-unit id="e4ffacba5591440a14a08eac7aade57c603e17c0" resname="calendar">
+                <jms:reference-file line="62">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
+                <source>calendar</source>
+                <target>calendar</target>
+            </trans-unit>
+            <trans-unit id="56b80273da1d7c0ac32ce82840d543a9da755bfd" resname="characteristics">
+                <jms:reference-file line="58">Dashboard/Offerer/ListingCharacteristicController.php</jms:reference-file>
+                <source>characteristics</source>
+                <target>characteristics</target>
+            </trans-unit>
+            <trans-unit id="2e58e0c1ea673cd22bd3a55a2fc1177945495215" resname="photos">
+                <jms:reference-file line="59">Dashboard/Offerer/ListingImageController.php</jms:reference-file>
+                <source>photos</source>
+                <target>photos</target>
+            </trans-unit>
+            <trans-unit id="e4c8d951f1cc300d96873c7cfc850ad0f0ddaab4" resname="presentation">
+                <jms:reference-file line="58">Dashboard/Offerer/ListingPresentationController.php</jms:reference-file>
+                <source>presentation</source>
+                <target>presentation</target>
+            </trans-unit>
+            <trans-unit id="8da0153c122a5df9365dbd1237f4ea573494adf8" resname="price and conditions">
+                <jms:reference-file line="61">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
+                <source>price and conditions</source>
+                <target>price and conditions</target>
+            </trans-unit>
+            <trans-unit id="d4eb4e1a30f4faa8b9faec7136791bf200415e0b" resname="various informations">
+                <jms:reference-file line="58">Dashboard/Offerer/ListingVariousInformationController.php</jms:reference-file>
+                <source>various informations</source>
+                <target>various informations</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

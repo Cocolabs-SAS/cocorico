@@ -1,0 +1,11 @@
+{% extends "@CocoricoCore/SMS/layout.txt.twig" %}
+
+{% trans_default_domain 'cocorico_sms' %}
+
+{% block message %}
+    {{ 'canceled_by_asker_offerer.sms.message'|trans({
+        '%offerer_firstname%': user.firstName,
+        '%asker_firstname%': asker.firstName,
+        '%booking_url%': booking_url,
+    }, 'cocorico_sms', user_locale) }}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% block user_block %}
+    <ul class="dropdown-menu dropdown-user">
+        {% if app.user %}
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') and sonata_user.impersonating %}
+                <li>
+                    <a href="{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters| merge({'_switch_user': '_exit'})) }}">
+                        (exit)
+                    </a>
+                </li>
+            {% endif %}
+
+            <li>
+                <a href="{{ url('sonata_user_admin_security_logout') }}">
+                    <strong>{{ app.user.firstName }}:</strong> {{ 'user_block_logout'|trans({}, 'SonataUserBundle') }}
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}

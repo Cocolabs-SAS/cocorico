@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+            <div id="form-registerlogin" class="form-signup validate-form">
+                <h1>{{ 'listing.new.signup.title'|trans({},'cocorico_listing') }}</h1>
+                {#Login And Register Form#}
+                <form class="form-signup" action="{{ path("cocorico_user_login_check") }}"
+                      method="POST">
+                    {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
+                    'form_registration': false,
+                    'form_login': form
+                    } only %}
+
+                    <div>
+                        <a href="{{ path('cocorico_user_resetting_request') }}">
+                            {{ 'user.password_forgotten'|trans }}
+                        </a>
+                    </div>
+
+                    <div class="btn-block text-center">
+                        <button type="submit" class="btn btn-default">{{ 'user.login.submit'|trans }}</button>
+                    </div>
+                </form>
+
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

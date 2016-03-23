@@ -1,0 +1,34 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'update_your_calendar_offerer.email.subject'|trans({}, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'update_your_calendar_offerer.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%listing_calendar_edit_url%': listing_calendar_edit_url
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--update_your_calendar_offerer-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -1,0 +1,29 @@
+imports:
+    - { resource: config_dev.yml }
+    - { resource: parameters_test.yml }
+
+framework:
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+    profiler:
+        collect: false
+
+web_profiler:
+    toolbar: "%debug_toolbar%"
+    intercept_redirects: "%debug_redirects%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+#    orm:
+#        auto_generate_proxy_classes: true
+#        auto_mapping: true
+#    orm:
+#        metadata_cache_driver: apc
+#        query_cache_driver: apc
+#        result_cache_driver: apc
+
+

@@ -1,0 +1,48 @@
+{% trans_default_domain 'cocorico_user' %}
+
+<!-- tabs-aside -->
+<aside class="tabs-aside">
+    <!-- tabset-holder -->
+    <nav class="tabset-holder">
+        <a href="#" class="opener">
+            <span class="hidden">opener</span>
+            <i class="icon-down-open-mini"></i></a>
+        <!-- nav-tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="{{ nav_side_dashboard_current == "about_me" ? 'active' : '' }}">
+                <a href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" aria-controls="about-me"
+                   role="tab"
+                   data-text="À propos de moi">
+                    {{ 'nav.user.about_me.link'|trans }}
+                </a>
+            </li>
+            <li role="presentation" class="{{ nav_side_dashboard_current == "payment" ? 'active' : '' }}">
+                <a href="{{ path('cocorico_user_dashboard_profile_edit_payment') }}" aria-controls="payment info"
+                   role="tab" data-text="Information de paiement">
+                    {{ 'nav.user.payment.link'|trans }}
+                </a>
+            </li>
+            <li role="presentation" class="{{ nav_side_dashboard_current == "contact" ? 'active' : '' }}">
+                <a href="{{ path('cocorico_user_dashboard_profile_edit_contact') }}" aria-controls="contact information"
+                   role="tab" data-text="Information de contact">
+                    {{ 'nav.user.contact.link'|trans }}
+                </a>
+            </li>
+            {% if bundleExist('CocoricoListingAlertBundle') %}
+                <li role="presentation" class="{{ nav_side_dashboard_current == "listing_alert" ? 'active' : '' }}">
+                    <a href="{{ path('cocorico_listing_alert_dashboard_alert') }}" aria-controls="listing alert"
+                       role="tab" data-text="Alertes annonces">
+                        {{ 'nav.user.listing_alert.link'|trans() }}
+                    </a>
+                </li>
+            {% endif %}
+            <li role="presentation">
+                <a target="_blank" href="{{ path('cocorico_user_profile_show', {'id': app.user.id }) }}"
+                   aria-controls="profil information"
+                   role="tab" data-text="Information de profil">
+                    {{ 'nav.user.show.link'|trans }}
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>

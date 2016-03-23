@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2016-03-16T21:11:41Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="c3df00f32f25fdc4ac61f5ad2b7ef2848450dc74" resname="The entity does not exist.">
+                <jms:reference-file line="39">Form/Type/EntityHiddenType.php</jms:reference-file>
+                <source>The entity does not exist.</source>
+                <target>The entity does not exist.</target>
+            </trans-unit>
+            <trans-unit id="fd9aafaaff97143c9686b8cde0752fd46568e7f5" resname="assert.max_length {{ limit }}">
+                <source>assert.max_length {{ limit }}</source>
+                <target>{{ limit }} characters maximum</target>
+            </trans-unit>
+            <trans-unit id="99b3878867560f0d2da27140d0015e1c9ce70e26" resname="assert.min_length {{ limit }}">
+                <source>assert.min_length {{ limit }}</source>
+                <target>{{ limit }} characters minimum</target>
+            </trans-unit>
+            <trans-unit id="423ba0ce5f00f14cc7dc806d6909ecbc84a7b67c" resname="assert.not_blank">
+                <source>assert.not_blank</source>
+                <target>Required</target>
+            </trans-unit>
+            <trans-unit id="fe66769572aafccc3e6664896cb31beaabd3cde9" resname="assert.unique">
+                <source>assert.unique</source>
+                <target>Value must be unique</target>
+            </trans-unit>
+            <trans-unit id="617ece6155264ee960631fa8405397188e270073" resname="cocorico_contact.email.blank">
+                <source>cocorico_contact.email.blank</source>
+                <target>Email required</target>
+            </trans-unit>
+            <trans-unit id="bf1eb03f71a160d4cf7abb47fcb0be45fcc72bd3" resname="cocorico_contact.email.invalid">
+                <source>cocorico_contact.email.invalid</source>
+                <target>Email invalid</target>
+            </trans-unit>
+            <trans-unit id="bd7f1fad35f56148ab8b0bb32e7e4e037f715f88" resname="cocorico_contact.email.long">
+                <source>cocorico_contact.email.long</source>
+                <target>Email too long</target>
+            </trans-unit>
+            <trans-unit id="0ab38aefc862eaf36fcb5d87344193241caed00c" resname="cocorico_contact.email.short">
+                <source>cocorico_contact.email.short</source>
+                <target>Email too short</target>
+            </trans-unit>
+            <trans-unit id="89823417ee869b58a941c5a34f902826203b478f" resname="cocorico_contact.first_name.blank">
+                <source>cocorico_contact.first_name.blank</source>
+                <target>First name required</target>
+            </trans-unit>
+            <trans-unit id="8aa9acea16c2123387489f0797c9c22f8703c370" resname="cocorico_contact.first_name.long">
+                <source>cocorico_contact.first_name.long</source>
+                <target>First name too long</target>
+            </trans-unit>
+            <trans-unit id="ba484c0a25de893c4074a9e6f659115ca7cc2b0a" resname="cocorico_contact.first_name.short">
+                <source>cocorico_contact.first_name.short</source>
+                <target>First name too short</target>
+            </trans-unit>
+            <trans-unit id="1ff5218e47ac728dc74d24158b1d5c8ead9146cb" resname="cocorico_contact.last_name.blank">
+                <source>cocorico_contact.last_name.blank</source>
+                <target>Last name required</target>
+            </trans-unit>
+            <trans-unit id="95b09cfd737d5da88e4dabc64c9da68902a76e66" resname="cocorico_contact.last_name.long">
+                <source>cocorico_contact.last_name.long</source>
+                <target>Last name too long</target>
+            </trans-unit>
+            <trans-unit id="c0462e5466b84ceec0e28a6a7fecd62f80c811a3" resname="cocorico_contact.last_name.short">
+                <source>cocorico_contact.last_name.short</source>
+                <target>Last name too short</target>
+            </trans-unit>
+            <trans-unit id="568b6b740c6fe55c20842177a7861e0e09e14e56" resname="cocorico_contact.message.blank">
+                <source>cocorico_contact.message.blank</source>
+                <target>Message required</target>
+            </trans-unit>
+            <trans-unit id="a07fa835ecdeb1568598171fbf40904d5e5f7649" resname="cocorico_contact.message.short">
+                <source>cocorico_contact.message.short</source>
+                <target>Message too short</target>
+            </trans-unit>
+            <trans-unit id="7889eba478729b65496baf4041fc54edbd5bbff6" resname="cocorico_contact.phone.long">
+                <source>cocorico_contact.phone.long</source>
+                <target>Phone too long</target>
+            </trans-unit>
+            <trans-unit id="c62b5eac792a77e8ea5505961c8458ca30cda29b" resname="cocorico_contact.phone.short">
+                <source>cocorico_contact.phone.short</source>
+                <target>Phone too short</target>
+            </trans-unit>
+            <trans-unit id="9694f4fe75963ab248fdf28637eb5224be183ad8" resname="cocorico_contact.subject.blank">
+                <source>cocorico_contact.subject.blank</source>
+                <target>Subject required</target>
+            </trans-unit>
+            <trans-unit id="b09330266caae421c62ad2e1fc43026935920479" resname="cocorico_contact.subject.long">
+                <source>cocorico_contact.subject.long</source>
+                <target>Subject too long</target>
+            </trans-unit>
+            <trans-unit id="c5d5e834352ed5aa86e19398015f860e92802d49" resname="cocorico_contact.subject.short">
+                <source>cocorico_contact.subject.short</source>
+                <target>Subject too short</target>
+            </trans-unit>
+            <trans-unit id="f85266aaf970ecc6ccb3bbeb61412845d69c207b" resname="cocorico_review.comment.not_blank">
+                <source>cocorico_review.comment.not_blank</source>
+                <target>Please leave a comment, this is very useful for other users!</target>
+            </trans-unit>
+            <trans-unit id="413611db3a87bf5d0eb7d560f6068bea9b7ed504" resname="cocorico_review.rating.not_blank">
+                <source>cocorico_review.rating.not_blank</source>
+                <target>Please leave a rating by giving a score</target>
+            </trans-unit>
+            <trans-unit id="f0956a03cf712b90bc327683fc7e42c70c2d0206" resname="cocorico_user.bank_owner_address.blank">
+                <source>cocorico_user.bank_owner_address.blank</source>
+                <target>Bank owner address required</target>
+            </trans-unit>
+            <trans-unit id="f3d7f780ea6f1913cf05e0cfef0d27b4aaf010da" resname="cocorico_user.bank_owner_name.blank">
+                <source>cocorico_user.bank_owner_name.blank</source>
+                <target>Bank owner name required</target>
+            </trans-unit>
+            <trans-unit id="0cb4c9874de364eeb71fa9d40e1806598e1d7cc4" resname="cocorico_user.bic.blank">
+                <source>cocorico_user.bic.blank</source>
+                <target>BIC required</target>
+            </trans-unit>
+            <trans-unit id="e8ee39994157c732ee47d48f80f11704edb3e652" resname="cocorico_user.birthday.blank">
+                <source>cocorico_user.birthday.blank</source>
+                <target>Birthday required</target>
+            </trans-unit>
+            <trans-unit id="fe5d878ea8abf516340e8d2b6b854ec2a58434e3" resname="cocorico_user.countryOfResidence.blank">
+                <jms:reference-file line="86">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.countryOfResidence.blank</source>
+                <target>Country Of Residence required</target>
+            </trans-unit>
+            <trans-unit id="a233f035a152744ca09d068f6a9aeb53621ca167" resname="cocorico_user.countryOfResidence.invalid">
+                <jms:reference-file line="87">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.countryOfResidence.invalid</source>
+                <target>Country of residence invalid</target>
+            </trans-unit>
+            <trans-unit id="71295e47e2b3ee1530f73b690a9560a634d1e6fc" resname="cocorico_user.country_of_residence.blank">
+                <source>cocorico_user.country_of_residence.blank</source>
+                <target>Country of residence required</target>
+            </trans-unit>
+            <trans-unit id="346e54252c56b95b9483d4cfc832a85a76ef2d6d" resname="cocorico_user.email.already_used">
+                <source>cocorico_user.email.already_used</source>
+                <target>This email is already used</target>
+            </trans-unit>
+            <trans-unit id="c13c24d6514fc2dc31ad98da18a6c49e697fc3c8" resname="cocorico_user.email.blank">
+                <jms:reference-file line="101">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.email.blank</source>
+                <target>Please enter an email</target>
+            </trans-unit>
+            <trans-unit id="db713e66548186388828ad1111f9e1201f0f08a3" resname="cocorico_user.email.invalid">
+                <jms:reference-file line="102">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.email.invalid</source>
+                <target>This email is not valid</target>
+            </trans-unit>
+            <trans-unit id="8749b7c68b8d94ce3c06e29aafa4b1dc45a7e0e9" resname="cocorico_user.first_name.blank">
+                <jms:reference-file line="38">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.first_name.blank</source>
+                <target>Please enter your first name</target>
+            </trans-unit>
+            <trans-unit id="c5dd48821c07a5471ec7b2ef084c970a2d7c8742" resname="cocorico_user.first_name.invalid">
+                <jms:reference-file line="39">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.first_name.invalid</source>
+                <target>First name invalid</target>
+            </trans-unit>
+            <trans-unit id="c960bcfd83a148a8a67094c7a1c0a112b6102f41" resname="cocorico_user.first_name.long">
+                <source>cocorico_user.first_name.long</source>
+                <target>[-Inf,Inf]Your first name is too long</target>
+            </trans-unit>
+            <trans-unit id="a57fec2cd9d84477d181df2b00dfda56bf1b266e" resname="cocorico_user.first_name.short">
+                <source>cocorico_user.first_name.short</source>
+                <target>[-Inf,Inf]Your first name is too short</target>
+            </trans-unit>
+            <trans-unit id="9afdbe8ed34a8929c836382abf6b0b4ef75fb9a8" resname="cocorico_user.iban.blank">
+                <source>cocorico_user.iban.blank</source>
+                <target>IBAN required</target>
+            </trans-unit>
+            <trans-unit id="b39f04b201cf30f064e1726bcde8aa61fbfd2422" resname="cocorico_user.iban.invalid">
+                <source>cocorico_user.iban.invalid</source>
+                <target>This email IBAN not valid</target>
+            </trans-unit>
+            <trans-unit id="09c6d74c9313b0ab1056b88f1d17cd3a8ed201c5" resname="cocorico_user.last_name.blank">
+                <jms:reference-file line="21">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.last_name.blank</source>
+                <target>Please enter your last name</target>
+            </trans-unit>
+            <trans-unit id="d775e43f9a7ec33bf6c3702b1c3ef2944d5b0b90" resname="cocorico_user.last_name.invalid">
+                <jms:reference-file line="22">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.last_name.invalid</source>
+                <target>Last name invalid</target>
+            </trans-unit>
+            <trans-unit id="75c3ba06f411658aeb6d9f03385d716e335d9947" resname="cocorico_user.last_name.long">
+                <source>cocorico_user.last_name.long</source>
+                <target>[-Inf,Inf]Your last name is too long</target>
+            </trans-unit>
+            <trans-unit id="bca65e68f678c137e23d28b0edfb048c29f435eb" resname="cocorico_user.last_name.short">
+                <source>cocorico_user.last_name.short</source>
+                <target>[-Inf,Inf]Your last name is too short</target>
+            </trans-unit>
+            <trans-unit id="47d9e5bd309bf0991922d308c4a1d1be45aae547" resname="cocorico_user.motherTongue.blank">
+                <source>cocorico_user.motherTongue.blank</source>
+                <target>Mother tongue required</target>
+            </trans-unit>
+            <trans-unit id="0f2d86402d8a9d5e8fe265b62714c7e0eed2c6c8" resname="cocorico_user.plainPassword.first.blank">
+                <jms:reference-file line="117">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.plainPassword.first.blank</source>
+                <target>Password required</target>
+            </trans-unit>
+            <trans-unit id="524738120a2dc5410296f69a349f6352e49122b4" resname="cocorico_user.plainPassword.first.invalid">
+                <jms:reference-file line="85">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <jms:reference-file line="118">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.plainPassword.first.invalid</source>
+                <target>Password invalid</target>
+            </trans-unit>
+            <trans-unit id="c1c4aacc55ad92c8cc767e9aa99c6eb2cba3d779" resname="cocorico_user.plainPassword.second.blank">
+                <jms:reference-file line="134">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.plainPassword.second.blank</source>
+                <target>Password required</target>
+            </trans-unit>
+            <trans-unit id="22192abddfc401abebde09731ecd36e6bc65660d" resname="cocorico_user.plainPassword.second.invalid">
+                <jms:reference-file line="101">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <jms:reference-file line="135">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>cocorico_user.plainPassword.second.invalid</source>
+                <target>Password invalid</target>
+            </trans-unit>
+            <trans-unit id="b51c7f162e47525994805f406bbb5efe382b7364" resname="cocorico_user.username.long">
+                <source>cocorico_user.username.long</source>
+                <target>This username is too long</target>
+            </trans-unit>
+            <trans-unit id="3cfddbd1ba7dbabbe58193395bba68307766bc23" resname="cocorico_user.username.short">
+                <source>cocorico_user.username.short</source>
+                <target>This username is too short</target>
+            </trans-unit>
+            <trans-unit id="4d598603daef54411310cc13cf77cdd1f9517fd4" resname="entity.review.max_limit">
+                <source>entity.review.max_limit</source>
+                <target>entity.review.max_limit</target>
+            </trans-unit>
+            <trans-unit id="a2d958ae1e72ca2c89c6d24649b5bcaa5ceb70bc" resname="entity.review.min_limit">
+                <source>entity.review.min_limit</source>
+                <target>entity.review.min_limit</target>
+            </trans-unit>
+            <trans-unit id="1fc6f04358d09368be33f2235dff8b634592ca3e" resname="entity.review.unique_allowed">
+                <source>entity.review.unique_allowed</source>
+                <target>Maximum one review authorized</target>
+            </trans-unit>
+            <trans-unit id="f48ccf84018671218aac090abf90770212497b70" resname="fos_user.email.already_used">
+                <source>fos_user.email.already_used</source>
+                <target>This email is already used</target>
+            </trans-unit>
+            <trans-unit id="d0e28536be754aebc7ef73cdc6cf0d729311ce1d" resname="fos_user.email.blank">
+                <source>fos_user.email.blank</source>
+                <target>Please enter an email</target>
+            </trans-unit>
+            <trans-unit id="17a097b4a496b3378a290ea4f8a05bc2a7879142" resname="fos_user.email.invalid">
+                <source>fos_user.email.invalid</source>
+                <target>The email is not valid</target>
+            </trans-unit>
+            <trans-unit id="9760d0f9c28fee7f91e5cad9e282921b13cd2f0b" resname="fos_user.email.long">
+                <source>fos_user.email.long</source>
+                <target>[-Inf,Inf]The email is too long</target>
+            </trans-unit>
+            <trans-unit id="1a1b926521b2b3010b91de1787f9265b3d6a97ae" resname="fos_user.email.short">
+                <source>fos_user.email.short</source>
+                <target>[-Inf,Inf]The email is too short</target>
+            </trans-unit>
+            <trans-unit id="a5a6b14a2360fe5c9876c4f2746ce5eace79b37d" resname="fos_user.group.blank">
+                <source>fos_user.group.blank</source>
+                <target>fos_user.group.blank</target>
+            </trans-unit>
+            <trans-unit id="a85da9132715da5c672fe03d4cbb3f9ecbcfb115" resname="fos_user.group.long">
+                <source>fos_user.group.long</source>
+                <target>fos_user.group.long</target>
+            </trans-unit>
+            <trans-unit id="ca13a192c80234ef7ffc377e3a7f2926c9d6561b" resname="fos_user.group.short">
+                <source>fos_user.group.short</source>
+                <target>fos_user.group.short</target>
+            </trans-unit>
+            <trans-unit id="1df43a6e24af03c39d20b2f1f5cbefdef7b30416" resname="fos_user.password.blank">
+                <source>fos_user.password.blank</source>
+                <target>Please enter your password</target>
+            </trans-unit>
+            <trans-unit id="ce9dc38b0d001e3346c2c1d8202e01bdecb121ef" resname="fos_user.password.mismatch">
+                <jms:reference-file line="52">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="82">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <jms:reference-file line="31">Form/Type/ResettingFormType.php</jms:reference-file>
+                <jms:reference-file line="100">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
+                <jms:reference-file line="133">Frontend/Common/_register.html.twig</jms:reference-file>
+                <source>fos_user.password.mismatch</source>
+                <target>The entered passwords don't match</target>
+            </trans-unit>
+            <trans-unit id="4b3130df261ac66147653997d2d83952a330faac" resname="fos_user.password.short">
+                <source>fos_user.password.short</source>
+                <target>[-Inf,Inf]The password is too short</target>
+            </trans-unit>
+            <trans-unit id="77c8ec07f205976bbed1a3ce90fdc458891bb81d" resname="fos_user.username.already_used">
+                <source>fos_user.username.already_used</source>
+                <target>This username is already used</target>
+            </trans-unit>
+            <trans-unit id="312a20b0239a4236f4b08e4e0ed35153a03667d0" resname="fos_user.username.blank">
+                <source>fos_user.username.blank</source>
+                <target>Please enter your username</target>
+            </trans-unit>
+            <trans-unit id="56ef686ed0b86d02dd4077e0796a4f1e61377552" resname="fos_user.username.long">
+                <source>fos_user.username.long</source>
+                <target>[-Inf,Inf]The username is too long</target>
+            </trans-unit>
+            <trans-unit id="920e8d37f8a7c923ece7d123d55668ac522d612d" resname="fos_user.username.short">
+                <source>fos_user.username.short</source>
+                <target>[-Inf,Inf]The username is too short</target>
+            </trans-unit>
+            <trans-unit id="5dd9f9c8ecfe76cd6718dc81bd5fe38ab2f9be68" resname="geo.location.address_invalid">
+                <jms:reference-file line="56">Form/Type/GeocodingToCoordinateType.php</jms:reference-file>
+                <source>geo.location.address_invalid</source>
+                <target>Your address is invalid</target>
+            </trans-unit>
+            <trans-unit id="6ede248c553cabf3cb7d505b497c42cf990b29b9" resname="{{ limit }}cocorico_user.password.short">
+                <source>{{ limit }}cocorico_user.password.short</source>
+                <target>Your password must be at least {{ limit }} characters long</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

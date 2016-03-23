@@ -1,0 +1,423 @@
+<?php
+
+/*
+ * This file is part of the Cocorico package.
+ *
+ * (c) Cocolabs SAS <contact@cocolabs.io>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Cocorico\CoreBundle\Model\Manager;
+
+use Cocorico\CoreBundle\Document\ListingAvailability;
+use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Event\ListingSearchEvent;
+use Cocorico\CoreBundle\Event\ListingSearchEvents;
+use Cocorico\CoreBundle\Model\DateRange;
+use Cocorico\CoreBundle\Model\ListingSearchRequest;
+use Cocorico\CoreBundle\Model\PriceRange;
+use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
+use Cocorico\CoreBundle\Repository\ListingRepository;
+use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
+class ListingSearchManager
+{
+    protected $em;
+    protected $dm;
+    protected $endDayIncluded;
+    protected $timeUnit;
+    protected $timeUnitIsDay;
+    protected $maxPerPage;
+    protected $listingDefaultStatus;
+    protected $dispatcher;
+
+    /**
+     * @param EntityManager            $em
+     * @param DocumentManager          $dm
+     * @param boolean                  $endDayIncluded
+     * @param int                      $timeUnit
+     * @param int                      $maxPerPage
+     * @param int                      $listingDefaultStatus
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function __construct(
+        EntityManager $em,
+        DocumentManager $dm,
+        $endDayIncluded,
+        $timeUnit,
+        $maxPerPage,
+        $listingDefaultStatus,
+        EventDispatcherInterface $dispatcher
+    ) {
+        $this->em = $em;
+        $this->dm = $dm;
+        $this->endDayIncluded = $endDayIncluded;
+        $this->timeUnit = $timeUnit;
+        $this->maxPerPage = $maxPerPage;
+        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
+        $this->listingDefaultStatus = $listingDefaultStatus;
+        $this->dispatcher = $dispatcher;
+    }
+
+    /**
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param                      $locale
+     *
+     * @return Paginator|null
+     */
+    public function search(ListingSearchRequest $listingSearchRequest, $locale)
+    {
+        $searchLocation = $listingSearchRequest->getLocation();
+        $viewport = $searchLocation->getBound();
+
+        //Select
+        $queryBuilder = $this->getRepository()->getFindQueryBuilder();
+
+        //Select distance
+        $queryBuilder
+            ->addSelect('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) AS distance')
+            ->setParameter('lat', $searchLocation->getLat())
+            ->setParameter('lng', $searchLocation->getLng());
+
+        //Where
+        $queryBuilder
+            ->where('co.lat < :neLat ')
+            ->andWhere('co.lat > :swLat ')
+            ->andWhere('co.lng < :neLng ')
+            ->andWhere('co.lng > :swLng ')
+            ->andWhere('t.locale = :locale')
+            ->andWhere('cat.locale = :locale')
+            ->andWhere('l.status = :listingStatus')
+            ->setParameter('neLat', $viewport["ne"]["lat"])
+            ->setParameter('swLat', $viewport["sw"]["lat"])
+            ->setParameter('neLng', $viewport["ne"]["lng"])
+            ->setParameter('swLng', $viewport["sw"]["lng"])
+            ->setParameter('locale', $locale)
+            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED);
+
+
+        //Dates availabilities (from MongoDB)
+        $dateRange = $listingSearchRequest->getDateRange();
+        if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
+            if ($this->listingDefaultStatus == ListingAvailability::STATUS_AVAILABLE) {
+                //Get listings unavailable for searched dates
+                $listingsUnavailable = $this->getListingsAvailability(
+                    $dateRange,
+                    $listingSearchRequest->getTimeRange(),
+                    $listingSearchRequest->getFlexibility(),
+                    null,
+                    array(ListingAvailability::STATUS_UNAVAILABLE, ListingAvailability::STATUS_BOOKED)
+                );
+
+                if (count($listingsUnavailable)) {
+                    $queryBuilder
+                        ->andWhere('l.id NOT IN (:listingsUnavailable)')
+                        ->setParameter('listingsUnavailable', array_keys($listingsUnavailable));
+                }
+
+            } else {//By default listing are unavailable
+                //Get listings available for searched dates
+                $listingsAvailable = $this->getListingsAvailability(
+                    $dateRange,
+                    $listingSearchRequest->getTimeRange(),
+                    $listingSearchRequest->getFlexibility(),
+                    null,
+                    array(ListingAvailability::STATUS_AVAILABLE)
+                );
+
+                if (count($listingsAvailable)) {
+                    $queryBuilder
+                        ->andWhere('l.id IN (:listingsAvailable)')
+                        ->setParameter('listingsAvailable', array_keys($listingsAvailable));
+                } else {
+                    $queryBuilder
+                        ->andWhere('l.id IN (:listingsAvailable)')
+                        ->setParameter('listingsAvailable', array(0));
+                }
+            }
+
+            //Min/Max durations
+            $duration = false;
+            if ($this->timeUnitIsDay) {
+                $duration = $dateRange->getDuration($this->endDayIncluded);
+            } else {
+                $timeRange = $listingSearchRequest->getTimeRange();
+                if ($timeRange && $timeRange->getStart()->format('H:i') !== $timeRange->getEnd()->format('H:i')
+                    && ($timeRange->getStart()->format('H:i') != '00:00')
+                ) {
+                    $duration = $timeRange->getDuration($this->timeUnit);
+                }
+            }
+
+            if ($duration !== false) {
+                $queryBuilder
+                    ->andWhere(
+                        "(l.minDuration IS NULL OR  l.minDuration <= :duration ) AND (l.maxDuration IS NULL OR l.maxDuration >= :duration)"
+                    )
+                    ->setParameter('duration', $duration);
+            }
+
+        }
+
+        //Prices
+        $priceRange = $listingSearchRequest->getPriceRange();
+        if ($priceRange->getMin() && $priceRange->getMax()) {
+            $queryBuilder
+                ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
+                ->setParameter('minPrice', $priceRange->getMin())
+                ->setParameter('maxPrice', $priceRange->getMax());
+        }
+
+
+        //Categories
+        $categories = $listingSearchRequest->getCategories();
+        if (count($categories)) {
+            $queryBuilder
+                ->andWhere(":categories MEMBER OF l.categories")
+                ->setParameter("categories", $categories);
+        }
+
+        //Characteristics
+        $characteristics = $listingSearchRequest->getCharacteristics();
+        $characteristics = array_filter($characteristics);
+        if (count($characteristics)) {
+            $queryBuilderCharacteristics = $this->em->createQueryBuilder();
+            $queryBuilderCharacteristics
+                ->select('IDENTITY(c.listing)')
+                ->from('CocoricoCoreBundle:ListingListingCharacteristic', 'c');
+
+            foreach ($characteristics as $characteristicId => $characteristicValueId) {
+                $queryBuilderCharacteristics
+                    ->orWhere(
+                        "( c.listingCharacteristic = :characteristic$characteristicId AND c.listingCharacteristicValue = :value$characteristicId )"
+                    );
+
+                $queryBuilder
+                    ->setParameter("characteristic$characteristicId", $characteristicId)
+                    ->setParameter("value$characteristicId", intval($characteristicValueId));
+            }
+
+            $queryBuilderCharacteristics
+                ->groupBy('c.listing')
+                ->having("COUNT(c.listing) = :nbCharacteristics");
+
+            $queryBuilder
+                ->setParameter("nbCharacteristics", count($characteristics));
+
+            $queryBuilder
+                ->leftJoin('l.listingListingCharacteristics', 'llc')
+                ->andWhere(
+                    $queryBuilder->expr()->in(
+                        'l.id',
+                        $queryBuilderCharacteristics->getDQL()
+                    )
+                );
+        }
+
+        //Order
+        switch ($listingSearchRequest->getSortBy()) {
+            case 'price':
+                $queryBuilder->orderBy("l.price", "ASC");
+                break;
+            case 'distance':
+                $queryBuilder->orderBy("distance", "ASC");
+                break;
+            default:
+                $queryBuilder->addOrderBy("distance", "ASC");
+                break;
+        }
+        $queryBuilder->addOrderBy("l.averageRating", "DESC");
+        $queryBuilder->addOrderBy("l.adminNotation", "DESC");
+
+
+        $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
+        $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH, $event);
+        $queryBuilder = $event->getQueryBuilder();
+
+        //Pagination
+        if ($listingSearchRequest->getMaxPerPage()) {
+            $queryBuilder
+                ->setFirstResult(($listingSearchRequest->getPage() - 1) * $listingSearchRequest->getMaxPerPage())
+                ->setMaxResults($listingSearchRequest->getMaxPerPage());
+        }
+
+        //Query
+        $query = $queryBuilder->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+
+        return new Paginator($query);
+    }
+
+    /**
+     * Get listings availabilities
+     *
+     * @param DateRange          $dateRange
+     * @param  TimeRange|boolean $timeRange
+     * @param  int               $flexibility in number of days
+     * @param  PriceRange|null   $priceRange
+     * @param  array             $status
+     *
+     * @return int[] ListingId   array key = Id listing, value = number of times listing is available inside date ranges
+     */
+    public function getListingsAvailability(
+        DateRange $dateRange,
+        $timeRange,
+        $flexibility,
+        $priceRange = null,
+        $status
+    ) {
+        $daysFlexibility = $flexibility ? $flexibility : 0;
+
+        //Create first date range from flexibility days
+        $now = date('Ymd');
+        $newStart = new \DateTime($dateRange->getStart()->format('Y-m-d'));
+        $newStart->sub(new \DateInterval('P' . $daysFlexibility . 'D'));
+
+        if ($this->endDayIncluded) {
+            $newEnd = new \DateTime($dateRange->getEnd()->format('Y-m-d H:i'));
+        } else {
+            $newEnd = new \DateTime($dateRange->getEnd()->format('Y-m-d'));
+        }
+        $newEnd->sub(new \DateInterval('P' . $daysFlexibility . 'D'));
+        $newDateRange = new DateRange(
+            $newStart,
+            $newEnd
+        );
+
+        /** @var ListingAvailabilityRepository $listingAvailabilityRepository */
+        $listingAvailabilityRepository = $this->dm->getRepository("CocoricoCoreBundle:ListingAvailability");
+        $listings = array();
+        $nbDateRanges = 0;
+
+        //Verify if there are listings (un)available for all range dates defined by flexibility days
+        for ($i = 0; $i <= $daysFlexibility * 2; $i++) {
+            //Only for date range greater than or equal to today
+            if ($newStart->format('Ymd') >= $now) {
+                $nbDateRanges++;
+                $listingsTmp =
+                    $listingAvailabilityRepository->getAvailabilitiesByDateTimeRangeAndStatusAndPrice(
+                        $newDateRange,
+                        $timeRange,
+                        $status,
+                        $priceRange,
+                        $this->timeUnitIsDay
+                    );
+
+//                echo "<br />" . $newStart->format('Y-m-d') . "/" . $newEnd->format('Y-m-d') . ":";
+//               print_r($listingsTmp);
+
+                /**
+                 * All listings are (un)available for this date:
+                 *
+                 * If listing availability status searched is "unavailable" and default listings availability is "available" then
+                 *  No listings unavailable for this date means all listing are available for this date
+                 *  This condition is enough to return empty array meaning all listing are available for at least one date range
+                 * Else if status searched is "available" and default listings availability is "unavailable" then
+                 *  No listing available for this date and the search continue for next dates range
+                 */
+                if (!count($listingsTmp)) {
+                    if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+                        $listings = array();
+                        break;
+                    }
+                } else {//Merge all (un)available listings.
+                    $listings = array_merge($listings, $listingsTmp);
+                }
+            }
+
+            //Next date range
+            $newDateRange = new DateRange(
+                $newStart->add(new \DateInterval('P1D')),
+                $newEnd->add(new \DateInterval('P1D'))
+            );
+        }
+
+        //Count number of unavailability by listing
+        $listings = array_count_values($listings);
+
+        if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+            //Get listings unavailable for all dates ranges
+            $listings = array_diff($listings, range(0, ($nbDateRanges - 1)));
+        } else {
+            //Get listings available for one of the dates ranges. $listings already contains them
+        }
+
+        return $listings;
+    }
+
+
+    /**
+     * getListingsByIds returns the listings, depending upon ids provided
+     *
+     * @param        ids array $ids
+     * @param        ids array $page
+     * @param string $locale
+     * @param array  $idsExcluded
+     * @param int    $maxPerPage
+     *
+     * @return Paginator|null
+     */
+    public function getListingsByIds($ids, $page, $locale, array $idsExcluded = array(), $maxPerPage = null)
+    {
+        // Remove the current listing id from the similar listings
+        $ids = array_diff($ids, $idsExcluded);
+
+        $queryBuilder = $this->getRepository()->getFindQueryBuilder();
+
+        //Where
+        $queryBuilder
+            ->where('t.locale = :locale')
+            ->andWhere('cat.locale = :locale')
+            ->andWhere('l.status = :listingStatus')
+            ->andWhere('l.id IN (:ids)')
+//            ->andWhere('lct.locale = :locale')
+//            ->andWhere('lcgt.locale = :locale')
+//            ->andWhere('lcvt.locale = :locale')
+            ->setParameter('locale', $locale)
+            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED)
+            ->setParameter('ids', $ids);
+
+
+        if ($maxPerPage === null) {
+            //Pagination
+            if ($page) {
+                $queryBuilder->setFirstResult(($page - 1) * $this->maxPerPage);
+            }
+
+            $queryBuilder->setMaxResults($this->maxPerPage);
+        }
+
+        //Query
+        $query = $queryBuilder->getQuery();
+
+        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+
+        return new Paginator($query);
+    }
+
+    /**
+     * @return int
+     */
+    public function getListingDefaultStatus()
+    {
+        return $this->listingDefaultStatus;
+    }
+
+
+    /**
+     *
+     * @return ListingRepository
+     */
+    public function getRepository()
+    {
+        return $this->em->getRepository('CocoricoCoreBundle:Listing');
+    }
+
+}

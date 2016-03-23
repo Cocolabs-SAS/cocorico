@@ -1,0 +1,28 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'profile' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <!-- maparea -->
+    <div role="tabpanel" class="tab-pane active clearfix" id="properties">
+        <div role="tabpanel">
+
+            {% block nav_side_dashboard -%}
+                {% include '@CocoricoUser/Dashboard/Profile/_nav_side.html.twig' with {
+                'nav_side_dashboard_current': nav_side_dashboard_current
+                } only %}
+            {%- endblock %}
+
+            {#{% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}#}
+
+            {% block content_dashboard %}{%- endblock %}
+        </div>
+    </div>
+
+{% endblock %}

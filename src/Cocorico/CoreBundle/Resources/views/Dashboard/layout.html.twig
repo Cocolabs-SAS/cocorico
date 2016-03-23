@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{% block layout %}
+
+    {% include '@CocoricoCore/Frontend/Common/_header.html.twig' only %}
+
+    <!-- contain main informative part of the site -->
+    <main id="main" role="main">
+        <div class="container">
+            <div class="row">
+
+                <h1 class="hidden">main heading text</h1>
+                <!-- breadcrumbs -->
+                {{ render(
+                controller(
+                'CocoricoBreadcrumbBundle:Breadcrumbs:breadcrumb',
+                { routeName: app.request.attributes.get('_route') }
+                )
+                ) }}
+
+                <!-- main-tabs -->
+                <div class="main-tabs col-xs-12">
+                    <!-- tabs -->
+                    <div role="tabpanel">
+                        <!-- form-switchers -->
+                        {{ render(controller("CocoricoUserBundle:Dashboard/Profile:profileSwitch")) }}
+
+                        {% block nav_dashboard -%}
+                            {% include 'CocoricoCoreBundle:Dashboard/Common:_nav.html.twig' with {
+                            'nav_dashboard_current': nav_dashboard_current
+                            } only %}
+                        {%- endblock %}
+
+                        <div class="tab-content">
+                            {% block main_dashboard %}
+
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {#popin#}
+        {% block modal %}{% endblock %}
+    </main>
+
+    {% include '@CocoricoCore/Frontend/Common/_footer.html.twig' only %}
+
+{% endblock %}
+

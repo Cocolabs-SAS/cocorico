@@ -1,0 +1,74 @@
+{% block a2lix_translations_widget %}
+    <div role="tabpanel">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+                {#to manage multiple tabset in same page#}
+                {% set tab_link =  (translationsFields|first).vars.id ~ "-" ~ locale %}
+
+                <li role="presentation" {% if app.request.locale == locale %}class="active"{% endif %}>
+                    <a href="#{{ tab_link }}" data-toggle="tab" data-text="{{ locale }}">
+                        {{ locale|capitalize }}
+                        {#{% if form.vars.default_locale == locale %}[Default]{% endif %}#}
+                        {% if translationsFields.vars.required %}*{% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+                {#to manage multiple tabset in same page#}
+                {% set tab_link =  (translationsFields|first).vars.id ~ "-" ~ locale %}
+
+                <div role="tabpanel" class="tab-pane {% if app.request.locale == locale %}active{% endif %}"
+                     id="{{ tab_link }}">
+
+                    {#{{ form_errors(translationsFields) }}#}
+                    {% for translationsField in translationsFields %}
+                        {% set type = translationsField.vars.block_prefixes %}
+                        {% set placeholderTxt = '' %}
+                        {% if 'listing_options_' not in translationsField.vars.id %}
+                            {% set placeholderTxt = translationsField.vars.id ~ '_placeholder' %}
+                        {% endif %}
+
+                        {% if "hidden" not in type %}
+                            <div class="field-row">
+                                {{ form_errors(translationsField) }}
+                                {% if "textarea" not in type %}
+                                    <span class="label">{{ form_label(translationsField) }}</span>
+                                    <div class="field-holder">
+                                        {{ form_widget(translationsField, {
+                                            'attr': {
+                                                'class': 'form-control',
+                                                'placeholder': placeholderTxt|trans({}, 'cocorico_listing')
+                                            }
+                                        }) }}
+                                    </div>
+                                {% else %}
+                                    <span class="label block">{{ form_label(translationsField) }}</span>
+                                    <div class="thin-scroll">
+                                        {{ form_widget(translationsField, {
+                                            'attr': {
+                                                'class': 'form-control',
+                                                'placeholder': placeholderTxt|trans({}, 'cocorico_listing')
+                                            }
+                                        }) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block a2lix_translationsForms_widget %}
+    {{ block('a2lix_translations_widget') }}
+{% endblock %}

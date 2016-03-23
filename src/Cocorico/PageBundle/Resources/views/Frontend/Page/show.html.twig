@@ -1,0 +1,21 @@
+{% extends '::base.html.twig' %}
+
+{% if page %}
+    {% set translation = page.translations[app.request.locale] %}
+    {% block meta_title %} {{ translation.metaTitle }} {% endblock meta_title %}
+    {% block meta_description %} {{ translation.metaDescription }} {% endblock meta_description %}
+{% endif %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% block main %}
+            <div class="min-height">
+                {% if page %}
+                    <h1>{{ translation.title }}</h1>
+                    <p>{{ translation.description | raw }}</p>
+                {% endif %}
+            </div>
+        {% endblock main %}
+    {% endembed %}
+{% endblock layout %}
+

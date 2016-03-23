@@ -1,0 +1,111 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'listings' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <!-- alert -->
+    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    <!-- maparea -->
+    <div role="tabpanel" class="tab-pane active" id="properties">
+        <div class="listing-area">
+            <div class="listing-holder row">
+                <h1 class="hidden">{{ 'listing.index.title'|trans }}</h1>
+                <!-- post -->
+                {% for listing in listings.iterator %}
+                    {% set translation = listing.translations[app.request.locale] %}
+                    {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+                    {% set image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+                    <article class="listing-post col-sm-6 col-xs-12">
+                        <a href="javascript:void(0)" class="listing-box">
+                            <div class="frame same-height-left">
+                                <div class="post-info">
+                                    <div class="img-holder">
+                                        <img src="{{ asset((ListingImageConstants.IMAGE_FOLDER ~ image) | imagine_filter('listing_xlarge')) }}"
+                                             alt="{{ translation.title ~ " " ~ price }}"/>
+                                    </div>
+                                    <div class="box">
+                                        <div class="box-holder">
+                                            <div class="foot">
+                                                <div class="time-price">
+                                                    <strong class="price">
+                                                        {{ price }}
+                                                        <sup>
+                                                            <small>
+                                                                {{ vatInclusionText(app.request.getLocale()) }}
+                                                            </small>
+                                                        </sup>
+                                                    </strong>
+
+                                                    <p>
+                                                        {{ 'listing_edit.form.price'|trans }}
+                                                        {{ 0|add_time_unit_text }}
+                                                    </p>
+                                                </div>
+                                                <div class="area">
+                                                    <h2>{{ translation.title }}</h2>
+
+                                                    <div class="area">
+                                                        {% if  listing.certified %}
+                                                            <span class="certified">
+                                                                <i class="icon-ok"></i>
+                                                                {{ 'listing.edit.index.certified'|trans }}
+                                                            </span>
+                                                        {% endif %}
+
+                                                        {% if listing.averageRating %}
+                                                            {{ listing.averageRating | cocorico_star_rating }}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </a>
+
+                        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:statusIndexForm', {'listing': listing})) }}
+                    </article>
+                {% endfor %}
+            </div>
+
+            {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+            'pagination': pagination
+            } only %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block modal %}
+    {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% set modalMessage = 'listing.edit.duplicate.modal.message'|trans %}
+
+    <script>
+        $(function () {
+            //Disable duplicate button when click on it
+            $("[data-id=duplicate]").on('click', function (e) {
+                var modal = $("#modal");
+                modal.find('.modal-body .title').html('{{ modalMessage }}');
+                modal.find('.close').remove();
+                modal.find('.modal-footer').html('<img src="{{ asset('images/loading.gif') }}" />');
+                modal.modal('show');
+//                e.preventDefault();
+            });
+        });
+    </script>
+{% endblock %}

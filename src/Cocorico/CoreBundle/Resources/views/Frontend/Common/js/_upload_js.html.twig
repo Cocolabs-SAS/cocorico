@@ -1,0 +1,201 @@
+{#Jquery files uploads and sortable management#}
+
+{% javascripts
+'js/vendor/jqfileupload/tmpl.min.js'
+'js/vendor/jqfileupload/load-image.all.min.js'
+'js/vendor/jqfileupload/canvas-to-blob.min.js'
+'js/vendor/jqfileupload/jquery.iframe-transport.js'
+'js/vendor/jqfileupload/jquery.fileupload.js'
+'js/vendor/jqfileupload/jquery.fileupload-process.js'
+'js/vendor/jqfileupload/jquery.fileupload-image.js'
+'js/vendor/jqfileupload/jquery.fileupload-validate.js'
+
+output='js/compiled/upload.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<script>
+    $(function () {
+        'use strict';
+        var $uploadElt = $("{{ upload_elt }}"),
+                $form = $uploadElt.closest("form"),
+                $images = $("{{ upload_images }}"), //Hidden field to memorize uploaded files
+                filesToUpload = [], //Files to upload
+                fileId = 0; //Id of files in the list. Used to order
+
+        if ($uploadElt.length && $form.length) {
+            $uploadElt.fileupload({
+                url: '{{ upload_url }}',
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: {{ listing_img_max_upload_size }}000000, // MB
+                maxNumberOfFiles: {{ upload_max }},
+                // Enable image resizing, except for Android and Opera
+                disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
+                previewMaxWidth: {{ upload_image_w }},
+                previewMaxHeight: {{ upload_image_h }},
+                previewCrop: true,
+                dropZone: $("#drop-zone")
+            }).on('fileuploadadd', function (e, data) {//Images added
+                uploadAdd(data);
+            }).on('fileuploadprocessalways', function (e, data) {
+                uploadAlways(data);
+            }).on('fileuploadprogressall', function (e, data) {
+                uploadProgress(data);
+            }).on('fileuploaddone', function (e, data) {//Image uploaded
+                uploadDone(data);
+            }).on('fileuploadfail', function (e, data) {
+                uploadFail(data);
+            }).on('fileuploadstop', function (e) {
+            }).on('fileuploadsend', function (e, data) {
+            }).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+
+            //Upload files in the right order
+            $form.find("[type=submit]").click(function (e) {
+                var $parent = $(this).parent('div');
+                if (!$parent.find('img.loading').length) {
+                    $parent.prepend('<img class="loading" src="{{ asset('images/loading.gif') }}" /><br>');
+                }
+                var $filesLI = $("ul#files-to-upload li");
+                var nbFilesToUpload = $filesLI.length; //filesToUpload.length;
+                var nbFilesUploaded = 0;
+                var orderedUploadedFiles = [];
+
+                if (nbFilesToUpload) {
+                    $filesLI.each(function (index, element) {
+                        var jqXHR = $("{{ upload_elt }}").fileupload('send', {
+                            files: filesToUpload[$(this).attr("data-id")],
+                            filePosition: index
+                        }).success(function (result, textStatus, jqXHR) {
+                            //Populate in the right order the images to upload for new entity
+                            orderedUploadedFiles[this.filePosition] = result.files[0].name;
+                        }).error(function (jqXHR, textStatus, errorThrown) {
+                            //  console.log("error");
+                        }).complete(function (result, textStatus, jqXHR) {
+                            nbFilesUploaded++;
+                            //Submit form if all images are uploaded
+                            if (nbFilesUploaded == nbFilesToUpload) {
+                                $images.val(orderedUploadedFiles.toString());
+                                $form.submit();
+                            }
+                        });
+                    });
+                } else {
+                    $form.submit();
+                }
+                return false;
+            });
+
+            //Sortable
+            $("#files-to-upload, #files-uploaded").sortable();
+
+            //Reordering sortable images
+            var collectionElt = $(".collection.files-list");
+
+            collectionElt.sortable({
+                stop: function (event, ui) {
+                    orderPositions();
+                }
+            });
+            //Order images positions on load
+            orderPositions();
+
+            //Order images positions on submit
+            collectionElt.closest("form").submit(function (e) {
+                orderPositions();
+            });
+            //End
+        }
+
+
+        function uploadDone(data) {
+            //@todo: handle upload error
+            $.each(data.result.files, function (index, file) {
+                if (file.error) {
+                    var error = $('<span class="error"/>').text(file.error);
+                }
+            });
+        }
+
+        function uploadProgress(data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('.progress-bar').css(
+                    'width',
+                    progress + '%'
+            );
+        }
+
+        function uploadAlways(data) {
+            if (data.context) {
+                var index = data.index,
+                        file = data.files[index],
+                        node = $(data.context.children()[index]);
+                if (file.preview) {
+                    node.prepend(file.preview);
+                }
+                if (file.error) {
+                    node.append('<br>').append($('<span class="error"/>').text(file.error));
+                }
+            }
+        }
+
+        function uploadFail(data) {
+            $.each(data.files, function (index) {
+                if (data.context) {
+                    var error = $('<span class="error"/>').text('File upload failed.');
+                    $(data.context.children()[index])
+                            .append('<br>')
+                            .append(error);
+                }
+            });
+        }
+
+        function uploadAdd(data) {
+            {#console.log({{ upload_max }} - $(".files-list .img-thumbnail").length);#}
+            {#console.log(data.files.length);#}
+
+            var maxFiles = {{ upload_max }} -$(".files-list .img-thumbnail").length;
+
+            if (data.files.length > maxFiles || fileId >= maxFiles) {
+                var error = '<div class="errors"><i class="icon-error-field"></i>' +
+                        '{{ "listing_images.max {{ max_images }}"|trans({"{{ max_images }}": listing_img_max}, 'cocorico_listing') }}' +
+                        '<br></div></div>';
+
+                $("#images-new").prepend(error);
+
+                return false;
+            }
+
+            data.context = $('<li data-id="' + fileId + '"/>').appendTo("#files-to-upload");
+            fileId++;
+
+            $.each(data.files, function (index, file) {
+                var node = $('<div />');
+                node.appendTo(data.context);
+
+                var cancelLink = $('<a class="cancel-upload" href="javascript:void(0)">' +
+                '<span>{{ 'listing.images.cancel.link'|trans({},'cocorico_listing') }}</span>' +
+                '</a>');
+
+                cancelLink.appendTo(data.context);
+                //Add files to upload when form is submitted
+                filesToUpload.push(file);
+            });
+
+            $(".cancel-upload").click(function (e) {
+                $(this).parent().remove();
+                fileId--;
+            });
+        }
+
+
+        function orderPositions() {
+            collectionElt.find(".img-thumbnail").each(function (index, element) {
+                $(this).find(".sort-position").first().val(index + 1);
+            });
+        }
+    });
+
+</script>

@@ -1,0 +1,95 @@
+{% trans_default_domain 'cocorico' %}
+
+{%- if app.session.get('profile') == 'offerer' -%}
+    {%- set menuItems = {
+    "messages": {
+    "link": path('cocorico_dashboard_message'),
+    "text": 'nav.dashboard.messages.link'|trans,
+    "ariaControls": "messaging",
+    "dataText": "Messagerie"
+    },
+    "bookings": {
+    "link": path('cocorico_dashboard_booking_offerer'),
+    "text": 'nav.dashboard.bookings.link'|trans,
+    "ariaControls": "reservations",
+    "dataText": "Mes reservations"
+    },
+    "listings": {
+    "link": path('cocorico_dashboard_listing'),
+    "text": 'nav.dashboard.listings.link'|trans,
+    "ariaControls": "properties",
+    "dataText": "Mes annonces"
+    },
+    "payments": {
+    "link": path('cocorico_dashboard_booking_bank_wire_offerer'),
+    "text": 'nav.dashboard.payments.link'|trans,
+    "ariaControls": "payments",
+    "dataText": "Mes paiements"
+    },
+    "comments": {
+    "link": path('cocorico_dashboard_reviews_received'),
+    "text": 'nav.dashboard.comments.link'|trans,
+    "ariaControls": "comments",
+    "dataText": "Commentaires"
+    },
+    "profile": {
+    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+    "text": 'nav.dashboard.profile.link'|trans,
+    "ariaControls": "profile",
+    "dataText": "Mon profil"
+    }
+    } -%}
+{%- else -%}
+    {%- set menuItems = {
+    "messages": {
+    "link": path('cocorico_dashboard_message'),
+    "text": 'nav.dashboard.messages.link'|trans,
+    "ariaControls": "messaging",
+    "dataText": "Messagerie"
+    },
+    "bookings": {
+    "link": path('cocorico_dashboard_booking_asker'),
+    "text": 'nav.dashboard.bookings.link'|trans,
+    "ariaControls": "reservations",
+    "dataText": "Mes reservations"
+    },
+    "payments": {
+    "link": path('cocorico_dashboard_booking_payin_asker'),
+    "text": 'nav.dashboard.payments.link'|trans,
+    "ariaControls": "payments",
+    "dataText": "Mes paiements"
+    },
+    "comments": {
+    "link": path('cocorico_dashboard_reviews_received'),
+    "text": 'nav.dashboard.comments.link'|trans,
+    "ariaControls": "comments",
+    "dataText": "Commentaires"
+    },
+    "profile": {
+    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+    "text": 'nav.dashboard.profile.link'|trans,
+    "ariaControls": "profile",
+    "dataText": "Mon profil"
+    }
+    } -%}
+{%- endif -%}
+
+{%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
+    <!-- Nav tabs -->
+    <nav class="tabset-holder">
+        <a href="#" class="opener">
+            <span class="hidden">opener</span>
+            <i class="icon-down-open-mini"></i>
+        </a>
+        <ul class="nav nav-tabs" role="tablist">
+            {% for name,menu in menuItems %}
+                <li role="presentation" class="{{ nav_dashboard_current == name ? 'active' : '' }}">
+                    <a href="{{ menu.link }}" aria-controls="{{ menu.ariaControls }}" role="tab"
+                       data-text="{{ menu.dataText }}">
+                        {{ menu.text }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </nav>
+{%- endif -%}

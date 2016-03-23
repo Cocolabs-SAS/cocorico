@@ -1,0 +1,187 @@
+{% extends '@CocoricoUser/Dashboard/Profile/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_user' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style type="text/css">
+        .jcf-option::first-letter, .jcf-select-text::first-letter {
+            text-transform: capitalize;
+        }
+    </style>
+{% endblock %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'about_me' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <!-- form-area -->
+    <form class="form-area" action="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}"
+          method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            <legend class="hidden">legend</legend>
+            <!-- alert -->
+            {% include '@CocoricoUser/Dashboard/Profile/_completion_notice.html.twig' only %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            {{ form_errors(form) }}
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- tab about-me -->
+                <div id="about" class="tab-pane active" role="tabpanel">
+
+                    <!-- form-holder -->
+                    <div class="form-holder columns-holder alt">
+
+                        <h2>{{ 'user.about.title'|trans }}</h2>
+                        <!-- about-info -->
+                        <div class="about-info">
+                            <div id="images-new" class="column">
+                                {{ form_errors(form.image.new) }}
+                                <div class="image-upload-holder">
+                                    {% set image_user = user.images|length > 0 and user.images.get(0) ? user.images.get(0).name : UserImageConstants.IMAGE_DEFAULT %}
+                                    <div class="img-holder files">
+                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_small') }}"/>
+                                    </div>
+                                    {{ form_widget(form.image.new ) }}
+                                </div>
+
+                                {{ form_errors(form.image.uploaded) }}
+                                {{ form_widget(form.image.uploaded ) }}
+
+                                <div id="drop-zone">
+                                    {{ 'profile.drop.files'|trans }}
+                                </div>
+
+                                <div id="progress" class="progress">
+                                    <div class="progress-bar progress-bar-success"></div>
+                                </div>
+
+                                <h3>{{ 'profile.images.to_upload.title'|trans }}</h3>
+                                <ul id="files-to-upload" class="images-list"></ul>
+
+
+                                <div class="files-list">
+                                    {{ form_errors(form.images) }}
+                                    {{ form_widget(form.images ) }}
+                                </div>
+                            </div>
+
+                            <div class="column">
+                                <h3>{{ 'profile.languages.title'|trans }}</h3>
+
+                                <div class="field-row from">
+                                    <span class="label">{{ form_label(form.motherTongue) }}:</span>
+                                    <div class="select-holder">
+                                        {{ form_widget(form.motherTongue) }}
+                                    </div>
+                                </div>
+
+                                <div class="languages-block">
+                                    <div class="field-holder language">
+                                        <span class="label">
+                                            <label for="language">{{ form_label(form.language) }}:</label>
+                                        </span>
+                                        <div class="field-holder">
+                                            <div class="select-holder">
+                                                {{ form_widget(form.language) }}
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-default btn-add">
+                                            {{ 'profile.languages.add'|trans }}
+                                        </button>
+                                    </div>
+
+                                    <ul class="list-inline btns-list languages"
+                                        data-prototype="{{ form_widget(form.languages.vars.prototype)|e }}">
+                                        {% if form.languages %}
+                                            {% for language in form.languages %}
+                                                <li>
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <i class="icon-cancel"></i>
+                                                        <span class="hidden">close</span>
+                                                    </a>
+                                                    <a href="#" class="btn btn-default">
+                                                        {{ language.code.vars.value | language_name(app.request.locale) }}
+                                                    </a>
+                                                    {{ form_row(language) }}
+                                                </li>
+                                            {% endfor %}
+                                        {% else %}
+                                            {{ form_row(languages) }}
+                                        {% endif %}
+                                    </ul>
+
+                                </div>
+
+                                <div class="message-area">
+                                    <h3>{{ 'profile.moreinfo.title'|trans }}</h3>
+
+                                    <div class="thin-scroll">
+                                        {# For html customizations see views\form\translations.html.twig #}
+                                        {{ form_widget(form.translations,{
+                                            'attr': {
+                                                'title': "english language"
+                                            }
+                                        }) }}
+                                    </div>
+
+                                    {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' only %}
+
+                                    <div class="field-row about-translate" align="center">
+                                        <div class="from-lang">
+                                            <span class="label">{{ form_label(form.fromLang) }} :</span>
+                                            <div class="select-holder">
+                                                <div>{{ form_widget(form.fromLang) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-row about-translate" align="center">
+                                        <div class="to-lang">
+                                            <span class="label">{{ form_label(form.toLang) }} :</span>
+                                            <div class="select-holder">
+                                                <div>{{ form_widget(form.toLang) }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field-row about-translate" align="center">
+                                        <a id="btn-translate" href="#" class="btn btn-default">
+                                            <span>{{ 'user.translate.button'|trans }}</span>
+                                        </a>
+                                    </div>
+
+                                    {{ form_rest(form) }}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="btn-block text-center">
+                        <button type="submit" class="btn btn-default">{{ 'profile.edit.submit'|trans }}</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+{%- endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Files upload#}
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_js.html.twig' with {
+    'upload_elt': '#user_image_new',
+    'upload_images': '#user_image_uploaded',
+    'upload_url': oneup_uploader_endpoint('user_images') ~ "?user_id=" ~ app.user.id ,
+    'upload_max': user_img_max,
+    } only %}
+
+    {% include '@CocoricoUser/Dashboard/Profile/js/_translator_js.html.twig' only %}
+
+{% endblock %}

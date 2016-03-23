@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            <div class="col-xs-12">
+                <h1>{{ 'user.request.h1'|trans }}</h1>
+
+                <div class="alert alert-success-new">
+                    <i class="ico icon-success">&nbsp;</i>
+
+                    <p>
+                        {{ 'user.reset.success'|trans|upper }}! {{ 'resetting.check_email'|trans({'%email%': email}) }}
+                    </p>
+                </div>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

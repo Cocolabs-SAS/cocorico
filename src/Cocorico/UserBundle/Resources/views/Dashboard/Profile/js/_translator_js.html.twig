@@ -1,0 +1,39 @@
+<script>
+    $(function () {
+        $("#btn-translate").bind('click', function (e) {
+            e.preventDefault();
+            var from = $('#user_fromLang').val();
+            var to = $('#user_toLang').val();
+            var text = $('#user_translations_' + from + '_description').val();
+            //var textData[0] = "[" + "\"" + (text) + "\"" + "]";
+            //var textData = "[" + "\"" + (text) + "\"" + "]";
+            var textData = [];
+            textData[0] = text;
+            if (to == from || (textData[0] == '')) {
+                $("#error").show();
+                $("#success").hide();
+                return false;
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ path('cocorico_language_translate') }}",
+                data: {from: from, to: to, textData: textData},
+                success: function (translateData) {
+                    var result = $.parseJSON(translateData);
+                    if (result.textData[0] == '') {
+                        $("#error").show();
+                        $("#success").hide();
+                    }
+                    else {
+                        $("#success").show();
+                        $("#error").hide();
+                        $(".same-height-right").css('height', '831px');
+                        $('#user_translations_' + to + '_description').val(result.textData[0]);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>

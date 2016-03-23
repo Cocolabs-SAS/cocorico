@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--@formatter:off-->
+    <parameters>
+         <parameter key="cocorico_user.login.form.class">Cocorico\UserBundle\Form\Type\LoginFormType</parameter>
+    </parameters>
+    <!--@formatter:on-->
+
+    <services>
+        <service id="cocorico_user.login.form.type" class="%cocorico_user.login.form.class%">
+            <tag name="form.type" alias="user_login"/>
+            <!--<argument>%fos_user.model.user.class%</argument>-->
+            <!--<argument type="service" id="fos_user.user_manager"/>-->
+            <!--<argument type="service" id="fos_user.security.login_manager"/>-->
+            <!--<argument>%fos_user.firewall_name%</argument>-->
+        </service>
+    </services>
+
+</container>

@@ -1,0 +1,33 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'payment_error_offerer.email.subject'|trans({'%booking_uid%': booking.id}, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ 'payment_error_offerer.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%asker_name%': asker.name,
+        '%booking_request_url%': booking_request_url
+    }, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ 'payment_error_offerer.email.message'|trans({
+                '%firstname%': user.firstName,
+                '%asker_name%': asker.name,
+                '%booking_request_url%': booking_request_url
+            }, 'cocorico_mail', user_locale)|raw|nl2br }}
+            {% endautoescape %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

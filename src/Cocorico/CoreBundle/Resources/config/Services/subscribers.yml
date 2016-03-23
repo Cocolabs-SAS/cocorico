@@ -1,0 +1,25 @@
+services:
+    #Booking Refund subscriber
+    cocorico.booking_payin_refund.subscriber:
+        class: Cocorico\CoreBundle\Event\BookingPayinRefundSubscriber
+        arguments:
+            - "@cocorico.booking_payin_refund.manager"
+        tags:
+            - { name: kernel.event_subscriber}
+
+    #Booking Validate subscriber
+    cocorico.booking_validate.subscriber:
+        class: Cocorico\CoreBundle\Event\BookingValidateSubscriber
+        arguments:
+            - "@cocorico.booking_bank_wire.manager"
+        tags:
+            - { name: kernel.event_subscriber}
+
+    #BookingBankWire  subscriber
+    cocorico.booking_bank_wire.subscriber:
+        class: Cocorico\CoreBundle\Event\BookingBankWireSubscriber
+        arguments:
+            - "@cocorico.booking_bank_wire.manager"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber}

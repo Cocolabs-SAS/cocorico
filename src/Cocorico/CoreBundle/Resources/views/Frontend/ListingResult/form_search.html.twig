@@ -1,0 +1,58 @@
+{% extends "@CocoricoCore/Frontend/Common/form_search.html.twig" %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+ {% block form_search_filters %}
+     <div class="sub-holder" id="search-container">
+         <!-- range-area -->
+         <div class="range-area">
+             <!-- range-holder -->
+             {{ form_widget(form.price_range) }}
+         </div>
+
+         <div class="selection-holder">
+             <div id="characteristics" class="select-holder">
+                 {{ form_errors(form.characteristics) }}
+                 {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
+                 <!--@formatter:off-->
+                 {% for characteristic in form.characteristics %}
+                     {% set listingCharacteristicGroup =  characteristic.vars.label_attr["group"] %}
+                     {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
+                         {% if previousListingCharacteristicGroup %}
+                             {{ "</ul>" }}
+                         {% endif %}
+                         {#<strong>{{ listingCharacteristicGroup }}</strong><br />#}
+                         {{ '<ul class="list-unstyled">' }}
+                     {% endif %}
+                     <li class="field-row">
+                         {#<span class="label">{{ form_label(characteristic) }}</span>#}
+                         <div class="select-holder">
+                             {{ form_widget(characteristic, {
+                                 'attr': {
+                                     'class': "form-control"
+                                 },
+                                 'empty_value': characteristic.vars.label
+                             }) }}
+                         </div>
+                     </li>
+                     {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
+                 {% endfor %}
+                 <!--@formatter:on-->
+             </div>
+
+
+             <div class="select-holder">
+                 {{ form_widget(form.sort_by) }}
+             </div>
+
+             {% if bundleExist('CocoricoListingAlertBundle') %}
+                 <div class="listing-alert">
+                     <a href="{{ path('cocorico_listing_alert_new') }}" data-id="listing-alert" class="btn btn-default">
+                         {{ "listing.search.result.alert.link"|trans }}
+                     </a>
+                 </div>
+                 <div data-id="listing-alert-dialog"></div>
+             {% endif %}
+         </div>
+     </div>
+ {% endblock %}

@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+#Update application
+#Usage: ./bin/update-app --env=staging
+
+PHP_CMD="php"
+
+"$PHP_CMD" composer.phar install --prefer-dist -vvv
+"$PHP_CMD" app/console doctrine:schema:update --force "$@"
+"$PHP_CMD" app/console cache:clear "$@"
+"$PHP_CMD" app/console assets:install --symlink web "$@"
+"$PHP_CMD" app/console assetic:dump "$@"

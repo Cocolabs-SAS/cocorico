@@ -1,0 +1,103 @@
+{% extends 'CocoricoCoreBundle:Dashboard:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'bookings' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block main_dashboard -%}
+    <!-- alert -->
+    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+    <div role="tabpanel" class="tab-pane active" id="messaging">
+
+        <!-- postarea -->
+        <section class="postarea alt3">
+            <div class="posts-holder">
+                {% include '@CocoricoCore/Dashboard/Booking/_booking_show.html.twig' with {
+                'booking': booking,
+                'other_user': other_user,
+                'amount_total': amount_total,
+                'other_user_rating': other_user_rating,
+                'vat_inclusion_text': vat_inclusion_text
+                } only %}
+            </div>
+
+            {% include '@CocoricoCore/Dashboard/Booking/_booking_show_actions.html.twig' with {
+            'booking': booking
+            } only %}
+
+            {% include '@CocoricoCore/Dashboard/Booking/_booking_show_contact_infos.html.twig' with {
+            'booking': booking,
+            'other_user': other_user
+            } only %}
+        </section>
+
+
+        <!-- form-ad-detail -->
+        <form class="form-ad-detail" method="post">
+            <fieldset>
+                <legend class="hidden">form-ad-detail</legend>
+                {{ form_errors(form) }}
+                {#{{ form_errors(form.body) }}#}
+                <div class="textarea-holder no-scroll">
+                    {{ form_widget(form.body, {
+                        'attr': {
+                            'placeholder': 'booking.show.textarea.placeholder'|trans,
+                            'title': 'booking.show.textarea.placeholder'|trans,
+                        }
+                    }) }}
+                </div>
+                {{ form_widget(form._token) }}
+                <div class="btn-block text-center">
+                    <input type="submit" class="btn btn-default" value="{{ 'booking.show.save'|trans }}">
+                </div>
+            </fieldset>
+        </form>
+
+        <!-- blog -->
+        <div class="blog">
+            <div class="posts-holder">
+                <!-- post -->
+                {% include 'CocoricoMessageBundle:Dashboard/Message:conversation_list.html.twig' with {
+                'thread': booking.thread
+                } only %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{#Modal#}
+{% block modal %}
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+         data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(function () {
+            {# Modal accept or refuse by offerer and cancel by asker content loading #}
+            var $modal = $("#modal");
+
+            $modal.on("hide.bs.modal", function (e) {
+                location.reload(true);
+            });
+
+//            $modal.on("show.bs.modal", function (e) {
+//                $(this).find(".modal-content").html('');
+//                var link = $(e.relatedTarget);
+//                $(this).find(".modal-content").load(link.attr("href"));
+//            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,9 @@
+white_october_breadcrumbs:
+    separator:          ''
+    separatorClass:     'separator'
+    listId:             'wo-breadcrumbs'
+    listClass:          'breadcrumb'
+    itemClass:          ''
+    linkRel:            ''    
+    translation_domain: "cocorico_breadcrumbs"
+    viewTemplate:       "WhiteOctoberBreadcrumbsBundle::breadcrumbs.html.twig"

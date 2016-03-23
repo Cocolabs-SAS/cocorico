@@ -1,0 +1,36 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'contact.email.subject'|trans({}, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'contact.email.message'|trans({
+        '%first_name%': contact.firstName,
+        '%last_name%': contact.lastName,
+        '%email%': contact.email,
+        '%phone%': contact.phone,
+        '%subject%': contact.subject,
+        '%message%': contact.message,
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|nl2br }}
+            {% endautoescape %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

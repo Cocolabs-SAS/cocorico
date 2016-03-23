@@ -1,0 +1,32 @@
+imports:
+    - { resource: admin.yml }
+
+services:
+    cocorico_contact.form.type.contact_new:
+        class: Cocorico\ContactBundle\Form\Type\Frontend\ContactNewType
+        tags:
+            - { name: form.type, alias: contact_new }
+
+    cocorico_contact.contact.manager:
+        class: Cocorico\ContactBundle\Model\Manager\ContactManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+
+    cocorico_contact.form.handler.contact:
+        class: Cocorico\ContactBundle\Form\Handler\Frontend\ContactFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_contact.contact.manager"
+            - "@cocorico_contact.mailer.twig_swift"
+
+    cocorico_contact.mailer.twig_swift:
+        class: Cocorico\ContactBundle\Mailer\TwigSwiftMailer
+        arguments:
+            - "@mailer"
+            - "@twig"
+            - parameters:
+                cocorico_locale: "%cocorico.locale%"
+                cocorico_contact_from_email: "%cocorico.from_email%"
+                cocorico_contact_contact_email: "%cocorico.contact_mail%"
+            - templates:
+                contact_message: "CocoricoContactBundle:Mails:contact_message.txt.twig"

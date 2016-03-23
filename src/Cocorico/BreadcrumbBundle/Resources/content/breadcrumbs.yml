@@ -1,0 +1,83 @@
+# breadcrumbs.yml
+cocorico_dashboard_message:
+    -
+        text: 'Messages'
+        route: 'cocorico_dashboard_message'
+
+cocorico_dashboard_booking_offerer:
+    -
+        text: 'Bookings'
+        route: 'cocorico_dashboard_booking_offerer'
+
+cocorico_dashboard_booking_bank_wire_offerer:
+    -
+        text: 'Payments'
+        route: 'cocorico_dashboard_booking_bank_wire_offerer'
+
+cocorico_dashboard_booking_asker:
+    -
+        text: 'Bookings'
+        route: 'cocorico_dashboard_booking_asker'
+
+cocorico_dashboard_booking_payin_asker:
+    -
+        text: 'Payments'
+        route: 'cocorico_dashboard_booking_payin_asker'
+
+cocorico_dashboard_booking_payin_refund_asker:
+    -
+        text: 'Payments'
+        route: 'cocorico_dashboard_booking_payin_refund_asker'
+
+cocorico_dashboard_listing:
+    -
+        text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+
+cocorico_dashboard_reviews_received:
+    -
+        text: 'Comments'
+        route: 'cocorico_dashboard_reviews_received'
+    -
+        text: 'Rating Received'
+        route: 'cocorico_dashboard_reviews_received'
+
+cocorico_dashboard_reviews_added:
+    -
+        text: 'Comments'
+        route: 'cocorico_dashboard_reviews_received'
+    -
+        text: 'Rating Made'
+        route: 'cocorico_dashboard_reviews_added'
+
+cocorico_user_dashboard_profile_edit_about_me:
+    -
+        text: 'Profile'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+    -
+        text: 'About me'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+
+cocorico_user_dashboard_profile_edit_payment:
+    -
+        text: 'Profile'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+    -
+        text: 'Payment Information'
+        route: 'cocorico_user_dashboard_profile_edit_payment'
+
+cocorico_user_dashboard_profile_edit_contact:
+    -
+        text: 'Profile'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+    -
+        text: 'Contact Information'
+        route: 'cocorico_user_dashboard_profile_edit_contact'
+
+cocorico_listing_alert_dashboard_alert:
+    -
+        text: 'Profile'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+    -
+        text: 'My Alerts'
+        route: 'cocorico_listing_alert_dashboard_alert'

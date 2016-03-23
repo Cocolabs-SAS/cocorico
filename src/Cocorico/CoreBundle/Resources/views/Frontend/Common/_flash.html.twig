@@ -1,0 +1,52 @@
+{#
+Alternatives flashes to not display on main flashes display (first include).
+Alt flashes name must have the form : success_xxx or error_xxx
+#}
+{% set alt_flashes = ['success_voucher', 'error_voucher' ] %}
+
+{#Does the alternate flash must be displayed#}
+{% set display_alt = display_alt|default(false) %}
+
+<div class="clearfix"></div>
+<div class="flashes clearfix">
+    {% for type, messages in app.session.flashbag.all() %}
+
+        {% set type_css = type %}
+        {% set hidden = "" %}
+
+        {% if type in alt_flashes %}
+            {% if not display_alt %}
+                {#Hide main flash display as it's displayed in alt flash #}
+                {% set hidden = "hidden" %}
+            {% else %}
+                {#Transform alternate type flash in success or error class #}
+                {% set type_css = type|split('_')|first %}
+            {% endif %}
+        {% endif %}
+
+        {% for message in messages %}
+            <div class="alert alert-{{ type_css }}-new {{ hidden }}">
+                <i class="ico icon-{{ type_css }}">&nbsp;</i>
+
+                <p>
+                    {% if type == 'success' %}
+                        {{ 'Success'|trans({}, 'cocorico') }}! {{ message }}
+                    {% elseif type == 'error' %}
+                        {{ 'Error'|trans({}, 'cocorico') }}! {{ message }}
+                    {% else %}
+                        {% if type not in alt_flashes %}
+                            {{ type|trans({}, 'cocorico') }}! {{ message }}
+                        {% else %}
+                            {% if not display_alt %}
+                                {#Add again to the flash stack because it was removed while accessing all flasbags #}
+                                {{ app.session.flashbag.add(type, message) }}
+                            {% else %}
+                                {{ type_css|capitalize|trans({}, 'cocorico') }}! {{ message }}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

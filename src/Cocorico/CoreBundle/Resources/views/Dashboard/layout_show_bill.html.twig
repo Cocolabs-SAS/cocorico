@@ -1,0 +1,189 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        body.loading {
+            overflow: visible;
+        }
+    </style>
+{% endblock %}
+
+{% block layout %}
+    <!-- contain main informative part of the site -->
+    <main id="main" role="main">
+        <div class="container">
+            <div class="row">
+                <div class="main-tabs col-xs-12">
+                    <div style="text-align: center; border: none; margin: 40px 0 40px 0">
+                        <img src="{{ asset('images/logo-invoice.png') }}" alt="logo" class="img">
+                    </div>
+
+                    {# Header #}
+                    <div class="header-left-contain text-color">
+                        {% block header %}
+                            <p>
+                                <strong>
+                                    {% if amount_dec > 0 %}
+                                        {{ 'booking.bill.title.booking_id'|trans }}
+                                    {% else %}
+                                        {{ 'booking.reciept.title.booking_id'|trans }}
+                                    {% endif %}:
+                                </strong>
+                                {{ booking.id }}
+                            </p>
+                        {% endblock %}
+
+                        {% block content %}
+                            <div>
+                                <strong>{{ 'booking.bill.user.name'|trans }}</strong> {{ user }}
+                            </div>
+
+                            <div>
+                                <strong>{{ 'booking.bill.user.address'|trans }}</strong>
+                                {% if user_address %}
+                                    {{ user_address.address }},
+                                    {{ user_address.city }},
+                                    {{ user_address.zip }} ,
+                                    {{ user_address.country | country_name(app.request.locale) }}
+                                {% endif %}
+                            </div>
+
+                            <br/>
+
+                            <div>
+                                {#Date démission#}
+                                <strong>{{ bill_date_title }}</strong>
+                                {% if  bill_date %}
+                                    {{ bill_date }}
+                                {% endif %}
+                            </div>
+
+                            <br/>
+
+                            <div>
+                                {#Date de la prestation#}
+                                <strong>{{ 'booking.bill.start.date'|trans }}</strong>
+                                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                            </div>
+
+                            {% if not timeUnitIsDay %}
+                                <div>
+                                    <strong>{{ 'booking.show.start_time:'|trans }} </strong>
+                                    {{ booking.startTime|date('H:i') }}
+                                </div>
+                                <div>
+                                    <strong>{{ 'booking.show.end_time:'|trans }}</strong>
+
+                                    {{ booking.endTime|date('H:i') }}
+                                </div>
+                            {% endif %}
+
+                            <div>
+                                <strong>{{ 'booking.voucher.duration' | trans }} :</strong>
+                                {{ booking.duration(endDayIncluded, timeUnit, timeUnitIsDay) | add_time_unit_text }}
+                            </div>
+                            <br/>
+                        {% endblock %}
+                    </div>
+
+                    {# Bill infos #}
+                    {% block bill_info %}
+                        {% if amount_dec > 0 %}
+                            <table class="table table-detail" title="table">
+                                <thead>
+                                <tr>
+                                    <th class="col1">{{ 'booking.bill.title.designation' | trans }} </th>
+                                    <th class="col2">{{ 'booking.bill.title.amount_te' | trans }}</th>
+                                    <th class="col3">{{ 'booking.bill.title.vat' | trans }}</th>
+                                    <th class="col4">{{ 'booking.bill.title.amount_ti' | trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="col1" data-label="{{ 'booking.bill.title.service' | trans }}">
+                                        <div>{{ 'booking.bill.title.service' | trans }}</div>
+                                    </td>
+                                    <td class="col2" data-label="fee_excl_taxes">
+                                        <div>{{ amount_excl_vat }}</div>
+                                    </td>
+                                    <td class="col3" data-label="fee_VAT">
+                                        <div>{{ amount_vat }}</div>
+                                    </td>
+                                    <td class="col4" data-label="fee_incl_taxes">
+                                        <div>{{ amount_fees }}</div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        {% endif %}
+                    {% endblock %}
+
+                    {#Booking infos#}
+                    {% block booking_info %}
+                        <div class="col-xs-8 col-xs-offset-2 text-center">
+                            <p class="second-paragraph-text">
+                                {{ 'booking.bill.title.information' | trans }}
+                            </p>
+                        </div>
+
+                        <div class="col-xs-8">
+                            <div class="text-color text-reminder-title">
+                                {{ 'booking.bill.title.reservation' | trans }}
+                            </div>
+                        </div>
+
+                        <table class="table table-detail" title="table">
+                            <thead>
+                            <tr>
+                                <th class="col1">{{ 'booking.bill.title.listing' | trans }}</th>
+                                <th class="col2">{{ 'booking.bill.title.start_date' | trans }}</th>
+                                <th class="col3">{{ 'booking.bill.title.end_date' | trans }}</th>
+                                <th class="col4">{{ 'booking.bill.title.amount' | trans }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="col1" data-label="listing title">
+                                    <div>{{ listing_translation.title }}</div>
+                                </td>
+                                <td class="col2" data-label="booking start date">
+                                    <div>{{ booking.start|localizeddate('short', 'none', 'fr') }}</div>
+                                </td>
+                                <td class="col3" data-label="booking end date">
+                                    <div>{{ booking.end|localizeddate('short', 'none','fr') }}</div>
+                                </td>
+                                <td class="col4" data-label="booking_total_amount">
+                                    <div>
+                                        {{ amount }}
+                                        <sup>
+                                            <small>{{ vatInclusionText(app.request.getLocale(), true, true) }}</small>
+                                        </sup>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    {% endblock %}
+                </div>
+
+
+                {#Company infos#}
+                <div class="col-xs-8 col-xs-offset-2 text-center text-color table-section-bottom">
+                    <div>{{ cocorico_site_name }}</div>
+                    <div>{{ cocorico_address }}</div>
+                    <div>TVA N°: {{ cocorico_vat_number }}</div>
+                    <div>{{ 'company_info' | trans({}, 'cocorico') }}</div>
+                    <div>{{ cocorico_phone }}</div>
+                    <div>{{ cocorico_contact_mail }}</div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+{% endblock %}
+
+{% block javascripts %}{% endblock %}

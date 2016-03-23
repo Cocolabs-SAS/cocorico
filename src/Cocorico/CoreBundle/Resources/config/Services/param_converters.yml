@@ -1,0 +1,15 @@
+services:
+    #Param converters
+    cocorico.listing_param_converter:
+        class: Cocorico\CoreBundle\Request\ListingParamConverter
+        arguments:
+            - "@doctrine.orm.entity_manager"
+        tags:
+            - { name: request.param_converter, priority: 0, converter: listing }
+
+    cocorico.listing_availability_param_converter:
+        class: Cocorico\CoreBundle\Request\ListingAvailabilityParamConverter
+        arguments:
+            - "@doctrine.odm.mongodb.document_manager"
+        tags:
+            - { name: request.param_converter, priority: -1, converter: listing_availability }

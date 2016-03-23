@@ -1,0 +1,46 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'canceled_by_asker_asker.email.subject'|trans({
+        '%booking_uid%': booking.id
+    }, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'canceled_by_asker_asker.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%listing_title%': listing_title,
+        '%listing_public_url%': listing_public_url,
+        '%booking_start_date%': booking.start|localizeddate('short', 'none', 'fr'),
+        '%booking_end_date%': booking.end|localizeddate('short', 'none', 'fr'),
+        '%booking_time_range_title%': booking_time_range_title,
+        '%booking_time_range%': booking_time_range,
+        '%booking_uid%': booking.id,
+        '%cancellation_policy_title%': booking.cancellationPolicyText|trans({}, 'cocorico_listing', user_locale),
+        '%cancellation_policy_description%': booking.cancellationPolicyDescription|trans({}, 'cocorico_listing', user_locale),
+        '%asker_cancellation_amount%': asker_cancellation_amount|format_price(user_locale, 2, false),
+        '%profile_payment_info_url%': profile_payment_info_url
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--booking_canceled_by_asker_asker-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

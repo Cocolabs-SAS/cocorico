@@ -1,0 +1,65 @@
+.field-row span.label {
+    color: #333;
+    font-size: 14px;
+}
+
+.form-group span.sign {
+    float: left;
+    margin-right: 4px;
+}
+
+div.connection {
+    padding-bottom: 20px;
+}
+
+/** Logo size responsive */
+body > .header .logo {
+    width: 220px;
+    height: 122px;
+}
+
+body > .header .logo img {
+    width: 134px;
+    height: 122px;
+    max-width: 134px;
+    max-height: 122px;
+}
+
+.left-side {
+    top: 122px;
+}
+
+@media screen and (max-width: 992px) {
+    body > .header .logo {
+        width: 220px;
+        height: 50px;
+    }
+
+    body > .header .logo img {
+        width: 55px;
+        height: 50px;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    body > .header .logo {
+        width: 100%;
+    }
+}
+
+.right-side > .content-header {
+    padding-top: 30px;
+}
+
+div.sonata-medium-date .select2-container {
+    width: 85px !important;
+}
+
+div.sonata-medium-date > div {
+    float: left;
+}
+
+div[id$='_hour'], div[id$='_minute'] {
+    width: 60px !important;
+    display: inline-block !important;
+}

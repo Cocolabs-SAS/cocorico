@@ -1,0 +1,669 @@
+{#
+    Javascript Geocoding Core
+
+    @params map_elt Map element id (Optional)
+    @params auto_complete_elt Place Auto Complete element id  (Optional)
+#}
+
+{% trans_default_domain 'cocorico_geo' %}
+<script type="text/javascript"
+        src="//maps.googleapis.com/maps/api/js?libraries=places{{ googlePlaceAPIKey ? '&amp;key=' ~ googlePlaceAPIKey : '' }}&amp;language={{ app.request.locale }}">
+</script>
+<script type="text/javascript"
+        src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js">
+</script>
+
+<script>
+    var geocoder, map, marker, autoComplete, latlng, boundingBox, markerDraggable;
+
+    //Functions
+    var initializeGMapFunc, geocodeFunc, geocodeJSONFunc, reverseGeocodeFunc, formatGeocodingResultFunc,
+            translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
+            geoLocateIPFunc;
+
+    $(function () {
+        //var maxZoom = 18;
+        var defaultLat = {{ default_lat|default(46.227638) }};
+        var defaultLng = {{ default_lng|default(2.213749000000007) }};
+        var defaultZoom = {{ default_zoom|default(4) }};
+        var mapElt = $("{{ map_elt|default('') }}");
+        var autoCompleteElt = $("{{ auto_complete_elt|default('') }}");
+        var displayMarker = {{ display_marker is not defined or display_marker ? "true" : "false" }};
+        var markerDraggable = {{ marker_draggable is not defined or not marker_draggable ? "false" : "true" }};
+        var ipInfoDbAPIKey = "{{ ipInfoDbAPIKey|default('') }}";
+
+        mapElt = mapElt.length ? mapElt[0] : false;
+        autoCompleteElt = autoCompleteElt.length ? autoCompleteElt[0] : false;
+
+        /**
+         * Initialize Google map
+         */
+        initializeGMapFunc = function () {
+            geocoder = new google.maps.Geocoder();
+
+            if (mapElt) {
+                latlng = new google.maps.LatLng(defaultLat, defaultLng);
+                var mapOptions = {
+                    zoom: defaultZoom,
+                    center: latlng,
+                    scrollwheel: false
+                };
+                map = new google.maps.Map(mapElt, mapOptions);
+
+                if (displayMarker) {
+                    marker = new google.maps.Marker({
+                        map: map,
+                        position: latlng,
+                        draggable: markerDraggable
+                    });
+
+                    if (markerDraggable) {
+                        google.maps.event.addListener(marker, 'dragend', function () {
+                            //Create and trigger marker dragend event
+                            $.event.trigger({
+                                type: "markerDragendEvt",
+                                markerPosition: marker.getPosition()
+                            });
+                        });
+                    }
+                }
+
+                handleMapRefresh();
+            }
+
+            if (autoCompleteElt) {
+                autoComplete = new google.maps.places.Autocomplete(
+                        autoCompleteElt,
+                        {types: ['geocode']}
+                );
+            }
+
+
+        };
+        initializeGMapFunc();
+
+
+        /**
+         * Geocoding
+         *
+         * @param address
+         * @param region
+         * @param translate
+         * @param refreshMap
+         *
+         * @returns object
+         */
+        geocodeFunc = function (address, region, translate, refreshMap) {
+            var deferred = new $.Deferred();
+
+            if (!address) {
+                deferred.reject("{{ 'geo.location.address_missing'|trans }}");
+            } else {
+                var geocodeParams = {};
+                geocodeParams['address'] = address;
+                geocodeParams['region'] = (typeof region !== 'undefined' && region) ? region : '';
+
+                geocoder.geocode(geocodeParams, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var result = results[0];
+//                        console_log(result);
+                        //Refresh Map
+                        if (typeof refreshMap !== 'undefined' && refreshMap == true) {
+                            var geometry = result.geometry;
+                            refreshMapFunc(geometry.viewport, geometry.location.lat(), geometry.location.lng());
+                        }
+
+                        //Format geocoding
+                        var formattedResult = formatGeocodingResultFunc(result);
+
+                        //Translate geocoding
+                        if (typeof translate !== 'undefined' && translate == true) {
+                            translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
+                                    function (resultsTranslated) {
+                                        //console_log("resultsTranslated", resultsTranslated);
+                                        //console_log("formattedResult", formattedResult);
+                                        deferred.resolve(
+                                                $.extend(formattedResult, resultsTranslated)
+                                        );
+                                    }
+                            );
+                        } else {
+                            deferred.resolve(formattedResult);
+                        }
+                    } else {
+                        deferred.reject("{{ 'geo.location.no_result'|trans }}");
+                    }
+                });
+            }
+
+            return deferred.promise();
+        };
+
+        /**
+         * Reverse Geocoding
+         *
+         * @param position
+         * @returns object
+         */
+        reverseGeocodeFunc = function (position) {
+            var deferred = new $.Deferred();
+
+            if (!position) {
+                deferred.reject("{{ 'geo.location.address_missing'|trans }}");
+            } else {
+                geocoder.geocode({'latLng': position}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var result = results[0];
+                        if (result) {
+                            //Format geocoding
+                            var formattedResult = formatGeocodingResultFunc(result);
+
+                            //Translate geocoding
+                            translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
+                                    function (resultsTranslated) {
+                                        deferred.resolve(
+                                                $.extend(formattedResult, resultsTranslated)
+                                        );
+                                    }
+                            );
+                        } else {
+                            deferred.reject("{{ 'geo.location.no_result'|trans }}");
+                        }
+                    } else {
+                        deferred.reject("{{ 'geo.location.no_result'|trans }}");
+                    }
+                });
+            }
+
+            return deferred.promise();
+        };
+
+        /**
+         * Format Geocoding Result
+         *
+         * @param result
+         * @returns object
+         */
+        formatGeocodingResultFunc = function (result) {
+            if (!result) {
+                return {};
+            }
+            var data = {}, geometry = result.geometry, viewport = geometry.viewport, bounds = geometry.bounds;
+
+            data[locale] = {};
+            {# Create a simplified version of the address components. @see also GoogleMapsProvider #}
+            $.each(result.address_components, function (index, object) {
+                //var name = object.types[0];
+                $.each(object.types, function (index, name) {
+                    data[locale][name] = object.long_name;
+                    data[locale][name + "_short"] = object.short_name;
+                });
+            });
+
+            $.extend(data, {
+                formatted_address: result.formatted_address,
+                types: result.types,
+                location_type: geometry.location_type || "PLACES",
+                viewport: viewport,
+                bounds: bounds,
+                location: geometry.location,
+                lat: geometry.location.lat(),
+                lng: geometry.location.lng()
+            });
+
+            return data;
+        };
+
+        /**
+         * Translate Geocode Result
+         *
+         * @param lat
+         * @param lng
+         * @returns {*}
+         */
+        translateGeocodeResultFunc = function translateGeoLocations(lat, lng) {
+            var promises = [];
+            var dataT = {};
+
+            $.each(locales, function (index, lang) {
+                if (lang != locale) {
+                    dataT[lang] = {};
+                    var deferred = new $.Deferred();
+                    $.getJSON(
+                            "//maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=false&language=" + lang,
+                            function (queryResult) {
+
+                                if (queryResult.status == 'OK' && queryResult.results.length) {
+                                    var resultsT = queryResult.results;
+                                    var resultT = resultsT[0];
+
+                                    $.each(resultT.address_components, function (index, objectT) {
+                                        if (objectT) {
+                                            $.each(objectT.types, function (index, name) {
+                                                dataT[lang][name] = objectT.long_name;
+                                                dataT[lang][name + "_short"] = objectT.short_name;
+                                            });
+                                        }
+                                    });
+                                    deferred.resolve(dataT);
+                                } else {
+                                    //datasT[lang]=null;
+                                    {#deferred.reject("{{ 'geo.location.no_result'|trans }}");#}
+                                }
+                            }).fail(function () {
+
+                            });
+                    promises.push(deferred);
+                }
+            });
+
+            return $.when.apply(undefined, promises).promise();
+        };
+
+        /**
+         * Refresh map
+         *
+         * @param viewport
+         * @param lat
+         * @param lng
+         */
+        refreshMapFunc = function (viewport, lat, lng) {
+            if (mapElt) {
+                if (displayMarker) {
+                    marker.setVisible(false);
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (viewport) {
+                    var ne, sw;
+                    if (typeof viewport === 'string') {
+                        var viewportObject = viewportStringToArray(viewport);
+                        if (viewportObject) {
+                            ne = new google.maps.LatLng(viewportObject.ne.lat, viewportObject.ne.lng);
+                            sw = new google.maps.LatLng(viewportObject.sw.lat, viewportObject.sw.lng);
+                            viewport = new google.maps.LatLngBounds(sw, ne);
+                        } else {
+                            refreshMapJSONFunc($(autoCompleteElt).val());
+                        }
+                    } else {
+                        ne = viewport.getNorthEast();
+                        sw = viewport.getSouthWest();
+                    }
+
+
+                    map.fitBounds(viewport);
+                    //fitbounds happens asynchronously, so we have to wait for a bounds_changed event before setting zoom works.
+                    google.maps.event.addListenerOnce(map, 'bounds_changed', function (event) {
+//                        console_log('bounds_changed' + getBoundsZoomLevel(ne, sw, mapElt));
+                        this.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
+                    });
+
+                    drawZone(ne, sw);
+
+                    if (displayMarker) {
+                        var location = new google.maps.LatLng(lat, lng);
+                        marker.setPosition(location);
+                        marker.setVisible(true);
+                    }
+
+
+                } else {
+                    //Try to get viewport through map api json
+                    refreshMapJSONFunc($(autoCompleteElt).val());
+                }
+            }
+        };
+
+
+        /**
+         * Extend search location
+         *
+         * @param parentLocationAddress
+         * @param parentLocationType
+         * @param modalId
+         * @param modalMessage
+         */
+        extendSearchLocationFunc = function (parentLocationAddress, parentLocationType, modalId, modalMessage) {
+            if (autoCompleteElt && parentLocationAddress && parentLocationType) {
+                var modal = $(modalId);
+                if (modal.length) {
+                    modal.find('.modal-body .title').html(modalMessage);
+                    modal.modal('show');
+                    //Start new search
+                    var extSId = setTimeout(function () {
+                        $(autoCompleteElt).val(parentLocationAddress);
+                        var searchForm = $(autoCompleteElt).closest("form");
+                        searchForm.submit();
+                    }, 3000);
+
+                    //Stop search on modal close
+                    modal.on('hidden.bs.modal', function () {
+                        clearTimeout(extSId);
+                    });
+                }
+            } else {
+                $('#location_addressType').val();
+            }
+        };
+
+
+        /**
+         * Convert viewport string to array
+         *
+         * @param viewport
+         */
+        function viewportStringToArray(viewport) {
+            if (!viewport) {
+                return null;
+            }
+
+            var matches = viewport.match(/\(\((.*?)\), \((.*?)\)\)/);
+            //console_log('viewportStringToArray', matches);
+
+            if (matches.length == 3) {
+                var sw = null;
+                var ne = null;
+
+                var coordinate = matches[1].split(',');
+
+                if (coordinate.length == 2) {
+                    var latitude = parseFloat(coordinate[0].trim());
+                    var longitude = parseFloat(coordinate[1].trim());
+
+                    sw = {'lat': latitude, 'lng': longitude};
+                }
+
+                coordinate = matches[2].split(',');
+                if (coordinate.length == 2) {
+                    latitude = parseFloat(coordinate[0].trim());
+                    longitude = parseFloat(coordinate[1].trim());
+
+                    ne = {'lat': latitude, 'lng': longitude};
+                }
+
+                if (sw && ne) {
+                    return {'sw': sw, 'ne': ne};
+                }
+            }
+
+            return null;
+        }
+
+        /**
+         * Refresh map json result
+         *
+         * @param address
+         */
+        refreshMapJSONFunc = function (address) {
+            $.when(
+                    geocodeJSONFunc(address)
+            ).then(
+                    function (results) {
+                        if (results) {
+                            var result = results[0];
+                            var geometry = result.geometry;
+
+                            if (geometry.viewport) {
+                                var ne = geometry.viewport.northeast;
+                                var sw = geometry.viewport.southwest;
+                                ne = new google.maps.LatLng(ne.lat, ne.lng);
+                                sw = new google.maps.LatLng(sw.lat, sw.lng);
+                                var viewport = new google.maps.LatLngBounds(sw, ne);
+
+                                map.fitBounds(viewport);
+                                map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
+                                drawZone(ne, sw);
+                            } else {
+                                map.setCenter(geometry.location);
+                                map.setZoom(17);
+                            }
+                            if (displayMarker) {
+                                marker.setPosition(geometry.location);
+                                marker.setVisible(true);
+                            }
+
+                        }
+                    }
+            );
+        };
+
+        /**
+         * Json geocoding
+         *
+         * @param address
+         */
+        geocodeJSONFunc = function (address) {
+            var deferred = new $.Deferred();
+            $.getJSON(
+                    "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}",
+                    function (queryResult) {
+                        if (queryResult.status == 'OK' && queryResult.results.length) {
+                            deferred.resolve(queryResult.results);
+                        } else {
+                            deferred.reject(false);
+                        }
+                    });
+            return deferred.promise();
+        };
+
+
+        /**
+         * Set markers on map
+         *
+         * @param locations
+         */
+        setMarkersFunc = function (locations) {
+            var markerTemplate = document.getElementById('popup1').innerHTML;
+
+            var image = {
+                url: '/images/pin.png',
+                size: new google.maps.Size(20, 32),
+                origin: new google.maps.Point(0, 0),
+                anchor: new google.maps.Point(0, 32)
+            };
+            var markers = [];
+
+            $.each(locations, function (i, location) {
+                //Marker
+                var myLatLng = new google.maps.LatLng(location['lat'], location['lng']);
+                var markerIB = new google.maps.Marker({
+                    icon: image,
+                    position: myLatLng,
+                    zIndex: i + 1,
+                    map: map
+                });
+
+
+                //InfoBox
+                var infoBoxContent = markerTemplate.replace('%title%', location['title']);
+                infoBoxContent = infoBoxContent.replace('/images/img.png', location['image']);
+                infoBoxContent = infoBoxContent.replace('%price%', location['price']);
+                infoBoxContent = infoBoxContent.replace('%certified%', location['certified']);
+                infoBoxContent = infoBoxContent.replace('%url%', location['url']);
+                infoBoxContent = infoBoxContent.replace('%category%', location['category']);
+                infoBoxContent = infoBoxContent.replace('%rating1%', location['rating1']);
+                infoBoxContent = infoBoxContent.replace('%rating2%', location['rating2']);
+                infoBoxContent = infoBoxContent.replace('%rating3%', location['rating3']);
+                infoBoxContent = infoBoxContent.replace('%rating4%', location['rating4']);
+                infoBoxContent = infoBoxContent.replace('%rating5%', location['rating5']);
+
+//                var popupElt = document.getElementById('popup1');
+//                popupElt.innerHTML = infoBoxContent;
+
+                var popupElt = document.createElement("div");
+                popupElt.setAttribute("class", "popup");
+                popupElt.innerHTML = infoBoxContent;
+
+                //console_log(document.getElementById('popup1').innerHTML);
+                markerIB.infobox = new InfoBox({
+                    content: popupElt,
+                    disableAutoPan: false,
+                    maxWidth: 150,
+                    pixelOffset: new google.maps.Size(-140, 0),
+                    zIndex: null,
+                    boxStyle: {
+                        width: "280px"
+                    },
+                    closeBoxURL: "",
+                    infoBoxClearance: new google.maps.Size(1, 1)
+                });
+
+                popupElt.onclick = function () {
+                    markerIB.infobox.close();
+                };
+
+                markers.push(markerIB);
+
+                google.maps.event.addListener(markerIB, 'click', (function (markerIB, i) {
+                    return function () {
+                        for (var h = 0; h < markers.length; h++) {
+                            markers[h].infobox.close();
+                        }
+
+                        markers[i].infobox.open(map, this);
+                        map.panTo(myLatLng);
+                    }
+                })(markerIB, i));
+            });
+        };
+
+        /**
+         * Geo localisation by ip through IPInfoDB
+         * @see http://www.ipinfodb.com/ip_location_api_json.php
+         *
+         * @param callBack Callback function to call after ip geo location. Do not mix up with the url callback parameter
+         */
+        geoLocateIPFunc = function (callBack) {
+            if (ipInfoDbAPIKey) {
+                var countries = $.parseJSON('{{ countries_translated(app.request.locale)|json_encode()|e('js') }}');
+                var url = "//api.ipinfodb.com/v3/ip-city/?key=" + ipInfoDbAPIKey + "&format=json";
+                //var url = "//freegeoip.net/json/"; //too lagged
+
+                try {
+                    var geoCookie = Cookies.get('_cgl');
+                    if (!geoCookie) {//if no cookie IPInfoDB is called
+                        $.ajax({
+                            url: url,
+                            cache: true,
+                            async: true,
+                            jsonp: "callback",// Name of the callback parameter
+                            dataType: "jsonp",// Tell jQuery we're expecting JSONP
+                            success: function (location) {
+                                if (location.statusCode == 'OK') {
+                                    location.countryName = countries[location.countryCode];//country name translated
+                                    Cookies.set('_cgl', JSON.stringify(location), {expires: 1, path: '/'});//set geo cookie
+                                    callBack(location);
+                                }
+                            },
+                            error: function (e) {
+                                //console_log(e.message);
+                            }
+                        });
+                    } else {//Cookie geo value is used instead
+                        callBack(JSON.parse(geoCookie));
+                    }
+                } catch (e) {
+                    //console_log(e);
+                }
+            }
+        };
+
+        /**
+         * Guess best zoom
+         *
+         * @param ne
+         * @param sw
+         * @param mapElt
+         * @returns {number}
+         */
+        function getBoundsZoomLevel(ne, sw, mapElt) {
+
+            var $mapDiv = $(mapElt);
+            var mapDim = {height: $mapDiv.height(), width: $mapDiv.width()};
+
+            var WORLD_DIM = {height: 256, width: 256};
+            var ZOOM_MAX = 21;
+
+            function latRad(lat) {
+                var sin = Math.sin(lat * Math.PI / 180);
+                var radX2 = Math.log((1 + sin) / (1 - sin)) / 2;
+                return Math.max(Math.min(radX2, Math.PI), -Math.PI) / 2;
+            }
+
+            function zoom(mapPx, worldPx, fraction) {
+                return Math.floor(Math.log(mapPx / worldPx / fraction) / Math.LN2);
+            }
+
+
+            var latFraction = (latRad(ne.lat()) - latRad(sw.lat())) / Math.PI;
+
+            var lngDiff = ne.lng() - sw.lng();
+            var lngFraction = ((lngDiff < 0) ? (lngDiff + 360) : lngDiff) / 360;
+
+            var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
+            var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
+
+            //console_log('getBoundsZoomLevel > return', Math.min(latZoom, lngZoom, ZOOM_MAX));
+
+            return Math.min(latZoom, lngZoom, ZOOM_MAX);
+        }
+
+        /**
+         * Draw zone on map
+         *
+         * @param ne
+         * @param sw
+         */
+        function drawZone(ne, sw) {
+            var strokeOpacity = 0;
+
+            {% if app.environment == 'dev' %}
+            strokeOpacity = 0.5;
+            {% endif %}
+
+            var boundingBoxPoints = [
+                ne, new google.maps.LatLng(ne.lat(), sw.lng()),
+                sw, new google.maps.LatLng(sw.lat(), ne.lng()), ne
+            ];
+
+            if (boundingBox) {
+                boundingBox.setMap(null);
+            }
+
+            boundingBox = new google.maps.Polyline({
+                path: boundingBoxPoints,
+                strokeColor: '#000',
+                strokeOpacity: strokeOpacity,
+                strokeWeight: 1
+            });
+            boundingBox.setMap(map);
+        }
+
+
+        /**
+         * Map refresh
+         */
+        function handleMapRefresh() {
+            //Map refresh on tabs shown
+            $('a[href="#map"][data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                resizeMap();
+            });
+
+            //Map refresh on resize and orientation change
+            google.maps.event.addDomListener(window, "orientationchange", function () {
+                resizeMap();
+            });
+
+            google.maps.event.addDomListener(window, "resize", function () {
+                resizeMap();
+            });
+        }
+
+        function resizeMap() {
+            var center = map.getCenter();
+            google.maps.event.trigger(map, 'resize');
+            map.setCenter(center);
+        }
+    });
+
+</script>

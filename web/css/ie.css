@@ -1,0 +1,201 @@
+input[type=password].form-control,
+input[type=password] {
+    font-family: Arial, Gotham, "Helvetica Neue", Helvetica, sans-serif !important;
+}
+
+.navbar-default .navbar-header {
+    margin: 8px 10px 0 -10px;
+}
+
+.main-tabs .nav-tabs > li {
+    margin-right: 5px;
+}
+
+.main-tabs .nav-tabs > li > a {
+    min-width: 120px;
+}
+
+.form-switchers {
+    width: 300px;
+    margin: 6px 0 0;
+}
+
+.form-switchers .counter,
+.form-switchers .title {
+    font-size: 13px;
+}
+
+.main-tabs .ad-post .foot {
+    background: #fff;
+}
+
+.tooltip:after,
+.tooltip:before {
+    display: none;
+}
+
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-dec,
+.gallery-slider .jcf-scrollbar-dec,
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-inc,
+.gallery-slider .jcf-scrollbar-inc,
+.availability-schedule .jcf-scrollbar-vertical .btn-next,
+.gallery-slider .btn-next,
+.availability-schedule .jcf-scrollbar-vertical .btn-prev,
+.gallery-slider .btn-prev {
+    width: 29px;
+    height: 14px;
+    background: url(../images/arrows.png) no-repeat 0 -24px;
+}
+
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-dec:before,
+.gallery-slider .jcf-scrollbar-dec:before,
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-inc:before,
+.gallery-slider .jcf-scrollbar-inc:before,
+.availability-schedule .jcf-scrollbar-vertical .btn-next:before,
+.gallery-slider .btn-next:before,
+.availability-schedule .jcf-scrollbar-vertical .btn-prev:before,
+.gallery-slider .btn-prev:before,
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-dec:after,
+.gallery-slider .jcf-scrollbar-dec:after,
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-inc:after,
+.gallery-slider .jcf-scrollbar-inc:after,
+.availability-schedule .jcf-scrollbar-vertical .btn-next:after,
+.gallery-slider .btn-next:after,
+.availability-schedule .jcf-scrollbar-vertical .btn-prev:after,
+.gallery-slider .btn-prev:after {
+    display: none;
+}
+
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-dec,
+.gallery-slider .jcf-scrollbar-dec,
+.availability-schedule .jcf-scrollbar-vertical .btn-prev,
+.gallery-slider .btn-prev {
+    background-position: 0 0;
+}
+
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-dec,
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-inc {
+    width: 44px;
+    height: 21px;
+    background-position: 0 -48px;
+}
+
+.availability-schedule .jcf-scrollbar-vertical .jcf-scrollbar-inc {
+    background-position: -54px -48px;
+}
+
+.gallery-small .btn-next span,
+.gallery-small .btn-prev span {
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 29px;
+    position: absolute;
+    margin: -13px 0 0 -7px;
+    background-position: -39px 0;
+    background: url(../images/arrows.png) no-repeat -39px 0;
+}
+
+.gallery-small .btn-next:before,
+.gallery-small .btn-prev:before,
+.gallery-small .btn-next:after,
+.gallery-small .btn-prev:after {
+    display: none;
+}
+
+.gallery-small .btn-next span {
+    background-position: -63px 0;
+}
+
+.blog .comments-counter {
+    margin: 4px 5px 0 2px;
+}
+
+.ad-post .title {
+    background: #707070;
+}
+
+.date-slider.alt .fc-ltr .fc-basic-view .fc-day-number {
+    min-height: inherit;
+}
+
+.postarea.alt .posts-holder .footer {
+    margin: 0;
+}
+
+.postarea.notation-booking .rating-area .title {
+    font-size: 13px;
+}
+
+.plus-sign:before {
+    text-indent: 4px;
+}
+
+iframe {
+    border: 0 none !important;
+    overflow: hidden !important;
+}
+
+.btns-area {
+    max-width: 265px;
+}
+
+.breadcrumb > li {
+    float: left;
+}
+
+.breadcrumb > li + li:before {
+    margin: 0 1px 0 5px;
+}
+
+#ui-datepicker-div .ui-datepicker-header .ui-datepicker-prev,
+#ui-datepicker-div .ui-datepicker-header .ui-datepicker-next {
+    text-indent: 9px;
+}
+
+.form-area .form-block .jcf-number .jcf-real-element {
+    padding: 7px 27px 7px 7px;
+}
+
+.jcf-scrollable {
+    width: 100% !important;
+}
+
+.form-selection .selection-area .col {
+    width: 33%;
+}
+
+.form-selection .selection-area .col:first-child {
+    width: 33%;
+}
+
+.form-control {
+    color: #c6ccd2;
+}
+
+.form-area .payment-info .form-control {
+    padding: 7px 5px;
+}
+
+.discount-list {
+    max-width: 760px;
+}
+
+.jcf-number {
+    height: 36px;
+}
+
+.jcf-number input {
+    text-align: left;
+    padding: 7px 27px 7px 7px;
+}
+
+.jcf-number .jcf-btn-dec,
+.jcf-number .jcf-btn-inc {
+    text-align: left;
+    text-indent: 8px;
+}
+
+.discount-area .jcf-number .ending {
+    right: 40px;
+}

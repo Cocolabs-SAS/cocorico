@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            <div class="col-xs-12">
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                <form id="form-registerlogin" class="form form-signup"
+                      action="{{ path('cocorico_user_resetting_send_email') }}" method="POST">
+                    <h1>{{ 'user.request.h1'|trans }}</h1>
+
+                    <div class="form-holder">
+                        <div class="field-row">
+                            {% if invalid_username is defined %}
+                                <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+                            {% endif %}
+                            <span class="label">
+                                <label for="username">{{ 'resetting.request.username'|trans }} *</label>
+                            </span>
+
+                            <div class="field-holder">
+                                <input type="text" id="username" name="username" required="required"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="btn-block text-center">
+                            <button type="submit" class="btn btn-default">
+                                {{ 'resetting.request.submit'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

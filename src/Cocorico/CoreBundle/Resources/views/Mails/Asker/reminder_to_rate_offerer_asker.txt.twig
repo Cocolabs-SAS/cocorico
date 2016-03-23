@@ -1,0 +1,38 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ 'reminder_to_rate_offerer_asker.email.subject'|trans({
+        '%offerer_name%': offerer.name,
+        '%booking_uid%': booking.id
+    }, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'reminder_to_rate_offerer_asker.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%offerer_name%': offerer.name,
+        '%asker_to_offerer_review_url%': asker_to_offerer_review_url
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--reminder_to_rate_offerer_asker-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

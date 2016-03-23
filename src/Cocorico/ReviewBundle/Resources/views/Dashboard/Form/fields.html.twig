@@ -1,0 +1,16 @@
+{% block star_rating_widget %}
+    {% spaceless %}
+        {% if expanded %}
+            <div class="hide-radio" {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    {# Create class string with "star" appended #}
+                    {% set starredClass = (child.vars.required ? ' required') %}
+                    {{ form_widget(child, {'attr': {'class': starredClass, 'title': child.vars.label}}) }}
+                {% endfor %}
+            </div>
+        {% else %}
+            {# Let the choice widget render the select tag #}
+            {{ block('choice_widget') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock star_rating_widget %}

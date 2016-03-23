@@ -1,0 +1,38 @@
+{% set page_count = pagination.pages_count %}
+{% set page = pagination.page %}
+
+{% if page_count > 1 %}
+    <nav class="nav-pagination text-right">
+        <ul class="pagination">
+            {% if page > 1 %}
+                <li>
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': page - 1})) }}"
+                       aria-label="Previous">
+                        <i class="icon-left-open-mini"></i>
+                        <span class="hidden">previous</span>
+                    </a>
+                </li>
+            {% endif %}
+
+            {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
+            {% for p in range(max(pagination.page-4, 1), min(page + 4, page_count)) %}
+                <li>
+                    <a{% if p == page %} class="active"{% endif %}
+                            href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">
+                        {{ p }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if page < page_count %}
+                <li>
+                    <a href="{{ path(pagination.route, pagination.route_params|merge({'page': page + 1})) }}"
+                       aria-label="Next">
+                        <i class="icon-right-open-mini"></i>
+                        <span class="hidden">next</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}

@@ -1,0 +1,24 @@
+services:
+    sonata.admin.thread:
+        class: Cocorico\MessageBundle\Admin\ThreadAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Users", label: "Messages" }
+        arguments:
+            - ~
+            - Cocorico\MessageBundle\Entity\Thread
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+
+    sonata.admin.message:
+        class: Cocorico\MessageBundle\Admin\MessageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+        arguments:
+            - ~
+            - Cocorico\MessageBundle\Entity\Message
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]

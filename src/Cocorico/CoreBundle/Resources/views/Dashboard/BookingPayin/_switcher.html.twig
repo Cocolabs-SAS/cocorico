@@ -1,0 +1,21 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+<!-- form-radio -->
+<form action="#" class="form-radio">
+    <fieldset>
+        <legend class="hidden">select option</legend>
+        <ul class="list-inline">
+            <li>
+                <input value="{{ path('cocorico_dashboard_booking_payin_asker') }}"
+                       name="radio-payin-switcher" type="radio" id="radio1" {{ checked_payin }}>
+                <label for="radio1">{{ "booking.payin.done.title"| trans }}</label>
+            </li>
+            <li>
+                <input value="{{ path('cocorico_dashboard_booking_payin_refund_asker') }}"
+                       name="radio-payin-switcher" type="radio" id="radio2" {{ checked_refund }}>
+                <label for="radio2">{{ "booking.payin.refund.title"| trans }}</label>
+            </li>
+        </ul>
+        <input type="submit" class="hidden">
+    </fieldset>
+</form>

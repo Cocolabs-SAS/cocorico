@@ -1,0 +1,109 @@
+{% trans_default_domain 'cocorico_user' %}
+
+{% if form_login %}
+    {#{{ form_errors(form_login) }}#}
+    {% set login_class= " active" %}
+    {% set register_class= "" %}
+{% endif %}
+
+{% if form_registration %}
+    {#{{ form_errors(form_registration) }}#}
+    {% set login_class= "" %}
+    {% set register_class= " active" %}
+{% endif %}
+
+<div role="tabpanel">
+    <!-- Nav tabs -->
+    <nav class="tabset-holder">
+        <a href="#" class="opener">
+            <span class="hidden">opener</span>
+            <i class="icon-down-open-mini"></i>
+        </a>
+
+        <ul id="login-register-tabs" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="{{ register_class }}">
+                {% if form_login and form_registration %}
+                    <a id="register-tab" href="#home" aria-controls="home" role="tab" data-toggle="tab"
+                       data-text="{{ 'user.signup'|trans }}">
+                        {{ 'user.signup'|trans }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('cocorico_user_register') }}">
+                        {{ 'user.signup'|trans }}
+                    </a>
+                {% endif %}
+            </li>
+            <li role="presentation" class="{{ login_class }}">
+                {% if form_login and form_registration %}
+                    <a id="login-tab" href="#profile" aria-controls="profile" role="tab" data-toggle="tab"
+                       data-text="{{ 'user.signin'|trans }}">
+                        {{ 'user.signin'|trans }}
+                    </a>
+                {% else %}
+                    <a href="{{ path('cocorico_user_login') }}">
+                        {{ 'user.signin'|trans }}
+                    </a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        {#Registration Form#}
+        {% if form_registration %}
+            {% include '@CocoricoUser/Frontend/Common/_register.html.twig'  with {
+            'form_registration' : form_registration,
+            'register_class' : register_class
+            } only %}
+        {% endif %}
+
+        {#Login Form#}
+        {% if form_login %}
+            {% include '@CocoricoUser/Frontend/Common/_login.html.twig'  with {
+            'form_login' : form_login,
+            'login_class' : login_class
+            } only %}
+        {% endif %}
+
+
+
+        {#Redirect after login on referer except for some routes #}
+        {% if app.request.uri != app.request.headers.get('referer')
+        and app.request.get('_route')  != 'cocorico_listing_availabilities'
+        and app.request.get('_route')  != 'cocorico_booking_new'
+        and app.request.get('_route')  != 'cocorico_listing_new' %}
+            {#and app.request.get('_route')  != 'cocorico_user_login'#}
+            {#and app.request.get('_route')  != 'cocorico_user_register'#}
+            <input type="hidden" name="redirect_to" value="{{ app.request.headers.get('referer') }}"/>
+        {% endif %}
+    </div>
+</div>
+
+{#Facebook #}
+{% include '@CocoricoCore/Frontend/Common/js/_facebook_js.html.twig' only %}
+
+<script>
+    $(function () {
+        $('#form-registerlogin form').parsley({
+            errorsContainer: function (ParsleyField) {
+                return ParsleyField.$element
+                        .parents('.field-row.validate-row').find('.error-container');
+            },
+            errorsWrapper: '<div class="errors"></div>',
+            errorTemplate: '<span class="icon-error-field"></span>'
+        });
+
+        //Activate login tab on page load if login errors
+        if ($("#login-errors-wrapper div.flashes").length) {
+            $('#login-tab').tab('show');
+        }
+
+        //Empty login fields on subscribe tab shown
+        $('#login-register-tabs a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            if (e.target.id == "register-tab") {
+                $("#profile input[type=text]").val('');
+            }
+        });
+    });
+</script>

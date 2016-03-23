@@ -1,0 +1,18 @@
+services:
+    cocorico_geo.form.type.geocoding:
+        class: Cocorico\GeoBundle\Form\Type\GeocodingToCoordinateType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.locales%"
+            - "@request_stack"
+            - "%cocorico_geo.google_place_server_api_key%"
+        tags:
+        - { name: form.type, alias: geocoding_to_coordinate }
+
+    cocorico.twig.cocorico_geo_extension:
+        class: Cocorico\GeoBundle\Twig\GeoExtension
+        arguments:
+            - "%cocorico_geo.google_place_api_key%"
+            - "%cocorico_geo.ipinfodb_api_key%"
+        tags:
+            - { name: twig.extension }

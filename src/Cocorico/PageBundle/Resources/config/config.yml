@@ -1,0 +1,30 @@
+imports:
+    - { resource: services.yml }
+
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            toolbar: full
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters:
+                instance: ckeditor
+
+fm_elfinder:
+    instances:
+        ckeditor:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            theme: smoothness # jquery theme
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        show_hidden: false # defaults to false
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg', 'application/pdf', 'image/gif']
+                        upload_deny: ['all']
+                        upload_max_size: 12M

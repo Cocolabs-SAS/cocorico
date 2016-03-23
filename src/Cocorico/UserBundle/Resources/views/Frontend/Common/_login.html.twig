@@ -1,0 +1,58 @@
+{% trans_default_domain 'cocorico_user' %}
+
+<div role="tabpanel" class="tab-pane{{ login_class }}" id="profile">
+
+    <div id="login-errors-wrapper">
+        {{ form_errors(form_login) }}
+    </div>
+
+    <div class="tab-holder">
+        <div class="column">
+            <h3>{{ 'user.login.subtitle'|trans }}</h3>
+
+            {{ form_errors(form_login._username) }}
+
+            <div class="field-row">
+                <span class="label">{{ form_label(form_login._username) }}</span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_login._username, {
+                        'attr': {
+                            'class': "form-control"
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            {{ form_errors(form_login._password) }}
+            <div class="field-row">
+                <span class="label">{{ form_label(form_login._password) }}</span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_login._password, {
+                        'attr': {
+                            'class': "form-control"
+                        }
+                    }) }}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="column">
+            <h3>{{ 'user.facebook.login.title'|trans }}</h3>
+            <a href="#" onclick="fb_login();" class="btn-facebook">
+                <i class="icon-facebook"></i>
+                {{ 'user.facebook.login'|trans }}
+            </a>
+
+            <div id="fb-root"></div>
+        </div>
+    </div>
+</div>
+
+{#<label for="remember_me">{{ 'user.login.remember_me'|trans }}</label>#}
+{#<input type="checkbox" id="remember_me" name="_remember_me" value="on"/>#}
+{#</div>#}
+
+{{ form_rest(form_login) }}

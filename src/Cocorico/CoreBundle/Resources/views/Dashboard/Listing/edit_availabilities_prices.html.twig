@@ -1,0 +1,168 @@
+{% extends '@CocoricoCore/Dashboard/Listing/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    'css/vendor/fullcalendar.min.css'
+    'css/fullcalendar-override.css'
+
+    filter='cssrewrite' output='css/compiled/fullcalendar.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'availabilities_prices' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <div class="form-area">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- tab presentation -->
+            <div role="tabpanel" class="tab-pane active" id="policy">
+                {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                <!-- form-holder -->
+                <div class="form-holder">
+                    <h2>{{ 'listing.edit.price.title'|trans }}</h2>
+
+                    <!-- price-section -->
+                    <div class="price-section">
+                        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:priceForm', {'listing': listing})) }}
+                        <!-- simulator -->
+                        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/ListingPriceSimulator:priceSimulatorForm', {'listing': listing})) }}
+                    </div>
+
+                    <!-- discount -->
+                    <div class="discount-area">
+                        <h2>{{ 'listing.edit.discount.title'|trans }}</h2>
+                        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/ListingDiscount:discountForm', {'listing': listing})) }}
+                    </div>
+
+                    {% if bundleExist('CocoricoListingOptionBundle') %}
+                        <div class="option-area">
+                            <h2>{{ 'listing.edit.options.title'|trans }}</h2>
+                            {{ render(controller('CocoricoListingOptionBundle:Dashboard/Offerer/ListingOption:optionForm', {'listing': listing})) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="booking-policy">
+                        <h2>{{ 'listing.edit.policy.title'|trans }}</h2>
+                        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:durationForm', {'listing': listing})) }}
+                    </div>
+
+                    <div class="form-block">
+                        <form id="prices-form" class="form" action="{{ form_prices.vars.action }}"
+                              method="{{ form_prices.vars.method }}" {{ form_enctype(form_prices) }}>
+                            <!-- price-range -->
+                            <div class="price-range">
+                                <h3>{{ 'listing.edit.price.range.title'|trans }}</h3>
+
+                                <div class="field-row time">
+                                    {{ form_errors(form_prices) }}
+
+                                    {{ form_errors(form_prices.date_range) }}
+                                    {{ form_label(form_prices.date_range) }}
+                                    {{ form_widget(form_prices.date_range) }}
+                                </div>
+
+                                <h3>{{ 'listing.edit.price.choose_weekdays.title'|trans }}</h3>
+
+                                {{ form_errors(form_prices.weekdays) }}
+                                {{ form_label(form_prices.weekdays) }}
+                                {{ form_widget(form_prices.weekdays) }}
+
+                                {% if ( not timeUnitIsDay ) %}
+                                    <h4>{{ 'listing.edit.price.choose_times.title'|trans }}</h4>
+                                    <div class="time-ranges">
+                                        {{ form_errors(form_prices.time_ranges) }}
+                                        {{ form_label(form_prices.time_ranges) }}
+                                        {{ form_widget(form_prices.time_ranges) }}
+                                    </div>
+                                {% endif %}
+
+                                <div class="field-row agenda">
+                                    {{ form_errors(form_prices.price_custom) }}
+                                    <span class="label">
+                                        {{ form_label(form_prices.price_custom) }}
+                                    </span>
+
+                                    {{ form_widget(form_prices.price_custom, {
+                                        'attr': {'class': 'form-control numbers-only' }
+                                    }) }}
+
+                                </div>
+
+                                {{ form_rest(form_prices) }}
+
+                                <div class="btn-block text-center">
+                                    <button type="submit" class="btn btn-default">
+                                        {{ 'listing.save'|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div class="form-block">
+                        <h3>{{ 'listing.edit.price.calendar.show.title'|trans }}</h3>
+
+                        <p>
+                            {{ 'listing.edit.price.calendar.day_click.info'|trans }}
+                        </p>
+                        <!-- date-slider -->
+                        <div class="date-slider alt">
+                            {% include '@CocoricoCore/Dashboard/Listing/_calendar.html.twig' with {'edit_mode': true} only %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+
+    {#Calendar #}
+    {% javascripts
+    'js/vendor/fullcalendar/fullcalendar.min.js'
+    'js/vendor/fullcalendar/lang-all.js'
+
+    output='js/compiled/calendar.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% include '@CocoricoCore/Frontend/Listing/js/_calendar_js.html.twig' with {
+    'calendar_elt': '#fc-calendar',
+    'listing_id': listing.id,
+    'default_price': price,
+    'edit_mode': true,
+    'edit_type': 'price'
+    } only %}
+
+    <script>
+        $(function () {
+            //Price Simulator form submitted when page load if dates are setted
+            if ($("#start-date").val() && $("#end-date").val()) {
+                var $formContainer = $("#price-simulator-form-container");
+                $formContainer.submitAjaxForm(function () {
+                    jcf.replaceAll("#price-simulator-form-container");
+                });
+                $formContainer.find("form").submit();
+            }
+        });
+    </script>
+{% endblock %}

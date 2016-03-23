@@ -1,0 +1,122 @@
+{% trans_default_domain 'cocorico' %}
+
+    {%- set offererItems = {
+    "messages": {
+    "link": path('cocorico_dashboard_message'),
+    "text": 'nav.dashboard.messages.link'|trans
+    },
+    "bookings": {
+    "link": path('cocorico_dashboard_booking_offerer'),
+    "text": 'nav.dashboard.bookings.link'|trans
+    },
+    "listings": {
+    "link": path('cocorico_dashboard_listing'),
+    "text": 'nav.dashboard.listings.link'|trans
+    },
+    "payments": {
+    "link": path('cocorico_dashboard_booking_bank_wire_offerer'),
+    "text": 'nav.dashboard.payments.link'|trans
+    },
+    "comments": {
+    "link": path('cocorico_dashboard_reviews_received'),
+    "text": 'nav.dashboard.comments.link'|trans
+    },
+    "profile": {
+    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+    "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+    "link": path('cocorico_user_logout'),
+    "text": 'nav.logout.link'|trans
+    },
+    } -%}
+
+    {%- set askerItems = {
+    "messages": {
+    "link": path('cocorico_dashboard_message'),
+    "text": 'nav.dashboard.messages.link'|trans
+    },
+    "bookings": {
+    "link": path('cocorico_dashboard_booking_asker'),
+    "text": 'nav.dashboard.bookings.link'|trans
+    },
+    "payments": {
+    "link": path('cocorico_dashboard_booking_payin_asker'),
+    "text": 'nav.dashboard.payments.link'|trans
+    },
+    "comments": {
+    "link": path('cocorico_dashboard_reviews_received'),
+    "text": 'nav.dashboard.comments.link'|trans
+    },
+    "profile": {
+    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+    "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+    "link": path('cocorico_user_logout'),
+    "text": 'nav.logout.link'|trans
+    }
+    } -%}
+
+{%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+    <ul class="dropdown-menu display-sub-tabs newstyle" role="menu">
+        <li class="tab-list">
+            <ul class="nav menu-sub-tabs" role="tablist">
+                <li class="active firstTab">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       data-id="asker">{{ 'nav.asker.link' | trans }}
+                        <span id="nb-unread-asker"></span>
+                    </a>
+                </li>
+                <li class="menu-second-tab secondTab">
+                    <a href="#" aria-expanded="false" class="dropdown-toggle"
+                       data-id="offerer">{{ 'nav.offerer.link' | trans }}
+                        <span id="nb-unread-offerer"></span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown open display-tab" data-id="asker">
+            <ul class="dropdown-menu">
+                {% for name, menu in askerItems %}
+                    <li>
+                        <a id="asker{{ menu.text }}" href="{{ menu.link }}">
+                            {{ menu.text }}
+                            {% if name == 'messages' %}
+                                <span id="askerMsg"></span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                    <li>
+                        <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
+                            {{ 'exit_impersonation'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+        <li class="dropdown display-tab" data-id="offerer">
+            <ul class="dropdown-menu">
+                {% for name, menu in offererItems %}
+                    <li>
+                        <a id="offerer{{ menu.text }}" href="{{ menu.link }}">
+                            {{ menu.text }}
+                            {% if name == 'messages' %}
+                                <span id="offererMsg"></span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                    <li>
+                        <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
+                            {{ 'exit_impersonation'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+    </ul>
+{%- endif -%}

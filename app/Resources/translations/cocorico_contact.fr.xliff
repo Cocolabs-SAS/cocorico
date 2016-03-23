@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2016-03-16T21:10:01Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="b4ce204ba1c572abe62609f69cedee82e8698e44" resname="admin.contact.status.label">
+                <jms:reference-file line="74">ContactBundle/Admin/ContactAdmin.php</jms:reference-file>
+                <jms:reference-file line="107">ContactBundle/Admin/ContactAdmin.php</jms:reference-file>
+                <source>admin.contact.status.label</source>
+                <target>Status</target>
+            </trans-unit>
+            <trans-unit id="617ece6155264ee960631fa8405397188e270073" resname="cocorico_contact.email.blank">
+                <source>cocorico_contact.email.blank</source>
+                <target>Veuillez saisir une adresse mail.</target>
+            </trans-unit>
+            <trans-unit id="bf1eb03f71a160d4cf7abb47fcb0be45fcc72bd3" resname="cocorico_contact.email.invalid">
+                <source>cocorico_contact.email.invalid</source>
+                <target>L'e-mail saisi est incorrect.</target>
+            </trans-unit>
+            <trans-unit id="bd7f1fad35f56148ab8b0bb32e7e4e037f715f88" resname="cocorico_contact.email.long">
+                <source>cocorico_contact.email.long</source>
+                <target>L'e-mail saisi est trop long.</target>
+            </trans-unit>
+            <trans-unit id="0ab38aefc862eaf36fcb5d87344193241caed00c" resname="cocorico_contact.email.short">
+                <source>cocorico_contact.email.short</source>
+                <target>L'e-mail saisi est trop court.</target>
+            </trans-unit>
+            <trans-unit id="89823417ee869b58a941c5a34f902826203b478f" resname="cocorico_contact.first_name.blank">
+                <source>cocorico_contact.first_name.blank</source>
+                <target>Veuillez renseigner votre prénom.</target>
+            </trans-unit>
+            <trans-unit id="8aa9acea16c2123387489f0797c9c22f8703c370" resname="cocorico_contact.first_name.long">
+                <source>cocorico_contact.first_name.long</source>
+                <target>Votre prénom est trop long.</target>
+            </trans-unit>
+            <trans-unit id="ba484c0a25de893c4074a9e6f659115ca7cc2b0a" resname="cocorico_contact.first_name.short">
+                <source>cocorico_contact.first_name.short</source>
+                <target>Votre prénom est trop court.</target>
+            </trans-unit>
+            <trans-unit id="1ff5218e47ac728dc74d24158b1d5c8ead9146cb" resname="cocorico_contact.last_name.blank">
+                <source>cocorico_contact.last_name.blank</source>
+                <target>Veuillez renseigner votre nom.</target>
+            </trans-unit>
+            <trans-unit id="95b09cfd737d5da88e4dabc64c9da68902a76e66" resname="cocorico_contact.last_name.long">
+                <source>cocorico_contact.last_name.long</source>
+                <target>Votre nom est trop long pour être enregistré.</target>
+            </trans-unit>
+            <trans-unit id="c0462e5466b84ceec0e28a6a7fecd62f80c811a3" resname="cocorico_contact.last_name.short">
+                <source>cocorico_contact.last_name.short</source>
+                <target>Votre nom est trop court pour être enregistré.</target>
+            </trans-unit>
+            <trans-unit id="568b6b740c6fe55c20842177a7861e0e09e14e56" resname="cocorico_contact.message.blank">
+                <source>cocorico_contact.message.blank</source>
+                <target>Veuillez saisir votre message.</target>
+            </trans-unit>
+            <trans-unit id="a07fa835ecdeb1568598171fbf40904d5e5f7649" resname="cocorico_contact.message.short">
+                <source>cocorico_contact.message.short</source>
+                <target>Votre message est trop court.</target>
+            </trans-unit>
+            <trans-unit id="7889eba478729b65496baf4041fc54edbd5bbff6" resname="cocorico_contact.phone.long">
+                <source>cocorico_contact.phone.long</source>
+                <target>Votre numéro de téléphone est trop long.</target>
+            </trans-unit>
+            <trans-unit id="c62b5eac792a77e8ea5505961c8458ca30cda29b" resname="cocorico_contact.phone.short">
+                <source>cocorico_contact.phone.short</source>
+                <target>Votre numéro de téléphone est trop court.</target>
+            </trans-unit>
+            <trans-unit id="9694f4fe75963ab248fdf28637eb5224be183ad8" resname="cocorico_contact.subject.blank">
+                <source>cocorico_contact.subject.blank</source>
+                <target>Veuillez saisir un sujet.</target>
+            </trans-unit>
+            <trans-unit id="b09330266caae421c62ad2e1fc43026935920479" resname="cocorico_contact.subject.long">
+                <source>cocorico_contact.subject.long</source>
+                <target>Le sujet de votre message est trop long.</target>
+            </trans-unit>
+            <trans-unit id="c5d5e834352ed5aa86e19398015f860e92802d49" resname="cocorico_contact.subject.short">
+                <source>cocorico_contact.subject.short</source>
+                <target>Le sujet de votre message est trop court.</target>
+            </trans-unit>
+            <trans-unit id="fce58b916a70eb53f56001f10e807cdf1cc7fee2" resname="contact.form.email.label">
+                <jms:reference-file line="39">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.email.label</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="865cca75d194e7c01a07dceb026e56b14c6b88cf" resname="contact.form.first_name.label">
+                <jms:reference-file line="25">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.first_name.label</source>
+                <target>Prénom</target>
+            </trans-unit>
+            <trans-unit id="cb9e2195bca982ce48c1aa3da3ac02c48e8589d4" resname="contact.form.last_name.label">
+                <jms:reference-file line="32">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.last_name.label</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="413caa3b4f3493ea303fa1cdc80d7e87671fee8f" resname="contact.form.message.label">
+                <jms:reference-file line="60">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.message.label</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="4c2d77679ee1915b3d0bc40a5a4da90ae4f9f601" resname="contact.form.phone.label">
+                <jms:reference-file line="46">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.phone.label</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="fb57c7da2be9d8e65c5161a43d8108ca429b6947" resname="contact.form.subject.label">
+                <jms:reference-file line="53">Type/Frontend/ContactNewType.php</jms:reference-file>
+                <source>contact.form.subject.label</source>
+                <target>Sujet</target>
+            </trans-unit>
+            <trans-unit id="35d8ee3612fd226f9cfbbc9b23fdc9534ee90792" resname="contact.form.submit.button">
+                <jms:reference-file line="32">views/Contact/index.html.twig</jms:reference-file>
+                <source>contact.form.submit.button</source>
+                <target>Envoyer</target>
+            </trans-unit>
+            <trans-unit id="8c4ecc2f579d5a4e94b8c400cae37855a672b92f" resname="contact.new.form.title">
+                <jms:reference-file line="24">views/Contact/index.html.twig</jms:reference-file>
+                <source>contact.new.form.title</source>
+                <target>Nous contacter</target>
+            </trans-unit>
+            <trans-unit id="8966dd81d50f350bf4aa2b7d2bae9a6afbbc441c" resname="contact.new.success">
+                <jms:reference-file line="38">Controller/Frontend/ContactController.php</jms:reference-file>
+                <source>contact.new.success</source>
+                <target>Nous vous remercions pour votre message. Nous vous répondrons dans les plus brefs délais.
+                </target>
+            </trans-unit>
+            <trans-unit id="e86eb4f1c43f4c050052a1d32f4b347a0c9f9047" resname="entity.contact.status.new">
+                <jms:reference-file line="21">ContactBundle/Model/BaseContact.php</jms:reference-file>
+                <source>entity.contact.status.new</source>
+                <target>Nouveau</target>
+            </trans-unit>
+            <trans-unit id="2c36a31b4a40cc88619dd26a0b07930e75b82ff8" resname="entity.contact.status.read">
+                <jms:reference-file line="22">ContactBundle/Model/BaseContact.php</jms:reference-file>
+                <source>entity.contact.status.read</source>
+                <target>Lu</target>
+            </trans-unit>
+            <trans-unit id="ccaeec1d1b1dbbc71e18f43031b34b69864d0ec0" resname="form.error">
+                <jms:reference-file line="69">views/Form/fields.html.twig</jms:reference-file>
+                <source>form.error</source>
+                <target>Au moins une erreur s'est produite.</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

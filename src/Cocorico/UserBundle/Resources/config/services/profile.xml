@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--@formatter:off-->
+    <parameters>
+        <parameter key="cocorico_user.profile_about_me.form.class">Cocorico\UserBundle\Form\Type\ProfileAboutMeFormType</parameter>
+    </parameters>
+    <!--@formatter:on-->
+
+    <services>
+
+        <service id="fos_user.profile.form" factory-method="createNamed" factory-service="form.factory"
+                 class="Symfony\Component\Form\Form">
+            <argument>%fos_user.profile.form.name%</argument>
+            <argument>%fos_user.profile.form.type%</argument>
+            <argument>null</argument>
+            <argument type="collection">
+                <argument key="validation_groups">%fos_user.profile.form.validation_groups%</argument>
+            </argument>
+        </service>
+
+
+        <service id="cocorico_user.profile_about_me.form.type" class="%cocorico_user.profile_about_me.form.class%">
+            <argument>%fos_user.model.user.class%</argument>
+            <argument type="service" id="request_stack"/>
+            <tag name="form.type" alias="user_profile_about_me"/>
+            <argument>%cocorico.locales%</argument>
+        </service>
+
+
+        <service id="fos_user.profile.form.handler.default" class="FOS\UserBundle\Form\Handler\ProfileFormHandler"
+                 scope="request" public="false">
+            <argument type="service" id="fos_user.profile.form"/>
+            <argument type="service" id="request"/>
+            <argument type="service" id="fos_user.user_manager"/>
+        </service>
+
+    </services>
+
+</container>

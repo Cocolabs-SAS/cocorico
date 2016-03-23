@@ -1,0 +1,38 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="availability-form-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+    {{ form_errors(form) }}
+    <div class="form-area">
+        <div class="form-holder">
+            <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+                <div class="field-row">
+                    {{ form_errors(form.status) }}
+                    <span class="label">{{ form_label(form.status) }}</span>
+                    <div class="select-holder">
+                        {{ form_widget(form.status, {
+                            'attr': {'class': 'no-arrow' },
+                        }) }}
+                    </div>
+                </div>
+
+                {{ form_rest(form) }}
+                <div class="text-center">
+                    <button class="btn btn-default" type="submit">{{ 'listing.availability.save'|trans }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            var $formContainer = $("#availability-form-container");
+            $formContainer.submitAjaxForm(function () {
+                jcf.replaceAll("#availability-form-container");
+            });
+        });
+    </script>
+</div>
+

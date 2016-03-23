@@ -1,0 +1,16 @@
+{% trans_default_domain 'cocorico_message' %}
+<form class="widget form-msg" method="post"
+      action="{{ path('cocorico_dashboard_message_new', { 'listingId': listing.id }) }}">
+    <fieldset>
+        {{ form_errors(form) }}
+        {#{{ form_errors(form.body) }}#}
+        <a class="contact-opener btn btn-default no-margin">{{ 'thread.new.contact_me'|trans }}</a>
+
+        <div class="form-holder" style="display:none;">
+            {{ form_widget(form.body) }}
+            {{ form_widget(form._token) }}
+            {{ form_rest(form) }}
+            <input type="submit" class="btn submit-contact btn-default" value="{{ 'thread.new.send'|trans }}">
+        </div>
+    </fieldset>
+</form>

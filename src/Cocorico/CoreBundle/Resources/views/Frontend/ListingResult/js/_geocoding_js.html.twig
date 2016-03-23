@@ -1,0 +1,98 @@
+{#
+ Javascript geocoding for search listing
+#}
+{% trans_default_domain 'cocorico_geo' %}
+
+
+{% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
+'map_elt': map_elt,
+'auto_complete_elt': auto_complete_elt,
+'default_lat': default_lat|default,
+'default_lng': default_lng|default,
+'default_zoom': default_zoom|default,
+'display_marker': display_marker is not defined ? true : display_marker
+} only %}
+
+
+<script>
+    $(function () {
+        var $searchForm = $("{{ auto_complete_elt }}").closest("form");
+
+        $searchForm.submit(function (e) {
+            e.preventDefault();
+            $.when(
+                    geocodeFunc($("{{ auto_complete_elt }}").val())
+            ).then(
+                    geocodeSuccess, geocodeError
+            );
+        });
+
+        //Center modal dialog box
+        $('.modal').on('show.bs.modal', centerModal);
+
+        $(window).on("resize", function () {
+            $('.modal:visible').each(centerModal);
+        });
+
+        function geocodeSuccess(result) {
+            fillAddressFields(result);
+//            console_log("geocodeSuccess", result);
+            $searchForm.unbind('submit').submit();
+        }
+
+        function geocodeError(result) {
+            // TRIGGER MODAL
+            var modal = $('#modal');
+            modal.find('.modal-body .title').html('{{ 'cocorico.search.invalidate.address' | trans({}, 'cocorico') }}');
+            modal.modal('show');
+        }
+
+        function fillAddressFields(result) {
+            var resultLocale = result[locale];
+            var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
+            var $zip = $("#location_zip");
+
+            if (extendSearch) {
+                //Google zip inconsistency: P
+                //Resolve zip code changing between geocoding requests while extending search.
+                var zip = $zip.val();
+                if (zip && resultLocale.postal_code) {
+                    //Zip has changed
+                    if (zip.substring(0, 2) != resultLocale.postal_code.substring(0, 2)) {
+                        $zip.val(zip.substring(0, 2));//We change zip code to the old value
+                        return;
+                    }
+                }
+            }
+
+            $("#page").val(1);
+            $("#location_lat").val(result.lat);
+            $("#location_lng").val(result.lng);
+            $("#location_viewport").val(result.viewport);
+            $("#location_addressType").val(result.types);
+            $("#location_country").val(resultLocale.country_short);
+            $("#location_area").val(resultLocale.administrative_area_level_1);
+            $("#location_department").val(resultLocale.administrative_area_level_2);
+            $("#location_city").val(resultLocale.locality);
+            $zip.val(resultLocale.postal_code);
+            $("#location_route").val(resultLocale.route);
+            $("#location_streetNumber").val(resultLocale.street_number);
+        }
+
+
+        //Geo locate ip
+        geoLocateIPFunc(function (location) {
+            var $location = $("#location");
+            if (!$location.val()) {
+                if (location.cityName) {
+                    $location.val(location.cityName + ", ");
+                }
+
+                if (location.countryName) {
+                    $location.val($location.val() + location.countryName);
+                }
+            }
+        });
+
+    });
+</script>

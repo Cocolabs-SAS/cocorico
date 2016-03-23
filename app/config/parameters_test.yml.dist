@@ -1,0 +1,20 @@
+# This file is used on test env (build)
+parameters:
+    database_driver:  pdo_sqlite
+    database_path: %kernel.root_dir%\..\features\_datas\cocorico_test.db
+
+    mongodb_server: mongodb://localhost:27017
+    mongodb_database_name: cocorico_test
+
+    debug_toolbar:          true
+    debug_redirects:        false
+    use_assetic_controller: false
+
+    cocorico.assets_base_urls: http://cocorico.test.dev
+
+    router.request_context.host: cocorico.test.dev
+    router.request_context.scheme: http
+    router.request_context.base_url: ''
+
+    profiler:
+        enabled: false

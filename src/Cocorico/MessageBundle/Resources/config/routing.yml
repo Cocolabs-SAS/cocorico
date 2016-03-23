@@ -1,0 +1,4 @@
+cocorico_message_dashboard:
+    resource: "@CocoricoMessageBundle/Controller/Dashboard"
+    type:     annotation
+    prefix: /dashboard

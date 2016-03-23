@@ -1,0 +1,78 @@
+services:
+    #Entities manager
+    cocorico.listing_search.manager:
+        class: Cocorico\CoreBundle\Model\Manager\ListingSearchManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@doctrine.odm.mongodb.document_manager"
+            - "%cocorico.booking.end_day_included%"
+            - "%cocorico.time_unit%"
+            - "%cocorico.listing_search_max_per_page%"
+            - "%cocorico.listing_availability_status%"
+            - "@event_dispatcher"
+
+    cocorico.listing.manager:
+        class: Cocorico\CoreBundle\Model\Manager\ListingManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@security.context"
+            - "%cocorico.listing_new_is_published%"
+            - "%cocorico.dashboard_max_per_page%"
+            - "@cocorico.mailer.twig_swift"
+
+    #todo: Split it in muliple services
+    cocorico.booking.manager:
+        class: Cocorico\CoreBundle\Model\Manager\BookingManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@doctrine.odm.mongodb.document_manager"
+            - "%cocorico.fee_as_asker%"
+            - "%cocorico.fee_as_offerer%"
+            - "%cocorico.booking.end_day_included%"
+            - "%cocorico.time_unit%"
+            - "%cocorico.times_max%"
+            - "%cocorico.booking.min_start_delay%"
+            - "%cocorico.booking.min_start_time_delay%"
+            - "%cocorico.booking_price_min%"
+            - "@cocorico.listing_availability.manager"
+            - "%cocorico.dashboard_max_per_page%"
+            - "@cocorico.mailer.twig_swift"
+            - "@cocorico.smser.twig"
+            - "@?cocorico_sms.receiver"
+            - "@?cocorico_listing_option.manager"
+            - "@?cocorico_voucher.manager"
+            - "%cocorico.listing_availability_status%"
+            - "%cocorico.vat%"
+            - "%cocorico.include_vat%"
+            - "@event_dispatcher"
+
+    cocorico.booking_bank_wire.manager:
+        class: Cocorico\CoreBundle\Model\Manager\BookingBankWireManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.bankwire_checking_simulation%"
+            - "@cocorico.mailer.twig_swift"
+            - "%cocorico.dashboard_max_per_page%"
+            - "@event_dispatcher"
+
+    cocorico.booking_payin_refund.manager:
+        class: Cocorico\CoreBundle\Model\Manager\BookingPayinRefundManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "%cocorico.booking.cancelation_policy%"
+            - "@cocorico.mailer.twig_swift"
+            - "%cocorico.dashboard_max_per_page%"
+
+    cocorico.language.manager:
+        class: Cocorico\CoreBundle\Model\Manager\LanguageManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@router"
+            - "%cocorico.locales%"
+
+    #Documents Manager
+    cocorico.listing_availability.manager:
+        class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager
+        arguments:
+            - "@doctrine.odm.mongodb.document_manager"
+            - "%cocorico.time_unit%"

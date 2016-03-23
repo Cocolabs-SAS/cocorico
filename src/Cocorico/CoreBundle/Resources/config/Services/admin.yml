@@ -1,0 +1,96 @@
+services:
+    sonata.admin.listing:
+        class: Cocorico\CoreBundle\Admin\ListingAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings", label: "Listings", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\Listing
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+            - [ setIncludeVat, [%cocorico.include_vat%]]
+
+    sonata.admin.booking:
+        class: Cocorico\CoreBundle\Admin\BookingAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bookings", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\Booking
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+            - [ setTimeUnit, [%cocorico.time_unit%]]
+            - [ setBookingExpirationDelay, [%cocorico.booking.expiration_delay%]]
+            - [ setIncludeVat, [%cocorico.include_vat%]]
+            - [ setBundlesEnabled, [%kernel.bundles%]]
+
+    sonata.admin.listing_category:
+        class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Category", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+
+    sonata.admin.listing_characteristic:
+        class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCharacteristic
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+
+    sonata.admin.listing_characteristic_group:
+        class: Cocorico\CoreBundle\Admin\ListingCharacteristicGroupAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Group", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCharacteristicGroup
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+
+
+    sonata.admin.booking_bank_wire:
+        class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bank Wires", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\BookingBankWire
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+            - [ setTimeUnit, [%cocorico.time_unit%]]
+            - [ setBookingBankWireManager, [@cocorico.booking_bank_wire.manager]]
+            - [ setBundlesEnabled, [%kernel.bundles%]]
+
+    sonata.admin.booking_payin_refund:
+        class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Payin Refunds", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\BookingPayinRefund
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+            - [ setTimeUnit, [%cocorico.time_unit%]]
+            - [ setBundlesEnabled, [%kernel.bundles%]]
+

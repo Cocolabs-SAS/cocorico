@@ -1,0 +1,22 @@
+{{ form_start(form) }}
+<fieldset>
+    <legend class="hidden">formswitchers</legend>
+    <span class="title">
+        <label for="applicant">
+            {{ 'Asker'|trans }}
+            {% if (nbMessages[0]['asker'] > 0 ) %} ({{ nbMessages[0]['asker'] }}) {% endif %}
+        </label>
+    </span>
+
+    <div class="radio-holder">
+        {{ form_widget(form['profile'][0],  {'id': 'applicant'}) }}
+        {{ form_widget(form['profile'][1],  {'id': 'provider'}) }}
+    </div>
+    <strong class="counter">
+        <label for="provider">{{ 'Offerer'|trans }}
+            {% if (nbMessages[0]['offerer'] > 0) %} ({{ nbMessages[0]['offerer'] }}) {% endif %}
+        </label>
+    </strong>
+    <input type="submit" class="hidden">
+</fieldset>
+{{ form_end(form) }}

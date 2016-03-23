@@ -1,0 +1,50 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'bookings' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <div class="tab-content no-border">
+        <!-- reservations -->
+        <div role="tabpanel" class="tab-pane active" id="reservations">
+            <!-- postarea -->
+            <section class="postarea alt">
+                <header class="section-head">
+                    <span class="result-counter">
+                        {{ 'results'|transchoice(bookings.count) }}
+                    </span>
+                    {% include '@CocoricoCore/Dashboard/Booking/_filters.html.twig'with {
+                    'filterForm': filterForm
+                    } only %}
+                </header>
+
+                <div class="posts-holder">
+                    {% include '@CocoricoCore/Dashboard/Booking/_booking_index.html.twig' with {
+                    'bookings': bookings
+                    } only %}
+                </div>
+
+                {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                'pagination': pagination
+                } only %}
+            </section>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        {# Filters by status #}
+        $('#status').change(function (e) {
+            $(this).closest('form').submit();
+        });
+    </script>
+{% endblock %}

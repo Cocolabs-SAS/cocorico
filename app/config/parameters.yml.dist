@@ -1,0 +1,103 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     cocorico_dev
+    database_user:     cocorico_dev
+    database_password: cocorico_dev
+
+    #MongoDB
+    mongodb_server: mongodb://localhost:27017
+    mongodb_database_name: cocorico_dev
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+    mailer_port: null
+
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    debug_toolbar:          false
+    debug_redirects:        false
+    use_assetic_controller: false
+
+    ### Cocorico environements dependant parameters (See CocoricoCoreBundle/Resources/config/parameters.yml) ###
+
+    #Assets for emails
+    cocorico.assets_base_urls: https://cocorico.dev
+
+    #Request Context url for email send from command
+    router.request_context.host: cocorico.dev
+    router.request_context.scheme: https
+    router.request_context.base_url: ''
+
+    #Admin access
+    cocorico.admin: admin
+    #Admin Web JMS translations activation
+    cocorico.admin_translation: false
+
+    #Microsoft Translator key
+    cocorico.translator.client.id: ~
+    cocorico.translator.secret.key: ~
+
+    #Facebook
+    cocorico.facebook.app_id: ~
+    cocorico.facebook.secret: ~
+
+    #Image processing driver (liip_imagine_bundle): (gd, imagick, gmagick)
+    cocorico.image_driver: imagick
+
+    #Google analytics code
+    cocorico.google_analytics: UA-64445856-1
+
+    #Google Tag Manager
+    cocorico.google_tag_manager: false
+
+    #Google Place API Key
+    cocorico_geo.google_place_api_key: ~
+    cocorico_geo.google_place_server_api_key: ~
+
+    #IpInfoDb Api key
+    cocorico_geo.ipinfodb_api_key: ~
+
+    #Deployment
+    cocorico.deploy.host: fake.cocorico.prod
+    cocorico.deploy.dir: /fake/path
+    cocorico.deploy.user: fakeuser
+
+    #### Environment dependant to facilitate tests ####
+    #### Delays ####
+
+    ##Booking expiration delay in minutes
+    cocorico.booking.expiration_delay: 2880
+
+    ##Expiring Bookings alert delay in minutes
+    cocorico.booking.alert_expiration_delay: 120
+
+    #Imminent Bookings alert delay in minutes
+    cocorico.booking.alert_imminent_delay: 1440
+
+    ##Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
+    ##after booking start date or booking end date.
+    cocorico.booking.validated_moment: 'start'
+
+    #Time after or before the moment the booking is considered as validated (in minutes)
+    #If less than 0 the time is before the moment else time is after the moment
+    cocorico.booking.validated_delay: 0
+
+    ##Does the bank wire checking must be done really or simulated
+    ##Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
+    ##Set to false in prod env
+    cocorico.bankwire_checking_simulation: false
+
+    ################################# Optional bundles #################################
+
+    #SMS
+    cocorico_sms.enabled: false
+    cocorico_sms.ovh_endpoint_name:      "ovh-eu"
+    cocorico_sms.ovh_application_key:    "Application Key"
+    cocorico_sms.ovh_application_secret: "Application Secret"
+    cocorico_sms.ovh_consumer_key:       "Consumer Key"
+    cocorico_sms.ovh_service_name:       "Service Name"
+    cocorico_sms.ovh_debug: false

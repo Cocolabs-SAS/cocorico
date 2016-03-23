@@ -1,0 +1,7 @@
+{% spaceless %}
+    {# initialize facebook SDK #}
+    <a href="http://www.facebook.com/sharer/sharer.php?{{ {'u': url, 'title': title }|url_encode }}">
+        <i class="icon-facebook"></i>
+        <span class="hidden">facebook</span>
+    </a>
+{% endspaceless %}

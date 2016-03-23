@@ -1,0 +1,57 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<section class="widget similar-ads">
+    <h1>{{ 'listing.similaries.heading'|trans }}</h1>
+
+    <div class="listing-holder">
+        <!-- post -->
+        {%- for result in results.getIterator() -%}
+            {% set listing = result[0] %}
+            {% set listing_translation = listing.translations[app.request.locale] %}
+            {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
+            {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+            <article class="post">
+                <div class="alignleft">
+                    <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}"
+                       class="listing-post listing-box"
+                       style="display:block">
+                        <img alt="{{ listing_translation.title }}"
+                             src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xsmall') }}">
+
+                        <div class="listing-post head">
+                            <div class="time-price">
+                                <strong class="price">
+                                    {{ price }}
+                                    <sup>
+                                        <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                                    </sup>
+                                    /{{ (0)|add_time_unit_text|first }}
+                                </strong>
+                            </div>
+                        </div>
+
+                        {% if listing.averageRating %}
+                            {{ listing.averageRating | cocorico_star_rating }}
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="post-content">
+                    <h2>
+                        <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                            {{ listing_translation.title }}
+                        </a>
+                    </h2>
+
+                    <p>{{ listing_translation.description | truncate(50,true) }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+    {% if ('search_result?location' in app.request.headers.get('referer')) or ('resultat_recherche?location' in app.request.headers.get('referer')) %}
+        {% set referer = app.request.headers.get('referer') %}
+    {% else %}
+        {% set referer = path('cocorico_listing_search_result') %}
+    {% endif %}
+    <a class="btn btn-default" href="{{ referer }}">{{ 'listing.similaries.back_to_search'|trans }}</a>
+</section>

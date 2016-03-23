@@ -1,0 +1,29 @@
+{% trans_default_domain 'cocorico_booking' %}
+<div class="btns-holder text-center">
+    {% if app.user == booking.user %}
+        {% if booking.canBeCanceledByAsker %}
+            <a href="{{ path('cocorico_dashboard_booking_edit_asker', {'id': booking.id, 'type': 'cancel'}) }}"
+               class="btn btn-default" data-toggle="modal" data-target="#modal">
+                {{ 'booking.show_asker.cancel'|trans }}
+            </a>
+        {% endif %}
+
+        {% if booking.status == BookingConstants.STATUS_PAYED %}
+            <a target="_blank" href="{{ path('cocorico_dashboard_booking_show_voucher', {'id': booking.id}) }}"
+               class="btn btn-default" data-toggle="" data-target="">
+                {{ 'booking.show_asker.download_voucher'|trans }}
+            </a>
+        {% endif %}
+    {% elseif app.user == booking.listing.user and booking.status == BookingConstants.STATUS_NEW %}
+        {% if booking.hasCorrectStartTime(minStartDelay, minStartTimeDelay, timeUnitIsDay) %}
+            <a href="{{ path('cocorico_dashboard_booking_edit_offerer', {'id': booking.id, 'type': 'refuse'}) }}"
+               class="btn btn-refuse" data-toggle="modal" data-target="#modal">
+                {{ 'booking.show_offerer.refuse'|trans }}
+            </a>
+            <a href="{{ path('cocorico_dashboard_booking_edit_offerer', {'id': booking.id, 'type': 'accept'}) }}"
+               class="btn btn-default" data-toggle="modal" data-target="#modal">
+                {{ 'booking.show_offerer.accept'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+</div>

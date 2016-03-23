@@ -1,0 +1,58 @@
+parameters:
+    cocorico.listing_activated_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:listing_activated_offerer.txt.twig"
+    cocorico.booking_request_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_request_offerer.txt.twig"
+    cocorico.booking_request_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_request_asker.txt.twig"
+    cocorico.booking_accepted_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_accepted_offerer.txt.twig"
+    cocorico.booking_accepted_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_accepted_asker.txt.twig"
+    cocorico.booking_refused_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_refused_offerer.txt.twig"
+    cocorico.booking_refused_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_refused_asker.txt.twig"
+    cocorico.booking_request_expired_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_request_expired_asker.txt.twig"
+    cocorico.booking_request_expired_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_request_expired_offerer.txt.twig"
+    cocorico.booking_canceled_by_asker_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_canceled_by_asker_offerer.txt.twig"
+    cocorico.booking_canceled_by_asker_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_canceled_by_asker_asker.txt.twig"
+    cocorico.booking_imminent_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_imminent_offerer.txt.twig"
+    cocorico.booking_imminent_asker.email.template: "CocoricoCoreBundle:Mails/Asker:booking_imminent_asker.txt.twig"
+    cocorico.booking_request_expiration_alert_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_request_expiration_alert_offerer.txt.twig"
+    cocorico.reminder_to_rate_asker_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:reminder_to_rate_asker_offerer.txt.twig"
+    cocorico.booking_bank_wire_transfer_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:booking_bank_wire_transfer_offerer.txt.twig"
+    cocorico.update_your_calendar_offerer.email.template: "CocoricoCoreBundle:Mails/Offerer:update_your_calendar_offerer.txt.twig"
+    cocorico.payment_error_asker.email.template: "CocoricoCoreBundle:Mails/Asker:payment_error_asker.txt.twig"
+    cocorico.reminder_to_rate_offerer_asker.email.template: "CocoricoCoreBundle:Mails/Asker:reminder_to_rate_offerer_asker.txt.twig"
+    cocorico.admin_message.email.template: "CocoricoCoreBundle:Mails:admin_message.txt.twig"
+
+services:
+    cocorico.mailer.twig_swift:
+        class: Cocorico\CoreBundle\Mailer\TwigSwiftMailer
+        arguments:
+            - "@mailer"
+            - "@router"
+            - "@twig"
+            - "@request_stack"
+            - "@translator"
+            - parameters:
+                cocorico_time_unit: %cocorico.time_unit%
+                cocorico_locales: %cocorico.locales%
+                cocorico_locale: %cocorico.locale%
+                cocorico_from_email: "%cocorico.from_email%"
+                cocorico_contact_email: "%cocorico.contact_mail%"
+            - templates:
+                listing_activated_offerer: %cocorico.listing_activated_offerer.email.template%
+                booking_request_offerer: %cocorico.booking_request_offerer.email.template%
+                booking_accepted_offerer: %cocorico.booking_accepted_offerer.email.template%
+                booking_canceled_by_asker_offerer: %cocorico.booking_canceled_by_asker_offerer.email.template%
+                booking_canceled_by_asker_asker: %cocorico.booking_canceled_by_asker_asker.email.template%
+                booking_request_expired_offerer: %cocorico.booking_request_expired_offerer.email.template%
+                booking_request_expired_asker: %cocorico.booking_request_expired_asker.email.template%
+                booking_request_asker: %cocorico.booking_request_asker.email.template%
+                booking_accepted_asker: %cocorico.booking_accepted_asker.email.template%
+                booking_refused_asker: %cocorico.booking_refused_asker.email.template%
+                booking_refused_offerer: %cocorico.booking_refused_offerer.email.template%
+                booking_imminent_offerer: %cocorico.booking_imminent_offerer.email.template%
+                booking_imminent_asker: %cocorico.booking_imminent_asker.email.template%
+                booking_request_expiration_alert_offerer: %cocorico.booking_request_expiration_alert_offerer.email.template%
+                booking_bank_wire_transfer_offerer: %cocorico.booking_bank_wire_transfer_offerer.email.template%
+                reminder_to_rate_asker_offerer: %cocorico.reminder_to_rate_asker_offerer.email.template%
+                reminder_to_rate_offerer_asker: %cocorico.reminder_to_rate_offerer_asker.email.template%
+                update_your_calendar_offerer: %cocorico.update_your_calendar_offerer.email.template%
+                payment_error_asker: %cocorico.payment_error_asker.email.template%
+                admin_message: %cocorico.admin_message.email.template%

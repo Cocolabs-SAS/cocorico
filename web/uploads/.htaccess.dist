@@ -1,0 +1,6 @@
+deny from all
+
+<Files ^(*.jpeg|*.jpg|*.png|*.gif|*.pdf)>
+   order deny,allow
+   allow from all
+</Files>

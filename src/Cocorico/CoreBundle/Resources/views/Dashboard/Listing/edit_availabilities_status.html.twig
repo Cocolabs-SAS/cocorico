@@ -1,0 +1,139 @@
+{% extends 'CocoricoCoreBundle:Dashboard/Listing:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    {% stylesheets
+    'css/vendor/fullcalendar.min.css'
+    'css/fullcalendar-override.css'
+
+    filter='cssrewrite' output='css/compiled/fullcalendar.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'availabilities_status' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block content_dashboard -%}
+    <form class="form-area" action="{{ form.vars.action }}"
+          method="{{ form.vars.method }}" {{ form_enctype(form) }} >
+        <fieldset>
+            <legend class="hidden">form area</legend>
+            {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+            <!-- alert -->
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- tab calendar -->
+                <div role="tabpanel" class="tab-pane active" id="calendar">
+
+                    <!-- form-holder -->
+                    <div class="form-holder">
+                        <h2>{{ 'listing.edit.calendar.title'|trans }}</h2>
+
+                        <p><strong class="sub-heading">{{ 'listing.edit.calendar.help'|trans }} :</strong></p>
+
+                        <div class="form-block">
+
+                            <!-- price-range -->
+                            <div class="price-range">
+                                <h3>{{ 'listing.edit.calendar.range.title'|trans }}</h3>
+
+                                <div class="field-row time">
+                                    {{ form_errors(form) }}
+                                    {{ form_errors(form.date_range) }}
+                                    {{ form_label(form.date_range) }}
+                                    {{ form_widget(form.date_range) }}
+                                </div>
+
+                                <h3>{{ 'listing.edit.calendar.choose_weekdays.title'|trans }}</h3>
+
+                                {{ form_errors(form.weekdays) }}
+                                {{ form_label(form.weekdays) }}
+                                {{ form_widget(form.weekdays) }}
+
+
+                                {% if ( not timeUnitIsDay ) %}
+                                    <h4>{{ 'listing.edit.calendar.choose_times.title'|trans }}</h4>
+
+                                    <div class="time-ranges collection-dib">
+                                        {{ form_errors(form.time_ranges) }}
+                                        {{ form_label(form.time_ranges) }}
+                                        {{ form_widget(form.time_ranges) }}
+                                    </div>
+                                {% endif %}
+
+                                <div class="location">
+                                    {{ form_errors(form.status) }}
+                                    <span class="label">{{ form_label(form.status) }}</span>
+
+                                    <div class="select-holder">
+                                        {{ form_widget(form.status, {
+                                            'attr': {
+                                                'class': "no-arrow"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="btn-block text-center">
+                                    <button type="submit" class="btn btn-default">
+                                        {{ 'listing.save'|trans }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-block">
+                            <h3>{{ 'listing.edit.calendar.show.title'|trans }}</h3>
+
+                            <p>
+                                {{ 'listing.edit.calendar.day_click.info'|trans }}
+                            </p>
+
+                            <div class="date-slider alt">
+                                {% include '@CocoricoCore/Dashboard/Listing/_calendar.html.twig' with {'edit_mode': true} only %}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            {{ form_rest(form) }}
+        </fieldset>
+    </form>
+{%- endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+
+    {#Calendar #}
+    {% javascripts
+    'js/vendor/fullcalendar/fullcalendar.min.js'
+    'js/vendor/fullcalendar/lang-all.js'
+
+    output='js/compiled/calendar.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+
+    {% include '@CocoricoCore/Frontend/Listing/js/_calendar_js.html.twig' with {
+    'calendar_elt': '#fc-calendar',
+    'listing_id': listing.id,
+    'default_price': price,
+    'edit_mode': true,
+    'edit_type': 'status'
+    } only %}
+
+{% endblock %}

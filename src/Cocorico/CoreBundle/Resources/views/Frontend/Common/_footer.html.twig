@@ -1,0 +1,94 @@
+{% trans_default_domain 'cocorico' %}
+
+<!-- bottom-container -->
+<div class="bottom-container">
+    <!-- footer-aside -->
+    <aside class="aside-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- contact-info -->
+                    <div class="contact-info pull-right">
+                        <strong class="title">{{ 'footer.contact_us.title'|trans }}</strong>
+                        <strong class="hidden" itemscope itemtype="http://schema.org/Organization">
+                            {{ cocorico_site_name }}
+                        </strong>
+                        <ul class="list-unstyled" itemscope itemtype="http://schema.org/Organization">
+                            <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                                <address><i class="icon-location"></i>{{ cocorico_address }}</address>
+                            </li>
+                            <li itemprop="telephone">
+                                <a href="tel:{{ cocorico_phone|replace({'+': '', '(': '', ')': '', ' ': ''}) }}">
+                                    <i class="icon-phone"></i>{{ cocorico_phone }}
+                                </a>
+                            </li>
+                            <li itemprop="email">
+                                <a href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
+                                    <i class="icon-mail-alt"></i>
+                                    {{ cocorico_contact_mail_obfuscated|raw }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- navarea -->
+                    <nav class="navarea">
+                        <ul class="list-unstyled pull-left">
+                            <li class="title">{{ 'footer.about.title'|trans }}</li>
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}">
+                                    {{ 'footer.who_we_are.link'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.how_it_works.slug'|trans }) }}">
+                                    {{ 'footer.how_it_works.link'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}">
+                                    {{ 'footer.the_team.link'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled pull-left">
+                            <li class="title">{{ 'footer.help.title'|trans }}</li>
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
+                                    {{ 'footer.faq.link'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('cocorico_contact_new') }}">
+                                    {{ 'footer.contact_us.link'|trans }}
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- footer of the page -->
+    <footer id="footer" class="container text-center">
+        <div class="row">
+            <div class="col-xs-12">
+                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}"
+                   class="by pull-right">
+                    {{ 'footer.legal_notices.link'|trans }}
+                </a>
+
+                <a href="http://www.sofracs.com/creation-site-marketplace-consommation-collaborative"
+                   class="by pull-right credit" target="_blank">
+                    <img src="{{ asset('images/marketplace-solutions.png') }}" width="45" height="15"
+                         alt="creation marketplace">
+                </a>
+
+                <p>
+                    &copy; {{ "now"|date("Y") }} {{ 'footer.all_right_reserved'|trans }}
+                    <a href="{{ path('cocorico_home') }}">{{ cocorico_site_name }}</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+</div>

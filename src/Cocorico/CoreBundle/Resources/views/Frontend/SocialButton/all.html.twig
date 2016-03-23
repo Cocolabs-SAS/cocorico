@@ -1,0 +1,30 @@
+{% if url is not defined or url == null %}
+    {% set url = app.request.uri %}
+{% endif %}
+
+
+<ul class="list-inline social-networks text-right">
+    <li>
+        {% include 'CocoricoCoreBundle:Frontend/SocialButton:facebook.html.twig' with {
+        'title': title,
+        'url': url
+        } only %}
+    </li>
+    <li>
+        {% include 'CocoricoCoreBundle:Frontend/SocialButton:twitter.html.twig' with {
+        'url': url
+        } only %}
+    </li>
+
+    {#<li>#}
+    {#<a href="#"><i class="icon-vimeo"></i>#}
+    {#<span class="hidden">vimoe</span>#}
+    {#</a>#}
+    {#</li>#}
+
+    <li>
+        {% include 'CocoricoCoreBundle:Frontend/SocialButton:gplus.html.twig' with {
+        'url': url
+        } only %}
+    </li>
+</ul>

@@ -1,0 +1,103 @@
+{% extends 'CocoricoCoreBundle:Dashboard:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_message' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'messages' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block main_dashboard -%}
+    {% set listing = thread.listing %}
+    {% set users = thread.getOtherParticipants(app.user) %}
+    {% if users|length > 0 %}
+        {% set user = users[0] %}
+    {% else %}
+        {% set user = app.user %}
+    {% endif %}
+    {% set image_user = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+    {% set translation = listing.translations[app.request.locale] %}
+
+    <div class="tab-content no-border">
+        <!-- reservations -->
+        <div role="tabpanel" class="tab-pane active" id="messaging">
+            <!-- form-ad-detail -->
+            <form action="{{ url('cocorico_dashboard_message_thread_view', {'threadId': thread.id}) }}"
+                  class="form-ad-detail"
+                  method="post">
+                <fieldset>
+                    <legend class="hidden">form-ad-detail</legend>
+                    <div class="listing-detail">
+                        <div class="area">
+                            <div class="img-holder">
+                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_small') }}"
+                                     alt="{{ translation.title }}">
+                            </div>
+                            <div class="box">
+                                <strong class="listing-title">{{ translation.title }}</strong>
+
+                                <div class="author-detail">
+                                    <div class="author-img">
+                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}"
+                                             alt="image description">
+                                    </div>
+                                    <div class="box">
+                                        {% if listing.user != app.user %}
+                                            <strong class="author-name">
+                                                {{ 'thread.offerer'|trans }}:
+                                                <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
+                                                    {{ user.getName }}
+                                                </a>
+                                            </strong>
+                                            {% if user.averageOffererRating %}
+                                                {{ user.averageOffererRating | cocorico_star_rating }}
+                                            {% endif %}
+                                        {% else %}
+                                            <strong class="author-name">
+                                                {{ 'thread.asker'|trans }}:
+                                                <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
+                                                    {{ user.getName }}
+                                                </a>
+                                            </strong>
+                                            {% if user.averageAskerRating %}
+                                                {{ user.averageAskerRating | cocorico_star_rating }}
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if listing.user != app.user %}
+                            <div class="btn-block text-center">
+                                <a href="{{ path('cocorico_listing_show', { 'slug': translation.slug }) }}"
+                                   class="btn btn-primary">
+                                    {{ 'thread.book'|trans }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="textarea-holder no-scroll">
+                        {{ form_errors(form) }}
+                        {#{{ form_errors(form.body) }}#}
+                        {{ form_widget(form.body) }}
+                        {{ form_widget(form._token) }}
+                    </div>
+
+                    <div class="btn-block text-center">
+                        <input type="submit" class="btn btn-default" value="{{ 'thread.send'|trans }}">
+                    </div>
+                </fieldset>
+            </form>
+            <!-- blog -->
+            <div class="blog">
+                <div class="posts-holder">
+                    {% include 'CocoricoMessageBundle:Dashboard/Message:conversation_list.html.twig' with{
+                    'thread': thread
+                    } only %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

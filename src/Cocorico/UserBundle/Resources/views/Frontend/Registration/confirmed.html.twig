@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            <div id="form-registerlogin" class="col-xs-12 form-signup min-height">
+                <h1>{{ 'registration.confirmed.title'|trans }}</h1>
+
+                <p>{{ 'registration.confirmed'|trans({'%firstname%': user.firstname}) }}</p>
+            </div>
+            {% if app.session is not empty %}
+                {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+                {% if targetUrl is not empty %}
+                    <p>
+                        <a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+                    </p>
+                {% endif %}
+            {% endif %}
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}

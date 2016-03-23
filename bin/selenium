@@ -1,0 +1,91 @@
+#!/usr/bin/env sh
+
+# Instal Xvfb server:
+# sudo apt-get install xvfb
+
+# Start Xvfb Server:
+# /etc/init.d/xvfb start|stop|restart
+
+# Check everything is OK:
+# Xvfb :99
+
+
+# For firefox test:
+# sudo apt-get install iceweasel
+
+# Create selenium log directory:
+# sudo mkdir -p /var/log/selenium/
+# chmod a+w /var/log/selenium/
+
+# In case of Dbus error install dbus-x11:
+# sudo apt-get install dbus-x11
+
+# Iptables rules:
+# -A INPUT -p tcp --dport 4444 -s 127.0.0.1 -j ACCEPT
+# -A INPUT -p tcp --dport 4444 -j DROP
+
+# Proc Infos:
+# sudo ps -aux  | grep selenium
+# sudo ps -aux  | grep xvfb
+
+SRC_DIR="`dirname "$0"`"
+
+#xvfb-run
+
+case $1 in
+    start)
+        if test -f /tmp/selenium.pid
+        then
+            echo "Selenium is already running."
+        else
+            export DISPLAY=:99
+            # -Dwebdriver.chrome.driver="$SRC_DIR"/chromedriver
+            java -jar "$SRC_DIR"/selenium-server.jar > /var/log/selenium/selenium-output.log 2> /var/log/selenium/selenium-error.log & echo $! > /tmp/selenium.pid
+            echo "Starting Selenium..."
+
+            error=$?
+            if test $error -gt 0
+            then
+                    echo "${bon}Error $error! Couldn't start Selenium!${boff}"
+            fi
+        fi
+    ;;
+
+    stop)
+        if test -f /tmp/selenium.pid
+        then
+            echo "Stopping Selenium..."
+            PID=`cat /tmp/selenium.pid`
+            kill -3 $PID
+            if kill -9 $PID ;
+            then
+                sleep 2
+                test -f /tmp/selenium.pid && rm -f /tmp/selenium.pid
+            else
+                echo "Selenium could not be stopped..."
+            fi
+        else
+            echo "Selenium is not running."
+        fi
+    ;;
+
+    'restart')
+        if test -f /tmp/selenium.pid
+        then
+            kill -HUP `cat /tmp/selenium.pid`
+            test -f /tmp/selenium.pid && rm -f /tmp/selenium.pid
+            sleep 1
+            export DISPLAY=:99
+            #-Dwebdriver.chrome.driver="$SRC_DIR"/chromedriver
+            java -jar "$SRC_DIR"/selenium-server.jar > /var/log/selenium/selenium-output.log 2> /var/log/selenium/selenium-error.log & echo $! > /tmp/selenium.pid
+            echo "Reload Selenium..."
+        else
+            echo "Selenium isn't running..."
+        fi
+        ;;
+
+    *)
+        echo "Usage: {start|stop}"
+        exit 1
+    ;;
+esac

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <!--@formatter:off-->
+    <parameters>
+        <parameter key="cocorico_user.account_created_user.email.template">CocoricoUserBundle:Mails/User:account_created_user.txt.twig</parameter>
+        <parameter key="cocorico_user.forgot_password_user.email.template">CocoricoUserBundle:Mails/User:forgot_password_user.txt.twig</parameter>
+        <parameter key="cocorico_user.new_message_user.email.template">CocoricoUserBundle:Mails/User:new_message_user.txt.twig</parameter>
+        <parameter key="cocorico_user.account_creation_confirmation_user.email.template">CocoricoUserBundle:Mails/User:account_creation_confirmation_user.txt.twig</parameter>
+    </parameters>
+    <!--@formatter:on-->
+    <services>
+        <service id="cocorico_user.mailer.twig_swift" class="Cocorico\UserBundle\Mailer\TwigSwiftMailer" public="true">
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="twig"/>
+            <argument type="service" id="request_stack"/>
+            <!--<argument type="service" id="translator"/>-->
+            <argument type="collection">
+                <argument key="templates" type="collection">
+                    <argument key="account_created_user">%cocorico_user.account_created_user.email.template%</argument>
+                    <argument key="forgot_password_user">%cocorico_user.forgot_password_user.email.template%</argument>
+                    <argument key="new_message_user">%cocorico_user.new_message_user.email.template%</argument>
+                    <argument key="account_creation_confirmation_user">%cocorico_user.account_creation_confirmation_user.email.template%</argument>
+                </argument>
+                <argument key="from_email">%cocorico.from_email%</argument>
+                <argument key="site_name">%cocorico.site_name%</argument>
+                <argument key="locales">%cocorico.locales%</argument>
+                <argument key="locale">%cocorico.locale%</argument>
+            </argument>
+        </service>
+
+    </services>
+
+</container>

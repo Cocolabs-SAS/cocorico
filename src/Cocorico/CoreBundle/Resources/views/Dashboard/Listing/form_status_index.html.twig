@@ -1,0 +1,74 @@
+{% trans_default_domain 'cocorico_listing' %}
+{% set translation = listing.translations[app.request.locale] %}
+<div id="status-form-container-{{ listing.id }}">
+    <ul class="info-btns list-inline{% if listingDuplication %} duplication{% endif %}">
+        <li style="width:100%">
+            {% if app.request.isXmlHttpRequest %}
+                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            {% endif %}
+            {{ form_errors(form) }}
+            {{ form_errors(form.status) }}
+        </li>
+        <li>
+            <a href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}"
+               class="btn btn-primary">
+                {{ 'listing.edit.edit'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('cocorico_listing_show', { 'slug': translation.slug }) }}"
+               class="btn btn-primary">
+                {{ 'listing.edit.show'|trans }}
+            </a>
+        </li>
+        {% if listingDuplication %}
+            <li>
+                <a data-id="duplicate" href="{{ path('cocorico_dashboard_listing_duplicate', { 'id': listing.id }) }}"
+                   class="btn btn-primary">
+                    {{ 'listing.edit.duplicate'|trans }}
+                </a>
+            </li>
+        {% endif %}
+        <li class="select-holder">
+            <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+                {{ form_widget(form.status, {
+                    'id': 'listing_status-' ~ listing.id,
+                    'attr': {
+                        'class': 'no-arrow announcements-list',
+                        'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
+                    }
+                }) }}
+                {{ form_rest(form) }}
+            </form>
+        </li>
+    </ul>
+
+    <script>
+        $(function () {
+            $("#status-form-container-{{ listing.id }}").submitAjaxForm(
+                    function () {
+                        jcf.replaceAll("#status-form-container-{{ listing.id }}");
+                    }
+            );
+
+            var $statusSelectElt = $("#listing_status-{{ listing.id }}");
+            $statusSelectElt.change(function (e) {
+                if ($statusSelectElt.val() == '{{ ListingConstants.STATUS_DELETED }}') {
+                    var $confirmDelete = confirm("{{ 'listing.confirm.delete'|trans }}");
+                    if ($confirmDelete) {
+                        $(this).closest('form').submit();
+                        //Remove listing from list if its status is deleted
+                        $("#status-form-container-{{ listing.id }}").closest('article').hide();
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    $(this).closest('form').submit();
+                }
+            });
+
+        });
+    </script>
+</div>
