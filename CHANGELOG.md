@@ -9,7 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## [Unreleased]
 
-- Nothing for now
+### Fixed
+- Fix bug "Duplicate error message on new booking"    
+
+### Changed
+- Update documentation
 
 ## [0.1.0] - 2016-03-23
 
