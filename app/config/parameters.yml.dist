@@ -16,6 +16,7 @@ parameters:
     mailer_password:   ~
     mailer_port: null
 
+    # You can generate it here http://nux.net/secret
     secret:            ThisTokenIsNotSoSecretChangeIt
 
     debug_toolbar:          false

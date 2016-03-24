@@ -1,9 +1,8 @@
 Parameters
 ==========
 
-Here are the descriptions of all parameters of Cocorico application located in the following file 
-Cocorico/CoreBundle/Resources/config/parameters.yml :
+Cocorico application parameters are defined in the following files:
 
-- todo:
-
+* Environment dependant parameters: `app/config/parameters.yml.dist`: 
+* Environment independent parameters: `Cocorico/CoreBundle/Resources/config/parameters.yml`
 

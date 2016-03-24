@@ -98,7 +98,7 @@ See [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-host
 
 ## Application install & configuration
 
-### Get Project sources
+### Get project sources
              
 Fork Cocorico Git Repository then get sources:
              
@@ -106,7 +106,7 @@ Fork Cocorico Git Repository then get sources:
 
      - Close all projects
      - Menu > VCS > Checkout from VC > Git
-        - Git Repo: New forked repository address
+        - Git Repo: https://github.com/Cocolabs-SAS/cocorico.git
         - Parent Dir: Choose parent of Symfony folder
         - Dir name: Symfony
      - Menu > File > Open: Symfony folder 
@@ -119,9 +119,8 @@ Fork Cocorico Git Repository then get sources:
 Change to your parent "Document Root" directory and clone repository:
 
     cd /var/www/cocorico.dev/
-    git clone https://[gituser]@xxx.org/xxx/cocorico-xxx.git Symfony
-                     
-                     
+    git clone https://github.com/Cocolabs-SAS/cocorico.git Symfony
+                   
 ### Create services accounts
     
 #### Create your microsoft Translator account:
@@ -130,24 +129,40 @@ Change to your parent "Document Root" directory and clone repository:
     
 #### Create your Facebook App:
 
-    See https://developers.facebook.com/docs/apps/register
-    Set "Valid OAuth redirect URIs" with [http://cocorico.dev]/[locale]/oauth/fb-login
+* Go to https://developers.facebook.com/quickstarts/?platform=web
+* Click on "Skip quick start"
+* Click on "Settings" and fill in "App Domains" your domain name. (ex:  xxx.com)
+* Click on "Add Platform" > "web site"
+* Fill in "Site URL" with your site url. (ex: https://www.xxx.com/)
+* Click on "save changes"
+* Click on "Advanced".
+* Fill in "Valid OAuth redirect URIs" with the urls for the concerned domain and the locales activated.
+    Ex for xxx.com with "en" and "fr" as activated locales :
+    
+        - https://www.xxx.com/en/oauth/fb-login
+        - https://www.xxx.com/fr/oauth/fb-login
 
+* Click on "Save changes"
+* You will then have to add your "Facebook App id" and "secret" in 
+`cocorico.facebook.app_id` and `cocorico.facebook.secret` parameters while composer install 
+described in "Install Cocorico dependencies and set your application parameters" chapter below
     
 ### Install composer
 
 If you don't have Composer yet, run the following command in the root folder of your Symfony project:
 
 For Linux:
-
+    
+    cd Symfony
     curl -s http://getcomposer.org/installer | php
         
 For Windows: 
 
+    cd Symfony
     php -r "readfile('https://getcomposer.org/installer');" | php
     
     
-### Install Cocorico dependencies and set your application parameters
+### Install Cocorico dependencies
 
     php composer.phar install
     
@@ -158,13 +173,18 @@ Or to speed up:
 Or in case of error with tarball (slower):
 
     php composer.phar install --prefer-source -vvv
+
+This command will ask you the values of some of your application parameters. 
+You will find more informations on them in the following chapter.
    
+### Set your application parameters 
+  
+  See `app/config/parameters.yml.dist`
    
 ### Configure project
 
-Copy and Paste web/.htaccess.dist and rename it to web/.htaccess. (It's configured by default for dev environment).
-       
-            
+Copy and paste web/.htaccess.dist and rename it to web/.htaccess. (It's configured by default for dev environment).
+
 ### Initialize the SQL and NoSQL database
 
 #### SQL database initialisation:
@@ -253,23 +273,24 @@ Cocorico follows the Semantic Versioning 2 as far as possible:
 
 # Contribute
 
-[CONTRIBUTING.md](CONTRIBUTING.md) explain how you can participate.
+Anyone and everyone is welcome to contribute. Please take a moment to
+review the [guidelines for contributing](CONTRIBUTING.md).
+
+* [Bug reports](CONTRIBUTING.md#bugs)
+* [Feature requests](CONTRIBUTING.md#features)
+* [Pull requests](CONTRIBUTING.md#pull-requests)
 
 # Roadmap
 
-[Roadmap.md](ROADMAP.md) list the planned features.
+[ROADMAP.md](ROADMAP.md) list the planned features.
 
 # Technical documentation
 
-[General](src/Cocorico/CoreBundle/Resources/doc/index.rst)
-
-[Parameters](src/Cocorico/CoreBundle/Resources/doc/parameters.rst)
-
-[Virtual Host](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
-
-[Tests](src/Cocorico/CoreBundle/Resources/doc/tests.rst)
-
-[Deployment](src/Cocorico/CoreBundle/Resources/doc/deployment.rst)
+* [General](src/Cocorico/CoreBundle/Resources/doc/index.rst)
+* [Parameters](src/Cocorico/CoreBundle/Resources/doc/parameters.rst)
+* [Virtual Host](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
+* [Tests](src/Cocorico/CoreBundle/Resources/doc/tests.rst)
+* [Deployment](src/Cocorico/CoreBundle/Resources/doc/deployment.rst)
 
 # License
 
