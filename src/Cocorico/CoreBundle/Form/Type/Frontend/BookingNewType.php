@@ -271,8 +271,11 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
          * @param               $errors
          */
         $formErrors = function (FormInterface $form, $errors) {
-            if (in_array('date_range.invalid.min_start', $errors)) {
-                unset($errors['date_range.invalid.min_start']);
+            $keys = array_keys($errors, 'date_range.invalid.min_start');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
                 $now = new \DateTime();
                 if ($this->minStartDelay > 0) {
                     $now->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
@@ -288,8 +291,11 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 );
             }
 
-            if (in_array('time_range.invalid.min_start', $errors)) {
-                unset($errors['time_range.invalid.min_start']);
+            $keys = array_keys($errors, 'time_range.invalid.min_start');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
                 $now = new \DateTime();
                 if ($this->minStartTimeDelay > 0) {
                     $now->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
@@ -305,15 +311,21 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 );
             }
 
-            if (in_array('unavailable', $errors)) {
-                unset($errors['unavailable']);
+            $keys = array_keys($errors, 'unavailable');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
                 $form['date_range']->addError(
                     new FormError(self::$unavailableError)
                 );
             }
 
-            if (in_array('amount_invalid', $errors)) {
-                unset($errors['amount_invalid']);
+            $keys = array_keys($errors, 'amount_invalid');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
                 $form['date_range']->addError(
                     new FormError(
                         self::$amountError,
@@ -325,8 +337,11 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 );
             }
 
-            if (in_array('code_voucher_invalid', $errors)) {
-                unset($errors['code_voucher_invalid']);
+            $keys = array_keys($errors, 'code_voucher_invalid');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
                 $form['codeVoucher']->addError(
                     new FormError(
                         self::$voucherError,
