@@ -342,13 +342,14 @@ class Booking extends BaseBooking
         /** @var \DateTime $validatedAt */
         $validatedAt = $this->$methodName();
         if ($validatedAt) {
+            $validatedAtCloned = clone $validatedAt;
             if ($bookingValidationDelay >= 0) {
-                $validatedAt->add(new \DateInterval('PT' . $bookingValidationDelay . 'M'));
+                $validatedAtCloned->add(new \DateInterval('PT' . $bookingValidationDelay . 'M'));
             } else {
-                $validatedAt->sub(new \DateInterval('PT' . abs($bookingValidationDelay) . 'M'));
+                $validatedAtCloned->sub(new \DateInterval('PT' . abs($bookingValidationDelay) . 'M'));
             }
 
-            return $validatedAt;
+            return $validatedAtCloned;
         }
 
         return false;
