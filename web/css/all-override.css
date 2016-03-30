@@ -203,6 +203,9 @@
     text-transform: none;
 }
 
+[class="ui-dialog-titlebar-close"]:focus {
+    outline: 0;
+}
 .ui-dialog .field-row {
     padding: 0 0 20px 0;
 }

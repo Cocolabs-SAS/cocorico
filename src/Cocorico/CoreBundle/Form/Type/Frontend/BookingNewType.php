@@ -27,6 +27,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Validator\Constraints\True;
@@ -51,6 +52,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     protected $endDayInclude;
     protected $minStartDelay;
     protected $minStartTimeDelay;
+    private $currency;
+    private $currencySymbol;
 
     /**
      * @param BookingManager           $bookingManager ,
@@ -63,6 +66,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
      * @param bool                     $endDayIncluded
      * @param int                      $minStartDelay
      * @param int                      $minStartTimeDelay
+     * @param string                   $currency
      */
     public function __construct(
         BookingManager $bookingManager,
@@ -74,7 +78,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $allowSingleDay,
         $endDayIncluded,
         $minStartDelay,
-        $minStartTimeDelay
+        $minStartTimeDelay,
+        $currency
     ) {
         $this->bookingManager = $bookingManager;
         $this->securityContext = $securityContext;
@@ -87,6 +92,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $this->endDayIncluded = $endDayIncluded;
         $this->minStartDelay = $minStartDelay;
         $this->minStartTimeDelay = $minStartTimeDelay;
+        $this->currency = $currency;
+        $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($currency);
     }
 
     /**
@@ -331,7 +338,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                         self::$amountError,
                         'cocorico',
                         array(
-                            '{{ min_price }}' => $this->bookingManager->minPrice / 100,
+                            '{{ min_price }}' => $this->bookingManager->minPrice / 100 . " " . $this->currencySymbol,
                         )
                     )
                 );

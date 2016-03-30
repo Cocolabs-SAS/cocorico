@@ -200,6 +200,7 @@ services:
             - "%cocorico.booking.end_day_included%"
             - "%cocorico.booking.min_start_delay%"
             - "%cocorico.booking.min_start_time_delay%"
+            - "%cocorico.currency%"
         tags:
             - { name: form.type, alias: booking_new }
 

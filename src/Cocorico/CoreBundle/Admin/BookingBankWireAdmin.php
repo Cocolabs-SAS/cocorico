@@ -266,7 +266,7 @@ class BookingBankWireAdmin extends Admin
                         'disabled' => true,
                         'mapped' => false,
                         'data' => 0,
-                        'sonata_help' => 'Fees'
+                        'help' => 'Fees'
                     )
                 )
                 ->add(

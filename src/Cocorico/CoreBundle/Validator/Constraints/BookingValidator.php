@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Validator\Constraints;
 use Cocorico\CoreBundle\Entity\Booking as BookingEntity;
 use Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -22,17 +23,22 @@ class BookingValidator extends ConstraintValidator
     private $bookingManager;
     private $minStartDelay;
     private $minStartTimeDelay;
+    private $currency;
+    private $currencySymbol;
 
     /**
      * @param BookingManager $bookingManager
      * @param int            $minStartDelay
      * @param int            $minStartTimeDelay
+     * @param string         $currency
      */
-    public function __construct(BookingManager $bookingManager, $minStartDelay, $minStartTimeDelay)
+    public function __construct(BookingManager $bookingManager, $minStartDelay, $minStartTimeDelay, $currency)
     {
         $this->bookingManager = $bookingManager;
         $this->minStartDelay = $minStartDelay;
         $this->minStartTimeDelay = $minStartTimeDelay;
+        $this->currency = $currency;
+        $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($currency);
     }
 
     /**
@@ -171,7 +177,9 @@ class BookingValidator extends ConstraintValidator
         if (in_array('amount_invalid', $errors)) {
             $violations[] = array(
                 'message' => $constraint::$messageAmountInvalid,
-                'parameter' => array('min_price' => $this->bookingManager->minPrice / 100),
+                'parameter' => array(
+                    'min_price' => $this->bookingManager->minPrice / 100 . " " . $this->currencySymbol
+                ),
                 'domain' => 'cocorico'
             );
         }
@@ -187,7 +195,9 @@ class BookingValidator extends ConstraintValidator
         if (in_array('amount_voucher_invalid', $errors)) {
             $violations[] = array(
                 'message' => $constraint::$messageAmountInvalid,
-                'parameter' => array('min_price' => $this->bookingManager->minPrice / 100),
+                'parameter' => array(
+                    'min_price' => $this->bookingManager->minPrice / 100 . " " . $this->currencySymbol
+                ),
                 'atPath' => 'codeVoucher',
                 'domain' => 'cocorico'
             );

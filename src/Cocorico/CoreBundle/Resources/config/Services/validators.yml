@@ -38,6 +38,7 @@ services:
             - "@cocorico.booking.manager"
             - "%cocorico.booking.min_start_delay%"
             - "%cocorico.booking.min_start_time_delay%"
+            - "%cocorico.currency%"
         tags:
             - { name: validator.constraint_validator, alias: booking }
 
