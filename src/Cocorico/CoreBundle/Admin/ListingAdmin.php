@@ -51,13 +51,16 @@ class ListingAdmin extends Admin
     {
 
         //Translations fields
-        $titles = $descriptions = array();
+        $titles = $descriptions = $rules = array();
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Title'
             );
             $descriptions[$locale] = array(
                 'label' => 'Description'
+            );
+            $rules[$locale] = array(
+                'label' => 'Rules'
             );
         }
 
@@ -112,6 +115,11 @@ class ListingAdmin extends Admin
                         'description' => array(
                             'field_type' => 'textarea',
                             'locale_options' => $descriptions,
+                        ),
+                        'rules' => array(
+                            'field_type' => 'textarea',
+                            'locale_options' => $rules,
+                            'required' => false,
                         ),
                         'slug' => array(
                             'field_type' => 'hidden'

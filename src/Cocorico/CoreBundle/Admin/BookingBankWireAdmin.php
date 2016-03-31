@@ -27,6 +27,7 @@ class BookingBankWireAdmin extends Admin
     protected $locales;
     protected $timeUnit;
     protected $timeUnitIsDay;
+    protected $currency;
     /** @var  BookingBankWireManager $bookingBankWireManager */
     protected $bookingBankWireManager;
     protected $bundles;
@@ -46,6 +47,11 @@ class BookingBankWireAdmin extends Admin
     {
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
+    }
+
+    public function setCurrency($currency)
+    {
+        $this->currency = $currency;
     }
 
     public function setBookingBankWireManager(BookingBankWireManager $bookingBankWireManager)
@@ -241,7 +247,7 @@ class BookingBankWireAdmin extends Admin
                             'label' => 'admin.booking.amount_to_wire.label',
                             'mapped' => false,
                             'data' => isset($amountToWire) ? number_format($amountToWire / 100, 2, ".", "") : null,
-                            'help' => 'Debited funds'
+                            'help' => 'Debited funds (' . $this->currency . ')'
                         )
                     );
             } else {
@@ -253,7 +259,7 @@ class BookingBankWireAdmin extends Admin
                             'precision' => 2,
                             'disabled' => true,
                             'label' => 'admin.booking_bank_wire.amount.label',
-                            'help' => 'Debited funds'
+                            'help' => 'Debited funds (' . $this->currency . ')'
                         )
                     );
             }
