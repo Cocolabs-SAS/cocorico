@@ -24,6 +24,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 - Update documentation
 - Change min listing price parameter to 1 (default currency)
+- Change composer.json support section
+
 
 ## [0.1.0] - 2016-03-23
 
