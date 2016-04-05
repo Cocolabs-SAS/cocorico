@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+
+## [0.1.1] - 2016-04-04
+
 ### Added
 - Add currency on booking amount error message 
 - Add fees help in sonata admin for bank wire
