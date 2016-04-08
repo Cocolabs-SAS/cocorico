@@ -12,7 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingSearchType extends ListingSearchResultType
 {
@@ -35,9 +35,9 @@ class ListingSearchType extends ListingSearchResultType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_listing',
@@ -45,9 +45,20 @@ class ListingSearchType extends ListingSearchResultType
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_search';
     }
-
 }

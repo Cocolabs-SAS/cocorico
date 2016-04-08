@@ -6,86 +6,85 @@
     {% if app.request.isXmlHttpRequest %}
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
-    <form id="price-simulator-form" action="{{ form.vars.action }}"
-          method="{{ form.vars.method }}" {{ form_enctype(form) }}>
 
-        {{ form_errors(form) }}
+    {{ form_start(form, {'attr': {'id': 'price-simulator-form'}}) }}
 
-        <div class="price-area">
-            {{ form_widget(form.date_range) }}
+    {{ form_errors(form) }}
 
-            {% if not timeUnitIsDay %}
-                {{ form_widget(form.time_range) }}
-            {% endif %}
-        </div>
+    <div class="price-area">
+        {{ form_widget(form.date_range) }}
 
-        <div class="add-info">
-            {% if includeVat %}
-                {% set amount = booking.amountDecimal %}
-            {% else %}
-                {% set amount = booking.amountExcludingVATDecimal(vatRate) %}
-            {% endif %}
-            {% set amount = amount | format_price(app.request.locale, 2) %}
-            <strong class="price">
-                {{ amount }}
-                <sup>
-                    <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
-                </sup> *
+        {% if not timeUnitIsDay %}
+            {{ form_widget(form.time_range) }}
+        {% endif %}
+    </div>
 
-                <button title="{{ 'booking.simulator.amount.help'|trans }}"
-                        data-placement="right"
-                        data-toggle="tooltip"
-                        class="tooltip-button"
-                        type="button">?
-                </button>
-            </strong>
+    <div class="add-info">
+        {% if includeVat %}
+            {% set amount = booking.amountDecimal %}
+        {% else %}
+            {% set amount = booking.amountExcludingVATDecimal(vatRate) %}
+        {% endif %}
+        {% set amount = amount | format_price(app.request.locale, 2) %}
+        <strong class="price">
+            {{ amount }}
+            <sup>
+                <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+            </sup> *
 
-            <ul class="list-inline price-info">
-                <li>
-                    {{ 'listing.price_simulator.cash_in'|trans }}
-                    {% if includeVat %}
-                        {% set amount_to_pay_to_offerer = booking.amountToPayToOffererDecimal %}
-                    {% else %}
-                        {% set amount_to_pay_to_offerer = booking.amountToPayToOffererExcludingVATDecimal(vatRate) %}
-                    {% endif %}
-                    {% set amount_to_pay_to_offerer = amount_to_pay_to_offerer | format_price(app.request.locale, 2) %}
+            <button title="{{ 'booking.simulator.amount.help'|trans }}"
+                    data-placement="right"
+                    data-toggle="tooltip"
+                    class="tooltip-button"
+                    type="button">?
+            </button>
+        </strong>
+
+        <ul class="list-inline price-info">
+            <li>
+                {{ 'listing.price_simulator.cash_in'|trans }}
+                {% if includeVat %}
+                    {% set amount_to_pay_to_offerer = booking.amountToPayToOffererDecimal %}
+                {% else %}
+                    {% set amount_to_pay_to_offerer = booking.amountToPayToOffererExcludingVATDecimal(vatRate) %}
+                {% endif %}
+                {% set amount_to_pay_to_offerer = amount_to_pay_to_offerer | format_price(app.request.locale, 2) %}
+                <span class="info price">
+                    {{ amount_to_pay_to_offerer }}
+                    <sup>
+                        <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                    </sup>
+
+                    <button title="{{ 'listing.price_simulator.help'|trans }}"
+                            data-placement="right"
+                            data-toggle="tooltip"
+                            class="tooltip-button"
+                            type="button">?
+                    </button>
+                </span>
+            </li>
+            <li>
+                {{ 'listing.price_simulator.fee'|trans }}
+                <span class="info">
+                    {% set amount_fee_as_offerer = booking.amountFeeAsOffererDecimal | format_price(app.request.locale, 2) %}
                     <span class="info price">
-                        {{ amount_to_pay_to_offerer }}
+                        {{ amount_fee_as_offerer }}
                         <sup>
-                            <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                            <small>{{ vatInclusionText(app.request.getLocale(), null, true) }}</small>
                         </sup>
-
-                        <button title="{{ 'listing.price_simulator.help'|trans }}"
-                                data-placement="right"
-                                data-toggle="tooltip"
-                                class="tooltip-button"
-                                type="button">?
-                        </button>
                     </span>
-                </li>
-                <li>
-                    {{ 'listing.price_simulator.fee'|trans }}
-                    <span class="info">
-                        {% set amount_fee_as_offerer = booking.amountFeeAsOffererDecimal | format_price(app.request.locale, 2) %}
-                        <span class="info price">
-                            {{ amount_fee_as_offerer }}
-                            <sup>
-                                <small>{{ vatInclusionText(app.request.getLocale(), null, true) }}</small>
-                            </sup>
-                        </span>
 
-                        <button title="{{ 'listing.price_simulator.fee.help'|trans }}"
-                                data-placement="left"
-                                data-toggle="tooltip"
-                                class="tooltip-button"
-                                type="button">?
-                        </button>
-                    </span>
-                </li>
-            </ul>
-        </div>
-        {{ form_rest(form) }}
-    </form>
+                    <button title="{{ 'listing.price_simulator.fee.help'|trans }}"
+                            data-placement="left"
+                            data-toggle="tooltip"
+                            class="tooltip-button"
+                            type="button">?
+                    </button>
+                </span>
+            </li>
+        </ul>
+    </div>
+    {{ form_end(form) }}
 
     <script>
         $(function () {

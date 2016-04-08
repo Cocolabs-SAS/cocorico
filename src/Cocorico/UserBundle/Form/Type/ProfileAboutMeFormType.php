@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProfileAboutMeFormType extends AbstractType implements TranslationContainerInterface
 {
@@ -183,12 +183,12 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
     }
 
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => $this->class,
-                'intention' => 'profile',
+                'csrf_token_id' => 'profile',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true,
                 'validation_groups' => array('CocoricoProfile'),
@@ -196,7 +196,19 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_profile_about_me';
     }

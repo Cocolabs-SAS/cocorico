@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
-use Cocorico\CoreBundle\Entity\BookingBankWire;
 use Cocorico\CoreBundle\Entity\BookingPayinRefund;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -73,7 +72,7 @@ class BookingPayinRefundAdmin extends Admin
                 'amount',
                 'price',
                 array(
-                    'precision' => 2,
+                    'scale' => 2,
                     'disabled' => true,
                     'label' => 'admin.booking_payin_refund.amount.label',
                     'include_vat' => true
@@ -84,10 +83,11 @@ class BookingPayinRefundAdmin extends Admin
                 'choice',
                 array(
                     'disabled' => true,
-                    'choices' => BookingPayinRefund::$statusValues,
+                    'choices' => array_flip(BookingPayinRefund::$statusValues),
                     'empty_value' => 'admin.booking.status.label',
                     'label' => 'admin.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -137,7 +137,7 @@ class BookingPayinRefundAdmin extends Admin
                     'amountDecimal',
                     'number',
                     array(
-                        'precision' => 2,
+                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_payin_refund.amount.label',
                     )
@@ -164,9 +164,10 @@ class BookingPayinRefundAdmin extends Admin
                 array(),
                 'choice',
                 array(
-                    'choices' => BookingBankWire::$statusValues,
+                    'choices' => array_flip(BookingPayinRefund::$statusValues),
                     'label' => 'admin.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             )
             ->add(

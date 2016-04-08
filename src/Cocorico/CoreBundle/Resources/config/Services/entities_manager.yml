@@ -15,7 +15,7 @@ services:
         class: Cocorico\CoreBundle\Model\Manager\ListingManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@security.context"
+            - "@security.token_storage"
             - "%cocorico.listing_new_is_published%"
             - "%cocorico.dashboard_max_per_page%"
             - "@cocorico.mailer.twig_swift"

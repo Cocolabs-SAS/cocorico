@@ -7,22 +7,22 @@
     {{ form_errors(form) }}
     <div class="form-area">
         <div class="form-holder">
-            <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
-                <div class="field-row">
-                    {{ form_errors(form.status) }}
-                    <span class="label">{{ form_label(form.status) }}</span>
-                    <div class="select-holder">
-                        {{ form_widget(form.status, {
-                            'attr': {'class': 'no-arrow' },
-                        }) }}
-                    </div>
-                </div>
+            {{ form_start(form) }}
 
-                {{ form_rest(form) }}
-                <div class="text-center">
-                    <button class="btn btn-default" type="submit">{{ 'listing.availability.save'|trans }}</button>
+            <div class="field-row">
+                {{ form_errors(form.status) }}
+                <span class="label">{{ form_label(form.status) }}</span>
+                <div class="select-holder">
+                    {{ form_widget(form.status, {
+                        'attr': {'class': 'no-arrow' },
+                    }) }}
                 </div>
-            </form>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-default" type="submit">{{ 'listing.availability.save'|trans }}</button>
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 

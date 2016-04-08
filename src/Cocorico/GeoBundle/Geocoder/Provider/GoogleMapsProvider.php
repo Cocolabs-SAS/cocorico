@@ -11,56 +11,99 @@
 
 namespace Cocorico\GeoBundle\Geocoder\Provider;
 
-use Geocoder\Exception\InvalidCredentialsException;
-use Geocoder\Exception\NoResultException;
-use Geocoder\Exception\QuotaExceededException;
+use Exception;
+use Geocoder\Exception\InvalidCredentials;
+use Geocoder\Exception\NoResult;
+use Geocoder\Exception\QuotaExceeded;
+use Geocoder\Exception\UnsupportedOperation;
+use Geocoder\Provider\GoogleMaps;
+use Ivory\HttpAdapter\HttpAdapterInterface;
 
 
-class GoogleMapsProvider extends \Geocoder\Provider\GoogleMapsProvider
+class GoogleMapsProvider extends GoogleMaps
 {
     /**
-     * @param string $query
-     *
-     * @return array
+     * @var bool
      */
-    protected function executeQuery($query)
-    {
-        $query = $this->buildQuery($query);
-        $content = $this->getAdapter()->getContent($query);
+    private $useSsl;
 
-//        die($content);
+    /**
+     * @var bool
+     */
+    const DEBUG = false;
+
+    /**
+     * @param HttpAdapterInterface $adapter An HTTP adapter
+     * @param string               $locale  A locale (optional)
+     * @param string               $region  Region biasing (optional)
+     * @param bool                 $useSsl  Whether to use an SSL connection (optional)
+     * @param string               $apiKey  Google Geocoding API key (optional)
+     */
+    public function __construct(
+        HttpAdapterInterface $adapter,
+        $locale = null,
+        $region = null,
+        $useSsl = false,
+        $apiKey = null
+    ) {
+        parent::__construct($adapter, $locale, $region, $useSsl, $apiKey);
+
+        $this->useSsl = $useSsl;
+    }
+
+
+    private function executeQuery($query)
+    {
+        $this->debug("executeQuery > query:\n" . $query);
+        $query = $this->buildQuery($query);
+        $this->debug("executeQuery > buildQuery > query :\n" . $query);
+
+        $content = (string)$this->getAdapter()->get($query)->getBody();
+        $this->debug("executeQuery > getAdapter > body :\n" . $content);
+
         // Throw exception if invalid clientID and/or privateKey used with GoogleMapsBusinessProvider
         if (strpos($content, "Provided 'signature' is not valid for the provided client ID") !== false) {
-            throw new InvalidCredentialsException(sprintf('Invalid client ID / API Key %s', $query));
+            throw new InvalidCredentials(sprintf('Invalid client ID / API Key %s', $query));
         }
 
-        if (null === $content) {
-            throw new NoResultException(sprintf('Could not execute query %s', $query));
+        if (empty($content)) {
+            throw new NoResult(sprintf('Empty content > Could not execute query "%s".', $query));
         }
 
-        //echo "Content executeQuery :" . $content;
-
-        $content = preg_replace('/:\s*(\-?\d+(\.\d+)?([e|E][\-|\+]\d+)?)/', ': "$1"', $content);
         $json = json_decode($content);
 
         // API error
         if (!isset($json)) {
-            throw new NoResultException(sprintf('Could not execute query %s', $query));
+            throw new NoResult(sprintf('JSON not set > Could not execute query "%s".', $query));
         }
 
         if ('REQUEST_DENIED' === $json->status && 'The provided API key is invalid.' === $json->error_message) {
-            throw new InvalidCredentialsException(sprintf('API key is invalid %s', $query));
+            throw new InvalidCredentials(sprintf('API key is invalid %s', $query));
+        }
+
+        if ('REQUEST_DENIED' === $json->status) {
+            $this->debug("executeQuery > REQUEST_DENIED :\n");
+            throw new Exception(
+                sprintf(
+                    'API access denied. Request: %s - Message: %s',
+                    $query,
+                    $json->error_message
+                )
+            );
         }
 
         // you are over your quota
         if ('OVER_QUERY_LIMIT' === $json->status) {
-            throw new QuotaExceededException(sprintf('Daily quota exceeded %s', $query));
+            throw new QuotaExceeded(sprintf('Daily quota exceeded %s', $query));
         }
 
         // no result
         if (!isset($json->results) || !count($json->results) || 'OK' !== $json->status) {
-            throw new NoResultException(sprintf('Could not execute query %s', $query));
+            throw new NoResult(sprintf('No result > Could not execute query "%s".', $query));
         }
+
+        $content = preg_replace('/:\s*(\-?\d+(\.\d+)?([e|E][\-|\+]\d+)?)/', ': "$1"', $content);
+        $json = json_decode($content);
 
         $results = array();
 
@@ -70,9 +113,9 @@ class GoogleMapsProvider extends \Geocoder\Provider\GoogleMapsProvider
             $resultSet = array();
             // update address components
             foreach ($result->address_components as $component) {
-                foreach ($component->types as $name) {
-                    $resultSet[$this->getLocale()][$name] = $component->long_name;
-                    $resultSet[$this->getLocale()][$name . "_short"] = $component->short_name;
+                foreach ($component->types as $type) {
+                    $resultSet[$this->getLocale()][$type] = $component->long_name;
+                    $resultSet[$this->getLocale()][$type . "_short"] = $component->short_name;
                 }
             }
 
@@ -119,4 +162,47 @@ class GoogleMapsProvider extends \Geocoder\Provider\GoogleMapsProvider
         return $results;
     }
 
+
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     * @return \Geocoder\Model\AddressCollection
+     */
+    public function reverse($latitude, $longitude)
+    {
+        return $this->geocode(sprintf('%F,%F', $latitude, $longitude));
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function geocode($address)
+    {
+        // Google API returns invalid data if IP address given
+        // This API doesn't handle IPs
+        if (filter_var($address, FILTER_VALIDATE_IP)) {
+            throw new UnsupportedOperation(
+                'The GoogleMaps provider does not support IP addresses, only street addresses.'
+            );
+        }
+
+        $query = sprintf(
+            $this->useSsl ? self::ENDPOINT_URL_SSL : self::ENDPOINT_URL,
+            rawurlencode($address)
+        );
+
+        return $this->executeQuery($query);
+    }
+
+
+    /**
+     * @param $message
+     */
+    private function debug($message)
+    {
+        if (self::DEBUG) {
+            echo nl2br($message) . "<br>";
+        }
+    }
 }

@@ -15,7 +15,7 @@ services:
         class: Cocorico\CoreBundle\Twig\CoreExtension
         arguments:
             - "@lexik_currency.currency_extension"
-            - "@translator"
+            - "@translator.default"
             - "%cocorico.locales%"
             - "%cocorico.time_unit%"
             - "%cocorico.time_unit_flexibility%"

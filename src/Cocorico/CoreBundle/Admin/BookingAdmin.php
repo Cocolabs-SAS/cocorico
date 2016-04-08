@@ -175,22 +175,24 @@ class BookingAdmin extends Admin
                 'status',
                 'choice',
                 array(
-                    'choices' => Booking::$statusValues,
+                    'choices' => array_flip(Booking::$statusValues),
                     'empty_value' => 'admin.booking.status.label',
                     'disabled' => true,
                     'label' => 'admin.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             )
             ->add(
                 'listing.cancellationPolicy',
                 'choice',
                 array(
-                    'choices' => Listing::$cancellationPolicyValues,
+                    'choices' => array_flip(Listing::$cancellationPolicyValues),
                     'empty_value' => 'admin.listing.cancellation_policy.label',
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
-                    'translation_domain' => 'cocorico_listing'
+                    'translation_domain' => 'cocorico_listing',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -402,9 +404,10 @@ class BookingAdmin extends Admin
                 array(),
                 'choice',
                 array(
-                    'choices' => Booking::$statusValues,
+                    'choices' => array_flip(Booking::$statusValues),
                     'label' => 'admin.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             )
             ->add(

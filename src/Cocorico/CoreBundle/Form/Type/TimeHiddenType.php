@@ -12,19 +12,14 @@
 namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 class TimeHiddenType extends TimeType
 {
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'time_hidden';
-    }
-
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
         $resolver->addAllowedValues(
             array(
                 'widget' => array(
@@ -38,5 +33,22 @@ class TimeHiddenType extends TimeType
     public function getParent()
     {
         return 'hidden';
+    }
+
+    /**
+     * BC
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'time_hidden';
     }
 }

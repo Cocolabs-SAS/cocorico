@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AddressFormType extends AbstractType
 {
@@ -59,21 +59,32 @@ class AddressFormType extends AbstractType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\UserAddress',
-                'intention' => 'billing',
+                'csrf_token_id' => 'billing',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true
             )
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_address';
     }
-
 }

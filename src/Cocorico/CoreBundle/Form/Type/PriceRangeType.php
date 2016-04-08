@@ -13,7 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 class PriceRangeType extends AbstractType
@@ -34,7 +34,7 @@ class PriceRangeType extends AbstractType
                 array(
                     'label' => 'listing.form.price',
                     'currency' => $this->currency,
-                    'precision' => 0
+                    'scale' => 0
                 )
             )
             ->add(
@@ -44,12 +44,12 @@ class PriceRangeType extends AbstractType
                     /** @Ignore */
                     'label' => false,
                     'currency' => $this->currency,
-                    'precision' => 0
+                    'scale' => 0
                 )
             );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -59,7 +59,19 @@ class PriceRangeType extends AbstractType
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'price_range';
     }

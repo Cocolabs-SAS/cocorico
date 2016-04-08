@@ -5,31 +5,30 @@
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
 
-    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}
-          class="form-announcements">
-        {{ form_errors(form) }}
-        <fieldset>
-            <legend class="hidden">announcements</legend>
-            <h2>
-                {{ form_label(form.status) }}
-            </h2>
+    {{ form_start(form, {'attr': {'class': 'form-announcements'}}) }}
 
-            {{ form_errors(form.status) }}
+    {{ form_errors(form) }}
+    <fieldset>
+        <legend class="hidden">announcements</legend>
+        <h2>
+            {{ form_label(form.status) }}
+        </h2>
 
-            <div class="select-holder">
-                {{ form_widget(form.status, {
-                    'attr': {
-                        'class': 'no-arrow announcements-list',
-                        'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
-                    }
-                }) }}
-            </div>
+        {{ form_errors(form.status) }}
 
-            <input type="submit" class="hidden" value="{{ 'listing.status_save'|trans }}">
+        <div class="select-holder">
+            {{ form_widget(form.status, {
+                'attr': {
+                    'class': 'no-arrow announcements-list',
+                    'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
+                }
+            }) }}
+        </div>
 
-            {{ form_rest(form) }}
-        </fieldset>
-    </form>
+        <input type="submit" class="hidden" value="{{ 'listing.status_save'|trans }}">
+
+    </fieldset>
+    {{ form_end(form) }}
 
 
     <script>

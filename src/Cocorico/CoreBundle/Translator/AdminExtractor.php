@@ -14,25 +14,29 @@ use JMS\TranslationBundle\Model\FileSource;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Model\MessageCatalogue;
 use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
+use PhpParser\Node;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitor;
 
-class AdminExtractor implements FileVisitorInterface, \PHPParser_NodeVisitor
+class AdminExtractor implements FileVisitorInterface, NodeVisitor
 {
     private $traverser;
+    /** @var  MessageCatalogue */
     private $catalogue;
     private $file;
 
     public function __construct()
     {
-        $this->traverser = new \PHPParser_NodeTraverser();
+        $this->traverser = new NodeTraverser();
         $this->traverser->addVisitor($this);
     }
 
-    public function enterNode(\PHPParser_Node $node)
+    public function enterNode(Node $node)
     {
 //        if (preg_match('/entity.*\./', $node->getDocComment())) {
 //            return;
 //        }
-        if (!$node instanceof \PHPParser_Node_Scalar_String) {
+        if (!$node instanceof Node\Scalar\String_) {
             return;
         } else {
             $id = $node->value;
@@ -69,7 +73,7 @@ class AdminExtractor implements FileVisitorInterface, \PHPParser_NodeVisitor
     {
     }
 
-    public function leaveNode(\PHPParser_Node $node)
+    public function leaveNode(Node $node)
     {
     }
 

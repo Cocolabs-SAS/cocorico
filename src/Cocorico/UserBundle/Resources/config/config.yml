@@ -9,8 +9,6 @@ twig:
 assetic:
     bundles: ["CocoricoUserBundle"]
 
-
-
 fos_user:
     db_driver: orm
     firewall_name: main
@@ -40,8 +38,6 @@ fos_user:
             type: user_profile
             name: user_profile
             validation_groups: [CocoricoProfile]
-
-
 
 sonata_user:
     security_acl: false

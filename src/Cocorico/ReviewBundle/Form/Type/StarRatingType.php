@@ -18,15 +18,6 @@ use Symfony\Component\Form\AbstractType;
  */
 class StarRatingType extends AbstractType
 {
-    /**
-     * getName returns name of the new type
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'star_rating';
-    }
 
     /**
      * getParent returns the parent type which will be overriding
@@ -36,5 +27,23 @@ class StarRatingType extends AbstractType
     public function getParent()
     {
         return 'choice';
+    }
+
+
+    /**
+     * BC
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'star_rating';
     }
 }

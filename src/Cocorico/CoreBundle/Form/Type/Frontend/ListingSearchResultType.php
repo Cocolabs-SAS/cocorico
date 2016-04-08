@@ -19,7 +19,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingSearchResultType extends AbstractType
 {
@@ -158,8 +158,9 @@ class ListingSearchResultType extends AbstractType
                 'sort_by',
                 'choice',
                 array(
-                    'choices' => ListingSearchRequest::$sortByValues,
+                    'choices' => array_flip(ListingSearchRequest::$sortByValues),
                     'empty_value' => 'listing_search.form.sort_by.empty_value',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -210,14 +211,16 @@ class ListingSearchResultType extends AbstractType
                         range(1, $this->timeUnitFlexibility)
                     ),
                     'required' => false,
+                    'choices_as_values' => true
                 )
             );
         }
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults(
             array(
                 'csrf_protection' => false,
@@ -227,9 +230,20 @@ class ListingSearchResultType extends AbstractType
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_search_result';
     }
-
 }

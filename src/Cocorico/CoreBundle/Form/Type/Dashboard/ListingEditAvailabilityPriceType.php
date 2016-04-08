@@ -16,7 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditAvailabilityPriceType extends AbstractType
 {
@@ -56,9 +56,9 @@ class ListingEditAvailabilityPriceType extends AbstractType
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -69,11 +69,19 @@ class ListingEditAvailabilityPriceType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'listing_edit_availability_price';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'listing_edit_availability_price';
+    }
 }

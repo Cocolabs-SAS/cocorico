@@ -22,7 +22,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LoginFormType extends AbstractType
 {
@@ -51,20 +51,31 @@ class LoginFormType extends AbstractType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_user',
-                'intention' => 'authentication',
+                'csrf_token_id' => 'authentication',
 //                'validation_groups' => array('Login'),
             )
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_login';
     }
-
 }

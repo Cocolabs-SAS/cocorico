@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserLanguageType extends AbstractType
 {
@@ -45,14 +45,14 @@ class UserLanguageType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\UserLanguage',
-                'intention' => 'user_language',
+                'csrf_token_id' => 'user_language',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true,
                 /** @Ignore */
@@ -62,9 +62,18 @@ class UserLanguageType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_language';
     }

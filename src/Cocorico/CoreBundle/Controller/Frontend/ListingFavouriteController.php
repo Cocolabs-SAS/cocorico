@@ -48,7 +48,7 @@ class ListingFavouriteController extends ListingSearchController
                 $request->getLocale()
             );
             $resultIterator = $results->getIterator();
-            $markers = $this->getMarkers($resultIterator);
+            $markers = $this->getMarkers($request, $resultIterator);
         }
 
         return $this->render(

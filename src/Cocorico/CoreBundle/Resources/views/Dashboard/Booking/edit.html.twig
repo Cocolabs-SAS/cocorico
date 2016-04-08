@@ -118,29 +118,28 @@
 
         {% if (booking_can_be_edited) %}
             {#{{ form_errors(form) }}#}
-            <form id="booking-edit-form" action="{{ form.vars.action }}" method="{{ form.vars.method }}"
-                  class="form-message" {{ form_enctype(form) }}>
-                <fieldset>
-                    <legend class="hidden">message form</legend>
-                    <div class="no-scroll">
-                        {{ form_errors(form.message) }}
-                        {{ form_widget(form.message) }}
-                    </div>
-                    <div class="agree">
-                        {{ form_errors(form.tac) }}
-                        {{ form_widget(form.tac) }}
-                        <span class="label">
-                            {{ form_label(form.tac, null, {'required': false} ) }}
-                            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
-                               target="_blank">
-                                {{ 'booking.new.tac.link'|trans }}
-                            </a>*
-                        </span>
-                    </div>
-                    <input type="submit" class="hidden">
-                    {{ form_rest(form) }}
-                </fieldset>
-            </form>
+            {{ form_start(form, {'attr': {'id': 'booking-edit-form', 'class': 'form-message'}}) }}
+
+            <fieldset>
+                <legend class="hidden">message form</legend>
+                <div class="no-scroll">
+                    {{ form_errors(form.message) }}
+                    {{ form_widget(form.message) }}
+                </div>
+                <div class="agree">
+                    {{ form_errors(form.tac) }}
+                    {{ form_widget(form.tac) }}
+                    <span class="label">
+                        {{ form_label(form.tac, null, {'required': false} ) }}
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                           target="_blank">
+                            {{ 'booking.new.tac.link'|trans }}
+                        </a>*
+                    </span>
+                </div>
+                <input type="submit" class="hidden">
+            </fieldset>
+            {{ form_end(form) }}
 
             <div class="modal-footer">
                 <a id="booking-edit-return" href="#"

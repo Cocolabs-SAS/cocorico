@@ -20,7 +20,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 
 class DateRangeType extends AbstractType
@@ -82,6 +81,7 @@ class DateRangeType extends AbstractType
                                     ),
                                     'label' => 'date_range.nb_days',
                                     'translation_domain' => 'cocorico',
+                                    'choices_as_values' => true
                                 )
                             );
                     } else {//$this->daysMax = 1
@@ -131,15 +131,15 @@ class DateRangeType extends AbstractType
         $builder->addEventSubscriber($options['validator']);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Model\DateRange',
                 'end_options' => array(),
                 'start_options' => array(),
-                'transformer' => null,
-                'validator' => null,
+//                'transformer' => null,
+//                'validator' => null,
                 'allow_single_day' => true,
                 'end_day_included' => true,
                 'display_mode' => 'range',
@@ -148,24 +148,30 @@ class DateRangeType extends AbstractType
             )
         );
 
-        $resolver->setAllowedTypes(
-            array(
-                'transformer' => 'Symfony\Component\Form\DataTransformerInterface',
-                'validator' => 'Symfony\Component\EventDispatcher\EventSubscriberInterface',
-            )
-        );
-
         // Those normalizers lazily create the required objects, if none given.
-        $resolver->setNormalizers(
-            array(
-                'transformer' => function (Options $options, $value) {
+        $resolver
+            ->setDefault('transformer', null)
+            ->setNormalizer(
+                'transformer',
+                function (Options $options, $value) {
                     if (!$value) {
                         $value = new DateRangeViewTransformer(new OptionsResolver());
                     }
 
                     return $value;
-                },
-                'validator' => function (Options $options, $value) {
+                }
+            )
+            ->setAllowedTypes(
+                'transformer',
+                array('Symfony\Component\Form\DataTransformerInterface', 'null')
+            );
+
+        // Those normalizers lazily create the required objects, if none given.
+        $resolver
+            ->setDefault('validator', null)
+            ->setNormalizer(
+                'validator',
+                function (Options $options, $value) {
                     if (!$value) {
                         $value = new DateRangeValidator(
                             new OptionsResolver(), array(
@@ -178,12 +184,28 @@ class DateRangeType extends AbstractType
                     }
 
                     return $value;
-                },
+                }
             )
-        );
+            ->setAllowedTypes(
+                'validator',
+                array('Symfony\Component\EventDispatcher\EventSubscriberInterface', 'null')
+            );
+
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'date_range';
     }

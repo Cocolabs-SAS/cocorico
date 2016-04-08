@@ -39,9 +39,6 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $requestStack;
     /** @var Request request */
     protected $request;
-//    protected $timeUnit;
-//    protected $timeUnitIsDay;
-//    protected $priceMin;
     protected $similarListings;
     protected $locale;
 
@@ -66,8 +63,6 @@ class ListingSearchRequest implements TranslationContainerInterface
 
         $this->maxPerPage = $maxPerPage;
         $this->page = 1;
-//        $this->timeUnit = $timeUnit;
-//        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
 
         //Init date range
         $dateRange = $this->request->query->get("date_range");
@@ -78,7 +73,6 @@ class ListingSearchRequest implements TranslationContainerInterface
         $this->flexibility = 0;
 
         //Price
-//        $this->priceMin = $priceMin;
         $this->priceRange = new PriceRange();
 
         //Location

@@ -34,21 +34,22 @@ Add this commands to your cron tab and don't forget to set the same php timezone
 
     `0 0 27 * * php <path-to-your-app>app/console cocorico:listings:alertUpdateCalendars --env=dev`
 
-8. Accept or refuse bookings from SMS (Optional. SMSBundle must be enabled)
+8. Listings platform notation computing (Optional. ListingSearchBundle must be enabled):
+        
+    `30 2 * * * php <path-to-your-app>app/console cocorico_listing_search:computeNotation --env=dev`
+    
+9. Accept or refuse bookings from SMS (Optional. SMSBundle must be enabled)
     
     `* *  * * *  php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS`
 
-9. Check phone from SMS (Optional. SMSBundle must be enabled)
+10. Check phone from SMS (Optional. SMSBundle must be enabled)
     
     `* *  * * *  php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS`
 
-10. Alert user if new listings are found (Optional. ListingAlertBundle must be enabled)
+11. Alert user if new listings are found (Optional. ListingAlertBundle must be enabled)
     
     `* *  * * *  php <path-to-your-app>app/console cocorico_listing_alert:alertNewListingsFound`
 
-11. Listings platform notation computing (Optional. ListingSearchBundle must be enabled):
-        
-    `30 2 * * * php <path-to-your-app>app/console cocorico_listing_search:computeNotation --env=dev`
         
 Translations
 ------------

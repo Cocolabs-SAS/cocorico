@@ -5,68 +5,67 @@
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
 
-    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
-        {{ form_errors(form) }}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
 
-        <div class="field-row">
-            {{ form_errors(form.min_duration) }}
-            <span class="label">{{ form_label(form.min_duration) }}</span>
+    <div class="field-row">
+        {{ form_errors(form.min_duration) }}
+        <span class="label">{{ form_label(form.min_duration) }}</span>
 
-            <div class="field-holder">
-                <span class="label">{{ (-1)|add_time_unit_text }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form.min_duration, {
-                        'attr': {
-                            'class': 'no-arrow'
-                        }
-                    }) }}
-                </div>
-            </div>
-        </div>
-
-        <div class="field-row">
-            {{ form_errors(form.max_duration) }}
-            <span class="label">{{ form_label(form.max_duration) }}</span>
+        <div class="field-holder">
+            <span class="label">{{ (-1)|add_time_unit_text }}</span>
 
             <div class="field-holder">
-                <span class="label">{{ (-1)|add_time_unit_text }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form.max_duration, {
-                        'attr': {
-                            'class': 'no-arrow'
-                        }
-                    }) }}
-                </div>
-            </div>
-        </div>
-
-        <div class="field-row">
-            {{ form_errors(form.cancellation_policy) }}
-            <span class="label">{{ form_label(form.cancellation_policy) }}</span>
-            <span class="info-policy">
-                <button title="{{ cancellationPolicies() }}" data-placement="right" data-html="true"
-                        data-toggle="tooltip" class="tooltip-button" type="button">?
-                </button>
-            </span>
-            <div class="field-holder">
-                {{ form_widget(form.cancellation_policy, {
+                {{ form_widget(form.min_duration, {
                     'attr': {
                         'class': 'no-arrow'
                     }
                 }) }}
             </div>
         </div>
+    </div>
 
-        <div class="btn-block text-center">
-            <button type="submit" class="btn btn-default">
-                {{ 'listing.save'|trans }}
-            </button>
+    <div class="field-row">
+        {{ form_errors(form.max_duration) }}
+        <span class="label">{{ form_label(form.max_duration) }}</span>
+
+        <div class="field-holder">
+            <span class="label">{{ (-1)|add_time_unit_text }}</span>
+
+            <div class="field-holder">
+                {{ form_widget(form.max_duration, {
+                    'attr': {
+                        'class': 'no-arrow'
+                    }
+                }) }}
+            </div>
         </div>
+    </div>
 
-        {{ form_rest(form) }}
-    </form>
+    <div class="field-row">
+        {{ form_errors(form.cancellation_policy) }}
+        <span class="label">{{ form_label(form.cancellation_policy) }}</span>
+        <span class="info-policy">
+            <button title="{{ cancellationPolicies() }}" data-placement="right" data-html="true"
+                    data-toggle="tooltip" class="tooltip-button" type="button">?
+            </button>
+        </span>
+        <div class="field-holder">
+            {{ form_widget(form.cancellation_policy, {
+                'attr': {
+                    'class': 'no-arrow'
+                }
+            }) }}
+        </div>
+    </div>
+
+    <div class="btn-block text-center">
+        <button type="submit" class="btn btn-default">
+            {{ 'listing.save'|trans }}
+        </button>
+    </div>
+
+    {{ form_end(form) }}
 
     <script>
         $(function () {

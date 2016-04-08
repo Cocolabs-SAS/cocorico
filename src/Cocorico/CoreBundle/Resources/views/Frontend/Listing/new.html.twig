@@ -33,8 +33,8 @@
         {% block main %}
             <div class="col-xs-12">
 
-                <form class="form" action="{{ form.vars.action }}"
-                      method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+                {{ form_start(form, {'attr': {'class': 'form'}}) }}
+
                     <div class="listing-section">
                         <fieldset>
                             <legend class="hidden">listing-section</legend>
@@ -44,8 +44,10 @@
 
                                 <p><strong>{{ 'listing.new.publish.notice'|trans }}</strong></p>
                             </div>
+
                             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
                             {{ form_errors(form) }}
+
                             <div class="holder">
                                 <div class="form-selection">
                                     <h2>{{ 'listing.new.categories.title'|trans }}</h2>
@@ -294,8 +296,7 @@
                         </div>
 
                     </div>
-                    {{ form_rest(form) }}
-                </form>
+                {{ form_end(form) }}
             </div>
 
         {% endblock %}

@@ -15,7 +15,7 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingPriceType extends AbstractType
 {
@@ -110,14 +110,14 @@ class BookingPriceType extends AbstractType
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
-                'intention' => 'booking_price',
+                'csrf_token_id' => 'booking_price',
                 'translation_domain' => 'cocorico_booking',
                 'cascade_validation' => true,
                 'validation_groups' => array('new'),
@@ -126,9 +126,18 @@ class BookingPriceType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'booking_price';
     }

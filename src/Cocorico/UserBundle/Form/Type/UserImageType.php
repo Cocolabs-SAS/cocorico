@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserImageType extends AbstractType
 {
@@ -70,14 +70,14 @@ class UserImageType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\UserImage',
-                'intention' => 'user_image',
+                'csrf_token_id' => 'user_image',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true,
                 /** @Ignore */
@@ -87,9 +87,18 @@ class UserImageType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_image';
     }

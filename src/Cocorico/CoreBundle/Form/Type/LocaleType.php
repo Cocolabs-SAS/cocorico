@@ -13,7 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LocaleType extends AbstractType
 {
@@ -22,7 +22,7 @@ class LocaleType extends AbstractType
     public function __construct($locales = array())
     {
         foreach ($locales as $locale) {
-            $this->locales[$locale] = 'cocorico.' . $locale;
+            $this->locales['cocorico.' . $locale] = $locale;
         }
     }
 
@@ -36,14 +36,15 @@ class LocaleType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'mapped' => false,
                 'choices' => $this->locales,
+                'choices_as_values' => true,
                 'translation_domain' => 'cocorico_user',
                 /** @Ignore */
                 'label' => false
@@ -59,10 +60,20 @@ class LocaleType extends AbstractType
         return 'choice';
     }
 
+
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'locale_choice';
     }

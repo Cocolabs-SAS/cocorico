@@ -28,7 +28,7 @@ services:
             - "@router"
             - "@twig"
             - "@request_stack"
-            - "@translator"
+            - "@translator.default"
             - parameters:
                 cocorico_time_unit: %cocorico.time_unit%
                 cocorico_locales: %cocorico.locales%

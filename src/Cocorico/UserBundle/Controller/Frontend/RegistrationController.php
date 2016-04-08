@@ -40,7 +40,7 @@ class RegistrationController extends ContainerAware
     {
         $session = $this->container->get('session');
         $router = $this->container->get('router');
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             if (!$session->has('profile')) {
                 $session->set('profile', 'asker');
             }
@@ -156,7 +156,7 @@ class RegistrationController extends ContainerAware
      */
     public function confirmedAction()
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }

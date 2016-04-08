@@ -14,7 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 use Cocorico\CoreBundle\Entity\Listing;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingImageType extends AbstractType
 {
@@ -71,14 +71,14 @@ class ListingImageType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\ListingImage',
-                'intention' => 'listing_image',
+                'csrf_token_id' => 'listing_image',
                 'translation_domain' => 'cocorico_listing',
                 'cascade_validation' => true,
                 /** @Ignore */
@@ -88,11 +88,19 @@ class ListingImageType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'listing_image';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'listing_image';
+    }
 }

@@ -5,16 +5,15 @@
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
 
-    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}
-          novalidate="novalidate">
-        {{ form_errors(form) }}
-        {{ form_widget(form.discounts) }}
-        {{ form_rest(form) }}
+    {{ form_start(form) }}
 
-        <div class="btn-block text-center">
-            <button type="submit" class="btn btn-default">{{ 'listing.price_save'|trans }}</button>
-        </div>
-    </form>
+    {{ form_errors(form) }}
+    {{ form_widget(form.discounts) }}
+
+    <div class="btn-block text-center">
+        <button type="submit" class="btn btn-default">{{ 'listing.price_save'|trans }}</button>
+    </div>
+    {{ form_end(form) }}
 
     <script>
         $(function () {

@@ -79,9 +79,10 @@ class ContactAdmin extends Admin
                 'status',
                 'choice',
                 array(
-                    'choices' => Contact::$statusValues,
+                    'choices' => array_flip(Contact::$statusValues),
                     'label' => 'admin.contact.status.label',
-                    'translation_domain' => 'cocorico_contact'
+                    'translation_domain' => 'cocorico_contact',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -112,9 +113,10 @@ class ContactAdmin extends Admin
                 array(),
                 'choice',
                 array(
-                    'choices' => Contact::$statusValues,
+                    'choices' => array_flip(Contact::$statusValues),
                     'label' => 'admin.contact.status.label',
-                    'translation_domain' => 'cocorico_contact'
+                    'translation_domain' => 'cocorico_contact',
+                    'choices_as_values' => true
                 )
             )
             ->add(

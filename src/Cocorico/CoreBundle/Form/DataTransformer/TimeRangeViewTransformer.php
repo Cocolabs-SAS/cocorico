@@ -14,20 +14,20 @@ namespace Cocorico\CoreBundle\Form\DataTransformer;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
 class TimeRangeViewTransformer implements DataTransformerInterface
 {
     protected $options = array();
 
-    public function __construct(OptionsResolverInterface $resolver, array $options = array())
+    public function __construct(OptionsResolver $resolver, array $options = array())
     {
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
 
     }

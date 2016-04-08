@@ -19,8 +19,6 @@ class LanguageManager
     protected $em;
     protected $router;
     protected $locales;
-    protected $languagesLinks = [];
-    protected $slugs = [];
 
     /**
      * @param EntityManager   $em
@@ -45,27 +43,37 @@ class LanguageManager
      * @param array  $routeParams passes all route parameters
      * @param string $queryString passes the query string from the current route
      *
-     * @return array $languagesLinks array of all language links depending upon the requests
+     * @return array all translated routes for each locales
      */
-    public function getLanguageLinks($routeName, $routeParams, $queryString)
+    public function getLanguageLinks($routeName, $routeParams = array(), $queryString)
     {
-        //Get slug translations to generate correct listing_show url for each languages
-        if ($routeName == 'cocorico_listing_show') {
-            $this->setTranslatedSlugs('CocoricoCoreBundle:Listing', $routeParams);
+
+        $languagesLinks = array_flip($this->locales);
+        foreach ($languagesLinks as $lang => $languagesLink) {
+            $languagesLinks[$lang] = '';
         }
 
-        //Get slug translations to generate correct page_show url for each languages
-        if ($routeName == 'cocorico_page_show') {
-            $this->setTranslatedSlugs('CocoricoPageBundle:Page', $routeParams);
+        if (!$routeName) {
+            return $languagesLinks;
         }
+
+        $slugs = array();
+        //Get slug translations to generate correct listing_show url for each languages
+        if ($routeName == 'cocorico_listing_show') {
+            $slugs = $this->setTranslatedSlugs('CocoricoCoreBundle:Listing', $routeParams);
+        } //Get slug translations to generate correct page_show url for each languages
+        elseif ($routeName == 'cocorico_page_show') {
+            $slugs = $this->setTranslatedSlugs('CocoricoPageBundle:Page', $routeParams);
+        }
+
 
         // generate the urls as per the locales available
         foreach ($this->locales as $locale) {
-            if (isset($this->slugs[$locale])) {
-                $routeParams["slug"] = $this->slugs[$locale];
+            if (isset($slugs[$locale])) {
+                $routeParams["slug"] = $slugs[$locale];
             }
 
-            $this->languagesLinks[$locale] = $this->router->generate(
+            $languagesLinks[$locale] = $this->router->generate(
                 $routeName,
                 array_merge(
                     $routeParams,
@@ -75,7 +83,7 @@ class LanguageManager
             );
         }
 
-        return $this->languagesLinks;
+        return $languagesLinks;
     }
 
     /**
@@ -84,16 +92,19 @@ class LanguageManager
      * @param string $entityName  Entity name used to call repository function
      * @param array  $routeParams passes all route parameters
      *
-     * @return void
+     * @return array
      */
     private function setTranslatedSlugs($entityName, $routeParams)
     {
+        $slugs = array();
         /** @var mixed $entityTranslations */
         $entityTranslations = $this->em->getRepository($entityName)
             ->findTranslationsBySlug($routeParams['slug'], $routeParams['_locale']);
 
         foreach ($entityTranslations as $entityTranslation) {
-            $this->slugs[$entityTranslation->getLocale()] = $entityTranslation->getSlug();
+            $slugs[$entityTranslation->getLocale()] = $entityTranslation->getSlug();
         }
+
+        return $slugs;
     }
 }

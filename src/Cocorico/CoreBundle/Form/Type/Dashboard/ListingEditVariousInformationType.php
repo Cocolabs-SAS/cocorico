@@ -13,7 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Form\Type\Frontend\ListingLocationType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * ListingEditVariousInformationType
@@ -28,11 +28,12 @@ class ListingEditVariousInformationType extends ListingEditType
             //     'type',
             //     'choice',
             //     array(
-            //         'choices' => Listing::$typeValues,
+            //         'choices' => array_flip(Listing::$typeValues),
             //         'empty_value' => 'listing.form.various_information.choose',
             //         'required' => false,
             //         'translation_domain' => 'cocorico_listing',
             //         'label' => 'listing.form.type',
+            //            'choices_as_values' => true
             //     )
             // )
             ->add(
@@ -54,12 +55,25 @@ class ListingEditVariousInformationType extends ListingEditType
             );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
     }
 
+
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_edit_various_information';
     }

@@ -19,7 +19,7 @@ services:
             - "@white_october_breadcrumbs"
             - "@jms_i18n_routing.router"
             - "@cocorico.breadcrumbs_loader"
-            - "@translator"
+            - "@translator.default"
 
     cocorico.translator.breadcrumbs_extractor:
         class: Cocorico\BreadcrumbBundle\Translator\BreadcrumbsExtractor

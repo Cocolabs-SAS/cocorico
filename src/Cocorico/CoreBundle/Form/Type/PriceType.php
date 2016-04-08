@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PriceType extends AbstractType
 {
@@ -55,14 +55,14 @@ class PriceType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_listing',
-                'precision' => $this->pricePrecision,
+                'scale' => $this->pricePrecision,
                 'defaultCurrency' => $this->defaultCurrency,
                 'currency' => $this->defaultCurrency,
                 'attr' => array(
@@ -98,11 +98,19 @@ class PriceType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'price';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'price';
+    }
 }

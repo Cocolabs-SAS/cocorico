@@ -15,11 +15,10 @@ namespace Cocorico\CoreBundle\Form\Extension;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ImageTypeExtension extends AbstractTypeExtension
-//    implements FormExtensionInterface
 {
 
     public function getExtendedType()
@@ -29,11 +28,11 @@ class ImageTypeExtension extends AbstractTypeExtension
 
     /**
      *
-     * @param \Symfony\Component\OptionsResolver\OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setOptional(
+        $resolver->setDefined(
             array(
                 'image_path',
                 'imagine_filter',

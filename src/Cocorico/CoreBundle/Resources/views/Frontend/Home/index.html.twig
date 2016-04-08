@@ -85,7 +85,10 @@
                     </div>
                 </div>
             </div>
-            {{ render(controller('CocoricoCoreBundle:Frontend/Home:highRankListing', {'limit': 6 })) }}
+            {{ render(controller('CocoricoCoreBundle:Frontend/Home:highRankListing', {
+                'request': app.request,
+                'limit': 6
+            })) }}
         {% endblock %}
         {% block modal %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}

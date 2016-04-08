@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProfilePaymentFormType extends AbstractType
 {
@@ -120,12 +120,12 @@ class ProfilePaymentFormType extends AbstractType
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\User',
-                'intention' => 'CocoricoProfilePayment',
+                'csrf_token_id' => 'CocoricoProfilePayment',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true,
                 'validation_groups' => array('CocoricoProfilePayment'),
@@ -133,9 +133,20 @@ class ProfilePaymentFormType extends AbstractType
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'user_profile_payment';
     }
-
 }

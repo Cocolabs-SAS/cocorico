@@ -16,7 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditAvailabilityStatusType extends AbstractType
 {
@@ -31,7 +31,8 @@ class ListingEditAvailabilityStatusType extends AbstractType
                 'status',
                 'choice',
                 array(
-                    'choices' => ListingAvailability::$visibleValues
+                    'choices' => array_flip(ListingAvailability::$visibleValues),
+                    'choices_as_values' => true
                 )
             );
 
@@ -59,9 +60,9 @@ class ListingEditAvailabilityStatusType extends AbstractType
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -73,11 +74,19 @@ class ListingEditAvailabilityStatusType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'listing_edit_availability_status';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'listing_edit_availability_status';
+    }
 }

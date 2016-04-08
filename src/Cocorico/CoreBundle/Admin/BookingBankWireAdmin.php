@@ -91,10 +91,11 @@ class BookingBankWireAdmin extends Admin
                 'choice',
                 array(
                     'disabled' => true,
-                    'choices' => Booking::$statusValues,
+                    'choices' => array_flip(Booking::$statusValues),
                     'empty_value' => 'admin.booking.status.label',
                     'label' => 'admin.booking_bank_wire.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             );
 
@@ -110,7 +111,7 @@ class BookingBankWireAdmin extends Admin
                     'amount',
                     'price',
                     array(
-                        'precision' => 2,
+                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount_excl_discount_voucher.label',
                         'include_vat' => true
@@ -170,7 +171,7 @@ class BookingBankWireAdmin extends Admin
                     'amount',
                     'price',
                     array(
-                        'precision' => 2,
+                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount.label',
                         'include_vat' => true
@@ -183,11 +184,12 @@ class BookingBankWireAdmin extends Admin
                 'status',
                 'choice',
                 array(
-                    'choices' => BookingBankWire::$statusValues,
+                    'choices' => array_flip(BookingBankWire::$statusValues),
                     'empty_value' => 'admin.booking.status.label',
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'help' => 'admin.booking_bank_wire.status.help'
+                    'help' => 'admin.booking_bank_wire.status.help',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -256,7 +258,7 @@ class BookingBankWireAdmin extends Admin
                         'amountDecimal',
                         'number',
                         array(
-                            'precision' => 2,
+                            'scale' => 2,
                             'disabled' => true,
                             'label' => 'admin.booking_bank_wire.amount.label',
                             'help' => 'Debited funds (' . $this->currency . ')'
@@ -326,9 +328,10 @@ class BookingBankWireAdmin extends Admin
                 array(),
                 'choice',
                 array(
-                    'choices' => BookingBankWire::$statusValues,
+                    'choices' => array_flip(BookingBankWire::$statusValues),
                     'label' => 'admin.booking.status.label',
-                    'translation_domain' => 'cocorico_booking'
+                    'translation_domain' => 'cocorico_booking',
+                    'choices_as_values' => true
                 )
             )
             ->add(

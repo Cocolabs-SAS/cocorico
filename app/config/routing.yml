@@ -4,9 +4,6 @@ cocorico_core:
 cocorico_user:
     resource: "@CocoricoUserBundle/Resources/config/routing.yml"
 
-cocorico_geo:
-   resource: "@CocoricoGeoBundle/Resources/config/routing.yml"
-
 cocorico_page:
     resource: "@CocoricoPageBundle/Resources/config/routing.yml"
 

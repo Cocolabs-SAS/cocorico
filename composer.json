@@ -3,7 +3,7 @@
   "license": "MIT",
   "type": "project",
   "description": "The \"Cocorico Standard Edition\" distribution",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "keywords": [
     "collaborative",
     "platform",
@@ -22,54 +22,57 @@
     "source": "https://github.com/Cocolabs-SAS/cocorico"
   },
   "autoload": {
-    "psr-0": {
-      "": "src/",
-      "SymfonyStandard": "app/"
-    }
+    "psr-4": {"": "src/"},
+    "classmap": [
+      "app/AppKernel.php",
+      "app/AppCache.php"
+    ]
   },
   "require": {
-    "php": ">=5.3.3",
-    "symfony/symfony": "2.5.*",
-    "doctrine/orm": "~2.2,>=2.2.3",
-    "twig/extensions": "~1.0",
-    "symfony/assetic-bundle": "~2.3",
+    "php": ">=5.4.0",
+    "symfony/symfony": "2.8.*",
+    "doctrine/orm": "^2.4.8",
+    "doctrine/doctrine-bundle": "~1.4",
+    "doctrine/doctrine-migrations-bundle": "^1.0",
     "symfony/swiftmailer-bundle": "~2.3",
     "symfony/monolog-bundle": "~2.4",
-    "sensio/distribution-bundle": "~3.0",
-    "sensio/framework-extra-bundle": "~3.0",
+    "symfony/assetic-bundle": "~2.8",
+    "sensio/distribution-bundle": "~5.0",
+    "sensio/framework-extra-bundle": "^3.0.2",
     "incenteev/composer-parameter-handler": "~2.0",
     "friendsofsymfony/user-bundle": "~1.3",
-    "jms/i18n-routing-bundle": "1.1.*@dev",
-    "knplabs/doctrine-behaviors": "dev-master",
+    "jms/i18n-routing-bundle": "^2.0",
+    "jms/translation-bundle": "^1.2",
+    "knplabs/doctrine-behaviors": "^1.3",
     "a2lix/translation-form-bundle": "2.*@dev",
-    "jms/di-extra-bundle": "1.4.*@dev",
+    "jms/di-extra-bundle": "^1.7",
     "stof/doctrine-extensions-bundle": "~1.1@dev",
     "oneup/uploader-bundle": "~1.3",
     "liip/imagine-bundle": "dev-master",
-    "lexik/currency-bundle": "dev-master",
-    "willdurand/geocoder-bundle": "3.1.*@dev",
-    "doctrine/mongodb-odm": "1.0.*@dev",
-    "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+    "lexik/currency-bundle": "^2.0",
+    "willdurand/geocoder-bundle": "^4.1",
+    "doctrine/mongodb-odm": "^1.0",
+    "doctrine/mongodb-odm-bundle": "^3.0",
     "ramsey/array_column": "~1.1",
     "sonata-project/admin-bundle": "~2.3",
     "sonata-project/doctrine-orm-admin-bundle": "~2.3",
     "sonata-project/block-bundle": "~2.2",
+    "sonata-project/easy-extends-bundle": "^2.1",
+    "sonata-project/user-bundle": "^2.2",
     "knplabs/knp-menu-bundle": "~2",
-    "sonata-project/easy-extends-bundle": "~2.1",
-    "sonata-project/user-bundle": "~2.2",
     "friendsofsymfony/message-bundle": "~1.2",
-    "doctrine/doctrine-bundle": "~1.4",
     "whiteoctober/breadcrumbs-bundle": "~1.1",
-    "hwi/oauth-bundle": "0.4.*@dev",
-    "egeloen/ckeditor-bundle": "~3.0",
-    "helios-ag/fm-elfinder-bundle": "~5.0",
+    "hwi/oauth-bundle": "^0.4",
+    "egeloen/ckeditor-bundle": "^4.0",
+    "helios-ag/fm-elfinder-bundle": "^6.0",
     "doctrine/doctrine-fixtures-bundle": "dev-master",
     "egulias/email-validator": "~1.2",
-    "simplethings/entity-audit-bundle": "^0.9.0",
+    "simplethings/entity-audit-bundle": "^0.9",
     "mrclay/minify": "^2.2"
   },
   "require-dev": {
     "sensio/generator-bundle": "~2.3",
+    "symfony/phpunit-bridge": "~2.7",
     "behat/symfony2-extension": "2.0.*@dev",
     "behat/mink-extension": "2.0.*@dev",
     "behat/mink-browserkit-driver": "1.2.*@dev",
@@ -77,22 +80,19 @@
     "behat/mink-goutte-driver": "1.1.*@dev",
     "behat/mink-zombie-driver": "1.2.*@dev",
     "doctrine/doctrine-fixtures-bundle": "2.2.*@dev",
-    "fzaninotto/faker": "1.5.*@dev",
+    "fzaninotto/faker": "~1.5",
     "phpunit/phpunit": "4.3.*",
     "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
     "hpatoio/deploy-bundle": "~1.5"
   },
   "scripts": {
-    "post-root-package-install": [
-      "SymfonyStandard\\Composer::hookRootPackageInstall"
-    ],
     "post-install-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ],
     "post-update-cmd": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -100,24 +100,25 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ]
   },
   "config": {
     "bin-dir": "bin",
+    "platform": {
+      "php": "5.4.8"
+    },
     "component-dir": "web/assets"
   },
   "extra": {
     "symfony-app-dir": "app",
     "symfony-web-dir": "web",
-    "incenteev-parameters": [
-      {
-        "file": "app/config/parameters.yml"
-      }
-    ],
-    "branch-alias": {
-      "dev-master": "2.5-dev"
+    "symfony-assets-install": "relative",
+    "incenteev-parameters": {
+      "file": "app/config/parameters.yml"
     },
-    "symfony-assets-install": "symlink"
+    "branch-alias": {
+      "dev-master": "2.8-dev"
+    }
   }
 }

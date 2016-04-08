@@ -47,7 +47,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
             <h3>What did you use to build Cocorico?</h3>
             <p>Cocorico is based on Symfony 2.</p>
             <h3>Where can I get it?</h3>
-            <p>Here: <a target="_blank" href="https://github.com/cocoricolabs/cocorico">https://github.com/cocoricolabs/cocorico</a></p>
+            <p>Here: <a target="_blank" href="https://github.com/Cocolabs-SAS/cocorico">https://github.com/Cocolabs-SAS/cocorico</a></p>
             <h3>Do you have a mascot?</h3>
             <p>Here&rsquo;s a video of our cute hen &ldquo;Cocotte&rdquo;: <a href="http://cocorico.rocks/">http://cocorico.rocks/</a></p>
             '
@@ -61,9 +61,9 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
             <h3>Qu&rsquo;utilisez-vous sur Cocorico ?</h3>
             <p>Cocorico utilise Symfony 2.</p>
             <h3>O&ugrave; puis-je l&rsquo;obtenir?</h3>
-            <p>Ici : <a target="_blank" href="https://github.com/cocoricolabs/cocorico">https://github.com/cocoricolabs/cocorico</a></p>
+            <p>Ici : <a target="_blank" href="https://github.com/Cocolabs-SAS/cocorico">https://github.com/Cocolabs-SAS/cocorico</a></p>
             <h3>Avez-vous une mascotte ?</h3>
-            <p>Voici une vid&eacute;o de &quot;Cocotte&quot;&nbsp;: http://<a href="http://cocorico.rocks/">cocorico.rocks/</a></p>'
+            <p>Voici une vid&eacute;o de &quot;Cocotte&quot;&nbsp;: <a href="http://cocorico.rocks/">http://cocorico.rocks/</a></p>'
         );
 
         //Page How it Works

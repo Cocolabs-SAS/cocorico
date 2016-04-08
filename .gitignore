@@ -1,3 +1,4 @@
+app/DoctrineMigrations
 app/bootstrap.php.cache
 app/spool
 app/cache
@@ -5,7 +6,7 @@ app/cache
 app/config/parameters.yml
 app/config/parameters_test.yml
 app/SymfonyRequirements.php
-
+/app/phpunit.xml
 app/logs
 !app/logs/.gitkeep
 !app/build/logs/.gitkeep
@@ -70,4 +71,5 @@ php
 /auth.json
 
 tmp/*
+tmp/*.*
 tmp/bu

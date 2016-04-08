@@ -47,10 +47,10 @@ class ListingCharacteristicType extends AbstractType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
                 /** @var ListingCharacteristicRepository $characteristicsRepository */
-                $characteristicsRepository = $this->entityManager
-                    ->getRepository("CocoricoCoreBundle:ListingCharacteristic");
-                $characteristics = $characteristicsRepository
-                    ->findAllTranslated($this->locale);
+                $characteristicsRepository = $this->entityManager->getRepository(
+                    "CocoricoCoreBundle:ListingCharacteristic"
+                );
+                $characteristics = $characteristicsRepository->findAllTranslated($this->locale);
 
                 $form = $event->getForm();
                 $data = $event->getData();
@@ -72,7 +72,8 @@ class ListingCharacteristicType extends AbstractType
                                 'group' => $listingCharacteristic->getListingCharacteristicGroup()->getName()
                             ),
                             'mapped' => false,
-                            'choices' => $this->buildCharacteristicValuesChoices($listingCharacteristic)
+                            'choices' => $this->buildCharacteristicValuesChoices($listingCharacteristic),
+                            'choices_as_values' => true
                         )
                     );
                 }
@@ -90,7 +91,7 @@ class ListingCharacteristicType extends AbstractType
         $characteristics = $listingCharacteristic->getListingCharacteristicTypeValues();
         /** @var ListingCharacteristicValue $characteristic */
         foreach ($characteristics as $characteristic) {
-            $choices[$characteristic->getId()] = $characteristic->getName();
+            $choices[$characteristic->getName()] = $characteristic->getId();
         }
 
         return $choices;
@@ -105,9 +106,18 @@ class ListingCharacteristicType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_characteristic';
     }

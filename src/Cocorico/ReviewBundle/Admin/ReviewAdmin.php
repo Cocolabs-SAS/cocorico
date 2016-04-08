@@ -72,14 +72,6 @@ class ReviewAdmin extends Admin
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-        $choices = array(
-            '1' => '1',
-            '2' => '2',
-            '3' => '3',
-            '4' => '4',
-            '5' => '5'
-        );
-
         $datagridMapper
             ->add(
                 'rating',
@@ -88,9 +80,13 @@ class ReviewAdmin extends Admin
                 'choice',
                 array(
                     'label' => 'admin.review.rating.label',
-                    'choices' => $choices,
+                    'choices' => array_combine(
+                        range(1, 5),
+                        range(1, 5)
+                    ),
                     'empty_value' => 'admin.review.rating.label',
                     'translation_domain' => 'SonataAdminBundle',
+                    'choices_as_values' => true
                 )
             )
             ->add(

@@ -15,7 +15,7 @@ use Cocorico\CoreBundle\Form\DataTransformer\EntityToIdTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /*
  * To embed an entity as a hidden field
@@ -40,7 +40,7 @@ class EntityHiddenType extends AbstractType
         $builder->addModelTransformer($transformer);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -55,7 +55,19 @@ class EntityHiddenType extends AbstractType
         return 'hidden';
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'entity_hidden';
     }

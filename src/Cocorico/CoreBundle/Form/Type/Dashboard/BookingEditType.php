@@ -16,7 +16,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\True;
 
@@ -61,14 +61,14 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
-                'intention' => 'booking_edit',
+                'csrf_token_id' => 'booking_edit',
                 'translation_domain' => 'cocorico_booking',
                 'cascade_validation' => true,
 //                'validation_groups' => array('edit', 'default'),
@@ -77,9 +77,18 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'booking_edit';
     }

@@ -24,8 +24,9 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints\True;
 
 class ListingNewType extends AbstractType implements TranslationContainerInterface
@@ -34,25 +35,29 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public static $credentialError = 'user.form.credential.error';
     public static $emptyTitle = 'listing.translation.title.default';
 
-    private $securityContext;
+    private $securityTokenStorage;
+    private $securityAuthChecker;
     private $loginManager;
     private $request;
     private $locale;
     private $locales;
 
     /**
-     * @param SecurityContext $securityContext
+     * @param TokenStorage         $securityTokenStorage
+     * @param AuthorizationChecker $securityAuthChecker
      * @param LoginManager    $loginManager
      * @param RequestStack    $requestStack
      * @param array           $locales
      */
     public function __construct(
-        SecurityContext $securityContext,
+        TokenStorage $securityTokenStorage,
+        AuthorizationChecker $securityAuthChecker,
         LoginManager $loginManager,
         RequestStack $requestStack,
         $locales
     ) {
-        $this->securityContext = $securityContext;
+        $this->securityTokenStorage = $securityTokenStorage;
+        $this->securityAuthChecker = $securityAuthChecker;
         $this->loginManager = $loginManager;
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
@@ -158,7 +163,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
          */
         $formUserModifier = function (FormInterface $form) {
             //Not logged
-            if (!$this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if (!$this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $form
                     ->add(//Login form
                         'user_login',
@@ -182,7 +187,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     'user',
                     'entity_hidden',
                     array(
-                        'data' => $this->securityContext->getToken()->getUser(),
+                        'data' => $this->securityTokenStorage->getToken()->getUser(),
                         'class' => 'Cocorico\UserBundle\Entity\User',
                         'data_class' => null
                     )
@@ -221,7 +226,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                             'user',
                             'entity_hidden',
                             array(
-                                'data' => $this->securityContext->getToken()->getUser(),
+                                'data' => $this->securityTokenStorage->getToken()->getUser(),
                                 'class' => 'Cocorico\UserBundle\Entity\User',
                                 'data_class' => null
                             )
@@ -249,14 +254,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
-                'intention' => 'listing_new',
+                'csrf_token_id' => 'listing_new',
                 'translation_domain' => 'cocorico_listing',
                 'cascade_validation' => true,
                 //'validation_groups' => array('Listing'),
@@ -265,9 +270,18 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_new';
     }

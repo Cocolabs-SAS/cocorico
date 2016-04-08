@@ -15,7 +15,7 @@ use Cocorico\CoreBundle\Entity\Listing;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditStatusType extends ListingEditType
 {
@@ -45,17 +45,18 @@ class ListingEditStatusType extends ListingEditType
                 'choice',
                 array(
                     'label' => 'listing.form.status',
-                    'choices' => $choices,
+                    'choices' => array_flip($choices),
+                    'choices_as_values' => true
                 )
             );
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_listing',
@@ -64,11 +65,19 @@ class ListingEditStatusType extends ListingEditType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'listing_edit_status';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'listing_edit_status';
+    }
 }

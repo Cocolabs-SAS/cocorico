@@ -18,19 +18,19 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TimeRangeValidator implements EventSubscriberInterface, TranslationContainerInterface
 {
     protected $options = array();
 
-    public function __construct(OptionsResolverInterface $resolver, array $options = array())
+    public function __construct(OptionsResolver $resolver, array $options = array())
     {
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -39,12 +39,8 @@ class TimeRangeValidator implements EventSubscriberInterface, TranslationContain
             )
         );
 
-        $resolver->setAllowedValues(
-            array(
-                'required' => array(true, false),
-                'display_mode' => array('range', 'duration'),
-            )
-        );
+        $resolver->setAllowedValues('required', array(true, false));
+        $resolver->setAllowedValues('display_mode', array('range', 'duration'));
     }
 
     public function onPostBind(FormEvent $event)

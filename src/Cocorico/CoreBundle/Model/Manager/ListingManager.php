@@ -23,33 +23,33 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\SecurityContext;
 
 class ListingManager extends BaseManager
 {
     protected $em;
-    protected $securityContext;
+    protected $securityTokenStorage;
     protected $newListingIsPublished;
     public $maxPerPage;
     protected $mailer;
 
     /**
      * @param EntityManager   $em
-     * @param SecurityContext $securityContext
+     * @param TokenStorage    $securityTokenStorage
      * @param int             $newListingIsPublished
      * @param int             $maxPerPage
      * @param TwigSwiftMailer $mailer
      */
     public function __construct(
         EntityManager $em,
-        SecurityContext $securityContext,
+        TokenStorage $securityTokenStorage,
         $newListingIsPublished,
         $maxPerPage,
         TwigSwiftMailer $mailer
     ) {
         $this->em = $em;
-        $this->securityContext = $securityContext;
+        $this->securityTokenStorage = $securityTokenStorage;
         $this->newListingIsPublished = $newListingIsPublished;
         $this->maxPerPage = $maxPerPage;
         $this->mailer = $mailer;
@@ -150,11 +150,8 @@ class ListingManager extends BaseManager
      */
     public function addImages(Listing $listing, array $images, $persist = false)
     {
-//        echo get_class($listing->getUser());
-//        echo ($this->securityContext->getToken()->getUser());
-//        echo($listing->getUser()->getId());
         //@todo : see why user is anonymous and not authenticated
-        if (true || $listing && $listing->getUser() == $this->securityContext->getToken()->getUser()) {
+        if (true || $listing && $listing->getUser() == $this->securityTokenStorage->getToken()->getUser()) {
             //Start new positions value
             $nbImages = $listing->getImages()->count();
 

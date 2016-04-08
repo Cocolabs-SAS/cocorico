@@ -152,11 +152,12 @@ class ThreadAdmin extends Admin
                 'choice',
                 array(
                     'choices' => array(
-                        'booking' => 'Reservation Message',
-                        'message' => 'Message'
+                        'Reservation Message' => 'booking',
+                        'Message' => 'message'
                     ),
                     'empty_value' => 'admin.thread.type.label',
-                    'translation_domain' => 'SonataAdminBundle'
+                    'translation_domain' => 'SonataAdminBundle',
+                    'choices_as_values' => true
                 )
             )
             ->add(

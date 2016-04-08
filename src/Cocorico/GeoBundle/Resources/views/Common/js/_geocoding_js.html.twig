@@ -4,10 +4,12 @@
     @params map_elt Map element id (Optional)
     @params auto_complete_elt Place Auto Complete element id  (Optional)
 #}
-
 {% trans_default_domain 'cocorico_geo' %}
+
+{% set gKey = googlePlaceAPIKey ? '&key=' ~ googlePlaceAPIKey : '' %}
+
 <script type="text/javascript"
-        src="//maps.googleapis.com/maps/api/js?libraries=places{{ googlePlaceAPIKey ? '&amp;key=' ~ googlePlaceAPIKey : '' }}&amp;language={{ app.request.locale }}">
+        src="//maps.googleapis.com/maps/api/js?libraries=places&language={{ app.request.locale }}{{ gKey|raw }}">
 </script>
 <script type="text/javascript"
         src="//google-maps-utility-library-v3.googlecode.com/svn/trunk/infobox/src/infobox.js">

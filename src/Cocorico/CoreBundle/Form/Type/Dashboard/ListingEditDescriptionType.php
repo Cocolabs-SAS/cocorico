@@ -14,7 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
 {
@@ -92,19 +92,28 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
     }
 
     /**
-     * @return string
+     * @param OptionsResolver $resolver
      */
-    public function getName()
+    public function configureOptions(OptionsResolver $resolver)
     {
-        return 'listing_edit_description';
+        parent::configureOptions($resolver);
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * BC
+     * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function getName()
     {
-        parent::setDefaultOptions($resolver);
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'listing_edit_description';
     }
 
     /**

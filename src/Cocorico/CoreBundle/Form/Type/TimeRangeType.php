@@ -21,9 +21,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-
+//todo: Fix SF2.8 depreciated : use 'choices_as_values' => true and flip choices keys values
 class TimeRangeType extends AbstractType
 {
     protected $timeUnit;
@@ -75,17 +74,18 @@ class TimeRangeType extends AbstractType
                                 'nb_minutes',
                                 'choice',
                                 array(
-                                    'choices' => array_combine(
                                     //from one time unit to timesMax * timeUnit
-                                        range($this->timeUnit, $this->timesMax * $this->timeUnit, $this->timeUnit),
-                                        range(1, $this->timesMax)
+                                    'choices' => array_combine(
+                                        range(1, $this->timesMax),
+                                        range($this->timeUnit, $this->timesMax * $this->timeUnit, $this->timeUnit)
                                     ),
                                     'data' => $nbMinutes,
                                     /** @Ignore */
                                     'empty_value' => '',
                                     'attr' => array(
                                         'class' => 'no-scroll no-arrow'
-                                    )
+                                    ),
+                                    'choices_as_values' => true
                                 )
                             );
                     } else {//One time unit. $this->timesMax = 1
@@ -145,7 +145,7 @@ class TimeRangeType extends AbstractType
         $builder->addEventSubscriber($options['validator']);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -191,7 +191,19 @@ class TimeRangeType extends AbstractType
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'time_range';
     }

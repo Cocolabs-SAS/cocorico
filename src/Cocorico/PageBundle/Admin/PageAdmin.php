@@ -43,7 +43,8 @@ class PageAdmin extends Admin
                 'label' => 'Title'
             );
             $descriptions[$locale] = array(
-                'label' => 'Description'
+                'label' => 'Description',
+                'required' => true,
             );
             $metaTitles[$locale] = array(
                 'label' => 'Meta Title'
@@ -60,15 +61,17 @@ class PageAdmin extends Admin
                 'a2lix_translations',
                 array(
                     'locales' => $this->locales,
-//                    'required_locales' => array($this->locale),
+                    'required_locales' => $this->locales,
                     'fields' => array(
                         'title' => array(
                             'field_type' => 'text',
                             'locale_options' => $titles,
+                            'required' => true,
                         ),
                         'description' => array(
                             'field_type' => 'ckeditor',
                             'locale_options' => $descriptions,
+                            'required' => true,
                             'config' => array(
                                 'filebrowser_image_browse_url' => array(
                                     'route' => 'elfinder',
@@ -79,10 +82,12 @@ class PageAdmin extends Admin
                         'metaTitle' => array(
                             'field_type' => 'text',
                             'locale_options' => $metaTitles,
+                            'required' => true,
                         ),
                         'metaDescription' => array(
                             'field_type' => 'textarea',
                             'locale_options' => $metaDescriptions,
+                            'required' => true,
                         ),
                         'slug' => array(
                             'field_type' => 'text',

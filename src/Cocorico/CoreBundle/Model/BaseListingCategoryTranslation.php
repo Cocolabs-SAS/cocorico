@@ -22,8 +22,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class BaseListingCategoryTranslation
 {
-
-
     /**
      * @var string
      * @Assert\NotBlank(message="assert.not_blank")

@@ -9,180 +9,177 @@
 
 {% block content_dashboard -%}
     <!-- form-area -->
-    <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }} class="form-area">
-        <fieldset>
-            <legend class="hidden">legend</legend>
-            <!-- alert -->
-            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-            {{ form_errors(form) }}
-            <div class="tab-content">
-                <!-- tab about-me -->
-                <div id="contact-info" class="tab-pane active" role="tabpanel">
-                    <div class="form-holder">
-                        <h3>{{ 'user.edit.contact.title'|trans }}</h3>
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
+    <fieldset>
+        <legend class="hidden">legend</legend>
+        <!-- alert -->
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ form_errors(form) }}
+        <div class="tab-content">
+            <!-- tab about-me -->
+            <div id="contact-info" class="tab-pane active" role="tabpanel">
+                <div class="form-holder">
+                    <h3>{{ 'user.edit.contact.title'|trans }}</h3>
 
-                        <div class="contact-info">
-                            <div class="column">
+                    <div class="contact-info">
+                        <div class="column">
 
-                                <div class="field-row">
-                                    {{ form_errors(form.email) }}
-                                    <span class="label">{{ form_label(form.email) }}</span>
+                            <div class="field-row">
+                                {{ form_errors(form.email) }}
+                                <span class="label">{{ form_label(form.email) }}</span>
 
-                                    <div class="field-holder">
-                                        {{ form_widget(form.email, {
-                                            'attr': {
-                                                'class': "form-control"
-                                            }
-                                        }) }}
-                                    </div>
-                                </div>
-
-
-                                <div class="field-row">
-                                    {{ form_errors(form.phone_prefix) }}
-                                    <span class="label">{{ form_label(form.phone_prefix) }}</span>
-
-                                    <div class="field-holder">
-                                        <div class="code">
-                                            {{ form_widget(form.phone_prefix, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                        <span class="tooltip-btn" style="right:none">
-                                            <button title="" data-placement="right"
-                                                    data-toggle="tooltip" class="tooltip-button"
-                                                    type="button"
-                                                    data-original-title="{{ 'form.contact.phone.help'|trans }}">
-                                                ?
-                                            </button>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div class="field-row">
-                                    {{ form_errors(form.phone) }}
-                                    <span class="label">{{ form_label(form.phone) }}</span>
-
-                                    <div class="field-holder">
-                                        {{ form_widget(form.phone, {
-                                            'attr': {
-                                                'class': "form-control"
-                                            }
-                                        }) }}
-                                    </div>
-                                </div>
-
-                                <div class="field-row">
-                                    <div class="error-container">{{ form_errors(form.plainPassword.first) }}</div>
-                                    <span class="label">{{ form_label(form.plainPassword.first) }}</span>
-
-                                    <div class="field-holder">
-                                        {{ form_widget(form.plainPassword.first, {
-                                            'attr': {
-                                                'class': "form-control required",
-                                                'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
-                                            }
-                                        }) }}
-                                    </div>
-                                </div>
-
-                                <div class="field-row">
-                                    <div class="error-container">{{ form_errors(form.plainPassword.second) }}</div>
-                                    <span class="label">{{ form_label(form.plainPassword.second) }}</span>
-
-                                    <div class="field-holder">
-                                        {{ form_widget(form.plainPassword.second , {
-                                            'attr': {
-                                                'class': "form-control required",
-                                                'data-parsley-equalto': "#"~ form.plainPassword.first.vars.id,
-                                                'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
-                                                'data-parsley-invalid-message': 'cocorico_user.plainPassword.second.invalid'|trans({}, 'validators')
-                                            }
-                                        }) }}
-                                    </div>
+                                <div class="field-holder">
+                                    {{ form_widget(form.email, {
+                                        'attr': {
+                                            'class': "form-control"
+                                        }
+                                    }) }}
                                 </div>
                             </div>
 
-                            <div class="column">
-                                {% for address in form.addresses %}
-                                    <h4>{{ 'form.contact.billingaddress.title'|trans }}</h4>
 
-                                    <div class="field-row alt">
-                                        {{ form_errors(address.address) }}
-                                        <span class="label">
-                                            {{ form_label(address.address) }}
-                                        </span>
+                            <div class="field-row">
+                                {{ form_errors(form.phone_prefix) }}
+                                <span class="label">{{ form_label(form.phone_prefix) }}</span>
 
-                                        <div class="field-holder">
-                                            {{ form_widget(address.address, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
+                                <div class="field-holder">
+                                    <div class="code">
+                                        {{ form_widget(form.phone_prefix, {
+                                            'attr': {
+                                                'class': "form-control"
+                                            }
+                                        }) }}
                                     </div>
+                                    <span class="tooltip-btn" style="right:none">
+                                        <button title="" data-placement="right"
+                                                data-toggle="tooltip" class="tooltip-button"
+                                                type="button"
+                                                data-original-title="{{ 'form.contact.phone.help'|trans }}">
+                                            ?
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
 
-                                    <div class="field-row">
-                                        {{ form_errors(address.address) }}
-                                        <span class="label">
-                                            {{ form_label(address.city) }}
-                                        </span>
+                            <div class="field-row">
+                                {{ form_errors(form.phone) }}
+                                <span class="label">{{ form_label(form.phone) }}</span>
 
-                                        <div class="field-holder">
-                                            {{ form_widget(address.city, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
+                                <div class="field-holder">
+                                    {{ form_widget(form.phone, {
+                                        'attr': {
+                                            'class': "form-control"
+                                        }
+                                    }) }}
+                                </div>
+                            </div>
 
-                                    <div class="field-row">
-                                        {{ form_errors(address.address) }}
-                                        <span class="label">
-                                            {{ form_label(address.zip) }}
-                                        </span>
+                            <div class="field-row">
+                                <div class="error-container">{{ form_errors(form.plainPassword.first) }}</div>
+                                <span class="label">{{ form_label(form.plainPassword.first) }}</span>
 
-                                        <div class="field-holder">
-                                            {{ form_widget(address.zip, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
+                                <div class="field-holder">
+                                    {{ form_widget(form.plainPassword.first, {
+                                        'attr': {
+                                            'class': "form-control required",
+                                            'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
+                                        }
+                                    }) }}
+                                </div>
+                            </div>
 
-                                    <div class="field-row">
-                                        {{ form_errors(address.address) }}
-                                        <span class="label">
-                                            {{ form_label(address.country) }}
-                                        </span>
+                            <div class="field-row">
+                                <div class="error-container">{{ form_errors(form.plainPassword.second) }}</div>
+                                <span class="label">{{ form_label(form.plainPassword.second) }}</span>
 
-                                        <div class="field-holder">
-                                            {{ form_widget(address.country, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                <div class="field-holder">
+                                    {{ form_widget(form.plainPassword.second , {
+                                        'attr': {
+                                            'class': "form-control required",
+                                            'data-parsley-equalto': "#"~ form.plainPassword.first.vars.id,
+                                            'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
+                                            'data-parsley-invalid-message': 'cocorico_user.plainPassword.second.invalid'|trans({}, 'validators')
+                                        }
+                                    }) }}
+                                </div>
                             </div>
                         </div>
 
-                        {{ form_rest(form) }}
+                        <div class="column">
+                            {% for address in form.addresses %}
+                                <h4>{{ 'form.contact.billingaddress.title'|trans }}</h4>
 
-                    </div>
-                    <div class="btn-block text-center">
-                        <button type="submit" class="btn btn-default">{{ 'profile.edit.submit'|trans }}</button>
+                                <div class="field-row alt">
+                                    {{ form_errors(address.address) }}
+                                    <span class="label">
+                                        {{ form_label(address.address) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(address.address, {
+                                            'attr': {
+                                                'class': "form-control"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row">
+                                    {{ form_errors(address.address) }}
+                                    <span class="label">
+                                        {{ form_label(address.city) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(address.city, {
+                                            'attr': {
+                                                'class': "form-control"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row">
+                                    {{ form_errors(address.address) }}
+                                    <span class="label">
+                                        {{ form_label(address.zip) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(address.zip, {
+                                            'attr': {
+                                                'class': "form-control"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row">
+                                    {{ form_errors(address.address) }}
+                                    <span class="label">
+                                        {{ form_label(address.country) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(address.country, {
+                                            'attr': {
+                                                'class': "form-control"
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
-
+                <div class="btn-block text-center">
+                    <button type="submit" class="btn btn-default">{{ 'profile.edit.submit'|trans }}</button>
+                </div>
             </div>
-        </fieldset>
-    </form>
+
+        </div>
+    </fieldset>
+    {{ form_end(form) }}
 {%- endblock %}
 
 

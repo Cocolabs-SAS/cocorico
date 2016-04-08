@@ -35,9 +35,10 @@ security:
             #if some changes are done make same change in Cocorico/CoreBundle/Resources/config/Services/listeners.yml
             form_login:
                 provider: fos_userbundle
-                csrf_provider: form.csrf_provider
+#                csrf_token_generator: form.csrf_provider
+                csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _token
-                intention: authentication
+                csrf_token_id: authentication
                 login_path: cocorico_user_login
                 check_path: cocorico_user_login_check
                 use_referer: true
@@ -68,8 +69,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        default:
-            anonymous: ~
 
     access_decision_manager:
         # strategy can be: affirmative, unanimous or consensus

@@ -16,7 +16,7 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingCategoryType extends AbstractType
 {
@@ -42,22 +42,18 @@ class ListingCategoryType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $categories = $this->entityManager
-            ->getRepository("CocoricoCoreBundle:ListingCategory")
-            ->findCategories($this->locale);
+        $categories = $this->entityManager->getRepository("CocoricoCoreBundle:ListingCategory")->findCategories(
+            $this->locale
+        );
 
         $resolver
             ->setDefaults(
                 array(
                     'class' => 'Cocorico\CoreBundle\Entity\ListingCategory',
-//                'query_builder' => function (ListingCategoryRepository $lcr) {
-//                    return $lcr->getNodesHierarchyTranslatedQueryBuilder($this->locale);
-//                },
-//                'property' => 'translations[' . $this->locale . '].name',
                     'choices' => $categories,
                     'multiple' => true,
                     'required' => false,
@@ -76,9 +72,18 @@ class ListingCategoryType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'listing_category';
     }

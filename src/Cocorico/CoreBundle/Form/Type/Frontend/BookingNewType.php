@@ -28,8 +28,9 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Intl;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints\True;
 
 class BookingNewType extends AbstractType implements TranslationContainerInterface
@@ -43,7 +44,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
 
     private $bookingManager;
     private $loginManager;
-    private $securityContext;
+    private $securityTokenStorage;
+    private $securityAuthChecker;
     private $request;
     private $dispatcher;
     private $locale;
@@ -56,8 +58,9 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     private $currencySymbol;
 
     /**
-     * @param BookingManager           $bookingManager ,
-     * @param SecurityContext          $securityContext
+     * @param BookingManager       $bookingManager
+     * @param TokenStorage         $securityTokenStorage
+     * @param AuthorizationChecker $securityAuthChecker
      * @param LoginManager             $loginManager
      * @param RequestStack             $requestStack
      * @param EventDispatcherInterface $dispatcher
@@ -70,7 +73,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
      */
     public function __construct(
         BookingManager $bookingManager,
-        SecurityContext $securityContext,
+        TokenStorage $securityTokenStorage,
+        AuthorizationChecker $securityAuthChecker,
         LoginManager $loginManager,
         RequestStack $requestStack,
         EventDispatcherInterface $dispatcher,
@@ -82,7 +86,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $currency
     ) {
         $this->bookingManager = $bookingManager;
-        $this->securityContext = $securityContext;
+        $this->securityTokenStorage = $securityTokenStorage;
+        $this->securityAuthChecker = $securityAuthChecker;
         $this->loginManager = $loginManager;
         $this->request = $requestStack->getCurrentRequest();
         $this->dispatcher = $dispatcher;
@@ -238,7 +243,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
          */
         $formUserModifier = function (FormInterface $form) {
             //Not logged
-            if (!$this->securityContext->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if (!$this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
                 $form
                     ->add(//Login form
                         'user_login',
@@ -263,7 +268,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'user',
                     'entity_hidden',
                     array(
-                        'data' => $this->securityContext->getToken()->getUser(),
+                        'data' => $this->securityTokenStorage->getToken()->getUser(),
                         'class' => 'Cocorico\UserBundle\Entity\User',
                         'data_class' => null
                     )
@@ -413,7 +418,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                             'user',
                             'entity_hidden',
                             array(
-                                'data' => $this->securityContext->getToken()->getUser(),
+                                'data' => $this->securityTokenStorage->getToken()->getUser(),
                                 'class' => 'Cocorico\UserBundle\Entity\User',
                                 'data_class' => null
                             )
@@ -456,9 +461,9 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
 
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -472,9 +477,18 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'booking_new';
     }

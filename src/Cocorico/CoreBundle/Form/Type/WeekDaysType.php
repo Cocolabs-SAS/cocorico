@@ -13,7 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class WeekDaysType extends AbstractType
 {
@@ -33,28 +33,29 @@ class WeekDaysType extends AbstractType
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'mapped' => false,
                 'choices' => array(
-                    '1' => 'cocorico.monday',
-                    '2' => 'cocorico.tuesday',
-                    '3' => 'cocorico.wednesday',
-                    '4' => 'cocorico.thursday',
-                    '5' => 'cocorico.friday',
-                    '6' => 'cocorico.saturday',
-                    '7' => 'cocorico.sunday',
+                    'cocorico.monday' => '1',
+                    'cocorico.tuesday' => '2',
+                    'cocorico.wednesday' => '3',
+                    'cocorico.thursday' => '4',
+                    'cocorico.friday' => '5',
+                    'cocorico.saturday' => '6',
+                    'cocorico.sunday' => '7',
                 ),
                 'translation_domain' => 'cocorico',
                 'multiple' => true,
                 'expanded' => true,
                 /** @Ignore */
                 'label' => false,
-                'data' => array('1', '2', '3', '4', '5', '6', '7')
+                'data' => array('1', '2', '3', '4', '5', '6', '7'),
+                'choices_as_values' => true
             )
         );
     }
@@ -68,11 +69,19 @@ class WeekDaysType extends AbstractType
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
     {
-        return 'weekdays';
+        return $this->getBlockPrefix();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'weekdays';
+    }
 }

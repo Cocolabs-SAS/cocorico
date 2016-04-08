@@ -65,6 +65,9 @@ class ListingCategoryAdmin extends Admin
                         'name' => array(
                             'field_type' => 'text',
                             'locale_options' => $titles,
+                        ),
+                        'slug' => array(
+                            'field_type' => 'hidden'
                         )
                     ),
                     /** @Ignore */

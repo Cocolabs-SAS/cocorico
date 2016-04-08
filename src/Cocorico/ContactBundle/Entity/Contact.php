@@ -49,4 +49,9 @@ class Contact extends BaseContact
     {
         return $this->id;
     }
+
+    public function __toString()
+    {
+        return (string)$this->getSubject();
+    }
 }

@@ -70,10 +70,11 @@ class ListingAdmin extends Admin
                 'status',
                 'choice',
                 array(
-                    'choices' => Listing::$statusValues,
+                    'choices' => array_flip(Listing::$statusValues),
                     'empty_value' => 'admin.listing.status.label',
                     'translation_domain' => 'cocorico_listing',
-                    'label' => 'admin.listing.status.label'
+                    'label' => 'admin.listing.status.label',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -81,17 +82,18 @@ class ListingAdmin extends Admin
                 'choice',
                 array(
                     'choices' => array_combine(
+                        range(0, 10, 0.5),
                         array_map(
                             function ($num) {
                                 return number_format($num, 1);
                             },
                             range(0, 10, 0.5)
-                        ),
-                        range(0, 10, 0.5)
+                        )
                     ),
                     'empty_value' => 'admin.listing.admin_notation.label',
                     'label' => 'admin.listing.admin_notation.label',
-                    'required' => false
+                    'required' => false,
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -167,11 +169,12 @@ class ListingAdmin extends Admin
                 'cancellationPolicy',
                 'choice',
                 array(
-                    'choices' => Listing::$cancellationPolicyValues,
+                    'choices' => array_flip(Listing::$cancellationPolicyValues),
                     'empty_value' => 'admin.listing.cancellation_policy.label',
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
-                    'translation_domain' => 'cocorico_listing'
+                    'translation_domain' => 'cocorico_listing',
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -240,9 +243,10 @@ class ListingAdmin extends Admin
                 array(),
                 'choice',
                 array(
-                    'choices' => Listing::$statusValues,
+                    'choices' => array_flip(Listing::$statusValues),
                     'translation_domain' => 'cocorico_listing',
-                    'label' => 'admin.listing.status.label'
+                    'label' => 'admin.listing.status.label',
+                    'choices_as_values' => true,
                 )
             )
             ->add(

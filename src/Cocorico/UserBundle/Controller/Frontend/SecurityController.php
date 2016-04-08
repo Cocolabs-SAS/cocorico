@@ -18,7 +18,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * Class SecurityController
@@ -36,7 +36,7 @@ class SecurityController extends BaseController implements TranslationContainerI
     {
         $session = $this->container->get('session');
         $request = $this->container->get('request');
-        if ($this->container->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             if (!$session->has('profile')) {
                 $session->set('profile', 'asker');
             }
@@ -50,16 +50,16 @@ class SecurityController extends BaseController implements TranslationContainerI
             //$form->handleRequest($request);
 
             // get the error if any (works with forward and redirect -- see below)
-            if ($request->attributes->has(SecurityContext::ACCESS_DENIED_ERROR)) {
-                $error = $request->attributes->get(SecurityContext::ACCESS_DENIED_ERROR);
-            } elseif (null !== $session && $session->has(SecurityContext::ACCESS_DENIED_ERROR)) {
-                $error = $session->get(SecurityContext::ACCESS_DENIED_ERROR);
-                $session->remove(SecurityContext::ACCESS_DENIED_ERROR);
-            } elseif ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-                $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-            } elseif (null !== $session && $session->has(SecurityContext::AUTHENTICATION_ERROR)) {
-                $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-                $session->remove(SecurityContext::AUTHENTICATION_ERROR);
+            if ($request->attributes->has(Security::ACCESS_DENIED_ERROR)) {
+                $error = $request->attributes->get(Security::ACCESS_DENIED_ERROR);
+            } elseif (null !== $session && $session->has(Security::ACCESS_DENIED_ERROR)) {
+                $error = $session->get(Security::ACCESS_DENIED_ERROR);
+                $session->remove(Security::ACCESS_DENIED_ERROR);
+            } elseif ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
+                $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
+            } elseif (null !== $session && $session->has(Security::AUTHENTICATION_ERROR)) {
+                $error = $session->get(Security::AUTHENTICATION_ERROR);
+                $session->remove(Security::AUTHENTICATION_ERROR);
             } else {
                 $error = '';
             }

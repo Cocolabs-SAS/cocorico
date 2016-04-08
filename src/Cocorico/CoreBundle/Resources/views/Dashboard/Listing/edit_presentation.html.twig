@@ -9,8 +9,7 @@
 
 {% block content_dashboard -%}
 
-    <form class="form-area" id="edit-presentation-form" action="{{ form.vars.action }}"
-          method="{{ form.vars.method }}" {{ form_enctype(form) }}>
+    {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
         <fieldset>
             <legend class="hidden">form area</legend>
             <!-- alert -->
@@ -49,10 +48,7 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{ form_rest(form) }}
                     </div>
-
 
                     <div class="btn-block text-center">
                         <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
@@ -60,7 +56,8 @@
                 </div>
             </div>
         </fieldset>
-    </form>
+
+    {{ form_end(form) }}
 {%- endblock %}
 
 

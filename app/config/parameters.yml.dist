@@ -1,5 +1,4 @@
 parameters:
-    database_driver:   pdo_mysql
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     cocorico_dev
@@ -19,8 +18,8 @@ parameters:
     # You can generate it here http://nux.net/secret
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    debug_toolbar:          false
-    debug_redirects:        false
+#    debug_toolbar:          false
+#    debug_redirects:        false
     use_assetic_controller: false
 
     ### Cocorico environements dependant parameters (See CocoricoCoreBundle/Resources/config/parameters.yml) ###

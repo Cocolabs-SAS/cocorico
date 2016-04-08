@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class HomeController
@@ -32,14 +33,15 @@ class HomeController extends Controller
     }
 
     /**
-     * @param int $limit
+     * @param Request $request
+     * @param int     $limit
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function highRankListingAction($limit)
+    public function highRankListingAction(Request $request, $limit)
     {
         /** @var ListingRepository $listingRepository */
         $listingRepository = $this->getDoctrine()->getRepository('CocoricoCoreBundle:Listing');
-        $listings = $listingRepository->findByHighestRanking($limit, $this->get('request')->getLocale());
+        $listings = $listingRepository->findByHighestRanking($limit, $request->getLocale());
 
         return $this->render(
             'CocoricoCoreBundle:Frontend/Home:high_rank.html.twig',

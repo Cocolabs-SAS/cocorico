@@ -1,6 +1,8 @@
 parameters:
     knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
     knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
+    #todo: remove when https://github.com/lexik/LexikCurrencyBundle/commit/a4c08e0 will be released
+    lexik_currency.doctrine_adapter.class: Cocorico\CurrencyBundle\Adapter\DoctrineCurrencyAdapter
 
 imports:
     - { resource: services.yml }
@@ -10,7 +12,7 @@ framework:
      validation:
         enabled: true
         enable_annotations: true
-        api: 2.5-bc
+#        api: 2.5-bc
      templating:
         assets_base_urls:
             http: ["%cocorico.assets_base_urls%"]

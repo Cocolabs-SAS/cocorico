@@ -580,7 +580,12 @@ class BookingManager extends BaseManager
         $queryBuilder = $this->getRepository()->getFindByAskerQuery($askerId, $locale, $status);
 
         $queryBuilder
-            ->andWhere('b.mangopayPayinPreAuthId IS NOT NULL');
+            ->andWhere('b.payedBookingAt IS NOT NULL');
+
+        if ($this->voucherIsEnabled()) {
+            $queryBuilder
+                ->andWhere('b.mangopayPayinPreAuthId IS NOT NULL');
+        }
 
         //Pagination
         $queryBuilder

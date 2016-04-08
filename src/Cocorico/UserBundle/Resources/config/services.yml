@@ -61,7 +61,7 @@ services:
             - "@fos_user.util.token_generator"
             - "@cocorico_user.login_manager"
             - "@event_dispatcher"
-        scope: request
+#        scope: request
         public: false
 
 
@@ -71,7 +71,7 @@ services:
             - "@request_stack"
             - "@cocorico_user.user_manager"
             - "@event_dispatcher"
-        scope: request
+#        scope: request
         public: true
 
 

@@ -2,77 +2,78 @@
 
 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 <!-- form-category -->
-<form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}
-      class="form-category alt col-xs-12">
-    {{ form_errors(form) }}
 
-    <fieldset>
-        <legend class="hidden">form-category</legend>
-        <div class="form-holder">
-            <div class="col categories">
-                <strong class="title">
-                    {{ form_label(form.categories) }}
-                </strong>
+{{ form_start(form, {'attr': {'class': 'form-category alt col-xs-12'}}) }}
 
-                <div class="multiselect">
-                    {{ form_widget(form.categories) }}
-                </div>
+{{ form_errors(form) }}
+
+<fieldset>
+    <legend class="hidden">form-category</legend>
+    <div class="form-holder">
+        <div class="col categories">
+            <strong class="title">
+                {{ form_label(form.categories) }}
+            </strong>
+
+            <div class="multiselect">
+                {{ form_widget(form.categories) }}
             </div>
-
-
-            <div class="col location">
-                <strong class="title">
-                    {{ form_label(form.location.address, null, {
-                        'required': false
-                    }) }}
-                </strong>
-
-                <div class="field-holder">
-                    {{ form_errors(form.location.address) }}
-                    {{ form_widget(form.location.address, {
-                        'id': 'location',
-                        'attr': {
-                            'class': 'form-control',
-                            'placeholder': 'listing.search.form.address.placeholder'|trans
-                        }
-                    } ) }}
-                    {{ form_rest(form.location) }}
-                </div>
-            </div>
-
-            <div class="col time">
-                {#In case of modification don't forget to add fields "start, end AND nb_days" #}
-                {{ form_widget(form.date_range) }}
-
-                {% if timeUnitFlexibility and form.flexibility is defined %}
-                    <div class="col flexibility">
-                        <strong class="title">
-                            {{ form_label(form.flexibility) }}
-                        </strong>
-
-                        <div class="input-append field-holder">
-                            {{ form_errors(form.flexibility) }}
-                            {{ form_widget(form.flexibility, {
-                                'attr': {
-                                    'class' : 'no-arrow'
-                                }
-                            }) }}
-                            <small>{{ 'listing_search.form.flexibility_day'|trans }}</small>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% if not timeUnitIsDay %}
-                    {{ form_widget(form.time_range) }}
-                {% endif %}
-            </div>
-
-            <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
         </div>
 
-        {% block form_search_filters %}
-        {% endblock %}
 
-        {{ form_rest(form) }}
-    </fieldset>
-</form>
+        <div class="col location">
+            <strong class="title">
+                {{ form_label(form.location.address, null, {
+                    'required': false
+                }) }}
+            </strong>
+
+            <div class="field-holder">
+                {{ form_errors(form.location.address) }}
+                {{ form_widget(form.location.address, {
+                    'id': 'location',
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'listing.search.form.address.placeholder'|trans
+                    }
+                } ) }}
+                {{ form_rest(form.location) }}
+            </div>
+        </div>
+
+        <div class="col time">
+            {#In case of modification don't forget to add fields "start, end AND nb_days" #}
+            {{ form_widget(form.date_range) }}
+
+            {% if timeUnitFlexibility and form.flexibility is defined %}
+                <div class="col flexibility">
+                    <strong class="title">
+                        {{ form_label(form.flexibility) }}
+                    </strong>
+
+                    <div class="input-append field-holder">
+                        {{ form_errors(form.flexibility) }}
+                        {{ form_widget(form.flexibility, {
+                            'attr': {
+                                'class' : 'no-arrow'
+                            }
+                        }) }}
+                        <small>{{ 'listing_search.form.flexibility_day'|trans }}</small>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if not timeUnitIsDay %}
+                {{ form_widget(form.time_range) }}
+            {% endif %}
+        </div>
+
+        <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
+    </div>
+
+    {% block form_search_filters %}
+    {% endblock %}
+
+</fieldset>
+
+{{ form_end(form) }}

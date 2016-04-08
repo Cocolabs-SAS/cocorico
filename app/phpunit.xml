@@ -9,7 +9,7 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         bootstrap="bootstrap.php.cache">
+         bootstrap="autoload.php">
 
     <testsuites>
         <testsuite name="Cocorico test suite">
@@ -19,14 +19,18 @@
     </testsuites>
 
     <php>
-        <!--<env name="BOOTSTRAP_DB_ENV" value="test"/>-->
-        <!--<server name="KERNEL_DIR" value="/path/to/your/app/" />-->
+        <ini name="error_reporting" value="-1"/>
+        <!--
+            <server name="KERNEL_DIR" value="/path/to/your/app/" />
+        -->
     </php>
 
     <filter>
         <whitelist>
             <directory>../src</directory>
             <exclude>
+                <directory>../src/*Bundle/Resources</directory>
+                <directory>../src/*Bundle/Tests</directory>
                 <directory>../src/*/*Bundle/Resources</directory>
                 <directory>../src/*/*Bundle/Tests</directory>
                 <directory>../src/*/Bundle/*Bundle/Resources</directory>

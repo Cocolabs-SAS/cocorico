@@ -30,16 +30,15 @@
             </li>
         {% endif %}
         <li class="select-holder">
-            <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
-                {{ form_widget(form.status, {
-                    'id': 'listing_status-' ~ listing.id,
-                    'attr': {
-                        'class': 'no-arrow announcements-list',
-                        'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
-                    }
-                }) }}
-                {{ form_rest(form) }}
-            </form>
+            {{ form_start(form) }}
+            {{ form_widget(form.status, {
+                'id': 'listing_status-' ~ listing.id,
+                'attr': {
+                    'class': 'no-arrow announcements-list',
+                    'data-jcf': '{"wrapNative": false, "wrapNativeOnMobile": false}'
+                }
+            }) }}
+            {{ form_end(form) }}
         </li>
     </ul>
 

@@ -16,7 +16,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ReviewType extends AbstractType implements TranslationContainerInterface
 {
@@ -34,16 +34,17 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
                     /** @Ignore */
                     'choices' =>
                         array(
-                            1 => "1",
-                            2 => "2",
-                            3 => "3",
-                            4 => "4",
-                            5 => "5"
+                            "1" => 1,
+                            "2" => 2,
+                            "3" => 3,
+                            "4" => 4,
+                            "5" => 5
                         ),
                     'expanded' => true,
                     'multiple' => false,
                     'label' => 'review.form.rating.label',
                     'required' => true,
+                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -57,9 +58,9 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
     }
 
     /**
-     * @param OptionsResolverInterface $resolver
+     * @param OptionsResolver $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -72,9 +73,18 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
     }
 
     /**
-     * @return string
+     * BC
+     * {@inheritdoc}
      */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'review_new';
     }

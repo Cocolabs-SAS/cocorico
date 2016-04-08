@@ -99,7 +99,6 @@ parameters:
     cocorico.listing_countries:
         - FR
         - GB
-        - FI
     cocorico.listing_favorite_countries:
         - FR
 
@@ -126,7 +125,7 @@ parameters:
     cocorico.listing_search_max_per_page: 10
 
     #Listing search min result. Search is restarted in a largest zone if number of result is less than this limit.
-    cocorico.listing_search_min_result: 5
+    cocorico.listing_search_min_result: 1
 
     #Enable listing duplication
     cocorico.listing.duplication: true

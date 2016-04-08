@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Translation\TranslatorInterface;
 
-class CoreExtension extends \Twig_Extension
+class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     protected $currencyExtension;
     protected $translator;
@@ -96,7 +96,7 @@ class CoreExtension extends \Twig_Extension
 
     public function __construct(
         $currencyExtension,
-        $translator,
+        TranslatorInterface $translator,
         $locales,
         //time unit
         $timeUnit,

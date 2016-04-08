@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GeocodingToCoordinateType extends AbstractType
 {
@@ -58,7 +58,7 @@ class GeocodingToCoordinateType extends AbstractType
         $builder->addModelTransformer($transformer);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -68,7 +68,7 @@ class GeocodingToCoordinateType extends AbstractType
 
             )
         );
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
     }
 
     public function getParent()
@@ -76,7 +76,19 @@ class GeocodingToCoordinateType extends AbstractType
         return 'hidden';
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'geocoding_to_coordinate';
     }

@@ -18,8 +18,8 @@ use Cocorico\GeoBundle\Entity\Country;
 use Cocorico\GeoBundle\Entity\Department;
 use Cocorico\GeoBundle\Geocoder\Provider\GoogleMapsProvider;
 use Doctrine\Common\Persistence\ObjectManager;
-use Geocoder\Exception\NoResultException;
-use Geocoder\HttpAdapter\CurlHttpAdapter;
+use Geocoder\Exception\NoResult;
+use Ivory\HttpAdapter\CurlHttpAdapter;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -35,6 +35,11 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     private $locales;
     private $locale;
     private $googlePlaceAPIKey;
+
+    /**
+     * @var bool
+     */
+    const DEBUG = false;
 
     /**
      * @param ObjectManager $om
@@ -77,13 +82,16 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
         if (!$geocodingI18n) {
             throw new TransformationFailedException();
         }
-        //print_r($geocodingI18n);
+        $this->debug("reverseTransform > geocodingI18n :\n" . print_r($geocodingI18n, 1));
+
         // wrap numbers
         $geocodingI18n = preg_replace('/:\s*(\-?\d+(\.\d+)?([e|E][\-|\+]\d+)?)/', ': "$1"', $geocodingI18n);
         $geocodingI18n = json_decode($geocodingI18n);
-//        echo "geocodingI18n Client :";
-//        print_r($geocodingI18n);
+
+        $this->debug("reverseTransform > geocodingI18n JSON decoded :\n" . print_r($geocodingI18n, 1));
+
         if (!$geocodingI18n->{$this->locale}) {
+            $this->debug("reverseTransform > Error: No geocodingI18n locale.\n");
             throw new TransformationFailedException();
         }
 
@@ -100,12 +108,13 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
         //Success? The server data are used.
         if ($geocodingI18nServer) {
             $geocodingI18n = $geocodingI18nServer;
-            //print_r($geocodingI18n);
+            $this->debug("reverseTransform > geocodingI18n server done :\n" . print_r($geocodingI18n, 1));
         }
 
         //Current Locale Geocoding
         $geocoding = $this->getGeocoding($geocodingI18n);
         if (!$geocoding) {
+            $this->debug("reverseTransform > Error: No geocoding.");
             throw new TransformationFailedException();
         }
 
@@ -118,8 +127,8 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
             )
         );
 
-        //echo $lat . "--" . $lng;
-        //die();
+        $this->debug("reverseTransform > LatLng:\n" . $lat . "--" . $lng);
+//        die();
 
         if (null === $coordinate) {
             try {
@@ -172,8 +181,8 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
                 $geocoder = new GoogleMapsProvider(
                     new CurlHttpAdapter(), $locale, $region, true, $this->googlePlaceAPIKey
                 );
-                $geocoder->setMaxResults(1);
-                $geocodingsServer[$locale] = $geocoder->getReversedData(array($lat, $lng));
+                $geocoder->limit(1);
+                $geocodingsServer[$locale] = $geocoder->reverse($lat, $lng);
             }
 
             //Move current locale to end of array. The current locale is the reference.
@@ -181,15 +190,15 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
             unset($geocodingsServer[$this->locale]);
             $geocodingsServer[$this->locale] = $localeGeocoding;
 
-//            echo "geocodingI18n Server :";
-//            print_r($geocodingsServer);
+            $this->debug("getGeocodingServer > geocodingsServer:\n" . print_r($geocodingsServer, 1));
 
             //Merge them
             foreach ($geocodingsServer as $geocodingServer) {
                 $geocodingI18nServer = array_merge($geocodingI18nServer, $geocodingServer);
             }
 
-        } catch (NoResultException $e) {
+        } catch (NoResult $e) {
+            $this->debug("getGeocodingServer NoResult Error:\n" . $e->getMessage());
             throw new TransformationFailedException();
         }
 
@@ -423,4 +432,13 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
         return $city;
     }
 
+    /**
+     * @param $message
+     */
+    private function debug($message)
+    {
+        if (self::DEBUG) {
+            echo nl2br($message) . "<br>";
+        }
+    }
 }

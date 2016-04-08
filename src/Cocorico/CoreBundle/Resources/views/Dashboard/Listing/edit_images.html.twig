@@ -9,63 +9,63 @@
 
 {% block content_dashboard -%}
 
-    <form class="form-area" action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }}>
-        <fieldset>
-            <legend class="hidden">form area</legend>
-            <!-- alert -->
-            {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
-            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-            {{ form_errors(form) }}
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- tab pics -->
-                <div role="tabpanel" class="tab-pane active" id="pics">
-                    <!-- files-selection-design -->
-                    <div class="file-selection">
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
 
-                        <h2>{{ 'listing.edit.image.title'|trans }}</h2>
-                        <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
+    <fieldset>
+        <legend class="hidden">form area</legend>
+        <!-- alert -->
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ form_errors(form) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- tab pics -->
+            <div role="tabpanel" class="tab-pane active" id="pics">
+                <!-- files-selection-design -->
+                <div class="file-selection">
 
-                        <div class="area">
-                            <div class="uploader">
-                                <div id="images-new">
-                                    {{ form_errors(form.image.new) }}
-                                    {{ form_widget(form.image.new ) }}
+                    <h2>{{ 'listing.edit.image.title'|trans }}</h2>
+                    <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
 
-                                    {{ form_errors(form.image.uploaded) }}
-                                    {{ form_widget(form.image.uploaded ) }}
-                                </div>
-                            </div>
-                            <div class="detail">
-                                <p>{{ 'listing_edit.photos.details'|trans }}</p>
-                            </div>
+                    <div class="area">
+                        <div class="uploader">
+                            <div id="images-new">
+                                {{ form_errors(form.image.new) }}
+                                {{ form_widget(form.image.new ) }}
 
-                            <div id="drop-zone">
-                                {{ 'listing.drop.files'|trans }}
+                                {{ form_errors(form.image.uploaded) }}
+                                {{ form_widget(form.image.uploaded ) }}
                             </div>
-                            <div id="progress" class="progress">
-                                <div class="progress-bar progress-bar-success"></div>
-                            </div>
-                            <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
-                            <ul id="files-to-upload" class="images-list"></ul>
+                        </div>
+                        <div class="detail">
+                            <p>{{ 'listing_edit.photos.details'|trans }}</p>
                         </div>
 
-
-                        <!-- files-list -->
-                        <div class="files-list">
-                            {{ form_errors(form.images) }}
-                            {{ form_widget(form.images ) }}
+                        <div id="drop-zone">
+                            {{ 'listing.drop.files'|trans }}
                         </div>
+                        <div id="progress" class="progress">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+                        <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                        <ul id="files-to-upload" class="images-list"></ul>
                     </div>
-                    <div class="btn-block text-center">
-                        <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
+
+
+                    <!-- files-list -->
+                    <div class="files-list">
+                        {{ form_errors(form.images) }}
+                        {{ form_widget(form.images ) }}
                     </div>
-                    {{ form_rest(form) }}
+                </div>
+                <div class="btn-block text-center">
+                    <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
                 </div>
             </div>
-        </fieldset>
-    </form>
+        </div>
+    </fieldset>
 
+    {{ form_end(form) }}
 {%- endblock %}
 
 

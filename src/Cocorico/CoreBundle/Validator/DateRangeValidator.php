@@ -19,19 +19,19 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DateRangeValidator implements EventSubscriberInterface, TranslationContainerInterface
 {
     protected $options = array();
 
-    public function __construct(OptionsResolverInterface $resolver, array $options = array())
+    public function __construct(OptionsResolver $resolver, array $options = array())
     {
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
         $this->options = $resolver->resolve($options);
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
@@ -45,16 +45,12 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
             )
         );
 
-        $resolver->setAllowedValues(
-            array(
-                'allow_end_in_past' => array(true, false),
-                'allow_single_day' => array(true, false),
-                'end_day_included' => array(true, false),
-                'required' => array(true, false),
-                'min_start_delay' => array_merge(array(null), range(0, 30)),
-                'display_mode' => array('range', 'duration'),
-            )
-        );
+        $resolver->setAllowedValues('allow_end_in_past', array(true, false));
+        $resolver->setAllowedValues('allow_single_day', array(true, false));
+        $resolver->setAllowedValues('end_day_included', array(true, false));
+        $resolver->setAllowedValues('required', array(true, false));
+        $resolver->setAllowedValues('min_start_delay', array_merge(array(null), range(0, 30)));
+        $resolver->setAllowedValues('display_mode', array('range', 'duration'));
     }
 
     public function onPostBind(FormEvent $event)

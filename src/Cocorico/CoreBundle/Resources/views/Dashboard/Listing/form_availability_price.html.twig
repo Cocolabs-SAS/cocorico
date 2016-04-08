@@ -7,23 +7,24 @@
     {{ form_errors(form) }}
     <div class="form-area">
         <div class="form-holder">
-            <form action="{{ form.vars.action }}" method="{{ form.vars.method }}" {{ form_enctype(form) }} novalidate>
-                <div class="field-row">
-                    {{ form_errors(form.price) }}
-                    <span class="label">{{ form_label(form.price) }}</span>
-                    <div class="field-holder">
-                        {{ form_widget(form.price, {
-                            'attr': {'class': 'numbers-only form-control','autofocus':'autofocus' },
-                            'help':  'listing.edit.price.help'|trans
-                        }) }}
-                    </div>
-                    {{ form_rest(form) }}
-                </div>
 
-                <div class="text-center">
-                    <button class="btn btn-default" type="submit">{{ 'listing.availability.save'|trans }}</button>
+            {{ form_start(form) }}
+            <div class="field-row">
+                {{ form_errors(form.price) }}
+                <span class="label">{{ form_label(form.price) }}</span>
+                <div class="field-holder">
+                    {{ form_widget(form.price, {
+                        'attr': {'class': 'numbers-only form-control','autofocus':'autofocus' },
+                        'help':  'listing.edit.price.help'|trans
+                    }) }}
                 </div>
-            </form>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-default" type="submit">{{ 'listing.availability.save'|trans }}</button>
+            </div>
+
+            {{ form_end(form) }}
         </div>
     </div>
 

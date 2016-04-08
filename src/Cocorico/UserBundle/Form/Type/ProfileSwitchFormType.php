@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProfileSwitchFormType extends AbstractType
 {
@@ -24,26 +24,39 @@ class ProfileSwitchFormType extends AbstractType
                 'profile',
                 'choice',
                 array(
-                    'choices' => array('asker' => 'Asker', 'offerer' => 'Offerer'),
+                    'choices' => array('Asker' => 'asker', 'Offerer' => 'offerer'),
                     /** @Ignore */
                     'label' => false,
-                    'expanded' => true
+                    'expanded' => true,
+                    'choices_as_values' => true
                 )
             );
 
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_user',
-                'intention' => 'profile',
+                'csrf_token_id' => 'profile',
             )
         );
     }
 
+    /**
+     * BC
+     * {@inheritdoc}
+     */
     public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'profile_switch';
     }

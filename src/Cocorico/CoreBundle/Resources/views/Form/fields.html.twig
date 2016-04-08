@@ -6,7 +6,7 @@
 {#@formatter:off#}
 {% block form_label %}
     {% spaceless %}
-        {% if label is not sameas(false) %}
+        {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
             {% endif %}
@@ -155,7 +155,7 @@
                 {{- block('listing_category_widget_options_tree') -}}
             </optgroup>
         {%- else -%}
-            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
         {%- endif -%}
     {% endfor %}
 {%- endblock listing_category_widget_options_tree %}
@@ -254,8 +254,8 @@
                 {% if "hidden" not in field.vars.block_prefixes %}
                     <li class="{{ field.vars.id }}">
                         {% if field.vars.name == "discount" %}
-                            <span class="label">{{ form_label(field) }}</span>
                             {{ form_errors(field) }}
+                            <span class="label">{{ form_label(field) }}</span>
                             <div class="field-holder">
                                 {{ form_widget(field,{
                                     'id': 'decrement',
@@ -268,11 +268,11 @@
                                 }) }}
                             </div>
                         {% elseif field.vars.name == "fromQuantity" %}
+                            {{ form_errors(field) }}
                             <span class="label">
                                 {{ form_label(field,
                                 field.vars.label|trans(quantityText, 'cocorico_listing')) }}
                             </span>
-                            {{ form_errors(field) }}
                             <div class="field-holder">
                                 {{ form_widget(field,{
                                     'id': 'per-day-price2',

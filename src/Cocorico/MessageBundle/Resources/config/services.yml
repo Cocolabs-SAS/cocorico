@@ -9,7 +9,7 @@ services:
         arguments: [%fos_message.thread_class%]
         tags:
         - { name: form.type, alias: cocorico_message_new_thread }
-        public: false
+        public: true
         
         
     cocorico_message.new_thread.form.handler:
@@ -28,7 +28,7 @@ services:
         arguments: [%fos_message.thread_class%]
         tags:
         - { name: form.type, alias: cocorico_message_reply }
-        public: false
+        public: true
         
         
     cocorico_message.reply.form.handler:

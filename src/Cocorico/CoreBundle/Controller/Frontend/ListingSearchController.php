@@ -49,7 +49,7 @@ class ListingSearchController extends Controller
             );
             $resultIterator = $results->getIterator();
 
-            $markers = $this->getMarkers($resultIterator);
+            $markers = $this->getMarkers($request, $resultIterator);
 
             //Persist similar listings id
             $listingSearchRequest->setSimilarListings(array_column($markers, 'id'));
@@ -106,39 +106,36 @@ class ListingSearchController extends Controller
     /**
      * Get Markers
      *
+     * @param  Request $request
      * @param  \ArrayIterator $results
      * @return array
      */
-    protected function getMarkers($results)
+    protected function getMarkers(Request $request, $results)
     {
         $imagePath = ListingImage::IMAGE_FOLDER;
         $currentCurrency = $this->get('session')->get('currency', $this->container->getParameter('cocorico.currency'));
+        $locale = $request->getLocale();
+        $liipCacheManager = $this->get('liip_imagine.cache.manager');
+        $currencyExtension = $this->get('lexik_currency.currency_extension');
         $markers = array();
 
         foreach ($results as $i => $result) {
             $listing = $result[0];
 
             $imageName = count($listing['images']) ? $listing['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
-            $image = $this->get('liip_imagine.cache.manager')->getBrowserPath(
-                $imagePath . $imageName,
-                'listing_medium',
-                array()
-            );
 
-            $price = $this->get('lexik_currency.currency_extension')->convertAndFormat(
-                $listing['price'] / 100,
-                $currentCurrency,
-                false
-            );
+            $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_medium', array());
+
+            $price = $currencyExtension->convertAndFormat($listing['price'] / 100, $currentCurrency, false);
 
             $categories = count($listing['categories']) ?
-                $listing['categories'][0]['translations'][$this->get('request')->getLocale()]['name'] : '';
+                $listing['categories'][0]['translations'][$locale]['name'] : '';
 
             $markers[] = array(
                 'id' => $listing['id'],
                 'lat' => $listing['location']['coordinate']['lat'],
                 'lng' => $listing['location']['coordinate']['lng'],
-                'title' => $listing['translations'][$this->get('request')->getLocale()]['title'],
+                'title' => $listing['translations'][$locale]['title'],
                 'category' => $categories,
                 'image' => $image,
                 'rating1' => ($listing['averageRating'] >= 1) ? '' : 'inactive',
@@ -150,7 +147,7 @@ class ListingSearchController extends Controller
                 'certified' => $listing['certified'] ? 'certified' : 'hidden',
                 'url' => $url = $this->generateUrl(
                     'cocorico_listing_show',
-                    array('slug' => $listing['translations'][$this->get('request')->getLocale()]['slug'])
+                    array('slug' => $listing['translations'][$locale]['slug'])
                 )
             );
         }

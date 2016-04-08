@@ -3,7 +3,8 @@ services:
     cocorico.form.type.listing_new:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewType
         arguments:
-            - "@security.context"
+            - "@security.token_storage"
+            - "@security.authorization_checker"
             - "@cocorico_user.login_manager"
             - "@request_stack"
             - "%cocorico.locales%"
@@ -14,7 +15,7 @@ services:
     cocorico.form.type.listing_edit:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditType
         arguments:
-            - "@security.context"
+            - "@security.token_storage"
             - "@request_stack"
             - "%cocorico.locales%"
             - "@cocorico.listing.manager"
@@ -191,7 +192,8 @@ services:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType
         arguments:
             - "@cocorico.booking.manager"
-            - "@security.context"
+            - "@security.token_storage"
+            - "@security.authorization_checker"
             - "@cocorico_user.login_manager"
             - "@request_stack"
             - "@event_dispatcher"

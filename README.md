@@ -14,6 +14,9 @@ This document contains information on how to download, install, and start using 
 - [License](#mit-license)
 
 
+* For Symfony 2.5.x, you need to use the 0.1.x release of the bundle
+* For Symfony 2.8.x, you need to use the 0.2.x release of the bundle
+
 # Installation
 
 ## Requirements & Server configuration
@@ -95,6 +98,7 @@ On Linux:
 
 See [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
 
+**Note:** 
 
 ## Application install & configuration
 
@@ -282,7 +286,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 
 # Roadmap
 
-[ROADMAP.md](ROADMAP.md) list the planned features.
+[ROADMAP](ROADMAP.md) list the planned features.
 
 # Technical documentation
 

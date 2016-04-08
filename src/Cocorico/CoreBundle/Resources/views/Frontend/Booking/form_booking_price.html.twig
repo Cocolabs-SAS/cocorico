@@ -4,31 +4,29 @@
     {% if app.request.isXmlHttpRequest %}
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
-    <form id="booking-price-form" action="{{ form.vars.action }}"
-          method="{{ form.vars.method }}" {{ form_enctype(form) }} class="date-selection">
 
-        {{ form_errors(form) }}
+    {{ form_start(form, {'attr': {'id': 'booking-price-form', 'class': 'date-selection'}}) }}
 
-        <div id="time-error" class="errors" style="display:none">
-            <i class="icon-error-field"></i>
-            {{ 'time_range.invalid.end_before_start'|trans({}, 'cocorico') }}<br>
-        </div>
+    {{ form_errors(form) }}
 
-        <fieldset>
-            <legend class="hidden">date-selection</legend>
+    <div id="time-error" class="errors" style="display:none">
+        <i class="icon-error-field"></i>
+        {{ 'time_range.invalid.end_before_start'|trans({}, 'cocorico') }}<br>
+    </div>
 
-            {{ form_widget(form.date_range) }}
+    <fieldset>
+        <legend class="hidden">date-selection</legend>
 
-            {% if not timeUnitIsDay %}
-                {{ form_widget(form.time_range) }}
-            {% endif %}
+        {{ form_widget(form.date_range) }}
 
-            <input type="submit" class="hidden">
-        </fieldset>
-        {{ form_rest(form) }}
-    </form>
+        {% if not timeUnitIsDay %}
+            {{ form_widget(form.time_range) }}
+        {% endif %}
 
-    <strong class="title hidden">{{ 'booking.hidden.title'|trans }}</strong>
+        <input type="submit" class="hidden">
+    </fieldset>
+
+    {{ form_end(form) }}
 
     <div class="add-info">
         {% if includeVat %}

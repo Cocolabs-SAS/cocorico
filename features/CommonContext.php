@@ -15,7 +15,6 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class CommonContext extends RawMinkContext implements Context, KernelAwareContext
@@ -131,7 +130,7 @@ abstract class CommonContext extends RawMinkContext implements Context, KernelAw
      */
     protected function getUser()
     {
-        $token = $this->getSecurityContext()->getToken();
+        $token = $this->getSecurityTokenStorage()->getToken();
 
         if (null === $token) {
             throw new \Exception('No token found in security context.');
@@ -143,11 +142,11 @@ abstract class CommonContext extends RawMinkContext implements Context, KernelAw
     /**
      * Get security context.
      *
-     * @return SecurityContextInterface
+     * @return \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage
      */
-    protected function getSecurityContext()
+    protected function getSecurityTokenStorage()
     {
-        return $this->getContainer()->get('security.context');
+        return $this->getContainer()->get('security.token_storage');
     }
 
     /**
