@@ -127,33 +127,34 @@
                                     }) }}
                                 </div>
 
-                                {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' only %}
+                                <div class="{% if locales|length == 1 %}hidden{% endif %}">
+                                    {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' only %}
 
-                                <div class="field-row about-translate" align="center">
-                                    <div class="from-lang">
-                                        <span class="label">{{ form_label(form.fromLang) }} :</span>
-                                        <div class="select-holder">
-                                            <div>{{ form_widget(form.fromLang) }}
+                                    <div class="field-row about-translate" align="center">
+                                        <div class="from-lang">
+                                            <span class="label">{{ form_label(form.fromLang) }} :</span>
+                                            <div class="select-holder">
+                                                <div>{{ form_widget(form.fromLang) }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="field-row about-translate" align="center">
-                                    <div class="to-lang">
-                                        <span class="label">{{ form_label(form.toLang) }} :</span>
-                                        <div class="select-holder">
-                                            <div>{{ form_widget(form.toLang) }}</div>
+                                    <div class="field-row about-translate" align="center">
+                                        <div class="to-lang">
+                                            <span class="label">{{ form_label(form.toLang) }} :</span>
+                                            <div class="select-holder">
+                                                <div>{{ form_widget(form.toLang) }}</div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="field-row about-translate" align="center">
-                                    <a id="btn-translate" href="#" class="btn btn-default">
-                                        <span>{{ 'user.translate.button'|trans }}</span>
-                                    </a>
+                                    <div class="field-row about-translate" align="center">
+                                        <a id="btn-translate" href="#" class="btn btn-default">
+                                            <span>{{ 'user.translate.button'|trans }}</span>
+                                        </a>
+                                    </div>
                                 </div>
-
                             </div>
                         </div>
 

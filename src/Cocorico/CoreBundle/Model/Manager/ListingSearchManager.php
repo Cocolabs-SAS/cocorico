@@ -93,7 +93,6 @@ class ListingSearchManager
             ->andWhere('co.lng < :neLng ')
             ->andWhere('co.lng > :swLng ')
             ->andWhere('t.locale = :locale')
-            ->andWhere('cat.locale = :locale')
             ->andWhere('l.status = :listingStatus')
             ->setParameter('neLat', $viewport["ne"]["lat"])
             ->setParameter('swLat', $viewport["sw"]["lat"])
@@ -374,7 +373,6 @@ class ListingSearchManager
         //Where
         $queryBuilder
             ->where('t.locale = :locale')
-            ->andWhere('cat.locale = :locale')
             ->andWhere('l.status = :listingStatus')
             ->andWhere('l.id IN (:ids)')
 //            ->andWhere('lct.locale = :locale')

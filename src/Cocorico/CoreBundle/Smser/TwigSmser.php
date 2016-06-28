@@ -59,7 +59,7 @@ class TwigSmser implements SmserInterface
 
         $this->templates = $templates;
 
-        $this->locale = 'en';
+        $this->locale = $parameters['parameters']['cocorico_locale'];
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }

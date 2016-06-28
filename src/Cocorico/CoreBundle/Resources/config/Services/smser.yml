@@ -23,6 +23,7 @@ services:
             - "@request_stack"
             - parameters:
                 cocorico_locales: %cocorico.locales%
+                cocorico_locale: %cocorico.locale%
                 cocorico_contact_mail: "%cocorico.contact_mail%"
             - templates:
                 booking_request_offerer: %cocorico.booking_request_offerer.sms.template%

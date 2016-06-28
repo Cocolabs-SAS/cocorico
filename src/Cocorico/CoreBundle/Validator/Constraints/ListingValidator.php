@@ -98,8 +98,8 @@ class ListingValidator extends ConstraintValidator
         }
 
         //Duration
-        if ($listing->getMinDuration() && $listing->getMaxDuration() && $listing->getMinDuration(
-            ) > $listing->getMaxDuration()
+        if ($listing->getMinDuration() && $listing->getMaxDuration() &&
+            $listing->getMinDuration() > $listing->getMaxDuration()
         ) {
             $this->context->buildViolation($constraint::$messageDuration)
                 ->atPath('min_duration')

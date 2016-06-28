@@ -1074,7 +1074,10 @@ class BookingManager extends BaseManager
                         /** @var Booking $booking */
                         $booking = $this->getRepository()
                             ->findOneBy(
-                                array('id' => $bookingId)
+                                array(
+                                    'id' => $bookingId,
+                                    'status' => Booking::STATUS_NEW
+                                )
                             );
 
                         //If SMS received is send from offerer

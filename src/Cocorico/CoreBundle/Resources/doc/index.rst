@@ -42,7 +42,7 @@ Add this commands to your cron tab and don't forget to set the same php timezone
     
     `* *  * * *  php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS`
 
-10. Check phone from SMS (Optional. SMSBundle must be enabled)
+10. Check phone from SMS (NOT IMPLEMENTED. Optional. SMSBundle must be enabled)
     
     `* *  * * *  php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS`
 
@@ -117,6 +117,22 @@ Prices
 All prices (listing, booking) are stored in cents and in the default app currency.
 To display them in the views it's necessary to divide them by 100. Some methods (`$listing->getPriceDecimal`) exists 
 to get the price in decimal.
+
+
+Currency
+--------
+
+Prices edition fields are expressed in the application default currency. 
+So in twig templates these fields have to displayed the default currency 
+symbol like this :
+
+`{{ currencySymbol(defaultCurrency) }}`
+
+Prices displaying (like listing prices in search result page) are done in the current currency.
+So in twig template it is done like this :
+
+`{{ currencySymbol(currentCurrency) }}`
+
 
 
 VAT

@@ -10,52 +10,52 @@
 {% block content_dashboard -%}
 
     {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
-        <fieldset>
-            <legend class="hidden">form area</legend>
-            <!-- alert -->
-            {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
-            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-            {{ form_errors(form) }}
-            <!-- Tab panes -->
-            <div class="tab-content">
-                <!-- tab presentation -->
-                <div role="tabpanel" class="tab-pane active" id="presentation">
-                    <!-- form-holder -->
-                    <div class="form-holder">
-                        <h2>{{ 'listing.edit.presentation.title'|trans }}</h2>
-                        {# For html customizations see views\form\translations.html.twig #}
-                        {{ form_widget(form.translations) }}
+    <fieldset>
+        <legend class="hidden">form area</legend>
+        <!-- alert -->
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ form_errors(form) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- tab presentation -->
+            <div role="tabpanel" class="tab-pane active" id="presentation">
+                <!-- form-holder -->
+                <div class="form-holder">
+                    <h2>{{ 'listing.edit.presentation.title'|trans }}</h2>
+                    {# For html customizations see views\form\translations.html.twig #}
+                    {{ form_widget(form.translations) }}
 
-                        <div class="row" style="margin-top:15px;">
-                            {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
-                            <div align="center">
-                                <div class="col-md-5 col-xs-12">
-                                    <span class="label">{{ form_label(form.fromLang) }} :</span>
-                                    <div class="select-holder">
-                                        {{ form_widget(form.fromLang) }}
-                                    </div>
+                    <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">
+                        {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
+                        <div align="center">
+                            <div class="col-md-5 col-xs-12">
+                                <span class="label">{{ form_label(form.fromLang) }} :</span>
+                                <div class="select-holder">
+                                    {{ form_widget(form.fromLang) }}
                                 </div>
+                            </div>
 
-                                <div class="col-md-5 col-xs-12">
-                                    <span class="label">{{ form_label(form.toLang) }} :</span>
-                                    <div class="select-holder">
-                                        {{ form_widget(form.toLang) }}
-                                    </div>
+                            <div class="col-md-5 col-xs-12">
+                                <span class="label">{{ form_label(form.toLang) }} :</span>
+                                <div class="select-holder">
+                                    {{ form_widget(form.toLang) }}
                                 </div>
-                                <div class="col-md-2 col-xs-12">
-                                    <a id="btn-translate" class="btn btn-default" style="padding:6px 12px;"
-                                       href="#">{{ 'listing.translate.button'|trans }}</a>
-                                </div>
+                            </div>
+                            <div class="col-md-2 col-xs-12">
+                                <a id="btn-translate" class="btn btn-default" style="padding:6px 12px;"
+                                   href="#">{{ 'listing.translate.button'|trans }}</a>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="btn-block text-center">
-                        <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
-                    </div>
+                <div class="btn-block text-center">
+                    <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
                 </div>
             </div>
-        </fieldset>
+        </div>
+    </fieldset>
 
     {{ form_end(form) }}
 {%- endblock %}

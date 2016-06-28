@@ -10,6 +10,19 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.2.1] - 2016-06-28
+
+### Fixed
+- Fix sensio/distribution-bundle / composer 1.1.0 type hint compatibility
+- Fix google map infobox.js remote access disabled
+- Disable manual translations on listing and user edition when there is only one locale available on platform
+- Set SMS default locale equal to app default locale
+- Add booking status "new" criteria to SMS booking acceptation
+
+### Changed
+- Change listing search by categories by including listings without categories
+- Update doc/index.rst
+
 
 ## [0.2.0] - 2016-04-08
 

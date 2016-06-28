@@ -42,13 +42,13 @@ class ListingRepository extends EntityRepository
             ->from('CocoricoCoreBundle:Listing', 'l')
             ->leftJoin('l.translations', 't')
             ->leftJoin('l.categories', 'ca')
-            ->leftJoin('ca.translations', 'cat')
+            //Join::WITH: Avoid exclusion of listings with no categories (disable inner join)
+            ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
             ->leftJoin('l.images', 'i')
             ->leftJoin('l.user', 'u')
             ->leftJoin('u.images', 'ui')
             ->leftJoin('l.location', 'ln')
             ->leftJoin('ln.coordinate', 'co');
-
 //            ->leftJoin('co.country', 'cy');
 
         return $queryBuilder;

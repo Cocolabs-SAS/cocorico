@@ -928,12 +928,12 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Add listings
      *
-     * @param  Listing $listings
+     * @param  Listing $listing
      * @return User
      */
-    public function addListing(Listing $listings)
+    public function addListing(Listing $listing)
     {
-        $this->listings[] = $listings;
+        $this->listings[] = $listing;
 
         return $this;
     }
@@ -941,11 +941,11 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Remove listings
      *
-     * @param Listing $listings
+     * @param Listing $listing
      */
-    public function removeListing(Listing $listings)
+    public function removeListing(Listing $listing)
     {
-        $this->listings->removeElement($listings);
+        $this->listings->removeElement($listing);
     }
 
     /**
