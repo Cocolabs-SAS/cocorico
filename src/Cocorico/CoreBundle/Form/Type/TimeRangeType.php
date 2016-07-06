@@ -28,16 +28,19 @@ class TimeRangeType extends AbstractType
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $timesMax;
+    protected $timePicker;
 
     /**
-     * @param int $timeUnit in minute
-     * @param int $timesMax
+     * @param int  $timeUnit in minute
+     * @param int  $timesMax
+     * @param bool $timePicker
      */
-    public function __construct($timeUnit, $timesMax)
+    public function __construct($timeUnit, $timesMax, $timePicker)
     {
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $this->timesMax = $timesMax;
+        $this->timePicker = $timePicker;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -51,13 +54,74 @@ class TimeRangeType extends AbstractType
             function (FormEvent $event) use ($options) {
                 $form = $event->getForm();
 
-                //Times display mode: range or duration
-                $timeEndType = 'time';
-                $widgetType = 'choice';
-                if ($options['display_mode'] == "duration") {
-                    $timeEndType = 'time_hidden';
-                    $widgetType = 'hidden';
+                $form
+                    ->add(
+                        'start',
+                        'time',
+                        array_merge(
+                            array(
+                                'label' => 'time_range.start',
+                                'property_path' => 'start',
+                                'empty_value' => '',
+                                'widget' => 'choice',
+                                'input' => 'datetime',
+                                'model_timezone' => 'UTC',
+                                'view_timezone' => 'UTC',
+                                'attr' => array(
+                                    'data-type' => 'start',
+                                ),
+                            ),
+                            $options['start_options']
+                        )
+                    )->add(
+                        'end',
+                        'time',
+                        array_merge(
+                            array(
+                                'label' => 'time_range.end',
+                                'property_path' => 'end',
+                                'empty_value' => '',
+                                'widget' => 'choice',
+                                'input' => 'datetime',
+                                'model_timezone' => 'UTC',
+                                'view_timezone' => 'UTC',
+                                'attr' => array(
+                                    'data-type' => 'end',
+                                ),
+                            ),
+                            $options['end_options']
+                        )
+                    );
 
+
+                //TimePicker
+                if ($this->timePicker) {
+                    $form
+                        ->add(
+                            'start_picker',
+                            'time',
+                            array(
+                                'mapped' => false,
+                                'widget' => 'single_text',
+                                /** @Ignore */
+                                'label' => false
+                            )
+                        )
+                        ->add(
+                            'end_picker',
+                            'time',
+                            array(
+                                'mapped' => false,
+                                'widget' => 'single_text',
+                                /** @Ignore */
+                                'label' => false
+                            )
+                        );
+                }
+
+
+                //Times display mode: range or duration
+                if ($options['display_mode'] == "duration") {
                     if ($this->timesMax > 1) { //Create times unit choice list limited to timesMax
                         $nbMinutes = null;
                         if (isset($options['start_options']['data']) && isset($options['end_options']['data'])) {
@@ -99,45 +163,6 @@ class TimeRangeType extends AbstractType
                             );
                     }
                 }
-
-                $form
-                    ->add(
-                        'start',
-                        'time',
-                        array_merge(
-                            array(
-                                'label' => 'time_range.start',
-                                'property_path' => 'start',
-                                'empty_value' => '',
-                                'widget' => 'choice',
-                                'input' => 'datetime',
-                                'model_timezone' => 'UTC',
-                                'view_timezone' => 'UTC',
-                                'attr' => array(
-                                    'data-type' => 'start',
-                                ),
-                            ),
-                            $options['start_options']
-                        )
-                    )->add(
-                        'end',
-                        $timeEndType,
-                        array_merge(
-                            array(
-                                'label' => 'time_range.end',
-                                'property_path' => 'end',
-                                'empty_value' => '',
-                                'widget' => $widgetType,
-                                'input' => 'datetime',
-                                'model_timezone' => 'UTC',
-                                'view_timezone' => 'UTC',
-                                'attr' => array(
-                                    'data-type' => 'end',
-                                ),
-                            ),
-                            $options['end_options']
-                        )
-                    );
             }
         );
 
@@ -161,33 +186,36 @@ class TimeRangeType extends AbstractType
 
         $resolver->setAllowedTypes(
             array(
-                'transformer' => 'Symfony\Component\Form\DataTransformerInterface',
-                'validator' => 'Symfony\Component\EventDispatcher\EventSubscriberInterface',
+                'transformer' => array('Symfony\Component\Form\DataTransformerInterface', 'null'),
+                'validator' => array('Symfony\Component\EventDispatcher\EventSubscriberInterface', 'null'),
             )
         );
 
         // Those normalizers lazily create the required objects, if none given.
-        $resolver->setNormalizers(
-            array(
-                'transformer' => function (Options $options, $value) {
-                    if (!$value) {
-                        $value = new TimeRangeViewTransformer(new OptionsResolver());
-                    }
+        $resolver->setNormalizer(
+            'transformer',
+            function (Options $options, $value) {
+                if (!$value) {
+                    $value = new TimeRangeViewTransformer(new OptionsResolver());
+                }
 
-                    return $value;
-                },
-                'validator' => function (Options $options, $value) {
-                    if (!$value) {
-                        $value = new TimeRangeValidator(
-                            new OptionsResolver(), array(
-                                'required' => $options["required"]
-                            )
-                        );
-                    }
+                return $value;
+            }
+        );
 
-                    return $value;
-                },
-            )
+        $resolver->setNormalizer(
+            'validator',
+            function (Options $options, $value) {
+                if (!$value) {
+                    $value = new TimeRangeValidator(
+                        new OptionsResolver(), array(
+                            'required' => $options["required"]
+                        )
+                    );
+                }
+
+                return $value;
+            }
         );
     }
 

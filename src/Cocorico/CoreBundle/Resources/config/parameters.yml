@@ -60,7 +60,7 @@ parameters:
     cocorico.fee_as_offerer: 0.05
 
     #Time unit in minute
-    cocorico.time_unit: 1440
+    cocorico.time_unit: 60
 
     #Is there a day flexibility for search. 0 For no else max days flexibility
     cocorico.time_unit_flexibility: 0
@@ -86,6 +86,9 @@ parameters:
     #Max search, booking time unit number.
     #Min 1. Max value of times max depends on time unit: 24 if time unit is hour. Not needed if time unit is day.
     cocorico.times_max: 8 #ex: for 8 hours with time_unit equal to 60
+
+    #Enable time picker on time fields
+    cocorico.time_picker: true
 
     #Default max items per page on dashboard list pages
     cocorico.dashboard_max_per_page: 10 #default

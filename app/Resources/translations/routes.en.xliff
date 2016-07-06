@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-03-16T21:11:42Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-04-14T17:43:55Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -190,18 +190,6 @@
             <trans-unit id="cefbea7a19e1292e3dac85a028346e6d1be091ad" resname="cocorico_language_translate">
                 <source>/language/translate</source>
                 <target>/language/translate</target>
-            </trans-unit>
-            <trans-unit id="311bb8223f58f33333cbf7332c4ff0b4d31d3420" resname="cocorico_listing_alert_dashboard_alert">
-                <source>/dashboard/listing-alert/{page}</source>
-                <target state="new">/dashboard/listing-alert/{page}</target>
-            </trans-unit>
-            <trans-unit id="c82f3ece898b0cd5915c56eed0ae6a6cfbca85a8" resname="cocorico_listing_alert_dashboard_alert_delete">
-                <source>/dashboard/listing-alert/{id}/delete</source>
-                <target state="new">/dashboard/listing-alert/{id}/delete</target>
-            </trans-unit>
-            <trans-unit id="7503f38efaf75f94d521690c4fcb8a82f31801c5" resname="cocorico_listing_alert_new">
-                <source>/listing-alert/new</source>
-                <target state="new">/listing-alert/new</target>
             </trans-unit>
             <trans-unit id="0d035f070813a7d01ed570d64541854d8c9518d5" resname="cocorico_listing_availabilities">
                 <source>/listing_availabilities/{listing_id}/{start}/{end}</source>

@@ -126,6 +126,12 @@ class TranslateManager
      */
     public function getTranslation($fromLanguage, $toLanguage, $text = array())
     {
+        $responseArray = array();
+
+        if (!$this->clientId || !$this->clientSecret) {
+            return $responseArray;
+        }
+
         //Create the XML string for passing the values.
         $requestXml = "<TranslateArrayRequest>" .
             "<AppId/>" .
@@ -150,7 +156,6 @@ class TranslateManager
         $requestXml .= "<To>$toLanguage</To>";
         $requestXml .= "</TranslateArrayRequest>";
 
-        $responseArray = array();
         $response = $this->getTranslateResponse($this->translateUrl, $requestXml);
 
         $xmlObj = new \SimpleXMLElement($response);

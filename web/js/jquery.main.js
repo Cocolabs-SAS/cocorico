@@ -194,9 +194,10 @@ function initDraggable() {
         revert: true
     });
 }
-
-// datepicker init
-// Same than initDatePickerAjax in common.js without ajax mode
+/**
+ * datepicker init
+ * Same than initDatePickerAjax in common.js without ajax mode
+ */
 function initDatepicker() {
     var today = new Date();
 
@@ -248,7 +249,91 @@ function initDatepicker() {
             setEndDay(from, to, $(this));
         });
     });
+
+    initTimePicker('.timepicker-holder');
 }
+
+/**
+ * Init timePicker fields.
+ *
+ * @param string parentTimesElt
+ */
+function initTimePicker(parentTimesElt) {
+    var timePickerCompatible = true;
+    if (/Edge./i.test(navigator.userAgent) || /iPad./i.test(navigator.userAgent) || /iPhone./i.test(navigator.userAgent)) {
+        timePickerCompatible = false;
+    }
+
+    $(parentTimesElt).each(function () {
+        var holder = $(this);
+        //Time Pickers
+        var pickers = ['start', 'end'];
+        pickers.forEach(function (picker) {
+            var $picker = holder.find("[id$=_" + picker + "_picker]").first();
+
+            if ($picker.length) {
+                if (!timePickerCompatible) $picker.attr('type', 'text');
+                $picker.prev('.add-on').find('.icon-clock').on('click', function (e) {
+                    $picker.focus();
+                });
+                $picker.next('.add-on').find('.icon-clock').on('click', function (e) {
+                    $picker.focus();
+                });
+                var $hour = holder.find("[id$=_" + picker + "_hour]").first();
+                var $minute = holder.find("[id$=_" + picker + "_minute]").first();
+
+                var defaultTime = '';
+                if ($hour.val() != '' && $minute.val() != '') {
+                    //defaultTime = new Date(new Date().setHours($hour.val(), $minute.val(), 0));
+                    defaultTime = moment($hour.val() + ":" + $minute.val(), 'HH:mm');
+                }
+
+                $picker.datetimepicker({
+                    format: 'HH:mm',
+                    stepping: 15,
+                    defaultDate: defaultTime
+                    //,debug: true
+                }).on('dp.hide', function (e) {
+                    var date = e.date;
+                    //console_log('dp.hide');console_log(date);console_log(date.format("H"));console_log(date.format("m"));
+                    $hour.val(date.format("H"));
+                    $minute.val(date.format("m")).change();
+                });
+            }
+        });
+    });
+
+    //Sync time fields in duration mode. Set end time.
+    syncTimeFields(parentTimesElt);
+}
+
+
+/**
+ * Sync time fields if exist. Sync times in duration mode for now.
+ *
+ * @param string parentTimesElt
+ */
+function syncTimeFields(parentTimesElt) {
+    $(parentTimesElt).each(function () {
+        var holder = $(this);
+
+        //Times are displayed in duration mode (cocorico.times_display_mode: duration)
+        if (holder.find("#time_range_nb_minutes").length) {
+            var $fromHour = holder.find("#time_range_start_hour");
+            var $fromMinute = holder.find("#time_range_start_minute");
+            var $toHour = holder.find("#time_range_end_hour");
+            var $toMinute = holder.find("#time_range_end_minute");
+            var $nbMinutes = holder.find("#time_range_nb_minutes");
+
+            $fromHour.add($fromMinute).add($nbMinutes).on("change", function () {
+                setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes);
+            });
+
+            setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes);
+        }
+    });
+}
+
 
 // remove row init
 function initRowRemove() {

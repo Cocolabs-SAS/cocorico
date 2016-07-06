@@ -337,22 +337,42 @@
 
 {% macro timeRangesCollectionItem(rows, allow_delete) %}
     {% spaceless %}
-        <li class="time-fields">
+        <li class="timepicker-holder time-fields">
             {% set fieldNum = 1 %}
-            {% for row in rows %}
-                {% if "hidden" not in row.vars.block_prefixes %}
-                    <div class="{{ row.vars.id }}">
-                        {{ form_errors(row) }}
-                        {{ form_label(row) }}
-                        {{ form_widget(row,{
-                            'attr': {
-                                'class': 'time-field no-arrow',
-                            }
-                        }) }}
-                    </div>
+            {% for field in rows %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    {% if field.vars.name == "start" or field.vars.name == "end" %}
+                        <div class="{{ field.vars.id }} hidden">
+                            {{ form_widget(field,{
+                                'attr': {
+                                    'class': 'time-field no-arrow',
+                                }
+                            }) }}
+                        </div>
+                    {% elseif field.vars.name == "start_picker" or field.vars.name == "end_picker" %}
+                        {% if field.vars.name == "start_picker" %}
+                            {{ form_errors(rows.start) }}
+                            {{ form_label(rows.start) }}
+                        {% else %}
+                            {{ form_errors(rows.end) }}
+                            {{ form_label(rows.end) }}
+                        {% endif %}
+                        <div class='input-group date' id='datetimepicker3'>
+                            {{ form_widget(field,{
+                                'attr': {
+                                    'class': 'form-control',
+                                    'placeholder': '--:--',
+                                }
+                            }) }}
+                            <span class="add-on">
+                                <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                            </span>
+                        </div>
+                    {% endif %}
+
                     {% set fieldNum = fieldNum + 1 %}
                 {% else %}
-                    {{ form_widget(row) }}
+                    {{ form_widget(field) }}
                 {% endif %}
             {% endfor %}
 
@@ -362,9 +382,7 @@
                     <span class="hidden">{{ 'collection.remove_item'|trans }}</span>
                     <i class="icon-cancel"></i>
                 </a>
-
             {% endif %}
-
         </li>
 
     {% endspaceless %}
@@ -566,9 +584,6 @@
 {%- endblock -%}
 
 
-
-
-
 {#
     Date range ajax widget
 #}
@@ -648,93 +663,202 @@
 
 
 {#
-    Time range widget
+    Time range widget:
+    If timesDisplayMode parameter is equal to 'duration' then end time field is hidden and duration field is added
+    If timePicker parameter is true then select time fields are replaced by timepicker
 #}
 {%- block time_range_widget -%}
-    <div class="col time-fields display-{{ timesDisplayMode }}">
-        <strong class="title">
-            {{ form_label(form.start) }}
-        </strong>
+    <div class="col timepicker-holder time-fields display-{{ timesDisplayMode }}">
+        <div class="col">
+            <strong class="title">
+                {{ form_label(form.start) }}
+            </strong>
 
-        {{ form_errors(form.start) }}
-        {{ form_widget(form.start) }}
+            {{ form_errors(form.start) }}
+            {% if timePicker %}
+                <div class='input-group date' id='datetimepicker3'>
+                    {{ form_widget(form.start_picker,{
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '--:--',
+                        }
+                    }) }}
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                    </span>
+                </div>
+                {#hide start time field#}
+                <div class="hidden">
+                    {{ form_widget(form.start) }}
+                </div>
+            {% else %}
+                {{ form_widget(form.start) }}
+            {% endif %}
+        </div>
 
-        {% if "time_hidden" not in form.end.vars.block_prefixes %}
+        {% if timesDisplayMode == "duration" %}
+            {#In new booking page there is no nb_minute fields#}
+            {% if form.nb_minutes is defined %}
+                {#display duration field#}
+                <strong class="title">
+                    {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
+                </strong>
+
+                {{ form_errors(form.nb_minutes) }}
+                {{ form_widget(form.nb_minutes) }}
+            {% endif %}
+
+            {#hide end time field#}
+            <div class="hidden">
+                {{ form_widget(form.end) }}
+            </div>
+        {% else %}
             <strong class="title">
                 {{ form_label(form.end) }}
             </strong>
 
             {{ form_errors(form.end) }}
-            {{ form_widget(form.end) }}
-        {% else %}
-            <strong class="title">
-                {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
-            </strong>
-
-            {{ form_errors(form.nb_minutes) }}
-            {{ form_widget(form.nb_minutes) }}
-            {#hidden#}
-            {{ form_widget(form.end) }}
+            {% if timePicker %}
+                <div class='input-group date' id='datetimepicker3'>
+                    {{ form_widget(form.end_picker,{
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '--:--',
+                        }
+                    }) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                {#hide end time field#}
+                <div class="hidden">
+                    {{ form_widget(form.end) }}
+                </div>
+            {% else %}
+                {{ form_widget(form.end) }}
+            {% endif %}
         {% endif %}
     </div>
 {%- endblock -%}
 
-
+{#
+    Time range hidden widget:
+    Used to hide all date and time fields and to display only field value
+#}
+{%- block _time_range_hidden_widget -%}
+    <li>
+        {{ form_errors(form.start) }}
+        {{ form_label(form.start) }}
+        <time>
+            <i class="icon-calendar"></i>
+            {{ form.parent.vars.value.startTime|date('H:i') }}
+        </time>
+        <div class="hidden">
+            {{ form_widget(form.start) }}
+        </div>
+    </li>
+    <li>
+        {{ form_errors(form.end) }}
+        {{ form_label(form.end) }}
+        <time>
+            <i class="icon-calendar"></i>
+            {{ form.parent.vars.value.endTime|date('H:i') }}
+        </time>
+        <div class="hidden">
+            {{ form_widget(form.end) }}
+        </div>
+        {#hide time picker because all date and time fields are hidden in this page#}
+        {% if timePicker %}
+            <div class="hidden">
+                {{ form_widget(form.start_picker) }}
+            </div>
+        {% endif %}
+    </li>
+    <li>&nbsp;</li>
+{%- endblock -%}
 
 {#
-    Time range ajax widget
+    Time range ajax widget:
+    If timesDisplayMode parameter is equal to 'duration' then end time field is hidden and duration field is added
+    If timePicker parameter is true then select time fields are replaced by timepicker
 #}
 {%- block _time_range_ajax_widget -%}
-    <div class="time-fields display-{{ timesDisplayMode }}">
+    <div class="timepicker-holder-ajax time-fields display-{{ timesDisplayMode }}">
         <div class="col">
             {{ form_errors(form.start) }}
             <strong class="title">
                 {{ form_label(form.start) }}
             </strong>
 
-            {{ form_widget(form.start, {
-                'attr': {
-                    'class': 'time-field',
-                }
-            }) }}
-        </div>
+            {% if timePicker %}
+                <div class='input-group date' id='datetimepicker3'>
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                    </span>
+                    {{ form_widget(form.start_picker,{
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '--:--',
+                        }
+                    }) }}
+                </div>
 
-        {% if "time_hidden" not in form.end.vars.block_prefixes %}
-            <div class="col">
+                <div class="hidden">
+                    {{ form_widget(form.start) }}
+                </div>
+            {% else %}
+                {{ form_widget(form.start, {
+                    'attr': {
+                        'class': 'time-field',
+                    }
+                }) }}
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if timesDisplayMode == "duration" %}
+                {{ form_errors(form.nb_minutes) }}
+                <strong class="title">
+                    {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
+                </strong>
+
+                {{ form_widget(form.nb_minutes) }}
+                {#hide end time field#}
+                <div class="hidden">
+                    {{ form_widget(form.end) }}
+                </div>
+            {% else %}
                 {{ form_errors(form.end) }}
                 <strong class="title">
                     {{ form_label(form.end) }}
                 </strong>
 
-                {{ form_widget(form.end, {
-                    'attr': {
-                        'class': 'time-field',
-                    }
-                }) }}
-            </div>
-        {% else %}
-            {{ form_errors(form.nb_minutes) }}
-            <strong class="title">
-                {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
-            </strong>
-
-            {{ form_widget(form.nb_minutes) }}
-            {#hidden#}
-            {{ form_widget(form.end) }}
-        {% endif %}
+                {% if timePicker %}
+                    <div class='input-group date' id='datetimepicker3'>
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                        </span>
+                        {{ form_widget(form.end_picker,{
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': '--:--',
+                            }
+                        }) }}
+                    </div>
+                    {#hide end time field#}
+                    <div class="hidden">
+                        {{ form_widget(form.end) }}
+                    </div>
+                {% else %}
+                    {{ form_widget(form.end, {
+                        'attr': {
+                            'class': 'time-field',
+                        }
+                    }) }}
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
 {%- endblock -%}
-
-
-{#
-    Time hidden widget
-#}
-{%- block time_hidden_widget -%}
-    {{ form_widget(form.hour) }}
-    {%- if with_minutes -%}{{ form_widget(form.minute) }}{% endif %}
-    {%- if with_seconds -%}{{ form_widget(form.second) }}{% endif %}
-{%- endblock -%}
-
 
 {#
     Time widget

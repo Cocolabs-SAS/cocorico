@@ -68,6 +68,13 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
             return;
         }
 
+        //Date required
+        if (($dateRange->start && !$dateRange->end) || (!$dateRange->start && $dateRange->end)) {
+            $form->addError(new FormError('date_range.invalid.required'));
+
+            return;
+        }
+
         if ($this->options['required'] && (!$dateRange->start || !$dateRange->end)) {
             $form->addError(new FormError('date_range.invalid.required'));
 

@@ -189,7 +189,7 @@
 }
 
 .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:before {
-    content: '\e808';
+    content: '\e811';
 }
 
 [class="ui-dialog-titlebar-close"]:before {
@@ -206,6 +206,7 @@
 [class="ui-dialog-titlebar-close"]:focus {
     outline: 0;
 }
+
 .ui-dialog .field-row {
     padding: 0 0 20px 0;
 }
@@ -383,7 +384,10 @@ li.time-fields {
     height: 33px;
 }
 
-.time-fields *, .time-ranges li * {
+/*.time-fields *, .time-ranges li * {*/
+/*display: inline-block;*/
+/*}*/
+.form-category .form-holder .col.time .time-fields #datetimepicker3 {
     display: inline-block;
 }
 
@@ -394,15 +398,11 @@ li.time-fields {
 
 /* Price simulator */
 #price-simulator-form #start-date, #price-simulator-form #end-date {
-    width: 75%;
+    width: 70%;
 }
 
 #price-simulator-form .price-area .add-on {
     margin: 0 0 0 10px;
-}
-
-#price-simulator-form .price-area .col {
-    width: 50%;
 }
 
 #price-simulator-form .time-fields {
@@ -412,7 +412,11 @@ li.time-fields {
 }
 
 #price-simulator-form .time-fields .col {
-    width: 50%;
+    width: 52%;
+}
+
+#price-simulator-form .time-fields .col + .col {
+    width: 47%;
 }
 
 #price-simulator-form .time-fields .title {
@@ -422,6 +426,17 @@ li.time-fields {
 #price-simulator-form .time-field {
     margin: 0;
 }
+
+#price-simulator-form .time-fields .form-control {
+    width: 35%;
+}
+
+#price-simulator-form .time-fields .add-on {
+    top: 0;
+    right: 0;
+    position: relative;
+}
+
 
 /* Booking price */
 #booking-price-form .nb-days {
@@ -442,7 +457,25 @@ li.time-fields {
 }
 
 #booking-price-form .time-fields label {
-    font-size: smaller;
+    font-size: 11px;
+}
+
+.time-ranges label {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.time-ranges .input-group {
+    display: inline-block;
+    margin-right: 50px;
+}
+
+.time-ranges .time-fields.timepicker-holder .form-control {
+    display: inline-block;
+}
+
+.time-ranges .time-fields.timepicker-holder .add-on {
+    position: absolute;
 }
 
 .time-ranges .close {
@@ -791,11 +824,6 @@ li.time-fields {
     margin: 5px;
 }
 
-.errors .icon-error-field:before {
-    content: '\e814';
-    color: #d8292f;
-}
-
 /** register / login **/
 #form-registerlogin h1 {
     margin: 0 0 23px 2px;
@@ -905,6 +933,7 @@ li.time-fields {
 .form-category .form-holder .col.time .time-fields select,
 .form-category .form-holder .col.time .nb-days select {
     display: inline-block;
+    max-width: 70px;
 }
 
 .form-category .form-holder .col.time .time-fields .title,
@@ -914,6 +943,82 @@ li.time-fields {
     position: relative;
     margin: 0;
     vertical-align: middle;
+}
+
+/** time picker */
+/** search form */
+.form-category .form-holder .col.time .time-fields .form-control {
+    width: 80%;
+}
+
+.form-category .form-holder .col.time .time-fields #datetimepicker3 {
+    width: 72%;
+    margin-left: 16px;
+    position: relative;
+}
+
+.form-category .time-fields .add-on {
+    top: 43%;
+}
+
+/** time picker */
+/** global */
+.time-fields.timepicker-holder-ajax .add-on {
+    top: 4px;
+    right: -4px;
+    position: absolute;
+}
+
+.time-fields .bootstrap-datetimepicker-widget.dropdown-menu {
+    width: 10em;
+}
+
+.time-fields .bootstrap-datetimepicker-widget table td span.glyphicon {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0;
+    color: #c6ccd2;
+    float: none;
+}
+
+.time-fields .bootstrap-datetimepicker-widget .timepicker-hour,
+.time-fields .bootstrap-datetimepicker-widget .timepicker-minute,
+.time-fields .bootstrap-datetimepicker-widget .timepicker-second {
+    width: 40px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+    line-height: 40px;
+    height: 40px;
+}
+
+.time-fields .bootstrap-datetimepicker-widget table td {
+    height: 40px;
+    line-height: 40px;
+    width: 40px;
+}
+
+.time-fields span.glyphicon.glyphicon-chevron-up:after, .time-fields span.glyphicon.glyphicon-chevron-down:after {
+    display: block;
+    content: '\e805';
+    cursor: pointer;
+    text-align: center;
+    font: 16px/24px 'fontello';
+    color: #58595b;
+    font-weight: bold;
+}
+
+.time-fields span.glyphicon.glyphicon-chevron-down:after {
+    content: '\e806';
+    font: 16px/24px 'fontello';
+    font-weight: bold;
+}
+
+.time-fields .bootstrap-datetimepicker-widget td.hour,
+.time-fields .bootstrap-datetimepicker-widget td.minute {
+    width: 34px;
+    padding: 0;
 }
 
 .form-category .form-holder .col.time .flexibility {

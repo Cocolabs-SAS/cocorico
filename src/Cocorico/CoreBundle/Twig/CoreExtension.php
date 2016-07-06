@@ -24,6 +24,8 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 {
     protected $currencyExtension;
     protected $translator;
+    protected $session;
+    protected $globalHelper;
     protected $locales;
     protected $timeUnit;
     protected $timeUnitIsDay;
@@ -31,6 +33,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $timesDisplayMode;
     protected $timeUnitFlexibility;
     protected $timeUnitAllDay;
+    protected $timePicker;
     protected $allowSingleDay;
     protected $endDayIncluded;
     protected $listingDefaultStatus;
@@ -43,12 +46,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $feeAsOfferer;
     protected $feeAsAsker;
     protected $displayMarker;
-    protected $session;
     protected $bookingExpirationDelay;
     protected $bookingValidationMoment;
     protected $bookingValidationDelay;
     protected $bookingPriceMin;
-    protected $globalHelper;
     protected $vatRate;
     protected $includeVat;
     protected $displayVat;
@@ -59,124 +60,78 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
     /**
      *
-     * @param CurrencyExtension   $currencyExtension
+     * @param CurrencyExtension                 $currencyExtension
      * @param TranslatorInterface $translator
-     * @param array               $locales
-     * @param int                 $timeUnit                App unit time in minutes
-     * @param boolean             $timeUnitFlexibility
-     * @param boolean             $timeUnitAllDay
-     * @param string              $daysDisplayMode
-     * @param string              $timesDisplayMode
-     * @param boolean             $allowSingleDay
-     * @param boolean             $endDayIncluded
-     * @param int                 $listingDefaultStatus
-     * @param int                 $listingPricePrecision
-     * @param array               $currencies
-     * @param string              $defaultCurrency
-     * @param string              $priceMin
-     * @param string              $priceMax
-     * @param float               $feeAsOfferer
-     * @param float               $feeAsAsker
-     * @param boolean             $displayMarker
      * @param Session             $session
-     * @param int                 $bookingExpirationDelay  Delay to expire a new booking in minute
-     * @param string              $bookingValidationMoment Moment when the booking is validated (start or end)
-     * @param int                 $bookingValidationDelay  Delay in minutes after or before $bookingValidationMoment
-     * @param int                 $bookingPriceMin
      * @param GlobalHelper        $globalHelper
-     * @param float               $vatRate
-     * @param bool                $includeVat
-     * @param bool                $displayVat
-     * @param int                 $listingSearchMinResult
-     * @param bool                $listingDuplication
-     * @param int                 $minStartDelay
-     * @param int                 $minStartTimeDelay
+     * @param array                             $parameters
      *
      */
 
     public function __construct(
         $currencyExtension,
         TranslatorInterface $translator,
-        $locales,
-        //time unit
-        $timeUnit,
-        $timeUnitFlexibility,
-        $timeUnitAllDay,
-        $daysDisplayMode,
-        $timesDisplayMode,
-        $allowSingleDay,
-        $endDayIncluded,
-        $listingDefaultStatus,
-        $listingPricePrecision,
-        //Currencies
-        $currencies,
-        $defaultCurrency,
-        //Prices
-        $priceMin,
-        $priceMax,
-        $feeAsOfferer,
-        $feeAsAsker,
-        $displayMarker,
         Session $session,
-        //Delay
-        $bookingExpirationDelay,
-        $bookingValidationMoment,
-        $bookingValidationDelay,
-        $bookingPriceMin,
         GlobalHelper $globalHelper,
-        $vatRate,
-        $includeVat,
-        $displayVat,
-        $listingSearchMinResult,
-        $listingDuplication,
-        $minStartDelay,
-        $minStartTimeDelay
+        array $parameters
     ) {
+        //Services
         $this->currencyExtension = $currencyExtension;
         $this->translator = $translator;
-        $this->locales = $locales;
+        $this->session = $session;
+        $this->globalHelper = $globalHelper;
+
+        $parameters = $parameters['parameters'];
+
+        $this->locales = $parameters["cocorico_locales"];
+
         //Time unit
-        $this->timeUnit = $timeUnit;
-        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
-        $this->timeUnitAllDay = $timeUnitAllDay;
-        $this->daysDisplayMode = $daysDisplayMode;
-        $this->timesDisplayMode = $timesDisplayMode;
-        $this->timeUnitFlexibility = $timeUnitFlexibility;
-
-        $this->allowSingleDay = $allowSingleDay;
-        $this->endDayIncluded = $endDayIncluded;
-
-        $this->listingDefaultStatus = $listingDefaultStatus;
-        $this->listingPricePrecision = $listingPricePrecision;
+        $this->timeUnit = $parameters["cocorico_time_unit"];
+        $this->timeUnitIsDay = ($this->timeUnit % 1440 == 0) ? true : false;
+        $this->timeUnitAllDay = $parameters["cocorico_time_unit_allday"];
+        $this->timeUnitFlexibility = $parameters["cocorico_time_unit_flexibility"];
+        $this->daysDisplayMode = $parameters["cocorico_days_display_mode"];
+        $this->timesDisplayMode = $parameters["cocorico_times_display_mode"];
+        $this->timePicker = $parameters["cocorico_time_picker"];
 
         //Currencies
-        $this->currencies = $currencies;
-        $this->defaultCurrency = $defaultCurrency;
-        $this->currentCurrency = $session->get('currency', $defaultCurrency);
+        $this->currencies = $parameters["cocorico_currencies"];
+        $this->defaultCurrency = $parameters["cocorico_currency"];
+        $this->currentCurrency = $session->get('currency', $this->defaultCurrency);
+
+        //Fees
+        $this->feeAsOfferer = $parameters["cocorico_fee_as_offerer"];
+        $this->feeAsAsker = $parameters["cocorico_fee_as_asker"];
+
+        //Status
+        $this->listingDefaultStatus = $parameters["cocorico_listing_availability_status"];
 
         //Prices
-        $this->priceMin = $priceMin;
-        $this->priceMax = $priceMax;
-        $this->feeAsOfferer = $feeAsOfferer;
-        $this->feeAsAsker = $feeAsAsker;
+        $this->listingPricePrecision = $parameters["cocorico_listing_price_precision"];
+        $this->priceMin = $parameters["cocorico_listing_price_min"];
+        $this->priceMax = $parameters["cocorico_listing_price_max"];
+        $this->bookingPriceMin = $parameters["cocorico_booking_price_min"];
 
-        $this->displayMarker = $displayMarker;
-        $this->session = $session;
+        //Map
+        $this->displayMarker = $parameters["cocorico_listing_map_display_marker"];
+
+        $this->listingSearchMinResult = $parameters["cocorico_listing_search_min_result"];
+        $this->listingDuplication = $parameters["cocorico_listing_duplication"];
+
+        $this->allowSingleDay = $parameters["cocorico_booking_allow_single_day"];
+        $this->endDayIncluded = $parameters["cocorico_booking_end_day_included"];
 
         //Delay
-        $this->bookingExpirationDelay = $bookingExpirationDelay * 60;//Converted to seconds
-        $this->bookingValidationMoment = $bookingValidationMoment;
-        $this->bookingValidationDelay = $bookingValidationDelay;
-        $this->bookingPriceMin = $bookingPriceMin;
+        $this->bookingExpirationDelay = $parameters["cocorico_booking_expiration_delay"] * 60;//Converted to seconds
+        $this->bookingValidationMoment = $parameters["cocorico_booking_validated_moment"];
+        $this->bookingValidationDelay = $parameters["cocorico_booking_validated_delay"];
+        $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];;
+        $this->minStartTimeDelay = $parameters["cocorico_booking_min_start_time_delay"];
 
-        $this->globalHelper = $globalHelper;
-        $this->vatRate = $vatRate;
-        $this->includeVat = $includeVat;
-        $this->displayVat = $displayVat;
-        $this->listingSearchMinResult = $listingSearchMinResult;
-        $this->listingDuplication = $listingDuplication;
-        $this->minStartDelay = $minStartDelay;
-        $this->minStartTimeDelay = $minStartTimeDelay;
+        //VAT
+        $this->vatRate = $parameters["cocorico_vat"];
+        $this->includeVat = $parameters["cocorico_include_vat"];
+        $this->displayVat = $parameters["cocorico_display_vat"];
     }
 
     /**
@@ -208,7 +163,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     /**
      * Format time from seconds to unit
      *
-     * @param int    $seconds
+     * @param int $seconds
      * @param string $format
      *
      * @return string
@@ -443,6 +398,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'timeUnit' => $this->timeUnit,
             'timeUnitIsDay' => $this->timeUnitIsDay,
             'timeUnitAllDay' => $this->timeUnitAllDay,
+            'timePicker' => $this->timePicker,
             'daysDisplayMode' => $this->daysDisplayMode,
             'timesDisplayMode' => $this->timesDisplayMode,
             'timeUnitFlexibility' => $this->timeUnitFlexibility,

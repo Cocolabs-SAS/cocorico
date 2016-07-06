@@ -453,6 +453,24 @@
                                             data-original-title="{{ cancellationPolicies() }}"> ?
                                     </button>
                                 </li>
+
+                                {% if listing.minDuration %}
+                                    <li>
+                                        {{ 'listing.show.min_duration:'|trans() }}
+                                        <strong>
+                                            {{ listing.minDuration ~ " " ~ (-1)|add_time_unit_text }}
+                                        </strong>
+                                    </li>
+                                {% endif %}
+
+                                {% if listing.maxDuration %}
+                                    <li>
+                                        {{ 'listing.show.max_duration:'|trans() }}
+                                        <strong>
+                                            {{ listing.maxDuration ? listing.maxDuration ~ " " ~ (-1)|add_time_unit_text : "none"|trans }}
+                                        </strong>
+                                    </li>
+                                {% endif %}
                             </ul>
                         </section>
 

@@ -170,18 +170,9 @@ services:
         arguments:
             - "%cocorico.time_unit%"
             - "%cocorico.times_max%"
+            - "%cocorico.time_picker%"
         tags:
             - { name: form.type, alias: time_range }
-
-    cocorico.form.type.time_hidden:
-        class:  Cocorico\CoreBundle\Form\Type\TimeHiddenType
-        tags:
-            - { name: form.type, alias: time_hidden }
-
-#    cocorico.form.type.time_choice_hidden:
-#        class:  Cocorico\CoreBundle\Form\Type\TimeChoiceHiddenType
-#        tags:
-#            - { name: form.type, alias: time_choice_hidden }
 
     cocorico.form.type.listing_edit_duration:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType

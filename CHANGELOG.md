@@ -10,6 +10,33 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.2.2] - 2016-07-06
+
+### Added
+- Add Min/Max listing duration informations on listing show page
+- Add time picker in time type fields
+- Add timepicker parameter
+
+### Fixed
+- Fix error occurring when a date is filled without the other one
+- Fix error occurring when a time is filled without the other one
+- Fix CS in common.js > getNbUnReadMessages
+- Fix Translate manager with missing key or secret param
+- Fix ie edge/ipad timepicker compatibility
+
+### Changed
+- Reduce number of twig core extension service args
+- Factorize and simplify Javascript date and time management
+- Fontello icons code
+- Remove unused glyphicons halflings
+- Remove "updated at" column in admin booking list
+- Change default time_unit parameter to 60 min
+
+### Deprecated
+- Fix TimeRange form type sf 2.8 depreciation
+- Remove TimeHidden form type
+
+
 ## [0.2.1] - 2016-06-28
 
 ### Fixed

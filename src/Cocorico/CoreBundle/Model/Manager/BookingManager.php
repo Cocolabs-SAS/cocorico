@@ -238,6 +238,12 @@ class BookingManager extends BaseManager
                     if (count($errors)) {
                         break;
                     }
+
+                    if (!isset($listingAvailability["ts"])) {
+                        throw new \Exception(
+                            "Time unit application parameter seems to have been changed from day to hour(s)."
+                        );
+                    }
                     //Compute amount from existing times
                     $existingTimes = $listingAvailability["ts"];
                     //echo "existingTimes" . print_r($existingTimes, 1) . "<br>";

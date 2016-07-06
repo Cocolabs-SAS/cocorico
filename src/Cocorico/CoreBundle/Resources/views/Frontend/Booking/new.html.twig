@@ -105,29 +105,7 @@
                                 </li>
 
                                 {% if not timeUnitIsDay %}
-                                    <li>
-                                        {{ form_errors(form.time_range.start) }}
-                                        {{ form_label(form.time_range.start) }}
-                                        <time datetime="{{ booking.startTime|date('H:i') }}">
-                                            <i class="icon-calendar"></i>
-                                            {{ booking.startTime|date('H:i') }}
-                                        </time>
-                                        {{ form_widget(form.time_range.start, {
-                                            'type': 'hidden'
-                                        }) }}
-                                    </li>
-                                    <li>
-                                        {{ form_errors(form.time_range.end) }}
-                                        {{ form_label(form.time_range.end) }}
-                                        <time datetime="{{ booking.endTime|date('H:i') }}">
-                                            <i class="icon-calendar"></i>
-                                            {{ booking.endTime|date('H:i') }}
-                                        </time>
-                                        {{ form_widget(form.time_range.end, {
-                                            'type': 'hidden'
-                                        }) }}
-                                    </li>
-                                    <li>&nbsp;</li>
+                                    {{ form_widget(form.time_range) }}
                                 {% endif %}
                             </ul>
 

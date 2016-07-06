@@ -5019,104 +5019,161 @@ input[type="button"].btn-block {
     /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
 
-.icon-down-open-mini:before {
+.icon-down-open:before {
     content: '\e800';
 }
 
 /* '' */
-.icon-ok:before {
+.icon-left-open:before {
     content: '\e801';
 }
 
 /* '' */
-.icon-phone:before {
+.icon-right-open:before {
     content: '\e802';
 }
 
 /* '' */
-.icon-mail-alt:before {
+.icon-up-open:before {
     content: '\e803';
 }
 
 /* '' */
-.icon-location:before {
+.icon-clock:before {
     content: '\e804';
 }
 
 /* '' */
-.icon-calendar:before {
+.icon-angle-up:before {
     content: '\e805';
 }
 
 /* '' */
-.icon-heart:before {
+.icon-angle-down:before {
     content: '\e806';
 }
 
 /* '' */
-.icon-star:before {
+.icon-angle-right:before {
     content: '\e807';
 }
 
 /* '' */
-.icon-cancel:before {
+.icon-angle-left:before {
     content: '\e808';
 }
 
 /* '' */
-.icon-left-open-mini:before {
+.icon-down-open-mini:before {
     content: '\e809';
 }
 
 /* '' */
-.icon-right-open-mini:before {
+.icon-ok:before {
     content: '\e80a';
 }
 
 /* '' */
-.icon-up-open-mini:before {
+.icon-phone:before {
     content: '\e80b';
 }
 
 /* '' */
-.icon-resize-full-alt:before {
+.icon-mail-alt:before {
     content: '\e80c';
 }
 
 /* '' */
-.icon-facebook:before {
+.icon-location:before {
     content: '\e80d';
 }
 
 /* '' */
-.icon-clock:before {
+.icon-calendar:before {
     content: '\e80e';
 }
 
 /* '' */
-.icon-twitter:before {
+.icon-heart:before {
     content: '\e80f';
 }
 
 /* '' */
-.icon-vimeo:before {
+.icon-star:before {
     content: '\e810';
 }
 
 /* '' */
-.icon-gplus:before {
+.icon-cancel:before {
     content: '\e811';
 }
 
 /* '' */
-.icon-eye:before {
+.icon-left-open-mini:before {
     content: '\e812';
 }
 
 /* '' */
-.icon-eye-off:before {
+.icon-right-open-mini:before {
     content: '\e813';
 }
+
+/* '' */
+.icon-up-open-mini:before {
+    content: '\e814';
+}
+
+/* '' */
+.icon-resize-full-alt:before {
+    content: '\e815';
+}
+
+/* '' */
+.icon-facebook:before {
+    content: '\e816';
+}
+
+/* '' */
+.icon-clock-1:before {
+    content: '\e817';
+}
+
+/* '' */
+.icon-twitter:before {
+    content: '\e818';
+}
+
+/* '' */
+.icon-vimeo:before {
+    content: '\e819';
+}
+
+/* '' */
+.icon-gplus:before {
+    content: '\e81a';
+}
+
+/* '' */
+.icon-eye:before {
+    content: '\e81b';
+}
+
+/* '' */
+.icon-eye-off:before {
+    content: '\e81c';
+}
+
+/* '' */
+.icon-error-field:before {
+    content: '\e81d';
+}
+
+/* '' */
+.icon-info:before {
+    content: '\e81e';
+}
+
+/* '' */
 
 /* '' */
 html {
@@ -5158,6 +5215,7 @@ input[type=button],
 input[type=search],
 input[type=email],
 input[type=number],
+input[type=time],
 textarea {
     -webkit-appearance: none;
     -webkit-border-radius: 0;
@@ -5819,7 +5877,7 @@ span.btn:focus {
     position: absolute;
 }
 
-.form-category .icon-calendar {
+.form-category .icon-calendar, .form-category .icon-clock, .time-ranges .icon-clock {
     color: #888a90;
     font-size: 22px;
     cursor: pointer;
@@ -5828,7 +5886,12 @@ span.btn:focus {
     transition: all 0.35s ease;
 }
 
-.form-category .icon-calendar:hover {
+.time-ranges .icon-clock {
+    color: #c6cdd2;
+    margin-left: 10px;
+}
+
+.form-category .icon-calendar:hover, .form-category .icon-clock:hover, .time-ranges .icon-clock:hover {
     color: #4a4b4f;
 }
 
@@ -7225,7 +7288,8 @@ span.btn:focus {
     position: absolute;
 }
 
-.date-selection .icon-calendar {
+.date-selection .icon-calendar,
+.date-selection .icon-clock {
     cursor: pointer;
     color: #c6cdd2;
     font-size: 20px;
@@ -7233,7 +7297,7 @@ span.btn:focus {
     transition: all 0.35s ease;
 }
 
-.date-selection .icon-calendar:hover {
+.date-selection .icon-calendar:hover, .icon-clock:hover {
     color: #71828e;
 }
 
@@ -11733,11 +11797,11 @@ h1.listing-title a {
 }
 
 .date-slider .fc-toolbar .fc-icon.fc-icon-left-single-arrow:after {
-    content: '\e809';
+    content: '\e808';
 }
 
 .date-slider .fc-toolbar .fc-icon.fc-icon-right-single-arrow:after {
-    content: '\e80a';
+    content: '\e807';
 }
 
 .date-slider .fc-toolbar .fc-center {
@@ -13860,7 +13924,7 @@ h1.listing-title a {
 }
 
 #ui-datepicker-div .ui-datepicker-header .ui-datepicker-prev:after {
-    content: '\e809';
+    content: '\e808';
 }
 
 #ui-datepicker-div .ui-datepicker-header .ui-datepicker-next {
@@ -13869,7 +13933,7 @@ h1.listing-title a {
 }
 
 #ui-datepicker-div .ui-datepicker-header .ui-datepicker-next:after {
-    content: '\e80a';
+    content: '\e807';
 }
 
 #ui-datepicker-div .ui-datepicker-title {
@@ -14083,7 +14147,7 @@ h1.listing-title a {
 
 .jcf-select .jcf-select-opener:after {
     display: block;
-    content: '\e800';
+    content: '\e809';
     cursor: pointer;
     text-align: center;
     font: 16px/36px 'fontello';
@@ -14540,7 +14604,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 .jcf-number .jcf-btn-dec:before,
 .jcf-number .jcf-btn-inc:before {
     display: block;
-    content: '\e80b';
+    content: '\e814';
     color: #c7cdd3;
     font: 17px/18px "fontello";
 }
@@ -14563,7 +14627,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 }
 
 .jcf-number .jcf-btn-dec:before {
-    content: '\e800';
+    content: '\e809';
     line-height: 17px;
 }
 

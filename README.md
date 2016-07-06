@@ -3,7 +3,7 @@
 Cocorico is an open source platform to create collaborative consumption marketplaces.
 You can find more information about this project on [http://www.cocolabs.io](http://www.cocolabs.io).
 
-This document contains information on how to download, install, and start using Cocorico.
+This document contains information on how to download, install, and start using Cocorico:
 
 - [Installation](#installation)
 - [Versioning](#versioning)
@@ -11,8 +11,9 @@ This document contains information on how to download, install, and start using 
 - [Contribute](#contribute)
 - [Roadmap](#roadmap)
 - [Technical documentation](#technical-documentation)
-- [License](#mit-license)
+- [License](#license)
 
+**Note:** 
 
 * For Symfony 2.5.x, you need to use the 0.1.x release of the bundle
 * For Symfony 2.8.x, you need to use the 0.2.x release of the bundle
@@ -98,7 +99,6 @@ On Linux:
 
 See [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
 
-**Note:** 
 
 ## Application install & configuration
 
@@ -110,7 +110,7 @@ Fork Cocorico Git Repository then get sources:
 
      - Close all projects
      - Menu > VCS > Checkout from VC > Git
-        - Git Repo: https://github.com/Cocolabs-SAS/cocorico.git
+        - Git Repo: New forked repository address
         - Parent Dir: Choose parent of Symfony folder
         - Dir name: Symfony
      - Menu > File > Open: Symfony folder 
@@ -123,9 +123,31 @@ Fork Cocorico Git Repository then get sources:
 Change to your parent "Document Root" directory and clone repository:
 
     cd /var/www/cocorico.dev/
-    git clone https://github.com/Cocolabs-SAS/cocorico.git Symfony
-                   
+    git clone https://[gituser]@xxx.org/xxx/cocorico-xxx.git Symfony
+                     
+                     
 ### Create services accounts
+
+#### Create your Google API account:
+
+* Go to https://console.developers.google.com/project
+* Sign-in with you google account
+* Create a new project
+* Activate the following APIs:
+     - Google Places API Web Service
+     - Google Maps JavaScript API
+     - Google Maps Geocoding API
+* Create a Browser API Key and add your domain to the white list
+* Create a Server API Key and add your server IP to the white list
+
+In the next chapter "Install Cocorico dependencies" you will add respectively the "Browser API Key" 
+and the "Server API Key" to the `cocorico_geo.google_place_api_key` and `cocorico_geo.google_place_server_api_key` 
+parameters in `app/config/parameters.yml`.
+
+
+Note:
+See https://developers.google.com/maps/documentation/javascript/usage?hl=en for Google API usage limits. For example 
+at 06 July 2016 the use of Google Map JavaScript API is free until exceeding 25,000 map loads per 24 hours.
     
 #### Create your microsoft Translator account:
 
@@ -133,6 +155,8 @@ Change to your parent "Document Root" directory and clone repository:
     
 #### Create your Facebook App:
 
+See [https://developers.facebook.com/docs/apps/register](https://developers.facebook.com/docs/apps/register)
+    
 * Go to https://developers.facebook.com/quickstarts/?platform=web
 * Click on "Skip quick start"
 * Click on "Settings" and fill in "App Domains" your domain name. (ex:  xxx.com)
@@ -148,19 +172,19 @@ Change to your parent "Document Root" directory and clone repository:
 
 * Click on "Save changes"
 * You will then have to add your "Facebook App id" and "secret" in 
-`cocorico.facebook.app_id` and `cocorico.facebook.secret` parameters while composer install 
-described in "Install Cocorico dependencies and set your application parameters" chapter below
+`cocorico.facebook.app_id` and `cocorico.facebook.secret` parameters while composer install described in 
+"Install Cocorico dependencies and set your application parameters" chapter below
     
 ### Install composer
 
 If you don't have Composer yet, run the following command in the root folder of your Symfony project:
 
 For Linux:
-    
+
     cd Symfony
     curl -s http://getcomposer.org/installer | php
         
-For Windows: 
+For Windows:
 
     cd Symfony
     php -r "readfile('https://getcomposer.org/installer');" | php
@@ -177,18 +201,18 @@ Or to speed up:
 Or in case of error with tarball (slower):
 
     php composer.phar install --prefer-source -vvv
-
+   
 This command will ask you the values of some of your application parameters. 
 You will find more informations on them in the following chapter.
    
 ### Set your application parameters 
   
   See `app/config/parameters.yml.dist`
-   
+     
 ### Configure project
 
 Copy and paste web/.htaccess.dist and rename it to web/.htaccess. (It's configured by default for dev environment).
-
+         
 ### Initialize the SQL and NoSQL database
 
 #### SQL database initialisation:

@@ -64,9 +64,11 @@ class TimeRangeValidator implements EventSubscriberInterface, TranslationContain
             ) {
                 $form->addError(new FormError('time_range.invalid.single_time'));
             }
+        } elseif ($timeRange && (($timeRange->start && !$timeRange->end) || (!$timeRange->start && $timeRange->end))) {
+            $form->addError(new FormError('time_range.invalid.required'));
+        } elseif ($timeRange && (!$timeRange->start && !$timeRange->end)) {
+            $form->addError(new FormError('time_range.invalid.required'));
         }
-
-
     }
 
     public static function getSubscribedEvents()

@@ -149,24 +149,24 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             );
 
         if (!$this->bookingManager->getTimeUnitIsDay()) {
+            //All date and time fields are hidden in this form
             $builder->add(
                 'time_range',
                 'time_range',
                 array(
                     'mapped' => false,
                     'start_options' => array(
-                        'widget' => 'single_text',
                         'mapped' => true,
                         'data' => $booking->getStartTime()
                     ),
                     'end_options' => array(
-                        'widget' => 'single_text',
                         'mapped' => true,
                         'data' => $booking->getEndTime()
                     ),
                     'required' => true,
                     /** @Ignore */
-                    'label' => false
+                    'label' => false,
+                    'block_name' => 'time_range_hidden',
                 )
             );
         }

@@ -112,7 +112,7 @@ $(function () {
     cleanHash();
 
     //Sync time fields for times in duration mode
-    syncTimeFields($(".time-fields"));
+    //syncTimeFields(".time-fields");
 
     fixIEMobile10();
 });
@@ -257,14 +257,11 @@ function convertCurrency(amount, from, to) {
         return '';
     }
 
-    var fromRate = 0;
-    var toRate = 0;
+    var fromRate = currencies[from];
+    var toRate = currencies[to];
 
     amount = amount.replace(/[^\d.,]/g, '');
     amount = parseInt(amount, 10);
-
-    fromRate = currencies[from];
-    toRate = currencies[to];
 
     if (amount && fromRate && toRate) {
         //console_log(Math.round((amount / fromRate) * toRate));
@@ -340,35 +337,13 @@ $.fn.submitAjaxForm = function (callbackSuccess) {
  * Same than initDatepicker in jquery.main.js with ajax mode
  *
  * @param callbackSuccess function
- * @param parentDatesElt string|null Optional parent element of dates fields. Used when many date fields are on the same page
+ * @param parentDatesElt string|null Optional parent element of dates and time fields.
+ * Used when many date fields are on the same page
  */
 function initDatePickerAjax(callbackSuccess, parentDatesElt) {
-
     parentDatesElt = (typeof parentDatesElt === 'undefined') ? '' : parentDatesElt + ' ';
-
     var today = new Date();
-    //Times
-    var holderTimes = $(parentDatesElt + ".ajax-container .time-fields");
-    syncTimeFields(holderTimes);
 
-    var startHour = holderTimes.find("[id$=_start_hour]").first();
-    var endHour = holderTimes.find("[id$=_end_hour]").first();
-    var startMinute = holderTimes.find("[id$=_start_minute]").first();
-    var endMinute = holderTimes.find("[id$=_end_minute]").first();
-    var selectsTimes = holderTimes.find('select');
-
-    selectsTimes.each(function () {
-        var select = $(this);
-
-        select.on('change', function (e) {
-            if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
-                submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
-            }
-        });
-    });
-
-
-    //Days
     $(parentDatesElt + '.datepicker-holder-ajax').each(function () {
         var holder = $(this);
         var inputs = holder.find('input:text, input:hidden');
@@ -403,30 +378,41 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
                         }, 100);
                     } else if (to.attr('type') == 'hidden') {//Day are displayed in duration mode
                         setEndDay(input, to, nbDays);
-                        if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
-                            submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
-                        }
+                        submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
                     }
                 }
 
                 if (from.val() && to.val() && input.is(to) && !input.is(":focus")) {
-                    if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
-                        submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
-                    }
+                    submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
                 }
             }
         });
 
         nbDays.on('change', function () {
             setEndDay(from, to, $(this));
-            if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
-                submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
-            }
+            submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
         });
     });
 
+    //Time picker
+    initTimePicker('.timepicker-holder-ajax');
+
+    $('.timepicker-holder-ajax').each(function () {
+        var holder = $(this);
+
+        //Handle times select field change
+        var timeSelects = holder.find('select');
+        timeSelects.each(function () {
+            var $timeSelect = $(this);
+
+            $timeSelect.on('change', function (e) {
+                submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
+            });
+        });
+    });
 
 }
+
 
 /**
  * Set end day from start day and nb days field
@@ -443,68 +429,6 @@ function setEndDay($from, $to, $nbDays) {
 
 
 /**
- * Submit form with date picker and time fields
- *
- * @param callbackSuccess
- * @param parentDatesElt
- */
-function submitDatePickerAjaxForm(callbackSuccess, parentDatesElt) {
-
-    parentDatesElt = (typeof parentDatesElt === 'undefined') ? '' : parentDatesElt + ' ';
-
-    //console_log('submitDatePickerAjaxForm');
-    $(parentDatesElt + '.datepicker-holder-ajax').each(function () {
-        var holder = $(this);
-        var inputs = holder.find('input:text, input:hidden');
-        var from = inputs.filter('input.from');
-        var to = inputs.filter('input.to');
-
-        var holderTimes = $(parentDatesElt + ".ajax-container .time-fields");
-        var startHour = holderTimes.find("[id$=_start_hour]").first();
-        var endHour = holderTimes.find("[id$=_end_hour]").first();
-        var startMinute = holderTimes.find("[id$=_start_minute]").first();
-        var endMinute = holderTimes.find("[id$=_end_minute]").first();
-
-        if (from.val() && to.val()) {
-            if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
-                var container = from.closest('.ajax-container');
-                container.submitAjaxForm(callbackSuccess);
-                container.find("form").submit();
-            }
-        }
-    });
-}
-
-
-/**
- *
- * Sync time fields if exist. For now sync times in duration mode.
- *
- * @param $timeFieldsContainers
- */
-function syncTimeFields($timeFieldsContainers) {
-
-    $timeFieldsContainers.each(function () {
-        var holder = $(this);
-
-        //Times are displayed in duration mode (cocorico.times_display_mode: duration)
-        if (holder.find("#time_range_nb_minutes").length) {
-            var $fromHour = holder.find("#time_range_start_hour");
-            var $fromMinute = holder.find("#time_range_start_minute");
-            var $toHour = holder.find("#time_range_end_hour");
-            var $toMinute = holder.find("#time_range_end_minute");
-            var $nbMinutes = holder.find("#time_range_nb_minutes");
-
-            $fromHour.add($fromMinute).add($nbMinutes).on("change", function () {
-                setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes);
-            });
-
-            setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes);
-        }
-    });
-}
-
-/**
  *
  * Set end time from start time and nb minutes field
  *
@@ -519,8 +443,8 @@ function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
         var startTime = moment($fromHour.val() + ":" + $fromMinute.val(), "HH:mm");
         startTime = startTime.add($nbMinutes.val(), "minute");
         //console.log(startTime);
-        $toHour.val(startTime.format("HH"));
-        $toMinute.val(startTime.format("mm"));
+        $toHour.val(startTime.format("H"));
+        $toMinute.val(startTime.format("m"));
     } else {
         $toHour.add($toMinute).val('');
     }
@@ -556,6 +480,41 @@ function timesAreValid(startHour, endHour, startMinute, endMinute) {
 }
 
 /**
+ * Submit form with date picker and time fields
+ *
+ * @param callbackSuccess
+ * @param parentDatesElt
+ */
+function submitDatePickerAjaxForm(callbackSuccess, parentDatesElt) {
+    parentDatesElt = (typeof parentDatesElt === 'undefined') ? '' : parentDatesElt + ' ';
+
+    //console_log('submitDatePickerAjaxForm');
+    $(parentDatesElt + '.datepicker-holder-ajax').each(function () {
+        var holder = $(this);
+        var inputs = holder.find('input:text, input:hidden');
+        var from = inputs.filter('input.from');
+        var to = inputs.filter('input.to');
+
+        var holderTimes = $(parentDatesElt + ".ajax-container .time-fields");
+        var startHour = holderTimes.find("[id$=_start_hour]").first();
+        var endHour = holderTimes.find("[id$=_end_hour]").first();
+        var startMinute = holderTimes.find("[id$=_start_minute]").first();
+        var endMinute = holderTimes.find("[id$=_end_minute]").first();
+
+        if (from.val() && to.val()) {
+            if (timesAreValid(startHour, endHour, startMinute, endMinute)) {
+                var container = from.closest('.ajax-container');
+                container.submitAjaxForm(callbackSuccess);
+                container.find("form").submit();
+            }
+        }
+    });
+}
+
+
+/**
+
+ /**
  * Bind profile switch change event.
  * Submit form on change.
  */
@@ -571,8 +530,8 @@ function getNbUnReadMessages(url) {
     $.ajax({
         type: 'POST',
         url: url,
-        success: function (translateData) {
-            var result = $.parseJSON(translateData);
+        success: function (messageData) {
+            var result = $.parseJSON(messageData);
             if (result.total > 0) {
                 $('#nb-unread-msg').html(" (" + result.total + ")");
             }

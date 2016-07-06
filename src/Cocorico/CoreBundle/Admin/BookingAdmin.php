@@ -666,15 +666,15 @@ class BookingAdmin extends Admin
                     'label' => 'admin.booking.expire_at.label',
                     'bookingExpirationDelay' => $this->bookingExpirationDelay,
                 )
-            )
-            ->add(
-                'updatedAt',
-                null,
-                array(
-                    'label' => 'admin.booking.updated_at.label',
-                    'format' => 'd/m/Y'
-                )
             );
+//            ->add(
+//                'updatedAt',
+//                null,
+//                array(
+//                    'label' => 'admin.booking.updated_at.label',
+//                    'format' => 'd/m/Y'
+//                )
+//            );
 
 
         $listMapper->add(

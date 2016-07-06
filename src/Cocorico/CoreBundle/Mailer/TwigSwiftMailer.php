@@ -27,7 +27,7 @@ class TwigSwiftMailer implements MailerInterface
     protected $twig;
     protected $requestStack;
     protected $translator;
-    protected $parameters;
+//    protected $parameters;
     protected $timeUnit;
     protected $timeUnitIsDay;
     /** @var  array locales */
@@ -60,17 +60,19 @@ class TwigSwiftMailer implements MailerInterface
         $this->translator = $translator;
 
         /** parameters */
-        $this->parameters = $parameters['parameters'];
-        $this->fromEmail = $parameters['parameters']['cocorico_from_email'];
-        $this->adminEmail = $parameters['parameters']['cocorico_contact_email'];
+//        $this->parameters = $parameters['parameters'];
+        $parameters = $parameters['parameters'];
 
-        $this->timeUnit = $parameters['parameters']['cocorico_time_unit'];
+        $this->fromEmail = $parameters['cocorico_from_email'];
+        $this->adminEmail = $parameters['cocorico_contact_email'];
+
+        $this->timeUnit = $parameters['cocorico_time_unit'];
         $this->timeUnitIsDay = ($this->timeUnit % 1440 == 0) ? true : false;
 
-        $this->locales = $parameters['parameters']['cocorico_locales'];
+        $this->locales = $parameters['cocorico_locales'];
 
         $this->templates = $templates;
-        $this->locale = $parameters['parameters']['cocorico_locale'];
+        $this->locale = $parameters['cocorico_locale'];
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }

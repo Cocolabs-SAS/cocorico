@@ -35,6 +35,8 @@
         'css/all.css'
         'css/all-override.css'
         'css/vendor/bootstrap-multiselect.css'
+        'css/vendor/bootstrap-datetimepicker.css'
+
         filter='cssrewrite, ?minifycsscompressor' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all">
         {% endstylesheets %}
@@ -141,6 +143,7 @@
     'js/jquery.main.js'
     'js/jquery.main-override.js'
     'js/vendor/parsley.min.js'
+    'js/vendor/bootstrap-datetimepicker.js'
 
     output='js/compiled/all.js' %}
     <script src="{{ asset_url }}"></script>

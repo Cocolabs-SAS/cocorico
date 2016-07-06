@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-03-16T21:10:01Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-04-14T17:41:13Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -8,7 +8,7 @@
         <body>
             <trans-unit id="9b81dbdb23890155a309ef09d92759b18552ea0c" resname="cocorico_booking_new">
                 <source>/booking/{listing_id}/{start}/{end}/{start_time}/{end_time}/new</source>
-                <target>/reservation/{listing_id}/{start}/{end}/{start_time}/{end_time}/nouveau</target>
+                <target>/reservation/{listing_id}/{start}/{end}/{start_time}/{end_time}/creer</target>
             </trans-unit>
             <trans-unit id="81a1cea4ee90d53ca7904aac09cd6dbda96fc3dc" resname="cocorico_booking_price">
                 <source>/booking/{listing_id}/price</source>
@@ -24,7 +24,7 @@
             </trans-unit>
             <trans-unit id="0b8e53ab3f45eb7281deef036265821371b94f41" resname="cocorico_contact_new">
                 <source>/contact/new</source>
-                <target>/contact/nouveau</target>
+                <target>/contact/creer</target>
             </trans-unit>
             <trans-unit id="5a3ded790dd4800705dda263f60329df12891745" resname="cocorico_currency_switch">
                 <source>/currency/{currency}/switch</source>
@@ -88,7 +88,7 @@
             </trans-unit>
             <trans-unit id="6526ae15e8dc1c008e9fde210f5045ce8fdac4af" resname="cocorico_dashboard_listing_duplicate">
                 <source>/dashboard/listing/{id}/duplicate</source>
-                <target state="new">/dashboard/listing/{id}/duplicate</target>
+                <target>/tableau-de-bord/annonce/{id}/dupliquer</target>
             </trans-unit>
             <trans-unit id="b70ef325485b570d4b366d6d0126ea2594c179f3" resname="cocorico_dashboard_listing_edit_availabilities_prices">
                 <source>/dashboard/listing/{listing_id}/edit_availabilities_prices</source>
@@ -140,11 +140,11 @@
             </trans-unit>
             <trans-unit id="cf2ff0370868ee31b19be5d289f5c28c1996d72e" resname="cocorico_dashboard_listing_new_availability_price">
                 <source>/dashboard/listing/{listing_id}/{day}/new_availability_price</source>
-                <target>/tableau-de-bord/annonce/{listing_id}/{day}/nouveau-dispo-prix</target>
+                <target>/tableau-de-bord/annonce/{listing_id}/{day}/creer-dispo-prix</target>
             </trans-unit>
             <trans-unit id="15e1d700b5f6f0d9ed9ae5bb844a0b0245f479c0" resname="cocorico_dashboard_listing_new_availability_status">
                 <source>/dashboard/listing/{listing_id}/{day}/new_availability_status</source>
-                <target>/tableau-de-bord/annonce/{listing_id}/{day}/nouveau-dispo-status</target>
+                <target>/tableau-de-bord/annonce/{listing_id}/{day}/creer-dispo-status</target>
             </trans-unit>
             <trans-unit id="c4d4ae5e8dca6d141910b03487fd169c635b653d" resname="cocorico_dashboard_listing_price_simulator">
                 <source>/dashboard/listing/{id}/price_simulator</source>
@@ -160,7 +160,7 @@
             </trans-unit>
             <trans-unit id="69e16c8d093b9f82bf95b03b4f43020614a71f2c" resname="cocorico_dashboard_message_new">
                 <source>/dashboard/message/{listingId}/new</source>
-                <target>/tableau-de-bord/message/{listingId}/nouveau</target>
+                <target>/tableau-de-bord/message/{listingId}/creer</target>
             </trans-unit>
             <trans-unit id="3ff5893c78ff114edc675b2c648aff354f246c15" resname="cocorico_dashboard_message_thread_delete">
                 <source>/dashboard/message/delete/{threadId}</source>
@@ -172,7 +172,7 @@
             </trans-unit>
             <trans-unit id="ebf79f5127f4e911d386ab4bdff620a02b405313" resname="cocorico_dashboard_review_new">
                 <source>/dashboard/review/new/{booking_id}</source>
-                <target>/tableau-de-bord/revue/nouveau/{booking_id}</target>
+                <target>/tableau-de-bord/revue/creer/{booking_id}</target>
             </trans-unit>
             <trans-unit id="db2e8e0cc769a0c3d9af18a53da8aa852dadbdf5" resname="cocorico_dashboard_reviews_added">
                 <source>/dashboard/review/reviews-made</source>
@@ -189,18 +189,6 @@
             <trans-unit id="cefbea7a19e1292e3dac85a028346e6d1be091ad" resname="cocorico_language_translate">
                 <source>/language/translate</source>
                 <target>/langage/traduire</target>
-            </trans-unit>
-            <trans-unit id="311bb8223f58f33333cbf7332c4ff0b4d31d3420" resname="cocorico_listing_alert_dashboard_alert">
-                <source>/dashboard/listing-alert/{page}</source>
-                <target state="new">/tableau-de-bord/alertes-annonce/{page}</target>
-            </trans-unit>
-            <trans-unit id="c82f3ece898b0cd5915c56eed0ae6a6cfbca85a8" resname="cocorico_listing_alert_dashboard_alert_delete">
-                <source>/dashboard/listing-alert/{id}/delete</source>
-                <target state="new">/tableau-de-bord/alertes-annonce/{id}/supprimer</target>
-            </trans-unit>
-            <trans-unit id="7503f38efaf75f94d521690c4fcb8a82f31801c5" resname="cocorico_listing_alert_new">
-                <source>/listing-alert/new</source>
-                <target state="new">/alertes-annonce/creer</target>
             </trans-unit>
             <trans-unit id="0d035f070813a7d01ed570d64541854d8c9518d5" resname="cocorico_listing_availabilities">
                 <source>/listing_availabilities/{listing_id}/{start}/{end}</source>
