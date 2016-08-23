@@ -8,6 +8,9 @@
 {%- endblock %}
 
 {% block main_dashboard -%}
+
+    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
     <div class="tab-content no-border">
         <!-- comments -->
         <div role="tabpanel" class="tab-pane active" id="comments">

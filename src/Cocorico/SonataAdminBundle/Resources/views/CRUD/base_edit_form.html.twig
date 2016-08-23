@@ -106,7 +106,7 @@
                                 </a>
                             {% endif %}
 
-                            {% if bundleExist('CocoricoMangoPayBundle') and admin.hasroute('mangopay_withdraw') and admin.isGranted('EDIT') %}
+                            {% if bundleExist('CocoricoMangoPayBundle') and admin.hasroute('mangopay_withdraw') and admin.isGranted('EDIT', object) and object.status == BookingBankWireConstants.STATUS_TO_DO %}
                                 {% include 'CocoricoMangoPayBundle:Admin:list_action_do_bank_wire.html.twig' with {'object': object} only %}
                             {% endif %}
 

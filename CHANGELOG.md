@@ -10,6 +10,25 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+
+## [0.2.3] - 2016-08-23
+
+### Added
+- Add booking duration in booking price
+- Add DQL MySQL timestamp diff function
+- Add ReportBundle support
+
+### Fixed
+- Fix flash bags on review manager 
+- Fix duration computing without time range 
+
+### Changed
+- CS 
+
+### Deprecated
+
+
+
 ## [0.2.2] - 2016-07-06
 
 ### Added

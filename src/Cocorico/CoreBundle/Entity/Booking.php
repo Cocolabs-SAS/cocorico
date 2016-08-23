@@ -249,6 +249,10 @@ class Booking extends BaseBooking
      */
     public function getDuration($endDayIncluded, $timeUnit)
     {
+        if (!$this->getStart() || !$this->getEnd()) {
+            return false;
+        }
+
         $timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $dateRange = new DateRange($this->getStart(), $this->getEnd());
         $durationDay = $dateRange->getDuration($endDayIncluded);
@@ -260,6 +264,9 @@ class Booking extends BaseBooking
         if ($timeUnitIsDay) {//Duration in time unit (day)
             $duration = $durationDay;
         } else {//Duration in time unit (hour, ...)
+            if (!$this->getStartTime() || !$this->getEndTime()) {
+                return false;
+            }
             $timeRange = new TimeRange($this->getStartTime(), $this->getEndTime());
             $durationTime = $timeRange->getDuration($timeUnit);
             $duration = $durationDay * $durationTime;

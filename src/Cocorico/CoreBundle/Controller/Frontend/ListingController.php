@@ -108,7 +108,7 @@ class ListingController extends Controller
      */
     public function showAction(Listing $listing)
     {
-        $reviews = $this->container->get('cocorico.review.manager')->getListingReview($listing);
+        $reviews = $this->container->get('cocorico.review.manager')->getListingReviews($listing);
 
         return $this->render(
             'CocoricoCoreBundle:Frontend/Listing:show.html.twig',

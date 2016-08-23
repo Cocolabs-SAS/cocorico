@@ -90,6 +90,8 @@ doctrine:
                 dql:
                     datetime_functions:
                         DATE_FORMAT: Cocorico\CoreBundle\DQL\DateFormatFunction
+                        TIME_DIFF: Cocorico\CoreBundle\DQL\TimeDiffFunction
+                        TIMESTAMP_DIFF: Cocorico\CoreBundle\DQL\TimestampDiffFunction
                     numeric_functions:
                         GEO_DISTANCE: Cocorico\CoreBundle\DQL\GeoDistanceFunction
         resolve_target_entities:
@@ -248,12 +250,12 @@ sonata_admin:
 
     dashboard:
         blocks:
-            - position: left
-              type: sonata.admin.block.admin_list
-            - position: right
-              type: sonata.block.service.text
-              settings:
-                content: '<h2>Welcome</h2><p>...</p>'
+#            - position: left
+#              type: sonata.admin.block.admin_list
+#            - position: right
+#              type: sonata.block.service.text
+#              settings:
+#                content: '<h2>Welcome</h2><p>...</p>'
 
 
 sonata_doctrine_orm_admin:

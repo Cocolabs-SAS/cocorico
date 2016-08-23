@@ -529,7 +529,7 @@ class BookingBankWireAdmin extends Admin
 
         if (array_key_exists("CocoricoMangoPayBundle", $this->bundles)) {
             $collection->add(
-                'mangopay_withdraw'
+                'mangopay_withdraw'//See Cocorico/SonataAdminBundle/Resources/views/CRUD/base_edit_form.html.twig
             );
         }
     }

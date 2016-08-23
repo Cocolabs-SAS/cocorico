@@ -934,7 +934,7 @@ class BookingManager extends BaseManager
 
     /**
      * Validate Booking:
-     *  Transfer the funds from the buyer's wallet to the seller's wallet.
+     *  Transfer the funds from the asker's wallet to the offerer's wallet.
      *  The offerer can be payed.
      *  Platform fees are taken here.
      *

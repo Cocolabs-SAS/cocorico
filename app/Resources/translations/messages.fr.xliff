@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-04-14T17:41:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-04-25T16:34:08Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -292,7 +292,6 @@
                 <target>Date de mise à jour</target>
                 <jms:reference-file line="307">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="464">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="674">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="216">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="114">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>

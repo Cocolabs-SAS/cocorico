@@ -54,7 +54,7 @@ class AppKernel extends Kernel
             new Cocorico\MessageBundle\CocoricoMessageBundle(),
             new Cocorico\ContactBundle\CocoricoContactBundle(),
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
-            new Cocorico\ConfigBundle\CocoricoConfigBundle(),
+            new Cocorico\ConfigBundle\CocoricoConfigBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {

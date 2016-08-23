@@ -152,7 +152,7 @@ class ReviewManager extends BaseManager
      * @param  Listing $listing
      * @return Array objects
      */
-    public function getListingReview(Listing $listing)
+    public function getListingReviews(Listing $listing)
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('r')

@@ -177,7 +177,7 @@ class ThreadManager
      * Get user reply rate and average delay in seconds
      *
      * @param ParticipantInterface $user
-     * @return array
+     * @return array 'reply_rate' => rate, 'reply_delay' => duration in seconds
      */
     public function getReplyRateAndDelay(ParticipantInterface $user)
     {

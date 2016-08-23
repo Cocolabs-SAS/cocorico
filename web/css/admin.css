@@ -64,3 +64,18 @@ div[id$='_hour'], div[id$='_minute'] {
     width: 60px !important;
     display: inline-block !important;
 }
+
+/** Report bundle */
+.small-box .icon {
+    font-size: 60px;
+    right: 10px;
+    top: -10px;
+    bottom: 0;
+    color: rgba(255, 255, 255, 0.15);
+}
+
+@media screen and (max-width: 480px) {
+    .small-box {
+        min-height: 132px;
+    }
+}

@@ -48,9 +48,12 @@
         {% endif %}
         <span class="text">*{{ 'listing.show.excluding_booking_fees'|trans }}</span>
 
-        <em class="text">
-            {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
-        </em>
+        {% set duration = booking.duration(endDayIncluded, timeUnit) %}
+        {% if duration %}
+            <em class="text">
+                {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
+            </em>
+        {% endif %}
     </div>
 
 
