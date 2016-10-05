@@ -37,7 +37,7 @@ class BookingAskerFormHandler extends BookingFormHandler
         /** @var Booking $booking */
         $booking = $form->getData();
         $message = $form->get("message")->getData();
-        $this->threadManager->addReplyThread($booking, $message);
+        $this->threadManager->addReplyThread($booking, $message, $booking->getUser());
         //Cancel
         $type = $this->request->get('type');
         if (in_array($booking->getStatus(), Booking::$cancelableStatus)) {

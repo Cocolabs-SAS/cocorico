@@ -153,18 +153,18 @@ class ThreadManager
      * replies to the existing booking request with refused or accepted status
      * In one word: booking response.
      *
-     * @param Booking $booking
-     * @param string  $messageTxt
-     *
+     * @param Booking              $booking
+     * @param string               $messageTxt
+     * @param ParticipantInterface $sender
      */
-    public function addReplyThread(Booking $booking, $messageTxt)
+    public function addReplyThread(Booking $booking, $messageTxt, ParticipantInterface $sender)
     {
         /** @var MessageInterface $message */
         $message = $this->fosMessageManager->createMessage();
         $thread = $booking->getThread();
         $replyBuilder = new ReplyMessageBuilder($message, $thread);
         $replyBuilder
-            ->setSender($booking->getListing()->getUser())
+            ->setSender($sender)
             ->setBody($messageTxt);
         // send the message
         $threadMessage = $replyBuilder->getMessage();

@@ -1,0 +1,45 @@
+{% extends 'CocoricoCoreBundle:Dashboard:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_review' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'comments' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block main_dashboard -%}
+
+    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+    <div class="tab-content no-border">
+        <!-- comments -->
+        <div role="tabpanel" class="tab-pane active" id="comments">
+            <!-- user-rating -->
+            {% include 'CocoricoReviewBundle:Dashboard/Review:_reviews_to_make.html.twig' with {
+            'unreviewed_bookings': unreviewed_bookings
+            } only %}
+
+            <!-- form-radio -->
+            <form action="#" class="form-radio alt">
+                <fieldset>
+                    <ul class="list-inline">
+                        <li>
+                            <input value="{{ path('cocorico_dashboard_reviews_received') }}" type="radio" id="radio1"
+                                   name="radio-rating-switcher" {{ reviews_type == 'received' ? 'checked' : '' }}>
+                            <label for="radio1">{{ 'review.comment.rating_received'| trans }}</label>
+                        </li>
+                        <li>
+                            <input value="{{ path('cocorico_dashboard_reviews_made') }}" type="radio" id="radio2"
+                                   name="radio-rating-switcher" {{ reviews_type == 'made' ? 'checked' : '' }}>
+                            <label for="radio2">{{ 'review.comment.rating_made'| trans }}</label>
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+
+            {% include 'CocoricoReviewBundle:Dashboard/Review:_reviews.html.twig' with {
+            'reviews': reviews
+            } only %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-04-14T17:43:54Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-05-10T13:29:13Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -276,7 +276,7 @@
             <trans-unit id="ce9dc38b0d001e3346c2c1d8202e01bdecb121ef" resname="fos_user.password.mismatch">
                 <source>fos_user.password.mismatch</source>
                 <target>The entered passwords don't match</target>
-                <jms:reference-file line="61">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="62">Form/Type/ProfileContactFormType.php</jms:reference-file>
                 <jms:reference-file line="91">Form/Type/RegistrationFormType.php</jms:reference-file>
                 <jms:reference-file line="40">Form/Type/ResettingFormType.php</jms:reference-file>
                 <jms:reference-file line="100">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>

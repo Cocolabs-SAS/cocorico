@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-04-25T16:34:08Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-05-10T13:28:19Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -121,13 +121,13 @@
             <trans-unit id="6d384fb8ef3ca9318f0f9d983868842a211770f8" resname="form.password">
                 <source>form.password</source>
                 <target>Mot de passe :</target>
-                <jms:reference-file line="54">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="55">Form/Type/ProfileContactFormType.php</jms:reference-file>
                 <jms:reference-file line="84">Form/Type/RegistrationFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="30de94712c8550862006ed6a664870c398c9482d" resname="form.password_confirmation">
                 <source>form.password_confirmation</source>
                 <target>Vérification :</target>
-                <jms:reference-file line="58">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="59">Form/Type/ProfileContactFormType.php</jms:reference-file>
                 <jms:reference-file line="88">Form/Type/RegistrationFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
@@ -212,8 +212,8 @@
             <trans-unit id="148005ed10f2b75bbdb99c10f5b4d409245a2bf0" resname="form.user.phone">
                 <source>form.user.phone</source>
                 <target>Téléphone :</target>
-                <jms:reference-file line="43">Form/Type/ProfileContactFormType.php</jms:reference-file>
-                <jms:reference-file line="70">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="44">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="71">Form/Type/ProfileContactFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="151cf4b1f11521a27811e8bad9ad07a73f2f1075" resname="form.user.phone:">
                 <source>form.user.phone:</source>

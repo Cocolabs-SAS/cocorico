@@ -5,8 +5,14 @@ framework:
     test: ~
 #    session:
 #        storage_id: session.storage.mock_file
-    profiler:
-        collect: false
+#    profiler:
+#        collect: false
+
+#To display web profiler in staging env
+#web_profiler:
+#    toolbar: true
+#    intercept_redirects: true
 
 swiftmailer:
     spool:     { type: memory }
+    logging: true

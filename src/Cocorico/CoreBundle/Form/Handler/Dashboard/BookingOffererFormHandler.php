@@ -37,7 +37,7 @@ class BookingOffererFormHandler extends BookingFormHandler
         /** @var Booking $booking */
         $booking = $form->getData();
         $message = $form->get("message")->getData();
-        $this->threadManager->addReplyThread($booking, $message);
+        $this->threadManager->addReplyThread($booking, $message, $booking->getListing()->getUser());
         //Accept or refuse
         $type = $this->request->get('type');
 

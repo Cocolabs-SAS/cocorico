@@ -42,13 +42,13 @@ cocorico_dashboard_reviews_received:
         text: 'Rating Received'
         route: 'cocorico_dashboard_reviews_received'
 
-cocorico_dashboard_reviews_added:
+cocorico_dashboard_reviews_made:
     -
         text: 'Comments'
         route: 'cocorico_dashboard_reviews_received'
     -
         text: 'Rating Made'
-        route: 'cocorico_dashboard_reviews_added'
+        route: 'cocorico_dashboard_reviews_made'
 
 cocorico_user_dashboard_profile_edit_about_me:
     -

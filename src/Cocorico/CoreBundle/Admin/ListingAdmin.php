@@ -145,13 +145,13 @@ class ListingAdmin extends Admin
                     'type' => new ListingImageType(),
                     'by_reference' => false,
                     'required' => false,
-                    'disabled' => false,
+                    'disabled' => true,
                     'prototype' => true,
-                    'allow_add' => true,
-                    'allow_delete' => true,
+                    'allow_add' => false,
+                    'allow_delete' => false,
                     'options' => array(
                         'required' => true,
-                        'disabled' => false
+                        'disabled' => true
                     ),
                     'label' => 'admin.listing.images.label'
                 )

@@ -47,7 +47,7 @@ class ListingAvailabilityRepository extends DocumentRepository
         }
 
         $qbDM
-            ->select('day', 'status', 'price', 'times')
+            ->select('day', 'status', 'price', 'times', 'listingId')
             ->field('listingId')->equals(intval($listingId))
             ->field('day')->gte(new \MongoDate($start->getTimestamp()));
 
@@ -128,32 +128,44 @@ class ListingAvailabilityRepository extends DocumentRepository
         } else {
             if (is_numeric($priceMin) && $priceMin && is_numeric($priceMax) && $priceMax) {//not use for now
                 //(Un)available or not in price range
-            } else {
+            } else {//(Un)available
                 //TODO: CHECK LISTING DEFAULT STATUS = UNAVAILABLE
-                //(Un)available
+                $qbDMDatesExp = $qbDM
+                    ->expr()
+                    ->field('day')->range($start, $end);
+
                 //Embedded documents require their own query builders to search on their fields
                 $embeddedQbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailabilityTime');
 
                 if ($timeRange) {
                     $startMinute = intval($timeRange->getStart()->getTimestamp() / 60);
                     $endMinute = intval($timeRange->getEnd()->getTimestamp() / 60) - 1;
-                    $embeddedQbDMExpr = $embeddedQbDM->expr()
+
+                    $qbDMDatesExp->field('times')->elemMatch(
+                        $embeddedQbDM->expr()
                         ->field('id')->in(range($startMinute, $endMinute))
-                        ->field('status')->in($status);
+                            ->field('status')->in($status)
+                    );
+
                 } else {
-                    //see communivy temp solution
-                    $embeddedQbDMExpr = $embeddedQbDM->expr()
-                        ->field('status')->in($status);
+                    //No time unit in the day is available
+                    if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+                        $startMinutes = range(0, 1360, 60);//each first minute of each hour of the day
+                        foreach ($startMinutes as $startMinute) {
+                            $qbDMDatesExp->field('times.' . $startMinute . '.s')->in($status);
+                        }
+                    } //At least one time unit in the day is available
+                    else {
+                        $qbDMDatesExp->field('times')->elemMatch(
+                            $embeddedQbDM->expr()
+                                ->field('status')->in($status)
+                        );
+                    }
                 }
 
                 $qbDM
                     ->addOr(
-                        $qbDM
-                            ->expr()
-                            ->field('day')->range($start, $end)
-                            ->field('times')->elemMatch(
-                                $embeddedQbDMExpr
-                            )
+                        $qbDMDatesExp
                     )
                     ->addOr(
                         $qbDM

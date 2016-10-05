@@ -63,7 +63,7 @@ class ReviewController extends Controller
                 $translator->trans('review.new.success', array(), 'cocorico_review')
             );
 
-            return $this->redirect($this->generateUrl('cocorico_dashboard_reviews_added'));
+            return $this->redirect($this->generateUrl('cocorico_dashboard_reviews_made'));
         }
 
         //Breadcrumbs
@@ -109,7 +109,7 @@ class ReviewController extends Controller
     /**
      * List of reviews made by the user
      *
-     * @Route("/reviews-made", name="cocorico_dashboard_reviews_added")
+     * @Route("/reviews-made", name="cocorico_dashboard_reviews_made")
      *
      * @Method({"GET"})
      *
@@ -123,14 +123,15 @@ class ReviewController extends Controller
         $userType = $request->getSession()->get('profile', 'asker');
 
         $reviewManager = $this->get('cocorico.review.manager');
-        $reviews = $reviewManager->getUserReviews($userType, $user);
-        $bookings = $reviewManager->getUnreviewedBooking($userType, $user);
+        $madeReviews = $reviewManager->getUserReviews($userType, $user, 'made');
+        $unreviewedBookings = $reviewManager->getUnreviewedBookings($userType, $user);
 
         return $this->render(
-            'CocoricoReviewBundle:Dashboard/Review:made_reviews.html.twig',
+            'CocoricoReviewBundle:Dashboard/Review:index.html.twig',
             array(
-                'reviews' => $reviews,
-                'bookings' => $bookings
+                'reviews' => $madeReviews,
+                'unreviewed_bookings' => $unreviewedBookings,
+                'reviews_type' => 'made'
             )
         );
     }
@@ -153,14 +154,15 @@ class ReviewController extends Controller
 
         $reviewManager = $this->get('cocorico.review.manager');
 
-        $reviews = $reviewManager->getUserReviews($userType, $user, false);
-        $bookings = $reviewManager->getUnreviewedBooking($userType, $user);
+        $receivedReviews = $reviewManager->getUserReviews($userType, $user, 'received');
+        $unreviewedBookings = $reviewManager->getUnreviewedBookings($userType, $user);
 
         return $this->render(
-            'CocoricoReviewBundle:Dashboard/Review:received_reviews.html.twig',
+            'CocoricoReviewBundle:Dashboard/Review:index.html.twig',
             array(
-                'reviews' => $reviews,
-                'bookings' => $bookings
+                'reviews' => $receivedReviews,
+                'unreviewed_bookings' => $unreviewedBookings,
+                'reviews_type' => 'received'
             )
         );
     }

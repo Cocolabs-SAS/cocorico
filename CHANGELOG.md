@@ -10,6 +10,28 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.2.4] - 2016-10-05
+
+### Added
+
+### Fixed
+- Fix reviewer name in dashboard reviews
+- Fix participant name in reservation thread messages when asker cancel booking
+- Fix search by date without time in not day mode
+- Fix timepicker compatibility in mobile device
+- Fix google map infobox.js remote access disabled
+- Fix admin listing images upload by disabling it
+- Fix sensio/distribution-bundle / composer 1.1.0 type hint compatibility
+
+### Changed
+- Display pay button in admin bank wires if its status is todo
+- Default user phone prefix to +33
+- Enhance ReviewBundle
+- Footer link
+- gc_probability setted to 0 for prod env
+
+### Deprecated
+
 
 ## [0.2.3] - 2016-08-23
 
@@ -26,7 +48,6 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - CS 
 
 ### Deprecated
-
 
 
 ## [0.2.2] - 2016-07-06
@@ -54,7 +75,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Deprecated
 - Fix TimeRange form type sf 2.8 depreciation
 - Remove TimeHidden form type
-
+ 
 
 ## [0.2.1] - 2016-06-28
 

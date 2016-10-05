@@ -51,16 +51,16 @@ class ReviewManager extends BaseManager
     }
 
     /**
-     * getUserReviews will retrun the paginator object of the reviews added or made for
+     * getUserReviews will return the paginator object of the reviews added or made for
      * the user object provided
      *
      * @param  string  $userType
      * @param  User    $user
-     * @param  boolean $addedReview
+     * @param  string  $type 'made' or 'received'
      * @param  integer $page
      * @return Review
      */
-    public function getUserReviews($userType, User $user, $addedReview = true, $page = 1)
+    public function getUserReviews($userType, User $user, $type, $page = 1)
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('r')
@@ -75,7 +75,7 @@ class ReviewManager extends BaseManager
             ->leftJoin('l.translations', 't');
 
         // adds the condition about which reviews need to be fetched.
-        if ($addedReview) {
+        if ($type == 'made') {
             $queryBuilder->where('r.reviewBy = :user');
         } else {
             $queryBuilder->where('r.reviewTo = :user');
@@ -127,14 +127,14 @@ class ReviewManager extends BaseManager
     }
 
     /**
-     * getUnreviewedBooking will fetch unreviewed bookings from the booking table
+     * getUnreviewedBookings will fetch unreviewed bookings from the booking table
      * by user, and already added reviews
      *
      * @param  string $userType
      * @param  User   $user
      * @return Array Booking | Null
      */
-    public function getUnreviewedBooking($userType, User $user)
+    public function getUnreviewedBookings($userType, User $user)
     {
         $reviewedBookingIds = $this->getRepository()->getReviewedBookingIds($user);
 

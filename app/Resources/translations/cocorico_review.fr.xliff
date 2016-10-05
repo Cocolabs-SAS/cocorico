@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-04-25T16:34:08Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-05-10T13:28:19Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -42,13 +42,7 @@
             <trans-unit id="af3cdfc334758965b84e280b838aa23a7e5fd308" resname="review.comment.add_rating">
                 <source>review.comment.add_rating</source>
                 <target>Ajouter votre notation</target>
-                <jms:reference-file line="20">Dashboard/Review/made_reviews.html.twig</jms:reference-file>
-                <jms:reference-file line="20">Dashboard/Review/received_reviews.html.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="e8026b1b4f1d24cb36071220b688cf7bd9204b96" resname="review.comment.applicant_text">
-                <source>review.comment.applicant_text</source>
-                <target>Demandeur que vous notez</target>
-                <jms:reference-file line="43">Dashboard/Review/reviews.html.twig</jms:reference-file>
+                <jms:reference-file line="12">Dashboard/Review/_reviews_to_make.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="f9489ed60fc2d5d0a30b98df526f87b5dc1c4010" resname="review.comment.cancel">
                 <source>review.comment.cancel</source>
@@ -58,8 +52,7 @@
             <trans-unit id="1ed554aeaf19ab46528bd1ce10fdbbef3a4ff713" resname="review.comment.concerning">
                 <source>review.comment.concerning</source>
                 <target>concernant</target>
-                <jms:reference-file line="25">Dashboard/Review/made_reviews.html.twig</jms:reference-file>
-                <jms:reference-file line="26">Dashboard/Review/received_reviews.html.twig</jms:reference-file>
+                <jms:reference-file line="17">Dashboard/Review/_reviews_to_make.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="3c749de46454a2ce8cda37e30ae24cd571e098e6" resname="review.comment.end_date">
                 <source>review.comment.end_date</source>
@@ -68,18 +61,18 @@
             </trans-unit>
             <trans-unit id="3d6bc643d9ad5e5de61c9c6801eaf11a1ff54fe1" resname="review.comment.for_ad">
                 <source>review.comment.for_ad</source>
-                <target>pour I'annonce</target>
-                <jms:reference-file line="28">Dashboard/Review/reviews.html.twig</jms:reference-file>
+                <target>pour l'annonce</target>
+                <jms:reference-file line="39">Dashboard/Review/_reviews.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="08ff89a4d45cd32716ae2029f21c0b97374af3a8" resname="review.comment.last_post">
-                <source>review.comment.last_post</source>
-                <target>Dernier message</target>
-                <jms:reference-file line="64">Dashboard/Review/reviews.html.twig</jms:reference-file>
+            <trans-unit id="08ff89a4d45cd32716ae2029f21c0b97374af3a8" resname="review.comment.desc">
+                <source>review.comment.desc</source>
+                <target>Commentaire</target>
+                <jms:reference-file line="87">Dashboard/Review/_reviews.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e595ae4b9d2c8d6dabf1d093bc07225499aac010" resname="review.comment.note">
                 <source>review.comment.note</source>
-                <target>La note que vous donnez</target>
-                <jms:reference-file line="36">Dashboard/Review/reviews.html.twig</jms:reference-file>
+                <target>Note</target>
+                <jms:reference-file line="48">Dashboard/Review/_reviews.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8a680dcdc222670c9f52fc0f20a7c6ab85d15329" resname="review.comment.publish_this_comment">
                 <source>review.comment.publish_this_comment</source>
@@ -93,21 +86,18 @@
             </trans-unit>
             <trans-unit id="ce5f410a640649ff9ae44c5a148c1324753faffd" resname="review.comment.rating_made">
                 <source>review.comment.rating_made</source>
-                <target>Notation faite</target>
-                <jms:reference-file line="42">Dashboard/Review/made_reviews.html.twig</jms:reference-file>
-                <jms:reference-file line="52">Dashboard/Review/received_reviews.html.twig</jms:reference-file>
+                <target>Notations faites</target>
+                <jms:reference-file line="31">Dashboard/Review/index.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="6de4dea37c5fcbf5e293cc4ba869f00fe62f2cc1" resname="review.comment.rating_note">
                 <source>review.comment.rating_note</source>
                 <target>Vous devez laisser une note pour cette reservation</target>
-                <jms:reference-file line="24">Dashboard/Review/made_reviews.html.twig</jms:reference-file>
-                <jms:reference-file line="25">Dashboard/Review/received_reviews.html.twig</jms:reference-file>
+                <jms:reference-file line="16">Dashboard/Review/_reviews_to_make.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="9a62a45b7312938d1c4c5887f4f0ba9d49ecb288" resname="review.comment.rating_received">
                 <source>review.comment.rating_received</source>
-                <target>Notation reçue</target>
-                <jms:reference-file line="37">Dashboard/Review/made_reviews.html.twig</jms:reference-file>
-                <jms:reference-file line="47">Dashboard/Review/received_reviews.html.twig</jms:reference-file>
+                <target>Notations reçues</target>
+                <jms:reference-file line="26">Dashboard/Review/index.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="ec1599bb0d3051c768b20b80016ef1920c7510dc" resname="review.comment.ratings_to">
                 <source>review.comment.ratings_to</source>
@@ -117,7 +107,17 @@
             <trans-unit id="863a7ca450a2e877c3c4ec5fb8f05f9c9ff44ae6" resname="review.comment.reservation">
                 <source>review.comment.reservation</source>
                 <target>Reservation</target>
-                <jms:reference-file line="26">Dashboard/Review/reviews.html.twig</jms:reference-file>
+                <jms:reference-file line="36">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="ead95da854790aade615a878757d1b5820670a6c" resname="review.comment.reviewed_user">
+                <source>review.comment.reviewed_user</source>
+                <target>Personne que vous avez noté</target>
+                <jms:reference-file line="58">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="61e65ede52354892c7e595264d7b92731597e892" resname="review.comment.reviewer">
+                <source>review.comment.reviewer</source>
+                <target state="new">Personne qui vous a noté</target>
+                <jms:reference-file line="63">Dashboard/Review/_reviews.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d2144bfb149404dfd4ad9eec9ccc2a7f2ff98100" resname="review.comment.start_date">
                 <source>review.comment.start_date</source>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-04-25T16:34:08Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-05-10T13:28:19Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -174,7 +174,7 @@
                 <source>/dashboard/review/new/{booking_id}</source>
                 <target>/tableau-de-bord/revue/creer/{booking_id}</target>
             </trans-unit>
-            <trans-unit id="db2e8e0cc769a0c3d9af18a53da8aa852dadbdf5" resname="cocorico_dashboard_reviews_added">
+            <trans-unit id="922891b2e63be6c1f473bacc5792c462bc0a1afd" resname="cocorico_dashboard_reviews_made">
                 <source>/dashboard/review/reviews-made</source>
                 <target>/tableau-de-bord/revue/revues-effectuees</target>
             </trans-unit>

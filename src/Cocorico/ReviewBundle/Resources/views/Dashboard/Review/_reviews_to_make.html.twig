@@ -1,0 +1,30 @@
+{% trans_default_domain 'cocorico_review' %}
+
+{% set reviewer = app.user %}
+
+{% for booking in unreviewed_bookings %}
+    {% set asker = booking.user %}
+    {% set offerer = booking.listing.user %}
+
+    <div class="user-rating">
+        <div class="area">
+            <a href="{{ path('cocorico_dashboard_review_new', {'booking_id':booking.id}) }}"
+               class="link">{{ 'review.comment.add_rating' | trans }}
+                <span class="plus-sign">+</span>
+            </a>
+
+            <p>{{ 'review.comment.rating_note' | trans }}
+                <strong>{{ booking.id }}</strong> {{ 'review.comment.concerning' | trans }}
+                <strong>
+                    {% if reviewer.id == asker.id %} {# reviewer is asker #}
+                        {{ offerer.getName }} {# reviewed user is offerer #}
+                    {% elseif reviewer.id == offerer.id %} {# reviewer is offerer #}
+                        {{ asker.getName }} {# reviewed user is asker #}
+                    {% else %}
+                        ?
+                    {% endif %}
+                </strong>
+            </p>
+        </div>
+    </div>
+{% endfor %}

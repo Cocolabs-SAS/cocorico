@@ -260,7 +260,7 @@ function initDatepicker() {
  */
 function initTimePicker(parentTimesElt) {
     var timePickerCompatible = true;
-    if (/Edge./i.test(navigator.userAgent) || /iPad./i.test(navigator.userAgent) || /iPhone./i.test(navigator.userAgent)) {
+    if (/Edge|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         timePickerCompatible = false;
     }
 
