@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,10 +30,14 @@ class ListingFavouriteController extends ListingSearchController
     public function indexFavouriteAction(Request $request)
     {
         $markers = array();
-        $results = new ArrayCollection();
+        $resultsIterator = new \ArrayIterator();
+        $nbResults = 0;
+
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
         $form = $this->createSearchForm($listingSearchRequest);
+
         $form->handleRequest($request);
+
         // handle the form for pagination
         if ($form->isSubmitted() && $form->isValid()) {
             $listingSearchRequest = $form->getData();
@@ -47,19 +50,21 @@ class ListingFavouriteController extends ListingSearchController
                 $listingSearchRequest->getPage(),
                 $request->getLocale()
             );
-            $resultIterator = $results->getIterator();
-            $markers = $this->getMarkers($request, $resultIterator);
+            $nbResults = $results->count();
+            $resultsIterator = $results->getIterator();
+            $markers = $this->getMarkers($request, $results, $resultsIterator);
         }
 
         return $this->render(
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array(
-                'results' => $results,
+                'results' => $resultsIterator,
+                'nb_results' => $nbResults,
                 'markers' => $markers,
                 'listing_search_request' => $listingSearchRequest,
                 'pagination' => array(
                     'page' => $listingSearchRequest->getPage(),
-                    'pages_count' => ceil($results->count() / $listingSearchRequest->getMaxPerPage()),
+                    'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
                     'route' => $request->get('_route'),
                     'route_params' => $request->query->all()
                 )

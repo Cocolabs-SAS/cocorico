@@ -3,6 +3,7 @@
 
     @params map_elt Map element id (Optional)
     @params auto_complete_elt Place Auto Complete element id  (Optional)
+    todo: move alll *_js.html.twig to js files
 #}
 {% trans_default_domain 'cocorico_geo' %}
 
@@ -14,7 +15,19 @@
 <script type="text/javascript"
         src="{{ asset('js/vendor/gmap-infobox.js') }}">
 </script>
+<script type="text/javascript"
+        src="{{ asset('js/vendor/gmap-marker-clusterer.js') }}">
+</script>
+<script type="text/javascript"
+        src="{{ asset('js/vendor/gmap-marker-spiderfier.js') }}">
+</script>
 
+<style>
+    .gmap-marker-label {
+        color: #fff;
+        font-size: 16px;
+    }
+</style>
 <script>
     var geocoder, map, marker, autoComplete, latlng, boundingBox, markerDraggable;
 
@@ -56,7 +69,8 @@
                     marker = new google.maps.Marker({
                         map: map,
                         position: latlng,
-                        draggable: markerDraggable
+                        draggable: markerDraggable,
+                        zIndex: 0
                     });
 
                     if (markerDraggable) {
@@ -294,7 +308,7 @@
 
 
                     map.fitBounds(viewport);
-                    //fitbounds happens asynchronously, so we have to wait for a bounds_changed event before setting zoom works.
+                    //fit bounds happens asynchronously, so we have to wait for a bounds_changed event before setting zoom works.
                     google.maps.event.addListenerOnce(map, 'bounds_changed', function (event) {
 //                        console_log('bounds_changed' + getBoundsZoomLevel(ne, sw, mapElt));
                         this.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
@@ -450,7 +464,8 @@
 
 
         /**
-         * Set markers on map
+         * Set markers on map.
+         * Thanks to Anthoni Noyon to help to enhance markers spidering;)
          *
          * @param locations
          */
@@ -459,22 +474,24 @@
 
             var image = {
                 url: '/images/pin.png',
-                size: new google.maps.Size(20, 32),
-                origin: new google.maps.Point(0, 0),
-                anchor: new google.maps.Point(0, 32)
+                size: new google.maps.Size(20, 32)
             };
-            var markers = [];
 
+            //Spider
+            var markerSpider = markerSpiderer();
+
+            var markers = [];
             $.each(locations, function (i, location) {
                 //Marker
                 var myLatLng = new google.maps.LatLng(location['lat'], location['lng']);
                 var markerIB = new google.maps.Marker({
                     icon: image,
                     position: myLatLng,
-                    zIndex: i + 1,
+                    zIndex: location['zindex'],
+                    opacity: location['opacity'],
+                    animation: google.maps.Animation.DROP,
                     map: map
                 });
-
 
                 //InfoBox
                 var infoBoxContent = markerTemplate.replace('%title%', location['title']);
@@ -489,19 +506,15 @@
                 infoBoxContent = infoBoxContent.replace('%rating4%', location['rating4']);
                 infoBoxContent = infoBoxContent.replace('%rating5%', location['rating5']);
 
-//                var popupElt = document.getElementById('popup1');
-//                popupElt.innerHTML = infoBoxContent;
-
                 var popupElt = document.createElement("div");
                 popupElt.setAttribute("class", "popup");
                 popupElt.innerHTML = infoBoxContent;
 
-                //console_log(document.getElementById('popup1').innerHTML);
                 markerIB.infobox = new InfoBox({
                     content: popupElt,
                     disableAutoPan: false,
-                    maxWidth: 150,
-                    pixelOffset: new google.maps.Size(-140, 0),
+                    maxWidth: 280,
+                    pixelOffset: new google.maps.Size(-140, -10),
                     zIndex: null,
                     boxStyle: {
                         width: "280px"
@@ -521,12 +534,84 @@
                         for (var h = 0; h < markers.length; h++) {
                             markers[h].infobox.close();
                         }
-
                         markers[i].infobox.open(map, this);
                         map.panTo(myLatLng);
                     }
                 })(markerIB, i));
+
+                markerSpider.addMarker(markerIB);
             });
+
+            //Cluster
+            var markerCluster = new MarkerClusterer(map, markers, {
+                maxZoom: 18,
+                gridSize: 30,
+                styles: null
+            });
+
+            /**
+             * Manage marker spidering
+             */
+            function markerSpiderer() {
+                var markerSpider = new OverlappingMarkerSpiderfier(map, {
+                    keepSpiderfied: true,
+                    legWeight: 0.5
+                });
+
+                var spiderfying = false;
+                var imageSpider = {
+                    url: '/images/marker1.png',
+                    size: new google.maps.Size(53, 52)
+                };
+                var spiderInterval;
+
+                markerSpider.addListener('spiderfy', function (markers) {
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].set('icon', image);
+                        markers[i].set('label', {
+                            text: ' '
+                        });
+                    }
+                    spiderfying = true;
+                });
+
+                markerSpider.addListener('unspiderfy', function (markers) {
+                    var nbMarkers = markers.length;
+                    for (var i = 0; i < markers.length; i++) {
+                        markers[i].set('icon', imageSpider);
+                        markers[i].set('label', {
+                            text: '' + nbMarkers
+                        });
+                    }
+                    spiderfying = false;
+                });
+
+                google.maps.event.addListener(map, "bounds_changed", spiderfy);
+
+                function spiderfy() {
+                    window.clearTimeout(spiderInterval);
+
+                    spiderInterval = setTimeout(function () {
+                        var markersToSpider = markerSpider.markersNearAnyOtherMarker();
+                        var nbMarkers = markersToSpider.length;
+
+//                    console_log("bounds_changed" + nbMarkers);
+                        $.each(markersToSpider, function (i, marker) {
+                            if (!spiderfying) {
+                                markersToSpider[i].set('icon', imageSpider);
+                                markersToSpider[i].set('label', {
+                                    text: '' + nbMarkers,
+                                    color: 'black',
+                                    fontSize: '14px',
+                                    fontWeight: 'bold'
+                                });
+                            }
+                        });
+                    }, 1000);
+                }
+
+                return markerSpider;
+            }
         };
 
         /**

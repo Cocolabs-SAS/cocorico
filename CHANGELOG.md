@@ -10,6 +10,24 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.2.5] - 2016-10-19
+
+### Added
+- Add listing markers cluster on map
+- Add markers spidering when overlaps
+
+### Fixed
+- Fix duplicate search query by removing iterator call in twig
+- Fix place autocomplete missing in user profile page
+
+### Changed
+- Disable web profiler in staging env
+- Display all markers of a listing search request on the map independently of pagination
+- Change listings marker aspect on the map depending on whether they are on the current page
+
+### Deprecated
+
+
 ## [0.2.4] - 2016-10-05
 
 ### Added

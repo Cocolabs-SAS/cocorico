@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 use Cocorico\CoreBundle\Entity\ListingImage;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,7 +34,9 @@ class ListingSearchController extends Controller
     public function searchAction(Request $request)
     {
         $markers = array();
-        $results = new ArrayCollection();
+        $resultsIterator = new \ArrayIterator();
+        $nbResults = 0;
+
         /** @var ListingSearchRequest $listingSearchRequest */
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
         $form = $this->createSearchResultForm($listingSearchRequest);
@@ -47,9 +50,9 @@ class ListingSearchController extends Controller
                 $listingSearchRequest,
                 $request->getLocale()
             );
-            $resultIterator = $results->getIterator();
-
-            $markers = $this->getMarkers($request, $resultIterator);
+            $nbResults = $results->count();
+            $resultsIterator = $results->getIterator();
+            $markers = $this->getMarkers($request, $results, $resultsIterator);
 
             //Persist similar listings id
             $listingSearchRequest->setSimilarListings(array_column($markers, 'id'));
@@ -69,12 +72,13 @@ class ListingSearchController extends Controller
         return $this->render(
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array(
-                'results' => $results,
+                'results' => $resultsIterator,
+                'nb_results' => $nbResults,
                 'markers' => $markers,
                 'listing_search_request' => $listingSearchRequest,
                 'pagination' => array(
                     'page' => $listingSearchRequest->getPage(),
-                    'pages_count' => ceil($results->count() / $listingSearchRequest->getMaxPerPage()),
+                    'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
                     'route' => $request->get('_route'),
                     'route_params' => $request->query->all()
                 )
@@ -106,12 +110,24 @@ class ListingSearchController extends Controller
     /**
      * Get Markers
      *
-     * @param  Request $request
-     * @param  \ArrayIterator $results
+     * @param  Request        $request
+     * @param  Paginator      $results
+     * @param  \ArrayIterator $resultsIterator
      * @return array
      */
-    protected function getMarkers(Request $request, $results)
+    protected function getMarkers(Request $request, $results, $resultsIterator)
     {
+        //We get listings id of current page to change their marker aspect on the map
+        $resultsInPage = array();
+        foreach ($resultsIterator as $i => $result) {
+            $resultsInPage[] = $result[0]['id'];
+        }
+
+        //We need to display all listings (without pagination) of the current search on the map
+        $results->getQuery()->setFirstResult(null);
+        $results->getQuery()->setMaxResults(null);
+        $nbResults = $results->count();
+
         $imagePath = ListingImage::IMAGE_FOLDER;
         $currentCurrency = $this->get('session')->get('currency', $this->container->getParameter('cocorico.currency'));
         $locale = $request->getLocale();
@@ -119,7 +135,7 @@ class ListingSearchController extends Controller
         $currencyExtension = $this->get('lexik_currency.currency_extension');
         $markers = array();
 
-        foreach ($results as $i => $result) {
+        foreach ($results->getIterator() as $i => $result) {
             $listing = $result[0];
 
             $imageName = count($listing['images']) ? $listing['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
@@ -130,6 +146,8 @@ class ListingSearchController extends Controller
 
             $categories = count($listing['categories']) ?
                 $listing['categories'][0]['translations'][$locale]['name'] : '';
+
+            $isInCurrentPage = in_array($listing['id'], $resultsInPage);
 
             $markers[] = array(
                 'id' => $listing['id'],
@@ -148,7 +166,10 @@ class ListingSearchController extends Controller
                 'url' => $url = $this->generateUrl(
                     'cocorico_listing_show',
                     array('slug' => $listing['translations'][$locale]['slug'])
-                )
+                ),
+                'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
+                'opacity' => $isInCurrentPage ? 1 : 0.4,
+
             );
         }
 
@@ -294,46 +315,4 @@ class ListingSearchController extends Controller
         return $listingSearchRequest;
     }
 
-//    /**
-//     * Set in session the search geocoding made through javascript.
-//     *
-//     * @Route("/listing/set_search_geo_js", name="cocorico_listing_set_search_geocoding_js")
-//     * @Method("POST")
-//     *
-//     * @param Request $request
-//     * @return \Symfony\Component\HttpFoundation\Response
-//     */
-//    public function setSearchGeocodingJS(Request $request)
-//    {
-//        if ($request->isXmlHttpRequest()) {
-//            $searchGeocodingJS = $request->request->get("searchGeocodingJS");
-//            $this->get('session')->set('listing_search_geocoding_js', $searchGeocodingJS);
-//
-//            return new Response(json_encode(array('result' => $searchGeocodingJS)));
-//        }
-//
-//        return new Response(json_encode(array('result' => false)));
-//    }
-//
-//
-//    /**
-//     * Get the search geocoding made through javascript.
-//     *
-//     * @Route("/listing/get_search_geo_js", name="cocorico_listing_get_search_geocoding_js")
-//     * @Method("GET")
-//     *
-//     * @param Request $request
-//     * @return \Symfony\Component\HttpFoundation\Response
-//     */
-//    public function getSearchGeocodingJS(Request $request)
-//    {
-//        if ($request->isXmlHttpRequest()) {
-//
-//            $searchGeocodingJS = $this->get('session')->get('listing_search_geocoding_js');
-//
-//            return new Response(json_encode(array('result' => $searchGeocodingJS)));
-//        }
-//
-//        return new Response(json_encode(array('result' => false)));
-//    }
 }

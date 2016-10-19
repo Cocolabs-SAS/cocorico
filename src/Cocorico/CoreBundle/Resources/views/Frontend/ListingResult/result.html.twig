@@ -9,7 +9,7 @@
 {%- endblock -%}
 
 {%- block meta_description -%}
-    {{ 'listing.search.result.meta_desc'|trans({'%nb_results%': results.count}, 'cocorico_meta') }}
+    {{ 'listing.search.result.meta_desc'|trans({'%nb_results%': nb_results}, 'cocorico_meta') }}
 {%- endblock -%}
 
 {% block stylesheets %}
@@ -47,7 +47,7 @@
             <h1>
                 {{ 'listing.search.result.title'|trans({'%listing_search_request%': location.address } ) }}
                 <small>
-                    {{ 'listing.search.result.results'|trans({'%nb_results%': results.count}) }}
+                    {{ 'listing.search.result.results'|trans({'%nb_results%': nb_results}) }}
                 </small>
             </h1>
 
@@ -65,7 +65,7 @@
                 <section class="listing-area col-xs-12 col-sm-8">
                     <div class="listing-holder row">
                         <!-- post -->
-                        {%- for result in results.iterator -%}
+                        {%- for result in results -%}
                             {% set listing = result[0] %}
                             {% set listing_translation = listing.translations[app.request.locale] %}
                             {% set listing_location = listing.location %}
@@ -136,10 +136,10 @@
                                                 <p itemprop="description">{{ listing_location["city"] }} </p>
 
                                                 <!--Debug:
-                                                    accuracy : {{ result["accuracy"]|default(0) }}<br />
-                                                    distance : {{ result["distance"]|default(0) }}<br />
-                                                    platformNotation : {{ listing.platformNotation|default(0) }}<br />
-                                                    reallyAvailable : {{ result["really_available"]|default(0) }}<br />
+                                                accuracy : {{ result["accuracy"]|default(0) }}<br />
+                                                distance : {{ result["distance"]|default(0) }}<br />
+                                                platformNotation : {{ listing.platformNotation|default(0) }}<br />
+                                                reallyAvailable : {{ result["really_available"]|default(0) }}<br />
                                                 -->
                                             </div>
                                         </div>
@@ -167,7 +167,7 @@
     {{ parent() }}
 
     {#Extend search area if not enough results#}
-    {% set extendSearch = results.count < listingSearchMinResult %}
+    {% set extendSearch = nb_results < listingSearchMinResult %}
 
     {#Geocoding #}
     {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {

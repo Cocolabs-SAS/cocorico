@@ -9,8 +9,8 @@ framework:
 #        collect: false
 
 #To display web profiler in staging env
-#web_profiler:
-#    toolbar: true
+web_profiler:
+    toolbar: false
 #    intercept_redirects: true
 
 swiftmailer:
