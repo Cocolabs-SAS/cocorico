@@ -588,7 +588,7 @@ class BookingManager extends BaseManager
         $queryBuilder
             ->andWhere('b.payedBookingAt IS NOT NULL');
 
-        if ($this->voucherIsEnabled()) {
+        if ($this->mangopayIsEnabled()) {
             $queryBuilder
                 ->andWhere('b.mangopayPayinPreAuthId IS NOT NULL');
         }
@@ -1193,6 +1193,14 @@ class BookingManager extends BaseManager
 
     /**
      * @return bool
+     */
+    public function mangopayIsEnabled()
+    {
+        return $this->em->getClassMetadata('Cocorico\CoreBundle\Entity\Booking')->hasField('mangopayPayinPreAuthId');
+    }
+
+    /**
+     * @return bool
      * @throws \Exception
      */
     public function voucherIsEnabled()
@@ -1203,7 +1211,6 @@ class BookingManager extends BaseManager
         }
 
         return !$this->em->getMetadataFactory()->isTransient('Cocorico\VoucherBundle\Entity\Voucher');
-
     }
 
     /**

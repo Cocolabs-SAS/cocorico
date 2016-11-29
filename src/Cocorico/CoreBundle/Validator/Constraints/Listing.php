@@ -26,6 +26,7 @@ class Listing extends Constraint implements TranslationContainerInterface
 //    public static $messageStatusInvalidated = "listing_status.invalidated";
     public static $messageMinPrice = "listing_price.min {{ min_price }}";
     public static $messageDuration = "listing_duration.overlap";
+    public static $messageCountryInvalid = "listing_location_country.invalid";
 
     public function validatedBy()
     {
@@ -48,9 +49,9 @@ class Listing extends Constraint implements TranslationContainerInterface
         $messages[] = new Message(self::$messageMaxImages, 'cocorico_listing');
         $messages[] = new Message(self::$messageMinImages, 'cocorico_listing');
         $messages[] = new Message(self::$messageMinCategories, 'cocorico_listing');
-//        $messages[] = new Message(self::$messageStatusInvalidated, 'cocorico_listing');
         $messages[] = new Message(self::$messageMinPrice, 'cocorico_listing');
         $messages[] = new Message(self::$messageDuration, 'cocorico_listing');
+        $messages[] = new Message(self::$messageCountryInvalid, 'cocorico_listing');
 
         return $messages;
     }

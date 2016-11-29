@@ -42,6 +42,8 @@ services:
     #Helpers
     cocorico.helper.global:
         class: Cocorico\CoreBundle\Helper\GlobalHelper
+        arguments:
+            - "%kernel.environment%"
 
     #Translator manager
     cocorico.translator.manager: 

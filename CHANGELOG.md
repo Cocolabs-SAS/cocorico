@@ -10,6 +10,24 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.2.6] - 2016-11-29
+
+### Added
+- Add multiple methods to geo localize user and add his location on listing location search field
+- Set last listing address as default address while listing deposit
+- Add user listings link in SBO users view list
+
+### Fixed
+- Fix missing user zip address while user geo localization
+- Fix invalid country in listing location
+
+### Changed
+- Change voucherIsEnabled by mangopayIsEnabled in BookingManager->findPayedByAsker and minor things
+- Disable Curl SSL VERIFYHOST in non prod env
+
+### Deprecated
+
+
 ## [0.2.5] - 2016-10-19
 
 ### Added

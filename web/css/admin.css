@@ -79,3 +79,17 @@ div[id$='_hour'], div[id$='_minute'] {
         min-height: 132px;
     }
 }
+
+/** one to many column in list view */
+td.sonata-ba-list-field-orm_one_to_many {
+    display: block;
+    height: 80px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+td.sonata-ba-list-field-orm_one_to_many a {
+    display: block;
+    width: 90%;
+    font-size: 14px;
+}

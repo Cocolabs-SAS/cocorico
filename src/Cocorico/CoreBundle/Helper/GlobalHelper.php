@@ -18,6 +18,16 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class GlobalHelper
 {
+    protected $env;
+
+    /**
+     * @param string $env
+     */
+    public function __construct($env)
+    {
+        $this->env = $env;
+    }
+
     /**
      * @param Form $form
      * @return array
@@ -132,15 +142,10 @@ class GlobalHelper
         curl_setopt($ch, CURLOPT_POST, count($postData));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
-//        curl_setopt($ch, CURLOPT_SSLVERSION, 'CURL_SSLVERSION_TLSv1_1');
-//        curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'SSLv3');
-//        curl_setopt($ch, CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
-//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-//        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-
-        //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        //curl_setopt($ch, CURLOPT_HEADER, false);
-        //curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        //To avoid to have a certificate in non prod env
+        if ($this->env && $this->env != 'prod') {
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        }
 
         $output = $this->curlExecFollow($ch);
 

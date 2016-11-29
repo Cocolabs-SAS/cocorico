@@ -288,7 +288,7 @@ class Listing extends BaseListing
     /**
      * Get categories
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection|ListingCategory[]
      */
     public function getCategories()
     {

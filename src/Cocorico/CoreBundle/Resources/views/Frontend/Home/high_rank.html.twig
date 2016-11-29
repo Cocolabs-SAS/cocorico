@@ -9,7 +9,7 @@
                         {% set listing_translation = listing.translations[app.request.locale] %}
                         {% set listing_location = listing.location %}
                         {% set listing_user = listing.user %}
-                        {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
+                        {% set price = listing.getPriceDecimal() | format_price(app.request.locale, 0) %}
                         {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
                         <article class="listing-post col-sm-4 col-xs-12" itemscope itemtype="http://schema.org/Product">

@@ -64,14 +64,14 @@ class UserAdmin extends SonataUserAdmin
                 'firstName',
                 null,
                 array(
-                    'required' => false,
+                    'required' => true,
                 )
             )
             ->add(
                 'lastName',
                 null,
                 array(
-                    'required' => false,
+                    'required' => true,
                 )
             )
             ->add('email')
@@ -291,11 +291,12 @@ class UserAdmin extends SonataUserAdmin
 
         $listMapper
             ->addIdentifier('fullname')
-            ->add('email')
+//            ->add('email')
             ->add('enabled', null, array('editable' => true))
             ->add('locked', null, array('editable' => true))
             ->add('feeAsAsker', null, array('editable' => true))
             ->add('feeAsOfferer', null, array('editable' => true))
+            ->add('listings', null, array('associated_property' => 'getTitle'))
             ->add(
                 'createdAt',
                 null,
@@ -319,6 +320,9 @@ class UserAdmin extends SonataUserAdmin
             array(
                 'actions' => array(
                     'edit' => array(),
+                    'list_user_listings' => array(
+                        'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig'
+                    )
                 )
             )
         );

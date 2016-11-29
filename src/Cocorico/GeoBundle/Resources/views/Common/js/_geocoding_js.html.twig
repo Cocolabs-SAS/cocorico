@@ -633,8 +633,8 @@
                             url: url,
                             cache: true,
                             async: true,
-                            jsonp: "callback",// Name of the callback parameter
-                            dataType: "jsonp",// Tell jQuery we're expecting JSONP
+//                            jsonp: "callback",// Name of the callback parameter. Commented for security reasons
+                            dataType: "json",// Tell jQuery we're expecting JSON and no more JSONP for security reasons
                             success: function (location) {
                                 if (location.statusCode == 'OK') {
                                     location.countryName = countries[location.countryCode];//country name translated

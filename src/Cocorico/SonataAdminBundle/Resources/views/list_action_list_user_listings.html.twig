@@ -1,0 +1,9 @@
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
+    {% set url =  path('admin_cocorico_core_listing_list', {'filter[user__email][value]': object.email}) %}
+
+    <a href="{{ url }}" target="_blank" class="btn btn-sm btn-default edit_link"
+       title="{{ 'list_user_listings'|trans({}, 'SonataAdminBundle') }}">
+        <i class="glyphicon glyphicon-list"> </i>
+        {{ 'list_user_listings'|trans({}, 'SonataAdminBundle') }}
+    </a>
+{% endif %}

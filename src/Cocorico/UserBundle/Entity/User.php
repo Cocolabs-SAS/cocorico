@@ -339,6 +339,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\Listing", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"createdAt" = "desc"})
      *
      * @var Listing[]
      */
@@ -951,7 +952,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get listings
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Listing[]|\Doctrine\Common\Collections\Collection
      */
     public function getListings()
     {

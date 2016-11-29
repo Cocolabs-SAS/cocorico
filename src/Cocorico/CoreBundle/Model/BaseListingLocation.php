@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Model;
 
 use Cocorico\CoreBundle\Entity\ListingLocation;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ListingLocation
@@ -25,6 +26,7 @@ abstract class BaseListingLocation
 
     /**
      * @ORM\Column(name="country", type="string", length=3, nullable=false)
+     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var string
      */
@@ -32,6 +34,7 @@ abstract class BaseListingLocation
 
     /**
      * @ORM\Column(name="city", type="string", length=75, nullable=false)
+     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var string
      */

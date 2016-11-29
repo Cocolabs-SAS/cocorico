@@ -58,7 +58,6 @@ class RegistrationFormType extends AbstractType
                 'birthday',
                 array(
                     'label' => 'form.user.birthday',
-//                    'format' => 'dd MMMM yyyy',
                     'widget' => "choice",
                     'years' => range(date('Y') - 18, date('Y') - 100),
                     'required' => true

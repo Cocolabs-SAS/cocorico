@@ -22,6 +22,7 @@ class ListingValidator extends ConstraintValidator
     private $minImages;
     private $minCategories;
     private $minPrice;
+    private $countries;
 
     /**
      * @param EntityManager $emr
@@ -29,14 +30,16 @@ class ListingValidator extends ConstraintValidator
      * @param               $minImages
      * @param               $minCategories
      * @param               $minPrice
+     * @param               $countries
      */
-    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $minPrice)
+    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $minPrice, $countries)
     {
         $this->emr = $emr;
         $this->maxImages = $maxImages;
         $this->minImages = $minImages;
         $this->minCategories = $minCategories;
         $this->minPrice = $minPrice;
+        $this->countries = $countries;
     }
 
     /**
@@ -74,20 +77,6 @@ class ListingValidator extends ConstraintValidator
                 ->addViolation();
         }
 
-        //Status
-//        $oldListing = $this->emr->getUnitOfWork()->getOriginalEntityData($listing);
-//
-//        if (is_array($oldListing) and !empty($oldListing)) {
-//            $oldStatus = $oldListing['status'];
-//            if ($oldStatus == $listing::STATUS_INVALIDATED && $listing->getStatus() != $listing::STATUS_INVALIDATED) {
-//                $listing->setStatus($oldStatus);
-//                $this->context->buildViolation($constraint::$messageStatusInvalidated)
-//                    ->atPath('status')
-//                    ->setTranslationDomain('cocorico_listing')
-//                    ->addViolation();
-//            }
-//        }
-
         //Price
         if ($listing->getPrice() < $this->minPrice) {
             $this->context->buildViolation($constraint::$messageMinPrice)
@@ -106,6 +95,29 @@ class ListingValidator extends ConstraintValidator
                 ->setTranslationDomain('cocorico_listing')
                 ->addViolation();
         }
+
+
+        //Location
+        if (!in_array($listing->getLocation()->getCountry(), $this->countries)) {
+            $this->context->buildViolation($constraint::$messageCountryInvalid)
+                ->atPath('location.country')
+                ->setTranslationDomain('cocorico_listing')
+                ->addViolation();
+        }
+
+        //Status
+//        $oldListing = $this->emr->getUnitOfWork()->getOriginalEntityData($listing);
+//
+//        if (is_array($oldListing) and !empty($oldListing)) {
+//            $oldStatus = $oldListing['status'];
+//            if ($oldStatus == $listing::STATUS_INVALIDATED && $listing->getStatus() != $listing::STATUS_INVALIDATED) {
+//                $listing->setStatus($oldStatus);
+//                $this->context->buildViolation($constraint::$messageStatusInvalidated)
+//                    ->atPath('status')
+//                    ->setTranslationDomain('cocorico_listing')
+//                    ->addViolation();
+//            }
+//        }
     }
 
 }

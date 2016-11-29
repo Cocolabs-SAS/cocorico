@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Security\LoginManager;
@@ -41,13 +42,15 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     private $request;
     private $locale;
     private $locales;
+    /** @var User|null */
+    private $user = null;
 
     /**
      * @param TokenStorage         $securityTokenStorage
      * @param AuthorizationChecker $securityAuthChecker
-     * @param LoginManager    $loginManager
-     * @param RequestStack    $requestStack
-     * @param array           $locales
+     * @param LoginManager         $loginManager
+     * @param RequestStack         $requestStack
+     * @param array                $locales
      */
     public function __construct(
         TokenStorage $securityTokenStorage,
@@ -62,6 +65,9 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
+        if ($this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->user = $this->securityTokenStorage->getToken()->getUser();
+        }
     }
 
     /**
@@ -132,7 +138,27 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             ->add(
                 'image',
                 new ImageType()
-            )
+            );
+
+        //Default listing location
+        $listingLocation = null;
+        if ($this->user) {
+            if ($this->user->getListings()->count()) {
+                /** @var Listing $listing */
+                $listing = $this->user->getListings()->first();
+                $location = $listing->getLocation();
+
+                $listingLocation = new ListingLocation();
+                $listingLocation->setListing($listing);
+                $listingLocation->setCountry($location->getCountry());
+                $listingLocation->setCity($location->getCity());
+                $listingLocation->setZip($location->getZip());
+                $listingLocation->setRoute($location->getRoute());
+                $listingLocation->setStreetNumber($location->getStreetNumber());
+            }
+        }
+
+        $builder
             ->add(
                 'location',
                 new ListingLocationType(),
@@ -140,8 +166,11 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
                     /** @Ignore */
                     'label' => false,
+                    'data' => $listingLocation
                 )
-            )
+            );
+
+        $builder
             ->add(
                 "tac",
                 "checkbox",
@@ -163,7 +192,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
          */
         $formUserModifier = function (FormInterface $form) {
             //Not logged
-            if (!$this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+            if (!$this->user) {
                 $form
                     ->add(//Login form
                         'user_login',
@@ -182,12 +211,11 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                         )
                     );
             } else {//Logged
-
                 $form->add(
                     'user',
                     'entity_hidden',
                     array(
-                        'data' => $this->securityTokenStorage->getToken()->getUser(),
+                        'data' => $this->user,
                         'class' => 'Cocorico\UserBundle\Entity\User',
                         'data_class' => null
                     )
@@ -226,7 +254,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                             'user',
                             'entity_hidden',
                             array(
-                                'data' => $this->securityTokenStorage->getToken()->getUser(),
+                                'data' => $user,
                                 'class' => 'Cocorico\UserBundle\Entity\User',
                                 'data_class' => null
                             )

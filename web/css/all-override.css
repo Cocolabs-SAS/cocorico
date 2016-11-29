@@ -818,7 +818,7 @@ li.time-fields {
 }
 
 /** form field error message **/
-.errors {
+.errors, .error {
     color: #d8292f;
     font-size: 10px;
     margin: 5px;

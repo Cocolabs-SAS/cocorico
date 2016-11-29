@@ -189,6 +189,9 @@ class ListingManager extends BaseManager
     {
         $queryBuilder = $this->getRepository()->getFindByOwnerQuery($ownerId, $locale, $status);
 
+        $queryBuilder
+            ->addOrderBy('l.createdAt', 'desc');
+
         //Pagination
         $queryBuilder
             ->setFirstResult(($page - 1) * $this->maxPerPage)

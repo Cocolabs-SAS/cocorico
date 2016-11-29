@@ -33,12 +33,14 @@ Activate following modules:
     
 Tested versions:
 
-    - php 5.4
-    - MongoDB 2.6.8, 3.0.3
+    - PHP: 5.4 for Cocorico 0.1.x, 5.6 for Cocorico 0.2.x
+    - MongoDB: 2.6.8, 3.0.3
+    - MySQL: 5.6.12, 5.5.47, 5.5.49
+    - Apache: 2.4, 2.2
         
 Activate following extensions:
 
-    - apc (For php 5.5 use php  native opcode cache)
+    - apc (For php >= 5.5 use php native opcode cache)
     - curl (>= 7.36)
     - intl
     - fileinfo
@@ -56,6 +58,8 @@ Add the following lines to php.ini:
     - memory_limit = 256M
     - upload_max_filesize = 12M (as cocorico.user_img_max_upload_size)
     - post_max_size = 13M
+    
+    For php < 5.5 
     - [APC]
       apc.enable_cli=Off
       apc.enabled = 1

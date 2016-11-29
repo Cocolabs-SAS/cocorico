@@ -31,6 +31,7 @@ framework:
         # handler_id set to null will use default session handler from php.ini
         handler_id:  ~
         name: _csess
+        #on debian there is a /etc/cron.d/php5 doing the job
         gc_probability: 0 #todo check in prod
     fragments:       ~
     http_method_override: true

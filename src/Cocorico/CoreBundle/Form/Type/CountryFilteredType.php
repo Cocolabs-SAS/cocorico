@@ -43,13 +43,15 @@ class CountryFilteredType extends BaseCountryType
                 Intl::getRegionBundle()->getCountryNames(),
                 array_flip($this->countries)
             );
+//            $countries[""] = "";
         }
 
         $resolver->setDefaults(
             array(
                 'choices' => array_flip($countries),
-                //'data' => $this->favoriteCountries[0],
+//                'data' => $this->favoriteCountries[0],
                 'preferred_choices' => $this->favoriteCountries,
+                'required' => true,
             )
         );
     }

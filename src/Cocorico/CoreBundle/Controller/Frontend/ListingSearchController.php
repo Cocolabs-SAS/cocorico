@@ -149,6 +149,15 @@ class ListingSearchController extends Controller
 
             $isInCurrentPage = in_array($listing['id'], $resultsInPage);
 
+            $rating1 = $rating2 = $rating3 = $rating4 = $rating5 = 'hidden';
+            if ($listing['averageRating']) {
+                $rating1 = ($listing['averageRating'] >= 1) ? '' : 'inactive';
+                $rating2 = ($listing['averageRating'] >= 2) ? '' : 'inactive';
+                $rating3 = ($listing['averageRating'] >= 3) ? '' : 'inactive';
+                $rating4 = ($listing['averageRating'] >= 4) ? '' : 'inactive';
+                $rating5 = ($listing['averageRating'] >= 5) ? '' : 'inactive';
+            }
+
             $markers[] = array(
                 'id' => $listing['id'],
                 'lat' => $listing['location']['coordinate']['lat'],
@@ -156,11 +165,11 @@ class ListingSearchController extends Controller
                 'title' => $listing['translations'][$locale]['title'],
                 'category' => $categories,
                 'image' => $image,
-                'rating1' => ($listing['averageRating'] >= 1) ? '' : 'inactive',
-                'rating2' => ($listing['averageRating'] >= 2) ? '' : 'inactive',
-                'rating3' => ($listing['averageRating'] >= 3) ? '' : 'inactive',
-                'rating4' => ($listing['averageRating'] >= 4) ? '' : 'inactive',
-                'rating5' => ($listing['averageRating'] >= 5) ? '' : 'inactive',
+                'rating1' => $rating1,
+                'rating2' => $rating2,
+                'rating3' => $rating3,
+                'rating4' => $rating4,
+                'rating5' => $rating5,
                 'price' => $price,
                 'certified' => $listing['certified'] ? 'certified' : 'hidden',
                 'url' => $url = $this->generateUrl(

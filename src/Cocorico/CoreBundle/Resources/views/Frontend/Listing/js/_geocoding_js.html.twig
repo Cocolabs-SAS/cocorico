@@ -96,7 +96,6 @@
                     }
 
                     if (geocoding.postal_code || geocoding.administrative_area_level_2_short) {
-//                        $("#listing_location_zip").val(geocoding.postal_code ? geocoding.postal_code : geocoding.administrative_area_level_2_short);
                         if (geocoding.postal_code) {
                             $("#listing_location_zip").val(geocoding.postal_code);
                         } else {
@@ -108,7 +107,19 @@
                     }
 
                     if (geocoding.country_short) {
-                        $("#listing_location_country").val(geocoding.country_short);
+                        var countries = $.map($('#listing_location_country option'), function (option) {
+                            return option.value;
+                        });
+
+                        if ($.inArray(geocoding.country_short, countries) !== -1) {
+                            $("#listing_location_country").val(geocoding.country_short);
+                        } else {
+                            var $listingLocationCountry = $("#listing_location_country");
+                            $listingLocationCountry.val('');
+                            $listingLocationCountry.find(":selected").removeAttr("selected");
+//                            $listingLocationCountry.next('.jcf-select').find('span span').html('');
+                            $listingLocationError.html("{{ 'geo.location.wrong_country'|trans() }}" + " : " + geocoding.country);
+                        }
                     }
                 } else {
                     $listingLocationError.html("{{ 'geo.location.no_result'|trans }}");

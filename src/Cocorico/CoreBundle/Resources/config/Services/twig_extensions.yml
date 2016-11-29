@@ -67,7 +67,6 @@ services:
         class: Cocorico\CoreBundle\Twig\CountryExtension
         tags:
             - { name: twig.extension }
-#            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     cocorico.twig.extra_bundle_extension:
         class: Cocorico\CoreBundle\Twig\ExtraBundleExtension

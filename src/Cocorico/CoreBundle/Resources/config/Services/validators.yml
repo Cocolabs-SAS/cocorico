@@ -8,6 +8,7 @@ services:
             - "%cocorico.listing_img_min%"
             - "%cocorico.listing_category_min%"
             - "%cocorico.listing_price_min%"
+            - "%cocorico.listing_countries%"
         tags:
             - { name: validator.constraint_validator, alias: listing }
 
