@@ -16,6 +16,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * BasePage
  *
+ * @todo: move to CMS bundle
+ *
  * @ORM\MappedSuperclass
  */
 abstract class BasePage

@@ -437,7 +437,6 @@ li.time-fields {
     position: relative;
 }
 
-
 /* Booking price */
 #booking-price-form .nb-days {
     float: right;
@@ -2221,4 +2220,22 @@ ul.collection {
     #booking-new .total-reservation .list-inline li {
         width: 100%;
     }
+}
+
+/* seo listing result */
+[data-id="seo-desc"] {
+    position: absolute;
+    bottom: 0;
+    padding: 20px 0;
+    border-top: 1px #e8e8e8 dashed;
+}
+
+[data-id="seo-desc-moved"] [data-id="seo-desc"] {
+    position: relative;
+    bottom: auto;
+}
+
+/* Various */
+.jcf-option::first-letter, .jcf-select-text::first-letter {
+    text-transform: capitalize;
 }

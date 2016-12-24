@@ -4,13 +4,27 @@
 
 {% set location = listing_search_request.location %}
 
+{# SEO #}
+{% set seo_title = 'listing.search.result.title'|trans({'%listing_search_request%': location.address }) %}
+{% set seo_desc = '' %}
+{% set seo_meta_tile = 'listing.search.result.meta_title'|trans({'%listing_search_request%': location.address }, 'cocorico_meta') ~ " - " ~ cocorico_site_name %}
+{% set seo_meta_desc = 'listing.search.result.meta_desc'|trans({'%nb_results%': nb_results}, 'cocorico_meta') %}
+
+{% if seo_content|default(null) %}
+    {% set seo_title = seo_content.title %}
+    {% set seo_desc = seo_content.description %}
+    {% set seo_meta_tile = seo_content.metaTitle %}
+    {% set seo_meta_desc = seo_content.metaDescription %}
+{% endif %}
+
 {%- block meta_title -%}
-    {{ 'listing.search.result.meta_title'|trans({'%listing_search_request%': location.address }, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+    {{ seo_meta_tile }}
 {%- endblock -%}
 
 {%- block meta_description -%}
-    {{ 'listing.search.result.meta_desc'|trans({'%nb_results%': nb_results}, 'cocorico_meta') }}
+    {{ seo_meta_desc }}
 {%- endblock -%}
+{# END SEO #}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -29,14 +43,9 @@
         {% trans_default_domain 'cocorico_listing' %}
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            {#<ol class="breadcrumb col-xs-12">#}
-            {#<li><a href="#">Home</a></li>#}
-            {#<li><a href="#">Pays</a></li>#}
-            {#<li><a href="#">Région</a></li>#}
-            {#<li><a href="#">Département</a></li>#}
-            {#<li><a href="#">Lieu dit</a></li>#}
-            {#<li>Code postale</li>#}
-            {#</ol>#}
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
         {% endblock %}
 
         {% block search_form %}
@@ -45,11 +54,15 @@
 
         {% block main %}
             <h1>
-                {{ 'listing.search.result.title'|trans({'%listing_search_request%': location.address } ) }}
+                {{ seo_title }}
                 <small>
                     {{ 'listing.search.result.results'|trans({'%nb_results%': nb_results}) }}
                 </small>
             </h1>
+            {#TO NOT DELETE#}
+            <div data-id="seo-desc">
+                {{ seo_desc|raw }}
+            </div>
 
             <!-- two-columns -->
             <div class="twocolumns row">
@@ -65,16 +78,15 @@
                 <section class="listing-area col-xs-12 col-sm-8">
                     <div class="listing-holder row">
                         <!-- post -->
-                        {%- for result in results -%}
-                            {% set listing = result[0] %}
+                        {%- for listing in results -%}
+                            {% set listing = listing[0] %}
                             {% set listing_translation = listing.translations[app.request.locale] %}
                             {% set listing_location = listing.location %}
                             {% set listing_user = listing.user %}
                             {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
                             {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
-                            <article class="listing-post col-sm-6 col-xs-12" itemscope
-                                     itemtype="http://schema.org/Product">
+                            <article class="listing-post col-sm-6 col-xs-12">
                                 <a href="javascript:void(0)" id="favourite-{{ listing.id }}" class="favourit">
                                     <i class="icon-heart"></i>
                                     <span class="hidden">favourit</span>
@@ -128,18 +140,18 @@
                                             {% set image_user = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
                                             <div class="alignleft">
                                                 <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}"
-                                                     alt="{{ listing.user.firstName }}"/>
+                                                     alt="{{ listing_user.firstName }}"/>
                                             </div>
                                             <div class="textbox">
-                                                <h2 itemprop="name">{{ listing_translation.title }}</h2>
+                                                <h2>{{ listing_translation.title }}</h2>
 
-                                                <p itemprop="description">{{ listing_location["city"] }} </p>
+                                                <p>{{ listing_location["city"] }} </p>
 
                                                 <!--Debug:
-                                                accuracy : {{ result["accuracy"]|default(0) }}<br />
-                                                distance : {{ result["distance"]|default(0) }}<br />
+                                                accuracy : {{ listing["accuracy"]|default(0) }}<br />
+                                                distance : {{ listing["distance"]|default(0) }}<br />
                                                 platformNotation : {{ listing.platformNotation|default(0) }}<br />
-                                                reallyAvailable : {{ result["really_available"]|default(0) }}<br />
+                                                reallyAvailable : {{ listing["really_available"]|default(0) }}<br />
                                                 -->
                                             </div>
                                         </div>
@@ -155,12 +167,22 @@
 
                 </section>
             </div>
+
+            {#TO NOT DELETE#}
+            <div data-id="seo-desc-moved"></div>
         {% endblock %}
+
         {% block modal %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
         {% endblock %}
+
+        {#{% block footer %}#}
+        {#{{ parent() }}#}
+        {#{% endblock %}#}
+
     {% endembed %}
-{% endblock %}
+
+{% endblock layout %}
 
 
 {% block javascripts %}
@@ -212,7 +234,6 @@
                 $(this).closest('form').submit();
             });
 
-
             // Categories
             initMultiSelect(
                     '#categories',
@@ -229,6 +250,19 @@
                 $dialog.openDialog($(this).attr("href"), "");
                 return false;
             });
+
+            //Move seo desc to bottom
+            $("[data-id=seo-desc]").appendTo("[data-id=seo-desc-moved]");
         });
     </script>
+{% endblock %}
+
+
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include '@CocoricoSeo/Frontend/ListingResult/_result_markup.jsonld.twig' ignore missing with {
+    'listings': results
+    } only %}
 {% endblock %}

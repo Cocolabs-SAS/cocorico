@@ -8,7 +8,7 @@
     {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
 {%- endblock -%}
 
-{% block theme 'home-page' %}
+{% block theme %}home-page{% endblock %}
 
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
@@ -51,7 +51,8 @@
                             <h2><a href="#">Lorem ipsum dolor sit amet, consectetur adipiscing.</a></h2>
 
                             <p>
-                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut
                                 labore.
                             </p>
                         </div>
@@ -64,7 +65,8 @@
                             <h2><a href="#">Lorem ipsum dolor sit amet ?</a></h2>
 
                             <p>
-                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut
                                 labore.
                             </p>
                         </div>
@@ -78,17 +80,19 @@
                             <h2><a href="#">Lorem ipsum dolor sit amet, consect</a></h2>
 
                             <p>
-                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                                Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                incididunt ut
                                 labore.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
-            {{ render(controller('CocoricoCoreBundle:Frontend/Home:highRankListing', {
-                'request': app.request,
-                'limit': 6
-            })) }}
+
+            {% include 'CocoricoCoreBundle:Frontend/Home:high_rank.html.twig'  with {
+            'listings': listings
+            } only %}
+
         {% endblock %}
         {% block modal %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
@@ -122,4 +126,12 @@
             );
         });
     </script>
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include '@CocoricoSeo/Frontend/Home/_index_markup.jsonld.twig' ignore missing with {
+    'listings': listings
+    } only %}
 {% endblock %}

@@ -58,7 +58,7 @@
             </ul>
         </nav>
         <div class="currency-converter white">
-            {% include('@CocoricoCore/Frontend/Common/_currency_converter.html.twig') %}
+            {% include '@CocoricoCore/Frontend/Common/_currency_converter.html.twig' with {'close' : false} only %}
         </div>
     </div>
 </aside>

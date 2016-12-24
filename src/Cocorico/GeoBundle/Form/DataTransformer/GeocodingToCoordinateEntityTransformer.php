@@ -56,7 +56,7 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     }
 
     /**
-     * Transforms an object (issue) to a string (number).
+     * Transforms an object (coordinate) to a string (number).
      *
      * @param  Coordinate|null $coordinate
      * @return string
@@ -118,7 +118,7 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
             throw new TransformationFailedException();
         }
 
-        //todo: JSON and DB lat and lng must be compared with the same precision:
+        //JSON and DB lat and lng must be compared with the same precision:
         //ex : 48.869782|2.3508079000000635 (JSON) != 48.8697820|2.3508079 (DB)
         $coordinate = $this->om->getRepository('CocoricoGeoBundle:Coordinate')->findOneBy(
             array(
@@ -309,13 +309,11 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
      */
     private function getOrCreateCountry($code, $names)
     {
-        $country = $this->om
-            ->getRepository('CocoricoGeoBundle:Country')
-            ->findOneBy(
-                array(
-                    'code' => $code
-                )
-            );
+        $country = $this->om->getRepository('CocoricoGeoBundle:Country')->findOneBy(
+            array(
+                'code' => $code
+            )
+        );
 
         if (null === $country) {
             $country = new Country();
@@ -342,12 +340,10 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     {
         $area = null;
         if ($country->getId()) {
-            $area = $this->om
-                ->getRepository('CocoricoGeoBundle:Area')
-                ->findOneByNameAndCountry(
-                    $names[$this->locale],
-                    $country
-                );
+            $area = $this->om->getRepository('CocoricoGeoBundle:Area')->findOneByNameAndCountry(
+                $names[$this->locale],
+                $country
+            );
         }
 
         if (null === $area) {
@@ -375,12 +371,10 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     {
         $department = null;
         if ($area->getId()) {
-            $department = $this->om
-                ->getRepository('CocoricoGeoBundle:Department')
-                ->findOneByNameAndArea(
-                    $names[$this->locale],
-                    $area
-                );
+            $department = $this->om->getRepository('CocoricoGeoBundle:Department')->findOneByNameAndArea(
+                $names[$this->locale],
+                $area
+            );
         }
 
         if (null === $department) {
@@ -409,12 +403,10 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     {
         $city = null;
         if ($department->getId()) {
-            $city = $this->om
-                ->getRepository('CocoricoGeoBundle:City')
-                ->findOneByNameAndDepartment(
-                    $names[$this->locale],
-                    $department
-                );
+            $city = $this->om->getRepository('CocoricoGeoBundle:City')->findOneByNameAndDepartment(
+                $names[$this->locale],
+                $department
+            );
         }
 
         if (null === $city) {

@@ -49,12 +49,13 @@ class AppKernel extends Kernel
             new Cocorico\GeoBundle\CocoricoGeoBundle(),
             new Cocorico\UserBundle\CocoricoUserBundle(),
             new Cocorico\PageBundle\CocoricoPageBundle(),
+            new Cocorico\CMSBundle\CocoricoCMSBundle(),
             new Cocorico\BreadcrumbBundle\CocoricoBreadcrumbBundle(),
             new Cocorico\SonataAdminBundle\CocoricoSonataAdminBundle(),
             new Cocorico\MessageBundle\CocoricoMessageBundle(),
             new Cocorico\ContactBundle\CocoricoContactBundle(),
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
-            new Cocorico\ConfigBundle\CocoricoConfigBundle()
+            new Cocorico\ConfigBundle\CocoricoConfigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {

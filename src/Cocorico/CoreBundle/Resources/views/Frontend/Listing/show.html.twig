@@ -48,34 +48,9 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            <ol class="breadcrumb col-xs-12">
-                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <a href="#" itemprop="url">
-                        <span itemprop="title">Home</span>
-                    </a>
-                </li>
-                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <a href="#" itemprop="url">
-                        <span itemprop="title">Pays</span>
-                    </a>
-                </li>
-                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <a href="#" itemprop="url">
-                        <span itemprop="title">Région</span>
-                    </a>
-                </li>
-                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <a href="#" itemprop="url">
-                        <span itemprop="title">Département</span>
-                    </a>
-                </li>
-                <li itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                    <a href="#" itemprop="url">
-                        <span itemprop="title">Lieu dit</span>
-                    </a>
-                </li>
-                <li>Code postal</li>
-            </ol>
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
         {% endblock %}
 
         {% block search_form %}
@@ -85,13 +60,13 @@
         {% block main %}
 
             <!-- two-columns -->
-            <div class="twocolumns row alt" itemscope itemtype="http://schema.org/Product">
+            <div class="twocolumns row alt">
                 <!-- contain the main content of the page -->
                 <div id="content" class="listing-area col-xs-12 col-md-9">
                     <div class="content-holder">
                         <!-- listing-container -->
                         <div class="listing-container">
-                            <h1 itemprop="name">
+                            <h1>
                                 {{ listing_translation.title }}
 
                                 {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") and app.user == listing_user %}
@@ -146,8 +121,7 @@
                                                     <!-- slide -->
                                                     <div class="slide" {% if loop.index > 1 %} style="display:none;"{% endif %}>
                                                         <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xxlarge') }}"
-                                                             alt="{{ listing_translation.title ~ " " ~ price }}"
-                                                             itemprop="image"/>
+                                                             alt="{{ listing_translation.title ~ " " ~ price }}"/>
                                                     </div>
                                                 {% endfor %}
                                             </div>
@@ -237,7 +211,7 @@
                                 <div class="tab-content">
                                     <!-- description -->
                                     <div role="tabpanel" class="tab-pane active" id="description">
-                                        <p itemprop="description">{{ listing_translation.description|nl2br }}</p>
+                                        <p>{{ listing_translation.description|nl2br }}</p>
                                     </div>
                                     <!-- conditions -->
                                     <div role="tabpanel" class="tab-pane" id="conditions">
@@ -314,8 +288,7 @@
                 <!-- contain sidebar of the page -->
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
-                        <div class="sub-head" itemprop="aggregateRating" itemscope
-                             itemtype="http://schema.org/AggregateRating">
+                        <div class="sub-head">
                             <!-- social-networks -->
                             {#{{ socialButtons({'title': translation.title}) }}#}
                             {% include 'CocoricoCoreBundle:Frontend/SocialButton:all.html.twig' with {'title': listing_translation.title} only %}
@@ -326,7 +299,7 @@
                             {% endif %}
                             <span class="counter">
                                 (
-                                <span itemprop="reviewCount">{{ listing.commentCount }}</span>
+                                <span>{{ listing.commentCount }}</span>
                                 {{ 'listing.show.comments'|trans }})
                             </span>
                         </div>
@@ -337,12 +310,7 @@
                         })) }}
 
                         <!-- members-list -->
-                        <section class="widget members-list" itemprop="offers" itemscope
-                                 itemtype="http://schema.org/Offer">
-
-                            <meta itemprop="priceCurrency" content="{{ defaultCurrency }}"/>
-                            <meta itemprop="price" content="{{ listing.priceDecimal }}"/>
-
+                        <section class="widget members-list">
                             <!-- gallery-small -->
                             <div id="user_contact" class="gallery-small slideshow">
                                 <div class="slideset">
@@ -368,11 +336,11 @@
                                     <span></span>
                                 </a>
                             </div>
-                            <h1>
+                            <h2>
                                 <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
                                     {{ listing_user.firstName }}
                                 </a>
-                            </h1>
+                            </h2>
 
                             {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
                                 {# contact button and form #}
@@ -432,8 +400,8 @@
                                     </button>
                                 </li>
                                 <li>
-                                    {{ 'form.user.has_booking:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.hasBooking %}
+                                    {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.nbBookingsOfferer %}
                                         <i class="icon-ok"></i>
                                         <strong>{{ "yes"|trans }}</strong>
                                     {% else %}
@@ -442,7 +410,7 @@
                                     {% endif %}
                                     <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
                                             type="button"
-                                            data-original-title="{{ 'listing.show.has_booking.help'|trans }}">?
+                                            data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
                                     </button>
                                 </li>
                                 <li>
@@ -558,4 +526,23 @@
             );
         });
     </script>
+
+    {#Get geocoding information and persist it #}
+    {% include '@CocoricoGeo/Common/js/_geocode_js.html.twig' with {
+    'coordinate': coordinate
+    } only %}
+{% endblock %}
+
+
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include '@CocoricoSeo/Frontend/Listing/_show_markup.jsonld.twig' ignore missing with {
+    'listing': listing,
+    'listing_translation': listing_translation,
+    'listing_user': listing_user,
+    'listing_location': listing_location,
+    'reviews': reviews
+    } only %}
 {% endblock %}

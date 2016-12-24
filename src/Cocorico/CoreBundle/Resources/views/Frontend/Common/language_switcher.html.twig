@@ -5,6 +5,7 @@
         <a href="#" tabindex="8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
             <img src="{{ asset('images/flag-' ~  app.request.locale ~ '.png') }}" alt="flag" class="flag" width="16"
                  height="11">
+            <span class="icon-down-open-mini"></span>
         </a>
         <ul class="dropdown-menu flag-list" role="menu">
             {%- for language, link in languages_links -%}

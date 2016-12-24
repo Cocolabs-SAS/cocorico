@@ -5,14 +5,15 @@
         <div class="slider-secondary">
             <div class="slider-clip">
                 <ul class="slides">
-                    {% for listing in listings %}
+                    {%- for result in listings -%}
+                        {% set listing = result[0] %}
                         {% set listing_translation = listing.translations[app.request.locale] %}
                         {% set listing_location = listing.location %}
                         {% set listing_user = listing.user %}
-                        {% set price = listing.getPriceDecimal() | format_price(app.request.locale, 0) %}
+                        {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
                         {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
-                        <article class="listing-post col-sm-4 col-xs-12" itemscope itemtype="http://schema.org/Product">
+                        <article class="listing-post col-sm-4 col-xs-12">
                             <div class="listing-content">
                                 <a href="javascript:void(0)" id="favourite-{{ listing.id }}" class="favourit">
                                     <i class="icon-heart"></i>
@@ -69,9 +70,9 @@
                                                      alt="{{ listing_user.firstName }}"/>
                                             </div>
                                             <div class="textbox">
-                                                <h2 itemprop="name">{{ listing_translation.title }}</h2>
+                                                <h2>{{ listing_translation.title }}</h2>
 
-                                                <p itemprop="description">{{ listing_location.city }} </p>
+                                                <p>{{ listing_location.city }} </p>
                                             </div>
                                         </div>
                                     </div>

@@ -1,12 +1,8 @@
 imports:
     - { resource: subscribers.yml }
+    - { resource: admin.yml }
 
 services:
-    #Disable Sonata Admin User Group
-    sonata.user.admin.group:
-        abstract: true
-        public: false
-
     #Validators
     cocorico_user.user.validator:
         class: Cocorico\UserBundle\Validator\Constraints\UserValidator
@@ -88,5 +84,3 @@ services:
         class: Cocorico\UserBundle\Security\OAuthUserProvider
         arguments:
             - "@cocorico_user.user_manager"
-
-

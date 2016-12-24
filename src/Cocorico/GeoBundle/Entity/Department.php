@@ -12,6 +12,7 @@
 
 namespace Cocorico\GeoBundle\Entity;
 
+use Cocorico\GeoBundle\Model\GeocodableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Department
  *
- * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Entity\DepartmentRepository")
+ * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Repository\DepartmentRepository")
  *
  * @ORM\Table(name="geo_department")
  *
@@ -28,7 +29,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Department
 {
     use ORMBehaviors\Translatable\Translatable;
-
+    use GeocodableTrait;
+    
     /**
      * @var integer
      *
@@ -75,6 +77,18 @@ class Department
     }
 
     /**
+     * Translation proxy
+     *
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        return $this->proxyCurrentLocaleTranslation($method, $arguments);
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -108,29 +122,29 @@ class Department
     }
 
     /**
-     * Add coordinates
+     * Add coordinate
      *
-     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      * @return Area
      */
-    public function addCoordinate(Coordinate $coordinates)
+    public function addCoordinate(Coordinate $coordinate)
     {
-        if (!$this->coordinates->contains($coordinates)) {
-            $this->coordinates[] = $coordinates;
-            $coordinates->setDepartment($this);
+        if (!$this->coordinates->contains($coordinate)) {
+            $this->coordinates[] = $coordinate;
+            $coordinate->setDepartment($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove coordinates
+     * Remove coordinate
      *
-     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      */
-    public function removeCoordinate(Coordinate $coordinates)
+    public function removeCoordinate(Coordinate $coordinate)
     {
-        $this->coordinates->removeElement($coordinates);
+        $this->coordinates->removeElement($coordinate);
     }
 
     /**
@@ -167,29 +181,29 @@ class Department
     }
 
     /**
-     * Add cities
+     * Add city
      *
-     * @param  \Cocorico\GeoBundle\Entity\City $cities
+     * @param  \Cocorico\GeoBundle\Entity\City $city
      * @return Department
      */
-    public function addCity(City $cities)
+    public function addCity(City $city)
     {
-        if (!$this->cities->contains($cities)) {
-            $this->cities[] = $cities;
-            $cities->setDepartment($this);
+        if (!$this->cities->contains($city)) {
+            $this->cities[] = $city;
+            $city->setDepartment($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove cities
+     * Remove city
      *
-     * @param \Cocorico\GeoBundle\Entity\City $cities
+     * @param \Cocorico\GeoBundle\Entity\City $city
      */
-    public function removeCity(City $cities)
+    public function removeCity(City $city)
     {
-        $this->cities->removeElement($cities);
+        $this->cities->removeElement($city);
     }
 
     /**
@@ -200,5 +214,21 @@ class Department
     public function getCities()
     {
         return $this->cities;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->translate()->getName();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->getName();
     }
 }

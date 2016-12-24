@@ -15,11 +15,20 @@ namespace Cocorico\CoreBundle\Event;
 class ListingSearchEvents
 {
     /**
-     * The LISTING_SEARCH event occurs when a new listing search is done.
+     * The LISTING_SEARCH event occurs when the listing search query is build.
      *
      * This event allows you to modify the search query.
      * The event listener method receives a Cocorico\CoreBundle\Event\ListingSearchEvent instance.
+     *
+     * todo: Renamed to LISTING_SEARCH_QUERY
      */
     const LISTING_SEARCH = 'cocorico.listing_search';
 
+    /**
+     * The LISTING_SEARCH_ACTION event occurs when the listing search action is called.
+     *
+     * This event allows you to add params to pass to the view rendered by the listing search action.
+     * The event listener method receives a Cocorico\CoreBundle\Event\ListingSearchActionEvent instance.
+     */
+    const LISTING_SEARCH_ACTION = 'cocorico.listing_search.action';
 }

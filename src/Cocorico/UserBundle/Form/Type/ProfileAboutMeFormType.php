@@ -57,7 +57,10 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
         foreach ($this->locales as $i => $locale) {
             $descriptions[$locale] = array(
                 /** @Ignore */
-                'label' => false
+                'label' => false,
+                'attr' => array(
+                    'placeholder' => 'auto'
+                )
             );
         }
 
@@ -65,7 +68,6 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             'translations',
             'a2lix_translations',
             array(
-                //'locales' => $this->locales,
                 'required_locales' => array($this->locale),
                 'fields' => array(
                     'description' => array(

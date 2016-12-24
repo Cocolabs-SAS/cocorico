@@ -24,27 +24,18 @@ class HomeController extends Controller
 {
     /**
      * @Route("/", name="cocorico_home")
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
-    {
-        return $this->render('CocoricoCoreBundle:Frontend\Home:index.html.twig');
-    }
-
-    /**
-     * @param Request $request
-     * @param int     $limit
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function highRankListingAction(Request $request, $limit)
+    public function indexAction(Request $request)
     {
         /** @var ListingRepository $listingRepository */
         $listingRepository = $this->getDoctrine()->getRepository('CocoricoCoreBundle:Listing');
-        $listings = $listingRepository->findByHighestRanking($limit, $request->getLocale());
+        $listings = $listingRepository->findByHighestRanking(6, $request->getLocale());
 
         return $this->render(
-            'CocoricoCoreBundle:Frontend/Home:high_rank.html.twig',
+            'CocoricoCoreBundle:Frontend\Home:index.html.twig',
             array(
                 'listings' => $listings
             )

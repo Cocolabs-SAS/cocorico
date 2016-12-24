@@ -40,9 +40,8 @@ class SecurityController extends BaseController implements TranslationContainerI
             if (!$session->has('profile')) {
                 $session->set('profile', 'asker');
             }
-            $url = $request->get('redirect_to') ? $request->get('redirect_to') : $this->container->get(
-                'router'
-            )->generate('cocorico_home');
+            $url = $request->get('redirect_to') ? $request->get('redirect_to') :
+                $this->container->get('router')->generate('cocorico_home');
 
             $response = new RedirectResponse($url);
         } else {

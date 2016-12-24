@@ -9,10 +9,15 @@ services:
         tags:
         - { name: form.type, alias: geocoding_to_coordinate }
 
-    cocorico.twig.cocorico_geo_extension:
+    cocorico_geo.twig.cocorico_geo_extension:
         class: Cocorico\GeoBundle\Twig\GeoExtension
         arguments:
             - "%cocorico_geo.google_place_api_key%"
             - "%cocorico_geo.ipinfodb_api_key%"
         tags:
             - { name: twig.extension }
+
+    cocorico_geo.geocoding.manager:
+        class: Cocorico\GeoBundle\Model\Manager\GeocodingManager
+        arguments:
+            - "@doctrine.orm.entity_manager"

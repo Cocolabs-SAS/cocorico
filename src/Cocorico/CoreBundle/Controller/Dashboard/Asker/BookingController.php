@@ -90,12 +90,10 @@ class BookingController extends Controller
     {
         $threadObj = $booking->getThread();
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')
-            ->create($threadObj);
-
+        $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
         $paramArr = $request->get($form->getName());
-
         $request->request->set($form->getName(), $paramArr);
+
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
@@ -111,9 +109,6 @@ class BookingController extends Controller
 
             return new RedirectResponse($selfUrl);
         }
-
-        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbs->addBookingShowBreadcrumbs($request, $booking);
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Booking:show.html.twig',

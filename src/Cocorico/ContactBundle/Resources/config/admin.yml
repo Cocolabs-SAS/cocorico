@@ -2,7 +2,7 @@ services:
     sonata.admin.contact:
         class: Cocorico\ContactBundle\Admin\ContactAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Site", label: "Contact" }
+            - { name: sonata.admin, manager_type: orm, group: "Site", label: "Contact", label_catalogue: "cocorico_admin_menu" }
         arguments:
             - ~
             - Cocorico\ContactBundle\Entity\Contact

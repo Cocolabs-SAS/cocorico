@@ -1,6 +1,6 @@
 {% trans_default_domain 'cocorico_listing' %}
 
-{% if close is defined %}
+{% if close is defined and close|default(false) %}
     <a href="#" class="close" data-dismiss="alert" aria-label="Close">
         <span class="hidden">Close</span>
         <i class="icon-cancel"></i>

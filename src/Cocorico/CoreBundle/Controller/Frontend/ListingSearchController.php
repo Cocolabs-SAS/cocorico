@@ -12,6 +12,8 @@
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\ListingImage;
+use Cocorico\CoreBundle\Event\ListingSearchActionEvent;
+use Cocorico\CoreBundle\Event\ListingSearchEvents;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -59,6 +61,7 @@ class ListingSearchController extends Controller
 
             //Persist listing search request in session
             $this->get('session')->set('listing_search_request', $listingSearchRequest);
+
         } else {
             foreach ($form->getErrors(true) as $error) {
                 $this->get('session')->getFlashBag()->add(
@@ -69,19 +72,31 @@ class ListingSearchController extends Controller
             }
         }
 
+        //Breadcrumbs
+        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addListingResultItems($this->get('request_stack')->getCurrentRequest(), $listingSearchRequest);
+
+        //Add params to view through event listener
+        $event = new ListingSearchActionEvent($request);
+        $this->get('event_dispatcher')->dispatch(ListingSearchEvents::LISTING_SEARCH_ACTION, $event);
+        $extraViewParams = $event->getExtraViewParams();
+
         return $this->render(
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
-            array(
-                'results' => $resultsIterator,
-                'nb_results' => $nbResults,
-                'markers' => $markers,
-                'listing_search_request' => $listingSearchRequest,
-                'pagination' => array(
-                    'page' => $listingSearchRequest->getPage(),
-                    'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
-                    'route' => $request->get('_route'),
-                    'route_params' => $request->query->all()
-                )
+            array_merge(
+                array(
+                    'results' => $resultsIterator,
+                    'nb_results' => $nbResults,
+                    'markers' => $markers,
+                    'listing_search_request' => $listingSearchRequest,
+                    'pagination' => array(
+                        'page' => $listingSearchRequest->getPage(),
+                        'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
+                        'route' => $request->get('_route'),
+                        'route_params' => $request->query->all()
+                    ),
+                ),
+                $extraViewParams
             )
         );
 

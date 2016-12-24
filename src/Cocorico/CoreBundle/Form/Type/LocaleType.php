@@ -15,6 +15,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+//todo: to change (as usual)
+
 class LocaleType extends AbstractType
 {
     protected $locales = array();

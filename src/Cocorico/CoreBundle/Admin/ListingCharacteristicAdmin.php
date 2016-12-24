@@ -75,9 +75,27 @@ class ListingCharacteristicAdmin extends Admin
                     'label' => 'Descriptions'
                 )
             )
-            ->add('position', null, array('label' => 'admin.listing_characteristic.position.label'))
-            ->add('listingCharacteristicType', null, array('label' => 'admin.listing_characteristic_type.label'))
-            ->add('listingCharacteristicGroup', 'sonata_type_model_list')
+            ->add(
+                'position',
+                null,
+                array(
+                    'label' => 'admin.listing_characteristic.position.label'
+                )
+            )
+            ->add(
+                'listingCharacteristicType',
+                null,
+                array(
+                    'label' => 'admin.listing_characteristic.type.label'
+                )
+            )
+            ->add(
+                'listingCharacteristicGroup',
+                'sonata_type_model_list',
+                array(
+                    'label' => 'admin.listing_characteristic.group.label'
+                )
+            )
             ->end();
     }
 

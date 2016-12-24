@@ -1,5 +1,7 @@
 {% block layout %}
-    {% include '@CocoricoCore/Frontend/Common/_header.html.twig' only %}
+    {% block header %}
+        {% include '@CocoricoCore/Frontend/Common/_header.html.twig' only %}
+    {% endblock %}
 
     <!-- contain main informative part of the site -->
     <main id="main" role="main">
@@ -16,5 +18,7 @@
         {% block modal %}{% endblock %}
     </main>
 
-    {% include '@CocoricoCore/Frontend/Common/_footer.html.twig' only %}
+    {% block footer %}
+        {% include '@CocoricoCore/Frontend/Common/_footer.html.twig' only %}
+    {% endblock %}
 {% endblock %}

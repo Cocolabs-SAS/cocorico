@@ -12,6 +12,7 @@
 
 namespace Cocorico\GeoBundle\Entity;
 
+use Cocorico\GeoBundle\Model\GeocodableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Country
  *
- * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Entity\CountryRepository")
+ * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Repository\CountryRepository")
  *
  * @ORM\Table(name="geo_country",indexes={
  *    @ORM\Index(name="code_idx", columns={"code"})
@@ -30,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Country
 {
     use ORMBehaviors\Translatable\Translatable;
+    use GeocodableTrait;
 
     /**
      * @var integer
@@ -61,6 +63,7 @@ class Country
      * @ORM\OneToMany(targetEntity="Cocorico\GeoBundle\Entity\City", mappedBy="country", cascade={"persist", "remove"})
      **/
     private $cities;
+
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\GeoBundle\Entity\Coordinate", mappedBy="country", cascade={"persist", "remove"})
      **/
@@ -72,6 +75,18 @@ class Country
         $this->departments = new ArrayCollection();
         $this->cities = new ArrayCollection();
         $this->coordinates = new ArrayCollection();
+    }
+
+    /**
+     * Translation proxy
+     *
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        return $this->proxyCurrentLocaleTranslation($method, $arguments);
     }
 
     /**
@@ -110,27 +125,27 @@ class Country
     /**
      * Add areas
      *
-     * @param  \Cocorico\GeoBundle\Entity\Area $areas
+     * @param  \Cocorico\GeoBundle\Entity\Area $area
      * @return Country
      */
-    public function addArea(Area $areas)
+    public function addArea(Area $area)
     {
-        if (!$this->areas->contains($areas)) {
-            $this->areas[] = $areas;
-            $areas->setCountry($this);
+        if (!$this->areas->contains($area)) {
+            $this->areas[] = $area;
+            $area->setCountry($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove areas
+     * Remove area
      *
-     * @param \Cocorico\GeoBundle\Entity\Area $areas
+     * @param \Cocorico\GeoBundle\Entity\Area $area
      */
-    public function removeArea(Area $areas)
+    public function removeArea(Area $area)
     {
-        $this->areas->removeElement($areas);
+        $this->areas->removeElement($area);
     }
 
     /**
@@ -146,27 +161,27 @@ class Country
     /**
      * Add coordinates
      *
-     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      * @return Country
      */
-    public function addCoordinate(Coordinate $coordinates)
+    public function addCoordinate(Coordinate $coordinate)
     {
-        if (!$this->coordinates->contains($coordinates)) {
-            $this->coordinates[] = $coordinates;
-            $coordinates->setCountry($this);
+        if (!$this->coordinates->contains($coordinate)) {
+            $this->coordinates[] = $coordinate;
+            $coordinate->setCountry($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove coordinates
+     * Remove coordinate
      *
-     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      */
-    public function removeCoordinate(Coordinate $coordinates)
+    public function removeCoordinate(Coordinate $coordinate)
     {
-        $this->coordinates->removeElement($coordinates);
+        $this->coordinates->removeElement($coordinate);
     }
 
     /**
@@ -180,29 +195,29 @@ class Country
     }
 
     /**
-     * Add departments
+     * Add department
      *
-     * @param  \Cocorico\GeoBundle\Entity\Department $departments
+     * @param  \Cocorico\GeoBundle\Entity\Department $department
      * @return Country
      */
-    public function addDepartment(Department $departments)
+    public function addDepartment(Department $department)
     {
-        if (!$this->departments->contains($departments)) {
-            $this->departments[] = $departments;
-            $departments->setCountry($this);
+        if (!$this->departments->contains($department)) {
+            $this->departments[] = $department;
+            $department->setCountry($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove depatments
+     * Remove department
      *
-     * @param \Cocorico\GeoBundle\Entity\Department $departments
+     * @param \Cocorico\GeoBundle\Entity\Department $department
      */
-    public function removeDepartment(Department $departments)
+    public function removeDepartment(Department $department)
     {
-        $this->departments->removeElement($departments);
+        $this->departments->removeElement($department);
     }
 
     /**
@@ -216,16 +231,16 @@ class Country
     }
 
     /**
-     * Add cities
+     * Add $city
      *
-     * @param  \Cocorico\GeoBundle\Entity\City $cities
+     * @param  \Cocorico\GeoBundle\Entity\City $city
      * @return Country
      */
-    public function addCity(City $cities)
+    public function addCity(City $city)
     {
-        if (!$this->cities->contains($cities)) {
-            $this->cities[] = $cities;
-            $cities->setCountry($this);
+        if (!$this->cities->contains($city)) {
+            $this->cities[] = $city;
+            $city->setCountry($this);
         }
 
         return $this;
@@ -234,11 +249,11 @@ class Country
     /**
      * Remove cities
      *
-     * @param \Cocorico\GeoBundle\Entity\City $cities
+     * @param \Cocorico\GeoBundle\Entity\City $city
      */
-    public function removeCity(City $cities)
+    public function removeCity(City $city)
     {
-        $this->cities->removeElement($cities);
+        $this->cities->removeElement($city);
     }
 
     /**
@@ -251,9 +266,19 @@ class Country
         return $this->cities;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->translate()->getName();
+    }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->translate()->getName() . '';
+        return (string)$this->getName();
     }
 }

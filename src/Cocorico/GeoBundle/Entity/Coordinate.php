@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Coordinate
  *
- * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Entity\CoordinateRepository")
+ * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Repository\CoordinateRepository")
  *
  * @ORM\Table(name="geo_coordinate",indexes={
  *    @ORM\Index(name="coordinate_idx", columns={"lat", "lng"})

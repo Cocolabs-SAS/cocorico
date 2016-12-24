@@ -12,7 +12,7 @@
 
 namespace Cocorico\UserBundle\Mailer;
 
-use Cocorico\MessageBundle\Entity\Thread;
+use FOS\MessageBundle\Model\ThreadInterface;
 use FOS\UserBundle\Model\UserInterface;
 
 /**
@@ -48,7 +48,13 @@ interface MailerInterface
      */
     public function sendResettingEmailMessageToUser(UserInterface $user);
 
-
-    public function sendNotificationForNewMessageToUser(UserInterface $user, Thread $thread);
+    /**
+     * Send new message notification email
+     *
+     * @param UserInterface   $user
+     * @param ThreadInterface $thread
+     * @return void
+     */
+    public function sendNotificationForNewMessageToUser(UserInterface $user, ThreadInterface $thread);
 
 }

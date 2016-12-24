@@ -36,26 +36,24 @@
         </section>
 
 
-        <!-- form-ad-detail -->
-        <form class="form-ad-detail" method="post">
-            <fieldset>
-                <legend class="hidden">form-ad-detail</legend>
-                {{ form_errors(form) }}
-                {#{{ form_errors(form.body) }}#}
-                <div class="textarea-holder no-scroll">
-                    {{ form_widget(form.body, {
-                        'attr': {
-                            'placeholder': 'booking.show.textarea.placeholder'|trans,
-                            'title': 'booking.show.textarea.placeholder'|trans,
-                        }
-                    }) }}
-                </div>
-                {{ form_widget(form._token) }}
-                <div class="btn-block text-center">
-                    <input type="submit" class="btn btn-default" value="{{ 'booking.show.save'|trans }}">
-                </div>
-            </fieldset>
-        </form>
+        <!-- form-ad-detail (this is the message form) -->
+        {{ form_start(form, {'attr': {'class': 'form-ad-detail'}}) }}
+        <fieldset>
+            <legend class="hidden">form-ad-detail</legend>
+            {{ form_errors(form) }}
+            <div class="textarea-holder no-scroll">
+                {{ form_widget(form.body, {
+                    'attr': {
+                        'placeholder': 'booking.show.textarea.placeholder'|trans,
+                        'title': 'booking.show.textarea.placeholder'|trans,
+                    }
+                }) }}
+            </div>
+            <div class="btn-block text-center">
+                <input type="submit" class="btn btn-default" value="{{ 'booking.show.save'|trans }}">
+            </div>
+        </fieldset>
+        {{ form_end(form) }}
 
         <!-- blog -->
         <div class="blog">
@@ -92,12 +90,6 @@
             $modal.on("hide.bs.modal", function (e) {
                 location.reload(true);
             });
-
-//            $modal.on("show.bs.modal", function (e) {
-//                $(this).find(".modal-content").html('');
-//                var link = $(e.relatedTarget);
-//                $(this).find(".modal-content").load(link.attr("href"));
-//            });
         });
     </script>
 {% endblock %}

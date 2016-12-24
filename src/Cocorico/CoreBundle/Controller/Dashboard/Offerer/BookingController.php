@@ -113,9 +113,6 @@ class BookingController extends Controller
             return new RedirectResponse($selfUrl);
         }
 
-        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbs->addBookingShowBreadcrumbs($request, $booking);
-
         //Amount excl or incl tax
         $amountTotal = $booking->getAmountToPayToOffererDecimal();
         if (!$this->container->getParameter('cocorico.include_vat')) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-05-10T13:29:14Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-06-20T22:22:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -182,6 +182,10 @@
             <trans-unit id="8e384ec1d76745ebe429c6b2b0ff313947df601d" resname="cocorico_dashboard_reviews_received">
                 <source>/dashboard/review/reviews-received</source>
                 <target>/dashboard/review/reviews-received</target>
+            </trans-unit>
+            <trans-unit id="eacc06390851235e3e6074a5ae93961daa151fe4" resname="cocorico_geo_create">
+                <source>/geocoding/{id}/create</source>
+                <target state="new">/geocoding/{id}/create</target>
             </trans-unit>
             <trans-unit id="59be3aa1f035af965016dafe7e8c54a7ab427504" resname="cocorico_home">
                 <source>/</source>

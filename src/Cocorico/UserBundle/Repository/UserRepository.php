@@ -11,8 +11,10 @@
 
 namespace Cocorico\UserBundle\Repository;
 
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * UserRepository
@@ -61,4 +63,24 @@ class UserRepository extends EntityRepository
         }
     }
 
+
+    /**
+     * @return array|null
+     */
+    public function findAllEnabled()
+    {
+        $queryBuilder = $this->createQueryBuilder('u')
+            ->where('u.enabled = :enabled')
+            ->andWhere('u.roles NOT LIKE :roles')
+            ->setParameter('enabled', true)
+            ->setParameter('roles', '%ROLE_SUPER_ADMIN%');
+
+        try {
+            $query = $queryBuilder->getQuery();
+
+            return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
 }

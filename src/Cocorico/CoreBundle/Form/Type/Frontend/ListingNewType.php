@@ -34,7 +34,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 {
     public static $tacError = 'listing.form.tac.error';
     public static $credentialError = 'user.form.credential.error';
-    public static $emptyTitle = 'listing.translation.title.default';
 
     private $securityTokenStorage;
     private $securityAuthChecker;
@@ -81,15 +80,16 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'listing.form.title',
-//                'data' => self::$emptyTitle
+                'attr' => array(
+                    'placeholder' => 'auto'
+                )
             );
             $descriptions[$locale] = array(
-                'label' => 'listing.form.description'
+                'label' => 'listing.form.description',
+                'attr' => array(
+                    'placeholder' => 'auto'
+                )
             );
-
-            /*$rules[$locale] = array(
-                'label' => 'listing.form.rules'
-            );*/
         }
 
         $builder->add(
@@ -107,8 +107,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                         'locale_options' => $descriptions
                     ),
                     'rules' => array(
-                        /*'field_type' => 'textarea',
-                        'locale_options' => $rules,*/
                         'display' => false
                     ),
                     'slug' => array(
@@ -324,7 +322,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $messages = array();
         $messages[] = new Message(self::$tacError, 'cocorico');
         $messages[] = new Message(self::$credentialError, 'cocorico');
-        $messages[] = new Message(self::$emptyTitle, 'cocorico_listing');
 
         return $messages;
     }

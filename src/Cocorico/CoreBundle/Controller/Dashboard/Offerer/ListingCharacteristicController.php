@@ -43,6 +43,7 @@ class ListingCharacteristicController extends Controller
      */
     public function editCharacteristicAction(Request $request, Listing $listing)
     {
+        $translator = $this->get('translator');
         $editForm = $this->createEditCharacteristicForm($listing);
         $editForm->handleRequest($request);
 
@@ -57,15 +58,11 @@ class ListingCharacteristicController extends Controller
 
             $this->get('session')->getFlashBag()->add(
                 'success',
-                $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
+                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($selfUrl);
         }
-
-        $this->get('cocorico.breadcrumbs_manager')->addListingItem($request, $listing);
-        $text = $this->get('translator')->trans('characteristics', array(), 'cocorico_breadcrumbs');
-        $this->get('cocorico.breadcrumbs_manager')->addItem($text, $selfUrl);
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Listing:edit_characteristic.html.twig',

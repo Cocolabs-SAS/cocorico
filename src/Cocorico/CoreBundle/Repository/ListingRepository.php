@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Repository;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
@@ -26,14 +27,14 @@ class ListingRepository extends EntityRepository
     {
         $queryBuilder = $this->_em->createQueryBuilder()
             //Select
-            ->select('partial l.{id, price, averageRating, certified}')
+            ->select('partial l.{id, price, averageRating, certified, createdAt}')
             ->addSelect("partial t.{id, locale, slug, title, description}")
-            ->addSelect("partial ca.{id}")
+            ->addSelect("partial ca.{id, lft, lvl, rgt, root}")
             ->addSelect("partial cat.{id, locale, name}")
             ->addSelect("partial i.{id, name}")
             ->addSelect("partial u.{id, firstName}")
             //->addSelect("partial ln.{id}")
-            ->addSelect("partial ln.{id, city, route}")//for test
+            ->addSelect("partial ln.{id, city, route, country}")
             ->addSelect("partial co.{id, lat, lng}")
             ->addSelect("partial ui.{id, name}")
             ->addSelect("'' AS DUMMY")//To maintain fields on same array level when extra fields are added
@@ -49,40 +50,51 @@ class ListingRepository extends EntityRepository
             ->leftJoin('u.images', 'ui')
             ->leftJoin('l.location', 'ln')
             ->leftJoin('ln.coordinate', 'co');
+
 //            ->leftJoin('co.country', 'cy');
+
+        $queryBuilder
+            ->addGroupBy('l.id');
 
         return $queryBuilder;
     }
 
     /**
-     * @param $slug
-     * @param $locale
+     * @param string $slug
+     * @param string $locale
+     * @param bool   $joined
      *
      * @return mixed|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function findOneBySlug($slug, $locale)
+    public function findOneBySlug($slug, $locale, $joined = true)
     {
         $queryBuilder = $this->createQueryBuilder('l')
             ->addSelect("t")
-            ->addSelect("u, i")
-//            ->addSelect("llc, lc, lct")
             ->leftJoin('l.translations', 't')
-            ->leftJoin('l.user', 'u')
-            ->leftJoin('u.images', 'i')
+            ->where('t.slug = :slug')
+            ->andWhere('t.locale = :locale')
+            ->setParameter('slug', $slug)
+            ->setParameter('locale', $locale);
+
+        if ($joined) {
+            $queryBuilder
+                ->addSelect("u, i")
+                ->leftJoin('l.user', 'u')
+                ->leftJoin('u.images', 'i');
+        }
+
+//          $queryBuilder
+//            ->addSelect("llc, lc, lct")
 //            ->leftJoin('l.listingListingCharacteristics', 'llc')
 //            ->leftJoin('llc.listingCharacteristic', 'lc')
 //            ->leftJoin('lc.translations', 'lct')
 //            ->leftJoin('lc.listingCharacteristicGroup', 'lcg')
 //            ->leftJoin('lc.translations', 'lcgt')
-            ->where('t.slug = :slug')
-            ->andWhere('t.locale = :locale')
 //            ->andWhere('lct.locale = :locale')
-//            ->andWhere('lcgt.locale = :locale')
-            ->setParameter('slug', $slug)
-            ->setParameter('locale', $locale);
-        try {
+//            ->andWhere('lcgt.locale = :locale');
 
+        try {
             $query = $queryBuilder->getQuery();
 //            $query->useResultCache(true, 3600, 'findOneBySlug');
 //            $query->setFetchMode("Cocorico\CoreBundle\Entity\Listing", "listingListingCharacteristics", ClassMetadata::FETCH_EAGER);
@@ -96,15 +108,15 @@ class ListingRepository extends EntityRepository
     }
 
     /**
-     * @param $slug
-     * @param $locale
+     * @param string $slug
+     * @param string $locale
      *
      * @return mixed|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findTranslationsBySlug($slug, $locale)
     {
-        $listing = $this->findOneBySlug($slug, $locale);
+        $listing = $this->findOneBySlug($slug, $locale, false);
 
         $queryBuilder = $this->getEntityManager()->createQueryBuilder()
             ->select('lt')
@@ -193,20 +205,37 @@ class ListingRepository extends EntityRepository
     }
 
     /**
+     * @param bool $withUser
+     * @param bool $withTranslations
+     *
+     * @param int  $hydrationMode
      * @return array|null
      */
-    public function findPublishedListing()
-    {
+    public function findAllPublished(
+        $withUser = true,
+        $withTranslations = false,
+        $hydrationMode = AbstractQuery::HYDRATE_OBJECT
+    ) {
         $queryBuilder = $this->createQueryBuilder('l')
-            ->addSelect("u")
-            ->leftJoin('l.translations', 't')
-            ->leftJoin('l.user', 'u')
             ->where('l.status = :listingStatus')
             ->setParameter('listingStatus', Listing::STATUS_PUBLISHED);
+
+        if ($withUser) {
+            $queryBuilder
+                ->addSelect("u")
+                ->leftJoin('l.user', 'u');
+        }
+
+        if ($withTranslations) {
+            $queryBuilder
+                ->addSelect("t")
+                ->leftJoin('l.translations', 't');
+        }
+
         try {
             $query = $queryBuilder->getQuery();
 
-            return $query->getResult();
+            return $query->getResult($hydrationMode);
         } catch (NoResultException $e) {
             return null;
         }
@@ -214,25 +243,16 @@ class ListingRepository extends EntityRepository
 
     public function findByHighestRanking($limit, $locale)
     {
-        $queryBuilder = $this->createQueryBuilder('l')
-            ->addSelect('t, i, c, ct, u, ut, uf, ll')
-            ->leftJoin('l.translations', 't')
-            ->leftJoin('l.images', 'i')
-            ->leftJoin('l.location', 'll')
-            ->leftJoin('l.user', 'u')
-            ->leftJoin('u.translations', 'ut')
-            ->leftJoin('u.userFacebook', 'uf')
-            ->leftJoin('l.categories', 'c')
-            ->leftJoin('c.translations', 'ct')
-            ->where('l.status = :listingStatus')
-            ->andWhere('t.locale = :locale')
-            ->andWhere('ct.locale = :locale')
-//            ->andWhere('ut.locale = :locale')
-            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED)
+        $queryBuilder = $this->getFindQueryBuilder();
+
+        //Where
+        $queryBuilder
+            ->where('t.locale = :locale')
+            ->andWhere('l.status = :listingStatus')
             ->setParameter('locale', $locale)
+            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED)
             ->setMaxResults($limit)
-            ->orderBy('l.createdAt', 'DESC')
-            ->groupBy('l.id');
+            ->orderBy('l.createdAt', 'DESC');
         try {
             $query = $queryBuilder->getQuery();
             $query->useResultCache(true, 21600, 'findByHighestRanking');

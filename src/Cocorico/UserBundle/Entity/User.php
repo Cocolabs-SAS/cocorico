@@ -265,11 +265,19 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      *
-     * @ORM\Column(name="has_booking", type="boolean", nullable=true)
+     * @ORM\Column(name="nb_bookings_offerer", type="smallint", nullable=true)
      *
-     * @var boolean
+     * @var int
      */
-    protected $hasBooking;
+    protected $nbBookingsOfferer;
+
+    /**
+     *
+     * @ORM\Column(name="nb_bookings_asker", type="smallint", nullable=true)
+     *
+     * @var int
+     */
+    protected $nbBookingsAsker;
 
     /**
      *
@@ -577,28 +585,43 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set hasBooking
+     * Set nbBookingsOfferer
      *
-     * @param boolean $hasBooking
+     * @param int $nbBookingsOfferer
      * @return User
      */
-    public function setHasBooking($hasBooking)
+    public function setNbBookingsOfferer($nbBookingsOfferer)
     {
-        $this->hasBooking = $hasBooking;
+        $this->nbBookingsOfferer = $nbBookingsOfferer;
 
         return $this;
     }
 
     /**
-     * Get hasBooking
+     * Get nbBookingsOfferer
      *
-     * @return boolean
+     * @return int
      */
-    public function getHasBooking()
+    public function getNbBookingsOfferer()
     {
-        return $this->hasBooking;
+        return $this->nbBookingsOfferer;
     }
 
+    /**
+     * @return int
+     */
+    public function getNbBookingsAsker()
+    {
+        return $this->nbBookingsAsker;
+    }
+
+    /**
+     * @param int $nbBookingsAsker
+     */
+    public function setNbBookingsAsker($nbBookingsAsker)
+    {
+        $this->nbBookingsAsker = $nbBookingsAsker;
+    }
 
     /**
      * @return int

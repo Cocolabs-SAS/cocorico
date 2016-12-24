@@ -47,7 +47,6 @@ class ReviewController extends Controller
     {
         $user = $this->getUser();
         $formHandler = $this->get('cocorico.form.handler.review');
-        $breadcrumbManager = $this->get('cocorico.breadcrumbs_manager');
         $translator = $this->get('translator');
 
         //Reviews form handling
@@ -65,17 +64,6 @@ class ReviewController extends Controller
 
             return $this->redirect($this->generateUrl('cocorico_dashboard_reviews_made'));
         }
-
-        //Breadcrumbs
-        $breadcrumbManager->addPreItems($request);
-        $breadcrumbManager->addItem(
-            $translator->trans('Comments', array(), 'cocorico_breadcrumbs'),
-            $this->generateUrl('cocorico_dashboard_reviews_received')
-        );
-        $breadcrumbManager->addItem(
-            $booking->getListing()->getTitle(),
-            $this->generateUrl('cocorico_dashboard_review_new', array('booking_id' => $booking->getId()))
-        );
 
         return $this->render(
             'CocoricoReviewBundle:Dashboard/Review:new.html.twig',

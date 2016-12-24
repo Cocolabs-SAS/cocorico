@@ -17,6 +17,9 @@ cocorico_contact:
     resource: "@CocoricoContactBundle/Resources/config/routing.yml"
     prefix:   /
 
+cocorico_geo:
+    resource: "@CocoricoGeoBundle/Resources/config/routing.yml"
+
 cocorico_extra_bundle:
     resource: .
     type: extra_bundle

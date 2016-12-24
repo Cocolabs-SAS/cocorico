@@ -5,14 +5,13 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        body.loading {
-            overflow: visible;
+        .loading .loader {
+            display: none;
         }
     </style>
 {% endblock %}
 
 {% block layout %}
-    <!-- contain main informative part of the site -->
     <main id="main" role="main">
         <div class="container">
             <div class="row">

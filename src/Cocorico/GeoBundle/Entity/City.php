@@ -12,6 +12,7 @@
 
 namespace Cocorico\GeoBundle\Entity;
 
+use Cocorico\GeoBundle\Model\GeocodableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * City
  *
- * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Entity\CityRepository")
+ * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Repository\CityRepository")
  *
  * @ORM\Table(name="geo_city")
  *
@@ -28,6 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class City
 {
     use ORMBehaviors\Translatable\Translatable;
+    use GeocodableTrait;
 
     /**
      * @var integer
@@ -79,6 +81,18 @@ class City
     }
 
     /**
+     * Translation proxy
+     *
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        return $this->proxyCurrentLocaleTranslation($method, $arguments);
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -112,29 +126,29 @@ class City
     }
 
     /**
-     * Add coordinates
+     * Add coordinate
      *
-     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      * @return Area
      */
-    public function addCoordinate(Coordinate $coordinates)
+    public function addCoordinate(Coordinate $coordinate)
     {
-        if (!$this->coordinates->contains($coordinates)) {
-            $this->coordinates[] = $coordinates;
-            $coordinates->setCity($this);
+        if (!$this->coordinates->contains($coordinate)) {
+            $this->coordinates[] = $coordinate;
+            $coordinate->setCity($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove coordinates
+     * Remove coordinate
      *
-     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      */
-    public function removeCoordinate(Coordinate $coordinates)
+    public function removeCoordinate(Coordinate $coordinate)
     {
-        $this->coordinates->removeElement($coordinates);
+        $this->coordinates->removeElement($coordinate);
     }
 
     /**
@@ -193,8 +207,19 @@ class City
         return $this->department;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->translate()->getName();
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->translate()->getName() . '';
+        return (string)$this->getName();
     }
 }

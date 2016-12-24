@@ -1,6 +1,5 @@
 {% trans_default_domain 'cocorico_review' %}
 
-
 <section class="postarea notation-booking">
     <div class="posts-holder">
         {% set user = app.user %}
@@ -25,14 +24,14 @@
                     <div class="img-holder">
                         <a href="#">
                             <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xmedium') }}"
-                                 alt="{{ listing_translation.title }}" itemprop="image">
+                                 alt="{{ listing_translation.title }}">
                         </a>
                     </div>
 
                     <div class="area">
-                        <header class="head" itemprop="review">
+                        <header class="head">
                             <div class="area">
-                                <h2 itemprop="name">
+                                <h2>
                                     {{ 'review.comment.reservation' | trans }}:
                                     <a href="{{ booking_url }}">{{ booking.id }}</a>
 
@@ -82,7 +81,7 @@
                                 <img alt="{{ reviewer.firstName }}"
                                      src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_reviewer) | imagine_filter('user_xsmall') }}">
                             </div>
-                            <div class="textbox" itemprop="description">
+                            <div class="textbox">
                                 <p>
                                     <strong>{{ 'review.comment.desc' | trans }}:</strong>
                                     <em>{{ review.comment | truncate(500, true, '...') }}</em>

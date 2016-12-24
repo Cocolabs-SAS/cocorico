@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\GeoBundle\Entity;
+namespace Cocorico\GeoBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
 class CoordinateRepository extends EntityRepository
 {
+
 
 }

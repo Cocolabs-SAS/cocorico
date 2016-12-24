@@ -11,6 +11,9 @@
 
 namespace Cocorico\MessageBundle\Controller\Dashboard;
 
+use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\MessageBundle\Entity\Message;
+use Cocorico\MessageBundle\Repository\MessageRepository;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\Model\ThreadInterface;
 use FOS\MessageBundle\Provider\ProviderInterface;
@@ -83,7 +86,7 @@ class MessageController extends Controller
         /** @var Form $form */
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
 
-        // get listing object
+        /** @var Listing $listing */
         $listing = $em->getRepository('CocoricoCoreBundle:Listing')->find($listingId);
 
         /** @var \Cocorico\MessageBundle\Entity\Thread $thread */
@@ -94,6 +97,7 @@ class MessageController extends Controller
         $form->setData($thread);
 
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+        /** @var Message $message */
         if ($message = $formHandler->process($form)) {
             $this->container->get('cocorico_user.mailer.twig_swift')
                 ->sendNotificationForNewMessageToUser($listing->getUser(), $message->getThread());
@@ -140,10 +144,9 @@ class MessageController extends Controller
         $threadObj = $this->getProvider()->getThread($threadId);
         /** @var Form $form */
         $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
-
         $paramArr = $request->get($form->getName());
-
         $request->request->set($form->getName(), $paramArr);
+
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
         $selfUrl = $this->container->get('router')->generate(
@@ -160,25 +163,9 @@ class MessageController extends Controller
             return new RedirectResponse($selfUrl);
         }
 
+        //Breadcrumbs
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbs->addPreItems($request);
-
-        $breadcrumbs->addItem(
-            $this->get('translator')->trans('Messages', array(), 'cocorico_breadcrumbs'),
-            $this->get('router')->generate('cocorico_dashboard_message')
-        );
-
-        $users = $threadObj->getOtherParticipants($this->getUser());
-        $user = (count($users) > 0) ? $users[0] : $this->getUser();
-
-        $breadcrumbs->addItem(
-            $this->get('translator')->trans(
-                'Discussion with %name%',
-                array('%name%' => $user->getName()),
-                'cocorico_breadcrumbs'
-            ),
-            $selfUrl
-        );
+        $breadcrumbs->addThreadViewItems($request, $threadObj, $this->getUser());
 
         return $this->container->get('templating')->renderResponse(
             'CocoricoMessageBundle:Dashboard/Message:thread.html.twig',
@@ -234,7 +221,9 @@ class MessageController extends Controller
         if ($request->isXmlHttpRequest()) {
             $user = $this->getUser();
             $em = $this->container->get('doctrine')->getManager();
-            $nbMessages = $em->getRepository('CocoricoMessageBundle:Message')->getNbUnreadMessage($user, true);
+            /** @var MessageRepository $repo */
+            $repo = $em->getRepository('CocoricoMessageBundle:Message');
+            $nbMessages = $repo->getNbUnreadMessage($user, true);
 
             $response['asker'] = ($nbMessages[0]['asker']) ? $nbMessages[0]['asker'] : 0;
             $response['offerer'] = $nbMessages[0]['offerer'] ? $nbMessages[0]['offerer'] : 0;

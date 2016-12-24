@@ -18,17 +18,16 @@ class BreadcrumbsController extends Controller
 {
     /**
      * @param Request $request
-     * @param string  $routeName
      *
      * @return array
      */
-    public function breadcrumbAction(Request $request, $routeName)
+    public function indexAction(Request $request)
     {
         $breadcrumbsManager = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbsManager->addBreadcrumbsForRoute($request, trim($routeName));
+        $breadcrumbsManager->addItemsFromYAML($request, trim($request->get('_route')));
 
         return $this->render(
-            'CocoricoBreadcrumbBundle:Breadcrumbs:breadcrumbs.html.twig'
+            'CocoricoBreadcrumbBundle:Breadcrumbs:index.html.twig'
         );
     }
 }

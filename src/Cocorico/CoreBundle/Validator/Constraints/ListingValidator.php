@@ -98,7 +98,7 @@ class ListingValidator extends ConstraintValidator
 
 
         //Location
-        if (!in_array($listing->getLocation()->getCountry(), $this->countries)) {
+        if ($this->countries && !in_array($listing->getLocation()->getCountry(), $this->countries)) {
             $this->context->buildViolation($constraint::$messageCountryInvalid)
                 ->atPath('location.country')
                 ->setTranslationDomain('cocorico_listing')

@@ -1,9 +1,13 @@
 {% extends '::base.html.twig' %}
 
+{% set user_images = user.images %}
 {% set user_description = "" %}
 {% if  user.translations[app.request.locale] is defined %}
     {% set user_description = user.translations[app.request.locale].description %}
 {% endif %}
+{% set user_address = user.getAddresses %}
+{% set user_address = (user_address is empty) ? null : user_address[0] %}
+
 
 {%- block meta_title -%}
     {{ 'user.show.meta_title'|trans({}, 'cocorico_meta') ~ " "  ~ user.name ~ " - " ~ cocorico_site_name }} }}
@@ -21,14 +25,9 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            <ol class="breadcrumb col-xs-12" xmlns="http://www.w3.org/1999/html">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pays</a></li>
-                <li><a href="#">Région</a></li>
-                <li><a href="#">Département</a></li>
-                <li><a href="#">Lieu dit</a></li>
-                <li>Code postale</li>
-            </ol>
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
         {% endblock %}
 
         {% block search_form %}
@@ -51,8 +50,6 @@
                                     {{ user.name }}
                                 </span>
 
-                                {% set user_address = user.getAddresses %}
-                                {% set user_address = (user_address is empty) ? null : user_address[0] %}
                                 {% if user_address %}
                                     {{ user_address.zip }},
                                     {{ user_address.city }},
@@ -91,11 +88,9 @@
                                     <!-- post -->
                                     {% set reviewBy = review.reviewBy %}
                                     {% set image_user = reviewBy.images|length ? reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
-                                    <article class="post" itemprop="review" itemscope
-                                             itemtype="http://schema.org/Review">
+                                    <article class="post">
                                         <header class="head">
-                                            <div class="author-img" itemprop="author" itemscope
-                                                 itemtype="http://schema.org/Person">
+                                            <div class="author-img">
                                                 <div class="img-holder">
                                                     <img alt="{{ reviewBy.firstName }}"
                                                          src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
@@ -104,13 +99,11 @@
                                                    class="author-name">{{ reviewBy.firstName }}</a>
                                             </div>
                                             <div class="meta">
-                                                <meta itemprop="datePublished"
-                                                      content="{{ review.createdAt|date('Y-m-d') }}">
                                                 <time datetime="{{ review.createdAt|date('Y-m-d') }}">{{ review.createdAt|localizeddate('short', 'none', 'fr') }} </time>
                                             </div>
                                         </header>
                                         <div class="post-content">
-                                            <p itemprop="reviewBody">{{ review.comment }}</p>
+                                            <p>{{ review.comment }}</p>
                                         </div>
                                         <footer class="footer">
                                             {% if review.booking.listing.user == user %}
@@ -137,7 +130,6 @@
                         <!-- gallery-small -->
                         <div id="user_profile" class="gallery-small slideshow">
                             <div class="slideset">
-                                {% set user_images = user.images %}
                                 {% if user_images|length %}
                                     {% for image in user_images %}
                                         <div class="slide">
@@ -213,8 +205,8 @@
                                     </button>
                                 </li>
                                 <li>
-                                    {{ 'form.user.has_booking:'|trans({}, 'cocorico_user') }}
-                                    {% if user.hasBooking %}
+                                    {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
+                                    {% if user.nbBookingsOfferer %}
                                         <i class="icon-ok"></i>
                                         <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
                                     {% else %}
@@ -223,7 +215,22 @@
                                     {% endif %}
                                     <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
                                             type="button"
-                                            data-original-title="{{ 'listing.show.has_booking.help'|trans({},'cocorico_listing') }}">
+                                            data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans({},'cocorico_listing') }}">
+                                        ?
+                                    </button>
+                                </li>
+                                <li>
+                                    {{ 'form.user.nb_bookings_asker:'|trans({}, 'cocorico_user') }}
+                                    {% if user.nbBookingsAsker %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.nb_bookings_asker.help'|trans({},'cocorico_listing') }}">
                                         ?
                                     </button>
                                 </li>
@@ -262,8 +269,7 @@
                                     {% for listing in user_listings %}
                                         {% set listing_translation = listing.translations[app.request.locale] %}
                                         <!-- listing-post -->
-                                        <article class="listing-post small" itemscope
-                                                 itemtype="http://schema.org/Product">
+                                        <article class="listing-post small">
                                             <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
                                                class="listing-box">
                                                 <div class="frame">
@@ -293,7 +299,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="foot">
-                                                                    <strong class="title" itemprop="name">
+                                                                    <strong class="title">
                                                                         {% for category in listing.categories %}
                                                                             {{ category.getName }},
                                                                         {% endfor %}
@@ -351,4 +357,15 @@
             );
         });
     </script>
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include '@CocoricoSeo/Frontend/Profile/_show_markup.jsonld.twig' ignore missing with {
+    'user': user,
+    'user_listings': user_listings,
+    'user_description': user_description,
+    'user_address': user_address
+    } only %}
 {% endblock %}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-05-10T13:29:13Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-06-20T22:22:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -49,12 +49,12 @@
             <trans-unit id="34f832a40f3b2312b5edf3fa0a87ef166bd6e803" resname="listing.search.result.meta_desc">
                 <source>listing.search.result.meta_desc</source>
                 <target>listing.search.result.meta_desc</target>
-                <jms:reference-file line="12">Frontend/ListingResult/result.html.twig</jms:reference-file>
+                <jms:reference-file line="11">Frontend/ListingResult/result.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="dbbb7d367ca632260337d44bfdae11156d2c45d4" resname="listing.search.result.meta_title">
                 <source>listing.search.result.meta_title</source>
                 <target>listing.search.result.meta_title</target>
-                <jms:reference-file line="8">Frontend/ListingResult/result.html.twig</jms:reference-file>
+                <jms:reference-file line="10">Frontend/ListingResult/result.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="3f11654f44b4d7474b2d72bbfcd8ae3731d008da" resname="listing.show.meta_desc">
                 <source>listing.show.meta_desc</source>
@@ -69,12 +69,12 @@
             <trans-unit id="bcc8420d0ad711f898edbf7ad82116ef5a1e45e6" resname="user.show.meta_desc">
                 <source>user.show.meta_desc</source>
                 <target>user.show.meta_desc</target>
-                <jms:reference-file line="13">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="17">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="5f6e3b950fe53c98fa64b5bc47a5d6cfde82c719" resname="user.show.meta_title">
                 <source>user.show.meta_title</source>
                 <target>user.show.meta_title</target>
-                <jms:reference-file line="9">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="13">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
         </body>
     </file>

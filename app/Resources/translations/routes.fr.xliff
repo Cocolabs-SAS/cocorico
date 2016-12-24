@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-05-10T13:28:19Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-06-20T22:17:14Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -182,6 +182,10 @@
                 <source>/dashboard/review/reviews-received</source>
                 <target>/tableau-de-bord/revue/revues-recues</target>
             </trans-unit>
+            <trans-unit id="eacc06390851235e3e6074a5ae93961daa151fe4" resname="cocorico_geo_create">
+                <source>/geocoding/{id}/create</source>
+                <target state="new">/geocoding/{id}/create</target>
+            </trans-unit>
             <trans-unit id="59be3aa1f035af965016dafe7e8c54a7ab427504" resname="cocorico_home">
                 <source>/</source>
                 <target>/</target>
@@ -228,19 +232,19 @@
             </trans-unit>
             <trans-unit id="08149a68b2433543823f9267f3478c31b931715f" resname="cocorico_user_dashboard_profile_edit_about_me">
                 <source>/dashboard/user_profile/edit_about_me</source>
-                <target>/tableau-de-bord/profile-utilisateur/editer-a-propos-de-moi</target>
+                <target>/tableau-de-bord/profil-utilisateur/editer-a-propos-de-moi</target>
             </trans-unit>
             <trans-unit id="178052b7e118b3230deb96bdcb8918301fa9bd73" resname="cocorico_user_dashboard_profile_edit_contact">
                 <source>/dashboard/user_profile/edit_contact</source>
-                <target>/tableau-de-bord/profile-utilisateur/editer-contact</target>
+                <target>/tableau-de-bord/profil-utilisateur/editer-contact</target>
             </trans-unit>
             <trans-unit id="43179d1dd2c91843f344a5430e8e16cffe175a50" resname="cocorico_user_dashboard_profile_edit_payment">
                 <source>/dashboard/user_profile/edit_payment</source>
-                <target>/tableau-de-bord/profile-utilisateur/editer-paiement</target>
+                <target>/tableau-de-bord/profil-utilisateur/editer-paiement</target>
             </trans-unit>
             <trans-unit id="3c96e3c605ccefef864eaf52d2eed6d263b9dc80" resname="cocorico_user_dashboard_profile_switch">
                 <source>/dashboard/user/profile-switch</source>
-                <target>/tableau-de-bord/profile-utilisateur/changer-de-profile</target>
+                <target>/tableau-de-bord/profil-utilisateur/changer-de-profil</target>
             </trans-unit>
             <trans-unit id="b890df7e94d738be9e59cf17c9776b7f51fcac5c" resname="cocorico_user_image">
                 <source>/user_image/</source>
@@ -260,7 +264,7 @@
             </trans-unit>
             <trans-unit id="5eac182800e731e2b43ca7c04183f2ef06d324fe" resname="cocorico_user_profile_show">
                 <source>/user_profile/{id}/show</source>
-                <target>/profile-utilisateur/{id}/voir</target>
+                <target>/profil-utilisateur/{id}/voir</target>
             </trans-unit>
             <trans-unit id="b2d05e08f510a64b25ddcb388d335df29955210b" resname="cocorico_user_register">
                 <source>/register</source>

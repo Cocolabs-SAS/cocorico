@@ -6245,7 +6245,7 @@ span.btn:focus {
 
 /* breadcrumbs */
 .breadcrumb {
-    margin: 19px 0 37px;
+    margin: 0 0 19px;
 }
 
 .breadcrumb > li {
@@ -7098,7 +7098,6 @@ span.btn:focus {
 /* definition-list */
 .info-list {
     margin: 0;
-    padding: 0;
     list-style: none;
     color: #58595b;
     line-height: 24px;
@@ -8256,7 +8255,7 @@ label {
 .currency-converter {
     display: inline-block;
     vertical-align: top;
-    width: 320px;
+    width: 370px;
     color: #ffffff;
     position: relative;
     border-radius: 5px;
@@ -8292,7 +8291,7 @@ label {
 
 .currency-converter .select-holder {
     float: right;
-    width: 51px;
+    width: 85px;
     position: relative;
     margin: 0 0 0 11px;
 }
@@ -8430,9 +8429,12 @@ label {
 .currency-converter.white .ico.resizer {
     width: 20px;
     padding: 0;
-    margin: 0 5px;
+    margin: 0 2px;
 }
 
+.currency-converter.white .field-row .form-control, .currency-converter.white .field-row .select-holder * {
+    font-size: 12px;
+}
 .currency-converter.white .ico.resizer:after {
     width: 20px;
     height: 9px;
@@ -8441,7 +8443,7 @@ label {
 }
 
 .currency-converter.white .select-holder {
-    width: 50px;
+    width: 60px;
     margin: 0 0 0 5px;
 }
 

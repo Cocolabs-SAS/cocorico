@@ -10,19 +10,16 @@
                     <!-- contact-info -->
                     <div class="contact-info pull-right">
                         <strong class="title">{{ 'footer.contact_us.title'|trans }}</strong>
-                        <strong class="hidden" itemscope itemtype="http://schema.org/Organization">
-                            {{ cocorico_site_name }}
-                        </strong>
-                        <ul class="list-unstyled" itemscope itemtype="http://schema.org/Organization">
-                            <li itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                        <ul class="list-unstyled">
+                            <li>
                                 <address><i class="icon-location"></i>{{ cocorico_address }}</address>
                             </li>
-                            <li itemprop="telephone">
+                            <li>
                                 <a href="tel:{{ cocorico_phone|replace({'+': '', '(': '', ')': '', ' ': ''}) }}">
                                     <i class="icon-phone"></i>{{ cocorico_phone }}
                                 </a>
                             </li>
-                            <li itemprop="email">
+                            <li>
                                 <a href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
                                     <i class="icon-mail-alt"></i>
                                     {{ cocorico_contact_mail_obfuscated|raw }}
@@ -68,6 +65,11 @@
             </div>
         </div>
     </aside>
+
+
+    {{ render(controller('CocoricoCMSBundle:Frontend/Footer:index',{
+        request: app.request
+    })) }}
 
     <!-- footer of the page -->
     <footer id="footer" class="container text-center">

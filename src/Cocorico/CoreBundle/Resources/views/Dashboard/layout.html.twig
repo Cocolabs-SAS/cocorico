@@ -11,12 +11,9 @@
         <div class="container">
             <div class="row">
                 <!-- breadcrumbs -->
-                {{ render(
-                controller(
-                'CocoricoBreadcrumbBundle:Breadcrumbs:breadcrumb',
-                { routeName: app.request.attributes.get('_route') }
-                )
-                ) }}
+                {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                    request: app.request
+                })) }}
 
                 <!-- main-tabs -->
                 <div class="main-tabs col-xs-12">

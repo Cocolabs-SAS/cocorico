@@ -15,8 +15,8 @@ This document contains information on how to download, install, and start using 
 
 **Note:** 
 
-* For Symfony 2.5.x, you need to use the 0.1.x release of the bundle
-* For Symfony 2.8.x, you need to use the 0.2.x release of the bundle
+* For Symfony 2.5.x, you need to use the 0.1.x release
+* For Symfony 2.8.x, you need to use the release >= 0.2.x
 
 # Installation
 

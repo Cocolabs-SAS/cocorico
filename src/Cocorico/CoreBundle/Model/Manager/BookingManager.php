@@ -94,8 +94,8 @@ class BookingManager extends BaseManager
         $minPrice,
         ListingAvailabilityManager $listingAvailabilityManager,
         $maxPerPage,
-        $mailer,
-        $smser,
+        TwigSwiftMailer $mailer,
+        TwigSmser $smser,
         $smsReceiver,
         $optionManager,
         $voucherManager,
@@ -956,13 +956,17 @@ class BookingManager extends BaseManager
                 $booking->setValidated(true);
                 $booking = $this->save($booking);
 
-                //Offerer hasBooking setted
+                //Offerer nb bookings setting
                 $offerer = $booking->getListing()->getUser();
-                if (!$offerer->getHasBooking()) {
-                    $offerer->setHasBooking(1);
-                    $this->em->persist($offerer);
-                    $this->em->flush();
-                }
+                $offerer->setNbBookingsOfferer($offerer->getNbBookingsOfferer() + 1);
+                $this->em->persist($offerer);
+                $this->em->flush();
+
+                //Asker nb bookings setting
+                $asker = $booking->getUser();
+                $asker->setNbBookingsAsker($asker->getNbBookingsAsker() + 1);
+                $this->em->persist($asker);
+                $this->em->flush();
 
                 //Voucher used
                 if ($this->voucherIsEnabled()) {
@@ -1205,12 +1209,13 @@ class BookingManager extends BaseManager
      */
     public function voucherIsEnabled()
     {
+        $voucherIsEnabled = !$this->em->getMetadataFactory()->isTransient('Cocorico\VoucherBundle\Entity\Voucher');
         //Voucher and Option Bundles not ready yet for booking amount computing
-        if ($this->optionIsEnabled()) {
+        if ($voucherIsEnabled && $this->optionIsEnabled()) {
             throw new \Exception("Voucher and Option are enabled but not ready yet");
         }
 
-        return !$this->em->getMetadataFactory()->isTransient('Cocorico\VoucherBundle\Entity\Voucher');
+        return $voucherIsEnabled;
     }
 
     /**

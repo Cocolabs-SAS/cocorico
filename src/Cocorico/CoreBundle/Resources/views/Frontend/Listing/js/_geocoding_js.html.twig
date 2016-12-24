@@ -1,5 +1,5 @@
 {#
- Javascript geocoding for listing edition and creation
+ Javascript geocoding for listing edition and creation without place auto complettion
 #}
 {% trans_default_domain 'cocorico_geo' %}
 
@@ -158,7 +158,7 @@
         });
 
 
-        //@todo make this work
+        //todo: make this work
         $("[type=submit]").click(function (e) {
             if (!$("#listing_location_coordinate").val()) {
                 refreshGeocoding();

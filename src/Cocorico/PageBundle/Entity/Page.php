@@ -65,6 +65,16 @@ class Page extends BasePage
         return (string)$this->translate()->getDescription();
     }
 
+    public function getMetaTitle()
+    {
+        return (string)$this->translate()->getMetaTitle();
+    }
+
+    public function getMetaDescription()
+    {
+        return (string)$this->translate()->getMetaDescription();
+    }
+
     public function __toString()
     {
         return $this->getTitle();

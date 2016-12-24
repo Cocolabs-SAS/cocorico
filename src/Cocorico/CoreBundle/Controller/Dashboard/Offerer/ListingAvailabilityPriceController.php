@@ -48,6 +48,7 @@ class ListingAvailabilityPriceController extends Controller
      */
     public function editAvailabilitiesPricesAction(Request $request, Listing $listing)
     {
+        $translator = $this->get('translator');
         $selfUrl = $this->generateUrl(
             'cocorico_dashboard_listing_edit_availabilities_prices',
             array('listing_id' => $listing->getId())
@@ -60,15 +61,11 @@ class ListingAvailabilityPriceController extends Controller
         if ($success == 1) {
             $this->get('session')->getFlashBag()->add(
                 'success',
-                $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
+                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($selfUrl);
         }
-
-        $this->get('cocorico.breadcrumbs_manager')->addListingItem($request, $listing);
-        $text = $this->get('translator')->trans('price and conditions', array(), 'cocorico_breadcrumbs');
-        $this->get('cocorico.breadcrumbs_manager')->addItem($text, $selfUrl);
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Listing:edit_availabilities_prices.html.twig',

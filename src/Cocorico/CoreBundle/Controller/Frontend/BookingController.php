@@ -135,6 +135,10 @@ class BookingController extends Controller
             $this->addFlashError($success);
         }
 
+        //Breadcrumbs
+        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addBookingNewItems($request, $booking);
+
         return $this->render(
             'CocoricoCoreBundle:Frontend/Booking:new.html.twig',
             array(

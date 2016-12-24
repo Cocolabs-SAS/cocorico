@@ -91,6 +91,7 @@ class GlobalHelper
 
 
     /**
+     *
      * @param Form              $form
      * @param FlashBagInterface $flashBag
      * @return array
@@ -113,6 +114,10 @@ class GlobalHelper
     }
 
     /**
+     * Post data to URL
+     *
+     * todo: move to new Utils class
+     *
      * @param $url
      * @param $params
      * @return mixed
@@ -161,6 +166,8 @@ class GlobalHelper
 
     /**
      * Manually follow locations due to open_base_dir restriction effect
+     *
+     * todo: move to new Utils class
      *
      * @param      $ch
      * @param int  $redirects
@@ -221,6 +228,8 @@ class GlobalHelper
      * Convert number of seconds into hours, minutes and seconds
      * and return an array containing those values
      *
+     * todo: move to new Utils class
+     *
      * @param integer $inputSeconds Number of seconds to parse
      * @return array
      */
@@ -257,6 +266,8 @@ class GlobalHelper
     }
 
     /**
+     * todo: move to new Utils class
+     *
      * @param string $msg
      */
     public function log($msg)
@@ -276,6 +287,10 @@ class GlobalHelper
     }
 
     /**
+     * Parse headers
+     *
+     * todo: move to new Utils class
+     *
      * @param array $headers
      * @return array
      */

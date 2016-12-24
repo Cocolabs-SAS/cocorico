@@ -53,6 +53,7 @@ web/media/cache/*
 web/images/Thumbs.db
 web/assets/*
 web/Thumbs.db
+web/sitemap.xml
 
 watch
 
@@ -70,6 +71,13 @@ php
 
 /auth.json
 
+
 tmp/*
 tmp/*.*
 tmp/bu
+tmp/tmp.json
+
+#Mangopay
+!tmp/mangopay/
+!tmp/mangopay/.gitkeep
+tmp/mangopay/MangoPaySdkStorage.tmp.php

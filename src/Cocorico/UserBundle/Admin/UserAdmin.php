@@ -223,10 +223,19 @@ class UserAdmin extends SonataUserAdmin
                 )
             )
             ->add(
-                'hasBooking',
+                'nbBookingsOfferer',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
+                )
+            )
+            ->add(
+                'nbBookingsAsker',
+                null,
+                array(
+                    'required' => false,
+                    'disabled' => true
                 )
             )
             ->add(

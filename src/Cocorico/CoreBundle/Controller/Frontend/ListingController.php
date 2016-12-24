@@ -102,13 +102,18 @@ class ListingController extends Controller
      * @Security("is_granted('view', listing)")
      * @ParamConverter("listing", class="Cocorico\CoreBundle\Entity\Listing", options={"repository_method" = "findOneBySlug"})
      *
-     * @param $listing Listing
+     * @param Request $request
+     * @param Listing $listing
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Listing $listing)
+    public function showAction(Request $request, Listing $listing)
     {
         $reviews = $this->container->get('cocorico.review.manager')->getListingReviews($listing);
+
+        //Breadcrumbs
+        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addListingShowItems($request, $listing);
 
         return $this->render(
             'CocoricoCoreBundle:Frontend/Listing:show.html.twig',

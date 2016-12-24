@@ -25,11 +25,13 @@ class ListingCategoryRepository extends NestedTreeRepository
     public function getNodesHierarchyTranslatedQueryBuilder($locale)
     {
         $qb = $this->getNodesHierarchyQueryBuilder();
+
         $alias = $qb->getRootAliases();
         $this->rootAlias = $alias[0];
 
-        $qb->addSelect('t');
-        $qb->leftJoin($this->rootAlias . ".translations", 't')
+        $qb
+            ->addSelect('t')
+            ->leftJoin($this->rootAlias . ".translations", 't')
             ->andWhere('t.locale = :locale')
             ->setParameter('locale', $locale);
 

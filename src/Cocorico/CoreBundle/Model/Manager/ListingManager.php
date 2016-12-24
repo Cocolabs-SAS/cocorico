@@ -211,7 +211,7 @@ class ListingManager extends BaseManager
     public function alertUpdateCalendars()
     {
         $result = 0;
-        $listings = $this->getRepository()->findPublishedListing();
+        $listings = $this->getRepository()->findAllPublished();
 
         foreach ($listings as $listing) {
             if ($this->alertUpdateCalendar($listing)) {

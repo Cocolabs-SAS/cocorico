@@ -1,0 +1,5 @@
+ #Disable Sonata Admin User Group
+services:
+    sonata.user.admin.group:
+        abstract: true
+        public: false

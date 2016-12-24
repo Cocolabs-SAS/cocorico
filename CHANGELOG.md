@@ -10,6 +10,54 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+
+## [0.3.1] - 2016-12-24
+
+### Added
+- Add geo localized breadcrumbs
+- Add "Access to site" link in admin
+- Add SeoBundle functionality : display seo content on listing search result page
+- Add SeoBundle functionality : Sitemap generation
+- Add CMSBundle functionality : Footer links management
+- Add SeoBundle functionality : JSON-LD Markups data
+- Add form tag to message in booking show page
+
+### Fixed
+- Fix duplicate rows in `ListingSearchManager->getFindQueryBuilder`
+- Fix user profile urls translation
+- Fix missing label_catalogue on some Bundles
+- Fix admin "go to site" link by disassociating it from translations activation
+- Fix missing admin translations
+- Fix GeoBundle findAll repositories methods conflict with default findAll method in SonataAdmin
+- Fix search form categories list by adding missing fields in findQueryBuilder
+- Fix selected countries validation while listing deposit when all countries are enabled
+- Fix voucherIsEnabled method when ListingOption bundle is enabled
+- Fix characteristics admin translations
+- Fix user address fields requirement
+
+### Changed
+- Replace condition voucherIsEnabled by mangopayIsEnabled in BookingManager->findPayedByAsker
+- Factorize user login in listing deposit form
+- Hide ratings in marker popin when no ratings
+- Set first name and last name required in user admin form
+- CS
+- Disable Curl SSL VERIFYHOST in non prod env
+- Uniformize breadcrumbs management
+- Move bundles services loading from bundles config.yml to bundles extension (UserBundle, PageBundle)
+- Change and enhance placeholder method for translations form fields
+- Enhance PageBundle translations
+- Change Listing repository findPublishedListing method
+- Remove all Microdata markups content
+- Add sitemap.xml to rsync_exclude.txt
+- Add and setting bookings number as asker/offerer in User entity
+- Add command to reset bookings number as asker/offerer
+- Add drop down icon to flags and currencies switchers
+- Change packages repository method in composer.json
+- Remove autoescape in show_voucher
+- Change duplicate h1 to h2 in listingshow page 
+- Move capitalize select box text css in all-override.css
+- Change error fields name in edit_contact
+
 ## [0.2.6] - 2016-11-29
 
 ### Added

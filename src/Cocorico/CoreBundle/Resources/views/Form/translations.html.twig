@@ -1,60 +1,63 @@
 {% block a2lix_translations_widget %}
     <div role="tabpanel">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            {% for translationsFields in form %}
-                {% set locale = translationsFields.vars.name %}
-                {#to manage multiple tabset in same page#}
-                {% set tab_link =  (translationsFields|first).vars.id ~ "-" ~ locale %}
+        {% if locales|length > 1 %}
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {% for translations_fields in form %}
+                    {% set locale = translations_fields.vars.name %}
+                    {#to manage multiple tabset in same page#}
+                    {% set tab_link =  (translations_fields|first).vars.id ~ "-" ~ locale %}
 
-                <li role="presentation" {% if app.request.locale == locale %}class="active"{% endif %}>
-                    <a href="#{{ tab_link }}" data-toggle="tab" data-text="{{ locale }}">
-                        {{ locale|capitalize }}
-                        {#{% if form.vars.default_locale == locale %}[Default]{% endif %}#}
-                        {% if translationsFields.vars.required %}*{% endif %}
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
+                    <li role="presentation" {% if app.request.locale == locale %}class="active"{% endif %}>
+                        <a href="#{{ tab_link }}" data-toggle="tab" data-text="{{ locale }}">
+                            {{ locale|capitalize }}
+                            {% if translations_fields.vars.required %}*{% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         <!-- Tab panes -->
         <div class="tab-content">
-            {% for translationsFields in form %}
-                {% set locale = translationsFields.vars.name %}
+            {% for translations_fields in form %}
+                {% set locale = translations_fields.vars.name %}
                 {#to manage multiple tabset in same page#}
-                {% set tab_link =  (translationsFields|first).vars.id ~ "-" ~ locale %}
+                {% set tab_link =  (translations_fields|first).vars.id ~ "-" ~ locale %}
 
                 <div role="tabpanel" class="tab-pane {% if app.request.locale == locale %}active{% endif %}"
                      id="{{ tab_link }}">
 
-                    {#{{ form_errors(translationsFields) }}#}
-                    {% for translationsField in translationsFields %}
-                        {% set type = translationsField.vars.block_prefixes %}
-                        {% set placeholderTxt = '' %}
-                        {% if 'listing_options_' not in translationsField.vars.id %}
-                            {% set placeholderTxt = translationsField.vars.id ~ '_placeholder' %}
+                    {#{{ form_errors(translations_fields) }}#}
+                    {% for translations_field in translations_fields %}
+                        {% set type = translations_field.vars.block_prefixes %}
+                        {% set translation_domain = translations_field.vars.translation_domain|default('cocorico') %}
+                        {% set placeholder = translations_field.vars.attr.placeholder|default('') %}
+
+                        {% if placeholder == 'auto' %}
+                            {% set placeholder = translations_field.vars.id ~ '_placeholder' %}
                         {% endif %}
 
                         {% if "hidden" not in type %}
                             <div class="field-row">
-                                {{ form_errors(translationsField) }}
+                                {{ form_errors(translations_field) }}
                                 {% if "textarea" not in type %}
-                                    <span class="label">{{ form_label(translationsField) }}</span>
+                                    <span class="label">{{ form_label(translations_field) }}</span>
                                     <div class="field-holder">
-                                        {{ form_widget(translationsField, {
+                                        {{ form_widget(translations_field, {
                                             'attr': {
                                                 'class': 'form-control',
-                                                'placeholder': placeholderTxt|trans({}, 'cocorico_listing')
+                                                'placeholder': placeholder|trans({}, translation_domain)
                                             }
                                         }) }}
                                     </div>
                                 {% else %}
-                                    <span class="label block">{{ form_label(translationsField) }}</span>
+                                    <span class="label block">{{ form_label(translations_field) }}</span>
                                     <div class="thin-scroll">
-                                        {{ form_widget(translationsField, {
+                                        {{ form_widget(translations_field, {
                                             'attr': {
                                                 'class': 'form-control',
-                                                'placeholder': placeholderTxt|trans({}, 'cocorico_listing')
+                                                'placeholder': placeholder|trans({}, translation_domain)
                                             }
                                         }) }}
                                     </div>

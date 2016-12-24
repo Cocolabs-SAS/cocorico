@@ -53,12 +53,19 @@ class MessageRepository extends EntityRepository
                 ->leftJoin('t.listing', 'l')
                 ->setParameter('user', $participant);
 
-            $result = $builder->getQuery()->getResult();
+            $query = $builder->getQuery();
+            $query->useResultCache(true, 3600, 'getNbUnreadMessageType');
+
+            $result = $query->getResult();
+
         } else {
             // case when needed count of all unread messages for a user
             $builder->select($builder->expr()->count('mm.id'));
 
-            $result = $builder->getQuery()->getSingleScalarResult();
+            $query = $builder->getQuery();
+            $query->useResultCache(true, 3600, 'getNbUnreadMessage');
+
+            $result = $query->getSingleScalarResult();
         }
 
         return $result;

@@ -12,15 +12,15 @@
 namespace Cocorico\PageBundle\Repository;
 
 use Cocorico\PageBundle\Entity\PageTranslation;
+use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 
 class PageRepository extends EntityRepository
 {
     /**
-     * @param string $slug
-     * @param string $locale
-     *
+     * @param $slug
+     * @param $locale
      * @return mixed|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
@@ -47,9 +47,7 @@ class PageRepository extends EntityRepository
     /**
      * @param $slug
      * @param $locale
-     *
-     * @return mixed|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return array|null
      */
     public function findTranslationsBySlug($slug, $locale)
     {
@@ -66,4 +64,26 @@ class PageRepository extends EntityRepository
             return null;
         }
     }
+
+    /**
+     * @return array|null
+     */
+    public function findAllPublished()
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->addSelect("t")
+            ->leftJoin('p.translations', 't')
+            ->andWhere('p.published = :published')
+            ->setParameter('published', true)
+            ->orderBy('p.id', 'ASC')
+            ->addOrderBy('t.locale', 'ASC');
+        try {
+            $query = $queryBuilder->getQuery();
+
+            return $query->getResult(AbstractQuery::HYDRATE_ARRAY);
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
+
 }

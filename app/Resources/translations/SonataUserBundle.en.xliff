@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-05-10T13:29:14Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-06-20T22:22:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -126,11 +126,6 @@
                 <target>First Name</target>
                 <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
             </trans-unit>
-            <trans-unit id="e26b3630af20cbcdc30c794454c0f677911b9aa1" resname="form.label_has_booking">
-                <source>form.label_has_booking</source>
-                <target>Has Booking</target>
-                <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
-            </trans-unit>
             <trans-unit id="4f0676231a848e7a463d0ca0fb9e8cd30e55bd55" resname="form.label_iban">
                 <source>form.label_iban</source>
                 <target>IBAN</target>
@@ -176,6 +171,16 @@
                 <target>Nationality</target>
                 <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
             </trans-unit>
+            <trans-unit id="314c8ce85451cc64580cf4c03f0153182ba713e5" resname="form.label_nb_bookings_asker">
+                <source>form.label_nb_bookings_asker</source>
+                <target>Bookings as asker</target>
+                <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="6841ad85d96f09359dced016dbfd443a58acd8a3" resname="form.label_nb_bookings_offerer">
+                <source>form.label_nb_bookings_offerer</source>
+                <target>Bookings as offerer</target>
+                <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
+            </trans-unit>
             <trans-unit id="fa12e1be90ea63bd08ebb826d140e90230fa0347" resname="form.label_phone">
                 <source>form.label_phone</source>
                 <target>Phone</target>
@@ -211,11 +216,6 @@
                 <target>Created at</target>
                 <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
             </trans-unit>
-            <trans-unit id="f349dd8d20e769bda6a4bed51c6994080ad8b75b" resname="list.label_email">
-                <source>list.label_email</source>
-                <target>Email</target>
-                <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
-            </trans-unit>
             <trans-unit id="6c847e6aed394db187a151d6ded703ce6fa13b8c" resname="list.label_enabled">
                 <source>list.label_enabled</source>
                 <target>Enabled</target>
@@ -244,6 +244,11 @@
             <trans-unit id="332d099fbb742861ea4a8ddbe0ce43467d6600fa" resname="list.label_impersonating">
                 <source>list.label_impersonating</source>
                 <target>Impersonating</target>
+                <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="8a0feda74cd7514d97c55cb823aa45c73abd73b9" resname="list.label_listings">
+                <source>list.label_listings</source>
+                <target state="new">Listings</target>
                 <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d832a7ec4617049cd2da61a11b6539925558428e" resname="list.label_locked">

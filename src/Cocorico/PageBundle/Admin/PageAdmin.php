@@ -200,6 +200,7 @@ class PageAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.page.created_at.label',
+                    'format' => 'd/m/Y'
                 )
             );
 

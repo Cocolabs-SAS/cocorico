@@ -2,16 +2,6 @@
 
 {% trans_default_domain 'cocorico_user' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-
-    <style type="text/css">
-        .jcf-option::first-letter, .jcf-select-text::first-letter {
-            text-transform: capitalize;
-        }
-    </style>
-{% endblock %}
-
 {% block nav_side_dashboard -%}
     {% set nav_side_dashboard_current = 'about_me' %}
     {{ parent() }}

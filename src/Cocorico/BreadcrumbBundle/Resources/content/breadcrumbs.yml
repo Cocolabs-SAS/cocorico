@@ -1,83 +1,133 @@
 # breadcrumbs.yml
-cocorico_dashboard_message:
-    -
-        text: 'Messages'
-        route: 'cocorico_dashboard_message'
 
+# Dashboard
+## Booking
 cocorico_dashboard_booking_offerer:
-    -
-        text: 'Bookings'
+    -   text: 'Bookings'
         route: 'cocorico_dashboard_booking_offerer'
 
+cocorico_dashboard_booking_show_offerer:
+    -   text: 'Bookings'
+        route: 'cocorico_dashboard_booking_offerer'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Booking', 'entityMethod': 'getListing'}
+
 cocorico_dashboard_booking_bank_wire_offerer:
-    -
-        text: 'Payments'
+    -   text: 'Payments'
         route: 'cocorico_dashboard_booking_bank_wire_offerer'
+    -   text: 'Bank wire'
 
 cocorico_dashboard_booking_asker:
-    -
-        text: 'Bookings'
+    -   text: 'Bookings'
         route: 'cocorico_dashboard_booking_asker'
 
+cocorico_dashboard_booking_show_asker:
+    -   text: 'Bookings'
+        route: 'cocorico_dashboard_booking_asker'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Booking', 'entityMethod': 'getListing'}
+
 cocorico_dashboard_booking_payin_asker:
-    -
-        text: 'Payments'
+    -   text: 'Payments'
         route: 'cocorico_dashboard_booking_payin_asker'
+    -   text: 'Payments done'
 
 cocorico_dashboard_booking_payin_refund_asker:
-    -
-        text: 'Payments'
+    -   text: 'Payments'
         route: 'cocorico_dashboard_booking_payin_refund_asker'
+    -   text: 'Payments refund'
 
+
+##Listing
 cocorico_dashboard_listing:
-    -
-        text: 'Listing'
+    -   text: 'Listing'
         route: 'cocorico_dashboard_listing'
 
+cocorico_dashboard_listing_edit_presentation:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Presentation'
+
+cocorico_dashboard_listing_edit_availabilities_prices:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'listing_id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Price and conditions'
+
+cocorico_dashboard_listing_edit_availabilities_status:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'listing_id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Calendar'
+
+cocorico_dashboard_listing_edit_images:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Photos'
+
+cocorico_dashboard_listing_edit_characteristic:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Characteristics'
+
+cocorico_dashboard_listing_edit_various_information:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Various informations'
+
+
+##Review
 cocorico_dashboard_reviews_received:
-    -
-        text: 'Comments'
+    -   text: 'Comments'
         route: 'cocorico_dashboard_reviews_received'
-    -
-        text: 'Rating Received'
+    -   text: 'Rating Received'
         route: 'cocorico_dashboard_reviews_received'
 
 cocorico_dashboard_reviews_made:
-    -
-        text: 'Comments'
+    -   text: 'Comments'
         route: 'cocorico_dashboard_reviews_received'
-    -
-        text: 'Rating Made'
+    -   text: 'Rating Made'
         route: 'cocorico_dashboard_reviews_made'
 
+cocorico_dashboard_review_new:
+    -   text: 'Comments'
+        route: 'cocorico_dashboard_reviews_received'
+    -   text: 'New comment'
+
+
+
+##User Profile
 cocorico_user_dashboard_profile_edit_about_me:
-    -
-        text: 'Profile'
+    -   text: 'Profile'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
-    -
-        text: 'About me'
+    -   text: 'About me'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
 
 cocorico_user_dashboard_profile_edit_payment:
-    -
-        text: 'Profile'
+    -   text: 'Profile'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
-    -
-        text: 'Payment Information'
+    -   text: 'Payment Information'
         route: 'cocorico_user_dashboard_profile_edit_payment'
 
 cocorico_user_dashboard_profile_edit_contact:
-    -
-        text: 'Profile'
+    -   text: 'Profile'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
-    -
-        text: 'Contact Information'
+    -   text: 'Contact Information'
         route: 'cocorico_user_dashboard_profile_edit_contact'
 
 cocorico_listing_alert_dashboard_alert:
-    -
-        text: 'Profile'
+    -   text: 'Profile'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
-    -
-        text: 'My Alerts'
+    -   text: 'My Alerts'
         route: 'cocorico_listing_alert_dashboard_alert'
+
+
+##Message
+cocorico_dashboard_message:
+    -   text: 'Messages'
+        route: 'cocorico_dashboard_message'
+
+#cocorico_dashboard_message_thread_view: See Cocorico\MessageBundle\Controller\Dashboard\MessageController
+

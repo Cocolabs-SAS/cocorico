@@ -41,14 +41,9 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            <ol class="breadcrumb col-xs-12" xmlns="http://www.w3.org/1999/html">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Pays</a></li>
-                <li><a href="#">Région</a></li>
-                <li><a href="#">Département</a></li>
-                <li><a href="#">Lieu dit</a></li>
-                <li>Code postale</li>
-            </ol>
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
         {% endblock %}
 
         {% block main %}

@@ -6,8 +6,7 @@
             {{ app.request.requestUri|slice(4)|replace({'/': " > ", '-': " ", '_': " "})|ucwords ~ " - " ~ cocorico_site_name }}
         {%- endblock -%}
     </title>
-    <meta name="description"
-          content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
+    <meta name="description" content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
 
     {%- block open_graph_data -%}{%- endblock -%}
 
@@ -67,6 +66,11 @@
     </script>
 
     {% include '@CocoricoCore/Frontend/Common/js/_google_analytics_js.html.twig' only %}
+
+    {#Rich snippets used by search engines like google  #}
+    {%- block markup_jsonld -%}
+        {% include '@CocoricoSeo/Frontend/Common/_markup.jsonld.twig' ignore missing only %}
+    {%- endblock -%}
 </head>
 
 <body class="loading {% block theme %}{% endblock %}">

@@ -20,6 +20,7 @@ services:
             - "@jms_i18n_routing.router"
             - "@cocorico.breadcrumbs_loader"
             - "@translator.default"
+            - "@doctrine.orm.entity_manager"
 
     cocorico.translator.breadcrumbs_extractor:
         class: Cocorico\BreadcrumbBundle\Translator\BreadcrumbsExtractor

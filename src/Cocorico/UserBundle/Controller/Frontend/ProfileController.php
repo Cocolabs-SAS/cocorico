@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -37,12 +38,13 @@ class ProfileController extends ContainerAware
      * @Method("GET")
      * @ParamConverter("user", class="CocoricoUserBundle:User")
      *
-     * @param  User $user
+     * @param  Request $request
+     * @param  User    $user
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
 
-    public function showAction(User $user)
+    public function showAction(Request $request, User $user)
     {
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -56,6 +58,10 @@ class ProfileController extends ContainerAware
             $this->container->get('request')->getLocale(),
             array(Listing::STATUS_PUBLISHED)
         );
+
+        //Breadcrumbs
+        $breadcrumbs = $this->container->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addProfileShowItems($request, $user);
 
         return $this->container->get('templating')->renderResponse(
             'CocoricoUserBundle:Frontend/Profile:show.html.twig',

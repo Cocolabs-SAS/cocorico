@@ -1,0 +1,25 @@
+{% if footers|length %}
+    <aside class="aside-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <nav class="navarea">
+                        <ul class="list-unstyled pull-left">
+                            <li class="title">{{ 'footer.title.various'|trans({}, 'cocorico') }}</li>
+                            {% for footer in footers %}
+                                <li>
+                                    <a href="{{ footer.link }}">{{ footer.title }}</a>
+                                </li>
+                                {% if loop.index is divisible by(3) and not loop.last %}
+                                    {{ '</ul>' }}
+                                    {{ '<ul class="list-unstyled pull-left">' }}
+                                    {{ '<li class="title">&nbsp;</li>' }}
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </aside>
+{% endif %}

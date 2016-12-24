@@ -34,7 +34,7 @@ class AddressFormType extends AbstractType
                 null,
                 array(
                     'label' => 'form.address.city',
-                    'required' => true
+                    'required' => false
                 )
             )
             ->add(
@@ -42,7 +42,7 @@ class AddressFormType extends AbstractType
                 null,
                 array(
                     'label' => 'form.address.zip',
-                    'required' => true
+                    'required' => false
                 )
             )
             ->add(
@@ -50,7 +50,7 @@ class AddressFormType extends AbstractType
                 'country',
                 array(
                     'label' => 'form.address.country',
-                    'required' => true,
+                    'required' => false,
                     'data' => 'FR',
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
@@ -64,7 +64,7 @@ class AddressFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\UserAddress',
-                'csrf_token_id' => 'billing',
+                'csrf_token_id' => 'user_address',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true
             )

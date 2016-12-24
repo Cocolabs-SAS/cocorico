@@ -261,18 +261,24 @@ file that was distributed with this source code.
                         {% endblock side_bar_nav %}
                         {% block side_bar_after_nav %}
                             {% if app.security.token and is_granted('ROLE_SONATA_ADMIN') %}
-                                {% if cocorico_admin_translation %}
-                                    {# add JMS Translation link #}
-                                    <ul class="sidebar-menu">
+                                {# add JMS Translation link #}
+                                <ul class="sidebar-menu">
+                                    {% if cocorico_admin_translation %}
                                         <li>
                                             <a href="{{ path('jms_translation_index') }}" target="_blank">
-                                                <i class="fa fa-angle-double-right"></i>
+                                                <i class="fa fa-flag-o"></i>
                                                 <span>{{ 'Translations'|trans({}, 'SonataAdminBundle') }}</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                    {# end link #}
-                                {% endif %}
+                                    {% endif %}
+                                    <li>
+                                        <a href="{{ path('cocorico_home') }}" target="_blank">
+                                            <i class="fa fa-home"></i>
+                                            <span>{{ 'Access site'|trans({}, 'SonataAdminBundle') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                {# end link #}
                             {% endif %}
                         {% endblock %}
                     {% endblock sonata_side_nav %}

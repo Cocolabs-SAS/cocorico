@@ -40,26 +40,35 @@ Add this commands to your cron tab and don't forget to set the same php timezone
     
 9. Accept or refuse bookings from SMS (Optional. SMSBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS`
+    `* *  * * *  php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS --env=dev`
 
 10. Check phone from SMS (NOT IMPLEMENTED. Optional. SMSBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS`
+    `* *  * * *  php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS --env=dev`
 
 11. Alert user if new listings are found (Optional. ListingAlertBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico_listing_alert:alertNewListingsFound`
+    `* *  * * *  php <path-to-your-app>app/console cocorico_listing_alert:alertNewListingsFound --env=dev`
+
+12. Generate Sitemap (Optional. ListingSeoBundle must be enabled)
+    
+    `* *  * * *  php <path-to-your-app>app/console cocorico_seo:sitemap:generate --env=dev`
+
 
         
 Translations
 ------------
 
 Views, Forms, Constraints messages are translated from JSM Translation bundle.
-    To ignore some translations add `/** @Ignore */` above the text to not translate.
-    To make some entity contents translatable by JSM prefix text with entity.
-        Ex : entity.custom.name
-    To add some entity contents untranslated by JMS see Cocorico\CoreBundle\Translator\EntityExtractor
-    In case of problem connection restart Apache then MongoDB
+
+- To ignore some translations add `/** @Ignore */` above the text to not translate.
+- To make some entity contents translatable by JSM prefix text with entity.
+    Ex : entity.custom.name
+- To add some entity contents untranslated by JMS see Cocorico\CoreBundle\Translator\EntityExtractor
+- To make some admin contents translatable by JSM prefix text with admin.
+    Ex : admin.listing.title
+- In case of problem connection restart Apache then MongoDB
+
 
 Extract translations
 --------------------
@@ -139,11 +148,14 @@ VAT
 ---
 
 Listing price fixing can be set with or without VAT through the parameter `cocorico.include_vat` value.
+
 If it's setted to true then:
+
 - listing price fixing include VAT
 - all other prices like booking, bank wire, ... include also VAT
 
 If it's setted to false then:
+
 - listing price fixing don't include VAT
 - Most of asker relative prices are displayed including VAT
 - Most of offerer relative prices are displayed excluding VAT

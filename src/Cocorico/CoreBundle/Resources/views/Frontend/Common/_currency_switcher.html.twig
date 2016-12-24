@@ -2,8 +2,9 @@
 
 {% if currencies|length > 1 %}
     <li class="dropdown">
-        <a href="#" tabindex="9" class="dropdown-toggle" data-toggle="dropdown" role="button"
-           aria-expanded="false">{{ currencies[currentCurrency] ~ " " ~ currentCurrency }}
+        <a href="#" tabindex="9" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+            {{ currencies[currentCurrency] ~ " " ~ currentCurrency }}
+            <span class="icon-down-open-mini"></span>
         </a>
 
         <ul class="dropdown-menu" role="menu">

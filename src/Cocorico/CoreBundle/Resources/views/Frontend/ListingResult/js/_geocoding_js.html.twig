@@ -1,5 +1,5 @@
 {#
- Javascript geocoding for search listing
+ Javascript geocoding for listing search with place auto completion
 #}
 {% trans_default_domain 'cocorico_geo' %}
 
@@ -46,7 +46,13 @@
 
         function geocodeSuccess(result) {
             fillAddressFields(result);
-//            console_log("geocodeSuccess", result);
+            //Disable form fields with empty value. These empty fields wont be added to the url
+//            $searchForm.find('select:not(:has(option:selected[value!=""]))').attr('disabled', 'disabled');
+//            $searchForm.find('input[type=text], input[type=time]').each(function(){
+//                if (!$(this).val()) {
+//                    $(this).attr('disabled', 'disabled');
+//                }
+//            });
             $searchForm.unbind('submit').submit();
         }
 

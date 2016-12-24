@@ -11,8 +11,8 @@
 
 namespace Cocorico\UserBundle\Mailer;
 
-use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\UserBundle\Entity\User;
+use FOS\MessageBundle\Model\ThreadInterface;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -90,11 +90,10 @@ class TwigSwiftMailer implements MailerInterface
 
 
     /**
-     *
-     * @param UserInterface $user
-     * @param Thread        $thread
+     * @param UserInterface   $user
+     * @param ThreadInterface $thread
      */
-    public function sendNotificationForNewMessageToUser(UserInterface $user, Thread $thread)
+    public function sendNotificationForNewMessageToUser(UserInterface $user, ThreadInterface $thread)
     {
         $template = $this->parameters['templates']['new_message_user'];
         $threadUrl = $this->router->generate(

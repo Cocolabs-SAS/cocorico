@@ -48,6 +48,7 @@ class ListingAvailabilityStatusController extends Controller
      */
     public function editAvailabilitiesStatusAction(Request $request, Listing $listing)
     {
+        $translator = $this->get('translator');
         $selfUrl = $this->generateUrl(
             'cocorico_dashboard_listing_edit_availabilities_status',
             array('listing_id' => $listing->getId())
@@ -60,16 +61,11 @@ class ListingAvailabilityStatusController extends Controller
         if ($success == 1) {
             $this->get('session')->getFlashBag()->add(
                 'success',
-                $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
+                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($selfUrl);
         }
-
-        $bcM = $this->get('cocorico.breadcrumbs_manager');
-        $bcM->addListingItem($request, $listing);
-        $text = $this->get('translator')->trans('calendar', array(), 'cocorico_breadcrumbs');
-        $bcM->addItem($text, $selfUrl);
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Listing:edit_availabilities_status.html.twig',

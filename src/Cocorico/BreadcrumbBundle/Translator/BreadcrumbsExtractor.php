@@ -40,9 +40,11 @@ class BreadcrumbsExtractor implements ExtractorInterface
 
         foreach ($breadcrumbRoutes as $key => $breadcrumbs) {
             foreach ($breadcrumbs as $breadcrumb) {
-                $message = new Message($breadcrumb['text'], $this->domain);
-                $message->setDesc($breadcrumb['text']);
-                $catalogue->add($message);
+                if (!is_array($breadcrumb['text'])) {
+                    $message = new Message($breadcrumb['text'], $this->domain);
+                    $message->setDesc($breadcrumb['text']);
+                    $catalogue->add($message);
+                }
             }
         }
 

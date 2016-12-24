@@ -1,9 +1,13 @@
 {% extends '::base.html.twig' %}
 
 {% if page %}
-    {% set translation = page.translations[app.request.locale] %}
-    {% block meta_title %} {{ translation.metaTitle }} {% endblock meta_title %}
-    {% block meta_description %} {{ translation.metaDescription }} {% endblock meta_description %}
+    {%- block meta_title -%}
+        {{ page.metaTitle }}
+    {%- endblock -%}
+
+    {%- block meta_description -%}
+        {{ page.metaDescription }}
+    {%- endblock -%}
 {% endif %}
 
 {% block layout %}
@@ -11,11 +15,13 @@
         {% block main %}
             <div class="min-height">
                 {% if page %}
-                    <h1>{{ translation.title }}</h1>
-                    <p>{{ translation.description | raw }}</p>
+                    <h1>{{ page.title }}</h1>
+                    <div>
+                        {{ page.description | raw }}
+                    </div>
                 {% endif %}
             </div>
-        {% endblock main %}
+        {% endblock %}
     {% endembed %}
 {% endblock layout %}
 

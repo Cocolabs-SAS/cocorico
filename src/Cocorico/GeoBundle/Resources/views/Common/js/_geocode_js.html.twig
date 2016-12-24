@@ -1,0 +1,82 @@
+{#Get geocoding information and persist it for each location parts of a coordinate entity if it don't exist.#}
+
+{% set country = coordinate.country %}
+{% set area = coordinate.area %}
+{% set department = coordinate.department %}
+{% set city = coordinate.city %}
+
+<script>
+    var urlGeocoding = "{{ path('cocorico_geo_create', {'id': coordinate.id}) }}";
+    var geocodeCountry = {{ country.geocoding|length ? 0 : 1 }};
+    var geocodeArea = {{ area.geocoding|length ? 0 : 1 }};
+    var geocodeDepartment = {{ department.geocoding|length ? 0 : 1 }};
+    var geocodeCity = {{ city.geocoding|length ? 0 : 1 }};
+
+    $(function () {
+        //Start places geocoding
+        geocodeNextPlace();
+
+        /**
+         * Geocode the next place of the current one. First geocoding start by city.
+         *
+         * @param data
+         * @param type
+         */
+        function geocodeNextPlace(data, type) {
+            if (typeof type === 'undefined') {
+                geocode('{{ city.name }}', '{{ country.code }}', 'city', geocodeCity);
+            } else if (type == 'city') {
+                geocode('{{ department.name }}', '{{ country.code }}', 'department', geocodeDepartment);
+            } else if (type == 'department') {
+                geocode('{{ area.name }}', '{{ country.code }}', 'area', geocodeArea);
+            } else if (type == 'area') {
+                geocode('{{ country.name }}', '{{ country.code }}', 'country', geocodeCountry);
+            }
+        }
+
+        /**
+         * Geocode current place else geocode the next one
+         *
+         * @param place
+         * @param region country iso code
+         * @param type
+         * @param doIt
+         */
+        function geocode(place, region, type, doIt) {
+            if (doIt) {
+                $.when(
+                        geocodeFunc(place, region, false, false)
+                ).then(
+                        function (result) {
+                            geocodeSuccess(result, type);
+                        },
+                        function (result) {//error
+                            geocodeNextPlace({}, type);
+                        }
+                );
+            } else {
+                geocodeNextPlace({}, type);
+            }
+        }
+
+        /**
+         * Send geocoding data to be persisted for a place. Once done geocode the next place
+         *
+         * @param result
+         * @param type
+         */
+        function geocodeSuccess(result, type) {
+            var data = {
+                type: type,
+                geocoding: JSON.stringify(result)
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: urlGeocoding,
+                data: data,
+                success: geocodeNextPlace(data, type)
+            });
+        }
+    });
+</script>

@@ -1,8 +1,5 @@
-{% trans_default_domain 'cocorico_booking' %}
-
 {% embed "@CocoricoCore/Dashboard/layout_show_bill.html.twig" %}
     {% trans_default_domain 'cocorico_booking' %}
-    {% autoescape false %}
 
     {% set listing = booking.listing %}
     {% set asker = booking.user %}
@@ -85,7 +82,4 @@
 
     {% block booking_info %}
     {% endblock %}
-
-    {% endautoescape %}
-
 {% endembed %}

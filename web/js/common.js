@@ -31,7 +31,7 @@ $(function () {
         return false;
     });
     // end of menu javascript
-    //
+
     $('.display-tab .dropdown-menu li a').on("click", function (e) {
         var selectTabs = $(this).parents('.display-tab').attr('data-id');
         if (selectTabs == 'offerer' || selectTabs == 'asker') {

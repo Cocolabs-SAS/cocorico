@@ -12,6 +12,7 @@
 
 namespace Cocorico\GeoBundle\Entity;
 
+use Cocorico\GeoBundle\Model\GeocodableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Area
  *
- * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Entity\AreaRepository")
+ * @ORM\Entity(repositoryClass="Cocorico\GeoBundle\Repository\AreaRepository")
  *
  * @ORM\Table(name="geo_area")
  *
@@ -28,6 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Area
 {
     use ORMBehaviors\Translatable\Translatable;
+    use GeocodableTrait;
 
     /**
      * @var integer
@@ -71,6 +73,18 @@ class Area
     }
 
     /**
+     * Translation proxy
+     *
+     * @param $method
+     * @param $arguments
+     * @return mixed
+     */
+    public function __call($method, $arguments)
+    {
+        return $this->proxyCurrentLocaleTranslation($method, $arguments);
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -104,29 +118,29 @@ class Area
     }
 
     /**
-     * Add coordinates
+     * Add coordinate
      *
-     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      * @return Area
      */
-    public function addCoordinate(Coordinate $coordinates)
+    public function addCoordinate(Coordinate $coordinate)
     {
-        if (!$this->coordinates->contains($coordinates)) {
-            $this->coordinates[] = $coordinates;
-            $coordinates->setArea($this);
+        if (!$this->coordinates->contains($coordinate)) {
+            $this->coordinates[] = $coordinate;
+            $coordinate->setArea($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove coordinates
+     * Remove coordinate
      *
-     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinates
+     * @param \Cocorico\GeoBundle\Entity\Coordinate $coordinate
      */
-    public function removeCoordinate(Coordinate $coordinates)
+    public function removeCoordinate(Coordinate $coordinate)
     {
-        $this->coordinates->removeElement($coordinates);
+        $this->coordinates->removeElement($coordinate);
     }
 
     /**
@@ -140,29 +154,29 @@ class Area
     }
 
     /**
-     * Add departments
+     * Add department
      *
-     * @param  \Cocorico\GeoBundle\Entity\Department $departments
+     * @param  \Cocorico\GeoBundle\Entity\Department $department
      * @return Area
      */
-    public function addDepartment(Department $departments)
+    public function addDepartment(Department $department)
     {
-        if (!$this->departments->contains($departments)) {
-            $this->departments[] = $departments;
-            $departments->setArea($this);
+        if (!$this->departments->contains($department)) {
+            $this->departments[] = $department;
+            $department->setArea($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove departments
+     * Remove department
      *
-     * @param \Cocorico\GeoBundle\Entity\Department $departments
+     * @param \Cocorico\GeoBundle\Entity\Department $department
      */
-    public function removeDepartment(Department $departments)
+    public function removeDepartment(Department $department)
     {
-        $this->departments->removeElement($departments);
+        $this->departments->removeElement($department);
     }
 
     /**
@@ -176,29 +190,29 @@ class Area
     }
 
     /**
-     * Add cities
+     * Add city
      *
-     * @param  \Cocorico\GeoBundle\Entity\City $cities
+     * @param  \Cocorico\GeoBundle\Entity\City $city
      * @return Area
      */
-    public function addCity(City $cities)
+    public function addCity(City $city)
     {
-        if (!$this->cities->contains($cities)) {
-            $this->cities[] = $cities;
-            $cities->setArea($this);
+        if (!$this->cities->contains($city)) {
+            $this->cities[] = $city;
+            $city->setArea($this);
         }
 
         return $this;
     }
 
     /**
-     * Remove cities
+     * Remove city
      *
-     * @param \Cocorico\GeoBundle\Entity\City $cities
+     * @param \Cocorico\GeoBundle\Entity\City $city
      */
-    public function removeCity(City $cities)
+    public function removeCity(City $city)
     {
-        $this->cities->removeElement($cities);
+        $this->cities->removeElement($city);
     }
 
     /**
@@ -209,5 +223,21 @@ class Area
     public function getCities()
     {
         return $this->cities;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return (string)$this->translate()->getName();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string)$this->getName();
     }
 }
