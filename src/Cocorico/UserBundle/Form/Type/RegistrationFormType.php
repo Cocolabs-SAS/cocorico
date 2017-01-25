@@ -69,7 +69,6 @@ class RegistrationFormType extends AbstractType
                 array(
                     'label' => 'form.user.countryOfResidence',
                     'required' => true,
-                    'data' => 'FR',
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
             )

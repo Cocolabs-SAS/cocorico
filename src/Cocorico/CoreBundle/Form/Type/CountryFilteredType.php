@@ -27,7 +27,6 @@ class CountryFilteredType extends BaseCountryType
      */
     public function __construct($countries, $favoriteCountries)
     {
-        //print_r($countries);
         $this->countries = $countries;
         $this->favoriteCountries = $favoriteCountries;
     }
@@ -40,16 +39,14 @@ class CountryFilteredType extends BaseCountryType
         $countries = Intl::getRegionBundle()->getCountryNames();
         if ($this->countries) {//Filtering countries app parameters
             $countries = array_intersect_key(
-                Intl::getRegionBundle()->getCountryNames(),
+                $countries,
                 array_flip($this->countries)
             );
-//            $countries[""] = "";
         }
 
         $resolver->setDefaults(
             array(
                 'choices' => array_flip($countries),
-//                'data' => $this->favoriteCountries[0],
                 'preferred_choices' => $this->favoriteCountries,
                 'required' => true,
             )

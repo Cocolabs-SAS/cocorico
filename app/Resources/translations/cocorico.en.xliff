@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-06-20T22:22:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-06-27T13:58:00Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -226,7 +226,7 @@
                 <source>multiselect.all_selected</source>
                 <target>All selected</target>
                 <jms:reference-file line="122">Frontend/Home/index.html.twig</jms:reference-file>
-                <jms:reference-file line="525">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="551">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="240">Frontend/ListingResult/result.html.twig</jms:reference-file>
                 <jms:reference-file line="355">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
@@ -234,7 +234,7 @@
                 <source>multiselect.none_selected</source>
                 <target>None selected</target>
                 <jms:reference-file line="123">Frontend/Home/index.html.twig</jms:reference-file>
-                <jms:reference-file line="526">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="552">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="241">Frontend/ListingResult/result.html.twig</jms:reference-file>
                 <jms:reference-file line="356">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
@@ -242,7 +242,7 @@
                 <source>multiselect.num_selected</source>
                 <target>selected</target>
                 <jms:reference-file line="124">Frontend/Home/index.html.twig</jms:reference-file>
-                <jms:reference-file line="527">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="553">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="242">Frontend/ListingResult/result.html.twig</jms:reference-file>
                 <jms:reference-file line="357">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>

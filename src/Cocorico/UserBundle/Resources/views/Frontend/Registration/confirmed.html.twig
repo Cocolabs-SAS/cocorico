@@ -10,15 +10,16 @@
                 <h1>{{ 'registration.confirmed.title'|trans }}</h1>
 
                 <p>{{ 'registration.confirmed'|trans({'%firstname%': user.firstname}) }}</p>
-            </div>
-            {% if app.session is not empty %}
-                {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-                {% if targetUrl is not empty %}
-                    <p>
-                        <a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
-                    </p>
+                <br/>
+                {% if app.session is not empty %}
+                    {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+                    {% if targetUrl is not empty %}
+                        <p>
+                            <a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
+                        </p>
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+            </div>
         {% endblock %}
 
     {% endembed %}

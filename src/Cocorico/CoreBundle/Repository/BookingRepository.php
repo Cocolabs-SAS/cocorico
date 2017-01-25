@@ -272,25 +272,32 @@ class BookingRepository extends EntityRepository
     }
 
     /**
-     * Find Expiring Bookings to alert
+     * Find expiring bookings to alert
      *
-     * @param int $bookingExpirationDelay Delay in minutes to consider a booking as expiring.
+     * @param int $bookingExpirationDelay      Delay in minutes to consider a booking as expiring.
+     * @param int $bookingExpirationAlertDelay Delay in minutes to consider a booking as expiring.
+     *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsExpiringToAlert($bookingExpirationDelay)
+    public function findBookingsExpiringToAlert($bookingExpirationDelay, $bookingExpirationAlertDelay)
     {
-        //Expiring date
-        $dateExpiring = new \DateTime();
+        $today = new \DateTime();
+        $today->sub(new \DateInterval('PT' . $bookingExpirationAlertDelay . 'M'));
+
+        $dateExpiring = clone $today;
         $dateExpiring->sub(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
 
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
-            ->andWhere('b.newBookingAt <= :dateExpiring')
+            ->andWhere(
+                "b.newBookingAt <= :dateExpiring OR CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today"
+            )
             ->andWhere('b.alertedExpiring = :alertedExpiring')
             ->setParameter('status', array(Booking::STATUS_NEW))
             ->setParameter('dateExpiring', $dateExpiring->format('Y-m-d H:i:s'))
-            ->setParameter('alertedExpiring', false);
+            ->setParameter('alertedExpiring', false)
+            ->setParameter('today', $today->format('Y-m-d H:i:s'));
 
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());
@@ -332,27 +339,35 @@ class BookingRepository extends EntityRepository
     }
 
     /**
-     * Find Bookings to expire
+     * Find Bookings to expire:
+     * Either newBookingAt is less than today minus $bookingExpirationDelay
+     * Either booking start date concatenated to start time is less than today date time
+     *
+     * todo: manage user timezone
      *
      * @param int $bookingExpirationDelay Delay in minutes to consider a booking as expired.
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function findBookingsToExpire($bookingExpirationDelay)
     {
-        //Expired date
-        $dateExpired = new \DateTime();
+        $today = new \DateTime();
+        $dateExpired = clone $today;
         $dateExpired->sub(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
 
         $queryBuilder = $this->getFindQueryBuilder();
-        $queryBuilder->where('b.status IN (:status)')
-            ->andWhere('b.newBookingAt <= :dateExpired')
+        $queryBuilder
+            ->where('b.status IN (:status)')
+            ->andWhere(
+                "b.newBookingAt <= :dateExpired OR CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today"
+            )
             ->setParameter(
                 'status',
                 array(
                     Booking::STATUS_NEW,
                 )
             )
-            ->setParameter('dateExpired', $dateExpired->format('Y-m-d H:i:s'));
+            ->setParameter('dateExpired', $dateExpired->format('Y-m-d H:i:s'))
+            ->setParameter('today', $today->format('Y-m-d H:i:s'));
 
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());

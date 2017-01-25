@@ -32,14 +32,22 @@
                             <div class="col-md-5 col-xs-12">
                                 <span class="label">{{ form_label(form.fromLang) }} :</span>
                                 <div class="select-holder">
-                                    {{ form_widget(form.fromLang) }}
+                                    {{ form_widget(form.fromLang,{
+                                        'attr': {
+                                            'class': "no-arrow"
+                                        }
+                                    }) }}
                                 </div>
                             </div>
 
                             <div class="col-md-5 col-xs-12">
                                 <span class="label">{{ form_label(form.toLang) }} :</span>
                                 <div class="select-holder">
-                                    {{ form_widget(form.toLang) }}
+                                    {{ form_widget(form.toLang,{
+                                        'attr': {
+                                            'class': "no-arrow"
+                                        }
+                                    }) }}
                                 </div>
                             </div>
                             <div class="col-md-2 col-xs-12">

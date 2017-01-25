@@ -40,7 +40,8 @@ class CommandContext extends CommonContext
                 break;
             case "cocorico:bookings:alertExpiring":
                 $application->add(new AlertExpiringBookingsCommand());
-                $arguments["--delay"] = 0;//cocorico.booking.expiration_delay + cocorico.booking.alert_expiration_delay
+                $arguments["--delay"] = 0;//cocorico.booking.expiration_delay
+                $arguments["--alert_delay"] = 0;//cocorico.booking.alert_expiration_delay
                 $arguments["--test"] = true;
                 break;
             case "cocorico:bookings:alertImminent":

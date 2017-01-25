@@ -31,7 +31,7 @@ class PriceType extends AbstractType
      * @param int       $pricePrecision
      * @param Converter $currencyConverter
      */
-    public function __construct($defaultCurrency, $pricePrecision, $currencyConverter)
+    public function __construct($defaultCurrency, $pricePrecision, Converter $currencyConverter)
     {
         $this->defaultCurrency = $defaultCurrency;
         $this->currency = $defaultCurrency;

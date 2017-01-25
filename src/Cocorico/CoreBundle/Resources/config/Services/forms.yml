@@ -91,6 +91,13 @@ services:
         tags:
             - { name: form.type, alias: country_filtered }
 
+    cocorico.form.type.language_filtered:
+        class: Cocorico\CoreBundle\Form\Type\LanguageFilteredType
+        arguments:
+            - "%cocorico.locales%"
+        tags:
+            - { name: form.type, alias: language_filtered }
+
     cocorico.form.type.price:
         class: Cocorico\CoreBundle\Form\Type\PriceType
         arguments:
@@ -223,13 +230,6 @@ services:
         class: Cocorico\CoreBundle\Form\Extension\ImageTypeExtension
         tags:
             - { name: form.type_extension, alias: file }
-
-    cocorico.form.type.locale:
-        class: Cocorico\CoreBundle\Form\Type\LocaleType
-        arguments:
-            - "%cocorico.locales%"
-        tags:
-            - { name: form.type, alias: locale_choice }
 
     cocorico.form.booking.status_filter:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType

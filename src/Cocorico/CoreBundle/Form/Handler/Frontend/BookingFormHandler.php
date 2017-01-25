@@ -52,10 +52,10 @@ class BookingFormHandler
      *
      * @param User|null  $user
      * @param Listing    $listing
-     * @param  \DateTime $start      format yyyy-mm-dd
-     * @param  \DateTime $end        format yyyy-mm-dd
-     * @param  \DateTime $start_time format H:i
-     * @param  \DateTime $end_time   format H:i
+     * @param  \DateTime $start     format yyyy-mm-dd
+     * @param  \DateTime $end       format yyyy-mm-dd
+     * @param  \DateTime $startTime format H:i
+     * @param  \DateTime $endTime   format H:i
      *
      * @return Booking $booking
      */
@@ -64,17 +64,17 @@ class BookingFormHandler
         Listing $listing,
         \DateTime $start = null,
         \DateTime $end = null,
-        \DateTime $start_time = null,
-        \DateTime $end_time = null
+        \DateTime $startTime = null,
+        \DateTime $endTime = null
     ) {
         $dateRange = $timeRange = null;
         if ($start && $end) {
             $dateRange = new DateRange($start, $end);
         }
-        if ($start_time && $end_time) {
+        if ($startTime && $endTime) {
             $timeRange = new TimeRange(
-                new \DateTime('1970-01-01 ' . $start_time->format('H:i')),
-                new \DateTime('1970-01-01 ' . $end_time->format('H:i'))
+                new \DateTime('1970-01-01 ' . $startTime->format('H:i')),
+                new \DateTime('1970-01-01 ' . $endTime->format('H:i'))
             );
         }
 
@@ -138,6 +138,7 @@ class BookingFormHandler
 
 
     /**
+     * Check voucher.
      * todo: decouple voucher
      *
      * @param $form

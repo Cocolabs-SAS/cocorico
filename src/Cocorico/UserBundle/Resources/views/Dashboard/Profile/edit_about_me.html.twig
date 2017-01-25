@@ -124,7 +124,11 @@
                                         <div class="from-lang">
                                             <span class="label">{{ form_label(form.fromLang) }} :</span>
                                             <div class="select-holder">
-                                                <div>{{ form_widget(form.fromLang) }}
+                                                <div>{{ form_widget(form.fromLang,{
+                                                        'attr': {
+                                                            'class': "no-arrow"
+                                                        }
+                                                    }) }}
                                                 </div>
                                             </div>
                                         </div>
@@ -134,7 +138,11 @@
                                         <div class="to-lang">
                                             <span class="label">{{ form_label(form.toLang) }} :</span>
                                             <div class="select-holder">
-                                                <div>{{ form_widget(form.toLang) }}</div>
+                                                <div>{{ form_widget(form.toLang,{
+                                                        'attr': {
+                                                            'class': "no-arrow"
+                                                        }
+                                                    }) }}</div>
                                             </div>
                                         </div>
                                     </div>

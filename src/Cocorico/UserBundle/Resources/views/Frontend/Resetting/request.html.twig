@@ -8,7 +8,7 @@
         {% block main %}
             <div class="col-xs-12">
                 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-                <form id="form-registerlogin" class="form form-signup"
+                <form id="form-registerlogin" class="form form-signup form-reset-password"
                       action="{{ path('cocorico_user_resetting_send_email') }}" method="POST">
                     <h1>{{ 'user.request.h1'|trans }}</h1>
 

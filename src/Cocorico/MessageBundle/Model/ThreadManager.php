@@ -119,9 +119,8 @@ class ThreadManager
      *
      * @param ParticipantInterface $participant
      * @param Booking              $booking
-     * @param string               $messageTxt
      */
-    public function createNewListingThread(ParticipantInterface $participant, Booking $booking, $messageTxt)
+    public function createNewListingThread(ParticipantInterface $participant, Booking $booking)
     {
         /** @var  ThreadInterface $thread */
         $thread = $this->fosThreadManager->createThread();
@@ -136,7 +135,7 @@ class ThreadManager
             ->setBooking($booking)
             ->setListing($listing)
             ->setSubject($listing->getTitle())
-            ->setBody($messageTxt);
+            ->setBody($booking->getMessage());
 
         // send the message
         $threadMessage = $threadBuilder->getMessage();
@@ -146,6 +145,7 @@ class ThreadManager
         $threadMessage->getThread()->setIsDeleted(false);
         $this->fosMessageManager->saveMessage($threadMessage);
 
+        //todo: is it really needed?
         $this->mailer->sendNotificationForNewMessageToUser($listing->getUser(), $thread);
     }
 

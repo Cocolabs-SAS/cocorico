@@ -681,14 +681,16 @@ class BookingManager extends BaseManager
      * Alert Expiring Bookings
      *
      * @param int $expirationDelay
+     * @param int $alertExpirationDelay
      *
      * @return integer
      */
-    public function alertExpiringBookings($expirationDelay)
+    public function alertExpiringBookings($expirationDelay, $alertExpirationDelay)
     {
         $result = 0;
         $bookingsExpiringToAlert = $this->getRepository()->findBookingsExpiringToAlert(
-            $expirationDelay
+            $expirationDelay,
+            $alertExpirationDelay
         );
         foreach ($bookingsExpiringToAlert as $bookingExpiringToAlert) {
             if ($this->alertExpiring($bookingExpiringToAlert)) {

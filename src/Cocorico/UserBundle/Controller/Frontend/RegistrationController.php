@@ -138,8 +138,6 @@ class RegistrationController extends ContainerAware
         $formHandler = $this->container->get('fos_user.registration.form.handler');
         $formHandler->handleRegistration($user);
 
-        $this->container->get('cocorico_user.mailer.twig_swift')->sendAccountCreatedMessageToUser($user);
-
         $response = new RedirectResponse($this->container->get('router')->generate('cocorico_user_register_confirmed'));
 
         return $response;

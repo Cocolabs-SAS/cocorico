@@ -6,8 +6,31 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
-
 ## [Unreleased]
+
+
+## [0.3.2] - 2017-01-25
+
+### Added
+- Add booking policy block informations in listing show page
+- Add new LanguageFiltered type to replace LocaleType dynamically poor for multi languages
+- Guess lang to translation for auto translation
+
+### Fixed
+- Fix User country and nationality default values
+- Fix arrows bug display in from and to translations fields
+- Expire bookings with start date greater than today date
+- Fix duplicate mails send while subscription
+- Fix subscription validation page title 
+- Fix unused email subject param in registration mail
+
+### Changed
+- Change duplicate h1 to h2 in listing show page
+- Rename AddressFormType To UserAddressFormType
+- Replace LocaleType and LanguageType usages by LanguageFiltered
+- Optimize createNewListingThread call
+
+### Deprecated
 
 
 

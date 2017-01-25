@@ -12,6 +12,7 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Cocorico\CoreBundle\Form\Type\ImageType;
+use Cocorico\CoreBundle\Form\Type\LanguageFilteredType;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Entity\UserImage;
 use JMS\TranslationBundle\Model\Message;
@@ -129,7 +130,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'fromLang',
-                'locale_choice',
+                'language_filtered',
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.from',
@@ -138,11 +139,11 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'toLang',
-                'locale_choice',
+                'language_filtered',
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.to',
-                    'data' => end($this->locales)
+                    'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
                 )
             );
 

@@ -30,7 +30,38 @@ Activate following modules:
 
     - mod_headers
     - mod_rewrite
+    - mod_ssl 
+    
+Note for SSL with WAMP: 
 
+- Install Win32 OpenSSL here http://slproweb.com/products/Win32OpenSSL.html
+- Copy/paste libeay32.dll, ssleay32.dll into php bin folder (ex: C:\wamp64\bin\php\php5.6.19)
+
+### Create your virtual host
+
+See [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
+
+### Install and start MongoDB 
+
+#### Install MongoDB on Debian:
+
+    See http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/?_ga=1.159299576.319082154.1425377029
+
+#### Install PHP MongoDB Driver:
+
+    See http://docs.mongodb.org/ecosystem/drivers/php/
+
+#### Start MongoDB:
+
+On Windows:
+    
+    bin\start-mongodb.bat "C:\Program Files\MongoDB\data"
+            
+On Linux:
+    
+    See http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/
+    
+    
 ### Configure PHP
     
 Tested versions:
@@ -78,33 +109,7 @@ Set the same php timezone to php and php-cli php.ini file:
 ### Create your database and your database user
 
     - CREATE DATABASE IF NOT EXISTS {DB} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-    - GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON {DB}.* TO {DBUSER}@localhost IDENTIFIED BY '{DBUSERPWD}'
-
-        
-### Install and start MongoDB 
-
-#### Install MongoDB on Debian:
-
-    See http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/?_ga=1.159299576.319082154.1425377029
-
-#### Install PHP MongoDB Driver:
-
-    See http://docs.mongodb.org/ecosystem/drivers/php/
-
-#### Start MongoDB:
-
-On Windows:
-    
-    bin\start-mongodb.bat "C:\Program Files\MongoDB\data"
-            
-On Linux:
-    
-    See http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/
-    
-### Create your virtual host
-
-See [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
-
+    - GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, REFERENCES ON {DB}.* TO {DBUSER}@localhost IDENTIFIED BY '{DBUSERPWD}'
 
 ## Application install & configuration
 
@@ -151,7 +156,7 @@ and the "Server API Key" to the `cocorico_geo.google_place_api_key` and `cocoric
 parameters in `app/config/parameters.yml`.
 
 
-Note:
+**Note:**
 See https://developers.google.com/maps/documentation/javascript/usage?hl=en for Google API usage limits. For example 
 at 06 July 2016 the use of Google Map JavaScript API is free until exceeding 25,000 map loads per 24 hours.
     
@@ -271,7 +276,10 @@ Check security dependencies:
     php app/console assets:install --symlink web --env=dev
     php app/console assetic:dump --env=dev
 
+## Add crons
 
+See [Technical documentation](src/Cocorico/CoreBundle/Resources/doc/index.rst)
+    
 ## Browsing the Demo Application
 
 Congratulations! You're now ready to use Cocorico.

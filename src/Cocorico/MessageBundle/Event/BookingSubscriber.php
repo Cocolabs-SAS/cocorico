@@ -35,7 +35,7 @@ class BookingSubscriber implements EventSubscriberInterface
     {
         $booking = $event->getBooking();
         $user = $booking->getUser();
-        $this->threadManager->createNewListingThread($user, $booking, $booking->getMessage());
+        $this->threadManager->createNewListingThread($user, $booking);
     }
 
 

@@ -67,7 +67,7 @@ class ProfileContactFormType extends AbstractType
                 'addresses',
                 'collection',
                 array(
-                    'type' => new AddressFormType(),
+                    'type' => new UserAddressFormType(),
                     /** @Ignore */
                     'label' => false,
                     'required' => false

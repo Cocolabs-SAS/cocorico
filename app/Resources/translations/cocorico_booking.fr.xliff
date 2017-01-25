@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-06-20T22:17:13Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2016-06-27T13:57:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -441,7 +441,7 @@
                 <source>booking.show.end_time:</source>
                 <target>Heure de fin :</target>
                 <jms:reference-file line="83">Dashboard/Booking/edit.html.twig</jms:reference-file>
-                <jms:reference-file line="45">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="42">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
                 <jms:reference-file line="83">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
                 <jms:reference-file line="65">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
                 <jms:reference-file line="77">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
@@ -467,7 +467,7 @@
             <trans-unit id="ad2ccfb5e344da7e3de0f7032723e2f771040cfc" resname="booking.show.save">
                 <source>booking.show.save</source>
                 <target>Enregistrer</target>
-                <jms:reference-file line="55">Dashboard/Booking/show.html.twig</jms:reference-file>
+                <jms:reference-file line="53">Dashboard/Booking/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e2795bf28db7fb5a69b480ed6a909be0833c0250" resname="booking.show.start:">
                 <source>booking.show.start:</source>
@@ -480,7 +480,7 @@
                 <source>booking.show.start_time:</source>
                 <target>Heure de début :</target>
                 <jms:reference-file line="77">Dashboard/Booking/edit.html.twig</jms:reference-file>
-                <jms:reference-file line="42">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="39">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
                 <jms:reference-file line="77">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
                 <jms:reference-file line="59">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
                 <jms:reference-file line="73">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
@@ -495,8 +495,8 @@
             <trans-unit id="bf3dffc0590e29525fe8c4556e1eb2aa009f2c41" resname="booking.show.textarea.placeholder">
                 <source>booking.show.textarea.placeholder</source>
                 <target>Rédigez votre message ici</target>
+                <jms:reference-file line="47">Dashboard/Booking/show.html.twig</jms:reference-file>
                 <jms:reference-file line="48">Dashboard/Booking/show.html.twig</jms:reference-file>
-                <jms:reference-file line="49">Dashboard/Booking/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="42d20235f886d8c9a4daa73abc18bcfe092eee2c" resname="booking.show_asker.cancel">
                 <source>booking.show_asker.cancel</source>
@@ -526,48 +526,48 @@
             <trans-unit id="9fa474d1bd7c96c0e054f6d8e275e48455bd1573" resname="booking.voucher.address">
                 <source>booking.voucher.address</source>
                 <target>Addresse</target>
-                <jms:reference-file line="30">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="27">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1a3b2401744802802117d77972e27b3df74c1d8a" resname="booking.voucher.booking_number">
                 <source>booking.voucher.booking_number</source>
                 <target>N° de réservation</target>
-                <jms:reference-file line="19">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="16">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="06cf5f344efbd190fbed5576f28cb9a956610d90" resname="booking.voucher.client_name">
                 <source>booking.voucher.client_name</source>
                 <target>Client</target>
-                <jms:reference-file line="21">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="18">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="37b646dbfc5986022241f37a471cb72d1e0ff706" resname="booking.voucher.date">
                 <source>booking.voucher.date</source>
                 <target>Date</target>
-                <jms:reference-file line="37">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="34">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b367509205e5befc29021f90ff3507cf73982f79" resname="booking.voucher.description">
                 <source>booking.voucher.description</source>
                 <target>Description</target>
-                <jms:reference-file line="64">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="62">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d96f14e07e7f693e71a6470bb2085f4cc3bf124f" resname="booking.voucher.duration">
                 <source>booking.voucher.duration</source>
                 <target>Durée</target>
-                <jms:reference-file line="51">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="48">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
                 <jms:reference-file line="84">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="662398bbd40602e4323b83b3b348ad00318c152b" resname="booking.voucher.phone">
                 <source>booking.voucher.phone</source>
                 <target>Téléphone</target>
-                <jms:reference-file line="32">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="29">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="4226cd5e744117098b86640d2d942f2e026f084a" resname="booking.voucher.title">
                 <source>booking.voucher.title</source>
                 <target>Titre</target>
-                <jms:reference-file line="59">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="57">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="6db5ec87115dd41348b80f82639706f810d814b1" resname="booking.voucher.voucher">
                 <source>booking.voucher.voucher</source>
                 <target>Bon de commande</target>
-                <jms:reference-file line="15">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+                <jms:reference-file line="12">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="7583a4df4c40fa7d408ffb88165907f42c23a04a" resname="entity.booking.bank_wire.status.done">
                 <source>entity.booking.bank_wire.status.done</source>

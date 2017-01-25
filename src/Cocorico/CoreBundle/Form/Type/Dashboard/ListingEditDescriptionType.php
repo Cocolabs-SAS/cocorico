@@ -11,6 +11,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use Cocorico\CoreBundle\Form\Type\LanguageFilteredType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,52 +45,58 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
             );
         }
 
-        $builder->add(
-            'translations',
-            'a2lix_translations',
-            array(
-                'required_locales' => array($this->locale),
-                'fields' => array(
-                    'title' => array(
-                        'field_type' => 'text',
-                        'locale_options' => $titles
+        $builder
+            ->add(
+                'translations',
+                'a2lix_translations',
+                array(
+                    'required_locales' => array($this->locale),
+                    'fields' => array(
+                        'title' => array(
+                            'field_type' => 'text',
+                            'locale_options' => $titles
+                        ),
+                        'description' => array(
+                            'field_type' => 'textarea',
+                            'locale_options' => $descriptions
+                        ),
+                        'rules' => array(
+                            'field_type' => 'textarea',
+                            'locale_options' => $rules
+                        ),
+                        'slug' => array(
+                            'field_type' => 'hidden'
+                        )
                     ),
-                    'description' => array(
-                        'field_type' => 'textarea',
-                        'locale_options' => $descriptions
-                    ),
-                    'rules' => array(
-                        'field_type' => 'textarea',
-                        'locale_options' => $rules
-                    ),
-                    'slug' => array(
-                        'field_type' => 'hidden'
-                    )
-                ),
-                /** @Ignore */
-                'label' => false
+                    /** @Ignore */
+                    'label' => false
+                )
             )
-        )
             ->add(
                 'fromLang',
-                'locale_choice',
+                'language_filtered',
                 array(
                     'mapped' => false,
-                    'label' => 'cocorico.from'
+                    'label' => 'cocorico.from',
+                    'data' => $this->locale,
+                    'translation_domain' => 'cocorico_user'
                 )
             )
             ->add(
                 'toLang',
-                'locale_choice',
+                'language_filtered',
                 array(
                     'mapped' => false,
-                    'label' => 'cocorico.to'
+                    'label' => 'cocorico.to',
+                    'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
+                    'translation_domain' => 'cocorico_user'
                 )
             );
 
         //Status field already added
         //$builder->remove('status');
     }
+
 
     /**
      * @param OptionsResolver $resolver

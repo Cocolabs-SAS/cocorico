@@ -309,6 +309,57 @@
                             'listing': listing
                         })) }}
 
+                        <section class="widget prices-conditions">
+                            <h2>{{ 'listing.show.policy.title'|trans }}</h2>
+                            <ul>
+                                <li>
+                                    {{ 'listing.show.cancellation_policy:'|trans() }}
+                                    <strong>{{ listing.cancellationPolicyText|trans }}</strong>
+                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            data-html="true" type="button"
+                                            data-original-title="{{ cancellationPolicies() }}"> ?
+                                    </button>
+                                </li>
+
+                                {% if listing.minDuration %}
+                                    <li>
+                                        {{ 'listing.show.min_duration:'|trans() }}
+                                        <strong>
+                                            {{ listing.minDuration ~ " " ~ (-1)|add_time_unit_text }}
+                                        </strong>
+                                    </li>
+                                {% endif %}
+
+                                {% if listing.maxDuration %}
+                                    <li>
+                                        {{ 'listing.show.max_duration:'|trans() }}
+                                        <strong>
+                                            {{ listing.maxDuration ? listing.maxDuration ~ " " ~ (-1)|add_time_unit_text : "none"|trans }}
+                                        </strong>
+                                    </li>
+                                {% endif %}
+
+                                {% if listing.discounts.count %}
+                                    {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
+                                    {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
+                                    <li>
+                                        {{ 'listing.show.discounts:'|trans() }}
+                                        <ul>
+                                            {% for discount in listing.discounts %}
+                                                <li>
+                                                    <strong>{{ discount.discount }}% </strong>
+                                                    {{ 'listing_edit.form.from_quantity'|trans(quantityText) }}
+                                                    <strong>{{ discount.fromQuantity }} </strong>
+                                                    {{ 'listing_edit.form.from_quantity.bought'|trans(quantitiesText) }}
+
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </section>
+
                         <!-- members-list -->
                         <section class="widget members-list">
                             <!-- gallery-small -->
@@ -413,32 +464,7 @@
                                             data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
                                     </button>
                                 </li>
-                                <li>
-                                    {{ 'listing.show.cancellation_policy:'|trans() }}
-                                    <strong>{{ listing.cancellationPolicyText|trans }}</strong>
-                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            data-html="true" type="button"
-                                            data-original-title="{{ cancellationPolicies() }}"> ?
-                                    </button>
-                                </li>
 
-                                {% if listing.minDuration %}
-                                    <li>
-                                        {{ 'listing.show.min_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.minDuration ~ " " ~ (-1)|add_time_unit_text }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
-
-                                {% if listing.maxDuration %}
-                                    <li>
-                                        {{ 'listing.show.max_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.maxDuration ? listing.maxDuration ~ " " ~ (-1)|add_time_unit_text : "none"|trans }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
                             </ul>
                         </section>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-06-20T22:22:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-06-27T13:58:00Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -740,16 +740,6 @@
                 <source>admin.thread.view.label</source>
                 <target>admin.thread.view.label</target>
                 <jms:reference-file line="94">MessageBundle/Admin/ThreadAdmin.php</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="45ca7e55a6930d23560f13b43ba365b3152db8d0" resname="cocorico.from">
-                <source>cocorico.from</source>
-                <target>cocorico.from</target>
-                <jms:reference-file line="78">Type/Dashboard/ListingEditDescriptionType.php</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="2297600d92e3fb5924c0659e20e479b5b5515490" resname="cocorico.to">
-                <source>cocorico.to</source>
-                <target>cocorico.to</target>
-                <jms:reference-file line="86">Type/Dashboard/ListingEditDescriptionType.php</jms:reference-file>
             </trans-unit>
         </body>
     </file>

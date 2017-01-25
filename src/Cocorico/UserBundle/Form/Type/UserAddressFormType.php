@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AddressFormType extends AbstractType
+class UserAddressFormType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -51,7 +51,6 @@ class AddressFormType extends AbstractType
                 array(
                     'label' => 'form.address.country',
                     'required' => false,
-                    'data' => 'FR',
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
             );

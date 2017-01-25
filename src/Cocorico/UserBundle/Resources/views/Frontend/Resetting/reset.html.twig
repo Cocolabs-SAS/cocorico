@@ -8,7 +8,7 @@
         {% block main %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
             <div id="form-registerlogin" class="col-xs-12">
-                <form class="form-signup validate-form"
+                <form class="form-signup validate-form form-reset-password-2"
                       action="{{ path('cocorico_user_resetting_reset', {'token': token}) }}"
                         {{ form_enctype(form) }}  method="POST">
                     <fieldset>

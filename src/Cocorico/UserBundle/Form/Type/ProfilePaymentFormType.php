@@ -51,7 +51,6 @@ class ProfilePaymentFormType extends AbstractType
                 'country',
                 array(
                     'label' => 'form.user.nationality',
-                    'data' => 'FR',
                     'required' => false,
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
@@ -62,7 +61,6 @@ class ProfilePaymentFormType extends AbstractType
                 array(
                     'label' => 'form.user.countryOfResidence',
                     'required' => true,
-                    'data' => 'FR',
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
             )

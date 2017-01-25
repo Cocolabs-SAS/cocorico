@@ -699,6 +699,16 @@ li.time-fields {
 }
 
 /*Overriding all.css*/
+.form-reset-password .label {
+    width: 254px;
+    text-align: right;
+}
+
+.form-reset-password-2 .label {
+    width: 170px;
+    text-align: right;
+}
+
 
 /** edit_availabilities_prices.html.twig **/
 .price-section .field-row {
@@ -750,11 +760,33 @@ li.time-fields {
 }
 
 /** Listing/show.html.twig **/
-.widget.members-list h1 a {
+.widget h2 {
+    color: #58595b;
+    margin: 0 0 10px;
+}
+
+.members-list h2 {
+    margin: 0 0 21px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 24px;
+}
+
+.widget.members-list h2 a {
     color: #58595b;
     text-decoration: none;
 }
 
+.widget.prices-conditions h2 {
+    color: #3f3f3f;
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.125;
+}
+
+.prices-conditions ul {
+    padding-left: 20px;
+}
 /** Common/_flash.html.twig **/
 
 .alert-error-new {
