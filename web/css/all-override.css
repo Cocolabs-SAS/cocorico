@@ -2070,6 +2070,7 @@ ul.collection {
 .form-area .about-info .languages-block .language .label {
     width: 150px;
     max-width: 210px;
+    margin: 16px 0 0;
 }
 
 .form-area .about-info .from .label {
@@ -2270,4 +2271,13 @@ ul.collection {
 /* Various */
 .jcf-option::first-letter, .jcf-select-text::first-letter {
     text-transform: capitalize;
+}
+
+/* categories */
+.listing-categories .jcf-list .jcf-option:after {
+    content: '';
+}
+
+.listing-categories .jcf-list-box {
+    min-width: 220px;
 }

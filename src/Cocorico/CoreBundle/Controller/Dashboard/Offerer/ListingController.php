@@ -74,7 +74,7 @@ class ListingController extends Controller
     private function createStatusForm(Listing $listing, $view)
     {
         $form = $this->get('form.factory')->createNamed(
-            'listing',
+            'listing_status',
             'listing_edit_status',
             $listing,
             array(
@@ -161,7 +161,7 @@ class ListingController extends Controller
     private function createPriceForm(Listing $listing)
     {
         $form = $this->get('form.factory')->createNamed(
-            'listing',
+            'listing_price',
             new ListingEditPriceType(),
             $listing,
             array(
@@ -268,7 +268,7 @@ class ListingController extends Controller
     private function createDurationForm(Listing $listing)
     {
         $form = $this->get('form.factory')->createNamed(
-            'listing',
+            'listing_duration',
             'listing_edit_duration',
             $listing,
             array(

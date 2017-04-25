@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-06-27T13:58:00Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-07-05T11:28:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,12 +9,12 @@
             <trans-unit id="46fdda4a5d3126614388f58a8f228edfa57b2b51" resname="booking.new.meta_desc">
                 <source>booking.new.meta_desc</source>
                 <target>booking.new.meta_desc</target>
-                <jms:reference-file line="33">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="35">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="14b6b218dbec12074bce69744dee7aa0ddf72dc0" resname="booking.new.meta_title">
                 <source>booking.new.meta_title</source>
                 <target>booking.new.meta_title</target>
-                <jms:reference-file line="29">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="31">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="855475bb058132617c6e3b515401462f03154acc" resname="contact.meta_desc">
                 <source>contact.meta_desc</source>

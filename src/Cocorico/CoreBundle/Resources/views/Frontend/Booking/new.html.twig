@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
 
+{% trans_default_domain 'cocorico_booking' %}
+
 {% set voucherBundleEnabled = bundleExist('CocoricoVoucherBundle') %}
 {% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
 {% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
@@ -36,7 +38,6 @@
 {% block layout %}
 
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
-
         {% trans_default_domain 'cocorico_booking' %}
 
         {% block breadcrumbs %}

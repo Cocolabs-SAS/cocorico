@@ -64,18 +64,22 @@
                             <div class="field-row from">
                                 <span class="label">{{ form_label(form.motherTongue) }}:</span>
                                 <div class="select-holder">
-                                    {{ form_widget(form.motherTongue) }}
+                                    {{ form_widget(form.motherTongue, {'attr': {
+                                        'class': 'no-arrow'
+                                    }}) }}
                                 </div>
                             </div>
 
                             <div class="languages-block">
                                 <div class="field-holder language">
                                     <span class="label">
-                                        <label for="language">{{ form_label(form.language) }}:</label>
+                                        {{ form_label(form.language) }}:
                                     </span>
                                     <div class="field-holder">
                                         <div class="select-holder">
-                                            {{ form_widget(form.language) }}
+                                            {{ form_widget(form.language, {'attr': {
+                                                'class': 'no-arrow'
+                                            }}) }}
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-default btn-add">
@@ -138,11 +142,13 @@
                                         <div class="to-lang">
                                             <span class="label">{{ form_label(form.toLang) }} :</span>
                                             <div class="select-holder">
-                                                <div>{{ form_widget(form.toLang,{
+                                                <div>
+                                                    {{ form_widget(form.toLang,{
                                                         'attr': {
                                                             'class': "no-arrow"
                                                         }
-                                                    }) }}</div>
+                                                    }) }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

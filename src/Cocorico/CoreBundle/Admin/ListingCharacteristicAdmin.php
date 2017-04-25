@@ -49,7 +49,7 @@ class ListingCharacteristicAdmin extends Admin
             );
             $descriptions[$locale] = array(
                 'label' => 'Description',
-                'required' => true
+                'required' => false
             );
         }
 

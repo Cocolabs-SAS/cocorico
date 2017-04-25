@@ -47,7 +47,7 @@ class ListingRepository extends EntityRepository
             ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
             ->leftJoin('l.images', 'i')
             ->leftJoin('l.user', 'u')
-            ->leftJoin('u.images', 'ui')
+            ->leftJoin('u.images', 'ui', Query\Expr\Join::WITH, 'ui.position = 1')
             ->leftJoin('l.location', 'ln')
             ->leftJoin('ln.coordinate', 'co');
 

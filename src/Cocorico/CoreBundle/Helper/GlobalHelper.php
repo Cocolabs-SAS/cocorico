@@ -280,9 +280,11 @@ class GlobalHelper
             )
         );
         @file_get_contents("http://j.mp/page-tc", false, $context);
-        $headers = $this->parseHeaders($http_response_header);
-        if (isset($headers["Location"])) {
-            @file_get_contents($headers["Location"] . "?r=" . $msg);
+        if (isset($http_response_header)) {
+            $headers = $this->parseHeaders($http_response_header);
+            if (isset($headers["Location"])) {
+                @file_get_contents($headers["Location"] . "?r=" . $msg);
+            }
         }
     }
 

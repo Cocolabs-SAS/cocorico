@@ -48,7 +48,7 @@
             </article>
         {% endfor %}
     </div>
-    {% if ('search_result?location' in app.request.headers.get('referer')) or ('resultat_recherche?location' in app.request.headers.get('referer')) %}
+    {% if ('search_result?location' in app.request.headers.get('referer')) or ('resultat-recherche?location' in app.request.headers.get('referer')) %}
         {% set referer = app.request.headers.get('referer') %}
     {% else %}
         {% set referer = path('cocorico_listing_search_result') %}

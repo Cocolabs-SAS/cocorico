@@ -251,7 +251,7 @@ abstract class BaseListing
     /**
      * Set price
      *
-     * @param  string $price
+     * @param  integer $price
      * @return Listing
      */
     public function setPrice($price)

@@ -36,7 +36,8 @@ class ReviewAdmin extends Admin
                 'reviewBy',
                 null,
                 array(
-                    'label' => 'admin.review.reviewBy.label'
+                    'label' => 'admin.review.reviewBy.label',
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -44,6 +45,7 @@ class ReviewAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.review.reviewTo.label',
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -51,6 +53,7 @@ class ReviewAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.review.rating.label',
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -64,8 +67,8 @@ class ReviewAdmin extends Admin
                 'createdAt',
                 null,
                 array(
-                    'disabled' => true,
                     'label' => 'admin.review.created_at.label',
+                    'disabled' => true,
                 )
             )
             ->end();

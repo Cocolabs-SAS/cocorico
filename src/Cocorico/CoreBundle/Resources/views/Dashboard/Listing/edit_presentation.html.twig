@@ -29,8 +29,8 @@
                     <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">
                         {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
                         <div align="center">
-                            <div class="col-md-5 col-xs-12">
-                                <span class="label">{{ form_label(form.fromLang) }} :</span>
+                            <div class="col-md-6 col-xs-12">
+                                <span class="label" style="max-width: 184px;">{{ form_label(form.fromLang) }} :</span>
                                 <div class="select-holder">
                                     {{ form_widget(form.fromLang,{
                                         'attr': {
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5 col-xs-12">
+                            <div class="col-md-4 col-xs-12">
                                 <span class="label">{{ form_label(form.toLang) }} :</span>
                                 <div class="select-holder">
                                     {{ form_widget(form.toLang,{

@@ -58,6 +58,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
             ->add(
@@ -65,6 +66,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
             ->add(
@@ -72,9 +74,17 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
-            ->add('email')
+            ->add(
+                'email',
+                null,
+                array(
+                    'required' => true,
+                    'disabled' => true
+                )
+            )
             ->add(
                 'plainPassword',
                 'text',
@@ -114,6 +124,7 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'format' => 'dd - MMMM - yyyy',
                     'years' => range(date('Y') - 18, date('Y') - 80),
+                    'disabled' => true
                 )
             )
             ->add(
@@ -134,7 +145,7 @@ class UserAdmin extends SonataUserAdmin
                 'nationality',
                 'country',
                 array(
-                    'data' => 'FR'
+                    'disabled' => true
                 )
             )
             ->add(
@@ -148,28 +159,32 @@ class UserAdmin extends SonataUserAdmin
                 'iban',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
                 )
             )
             ->add(
                 'bic',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
                 )
             )
             ->add(
                 'bankOwnerName',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
                 )
             )
             ->add(
                 'bankOwnerAddress',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
+                    'disabled' => true
                 )
             )
             ->add(

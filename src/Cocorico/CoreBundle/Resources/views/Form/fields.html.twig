@@ -146,16 +146,18 @@
 {% block listing_category_widget_options_tree -%}
     {% for group_label, choice in options %}
         {% set category = choice.data %}
-        {% set indent = '--'|repeat(category.getLvl) %}
+        {% set indent = '-'|repeat(category.getLvl) %}
 
         {%- if not category.isLeaf -%}
             {#|trans({}, translation_domain)#}
-            <optgroup label="{{ category.getName() }}">
+            <optgroup label="{{ indent ~ " " ~ category.getName() }}">
                 {% set options = choice %}
                 {{- block('listing_category_widget_options_tree') -}}
             </optgroup>
         {%- else -%}
-            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label }}</option>
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                {{ indent ~ " " ~ choice.label }}
+            </option>
         {%- endif -%}
     {% endfor %}
 {%- endblock listing_category_widget_options_tree %}
@@ -309,7 +311,7 @@
 {% endmacro %}
 
 
-{%- block _listing_discounts_widget -%}
+{%- block _listing_discount_discounts_widget -%}
     {% set data_prototype = "" %}
     {% if prototype is defined %}
         {% set data_prototype =  _self.discountCollectionItem(form.vars.prototype, allow_delete) %}

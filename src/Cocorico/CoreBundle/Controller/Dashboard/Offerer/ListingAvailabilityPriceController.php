@@ -212,14 +212,16 @@ class ListingAvailabilityPriceController extends Controller
         $start_time,
         $end_time
     ) {
-        $lam = $this->get("cocorico.listing_availability.manager");
+        $listingAvailabilityManager = $this->get("cocorico.listing_availability.manager");
 
         if ($listing->getId() != $listing_availability->getListingId()) {
             throw new AccessDeniedHttpException("Edition impossible");
         }
 
         //No status edition if already booked
-        if ($lam->getTimeUnitIsDay() && $listing_availability->getStatus() == ListingAvailability::STATUS_BOOKED) {
+        if ($listingAvailabilityManager->getTimeUnitIsDay() &&
+            $listing_availability->getStatus() == ListingAvailability::STATUS_BOOKED
+        ) {
             throw $this->createNotFoundException('Edition impossible');
         }
 
@@ -229,7 +231,7 @@ class ListingAvailabilityPriceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ListingAvailability $listing_availability */
             $listing_availability = $form->getData();
-            $lam->saveAvailabilityTimes(
+            $listingAvailabilityManager->saveAvailabilityTimes(
                 $listing_availability,
                 $start_time,
                 $end_time,

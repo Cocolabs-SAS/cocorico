@@ -85,7 +85,7 @@
                     function () {
                         //Replace price with new one on calendar
                         var $titleElt = $('.fc-title-default');
-                        var $price = $("#listing_price");
+                        var $price = $("#listing_price_price");
                         var newPrice = $price.val();
                         newPrice = convertCurrency(newPrice, defaultCurrency, currentCurrency);
                         $titleElt.html($titleElt.html().replace(/\d+(\.\d*)?|\.\d+/, newPrice));

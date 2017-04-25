@@ -27,7 +27,7 @@ class ListingCategoryAdmin extends Admin
     // setup the default sort column and order
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'id'
+        '_sort_by' => 'root, lft'
     );
 
     public function setLocales($locales)
@@ -103,17 +103,17 @@ class ListingCategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
+            ->addIdentifier(
+                'parent',
+                null,
+                array('label' => 'admin.listing_category.parent.label')
+            )
             ->add(
                 'name',
                 null,
                 array(
                     'label' => 'admin.listing_category.name.label',
                 )
-            )
-            ->addIdentifier(
-                'parent',
-                null,
-                array('label' => 'admin.listing_category.parent.label')
             );
 
 
@@ -143,9 +143,9 @@ class ListingCategoryAdmin extends Admin
         $datagrid = $this->getDatagrid();
         $datagrid->buildPager();
 
-        $datasourceit = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
-        $datasourceit->setDateTimeFormat('d M Y'); //change this to suit your needs
-        return $datasourceit;
+        $datasourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
+        $datasourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+        return $datasourceIt;
     }
 
     public function getBatchActions()

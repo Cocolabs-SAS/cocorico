@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-06-27T13:58:00Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-07-05T11:28:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -749,14 +749,14 @@
                 <source>listing.show.cancellation_policy:</source>
                 <target>Cancellation policy:</target>
                 <jms:reference-file line="111">Dashboard/Booking/edit.html.twig</jms:reference-file>
-                <jms:reference-file line="278">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="279">Frontend/Booking/new.html.twig</jms:reference-file>
                 <jms:reference-file line="318">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="239">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="listing.show.categories:">
                 <source>listing.show.categories:</source>
                 <target>Categories:</target>
-                <jms:reference-file line="266">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="267">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="listing.show.characteristics">
                 <source>listing.show.characteristics</source>
@@ -802,7 +802,7 @@
             <trans-unit id="49ff4bce3e52dd086b802ffa369d62b7e99d537b" resname="listing.show.location:">
                 <source>listing.show.location:</source>
                 <target>Location:</target>
-                <jms:reference-file line="274">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="275">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="368a7d80b53cf610605714c046875ad7fd4d19b6" resname="listing.show.map">
                 <source>listing.show.map</source>

@@ -715,7 +715,7 @@ pre code {
 }
 
 .col-xs-pull-0 {
-    right: 0%;
+    right: 0;
 }
 
 .col-xs-push-12 {
@@ -767,7 +767,7 @@ pre code {
 }
 
 .col-xs-push-0 {
-    left: 0%;
+    left: 0;
 }
 
 .col-xs-offset-12 {
@@ -819,7 +819,7 @@ pre code {
 }
 
 .col-xs-offset-0 {
-    margin-left: 0%;
+    margin-left: 0;
 }
 
 @media (min-width: 768px) {
@@ -924,7 +924,7 @@ pre code {
     }
 
     .col-sm-pull-0 {
-        right: 0%;
+        right: 0;
     }
 
     .col-sm-push-12 {
@@ -976,7 +976,7 @@ pre code {
     }
 
     .col-sm-push-0 {
-        left: 0%;
+        left: 0;
     }
 
     .col-sm-offset-12 {
@@ -1028,7 +1028,7 @@ pre code {
     }
 
     .col-sm-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -1134,7 +1134,7 @@ pre code {
     }
 
     .col-md-pull-0 {
-        right: 0%;
+        right: 0;
     }
 
     .col-md-push-12 {
@@ -1186,7 +1186,7 @@ pre code {
     }
 
     .col-md-push-0 {
-        left: 0%;
+        left: 0;
     }
 
     .col-md-offset-12 {
@@ -1238,7 +1238,7 @@ pre code {
     }
 
     .col-md-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -1344,7 +1344,7 @@ pre code {
     }
 
     .col-lg-pull-0 {
-        right: 0%;
+        right: 0;
     }
 
     .col-lg-push-12 {
@@ -1396,7 +1396,7 @@ pre code {
     }
 
     .col-lg-push-0 {
-        left: 0%;
+        left: 0;
     }
 
     .col-lg-offset-12 {
@@ -1448,7 +1448,7 @@ pre code {
     }
 
     .col-lg-offset-0 {
-        margin-left: 0%;
+        margin-left: 0;
     }
 }
 
@@ -3725,7 +3725,7 @@ input[type="button"].btn-block {
     padding: 0 0;
     margin-bottom: 20px;
     list-style: none;
-    background-color: none;
+    background-color: transparent;
     border-radius: 4px;
 }
 
@@ -4998,7 +4998,6 @@ input[type="button"].btn-block {
     font-family: "fontello";
     font-style: normal;
     font-weight: normal;
-    speak: none;
     display: inline-block;
     text-decoration: inherit;
     width: 1em;
@@ -11208,10 +11207,6 @@ h1.listing-title a {
     width: 221px;
 }
 
-.form-area .about-info p {
-    margin: 0 0 20px;
-}
-
 .form-area .about-info .from {
     max-width: 375px;
     margin: 0 0 7px;
@@ -11279,10 +11274,13 @@ h1.listing-title a {
 }
 
 .form-area .message-area .tab-content {
-    padding: 0;
-    margin: 0 0 20px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
+.form-area .message-area .field-row {
+    margin: 0;
+}
 .form-area .message-area .jcf-textarea {
     border-width: 0;
 }
@@ -11306,8 +11304,9 @@ h1.listing-title a {
     background: #c6ccd2;
 }
 
-.form-area .message-area .btn-translate {
-    margin: 0 30px -21px 0;
+.form-area .message-area #btn-translate {
+    margin: 10px 0 0 0;
+    padding: 7px 14px;
 }
 
 .form-area .message-area .nav-tabs > li > a {
@@ -11605,7 +11604,6 @@ h1.listing-title a {
 }
 
 .btns-list li {
-    padding: 0;
     float: left;
     width: 33.3333%;
     position: relative;
@@ -11687,7 +11685,6 @@ h1.listing-title a {
 .check-list .label {
     padding: 0;
     float: none;
-    vertical-align: top;
     display: inline-block;
     vertical-align: middle;
 }
@@ -14471,7 +14468,6 @@ body > .jcf-select-drop.jcf-drop-flipped {
     width: 8px;
     height: 1px;
     display: block;
-    margin: 0 auto;
     border-radius: 5px;
     position: relative;
     margin: 0 0 0 -4px;
@@ -14805,8 +14801,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 ---------------------------------------------------------*/
 /* styles for screens 1200px wide and larger */
 @media screen and (max-width: 1230px) {
-    .c
-    ontainer {
+    .container {
         width: auto;
     }
 
@@ -15657,11 +15652,8 @@ body > .jcf-select-drop.jcf-drop-flipped {
     body.modal-open:after {
         z-index: 900;
         content: '';
-        top: 0;
         left: 0;
         right: 0;
-        bottom: 0;
-        position: absolute;
         position: fixed;
         top: -9999px;
         bottom: -9999px;

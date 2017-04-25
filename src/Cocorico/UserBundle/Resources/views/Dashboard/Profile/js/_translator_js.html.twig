@@ -28,9 +28,13 @@
                     else {
                         $("#success").show();
                         $("#error").hide();
-                        $(".same-height-right").css('height', '831px');
                         $('#user_translations_' + to + '_description').val(result.textData[0]);
                     }
+                    $('.about-info').sameHeight({
+                        elements: '.column',
+                        flexible: true,
+                        multiLine: true
+                    });
                 }
             });
             return false;

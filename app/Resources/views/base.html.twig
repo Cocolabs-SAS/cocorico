@@ -113,11 +113,10 @@
             src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/i18n/jquery-ui-i18n.min.js"></script>
 
     <script type="text/javascript">
-        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery.min.js') }}"><\/script>');
-        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"><\/script>');
-        window.jQuery || document.write('<script src="{{ asset('js/vendor/jquery-ui-i18n.min.js') }}"><\/script>');
-        {#<script src="{{ asset('js/vendor/jquery.min.js') }}"></script>#}
-        {#<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"></script>#}
+        var jqEnabled = window.jQuery && typeof window.jQuery("html") !== 'undefined';
+        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery.min.js') }}"><\/script>');
+        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"><\/script>');
+        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery-ui-i18n.min.js') }}"><\/script>');
     </script>
 
     {#Safely using .ready() before including jQuery #}

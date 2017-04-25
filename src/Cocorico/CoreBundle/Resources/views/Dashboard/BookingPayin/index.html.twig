@@ -79,11 +79,13 @@
                         </td>
                         <td class="col6" data-label="{{ "booking.bank_wire.bill.title"| trans }}">
                             <div>
-                                <a class="icon-pdf"
-                                   href="{{ path('cocorico_dashboard_booking_payin_show_bill_asker',{'id': booking.id }) }}"
-                                   target="_blank">
-                                    <img alt="pdf" src="{{ asset('images/icon-pdf.png') }}">
-                                </a>
+                                {% if booking.amountFeeAsAskerDecimal > 0 %}
+                                    <a class="icon-pdf"
+                                       href="{{ path('cocorico_dashboard_booking_payin_show_bill_asker',{'id': booking.id }) }}"
+                                       target="_blank">
+                                        <img alt="pdf" src="{{ asset('images/icon-pdf.png') }}">
+                                    </a>
+                                {% endif %}
                             </div>
                         </td>
                     </tr>

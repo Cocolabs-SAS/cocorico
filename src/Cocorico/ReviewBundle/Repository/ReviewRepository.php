@@ -15,6 +15,7 @@ use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
 
 class ReviewRepository extends EntityRepository
 {
@@ -28,18 +29,21 @@ class ReviewRepository extends EntityRepository
     public function getUserAverage(Review $review)
     {
         $user = $review->getReviewTo();
-        $askerQB = $this->getInitialQuery($user);
-        $askerRating = $askerQB->addSelect("avg(r.rating) as asker_avg")
+
+        $askerQuery = $this->getInitialQuery($user)
+            ->addSelect("avg(r.rating) as asker_avg")
             ->andWhere('b.user = :bookingUser')
             ->setParameter('bookingUser', $user)
-            ->getQuery()->getArrayResult();
+            ->getQuery();
+        $askerRating = $askerQuery->getArrayResult();
 
-        $offererQB = $this->getInitialQuery($user);
-        $offererRating = $offererQB->addSelect("avg(r.rating) as offerer_avg")
+        $offererQuery = $this->getInitialQuery($user)
+            ->addSelect("avg(r.rating) as offerer_avg")
             ->leftJoin('b.listing', 'l')
             ->andWhere('l.user = :listingUser')
             ->setParameter('listingUser', $user)
-            ->getQuery()->getArrayResult();
+            ->getQuery();
+        $offererRating = $offererQuery->getArrayResult();
 
         $avgUserRatings['asker_avg'] = (isset($askerRating[0]['asker_avg'])) ? $askerRating[0]['asker_avg'] : 0;
         $avgUserRatings['offerer_avg'] = (isset($offererRating[0]['offerer_avg'])) ? $offererRating[0]['offerer_avg'] : 0;
@@ -60,7 +64,7 @@ class ReviewRepository extends EntityRepository
         $listing = $review->getBooking()->getListing();
         $offerer = $listing->getUser();
         // get rating as asker
-        $avgListingRatings = $this->_em->createQueryBuilder()
+        $listingQuery = $this->_em->createQueryBuilder()
             ->from('Cocorico\ReviewBundle\Entity\Review', 'r')
             ->leftJoin('r.booking', 'b')
             ->leftJoin('b.listing', 'l')
@@ -70,9 +74,11 @@ class ReviewRepository extends EntityRepository
             ->setParameter('listing', $listing)
             ->setParameter('reviewBy', $offerer)
             ->groupBy('b.listing')
-            ->getQuery()->getArrayResult();
+            ->getQuery();
 
-        return $avgListingRatings;
+        $listingRating = $listingQuery->getArrayResult();
+
+        return $listingRating;
     }
 
     /**
@@ -100,7 +106,7 @@ class ReviewRepository extends EntityRepository
      * getInitialQuery returns the query builder for the review calculations for offerer and askerer
      *
      * @param  User $user
-     * @return Object Querybuilder
+     * @return  QueryBuilder
      */
     private function getInitialQuery(User $user)
     {

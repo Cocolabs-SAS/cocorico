@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2016-06-27T13:58:00Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-07-05T11:28:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -123,6 +123,10 @@
                 <source>/dashboard/listing/{id}/edit_images</source>
                 <target>/dashboard/listing/{id}/edit_images</target>
             </trans-unit>
+            <trans-unit id="223734d9283ac4aeb6d32c439d689da41659170a" resname="cocorico_dashboard_listing_edit_option">
+                <source>/dashboard/listing/{id}/edit_option</source>
+                <target state="new">/dashboard/listing/{id}/edit_option</target>
+            </trans-unit>
             <trans-unit id="5f2acf99fb0b0e7f40210605e40c5c3004a3cf04" resname="cocorico_dashboard_listing_edit_presentation">
                 <source>/dashboard/listing/{id}/edit_presentation</source>
                 <target>/dashboard/listing/{id}/edit_presentation</target>
@@ -195,9 +199,21 @@
                 <source>/language/translate</source>
                 <target>/language/translate</target>
             </trans-unit>
+            <trans-unit id="311bb8223f58f33333cbf7332c4ff0b4d31d3420" resname="cocorico_listing_alert_dashboard_alert">
+                <source>/dashboard/listing-alert/{page}</source>
+                <target state="new">/dashboard/listing-alert/{page}</target>
+            </trans-unit>
+            <trans-unit id="c82f3ece898b0cd5915c56eed0ae6a6cfbca85a8" resname="cocorico_listing_alert_dashboard_alert_delete">
+                <source>/dashboard/listing-alert/{id}/delete</source>
+                <target state="new">/dashboard/listing-alert/{id}/delete</target>
+            </trans-unit>
+            <trans-unit id="7503f38efaf75f94d521690c4fcb8a82f31801c5" resname="cocorico_listing_alert_new">
+                <source>/listing-alert/new</source>
+                <target state="new">/listing-alert/new</target>
+            </trans-unit>
             <trans-unit id="0d035f070813a7d01ed570d64541854d8c9518d5" resname="cocorico_listing_availabilities">
                 <source>/listing_availabilities/{listing_id}/{start}/{end}</source>
-                <target>/annonce-disponibilitee/{listing_id}/{start}/{end}</target>
+                <target>/listing-availabilities/{listing_id}/{start}/{end}</target>
             </trans-unit>
             <trans-unit id="b03dfac5699e4ae360dc374ea980b05a5e0b626a" resname="cocorico_listing_favourite">
                 <source>/listing/favourite</source>
@@ -210,6 +226,10 @@
             <trans-unit id="8ece2c88a49506e23bca2cccb11361ef9085b426" resname="cocorico_listing_new">
                 <source>/listing/new</source>
                 <target>/listing/new</target>
+            </trans-unit>
+            <trans-unit id="41c0f5c7a67f582d941d39c7d21801cd26786260" resname="cocorico_listing_option_booking_edit_options">
+                <source>/booking/{listing_id}/{start}/{end}/{start_time}/{end_time}/edit_options</source>
+                <target state="new">/booking/{listing_id}/{start}/{end}/{start_time}/{end_time}/edit_options</target>
             </trans-unit>
             <trans-unit id="d06b47abef321abd0ce8009ccc834cb1b711e68b" resname="cocorico_listing_search_result">
                 <source>/listing/search_result</source>
@@ -226,6 +246,10 @@
             <trans-unit id="08287e8d950d47856d8c09d38255f293609de0c2" resname="cocorico_page_show">
                 <source>/page/{slug}</source>
                 <target>/page/{slug}</target>
+            </trans-unit>
+            <trans-unit id="73a05d2b193a482aa4e524a30c720500da1bb276" resname="cocorico_sms_check">
+                <source>/sms/check</source>
+                <target state="new">/sms/check</target>
             </trans-unit>
             <trans-unit id="a46a768e4fd64905558a97d6b0bff4efd0ba3eda" resname="cocorico_user_change_password">
                 <source>/change-password</source>

@@ -10,6 +10,17 @@
 
                     <li role="presentation" {% if app.request.locale == locale %}class="active"{% endif %}>
                         <a href="#{{ tab_link }}" data-toggle="tab" data-text="{{ locale }}">
+                            {#error icon in tabs#}
+                            {% set has_error = false %}
+                            {% for translations_field in translations_fields if not has_error %}
+                                {% if translations_field.vars.errors|length %}
+                                    {% set has_error = true %}
+                                    <span class="errors">
+                                        <i class="icon-error-field"></i>
+                                    </span>
+                                {% endif %}
+                            {% endfor %}
+
                             {{ locale|capitalize }}
                             {% if translations_fields.vars.required %}*{% endif %}
                         </a>

@@ -323,23 +323,6 @@ class BookingAdmin extends Admin
                 )
                 ->add(
                     'options',
-                    '',
-                    array(
-                        'by_reference' => false,
-                        'class' => 'Cocorico\ListingOptionBundle\Entity\BookingOption',
-                        'query_builder' =>
-                            $this->modelManager
-                                ->createQuery('Cocorico\ListingOptionBundle\Entity\BookingOption', 'bo')
-                                ->where('bo.quantity > 0'),
-                        'property' => 'name'
-                    ),
-                    array(
-                        'edit' => 'inline',
-                        'inline' => 'table',
-                    )
-                )
-                ->add(
-                    'options',
                     'sonata_type_collection',
                     array(
                         'type_options' => array(
@@ -421,12 +404,12 @@ class BookingAdmin extends Admin
                 array('label' => 'admin.booking.listing_title.label')
             )
             ->add(
-                'user.email',
+                'user.email',//todo: search by first name and last name
                 null,
                 array('label' => 'admin.booking.asker.label')
             )
             ->add(
-                'listing.user.email',
+                'listing.user.email',//todo: search by first name and last name
                 null,
                 array('label' => 'admin.booking.offerer.label')
             )

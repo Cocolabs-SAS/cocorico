@@ -85,6 +85,7 @@
                             {% set listing_user = listing.user %}
                             {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
                             {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+                            {% set user_image = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
 
                             <article class="listing-post col-sm-6 col-xs-12">
                                 <a href="javascript:void(0)" id="favourite-{{ listing.id }}" class="favourit">
@@ -137,9 +138,8 @@
                                         </div>
 
                                         <div class="post-content">
-                                            {% set image_user = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
                                             <div class="alignleft">
-                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}"
+                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
                                                      alt="{{ listing_user.firstName }}"/>
                                             </div>
                                             <div class="textbox">

@@ -52,7 +52,7 @@ Add this commands to your cron tab and don't forget to set the same php timezone
 
 12. Generate Sitemap (Optional. ListingSeoBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico_seo:sitemap:generate --env=dev`
+    `0 4  * * *  php <path-to-your-app>app/console cocorico_seo:sitemap:generate --env=dev`
 
 
         
@@ -335,4 +335,11 @@ Extra Bundle Routing
 To add extra bundle routing to the app add new bundle routing path to `Cocorico/CoreBundle/Routing/ExtraBundleLoader.php`
 
 
+WkHtml2PDF Install
+------------------
 
+    cd mytmpfolder
+    wget http://download.gna.org/wkhtmltopdf/0.12/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+    sudo tar xvf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz
+    sudo mkdir /usr/local/bin
+    sudo mv wkhtmltox/bin/wkhtmlto* /usr/local/bin/

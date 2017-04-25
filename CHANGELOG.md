@@ -9,6 +9,36 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 
+## [0.3.3] - 2017-04-26
+
+### Added
+
+### Fixed
+- Fix admin translation
+- Fix duplicate booking options in admin
+- Fix similar listings back link
+- Fix design related change on manual translations fields 
+- Fix user image order in listing result
+- Fix Jquery CDN fallback
+- Fix duplicate listing dashboard forms name (to display them into Web Profiler)
+
+
+### Changed
+- Change listing availabilities route translation
+- Change doc
+- Remove arrows in user language select list
+- Allow all countries in listing deposit
+- Remove SBO characteristics description requirement
+- Do not display bill link in asker payments if asker fees are 0
+- Add error icon in translation tabs in case of error
+- Add Google API account creation explanation into README
+- Set disabled property to true in UserAdmin for Mangopay related fields
+- Set disabled property to true in ReviewAdmin for almost review fields
+
+### Deprecated
+
+
+
 ## [0.3.2] - 2017-01-25
 
 ### Added
