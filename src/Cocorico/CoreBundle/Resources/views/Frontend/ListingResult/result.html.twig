@@ -58,6 +58,17 @@
                 <small>
                     {{ 'listing.search.result.results'|trans({'%nb_results%': nb_results}) }}
                 </small>
+
+                {% if bundleExist('CocoricoListingAlertBundle') %}
+                    <div class="listing-alert">
+                        <a href="{{ path('cocorico_listing_alert_new') }}" data-id="listing-alert"
+                           class="btn btn-default">
+                            {{ "listing.search.result.alert.link"|trans }}
+                        </a>
+                    </div>
+                    <div data-id="listing-alert-dialog"></div>
+                {% endif %}
+
             </h1>
             {#TO NOT DELETE#}
             <div data-id="seo-desc">
@@ -128,8 +139,8 @@
                                                             {% endif %}
                                                         </div>
                                                         <strong class="title">
-                                                            {% for category in listing.categories %}
-                                                                {{ category.translations[app.request.locale].name }},
+                                                            {% for listingListingCategory in listing.listingListingCategories %}
+                                                                {{ listingListingCategory.category.translations[app.request.locale].name }},
                                                             {% endfor %}
                                                         </strong>
                                                     </div>
@@ -143,6 +154,12 @@
                                                      alt="{{ listing_user.firstName }}"/>
                                             </div>
                                             <div class="textbox">
+                                                {% if bundleExist('CocoricoDeliveryBundle') %}
+                                                    {% include '@CocoricoDelivery/Frontend/Listing/_show_delivery.html.twig' with {
+                                                    'listing_delivery': listing.delivery
+                                                    } only %}
+                                                {% endif %}
+
                                                 <h2>{{ listing_translation.title }}</h2>
 
                                                 <p>{{ listing_location["city"] }} </p>
@@ -227,12 +244,12 @@
             setDefaultFavourites();
 
             //Select change submit the form
-            $("select[id^='characteristics_'], select#sort_by").change(function (e) {
-                $(this).closest('form').submit();
-            });
-            $(".ui-slider").on("slidestop", function (event, ui) {
-                $(this).closest('form').submit();
-            });
+//            $("select[id^='characteristics_'], select#sort_by").change(function (e) {
+//                $(this).closest('form').submit();
+//            });
+//            $(".ui-slider").on("slidestop", function (event, ui) {
+//                $(this).closest('form').submit();
+//            });
 
             // Categories
             initMultiSelect(
@@ -241,6 +258,10 @@
                     '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
                     '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
             );
+
+            $(".datepicker").datepicker({
+                dateFormat: "dd/mm/yy"
+            });
 
             //Listing alert (See form_search.html.twig, common.js)
             var $dialog = $("div[data-id=listing-alert-dialog]").initDialogForm(400);

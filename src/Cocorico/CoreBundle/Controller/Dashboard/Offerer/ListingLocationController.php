@@ -24,13 +24,13 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @Route("/listing")
  */
-class ListingVariousInformationController extends Controller
+class ListingLocationController extends Controller
 {
 
     /**
      * Edits an existing Listing entity.
      *
-     * @Route("/{id}/edit_various_information", name="cocorico_dashboard_listing_edit_various_information", requirements={"id" = "\d+"})
+     * @Route("/{id}/edit_location", name="cocorico_dashboard_listing_edit_location", requirements={"id" = "\d+"})
      * @Security("is_granted('edit', listing)")
      * @ParamConverter("listing", class="CocoricoCoreBundle:Listing")
      *
@@ -41,14 +41,14 @@ class ListingVariousInformationController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editVariousInformationAction(Request $request, Listing $listing)
+    public function editLocationAction(Request $request, Listing $listing)
     {
         $translator = $this->get('translator');
-        $editForm = $this->createEditVariousInformationForm($listing);
+        $editForm = $this->createEditLocationForm($listing);
         $editForm->handleRequest($request);
 
         $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_various_information',
+            'cocorico_dashboard_listing_edit_location',
             array(
                 'id' => $listing->getId()
             )
@@ -65,7 +65,7 @@ class ListingVariousInformationController extends Controller
         }
 
         return $this->render(
-            'CocoricoCoreBundle:Dashboard/Listing:edit_various_information.html.twig',
+            'CocoricoCoreBundle:Dashboard/Listing:edit_location.html.twig',
             array(
                 'listing' => $listing,
                 'form' => $editForm->createView()
@@ -81,15 +81,15 @@ class ListingVariousInformationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditVariousInformationForm(Listing $listing)
+    private function createEditLocationForm(Listing $listing)
     {
         $form = $this->get('form.factory')->createNamed(
             'listing',
-            'listing_edit_various_information',
+            'listing_edit_location',
             $listing,
             array(
                 'action' => $this->generateUrl(
-                    'cocorico_dashboard_listing_edit_various_information',
+                    'cocorico_dashboard_listing_edit_location',
                     array('id' => $listing->getId())
                 ),
                 'method' => 'POST',

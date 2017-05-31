@@ -83,6 +83,9 @@ class BookingController extends Controller
             $end_time
         );
 
+        $event = new BookingEvent($booking);
+        $dispatcher->dispatch(BookingEvents::BOOKING_INIT, $event);
+
         //Availability is validated through BookingValidator and amounts are setted through Form Event PRE_SET_DATA
         $form = $this->createCreateForm($booking);
 
@@ -131,6 +134,11 @@ class BookingController extends Controller
                 'success_voucher',
                 $translator->trans('booking.new.voucher.success', array(), 'cocorico_booking')
             );
+        } elseif ($success === 3) {//Delivery is valid
+            $session->getFlashBag()->add(
+                'success',
+                $translator->trans('booking.new.delivery.success', array(), 'cocorico_booking')
+            );
         } elseif ($success < 0) {//Errors
             $this->addFlashError($success);
         }
@@ -168,6 +176,12 @@ class BookingController extends Controller
         } elseif ($success == -4) {
             $errorMsg = $translator->trans('booking.new.voucher_amount.error', array(), 'cocorico_booking');
             $flashType = 'error_voucher';
+        } elseif ($success == -5) {
+            $errorMsg = $translator->trans('booking.new.delivery_max.error', array(), 'cocorico_booking');
+            $flashType = 'error';
+        } elseif ($success == -6) {
+            $errorMsg = $translator->trans('booking.new.delivery.error', array(), 'cocorico_booking');
+            $flashType = 'error';
         }
 
         $this->container->get('session')->getFlashBag()->add(

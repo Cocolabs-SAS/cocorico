@@ -23,7 +23,9 @@ class ListingSearchType extends ListingSearchResultType
         $builder
             ->remove('price_range')
             ->remove('characteristics')
-            ->remove('sort_by');
+            ->remove('sort_by')
+            ->remove('delivery')
+            ->remove('categories_fields');
 
         if ($this->timeUnitFlexibility) {
             $builder->remove('flexibility');

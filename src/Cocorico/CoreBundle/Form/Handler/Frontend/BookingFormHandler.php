@@ -107,6 +107,7 @@ class BookingFormHandler
      * @param $form
      *
      * @return int equal to :
+     * 3: Delivery success
      * 2: Voucher code success
      * 1: Success
      * 0: if form is not submitted:
@@ -114,13 +115,22 @@ class BookingFormHandler
      * -2: Self booking error
      * -3: Voucher error on code
      * -4: Voucher error on booking amount
+     * -5: the max delivery distance has been reached
+     * -6: distance matrix api error
      */
     public function process(Form $form)
     {
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $this->request->isMethod('POST')) {
-            if ($result = $this->checkVoucher($form)) {
+
+            $result = $this->checkDelivery($form);
+            if ($result || $result === 0) {
+                return $result;//0, 3, -5 or -6
+            }
+
+            $result = $this->checkVoucher($form);
+            if ($result) {
                 return $result;//2, -3 or -4
             }
 
@@ -136,6 +146,44 @@ class BookingFormHandler
         return $result;
     }
 
+    /**
+     * todo: decouple delivery
+     *
+     * @param $form
+     *
+     * @return bool|int equal to:
+     *  3: Delivery success
+     *  0: Neither error ,either success: The address is empty and booking amounts have been recomputed
+     *  -5: the max delivery distance has been reached
+     *  -6: distance matrix api error
+     */
+    private function checkDelivery(Form $form)
+    {
+        $result = false;
+
+        if ($this->bookingManager->deliveryIsEnabled()) {
+            //Check only if Ok is clicked
+            if ($form->get('validateDelivery')->isClicked()) {
+                /** @var Booking $booking */
+                $booking = $form->getData();
+                if ($booking->getAmountDelivery() || $booking->getAmountDelivery() === 0) {
+                    $result = 3;//Success
+                } else {
+                    if ($booking->getDeliveryAddress()) {//Error
+                        if ($booking->getDistanceDelivery() > $booking->getListing()->getKilometerMax()) {
+                            $result = -5;
+                        } else {
+                            $result = -6;//API error
+                        }
+                    } else {
+                        $result = 0;//No error. The address is empty and booking amounts have been recomputed
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
 
     /**
      * Check voucher.

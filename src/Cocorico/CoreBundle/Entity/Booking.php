@@ -67,7 +67,6 @@ class Booking extends BaseBooking
      */
     protected $user;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Cocorico\CoreBundle\Entity\Listing", inversedBy="bookings")
      * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")

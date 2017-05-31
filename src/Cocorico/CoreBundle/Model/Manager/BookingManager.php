@@ -24,6 +24,8 @@ use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\CoreBundle\Repository\BookingRepository;
 use Cocorico\CoreBundle\Repository\ListingDiscountRepository;
 use Cocorico\CoreBundle\Smser\TwigSmser;
+use Cocorico\GeoBundle\DistanceMatrix\DistanceMatrix;
+use Cocorico\GeoBundle\DistanceMatrix\DistanceMatrixRequest;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
@@ -286,6 +288,16 @@ class BookingManager extends BaseManager
 
 
         if (!count($errors)) {
+            if ($this->deliveryIsEnabled()) {
+                //Shipping cost
+                $result = $this->applyDeliveryOnBooking($booking);
+                $booking = $result['booking'];
+                $errors[] = $result['error'];
+                if (!$result['error']) {
+                    $amount += $booking->getAmountDelivery();
+                }
+            }
+
             //Discount
             /** @var ListingDiscountRepository $listingDiscountRepository */
             $listingDiscountRepository = $this->em->getRepository("CocoricoCoreBundle:ListingDiscount");
@@ -334,8 +346,78 @@ class BookingManager extends BaseManager
         return $errors;
     }
 
+    /**
+     * //todo: decouple delivery
+     *
+     * Apply delivery constraint on Booking: Set delivery amount and distance or return error if any
+     *
+     * @param Booking $booking
+     * @return Booking[]|string
+     *      ['booking']              Booking
+     *      ['error']                string ('delivery_max_invalid' or 'delivery_invalid') in case of error
+     */
+    private function applyDeliveryOnBooking(Booking $booking)
+    {
+        $result = array('booking' => $booking, 'error' => '');
+
+        $listing = $booking->getListing();
+
+        if ($booking->getDelivery() && $booking->getDeliveryAddress()) {
+            if ($listing->getPriceDelivery()) {
+                $coordinate = $listing->getLocation()->getCoordinate();
+                $origins = array($coordinate->getLat() . ',' . $coordinate->getLng());
+                $destinations = array($booking->getDeliveryAddress());
+
+                try {
+                    $distanceMatrixRequest = new DistanceMatrixRequest($origins, $destinations);
+                    $distanceMatrixRequest->setTravelMode(DistanceMatrix::TRAVEL_DRIVING);
+                    $distanceMatrix = new DistanceMatrix();
+                    $response = $distanceMatrix->process($distanceMatrixRequest);
+
+                    $origins = $response->getOrigins();
+
+                    for ($i = 0; $i < count($origins); $i++) {
+                        $rows = $response->getRows();
+                        $elements = $rows[$i]->getElements();
+
+                        for ($j = 0; $j < count($elements); $j++) {
+                            $element = $elements[$j];
+                            if ($element->getStatus() == DistanceMatrix::STATUS_OK) {
+                                $distance = $element->getDistance();
+                                $distanceInKm = $distance->getValue() / 1000;
+
+                                $amountDelivery = $distanceInKm * $listing->getPriceDelivery();
+                                $amountDelivery = $amountDelivery > 0 ? $amountDelivery : 0;
+                                if ($distanceInKm <= $listing->getKilometerMax()) {
+                                    if ($distanceInKm > $listing->getKilometerMin()) {
+                                        $booking->setAmountDelivery($amountDelivery);
+                                    } else {
+                                        $booking->setAmountDelivery(0);
+                                    }
+                                    $booking->setDistanceDelivery($distance->getValue());
+                                } else {
+                                    $result['error'] = 'delivery_max_invalid';
+                                }
+                            } else {
+                                $result['error'] = 'delivery_invalid';
+                            }
+                        }
+                    }
+                } catch (\Exception $e) {
+                    $result['error'] = 'delivery_invalid';
+                }
+            } else {
+                $booking->setAmountDelivery(0);
+            }
+        }
+
+        $result['booking'] = $booking;
+
+        return $result;
+    }
 
     /**
+     * //todo: decouple voucher
      * Apply voucher on booking amount : Modify booking amount or return error type if any
      *
      * array['booking']              Booking
@@ -1197,6 +1279,7 @@ class BookingManager extends BaseManager
         return $this->mailer;
     }
 
+    //todo: use kernel.bundles param instead xxxIsEnabled methods
     /**
      * @return bool
      */
@@ -1228,6 +1311,13 @@ class BookingManager extends BaseManager
         return !$this->em->getMetadataFactory()->isTransient('Cocorico\ListingOptionBundle\Entity\ListingOption');
     }
 
+    /**
+     * @return bool
+     */
+    public function deliveryIsEnabled()
+    {
+        return $this->em->getClassMetadata('Cocorico\CoreBundle\Entity\Booking')->hasField('amountDelivery');
+    }
 
     /**
      *

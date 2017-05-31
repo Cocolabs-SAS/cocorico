@@ -41,6 +41,9 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $request;
     protected $similarListings;
     protected $locale;
+    //todo: decouple category fields and delivery
+    protected $categoriesFields;
+    protected $delivery;
 
     public static $sortByValues = array(
         'recommended' => 'listing.search.sort_by.recommended',
@@ -85,6 +88,13 @@ class ListingSearchRequest implements TranslationContainerInterface
             $this->categories = $categories;
         }
 
+        //Categories fields
+        $this->categoriesFields = array();
+        $categoriesFields = $this->request->query->get("categories_fields");
+        if (is_array($categoriesFields)) {
+            $this->categoriesFields = $categoriesFields;
+        }
+
         //Characteristics
         $this->characteristics = array();
         $characteristics = $this->request->query->get("characteristics");
@@ -93,6 +103,12 @@ class ListingSearchRequest implements TranslationContainerInterface
         }
 
         $this->setSimilarListings(array());
+
+        //Delivery
+        $delivery = $this->request->query->get("delivery");
+        if ($delivery) {
+            $this->delivery = $delivery;
+        }
     }
 
     /**
@@ -296,6 +312,22 @@ class ListingSearchRequest implements TranslationContainerInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getDelivery()
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * @param bool $delivery
+     */
+    public function setDelivery($delivery)
+    {
+        $this->delivery = $delivery;
+    }
+
+    /**
      * Refresh dates and eventually times Listing Search Request Parameters and memorize them in session
      *
      * @param array $dateRangeParameter
@@ -336,6 +368,22 @@ class ListingSearchRequest implements TranslationContainerInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategoriesFields()
+    {
+        return $this->categoriesFields;
+    }
+
+    /**
+     * @param array $categoriesFields
+     */
+    public function setCategoriesFields($categoriesFields)
+    {
+        $this->categoriesFields = $categoriesFields;
     }
 
 

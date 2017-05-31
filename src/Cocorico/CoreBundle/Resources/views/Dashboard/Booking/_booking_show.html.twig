@@ -85,6 +85,12 @@
                         {{ other_user_rating | cocorico_star_rating }}
                     {% endif %}
                 </div>
+
+                {% if bundleExist('CocoricoDeliveryBundle') %}
+                    {% include '@CocoricoDelivery/Dashboard/Booking/_show_delivery.html.twig' with {
+                    'booking': booking
+                    } only %}
+                {% endif %}
             </div>
 
             {% if bundleExist('CocoricoListingOptionBundle') %}

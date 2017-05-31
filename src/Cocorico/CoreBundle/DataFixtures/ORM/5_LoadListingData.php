@@ -16,6 +16,7 @@ use Cocorico\CoreBundle\Entity\ListingCategory;
 use Cocorico\CoreBundle\Entity\ListingCharacteristic;
 use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
 use Cocorico\CoreBundle\Entity\ListingImage;
+use Cocorico\CoreBundle\Entity\ListingListingCategory;
 use Cocorico\CoreBundle\Entity\ListingListingCharacteristic;
 use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Entity\ListingTranslation;
@@ -124,7 +125,10 @@ class LoadListingData extends AbstractFixture implements OrderedFixtureInterface
 
         /** @var ListingCategory $category */
         $category = $manager->merge($this->getReference('category1_1'));
-        $listing->addCategory($category);
+        $listingCategory = new ListingListingCategory();
+        $listingCategory->setListing($listing);
+        $listingCategory->setCategory($category);
+        $listing->addListingListingCategory($listingCategory);
 
         /** @var ListingCharacteristic $characteristic */
         $characteristic = $manager->merge($this->getReference('characteristic_1'));

@@ -1,0 +1,32 @@
+<!-- features-area -->
+<div class="features-area">
+    <!-- features-list -->
+    {#<ul class="list-unstyled features-list">#}
+    {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
+    <!--@formatter:off-->
+    {% for characteristic in characterisitics %}
+        {% set listingCharacteristic = characteristic.listingCharacteristic %}
+        {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
+        {% set listingCharacteristicValue = characteristic.listingCharacteristicValue %}
+
+        {% if listingCharacteristicValue %}
+            {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
+                {% if previousListingCharacteristicGroup %}
+                    {{ "</ul>" }}
+                {% endif %}
+                    {{ "<ul class='list-unstyled features-list'>" }}
+                    <h3>{{ listingCharacteristicGroup }}</h3>
+            {% endif %}
+
+            <li>
+                {{ listingCharacteristic.getName() }} :
+                <strong>{{ listingCharacteristicValue.getName() }}</strong>
+                {% if listingCharacteristic.getDescription() %}
+                    <button title="" data-original-title="{{ listingCharacteristic.getDescription() }}" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button">?</button>
+                {% endif %}
+            </li>
+            {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
+        {% endif %}
+    {% endfor %}
+    <!--@formatter:on-->
+</div>

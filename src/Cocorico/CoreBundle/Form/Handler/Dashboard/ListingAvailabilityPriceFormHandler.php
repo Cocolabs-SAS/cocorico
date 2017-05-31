@@ -32,14 +32,8 @@ class ListingAvailabilityPriceFormHandler extends ListingAvailabilityFormHandler
         /** @var Listing $listing */
         $listing = $form->getData();
 
-        //Todo: Optimization. Transform php processing to mongodb request
-        //If mod_fcgi then
-        // add IPCCommTimeout, IPCConnectTimeout to Vhost
-        //Else
-        // set_time_limit(120);
-        //ini_set('max_execution_time', 120);
-
-        //ini_set('memory_limit', '256M');
+        //If mod_fcgi then add IPCCommTimeout, IPCConnectTimeout to Vhost
+        //Else set_time_limit(120);ini_set('max_execution_time', 120);ini_set('memory_limit', '256M');
 
         $this->listingAvailabilityManager->saveAvailabilitiesPrices(
             $listing->getId(),

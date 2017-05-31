@@ -159,8 +159,8 @@ class ListingSearchController extends Controller
 
             $price = $currencyExtension->convertAndFormat($listing['price'] / 100, $currentCurrency, false);
 
-            $categories = count($listing['categories']) ?
-                $listing['categories'][0]['translations'][$locale]['name'] : '';
+            $categories = count($listing['listingListingCategories']) ?
+                $listing['listingListingCategories'][0]['category']['translations'][$locale]['name'] : '';
 
             $isInCurrentPage = in_array($listing['id'], $resultsInPage);
 

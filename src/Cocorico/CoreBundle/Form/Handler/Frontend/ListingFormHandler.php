@@ -50,7 +50,8 @@ class ListingFormHandler
     public function init()
     {
         $listing = new Listing();
-        $this->addImages($listing);
+        $listing = $this->addImages($listing);
+        $listing = $this->addCategories($listing);
 
         return $listing;
     }
@@ -111,6 +112,30 @@ class ListingFormHandler
             $listing = $this->listingManager->addImages(
                 $listing,
                 $imagesUploadedArray
+            );
+        }
+
+        return $listing;
+    }
+
+    /**
+     * Add selected categories and corresponding fields values from post parameters while listing deposit
+     *
+     * @param  Listing $listing
+     * @return Listing
+     */
+    public function addCategories(Listing $listing)
+    {
+        $categories = $this->request->request->get("listing_categories");
+
+        $listingCategories = isset($categories["listingListingCategories"]) ? $categories["listingListingCategories"] : array();
+        $listingCategoriesValues = isset($categories["categoriesFieldsSearchableValuesOrderedByGroup"]) ? $categories["categoriesFieldsSearchableValuesOrderedByGroup"] : array();
+
+        if ($categories) {
+            $listing = $this->listingManager->addCategories(
+                $listing,
+                $listingCategories,
+                $listingCategoriesValues
             );
         }
 

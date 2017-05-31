@@ -9,7 +9,7 @@
     'css/vendor/fullcalendar.min.css'
     'css/fullcalendar-override.css'
 
-    filter='cssrewrite' output='css/compiled/fullcalendar.css' %}
+    filter='cssrewrite, ?minifycsscompressor' output='css/compiled/fullcalendar.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}
@@ -123,7 +123,7 @@
     'js/vendor/fullcalendar/fullcalendar.min.js'
     'js/vendor/fullcalendar/lang-all.js'
 
-    output='js/compiled/calendar.js' %}
+    filter="jsqueeze" output='js/compiled/calendar.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

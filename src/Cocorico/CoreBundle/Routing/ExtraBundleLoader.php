@@ -26,6 +26,14 @@ class ExtraBundleLoader extends Loader
         $this->env = $env;
     }
 
+    /**
+     * Add routing from extra bundles
+     *
+     * @param mixed $resource
+     * @param null  $type
+     * @return RouteCollection
+     * @throws FileLoaderLoadException
+     */
     public function load($resource, $type = null)
     {
         $collection = new RouteCollection();
@@ -58,6 +66,15 @@ class ExtraBundleLoader extends Loader
                 $importedRoutes = $this->import($resource, $type);
                 $collection->addCollection($importedRoutes);
             }
+
+            if (array_key_exists("CocoricoListingCategoryFieldBundle", $this->bundles)) {
+                $resource = '@CocoricoListingCategoryFieldBundle/Resources/config/routing.yml';
+                $type = 'yaml';
+                $importedRoutes = $this->import($resource, $type);
+                $collection->addCollection($importedRoutes);
+            }
+
+
         } catch (FileLoaderLoadException  $e) {
             throw new FileLoaderLoadException($resource);
         }

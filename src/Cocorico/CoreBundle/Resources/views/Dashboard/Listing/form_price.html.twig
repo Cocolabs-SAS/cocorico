@@ -20,6 +20,12 @@
         }) }}
     </div>
 
+    {% if bundleExist('CocoricoDeliveryBundle') %}
+        {% include '@CocoricoDelivery/Dashboard/Listing/_form_delivery.html.twig' with {
+        'form': form
+        } only %}
+    {% endif %}
+
     <ul class="list-unstyled price-info">
         <li>
             {{ 'listing.price_simulator.cash_in'|trans }}

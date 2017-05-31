@@ -11,10 +11,13 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use Cocorico\CoreBundle\Event\ListingSearchFormBuilderEvent;
+use Cocorico\CoreBundle\Event\ListingSearchFormEvents;
 use Cocorico\CoreBundle\Form\Type\PriceRangeType;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Repository\ListingCategoryRepository;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -37,19 +40,21 @@ class ListingSearchResultType extends AbstractType
     protected $daysDisplayMode;
     protected $timesDisplayMode;
     protected $minStartDelay;
+    protected $dispatcher;
 
     /**
-     * @param Session       $session
-     * @param string        $defaultCurrency
-     * @param EntityManager $entityManager
-     * @param RequestStack  $requestStack
-     * @param int           $timeUnit
-     * @param boolean       $timeUnitFlexibility
-     * @param boolean       $allowSingleDay
-     * @param boolean       $endDayIncluded
-     * @param string        $daysDisplayMode
-     * @param string        $timesDisplayMode
-     * @param int           $minStartDelay
+     * @param Session                  $session
+     * @param string                   $defaultCurrency
+     * @param EntityManager            $entityManager
+     * @param RequestStack             $requestStack
+     * @param int                      $timeUnit
+     * @param boolean                  $timeUnitFlexibility
+     * @param boolean                  $allowSingleDay
+     * @param boolean                  $endDayIncluded
+     * @param string                   $daysDisplayMode
+     * @param string                   $timesDisplayMode
+     * @param int                      $minStartDelay
+     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         Session $session,
@@ -62,7 +67,8 @@ class ListingSearchResultType extends AbstractType
         $endDayIncluded,
         $daysDisplayMode,
         $timesDisplayMode,
-        $minStartDelay
+        $minStartDelay,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->session = $session;
         $this->currency = $this->session->has('currency') ? $this->session->get('currency') : $defaultCurrency;
@@ -77,6 +83,7 @@ class ListingSearchResultType extends AbstractType
         $this->daysDisplayMode = $daysDisplayMode;
         $this->timesDisplayMode = $timesDisplayMode;
         $this->minStartDelay = $minStartDelay;
+        $this->dispatcher = $dispatcher;;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -84,26 +91,21 @@ class ListingSearchResultType extends AbstractType
         /** @var ListingSearchRequest $listingSearchRequest */
         $listingSearchRequest = $builder->getData();
 
+        $builder
+            ->add(
+                'location',
+                new ListingLocationSearchType()
+            );
+
+        //CATEGORIES
         /** @var ListingCategoryRepository $categoryRepository */
         $categoryRepository = $this->entityManager->getRepository("CocoricoCoreBundle:ListingCategory");
         $categories = $categoryRepository->findCategoriesByIds(
             $listingSearchRequest->getCategories(),
             $this->locale
         );
-        $characteristics = $listingSearchRequest->getCharacteristics();
-
-        $dateRange = $listingSearchRequest->getDateRange();
-        $dateRangeStart = $dateRangeEnd = null;
-        if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
-            $dateRangeStart = $dateRange->getStart();
-            $dateRangeEnd = $dateRange->getEnd();
-        }
 
         $builder
-            ->add(
-                'location',
-                new ListingLocationSearchType()
-            )
             ->add(
                 'categories',
                 'listing_category',
@@ -115,7 +117,25 @@ class ListingSearchResultType extends AbstractType
                     'multiple' => true,
                     'empty_value' => 'listing_search.form.categories.empty_value',
                 )
-            )
+            );
+
+
+        //Dispatch LISTING_SEARCH_RESULT_FORM_BUILD Event. Listener listening this event can add fields and validation
+        //Used for example to add fields to listing search form
+        $this->dispatcher->dispatch(
+            ListingSearchFormEvents::LISTING_SEARCH_RESULT_FORM_BUILD,
+            new ListingSearchFormBuilderEvent($builder, $listingSearchRequest)
+        );
+
+        //DATE RANGE
+        $dateRange = $listingSearchRequest->getDateRange();
+        $dateRangeStart = $dateRangeEnd = null;
+        if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
+            $dateRangeStart = $dateRange->getStart();
+            $dateRangeEnd = $dateRange->getEnd();
+        }
+
+        $builder
             ->add(
                 'date_range',
                 'date_range',
@@ -145,7 +165,11 @@ class ListingSearchResultType extends AbstractType
                     /** @Ignore */
                     'label' => false
                 )
-            )
+            );
+
+        //CHARACTERISTICS
+        $characteristics = $listingSearchRequest->getCharacteristics();
+        $builder
             ->add(
                 'characteristics',
                 'listing_characteristic',

@@ -6,7 +6,6 @@ services:
             - "@request_stack"
             - "@cocorico.listing.manager"
             - "@cocorico_user.form.handler.registration"
-#        scope: request
 
     #Booking
     cocorico.form.handler.booking:
@@ -15,7 +14,6 @@ services:
             - "@request_stack"
             - "@cocorico.booking.manager"
             - "@cocorico_user.form.handler.registration"
-#        scope: request
 
     cocorico.form.handler.booking.dashboard:
         abstract:  true
@@ -29,12 +27,10 @@ services:
     cocorico.form.handler.booking.offerer.dashboard:
         class: Cocorico\CoreBundle\Form\Handler\Dashboard\BookingOffererFormHandler
         parent: cocorico.form.handler.booking.dashboard
-#        scope: request
 
     cocorico.form.handler.booking.asker.dashboard:
         class: Cocorico\CoreBundle\Form\Handler\Dashboard\BookingAskerFormHandler
         parent: cocorico.form.handler.booking.dashboard
-#        scope: request
 
     cocorico.form.handler.booking_price:
         class: Cocorico\CoreBundle\Form\Handler\Frontend\BookingPriceFormHandler
@@ -56,10 +52,8 @@ services:
     cocorico.form.handler.listing_availability.price.dashboard:
         class: Cocorico\CoreBundle\Form\Handler\Dashboard\ListingAvailabilityPriceFormHandler
         parent: cocorico.form.handler.listing_availability.dashboard
-#        scope: request
 
     cocorico.form.handler.listing_availability.status.dashboard:
         class: Cocorico\CoreBundle\Form\Handler\Dashboard\ListingAvailabilityStatusFormHandler
         parent: cocorico.form.handler.listing_availability.dashboard
-#        scope: request
 

@@ -1,0 +1,27 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="category-form-container">
+    <div id="category-form" class="new">
+        {% if app.request.isXmlHttpRequest %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {% endif %}
+
+        <h2>{{ 'listing.new.categories.title'|trans }}</h2>
+
+        {{ form_errors(form) }}
+
+        <div class="selection-area listing-categories">
+            {{ form_errors(form.listingListingCategories) }}
+            {{ form_widget(form.listingListingCategories) }}
+        </div>
+
+        {% if bundleExist('CocoricoListingCategoryFieldBundle') %}
+            {#ajax form creation and submission is done here#}
+            {% include '@CocoricoListingCategoryField/Frontend/Listing/_form_categories_fields_values.html.twig' with {
+            'form': form
+            } only %}
+        {% endif %}
+
+        {{ form_rest(form) }}
+    </div>
+</div>

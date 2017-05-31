@@ -161,6 +161,7 @@ parameters:
     #Refund percentage rules depending on Listing Cancelation Policies
     cocorico.booking.cancelation_policy:
         flexible:
+            #in seconds
             time_before_start: 86400
             refund_min: 0.5
             refund_max: 1
@@ -169,14 +170,23 @@ parameters:
             refund_min: 0
             refund_max: 0.5
 
-
+    #ListingOptionBundle:
     #ListingOption: none or Cocorico\ListingOptionBundle\Entity\ListingOption (without quotes!)
     #BookingOption: none or Cocorico\ListingOptionBundle\Entity\BookingOption (without quotes!)
     cocorico_listing_option.listing_option.entity_class: none
     cocorico_listing_option.booking_option.entity_class: none
+
+    #ListingAlertBundle:
     #ListingAlert: none or Cocorico\ListingAlertBundle\Entity\ListingAlert
     cocorico_listing_alert.entity_class: none
 
+    #ListingCategoryFieldBundle:
+    #ListingCategoryField: none or Cocorico\ListingCategoryFieldBundle\Entity\ListingCategoryField
+    cocorico_listing_category_field.entity_class: none
+    #ListingCategoryFieldValue: none or Cocorico\ListingCategoryFieldBundle\Entity\ListingCategoryFieldValue
+    cocorico_listing_category_field_value.entity_class: none
+    #ListingCategoryFieldValue: none or Cocorico\ListingCategoryFieldBundle\Entity\ListingCategoryFieldValue
+    cocorico_listing_category_listing_category_field.entity_class: none
     #Config
     cocorico_config.parameters_allowed:
         - 'cocorico.fee_as_asker'

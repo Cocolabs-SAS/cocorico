@@ -122,6 +122,8 @@ hwi_oauth:
             type:                facebook
             client_id:           %cocorico.facebook.app_id%
             client_secret:       %cocorico.facebook.secret%
+            options:
+                csrf: true
             #todo: Submit app review to facebook to get user_location user_hometown user_birthday
             #scope:         "public_profile, user_birthday, user_friends, user_location, user_hometown"
             #infos_url:     "https://graph.facebook.com/me?fields=id,link,name,email,first_name,last_name,verified,gender,birthday,locale,timezone,picture.height(500).width(500),address,location,hometown,friends"

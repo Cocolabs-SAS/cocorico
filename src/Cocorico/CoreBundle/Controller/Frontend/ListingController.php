@@ -42,7 +42,6 @@ class ListingController extends Controller
 
         $listing = $listingHandler->init();
         $form = $this->createCreateForm($listing);
-        //  $this->get('cocorico.helper.global')->displayExtraFieldsFormErrorMessage($request, $form);
         $success = $listingHandler->process($form);
 
         if ($success) {

@@ -2,8 +2,8 @@
   "name": "cocorico/cocorico",
   "license": "MIT",
   "type": "project",
-  "description": "The \"Cocorico Standard Edition\" distribution",
-  "version": "0.3.3",
+  "description": "The Cocorico Standard Edition distribution",
+  "version": "0.3.4",
   "keywords": [
     "collaborative",
     "platform",
@@ -46,7 +46,7 @@
     "knplabs/doctrine-behaviors": "^1.3",
     "a2lix/translation-form-bundle": "2.*@dev",
     "jms/di-extra-bundle": "^1.7",
-    "stof/doctrine-extensions-bundle": "~1.1@dev",
+    "stof/doctrine-extensions-bundle": "^1.2",
     "oneup/uploader-bundle": "~1.3",
     "liip/imagine-bundle": "dev-master",
     "lexik/currency-bundle": "^2.0",
@@ -68,6 +68,8 @@
     "doctrine/doctrine-fixtures-bundle": "dev-master",
     "egulias/email-validator": "~1.2",
     "simplethings/entity-audit-bundle": "^0.9",
+    "mrclay/minify": "^2.2",
+    "patchwork/jsqueeze": "^2.0",
     "mrclay/minify": "^2.2"
   },
   "require-dev": {

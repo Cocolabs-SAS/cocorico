@@ -13,11 +13,15 @@ namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Entity\ListingLocation;
+use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
+use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
+use Cocorico\ListingCategoryFieldBundle\Form\Type\ListingCategoryFieldValueType;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Security\LoginManager;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
@@ -30,6 +34,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints\True;
 
+/**
+ * Class ListingNewType
+ * Categories are created trough ajax in ListingNewCategoriesType
+ *
+ * @package Cocorico\CoreBundle\Form\Type\Frontend
+ */
 class ListingNewType extends AbstractType implements TranslationContainerInterface
 {
     public static $tacError = 'listing.form.tac.error';
@@ -43,20 +53,24 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     private $locales;
     /** @var User|null */
     private $user = null;
+    protected $dispatcher;
+
 
     /**
-     * @param TokenStorage         $securityTokenStorage
-     * @param AuthorizationChecker $securityAuthChecker
-     * @param LoginManager         $loginManager
-     * @param RequestStack         $requestStack
-     * @param array                $locales
+     * @param TokenStorage             $securityTokenStorage
+     * @param AuthorizationChecker     $securityAuthChecker
+     * @param LoginManager             $loginManager
+     * @param RequestStack             $requestStack
+     * @param array                    $locales
+     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         TokenStorage $securityTokenStorage,
         AuthorizationChecker $securityAuthChecker,
         LoginManager $loginManager,
         RequestStack $requestStack,
-        $locales
+        $locales,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->securityTokenStorage = $securityTokenStorage;
         $this->securityAuthChecker = $securityAuthChecker;
@@ -67,6 +81,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         if ($this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->user = $this->securityTokenStorage->getToken()->getUser();
         }
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -75,6 +90,8 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+//        $listing = $builder->getData();
+
         //Translations fields
         $titles = $descriptions = array();
         foreach ($this->locales as $i => $locale) {
@@ -124,13 +141,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 'price',
                 array(
                     'label' => 'listing.form.price',
-                )
-            )
-            ->add(
-                'categories',
-                'listing_category',
-                array(
-                    'block_name' => 'categories'
                 )
             )
             ->add(
@@ -276,6 +286,12 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             }
         );
 
+        //Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
+        //Used for example to add fields to new listing form
+        $this->dispatcher->dispatch(
+            ListingFormEvents::LISTING_NEW_FORM_BUILD,
+            new ListingFormBuilderEvent($builder)
+        );
     }
 
 

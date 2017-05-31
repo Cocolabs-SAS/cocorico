@@ -16,33 +16,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * ListingEditVariousInformationType
+ * ListingEditLocationType
  */
-class ListingEditVariousInformationType extends ListingEditType
+class ListingEditLocationType extends ListingEditType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder
-            // ->add(
-            //     'type',
-            //     'choice',
-            //     array(
-            //         'choices' => array_flip(Listing::$typeValues),
-            //         'empty_value' => 'listing.form.various_information.choose',
-            //         'required' => false,
-            //         'translation_domain' => 'cocorico_listing',
-            //         'label' => 'listing.form.type',
-            //            'choices_as_values' => true
-            //     )
-            // )
-            ->add(
-                'categories',
-                'listing_category',
-                array(
-                    'block_name' => 'categories'
-                )
-            )
             ->add(
                 'location',
                 new ListingLocationType(),
@@ -75,7 +58,7 @@ class ListingEditVariousInformationType extends ListingEditType
      */
     public function getBlockPrefix()
     {
-        return 'listing_edit_various_information';
+        return 'listing_edit_location';
     }
 
 }

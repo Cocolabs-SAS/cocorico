@@ -48,11 +48,18 @@
                         {{ 'nav.listing.characteristic.link'|trans }}
                     </a>
                 </li>
-                <li role="presentation" class="{{ nav_side_dashboard_current == "informations" ? 'active' : '' }}">
-                    <a data-text="{{ 'nav.listing.informations.link'|trans }}"
+                <li role="presentation" class="{{ nav_side_dashboard_current == "categories" ? 'active' : '' }}">
+                    <a data-text="{{ 'nav.listing.categories.link'|trans }}"
                        aria-controls="presentation"
-                       href="{{ path('cocorico_dashboard_listing_edit_various_information', { 'id': listing.id }) }}">
-                        {{ 'nav.listing.informations.link'|trans }}
+                       href="{{ path('cocorico_dashboard_listing_edit_categories', { 'id': listing.id }) }}">
+                        {{ 'nav.listing.categories.link'|trans }}
+                    </a>
+                </li>
+                <li role="presentation" class="{{ nav_side_dashboard_current == "location" ? 'active' : '' }}">
+                    <a data-text="{{ 'nav.listing.location.link'|trans }}"
+                       aria-controls="presentation"
+                       href="{{ path('cocorico_dashboard_listing_edit_location', { 'id': listing.id }) }}">
+                        {{ 'nav.listing.location.link'|trans }}
                     </a>
                 </li>
             </ul>

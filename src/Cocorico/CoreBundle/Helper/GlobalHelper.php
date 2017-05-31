@@ -58,35 +58,51 @@ class GlobalHelper
      *
      * @param Request $request
      * @param Form    $form
+     * @param bool    $firstCall
      */
-    public function displayExtraFieldsFormErrorMessage(Request $request, Form $form)
+    public function displayExtraFieldsFormErrorMessage(Request $request, Form $form, $firstCall = true)
     {
-        $datas = $request->request->all();
+        if ($request->getMethod() == Request::METHOD_POST) {
+            $datas = $request->request->all();
+        } else {
+            $datas = $request->query->all();
+        }
 
-        $message = "REQUEST DATAS:<br/>";
-        foreach ($datas as $field => $data) {
-            $message .= "$field: <pre>";
-            $message .= print_r($data, 1);
-            $message .= "</pre>";
+        $message = "";
+
+        if ($firstCall) {
+            $message = "<strong>REQUEST DATAS:</strong><br/>";
+            foreach ($datas as $field => $data) {
+                $message .= "$field: <pre>";
+                $message .= print_r($data, 1);
+                $message .= "</pre>";
+            }
+
+            echo $message;
         }
 
         $children = $form->all();
-        $message .= "<br/>FORM CHILDREN<br/>";
-        /** @var Form $child */
-        foreach ($children as $child) {
-            $message .= $child->getName() . "<br/>";
+        if (count($children)) {
+            $message .= "<br/><strong>FORM CHILDREN OF " . $form->getName() . ":</strong><br/>";
+            /** @var Form $child */
+            foreach ($children as $child) {
+                $message .= $child->getName() . "<br/>";
+//                $this->displayExtraFieldsFormErrorMessage($request, $child, false);
+            }
         }
 
         $extraFields = array_diff_key($datas, $children);
-        $message .= "<br/>EXTRA FIELDS<br/>";
-        foreach ($extraFields as $field => $data) {
-            $message .= "$field: <pre>";
-            $message .= print_r($data, 1);
-            $message .= "</pre>";
+        if (count($extraFields)) {
+            $message .= "<br/><strong>EXTRA FIELDS</strong><br/>";
+            foreach ($extraFields as $field => $data) {
+                $message .= "$field: <pre>";
+                $message .= print_r($data, 1);
+                $message .= "</pre>";
+            }
         }
+
         echo $message;
 
-        die();
     }
 
 

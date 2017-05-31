@@ -1,0 +1,55 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="category-form-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    <h3>{{ 'listing.edit.categories.sub_title'|trans }}</h3>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="selection-area listing-categories">
+        {{ form_errors(form.listingListingCategories) }}
+        {{ form_widget(form.listingListingCategories) }}
+    </div>
+
+    {% if bundleExist('CocoricoListingCategoryFieldBundle') %}
+        {#ajax form submission is done here#}
+        {% include '@CocoricoListingCategoryField/Dashboard/Listing/_form_categories_fields_values.html.twig' with {
+        'form': form
+        } only %}
+    {% endif %}
+
+    {{ form_end(form) }}
+
+    <script>
+        $(function () {
+            var $formContainer = $("#category-form-container");
+            $formContainer.submitAjaxForm(function () {
+                jcf.replaceAll("#category-form-container");
+            });
+
+            var changeIsDisabled = false;
+            //Edition
+            $("#listing_categories_listingListingCategories").on('change', function (e) {
+                if (!changeIsDisabled) {
+                    changeIsDisabled = true;
+
+                    $(this).closest('form').submit();
+
+                    $(this).find("option:not(:selected)").each(function () {
+                        $(this).attr('disabled', 'disabled');
+                    });
+                    $(this).next('.jcf-list-box').css('opacity', '0.5');
+                } else {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</div>
+
+
+

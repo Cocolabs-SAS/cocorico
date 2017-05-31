@@ -573,7 +573,7 @@ li.time-fields {
 }
 
 .price-box .field-holder {
-    max-width: 120px;
+    max-width: 110px;
 }
 
 /* user edit_payment.html.twig */
@@ -709,6 +709,21 @@ li.time-fields {
     text-align: right;
 }
 
+.form-area #price-form-container .field-row:nth-child(3) {
+    margin: 0 0 18px;
+}
+
+.form-area #price-form-container .field-row:nth-child(3) .label {
+    margin: 0;
+}
+
+.form-area #price-form-container .checkbox {
+    padding-left: 0;
+}
+
+.form-area #price-form-container .checkbox .label {
+    float: none;
+}
 
 /** edit_availabilities_prices.html.twig **/
 .price-section .field-row {
@@ -717,7 +732,7 @@ li.time-fields {
 }
 
 #price-form-container, #price-simulator-form-container {
-    min-height: 237px;
+    min-height: 255px;
 }
 
 #prices-form .day-fields {
@@ -787,6 +802,7 @@ li.time-fields {
 .prices-conditions ul {
     padding-left: 20px;
 }
+
 /** Common/_flash.html.twig **/
 
 .alert-error-new {
@@ -868,19 +884,27 @@ li.time-fields {
 
 #search-container .range-area {
     width: 25%;
+    padding-top: 14px;
 }
 
 #search-container .range-holder {
     width: 100%;
+    float: none;
+}
+
+#search-container .range-area .field-row .title,
+#search-container .range-area .field-row .field-holder {
+    display: inline-block;
+    margin: 0 10px 0 0;
 }
 
 #search-container .selection-holder > .select-holder:first-child {
-    width: 63%
+    width: 77%
 }
 
 #search-container li.field-row {
     float: left;
-    width: 50%;
+    width: 25%;
 }
 
 #search-container li.field-row .select-holder {
@@ -1244,6 +1268,10 @@ images css for making it 4:3
     text-transform: uppercase;
 }
 
+.listing-post .price {
+    text-shadow: -1px 0 #999, 0 1px #999, 1px 0 #999, 0 -1px #999;
+}
+
 .reservation .price small {
     font-size: 20px;
 }
@@ -1289,6 +1317,14 @@ images css for making it 4:3
     width: 80px;
     display: inline-block;
     text-align: right;
+}
+
+#booking-new .timing li {
+    width: 35%;
+}
+
+#booking-new .timing li:nth-child(3n+0) {
+    width: 30%;
 }
 
 #booking-new .timing li label {
@@ -2003,13 +2039,13 @@ ul.collection {
 }
 
 /** Listing Alert**/
-.form-category .listing-alert {
-    float: left;
+.listing-alert {
+    display: inline-block;
     padding: 0 0 0 10px;
     width: 10%;
 }
 
-.form-category .listing-alert a.btn {
+.listing-alert a.btn {
     text-transform: none;
     padding: 6px 10px;
 }
@@ -2099,7 +2135,7 @@ ul.collection {
     text-decoration: none;
 }
 
-.form-area #characteristics h3 {
+.form-area #characteristics h3, .form-area #categories-fields h3 {
     margin-bottom: 10px;
     margin-top: 20px;
 }
@@ -2247,11 +2283,41 @@ ul.collection {
     }
 
     #booking-new .timing li:nth-child(3n+0) {
-        text-align: center;
+        display: none;
     }
 
     #booking-new .total-reservation .list-inline li {
         width: 100%;
+    }
+
+    .form-category .col.categories,
+    .form-category .form-holder .col.time,
+    .form-category .form-holder .col.time .col,
+    .form-category .form-holder .col.time .col:first-child,
+    .form-category .form-holder input.btn-default,
+    #search-container .range-area,
+    #search-container .selection-holder,
+    #search-container .selection-holder > .select-holder:first-child {
+        width: 100%;
+    }
+
+    .form-category .form-holder .col.time .time-fields #datetimepicker3 {
+        margin-left: 0;
+    }
+
+    .form-category .form-holder .col.location .title {
+        width: 74px;
+    }
+
+    .form-category .listing-alert {
+        width: 100%;
+        padding: 0 5px;
+    }
+
+    .ui-dialog {
+        width: calc(100% - 30px) !important;
+        left: 15px !important;
+        right: 15px !important;
     }
 }
 
@@ -2279,5 +2345,241 @@ ul.collection {
 }
 
 .listing-categories .jcf-list-box {
-    min-width: 220px;
+    min-width: 270px;
+}
+
+.listing-categories .jcf-list .jcf-optgroup-caption, .listing-categories .jcf-list .jcf-option {
+    padding: 9px 38px 9px 19px;
+}
+
+.listing-categories .jcf-list-box {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+}
+
+.listing-categories .jcf-list-box .jcf-selected {
+    color: #ffffff;
+    background: #7a7a7a;
+}
+
+.listing-categories .jcf-list .jcf-option:hover {
+    cursor: pointer;
+    color: #000000;
+    background: #e6e6e6;
+}
+
+.listing-categories .jcf-list .jcf-disabled {
+    background: transparent !important;
+    color: #58595b !important;
+}
+
+.categories-list .close {
+    margin-bottom: 5px;
+}
+
+.categories-list .close {
+    position: static;
+    margin: 6px -11px 0 11px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/*listing categories */
+#categories-fields-wrapper {
+    margin: 30px 0 20px 0
+}
+
+#category-form.new #categories-fields-wrapper #categories-fields {
+    margin: 0 14px;
+}
+
+#categories-fields .form-block {
+    border: #eaebec solid 1px;
+    border-radius: 5px 5px 5px 5px;
+    padding: 18px 20px;
+    background-color: #fff;
+}
+
+#categories-fields .form-block + .form-block {
+    margin: 20px 0 0;
+}
+
+#categories-fields .features-list {
+    border: #eaebec solid 1px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 0 0 0 10px;
+    padding: 10px 10px 18px;
+    vertical-align: top;
+    width: 32%;
+    float: none;
+    display: inline-block;
+    background-color: #f7f7f7;
+}
+
+#categories-fields .form-block .features-list:nth-child(3n-1) {
+    margin-left: 0;
+}
+
+#categories-fields .form-block .features-list:nth-child(n+5) {
+    margin-top: 20px;
+}
+
+#categories-fields .form-block .features-list li i {
+    display: inline-block;
+    margin: -1px 4px 0 0;
+}
+
+/** Search categories */
+.form-category .multiselect-container > li.multiselect-group label, .form-category .multiselect-container > li > a > label {
+    padding-left: 10px;
+}
+
+.form-category .multiselect-container > li > a {
+    text-decoration: none;
+}
+
+.form-category .multiselect-container > li > a input[type="checkbox"] {
+    width: 0;
+}
+
+.form-category #categories-fields .form-block {
+    padding: 10px;
+    margin: 0 0 10px 10px;
+}
+
+.form-category #categories-fields .form-block + .form-block {
+    margin: 0 0 10px 10px;
+}
+
+.form-category #search-container .selection-holder #categories-fields {
+    width: 100%;
+}
+
+.form-category #categories-fields .list-unstyled {
+    display: inline-block;
+    margin: 10px 0 0 10px;
+    width: 23%;
+}
+
+.form-category #categories-fields .list-unstyled li:first-child {
+    margin-bottom: 6px;
+}
+
+#search-container #categories-fields .list-unstyled li.field-row {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/** date range*/
+.form-category #categories-fields .field-row.type-date label {
+    float: left;
+    clear: both;
+}
+
+.form-category #categories-fields .field-row.type-date .display-range {
+    width: 100%;
+}
+
+.form-category #categories-fields .field-row.type-date .display-range .title {
+    display: none;
+}
+
+.form-category #categories-fields .field-row.type-date .display-range .col {
+    width: 46%;
+}
+
+.form-category #categories-fields .field-row.type-date .display-range .input-append {
+    padding-right: 0;
+}
+
+.form-category #categories-fields .field-row.type-date .display-range .add-on {
+    display: none;
+}
+
+/** number range */
+.form-category #categories-fields .number-range {
+    width: 100%;
+}
+
+.form-category .form-holder {
+    /*margin-bottom: 0;*/
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #e8e8e8;
+}
+
+.form-category .sub-holder {
+    margin: -40px -10px 20px -10px;
+    padding: 20px 19px 10px;
+    border-radius: 0 0 4px 4px;
+    border-color: #e8e8e8;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+}
+
+#listing-location {
+    padding: 18px 17px;
+}
+
+.featured-block #characteristics li .label {
+    display: inline;
+}
+
+/* new booking delivery  */
+.booking-delivery .field-row-inner {
+    clear: both;
+    padding: 19px 20px;
+    margin-bottom: 0;
+    background-color: #f7f6f6;
+    border: 1px solid #eaebec;
+    border-bottom: 0;
+}
+
+.booking-delivery .field-row .checkbox {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.booking-delivery .field-row-inner .field-holder {
+    display: inline-block;
+    width: 252px;
+    margin: 0 20px 0 33px;
+    vertical-align: middle;
+}
+
+.booking-delivery .btn.btn-primary {
+    min-width: 157px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+}
+
+.booking-delivery .box-inner .field-row:last-child {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: left;
+    border: 1px solid #eaebec;
+    border-top: 0;
+}
+
+.booking-delivery .box-inner .field-row:last-child label,
+.booking-delivery .box-inner .field-row:last-child .form-controls {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.booking-delivery .box-inner .field-row:last-child .form-controls {
+    float: right;
+}
+
+.btn-loading {
+    background: #444546 url("../images/loading.gif") no-repeat 50% 50% !important;
+}
+
+.post-content .listing-box-delivery {
+    float: right;
 }

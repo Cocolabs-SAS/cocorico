@@ -179,7 +179,7 @@ class ListingSearchManager
         $categories = $listingSearchRequest->getCategories();
         if (count($categories)) {
             $queryBuilder
-                ->andWhere(":categories MEMBER OF l.categories")
+                ->andWhere("llcat.category IN (:categories)")
                 ->setParameter("categories", $categories);
         }
 

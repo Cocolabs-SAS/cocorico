@@ -41,6 +41,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     public static $amountError = 'booking.new.error.amount_invalid {{ min_price }}';
     public static $voucherError = 'booking.new.error.voucher';
     public static $credentialError = 'user.form.credential.error';
+    public static $messageDeliveryInvalid = 'booking.new.delivery.error';
+    public static $messageDeliveryMaxInvalid = 'booking.new.delivery_max.error';
 
     private $bookingManager;
     private $loginManager;
@@ -363,6 +365,34 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 );
             }
 
+            $keys = array_keys($errors, 'delivery_invalid');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
+                $form['deliveryAddress']->addError(
+                    new FormError(
+                        self::$messageDeliveryInvalid,
+                        'cocorico_booking',
+                        array()
+                    )
+                );
+            }
+
+            $keys = array_keys($errors, 'delivery_max_invalid');
+            if (count($keys)) {
+                foreach ($keys as $key) {
+                    unset($errors[$key]);
+                }
+                $form['deliveryAddress']->addError(
+                    new FormError(
+                        self::$messageDeliveryMaxInvalid,
+                        'cocorico_booking',
+                        array()
+                    )
+                );
+            }
+
             if (count($errors) > 0) {
                 foreach ($errors as $error) {
                     $form['date_range']->addError(
@@ -508,6 +538,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $messages[] = new Message(self::$amountError, 'cocorico');
         $messages[] = new Message(self::$voucherError, 'cocorico_booking');
         $messages[] = new Message(self::$credentialError, 'cocorico');
+        $messages[] = new Message(self::$messageDeliveryInvalid, 'cocorico_booking');
+        $messages[] = new Message(self::$messageDeliveryMaxInvalid, 'cocorico_booking');
 
         return $messages;
     }

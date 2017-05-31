@@ -8146,12 +8146,16 @@ label {
 .price-box {
     display: inline-block;
     vertical-align: top;
-    width: 300px;
+    width: 350px;
     color: #58595b;
     border-radius: 5px;
     margin: 0 4.7% 0 3.5%;
     padding: 15px 16px 17px;
     border: #eaebec solid 1px;
+}
+
+.price-box .checkbox {
+    padding-left: 11px;
 }
 
 .price-box .title {
@@ -8160,6 +8164,9 @@ label {
     margin: 0 0 17px;
 }
 
+.price-box .field-row, .currency-converter .field-row {
+    margin-bottom: 10px;
+}
 .price-box .field-row:before,
 .price-box .field-row:after {
     content: " ";
@@ -8182,7 +8189,7 @@ label {
 
 .price-box .label {
     float: left;
-    width: 92px;
+    width: 140px;
     text-align: right;
     margin: 7px 11px 0 0;
 }
@@ -14268,7 +14275,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 
 .jcf-list .jcf-disabled {
     background: #ffffff !important;
-    color: #f7f7f7 !important;
+    color: #ccc !important;
 }
 
 .jcf-list .jcf-optgroup-caption {

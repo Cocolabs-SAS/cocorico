@@ -1,0 +1,32 @@
+{% trans_default_domain 'cocorico_listing' %}
+{#You can add extra fields here#}
+
+{{ form_start(form) }}
+{{ form_errors(form) }}
+
+{% if false %}
+    <div class="form-block block1">
+        <h2>{{ 'listing.type.title'|trans }}</h2>
+
+        <div class="field-row type">
+            {{ form_errors(form.type) }}
+            <span class="label">{{ form_label(form.type) }}</span>
+
+            <div class="select-holder">
+                {{ form_widget(form.type, {
+                    'attr': {
+                        'class': "no-arrow"
+                    }
+                }) }}
+            </div>
+        </div>
+
+        <div class="btn-block text-center">
+            <button type="submit" class="btn btn-default btn-primary">
+                <span>{{ 'listing.save'|trans }}</span>
+            </button>
+        </div>
+    </div>
+{% endif %}
+
+{{ form_end(form) }}

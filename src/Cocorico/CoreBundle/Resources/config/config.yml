@@ -94,10 +94,16 @@ doctrine:
                         TIMESTAMP_DIFF: Cocorico\CoreBundle\DQL\TimestampDiffFunction
                     numeric_functions:
                         GEO_DISTANCE: Cocorico\CoreBundle\DQL\GeoDistanceFunction
+                    string_functions:
+                        CAST: Cocorico\CoreBundle\DQL\CastFunction
+
         resolve_target_entities:
             #Don't put double quotes!
             Cocorico\CoreBundle\Model\ListingOptionInterface: %cocorico_listing_option.listing_option.entity_class%
             Cocorico\CoreBundle\Model\BookingOptionInterface: %cocorico_listing_option.booking_option.entity_class%
+            Cocorico\CoreBundle\Model\ListingCategoryFieldInterface: %cocorico_listing_category_field.entity_class%
+            Cocorico\CoreBundle\Model\ListingCategoryFieldValueInterface: %cocorico_listing_category_field_value.entity_class%
+            Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface: %cocorico_listing_category_listing_category_field.entity_class%
 
     dbal:
         types:

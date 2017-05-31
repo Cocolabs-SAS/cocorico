@@ -28,18 +28,6 @@ services:
             - [ setIncludeVat, [%cocorico.include_vat%]]
             - [ setBundlesEnabled, [%kernel.bundles%]]
 
-    sonata.admin.listing_category:
-        class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Category", label_catalogue: "cocorico_admin_menu" }
-        arguments:
-            - ~
-            - Cocorico\CoreBundle\Entity\ListingCategory
-            - ~
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
         tags:
@@ -64,6 +52,18 @@ services:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setLocales, [%cocorico.locales%]]
 
+    sonata.admin.listing_category:
+        class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Category", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, [%cocorico.locales%]]
+            - [ setBundlesEnabled, [%kernel.bundles%]]
 
     sonata.admin.booking_bank_wire:
         class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin

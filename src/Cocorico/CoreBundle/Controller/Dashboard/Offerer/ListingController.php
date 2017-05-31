@@ -12,7 +12,6 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -162,7 +161,7 @@ class ListingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_price',
-            new ListingEditPriceType(),
+            'listing_edit_price',
             $listing,
             array(
                 'method' => 'POST',

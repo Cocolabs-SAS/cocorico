@@ -12,10 +12,14 @@
 namespace Cocorico\CoreBundle\Model\Manager;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Entity\ListingCategory;
 use Cocorico\CoreBundle\Entity\ListingImage;
+use Cocorico\CoreBundle\Entity\ListingListingCategory;
 use Cocorico\CoreBundle\Entity\ListingListingCharacteristic;
 use Cocorico\CoreBundle\Entity\ListingTranslation;
 use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
+use Cocorico\CoreBundle\Model\ListingCategoryFieldValueInterface;
+use Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface;
 use Cocorico\CoreBundle\Model\ListingOptionInterface;
 use Cocorico\CoreBundle\Repository\ListingCharacteristicRepository;
 use Cocorico\CoreBundle\Repository\ListingRepository;
@@ -176,6 +180,55 @@ class ListingManager extends BaseManager
         return $listing;
     }
 
+    /**
+     * Create categories and field values while listing deposit.
+     *
+     *
+     * @param  Listing $listing
+     * @param  array   $categories Id(s) of ListingCategory(s) selected
+     * @param  array   $values     Value(s) of ListingCategoryFieldValue(s) of the ListingCategory(s) selected
+     *
+     * @return Listing
+     */
+    public function addCategories(Listing $listing, array $categories, array $values)
+    {
+        foreach ($categories as $i => $category) {
+            //Find the ListingCategory entity selected
+            /** @var ListingCategory $listingCategory */
+            $listingCategory = $this->em->getRepository('CocoricoCoreBundle:ListingCategory')->findOneById(
+                $category
+            );
+
+            //Create the corresponding ListingListingCategory
+            $listingListingCategory = new ListingListingCategory();
+            $listingListingCategory->setListing($listing);
+            $listingListingCategory->setCategory($listingCategory);
+
+            //Create the corresponding ListingCategoryFieldValue(s)
+            /** @var ListingCategoryListingCategoryFieldInterface $field */
+            if ($listingCategory->getFields()) {
+                foreach ($listingCategory->getFields() as $field) {
+                    /** @var ListingCategoryFieldValueInterface $fieldValue */
+                    $fieldValue = new \Cocorico\ListingCategoryFieldBundle\Entity\ListingCategoryFieldValue();
+                    $fieldValue->setListingListingCategory($listingListingCategory);
+                    $fieldValue->setListingCategoryListingCategoryField($field);
+                    //Set the values. Index of $values corresponds to the ListingCategoryListingCategoryField Id.
+                    //It permits to associate the field value with the corresponding field.
+                    //Mainly use to remove block fields when the corresponding category is unselected
+                    //See Listing->getCategoriesFieldsValuesOrderedByGroup method
+                    $value = isset($values[$field->getId()]["value"]) ? $values[$field->getId()]["value"] : null;
+                    $fieldValue->setValue($value);
+
+                    $listingListingCategory->addValue($fieldValue);
+                }
+            }
+
+
+            $listing->addListingListingCategory($listingListingCategory);
+        }
+
+        return $listing;
+    }
 
     /**
      * @param int    $ownerId

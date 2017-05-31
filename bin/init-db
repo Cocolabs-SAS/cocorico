@@ -12,10 +12,8 @@ then
 	exit 1
 fi
 
-#"${PHP_ARG}" app/console assetic:dump "${ENV_ARG}"
-
-"${PHP_ARG}" app/console doctrine:database:drop --force "${ENV_ARG}"
-"${PHP_ARG}" app/console doctrine:database:create "${ENV_ARG}"
+# "${PHP_ARG}" app/console doctrine:database:drop --force "${ENV_ARG}"
+"${PHP_ARG}" app/console doctrine:database:create --if-not-exists "${ENV_ARG}"
 "${PHP_ARG}" app/console doctrine:schema:update --force "${ENV_ARG}"
 "${PHP_ARG}" app/console doctrine:fixtures:load "${ENV_ARG}"
 "${PHP_ARG}" app/console cocorico:currency:update "${ENV_ARG}"

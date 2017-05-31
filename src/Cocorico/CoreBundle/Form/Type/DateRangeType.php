@@ -144,7 +144,8 @@ class DateRangeType extends AbstractType
                 'end_day_included' => true,
                 'display_mode' => 'range',
                 'min_start_delay' => 0,
-                'days_max' => $this->daysMax
+                'days_max' => $this->daysMax,
+                'allow_end_in_past' => false,
             )
         );
 
@@ -178,7 +179,8 @@ class DateRangeType extends AbstractType
                                 'required' => $options["required"],
                                 'allow_single_day' => $options["allow_single_day"],
                                 'min_start_delay' => $options["min_start_delay"],
-                                'days_max' => $options["days_max"]
+                                'days_max' => $options["days_max"],
+                                'allow_end_in_past' => $options["allow_end_in_past"]
                             )
                         );
                     }

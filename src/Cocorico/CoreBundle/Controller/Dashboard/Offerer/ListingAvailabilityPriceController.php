@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingAvailabilityType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -48,7 +49,6 @@ class ListingAvailabilityPriceController extends Controller
      */
     public function editAvailabilitiesPricesAction(Request $request, Listing $listing)
     {
-        $translator = $this->get('translator');
         $selfUrl = $this->generateUrl(
             'cocorico_dashboard_listing_edit_availabilities_prices',
             array('listing_id' => $listing->getId())
@@ -61,7 +61,7 @@ class ListingAvailabilityPriceController extends Controller
         if ($success == 1) {
             $this->get('session')->getFlashBag()->add(
                 'success',
-                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
+                $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($selfUrl);
@@ -231,8 +231,12 @@ class ListingAvailabilityPriceController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ListingAvailability $listing_availability */
             $listing_availability = $form->getData();
+
+            //convert object to array
+            $listingAvailability = $listingAvailabilityManager->listingAvailabilityToArray($listing_availability);
+
             $listingAvailabilityManager->saveAvailabilityTimes(
-                $listing_availability,
+                $listingAvailability,
                 $start_time,
                 $end_time,
                 "price"

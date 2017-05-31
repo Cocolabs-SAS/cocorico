@@ -5,6 +5,7 @@
 {% set voucherBundleEnabled = bundleExist('CocoricoVoucherBundle') %}
 {% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
 {% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+{% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
 
 {% set listing = booking.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
@@ -74,7 +75,7 @@
                             <ul class="list-inline timing">
                                 <li>
                                     {{ form_errors(form.date_range.start) }}
-                                    {{ form_label(form.date_range.start) }}
+                                    {{ form_label(form.date_range.start, null, {'required': false} ) }}
                                     <time datetime="{{ booking.start|date('Y-m-d') }}">
                                         <i class="icon-calendar"></i>
                                         {{ booking.start|localizeddate('short', 'none', 'fr') }}
@@ -85,7 +86,7 @@
                                 </li>
                                 <li>
                                     {{ form_errors(form.date_range.end) }}
-                                    {{ form_label(form.date_range.end) }}
+                                    {{ form_label(form.date_range.end, null, {'required': false}) }}
 
                                     <time datetime="{{ booking.end|date('Y-m-d') }}">
                                         <i class="icon-calendar"></i>
@@ -104,6 +105,13 @@
                                     {{ form_widget(form.time_range) }}
                                 {% endif %}
                             </ul>
+
+                            {% if deliveryBundleEnabled %}
+                                {% include '@CocoricoDelivery/Frontend/Booking/_form_delivery.html.twig' with {
+                                'form': form,
+                                'booking': booking
+                                } only %}
+                            {% endif %}
 
                             <ul class="list-inline price-list">
                                 <li>
@@ -266,8 +274,8 @@
                                 <li>
                                     {{ 'listing.show.categories:'|trans({},'cocorico_listing') }}
                                     <strong>
-                                        {% for category in listing.categories %}
-                                            {{ category.translations[app.request.locale].name }},
+                                        {% for listingListingCategory in listing.listingListingCategories %}
+                                            {{ listingListingCategory.category.name }},
                                         {% endfor %}
                                     </strong>
                                 </li>
@@ -300,12 +308,10 @@
 
 {% block javascripts %}
     {{ parent() }}
-    <script>
-        //        $(function () {
-        //            //Disable submit button on click
-        //            $("[type=submit]").click(function (e) {
-        //                $(this).prop('disabled', true);
-        //            });
-        //        });
-    </script>
+
+    {% if deliveryBundleEnabled %}
+        {% include '@CocoricoDelivery/Frontend/Booking/js/_delivery_js.html.twig' with {
+        'listing_location': listing_location
+        } only %}
+    {% endif %}
 {% endblock %}

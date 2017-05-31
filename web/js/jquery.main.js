@@ -217,6 +217,10 @@ function initDatepicker() {
                 e.preventDefault();
                 input.focus();
             });
+
+            if (input.hasClass('no-min-date')) {
+                today = null;
+            }
         });
 
         inputs.datepicker({
@@ -2335,6 +2339,9 @@ jQuery.onFontResize = (function ($) {
         // crossbrowser style handling
         var addCSSRule = function (selector, rules, index) {
             if (styleSheet.insertRule) {
+                if (!index) {
+                    index = 0;
+                }
                 styleSheet.insertRule(selector + '{' + rules + '}', index);
             } else {
                 styleSheet.addRule(selector, rules, index);
@@ -3374,7 +3381,10 @@ jQuery.onFontResize = (function ($) {
                     });
                 } else {
                     // set single selected index
-                    this.element.prop('selectedIndex', clickedIndex);
+                    //abe--
+                    //this.element.prop('selectedIndex', clickedIndex);
+                    //abe++
+                    this.realOptions[clickedIndex].selected = !this.realOptions[clickedIndex].selected;
                 }
             } else {
                 this.element.prop('selectedIndex', clickedIndex);
@@ -3541,7 +3551,9 @@ jQuery.onFontResize = (function ($) {
         createOption: function (option) {
             var newOption = document.createElement('span');
             newOption.className = this.options.optionClass;
-            newOption.innerHTML = option.innerHTML;
+            //abe-- newOption.innerHTML = option.innerHTML ;
+            //abe++
+            newOption.innerHTML = option.text;
             newOption.setAttribute(this.options.indexAttribute, this.optionIndex++);
 
             var optionImage, optionImageSrc = option.getAttribute('data-image');

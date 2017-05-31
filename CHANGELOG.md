@@ -8,6 +8,45 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.3.4] - 2017-05-31
+
+### Added
+- Add ListingCategoryFieldBundle support
+- Add filter button in result page
+- Add jsqueeze JS compiler to compile all js in prod
+- Add css minifycsscompressor filter on fullcalendar.css
+- Add csrf option to hwi_oauth
+- Add characteristics tooltip in offerer dashboard
+- Optimisation of mongodb prices and status edition and search
+- Add DeliveryBundle support
+- Add NumberRange Form type
+- Add CAST DQL function
+- Add support for search by range values for fields of type numeric and date in ListingCategoryFieldBundle
+
+### Fixed
+- Fix jquery warning
+- Fix categories displaying
+- Fix listing duplication error when listing doesn't have availabilities
+- Update guzzlehttp/guzzle to 5.3.1 to Fix Security HTTP Proxy header vulnerability (CVE-2016-5385)
+- Fix translations tabs if locales number is equal to 1
+- Fix ConfigBundle LoadDataFixture when no parameters are allowed to be edited
+- Fix mongodb times storing and search by time range
+- Fix init-db command (https://github.com/doctrine/DoctrineBundle/issues/561)
+
+### Changed
+- Split listing categories and location dashboard edition and ajaxify categories edition
+- New booking page dates displaying
+- Change Readme about DB grant
+- Create ListingSearchFormBuilder and use it for categories search instead of ListingFormSubscriber 
+- Enhance date range options in DateRangeType and in Jquery Datepicker
+
 
 ## [0.3.3] - 2017-04-26
 

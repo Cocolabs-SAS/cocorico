@@ -23,6 +23,7 @@ class ListingCategoryAdmin extends Admin
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'listing-category';
     protected $locales;
+    protected $bundles;
 
     // setup the default sort column and order
     protected $datagridValues = array(
@@ -33,6 +34,11 @@ class ListingCategoryAdmin extends Admin
     public function setLocales($locales)
     {
         $this->locales = $locales;
+    }
+
+    public function setBundlesEnabled($bundles)
+    {
+        $this->bundles = $bundles;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -80,7 +86,22 @@ class ListingCategoryAdmin extends Admin
                 array(
                     'label' => 'admin.listing_category.parent.label'
                 )
-            )
+            );
+
+        if (array_key_exists("CocoricoListingCategoryFieldBundle", $this->bundles)) {
+            $formMapper
+                ->add(
+                    'fields',
+                    null,
+                    array(
+                        'label' => 'admin.listing_category.fields.label',
+                        'disabled' => true,
+                        'property' => 'field'
+                    )
+                );
+        }
+
+        $formMapper
             ->end();
     }
 
@@ -103,19 +124,30 @@ class ListingCategoryAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
-            ->addIdentifier(
-                'parent',
-                null,
-                array('label' => 'admin.listing_category.parent.label')
-            )
             ->add(
                 'name',
                 null,
                 array(
                     'label' => 'admin.listing_category.name.label',
                 )
+            )
+            ->addIdentifier(
+                'parent',
+                null,
+                array('label' => 'admin.listing_category.parent.label')
             );
 
+        if (array_key_exists("CocoricoListingCategoryFieldBundle", $this->bundles)) {
+            $listMapper
+                ->add(
+                    'fields',
+                    null,
+                    array(
+                        'label' => 'admin.listing_category.fields.label',
+                        'associated_property' => 'field'
+                    )
+                );
+        }
 
         $listMapper->add(
             '_action',
@@ -143,9 +175,10 @@ class ListingCategoryAdmin extends Admin
         $datagrid = $this->getDatagrid();
         $datagrid->buildPager();
 
-        $datasourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
-        $datasourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
-        return $datasourceIt;
+        $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
+        $dataSourceIt->setDateTimeFormat('d M Y');
+
+        return $dataSourceIt;
     }
 
     public function getBatchActions()

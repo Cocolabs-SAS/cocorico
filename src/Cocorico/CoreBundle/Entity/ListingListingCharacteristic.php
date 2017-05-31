@@ -15,7 +15,7 @@ use Cocorico\CoreBundle\Model\BaseListingListingCharacteristic;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * BaseListingListingCharacteristic
+ * ListingListingCharacteristic
  *
  * @ORM\Entity()
  *

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-07-05T11:28:10Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2016-08-25T23:43:38Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
             <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -18,21 +18,21 @@
                 <target>Cancellation policy</target>
                 <jms:reference-file line="191">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="193">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="173">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="175">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="181">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="183">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="70f4bab980aaea77504b06db4a44795d111c90ba" resname="admin.listing.status.label">
                 <source>admin.listing.status.label</source>
                 <target>Status</target>
                 <jms:reference-file line="74">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
                 <jms:reference-file line="76">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="248">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="256">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="0d612c12d2ac33625bf3e0351b6f5e4f73829fa8" resname="auto">
                 <source>auto</source>
                 <target state="new">auto</target>
-                <jms:reference-file line="84">Type/Frontend/ListingNewType.php</jms:reference-file>
-                <jms:reference-file line="90">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="101">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="107">Type/Frontend/ListingNewType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="ccc43ccbdcfdca4d50fd5309c511321b500c4f44" resname="booking.simulator.amount.help">
                 <source>booking.simulator.amount.help</source>
@@ -140,7 +140,7 @@
             <trans-unit id="11f9578d05e6f7bb58a3cdd00107e9f4e3882671" resname="error">
                 <source>error</source>
                 <target>Error</target>
-                <jms:reference-file line="13">Frontend/Common/from_to_alert.html.twig</jms:reference-file>
+                <jms:reference-file line="14">Frontend/Common/from_to_alert.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1cb7e62bfe757aa67c3da37cd0176741ab8e164d" resname="home.high.rank.section.header">
                 <source>home.high.rank.section.header</source>
@@ -150,8 +150,8 @@
             <trans-unit id="7686201ef254f400070d9fb294e5743fede8e338" resname="listing.availability.edit.success">
                 <source>listing.availability.edit.success</source>
                 <target>Saved</target>
-                <jms:reference-file line="241">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
-                <jms:reference-file line="241">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
+                <jms:reference-file line="247">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
+                <jms:reference-file line="245">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="553e5a5a5aa38bbac244a267aba6e126b859282b" resname="listing.availability.new.success">
                 <source>listing.availability.new.success</source>
@@ -185,15 +185,10 @@
                 <target>Cancellation policies</target>
                 <jms:reference-file line="291">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
             </trans-unit>
-            <trans-unit id="7ecf5679b1f367be7b307b53b2a669a206c7544d" resname="listing.categories.title">
-                <source>listing.categories.title</source>
-                <target>Categories</target>
-                <jms:reference-file line="57">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-            </trans-unit>
             <trans-unit id="057c7d9bab55cfec93c2f668f2ca90424f6b57f7" resname="listing.comments.header">
                 <source>listing.comments.header</source>
                 <target>Lasts comments</target>
-                <jms:reference-file line="271">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="256">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="89a665745f28f00d3b72f22e28568dd80863987e" resname="listing.confirm.delete">
                 <source>listing.confirm.delete</source>
@@ -208,13 +203,13 @@
             <trans-unit id="25223238b38ced1fe02f1c0260bce8c63a6eccd3" resname="listing.description.title">
                 <source>listing.description.title</source>
                 <target>Describe your listing</target>
-                <jms:reference-file line="71">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="63">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1ce3ef0da02d34c985bff16c4fe2a82eefadd304" resname="listing.drop.files">
                 <source>listing.drop.files</source>
                 <target>Drop your files here</target>
                 <jms:reference-file line="45">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
-                <jms:reference-file line="95">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="87">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="57d816fbddcbd4752fba830c73204f3863d0646e" resname="listing.duplicate.error">
                 <source>listing.duplicate.error</source>
@@ -261,6 +256,16 @@
                 <target>Calendar</target>
                 <jms:reference-file line="40">Dashboard/Listing/edit_availabilities_status.html.twig</jms:reference-file>
             </trans-unit>
+            <trans-unit id="162d093e09d2f1a013d89e6b396fdeda059eff19" resname="listing.edit.categories.sub_title">
+                <source>listing.edit.categories.sub_title</source>
+                <target state="new">Select one or more categories</target>
+                <jms:reference-file line="8">Dashboard/Listing/form_categories_ajax.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="de8101c74afaa94af7f71e138806d1ab50586d59" resname="listing.edit.categories.title">
+                <source>listing.edit.categories.title</source>
+                <target state="new">Categories</target>
+                <jms:reference-file line="24">Dashboard/Listing/edit_categories.html.twig</jms:reference-file>
+            </trans-unit>
             <trans-unit id="2794ffe7c731458884325179895cbea762a11636" resname="listing.edit.characteristic.sub_title">
                 <source>listing.edit.characteristic.sub_title</source>
                 <target>Please fill your characteristics</target>
@@ -274,42 +279,42 @@
             <trans-unit id="d2ed0e6bf5c1b92d14ab680e03dbacad129c51ba" resname="listing.edit.completion_notice">
                 <source>listing.edit.completion_notice</source>
                 <target>Improve your listing by filling the following information :</target>
-                <jms:reference-file line="10">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="8">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b7409dbdf0659f371d1633e937b3ab1efb3db57c" resname="listing.edit.completion_notice_characteristics">
                 <source>listing.edit.completion_notice_characteristics</source>
                 <target><![CDATA[<a href="%listing_edit_characteristic%">indicate your characteristics</a>]]></target>
-                <jms:reference-file line="41">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="35">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e3b573431e529abf45ebd78af0cf3b48b50aaa1d" resname="listing.edit.completion_notice_desc">
                 <source>listing.edit.completion_notice_desc</source>
                 <target><![CDATA[<a href="%listing_edit_presentation%">enter a description</a>]]></target>
-                <jms:reference-file line="20">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="17">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d2985173167ff4478eaa99e089173bad7f852420" resname="listing.edit.completion_notice_imgage">
                 <source>listing.edit.completion_notice_imgage</source>
                 <target><![CDATA[<a href="%listing_edit_image%">add at least 3 photos</a>]]></target>
-                <jms:reference-file line="34">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="29">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="08586efbefe3e07f30f785c759bfabebdeee4325" resname="listing.edit.completion_notice_price">
                 <source>listing.edit.completion_notice_price</source>
                 <target><![CDATA[<a href="%listing_edit_price%">Set your price</a>]]></target>
-                <jms:reference-file line="27">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="23">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="ebe9c24f88a0e40e2069e037cf43c6748475ca57" resname="listing.edit.completion_notice_profile_desc">
                 <source>listing.edit.completion_notice_profile_desc</source>
                 <target><![CDATA[<a href="%profile%">Introduce yourself.</a>]]></target>
-                <jms:reference-file line="55">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="47">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="15d1bbc5c27c9dbc99f110c4a826dfe9350a701e" resname="listing.edit.completion_notice_profile_photo">
                 <source>listing.edit.completion_notice_profile_photo</source>
                 <target><![CDATA[<a href="%profile%">Add a profile photo</a>]]></target>
-                <jms:reference-file line="48">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="41">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="673cd66258f1018b96661ad426e3c1de00baad1c" resname="listing.edit.completion_notice_title">
                 <source>listing.edit.completion_notice_title</source>
                 <target><![CDATA[<a href="%listing_edit_presentation%">Enter a title</a>]]></target>
-                <jms:reference-file line="13">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
+                <jms:reference-file line="11">Dashboard/Listing/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="485da2407741b15d7c6f27d864eb61ebad955d51" resname="listing.edit.discount.title">
                 <source>listing.edit.discount.title</source>
@@ -330,7 +335,7 @@
                 <source>listing.edit.edit</source>
                 <target>Edit</target>
                 <jms:reference-file line="15">Dashboard/Listing/form_status_index.html.twig</jms:reference-file>
-                <jms:reference-file line="75">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="76">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="947447a47864044b83dbfa66d75051c40da52ed9" resname="listing.edit.image.title">
                 <source>listing.edit.image.title</source>
@@ -342,6 +347,11 @@
                 <target>Listing certified</target>
                 <jms:reference-file line="58">Dashboard/Listing/index.html.twig</jms:reference-file>
                 <jms:reference-file line="318">Frontend/Profile/show.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="c75b4ce0fe7a516c4d8346a86942da24eeaee7ef" resname="listing.edit.location.title">
+                <source>listing.edit.location.title</source>
+                <target state="new">Location</target>
+                <jms:reference-file line="35">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="646b42ecb84e81022f999bf28eaa9369b44eaca1" resname="listing.edit.options.title">
                 <source>listing.edit.options.title</source>
@@ -388,7 +398,7 @@
                 <target>Price help while mouse hover</target>
                 <jms:reference-file line="18">Dashboard/Listing/form_availability_price.html.twig</jms:reference-file>
                 <jms:reference-file line="19">Dashboard/Listing/form_price.html.twig</jms:reference-file>
-                <jms:reference-file line="132">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="121">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1b5a8ab3a8ba981de8c48e9ba6b250125aa32b90" resname="listing.edit.price.range.title">
                 <source>listing.edit.price.range.title</source>
@@ -415,16 +425,17 @@
                 <target>Update successful</target>
                 <jms:reference-file line="64">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
                 <jms:reference-file line="64">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
+                <jms:reference-file line="94">Dashboard/Offerer/ListingCategoriesAjaxController.php</jms:reference-file>
+                <jms:reference-file line="82">Dashboard/Offerer/ListingCategoriesController.php</jms:reference-file>
                 <jms:reference-file line="61">Dashboard/Offerer/ListingCharacteristicController.php</jms:reference-file>
                 <jms:reference-file line="62">Dashboard/Offerer/ListingImageController.php</jms:reference-file>
+                <jms:reference-file line="61">Dashboard/Offerer/ListingLocationController.php</jms:reference-file>
                 <jms:reference-file line="60">Dashboard/Offerer/ListingPresentationController.php</jms:reference-file>
-                <jms:reference-file line="61">Dashboard/Offerer/ListingVariousInformationController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="ee82168e95bcb352171622ab1b2e7b4b1bc2f398" resname="listing.edit.various_information.title">
                 <source>listing.edit.various_information.title</source>
                 <target>Various informations</target>
-                <jms:reference-file line="36">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="77">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="69">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="2abe53493f2d54535cf17e971dc59d15a5a2be3b" resname="listing.edit_discount.success">
                 <source>listing.edit_discount.success</source>
@@ -441,6 +452,11 @@
                 <target>Status updated</target>
                 <jms:reference-file line="395">Dashboard/Offerer/ListingController.php</jms:reference-file>
             </trans-unit>
+            <trans-unit id="8a218b17dd024c613755aadcddf2bb1003ac6c35" resname="listing.filter">
+                <source>listing.filter</source>
+                <target state="new">Filter</target>
+                <jms:reference-file line="43">Frontend/ListingResult/form_search.html.twig</jms:reference-file>
+            </trans-unit>
             <trans-unit id="a96c4feeeb9fa528c736f5ee149d0a1f24234ff1" resname="listing.form.characteristic.choose">
                 <source>listing.form.characteristic.choose</source>
                 <target>Select</target>
@@ -449,7 +465,7 @@
             <trans-unit id="41740b0667eb3ff6abff8e5eb95a3de58777f1fc" resname="listing.form.description">
                 <source>listing.form.description</source>
                 <target>Description</target>
-                <jms:reference-file line="88">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="105">Type/Frontend/ListingNewType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d7e1af8193ba70fb63302eac37fbbf57b7887e19" resname="listing.form.description.en">
                 <source>listing.form.description.en</source>
@@ -492,7 +508,7 @@
             <trans-unit id="0db128b0ec8ab06117fa0f4e27debe03057dcaf6" resname="listing.form.price">
                 <source>listing.form.price</source>
                 <target>Price</target>
-                <jms:reference-file line="126">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="143">Type/Frontend/ListingNewType.php</jms:reference-file>
                 <jms:reference-file line="35">Form/Type/PriceRangeType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="0f91db9360163dba55746b7250c36878537b4ee1" resname="listing.form.rules.en">
@@ -517,12 +533,12 @@
             <trans-unit id="68af81ad015bd138bbb52a137e8a782c7136b7d3" resname="listing.form.tac">
                 <source>listing.form.tac</source>
                 <target>I accept</target>
-                <jms:reference-file line="176">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="186">Type/Frontend/ListingNewType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b32775cc4444951b78d8abe0d68e1cb394515443" resname="listing.form.title">
                 <source>listing.form.title</source>
                 <target>Title</target>
-                <jms:reference-file line="82">Type/Frontend/ListingNewType.php</jms:reference-file>
+                <jms:reference-file line="99">Type/Frontend/ListingNewType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f5a1d75832a0774860eecbfda2d4d2362f2d4775" resname="listing.form.title.en">
                 <source>listing.form.title.en</source>
@@ -541,7 +557,7 @@
                 <source>listing.images.to_upload.title</source>
                 <target>New images</target>
                 <jms:reference-file line="50">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
-                <jms:reference-file line="100">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="89">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="aac609f0882f7a9d1a9380c0a71a287b36f60c02" resname="listing.index.title">
                 <source>listing.index.title</source>
@@ -551,130 +567,130 @@
             <trans-unit id="c1a5788f52b0e02947fa1b8c2c9a2d65b256f6bd" resname="listing.location.address_found">
                 <source>listing.location.address_found</source>
                 <target>Address found:</target>
-                <jms:reference-file line="147">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="244">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="118">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="239">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e098776bc2b93ce4d38c8b72e044a5cd6d2e58bc" resname="listing.location.drag_message">
                 <source>listing.location.drag_message</source>
                 <target>If the marker on the map is not accurate, you can drag it.</target>
-                <jms:reference-file line="160">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="251">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="131">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="246">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="2d4c746a395b8487b029d9e747289898947c6216" resname="listing.location.help">
                 <source>listing.location.help</source>
                 <target>Ex: 12Bis, 12Ter, 12, ...</target>
-                <jms:reference-file line="101">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="105">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="204">Frontend/Listing/new.html.twig</jms:reference-file>
-                <jms:reference-file line="208">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="72">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="76">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="199">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="203">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="327b1c4301569c35ced92438b22c4e4dca42b0dd" resname="listing.location.none">
                 <source>listing.location.none</source>
                 <target>None</target>
-                <jms:reference-file line="148">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="245">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="119">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="240">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="36828233d750b8f4e5317f5aff28d1cbf07f9512" resname="listing.location.private_message">
                 <source>listing.location.private_message</source>
                 <target>This address will still private. Only the approximate zone will be shown.</target>
-                <jms:reference-file line="259">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="254">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e7de3fdff3d52c70949ad77812a61129139d01eb" resname="listing.location.title">
                 <source>listing.location.title</source>
                 <target>Listing address</target>
-                <jms:reference-file line="67">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
+                <jms:reference-file line="38">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="9353f38b69e641a50c61bed7f2c8bc93dc9c3a76" resname="listing.location.validate">
                 <source>listing.location.validate</source>
                 <target>Validate this address</target>
-                <jms:reference-file line="152">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
-                <jms:reference-file line="239">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="123">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+                <jms:reference-file line="234">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8fa76a7978cae2530ff2c22d810fd827e3446e66" resname="listing.new.address.title">
                 <source>listing.new.address.title</source>
                 <target>Adress - Fill your address :</target>
-                <jms:reference-file line="155">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="150">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="72b732682cffac50b7b04c2703af21318d03a7b5" resname="listing.new.categories.title">
                 <source>listing.new.categories.title</source>
                 <target>Which listing types do you want to publish ?</target>
-                <jms:reference-file line="53">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="9">Frontend/Listing/form_categories.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="10c64b246aa5847e69aa2e4d0b57c39bb7bad697" resname="listing.new.price.rent">
                 <source>listing.new.price.rent</source>
                 <target>Rent price</target>
-                <jms:reference-file line="121">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="110">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="7cdb4945f2b3c3fc503e0aeb41361ed246766c28" resname="listing.new.price.title">
                 <source>listing.new.price.title</source>
                 <target>Please set your price</target>
-                <jms:reference-file line="116">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="105">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b6e9646890212403f9b182fd5d81b1e375b003a8" resname="listing.new.price_notice">
                 <source>listing.new.price_notice</source>
                 <target>You will have the opportunity to set different prices in your dashboard.</target>
-                <jms:reference-file line="147">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="142">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d51330e2f2746000508926561dc532bd4bc77a3a" resname="listing.new.publish.notice">
                 <source>listing.new.publish.notice</source>
                 <target>You will be able to specify other informations about your company in your profile.</target>
-                <jms:reference-file line="45">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="47">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="f9b32384b68743661c0683cfa182d4db14a5eabc" resname="listing.new.save">
                 <source>listing.new.save</source>
                 <target>Publish your listing</target>
-                <jms:reference-file line="299">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="294">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="a81c08ca39057623265fcf541e0aab54c70ec3de" resname="listing.new.signup.title">
                 <source>listing.new.signup.title</source>
                 <target>Subscribe or login</target>
-                <jms:reference-file line="272">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="267">Frontend/Listing/new.html.twig</jms:reference-file>
                 <jms:reference-file line="12">Frontend/Registration/register.html.twig</jms:reference-file>
                 <jms:reference-file line="12">Frontend/Security/login.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="7a72e3c35099a160f80cee3d727b77233cf29318" resname="listing.new.success">
                 <source>listing.new.success</source>
                 <target>You have created a new listing successfully</target>
-                <jms:reference-file line="56">Controller/Frontend/ListingController.php</jms:reference-file>
+                <jms:reference-file line="55">Controller/Frontend/ListingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="91f0ae365b42ca15297e24469531596860d6e62c" resname="listing.new.tac.link">
                 <source>listing.new.tac.link</source>
                 <target>the terms of use</target>
-                <jms:reference-file line="288">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="283">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="099bd9fd3eb8ecdfa47a2bf51cd486c5094cfae0" resname="listing.new.title">
                 <source>listing.new.title</source>
                 <target>Deposit your listing</target>
-                <jms:reference-file line="43">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="45">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="a385c95efe54f5b3d6707f5106282c2ae14fc04f" resname="listing.price_save">
                 <source>listing.price_save</source>
                 <target>Save</target>
                 <jms:reference-file line="14">Dashboard/Listing/form_discount.html.twig</jms:reference-file>
-                <jms:reference-file line="76">Dashboard/Listing/form_price.html.twig</jms:reference-file>
+                <jms:reference-file line="82">Dashboard/Listing/form_price.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e1c395f58d46acbfe87d57f646fb95210160751b" resname="listing.price_simulator.cash_in">
                 <source>listing.price_simulator.cash_in</source>
                 <target>You will earn</target>
-                <jms:reference-file line="25">Dashboard/Listing/form_price.html.twig</jms:reference-file>
+                <jms:reference-file line="31">Dashboard/Listing/form_price.html.twig</jms:reference-file>
                 <jms:reference-file line="45">Dashboard/Listing/form_price_simulator.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="4068a1c3c76dc94f369e53e42fc18bb5e3ea51e8" resname="listing.price_simulator.fee">
                 <source>listing.price_simulator.fee</source>
                 <target>Our fee</target>
-                <jms:reference-file line="50">Dashboard/Listing/form_price.html.twig</jms:reference-file>
+                <jms:reference-file line="56">Dashboard/Listing/form_price.html.twig</jms:reference-file>
                 <jms:reference-file line="67">Dashboard/Listing/form_price_simulator.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="7c020a0b11c62f4725259b4795995bc1e1e090ea" resname="listing.price_simulator.fee.help">
                 <source>listing.price_simulator.fee.help</source>
                 <target>Display help while mouse hover</target>
-                <jms:reference-file line="65">Dashboard/Listing/form_price.html.twig</jms:reference-file>
+                <jms:reference-file line="71">Dashboard/Listing/form_price.html.twig</jms:reference-file>
                 <jms:reference-file line="77">Dashboard/Listing/form_price_simulator.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="19e0ac6564350cc95dac17c3abde0669e0a4e448" resname="listing.price_simulator.help">
                 <source>listing.price_simulator.help</source>
                 <target>Display help while mouse hover 2</target>
-                <jms:reference-file line="41">Dashboard/Listing/form_price.html.twig</jms:reference-file>
+                <jms:reference-file line="47">Dashboard/Listing/form_price.html.twig</jms:reference-file>
                 <jms:reference-file line="58">Dashboard/Listing/form_price_simulator.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b6da107330f9826fd55158c97436c400a516d276" resname="listing.save">
@@ -684,8 +700,9 @@
                 <jms:reference-file line="89">Dashboard/Listing/edit_availabilities_status.html.twig</jms:reference-file>
                 <jms:reference-file line="67">Dashboard/Listing/edit_characteristic.html.twig</jms:reference-file>
                 <jms:reference-file line="62">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
+                <jms:reference-file line="139">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
                 <jms:reference-file line="62">Dashboard/Listing/edit_presentation.html.twig</jms:reference-file>
-                <jms:reference-file line="170">Dashboard/Listing/edit_various_information.html.twig</jms:reference-file>
+                <jms:reference-file line="26">Dashboard/Listing/form_categories.html.twig</jms:reference-file>
                 <jms:reference-file line="64">Dashboard/Listing/form_duration.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="eefe2802a4c35e0e9b5fa459640bb4d844e341b4" resname="listing.search">
@@ -708,13 +725,13 @@
             <trans-unit id="4b400b39c198d9f694b9cd1c1441ab56de2b2b61" resname="listing.search.result.alert.link">
                 <source>listing.search.result.alert.link</source>
                 <target>Alert</target>
-                <jms:reference-file line="51">Frontend/ListingResult/form_search.html.twig</jms:reference-file>
+                <jms:reference-file line="66">Frontend/ListingResult/result.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="18863f581e62255f702deeadfebbc2b0244b8897" resname="listing.search.result.certified">
                 <source>listing.search.result.certified</source>
                 <target>Certified</target>
                 <jms:reference-file line="52">Frontend/Home/high_rank.html.twig</jms:reference-file>
-                <jms:reference-file line="125">Frontend/ListingResult/result.html.twig</jms:reference-file>
+                <jms:reference-file line="137">Frontend/ListingResult/result.html.twig</jms:reference-file>
                 <jms:reference-file line="68">Frontend/ListingResult/_marker.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e0c7225719f33b2cab0a2b344bd1f92c1963ad00" resname="listing.search.result.results">
@@ -742,83 +759,89 @@
             <trans-unit id="7967e0c9de2753e165f0ac3f71f97504a2156d73" resname="listing.show.calendar">
                 <source>listing.show.calendar</source>
                 <target>Calendar</target>
-                <jms:reference-file line="102">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="103">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="104">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="50bdda2cc153c4d642eefabaa13e25344b9fb55c" resname="listing.show.cancellation_policy:">
                 <source>listing.show.cancellation_policy:</source>
                 <target>Cancellation policy:</target>
                 <jms:reference-file line="111">Dashboard/Booking/edit.html.twig</jms:reference-file>
-                <jms:reference-file line="279">Frontend/Booking/new.html.twig</jms:reference-file>
-                <jms:reference-file line="318">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="287">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="303">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="239">Frontend/Profile/show.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="f5c75b851ea7ef9715252505d5032f652fdaf38b" resname="listing.show.categories">
+                <source>listing.show.categories</source>
+                <target state="new">Categories</target>
+                <jms:reference-file line="197">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="198">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="listing.show.categories:">
                 <source>listing.show.categories:</source>
                 <target>Categories:</target>
-                <jms:reference-file line="267">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="275">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="listing.show.characteristics">
                 <source>listing.show.characteristics</source>
                 <target>Characteristics</target>
-                <jms:reference-file line="189">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="190">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="191">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="89814edfe335fbfce2cc3582fbc6ecf400d23995" resname="listing.show.comments">
                 <source>listing.show.comments</source>
                 <target>Comments</target>
-                <jms:reference-file line="203">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="204">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="305">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="213">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="214">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="290">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="6ccb7ab4251c8fe7d27af0820204dcc806023e09" resname="listing.show.description">
                 <source>listing.show.description</source>
                 <target>Description</target>
-                <jms:reference-file line="177">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="178">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="179">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d15ba75f6a96d18ca4810e34bf66017e3dbd5784" resname="listing.show.discounts:">
                 <source>listing.show.discounts:</source>
                 <target state="new">Discounts:</target>
-                <jms:reference-file line="348">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="333">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="5c526d69de94e2e558c93ddf197db754625c80c6" resname="listing.show.email_verified.help">
                 <source>listing.show.email_verified.help</source>
                 <target>Display help while mouse hover</target>
-                <jms:reference-file line="438">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="423">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="188">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="a4e63be737bc06d46818e37203b501d474dde89d" resname="listing.show.favorites.add">
                 <source>listing.show.favorites.add</source>
                 <target>Add to favorites</target>
-                <jms:reference-file line="109">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="110">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="dbd06cac737dbcb255e8ceb4a5554081ee17db82" resname="listing.show.id_card_verified.help">
                 <source>listing.show.id_card_verified.help</source>
                 <target>This user has provided a copy of his ID.</target>
-                <jms:reference-file line="452">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="437">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="203">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="49ff4bce3e52dd086b802ffa369d62b7e99d537b" resname="listing.show.location:">
                 <source>listing.show.location:</source>
                 <target>Location:</target>
-                <jms:reference-file line="275">Frontend/Booking/new.html.twig</jms:reference-file>
+                <jms:reference-file line="283">Frontend/Booking/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="368a7d80b53cf610605714c046875ad7fd4d19b6" resname="listing.show.map">
                 <source>listing.show.map</source>
                 <target>Map</target>
-                <jms:reference-file line="96">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="97">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="98">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1144951758a718382c5c55de1f294cea1cf9efc6" resname="listing.show.max_duration:">
                 <source>listing.show.max_duration:</source>
                 <target state="new">Maximum duration:</target>
-                <jms:reference-file line="337">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="322">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b28dc20af3a8d02e4a0818f6decb8b4aea3ad536" resname="listing.show.min_duration:">
                 <source>listing.show.min_duration:</source>
                 <target state="new">Minimum duration:</target>
-                <jms:reference-file line="328">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="313">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="3c16a0f6ad566fe2fa301ccf12e36c317c4b297a" resname="listing.show.nb_bookings_asker.help">
                 <source>listing.show.nb_bookings_asker.help</source>
@@ -828,42 +851,42 @@
             <trans-unit id="acffb69c919141c1a4fc0626c65ea7f32f7a23d4" resname="listing.show.nb_bookings_offerer.help">
                 <source>listing.show.nb_bookings_offerer.help</source>
                 <target>Display help while mouse hover</target>
-                <jms:reference-file line="466">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="451">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="218">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="ec450c43b78fe468a9c80305e073e77a47cdf499" resname="listing.show.options">
                 <source>listing.show.options</source>
                 <target>Options</target>
-                <jms:reference-file line="196">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="197">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="206">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="207">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="300a1d105416cb289c45d0e92275878b6afe617e" resname="listing.show.phone_verified.help">
                 <source>listing.show.phone_verified.help</source>
                 <target>This user's phone number has been verified.</target>
-                <jms:reference-file line="423">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="408">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="172">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="17cb36f8f2e1f02eea4e5ff7248a692036d135f9" resname="listing.show.photos.title">
                 <source>listing.show.photos.title</source>
                 <target>Photos</target>
-                <jms:reference-file line="90">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="91">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="92">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="c6c355b248d9a40842f3ae0d3519be3eaa790bf8" resname="listing.show.policy.title">
                 <source>listing.show.policy.title</source>
                 <target state="new">Booking policy</target>
-                <jms:reference-file line="315">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="300">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="edfb8ef84c3f95470bc8c1d320bbcbd712db8e77" resname="listing.show.rules">
                 <source>listing.show.rules</source>
                 <target>Rules</target>
-                <jms:reference-file line="183">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="184">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="185">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="328589c0f1a692fe96a7b95acbd4c93415937e57" resname="listing.show.user.contact">
                 <source>listing.show.user.contact</source>
                 <target>Contact me</target>
-                <jms:reference-file line="406">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="391">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="999c9cec7915935365c0cb0e95b6619670186934" resname="listing.similaries.back_to_search">
                 <source>listing.similaries.back_to_search</source>
@@ -888,12 +911,17 @@
             <trans-unit id="85f021657fd9185d839033269965aa42c299342a" resname="listing.translate.error">
                 <source>listing.translate.error</source>
                 <target>An error has occurred</target>
-                <jms:reference-file line="13">Frontend/Common/from_to_alert.html.twig</jms:reference-file>
+                <jms:reference-file line="14">Frontend/Common/from_to_alert.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="76587d94e817c42bd896cdce110ada62b0250acf" resname="listing.translate.success">
                 <source>listing.translate.success</source>
                 <target>Translation done successfully</target>
                 <jms:reference-file line="7">Frontend/Common/from_to_alert.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="62510a72090b89ab73a05038f1f6a0acf58b2cad" resname="listing.type.title">
+                <source>listing.type.title</source>
+                <target state="new">listing.type.title</target>
+                <jms:reference-file line="9">Dashboard/Listing/form_categories.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="5ecf4e31f55710533951a1068244c8b7e3dd4c86" resname="listing_categories.min {{ min_categories }}">
                 <source>listing_categories.min {{ min_categories }}</source>
@@ -931,13 +959,13 @@
                 <source>listing_edit.form.from_quantity</source>
                 <target>on the price by %quantity_text%, from</target>
                 <jms:reference-file line="44">Form/Type/ListingDiscountType.php</jms:reference-file>
-                <jms:reference-file line="353">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="338">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="f8f32c1d94fa3fde6587937808b7f381e8d393c4" resname="listing_edit.form.from_quantity.bought">
                 <source>listing_edit.form.from_quantity.bought</source>
                 <target>%quantity_text% ordered</target>
-                <jms:reference-file line="298">views/Form/fields.html.twig</jms:reference-file>
-                <jms:reference-file line="355">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="304">views/Form/fields.html.twig</jms:reference-file>
+                <jms:reference-file line="340">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="840e18571bfc4e9f516fd60527195d3b2a1f9836" resname="listing_edit.form.max_duration">
                 <source>listing_edit.form.max_duration</source>
@@ -952,7 +980,7 @@
             <trans-unit id="93f49fe2a272a47cb9d809e1bf14f7292726a1f7" resname="listing_edit.form.price">
                 <source>listing_edit.form.price</source>
                 <target>Price by</target>
-                <jms:reference-file line="32">Type/Dashboard/ListingEditPriceType.php</jms:reference-file>
+                <jms:reference-file line="45">Type/Dashboard/ListingEditPriceType.php</jms:reference-file>
                 <jms:reference-file line="47">Dashboard/Listing/index.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1f71650beb1fd27a36387a72e9deb4c453abbc9a" resname="listing_edit.form.price_custom">
@@ -967,13 +995,13 @@
                     The first image will be used as your cover image.
                 </target>
                 <jms:reference-file line="41">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
-                <jms:reference-file line="91">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="83">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="acbb7a84aec1e38715d027f14b6768741ce29ab0" resname="listing_edit.photos.title">
                 <source>listing_edit.photos.title</source>
                 <target>Manage your images. (Maximum %max_images% photos)</target>
                 <jms:reference-file line="28">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
-                <jms:reference-file line="78">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="70">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="ef951d4e27ee99dade81571f3b0dd6489e40e8f5" resname="listing_images.max {{ max_images }}">
                 <source>listing_images.max {{ max_images }}</source>
@@ -995,28 +1023,30 @@
             <trans-unit id="793890ef1a5e2a969f867ff69e3a84f5cf01751b" resname="listing_search.form.categories">
                 <source>listing_search.form.categories</source>
                 <target>Categories</target>
-                <jms:reference-file line="111">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="45">Type/Dashboard/ListingEditCategoriesAjaxType.php</jms:reference-file>
+                <jms:reference-file line="113">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f0321085b5fdb1cbb8a670c7431d3cb69cc86878" resname="listing_search.form.categories.empty_value">
                 <source>listing_search.form.categories.empty_value</source>
                 <target>Select your category</target>
-                <jms:reference-file line="116">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="46">Type/Dashboard/ListingEditCategoriesAjaxType.php</jms:reference-file>
+                <jms:reference-file line="118">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="08d3c10ef83330fff09ab0febe661ada75d6133e" resname="listing_search.form.end">
                 <source>listing_search.form.end</source>
                 <target>End</target>
-                <jms:reference-file line="128">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="148">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="db302e427440ffbbdcabd856e13975a07d4fe837" resname="listing_search.form.end_time">
                 <source>listing_search.form.end_time</source>
                 <target>To</target>
-                <jms:reference-file line="189">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="213">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b644314a459aa4e290ba05380a316d8be5e712e9" resname="listing_search.form.flexibility">
                 <source>listing_search.form.flexibility</source>
                 <target>Flexibility</target>
-                <jms:reference-file line="207">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
-                <jms:reference-file line="208">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="231">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="232">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="5792a5686f229ac793f59b6e5ac0e5fe2f3a2a4f" resname="listing_search.form.flexibility_day">
                 <source>listing_search.form.flexibility_day</source>
@@ -1026,17 +1056,17 @@
             <trans-unit id="118dfbd26735a9d9eac9e76aec5cdf8621019cc2" resname="listing_search.form.sort_by.empty_value">
                 <source>listing_search.form.sort_by.empty_value</source>
                 <target>Sort by</target>
-                <jms:reference-file line="162">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="186">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="6536bbf97e221f5a8e0f83aa57e2873b46538a44" resname="listing_search.form.start">
                 <source>listing_search.form.start</source>
                 <target>Date</target>
-                <jms:reference-file line="124">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="144">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="a15967324920a8f13597638e765f30bcafdd6557" resname="listing_search.form.start_time">
                 <source>listing_search.form.start_time</source>
                 <target>From</target>
-                <jms:reference-file line="185">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
+                <jms:reference-file line="209">Type/Frontend/ListingSearchResultType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="a42ab2a8af3a5f5dc38c55abbe3326ac97ad3637" resname="listing_translations_en_description_placeholder">
                 <source>listing_translations_en_description_placeholder</source>
@@ -1068,6 +1098,12 @@
                 <jms:reference-file line="31">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
                 <jms:reference-file line="34">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
             </trans-unit>
+            <trans-unit id="d529fbd59b804564c3cd52cdb93f8623857d58ac" resname="nav.listing.categories.link">
+                <source>nav.listing.categories.link</source>
+                <target state="new">Categories</target>
+                <jms:reference-file line="52">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
+                <jms:reference-file line="55">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
+            </trans-unit>
             <trans-unit id="5a53382996a5e6ba6163c57a5aa93b0513889803" resname="nav.listing.characteristic.link">
                 <source>nav.listing.characteristic.link</source>
                 <target>Characteristics</target>
@@ -1080,11 +1116,11 @@
                 <jms:reference-file line="38">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
                 <jms:reference-file line="41">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="9010ffd7e736930cb265e6e48a9c51060e813a83" resname="nav.listing.informations.link">
-                <source>nav.listing.informations.link</source>
-                <target>Various information</target>
-                <jms:reference-file line="52">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
-                <jms:reference-file line="55">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
+            <trans-unit id="6b7e582b7d96545e4b34ce2efa309297b4661542" resname="nav.listing.location.link">
+                <source>nav.listing.location.link</source>
+                <target state="new">Location</target>
+                <jms:reference-file line="59">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
+                <jms:reference-file line="62">Dashboard/Listing/_nav_side.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="63936a5bbe1a225849dcd3622b8de5bdf9de6d31" resname="nav.listing.presentation.link">
                 <source>nav.listing.presentation.link</source>
@@ -1101,21 +1137,21 @@
             <trans-unit id="c7a4298347ed905bf82c406276876396d2b49a12" resname="nav.tac.slug">
                 <source>nav.tac.slug</source>
                 <target>terms-of-use</target>
-                <jms:reference-file line="286">Frontend/Listing/new.html.twig</jms:reference-file>
+                <jms:reference-file line="281">Frontend/Listing/new.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="fd1286353570c5703799ba76999323b7c7447b06" resname="no">
                 <source>no</source>
                 <target>no</target>
-                <jms:reference-file line="462">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="447">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="214">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="229">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="64826d1aab5cee61ad356fad98dd327db02da61e" resname="no_verified">
                 <source>no_verified</source>
                 <target>Not verified</target>
+                <jms:reference-file line="404">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="419">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="434">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="448">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="433">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="168">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="184">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="199">Frontend/Profile/show.html.twig</jms:reference-file>
@@ -1123,7 +1159,7 @@
             <trans-unit id="71f8e7976e4cbc4561c9d62fb283e7f788202acb" resname="none">
                 <source>none</source>
                 <target state="new">None</target>
-                <jms:reference-file line="339">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="324">Frontend/Listing/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="53a5687cb26dc41f2ab4033e97e13adefd3740d6" resname="success">
                 <source>success</source>
@@ -1155,9 +1191,9 @@
             <trans-unit id="ec734b651574683f36974c7f12847fbbe084dbe2" resname="verified">
                 <source>verified</source>
                 <target>verified</target>
-                <jms:reference-file line="415">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="431">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="445">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="400">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="416">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="430">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="164">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="181">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="196">Frontend/Profile/show.html.twig</jms:reference-file>
@@ -1165,7 +1201,7 @@
             <trans-unit id="fb360f9c09ac8c5edb2f18be5de4e80ea4c430d0" resname="yes">
                 <source>yes</source>
                 <target>yes</target>
-                <jms:reference-file line="459">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="444">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="211">Frontend/Profile/show.html.twig</jms:reference-file>
                 <jms:reference-file line="226">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>

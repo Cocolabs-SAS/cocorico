@@ -8,6 +8,7 @@ services:
             - "@cocorico_user.login_manager"
             - "@request_stack"
             - "%cocorico.locales%"
+            - "@event_dispatcher"
         tags:
             - { name: form.type, alias: listing_new }
 
@@ -35,6 +36,13 @@ services:
         tags:
             - { name: form.type, alias: listing_edit_description }
 
+    cocorico.form.type.listing_edit_price:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type, alias: listing_edit_price }
+
     cocorico.form.type.listing_edit_images:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditImagesType
         parent: cocorico.form.type.listing_edit
@@ -42,10 +50,10 @@ services:
             - { name: form.type, alias: listing_edit_images }
 
     cocorico.form.type.listing_edit_location:
-        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditVariousInformationType
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditLocationType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_various_information }
+            - { name: form.type, alias: listing_edit_location }
 
     cocorico.form.type.listing_edit_characteristic:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCharacteristicType
@@ -78,10 +86,24 @@ services:
         tags:
             - { name: form.type, alias: listing_edit_availability_price }
 
-    cocorico.form.type.listing_location: #Not needed
-        class: Cocorico\CoreBundle\Form\Type\Frontend\ListingLocationType
+    cocorico.form.type.listing_new_categories:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCategoriesType
+        arguments:
+            - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_location }
+            - { name: form.type, alias: listing_new_categories }
+
+    cocorico.form.type.listing_edit_categories:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCategoriesType
+        tags:
+            - { name: form.type, alias: listing_edit_categories }
+
+    cocorico.form.type.listing_edit_categories_ajax:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCategoriesAjaxType
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type, alias: listing_edit_categories_ajax }
 
     cocorico.form.type.country_filtered:
         class: Cocorico\CoreBundle\Form\Type\CountryFilteredType
@@ -136,6 +158,7 @@ services:
             - "%cocorico.days_display_mode%"
             - "%cocorico.times_display_mode%"
             - "%cocorico.booking.min_start_delay%"
+            - "@event_dispatcher"
         tags:
             - { name: form.type, alias: listing_search_result }
 

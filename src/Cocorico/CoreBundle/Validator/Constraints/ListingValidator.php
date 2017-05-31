@@ -69,9 +69,9 @@ class ListingValidator extends ConstraintValidator
         }
 
         //Categories
-        if ($listing->getCategories()->count() < $this->minCategories) {
+        if ($listing->getListingListingCategories()->count() < $this->minCategories) {
             $this->context->buildViolation($constraint::$messageMinCategories)
-                ->atPath('categories')
+                ->atPath('listingListingCategories')
                 ->setParameter('{{ min_categories }}', $this->minCategories)
                 ->setTranslationDomain('cocorico_listing')
                 ->addViolation();

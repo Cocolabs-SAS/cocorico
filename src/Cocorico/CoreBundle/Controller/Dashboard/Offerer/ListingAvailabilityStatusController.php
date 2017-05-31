@@ -228,8 +228,12 @@ class ListingAvailabilityStatusController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var ListingAvailability $listing_availability */
             $listing_availability = $form->getData();
+
+            //convert object to array
+            $listingAvailability = $listingAvailabilityManager->listingAvailabilityToArray($listing_availability);
+
             $listingAvailabilityManager->saveAvailabilityTimes(
-                $listing_availability,
+                $listingAvailability,
                 $start_time,
                 $end_time,
                 "status",

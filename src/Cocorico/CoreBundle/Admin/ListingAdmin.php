@@ -139,6 +139,14 @@ class ListingAdmin extends Admin
                 )
             )
             ->add(
+                'listingListingCategories',
+                null,
+                array(
+                    'disabled' => true,
+                    'label' => 'admin.listing.categories.label'
+                )
+            )
+            ->add(
                 'images',
                 'collection',
                 array(
@@ -212,7 +220,7 @@ class ListingAdmin extends Admin
     {
         $datagridMapper
             ->add(
-                'fullname',
+                'fullName',
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getFullNameFilter'),
@@ -233,7 +241,7 @@ class ListingAdmin extends Admin
                 array('label' => 'admin.listing.user_phone.label')
             )
             ->add(
-                'categories',
+                'listingListingCategories.category',
                 null,
                 array('label' => 'admin.listing.categories.label')
             )

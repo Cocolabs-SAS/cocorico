@@ -1,0 +1,32 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div id="characteristics" class="select-holder">
+    {{ form_errors(characteristics) }}
+    {% set listing_characteristic_group, previous_listing_characteristic_group = "", "" %}
+    <!--@formatter:off-->
+    {{ '<ul class="list-unstyled">' }}
+    {% for characteristic in characteristics %}
+        {% set listing_characteristic_group =  characteristic.vars.label_attr["group"] %}
+        {% if listing_characteristic_group != previous_listing_characteristic_group %}
+             {% if previous_listing_characteristic_group %}
+                 {#{{ "</ul>" }}#}
+             {% endif %}
+             {#<strong>{{ listing_characteristic_group }}</strong><br />#}
+             {#{{ '<ul class="list-unstyled">' }}#}
+        {% endif %}
+        <li class="field-row">
+            {#<span class="label">{{ form_label(characteristic) }}</span>#}
+            <div class="select-holder">
+             {{ form_widget(characteristic, {
+                 'attr': {
+                     'class': "form-control no-arrow"
+                 },
+                 'placeholder': characteristic.vars.label
+             }) }}
+            </div>
+        </li>
+        {% set previous_listing_characteristic_group =  listing_characteristic_group %}
+    {% endfor %}
+    {{ "</ul>" }}
+    <!--@formatter:on-->
+</div>

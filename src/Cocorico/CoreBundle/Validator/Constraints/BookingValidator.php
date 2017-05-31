@@ -203,6 +203,21 @@ class BookingValidator extends ConstraintValidator
             );
         }
 
+        //Delivery error
+        if (in_array('delivery_max_invalid', $errors)) {
+            $violations[] = array(
+                'message' => BookingNewType::$messageDeliveryMaxInvalid,
+                'atPath' => 'deliveryAddress',
+            );
+        }
+
+        if (in_array('delivery_invalid', $errors)) {
+            $violations[] = array(
+                'message' => BookingNewType::$messageDeliveryInvalid,
+                'atPath' => 'deliveryAddress',
+            );
+        }
+
         return $violations;
     }
 }

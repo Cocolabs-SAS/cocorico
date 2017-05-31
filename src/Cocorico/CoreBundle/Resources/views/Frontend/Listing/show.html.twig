@@ -3,6 +3,7 @@
 {% trans_default_domain 'cocorico_listing' %}
 
 {% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+{% set categoryFieldBundleEnabled = bundleExist('CocoricoListingCategoryFieldBundle') %}
 
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_location = listing.location %}
@@ -34,7 +35,7 @@
     'css/vendor/fullcalendar.min.css'
     'css/fullcalendar-override.css'
 
-    filter='cssrewrite' output='css/compiled/fullcalendar.css' %}
+    filter='cssrewrite, ?minifycsscompressor' output='css/compiled/fullcalendar.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}
@@ -190,6 +191,15 @@
                                                 {{ 'listing.show.characteristics'|trans }}
                                             </a>
                                         </li>
+                                        {% if categoryFieldBundleEnabled %}
+                                            <li>
+                                                <a href="#categories-fields" data-toggle="tab"
+                                                   data-text="{{ 'listing.show.categories'|trans }}">
+                                                    {{ 'listing.show.categories'|trans }}
+                                                </a>
+                                            </li>
+                                        {% endif %}
+
                                         {% if optionBundleEnabled %}
                                             <li>
                                                 <a href="#options" data-toggle="tab"
@@ -219,45 +229,17 @@
                                     </div>
                                     <!-- features -->
                                     <div role="tabpanel" class="tab-pane" id="features">
-                                        <!-- features-area -->
-                                        <div class="features-area">
-                                            <!-- features-list -->
-                                            {#<ul class="list-unstyled features-list">#}
-                                            {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
-                                            <!--@formatter:off-->
-                                            {% for characteristic in listing.getListingListingCharacteristicsOrderedByGroup %}
-                                            {% set listingCharacteristic = characteristic.listingCharacteristic %}
-                                            {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
-                                            {% set listingCharacteristicValue = characteristic.listingCharacteristicValue %}
-                                            {% if listingCharacteristicValue %}
-                                            {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
-                                            {% if previousListingCharacteristicGroup %}
-                                            {{ "</ul>" }}
-                                            {% endif %}
-                                            <h3>{{ listingCharacteristicGroup }}</h3>
-                                            {{ "<ul>" }}
-                                            {% endif %}
-                                            <li>
-                                            {{ listingCharacteristic.getName() }} :
-                                            <strong>
-                                            {{ listingCharacteristicValue.getName() }}
-                                            {# {% else %}
-                                            ND #}
-                                            </strong>
-                                            {% if listingCharacteristic.getDescription() %}
-                                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button" data-original-title="{{ listingCharacteristic.getDescription() }}">?</button>
-                                            {% endif %}
-                                            </li>
-                                            {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
-                                            {% endif %}
-                                            {% endfor %}
-                                            <!--@formatter:on-->
-                                            {#</ul>#}
-                                        </div>
+                                        {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
                                     </div>
-
-                                    <!-- options -->
+                                    {% if categoryFieldBundleEnabled %}
+                                        <!-- Categories fields -->
+                                        <div role="tabpanel" class="tab-pane" id="categories-fields">
+                                            {% include '@CocoricoListingCategoryField/Frontend/Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
+                                        </div>
+                                    {% endif %}
+                                    
                                     {% if optionBundleEnabled %}
+                                        <!-- options -->
                                         <div role="tabpanel" class="tab-pane" id="options">
                                             {% include '@CocoricoListingOption/Frontend/Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
                                         </div>
@@ -494,7 +476,7 @@
     'js/vendor/fullcalendar/fullcalendar.min.js'
     'js/vendor/fullcalendar/lang-all.js'
 
-    output='js/compiled/calendar.js' %}
+    filter="jsqueeze" output='js/compiled/calendar.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 

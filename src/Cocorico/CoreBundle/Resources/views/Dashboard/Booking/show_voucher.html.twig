@@ -49,6 +49,11 @@
             {{ booking.duration(endDayIncluded, timeUnit, timeUnitIsDay) | add_time_unit_text }}
         </div>
 
+        {% if bundleExist('CocoricoDeliveryBundle') %}
+            {% include '@CocoricoDelivery/Dashboard/Booking/_show_delivery_in_voucher.html.twig' with {
+            'booking': booking
+            } only %}
+        {% endif %}
 
         <div>
             <br/>

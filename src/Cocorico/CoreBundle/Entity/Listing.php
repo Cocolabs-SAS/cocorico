@@ -71,17 +71,10 @@ class Listing extends BaseListing
     private $location;
 
     /**
-     * For Asserts
+     * @ORM\OneToMany(targetEntity="ListingListingCategory", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)//, fetch="EAGER"
      *
-     * @see \Cocorico\CoreBundle\Validator\Constraints\ListingValidator
-     *
-     * @ORM\ManyToMany(targetEntity="ListingCategory", inversedBy="listings")
-     * @ORM\JoinTable(name="listing_listing_category",
-     *      joinColumns={@ORM\JoinColumn(name="listing_id", referencedColumnName="id", onDelete="CASCADE")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="listing_category_id", referencedColumnName="id")}
-     * )
-     **/
-    private $categories;
+     */
+    private $listingListingCategories;
 
     /**
      * For Asserts @see \Cocorico\CoreBundle\Validator\Constraints\ListingValidator
@@ -126,9 +119,9 @@ class Listing extends BaseListing
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->listingListingCharacteristics = new ArrayCollection();
+        $this->listingListingCategories = new ArrayCollection();
         $this->discounts = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->threads = new ArrayCollection();
@@ -239,6 +232,47 @@ class Listing extends BaseListing
         $this->removeListingListingCharacteristic($listingListingCharacteristic);
     }
 
+
+    /**
+     * Add category
+     *
+     * @param  \Cocorico\CoreBundle\Entity\ListingListingCategory $listingListingCategory
+     * @return Listing
+     */
+    public function addListingListingCategory(ListingListingCategory $listingListingCategory)
+    {
+        $listingListingCategory->setListing($this);
+        $this->listingListingCategories[] = $listingListingCategory;
+
+        return $this;
+    }
+
+
+    /**
+     * Remove category
+     *
+     * @param \Cocorico\CoreBundle\Entity\ListingListingCategory $listingListingCategory
+     */
+    public function removeListingListingCategory(ListingListingCategory $listingListingCategory)
+    {
+//        foreach ($listingListingCategory->getValues() as $value) {
+//            $listingListingCategory->removeValue($value);
+//        }
+
+        $this->listingListingCategories->removeElement($listingListingCategory);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection|ListingListingCategory[]
+     */
+    public function getListingListingCategories()
+    {
+        return $this->listingListingCategories;
+    }
+
+
     /**
      * Set user
      *
@@ -260,39 +294,6 @@ class Listing extends BaseListing
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Add categories
-     *
-     * @param  \Cocorico\CoreBundle\Entity\ListingCategory $category
-     * @return Listing
-     */
-    public function addCategory(ListingCategory $category)
-    {
-        $this->categories[] = $category;
-
-        return $this;
-    }
-
-    /**
-     * Remove categories
-     *
-     * @param \Cocorico\CoreBundle\Entity\ListingCategory $category
-     */
-    public function removeCategory(ListingCategory $category)
-    {
-        $this->categories->removeElement($category);
-    }
-
-    /**
-     * Get categories
-     *
-     * @return \Doctrine\Common\Collections\Collection|ListingCategory[]
-     */
-    public function getCategories()
-    {
-        return $this->categories;
     }
 
     /**
@@ -615,12 +616,12 @@ class Listing extends BaseListing
             }
 
             //Categories
-            /** @var ListingCategory[] $categories */
-            $categories = $this->getCategories();
-            $this->categories = new ArrayCollection();
+            $categories = $this->getListingListingCategories();
+            $this->listingListingCategories = new ArrayCollection();
             foreach ($categories as $category) {
-                $category->addListing($this);
-                $this->addCategory($category);
+                $category = clone $category;
+                $category->setListing($this);
+                $this->addListingListingCategory($category);
             }
 
             //Discounts

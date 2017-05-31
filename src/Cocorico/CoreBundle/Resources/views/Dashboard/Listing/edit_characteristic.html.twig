@@ -27,7 +27,7 @@
                     <h2>{{ 'listing.edit.characteristic.title'|trans }}</h2>
                     <strong class="sub-heading">{{ 'listing.edit.characteristic.sub_title'|trans }}</strong>
                     <!-- features-area -->
-                    <div id="characteristics" class="features-area">
+                    <div id="characteristics" class="form-block features-area">
                         {{ form_errors(form.listingListingCharacteristicsOrderedByGroup) }}
                         {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
                         <!--@formatter:off-->
@@ -45,10 +45,10 @@
                                     <li>
                                         <label class="label">
                                             {{ listingCharacteristic.getName() }}
-                                            {# //todo: test if help is defined for listingCharacteristic. if true, display the button which is comment#}
-                                            {#<button title="Au survol de la souris, des informations complémentaires apparaissent." data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button" data-original-title="Au survol de la souris, des informations complémentaires apparaissent.">?</button>#}
                                         </label>
-
+                                        {% if listingCharacteristic.getDescription()|length %}
+                                            <button title="" data-original-title="{{ listingCharacteristic.getDescription() }}" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button">?</button>
+                                        {% endif %}
                                         <div class="field-holder">
                                             {{ form_widget(listingListingCharacteristic.listingCharacteristicValue, {
                                                 'attr': {

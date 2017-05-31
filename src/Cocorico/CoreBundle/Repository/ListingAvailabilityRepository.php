@@ -143,7 +143,7 @@ class ListingAvailabilityRepository extends DocumentRepository
 
                     $qbDMDatesExp->field('times')->elemMatch(
                         $embeddedQbDM->expr()
-                        ->field('id')->in(range($startMinute, $endMinute))
+                            ->field('id')->in(range($startMinute, $endMinute))
                             ->field('status')->in($status)
                     );
 

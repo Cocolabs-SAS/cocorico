@@ -309,6 +309,30 @@ class BookingAdmin extends Admin
             )
             ->end();
 
+
+        if (array_key_exists("CocoricoDeliveryBundle", $this->bundles)) {
+            $formMapper
+                ->with('admin.booking.delivery')
+                ->add(
+                    'deliveryAddress',
+                    null,
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.delivery_address.label'
+                    )
+                )
+                ->add(
+                    'amountDelivery',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.delivery_amount.label'
+                    )
+                )
+                ->end();
+        }
+
+
         if (array_key_exists("CocoricoListingOptionBundle", $this->bundles)) {
             $formMapper
                 ->with('Options')

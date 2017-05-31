@@ -54,8 +54,8 @@
                                                             {% endif %}
                                                         </div>
                                                         <strong class="title">
-                                                            {% for category in listing.categories %}
-                                                                {{ category.translations[app.request.locale].name }},
+                                                            {% for listingListingCategory in listing.listingListingCategories %}
+                                                                {{ listingListingCategory.category.name }},
                                                             {% endfor %}
                                                         </strong>
                                                     </div>

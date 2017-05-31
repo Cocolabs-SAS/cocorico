@@ -47,7 +47,7 @@
             <div class="errors">
                 {% for error in errors %}
                     {#duplicate errors#}
-                    {% if error.message not in existing_errors %}
+                    {% if error.message and error.message not in existing_errors %}
                         <i class="icon-error-field"></i>
                         {{ error.message|trans(error.messageParameters) }}<br/>
                         {% set existing_errors = existing_errors|merge([error.message]) %}
@@ -122,7 +122,7 @@
 
 
 {# Categories tree  widget #}
-{% block _listing_categories_widget -%}
+{% block _listing_categories_listingListingCategories_widget -%}
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
@@ -146,21 +146,25 @@
 {% block listing_category_widget_options_tree -%}
     {% for group_label, choice in options %}
         {% set category = choice.data %}
-        {% set indent = '-'|repeat(category.getLvl) %}
+        {% set indent = '&#160;&#160;&#160;'|repeat(category.getLvl) %}
 
         {%- if not category.isLeaf -%}
-            {#|trans({}, translation_domain)#}
-            <optgroup label="{{ indent ~ " " ~ category.getName() }}">
+            <optgroup label="{{ indent  ~ category.getName() }}">
                 {% set options = choice %}
                 {{- block('listing_category_widget_options_tree') -}}
             </optgroup>
         {%- else -%}
             <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
-                {{ indent ~ " " ~ choice.label }}
+                {{ indent  ~ choice.label }}
             </option>
         {%- endif -%}
     {% endfor %}
 {%- endblock listing_category_widget_options_tree %}
+
+
+{% block _listing_categories_widget %}
+    {{ block('_listing_categories_listingListingCategories_widget') }}
+{% endblock %}
 
 
 {% block file_widget %}
@@ -525,13 +529,15 @@
     <div class="col datepicker-holder day-fields display-{{ daysDisplayMode }}">
         <div class="col">
             {{ form_errors(form.start) }}
-            <strong class="title">{{ form_label(form.start) }}</strong>
+            {% if form.start.vars.label %}
+                <strong class="title">{{ form_label(form.start) }}</strong>
+            {% endif %}
 
             <div class="input-append date field-holder">
                 {{ form_widget(form.start,{
                     'type': 'text',
                     'attr': {
-                        'class': 'form-control from',
+                        'class': 'form-control from ' ~ form.start.vars.attr.class|default(''),
                         'placeholder': "/      /"
                     }
                 }) }}
@@ -544,13 +550,15 @@
         {% if "date_hidden" not in form.end.vars.block_prefixes %}
             <div class="col">
                 {{ form_errors(form.end) }}
-                <strong class="title">{{ form_label(form.end) }}</strong>
+                {% if form.end.vars.label %}
+                    <strong class="title">{{ form_label(form.end) }}</strong>
+                {% endif %}
 
                 <div class="input-append date field-holder">
                     {{ form_widget(form.end,{
                         'type': 'text',
                         'attr': {
-                            'class': 'form-control to',
+                            'class': 'form-control to ' ~ form.end.vars.attr.class|default(''),
                             'placeholder': "/      /"
                         }
                     }) }}
@@ -988,6 +996,43 @@
         </div>
     </div>
 {%- endblock -%}
+
+
+{#
+    Number range widget
+#}
+{%- block number_range_widget -%}
+    <div class="number-range">
+        <div class="col">
+            {{ form_errors(form.min) }}
+            {% if form.min.vars.label %}
+                <strong class="title">{{ form_label(form.min) }}</strong>
+            {% endif %}
+            <div class="field-holder">
+                {{ form_widget(form.min,{
+                    'attr': {
+                        'class': '' ~ form.min.vars.attr.class|default(''),
+                    }
+                }) }}
+            </div>
+        </div>
+
+        <div class="col">
+            {{ form_errors(form.max) }}
+            {% if form.max.vars.label %}
+                <strong class="title">{{ form_label(form.max) }}</strong>
+            {% endif %}
+            <div class="field-holder">
+                {{ form_widget(form.max,{
+                    'attr': {
+                        'class': '' ~ form.max.vars.attr.class|default(''),
+                    }
+                }) }}
+            </div>
+        </div>
+    </div>
+{%- endblock -%}
+
 
 {#
     Images collection

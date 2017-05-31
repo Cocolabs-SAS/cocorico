@@ -12,12 +12,25 @@
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
+use Cocorico\CoreBundle\Event\ListingFormEvents;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditPriceType extends AbstractType
 {
+    protected $dispatcher;
+
+    /**
+     * @param EventDispatcherInterface $dispatcher
+     */
+    public function __construct(EventDispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
@@ -32,6 +45,13 @@ class ListingEditPriceType extends AbstractType
                     'label' => 'listing_edit.form.price',
                 )
             );
+
+        //Dispatch LISTING_EDIT_PRICE_FORM_BUILD Event. Listener listening this event can add fields and validation
+        //Used for example to add fields to price edition form
+        $this->dispatcher->dispatch(
+            ListingFormEvents::LISTING_EDIT_PRICE_FORM_BUILD,
+            new ListingFormBuilderEvent($builder)
+        );
     }
 
     /**

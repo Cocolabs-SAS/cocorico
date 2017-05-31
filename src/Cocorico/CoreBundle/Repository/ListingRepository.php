@@ -27,8 +27,9 @@ class ListingRepository extends EntityRepository
     {
         $queryBuilder = $this->_em->createQueryBuilder()
             //Select
-            ->select('partial l.{id, price, averageRating, certified, createdAt}')
+            ->select("partial l.{id, price, averageRating, certified, createdAt}")
             ->addSelect("partial t.{id, locale, slug, title, description}")
+            ->addSelect("partial llcat.{id, listing, category}")
             ->addSelect("partial ca.{id, lft, lvl, rgt, root}")
             ->addSelect("partial cat.{id, locale, name}")
             ->addSelect("partial i.{id, name}")
@@ -42,7 +43,8 @@ class ListingRepository extends EntityRepository
             //From
             ->from('CocoricoCoreBundle:Listing', 'l')
             ->leftJoin('l.translations', 't')
-            ->leftJoin('l.categories', 'ca')
+            ->leftJoin('l.listingListingCategories', 'llcat')
+            ->leftJoin('llcat.category', 'ca')
             //Join::WITH: Avoid exclusion of listings with no categories (disable inner join)
             ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
             ->leftJoin('l.images', 'i')
@@ -140,14 +142,15 @@ class ListingRepository extends EntityRepository
     public function getFindByOwnerQuery($ownerId, $locale, $status)
     {
         $queryBuilder = $this->createQueryBuilder('l')
-            ->addSelect("t, i, c, ca, cat, u")
+            ->addSelect("t, i, c, llcat, ca, cat, u")
 //            ->addSelect("t, i, c, ca, cat, u, rt")
             ->leftJoin('l.translations', 't')
             ->leftJoin('l.user', 'u')
             //->leftJoin('u.reviewsTo', 'rt')
             ->leftJoin('l.listingListingCharacteristics', 'c')
             ->leftJoin('l.images', 'i')
-            ->leftJoin('l.categories', 'ca')
+            ->leftJoin('l.listingListingCategories', 'llcat')
+            ->leftJoin('llcat.category', 'ca')
             ->leftJoin('ca.translations', 'cat')
             ->where('u.id = :ownerId')
             ->andWhere('t.locale = :locale')

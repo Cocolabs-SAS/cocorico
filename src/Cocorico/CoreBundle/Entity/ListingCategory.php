@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Entity;
 
 use Cocorico\CoreBundle\Model\BaseListingCategory;
+use Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -54,13 +55,22 @@ class ListingCategory extends BaseListingCategory
     private $children;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Listing", mappedBy="categories")
-     **/
-    private $listings;
+     *
+     * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\ListingListingCategory", mappedBy="category", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $listingListingCategories;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface", mappedBy="category", cascade={"persist", "remove"})
+     */
+    private $fields;
+
 
     public function __construct()
     {
-        $this->listings = new ArrayCollection();
+        $this->listingListingCategories = new ArrayCollection();
+        $this->fields = new ArrayCollection();
     }
 
     /**
@@ -97,38 +107,6 @@ class ListingCategory extends BaseListingCategory
         return $this->parent;
     }
 
-    /**
-     * Add listings
-     *
-     * @param  \Cocorico\CoreBundle\Entity\Listing $listings
-     * @return ListingCategory
-     */
-    public function addListing(Listing $listings)
-    {
-        $this->listings[] = $listings;
-
-        return $this;
-    }
-
-    /**
-     * Remove listings
-     *
-     * @param \Cocorico\CoreBundle\Entity\Listing $listings
-     */
-    public function removeListing(Listing $listings)
-    {
-        $this->listings->removeElement($listings);
-    }
-
-    /**
-     * Get listings
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getListings()
-    {
-        return $this->listings;
-    }
 
     /**
      * Add children
@@ -163,11 +141,92 @@ class ListingCategory extends BaseListingCategory
         return $this->children;
     }
 
+    /**
+     * Add field
+     *
+     * @param  ListingCategoryListingCategoryFieldInterface $field
+     * @return ListingCategory
+     */
+    public function addField($field)
+    {
+        $this->fields[] = $field;
+
+        return $this;
+    }
+
+    /**
+     * Remove listings
+     *
+     * @param  ListingCategoryListingCategoryFieldInterface $field
+     */
+    public function removeField($field)
+    {
+        $this->fields->removeElement($field);
+    }
+
+    /**
+     * Get fields
+     *
+     * @return \Doctrine\Common\Collections\ArrayCollection|ListingCategoryListingCategoryFieldInterface[]
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+
+    /**
+     * Add category
+     *
+     * @param  \Cocorico\CoreBundle\Entity\ListingListingCategory $listingListingCategory
+     * @return ListingCategory
+     */
+    public function addListingListingCategory(ListingListingCategory $listingListingCategory)
+    {
+        if (!$this->listingListingCategories->contains($listingListingCategory)) {
+            $this->listingListingCategories[] = $listingListingCategory;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \Cocorico\CoreBundle\Entity\ListingListingCategory $listingListingCategory
+     */
+    public function removeListingListingCategory(ListingListingCategory $listingListingCategory)
+    {
+        $this->listingListingCategories->removeElement($listingListingCategory);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListingListingCategories()
+    {
+        return $this->listingListingCategories;
+    }
+
+    /**
+     * @param ArrayCollection $listingListingCategories
+     * @return ArrayCollection
+     */
+    public function setListingListingCategories(ArrayCollection $listingListingCategories)
+    {
+        $this->listingListingCategories = $listingListingCategories;
+    }
+
     public function getName()
     {
         return $this->translate()->getName();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();

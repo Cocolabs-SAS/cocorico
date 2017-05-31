@@ -54,7 +54,6 @@ class ListingCharacteristicRepository extends EntityRepository
         return $this->getFindAllTranslatedQueryBuilder($locale)
             ->getQuery()
             ->getResult();
-
     }
 
 

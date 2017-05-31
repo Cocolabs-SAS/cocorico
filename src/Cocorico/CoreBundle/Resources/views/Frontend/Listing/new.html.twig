@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
 
+{% trans_default_domain 'cocorico_listing' %}
+
 {%- block meta_title -%}
     {{ 'listing.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
@@ -50,23 +52,13 @@
 
                         <div class="holder">
                             <div class="form-selection">
-                                <h2>{{ 'listing.new.categories.title'|trans }}</h2>
-
-                                <div class="selection-area listing-categories">
-                                    {#<div class="col">#}
-                                    {#<div class="jcf-select-drop">#}
-                                    {#<div class="jcf-select-drop-content">#}
-                                    {#<div class="jcf-list">#}
-                                    {#<div class="jcf-list-content jcf-scrollable">#}
-                                                        {{ form_errors(form.categories) }}
-                                                        {{ form_widget(form.categories) }}
-                                    {#</div>#}
-                                    {#</div>#}
-                                    {#</div>#}
-                                    {#</div>#}
-                                    {#</div>#}
+                                <div class="form-block block1">
+                                    <div class="selection-holder">
+                                        {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="form-listing-info">
                                 <h2>{{ 'listing.description.title'|trans }}</h2>
                                 {#For html customizations see views\form\translations.html.twig#}
@@ -94,9 +86,6 @@
                                     <div id="drop-zone">
                                         {{ 'listing.drop.files'|trans }}
                                     </div>
-                                    {#<div id="progress" class="progress">#}
-                                    {#<div class="progress-bar progress-bar-success"></div>#}
-                                    {#</div>#}
                                     <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
                                     <ul id="files-to-upload" class="images-list"></ul>
                                 </div>
@@ -133,6 +122,12 @@
                                                 }
                                             }) }}
                                         </div>
+
+                                        {% if bundleExist('CocoricoDeliveryBundle') %}
+                                            {% include '@CocoricoDelivery/Frontend/Listing/_form_delivery.html.twig' with {
+                                            'form': form
+                                            } only %}
+                                        {% endif %}
                                     </div>
                                     <!-- simulator -->
                                     <div class="currency-converter">

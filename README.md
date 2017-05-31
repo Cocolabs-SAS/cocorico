@@ -1,5 +1,3 @@
-**WE'RE HIRING** http://www.cocolabs.io/fr/cdi-developpeur-symfony/
-
 # Cocorico
 
 Cocorico is an open source platform to create collaborative consumption marketplaces.
@@ -134,7 +132,7 @@ Fork Cocorico Git Repository then get sources:
 Change to your parent "Document Root" directory and clone repository:
 
     cd /var/www/cocorico.dev/
-    git clone https://[gituser]@xxx.org/xxx/cocorico-xxx.git Symfony
+    git clone https://github.com/[gituser]/cocorico.git Symfony
                      
                      
 ### Create services accounts
