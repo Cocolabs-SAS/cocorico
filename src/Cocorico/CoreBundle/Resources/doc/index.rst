@@ -24,11 +24,11 @@ Add this commands to your cron tab and don't forget to set the same php timezone
 
 5. Bookings expiring alert:
 
-    `*/15 * * * php <path-to-your-app>app/console cocorico:bookings:alertExpiring --env=dev`
+    `*/15 * * * * php <path-to-your-app>app/console cocorico:bookings:alertExpiring --env=dev`
 
 6. Bookings imminent alert:
 
-    `*/15 * * * php <path-to-your-app>app/console cocorico:bookings:alertImminent --env=dev`
+    `*/15 * * * * php <path-to-your-app>app/console cocorico:bookings:alertImminent --env=dev`
 
 7. Listings calendar update alert:
 
@@ -40,19 +40,19 @@ Add this commands to your cron tab and don't forget to set the same php timezone
     
 9. Accept or refuse bookings from SMS (Optional. SMSBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS --env=dev`
+    `* * * * * php <path-to-your-app>app/console cocorico:bookings:acceptOrRefuseFromSMS --env=dev`
 
 10. Check phone from SMS (NOT IMPLEMENTED. Optional. SMSBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS --env=dev`
+    `* * * * * php <path-to-your-app>app/console cocorico_user:checkPhoneFromSMS --env=dev`
 
 11. Alert user if new listings are found (Optional. ListingAlertBundle must be enabled)
     
-    `* *  * * *  php <path-to-your-app>app/console cocorico_listing_alert:alertNewListingsFound --env=dev`
+    `* * * * * php <path-to-your-app>app/console cocorico_listing_alert:alertNewListingsFound --env=dev`
 
 12. Generate Sitemap (Optional. ListingSeoBundle must be enabled)
     
-    `0 4  * * *  php <path-to-your-app>app/console cocorico_seo:sitemap:generate --env=dev`
+    `0 4 * * * php <path-to-your-app>app/console cocorico_seo:sitemap:generate --env=dev`
 
 
         
