@@ -18,7 +18,8 @@ Deployment use https://github.com/hpatoio/DeployBundle
     Add this to your php.ini:
 
         extension=mongo.so
-        apc.enabled=1
+        
+        apc.enabled=1 (for php <= 5.4)
 
 2) Use
 ------
