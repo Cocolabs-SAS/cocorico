@@ -22,7 +22,7 @@ parameters:
 #    debug_redirects:        false
     use_assetic_controller: false
 
-    ### Cocorico environements dependant parameters (See CocoricoCoreBundle/Resources/config/parameters.yml) ###
+    ### Cocorico environments dependant parameters (See CocoricoCoreBundle/Resources/config/parameters.yml) ###
 
     #Assets for emails
     cocorico.assets_base_urls: https://cocorico.dev
@@ -38,7 +38,6 @@ parameters:
     cocorico.admin_translation: false
 
     #Microsoft Translator key
-    cocorico.translator.client.id: ~
     cocorico.translator.secret.key: ~
 
     #Facebook

@@ -49,11 +49,8 @@ services:
     cocorico.translator.manager: 
         class: Cocorico\CoreBundle\Model\Manager\TranslateManager
         arguments:
-            - "%cocorico.translator.client.id%"
             - "%cocorico.translator.secret.key%"
-            - "%cocorico.translator.scope.url%"
             - "%cocorico.translator.token.url%"
-            - "%cocorico.translator.grant.type%"
             - "%cocorico.translator.translate.url%"
 
     cocorico.user_type.cookie.listener:

@@ -263,12 +263,9 @@ parameters:
     cocorico.admin_translation: ~
 
     #translator key
-    cocorico.translator.client.id: ~
     cocorico.translator.secret.key: ~
     cocorico.translator.translate.url: http://api.microsofttranslator.com/v2/Http.svc/TranslateArray
-    cocorico.translator.scope.url: http://api.microsofttranslator.com
-    cocorico.translator.token.url: https://datamarket.accesscontrol.windows.net/v2/OAuth2-13/
-    cocorico.translator.grant.type: 'client_credentials'
+    cocorico.translator.token.url: https://api.cognitive.microsoft.com/sts/v1.0/issueToken
 
     #facebook
     cocorico.facebook.app_id: ~

@@ -13,7 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Fixed
 
 ### Changed
-
+- Upgrade Microsoft Translator API request method from Bing to Azur 
 
 ## [0.3.4] - 2017-05-31
 

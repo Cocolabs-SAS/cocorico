@@ -16,55 +16,72 @@ namespace Cocorico\CoreBundle\Model\Manager;
 class TranslateManager
 {
 
-    protected $clientId;
     protected $clientSecret;
-    protected $scopeUrl;
     protected $tokenUrl;
-    protected $grantType;
     protected $translateUrl;
 
     /**
      * __construct
      *
-     * @param string $clientId
      * @param string $clientSecret
-     * @param string $scopeUrl
      * @param string $tokenUrl
-     * @param string $grantType
      * @param string $translateUrl
      */
     public function __construct(
-        $clientId,
         $clientSecret,
-        $scopeUrl,
         $tokenUrl,
-        $grantType,
         $translateUrl
     ) {
-        $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
-        $this->scopeUrl = $scopeUrl;
         $this->tokenUrl = $tokenUrl;
-        $this->grantType = $grantType;
         $this->translateUrl = $translateUrl;
     }
 
     /**
-     * @param $url
+     * [getAccessToken returns the access token used to generate the translations ]
+     *
+     * @return mixed
+     */
+    private function getAccessToken()
+    {
+        $curlHandler = curl_init();
+        $dataString = json_encode('{body}');
+        curl_setopt($curlHandler, CURLOPT_POSTFIELDS, $dataString);
+        curl_setopt(
+            $curlHandler,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($dataString),
+                'Ocp-Apim-Subscription-Key: ' . $this->clientSecret
+            )
+        );
+        curl_setopt($curlHandler, CURLOPT_URL, $this->tokenUrl);
+        curl_setopt($curlHandler, CURLOPT_HEADER, false);
+        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
+
+        $strResponse = curl_exec($curlHandler);
+        curl_close($curlHandler);
+
+        return $strResponse;
+    }
+
+    /**
      * @param $requestXml
      * @return mixed
      * @throws \Exception
      */
-    private function getTranslateResponse($url, $requestXml)
+    private function getTranslateResponse($requestXml)
     {
         $curlHandler = curl_init();
 
-        curl_setopt($curlHandler, CURLOPT_URL, $url);
+        curl_setopt($curlHandler, CURLOPT_URL, $this->translateUrl);
         curl_setopt(
             $curlHandler,
             CURLOPT_HTTPHEADER,
             array('Authorization: Bearer ' . $this->getAccessToken(), 'Content-Type: text/xml')
         );
+
         curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, false);
 
@@ -87,36 +104,6 @@ class TranslateManager
     }
 
     /**
-     * [getAccessToken returns the access token used to generate the translations ]
-     *
-     * @return mixed
-     */
-    private function getAccessToken()
-    {
-        $clientId = $this->clientId;
-        $clientSecret = $this->clientSecret;
-
-        $curlHandler = curl_init();
-
-        $request = 'grant_type=' . urlencode($this->grantType) . '&scope=' . urlencode($this->scopeUrl) .
-            '&client_id=' . urlencode($clientId) . '&client_secret=' . urlencode($clientSecret);
-
-        curl_setopt($curlHandler, CURLOPT_URL, $this->tokenUrl);
-        curl_setopt($curlHandler, CURLOPT_POST, true);
-        curl_setopt($curlHandler, CURLOPT_POSTFIELDS, $request);
-        curl_setopt($curlHandler, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curlHandler, CURLOPT_SSL_VERIFYPEER, false);
-
-        $response = curl_exec($curlHandler);
-
-        curl_close($curlHandler);
-
-        $responseObject = json_decode($response);
-
-        return $responseObject->access_token;
-    }
-
-    /**
      * getTranslation returns translated string from the server replacing tags
      *
      * @param  string $fromLanguage
@@ -128,35 +115,36 @@ class TranslateManager
     {
         $responseArray = array();
 
-        if (!$this->clientId || !$this->clientSecret) {
+        if (!$this->clientSecret) {
             return $responseArray;
         }
 
-        //Create the XML string for passing the values.
-        $requestXml = "<TranslateArrayRequest>" .
-            "<AppId/>" .
-            "<From>$fromLanguage</From>" .
-            "<Options>" .
-            "<Category xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />" .
-            "<ContentType xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\">text/plain</ContentType>" .
-            "<ReservedFlags xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />" .
-            "<State xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />" .
-            "<Uri xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />" .
-            "<User xmlns=\"http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2\" />" .
-            "</Options>";
-
-        $requestXml .= "<Texts>";
-
+        $xml = <<<XML
+            <TranslateArrayRequest>
+                <AppId/>
+                <From>{$fromLanguage}</From>
+                <Options>
+                    <Category xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" />
+                    <ContentType xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2">text/plain</ContentType>
+                    <ReservedFlags xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" />
+                    <State xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" />
+                    <Uri xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" />
+                    <User xmlns="http://schemas.datacontract.org/2004/07/Microsoft.MT.Web.Service.V2" />
+                </Options>
+                <Texts>
+XML;
         foreach ($text as $inputStr) {
-            $requestXml .= "<string xmlns=\"http://schemas.microsoft.com/2003/10/Serialization/Arrays\">$inputStr</string>";
+            $xml .= <<<XML
+                    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">{$inputStr}</string>
+XML;
         }
+        $xml .= <<<XML
+                </Texts>
+                <To>{$toLanguage}</To>
+            </TranslateArrayRequest>
+XML;
 
-        $requestXml .= "</Texts>";
-
-        $requestXml .= "<To>$toLanguage</To>";
-        $requestXml .= "</TranslateArrayRequest>";
-
-        $response = $this->getTranslateResponse($this->translateUrl, $requestXml);
+        $response = $this->getTranslateResponse($xml);
 
         $xmlObj = new \SimpleXMLElement($response);
         foreach ($xmlObj->TranslateArrayResponse as $translatedArrObj) {
