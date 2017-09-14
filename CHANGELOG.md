@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Fix bug #71 - Listing status available while duplication
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 
