@@ -417,7 +417,8 @@
             </trans-unit>
             <trans-unit id="f1d24cf913356e9f49b26d914a31742608c9cb6b" resname="time_unit_hour">
                 <source>time_unit_hour</source>
-                <target state="new">{-3} par heure|{-1} heure(s)|[0,1] %count% heure|]1,Inf]%count% heures</target>
+                <target state="new">{-3} par heure|{-1} heure(s)|{0} heure|]0,1] %count% heure|]1,Inf]%count% heures
+                </target>
                 <jms:reference-file line="213">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f84671b575da92a2471bfb36da94f36cf5b7dfd1" resname="time_unit_night">

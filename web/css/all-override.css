@@ -1003,18 +1003,29 @@ li.time-fields {
 /** time picker */
 /** search form */
 .form-category .form-holder .col.time .time-fields .form-control {
-    width: 80%;
+    width: 117px;
 }
 
 .form-category .form-holder .col.time .time-fields #datetimepicker3 {
     width: 72%;
     margin-left: 16px;
     position: relative;
+    min-width: 103px;
 }
 
 .form-category .time-fields .add-on {
     top: 43%;
 }
+
+.form-category .time-fields.display-range .col {
+    float: none;
+    display: inline-block;
+}
+
+.form-category .form-holder .col.time .time-fields.display-range #datetimepicker3 {
+    width: 42%;
+}
+
 
 /** time picker */
 /** global */
