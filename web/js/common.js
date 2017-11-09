@@ -524,16 +524,9 @@ function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
  */
 function timesAreValid(startHour, endHour, startMinute, endMinute) {
     if (startHour.length && endHour.length) {
-        if ($.isNumeric(startHour.val()) && $.isNumeric(endHour.val()) &&
-            $.isNumeric(startMinute.val()) && $.isNumeric(endMinute.val())) {
-            var startHourVal = parseInt(startHour.val());
-            var endHourVal = parseInt(endHour.val());
+        if (!$.isNumeric(startHour.val()) || !$.isNumeric(endHour.val()) ||
+            !$.isNumeric(startMinute.val()) || !$.isNumeric(endMinute.val())) {
 
-            if (startHourVal >= endHourVal) {
-                $("#time-error").show();
-                return false;
-            }
-        } else {
             return false;
         }
     }
