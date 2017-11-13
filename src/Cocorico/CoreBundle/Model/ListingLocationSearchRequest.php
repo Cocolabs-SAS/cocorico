@@ -520,4 +520,36 @@ class ListingLocationSearchRequest
                 return false;
         }
     }
+
+
+    /**
+     * Get viewport diagonal distance in km
+     *
+     * @param  string $viewport e: ((48.815573, 2.2241989999999987), (48.9021449, 2.4699207999999544))
+     *
+     * @return float
+     */
+    public function getViewportDiagonalDistance($viewport = null)
+    {
+        $_piBy180 = 0.0174532925; //PI() / 180
+        $_180byPi = 57.2957795131; //PI() / 180
+
+        $bounds = $this->getBound($viewport);
+        if (!$bounds) {
+            return 0;
+        }
+
+        $neLat = $bounds["ne"]["lat"];
+        $neLng = $bounds["ne"]["lng"];
+        $swLat = $bounds["sw"]["lat"];
+        $swLng = $bounds["sw"]["lng"];
+
+        $distance = (sin($neLat * $_piBy180) * sin($swLat * $_piBy180)) +
+            (cos($neLat * $_piBy180) * cos($swLat * $_piBy180) * cos(($neLng - $swLng) * $_piBy180));
+        $distance = acos($distance);
+        $distance = $distance * $_180byPi;
+        $distance = $distance * 60 * 1.1515 * 1.609344;//in km
+
+        return $distance;
+    }
 }

@@ -1,54 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:43:38Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-11-13T18:50:28Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="8689776af722a69f88c8eefde3d1babb13877c89" resname="booking_accepted_asker.sms.message">
                 <source>booking_accepted_asker.sms.message</source>
-                <target>Your booking has been confirmed by %offerer_firstname%! See the details of your booking : %booking_url%</target>
+                <target>Your booking has been confirmed by %offerer_firstname%! See the details of your booking :
+                    %booking_url%
+                </target>
                 <jms:reference-file line="6">SMS/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="4ba35707aaa5b7d35580abd91f4be7c9a7f2ee1f" resname="booking_request_expired_asker.sms.message">
+            <trans-unit id="4ba35707aaa5b7d35580abd91f4be7c9a7f2ee1f"
+                        resname="booking_request_expired_asker.sms.message">
                 <source>booking_request_expired_asker.sms.message</source>
-                <target>Your booking request has expired as we didn't receive a confirmation from %offerer_firstname% in time. Nothing has been charged to you.</target>
+                <target>Your booking request has expired as we didn't receive a confirmation from %offerer_firstname% in
+                    time. Nothing has been charged to you.
+                </target>
                 <jms:reference-file line="6">SMS/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="729b9f5579c75c61321df544453fed647e6ddf32" resname="booking_request_expired_offerer.sms.message">
+            <trans-unit id="729b9f5579c75c61321df544453fed647e6ddf32"
+                        resname="booking_request_expired_offerer.sms.message">
                 <source>booking_request_expired_offerer.sms.message</source>
-                <target>You have a reservation that has expired. If you wish to you can still contact %asker_firstname%: %booking_url%</target>
+                <target>You have a reservation that has expired. If you wish to you can still contact %asker_firstname%:
+                    %booking_url%
+                </target>
                 <jms:reference-file line="6">SMS/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="27626bf9da75848d5ecd9d460ea02716988152a6" resname="booking_request_offerer.sms.message">
                 <source>booking_request_offerer.sms.message</source>
-                <target>You have a new booking request from %asker_firstname%. Answer Yes or No to accept or refuse it.</target>
+                <target>You have a new booking request from %asker_firstname%. Answer Yes or No to accept or refuse
+                    it.
+                </target>
                 <jms:reference-file line="6">SMS/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="ba284ff15b094ab234db2353f3132fda63c864ed" resname="canceled_by_asker_offerer.sms.message">
                 <source>canceled_by_asker_offerer.sms.message</source>
-                <target>Sorry, %asker_firstname% has cancelled the booking. You can view this booking here: %booking_url%.</target>
+                <target>Sorry, %asker_firstname% has cancelled the booking. You can view this booking here:
+                    %booking_url%.
+                </target>
                 <jms:reference-file line="6">SMS/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="67dc82d20e95c50009564f86d441d1733e9616f6" resname="expiration_alert_offerer.sms.message">
                 <source>expiration_alert_offerer.sms.message</source>
-                <target>You have a reservation that is about to expire. Click on the following link to accept or reject the request: %booking_url%</target>
-                <jms:reference-file line="6">SMS/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+                <target>You have a reservation that is about to expire. Click on the following link to accept or reject
+                    the request: %booking_url%
+                </target>
+                <jms:reference-file line="6">SMS/Offerer/booking_request_expiration_alert_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="335dc3b1197620ef4e2f50dfa714ef4512c51919" resname="imminent_booking_asker.sms.message">
                 <source>imminent_booking_asker.sms.message</source>
-                <target>Hi %asker_firstname%, this is a reminder that your booking will start soon: %booking_url%</target>
+                <target>Hi %asker_firstname%, this is a reminder that your booking will start soon: %booking_url%
+                </target>
                 <jms:reference-file line="6">SMS/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d30342a2859b32f131ccf7bb661cce1e8ee03cb8" resname="imminent_booking_offerer.sms.message">
                 <source>imminent_booking_offerer.sms.message</source>
-                <target>Hi %offerer_firstname%, this is a reminder that you have a booking tomorrow: %booking_url%</target>
+                <target>Hi %offerer_firstname%, this is a reminder that you have a booking tomorrow: %booking_url%
+                </target>
                 <jms:reference-file line="6">SMS/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8d4398c7aca41630bb0c5b6bf73d87a650a0f771" resname="refused_booking_asker.sms.message">
                 <source>refused_booking_asker.sms.message</source>
-                <target>Your booking request has been rejected by %offerer_firstname%.Don't worry, nothing has been charged to you.</target>
+                <target>Your booking request has been rejected by %offerer_firstname%.Don't worry, nothing has been
+                    charged to you.
+                </target>
                 <jms:reference-file line="6">SMS/Asker/booking_refused_asker.txt.twig</jms:reference-file>
             </trans-unit>
         </body>

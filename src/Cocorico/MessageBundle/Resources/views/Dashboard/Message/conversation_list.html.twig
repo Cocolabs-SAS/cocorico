@@ -12,22 +12,19 @@
                 </div>
                 <a class="author-name" title="{{ user.getName }}"
                    href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
-                    <strong>{{ user.getName }}</strong>
+                    <span>{{ user.getName }}</span>
                 </a>
             </div>
             <div class="meta">
-                <time datetime="{{ message.createdAt |date("Y-m-d") }}">
-                    {{ message.createdAt |date("d/m/Y") }}
-                </time>
+                <time>{{ message.createdAt|date("d/m/Y") }}</time>
             </div>
         </header>
         <div class="post-content">
-            <p>{{ message.body | nl2br }}</p>
+            <p>{{ message.body|strip_private_info|nl2br }}</p>
         </div>
         <footer class="footer">
             <span class="time">
-                <i class="icon-clock"></i> {{ message.createdAt |date("H") }}
-                h{{ message.createdAt |date("i") }} GMT
+                <i class="icon-clock"></i>{{ message.createdAt|date("H:i") }} GMT
             </span>
         </footer>
     </article>

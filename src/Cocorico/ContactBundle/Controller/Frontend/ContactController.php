@@ -51,7 +51,7 @@ class ContactController extends Controller
         }
 
         return $this->render(
-            'CocoricoContactBundle:Contact:index.html.twig',
+            'CocoricoContactBundle:Frontend:index.html.twig',
             array(
                 'form' => $form->createView()
             )

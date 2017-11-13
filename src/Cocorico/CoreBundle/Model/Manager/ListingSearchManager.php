@@ -31,39 +31,35 @@ class ListingSearchManager
 {
     protected $em;
     protected $dm;
+    protected $dispatcher;
     protected $endDayIncluded;
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $maxPerPage;
     protected $listingDefaultStatus;
-    protected $dispatcher;
 
     /**
      * @param EntityManager            $em
      * @param DocumentManager          $dm
-     * @param boolean                  $endDayIncluded
-     * @param int                      $timeUnit
-     * @param int                      $maxPerPage
-     * @param int                      $listingDefaultStatus
      * @param EventDispatcherInterface $dispatcher
+     * @param array                    $parameters
      */
     public function __construct(
         EntityManager $em,
         DocumentManager $dm,
-        $endDayIncluded,
-        $timeUnit,
-        $maxPerPage,
-        $listingDefaultStatus,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        array $parameters
     ) {
         $this->em = $em;
         $this->dm = $dm;
-        $this->endDayIncluded = $endDayIncluded;
-        $this->timeUnit = $timeUnit;
-        $this->maxPerPage = $maxPerPage;
-        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
-        $this->listingDefaultStatus = $listingDefaultStatus;
         $this->dispatcher = $dispatcher;
+
+        $parameters = $parameters["parameters"];
+        $this->endDayIncluded = $parameters["cocorico_booking_end_day_included"];
+        $this->timeUnit = $parameters["cocorico_time_unit"];
+        $this->timeUnitIsDay = ($this->timeUnit % 1440 == 0) ? true : false;
+        $this->maxPerPage = $parameters["cocorico_listing_search_max_per_page"];
+        $this->listingDefaultStatus = $parameters["cocorico_listing_availability_status"];
     }
 
     /**
@@ -74,30 +70,32 @@ class ListingSearchManager
      */
     public function search(ListingSearchRequest $listingSearchRequest, $locale)
     {
-        $searchLocation = $listingSearchRequest->getLocation();
-        $viewport = $searchLocation->getBound();
-
         //Select
         $queryBuilder = $this->getRepository()->getFindQueryBuilder();
 
+        $searchLocation = $listingSearchRequest->getLocation();
         //Select distance
         $queryBuilder
             ->addSelect('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) AS distance')
             ->setParameter('lat', $searchLocation->getLat())
             ->setParameter('lng', $searchLocation->getLng());
 
+        $viewport = $searchLocation->getBound();
         //Where
         $queryBuilder
-            ->where('co.lat < :neLat ')
-            ->andWhere('co.lat > :swLat ')
-            ->andWhere('co.lng < :neLng ')
-            ->andWhere('co.lng > :swLng ')
-            ->andWhere('t.locale = :locale')
-            ->andWhere('l.status = :listingStatus')
+            ->where('co.lat < :neLat')
+            ->andWhere('co.lat > :swLat')
+            ->andWhere('co.lng < :neLng')
+            ->andWhere('co.lng > :swLng')
             ->setParameter('neLat', $viewport["ne"]["lat"])
             ->setParameter('swLat', $viewport["sw"]["lat"])
             ->setParameter('neLng', $viewport["ne"]["lng"])
-            ->setParameter('swLng', $viewport["sw"]["lng"])
+            ->setParameter('swLng', $viewport["sw"]["lng"]);
+
+
+        $queryBuilder
+            ->andWhere('t.locale = :locale')
+            ->andWhere('l.status = :listingStatus')
             ->setParameter('locale', $locale)
             ->setParameter('listingStatus', Listing::STATUS_PUBLISHED);
 
@@ -148,10 +146,12 @@ class ListingSearchManager
                 $duration = $dateRange->getDuration($this->endDayIncluded);
             } else {
                 $timeRange = $listingSearchRequest->getTimeRange();
-                if ($timeRange && $timeRange->getStart()->format('H:i') !== $timeRange->getEnd()->format('H:i')
-                    && ($timeRange->getStart()->format('H:i') != '00:00')
-                ) {
-                    $duration = $timeRange->getDuration($this->timeUnit);
+                if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
+                    if ($timeRange->getStart()->format('H:i') !== $timeRange->getEnd()->format('H:i')
+                        && ($timeRange->getStart()->format('H:i') != '00:00')
+                    ) {
+                        $duration = $timeRange->getDuration($this->timeUnit);
+                    }
                 }
             }
 
@@ -229,7 +229,7 @@ class ListingSearchManager
                 $queryBuilder->orderBy("distance", "ASC");
                 break;
             default:
-                $queryBuilder->addOrderBy("distance", "ASC");
+                $queryBuilder->orderBy("distance", "ASC");
                 break;
         }
         $queryBuilder->addOrderBy("l.averageRating", "DESC");

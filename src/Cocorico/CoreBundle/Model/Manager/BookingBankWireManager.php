@@ -18,7 +18,6 @@ use Cocorico\CoreBundle\Event\BookingBankWireEvents;
 use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
 use Cocorico\CoreBundle\Repository\BookingBankWireRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -29,6 +28,7 @@ class BookingBankWireManager extends BaseManager
     protected $mailer;
     public $maxPerPage;
     protected $dispatcher;
+    protected $bundles;
 
     /**
      * @param EntityManager            $em
@@ -36,20 +36,22 @@ class BookingBankWireManager extends BaseManager
      * @param TwigSwiftMailer          $mailer
      * @param int                      $maxPerPage
      * @param EventDispatcherInterface $dispatcher
+     * @param array                    $bundles
      */
     public function __construct(
         EntityManager $em,
         $checkingSimulation,
         TwigSwiftMailer $mailer,
         $maxPerPage,
-        EventDispatcherInterface $dispatcher
-
+        EventDispatcherInterface $dispatcher,
+        $bundles
     ) {
         $this->em = $em;
         $this->checkingSimulation = $checkingSimulation;
         $this->mailer = $mailer;
         $this->maxPerPage = $maxPerPage;
         $this->dispatcher = $dispatcher;
+        $this->bundles = $bundles;
     }
 
     /**
@@ -213,11 +215,14 @@ class BookingBankWireManager extends BaseManager
         return $this->checkingSimulation;
     }
 
-
+    /**
+     * @return bool
+     */
     public function voucherIsEnabled()
     {
-        return !$this->em->getMetadataFactory()->isTransient('Cocorico\VoucherBundle\Entity\Voucher');
+        return isset($this->bundles["CocoricoVoucherBundle"]);
     }
+
 
     /**
      *

@@ -1,7 +1,7 @@
 # This file is used on test env (build)
 parameters:
     database_driver:  pdo_sqlite
-    database_path: %kernel.root_dir%\..\features\_datas\cocorico_test.db
+    database_path: "%kernel.root_dir%\\..\\features\\_datas\\cocorico_test.db"
 
     mongodb_server: mongodb://localhost:27017
     mongodb_database_name: cocorico_test

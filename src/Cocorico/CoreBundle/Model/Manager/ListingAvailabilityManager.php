@@ -18,24 +18,26 @@ use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentManager;
-use Doctrine\ORM\Query;
 
 class ListingAvailabilityManager
 {
     protected $dm;
     protected $timeUnit;
     protected $timeUnitIsDay;
+    protected $defaultListingStatus;
     protected $collection;
 
     /**
      * @param DocumentManager $dm
      * @param int             $timeUnit
+     * @param bool            $defaultListingStatus
      */
-    public function __construct(DocumentManager $dm, $timeUnit)
+    public function __construct(DocumentManager $dm, $timeUnit, $defaultListingStatus)
     {
         $this->dm = $dm;
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
+        $this->defaultListingStatus = $defaultListingStatus;
         $this->collection = $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability');
     }
 
@@ -287,7 +289,9 @@ class ListingAvailabilityManager
             //The start minute number
             $startMinute = intval($startTime->getTimestamp() / 60);
             $endMinute = intval($endTime->getTimestamp() / 60);
-
+            if ($endTime->format('H:i') == '00:00') {
+                $endMinute = 1440;
+            }
             //Replace existing minutes with new ones and add new ones if they don't exist
             for ($k = $startMinute; $k < $endMinute; $k++) {
                 if (isset($times[$k])) {
@@ -453,6 +457,11 @@ class ListingAvailabilityManager
                     $events = array_merge($events, $this->asCalendarEvent($availability));
                 }
                 break;
+            case 'status':
+                foreach ($availabilities as $availability) {
+                    $events = $events + $this->asStatus($availability);
+                }
+                break;
             default:
                 $events = $availabilities;
                 break;
@@ -461,6 +470,44 @@ class ListingAvailabilityManager
 
         return $events;
     }
+
+    /**
+     * Get ListingAvailability as status raw
+     *
+     * @param ListingAvailability $listingAvailability
+     *
+     * @return array
+     *  If time unit is day : $events[$day] = status
+     *  else $events[$day][$minute] = status
+     */
+    public function asStatus($listingAvailability)
+    {
+        /** @var \MongoDate $dayMD */
+        $dayMD = $listingAvailability['d'];
+        $day = new \DateTime();
+        $day->setTimestamp($dayMD->sec);
+        $day = $day->format("Ymd");
+
+        $timesRanges = $this->getTimesRanges($listingAvailability, 1, false);
+        $events = array();
+
+        if (count($timesRanges)) {
+            //Fill default listing status for all minutes of the day
+            $events[$day] = array_fill_keys(array_keys(range(0, 1439)), $this->defaultListingStatus);
+
+            //Replace minutes status by existing availability status
+            foreach ($timesRanges as $i => $timeRange) {
+                for ($m = $timeRange['start']; $m < $timeRange['end']; $m++) {
+                    $events[$day][$m] = $timeRange['status'];
+                }
+            }
+        } else {
+            $events[$day] = $listingAvailability["s"];
+        }
+
+        return $events;
+    }
+
 
     /**
      * Get ListingAvailability as calendar event
@@ -476,7 +523,11 @@ class ListingAvailabilityManager
         $dayMD = $listingAvailability['d'];
         $day = new \DateTime();
         $day->setTimestamp($dayMD->sec);
-        $day = $day->format("Y-m-d");
+        $dayAsString = $dayEndAsString = $day->format("Y-m-d");//by default day is the same for an event
+
+        $nextDay = clone $day;//if end time is 00:00 the day will be the next one
+        $nextDay->add(new \DateInterval('P1D'));
+        $nextDayAsString = $nextDay->format("Y-m-d");
 
         $timesRanges = $this->getTimesRanges($listingAvailability);
         $events = array();
@@ -484,18 +535,22 @@ class ListingAvailabilityManager
 //        print_r($timesRanges);
         if (count($timesRanges)) {
             foreach ($timesRanges as $i => $timeRange) {
+                $dayEndAsString = $dayAsString;
+                if ($timeRange['end'] == '00:00') {
+                    $dayEndAsString = $nextDayAsString;
+                }
+
                 $events[] = array(
                     'id' => $listingAvailability["_id"] . str_replace(":", "", $timeRange['start']),
                     'title' => $timeRange['price'] / 100,
-//                  'description' => "",
                     /** @Ignore */
                     'className' => "cal-" . str_replace(
                             "entity.listing_availability.status.",
                             "",
                             ListingAvailabilityTime::$statusValues[$timeRange['status']]
                         ) . "-evt",
-                    'start' => $day . " " . $timeRange['start'],
-                    'end' => $day . " " . $timeRange['end'],
+                    'start' => $dayAsString . " " . $timeRange['start'],
+                    'end' => $dayEndAsString . " " . $timeRange['end'],
                     'editable' => true,
                     'allDay' => false
                 );
@@ -508,15 +563,14 @@ class ListingAvailabilityManager
             $events[] = array(
                 'id' => $listingAvailability["_id"] . "0000",
                 'title' => $listingAvailability["p"] / 100,
-//              'description' => "",
                 /** @Ignore */
                 'className' => "cal-" . str_replace(
                         "entity.listing_availability.status.",
                         "",
                         ListingAvailability::$statusValues[$listingAvailability["s"]]
                     ) . "-evt",
-                'start' => $day . " " . "00:00",
-                'end' => $day . " " . "23:59",
+                'start' => $dayAsString . " " . "00:00",
+                'end' => $dayAsString . " " . "23:59",
                 'editable' => true,
                 'allDay' => $allDay,
             );
@@ -531,10 +585,11 @@ class ListingAvailabilityManager
      *
      * @param ListingAvailability $listingAvailability
      * @param int                 $addOneMinuteToEndTime 1 or 0
+     * @param bool                $timeAsString
      *
      * @return array
      */
-    public function getTimesRanges($listingAvailability, $addOneMinuteToEndTime = 1)
+    public function getTimesRanges($listingAvailability, $addOneMinuteToEndTime = 1, $timeAsString = true)
     {
         $times = isset($listingAvailability["ts"]) ? $listingAvailability["ts"] : array();
         $timesRanges = $range = array();
@@ -543,13 +598,21 @@ class ListingAvailabilityManager
         foreach ($times as $i => $time) {
             if ($time["s"] !== $prevStatus || $time["_id"] != ($prevId + 1) || $time["p"] !== $prevPrice) {
                 if ($prevStatus !== false && $prevId !== false) {
-                    $range['end'] = date('H:i', mktime(0, $prevId + $addOneMinuteToEndTime));
+                    $end = $prevId + $addOneMinuteToEndTime;
+                    if ($timeAsString) {
+                        $end = date('H:i', mktime(0, $end));
+                    }
+                    $range['end'] = $end;
                     $timesRanges[] = $range;
                     //$range = array();
                 }
 
+                $start = $time["_id"];
+                if ($timeAsString) {
+                    $start = date('H:i', mktime(0, $start));
+                }
                 $range = array(
-                    'start' => date('H:i', mktime(0, $time["_id"])),
+                    'start' => $start,
                     'status' => $time["s"],
                     'price' => $time["p"]
                 );
@@ -561,8 +624,12 @@ class ListingAvailabilityManager
         }
 
         if (count($times)) {
-            $end = end($times);
-            $range['end'] = date('H:i', mktime(0, $end["_id"] + $addOneMinuteToEndTime));
+            $lastTime = end($times);
+            $end = $lastTime["_id"] + $addOneMinuteToEndTime;
+            if ($timeAsString) {
+                $end = date('H:i', mktime(0, $end));
+            }
+            $range['end'] = $end;
             $timesRanges[] = $range;
         }
 

@@ -17,6 +17,7 @@ use GuzzleHttp\Client;
 
 /**
  * DistanceMatrix service
+ * Require "guzzlehttp/guzzle"
  *
  * @author CocolabsSAS
  * @author GeLo <geloen.eric@gmail.com>

@@ -62,9 +62,8 @@ class ListingEditImagesType extends ListingEditType
         $builder->addEventListener(
             FormEvents::SUBMIT,
             function (FormEvent $event) {
-                $data = $event->getData();
                 /** @var Listing $listing */
-                $listing = $data;
+                $listing = $event->getData();
 
                 if ($this->uploaded) {
                     $nbImages = $listing->getImages()->count();

@@ -99,9 +99,35 @@ class TimeRange
      */
     public function getDuration($timeUnit)
     {
-        $duration = ($this->getEnd()->getTimestamp() - $this->getStart()->getTimestamp()) / 60;
+        if ($this->getEnd()->format('H:i') == '00:00') {//End minute is equal to 1440*60=86400 and not 0
+            $duration = (86400 - $this->getStart()->getTimestamp()) / 60;
+        } else {
+            $duration = ($this->getEnd()->getTimestamp() - $this->getStart()->getTimestamp()) / 60;
+        }
+
         $duration = $duration / $timeUnit;
 
-        return $duration;
+        return max($duration, 0);
+    }
+
+    /**
+     * Create TimeRange instance from array
+     *
+     * @param array $timeR
+     * @return null|TimeRange
+     */
+    public static function createFromArray($timeR)
+    {
+        if (isset($timeR['start']) && isset($timeR['end']) &&
+            is_numeric($timeR['start']['hour']) && is_numeric($timeR['end']['hour']) &&
+            is_numeric($timeR['start']['minute']) && is_numeric($timeR['end']['minute'])
+        ) {
+            return new static(
+                new \DateTime("1970-01-01 " . $timeR['start']['hour'] . ":" . $timeR['start']['minute']),
+                new \DateTime("1970-01-01 " . $timeR['end']['hour'] . ":" . $timeR['end']['minute'])
+            );
+        }
+
+        return null;
     }
 }

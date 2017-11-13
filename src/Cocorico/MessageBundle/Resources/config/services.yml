@@ -6,7 +6,7 @@ imports:
 services:
     cocorico_message.new_thread.form.type:
         class: Cocorico\MessageBundle\Form\Type\Frontend\NewThreadMessageFormType
-        arguments: [%fos_message.thread_class%]
+        arguments: ["%fos_message.thread_class%"]
         tags:
         - { name: form.type, alias: cocorico_message_new_thread }
         public: true
@@ -25,7 +25,7 @@ services:
 
     cocorico_message.reply.form.type:
         class: Cocorico\MessageBundle\Form\Type\Frontend\ReplyMessageFormType
-        arguments: [%fos_message.thread_class%]
+        arguments: ["%fos_message.thread_class%"]
         tags:
         - { name: form.type, alias: cocorico_message_reply }
         public: true

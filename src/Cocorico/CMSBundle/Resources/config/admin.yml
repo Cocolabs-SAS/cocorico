@@ -9,5 +9,5 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setFooterManager, [@cocorico_cms.footer.manager]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setFooterManager, ["@cocorico_cms.footer.manager"]]

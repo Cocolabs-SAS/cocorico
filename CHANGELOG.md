@@ -6,15 +6,79 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
+
 ## [Unreleased]
 
 ### Added
 
 ### Fixed
+
+### Changed
+
+
+## [0.4.0] - 2017-11-13
+
+### Added
+- Add rss feeds to home page
+- Add "guzzlehttp/guzzle" to composer.json for DistanceMatrix usage
+- Pre-filled reservation fields with the upcoming availability
+- Add time_hours_available parameter and relative functionalities
+- Add default users time zone parameter and relative functionalities
+- Add missing listing link in reviews list
+- Add rotating_file handler to monolog
+- Add flags icons
+- Add function to get culture code from locale
+- Strip private info in all user texts (listing, user, reviews, messages)
+- Add createdAt index in all timestampable entities
+
+### Fixed
 - Fix bug #71 - Listing status available while duplication
+- Fix data fixtures for listing geo location
+- Fix phone_prefix default value on ProfileContactFormType
+- Fix missing breadcrumbs in Listing Categories and Location edition
+- Fix hour removing bug in search form
+- Fix search form css in day mode
+- Fix time zone on booking minimum start time error displaying
+- Fix end time of TimeRange validation by removing end time relation with hours_available parameter
+- Fix some Symfony 2.8 depreciation
+- Fix booking cancelation policy type checking while refunding by verifying also the booking start time
+- Fix IPInfoDB dataType of ajax call by changing it to "json" instead of "jsonp"
+- Fix Country name in booking new
+- Fix missing translations in admin
+- Fix listing delivery and options missing on booking new
+- Fix booking pre-fill dates on BookingPrice for booking.min_start_time_delay different of 24
+- Fix facebook login popup language
+- Fix out of memory in admin forms containing a lot of listings
+- Fix multi categories displaying in listings search result page and home page
+- Fix JMS extraction on admins for subject equal to null
+- Fix listing reviews order displaying in frontend and dashboard (listing, user)
+- Fix GeocodingController createAction in listing show page
+- Fix add_time_unit_text filter for duration < 1 hour
+- Fix responsive of search form
+- Fix cron docs
+- Fix new booking form handler without BOOKING_NEW_FORM_PROCESS listeners
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 
+- Change homepage by extending to 100% visual image
+- Change monolog action_level to critical
+- Factorize DateRange and TimeRange creation in ListingSearchRequest, BookingPriceFormHandler and BookingFormHandler
+- Remove dates and times synchronisation from booking price form to listing search form
+- Change the maximum date time of the booking acceptation (and refusal )
+- Remove duplicate datetimepicker css in all.css
+- Enhance getNbUnReadMessages
+- Extract js libraries from jquery.main.js
+- Replace map markers spider by slider in InfoBox for listings with same locations
+- Add markers and cluster overlay effect while listing mouseover
+- Update ListingSearchBundle composer dependency to v0.2.2 (Listing search by distance and search extension when insufficient results)
+- Change delivery twig templates path scheme for overriding purposes
+- Remove bootstrap duplicated datetimepicker from bootstrap.min.js
+- Time form field enhancement (timepicker min hour available, nb_minute form label hiding/displaying, time search form error )
+- Use flags icons into images/flags folder
+- Uniformize users name truncation (ex : Firstname L.)
+- Replace method to know which bundles is enabled by using kernel.bundles instead of EntityManager methods
+- Update deployment.rst
+
 
 ## [0.3.4] - 2017-05-31
 
@@ -262,7 +326,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Disable manual translations on listing and user edition when there is only one locale available on platform
 - Set SMS default locale equal to app default locale
 - Add booking status "new" criteria to SMS booking acceptation
-
+ 
 ### Changed
 - Change listing search by categories by including listings without categories
 - Update doc/index.rst

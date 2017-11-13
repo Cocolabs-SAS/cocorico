@@ -67,6 +67,9 @@ class BookingAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Booking $booking */
+        $booking = $this->getSubject();
+
         $formMapper
             ->with('admin.booking.title')
             ->add(
@@ -85,11 +88,20 @@ class BookingAdmin extends Admin
                     'label' => 'admin.booking.offerer.label',
                     'data_class' => 'Cocorico\UserBundle\Entity\User'
                 )
-            )
+
+            );
+
+        $formMapper
             ->add(
                 'listing',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $booking ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                        ->getRepository('CocoricoCoreBundle:Listing')
+                        ->getFindOneByIdAndLocaleQuery(
+                            $booking->getListing()->getId(),
+                            $this->request ? $this->getRequest()->getLocale() : 'fr'
+                        ) : null,
                     'disabled' => true,
                     'label' => 'admin.listing.label',
                 )

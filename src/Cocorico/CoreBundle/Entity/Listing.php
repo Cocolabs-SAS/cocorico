@@ -17,7 +17,6 @@ use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Cocorico\CoreBundle\Repository\ListingRepository")
  *
  * @ORM\Table(name="listing",indexes={
+ *    @ORM\Index(name="created_at_l_idx", columns={"createdAt"}),
  *    @ORM\Index(name="status_l_idx", columns={"status"}),
  *    @ORM\Index(name="price_idx", columns={"price"}),
  *    @ORM\Index(name="type_idx", columns={"type"}),

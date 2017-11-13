@@ -5,8 +5,8 @@
         <div class="slider-secondary">
             <div class="slider-clip">
                 <ul class="slides">
-                    {%- for result in listings -%}
-                        {% set listing = result[0] %}
+                    {%- for listingTmp in listings -%}
+                        {% set listing = listingTmp[0] %}
                         {% set listing_translation = listing.translations[app.request.locale] %}
                         {% set listing_location = listing.location %}
                         {% set listing_user = listing.user %}
@@ -55,7 +55,7 @@
                                                         </div>
                                                         <strong class="title">
                                                             {% for listingListingCategory in listing.listingListingCategories %}
-                                                                {{ listingListingCategory.category.name }},
+                                                                {{ listingListingCategory.category.translations[app.request.locale].name }},
                                                             {% endfor %}
                                                         </strong>
                                                     </div>

@@ -90,6 +90,7 @@ class BookingController extends Controller
         $form = $this->createCreateForm($booking);
 
         $success = $bookingHandler->process($form);
+
         if ($success === 1) {//Success
             $event = new BookingEvent($booking);
 
@@ -138,6 +139,11 @@ class BookingController extends Controller
             $session->getFlashBag()->add(
                 'success',
                 $translator->trans('booking.new.delivery.success', array(), 'cocorico_booking')
+            );
+        } elseif ($success === 4) {//Options is valid
+            $session->getFlashBag()->add(
+                'success',
+                $translator->trans('booking.new.options.success', array(), 'cocorico_booking')
             );
         } elseif ($success < 0) {//Errors
             $this->addFlashError($success);

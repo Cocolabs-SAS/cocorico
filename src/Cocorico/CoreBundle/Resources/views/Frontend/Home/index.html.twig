@@ -15,12 +15,8 @@
 
         {% trans_default_domain 'cocorico_home' %}
 
-        {% block search_form %}
-            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
-        {% endblock %}
-
-        {% block main %}
-            <!-- visual -->
+        {% block sub_header %}
+            {#<!-- visual -->#}
             <div class="visual text-center">
                 <div class="container">
                     <div class="row">
@@ -36,10 +32,13 @@
                                 </div>
                             </div>
                         </div>
+                        {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
                     </div>
                 </div>
             </div>
+        {% endblock %}
 
+        {% block main %}
             <!-- infoarea -->
             <div class="infoarea container">
                 <div class="row">
@@ -93,7 +92,10 @@
             'listings': listings
             } only %}
 
+            {{ render(controller('CocoricoCoreBundle:Frontend/Home:rssFeeds')) }}
+
         {% endblock %}
+
         {% block modal %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
         {% endblock %}
@@ -121,8 +123,7 @@
                     '#categories',
                     '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
                     '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}',
-                    '250px'
+                '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
             );
         });
     </script>
@@ -131,7 +132,7 @@
 {% block markup_jsonld %}
     {{ parent() }}
 
-    {% include '@CocoricoSeo/Frontend/Home/_index_markup.jsonld.twig' ignore missing with {
+    {% include 'CocoricoSeoBundle:Frontend:Home/_index_markup.jsonld.twig' ignore missing with {
     'listings': listings
     } only %}
 {% endblock %}

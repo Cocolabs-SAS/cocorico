@@ -1,13 +1,21 @@
-Cocorico commands
-=================
+GeoBundle
+=========
 
-1) Geocoding object format used internally
-------------------------------------------
+Requirements
+------------
+
+If the distanceMatrix functionality is used then "guzzlehttp/guzzle": "^5.3" dependency is required.
+
+Geocoding object format used internally
+---------------------------------------
 
 ::
+
 stdClass Object
 (
+
     [formatted_address] => 8 Rue Saint - Marc, 75002 Paris, France
+   
     [location_type] => ROOFTOP
     [viewport] => stdClass Object
     (

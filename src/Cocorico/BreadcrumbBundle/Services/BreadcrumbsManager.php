@@ -166,6 +166,7 @@ class BreadcrumbsManager implements TranslationContainerInterface
 
     /**
      * Add breadcrumbs to listing show action
+     * todo: Optimize SQL queries
      *
      * @param Request $request
      * @param Listing $listing

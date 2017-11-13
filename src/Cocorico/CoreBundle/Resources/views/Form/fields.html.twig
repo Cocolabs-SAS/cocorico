@@ -709,11 +709,14 @@
         {% if timesDisplayMode == "duration" %}
             {#In new booking page there is no nb_minute fields#}
             {% if form.nb_minutes is defined %}
-                {#display duration field#}
-                <strong class="title">
-                    {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
-                </strong>
+                {#display duration label if field is not hidden #}
+                {% if "hidden" not in form.nb_minutes.vars.block_prefixes %}
+                    <strong class="title">
+                        {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
+                    </strong>
+                {% endif %}
 
+                {#display duration field#}
                 {{ form_errors(form.nb_minutes) }}
                 {{ form_widget(form.nb_minutes) }}
             {% endif %}
@@ -827,9 +830,12 @@
         <div class="col">
             {% if timesDisplayMode == "duration" %}
                 {{ form_errors(form.nb_minutes) }}
-                <strong class="title">
-                    {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
-                </strong>
+
+                {% if "hidden" not in form.nb_minutes.vars.block_prefixes %}
+                    <strong class="title">
+                        {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
+                    </strong>
+                {% endif %}
 
                 {{ form_widget(form.nb_minutes) }}
                 {#hide end time field#}

@@ -112,13 +112,14 @@ class BookingValidator extends ConstraintValidator
 
         //Date Time errors
         if (in_array('date_range.invalid.min_start', $errors)) {
-            $now = new \DateTime();
+            $minStart = new \DateTime();
+            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
             if ($this->minStartDelay > 0) {
-                $now->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
+                $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
             }
             $violations[] = array(
                 'message' => 'date_range.invalid.min_start {{ min_start_day }}',
-                'parameter' => array('min_start_day' => $now->format('d/m/Y')),
+                'parameter' => array('min_start_day' => $minStart->format('d/m/Y')),
                 'domain' => 'cocorico'
             );
         }
@@ -162,13 +163,14 @@ class BookingValidator extends ConstraintValidator
         }
 
         if (in_array('time_range.invalid.min_start', $errors)) {
-            $now = new \DateTime();
+            $minStart = new \DateTime();
+            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
             if ($this->minStartTimeDelay > 0) {
-                $now->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
+                $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
             }
             $violations[] = array(
                 'message' => 'time_range.invalid.min_start {{ min_start_time }}',
-                'parameter' => array('min_start_time' => $now->format('d/m/Y H:i')),
+                'parameter' => array('min_start_time' => $minStart->format('d/m/Y H:i')),
                 'domain' => 'cocorico'
             );
         }

@@ -17,15 +17,20 @@ monolog:
     handlers:
         main:
             type:               fingers_crossed
-            action_level:       error
+            action_level:       critical
             handler:            grouped
         grouped:
             type:               group
-            members:            [streamed, swift]
-        streamed:
-            type:               stream
+            members:            [rotated, swift]
+#            members:            [streamed, swift]
+        rotated:
+            type:               rotating_file
             path:               "%kernel.logs_dir%/%kernel.environment%.log"
             level:              debug
+#        streamed:
+#            type:               stream
+#            path:               "%kernel.logs_dir%/%kernel.environment%.log"
+#            level:              debug
         swift:
             type:               swift_mailer
             from_email:         "%cocorico.from_email%"

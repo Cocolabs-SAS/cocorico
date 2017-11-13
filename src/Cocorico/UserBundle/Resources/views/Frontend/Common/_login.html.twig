@@ -18,7 +18,9 @@
                 <div class="field-holder">
                     {{ form_widget(form_login._username, {
                         'attr': {
-                            'class': "form-control"
+                            'class': "form-control required",
+                            'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
+                            'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
                         }
                     }) }}
                 </div>
@@ -31,7 +33,9 @@
                 <div class="field-holder">
                     {{ form_widget(form_login._password, {
                         'attr': {
-                            'class': "form-control"
+                            'class': "form-control required",
+                            'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
+                            'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
                         }
                     }) }}
                 </div>

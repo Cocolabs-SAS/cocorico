@@ -30,8 +30,8 @@ class ListingFavouriteController extends ListingSearchController
     public function indexFavouriteAction(Request $request)
     {
         $markers = array();
-        $resultsIterator = new \ArrayIterator();
-        $nbResults = 0;
+        $listings = new \ArrayIterator();
+        $nbListings = 0;
 
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
         $form = $this->createSearchForm($listingSearchRequest);
@@ -50,21 +50,21 @@ class ListingFavouriteController extends ListingSearchController
                 $listingSearchRequest->getPage(),
                 $request->getLocale()
             );
-            $nbResults = $results->count();
-            $resultsIterator = $results->getIterator();
-            $markers = $this->getMarkers($request, $results, $resultsIterator);
+            $nbListings = $results->count();
+            $listings = $results->getIterator();
+            $markers = $this->getMarkers($request, $results, $listings);
         }
 
         return $this->render(
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array(
-                'results' => $resultsIterator,
-                'nb_results' => $nbResults,
+                'listings' => $listings,
+                'nb_listings' => $nbListings,
                 'markers' => $markers,
                 'listing_search_request' => $listingSearchRequest,
                 'pagination' => array(
                     'page' => $listingSearchRequest->getPage(),
-                    'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
+                    'pages_count' => ceil($nbListings / $listingSearchRequest->getMaxPerPage()),
                     'route' => $request->get('_route'),
                     'route_params' => $request->query->all()
                 )

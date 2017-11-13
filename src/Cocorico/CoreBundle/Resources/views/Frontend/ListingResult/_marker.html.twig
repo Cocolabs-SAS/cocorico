@@ -1,80 +1,100 @@
 {% spaceless %}
     {% trans_default_domain 'cocorico_listing' %}
     {% autoescape 'html' %}
-    <div class="infobox-wrapper">
-        <div class="popup" id="popup1">
-            <a class="close" href="javascript:void(0)">
-                <span class="hidden">Close</span>
-                <i class="icon-cancel"></i>
-            </a>
+        {#
+        HTML template used to create infobox content on map when a marker is clicked
+        Variable %var% are replaced by the listing data
+        @see Cocorico/GeoBundle/Resources/views/Common/js/_geocoding_js.html.twig
+        #}
+        <div class="info-box-tpl hidden">
+            <div class="popup">
+                <ul>
+                    <li class="listing-post small" data-id="info-box">
+                        {#Customisation start here#}
+                        <a href="%url%" class="listing-box">
+                            <div class="frame">
+                                <div class="post-info">
 
-            <div class="listing-post small">
-                <a href="%url%" class="listing-box">
-                    <div class="frame">
-                        <div class="post-info">
+                                    <div class="img-holder">
+                                        <img src="/images/img.png" alt="image description">
+                                    </div>
 
-                            <div class="img-holder">
-                                <img src="/images/img.png" alt="image description">
-                            </div>
+                                    <div class="box">
+                                        <div class="box-holder">
+                                            <div class="head">
+                                                <ul class="rating list-inline">
+                                                    <li class="%rating1%">
+                                                    <span class="icon-star">
+                                                        <span class="hide">1</span>
+                                                    </span>
+                                                    </li>
+                                                    <li class="%rating2%">
+                                                    <span class="icon-star">
+                                                        <span class="hide">2</span>
+                                                    </span>
+                                                    </li>
+                                                    <li class="%rating3%">
+                                                    <span class="icon-star">
+                                                        <span class="hide">3</span>
+                                                    </span>
+                                                    </li>
+                                                    <li class="%rating4%">
+                                                    <span class="icon-star">
+                                                        <span class="hide">4</span>
+                                                    </span>
+                                                    </li>
+                                                    <li class="%rating5%">
+                                                    <span class="icon-star">
+                                                        <span class="hide">5</span>
+                                                    </span>
+                                                    </li>
+                                                </ul>
+                                                <div class="time-price">
+                                                    <strong class="price">%price%</strong>
 
-                            <div class="box">
-                                <div class="box-holder">
-                                    <div class="head">
-                                        <ul class="rating list-inline">
-                                            <li class="%rating1%">
-                                                <span class="icon-star">
-                                                    <span class="hide">1</span>
-                                                </span>
-                                            </li>
-                                            <li class="%rating2%">
-                                                <span class="icon-star">
-                                                    <span class="hide">2</span>
-                                                </span>
-                                            </li>
-                                            <li class="%rating3%">
-                                                <span class="icon-star">
-                                                    <span class="hide">3</span>
-                                                </span>
-                                            </li>
-                                            <li class="%rating4%">
-                                                <span class="icon-star">
-                                                    <span class="hide">4</span>
-                                                </span>
-                                            </li>
-                                            <li class="%rating5%">
-                                                <span class="icon-star">
-                                                    <span class="hide">5</span>
-                                                </span>
-                                            </li>
-                                        </ul>
-                                        <div class="time-price">
-                                            <strong class="price">%price%</strong>
+                                                    <p>/{{ (0)|add_time_unit_text|raw }}</p>
+                                                </div>
+                                            </div>
 
-                                            <p>/{{ (0)|add_time_unit_text|raw }}</p>
+                                            <div class="foot">
+                                                <strong class="title">%category%</strong>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <div class="foot">
-                                        <strong class="title">%category%</strong>
+                                <div class="post-content">
+                                    <div class="textbox">
+                                        <h2>%title%</h2>
+                                        <span class="%certified%">
+                                        <i class="icon-ok"></i>{{ 'listing.search.result.certified'|trans }}
+                                    </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        <div class="post-content">
-                            <div class="textbox">
-                                <h2>%title%</h2>
-                                <span class="%certified%">
-                                    <i class="icon-ok"></i>{{ 'listing.search.result.certified'|trans }}
-                                </span>
                             </div>
-                        </div>
-
-                    </div>
-                </a>
+                        </a>
+                        {#End of customisation#}
+                    </li>
+                </ul>
             </div>
+        </div>
 
+        {#Above content are injected in %infoBoxContent% below#}
+        <div class="info-box-wrapper hidden">
+            <div>
+                <a class="close" href="javascript:void(0)">
+                    <span class="hidden">Close</span>
+                    <i class="icon-cancel"></i>
+                </a>
+
+                <div class="popup">
+                    <ul>
+                        %info_box_content%
+                    </ul>
+            </div>
         </div>
     </div>
+
     {% endautoescape %}
 {% endspaceless %}

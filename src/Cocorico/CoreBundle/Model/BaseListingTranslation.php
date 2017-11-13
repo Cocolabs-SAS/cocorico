@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\Listing;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -79,7 +78,7 @@ abstract class BaseListingTranslation
      * Set title
      *
      * @param  string $title
-     * @return Listing
+     * @return $this
      */
     public function setTitle($title)
     {
@@ -102,32 +101,11 @@ abstract class BaseListingTranslation
      * Set description
      *
      * @param  string $description
-     * @return Listing
+     * @return $this
      */
     public function setDescription($description)
     {
         $this->description = $description;
-
-//        if (in_array("phone", $typeFilter)) {
-//            $pattern = "(0[0-9])?([-. ]?[0-9]{2}){4}";
-//            //$pattern = "(([-. _|,;\!\$\?\!\#:|@]?){1,}[0-9]{2}){4,}";
-//            //$pattern = "(([-. _|,;\/\!\$\?\!\#:|@]?){1,}[0-9]{2}){4,}";
-//            //$pattern = "^0[1-68]([-. ]?[0-9]{2}){4}$";
-//            //$sep = "((-|\.| |_|,|;|/){0,}[0-9]{2}){4,}";
-//            $content = preg_replace("#$pattern#", $replaceBy, $content);
-//
-//            $pattern = "\+[0-9]{1}([-. ]?[0-9]){10}";
-//            $content = preg_replace("#$pattern#", $replaceBy, $content);
-//        }
-//        if (in_array("email", $typeFilter)) {
-//            $pattern = "[a-zA-Z0-9_.+-]+(@)[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+";
-//            $content = preg_replace("#$pattern#", $replaceBy, $content);
-//        }
-//        if (in_array("address", $typeFilter)) {
-//            //$pattern = "([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}";
-//            $pattern = "([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+(com|fr|co|org|net|biz|tv|info)";
-//            $content = preg_replace("#$pattern#", $replaceBy, $content);
-//        }
 
         return $this;
     }
@@ -146,7 +124,7 @@ abstract class BaseListingTranslation
      * Set description
      *
      * @param  string $rules
-     * @return Listing
+     * @return $this
      */
     public function setRules($rules)
     {

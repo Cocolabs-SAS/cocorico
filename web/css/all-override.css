@@ -115,8 +115,10 @@
     text-decoration: none;
     word-wrap: normal;
     float: right;
-    text-align: right;
-    padding-right: 12px;
+    text-align: center;
+    padding-right: 0;
+    margin-right: -10px;
+    font-size: 12px;
 }
 
 /* Availabilities design dialog box */
@@ -770,6 +772,10 @@ li.time-fields {
     text-transform: none;
 }
 
+.form-area a.validate-location {
+    margin: 0;
+}
+
 .jcf-select .jcf-select-text {
     color: #58595b;
 }
@@ -913,8 +919,8 @@ li.time-fields {
     margin: 0 0 10px 0;
 }
 
-#categories, .multiselect .btn-group {
-    height: 34px;
+#categories {
+    height: 36px;
 }
 
 .form-category .area .col .title {
@@ -930,26 +936,21 @@ li.time-fields {
     width: auto;
 }
 
-.form-category .multiselect .btn-default {
-    top: 0;
-    right: 0;
-    padding: 6px 14px 6px;
-}
+/*.form-category .col {*/
+/*width: 49%;*/
+/*}*/
 
-.form-category .col {
-    width: 49%;
-}
-
-.form-category .display-duration .col, .form-category .col.display-duration {
+.form-category .display-duration .col,
+.form-category .col.display-duration {
     width: auto;
 }
 
 .form-category .col.categories {
-    width: 27%;
+    width: auto;
 }
 
 .form-category .form-holder .col.time {
-    width: 47%;
+    width: 41%;
 }
 
 .form-category .form-holder .col.time .col,
@@ -969,8 +970,7 @@ li.time-fields {
 }
 
 .form-category .form-holder .col.time .time-fields {
-    float: left;
-    margin-left: 3px;
+    display: inline-block;
     line-height: 36px;
     height: 36px;
     margin-top: 4px;
@@ -1008,9 +1008,13 @@ li.time-fields {
 
 .form-category .form-holder .col.time .time-fields #datetimepicker3 {
     width: 72%;
-    margin-left: 16px;
+    margin-left: 20px;
     position: relative;
     min-width: 103px;
+}
+
+.form-category .form-holder .col.time .time-fields .form-control {
+    /*width: auto;*/
 }
 
 .form-category .time-fields .add-on {
@@ -1033,6 +1037,11 @@ li.time-fields {
     top: 4px;
     right: -4px;
     position: absolute;
+}
+
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover {
+    color: #ddd;
 }
 
 .time-fields .bootstrap-datetimepicker-widget.dropdown-menu {
@@ -1065,7 +1074,8 @@ li.time-fields {
     width: 40px;
 }
 
-.time-fields span.glyphicon.glyphicon-chevron-up:after, .time-fields span.glyphicon.glyphicon-chevron-down:after {
+.time-fields span.glyphicon.glyphicon-chevron-up:after,
+.time-fields span.glyphicon.glyphicon-chevron-down:after {
     display: block;
     content: '\e805';
     cursor: pointer;
@@ -1101,7 +1111,8 @@ li.time-fields {
     width: 60%;
 }
 
-.multiselect-container.dropdown-menu > .active > a, .multiselect-container .dropdown-menu > .active > a:hover,
+.multiselect-container.dropdown-menu > .active > a,
+.multiselect-container .dropdown-menu > .active > a:hover,
 .multiselect-container .dropdown-menu > .active > a:focus {
     color: #ffffff;
     text-decoration: none;
@@ -1153,6 +1164,7 @@ section.similar-ads .listing-post .price {
     display: inline-block;
     margin: 0 0 -10px;
     line-height: 15px;
+    text-shadow: none;
 }
 
 section.similar-ads .time-price p {
@@ -1328,6 +1340,10 @@ images css for making it 4:3
     width: 80px;
     display: inline-block;
     text-align: right;
+}
+
+#booking-new .timing {
+    margin: 0;
 }
 
 #booking-new .timing li {
@@ -1914,6 +1930,16 @@ ul.collection {
     color: #58595b;
 }
 
+.option-reservation .btn.btn-primary {
+    min-width: 157px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0;
+    margin: 10px auto;
+}
+
 /* ------------------------------------------------------------ *\
 	Voucher options
 \* ------------------------------------------------------------ */
@@ -2151,9 +2177,10 @@ ul.collection {
     margin-top: 20px;
 }
 
-.high-rank-title {
+.high-rank-title, .section-title {
     text-align: center;
     margin-bottom: 40px;
+    text-transform: uppercase;
 }
 
 .infoarea {
@@ -2278,6 +2305,7 @@ ul.collection {
     width: auto;
     max-width: 380px;
     position: relative;
+    margin: 0 auto;
 }
 
 .slider-secondary .slider-secondary-actions a.slider-prev {
@@ -2309,15 +2337,11 @@ ul.collection {
     #search-container .range-area,
     #search-container .selection-holder,
     #search-container .selection-holder > .select-holder:first-child {
-        width: 100%;
+        width: auto;
     }
 
     .form-category .form-holder .col.time .time-fields #datetimepicker3 {
         margin-left: 0;
-    }
-
-    .form-category .form-holder .col.location .title {
-        width: 74px;
     }
 
     .form-category .listing-alert {
@@ -2513,18 +2537,23 @@ ul.collection {
 }
 
 .form-category .form-holder {
+    display: inline-block;
+    vertical-align: top;
     /*margin-bottom: 0;*/
     border-radius: 4px 4px 0 0;
     border: 1px solid #e8e8e8;
+    width: 100%;
+    max-width: 100%;
 }
 
 .form-category .sub-holder {
-    margin: -40px -10px 20px -10px;
+    margin: -40px 0 20px 0;
     padding: 20px 19px 10px;
     border-radius: 0 0 4px 4px;
     border-color: #e8e8e8;
     border-style: solid;
     border-width: 0 1px 1px 1px;
+    max-width: 100%;
 }
 
 #listing-location {
@@ -2536,6 +2565,20 @@ ul.collection {
 }
 
 /* new booking delivery  */
+.booking-delivery {
+    color: #58595b;
+    margin: 0 0 20px;
+    border-radius: 5px;
+    padding: 19px 19px 19px;
+    border: #eaebec solid 1px;
+}
+
+.booking-delivery h2 {
+    margin: 0 10px 10px 0;
+    font-size: 14px;
+    line-height: 17px;
+}
+
 .booking-delivery .field-row-inner {
     clear: both;
     padding: 19px 20px;
@@ -2570,7 +2613,6 @@ ul.collection {
 
 .booking-delivery .box-inner .field-row:last-child {
     padding: 10px 20px;
-    margin-bottom: 20px;
     font-size: 18px;
     text-align: left;
     border: 1px solid #eaebec;
@@ -2593,4 +2635,302 @@ ul.collection {
 
 .post-content .listing-box-delivery {
     float: right;
+}
+
+/* ------------------------------------------------------------ *\
+	Feeds
+\* ------------------------------------------------------------ */
+.section-feeds {
+    padding-bottom: 80px;
+    float: left;
+    clear: both;
+}
+
+.section-feeds .section-head {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.feed-items {
+    margin-right: -20px;
+    padding: 0;
+    font-size: 0;
+    line-height: 0;
+    list-style: none outside none;
+}
+
+.feed-item {
+    overflow: hidden;
+    position: relative;
+    display: inline-block;
+    width: 280px;
+    height: 280px;
+    border-radius: 4px;
+    margin-right: 20px;
+    vertical-align: top;
+    border: 1px solid #eaebec;
+}
+
+.feed-item img {
+    width: 100%;
+    height: auto;
+}
+
+.feed-item-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 5px;
+    background: rgba(0, 0, 0, 0.45);
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.79;
+    color: #fff;
+    font-weight: 400;
+    text-align: right;
+}
+
+.feed-item-content h2 {
+    position: relative;
+    color: #fff;
+    text-transform: initial;
+    text-align: left;
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+    padding-bottom: 0;
+    padding-left: 5px;
+    padding-top: 5px;
+    height: 52px;
+}
+
+/*.feed-item-content h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 118px;
+    height: 2px;
+    background-color: #fff;
+}*/
+
+.feed-item-content p {
+    text-align: right;
+}
+
+.feed-item-content a {
+    text-decoration: underline;
+    line-height: 2;
+    color: #fff;
+}
+
+.feed-item-content a:hover {
+    text-decoration: none;
+}
+
+.listing-detail .blog .head {
+    padding-bottom: 5px;
+}
+
+.feeds-holder .meta {
+    overflow: hidden;
+}
+
+.feeds-holder .meta time {
+    float: left;
+    text-align: left;
+}
+
+.feeds-holder .meta .rating {
+    float: right;
+    padding-right: 10px;
+}
+
+.feeds-holder .meta .list-inline > li {
+    padding-left: 0;
+    padding-right: 0;
+    color: #efd234;
+}
+
+.feeds-holder .author-name {
+    white-space: nowrap;
+}
+
+.feed-items-hover .feed-item-image {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.feed-items-hover .feed-item-image:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: opacity .4s;
+}
+
+.feed-items-hover .feed-item:hover .feed-item-image:after {
+    opacity: 1;
+}
+
+@media (max-width: 1199px) {
+    .feed-item {
+        width: 23%;
+        margin-right: 2%;
+    }
+
+    .feed-item img {
+        width: auto;
+        height: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+    .feed-item {
+        width: 48%;
+        margin-bottom: 15px;
+    }
+
+    .feed-item img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    .feed-item {
+        width: 48%;
+        margin-bottom: 15px;
+    }
+
+    .feed-item img {
+        width: 100%;
+        height: auto;
+    }
+
+    .main-tab .tab-content .price-box .label {
+        width: 145px !important;
+        float: left;
+    }
+}
+
+@media (max-width: 767px) {
+    .feed-items {
+        margin-right: 0;
+    }
+
+    .feed-item {
+        width: 100%;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .feeds-holder .meta time,
+    .feeds-holder .meta .rating {
+        float: none;
+        display: block;
+    }
+}
+
+/** Unslider */
+.infoBox .unslider {
+    border-radius: 5px;
+    background-color: #fff;
+    border: #eaebec solid 1px;
+}
+
+.infoBox .unslider-arrow {
+    display: block;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+    right: -50px;
+    left: auto;
+    margin-top: -16px;
+    overflow: hidden;
+    background: rgba(88, 89, 91, 0.8) no-repeat 50% 50%;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAQCAQAAABuQZ3IAAAAi0lEQVR4AU3OISBEQQBAwS0AACS9NxqQgCZpkiYBVddFvWhAAUABAPQCAGC4g/0vTnrBqCfDIZl70J+kMUBPpEwT4FNXxBxz4F1HxHyr4EVTxBLb4EFNxEon4CJSlVNw9AcV9sC16h8osgke1P1ArgXwouVvdQq86ww/GQefusNf7kBviBlxpT8k+gL/Wox4r1d4MwAAAABJRU5ErkJggg==);
+    background-size: 7px 11px;
+    border-radius: 32px;
+    text-indent: -999em;
+    opacity: .6;
+    transition: opacity .2s;
+}
+
+.infoBox .unslider-arrow.prev {
+    left: 0;
+    right: auto;
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.infoBox .unslider-arrow.next {
+    left: auto;
+    right: 0;
+}
+
+.infoBox .unslider-nav {
+    position: relative;
+}
+
+.infoBox .unslider-nav ol li {
+    border: 2px solid #58595b;
+}
+
+.infoBox .unslider-nav ol li.unslider-active {
+    background: #58595b;
+}
+
+.infoBox .listing-post .frame {
+    border: none;
+}
+
+.infoBox .listing-post.small .time-price {
+    text-align: right;
+}
+
+.map-label, .map-label-overlay {
+    color: #000;
+    background-color: #fff;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    white-space: nowrap;
+    border: none;
+    border-radius: 100%;
+}
+
+.map-label-overlay {
+    background-color: #c53f4e;
+    color: #fff;
+}
+
+/*Cluster overlay*/
+div.cluster.cluster-overlay div[style] {
+    color: #fff !important;
+}
+
+div.cluster img {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+div.cluster.cluster-overlay img {
+    -webkit-transform: rotate(60deg) scale(1.1);
+    transform: rotate(60deg) scale(1.1);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
 }

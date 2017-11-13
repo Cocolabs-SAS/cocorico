@@ -44,7 +44,7 @@
         </strong>
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
-            {% include '@CocoricoDelivery/Frontend/Booking/_show_delivery.html.twig' with {
+            {% include 'CocoricoDeliveryBundle:Frontend:Booking/_show_delivery.html.twig' with {
             'listing_delivery':  booking.listing.delivery
             } only %}
         {% endif %}

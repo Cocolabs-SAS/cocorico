@@ -163,9 +163,8 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
         $builder->addEventListener(
             FormEvents::SUBMIT,
             function (FormEvent $event) {
-                $data = $event->getData();
                 /** @var User $user */
-                $user = $data;
+                $user = $event->getData();
 
                 if ($this->uploaded) {
                     $nbImages = $user->getImages()->count();

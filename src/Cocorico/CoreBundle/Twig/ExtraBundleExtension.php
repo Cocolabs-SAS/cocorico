@@ -18,11 +18,17 @@ class ExtraBundleExtension extends \Twig_Extension
 
     protected $bundles;
 
+    /**
+     * @param array $bundles
+     */
     public function __construct(array $bundles)
     {
         $this->bundles = $bundles;
     }
 
+    /**
+     * @return array
+     */
     public function getFunctions()
     {
         return array(
@@ -33,14 +39,18 @@ class ExtraBundleExtension extends \Twig_Extension
         );
     }
 
+    /**
+     * @param string $bundle
+     * @return bool
+     */
     public function bundleExist($bundle)
     {
-        return array_key_exists(
-            $bundle,
-            $this->bundles
-        );
+        return array_key_exists($bundle, $this->bundles);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getName()
     {
         return 'extra_bundle_extension';

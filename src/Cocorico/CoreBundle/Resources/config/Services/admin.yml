@@ -9,8 +9,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setIncludeVat, [%cocorico.include_vat%]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setIncludeVat, ["%cocorico.include_vat%"]]
 
     sonata.admin.booking:
         class: Cocorico\CoreBundle\Admin\BookingAdmin
@@ -22,11 +22,11 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setTimeUnit, [%cocorico.time_unit%]]
-            - [ setBookingExpirationDelay, [%cocorico.booking.expiration_delay%]]
-            - [ setIncludeVat, [%cocorico.include_vat%]]
-            - [ setBundlesEnabled, [%kernel.bundles%]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setTimeUnit, ["%cocorico.time_unit%"]]
+            - [ setBookingExpirationDelay, ["%cocorico.booking.expiration_delay%"]]
+            - [ setIncludeVat, ["%cocorico.include_vat%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
@@ -38,7 +38,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
+            - [ setLocales, ["%cocorico.locales%"]]
 
     sonata.admin.listing_characteristic_group:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicGroupAdmin
@@ -50,7 +50,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
+            - [ setLocales, ["%cocorico.locales%"]]
 
     sonata.admin.listing_category:
         class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
@@ -62,8 +62,8 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setBundlesEnabled, [%kernel.bundles%]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
     sonata.admin.booking_bank_wire:
         class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin
@@ -75,11 +75,11 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setTimeUnit, [%cocorico.time_unit%]]
-            - [ setCurrency, [%cocorico.currency%]]
-            - [ setBookingBankWireManager, [@cocorico.booking_bank_wire.manager]]
-            - [ setBundlesEnabled, [%kernel.bundles%]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setTimeUnit, ["%cocorico.time_unit%"]]
+            - [ setCurrency, ["%cocorico.currency%"]]
+            - [ setBookingBankWireManager, ["@cocorico.booking_bank_wire.manager"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
     sonata.admin.booking_payin_refund:
         class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
@@ -91,7 +91,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
-            - [ setTimeUnit, [%cocorico.time_unit%]]
-            - [ setBundlesEnabled, [%kernel.bundles%]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setTimeUnit, ["%cocorico.time_unit%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
 

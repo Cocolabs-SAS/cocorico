@@ -10,7 +10,7 @@ ivory_ck_editor:
 fm_elfinder:
     instances:
         ckeditor:
-            locale: %locale% # defaults to current request locale
+            locale: "%locale%" # defaults to current request locale
             editor: ckeditor # other options are tinymce, tinymce4, form, custom and simple
             fullscreen: true # defaults true, applies to simple and ckeditor editors
             theme: smoothness # jquery theme

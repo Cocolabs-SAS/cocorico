@@ -1,0 +1,35 @@
+{% trans_default_domain 'cocorico_home' %}
+<section class="section section-feeds">
+    <div class="container">
+        <header class="section-head">
+            <h2 class="section-title">
+                {{ 'home.feeds.section.header.title'|trans }}
+            </h2>
+        </header>
+
+        <div class="section-body" id="rss-feed">
+            <ul class="feed-items feed-items-hover">
+                {% for feed in feeds|slice(0, 4) %}
+                    {% if feed.image is defined %}
+                        {% set image = feed.image %}
+                    {% else %}
+                        {% set image = asset('images/feed-default.png') %}
+                    {% endif %}
+                    <li class="feed-item">
+                        <a href="{{ feed.link }}" target="_blank">
+                            <div class="feed-item-image">
+                                <img src="{{ image }}" alt=""/>
+                            </div>
+
+                            <div class="feed-item-content">
+                                <h2>{{ feed.title }}</h2>
+
+                                <p>{{ 'home.feeds.section.content.link'|trans }} &gt;</p>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>

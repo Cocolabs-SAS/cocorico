@@ -17,7 +17,7 @@
 
         {% if bundleExist('CocoricoListingCategoryFieldBundle') %}
             {#ajax form creation and submission is done here#}
-            {% include '@CocoricoListingCategoryField/Frontend/Listing/_form_categories_fields_values.html.twig' with {
+            {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_form_categories_fields_values.html.twig' with {
             'form': form
             } only %}
         {% endif %}

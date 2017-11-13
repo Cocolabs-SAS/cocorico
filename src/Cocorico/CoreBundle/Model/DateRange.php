@@ -111,5 +111,22 @@ class DateRange
         return $duration;
     }
 
+    /**
+     * Create DateRange instance from array
+     *
+     * @param array $dateR
+     * @return null|DateRange
+     */
+    public static function createFromArray($dateR)
+    {
+        if (isset($dateR['start']) && isset($dateR['end']) && $dateR['start'] && $dateR['end']) {
+            $start = \DateTime::createFromFormat('d/m/Y', $dateR['start']);
+            $end = \DateTime::createFromFormat('d/m/Y', $dateR['end']);
+
+            return new static($start, $end);
+        }
+
+        return null;
+    }
 
 }

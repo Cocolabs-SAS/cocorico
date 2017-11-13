@@ -50,7 +50,7 @@
         </div>
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
-            {% include '@CocoricoDelivery/Dashboard/Booking/_show_delivery_in_voucher.html.twig' with {
+            {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery_in_voucher.html.twig' with {
             'booking': booking
             } only %}
         {% endif %}
@@ -73,7 +73,7 @@
 
         {% if bundleExist('CocoricoListingOptionBundle') %}
             <div class="voucher">
-                {% include '@CocoricoListingOption/Dashboard/Booking/_booking_show_options.html.twig' with {
+                {% include 'CocoricoListingOptionBundle:Dashboard:Booking/_booking_show_options.html.twig' with {
                 'booking': booking
                 } only %}
             </div>

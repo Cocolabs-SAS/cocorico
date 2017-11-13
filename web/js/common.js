@@ -152,7 +152,7 @@ function initMultiSelect(elt, allSelectedText, noneSelectedText, numSelectedText
     });
 
     $(elt).multiselect({
-        buttonWidth: width,
+        //buttonWidth: width,
         allSelectedText: allSelectedText,
         nonSelectedText: noneSelectedText,
         nSelectedText: numSelectedText,
@@ -504,7 +504,6 @@ function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
     if ($fromHour.val() != '' && $fromMinute.val() != '' && $nbMinutes.val() != '') {
         var startTime = moment($fromHour.val() + ":" + $fromMinute.val(), "HH:mm");
         startTime = startTime.add($nbMinutes.val(), "minute");
-        //console.log(startTime);
         $toHour.val(startTime.format("H"));
         $toMinute.val(startTime.format("m"));
     } else {
@@ -567,8 +566,6 @@ function submitDatePickerAjaxForm(callbackSuccess, parentDatesElt) {
 }
 
 
-/**
-
  /**
  * Bind profile switch change event.
  * Submit form on change.
@@ -583,10 +580,9 @@ $('input[name="profileSwitch[profile]"]').on("change", function () {
  */
 function getNbUnReadMessages(url) {
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         url: url,
-        success: function (messageData) {
-            var result = $.parseJSON(messageData);
+        success: function (result) {
             if (result.total > 0) {
                 $('#nb-unread-msg').html(" (" + result.total + ")");
             }

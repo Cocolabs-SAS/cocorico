@@ -22,7 +22,7 @@
 
                 <article class="post">
                     <div class="img-holder">
-                        <a href="#">
+                        <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
                             <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xmedium') }}"
                                  alt="{{ listing_translation.title }}">
                         </a>
@@ -56,18 +56,20 @@
                                             {%- if user.id == reviewer.id -%}{# current user is the reviewer #}
                                                 {{ 'review.comment.reviewed_user' | trans }}:
                                                 <a href="{{ path('cocorico_user_profile_show', { 'id': reviewed_user.id }) }}">
-                                                    {{ reviewed_user.firstName }}
+                                                    {{ reviewed_user.firstName  ~ " " ~ reviewed_user.lastName|first|capitalize }}
+                                                    .
                                                 </a>
                                             {% elseif user.id == reviewed_user.id %}{# current user is the reveiwed user #}
                                                 {{ 'review.comment.reviewer' | trans }}:
                                                 <a href="{{ path('cocorico_user_profile_show', { 'id': reviewer.id }) }}">
-                                                    {{ reviewer.firstName }}
+                                                    {{ reviewer.firstName ~ " " ~  reviewer.lastName|first|capitalize }}
+                                                    .
                                                 </a>
                                             {% endif %}
                                         </li>
                                         <li>
                                             Date:
-                                            <time datetime="{{ review.createdAt|date('Y-m-d') }}">
+                                            <time>
                                                 {{ review.createdAt|localizeddate('short', 'none', 'fr') }}
                                             </time>
                                         </li>
@@ -84,7 +86,7 @@
                             <div class="textbox">
                                 <p>
                                     <strong>{{ 'review.comment.desc' | trans }}:</strong>
-                                    <em>{{ review.comment | truncate(500, true, '...') }}</em>
+                                    <em>{{ review.comment|strip_private_info }}</em>
                                 </p>
                             </div>
                         </div>

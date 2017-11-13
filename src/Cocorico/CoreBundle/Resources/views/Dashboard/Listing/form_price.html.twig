@@ -21,7 +21,7 @@
     </div>
 
     {% if bundleExist('CocoricoDeliveryBundle') %}
-        {% include '@CocoricoDelivery/Dashboard/Listing/_form_delivery.html.twig' with {
+        {% include 'CocoricoDeliveryBundle:Dashboard:Listing/_form_delivery.html.twig' with {
         'form': form
         } only %}
     {% endif %}

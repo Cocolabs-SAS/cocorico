@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:43:38Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-11-13T18:50:28Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="8250a2a3044490a05da33c749d5af47750ce06fa" resname="account_created_user.email.message">
@@ -106,7 +110,8 @@ This booking request will expire on %booking_request_expiry_date%.]]></target>
                 <target>Confirmation of your booking request %booking_uid%</target>
                 <jms:reference-file line="5">Mails/Asker/booking_request_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="d386fae1232f9a5c593f10f89f30b4639421502a" resname="booking_request_expired_asker.email.message">
+            <trans-unit id="d386fae1232f9a5c593f10f89f30b4639421502a"
+                        resname="booking_request_expired_asker.email.message">
                 <source>booking_request_expired_asker.email.message</source>
                 <target><![CDATA[Hi %firstname%,
 
@@ -115,12 +120,14 @@ Your booking request has expired as we didn’t receive a confirmation in time. 
 Click <a href="%similar_booking_listings_url%">here</a> to view other listings to book from.]]></target>
                 <jms:reference-file line="10">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="ef4fe83f032b4bf763a8bd0c1916e2681b66cd41" resname="booking_request_expired_asker.email.subject">
+            <trans-unit id="ef4fe83f032b4bf763a8bd0c1916e2681b66cd41"
+                        resname="booking_request_expired_asker.email.subject">
                 <source>booking_request_expired_asker.email.subject</source>
                 <target>Your booking request has expired %booking_uid%</target>
                 <jms:reference-file line="5">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="6dbc477da4c4e88ce9ffc03a976c202988d3e21b" resname="booking_request_expired_offerer.email.message">
+            <trans-unit id="6dbc477da4c4e88ce9ffc03a976c202988d3e21b"
+                        resname="booking_request_expired_offerer.email.message">
                 <source>booking_request_expired_offerer.email.message</source>
                 <target><![CDATA[Hi %firstname%,
 
@@ -135,9 +142,11 @@ The following reservation has expired:
 If you wish you can still contact %asker_name% <a href="%booking_request_url%">here</a>.
 
 Be aware that it is best that you do not let the requests expire as that has a negative impact on your position in the search results.]]></target>
-                <jms:reference-file line="10">Mails/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="10">Mails/Offerer/booking_request_expired_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
-            <trans-unit id="14c35b932cf4688868d807cca561641023fd874d" resname="booking_request_expired_offerer.email.subject">
+            <trans-unit id="14c35b932cf4688868d807cca561641023fd874d"
+                        resname="booking_request_expired_offerer.email.subject">
                 <source>booking_request_expired_offerer.email.subject</source>
                 <target>A reservation request has expired %booking_uid%</target>
                 <jms:reference-file line="5">Mails/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
@@ -208,12 +217,14 @@ The cancellation policy you selected is the following:
 
 In accordance to this, the outstanding payment to be made to you is %offerer_cancellation_amount%.
 When an amount has to be paid, wire transfers are made 4 business days after the cancellation.]]></target>
-                <jms:reference-file line="14">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="14">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="0234973eefac2840f88abdd89192e300e63ee72b" resname="canceled_by_asker_offerer.email.subject">
                 <source>canceled_by_asker_offerer.email.subject</source>
                 <target>%asker_name% has cancelled his booking %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="5">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="43df1fbbbd0a6b7c4c76d3d135a78a35a4884009" resname="contact.email.message">
                 <source>contact.email.message</source>
@@ -254,12 +265,14 @@ The following reservation is about to expire:
 Be aware that it is best that you do not let the request expire as that will have a negative impact on your position in the search results.
 
 You can click on the following <a href="%booking_request_url%">link</a> to accept or reject the request.]]></target>
-                <jms:reference-file line="13">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="13">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="d89d582749df8f693dd725fd5082f6cf7727b1a4" resname="expiration_alert_offerer.email.subject">
                 <source>expiration_alert_offerer.email.subject</source>
                 <target>A reservation request is about to expire %booking_amount_offerer% %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="5">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="0c5b4117ec234d02dd5733079796b3041c6b9ca8" resname="forgot_password_user.email.message">
                 <source>forgot_password_user.email.message</source>
@@ -410,7 +423,8 @@ Don’t hesitate to let us know if there is anything we can do to make these req
                 <target>You have turned down a reservation %booking_uid%</target>
                 <jms:reference-file line="5">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="d7c0ead101acaa46a152dfda651b653a7e54024a" resname="reminder_to_rate_asker_offerer.email.message">
+            <trans-unit id="d7c0ead101acaa46a152dfda651b653a7e54024a"
+                        resname="reminder_to_rate_asker_offerer.email.message">
                 <source>reminder_to_rate_asker_offerer.email.message</source>
                 <target><![CDATA[Hi %firstname%,
 
@@ -419,12 +433,14 @@ By clicking on the following <a href="%offerer_to_asker_review_url%">link</a> yo
 Leaving reviews greatly increases your ranking on our search engine as it indicates that you are an active member of our community.]]></target>
                 <jms:reference-file line="13">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="d76633bbb4801846d6c282cba90c40b2c888d304" resname="reminder_to_rate_asker_offerer.email.subject">
+            <trans-unit id="d76633bbb4801846d6c282cba90c40b2c888d304"
+                        resname="reminder_to_rate_asker_offerer.email.subject">
                 <source>reminder_to_rate_asker_offerer.email.subject</source>
                 <target>Please review %asker_name% (%booking_uid%)</target>
                 <jms:reference-file line="5">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="9ec9411a8cb67d78a67b2453d3c1a3a203670b24" resname="reminder_to_rate_offerer_asker.email.message">
+            <trans-unit id="9ec9411a8cb67d78a67b2453d3c1a3a203670b24"
+                        resname="reminder_to_rate_offerer_asker.email.message">
                 <source>reminder_to_rate_offerer_asker.email.message</source>
                 <target><![CDATA[Hi %firstname%,
 
@@ -433,7 +449,8 @@ We hope that the review system helped you when you made your booking. We encoura
 By clicking on the following <a href="%asker_to_offerer_review_url%">link</a>. you will be able to leave your review on %offerer_name%.]]></target>
                 <jms:reference-file line="13">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="d15001f727b8f27e9ac5d170a987164d9e7cb942" resname="reminder_to_rate_offerer_asker.email.subject">
+            <trans-unit id="d15001f727b8f27e9ac5d170a987164d9e7cb942"
+                        resname="reminder_to_rate_offerer_asker.email.subject">
                 <source>reminder_to_rate_offerer_asker.email.subject</source>
                 <target>Please review %offerer_name% (%booking_uid%)</target>
                 <jms:reference-file line="5">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
@@ -443,7 +460,8 @@ By clicking on the following <a href="%asker_to_offerer_review_url%">link</a>. y
                 <target>The %sitename% team</target>
                 <jms:reference-file line="73">views/Mails/layout.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="e03d0327b190096bff51daf6a295ce974e25425a" resname="update_your_calendar_offerer.email.message">
+            <trans-unit id="e03d0327b190096bff51daf6a295ce974e25425a"
+                        resname="update_your_calendar_offerer.email.message">
                 <source>update_your_calendar_offerer.email.message</source>
                 <target><![CDATA[Hi %firstname%,
 
@@ -452,7 +470,8 @@ Updating your calendar will rank your listing up in the search results. In parti
 You can click on the following <a href="%listing_calendar_edit_url%">link</a> to update your calendar.]]></target>
                 <jms:reference-file line="10">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="ced576971859d17be3425b517e65d6ddcaaf03eb" resname="update_your_calendar_offerer.email.subject">
+            <trans-unit id="ced576971859d17be3425b517e65d6ddcaaf03eb"
+                        resname="update_your_calendar_offerer.email.subject">
                 <source>update_your_calendar_offerer.email.subject</source>
                 <target>Rank up in our search results to get more bookings</target>
                 <jms:reference-file line="5">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
@@ -465,13 +484,15 @@ You can click on the following <a href="%listing_calendar_edit_url%">link</a> to
               Please allow for a couple of days for the funds to appear in your account.
 
               You can view your payments: <a href="%offerer_payments_list%">here</a>]]></target>
-                <jms:reference-file line="13">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="13">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="2cd8bf2c0ddd4b4d364fc0fb51ee42ff10ce0733" resname="wiretransfer_offerer.email.subject">
                 <source>wiretransfer_offerer.email.subject</source>
                 <target>Your wiretransfer of %booking_amount_offerer% has been executed (booking_amount_offerer)
                 </target>
-                <jms:reference-file line="5">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig</jms:reference-file>
+                <jms:reference-file line="5">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig
+                </jms:reference-file>
             </trans-unit>
         </body>
     </file>

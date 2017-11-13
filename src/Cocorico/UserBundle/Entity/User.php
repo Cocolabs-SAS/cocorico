@@ -47,6 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  *
  * @ORM\Table(name="`user`",indexes={
+ *    @ORM\Index(name="created_at_u_idx", columns={"createdAt"}),
  *    @ORM\Index(name="slug_u_idx", columns={"slug"}),
  *    @ORM\Index(name="enabled_idx", columns={"enabled"}),
  *    @ORM\Index(name="email_idx", columns={"email"})
@@ -332,11 +333,13 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\ReviewBundle\Entity\Review", mappedBy="reviewBy", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "desc"})
      */
     private $reviewsBy;
 
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\ReviewBundle\Entity\Review", mappedBy="reviewTo", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "desc"})
      */
     private $reviewsTo;
 
@@ -502,16 +505,25 @@ class User extends BaseUser implements ParticipantInterface
         return $this->firstName;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->firstName . " " . ucfirst(substr($this->lastName, 0, 1) . ".");
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail($email)
     {
         $email = is_null($email) ? '' : $email;
         parent::setEmail($email);
         $this->setUsername($email);
+
+        return $this;
     }
 
 

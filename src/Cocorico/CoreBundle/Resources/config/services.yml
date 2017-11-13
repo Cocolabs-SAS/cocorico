@@ -1,16 +1,16 @@
 imports:
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/entities_manager.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/forms.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/listeners.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/param_converters.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/twig_extensions.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/validators.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/voters.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/forms_handlers.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/mailer.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/smser.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/admin.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/Services/subscribers.yml }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/entities_manager.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/forms.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/listeners.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/param_converters.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/twig_extensions.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/validators.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/voters.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/forms_handlers.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/mailer.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/smser.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/admin.yml" }
+    - { resource: "@CocoricoCoreBundle/Resources/config/Services/subscribers.yml" }
 
 services:
     #Custom classes

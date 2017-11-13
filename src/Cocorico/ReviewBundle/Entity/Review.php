@@ -20,7 +20,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Review
  *
  * @ORM\Entity(repositoryClass="Cocorico\ReviewBundle\Repository\ReviewRepository")
- * @ORM\Table(name="review")
+ * @ORM\Table(name="review",indexes={
+ *    @ORM\Index(name="created_at_r_idx", columns={"createdAt"}),
+ *  })
+ *
  * @UniqueEntity(
  *     fields={"booking", "reviewBy"},
  *     errorPath="booking",
@@ -58,10 +61,9 @@ class Review extends BaseReview
 
     public function __toString()
     {
-        $booking = $this->getBooking();
-
-        return $this->getReviewBy()->getName() . " (" . $booking->getListing() . ":" . $booking->getStart()->format(
-            'd-m-Y'
-        ) . ")";
+        return
+            $this->getReviewBy()->getName() . " (" .
+            $this->getBooking()->getListing() . ":" . $this->getBooking()->getStart()->format('d-m-Y')
+            . ")";
     }
 }

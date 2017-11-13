@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:43:38Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-11-13T18:50:28Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
@@ -128,14 +132,14 @@
             <trans-unit id="6d384fb8ef3ca9318f0f9d983868842a211770f8" resname="form.password">
                 <source>form.password</source>
                 <target>Password</target>
-                <jms:reference-file line="55">Form/Type/ProfileContactFormType.php</jms:reference-file>
-                <jms:reference-file line="82">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <jms:reference-file line="54">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="83">Form/Type/RegistrationFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="30de94712c8550862006ed6a664870c398c9482d" resname="form.password_confirmation">
                 <source>form.password_confirmation</source>
                 <target>Verification</target>
-                <jms:reference-file line="59">Form/Type/ProfileContactFormType.php</jms:reference-file>
-                <jms:reference-file line="86">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <jms:reference-file line="58">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="87">Form/Type/RegistrationFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
                 <source>form.user.annual_income</source>
@@ -197,8 +201,8 @@
             <trans-unit id="e5558516d20ded5db5636ee40f8e0aca3e7925e7" resname="form.user.id_card:">
                 <source>form.user.id_card:</source>
                 <target>ID Card:</target>
-                <jms:reference-file line="427">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="193">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="423">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="195">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="bdee700ca1f92fc98ece74bc492d515d983c8978" resname="form.user.last_name">
                 <source>form.user.last_name</source>
@@ -213,26 +217,26 @@
             <trans-unit id="fac62ecee873d75e35c7969ee91109062cace1f8" resname="form.user.nb_bookings_asker:">
                 <source>form.user.nb_bookings_asker:</source>
                 <target>Already made a rental:</target>
-                <jms:reference-file line="223">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="225">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="35637b79ac1809dfca3542e924854084630ab47e" resname="form.user.nb_bookings_offerer:">
                 <source>form.user.nb_bookings_offerer:</source>
                 <target>Already rent:</target>
-                <jms:reference-file line="441">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="208">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="437">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="210">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="148005ed10f2b75bbdb99c10f5b4d409245a2bf0" resname="form.user.phone">
                 <source>form.user.phone</source>
                 <target>Phone :</target>
-                <jms:reference-file line="44">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="43">Form/Type/ProfileContactFormType.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="151cf4b1f11521a27811e8bad9ad07a73f2f1075" resname="form.user.phone:">
                 <source>form.user.phone:</source>
                 <target>Phone:</target>
+                <jms:reference-file line="395">Frontend/Listing/show.html.twig</jms:reference-file>
                 <jms:reference-file line="399">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="403">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="163">Frontend/Profile/show.html.twig</jms:reference-file>
-                <jms:reference-file line="167">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="165">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="169">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="cabf749e9747455b9354ecd631958505631e7a30" resname="form.user.phone_prefix">
                 <source>form.user.phone_prefix</source>
@@ -247,8 +251,8 @@
             <trans-unit id="f912106675d47c1f3f01082da2f4b303de0a8d14" resname="form.user.username:">
                 <source>form.user.username:</source>
                 <target>Email:</target>
-                <jms:reference-file line="413">Frontend/Listing/show.html.twig</jms:reference-file>
-                <jms:reference-file line="178">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="409">Frontend/Listing/show.html.twig</jms:reference-file>
+                <jms:reference-file line="180">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="9f92ae96e8c9f7661c8f46a371f6a85a487e8fd2" resname="nav.user.about_me.link">
                 <source>nav.user.about_me.link</source>
@@ -317,7 +321,7 @@
                 <target>An email has been sent to %email%. It contains an activation link you must click to activate
                     your account.
                 </target>
-                <jms:reference-file line="15">Frontend/Registration/checkEmail.html.twig</jms:reference-file>
+                <jms:reference-file line="16">Frontend/Registration/checkEmail.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="4ba3f8b403cb294758fe412284220b37835a86a8" resname="registration.check_email.h1">
                 <source>registration.check_email.h1</source>
@@ -343,7 +347,8 @@
                     Regards,
                     the Team.
                 </target>
-                <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+                <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig
+                </jms:reference-file>
             </trans-unit>
             <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
                 <source>registration.email.subject</source>
@@ -413,7 +418,9 @@
             </trans-unit>
             <trans-unit id="bde1a863d677579f32c5cb7e7c38c5a1f433c001" resname="user.edit.completion_notice">
                 <source>user.edit.completion_notice</source>
-                <target>Increase your chances to rent your listing or to be accepted for a booking by filling your profile informations.</target>
+                <target>Increase your chances to rent your listing or to be accepted for a booking by filling your
+                    profile informations.
+                </target>
                 <jms:reference-file line="8">Dashboard/Profile/_completion_notice.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e29f6e5f025f307e27bc9ee74f440833c2c2d4d6" resname="user.edit.contact.success">
@@ -444,13 +451,13 @@
             <trans-unit id="f9956945547d9d750f40d9a3ac33a4931d1839ae" resname="user.facebook.login">
                 <source>user.facebook.login</source>
                 <target>Login with Facebook</target>
-                <jms:reference-file line="46">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="50">Frontend/Common/_login.html.twig</jms:reference-file>
                 <jms:reference-file line="146">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d075f3f1f8a3430b41490ddd8497be9e9106102d" resname="user.facebook.login.title">
                 <source>user.facebook.login.title</source>
                 <target>Or login with your Facebook account</target>
-                <jms:reference-file line="43">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="47">Frontend/Common/_login.html.twig</jms:reference-file>
                 <jms:reference-file line="143">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="b25f30d71bfa16486eb2ae7200fbd102f4a1274e" resname="user.login.password">
@@ -486,17 +493,17 @@
             <trans-unit id="9e750f6979ebc1dbab4e2e37a1f3b8c1f9faa9c2" resname="user.profile.languages">
                 <source>user.profile.languages</source>
                 <target>Spoken languages:</target>
-                <jms:reference-file line="252">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="254">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="329ffbfee377ed1f628c557cf8c1fe2c20dd5f14" resname="user.profile.my-listing">
                 <source>user.profile.my-listing</source>
                 <target>My listings</target>
-                <jms:reference-file line="266">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="267">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="6e0d3c3e10cb50874685c595bf6daaf767e8a548" resname="user.profile.subscribe-date.title">
                 <source>user.profile.subscribe-date.title</source>
                 <target>Member since</target>
-                <jms:reference-file line="153">Frontend/Profile/show.html.twig</jms:reference-file>
+                <jms:reference-file line="155">Frontend/Profile/show.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8b14373c89f426fb1db4d41571f9ab2718134368" resname="user.register.success">
                 <source>user.register.success</source>
@@ -564,11 +571,13 @@
                 <source>user_images.min {{ min_images }}</source>
                 <target>Min {{ min_images }}</target>
             </trans-unit>
-            <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13" resname="user_translations_en_description_placeholder">
+            <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13"
+                        resname="user_translations_en_description_placeholder">
                 <source>user_translations_en_description_placeholder</source>
                 <target>Introduction</target>
             </trans-unit>
-            <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1" resname="user_translations_fr_description_placeholder">
+            <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1"
+                        resname="user_translations_fr_description_placeholder">
                 <source>user_translations_fr_description_placeholder</source>
                 <target>Introduction</target>
             </trans-unit>

@@ -42,8 +42,7 @@ class MessageAdmin extends Admin
                 array(
                     'read_only' => true,
                     'disabled' => true,
-                ),
-                array()
+                )
             )
             ->add(
                 'createdAt',
@@ -51,10 +50,16 @@ class MessageAdmin extends Admin
                 array(
                     'read_only' => true,
                     'disabled' => true,
-                ),
-                array()
+                )
             )
-            ->add('body', null, array(), array())
+            ->add(
+                'body',
+                null,
+                array(
+                    'disabled' => true,
+                    'read_only' => true,
+                )
+            )
             ->end();
     }
 

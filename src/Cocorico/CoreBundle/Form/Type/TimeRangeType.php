@@ -29,18 +29,21 @@ class TimeRangeType extends AbstractType
     protected $timeUnitIsDay;
     protected $timesMax;
     protected $timePicker;
+    protected $hoursAvailable;
 
     /**
-     * @param int  $timeUnit in minute
-     * @param int  $timesMax
-     * @param bool $timePicker
+     * @param int   $timeUnit in minute
+     * @param int   $timesMax
+     * @param bool  $timePicker
+     * @param array $hoursAvailable
      */
-    public function __construct($timeUnit, $timesMax, $timePicker)
+    public function __construct($timeUnit, $timesMax, $timePicker, $hoursAvailable)
     {
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $this->timesMax = $timesMax;
         $this->timePicker = $timePicker;
+        $this->hoursAvailable = $hoursAvailable;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -209,7 +212,8 @@ class TimeRangeType extends AbstractType
                 if (!$value) {
                     $value = new TimeRangeValidator(
                         new OptionsResolver(), array(
-                            'required' => $options["required"]
+                            'required' => $options["required"],
+                            'hours_available' => $this->hoursAvailable
                         )
                     );
                 }

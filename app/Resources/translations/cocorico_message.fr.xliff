@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:42:17Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-11-13T18:50:04Z" source-language="en" target-language="fr" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="cdf7e925f5746741c316f5fbcf39ad0dfca90775" resname="results">
@@ -29,7 +33,7 @@
             <trans-unit id="499bd785413cd81fd726c95a680ddce247246bd2" resname="thread.new.send">
                 <source>thread.new.send</source>
                 <target>Envoyer</target>
-                <jms:reference-file line="12">Dashboard/Message/newThread.html.twig</jms:reference-file>
+                <jms:reference-file line="13">Dashboard/Message/newThread.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="d99962cf893ac8bee73a67004253045ee2968758" resname="thread.offerer">
                 <source>thread.offerer</source>
@@ -44,37 +48,37 @@
             <trans-unit id="a9951cbccdb7df6f118d17ceb300b04a70decf4a" resname="threads.list.date">
                 <source>threads.list.date</source>
                 <target>Date :</target>
-                <jms:reference-file line="31">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="32">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="e8027446dc9c8a7cac6c836878a5450de437bf04" resname="threads.list.delete">
                 <source>threads.list.delete</source>
                 <target>Supprimer</target>
-                <jms:reference-file line="66">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="67">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="bc97b2ce86bedc6db244dcadaf7679ed2cfca010" resname="threads.list.more">
                 <source>threads.list.more</source>
                 <target>En lire plus</target>
-                <jms:reference-file line="49">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="50">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="1c9df5547fa7ac366323969c7a55a40a8645fdd3" resname="threads.list.open">
                 <source>threads.list.open</source>
                 <target>Ouvrir</target>
-                <jms:reference-file line="62">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="63">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="81d82993d14a61625157ccbfc27ea8d44233aed2" resname="threads.list.participants">
                 <source>threads.list.participants</source>
                 <target>Participant :</target>
-                <jms:reference-file line="36">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="37">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="3f5e300c2192edf6ac5451cd36de9199bcc3d7ea" resname="threads.list.reply">
                 <source>threads.list.reply</source>
                 <target>Répondre</target>
-                <jms:reference-file line="58">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="59">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="255d7429bd3e1c6758a4f046a3f5cecd6ec4d03e" resname="threads.list.say">
                 <source>threads.list.say</source>
                 <target>dit :</target>
-                <jms:reference-file line="46">Dashboard/Message/threads_list.html.twig</jms:reference-file>
+                <jms:reference-file line="47">Dashboard/Message/threads_list.html.twig</jms:reference-file>
             </trans-unit>
         </body>
     </file>

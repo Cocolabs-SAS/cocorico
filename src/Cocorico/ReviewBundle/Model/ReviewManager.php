@@ -72,7 +72,8 @@ class ReviewManager extends BaseManager
             ->leftJoin('r.reviewBy', 'rb')
             ->leftJoin('rb.images', 'rbi')
             ->leftJoin('r.reviewTo', 'rt')
-            ->leftJoin('l.translations', 't');
+            ->leftJoin('l.translations', 't')
+            ->orderBy('r.createdAt', 'DESC');
 
         // adds the condition about which reviews need to be fetched.
         if ($type == 'made') {
@@ -162,6 +163,7 @@ class ReviewManager extends BaseManager
             ->leftJoin('r.reviewBy', 'u')
             ->where('r.reviewBy != :owner')
             ->andWhere('b.listing = :listing')
+            ->orderBy('r.createdAt', 'DESC')
             ->setParameter('owner', $listing->getUser())
             ->setParameter('listing', $listing);
 

@@ -5,7 +5,7 @@ services:
     cocorico.breadcrumbs_yaml_locator:
         class: Symfony\Component\Config\FileLocator
         arguments:
-            - %kernel.root_dir%/../src/Cocorico/BreadcrumbBundle/Resources/content/
+            - "%kernel.root_dir%/../src/Cocorico/BreadcrumbBundle/Resources/content/"
 
     cocorico.breadcrumbs_loader:
         class: Cocorico\BreadcrumbBundle\Services\BreadcrumbsYamlLoader
