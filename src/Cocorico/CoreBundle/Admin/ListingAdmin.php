@@ -186,6 +186,14 @@ class ListingAdmin extends Admin
                 )
             )
             ->add(
+                'location.completeAddress',
+                'text',
+                array(
+                    'disabled' => true,
+                    'label' => 'admin.listing.location.label'
+                )
+            )
+            ->add(
                 'createdAt',
                 null,
                 array(
@@ -201,8 +209,6 @@ class ListingAdmin extends Admin
                     'label' => 'admin.listing.updated_at.label'
                 )
             )
-//            ->end()
-//            ->with('Location')
 //            ->end()
 //            ->with('Characteristics')
 //            ->add(

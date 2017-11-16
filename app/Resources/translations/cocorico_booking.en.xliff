@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-11-13T18:50:28Z" source-language="en" target-language="en" datatype="plaintext"
+    <file date="2017-11-16T11:41:47Z" source-language="en" target-language="en" datatype="plaintext"
           original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
@@ -295,17 +295,17 @@
             <trans-unit id="de1727b52b15b37b38993a85d41786d382c35f3d" resname="booking.new.delivery.error">
                 <source>booking.new.delivery.error</source>
                 <target state="new">Delivery unavailable</target>
-                <jms:reference-file line="188">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="189">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="ac0ca9b37979902af8065324b68a1854cba66a35" resname="booking.new.delivery.success">
                 <source>booking.new.delivery.success</source>
                 <target state="new">Your delivery request is validated</target>
-                <jms:reference-file line="140">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="141">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="56c15ae0e9dd3422fe84d16dc8e32cfb769a06f2" resname="booking.new.delivery_max.error">
                 <source>booking.new.delivery_max.error</source>
                 <target state="new">booking.new.delivery_max.error</target>
-                <jms:reference-file line="185">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="186">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9cc287ca6419b68c601007f17a971052386de774"
                         resname="booking.new.error.amount_invalid {{ min_price }}">
@@ -327,7 +327,7 @@
             <trans-unit id="42f63b537bae10ae0037c14333bb589d2cae56d9" resname="booking.new.form.error">
                 <source>booking.new.form.error</source>
                 <target>An error has occured</target>
-                <jms:reference-file line="175">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="176">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="c7de4f52f1bf3074e96c0f94b6fb806ad7c2e469" resname="booking.new.message.placeholder">
                 <source>booking.new.message.placeholder</source>
@@ -337,7 +337,7 @@
             <trans-unit id="1703c3a03d2cf45800ecb3b3f93e1a5b8bb6573f" resname="booking.new.options.success">
                 <source>booking.new.options.success</source>
                 <target state="new">booking.new.options.success</target>
-                <jms:reference-file line="145">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="146">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="083c618c0d6cea305c1e7472bcceb15434994011" resname="booking.new.provider.title">
                 <source>booking.new.provider.title</source>
@@ -347,12 +347,12 @@
             <trans-unit id="28b9e3c63b01f9d312668d113cd7eb5c04157a3c" resname="booking.new.self_booking.error">
                 <source>booking.new.self_booking.error</source>
                 <target>You can't book to yourself</target>
-                <jms:reference-file line="177">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="178">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="925b7c8ca8556c7b560a5a904ec979fe4916a304" resname="booking.new.success">
                 <source>booking.new.success</source>
                 <target>You have booked this listing successfully</target>
-                <jms:reference-file line="109">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="110">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="339b4d363003c41683cf58282a0895c975c66f6f" resname="booking.new.tac.link">
                 <source>booking.new.tac.link</source>
@@ -365,7 +365,7 @@
                 <target>Unknown error</target>
                 <jms:reference-file line="171">Dashboard/Asker/BookingController.php</jms:reference-file>
                 <jms:reference-file line="181">Dashboard/Offerer/BookingController.php</jms:reference-file>
-                <jms:reference-file line="171">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="172">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b370314c697defb1d7393abebaf775f49845880b" resname="booking.new.validation.submit">
                 <source>booking.new.validation.submit</source>
@@ -375,17 +375,17 @@
             <trans-unit id="0462988b55dd0888cce21c33dc9ad8ecff7e38c6" resname="booking.new.voucher.success">
                 <source>booking.new.voucher.success</source>
                 <target>Your voucher code is valid. You get a discount.</target>
-                <jms:reference-file line="135">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="136">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="34d6eabc34fbcd0e218de0639d3c36b1ae87127c" resname="booking.new.voucher_amount.error">
                 <source>booking.new.voucher_amount.error</source>
                 <target>The booking amount is insufficient to use this code.</target>
-                <jms:reference-file line="182">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="183">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="42217431f6de6e7c4326a18f5e57ba8d637b0539" resname="booking.new.voucher_code.error">
                 <source>booking.new.voucher_code.error</source>
                 <target state="new">This code is not correct</target>
-                <jms:reference-file line="179">Controller/Frontend/BookingController.php</jms:reference-file>
+                <jms:reference-file line="180">Controller/Frontend/BookingController.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="120b92535d73cd274ad24e0314361747252b8251" resname="booking.payin.amount.title">
                 <source>booking.payin.amount.title</source>

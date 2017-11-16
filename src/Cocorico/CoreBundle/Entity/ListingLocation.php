@@ -107,6 +107,19 @@ class ListingLocation extends BaseListingLocation
         return $this->listing;
     }
 
+    /**
+     * @return string
+     */
+    public function getCompleteAddress()
+    {
+        $address = $this->getStreetNumber() . " " . $this->getRoute() . ", " . $this->getZip() . " " . $this->getCity();
+        if ($this->getCoordinate()) {
+            $address .= ", " . $this->getCoordinate()->getCountry();
+        }
+
+        return $address;
+    }
+
     public function __clone()
     {
         if ($this->id) {

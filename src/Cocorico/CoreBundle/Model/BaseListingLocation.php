@@ -180,12 +180,4 @@ abstract class BaseListingLocation
     {
         return $this->streetNumber;
     }
-
-    /**
-     * @return string
-     */
-    public function getCompleteAddress()
-    {
-        return $this->getStreetNumber() . " " . $this->getRoute() . ", " . $this->getZip() . " " . $this->getCity();
-    }
 }

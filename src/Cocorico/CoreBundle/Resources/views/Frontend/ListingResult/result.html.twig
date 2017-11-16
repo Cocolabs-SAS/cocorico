@@ -155,7 +155,7 @@
                                             </div>
                                             <div class="textbox">
                                                 {% if bundleExist('CocoricoDeliveryBundle') %}
-                                                    {% include '@CocoricoDelivery/Frontend/Listing/_show_delivery.html.twig' with {
+                                                    {% include 'CocoricoDeliveryBundle:Frontend:Listing/_show_delivery.html.twig' with {
                                                     'listing_delivery': listing.delivery
                                                     } only %}
                                                 {% endif %}
