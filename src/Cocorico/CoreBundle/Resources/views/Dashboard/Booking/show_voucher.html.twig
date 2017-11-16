@@ -66,7 +66,7 @@
             <div>
                 <strong>{{ 'booking.voucher.description' | trans }} : </strong>
                 <br/>
-                {{ translation.description }}
+                {{ translation.description|strip_private_info }}
             </div>
         </div>
 
