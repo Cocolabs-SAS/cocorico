@@ -14,6 +14,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add Carrier Bundle compatibility
 
 ### Fixed
+- Fix user bad credential translation
 
 ### Changed
 
