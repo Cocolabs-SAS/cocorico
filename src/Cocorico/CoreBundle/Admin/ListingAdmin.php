@@ -27,6 +27,7 @@ class ListingAdmin extends Admin
     protected $baseRoutePattern = 'listing';
     protected $locales;
     protected $includeVat;
+    protected $bundles;
 
     // setup the default sort column and order
     protected $datagridValues = array(
@@ -45,6 +46,11 @@ class ListingAdmin extends Admin
     public function setIncludeVat($includeVat)
     {
         $this->includeVat = $includeVat;
+    }
+
+    public function setBundlesEnabled($bundles)
+    {
+        $this->bundles = $bundles;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -220,6 +226,23 @@ class ListingAdmin extends Admin
 //                )
 //            )
             ->end();
+
+        if (array_key_exists("CocoricoCarrierBundle", $this->bundles)) {
+            $formMapper
+                ->with('admin.booking.delivery')
+                ->add(
+                    'pallets',
+                    'number',
+                    array(
+                        'label' => 'listing.form.pallets',
+                        'required' => true
+                    ),
+                    array(
+                        'translation_domain' => 'cocorico_carrier_listing',
+                    )
+                )
+                ->end();
+        }
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

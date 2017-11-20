@@ -6,6 +6,7 @@
 {% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
 {% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
 {% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
+{% set carrierBundleEnabled = bundleExist('CocoricoCarrierBundle') %}
 
 {% set listing = booking.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
@@ -107,8 +108,14 @@
                             </ul>
                         </div>
 
+                        {#Delivery OR Carrier bundle form#}
                         {% if deliveryBundleEnabled %}
                             {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
+                            'form': form,
+                            'booking': booking
+                            } only %}
+                        {% elseif carrierBundleEnabled %}
+                            {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
                             'form': form,
                             'booking': booking
                             } only %}
@@ -295,6 +302,10 @@
 
     {% if deliveryBundleEnabled %}
         {% include 'CocoricoDeliveryBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
+        'listing_location': listing_location
+        } only %}
+    {% elseif carrierBundleEnabled %}
+        {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
         'listing_location': listing_location
         } only %}
     {% endif %}

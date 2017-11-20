@@ -60,6 +60,12 @@
                 {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
             </em>
         {% endif %}
+
+        {% if bundleExist('CocoricoCarrierBundle') %}
+            {% include 'CocoricoCarrierBundle:Frontend:Listing/_show_carrier.html.twig' with {
+            'listing_pallets': booking.listing.pallets
+            } only %}
+        {% endif %}
     </div>
 
 

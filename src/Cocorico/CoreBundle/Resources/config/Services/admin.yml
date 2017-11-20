@@ -11,6 +11,7 @@ services:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setLocales, ["%cocorico.locales%"]]
             - [ setIncludeVat, ["%cocorico.include_vat%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
     sonata.admin.booking:
         class: Cocorico\CoreBundle\Admin\BookingAdmin

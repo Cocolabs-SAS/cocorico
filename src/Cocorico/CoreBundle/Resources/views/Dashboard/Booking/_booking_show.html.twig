@@ -90,6 +90,10 @@
                     {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery.html.twig' with {
                     'booking': booking
                     } only %}
+                {% elseif bundleExist('CocoricoCarrierBundle') %}
+                    {% include 'CocoricoCarrierBundle:Dashboard:Booking/_show_carrier.html.twig' with {
+                    'booking': booking
+                    } only %}
                 {% endif %}
             </div>
 

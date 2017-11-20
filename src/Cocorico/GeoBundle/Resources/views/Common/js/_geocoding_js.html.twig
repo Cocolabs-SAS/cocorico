@@ -135,8 +135,8 @@
                         if (typeof translate !== 'undefined' && translate == true) {
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
                                     function (resultsTranslated) {
-                                        //console_log("resultsTranslated", resultsTranslated);
-                                        //console_log("formattedResult", formattedResult);
+//                                        console_log("resultsTranslated", resultsTranslated);
+//                                        console_log("formattedResult", formattedResult);
                                         deferred.resolve(
                                                 $.extend(formattedResult, resultsTranslated)
                                         );

@@ -53,6 +53,10 @@
             {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery_in_voucher.html.twig' with {
             'booking': booking
             } only %}
+        {% elseif bundleExist('CocoricoCarrierBundle') %}
+            {% include 'CocoricoCarrierBundle:Dashboard:Booking/_show_carrier_in_voucher.html.twig' with {
+            'booking': booking
+            } only %}
         {% endif %}
 
         <div>

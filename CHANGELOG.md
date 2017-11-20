@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Added
 - Add listing location in listing admin
+- Add Carrier Bundle compatibility
 
 ### Fixed
 
