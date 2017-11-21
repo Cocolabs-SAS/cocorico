@@ -6,8 +6,16 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
-
 ## [Unreleased]
+
+### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.4.1] - 2017-11-22
 
 ### Added
 - Add PHP 7.1 compatibility
