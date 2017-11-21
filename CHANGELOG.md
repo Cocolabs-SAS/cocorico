@@ -18,6 +18,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix user bad credential translation
 
 ### Changed
+- Update doc for PHP7 and Docker usage
 
 
 ## [0.4.0] - 2017-11-13

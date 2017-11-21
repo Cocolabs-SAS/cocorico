@@ -1,5 +1,5 @@
-Virtual simple dev host samples
-===============================
+Dev virtual host sample
+=======================
 
 
 Dev minimum
