@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Add PHP 7.1 compatibility
 - Add listing location in listing admin
 - Add Carrier Bundle compatibility
 
