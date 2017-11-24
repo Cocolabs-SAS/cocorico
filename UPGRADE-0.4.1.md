@@ -4,10 +4,12 @@ UPGRADE to 0.4.1
 
 # Table of Contents
 
--  [Upgrade PHP to 7.1](#Upgrade PHP to 7.1)
--  [Replace PHP mongo extension by mongodb](#Replace PHP mongo extension by mongodb)
+-  [Upgrade PHP to 7.1](#upgrade-php-to-71)
+-  [Replace PHP mongo extension by mongodb](#replace-php-mongo-extension-by-mongodb)
 
 ## Upgrade PHP to 7.1
+
+    
 
 ## Replace PHP mongo extension by mongodb
         
