@@ -1,5 +1,7 @@
 # Cocorico
 
+[![Build Status](https://secure.travis-ci.org/Cocolabs-SAS/cocorico.svg)](http://travis-ci.org/Cocolabs-SAS/cocorico)
+
 Cocorico is an open source platform to create collaborative consumption marketplaces.
 You can find more information about this project on [http://www.cocolabs.io](http://www.cocolabs.io).
 
