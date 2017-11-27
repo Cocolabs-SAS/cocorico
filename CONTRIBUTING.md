@@ -142,3 +142,16 @@ license your work under the same license as that used by the project.
 
 
 Thanks to https://github.com/necolas for this contributing guidelines.
+
+
+## Versioning
+
+Cocorico follows the Semantic Versioning 2 as far as possible:
+
+> Given a version number MAJOR.MINOR.PATCH, increment the:
+>
+> MAJOR version when you make incompatible API changes,
+>
+> MINOR version when you add functionality in a backwards-compatible manner, and
+>
+> PATCH version when you make backwards-compatible bug fixes.
