@@ -1,8 +1,6 @@
-BDD Tests
-=========
+# BDD Tests
 
-1) Execute tests
-----------------
+##  Execute tests
 
 1. Start selenium server:
 

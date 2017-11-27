@@ -32,7 +32,7 @@ Cocorico works also with Nginx.
             
 #### Create your virtual host: 
 
-See [dev virtual host sample](doc/virtual-hosts.rst)
+See [dev virtual host sample](doc/virtual-hosts.md)
 
 ### MongoDB
 
@@ -115,7 +115,7 @@ Change to your parent "Document Root" directory and clone repository:
                         
 ### Create services accounts
 
-See  [Services account creation ](doc/services-creation.rst)
+See  [Services account creation ](doc/services-creation.md)
 
     
 ### Install composer
@@ -191,7 +191,7 @@ In case of error "An error occurred: SSL certificate problem: unable to get loca
 
 ## Add crons
 
-See [Technical documentation](doc/index.rst)
+See [Technical documentation](doc/index.md)
     
 ## Browsing the Demo Application
 

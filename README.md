@@ -1,3 +1,7 @@
+<h1 align="center">
+    <img src="http://docs.cocorico.io/images/logo_cocorico.png" alt="Cocorico"/>
+</h1>
+
 # Cocorico
 
 [![Build Status](https://secure.travis-ci.org/Cocolabs-SAS/cocorico.svg)](http://travis-ci.org/Cocolabs-SAS/cocorico)
@@ -6,11 +10,15 @@
 
 Cocorico is an open source platform to create collaborative consumption marketplaces - [http://www.cocolabs.io](http://www.cocolabs.io)
 
-![preview](doc/img/preview1.png)
+A demo is available at [http://demo.cocorico.io](http://demo.cocorico.io).
 
 ## Installation
 
-Please [read this documentation](doc/installation.md)
+Please [read installation instructions](doc/installation.md)
+
+## Documentation
+
+Documentation is available [here](doc/index.md)
 
 ## Contribute
 

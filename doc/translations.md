@@ -1,5 +1,4 @@
-Translations
-============
+# Translations
 
 There are two types of translations:
 
@@ -24,8 +23,7 @@ There are two types of translations:
         Ex: 'label' => 'admin.listing.title'
     
 
-Extract translations
---------------------
+## Extract translations
 
 To extract translations keys from whole application:
     In english languages:
@@ -41,8 +39,7 @@ To translate keys you have choice to:
 * Edit `app/Resources/translations/` files
 * Go to http://cocorico.dev/[admin]/__translations/
 
-Do not generate entities
-------------------------
+## Do not generate entities
 
 Do not generate entities from `generate:entities` because of this doctrine remark and the use of mapped super class
 

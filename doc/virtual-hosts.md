@@ -1,8 +1,6 @@
-Virtual host sample
-===================
+# Virtual host sample
 
-Dev
----
+## Dev
 
 - HTTP 
 
@@ -53,8 +51,7 @@ Dev
         </VirtualHost>
 
 
-Prod
-----
+## Prod
 
 - HTTPS
 

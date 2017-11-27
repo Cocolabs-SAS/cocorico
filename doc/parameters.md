@@ -1,5 +1,4 @@
-Parameters
-==========
+# Parameters
 
 Cocorico application parameters are defined in the following files:
 

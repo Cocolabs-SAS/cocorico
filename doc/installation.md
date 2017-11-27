@@ -2,11 +2,9 @@
 
 For a quick installation based on Docker see [Docker installation](https://github.com/Cocolabs-SAS/cocorico-docker)
 
-For a manual installation on Windows see [Windows installation](doc/installation-windows.md)
+For a manual installation on Windows see [Windows installation](installation-windows.md)
 
 For a manual installation on Linux see below
-
-# Installation
 
 ## Requirements
 
@@ -18,7 +16,7 @@ Activate following modules
     - mod_rewrite
     - mod_ssl
 
-Create your virtual host: [dev virtual host sample](doc/virtual-hosts.rst)
+Create your virtual host: [dev virtual host sample](virtual-hosts.md)
 
 
 ### MongoDB 
@@ -104,7 +102,7 @@ Go to to your parent "Document Root" directory and clone repository:
                      
 ### Create services accounts
 
-See [Services account creation ](doc/services-creation.rst)
+See [Services account creation ](services-creation.md)
 
 
 ### Install composer
@@ -181,7 +179,7 @@ In case of error "An error occurred: SSL certificate problem: unable to get loca
 
 ## Add crons
 
-See [Technical documentation](doc/index.rst)
+See [Crons documentation](crons.md)
     
 ## Browsing the Demo Application
 

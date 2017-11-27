@@ -1,8 +1,6 @@
-Times
-=====
+# Times
 
-Time unit
----------
+## Time unit
 
 Time unit depend on value of some parameters.
 See `Cocorico/CoreBundle/Resources/config/parameters.yml` to view default values.
@@ -82,8 +80,7 @@ Examples:
         cocorico.booking.end_day_included: true
 
 
-Booking Expiration
-------------------
+## Booking Expiration
 
 Booking expiration depends on the following parameters: 
 

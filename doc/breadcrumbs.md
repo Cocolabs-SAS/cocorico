@@ -1,5 +1,4 @@
-Breadcrumbs
-===========
+# Breadcrumbs
 
 You need to add your breadcrumbs in `src/Cocorico/CoreBundle/Resources/content/breadcrumbs.yml`
 

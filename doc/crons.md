@@ -1,11 +1,9 @@
-Crons
-=====
+# Crons
 
 Add this commands to your cron tab and don't forget to set the same PHP timezone "UTC" 
 in  the php.ini file of php and php-cli.
 
-Required
---------
+## Required
 
 1. Currencies update:
 
@@ -36,8 +34,7 @@ Required
     `0 0 27 * * php <path-to-your-app>app/console cocorico:listings:alertUpdateCalendars --env=dev`
 
 
-Optionals
----------
+## Optionals
 
 1. Listings platform notation computing (Optional. ListingSearchBundle must be enabled):
         

@@ -1,5 +1,4 @@
-MongoDB
-=======
+# MongoDB
 
 Listing prices and availabilities are stored in MongoDB through ListingAvailability and ListingAvailabilityTime
 documents. 

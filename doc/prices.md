@@ -1,5 +1,4 @@
-Prices
-======
+# Prices
 
 All prices (listing, booking, bankwire, refund, ...) are stored in cents and in the default app currency 
 defined by `cocorico.currency` parameter.
@@ -7,8 +6,7 @@ defined by `cocorico.currency` parameter.
 Entities decimal prices are accessed though `getXXXDecimal` methods.
 
 
-VAT
----
+## VAT
 
 Listing price fixing can be set with or without VAT included depending on the parameter `cocorico.include_vat` value.
 
@@ -24,8 +22,7 @@ If it's setted to false then:
 - Most of offerer relative prices are displayed excluding VAT
 
 
-Fees
-----
+## Fees
 
 The platform can take fees on each transactions. 
 Fees rate are defined by the parameters `cocorico.fee_as_asker` and `cocorico.fee_as_offerer` parameter. 
@@ -33,8 +30,7 @@ Fees rate are defined by the parameters `cocorico.fee_as_asker` and `cocorico.fe
 The administrator can choose to change the fee rate of each user as asker and as offerer. 
 
 
-Refund
-------
+## Refund
 
 There are two type of cancellation policies **Flexible** and **Strict**. 
 Each policy define how asker will be refunded according to when he make a cancelation.

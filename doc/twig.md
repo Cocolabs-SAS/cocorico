@@ -1,9 +1,7 @@
-Twig
-====
+# Twig
 
 
-Prices
-------
+## Prices
 
 All prices are stored in cents without decimal and need to be converted and formatted through 
 the twig `format_price` filter inside templates.
@@ -11,8 +9,7 @@ the twig `format_price` filter inside templates.
     Ex: listing.priceDecimal | format_price(app.request.locale, 2, false)
     
 
-Currency
---------
+## Currency
 
 * To display default currency symbol (ex: €):
 
@@ -23,8 +20,7 @@ Currency
     `{{ currencySymbol(currentCurrency) }}`
 
     
-Images
-------
+## Images
 
 There are two methods to add images in twig templates according to their type:
 
@@ -39,8 +35,7 @@ There are two methods to add images in twig templates according to their type:
     Users images are cached in web/media/cache folder.
 
 
-Global variables
-----------------
+## Global variables
 
 Global twig variables are defined in `Cocorico\CoreBundle\Twig\CoreExtension.php` and in 
 `Cocorico/CoreBundle/Resources/config/config.yml`.

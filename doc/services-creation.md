@@ -1,8 +1,6 @@
-Create services accounts
-=======================
+# Create services accounts
 
-Create your Google API account
-------------------------------
+## Create your Google API account
 
 * Go to https://console.developers.google.com/project
 * Sign-in with you google account
@@ -23,16 +21,14 @@ parameters in `app/config/parameters.yml`.
 *See https://developers.google.com/maps/faq#switch-key-type.*
     
     
-Create your microsoft Translator account
-----------------------------------------
+## Create your microsoft Translator account
 
     See https://www.microsoft.com/translator/getstarted.aspx. 
     
 *Note: Free for 2 millions of characters by month, after it is 10$ per million characters.*
 *See https://azure.microsoft.com/en-us/pricing/details/cognitive-services/translator-text-api/*
     
-Create your Facebook Login App
-------------------------------
+## Create your Facebook Login App
 
 See [https://developers.facebook.com/docs/apps/register](https://developers.facebook.com/docs/apps/register)
     
