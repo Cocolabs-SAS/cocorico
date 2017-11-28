@@ -26,7 +26,7 @@ services:
     cocorico.authentication_success_listener:
         class: Cocorico\CoreBundle\Authentication\Handler\LoginSuccessHandler
         arguments:
-            - @security.http_utils
+            - "@security.http_utils"
             #This must be the same that those in security.yml firewall main config
             #todo: add to parameters this values
             - { target_path_parameter: 'redirect_to', login_path: cocorico_user_login, use_referer: true }

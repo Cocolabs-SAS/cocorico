@@ -31,6 +31,7 @@ class ListingCharacteristicValueRepository extends EntityRepository
             ->setParameter('lcr', $listingCharacteristicType)
             ->setParameter('locale', $locale);
 
+
 //        $queryBuilder->getQuery()->useQueryCache(true);
 //        $queryBuilder->getQuery()->useResultCache(true, 3600, 'listing_characteristic_values');
         return $queryBuilder;

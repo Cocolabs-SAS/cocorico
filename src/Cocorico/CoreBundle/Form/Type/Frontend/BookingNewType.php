@@ -31,7 +31,7 @@ use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class BookingNewType extends AbstractType implements TranslationContainerInterface
 {
@@ -142,7 +142,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,
-                    'constraints' => new True(
+                    'constraints' => new IsTrue(
                         array(
                             "message" => self::$tacError
                         )
@@ -170,53 +170,6 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'label' => false,
                     'block_name' => 'time_range_hidden',
                 )
-            );
-        }
-
-        if ($this->bookingManager->voucherIsEnabled()) {
-            $builder
-                ->add(
-                    'voucher',
-                    'voucher',
-                    array(
-                        'translation_domain' => 'cocorico_voucher',
-                    )
-                );
-        }
-
-        if ($this->bookingManager->optionIsEnabled()) {
-            $builder
-                ->add(
-                    'options',
-                    'collection',
-                    array(
-                        'allow_delete' => false,
-                        'allow_add' => false,
-                        'type' => 'booking_option',
-                        'by_reference' => false,
-                        'prototype' => false,
-                        /** @Ignore */
-                        'label' => false,
-                        'cascade_validation' => true,//Important to have error on collection item field!
-                        'translation_domain' => 'cocorico_listing_option',
-                    )
-                );
-
-            //Add new Listing Options eventually not already attached to booking
-            $builder->addEventListener(
-                FormEvents::PRE_SET_DATA,
-                function (FormEvent $event) {
-                    /** @var Booking $booking */
-                    $booking = $event->getData();
-
-                    $booking = $this->bookingManager->setBookingOptions(
-                        $booking,
-                        $this->locales,
-                        $this->locale
-                    );
-
-                    $event->setData($booking);
-                }
             );
         }
 
@@ -279,6 +232,8 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         };
 
         /**
+         * todo: decouple external bundles errors management
+         *
          * Add errors to the form if any
          *
          * @param FormInterface $form
@@ -290,16 +245,17 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 foreach ($keys as $key) {
                     unset($errors[$key]);
                 }
-                $now = new \DateTime();
+                $minStart = new \DateTime();
+                $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
                 if ($this->minStartDelay > 0) {
-                    $now->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
+                    $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
                 }
                 $form['date_range']->addError(
                     new FormError(
                         'date_range.invalid.min_start {{ min_start_day }}',
                         'cocorico',
                         array(
-                            '{{ min_start_day }}' => $now->format('d/m/Y'),
+                            '{{ min_start_day }}' => $minStart->format('d/m/Y'),
                         )
                     )
                 );
@@ -310,16 +266,17 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 foreach ($keys as $key) {
                     unset($errors[$key]);
                 }
-                $now = new \DateTime();
+                $minStart = new \DateTime();
+                $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
                 if ($this->minStartTimeDelay > 0) {
-                    $now->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
+                    $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
                 }
                 $form['date_range']->addError(
                     new FormError(
                         'time_range.invalid.min_start {{ min_start_time }}',
                         'cocorico',
                         array(
-                            '{{ min_start_time }}' => $now->format('d/m/Y H:i'),
+                            '{{ min_start_time }}' => $minStart->format('d/m/Y H:i'),
                         )
                     )
                 );

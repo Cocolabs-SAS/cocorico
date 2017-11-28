@@ -1,6 +1,6 @@
 default:
     autoload:
-        '': %paths.base%/features
+        '': "%paths.base%/features"
     formatters:
         pretty: true
 
@@ -11,11 +11,11 @@ default:
                 debug: true
         Behat\MinkExtension:
             base_url: 'http://cocorico.test.localhost/'
-            files_path: %paths.base%\features\_datas\
+            files_path: "%paths.base%\\features\\_datas\\"
             selenium2: ~
             show_auto:    false
             show_cmd: open %s
-            show_tmp_dir: %paths.base%\web\test\behat
+            show_tmp_dir: "%paths.base%\\web\\test\\behat"
             sessions:
                 default:
                     symfony2: ~

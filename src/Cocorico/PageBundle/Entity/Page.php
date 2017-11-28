@@ -23,6 +23,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  *
  * @ORM\Table(name="page",indexes={
  *    @ORM\Index(name="published_idx", columns={"published"}),
+ *    @ORM\Index(name="created_at_p_idx", columns={"createdAt"})
  *  })
  *
  */

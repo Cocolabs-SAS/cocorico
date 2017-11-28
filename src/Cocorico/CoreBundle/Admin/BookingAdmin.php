@@ -19,6 +19,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
 
 class BookingAdmin extends Admin
 {
@@ -67,6 +69,9 @@ class BookingAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Booking $booking */
+        $booking = $this->getSubject();
+
         $formMapper
             ->with('admin.booking.title')
             ->add(
@@ -85,11 +90,20 @@ class BookingAdmin extends Admin
                     'label' => 'admin.booking.offerer.label',
                     'data_class' => 'Cocorico\UserBundle\Entity\User'
                 )
-            )
+
+            );
+
+        $formMapper
             ->add(
                 'listing',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $booking ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                        ->getRepository('CocoricoCoreBundle:Listing')
+                        ->getFindOneByIdAndLocaleQuery(
+                            $booking->getListing()->getId(),
+                            $this->request ? $this->getRequest()->getLocale() : 'fr'
+                        ) : null,
                     'disabled' => true,
                     'label' => 'admin.listing.label',
                 )
@@ -313,6 +327,49 @@ class BookingAdmin extends Admin
         if (array_key_exists("CocoricoDeliveryBundle", $this->bundles)) {
             $formMapper
                 ->with('admin.booking.delivery')
+                ->add(
+                    'deliveryAddress',
+                    null,
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.delivery_address.label'
+                    )
+                )
+                ->add(
+                    'amountDelivery',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.delivery_amount.label'
+                    )
+                )
+                ->end();
+        } elseif (array_key_exists("CocoricoCarrierBundle", $this->bundles)) {
+            $formMapper
+                ->with('admin.booking.delivery')
+                ->add(
+                    'listing.location.completeAddress',
+                    'text',
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.listing.location.label'
+                    )
+                )
+                ->add(
+                    'pallets',
+                    'number',
+                    array(
+                        'label' => 'listing.form.pallets',
+                        'required' => true,
+                        'constraints' => array(
+                            new NotBlank(),
+                            new Range(array('min' => 1, 'max' => 33))
+                        )
+                    ),
+                    array(
+                        'translation_domain' => 'cocorico_carrier_listing',
+                    )
+                )
                 ->add(
                     'deliveryAddress',
                     null,

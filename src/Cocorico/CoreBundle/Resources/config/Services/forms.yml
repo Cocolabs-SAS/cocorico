@@ -201,6 +201,7 @@ services:
             - "%cocorico.time_unit%"
             - "%cocorico.times_max%"
             - "%cocorico.time_picker%"
+            - "%cocorico.time_hours_available%"
         tags:
             - { name: form.type, alias: time_range }
 

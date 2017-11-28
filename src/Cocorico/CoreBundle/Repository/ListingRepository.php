@@ -16,6 +16,7 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ListingRepository extends EntityRepository
 {
@@ -52,11 +53,10 @@ class ListingRepository extends EntityRepository
             ->leftJoin('u.images', 'ui', Query\Expr\Join::WITH, 'ui.position = 1')
             ->leftJoin('l.location', 'ln')
             ->leftJoin('ln.coordinate', 'co');
-
 //            ->leftJoin('co.country', 'cy');
 
-        $queryBuilder
-            ->addGroupBy('l.id');
+//        $queryBuilder
+//            ->addGroupBy('l.id');
 
         return $queryBuilder;
     }
@@ -258,11 +258,30 @@ class ListingRepository extends EntityRepository
             ->orderBy('l.createdAt', 'DESC');
         try {
             $query = $queryBuilder->getQuery();
+            $query->setHydrationMode(Query::HYDRATE_ARRAY);
             $query->useResultCache(true, 21600, 'findByHighestRanking');
 
-            return $query->getResult();
+            return new Paginator($query);
         } catch (NoResultException $e) {
             return null;
         }
+    }
+
+    /**
+     * @param $listingId
+     * @param $locale
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    public function getFindOneByIdAndLocaleQuery($listingId, $locale)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->addSelect("lt")
+            ->leftJoin("l.translations", "lt")
+            ->where('l.id = :listingId')
+            ->andWhere('lt.locale = :locale')
+            ->setParameter('listingId', $listingId)
+            ->setParameter('locale', $locale);
+
+        return $queryBuilder;
     }
 }

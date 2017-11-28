@@ -25,7 +25,6 @@ use Cocorico\CoreBundle\Repository\ListingCharacteristicRepository;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -148,9 +147,9 @@ class ListingManager extends BaseManager
     /**
      * @param  Listing $listing
      * @param  array   $images
-     * @param  boolean $persist
-     *
+     * @param bool     $persist
      * @return Listing
+     * @throws AccessDeniedException
      */
     public function addImages(Listing $listing, array $images, $persist = false)
     {
@@ -182,7 +181,6 @@ class ListingManager extends BaseManager
 
     /**
      * Create categories and field values while listing deposit.
-     *
      *
      * @param  Listing $listing
      * @param  array   $categories Id(s) of ListingCategory(s) selected
@@ -299,7 +297,9 @@ class ListingManager extends BaseManager
     public function duplicate(Listing $listing)
     {
         $listingCloned = clone $listing;
-        $listingCloned->setStatus(Listing::STATUS_NEW);
+        if (!$this->newListingIsPublished) {
+            $listing->setStatus(Listing::STATUS_TO_VALIDATE);
+        }
 
         //Translations
         $listingCloned->mergeNewTranslations();

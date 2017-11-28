@@ -5,11 +5,12 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@doctrine.odm.mongodb.document_manager"
-            - "%cocorico.booking.end_day_included%"
-            - "%cocorico.time_unit%"
-            - "%cocorico.listing_search_max_per_page%"
-            - "%cocorico.listing_availability_status%"
             - "@event_dispatcher"
+            - parameters:
+                cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
+                cocorico_time_unit: "%cocorico.time_unit%"
+                cocorico_listing_search_max_per_page: "%cocorico.listing_search_max_per_page%"
+                cocorico_listing_availability_status: "%cocorico.listing_availability_status%"
 
     cocorico.listing.manager:
         class: Cocorico\CoreBundle\Model\Manager\ListingManager
@@ -26,25 +27,29 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@doctrine.odm.mongodb.document_manager"
-            - "%cocorico.fee_as_asker%"
-            - "%cocorico.fee_as_offerer%"
-            - "%cocorico.booking.end_day_included%"
-            - "%cocorico.time_unit%"
-            - "%cocorico.times_max%"
-            - "%cocorico.booking.min_start_delay%"
-            - "%cocorico.booking.min_start_time_delay%"
-            - "%cocorico.booking_price_min%"
             - "@cocorico.listing_availability.manager"
-            - "%cocorico.dashboard_max_per_page%"
             - "@cocorico.mailer.twig_swift"
             - "@cocorico.smser.twig"
             - "@?cocorico_sms.receiver"
-            - "@?cocorico_listing_option.manager"
-            - "@?cocorico_voucher.manager"
-            - "%cocorico.listing_availability_status%"
-            - "%cocorico.vat%"
-            - "%cocorico.include_vat%"
             - "@event_dispatcher"
+            - parameters:
+                cocorico_fee_as_asker: "%cocorico.fee_as_asker%"
+                cocorico_fee_as_offerer: "%cocorico.fee_as_offerer%"
+                cocorico_time_unit: "%cocorico.time_unit%"
+                cocorico_time_zone: "%cocorico.time_zone%"
+                cocorico_time_max: "%cocorico.times_max%"
+                cocorico_time_hours_available: "%cocorico.time_hours_available%"
+                cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
+                cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
+                cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
+                cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
+                cocorico_booking_price_min: "%cocorico.booking_price_min%"
+                cocorico_dashboard_max_per_page: "%cocorico.dashboard_max_per_page%"
+                cocorico_listing_availability_status: "%cocorico.listing_availability_status%"
+                cocorico_vat: "%cocorico.vat%"
+                cocorico_include_vat: "%cocorico.include_vat%"
+                cocorico_bundles: "%kernel.bundles%"
+
 
     cocorico.booking_bank_wire.manager:
         class: Cocorico\CoreBundle\Model\Manager\BookingBankWireManager
@@ -54,6 +59,7 @@ services:
             - "@cocorico.mailer.twig_swift"
             - "%cocorico.dashboard_max_per_page%"
             - "@event_dispatcher"
+            - "%kernel.bundles%"
 
     cocorico.booking_payin_refund.manager:
         class: Cocorico\CoreBundle\Model\Manager\BookingPayinRefundManager
@@ -62,6 +68,8 @@ services:
             - "%cocorico.booking.cancelation_policy%"
             - "@cocorico.mailer.twig_swift"
             - "%cocorico.dashboard_max_per_page%"
+            - "%cocorico.time_zone%"
+            - "%kernel.bundles%"
 
     cocorico.language.manager:
         class: Cocorico\CoreBundle\Model\Manager\LanguageManager
@@ -76,3 +84,4 @@ services:
         arguments:
             - "@doctrine.odm.mongodb.document_manager"
             - "%cocorico.time_unit%"
+            - "%cocorico.listing_availability_status%"

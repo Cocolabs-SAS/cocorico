@@ -3,7 +3,7 @@
 {% set user_images = user.images %}
 {% set user_description = "" %}
 {% if  user.translations[app.request.locale] is defined %}
-    {% set user_description = user.translations[app.request.locale].description %}
+    {% set user_description = user.translations[app.request.locale].description|strip_private_info %}
 {% endif %}
 {% set user_address = user.getAddresses %}
 {% set user_address = (user_address is empty) ? null : user_address[0] %}
@@ -92,18 +92,20 @@
                                         <header class="head">
                                             <div class="author-img">
                                                 <div class="img-holder">
-                                                    <img alt="{{ reviewBy.firstName }}"
+                                                    <img alt="{{ reviewBy.name }}"
                                                          src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
                                                 </div>
                                                 <a href="{{ path('cocorico_user_profile_show', { 'id': reviewBy.id }) }}"
-                                                   class="author-name">{{ reviewBy.firstName }}</a>
+                                                   class="author-name">{{ reviewBy.name }}</a>
                                             </div>
                                             <div class="meta">
-                                                <time datetime="{{ review.createdAt|date('Y-m-d') }}">{{ review.createdAt|localizeddate('short', 'none', 'fr') }} </time>
+                                                <time datetime="{{ review.createdAt|date('Y-m-d') }}">
+                                                    {{ review.createdAt|localizeddate('short', 'none', 'fr') }}
+                                                </time>
                                             </div>
                                         </header>
                                         <div class="post-content">
-                                            <p>{{ review.comment }}</p>
+                                            <p>{{ review.comment|strip_private_info }}</p>
                                         </div>
                                         <footer class="footer">
                                             {% if review.booking.listing.user == user %}
@@ -134,13 +136,13 @@
                                     {% for image in user_images %}
                                         <div class="slide">
                                             <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                                 alt="{{ user.firstName }}"/>
+                                                 alt="{{ user.name }}"/>
                                         </div>
                                     {% endfor %}
                                 {% else %}
                                     <div class="slide">
                                         <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
-                                             alt="{{ user.firstName }}"/>
+                                             alt="{{ user.name }}"/>
                                     </div>
                                 {% endif %}
                             </div>
@@ -151,7 +153,7 @@
                         <section class="widget members-list">
                             <h1>
                                 {{ 'user.profile.subscribe-date.title'|trans }}
-                                <time datetime="2009-01-12">
+                                <time datetime="{{ user.createdAt|date("Y-m-d") }}">
                                     {{ user.createdAt|localizeddate('short', 'none', 'fr') }}
                                 </time>
                             </h1>
@@ -362,7 +364,7 @@
 {% block markup_jsonld %}
     {{ parent() }}
 
-    {% include '@CocoricoSeo/Frontend/Profile/_show_markup.jsonld.twig' ignore missing with {
+    {% include 'CocoricoSeoBundle:Frontend:Profile/_show_markup.jsonld.twig' ignore missing with {
     'user': user,
     'user_listings': user_listings,
     'user_description': user_description,

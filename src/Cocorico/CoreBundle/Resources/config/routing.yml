@@ -19,7 +19,7 @@ _sonata_admin:
     options: { i18n: false }
 
 JMSTranslationBundle_ui:
-    resource: @JMSTranslationBundle/Controller/
+    resource: "@JMSTranslationBundle/Controller/"
     type: annotation
     #prefix: /_translations
     prefix:   /%cocorico.admin%/__translations

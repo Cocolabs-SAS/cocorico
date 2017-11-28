@@ -22,4 +22,14 @@ class BookingFormEvents
      * The event listener receives a \Cocorico\CoreBundle\Event\BookingFormBuilderEvent instance.
      */
     const BOOKING_NEW_FORM_BUILD = 'cocorico.booking_new.form.build';
+
+
+    /**
+     * The BOOKING_NEW_FORM_PROCESS event is thrown each time a new booking form is processed
+     *
+     * This event allows you to process and validate extra form fields.
+     *
+     * The event listener receives a \Cocorico\CoreBundle\Event\BookingFormEvent instance.
+     */
+    const BOOKING_NEW_FORM_PROCESS = 'cocorico.booking_new.form.process';
 }

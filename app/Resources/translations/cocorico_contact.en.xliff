@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:43:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-11-16T11:41:47Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="b4ce204ba1c572abe62609f69cedee82e8698e44" resname="admin.contact.status.label">
@@ -113,12 +117,12 @@
             <trans-unit id="35d8ee3612fd226f9cfbbc9b23fdc9534ee90792" resname="contact.form.submit.button">
                 <source>contact.form.submit.button</source>
                 <target>Submit</target>
-                <jms:reference-file line="32">views/Contact/index.html.twig</jms:reference-file>
+                <jms:reference-file line="32">views/Frontend/index.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8c4ecc2f579d5a4e94b8c400cae37855a672b92f" resname="contact.new.form.title">
                 <source>contact.new.form.title</source>
                 <target>Contact Us</target>
-                <jms:reference-file line="24">views/Contact/index.html.twig</jms:reference-file>
+                <jms:reference-file line="24">views/Frontend/index.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="8966dd81d50f350bf4aa2b7d2bae9a6afbbc441c" resname="contact.new.success">
                 <source>contact.new.success</source>

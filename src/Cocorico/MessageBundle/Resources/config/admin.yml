@@ -9,7 +9,7 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
+            - [ setLocales, ["%cocorico.locales%"]]
 
     sonata.admin.message:
         class: Cocorico\MessageBundle\Admin\MessageAdmin
@@ -21,4 +21,4 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, [%cocorico.locales%]]
+            - [ setLocales, ["%cocorico.locales%"]]

@@ -18,7 +18,6 @@ use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
 use Cocorico\CoreBundle\Repository\BookingPayinRefundRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class BookingPayinRefundManager extends BaseManager
@@ -27,19 +26,31 @@ class BookingPayinRefundManager extends BaseManager
     protected $cancellationPolicyRules;
     protected $mailer;
     public $maxPerPage;
+    protected $timeZone;
+    protected $bundles;
 
     /**
      * @param EntityManager   $em
      * @param array           $cancellationPolicyRules
      * @param TwigSwiftMailer $mailer
      * @param int             $maxPerPage
+     * @param string          $timeZone
+     * @param array           $bundles
      */
-    public function __construct(EntityManager $em, array $cancellationPolicyRules, TwigSwiftMailer $mailer, $maxPerPage)
-    {
+    public function __construct(
+        EntityManager $em,
+        array $cancellationPolicyRules,
+        TwigSwiftMailer $mailer,
+        $maxPerPage,
+        $timeZone,
+        $bundles
+    ) {
         $this->em = $em;
         $this->cancellationPolicyRules = $cancellationPolicyRules;
         $this->mailer = $mailer;
         $this->maxPerPage = $maxPerPage;
+        $this->timeZone = $timeZone;
+        $this->bundles = $bundles;
     }
 
     /**
@@ -108,7 +119,7 @@ class BookingPayinRefundManager extends BaseManager
             }
 
             //If time before checkin is less than the limit then the refund is minimum
-            if ($booking->getTimeBeforeStart() < $rules["time_before_start"]) {
+            if ($booking->getTimeBeforeStart($this->timeZone) < $rules["time_before_start"]) {
                 $refundPercentage = $rules["refund_min"];
             } else {
                 $refundPercentage = $rules["refund_max"];
@@ -209,9 +220,8 @@ class BookingPayinRefundManager extends BaseManager
      */
     public function voucherIsEnabled()
     {
-        return !$this->em->getMetadataFactory()->isTransient('Cocorico\VoucherBundle\Entity\Voucher');
+        return isset($this->bundles["CocoricoVoucherBundle"]);
     }
-
 
     /**
      *

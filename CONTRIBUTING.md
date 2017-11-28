@@ -30,7 +30,7 @@ Good bug reports are extremely helpful - thank you!
 
 Guidelines for bug reports:
 
-1. **Use the GitHub issue search** &mdash; check if the issue has already been
+1. **[Use the GitHub issue search](https://github.com/Cocolabs-SAS/cocorico/issues)** &mdash; check if the issue has already been
    reported.
 
 2. **Check if the issue has been fixed** &mdash; try to reproduce it using the
@@ -142,3 +142,16 @@ license your work under the same license as that used by the project.
 
 
 Thanks to https://github.com/necolas for this contributing guidelines.
+
+
+## Versioning
+
+Cocorico follows the Semantic Versioning 2 as far as possible:
+
+> Given a version number MAJOR.MINOR.PATCH, increment the:
+>
+> MAJOR version when you make incompatible API changes,
+>
+> MINOR version when you add functionality in a backwards-compatible manner, and
+>
+> PATCH version when you make backwards-compatible bug fixes.

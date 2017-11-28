@@ -117,16 +117,16 @@ doctrine_mongodb:
 
 
 jms_i18n_routing:
-    default_locale: %cocorico.locale%
-    locales: %cocorico.locales%
+    default_locale: "%cocorico.locale%"
+    locales: "%cocorico.locales%"
     strategy: prefix
 
 
 jms_translation:
     configs:
         cocorico:
-            dirs: [%kernel.root_dir%, %kernel.root_dir%/../src]
-            output_dir: %kernel.root_dir%/Resources/translations
+            dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
+            output_dir: "%kernel.root_dir%/Resources/translations"
 #            ignored_domains: [routes]
             excluded_names: ["*TestCase.php", "*Test.php"]
             excluded_dirs: [cache, data, logs, Tests]
@@ -134,14 +134,14 @@ jms_translation:
 
 
 a2lix_translation_form:
-    locales: %cocorico.locales%
+    locales: "%cocorico.locales%"
     #required_locales: [%cocorico.locale%]
     manager_registry: doctrine
     templating: "CocoricoCoreBundle:Form:translations.html.twig"
 
 
 stof_doctrine_extensions:
-    default_locale: %cocorico.locale%
+    default_locale: "%cocorico.locale%"
     orm:
         default:
             tree: true
@@ -155,61 +155,61 @@ oneup_uploader:
             enable_progress: true
             namer: cocorico.namer.image_namer
             storage:
-                directory: %kernel.root_dir%/../web/uploads/listings/images/
+                directory: "%kernel.root_dir%/../web/uploads/listings/images/"
 
 
 liip_imagine:
-    driver: %cocorico.image_driver%
+    driver: "%cocorico.image_driver%"
     cache: ~
     filter_sets:
         listing_xsmall:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_xsmall_w%, %cocorico.listing_img_xsmall_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_xsmall_w%", "%cocorico.listing_img_xsmall_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
                 #thumbnail: { size: [%cocorico.listing_img_medium_w%, %cocorico.listing_img_medium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_small:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_small_w%, %cocorico.listing_img_small_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_small_w%", "%cocorico.listing_img_small_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         listing_xxmedium:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_xxmedium_w%, %cocorico.listing_img_xxmedium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_xxmedium_w%", "%cocorico.listing_img_xxmedium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_xmedium:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_xmedium_w%, %cocorico.listing_img_xmedium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_xmedium_w%", "%cocorico.listing_img_xmedium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_medium:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_medium_w%, %cocorico.listing_img_medium_h%], mode: outbound , cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_medium_w%", "%cocorico.listing_img_medium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_xxlarge:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.listing_img_xxlarge_w%, %cocorico.listing_img_xxlarge_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.listing_img_xxlarge_w%", "%cocorico.listing_img_xxlarge_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         listing_xlarge:
             quality: 100
             filters:
                 auto_rotate: ~
-                upscale: { min: [%cocorico.listing_img_xlarge_w%, %cocorico.listing_img_xlarge_h%] }
-                thumbnail: { size: [%cocorico.listing_img_xlarge_w%, %cocorico.listing_img_xlarge_h%], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
+                upscale: { min: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"] }
+                thumbnail: { size: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
         listing_large:
             quality: 85
             filters:
                 auto_rotate: ~
-                upscale: { min: [%cocorico.listing_img_large_w%, %cocorico.listing_img_large_h%] }
-                thumbnail: { size: [%cocorico.listing_img_large_w%, %cocorico.listing_img_large_h%], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
+                upscale: { min: ["%cocorico.listing_img_large_w%", "%cocorico.listing_img_large_h%"] }
+                thumbnail: { size: ["%cocorico.listing_img_large_w%", "%cocorico.listing_img_large_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
 
 lexik_currency:
     currencies:
-        default: %cocorico.currency%
-        managed: %cocorico.currencies_for_lexik%
+        default: "%cocorico.currency%"
+        managed: "%cocorico.currencies_for_lexik%"
     decimal_part:
         precision:  0                           # number of digits for the decimal part
         round_mode: up                          # round mode to use (up|down|even|odd)
@@ -246,7 +246,7 @@ sonata_block:
 
 
 sonata_admin:
-    title:      %cocorico.site_name% administration
+    title:      "%cocorico.site_name% administration"
     title_logo: /images/logo2.gif
 
     templates:

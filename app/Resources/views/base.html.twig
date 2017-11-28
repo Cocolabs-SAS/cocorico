@@ -32,9 +32,10 @@
     {% block stylesheets %}
         {% stylesheets
         'css/all.css'
-        'css/all-override.css'
-        'css/vendor/bootstrap-multiselect.css'
         'css/vendor/bootstrap-datetimepicker.css'
+        'css/vendor/bootstrap-multiselect.css'
+        'css/vendor/unslider.css'
+        'css/all-override.css'
 
         filter='cssrewrite, ?minifycsscompressor' output='css/compiled/all.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all">
@@ -69,7 +70,7 @@
 
     {#Rich snippets used by search engines like google  #}
     {%- block markup_jsonld -%}
-        {% include '@CocoricoSeo/Frontend/Common/_markup.jsonld.twig' ignore missing only %}
+        {% include 'CocoricoSeoBundle:Frontend:Common/_markup.jsonld.twig' ignore missing only %}
     {%- endblock -%}
 </head>
 
@@ -103,6 +104,8 @@
         var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
         var timeUnitAllDay = {{ timeUnitAllDay ? 'true' : 'false' }};
         var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
+        var isAuthenticated = {{ app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") ? 'true' : 'false' }};
+        var hoursAvailable = {{ timeHoursAvailable|json_encode|raw }};
     </script>
 
 
@@ -138,15 +141,20 @@
     </script>
 
     {% javascripts
-    'js/vendor/bootstrap-multiselect.js'
-    'js/vendor/jquery.carouFredSel.min.js'
-    'js/vendor/jquery.cookie.js'
-    'js/common.js'
+    'js/vendor/moment.js'
     'js/vendor/json2.js'
+    'js/vendor/jquery.cookie.js'
+    'js/vendor/jquery.touch-punch.js'
+    'js/vendor/hammer.js'
+    'js/vendor/bootstrap-multiselect.js'
+    'js/vendor/bootstrap-datetimepicker.js'
+    'js/vendor/parsley.min.js'
+    'js/vendor/jquery.unslider.js'
+    'js/vendor/jquery.caroufredsel.min.js'
+    'js/vendor/jquery.clearsearch.js'
     'js/jquery.main.js'
     'js/jquery.main-override.js'
-    'js/vendor/parsley.min.js'
-    'js/vendor/bootstrap-datetimepicker.js'
+    'js/common.js'
 
     filter="?jsqueeze" output='js/compiled/all.js' %}
     <script src="{{ asset_url }}"></script>
@@ -154,11 +162,10 @@
 
     <script type="text/javascript">
         $(function () {
-            {% if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") %}
-            //Unread messages
-            getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
-            {% endif %}
-
+            if (isAuthenticated) {
+                //Unread messages
+                getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
+            }
             //Handle Ajax Unauthorised access
             handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
         });

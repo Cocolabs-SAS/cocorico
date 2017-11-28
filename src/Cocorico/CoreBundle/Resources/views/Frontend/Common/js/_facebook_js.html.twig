@@ -15,7 +15,7 @@
         }
         js = d.createElement(s);
         js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
+        js.src = "//connect.facebook.net/{{ culture_code(app.request.locale) }}/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 
@@ -30,7 +30,7 @@
                     if (response.authResponse) {
                         document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";
                     } else {
-                        alert('Cancelled.');
+//                        alert('Cancelled.');
                     }
                 }, {scope: 'email'});
             }

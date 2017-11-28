@@ -36,8 +36,8 @@ class ListingSearchController extends Controller
     public function searchAction(Request $request)
     {
         $markers = array();
-        $resultsIterator = new \ArrayIterator();
-        $nbResults = 0;
+        $listings = new \ArrayIterator();
+        $nbListings = 0;
 
         /** @var ListingSearchRequest $listingSearchRequest */
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
@@ -52,12 +52,13 @@ class ListingSearchController extends Controller
                 $listingSearchRequest,
                 $request->getLocale()
             );
-            $nbResults = $results->count();
-            $resultsIterator = $results->getIterator();
-            $markers = $this->getMarkers($request, $results, $resultsIterator);
+            $nbListings = $results->count();
+            $listings = $results->getIterator();
+            $markers = $this->getMarkers($request, $results, $listings);
 
             //Persist similar listings id
-            $listingSearchRequest->setSimilarListings(array_column($markers, 'id'));
+//            print_r($markers);
+            $listingSearchRequest->setSimilarListings(array_column(array_column($markers, 0), 'id'));
 
             //Persist listing search request in session
             $this->get('session')->set('listing_search_request', $listingSearchRequest);
@@ -85,13 +86,13 @@ class ListingSearchController extends Controller
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array_merge(
                 array(
-                    'results' => $resultsIterator,
-                    'nb_results' => $nbResults,
+                    'listings' => $listings,
+                    'nb_listings' => $nbListings,
                     'markers' => $markers,
                     'listing_search_request' => $listingSearchRequest,
                     'pagination' => array(
                         'page' => $listingSearchRequest->getPage(),
-                        'pages_count' => ceil($nbResults / $listingSearchRequest->getMaxPerPage()),
+                        'pages_count' => ceil($nbListings / $listingSearchRequest->getMaxPerPage()),
                         'route' => $request->get('_route'),
                         'route_params' => $request->query->all()
                     ),
@@ -173,7 +174,9 @@ class ListingSearchController extends Controller
                 $rating5 = ($listing['averageRating'] >= 5) ? '' : 'inactive';
             }
 
-            $markers[] = array(
+            //Allow to group markers with same location
+            $locIndex = $listing['location']['coordinate']['lat'] . "-" . $listing['location']['coordinate']['lng'];
+            $markers[$locIndex][] = array(
                 'id' => $listing['id'],
                 'lat' => $listing['location']['coordinate']['lat'],
                 'lng' => $listing['location']['coordinate']['lng'],

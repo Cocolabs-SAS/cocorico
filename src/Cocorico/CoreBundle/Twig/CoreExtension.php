@@ -29,11 +29,13 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $locales;
     protected $timeUnit;
     protected $timeUnitIsDay;
+    protected $timeZone;
     protected $daysDisplayMode;
     protected $timesDisplayMode;
     protected $timeUnitFlexibility;
     protected $timeUnitAllDay;
     protected $timePicker;
+    protected $timeHoursAvailable;
     protected $allowSingleDay;
     protected $endDayIncluded;
     protected $listingDefaultStatus;
@@ -88,11 +90,13 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         //Time unit
         $this->timeUnit = $parameters["cocorico_time_unit"];
         $this->timeUnitIsDay = ($this->timeUnit % 1440 == 0) ? true : false;
+        $this->timeZone = $parameters["cocorico_time_zone"];
         $this->timeUnitAllDay = $parameters["cocorico_time_unit_allday"];
         $this->timeUnitFlexibility = $parameters["cocorico_time_unit_flexibility"];
         $this->daysDisplayMode = $parameters["cocorico_days_display_mode"];
         $this->timesDisplayMode = $parameters["cocorico_times_display_mode"];
         $this->timePicker = $parameters["cocorico_time_picker"];
+        $this->timeHoursAvailable = $parameters["cocorico_time_hours_available"];
 
         //Currencies
         $this->currencies = $parameters["cocorico_currencies"];
@@ -146,7 +150,8 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new \Twig_SimpleFilter('format_seconds', array($this, 'formatSecondsFilter')),
             new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new \Twig_SimpleFilter('ucwords', 'ucwords'),
-            new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter'))
+            new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
+            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfo'))
         );
     }
 
@@ -249,6 +254,31 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
 
         return $price;
+    }
+
+    /**
+     * @param string $text
+     * @param array  $typeInfo
+     * @param string $replaceBy Text replacement translated
+     *
+     * @return string
+     */
+    public function stripPrivateInfo(
+        $text,
+        $typeInfo = array("phone", "email", "domain"),
+        $replaceBy = 'default'
+    ) {
+
+        if ($replaceBy == 'default') {
+            $replaceBy = $this->translator->trans(
+                'private_info_replacement',
+                array(),
+                'cocorico'
+            );
+        }
+
+
+        return $this->globalHelper->stripTexts($text, $typeInfo, $replaceBy);
     }
 
     /**
@@ -397,8 +427,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'bookingStatusClass' => $bookingStatusClass,
             'timeUnit' => $this->timeUnit,
             'timeUnitIsDay' => $this->timeUnitIsDay,
+            'timeZone' => $this->timeZone,
             'timeUnitAllDay' => $this->timeUnitAllDay,
             'timePicker' => $this->timePicker,
+            'timeHoursAvailable' => $this->timeHoursAvailable,
             'daysDisplayMode' => $this->daysDisplayMode,
             'timesDisplayMode' => $this->timesDisplayMode,
             'timeUnitFlexibility' => $this->timeUnitFlexibility,

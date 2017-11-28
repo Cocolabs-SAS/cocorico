@@ -3,7 +3,7 @@
 {% if languages_links|length > 1 %}
     <li class="dropdown link-flag">
         <a href="#" tabindex="8" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-            <img src="{{ asset('images/flag-' ~  app.request.locale ~ '.png') }}" alt="flag" class="flag" width="16"
+            <img src="{{ asset('images/flags/' ~  app.request.locale ~ '.png') }}" alt="flag" class="flag" width="16"
                  height="11">
             <span class="icon-down-open-mini"></span>
         </a>
@@ -11,7 +11,7 @@
             {%- for language, link in languages_links -%}
                 <li>
                     <a href="{{ link }}">
-                        <img src="{{ asset('images/flag-' ~  language ~ '.png') }}" alt="flag" class="flag" width="16"
+                        <img src="{{ asset('images/flags/' ~  language ~ '.png') }}" alt="flag" class="flag" width="16"
                              height="11">
                         {{ language|capitalize }}
                     </a>

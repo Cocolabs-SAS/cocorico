@@ -16,11 +16,11 @@ fos_user:
         mailer: cocorico_user.mailer.twig_swift
         user_manager: cocorico_user.user_manager
     from_email:
-        address:        %cocorico.from_email%
-        sender_name:    %cocorico.site_name%
+        address:        "%cocorico.from_email%"
+        sender_name:    "%cocorico.site_name%"
     registration:
         confirmation:
-            enabled:    %cocorico.registration_confirmation%
+            enabled:    "%cocorico.registration_confirmation%"
         form:
             type: user_registration
             name: user_registration
@@ -70,6 +70,7 @@ doctrine:
                     #ApplicationSonataUserBundle: ~
                     SonataUserBundle: ~
         resolve_target_entities:
+            #Don't put double quotes!
             Cocorico\UserBundle\Model\ListingAlertInterface: %cocorico_listing_alert.entity_class%
 
 oneup_uploader:
@@ -81,7 +82,7 @@ oneup_uploader:
             enable_progress: true
             namer: cocorico.namer.image_namer
             storage:
-                directory: %kernel.root_dir%/../web/uploads/users/images/
+                directory: "%kernel.root_dir%/../web/uploads/users/images/"
 
 liip_imagine:
     cache: ~
@@ -90,27 +91,27 @@ liip_imagine:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.user_img_xsmall_w%, %cocorico.user_img_xsmall_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.user_img_xsmall_w%", "%cocorico.user_img_xsmall_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         user_small:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.user_img_small_w%, %cocorico.user_img_small_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.user_img_small_w%", "%cocorico.user_img_small_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         user_medium:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.user_img_medium_w%, %cocorico.user_img_medium_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.user_img_medium_w%", "%cocorico.user_img_medium_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         user_contact:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.user_img_contact_w%, %cocorico.user_img_contact_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.user_img_contact_w%", "%cocorico.user_img_contact_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         user_profile:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: [%cocorico.user_img_profile_w%, %cocorico.user_img_profile_h%], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: ["%cocorico.user_img_profile_w%", "%cocorico.user_img_profile_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
 
 hwi_oauth:
     connect:
@@ -120,8 +121,8 @@ hwi_oauth:
     resource_owners:
         facebook:
             type:                facebook
-            client_id:           %cocorico.facebook.app_id%
-            client_secret:       %cocorico.facebook.secret%
+            client_id:           "%cocorico.facebook.app_id%"
+            client_secret:       "%cocorico.facebook.secret%"
             options:
                 csrf: true
             #todo: Submit app review to facebook to get user_location user_hometown user_birthday

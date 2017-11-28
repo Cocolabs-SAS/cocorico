@@ -14,7 +14,6 @@ namespace Cocorico\CoreBundle\Document;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -49,13 +48,13 @@ class ListingAvailability
     protected $id;
 
     /**
-     * @MongoDB\Int(nullable="false", name="lId")
+     * @MongoDB\Field(type="int", nullable="false", name="lId")
      * @Assert\NotBlank()
      */
     protected $listingId;
 
     /**
-     * @MongoDB\Date(nullable="false", name="d")
+     * @MongoDB\Field(type="date", nullable="false", name="d")
      * @MongoDB\Index(order="asc")
      * @Assert\NotBlank()
      */
@@ -63,14 +62,14 @@ class ListingAvailability
 
 
     /**
-     * @MongoDB\Int(nullable="false", name="s")
+     * @MongoDB\Field(type="int", nullable="false", name="s")
      * @MongoDB\Index(order="asc")
      * @Assert\Choice(callback = "getStatusValuesKeys")
      */
     protected $status;
 
     /**
-     * @MongoDB\Int(nullable="false", name="p")
+     * @MongoDB\Field(type="int", nullable="false", name="p")
      * @MongoDB\Index(order="asc")
      * @Assert\NotBlank()
      */

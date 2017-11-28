@@ -63,14 +63,14 @@ class ListingSearchRequest implements TranslationContainerInterface
         if ($this->request) {
             $this->locale = $this->request->getLocale();
         }
-
         $this->maxPerPage = $maxPerPage;
         $this->page = 1;
 
-        //Init date range
-        $dateRange = $this->request->query->get("date_range");
-        $timeRange = $this->request->query->get("time_range");
-        $this->refreshData($dateRange, $timeRange);
+        //Set date range and time range only while listing search
+        if ($this->request && $this->request->get('_route') == 'cocorico_listing_search_result') {
+            $this->setDateRange(DateRange::createFromArray($this->request->query->get("date_range")));
+            $this->setTimeRange(TimeRange::createFromArray($this->request->query->get("time_range")));
+        }
 
         //Flexibility
         $this->flexibility = 0;
@@ -146,10 +146,59 @@ class ListingSearchRequest implements TranslationContainerInterface
     /**
      * @param DateRange $dateRange
      */
-    public function setDateRange(DateRange $dateRange)
+    public function setDateRange(DateRange $dateRange = null)
     {
         $this->dateRange = $dateRange;
     }
+
+    /**
+     * @return TimeRange
+     */
+    public function getTimeRange()
+    {
+        return $this->timeRange;
+    }
+
+    /**
+     * @param TimeRange $timeRange
+     */
+    public function setTimeRange(TimeRange $timeRange = null)
+    {
+        $this->timeRange = $timeRange;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFlexibility()
+    {
+        return $this->flexibility;
+    }
+
+    /**
+     * @param mixed $flexibility
+     */
+    public function setFlexibility($flexibility)
+    {
+        $this->flexibility = $flexibility;
+    }
+
+    /**
+     * @return PriceRange
+     */
+    public function getPriceRange()
+    {
+        return $this->priceRange;
+    }
+
+    /**
+     * @param PriceRange $priceRange
+     */
+    public function setPriceRange($priceRange)
+    {
+        $this->priceRange = $priceRange;
+    }
+
 
     /**
      * @return ListingLocationSearchRequest
@@ -247,53 +296,6 @@ class ListingSearchRequest implements TranslationContainerInterface
         return $messages;
     }
 
-    /**
-     * @return TimeRange
-     */
-    public function getTimeRange()
-    {
-        return $this->timeRange;
-    }
-
-    /**
-     * @param TimeRange $timeRange
-     */
-    public function setTimeRange($timeRange)
-    {
-        $this->timeRange = $timeRange;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFlexibility()
-    {
-        return $this->flexibility;
-    }
-
-    /**
-     * @param mixed $flexibility
-     */
-    public function setFlexibility($flexibility)
-    {
-        $this->flexibility = $flexibility;
-    }
-
-    /**
-     * @return PriceRange
-     */
-    public function getPriceRange()
-    {
-        return $this->priceRange;
-    }
-
-    /**
-     * @param PriceRange $priceRange
-     */
-    public function setPriceRange($priceRange)
-    {
-        $this->priceRange = $priceRange;
-    }
 
     /**
      * @return int[]
@@ -328,49 +330,6 @@ class ListingSearchRequest implements TranslationContainerInterface
     }
 
     /**
-     * Refresh dates and eventually times Listing Search Request Parameters and memorize them in session
-     *
-     * @param array $dateRangeParameter
-     * @param array $timeRangeParameter
-     * @return $this
-     */
-    public function refreshData($dateRangeParameter, $timeRangeParameter)
-    {
-        if (isset($dateRangeParameter['start']) && isset($dateRangeParameter['end']) &&
-            $dateRangeParameter['start'] && $dateRangeParameter['end']
-        ) {
-            $start = \DateTime::createFromFormat('d/m/Y', $dateRangeParameter['start']);
-            $end = \DateTime::createFromFormat('d/m/Y', $dateRangeParameter['end']);
-
-            $dateRange = new DateRange(
-                new \DateTime($start->format('Y-m-d')),
-                new \DateTime($end->format('Y-m-d'))
-            );
-            $this->setDateRange($dateRange);
-        }
-
-        if (isset($timeRangeParameter['start']) && isset($timeRangeParameter['end']) &&
-            is_numeric($timeRangeParameter['start']['hour']) && is_numeric($timeRangeParameter['end']['hour']) &&
-            is_numeric($timeRangeParameter['start']['minute']) && is_numeric($timeRangeParameter['end']['minute'])
-        ) {
-            $timeRange = new TimeRange(
-                new \DateTime(
-                    "1970-01-01 " . $timeRangeParameter['start']['hour'] . ":" . $timeRangeParameter['start']['minute']
-                ),
-                new \DateTime(
-                    "1970-01-01 " . $timeRangeParameter['end']['hour'] . ":" . $timeRangeParameter['end']['minute']
-                )
-            );
-
-            $this->setTimeRange($timeRange);
-        } else {
-            $this->setTimeRange(null);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return array
      */
     public function getCategoriesFields()
@@ -385,7 +344,6 @@ class ListingSearchRequest implements TranslationContainerInterface
     {
         $this->categoriesFields = $categoriesFields;
     }
-
 
     /**
      * Remove some Object properties while serialisation

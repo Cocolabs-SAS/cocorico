@@ -5,7 +5,11 @@
 {% block stylesheets %}
     {{ parent() }}
     <style>
-        .loading .loader {
+        body.loading {
+            overflow: visible;
+        }
+
+        body.loading .loader {
             display: none;
         }
     </style>

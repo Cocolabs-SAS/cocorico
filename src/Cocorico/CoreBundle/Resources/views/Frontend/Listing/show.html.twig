@@ -6,6 +6,7 @@
 {% set categoryFieldBundleEnabled = bundleExist('CocoricoListingCategoryFieldBundle') %}
 
 {% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_description = listing_translation.description|strip_private_info %}
 {% set listing_location = listing.location %}
 {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
 {% set listing_user = listing.user %}
@@ -15,12 +16,12 @@
 {%- endblock -%}
 
 {%- block meta_description -%}
-    {{ 'listing.show.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+    {{ 'listing.show.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_description|truncate(200, true) }}
 {%- endblock -%}
 
 {%- block open_graph_data -%}
     <meta property="og:title" content="{{ listing_translation.title }}"/>
-    <meta property="og:description" content="{{ listing_translation.description|slice(0, 200, true) }}"/>
+    <meta property="og:description" content="{{ listing_description|truncate(200, true) }}"/>
     {% if listing.images|length %}
         <meta property="og:image"
               content="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing.images[0].name) | imagine_filter('listing_large') }}"/>
@@ -221,11 +222,11 @@
                                 <div class="tab-content">
                                     <!-- description -->
                                     <div role="tabpanel" class="tab-pane active" id="description">
-                                        <p>{{ listing_translation.description|nl2br }}</p>
+                                        <p>{{ listing_description|nl2br }}</p>
                                     </div>
                                     <!-- conditions -->
                                     <div role="tabpanel" class="tab-pane" id="conditions">
-                                        <p>{{ listing_translation.rules|nl2br }}</p>
+                                        <p>{{ listing_translation.rules|strip_private_info|nl2br }}</p>
                                     </div>
                                     <!-- features -->
                                     <div role="tabpanel" class="tab-pane" id="features">
@@ -234,14 +235,14 @@
                                     {% if categoryFieldBundleEnabled %}
                                         <!-- Categories fields -->
                                         <div role="tabpanel" class="tab-pane" id="categories-fields">
-                                            {% include '@CocoricoListingCategoryField/Frontend/Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
+                                            {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
                                         </div>
                                     {% endif %}
-                                    
+
                                     {% if optionBundleEnabled %}
                                         <!-- options -->
                                         <div role="tabpanel" class="tab-pane" id="options">
-                                            {% include '@CocoricoListingOption/Frontend/Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
+                                            {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
                                         </div>
                                     {% endif %}
 
@@ -352,13 +353,13 @@
                                         {% for image in listing_user.images %}
                                             <div class="slide">
                                                 <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
-                                                     alt="{{ listing_user.firstName }}"/>
+                                                     alt="{{ listing_user.name }}"/>
                                             </div>
                                         {% endfor %}
                                     {% else %}
                                         <div class="slide">
                                             <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
-                                                 alt="{{ listing_user.firstName }}"/>
+                                                 alt="{{ listing_user.name }}"/>
                                         </div>
                                     {% endif %}
                                 </div>
@@ -371,7 +372,7 @@
                             </div>
                             <h2>
                                 <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
-                                    {{ listing_user.firstName }}
+                                    {{ listing_user.name }}
                                 </a>
                             </h2>
 
@@ -546,7 +547,7 @@
 {% block markup_jsonld %}
     {{ parent() }}
 
-    {% include '@CocoricoSeo/Frontend/Listing/_show_markup.jsonld.twig' ignore missing with {
+    {% include 'CocoricoSeoBundle:Frontend:Listing/_show_markup.jsonld.twig' ignore missing with {
     'listing': listing,
     'listing_translation': listing_translation,
     'listing_user': listing_user,

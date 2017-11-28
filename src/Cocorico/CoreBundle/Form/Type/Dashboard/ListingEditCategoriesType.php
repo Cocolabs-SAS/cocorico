@@ -20,6 +20,20 @@ class ListingEditCategoriesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+//        $builder
+//            ->add(
+//                'type',
+//                'choice',
+//                array(
+//                    'choices' => array_flip(Listing::$typeValues),
+//                    'empty_value' => 'listing_edit.form.choose',
+//                    'required' => false,
+//                    'translation_domain' => 'cocorico_listing',
+//                    'label' => 'listing.form.type',
+//                    'choices_as_values' => true
+//                )
+//            );
     }
 
     /**

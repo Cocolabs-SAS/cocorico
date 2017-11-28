@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2016-08-25T23:43:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-11-16T11:41:46Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+                default message.
+            </note>
         </header>
         <body>
             <trans-unit id="c3df00f32f25fdc4ac61f5ad2b7ef2848450dc74" resname="The entity does not exist.">
                 <source>The entity does not exist.</source>
                 <target>The entity does not exist.</target>
                 <jms:reference-file line="48">Form/Type/EntityHiddenType.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="c0ab0258e7fb05f22a931c8f9bd5d02f270023c4"
+                        resname="This value should be of type {{ type }}.">
+                <source>This value should be of type {{ type }}.</source>
+                <target state="new">This value should be of type {{ type }}.</target>
+                <jms:reference-file line="34">Form/Type/NumberRangeType.php</jms:reference-file>
+                <jms:reference-file line="47">Form/Type/NumberRangeType.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="dc356f321a49986997503e3919506f01ecefc057" resname="assert.invalid">
+                <source>assert.invalid</source>
+                <target state="new">assert.invalid</target>
+                <jms:reference-file line="23">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="38">Frontend/Common/_login.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="fd9aafaaff97143c9686b8cde0752fd46568e7f5" resname="assert.max_length {{ limit }}">
                 <source>assert.max_length {{ limit }}</source>
@@ -22,6 +39,8 @@
             <trans-unit id="423ba0ce5f00f14cc7dc806d6909ecbc84a7b67c" resname="assert.not_blank">
                 <source>assert.not_blank</source>
                 <target>Required</target>
+                <jms:reference-file line="22">Frontend/Common/_login.html.twig</jms:reference-file>
+                <jms:reference-file line="37">Frontend/Common/_login.html.twig</jms:reference-file>
             </trans-unit>
             <trans-unit id="fe66769572aafccc3e6664896cb31beaabd3cde9" resname="assert.unique">
                 <source>assert.unique</source>
@@ -124,12 +143,14 @@
                 <target>Country Of Residence required</target>
                 <jms:reference-file line="86">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="a233f035a152744ca09d068f6a9aeb53621ca167" resname="cocorico_user.countryOfResidence.invalid">
+            <trans-unit id="a233f035a152744ca09d068f6a9aeb53621ca167"
+                        resname="cocorico_user.countryOfResidence.invalid">
                 <source>cocorico_user.countryOfResidence.invalid</source>
                 <target>Country of residence invalid</target>
                 <jms:reference-file line="87">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="71295e47e2b3ee1530f73b690a9560a634d1e6fc" resname="cocorico_user.country_of_residence.blank">
+            <trans-unit id="71295e47e2b3ee1530f73b690a9560a634d1e6fc"
+                        resname="cocorico_user.country_of_residence.blank">
                 <source>cocorico_user.country_of_residence.blank</source>
                 <target>Country of residence required</target>
             </trans-unit>
@@ -200,18 +221,21 @@
                 <target>Password required</target>
                 <jms:reference-file line="117">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="524738120a2dc5410296f69a349f6352e49122b4" resname="cocorico_user.plainPassword.first.invalid">
+            <trans-unit id="524738120a2dc5410296f69a349f6352e49122b4"
+                        resname="cocorico_user.plainPassword.first.invalid">
                 <source>cocorico_user.plainPassword.first.invalid</source>
                 <target>Password invalid</target>
                 <jms:reference-file line="85">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
                 <jms:reference-file line="118">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="c1c4aacc55ad92c8cc767e9aa99c6eb2cba3d779" resname="cocorico_user.plainPassword.second.blank">
+            <trans-unit id="c1c4aacc55ad92c8cc767e9aa99c6eb2cba3d779"
+                        resname="cocorico_user.plainPassword.second.blank">
                 <source>cocorico_user.plainPassword.second.blank</source>
                 <target>Password required</target>
                 <jms:reference-file line="134">Frontend/Common/_register.html.twig</jms:reference-file>
             </trans-unit>
-            <trans-unit id="22192abddfc401abebde09731ecd36e6bc65660d" resname="cocorico_user.plainPassword.second.invalid">
+            <trans-unit id="22192abddfc401abebde09731ecd36e6bc65660d"
+                        resname="cocorico_user.plainPassword.second.invalid">
                 <source>cocorico_user.plainPassword.second.invalid</source>
                 <target>Password invalid</target>
                 <jms:reference-file line="101">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
@@ -276,8 +300,8 @@
             <trans-unit id="ce9dc38b0d001e3346c2c1d8202e01bdecb121ef" resname="fos_user.password.mismatch">
                 <source>fos_user.password.mismatch</source>
                 <target>The entered passwords don't match</target>
-                <jms:reference-file line="62">Form/Type/ProfileContactFormType.php</jms:reference-file>
-                <jms:reference-file line="89">Form/Type/RegistrationFormType.php</jms:reference-file>
+                <jms:reference-file line="61">Form/Type/ProfileContactFormType.php</jms:reference-file>
+                <jms:reference-file line="90">Form/Type/RegistrationFormType.php</jms:reference-file>
                 <jms:reference-file line="40">Form/Type/ResettingFormType.php</jms:reference-file>
                 <jms:reference-file line="100">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
                 <jms:reference-file line="133">Frontend/Common/_register.html.twig</jms:reference-file>

@@ -15,7 +15,6 @@ use Cocorico\CoreBundle\Model\BaseBookingPayinRefund;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -25,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="booking_payin_refund",indexes={
  *    @ORM\Index(name="status_pr_idx", columns={"status"}),
- *    @ORM\Index(name="createdAt_pr_idx", columns={"createdAt"})
+ *    @ORM\Index(name="created_at_pr_idx", columns={"createdAt"})
  *  })
  */
 class BookingPayinRefund extends BaseBookingPayinRefund

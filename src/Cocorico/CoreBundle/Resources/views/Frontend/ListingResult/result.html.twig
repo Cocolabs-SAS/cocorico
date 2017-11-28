@@ -8,7 +8,7 @@
 {% set seo_title = 'listing.search.result.title'|trans({'%listing_search_request%': location.address }) %}
 {% set seo_desc = '' %}
 {% set seo_meta_tile = 'listing.search.result.meta_title'|trans({'%listing_search_request%': location.address }, 'cocorico_meta') ~ " - " ~ cocorico_site_name %}
-{% set seo_meta_desc = 'listing.search.result.meta_desc'|trans({'%nb_results%': nb_results}, 'cocorico_meta') %}
+{% set seo_meta_desc = 'listing.search.result.meta_desc'|trans({'%nb_results%': nb_listings}, 'cocorico_meta') %}
 
 {% if seo_content|default(null) %}
     {% set seo_title = seo_content.title %}
@@ -56,7 +56,7 @@
             <h1>
                 {{ seo_title }}
                 <small>
-                    {{ 'listing.search.result.results'|trans({'%nb_results%': nb_results}) }}
+                    {{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}
                 </small>
 
                 {% if bundleExist('CocoricoListingAlertBundle') %}
@@ -89,8 +89,8 @@
                 <section class="listing-area col-xs-12 col-sm-8">
                     <div class="listing-holder row">
                         <!-- post -->
-                        {%- for listing in results -%}
-                            {% set listing = listing[0] %}
+                        {%- for listingTmp in listings -%}
+                            {% set listing = listingTmp[0] %}
                             {% set listing_translation = listing.translations[app.request.locale] %}
                             {% set listing_location = listing.location %}
                             {% set listing_user = listing.user %}
@@ -98,7 +98,7 @@
                             {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
                             {% set user_image = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
 
-                            <article class="listing-post col-sm-6 col-xs-12">
+                            <article class="listing-post col-sm-6 col-xs-12" data-lid="{{ listing.id }}">
                                 <a href="javascript:void(0)" id="favourite-{{ listing.id }}" class="favourit">
                                     <i class="icon-heart"></i>
                                     <span class="hidden">favourit</span>
@@ -155,21 +155,22 @@
                                             </div>
                                             <div class="textbox">
                                                 {% if bundleExist('CocoricoDeliveryBundle') %}
-                                                    {% include '@CocoricoDelivery/Frontend/Listing/_show_delivery.html.twig' with {
+                                                    {% include 'CocoricoDeliveryBundle:Frontend:Listing/_show_delivery.html.twig' with {
                                                     'listing_delivery': listing.delivery
                                                     } only %}
                                                 {% endif %}
 
                                                 <h2>{{ listing_translation.title }}</h2>
 
-                                                <p>{{ listing_location["city"] }} </p>
+                                                <p>{{ listing_location.city }} </p>
 
-                                                <!--Debug:
-                                                accuracy : {{ listing["accuracy"]|default(0) }}<br />
-                                                distance : {{ listing["distance"]|default(0) }}<br />
-                                                platformNotation : {{ listing.platformNotation|default(0) }}<br />
-                                                reallyAvailable : {{ listing["really_available"]|default(0) }}<br />
-                                                -->
+                                                {#<!--Debug:#}
+                                                {#accuracy : {{ listingTmp.accuracy|default(-1) }}<br/>#}
+                                                {#distance : {{ listingTmp.distance|default(-1) }}<br/>#}
+                                                {#distance_range : {{ listingTmp.distance_range|default(-1) }}<br/>#}
+                                                {#platformNotation : {{ listing.platformNotation|default(-1) }}<br/>#}
+                                                {#reallyAvailable : {{ listingTmp.really_available|default(-1) }}<br/>#}
+                                                {#-->#}
                                             </div>
                                         </div>
                                     </div>
@@ -205,8 +206,8 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {#Extend search area if not enough results#}
-    {% set extendSearch = nb_results < listingSearchMinResult %}
+    {#Extend search area if not enough results and if location search type is not done by distance #}
+    {% set extendSearch = nb_listings < listingSearchMinResult and listingSearchLocationType|default('viewport') != 'distance' %}
 
     {#Geocoding #}
     {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
@@ -243,14 +244,6 @@
             // Set default favourites in the listing
             setDefaultFavourites();
 
-            //Select change submit the form
-//            $("select[id^='characteristics_'], select#sort_by").change(function (e) {
-//                $(this).closest('form').submit();
-//            });
-//            $(".ui-slider").on("slidestop", function (event, ui) {
-//                $(this).closest('form').submit();
-//            });
-
             // Categories
             initMultiSelect(
                     '#categories',
@@ -274,6 +267,15 @@
 
             //Move seo desc to bottom
             $("[data-id=seo-desc]").appendTo("[data-id=seo-desc-moved]");
+
+            //Select change submit the form
+//            $("select[id^='characteristics_'], select#sort_by").change(function (e) {
+//                $(this).closest('form').submit();
+//            });
+//            $(".ui-slider").on("slidestop", function (event, ui) {
+//                $(this).closest('form').submit();
+//            });
+
         });
     </script>
 {% endblock %}
@@ -283,7 +285,7 @@
 {% block markup_jsonld %}
     {{ parent() }}
 
-    {% include '@CocoricoSeo/Frontend/ListingResult/_result_markup.jsonld.twig' ignore missing with {
-    'listings': results
+    {% include 'CocoricoSeoBundle:Frontend:ListingResult/_result_markup.jsonld.twig' ignore missing with {
+    'listings': listings
     } only %}
 {% endblock %}

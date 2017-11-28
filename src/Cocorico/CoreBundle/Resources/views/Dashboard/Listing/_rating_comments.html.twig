@@ -4,26 +4,25 @@
         <header class="head">
             <div class="author-img">
                 <div class="img-holder">
-                    <img alt="{{ review.reviewBy.firstName }}"
+                    <img alt="{{ review.reviewBy.name }}"
                          src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
                 </div>
                 <a href="{{ path('cocorico_user_profile_show', { 'id': review.reviewBy.id }) }}" class="author-name">
-                    {{ review.reviewBy.firstName }}
+                    {{ review.reviewBy.name }}
                 </a>
             </div>
             <div class="meta">
-                <time datetime="{{ review.createdAt|date('Y-m-d') }}">{{ review.createdAt|localizeddate('short', 'none', 'fr') }} </time>
+                <time>{{ review.createdAt|localizeddate('short', 'none', 'fr') }} </time>
             </div>
         </header>
         <div class="post-content">
             <p>
-                {{ review.comment | truncate(500, true, '...') }}
+                {{ review.comment|strip_private_info }}
             </p>
         </div>
         <footer class="footer">
-            <span class="time"><i class="icon-clock"></i>{{ review.createdAt |date("H") }}
-                h{{ review.createdAt |date("i") }}
-                GMT
+            <span class="time">
+                <i class="icon-clock"></i>{{ review.createdAt |date("H:i") }} GMT
             </span>
             <!-- rating -->
             {% if review.rating %}

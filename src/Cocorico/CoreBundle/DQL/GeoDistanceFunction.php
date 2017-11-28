@@ -43,7 +43,7 @@ class GeoDistanceFunction extends FunctionNode
     }
 
     /**
-     * Get SQL
+     * Get SQL to compute distance between two points in km
      *
      * @param SqlWalker $sqlWalker
      * @return string
@@ -51,11 +51,13 @@ class GeoDistanceFunction extends FunctionNode
     public function getSql(SqlWalker $sqlWalker)
     {
         $connection = $sqlWalker->getConnection();
-        $piBy180 = 0.0174532944; //PI() / 180
+
+        $_piBy180 = 0.0174532925; //PI() / 180
+        $_180byPi = 57.2957795131; //PI() / 180
+
         if ($connection->getDriver()->getName() != 'pdo_sqlite') {
             return sprintf(
-                '((ACOS(SIN(%s * ' . $piBy180 . ') * SIN(%s * ' . $piBy180 . ' ) + COS(%s * ' . $piBy180 .
-                ') * COS(%s * ' . $piBy180 . ') * COS((%s - %s) * ' . $piBy180 . ')) * 180 / PI()) * %s)',
+                '((ACOS(SIN(%s * ' . $_piBy180 . ') * SIN(%s * ' . $_piBy180 . ' ) + COS(%s * ' . $_piBy180 . ') * COS(%s * ' . $_piBy180 . ') * COS((%s - %s) * ' . $_piBy180 . ')) * ' . $_180byPi . ') * %s)',
                 $this->latitude->rightExpression->dispatch($sqlWalker),
                 $this->latitude->leftExpression->dispatch($sqlWalker),
                 $this->latitude->rightExpression->dispatch($sqlWalker),

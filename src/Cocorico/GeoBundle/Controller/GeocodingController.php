@@ -11,12 +11,11 @@
 
 namespace Cocorico\GeoBundle\Controller;
 
-use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\GeoBundle\Entity\Coordinate;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -27,25 +26,25 @@ use Symfony\Component\HttpFoundation\Response;
 class GeocodingController extends Controller
 {
     /**
-     * Add new geocoding informations to existing geographical entities
+     * Create new geocoding entity for a particular coordinate entity
      *
-     * @Route("/{slug}/create", name="cocorico_geo_create", requirements={
-     *      "slug" = "[a-z0-9-]+$"
+     * @Route("/{id}/create", name="cocorico_geo_create", requirements={
+     *      "id" = "\d+"
      * })
      * @Method("POST")
-     * @ParamConverter("listing", class="Cocorico\CoreBundle\Entity\Listing", options={"repository_method" = "findOneBySlug"})
+     * @ParamConverter("coordinate", class="Cocorico\GeoBundle\Entity\Coordinate")
      *
-     * @param Request $request
-     * @param Listing $listing
+     * @param Coordinate $coordinate
      *
      * @return Response
      */
-    public function createAction(Request $request, Listing $listing)
+    public function createAction(Coordinate $coordinate)
     {
+        $request = $this->get('request_stack')->getCurrentRequest();
         $type = $request->request->get('type');
         $geocoding = $request->request->get('geocoding');
 
-        $this->get('cocorico_geo.geocoding.manager')->createGeocoding($listing, $type, $geocoding);
+        $this->get('cocorico_geo.geocoding.manager')->createGeocoding($coordinate, $type, $geocoding);
 
         return new Response('true');
     }

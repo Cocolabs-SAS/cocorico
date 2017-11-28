@@ -6,6 +6,7 @@
 {% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
 {% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
 {% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
+{% set carrierBundleEnabled = bundleExist('CocoricoCarrierBundle') %}
 
 {% set listing = booking.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
@@ -105,36 +106,26 @@
                                     {{ form_widget(form.time_range) }}
                                 {% endif %}
                             </ul>
-
-                            {% if deliveryBundleEnabled %}
-                                {% include '@CocoricoDelivery/Frontend/Booking/_form_delivery.html.twig' with {
-                                'form': form,
-                                'booking': booking
-                                } only %}
-                            {% endif %}
-
-                            <ul class="list-inline price-list">
-                                <li>
-                                    {{ 'booking.amount:'|trans }}
-                                    <strong data-id="booking-amount" class="price">
-                                        {{ amount }}
-                                        <sup>
-                                            <small>
-                                                {{ vatInclusionText(app.request.getLocale(), true, true) }}
-                                            </small>
-                                        </sup>
-                                    </strong>
-                                    <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
-                                            data-toggle="tooltip" class="tooltip-button" type="button"
-                                            data-original-title="{{ 'booking.amount.help'|trans }}">?
-                                    </button>
-                                </li>
-                            </ul>
                         </div>
 
+                        {#Delivery OR Carrier bundle form#}
+                        {% if deliveryBundleEnabled %}
+                            {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
+                            'form': form,
+                            'booking': booking
+                            } only %}
+                        {% elseif carrierBundleEnabled %}
+                            {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
+                            'form': form,
+                            'booking': booking
+                            } only %}
+                        {% endif %}
+
                         {% if optionBundleEnabled %}
-                            <div class="hidden">{{ form_widget(form.options) }}</div>
-                            {% include '@CocoricoListingOption/Frontend/Booking/_edit_options.html.twig' with {'booking': booking} only %}
+                            {% include 'CocoricoListingOptionBundle:Frontend:Booking/_form_options.html.twig' with {
+                            'form': form,
+                            'booking': booking
+                            } only %}
                         {% endif %}
 
                         {% if voucherBundleEnabled %}
@@ -213,7 +204,7 @@
                         </div>
 
                         {% if mangopayBundleEnabled %}
-                            {% include '@CocoricoMangoPay/Frontend/Booking/_form_payment_card.html.twig' with {
+                            {% include 'CocoricoMangoPayBundle:Frontend:Booking/_form_payment_card.html.twig' with {
                             'form' : form
                             } only %}
                         {% endif %}
@@ -255,12 +246,12 @@
 
                                 <div class="author-img">
                                     <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
-                                         alt="{{ user.firstName }}"/>
+                                         alt="{{ user.name }}"/>
                                 </div>
                                 <div class="textbox">
                                     <span class="author-name">
                                         <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
-                                            {{ user.firstName }}
+                                            {{ user.name }}
                                         </a>
                                     </span>
                                     <!-- rating -->
@@ -281,7 +272,7 @@
                                 </li>
                                 <li>
                                     {{ 'listing.show.location:'|trans({},'cocorico_listing') }}
-                                    <strong>{{ listing_location.city ~ ", " ~ listing_location.country }}</strong>
+                                    <strong>{{ listing_location.city ~ ", " ~ listing_location.country|country_name }}</strong>
                                 </li>
                                 <li>
                                     {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
@@ -310,8 +301,16 @@
     {{ parent() }}
 
     {% if deliveryBundleEnabled %}
-        {% include '@CocoricoDelivery/Frontend/Booking/js/_delivery_js.html.twig' with {
+        {% include 'CocoricoDeliveryBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
         'listing_location': listing_location
         } only %}
+    {% elseif carrierBundleEnabled %}
+        {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
+        'listing_location': listing_location
+        } only %}
+    {% endif %}
+
+    {% if optionBundleEnabled %}
+        {% include 'CocoricoListingOptionBundle:Frontend:Booking/js/_options_js.html.twig' only %}
     {% endif %}
 {% endblock %}

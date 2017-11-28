@@ -8,15 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Cocorico\CoreBundle\Form\Handler\Frontend;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Event\BookingFormEvent;
+use Cocorico\CoreBundle\Event\BookingFormEvents;
 use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Form\Handler\RegistrationFormHandler;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -30,20 +34,24 @@ class BookingFormHandler
     protected $flashBag;
     protected $bookingManager;
     protected $registrationHandler;
+    protected $dispatcher;
 
     /**
-     * @param RequestStack            $requestStack
-     * @param BookingManager          $bookingManager
-     * @param RegistrationFormHandler $registrationHandler
+     * @param RequestStack             $requestStack
+     * @param BookingManager           $bookingManager
+     * @param RegistrationFormHandler  $registrationHandler
+     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         RequestStack $requestStack,
         BookingManager $bookingManager,
-        RegistrationFormHandler $registrationHandler
+        RegistrationFormHandler $registrationHandler,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->bookingManager = $bookingManager;
         $this->registrationHandler = $registrationHandler;
+        $this->dispatcher = $dispatcher;
     }
 
 
@@ -80,20 +88,8 @@ class BookingFormHandler
 
         //Get date range from post request if any
         if ($this->request->getMethod() == 'POST') {
-            $dateRangeParameter = $this->request->request->get('date_range');
-            if (isset($dateRangeParameter['start']) && isset($dateRangeParameter['end'])) {
-                $start = \DateTime::createFromFormat('d/m/Y', $dateRangeParameter['start']);
-                $end = \DateTime::createFromFormat('d/m/Y', $dateRangeParameter['end']);
-                $dateRange = new DateRange($start, $end);
-            }
-
-            if (isset($timeRangeParameter['start']) && isset($timeRangeParameter['end'])) {
-                $timeRangeParameter = $this->request->request->get('time_range');
-                $timeRange = new TimeRange(
-                    new \DateTime('1970-01-01 ' . $timeRangeParameter['start']),
-                    new \DateTime('1970-01-01 ' . $timeRangeParameter['end'])
-                );
-            }
+            $dateRange = DateRange::createFromArray($this->request->request->get('date_range'));
+            $timeRange = TimeRange::createFromArray($this->request->request->get('time_range'));
         }
 
         $booking = $this->bookingManager->initBooking($listing, $user, $dateRange, $timeRange);
@@ -107,6 +103,7 @@ class BookingFormHandler
      * @param $form
      *
      * @return int equal to :
+     * 4: Options success
      * 3: Delivery success
      * 2: Voucher code success
      * 1: Success
@@ -120,18 +117,21 @@ class BookingFormHandler
      */
     public function process(Form $form)
     {
+//        var_dump($success);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $this->request->isMethod('POST')) {
+            if (count($this->dispatcher->getListeners(BookingFormEvents::BOOKING_NEW_FORM_PROCESS)) > 0) {
+                try {
+                    $event = new BookingFormEvent($form);
+                    $this->dispatcher->dispatch(BookingFormEvents::BOOKING_NEW_FORM_PROCESS, $event);
+                    $result = $event->getResult();
+                    if ($result !== false) {
+                        return $result;
+                    }
+                } catch (\Exception $e) {
 
-            $result = $this->checkDelivery($form);
-            if ($result || $result === 0) {
-                return $result;//0, 3, -5 or -6
-            }
-
-            $result = $this->checkVoucher($form);
-            if ($result) {
-                return $result;//2, -3 or -4
+                }
             }
 
             if ($form->isValid()) {
@@ -140,6 +140,7 @@ class BookingFormHandler
                 $result = -1;//form not valid
             }
         } else {
+
             $result = 0; //Not submitted
         }
 
@@ -147,86 +148,6 @@ class BookingFormHandler
     }
 
     /**
-     * todo: decouple delivery
-     *
-     * @param $form
-     *
-     * @return bool|int equal to:
-     *  3: Delivery success
-     *  0: Neither error ,either success: The address is empty and booking amounts have been recomputed
-     *  -5: the max delivery distance has been reached
-     *  -6: distance matrix api error
-     */
-    private function checkDelivery(Form $form)
-    {
-        $result = false;
-
-        if ($this->bookingManager->deliveryIsEnabled()) {
-            //Check only if Ok is clicked
-            if ($form->get('validateDelivery')->isClicked()) {
-                /** @var Booking $booking */
-                $booking = $form->getData();
-                if ($booking->getAmountDelivery() || $booking->getAmountDelivery() === 0) {
-                    $result = 3;//Success
-                } else {
-                    if ($booking->getDeliveryAddress()) {//Error
-                        if ($booking->getDistanceDelivery() > $booking->getListing()->getKilometerMax()) {
-                            $result = -5;
-                        } else {
-                            $result = -6;//API error
-                        }
-                    } else {
-                        $result = 0;//No error. The address is empty and booking amounts have been recomputed
-                    }
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Check voucher.
-     * todo: decouple voucher
-     *
-     * @param $form
-     *
-     * @return bool|int equal to:
-     *  2: Voucher code success
-     *  -3: Voucher error on code
-     *  -4: Voucher error on booking amount
-     *
-     * @throws \Exception
-     */
-    private function checkVoucher(Form $form)
-    {
-        $result = false;
-
-        if ($this->bookingManager->voucherIsEnabled()) {
-            $voucherForm = $form->get('voucher');
-            //Check only if Ok is clicked
-            if ($voucherForm->get('validateVoucher')->isClicked()) {
-                /** @var Booking $booking */
-                $booking = $form->getData();
-                if (!$voucherForm->get('codeVoucher')->isValid()) {
-                    if (!$booking->getAmountDiscountVoucher()) {
-                        $result = -3;//Code invalid
-                    } else {
-                        $result = -4;//Booking amount invalid
-                    }
-                } elseif ($booking->getAmountDiscountVoucher()) {
-                    $result = 2;//Success
-                }
-            }
-        }
-
-        return $result;
-    }
-
-
-    /**
-     * createFromFormat  MP Card and Pre auth. Save Booking.
-     *
      * @param Form $form
      *
      * @return int equal to :
@@ -247,6 +168,7 @@ class BookingFormHandler
             $this->registrationHandler->handleRegistration($user);
         }
 
+        //No self booking
         if ($booking->getUser() == $booking->getListing()->getUser()) {
             $result = -2;
 

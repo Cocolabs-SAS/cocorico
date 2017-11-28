@@ -41,13 +41,14 @@ class BookingOffererFormHandler extends BookingFormHandler
         //Accept or refuse
         $type = $this->request->get('type');
 
-        $hasCorrectStartTime = $booking->hasCorrectStartTime(
+        $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
             $this->minStartDelay,
             $this->minStartTimeDelay,
-            $this->bookingManager->getTimeUnitIsDay()
+            $this->bookingManager->getTimeUnitIsDay(),
+            $this->bookingManager->getTimeZone()
         );
 
-        if ($booking->getStatus() == Booking::STATUS_NEW && $hasCorrectStartTime) {
+        if ($canBeAcceptedOrRefused) {
             if ($type == 'accept') {
                 if ($this->bookingManager->pay($booking)) {
                     $result = 1;

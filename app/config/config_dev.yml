@@ -1,6 +1,6 @@
 imports:
     - { resource: config.yml }
-    - { resource: @CocoricoCoreBundle/Resources/config/config_dev.yml}
+    - { resource: "@CocoricoCoreBundle/Resources/config/config_dev.yml"}
 
 #doctrine:
 #    orm:
@@ -21,7 +21,8 @@ web_profiler:
 monolog:
     handlers:
         main:
-            type:   stream
+#            type:   stream
+            type:   rotating_file
             path:   "%kernel.logs_dir%/%kernel.environment%.log"
             level:  debug
             channels: [!event]

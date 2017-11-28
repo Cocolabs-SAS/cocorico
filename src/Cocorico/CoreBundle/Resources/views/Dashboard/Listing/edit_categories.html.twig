@@ -27,7 +27,8 @@
                         {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/ListingCategoriesAjax:categoriesAjaxForm', {'listing': listing})) }}
                     </div>
 
-                    {% include '@CocoricoCore/Dashboard/Listing/form_categories.html.twig' with {'form': form} %}
+                    {#Extra fields#}
+                    {% include '@CocoricoCore/Dashboard/Listing/form_categories_extra.html.twig' with {'form': form} %}
                 </div>
                 <!-- form-holder -->
             </div>

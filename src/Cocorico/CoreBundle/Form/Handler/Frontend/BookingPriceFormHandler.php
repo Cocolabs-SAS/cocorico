@@ -13,8 +13,10 @@ namespace Cocorico\CoreBundle\Form\Handler\Frontend;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType;
+use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -72,20 +74,18 @@ class BookingPriceFormHandler
         $listingSearchRequest = $this->session->has('listing_search_request') ?
             $this->session->get('listing_search_request') : $this->listingSearchRequest;
 
-        //Refresh ListingSearch Request dates if form is submitted
+        $dateRange = $listingSearchRequest->getDateRange();
+        $timeRange = $listingSearchRequest->getTimeRange();
         if ($this->request->getMethod() == 'POST') {
-            $listingSearchRequest = $listingSearchRequest->refreshData(
-                $this->request->request->get('date_range', false),
-                $this->request->request->get('time_range', false)
-            );
-            $this->session->set('listing_search_request', $listingSearchRequest);
+            $dateRange = DateRange::createFromArray($this->request->request->get('date_range'));
+            $timeRange = TimeRange::createFromArray($this->request->request->get('time_range'));
         }
 
         $booking = $this->bookingManager->initBooking(
             $listing,
             $user,
-            $listingSearchRequest->getDateRange(),
-            $listingSearchRequest->getTimeRange()
+            $dateRange,
+            $timeRange
         );
 
         return $booking;

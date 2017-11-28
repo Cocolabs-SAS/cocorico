@@ -19,9 +19,8 @@
         src="{{ asset('js/vendor/gmap-marker-clusterer.js') }}">
 </script>
 <script type="text/javascript"
-        src="{{ asset('js/vendor/gmap-marker-spiderfier.js') }}">
+        src="{{ asset('js/vendor/gmap-marker-with-label.js') }}">
 </script>
-
 <style>
     .gmap-marker-label {
         color: #fff;
@@ -136,8 +135,8 @@
                         if (typeof translate !== 'undefined' && translate == true) {
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
                                     function (resultsTranslated) {
-                                        //console_log("resultsTranslated", resultsTranslated);
-                                        //console_log("formattedResult", formattedResult);
+//                                        console_log("resultsTranslated", resultsTranslated);
+//                                        console_log("formattedResult", formattedResult);
                                         deferred.resolve(
                                                 $.extend(formattedResult, resultsTranslated)
                                         );
@@ -465,154 +464,246 @@
 
         /**
          * Set markers on map.
-         * Thanks to Anthoni Noyon to help to enhance markers spidering;)
          *
-         * @param locations
+         * @param markersGroupedByLocation associative array. First dimension is the lat-lng and can contain multiple listings
+         * with same locations
+         *      Ex :
+         *      markersGroupedByLocation["12.789-0.4589"]=> array(
+         *          0 => array(
+         *                  'title' => 'Title Marker',
+         *                  'price' => '1000',
+         *                  ...
+         *                  ),
+         *          1 => array(
+         *                  'title' => 'Other Title Marker',
+         *                  'price' => '200',
+         *                  ...
+         *                  ),
+         *         ...
+         *      )
          */
-        setMarkersFunc = function (locations) {
-            var markerTemplate = document.getElementById('popup1').innerHTML;
+        {# markersGroupedByLocation are setted in Cocorico/CoreBundle/Controller/Frontend/ListingSearchController.php#}
+        setMarkersFunc = function (markersGroupedByLocation) {
+            {#Get infobox html template @see Cocorico/CoreBundle/Resources/views/Frontend/ListingResult/_marker.html.twig#}
+            var markerTemplate = $('.info-box-tpl').find('ul').html();
 
             var image = {
                 url: '/images/pin.png',
                 size: new google.maps.Size(20, 32)
             };
 
-            //Spider
-            var markerSpider = markerSpiderer();
+            //Compute InfoBox Y Offset and height
+            var infoBoxHeight = 270;
+            var infoBoxWidth = 275;
+            var offsetY = -infoBoxHeight - 34;
 
-            var markers = [];
-            $.each(locations, function (i, location) {
+            var markers = {};
+
+            //Construct InfoBox for each marker with different location
+            $.each(markersGroupedByLocation, function (cptMarker, markersForOneLocation) {//cptMarker is of form lat-lng
+                var markerData = getMarkerData(markersForOneLocation);
+                var nbMarkersWithSameLocation = markerData["nbMarkersWithSameLocation"];
+                var listingsIdWithSameLocation = markerData["listingsIdWithSameLocation"];
+                var infoBoxContent = markerData["infoBoxContent"];
+
+                var $popupElt = $(infoBoxContent);
+                $popupElt.find("[data-id=info-box]").css("height", infoBoxHeight + "px");
+
                 //Marker
-                var myLatLng = new google.maps.LatLng(location['lat'], location['lng']);
-                var markerIB = new google.maps.Marker({
+                var firstMarker = markersForOneLocation[0];
+                var myLatLng = new google.maps.LatLng(firstMarker['lat'], firstMarker['lng']);
+                var marker = new MarkerWithLabel({
                     icon: image,
                     position: myLatLng,
-                    zIndex: location['zindex'],
-                    opacity: location['opacity'],
+                    zIndex: firstMarker['zindex'],
+                    opacity: firstMarker['opacity'],
                     animation: google.maps.Animation.DROP,
-                    map: map
+                    map: map,
+                    labelContent: nbMarkersWithSameLocation.toString(),
+                    labelAnchor: new google.maps.Point(7, 28),//to change if marker icon change
+                    labelClass: "map-label"
                 });
 
                 //InfoBox
-                var infoBoxContent = markerTemplate.replace('%title%', location['title']);
-                infoBoxContent = infoBoxContent.replace('/images/img.png', location['image']);
-                infoBoxContent = infoBoxContent.replace('%price%', location['price']);
-                infoBoxContent = infoBoxContent.replace('%certified%', location['certified']);
-                infoBoxContent = infoBoxContent.replace('%url%', location['url']);
-                infoBoxContent = infoBoxContent.replace('%category%', location['category']);
-                infoBoxContent = infoBoxContent.replace('%rating1%', location['rating1']);
-                infoBoxContent = infoBoxContent.replace('%rating2%', location['rating2']);
-                infoBoxContent = infoBoxContent.replace('%rating3%', location['rating3']);
-                infoBoxContent = infoBoxContent.replace('%rating4%', location['rating4']);
-                infoBoxContent = infoBoxContent.replace('%rating5%', location['rating5']);
-
-                var popupElt = document.createElement("div");
-                popupElt.setAttribute("class", "popup");
-                popupElt.innerHTML = infoBoxContent;
-
-                markerIB.infobox = new InfoBox({
-                    content: popupElt,
+                marker.infobox = new InfoBox({
+                    content: $popupElt[0],//DOM element
                     disableAutoPan: false,
-                    maxWidth: 280,
-                    pixelOffset: new google.maps.Size(-140, -10),
+                    maxWidth: infoBoxWidth,
+                    pixelOffset: new google.maps.Size(-Math.round(infoBoxWidth / 2), offsetY),
                     zIndex: null,
                     boxStyle: {
-                        width: "280px"
+                        width: infoBoxWidth + "px"
                     },
                     closeBoxURL: "",
                     infoBoxClearance: new google.maps.Size(1, 1)
                 });
+                markers[cptMarker] = marker;
 
-                popupElt.onclick = function () {
-                    markerIB.infobox.close();
-                };
+                ////////EVENTS///////
+                //Close InfoBox
+                $popupElt.find('.close').on('click', function (e) {
+                    e.preventDefault();
+                    marker.infobox.close();
+                    return false;
+                });
 
-                markers.push(markerIB);
-
-                google.maps.event.addListener(markerIB, 'click', (function (markerIB, i) {
+                //Open InfoBox on marker click
+                google.maps.event.addListener(marker, 'click', (function (cptMarker, nbMarkersWithSameLocation) {
                     return function () {
-                        for (var h = 0; h < markers.length; h++) {
-                            markers[h].infobox.close();
+                        //Close all info box
+                        for (var m in markers) {
+                            if (markers.hasOwnProperty(m)) {
+                                markers[m].infobox.close();
+                            }
                         }
-                        markers[i].infobox.open(map, this);
-                        map.panTo(myLatLng);
+
+                        //Open info box for current marker
+                        markers[cptMarker].infobox.open(map, this);
+
+                        //Add slider and pan map
+                        setTimeout(function () {
+                            addSlider(nbMarkersWithSameLocation);
+                            map.panTo(myLatLng);
+                            map.panBy(0, Math.round(offsetY / 2));
+                        }, 5);
                     }
-                })(markerIB, i));
+                })(cptMarker, nbMarkersWithSameLocation));
 
-                markerSpider.addMarker(markerIB);
-            });
+                //Overlay corresponding marker or cluster on listing mouseover
+                $.each(listingsIdWithSameLocation, function (i, listingId) {
+                    $("[data-lid=" + listingId + "]").on('mouseenter mouseleave', function (e) {
+                        try {
+                            if (e.type == 'mouseenter') {
+                                marker.labelClass = "map-label-overlay";
+                                if (marker.cluster) {//setted in clusteringend event below
+                                    marker.cluster.clusterIcon_.div_.className = 'cluster cluster-overlay';
+                                }
+                            } else {
+                                marker.labelClass = "map-label";
+                                if (marker.cluster) {
+                                    marker.cluster.clusterIcon_.div_.className = 'cluster';
+                                }
+                            }
+                            marker.label.draw();
+                        } catch (e) {
+                            //todo: know why projection is null
+                        }
+                    });
+                });
 
-            //Cluster
-            var markerCluster = new MarkerClusterer(map, markers, {
-                maxZoom: 18,
-                gridSize: 30,
-                styles: null
+            });//end loop of info boxes construction
+
+            /**
+             * Extend map to fit bounds on visible markers
+             */
+            google.maps.event.addListenerOnce(map, 'idle', function () {
+                var viewport = this.getBounds();
+
+                for (var m in markers) {
+                    if (markers.hasOwnProperty(m)) {
+                        viewport = viewport.extend(markers[m].getPosition());
+                    }
+                }
+
+                map.fitBounds(viewport);
             });
 
             /**
-             * Manage marker spidering
+             * Generate info box content for each marker
+             * Some markers can have same locations. In this case info box marker are rendered as slider
+             *
              */
-            function markerSpiderer() {
-                var markerSpider = new OverlappingMarkerSpiderfier(map, {
-                    keepSpiderfied: true,
-                    legWeight: 0.5
-                });
+            function getMarkerData(markersForOneLocation) {
+                var infoBoxContent = '';
+                var nbMarkersWithSameLocation = 0;
+                var listingsIdWithSameLocation = [];
 
-                var spiderfying = false;
-                var imageSpider = {
-                    url: '/images/marker1.png',
-                    size: new google.maps.Size(53, 52)
+                $.each(markersForOneLocation, function (i, marker) {
+                    var tmpContent = markerTemplate.replace('%title%', marker['title']);
+                    tmpContent = tmpContent.replace('/images/img.png', marker['image']);
+                    tmpContent = tmpContent.replace('%price%', marker['price']);
+                    tmpContent = tmpContent.replace('%certified%', marker['certified']);
+                    tmpContent = tmpContent.replace('%url%', marker['url']);
+                    tmpContent = tmpContent.replace('%category%', marker['category']);
+                    tmpContent = tmpContent.replace('%rating1%', marker['rating1']);
+                    tmpContent = tmpContent.replace('%rating2%', marker['rating2']);
+                    tmpContent = tmpContent.replace('%rating3%', marker['rating3']);
+                    tmpContent = tmpContent.replace('%rating4%', marker['rating4']);
+                    tmpContent = tmpContent.replace('%rating5%', marker['rating5']);
+
+                    infoBoxContent = infoBoxContent + tmpContent;
+                    nbMarkersWithSameLocation++;
+                    listingsIdWithSameLocation.push(marker['id']);
+                });
+                {#Inject html into infobox wrapper @see Cocorico/CoreBundle/Resources/views/Frontend/ListingResult/_marker.html.twig#}
+                infoBoxContent = $('.info-box-wrapper').html().replace('%info_box_content%', infoBoxContent);
+
+                return {
+                    "infoBoxContent": infoBoxContent,
+                    "nbMarkersWithSameLocation": nbMarkersWithSameLocation,
+                    "listingsIdWithSameLocation": listingsIdWithSameLocation
                 };
-                var spiderInterval;
-
-                markerSpider.addListener('spiderfy', function (markers) {
-                    for (var i = 0; i < markers.length; i++) {
-                        markers[i].set('icon', image);
-                        markers[i].set('label', {
-                            text: ' '
-                        });
-                    }
-                    spiderfying = true;
-                });
-
-                markerSpider.addListener('unspiderfy', function (markers) {
-                    var nbMarkers = markers.length;
-                    for (var i = 0; i < markers.length; i++) {
-                        markers[i].set('icon', imageSpider);
-                        markers[i].set('label', {
-                            text: '' + nbMarkers
-                        });
-                    }
-                    spiderfying = false;
-                });
-
-                google.maps.event.addListener(map, "bounds_changed", spiderfy);
-
-                function spiderfy() {
-                    window.clearTimeout(spiderInterval);
-
-                    spiderInterval = setTimeout(function () {
-                        var markersToSpider = markerSpider.markersNearAnyOtherMarker();
-                        var nbMarkers = markersToSpider.length;
-
-//                    console_log("bounds_changed" + nbMarkers);
-                        $.each(markersToSpider, function (i, marker) {
-                            if (!spiderfying) {
-                                markersToSpider[i].set('icon', imageSpider);
-                                markersToSpider[i].set('label', {
-                                    text: '' + nbMarkers,
-                                    color: 'black',
-                                    fontSize: '14px',
-                                    fontWeight: 'bold'
-                                });
-                            }
-                        });
-                    }, 1000);
-                }
-
-                return markerSpider;
             }
-        };
+
+
+            function addSlider(nbMarkersWithSameLocation) {
+                var options = {
+                    infinite: true,
+                    arrows: false
+                };
+
+                if (nbMarkersWithSameLocation > 1) {
+                    options = {
+                        infinite: true,
+                        arrows: true
+                    };
+                }
+                $(".infoBox .popup").unslider(options);
+            }
+
+            //Cluster
+            var markerCluster = new MarkerClusterer(map, markers, {
+                maxZoom: 15,
+                gridSize: 30,
+                styles: null,
+                calculator: function (markers, numStyles) {
+                    var index = 0;
+                    var title = "";
+                    var count = 0;
+                    //Compute the number of markers in cluster including markers with same location
+                    for (var marker in markers) {
+                        if (markers.hasOwnProperty(marker)) {
+                            count += parseInt(markers[marker].labelContent);
+                        }
+                    }
+                    count = count.toString();
+
+                    var dv = count;
+                    while (dv !== 0) {
+                        dv = parseInt(dv / 10, 10);
+                        index++;
+                    }
+
+                    index = Math.min(index, numStyles);
+                    return {
+                        text: count,
+                        index: index,
+                        title: title
+                    };
+                }
+            });
+
+            //Associate each marker to its cluster to manage cluster overlay effect on listing mouseover
+            google.maps.event.addListener(markerCluster, 'clusteringend', function (e) {
+                var clusters = this.getClusters();
+                for (var i = 0; i < clusters.length; i++) {
+                    for (var j = 0; j < clusters[i].markers_.length; j++) {
+                        clusters[i].markers_[j].cluster = clusters[i];
+                    }
+                }
+            });
+        };//end setMarkersFunc
+
 
         /**
          * Geo localisation by ip through IPInfoDB
@@ -624,7 +715,6 @@
             if (ipInfoDbAPIKey) {
                 var countries = $.parseJSON('{{ countries_translated(app.request.locale)|json_encode()|e('js') }}');
                 var url = "//api.ipinfodb.com/v3/ip-city/?key=" + ipInfoDbAPIKey + "&format=json";
-                //var url = "//freegeoip.net/json/"; //too lagged
 
                 try {
                     var geoCookie = Cookies.get('_cgl');
@@ -690,7 +780,7 @@
             var latZoom = zoom(mapDim.height, WORLD_DIM.height, latFraction);
             var lngZoom = zoom(mapDim.width, WORLD_DIM.width, lngFraction);
 
-            //console_log('getBoundsZoomLevel > return', Math.min(latZoom, lngZoom, ZOOM_MAX));
+//            console_log('getBoundsZoomLevel > return', Math.min(latZoom, lngZoom, ZOOM_MAX));
 
             return Math.min(latZoom, lngZoom, ZOOM_MAX);
         }

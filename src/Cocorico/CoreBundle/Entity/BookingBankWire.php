@@ -15,7 +15,6 @@ use Cocorico\CoreBundle\Model\BaseBookingBankWire;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
 
 
 /**
@@ -25,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="booking_bank_wire",indexes={
  *    @ORM\Index(name="status_bbw_idx", columns={"status"}),
- *    @ORM\Index(name="createdAt_idx", columns={"createdAt"}),
+ *    @ORM\Index(name="created_at_bbw_idx", columns={"createdAt"}),
  *  })
  */
 class BookingBankWire extends BaseBookingBankWire

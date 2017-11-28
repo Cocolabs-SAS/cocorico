@@ -44,26 +44,26 @@
                             <ul class="list-inline booking-detail">
                                 <li>
                                     {{ 'review.comment.start_date'| trans }}:
-                                    <time datetime="{{ booking.start|date('Y-m-d') }}">
+                                    <time>
                                         {{ booking.start|localizeddate('short', 'none', 'fr') }}
                                     </time>
                                 </li>
                                 <li>
                                     {{ 'review.comment.end_date' | trans }} :
-                                    <time datetime="{{ booking.end|date('Y-m-d') }}">
+                                    <time>
                                         {{ booking.end|localizeddate('short', 'none', 'fr') }}
                                     </time>
                                 </li>
                                 {% if not timeUnitIsDay %}
                                     <li>
                                         {{ 'booking.show.start_time:'|trans({}, 'cocorico_booking') }}
-                                        <time datetime="{{ booking.startTime|date('H:i') }}">
+                                        <time>
                                             {{ booking.startTime|date('H:i') }}
                                         </time>
                                     </li>
                                     <li>
                                         {{ 'booking.show.end_time:'|trans({}, 'cocorico_booking') }}
-                                        <time datetime="{{ booking.endTime|date('H:i') }}">
+                                        <time>
                                             {{ booking.endTime|date('H:i') }}
                                         </time>
                                     </li>

@@ -44,7 +44,7 @@
         </strong>
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
-            {% include '@CocoricoDelivery/Frontend/Booking/_show_delivery.html.twig' with {
+            {% include 'CocoricoDeliveryBundle:Frontend:Booking/_show_delivery.html.twig' with {
             'listing_delivery':  booking.listing.delivery
             } only %}
         {% endif %}
@@ -59,6 +59,12 @@
             <em class="text">
                 {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
             </em>
+        {% endif %}
+
+        {% if bundleExist('CocoricoCarrierBundle') %}
+            {% include 'CocoricoCarrierBundle:Frontend:Listing/_show_carrier.html.twig' with {
+            'listing_pallets': booking.listing.pallets
+            } only %}
         {% endif %}
     </div>
 

@@ -3,7 +3,7 @@
   "license": "MIT",
   "type": "project",
   "description": "The Cocorico Standard Edition distribution",
-  "version": "0.3.4",
+  "version": "0.4.1",
   "keywords": [
     "collaborative",
     "platform",
@@ -34,6 +34,8 @@
     "doctrine/orm": "^2.4.8",
     "doctrine/doctrine-bundle": "~1.4",
     "doctrine/doctrine-migrations-bundle": "^1.0",
+    "alcaeus/mongo-php-adapter": "^1.1",
+    "doctrine/mongodb-odm-bundle": "^3.0",
     "symfony/swiftmailer-bundle": "~2.3",
     "symfony/monolog-bundle": "~2.4",
     "symfony/assetic-bundle": "~2.8",
@@ -47,12 +49,10 @@
     "a2lix/translation-form-bundle": "2.*@dev",
     "jms/di-extra-bundle": "^1.7",
     "stof/doctrine-extensions-bundle": "^1.2",
-    "oneup/uploader-bundle": "~1.3",
+    "oneup/uploader-bundle": "^1.8",
     "liip/imagine-bundle": "dev-master",
     "lexik/currency-bundle": "^2.0",
     "willdurand/geocoder-bundle": "^4.1",
-    "doctrine/mongodb-odm": "^1.0",
-    "doctrine/mongodb-odm-bundle": "^3.0",
     "ramsey/array_column": "~1.1",
     "sonata-project/admin-bundle": "~2.3",
     "sonata-project/doctrine-orm-admin-bundle": "~2.3",
@@ -61,7 +61,7 @@
     "sonata-project/user-bundle": "^2.2",
     "knplabs/knp-menu-bundle": "~2",
     "friendsofsymfony/message-bundle": "~1.2",
-    "whiteoctober/breadcrumbs-bundle": "^1.2",
+    "whiteoctober/breadcrumbs-bundle": "~1.2",
     "hwi/oauth-bundle": "^0.4",
     "egeloen/ckeditor-bundle": "^4.0",
     "helios-ag/fm-elfinder-bundle": "^6.0",
@@ -107,7 +107,7 @@
   "config": {
     "bin-dir": "bin",
     "platform": {
-      "php": "5.4.8"
+      "php": "7.1"
     },
     "component-dir": "web/assets"
   },
@@ -121,5 +121,8 @@
     "branch-alias": {
       "dev-master": "2.8-dev"
     }
+  },
+  "provide": {
+    "ext-mongo": "1.6.14"
   }
 }

@@ -53,8 +53,8 @@ class LoadListingData extends AbstractFixture implements OrderedFixtureInterface
         $department = new Department();
         $department->setCountry($country);
         $department->setArea($area);
-        $department->translate('en')->setName('Île-de-France');
-        $department->translate('fr')->setName('Île-de-France');
+        $department->translate('en')->setName('Paris');
+        $department->translate('fr')->setName('Paris');
 
         $city = new City();
         $city->setCountry($country);

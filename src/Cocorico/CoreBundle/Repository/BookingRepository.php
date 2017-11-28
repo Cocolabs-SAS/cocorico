@@ -442,7 +442,7 @@ class BookingRepository extends EntityRepository
      *                                after booking start date or booking end date.
      * @param int    $validatedDelay  Time after or before the moment the booking is considered as validated (in minutes)
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection|Booking[]
      *
      * @throws \Exception
      */

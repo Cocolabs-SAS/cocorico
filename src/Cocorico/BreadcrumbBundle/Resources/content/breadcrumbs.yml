@@ -71,12 +71,17 @@ cocorico_dashboard_listing_edit_characteristic:
     -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
     -   text: 'Characteristics'
 
-cocorico_dashboard_listing_edit_various_information:
+cocorico_dashboard_listing_edit_location:
     -   text: 'Listing'
         route: 'cocorico_dashboard_listing'
     -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
-    -   text: 'Various informations'
+    -   text: 'Address'
 
+cocorico_dashboard_listing_edit_categories:
+    -   text: 'Listing'
+        route: 'cocorico_dashboard_listing'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Listing', 'entityMethod': 'getTitle'}
+    -   text: 'Categories'
 
 ##Review
 cocorico_dashboard_reviews_received:

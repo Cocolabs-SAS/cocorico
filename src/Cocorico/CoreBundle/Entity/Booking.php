@@ -73,7 +73,6 @@ class Booking extends BaseBooking
      */
     protected $listing;
 
-
     /**
      * @ORM\OneToOne(targetEntity="Cocorico\MessageBundle\Entity\Thread", mappedBy="booking", cascade={"remove"}, orphanRemoval=true)
      */
@@ -365,14 +364,22 @@ class Booking extends BaseBooking
     /**
      * Get time in seconds before booking start
      *
+     * @param string $timeZone
+     *
      * @return bool|int nb seconds before start
      */
-    public function getTimeBeforeStart()
+    public function getTimeBeforeStart($timeZone)
     {
         if ($this->getStart()) {
-            $now = new \DateTime();
+            $now = new \DateTime('now', new \DateTimeZone($timeZone));
 
-            return $this->getStart()->getTimestamp() - $now->getTimestamp();
+            $start = $this->getStart()->format('Y-m-d');
+            if ($this->getStartTime()) {
+                $start .= ' ' . $this->getStartTime()->format('H:i:s');
+            }
+            $start = new \DateTime($start, new \DateTimeZone($timeZone));
+
+            return $start->getTimestamp() - $now->getTimestamp();
         }
 
         return false;
@@ -408,45 +415,64 @@ class Booking extends BaseBooking
 
     }
 
+    /**
+     * Return whether a booking can be accepted or refused by offerer
+     * For now a booking can be accepted or refused no later than ($minStartTimeDelay / 2) hours before it starts
+     *
+     * @param int    $minStartDelay     in days
+     * @param int    $minStartTimeDelay in hours
+     * @param bool   $timeUnitIsDay
+     * @param string $timeZone          Default user timezone
+     *
+     * @return bool
+     */
+    public function canBeAcceptedOrRefusedByOfferer($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
+    {
+        $statusIsOk = in_array($this->getStatus(), self::$payableStatus);//$refusableStatus is equal to $payableStatus
+        $minStartTimeDelay = round($minStartTimeDelay / 2);
+        $timeIsOk = $this->hasCorrectStartTime($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone);
+
+        if ($statusIsOk && $timeIsOk) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     /**
      * Check if booking start time is correct according to $minStartTimeDelay
      *
-     * @param int  $minStartDelay     in days
-     * @param int  $minStartTimeDelay in hours
-     * @param bool $timeUnitIsDay
+     * @param int    $minStartDelay     in days
+     * @param int    $minStartTimeDelay in hours
+     * @param bool   $timeUnitIsDay
+     * @param string $timeZone          Default user timezone
      *
      * @return bool
      */
-    public function hasCorrectStartTime($minStartDelay, $minStartTimeDelay, $timeUnitIsDay)
+    public function hasCorrectStartTime($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
     {
-        $now = new \DateTime();
+        $minStartTime = new \DateTime();
+        $minStartTime->setTimezone(new \DateTimeZone($timeZone));
 
         if ($timeUnitIsDay) {
-            $now->setTime(0, 0, 0);
+            $minStartTime->add(new \DateInterval('P' . $minStartDelay . 'D'));
+            $minStartTime->setTime(0, 0, 0);
 
             $start = new \DateTime(
                 $this->getStart()->format('Y-m-d')
             );
-            $interval = $now->diff($start);
-            $days = $interval->days;
 
-//            echo $start->format('Y-m-d H:i') . "<br>";
-//            echo $now->format('Y-m-d H:i') . "<br>";
-//            echo $days . "<br>";
-//            echo $minStartDelay . "<br>";
-//            echo $interval->invert . "<br>";
-
-            if ($interval->invert == 1 || $days < $minStartDelay) {
+            if ($start->format('Ymd') < $minStartTime->format('Ymd')) {
                 return false;
             }
         } else {
+            $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'H'));
             $start = new \DateTime(
                 $this->getStart()->format('Y-m-d') . " " . $this->getStartTime()->format('H:i')
             );
-            $interval = $now->diff($start);
-            $hours = ($interval->days * 24) + $interval->h;
-            if ($interval->invert == 1 || $hours < $minStartTimeDelay) {
+
+            if ($start->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
                 return false;
             }
         }

@@ -13,7 +13,6 @@ namespace Cocorico\CoreBundle\Document;
 
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -39,14 +38,14 @@ class ListingAvailabilityTime
     protected $id;
 
     /**
-     * @MongoDB\Int(nullable="false", name="s")
+     * @MongoDB\Field(type="int", nullable="false", name="s")
      * @MongoDB\Index(order="asc")
      * @Assert\Choice(callback = "getStatusValuesKeys")
      */
     protected $status;
 
     /**
-     * @MongoDB\Int(nullable="false", name="p")
+     * @MongoDB\Field(type="int", nullable="false", name="p")
      * @MongoDB\Index(order="asc")
      * @Assert\NotBlank()
      */

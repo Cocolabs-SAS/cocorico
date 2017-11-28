@@ -14,8 +14,8 @@
                 {{ 'booking.show_asker.download_voucher'|trans }}
             </a>
         {% endif %}
-    {% elseif app.user == booking.listing.user and booking.status == BookingConstants.STATUS_NEW %}
-        {% if booking.hasCorrectStartTime(minStartDelay, minStartTimeDelay, timeUnitIsDay) %}
+    {% elseif app.user == booking.listing.user %}
+        {% if booking.canBeAcceptedOrRefusedByOfferer(minStartDelay, minStartTimeDelay, timeUnitIsDay, timeZone) %}
             <a href="{{ path('cocorico_dashboard_booking_edit_offerer', {'id': booking.id, 'type': 'refuse'}) }}"
                class="btn btn-refuse" data-toggle="modal" data-target="#modal">
                 {{ 'booking.show_offerer.refuse'|trans }}

@@ -11,6 +11,7 @@
 
 namespace Cocorico\MessageBundle\Admin;
 
+use Cocorico\MessageBundle\Entity\Thread;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -110,6 +111,34 @@ class ThreadAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Thread $thread */
+        $thread = $this->getSubject();
+
+        $listing = null;
+        if ($thread && $thread->getListing()) {
+            $listing = $thread->getListing();
+        } elseif ($thread && $thread->getBooking()) {
+            $listing = $thread->getBooking()->getListing();
+        }
+
+        if ($listing) {
+            $formMapper
+                ->add(
+                    'listing',
+                    'sonata_type_model',
+                    array(
+                        'query' => $listing ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                            ->getRepository('CocoricoCoreBundle:Listing')
+                            ->getFindOneByIdAndLocaleQuery(
+                                $listing->getId(),
+                                $this->request ? $this->getRequest()->getLocale() : 'fr'
+                            ) : null,
+                        'disabled' => true,
+                        'label' => 'admin.review.listing.label',
+                    )
+                );
+        }
+
         $formMapper
             ->add(
                 'messages',
@@ -308,6 +337,7 @@ class ThreadAdmin extends Admin
 
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $dataSourceIt;
     }
 

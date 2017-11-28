@@ -17,7 +17,6 @@ use Cocorico\CoreBundle\Model\PriceRange;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Doctrine\ORM\Query;
 
 
 class ListingAvailabilityRepository extends DocumentRepository
@@ -137,10 +136,12 @@ class ListingAvailabilityRepository extends DocumentRepository
                 //Embedded documents require their own query builders to search on their fields
                 $embeddedQbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailabilityTime');
 
-                if ($timeRange) {
+                if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
                     $startMinute = intval($timeRange->getStart()->getTimestamp() / 60);
                     $endMinute = intval($timeRange->getEnd()->getTimestamp() / 60) - 1;
-
+                    if ($timeRange->getEnd()->format('H:i') == '00:00') {//End minute is equal to 1440-1=1439 and not 0
+                        $endMinute = 1439;
+                    }
                     $qbDMDatesExp->field('times')->elemMatch(
                         $embeddedQbDM->expr()
                             ->field('id')->in(range($startMinute, $endMinute))

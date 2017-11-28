@@ -7,8 +7,8 @@ services:
     cocorico_user.user.validator:
         class: Cocorico\UserBundle\Validator\Constraints\UserValidator
         arguments:
-            - %cocorico.user_img_max%
-            - %cocorico.user_img_min%
+            - "%cocorico.user_img_max%"
+            - "%cocorico.user_img_min%"
         tags:
             - { name: validator.constraint_validator, alias: user }
 
@@ -57,7 +57,6 @@ services:
             - "@fos_user.util.token_generator"
             - "@cocorico_user.login_manager"
             - "@event_dispatcher"
-#        scope: request
         public: false
 
 
@@ -67,7 +66,6 @@ services:
             - "@request_stack"
             - "@cocorico_user.user_manager"
             - "@event_dispatcher"
-#        scope: request
         public: true
 
 

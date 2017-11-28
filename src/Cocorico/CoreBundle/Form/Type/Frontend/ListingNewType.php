@@ -16,7 +16,6 @@ use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
-use Cocorico\ListingCategoryFieldBundle\Form\Type\ListingCategoryFieldValueType;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Security\LoginManager;
 use JMS\TranslationBundle\Model\Message;
@@ -32,7 +31,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Validator\Constraints\True;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 /**
  * Class ListingNewType
@@ -185,7 +184,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,
-                    'constraints' => new True(
+                    'constraints' => new IsTrue(
                         array(
                             "message" => self::$tacError
                         )

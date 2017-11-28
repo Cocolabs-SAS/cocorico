@@ -43,13 +43,13 @@
                     <ul class="list-inline" id="booking-asker-date">
                         <li content="{{ booking.start|date('Y-m-d') }}">
                             {{ 'booking.show.start:'|trans }}
-                            <time datetime="{{ booking.start|date('Y-m-d') }}">
+                            <time>
                                 {{ booking.start|localizeddate('short', 'none', 'fr') }}
                             </time>
                         </li>
                         <li>
                             {{ 'booking.show.end:'|trans }}
-                            <time datetime="{{ booking.end|date('Y-m-d') }}">
+                            <time>
                                 {{ booking.end|localizeddate('short', 'none', 'fr') }}
                             </time>
                         </li>
@@ -57,13 +57,13 @@
                         {% if not timeUnitIsDay %}
                             <li>
                                 {{ 'booking.show.start_time:'|trans }}
-                                <time datetime="{{ booking.startTime|date('H:i') }}">
+                                <time>
                                     {{ booking.startTime|date('H:i') }}
                                 </time>
                             </li>
                             <li>
                                 {{ 'booking.show.end_time:'|trans }}
-                                <time datetime="{{ booking.endTime|date('H:i') }}">
+                                <time>
                                     {{ booking.endTime|date('H:i') }}
                                 </time>
                             </li>
@@ -75,11 +75,11 @@
             <div class="post-content">
                 <div class="author-img">
                     <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
-                         alt="{{ other_user.firstName }}">
+                         alt="{{ other_user.name }}">
                 </div>
                 <div class="textbox">
                     <span class="author-info">
-                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.firstName }}</strong></a>
+                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.name }}</strong></a>
                     </span>
                     {% if other_user_rating %}
                         {{ other_user_rating | cocorico_star_rating }}
@@ -87,14 +87,18 @@
                 </div>
 
                 {% if bundleExist('CocoricoDeliveryBundle') %}
-                    {% include '@CocoricoDelivery/Dashboard/Booking/_show_delivery.html.twig' with {
+                    {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery.html.twig' with {
+                    'booking': booking
+                    } only %}
+                {% elseif bundleExist('CocoricoCarrierBundle') %}
+                    {% include 'CocoricoCarrierBundle:Dashboard:Booking/_show_carrier.html.twig' with {
                     'booking': booking
                     } only %}
                 {% endif %}
             </div>
 
             {% if bundleExist('CocoricoListingOptionBundle') %}
-                {% include '@CocoricoListingOption/Dashboard/Booking/_booking_show_options.html.twig' with {
+                {% include 'CocoricoListingOptionBundle:Dashboard:Booking/_booking_show_options.html.twig' with {
                 'booking': booking
                 } only %}
             {% endif %}

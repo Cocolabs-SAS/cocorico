@@ -110,8 +110,9 @@ class SecurityController extends BaseController implements TranslationContainerI
      * @Route("/login-check", name="cocorico_user_login_check")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \RuntimeException
      */
-
     public function checkAction()
     {
         throw new \RuntimeException(
@@ -123,7 +124,10 @@ class SecurityController extends BaseController implements TranslationContainerI
      * Logout user
      *
      * @Route("/logout", name="cocorico_user_logout")
+     *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \RuntimeException
      */
     public function logoutAction()
     {
@@ -137,7 +141,7 @@ class SecurityController extends BaseController implements TranslationContainerI
      */
     public static function getTranslationMessages()
     {
-        $messages[] = new Message('Bad credentials', 'cocorico_user');
+        $messages[] = new Message('Bad credentials.', 'cocorico_user');
 
         return $messages;
     }

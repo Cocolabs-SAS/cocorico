@@ -124,7 +124,11 @@
                                         </div>
 
                                         {% if bundleExist('CocoricoDeliveryBundle') %}
-                                            {% include '@CocoricoDelivery/Frontend/Listing/_form_delivery.html.twig' with {
+                                            {% include 'CocoricoDeliveryBundle:Frontend:Listing/_form_delivery.html.twig' with {
+                                            'form': form
+                                            } only %}
+                                        {% elseif bundleExist('CocoricoCarrierBundle') %}
+                                            {% include 'CocoricoCarrierBundle:Frontend:Listing/_form_carrier.html.twig' with {
                                             'form': form
                                             } only %}
                                         {% endif %}

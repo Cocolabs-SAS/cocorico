@@ -11,6 +11,7 @@
 
 namespace Cocorico\ReviewBundle\Admin;
 
+use Cocorico\ReviewBundle\Entity\Review;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -30,6 +31,9 @@ class ReviewAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Review $review */
+        $review = $this->getSubject();
+
         $formMapper
             ->with('admin.review.title')
             ->add(
@@ -49,6 +53,20 @@ class ReviewAdmin extends Admin
                 )
             )
             ->add(
+                'booking.listing',
+                'sonata_type_model',
+                array(
+                    'query' => $review ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                        ->getRepository('CocoricoCoreBundle:Listing')
+                        ->getFindOneByIdAndLocaleQuery(
+                            $review->getBooking()->getListing()->getId(),
+                            $this->request ? $this->getRequest()->getLocale() : 'fr'
+                        ) : null,
+                    'disabled' => true,
+                    'label' => 'admin.review.listing.label',
+                )
+            )
+            ->add(
                 'rating',
                 null,
                 array(
@@ -60,6 +78,7 @@ class ReviewAdmin extends Admin
                 'comment',
                 null,
                 array(
+                    'disabled' => false,
                     'label' => 'admin.review.comment.label',
                 )
             )
@@ -146,6 +165,7 @@ class ReviewAdmin extends Admin
                 'reviewBy',
                 null,
                 array(
+                    'disabled' => true,
                     'label' => 'admin.review.reviewBy.label'
                 )
             )
@@ -153,6 +173,7 @@ class ReviewAdmin extends Admin
                 'reviewTo',
                 null,
                 array(
+                    'disabled' => true,
                     'label' => 'admin.review.reviewTo.label',
                 )
             )
@@ -167,6 +188,7 @@ class ReviewAdmin extends Admin
                 'rating',
                 null,
                 array(
+                    'disabled' => true,
                     'label' => 'admin.review.rating.label',
                 )
             )
@@ -220,6 +242,7 @@ class ReviewAdmin extends Admin
 
         $datasourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $datasourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $datasourceIt;
     }
 

@@ -330,4 +330,36 @@ class GlobalHelper
         return $head;
     }
 
+
+    /**
+     * Remove some texts from string depending on $typeText value
+     *
+     * @param string $text
+     * @param array  $typeText
+     * @param string $replaceBy
+     * @return mixed
+     */
+    public function stripTexts($text, $typeText = array("phone", "email", "domain"), $replaceBy = '')
+    {
+        if (in_array("phone", $typeText)) {
+            $pattern = "(0[0-9])?([-. ]?[0-9]{2}){4}";
+            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
+
+            $pattern = "\+[0-9]{1}([-. ]?[0-9]){10}";
+            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
+        }
+
+        if (in_array("email", $typeText)) {
+            $pattern = "[a-zA-Z0-9_.+-]+(@)[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+";
+            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
+        }
+
+        if (in_array("domain", $typeText)) {
+            $pattern = "([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+(com|fr|co|org|net|biz|tv|info)";
+            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
+        }
+
+        return $text;
+    }
+
 }

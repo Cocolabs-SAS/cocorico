@@ -21,6 +21,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -209,9 +210,11 @@ class MessageController extends Controller
     /**
      * Get number of unread messages for user
      *
-     * @param Request $request
-     *
      * @Route("/get-nb-unread-messages", name="cocorico_dashboard_message_nb_unread")
+     *
+     * @Method("GET")
+     *
+     * @param Request $request
      *
      * @return Response
      */
@@ -228,10 +231,9 @@ class MessageController extends Controller
             $response['asker'] = ($nbMessages[0]['asker']) ? $nbMessages[0]['asker'] : 0;
             $response['offerer'] = $nbMessages[0]['offerer'] ? $nbMessages[0]['offerer'] : 0;
             $response['total'] = $response['asker'] + $response['offerer'];
-
         }
 
-        return new Response(json_encode($response));
+        return new JsonResponse($response);
     }
 
 }

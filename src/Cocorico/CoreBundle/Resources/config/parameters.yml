@@ -11,6 +11,7 @@ parameters:
     cocorico.from_email: no-reply@cocorico.io
     cocorico.webmaster_email: webmaster@cocorico.io
     cocorico.vat_number: FR 12 123 456 789
+    cocorico.home_rss_feed: 'http://www.cocolabs.io/fr/feed/'
 
     #Languages
     #For knp translatable
@@ -42,7 +43,7 @@ parameters:
         RUB: руб
         AUD: $ AUD
     cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
-    cocorico.currencies_json: %kernel.root_dir%/../web/json/currencies.json
+    cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
 
     #Does VAT is included in prices fixing
     cocorico.include_vat: true
@@ -62,19 +63,8 @@ parameters:
     #Time unit in minute
     cocorico.time_unit: 60
 
-    #Is there a day flexibility for search. 0 For no else max days flexibility
-    cocorico.time_unit_flexibility: 0
-
-    #Used for display calendar :
-    #Unavailability is for all day or overlaps two consecutives days.
-    cocorico.time_unit_allday: true  #boolean
-
-    #Days display mode. (range or duration)
-    cocorico.days_display_mode: range
-
-    #Times display mode. (range or duration).
-    #No effect if time unit is day
-    cocorico.times_display_mode: duration
+    #Default users timezone
+    cocorico.time_zone: 'Europe/Paris'
 
     #Max search and booking days number.
     #Min 1. If set to 1 and days_display_mode = duration then only start date is displayed
@@ -83,12 +73,30 @@ parameters:
     #Max availabilities edition days number
     cocorico.days_max_edition: 180
 
+    #Days display mode. (range or duration)
+    cocorico.days_display_mode: range
+
+    #Enable time picker on time fields
+    cocorico.time_picker: true
+
+    #Available hours for listing availabilities hours edition and booking hours request
+    #Hours must be consecutive
+    cocorico.time_hours_available: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+
+    #Is there a day flexibility for search. 0 For no else max days flexibility
+    cocorico.time_unit_flexibility: 0
+
+    #Used for display calendar :
+    #Unavailability is for all day or overlaps two consecutives days.
+    cocorico.time_unit_allday: true  #boolean
+
     #Max search, booking time unit number.
     #Min 1. Max value of times max depends on time unit: 24 if time unit is hour. Not needed if time unit is day.
     cocorico.times_max: 8 #ex: for 8 hours with time_unit equal to 60
 
-    #Enable time picker on time fields
-    cocorico.time_picker: true
+    #Times display mode. (range or duration).
+    #No effect if time unit is day
+    cocorico.times_display_mode: duration
 
     #Default max items per page on dashboard list pages
     cocorico.dashboard_max_per_page: 10 #default
@@ -122,12 +130,11 @@ parameters:
     cocorico.listing_discount_min: 1
     cocorico.listing_discount_max: 90
 
-    #List max per page
     #Listing result per page
     cocorico.listing_search_max_per_page: 10
 
     #Listing search min result. Search is restarted in a largest zone if number of result is less than this limit.
-    cocorico.listing_search_min_result: 1
+    cocorico.listing_search_min_result: 0
 
     #Enable listing duplication
     cocorico.listing.duplication: true
@@ -139,13 +146,14 @@ parameters:
     #Min booking price in euro cents
     cocorico.booking_price_min: 500
 
-    #Does a booking request can be made with a start equal to end. If set to true end_day_included must be set to true
+    #Does a booking request can be made with a start equal to end.
     #Does a single day is allowed in search
-    cocorico.booking.allow_single_day: false
+    #If set to true end_day_included must be set to true
+    cocorico.booking.allow_single_day: true
 
-    #Does a booking request include the end day in the booking duration.
+    #Does a booking request include the end day in the booking duration
     #Does the end day is included in search.
-    cocorico.booking.end_day_included: false
+    cocorico.booking.end_day_included: true
 
     #Minimum days between booking request and booking starting day
     #Or Number of days to add to the current date to consider start date as valid
@@ -156,6 +164,7 @@ parameters:
     #Minimum hours between booking request and booking starting time
     #Or Number of hours to add to the current time to consider start time as valid
     #Ex : 8 -> the booking can be requested at least eight hours before it start.
+    #To use in not day mode
     cocorico.booking.min_start_time_delay: 12
 
     #Refund percentage rules depending on Listing Cancelation Policies
@@ -173,8 +182,8 @@ parameters:
     #ListingOptionBundle:
     #ListingOption: none or Cocorico\ListingOptionBundle\Entity\ListingOption (without quotes!)
     #BookingOption: none or Cocorico\ListingOptionBundle\Entity\BookingOption (without quotes!)
-    cocorico_listing_option.listing_option.entity_class: none
-    cocorico_listing_option.booking_option.entity_class: none
+    cocorico_listing_option.listing_option.entity_class: Cocorico\ListingOptionBundle\Entity\ListingOption
+    cocorico_listing_option.booking_option.entity_class: Cocorico\ListingOptionBundle\Entity\BookingOption
 
     #ListingAlertBundle:
     #ListingAlert: none or Cocorico\ListingAlertBundle\Entity\ListingAlert
