@@ -9,11 +9,13 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Add minimal tests
 
 ### Fixed
+- Fix js escaping on result
 
 ### Changed
-
+- Update doc
 
 ## [0.4.1] - 2017-11-22
 
