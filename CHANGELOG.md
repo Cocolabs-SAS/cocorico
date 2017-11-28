@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Added
 - Add minimal tests
+- Add multi parameters on Booking validator messages
 
 ### Fixed
 - Fix js escaping on result

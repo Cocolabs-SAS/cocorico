@@ -56,16 +56,16 @@ class BookingValidator extends ConstraintValidator
                     $message = $violation['message'];
                     $atPath = isset($violation['atPath']) ? $violation['atPath'] : 'date_range';
                     $domain = isset($violation['domain']) ? $violation['domain'] : 'cocorico_booking';
-                    $parameter = isset($violation['parameter']) ? $violation['parameter'] : array();
-                    reset($parameter);
+                    $parameters = isset($violation['parameter']) ? $violation['parameter'] : array();
+                    reset($parameters);
+                    foreach ($parameters as $key => $value) {
+                        $parameters['{{ ' . $key . ' }}'] = $value;
+                    }
 
-                    if ($parameter) {
+                    if ($parameters) {
                         $this->context->buildViolation($message)
                             ->atPath($atPath)
-                            ->setParameter(
-                                '{{ ' . key($parameter) . ' }}',
-                                $parameter[key($parameter)]
-                            )
+                            ->setParameters($parameters)
                             ->setTranslationDomain($domain)
                             ->addViolation();
                     } else {
