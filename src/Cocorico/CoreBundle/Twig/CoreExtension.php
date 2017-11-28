@@ -297,6 +297,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new \Twig_SimpleFunction('currencySymbol', array($this, 'currencySymbolFunction')),
             new \Twig_SimpleFunction('cancellationPolicies', array($this, 'cancellationPoliciesFunction')),
             new \Twig_SimpleFunction('vatInclusionText', array($this, 'vatInclusionText')),
+            new \Twig_SimpleFunction('staticProperty', array($this, 'staticProperty')),
         );
     }
 
@@ -371,6 +372,22 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         }
 
         return '';
+    }
+
+    /**
+     * Get static properties values
+     *
+     * @param string $class
+     * @param string $property
+     * @return mixed
+     */
+    public function staticProperty($class, $property)
+    {
+        if (property_exists($class, $property)) {
+            return $class::$$property;
+        }
+
+        return null;
     }
 
     /**
