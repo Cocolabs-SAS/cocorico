@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add minimal tests
 - Add multi parameters on Booking validator messages
 - Add static property access twig function
+- Add Booking in Admin Review
 
 ### Fixed
 - Fix js escaping on result

@@ -1215,6 +1215,12 @@
                 </target>
         <jms:reference-file line="41">ConfigBundle/Admin/ParameterAdmin.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="f770dd493424dc3ace1358fdad34a4d43321cb5f" resname="admin.review.booking.label">
+        <source>admin.review.booking.label</source>
+        <target state="new">Réservation</target>
+        <jms:reference-file line="73">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+        <jms:reference-file line="202">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="18418eba65ff205625eb45e329e363caf297da2a" resname="admin.review.comment.label">
         <source>admin.review.comment.label</source>
         <target>Commentaire</target>

@@ -37,6 +37,21 @@ class ReviewAdmin extends Admin
         $formMapper
             ->with('admin.review.title')
             ->add(
+                'booking',
+                'sonata_type_model',
+                array(
+                    'query' => $review ?
+                        $this->modelManager->getEntityManager('CocoricoCoreBundle:Booking')
+                            ->getRepository('CocoricoCoreBundle:Booking')
+                            ->createQueryBuilder('b')
+                            ->where('b.id = :bookingId')
+                            ->setParameter('bookingId', $review->getBooking()->getId())->getQuery()
+                        : null,
+                    'disabled' => true,
+                    'label' => 'admin.review.booking.label',
+                )
+            )
+            ->add(
                 'reviewBy',
                 null,
                 array(
@@ -161,6 +176,13 @@ class ReviewAdmin extends Admin
     {
         $listMapper
             ->addIdentifier('id')
+            ->add(
+                'booking',
+                null,
+                array(
+                    'label' => 'admin.review.booking.label',
+                )
+            )
             ->add(
                 'reviewBy',
                 null,
