@@ -252,6 +252,8 @@ class BookingController extends Controller
      * })
      * @Method("GET")
      *
+     * @Security("is_granted('view_voucher_as_asker', booking)")
+     *
      * @param Request $request
      * @param Booking $booking
      *

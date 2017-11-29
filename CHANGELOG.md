@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add multi parameters on Booking validator messages
 - Add static property access twig function
 - Add Booking in Admin Review
+- Add security voter to voucher page access
 
 ### Fixed
 - Fix js escaping on result

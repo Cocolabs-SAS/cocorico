@@ -16,7 +16,6 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -64,6 +63,10 @@ abstract class BaseBooking
         self::STATUS_PAYMENT_REFUSED
     );
 
+    //Status relative to a valid transaction
+    public static $payedStatus = array(
+        self::STATUS_PAYED,
+    );
 
     //Status for which booking can be created
     public static $newableStatus = array(

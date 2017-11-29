@@ -23,6 +23,7 @@ class BookingVoter implements VoterInterface
     const VIEW_AS_OFFERER = 'view_as_offerer';
     const EDIT_AS_OFFERER = 'edit_as_offerer';
     const EDIT_AS_ASKER = 'edit_as_asker';
+    const VIEW_VOUCHER_AS_ASKER = 'view_voucher_as_asker';
 
     public function supportsAttribute($attribute)
     {
@@ -33,6 +34,7 @@ class BookingVoter implements VoterInterface
                 self::VIEW_AS_OFFERER,
                 self::EDIT_AS_OFFERER,
                 self::EDIT_AS_ASKER,
+                self::VIEW_VOUCHER_AS_ASKER,
             )
         );
     }
@@ -62,7 +64,7 @@ class BookingVoter implements VoterInterface
         // design your voter
         if (1 !== count($attributes)) {
             throw new \InvalidArgumentException(
-                'Only one attribute is allowed for VIEW_AS_ASKER or VIEW_AS_OFFERER or EDIT_AS_OFFERER or EDIT_AS_ASKER'
+                'Only one attribute is allowed for VIEW_AS_ASKER or VIEW_AS_OFFERER or EDIT_AS_OFFERER or EDIT_AS_ASKER or VIEW_VOUCHER_AS_ASKER'
             );
         }
 
@@ -80,13 +82,20 @@ class BookingVoter implements VoterInterface
         if (!$user instanceof UserInterface) {
             return VoterInterface::ACCESS_DENIED;
         }
+        $listing = $booking->getListing();
+        $offerer = $listing->getUser();
+        $asker = $booking->getUser();
 
         if ($attribute == self::VIEW_AS_ASKER || $attribute == self::EDIT_AS_ASKER) {
-            if ($user->getId() === $booking->getUser()->getId()) {
+            if ($user->getId() === $asker->getId()) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+        } elseif ($attribute == self::VIEW_VOUCHER_AS_ASKER) {
+            if ($user->getId() === $asker->getId() && in_array($booking->getStatus(), Booking::$payedStatus)) {
                 return VoterInterface::ACCESS_GRANTED;
             }
         } elseif ($attribute == self::VIEW_AS_OFFERER || $attribute == self::EDIT_AS_OFFERER) {
-            if ($user->getId() === $booking->getListing()->getUser()->getId()) {
+            if ($user->getId() === $offerer->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
         } else {

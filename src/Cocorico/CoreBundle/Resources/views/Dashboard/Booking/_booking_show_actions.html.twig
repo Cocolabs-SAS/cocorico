@@ -8,7 +8,7 @@
             </a>
         {% endif %}
 
-        {% if booking.status == BookingConstants.STATUS_PAYED %}
+        {% if booking.status in staticProperty('Cocorico\\CoreBundle\\Entity\\Booking', 'payedStatus') %}
             <a target="_blank" href="{{ path('cocorico_dashboard_booking_show_voucher', {'id': booking.id}) }}"
                class="btn btn-default" data-toggle="" data-target="">
                 {{ 'booking.show_asker.download_voucher'|trans }}
