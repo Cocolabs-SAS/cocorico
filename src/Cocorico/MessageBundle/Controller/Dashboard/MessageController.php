@@ -44,7 +44,7 @@ class MessageController extends Controller
      *
      * @param Request $request
      * @param Integer $page
-     * @return RedirectResponse
+     * @return Response
      */
     public function indexAction(Request $request, $page)
     {
@@ -135,6 +135,8 @@ class MessageController extends Controller
      * Displays a thread, also allows to reply to it.
      * @Route("/conversation/{threadId}", name="cocorico_dashboard_message_thread_view", requirements={"threadId" = "\d+"})
      *
+     * Security is managed by FOSMessageProvider
+     *
      * @param Request $request
      * @param         $threadId
      * @return RedirectResponse
@@ -143,6 +145,10 @@ class MessageController extends Controller
     {
         /* @var $threadObj \Cocorico\MessageBundle\Entity\Thread */
         $threadObj = $this->getProvider()->getThread($threadId);
+
+        $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
+            ->clearNbUnreadMessageCache($this->getUser()->getId());
+
         /** @var Form $form */
         $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
         $paramArr = $request->get($form->getName());
@@ -179,7 +185,10 @@ class MessageController extends Controller
 
     /**
      * Deletes a thread
+     *
      * @Route("/delete/{threadId}", name="cocorico_dashboard_message_thread_delete", requirements={"threadId" = "\d+"})
+     *
+     * Security is managed by FOSMessageProvider
      *
      * @param string $threadId the thread id
      *

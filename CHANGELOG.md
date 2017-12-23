@@ -17,6 +17,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Fixed
 - Fix js escaping on result
+- Fix #116 issue (update "unread" message in dashboard)
 
 ### Changed
 - Update doc

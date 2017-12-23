@@ -54,8 +54,7 @@ class MessageRepository extends EntityRepository
                 ->setParameter('user', $participant);
 
             $query = $builder->getQuery();
-            $query->useResultCache(true, 3600, 'getNbUnreadMessageType');
-
+            $query->useResultCache(true, 3600, 'getNbUnreadMessageType' . $participant->getId());
             $result = $query->getResult();
 
         } else {
@@ -63,11 +62,21 @@ class MessageRepository extends EntityRepository
             $builder->select($builder->expr()->count('mm.id'));
 
             $query = $builder->getQuery();
-            $query->useResultCache(true, 3600, 'getNbUnreadMessage');
+            $query->useResultCache(true, 3600, 'getNbUnreadMessage' . $participant->getId());
 
             $result = $query->getSingleScalarResult();
         }
 
         return $result;
+    }
+
+    /**
+     * @param $userId
+     */
+    public function clearNbUnreadMessageCache($userId)
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->getConfiguration()->getResultCacheImpl()->delete('getNbUnreadMessageType' . $userId);
+        $entityManager->getConfiguration()->getResultCacheImpl()->delete('getNbUnreadMessage' . $userId);
     }
 }
