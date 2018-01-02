@@ -4,6 +4,7 @@
 
 # Cocorico
 
+[![Try the demo](https://img.shields.io/badge/try-demo-green.svg)](http://demo.cocorico.io)
 [![Build Status](https://secure.travis-ci.org/Cocolabs-SAS/cocorico.svg)](http://travis-ci.org/Cocolabs-SAS/cocorico)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Latest Stable Version](https://poser.pugx.org/cocorico/cocorico/v/stable.svg)](https://packagist.org/packages/cocorico/cocorico)
