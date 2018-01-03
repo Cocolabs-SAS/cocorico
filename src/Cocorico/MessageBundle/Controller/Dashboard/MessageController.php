@@ -103,6 +103,9 @@ class MessageController extends Controller
             $this->container->get('cocorico_user.mailer.twig_swift')
                 ->sendNotificationForNewMessageToUser($listing->getUser(), $message->getThread());
 
+            $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
+                ->clearNbUnreadMessageCache($listing->getUser()->getId());
+
             return new RedirectResponse(
                 $this->container->get('router')
                     ->generate(
@@ -200,6 +203,9 @@ class MessageController extends Controller
         $thread = $this->getProvider()->getThread($threadId);
         $this->container->get('fos_message.deleter')->markAsDeleted($thread);
         $this->container->get('fos_message.thread_manager')->saveThread($thread);
+
+        $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
+            ->clearNbUnreadMessageCache($this->getUser()->getId());
 
         return new RedirectResponse(
             $this->container->get('router')->generate('cocorico_dashboard_message')

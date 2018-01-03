@@ -75,8 +75,8 @@ class MessageRepository extends EntityRepository
      */
     public function clearNbUnreadMessageCache($userId)
     {
-        $entityManager = $this->getEntityManager();
-        $entityManager->getConfiguration()->getResultCacheImpl()->delete('getNbUnreadMessageType' . $userId);
-        $entityManager->getConfiguration()->getResultCacheImpl()->delete('getNbUnreadMessage' . $userId);
+        $resultCache = $this->getEntityManager()->getConfiguration()->getResultCacheImpl();
+        $resultCache->delete('getNbUnreadMessageType' . $userId);
+        $resultCache->delete('getNbUnreadMessage' . $userId);
     }
 }
