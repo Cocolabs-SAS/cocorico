@@ -20,6 +20,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix js escaping on result
 - Fix #116 issue (update "unread" message in dashboard)
 - Fix Booking expiration alert
+- Replace depreciated 'intention' by 'csrf_token_id' in BookingNewType
 
 ### Changed
 - Update doc

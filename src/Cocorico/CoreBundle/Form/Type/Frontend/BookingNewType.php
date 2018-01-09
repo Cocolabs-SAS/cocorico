@@ -455,7 +455,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
-                'intention' => 'booking_new',
+                'csrf_token_id' => 'booking_new',
                 'translation_domain' => 'cocorico_booking',
                 'cascade_validation' => true,
                 'validation_groups' => array('new', 'default'),
