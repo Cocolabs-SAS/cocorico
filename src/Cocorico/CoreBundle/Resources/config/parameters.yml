@@ -164,8 +164,33 @@ parameters:
     #Minimum hours between booking request and booking starting time
     #Or Number of hours to add to the current time to consider start time as valid
     #Ex : 8 -> the booking can be requested at least eight hours before it start.
-    #To use in not day mode
+    #To use in not day mode and MUST be greater than (cocorico.booking.expiration_delay / 60) (in hours)
+    #Ex: min_start_time_delay = 8 and expiration_delay = 240
     cocorico.booking.min_start_time_delay: 12
+
+    #### Environment dependant only to facilitate tests ####
+    #Booking expiration delay in minutes. MUST be greater than cocorico.booking.alert_expiration_delay
+    cocorico.booking.expiration_delay: ~ #2880
+
+    #Expiring Bookings alert delay in minutes. It is the time before expiration alert time above
+    cocorico.booking.alert_expiration_delay: ~ #120
+
+    #Imminent Bookings alert delay in minutes
+    cocorico.booking.alert_imminent_delay: ~ #1440
+
+    #Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
+    #after booking start date or booking end date.
+    cocorico.booking.validated_moment: ~ #'start'
+
+    #Time after or before the moment the booking is considered as validated (in minutes)
+    #If less than 0 the time is before the moment else time is after the moment
+    cocorico.booking.validated_delay: ~ #0
+
+    #Does the bank wire checking must be done really or simulated
+    #Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
+    #Set to false in prod env
+    cocorico.bankwire_checking_simulation: ~ #false
+    #### End Environment dependant ####
 
     #Refund percentage rules depending on Listing Cancelation Policies
     cocorico.booking.cancelation_policy:
@@ -300,33 +325,6 @@ parameters:
     cocorico.deploy.host: ~
     cocorico.deploy.dir: ~
     cocorico.deploy.user: ~
-
-    #### Environment dependant only to facilitate tests ####
-
-    #Booking expiration delay in minutes
-    cocorico.booking.expiration_delay: ~ #2880
-
-    #Expiring Bookings alert delay in minutes
-    cocorico.booking.alert_expiration_delay: ~ #120
-
-    #Imminent Bookings alert delay in minutes
-    cocorico.booking.alert_imminent_delay: ~ #1440
-
-    #Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
-    #after booking start date or booking end date.
-    cocorico.booking.validated_moment: ~ #'start'
-
-    #Time after or before the moment the booking is considered as validated (in minutes)
-    #If less than 0 the time is before the moment else time is after the moment
-    cocorico.booking.validated_delay: ~ #0
-
-    #Does the bank wire checking must be done really or simulated
-    #Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
-    #Set to false in prod env
-    cocorico.bankwire_checking_simulation: ~ #false
-
-    #### End Environment dependant ####
-
 
     ################################# Optional bundles #################################
 

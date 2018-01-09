@@ -18,6 +18,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Fixed
 - Fix js escaping on result
 - Fix #116 issue (update "unread" message in dashboard)
+- Fix Booking expiration alert
 
 ### Changed
 - Update doc

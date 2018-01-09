@@ -281,23 +281,19 @@ class BookingRepository extends EntityRepository
      */
     public function findBookingsExpiringToAlert($bookingExpirationDelay, $bookingExpirationAlertDelay)
     {
-        $today = new \DateTime();
-        $today->sub(new \DateInterval('PT' . $bookingExpirationAlertDelay . 'M'));
-
-        $dateExpiring = clone $today;
-        $dateExpiring->sub(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
+        $dateExpiring = new \DateTime();
+        $dateExpiring->sub(new \DateInterval('PT' . ($bookingExpirationDelay - $bookingExpirationAlertDelay) . 'M'));
 
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
             ->andWhere(
-                "b.newBookingAt <= :dateExpiring OR CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today"
+                "b.newBookingAt <= :dateExpiring"
             )
             ->andWhere('b.alertedExpiring = :alertedExpiring')
             ->setParameter('status', array(Booking::STATUS_NEW))
             ->setParameter('dateExpiring', $dateExpiring->format('Y-m-d H:i:s'))
-            ->setParameter('alertedExpiring', false)
-            ->setParameter('today', $today->format('Y-m-d H:i:s'));
+            ->setParameter('alertedExpiring', false);
 
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());
@@ -351,6 +347,7 @@ class BookingRepository extends EntityRepository
     public function findBookingsToExpire($bookingExpirationDelay)
     {
         $today = new \DateTime();
+
         $dateExpired = clone $today;
         $dateExpired->sub(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
 
