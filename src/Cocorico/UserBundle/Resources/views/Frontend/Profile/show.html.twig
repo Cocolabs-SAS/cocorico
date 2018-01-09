@@ -30,15 +30,14 @@
             })) }}
         {% endblock %}
 
-        {% block search_form %}
+        {% block main %}
+
             {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
             {# close previous .row #}
-            {{ "</div>" }}
-        {% endblock %}
+            {{ '</div>' }}
 
-        {% block main %}
             <!-- two-columns -->
-            <div class="twocolumns row">
+            {{ '<div class="twocolumns row">' }}
                 <!-- contain the main content of the page -->
                 <div id="content" class="listing-area col-xs-12 col-sm-8 col-md-9 pull-right">
                     <!-- profile-detail -->
@@ -253,6 +252,7 @@
                                 <li>
                                     {{ 'user.profile.languages'|trans }}
                                     <strong>
+                                        {{ user.motherTongue|language_name(app.request.locale) }},
                                         {% for cpt_lang, language in user.languages %}
                                             {% if cpt_lang != 0 %}, {% endif %}
                                             {{ language.code|language_name(app.request.locale) }}
@@ -331,7 +331,7 @@
                         </section>
                     </div>
                 </aside>
-            </div>
+            {#</div>#}
         {% endblock %}
 
     {% endembed %}
