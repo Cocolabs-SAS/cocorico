@@ -3,7 +3,8 @@ imports:
 
 framework:
     test: ~
-#    session:
+    session:
+        gc_probability: 0
 #        storage_id: session.storage.mock_file
 #    profiler:
 #        collect: false
