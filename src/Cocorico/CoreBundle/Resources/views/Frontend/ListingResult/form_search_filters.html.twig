@@ -1,0 +1,41 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div class="sub-holder" id="search-container">
+    <!-- range-area -->
+    <div class="range-area">
+        <!-- range-holder -->
+        {{ form_widget(form.price_range) }}
+
+        {% if bundleExist('CocoricoDeliveryBundle') %}
+            {% include '@CocoricoDelivery/Frontend/ListingResult/_form_delivery.html.twig' with {
+                'delivery' : form.delivery
+            } only %}
+        {% endif %}
+    </div>
+
+    <div class="selection-holder">
+        {% include '@CocoricoCore/Frontend/ListingResult/_form_search_characteristics.html.twig' with {
+            'characteristics' : form.characteristics
+        } only %}
+
+        <div class="select-holder">
+            {{ form_widget(form.sort_by, {
+                'attr': {
+                    'class': "form-control no-arrow"
+                }
+            }) }}
+        </div>
+    </div>
+
+    {% if bundleExist('CocoricoListingCategoryFieldBundle') %}
+        {{ render(controller('CocoricoListingCategoryFieldBundle:Frontend/ListingSearchCategoriesFields:categoriesSearchForm')) }}
+        {#categories_fields form is already rendred in above controller#}
+        {% do form.categories_fields.setRendered() %}
+    {% endif %}
+
+    <div class="selection-holder btn-block text-right">
+        <button type="submit" class="btn btn-default" style="padding: 6px 14px 6px;">
+            {{ 'listing.filter'|trans }}
+        </button>
+    </div>
+</div>

@@ -37,7 +37,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Changed
 - Update doc for PHP7 and Docker usage
-
+- Facilitate listing search form filters twig modifications in result page
 
 ## [0.4.0] - 2017-11-13
 

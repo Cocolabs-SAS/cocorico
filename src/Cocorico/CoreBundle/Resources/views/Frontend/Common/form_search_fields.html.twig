@@ -1,0 +1,68 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{#search form fields without start ane end form#}
+
+<fieldset>
+    <legend class="hidden">form-category</legend>
+    <div class="form-holder">
+        <div class="col categories">
+            <strong class="title">
+                {{ form_label(form.categories) }}
+            </strong>
+
+            <div class="multiselect">
+                {{ form_widget(form.categories) }}
+            </div>
+        </div>
+
+
+        <div class="col location">
+            <strong class="title">
+                {{ form_label(form.location.address, null, {
+                    'required': false
+                }) }}
+            </strong>
+
+            <div class="field-holder">
+                {{ form_errors(form.location.address) }}
+                {{ form_widget(form.location.address, {
+                    'id': 'location',
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': 'listing.search.form.address.placeholder'|trans
+                    }
+                } ) }}
+                {{ form_rest(form.location) }}
+            </div>
+        </div>
+
+        <div class="col time">
+            {#In case of modification don't forget to add fields "start, end AND nb_days" #}
+            {{ form_widget(form.date_range) }}
+
+            {% if timeUnitFlexibility and form.flexibility is defined %}
+                <div class="col flexibility">
+                    <strong class="title">
+                        {{ form_label(form.flexibility) }}
+                    </strong>
+
+                    <div class="input-append field-holder">
+                        {{ form_errors(form.flexibility) }}
+                        {{ form_widget(form.flexibility, {
+                            'attr': {
+                                'class' : 'no-arrow'
+                            }
+                        }) }}
+                        <small>{{ 'listing_search.form.flexibility_day'|trans }}</small>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% if not timeUnitIsDay %}
+                {{ form_widget(form.time_range) }}
+            {% endif %}
+        </div>
+
+        <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
+    </div>
+</fieldset>

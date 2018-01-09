@@ -86,6 +86,7 @@ class ListingSearchController extends Controller
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array_merge(
                 array(
+                    'form' => $form->createView(),
                     'listings' => $listings,
                     'nb_listings' => $nbListings,
                     'markers' => $markers,
@@ -277,22 +278,6 @@ class ListingSearchController extends Controller
         return $form;
     }
 
-    /**
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function searchResultFormAction()
-    {
-        $listingSearchRequest = $this->getListingSearchRequest();
-        $form = $this->createSearchResultForm($listingSearchRequest);
-
-        return $this->render(
-            '@CocoricoCore/Frontend/ListingResult/form_search.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
-    }
 
     /**
      * similarListingAction will list out the listings which are almost similar to what has been

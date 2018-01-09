@@ -55,11 +55,8 @@
             })) }}
         {% endblock %}
 
-        {% block search_form %}
-            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
-        {% endblock %}
-
         {% block main %}
+            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
 
             <!-- two-columns -->
             <div class="twocolumns row alt">
