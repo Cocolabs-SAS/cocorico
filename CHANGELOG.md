@@ -14,6 +14,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add static property access twig function
 - Add Booking in Admin Review
 - Add security voter to voucher page access
+- Add Carrier bundle hatchback field to booking admin
 
 ### Fixed
 - Fix js escaping on result

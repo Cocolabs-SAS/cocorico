@@ -383,7 +383,25 @@ class BookingAdmin extends Admin
                     'price',
                     array(
                         'disabled' => true,
-                        'label' => 'admin.booking.delivery_amount.label'
+                        'label' => 'admin.booking.delivery_amount.label',
+                        'include_vat' => true
+                    )
+                )
+                ->add(
+                    'hatchback',
+                    'checkbox',
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.hatchback.label',
+                    )
+                )
+                ->add(
+                    'amountHatchback',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.hatchback_amount.label',
+                        'include_vat' => true
                     )
                 )
                 ->end();

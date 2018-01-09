@@ -667,6 +667,16 @@
         <jms:reference-file line="456">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
         <jms:reference-file line="685">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
       </trans-unit>
+        <trans-unit id="7f1af80a760853b4452b790d7684ac5322fecf5f" resname="admin.booking.hatchback.label">
+            <source>admin.booking.hatchback.label</source>
+            <target state="new">Option hayon</target>
+            <jms:reference-file line="508">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="582617bc386d20e79cec81588b71e822690f0bd9" resname="admin.booking.hatchback_amount.label">
+            <source>admin.booking.hatchback_amount.label</source>
+            <target state="new">Frais pour l'option Hayon</target>
+            <jms:reference-file line="516">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+        </trans-unit>
       <trans-unit id="7dcb7d17e625f1c12af3ea0211f208cd93601299" resname="admin.booking.label">
         <source>admin.booking.label</source>
         <target>Réservation</target>
