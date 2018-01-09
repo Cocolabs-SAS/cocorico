@@ -101,7 +101,7 @@
                 $(this).find("select option:not(:selected)").each(function () {
                     $(this).attr('disabled', 'disabled');
                 });
-                $(".add-info .price, .add-info .loading, a#submit-booking,.add-info .price-info").remove();
+                $(".add-info .price, .add-info .loading,.add-info .price-info").remove();
                 $(".add-info").prepend('<img class="loading" src="{{ asset("images/loading.gif") }}" /><br>');
             });
 

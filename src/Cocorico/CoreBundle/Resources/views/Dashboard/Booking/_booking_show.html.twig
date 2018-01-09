@@ -108,15 +108,11 @@
 
     <footer class="footer">
         <strong class="price">
-            <span>
-                <span data-id="booking-total">
-                    <span>
-                        {{ amount_total }}
-                        <sup>
-                            <small>{{ vat_inclusion_text }}</small>
-                        </sup>
-                    </span>
-                </span>
+            <span data-id="booking-total">
+                {{ amount_total }}
+                <sup>
+                    <small>{{ vat_inclusion_text }}</small>
+                </sup>
             </span>
             <button title="{{ 'booking.amount_total.help'|trans }}" data-placement="right" data-toggle="tooltip"
                     class="tooltip-button" type="button">
