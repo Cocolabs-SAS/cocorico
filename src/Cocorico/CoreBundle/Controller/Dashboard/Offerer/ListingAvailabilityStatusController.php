@@ -65,6 +65,11 @@ class ListingAvailabilityStatusController extends Controller
             );
 
             return $this->redirect($selfUrl);
+        } elseif ($success == -1) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $this->get('translator')->trans('form.error', array(), 'cocorico')
+            );
         }
 
         return $this->render(
