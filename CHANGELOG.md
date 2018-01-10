@@ -16,6 +16,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add security voter to voucher page access
 - Add Carrier bundle hatchback field to booking admin
 - Add listing search engine on user profile page
+- Add error message on listing calendar edition
 
 ### Fixed
 - Fix js escaping on result
