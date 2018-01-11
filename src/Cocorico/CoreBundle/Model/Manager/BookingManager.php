@@ -172,7 +172,7 @@ class BookingManager extends BaseManager
     }
 
     /**
-     * Init Booking day and hours with the first listing availability
+     * Init Booking day and hours with the first listing availability in the 30 next days
      *
      * @param Booking $booking
      * @return Booking
@@ -298,7 +298,7 @@ class BookingManager extends BaseManager
 
 
     /**
-     * Init Booking date with the first listing availability for time unit in day mode
+     * Init Booking date with the first listing availability for time unit in day mode in the 30 next days
      *
      * @param Booking $booking
      * @return Booking
@@ -1095,6 +1095,9 @@ class BookingManager extends BaseManager
                 $this->mailer->sendReminderToRateOffererMessageToAsker($booking);
 
                 return true;
+            } else {
+                $booking->setStatus(Booking::STATUS_PAYMENT_REFUSED);
+                $booking = $this->save($booking);
             }
         }
 
@@ -1137,16 +1140,18 @@ class BookingManager extends BaseManager
 
             if ($cancelable) {
                 if ($booking->getStatus() == Booking::STATUS_PAYED) {
+                    $listing = $booking->getListing();
+
                     //Free booking availabilities
                     $this->listingAvailabilityManager->saveAvailabilitiesStatus(
-                        $booking->getListing()->getId(),
+                        $listing->getId(),
                         new DateRange($booking->getStart(), $booking->getEnd()),
                         array(),
                         $this->timeUnitIsDay ? array() : array(
                             new TimeRange($booking->getStartTime(), $booking->getEndTime())
                         ),
                         ListingAvailability::STATUS_AVAILABLE,
-                        $booking->getListing()->getPrice(),
+                        $listing->getPrice(),
                         $this->endDayIncluded,
                         true
                     );
