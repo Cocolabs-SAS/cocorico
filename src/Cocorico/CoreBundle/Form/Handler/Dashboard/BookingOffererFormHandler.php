@@ -42,9 +42,8 @@ class BookingOffererFormHandler extends BookingFormHandler
         $type = $this->request->get('type');
 
         $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->minStartDelay,
-            $this->minStartTimeDelay,
-            $this->bookingManager->getTimeUnitIsDay(),
+            $this->bookingManager->getExpirationDelay(),
+            $this->bookingManager->getAcceptationDelay(),
             $this->bookingManager->getTimeZone()
         );
 

@@ -49,15 +49,17 @@ class BookingManager extends BaseManager
     protected $timeZone;
     protected $timesMax;
     protected $hoursAvailable;
+    protected $expirationDelay;
+    protected $acceptationDelay;
     protected $minStartDelay;
     protected $minStartTimeDelay;
     protected $allowSingleDay;
-    public $minPrice;
-    public $maxPerPage;
     protected $defaultListingStatus;
     protected $vatRate;
     protected $includeVat;
     protected $bundles;
+    public $minPrice;
+    public $maxPerPage;
 
     /**
      * @param EntityManager                                              $em
@@ -115,6 +117,8 @@ class BookingManager extends BaseManager
         if ($this->allowSingleDay) {
             $this->endDayIncluded = true;
         }
+        $this->expirationDelay = $parameters["cocorico_booking_expiration_delay"];
+        $this->acceptationDelay = $parameters["cocorico_booking_acceptation_delay"];
         $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];
         $this->minStartTimeDelay = $parameters["cocorico_booking_min_start_time_delay"];
         $this->minPrice = $parameters["cocorico_booking_price_min"];
@@ -592,7 +596,7 @@ class BookingManager extends BaseManager
                         $errors[] = 'time_range.invalid.duration';
                     }
 
-                    if (!$booking->hasCorrectStartTime(
+                    if (!$booking->beginAfterMinStartDate(
                         $this->minStartDelay,
                         $this->minStartTimeDelay,
                         $this->getTimeUnitIsDay(),
@@ -785,18 +789,31 @@ class BookingManager extends BaseManager
     /**
      * Alert Expiring Bookings
      *
-     * @param int $expirationDelay
-     * @param int $alertExpirationDelay
+     * @param int    $alertExpirationDelay
+     * @param int    $expirationDelay
+     * @param int    $acceptationDelay
+     * @param string $timeZone
      *
      * @return integer
      */
-    public function alertExpiringBookings($expirationDelay, $alertExpirationDelay)
-    {
+    public function alertExpiringBookings(
+        $alertExpirationDelay,
+        $expirationDelay = null,
+        $acceptationDelay = null,
+        $timeZone = null
+    ) {
         $result = 0;
+        $expirationDelay = $expirationDelay !== null ? $expirationDelay : $this->expirationDelay;
+        $acceptationDelay = $acceptationDelay !== null ? $acceptationDelay : $this->acceptationDelay;
+        $timeZone = $timeZone !== null ? $timeZone : $this->getTimeZone();
+
         $bookingsExpiringToAlert = $this->getRepository()->findBookingsExpiringToAlert(
+            $alertExpirationDelay,
             $expirationDelay,
-            $alertExpirationDelay
+            $acceptationDelay,
+            $timeZone
         );
+
         foreach ($bookingsExpiringToAlert as $bookingExpiringToAlert) {
             if ($this->alertExpiring($bookingExpiringToAlert)) {
                 $result++;
@@ -832,14 +849,25 @@ class BookingManager extends BaseManager
     /**
      * Expire Bookings
      *
-     * @param int $expirationDelay
+     * @param int    $expirationDelay
+     * @param int    $acceptationDelay
+     * @param string $timeZone
      *
      * @return integer
      */
-    public function expireBookings($expirationDelay)
+    public function expireBookings($expirationDelay = null, $acceptationDelay = null, $timeZone = null)
     {
         $result = 0;
-        $bookingsToExpire = $this->getRepository()->findBookingsToExpire($expirationDelay);
+        $expirationDelay = $expirationDelay !== null ? $expirationDelay : $this->expirationDelay;
+        $acceptationDelay = $acceptationDelay !== null ? $acceptationDelay : $this->acceptationDelay;
+        $timeZone = $timeZone !== null ? $timeZone : $this->getTimeZone();
+
+        $bookingsToExpire = $this->getRepository()->findBookingsToExpire(
+            $expirationDelay,
+            $acceptationDelay,
+            $timeZone
+        );
+
         foreach ($bookingsToExpire as $bookingToExpire) {
             if ($this->expire($bookingToExpire)) {
                 $result++;
@@ -936,9 +964,8 @@ class BookingManager extends BaseManager
     public function pay(Booking $booking)
     {
         $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->minStartDelay,
-            $this->minStartTimeDelay,
-            $this->getTimeUnitIsDay(),
+            $this->getExpirationDelay(),
+            $this->getAcceptationDelay(),
             $this->getTimeZone()
         );
         if ($canBeAcceptedOrRefused) {
@@ -1003,9 +1030,8 @@ class BookingManager extends BaseManager
     public function refuse(Booking $booking)
     {
         $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->minStartDelay,
-            $this->minStartTimeDelay,
-            $this->getTimeUnitIsDay(),
+            $this->getExpirationDelay(),
+            $this->getAcceptationDelay(),
             $this->getTimeZone()
         );
 
@@ -1263,6 +1289,24 @@ class BookingManager extends BaseManager
     {
         return $this->timeUnitIsDay;
     }
+
+    /**
+     * @return int
+     */
+    public function getExpirationDelay()
+    {
+        return $this->expirationDelay;
+    }
+
+
+    /**
+     * @return int
+     */
+    public function getAcceptationDelay()
+    {
+        return $this->acceptationDelay;
+    }
+
 
     /**
      * @return string

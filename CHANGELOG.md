@@ -18,6 +18,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add listing search engine on user profile page
 - Add error message on listing calendar edition
 - Set booking status to STATUS_PAYMENT_REFUSED when booking can not be validated
+- Add booking acceptation delay 
 
 ### Fixed
 - Fix js escaping on result

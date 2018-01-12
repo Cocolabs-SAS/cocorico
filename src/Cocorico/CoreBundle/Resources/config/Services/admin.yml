@@ -26,6 +26,7 @@ services:
             - [ setLocales, ["%cocorico.locales%"]]
             - [ setTimeUnit, ["%cocorico.time_unit%"]]
             - [ setBookingExpirationDelay, ["%cocorico.booking.expiration_delay%"]]
+            - [ setBookingAcceptationDelay, ["%cocorico.booking.acceptation_delay%"]]
             - [ setIncludeVat, ["%cocorico.include_vat%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
 

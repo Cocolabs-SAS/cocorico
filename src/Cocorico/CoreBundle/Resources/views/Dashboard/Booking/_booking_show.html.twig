@@ -134,7 +134,7 @@
         </span>
 
         <strong class="expiry">
-            {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay) %}
+            {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
             {% if expiration > 0 %}
                 {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}
             {% endif %}

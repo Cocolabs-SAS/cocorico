@@ -274,25 +274,40 @@ class BookingRepository extends EntityRepository
     /**
      * Find expiring bookings to alert
      *
-     * @param int $bookingExpirationDelay      Delay in minutes to consider a booking as expiring.
-     * @param int $bookingExpirationAlertDelay Delay in minutes to consider a booking as expiring.
+     * @param int    $expirationAlertDelay Delay in minutes to consider a booking as expiring.
+     * @param int    $expirationDelay      Delay in minutes to consider a booking as expiring.
+     * @param int    $acceptationDelay     Delay in minutes to consider a booking as expiring for acceptation.
+     * @param string $timeZone             Default user timezone
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsExpiringToAlert($bookingExpirationDelay, $bookingExpirationAlertDelay)
-    {
+    public function findBookingsExpiringToAlert(
+        $expirationAlertDelay,
+        $expirationDelay,
+        $acceptationDelay,
+        $timeZone
+    ) {
         $dateExpiring = new \DateTime();
-        $dateExpiring->sub(new \DateInterval('PT' . ($bookingExpirationDelay - $bookingExpirationAlertDelay) . 'M'));
+        $dateExpiring->sub(new \DateInterval('PT' . ($expirationDelay - $expirationAlertDelay) . 'M'));
+
+        $dateAcceptationExpiring = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateAcceptationExpiring->add(new \DateInterval('PT' . ($acceptationDelay + $expirationAlertDelay) . 'M'));
+
+        $sql = <<<SQLQUERY
+            b.newBookingAt <= :dateExpiring OR
+            CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :dateAcceptationExpiring
+SQLQUERY;
 
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
             ->andWhere(
-                "b.newBookingAt <= :dateExpiring"
+                $sql
             )
             ->andWhere('b.alertedExpiring = :alertedExpiring')
             ->setParameter('status', array(Booking::STATUS_NEW))
             ->setParameter('dateExpiring', $dateExpiring->format('Y-m-d H:i:s'))
+            ->setParameter('dateAcceptationExpiring', $dateAcceptationExpiring->format('Y-m-d H:i:s'))
             ->setParameter('alertedExpiring', false);
 
 //        echo $queryBuilder->getQuery()->getSQL();
@@ -339,23 +354,33 @@ class BookingRepository extends EntityRepository
      * Either newBookingAt is less than today minus $bookingExpirationDelay
      * Either booking start date concatenated to start time is less than today date time
      *
-     * todo: manage user timezone
+     * @param int    $expirationDelay  Delay in minutes to consider a booking as expired.
+     * @param int    $acceptationDelay Delay in minutes to consider a booking as expired for acceptation.
+     * @param string $timeZone         Default user timezone
      *
-     * @param int $bookingExpirationDelay Delay in minutes to consider a booking as expired.
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsToExpire($bookingExpirationDelay)
+    public function findBookingsToExpire($expirationDelay, $acceptationDelay, $timeZone)
     {
-        $today = new \DateTime();
+        $today = new \DateTime('now', new \DateTimeZone($timeZone));
 
-        $dateExpired = clone $today;
-        $dateExpired->sub(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
+        $dateExpired = new \DateTime();
+        $dateExpired->sub(new \DateInterval('PT' . $expirationDelay . 'M'));
+
+        $dateAcceptationExpired = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateAcceptationExpired->add(new \DateInterval('PT' . $acceptationDelay . 'M'));
+
+        $sql = <<<SQLQUERY
+            b.newBookingAt <= :dateExpired OR
+            CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :dateAcceptationExpired OR
+            CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today
+SQLQUERY;
 
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
             ->andWhere(
-                "b.newBookingAt <= :dateExpired OR CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today"
+                $sql
             )
             ->setParameter(
                 'status',
@@ -364,6 +389,7 @@ class BookingRepository extends EntityRepository
                 )
             )
             ->setParameter('dateExpired', $dateExpired->format('Y-m-d H:i:s'))
+            ->setParameter('dateAcceptationExpired', $dateAcceptationExpired->format('Y-m-d H:i:s'))
             ->setParameter('today', $today->format('Y-m-d H:i:s'));
 
 //        echo $queryBuilder->getQuery()->getSQL();

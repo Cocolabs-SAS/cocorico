@@ -274,35 +274,30 @@ class Booking extends BaseBooking
     }
 
     /**
-     * Get time elapsed since new booking creation
-     *
-     * @return bool|int in seconds
-     */
-    public function getNewBookingTimeElapsed()
-    {
-        if ($this->getNewBookingAt()) {
-            $now = new \DateTime();
-
-            return $now->getTimestamp() - $this->getNewBookingAt()->getTimestamp();
-        }
-
-        return false;
-    }
-
-    /**
      * Get time in seconds before booking request expire depending on its status
      *
-     * @param int $expirationDelay in seconds
+     * @param int    $expirationDelay  in minutes
+     * @param int    $acceptationDelay in minutes
+     * @param string $timeZone         default user time zone
+     *
      * @return bool|int nb seconds before expiration
      */
-    public function getTimeBeforeExpiration($expirationDelay)
+    public function getTimeBeforeExpiration($expirationDelay, $acceptationDelay, $timeZone)
     {
         switch ($this->getStatus()) {
             case self::STATUS_DRAFT:
                 return false;
                 break;
             case self::STATUS_NEW:
-                return round($expirationDelay - $this->getNewBookingTimeElapsed());
+                $expirationDate = $this->getExpirationDate($expirationDelay, $acceptationDelay, $timeZone);
+                if ($expirationDate) {
+                    $now = new \DateTime('now', new \DateTimeZone($timeZone));
+
+                    return round($expirationDate->getTimestamp() - $now->getTimestamp());
+                }
+
+                return false;
+
                 break;
             default:
                 //No expiration case
@@ -311,19 +306,35 @@ class Booking extends BaseBooking
     }
 
     /**
-     * Get booking expiration date
+     * Get booking expiration date:
+     *   Equal to the smallest date between (new booking date + expiration delay) and (booking start date + acceptation delay)
      *
-     * @param int $bookingExpirationDelay in minutes
+     * @param int    $bookingExpirationDelay  in minutes
+     * @param int    $bookingAcceptationDelay in minutes
+     * @param string $timeZone                default user time zone
      *
      * @return \Datetime|bool
      */
-    public function getExpirationDate($bookingExpirationDelay)
+    public function getExpirationDate($bookingExpirationDelay, $bookingAcceptationDelay, $timeZone)
     {
+        //todo: check in day mode
         if ($this->getNewBookingAt()) {
-            $newBookingAt = clone $this->getNewBookingAt();
-            $newBookingAt->add(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
+            $expirationDate = clone $this->getNewBookingAt();
+            $expirationDate->setTimezone(new \DateTimeZone($timeZone));
+            $expirationDate->add(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
 
-            return $newBookingAt;
+            $acceptationDate = new \DateTime(
+                $this->getStartDateAndTime()->format('Y-m-d H:i:s'),
+                new \DateTimeZone($timeZone)
+            );
+            $acceptationDate->sub(new \DateInterval('PT' . $bookingAcceptationDelay . 'M'));
+
+            //Return minus date
+            if ($expirationDate->format('Ymd H:i') < $acceptationDate->format('Ymd H:i')) {
+                return $expirationDate;
+            } else {
+                return $acceptationDate;
+            }
         }
 
         return false;
@@ -373,11 +384,8 @@ class Booking extends BaseBooking
         if ($this->getStart()) {
             $now = new \DateTime('now', new \DateTimeZone($timeZone));
 
-            $start = $this->getStart()->format('Y-m-d');
-            if ($this->getStartTime()) {
-                $start .= ' ' . $this->getStartTime()->format('H:i:s');
-            }
-            $start = new \DateTime($start, new \DateTimeZone($timeZone));
+            $start = $this->getStartDateAndTime();
+            $start->setTimezone(new \DateTimeZone($timeZone));
 
             return $start->getTimestamp() - $now->getTimestamp();
         }
@@ -419,20 +427,20 @@ class Booking extends BaseBooking
      * Return whether a booking can be accepted or refused by offerer
      * For now a booking can be accepted or refused no later than ($minStartTimeDelay / 2) hours before it starts
      *
-     * @param int    $minStartDelay     in days
-     * @param int    $minStartTimeDelay in hours
-     * @param bool   $timeUnitIsDay
-     * @param string $timeZone          Default user timezone
+     * @param int    $expirationDelay  in minutes
+     * @param int    $acceptationDelay in minutes
+     * @param string $timeZone         Default user timezone
      *
      * @return bool
      */
-    public function canBeAcceptedOrRefusedByOfferer($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
+    public function canBeAcceptedOrRefusedByOfferer($expirationDelay, $acceptationDelay, $timeZone)
     {
         $statusIsOk = in_array($this->getStatus(), self::$payableStatus);//$refusableStatus is equal to $payableStatus
-        $minStartTimeDelay = round($minStartTimeDelay / 2);
-        $timeIsOk = $this->hasCorrectStartTime($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone);
 
-        if ($statusIsOk && $timeIsOk) {
+        $isNotExpired = $this->getTimeBeforeExpiration($expirationDelay, $acceptationDelay, $timeZone);
+        $isNotExpired = $isNotExpired && $isNotExpired > 0;
+
+        if ($statusIsOk && $isNotExpired) {
             return true;
         } else {
             return false;
@@ -441,7 +449,8 @@ class Booking extends BaseBooking
     }
 
     /**
-     * Check if booking start time is correct according to $minStartTimeDelay
+     * Check if booking begin after the minimum start date according to $minStartTimeDelay or $minStartDelay
+     * old: hasCorrectStartTime
      *
      * @param int    $minStartDelay     in days
      * @param int    $minStartTimeDelay in hours
@@ -450,7 +459,7 @@ class Booking extends BaseBooking
      *
      * @return bool
      */
-    public function hasCorrectStartTime($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
+    public function beginAfterMinStartDate($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
     {
         $minStartTime = new \DateTime();
         $minStartTime->setTimezone(new \DateTimeZone($timeZone));
@@ -459,18 +468,14 @@ class Booking extends BaseBooking
             $minStartTime->add(new \DateInterval('P' . $minStartDelay . 'D'));
             $minStartTime->setTime(0, 0, 0);
 
-            $start = new \DateTime(
-                $this->getStart()->format('Y-m-d')
-            );
+            $start = $this->getStart();
 
             if ($start->format('Ymd') < $minStartTime->format('Ymd')) {
                 return false;
             }
         } else {
             $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'H'));
-            $start = new \DateTime(
-                $this->getStart()->format('Y-m-d') . " " . $this->getStartTime()->format('H:i')
-            );
+            $start = $this->getStartDateAndTime();
 
             if ($start->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
                 return false;

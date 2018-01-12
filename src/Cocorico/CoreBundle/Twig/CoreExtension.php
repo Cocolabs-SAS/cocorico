@@ -49,6 +49,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $feeAsAsker;
     protected $displayMarker;
     protected $bookingExpirationDelay;
+    protected $bookingAcceptationDelay;
     protected $bookingValidationMoment;
     protected $bookingValidationDelay;
     protected $bookingPriceMin;
@@ -126,10 +127,11 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->endDayIncluded = $parameters["cocorico_booking_end_day_included"];
 
         //Delay
-        $this->bookingExpirationDelay = $parameters["cocorico_booking_expiration_delay"] * 60;//Converted to seconds
+        $this->bookingExpirationDelay = $parameters["cocorico_booking_expiration_delay"];
+        $this->bookingAcceptationDelay = $parameters["cocorico_booking_acceptation_delay"];
         $this->bookingValidationMoment = $parameters["cocorico_booking_validated_moment"];
         $this->bookingValidationDelay = $parameters["cocorico_booking_validated_delay"];
-        $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];;
+        $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];
         $this->minStartTimeDelay = $parameters["cocorico_booking_min_start_time_delay"];
 
         //VAT
@@ -464,6 +466,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'feeAsAsker' => $this->feeAsAsker,
             'displayMarker' => $this->displayMarker,
             'bookingExpirationDelay' => $this->bookingExpirationDelay,
+            'bookingAcceptationDelay' => $this->bookingAcceptationDelay,
             'bookingValidationMoment' => $this->bookingValidationMoment,
             'bookingValidationDelay' => $this->bookingValidationDelay,
             'bookingPriceMin' => $this->bookingPriceMin,

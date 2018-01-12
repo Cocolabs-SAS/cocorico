@@ -32,16 +32,22 @@ class AlertExpiringBookingsCommand extends ContainerAwareCommand
             ->setName('cocorico:bookings:alertExpiring')
             ->setDescription('Alert Expiring Bookings.')
             ->addOption(
-                'delay',
+                'alert-delay',
+                null,
+                InputOption::VALUE_OPTIONAL,
+                'Booking expiring alert delay in minutes. To use only on no prod env'
+            )
+            ->addOption(
+                'expiration-delay',
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Booking expiration delay in minutes. To use only on no prod env'
             )
             ->addOption(
-                'alert_delay',
+                'acceptation-delay',
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'Booking expiring alert delay in minutes. To use only on no prod env'
+                'Booking acceptation delay in minutes. To use only on no prod env'
             )
             ->addOption(
                 'test',
@@ -54,18 +60,19 @@ class AlertExpiringBookingsCommand extends ContainerAwareCommand
 
     public function execute(InputInterface $input, OutputInterface $output)
     {
-        $delay = $this->getContainer()->getParameter('cocorico.booking.expiration_delay');
+        $expirationDelay = $acceptationDelay = null;
         $alertDelay = $this->getContainer()->getParameter('cocorico.booking.alert_expiration_delay');
 
-        if ($input->getOption('test') && $input->hasOption('delay') && $input->hasOption('alert_delay')) {
-            $delay = $input->getOption('delay');
-            $alertDelay = $input->getOption('alert_delay');
+        if ($input->getOption('test') && $input->hasOption('alert-delay') &&
+            $input->hasOption('expiration-delay') && $input->hasOption('acceptation-delay')
+        ) {
+            $expirationDelay = $input->getOption('expiration-delay');
+            $acceptationDelay = $input->getOption('acceptation-delay');
+            $alertDelay = $input->getOption('alert-delay');
         }
 
-        $container = $this->getContainer();
-        $bookingManager = $container->get('cocorico.booking.manager');
-
-        $result = $bookingManager->alertExpiringBookings($delay, $alertDelay);
+        $result = $this->getContainer()->get('cocorico.booking.manager')
+            ->alertExpiringBookings($alertDelay, $expirationDelay, $acceptationDelay);
 
         $output->writeln($result . " booking(s) expiring alerted");
     }

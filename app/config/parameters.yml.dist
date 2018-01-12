@@ -67,15 +67,17 @@ parameters:
 
     #### Environment dependant to facilitate tests ####
     #### Delays ####
-
     ##Booking expiration delay in minutes
-    cocorico.booking.expiration_delay: 2880
+    cocorico.booking.expiration_delay: 2880 #2 days
+
+    ##Booking acceptation expiration delay in minutes
+    cocorico.booking.acceptation_delay: 240 #4 hours
 
     ##Expiring Bookings alert delay in minutes
-    cocorico.booking.alert_expiration_delay: 120
+    cocorico.booking.alert_expiration_delay: 120 #2 hours
 
     #Imminent Bookings alert delay in minutes
-    cocorico.booking.alert_imminent_delay: 1440
+    cocorico.booking.alert_imminent_delay: 1440 #1 day
 
     ##Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
     ##after booking start date or booking end date.

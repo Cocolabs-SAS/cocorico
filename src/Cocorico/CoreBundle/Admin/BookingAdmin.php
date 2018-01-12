@@ -30,6 +30,7 @@ class BookingAdmin extends Admin
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $bookingExpirationDelay;
+    protected $bookingAcceptationDelay;
     protected $includeVat;
     protected $bundles;
 
@@ -51,7 +52,12 @@ class BookingAdmin extends Admin
 
     public function setBookingExpirationDelay($bookingExpirationDelay)
     {
-        $this->bookingExpirationDelay = $bookingExpirationDelay;
+        $this->bookingExpirationDelay = $bookingExpirationDelay;//in minutes
+    }
+
+    public function setBookingAcceptationDelay($bookingAcceptationDelay)
+    {
+        $this->bookingAcceptationDelay = $bookingAcceptationDelay;//in minutes
     }
 
     public function setBundlesEnabled($bundles)
@@ -747,6 +753,7 @@ class BookingAdmin extends Admin
                     'template' => 'CocoricoSonataAdminBundle::list_booking_expiration_date.html.twig',
                     'label' => 'admin.booking.expire_at.label',
                     'bookingExpirationDelay' => $this->bookingExpirationDelay,
+                    'bookingAcceptationDelay' => $this->bookingAcceptationDelay,
                 )
             );
 //            ->add(

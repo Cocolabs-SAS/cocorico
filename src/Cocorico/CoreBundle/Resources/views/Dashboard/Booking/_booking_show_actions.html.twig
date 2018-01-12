@@ -15,7 +15,7 @@
             </a>
         {% endif %}
     {% elseif app.user == booking.listing.user %}
-        {% if booking.canBeAcceptedOrRefusedByOfferer(minStartDelay, minStartTimeDelay, timeUnitIsDay, timeZone) %}
+        {% if booking.canBeAcceptedOrRefusedByOfferer(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
             <a href="{{ path('cocorico_dashboard_booking_edit_offerer', {'id': booking.id, 'type': 'refuse'}) }}"
                class="btn btn-refuse" data-toggle="modal" data-target="#modal">
                 {{ 'booking.show_offerer.refuse'|trans }}

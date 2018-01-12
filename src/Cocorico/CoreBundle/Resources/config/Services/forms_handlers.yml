@@ -22,8 +22,6 @@ services:
             - [setRequest, ["@request_stack"]]
             - [setBookingManager, ["@cocorico.booking.manager"]]
             - [setThreadManager, ["@cocorico_message.thread_manager"]]
-            - [setMinStartDelay, ["%cocorico.booking.min_start_delay%"]]
-            - [setMinStartTimeDelay, ["%cocorico.booking.min_start_time_delay%"]]
 
     cocorico.form.handler.booking.offerer.dashboard:
         class: Cocorico\CoreBundle\Form\Handler\Dashboard\BookingOffererFormHandler

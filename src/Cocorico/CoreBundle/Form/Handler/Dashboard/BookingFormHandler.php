@@ -29,9 +29,9 @@ abstract class BookingFormHandler
     /** @var  ThreadManager $threadManager */
     protected $threadManager;
     /** @var  int */
-    protected $minStartDelay;
+    protected $expirationDelay;
     /** @var  int */
-    protected $minStartTimeDelay;
+    protected $acceptationDelay;
 
     /**
      * @param RequestStack $requestStack
@@ -55,22 +55,6 @@ abstract class BookingFormHandler
     public function setThreadManager(ThreadManager $threadManager)
     {
         $this->threadManager = $threadManager;
-    }
-
-    /**
-     * @param int $minStartDelay
-     */
-    public function setMinStartDelay($minStartDelay)
-    {
-        $this->minStartDelay = $minStartDelay;
-    }
-
-    /**
-     * @param int $minStartTimeDelay
-     */
-    public function setMinStartTimeDelay($minStartTimeDelay)
-    {
-        $this->minStartTimeDelay = $minStartTimeDelay;
     }
 
     /**

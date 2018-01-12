@@ -23,7 +23,7 @@
         '%booking_time_range%': booking_time_range,
         '%booking_amount_offerer%': booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
         '%booking_request_url%': booking_request_url,
-        '%booking_request_expiry_date%': booking.expirationDate(bookingExpirationDelay/60)|localizeddate('short', 'medium', 'fr'),
+        '%booking_request_expiry_date%': booking.expirationDate(bookingExpirationDelay, bookingAcceptationDelay, timeZone)|localizeddate('short', 'medium', 'fr', timeZone),
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
 

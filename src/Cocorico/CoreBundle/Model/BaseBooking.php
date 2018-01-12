@@ -291,6 +291,50 @@ abstract class BaseBooking
         $this->end = $end;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+
+    /**
+     * @param \DateTime $startTime
+     */
+    public function setStartTime($startTime)
+    {
+        $this->startTime = $startTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getEndTime()
+    {
+        return $this->endTime;
+    }
+
+    /**
+     * @param \DateTime $endTime
+     */
+    public function setEndTime($endTime)
+    {
+        $this->endTime = $endTime;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getStartDateAndTime()
+    {
+        $start = $this->getStart()->format('Y-m-d');
+        if ($this->getStartTime()) {
+            $start .= ' ' . $this->getStartTime()->format('H:i:s');
+        }
+
+        return new \DateTime($start);
+    }
 
     /**
      * Set status
@@ -650,38 +694,6 @@ abstract class BaseBooking
         }
 
         $this->cancellationPolicy = $cancellationPolicy;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getStartTime()
-    {
-        return $this->startTime;
-    }
-
-    /**
-     * @param \DateTime $startTime
-     */
-    public function setStartTime($startTime)
-    {
-        $this->startTime = $startTime;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getEndTime()
-    {
-        return $this->endTime;
-    }
-
-    /**
-     * @param \DateTime $endTime
-     */
-    public function setEndTime($endTime)
-    {
-        $this->endTime = $endTime;
     }
 
     /**
