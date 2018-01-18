@@ -67,6 +67,10 @@ class TranslateManager
         $strResponse = curl_exec($curlHandler);
         curl_close($curlHandler);
 
+        if(preg_match('/Out of call volume quota/i', $strResponse)) {
+            throw new TranslationQuotaExceeded('quota exceeded for translation');
+        }
+
         return $strResponse;
     }
 
