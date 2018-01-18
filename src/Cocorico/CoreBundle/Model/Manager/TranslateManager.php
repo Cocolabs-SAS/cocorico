@@ -13,6 +13,9 @@ namespace Cocorico\CoreBundle\Model\Manager;
 
 //todo: create a bundle instead
 
+use Cocorico\CoreBundle\Model\Manager\Exception\TranslationKeyIsInvalid;
+use Cocorico\CoreBundle\Model\Manager\Exception\TranslationQuotaExceeded;
+
 class TranslateManager
 {
 
@@ -69,6 +72,10 @@ class TranslateManager
 
         if(preg_match('/Out of call volume quota/i', $strResponse)) {
             throw new TranslationQuotaExceeded('quota exceeded for translation');
+        }
+
+        if(preg_match('/invalid subscription key/i', $strResponse)) {
+            throw new TranslationKeyIsInvalid('your key is invalid');
         }
 
         return $strResponse;
