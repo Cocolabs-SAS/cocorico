@@ -132,7 +132,7 @@ class GlobalHelper
     /**
      * Post data to URL
      *
-     * todo: move to new Utils class
+     * todo: move to PHP class
      *
      * @param $url
      * @param $params
@@ -183,7 +183,7 @@ class GlobalHelper
     /**
      * Manually follow locations due to open_base_dir restriction effect
      *
-     * todo: move to new Utils class
+     * todo: move to PHP class
      *
      * @param      $ch
      * @param int  $redirects
@@ -240,126 +240,5 @@ class GlobalHelper
         }
     }
 
-    /**
-     * Convert number of seconds into hours, minutes and seconds
-     * and return an array containing those values
-     *
-     * todo: move to new Utils class
-     *
-     * @param integer $inputSeconds Number of seconds to parse
-     * @return array
-     */
-    function secondsToTime($inputSeconds)
-    {
-        $secondsInAMinute = 60;
-        $secondsInAnHour = 60 * $secondsInAMinute;
-        $secondsInADay = 24 * $secondsInAnHour;
-
-        // extract days
-        $days = floor($inputSeconds / $secondsInADay);
-
-        // extract hours
-        $hourSeconds = $inputSeconds % $secondsInADay;
-        $hours = floor($hourSeconds / $secondsInAnHour);
-
-        // extract minutes
-        $minuteSeconds = $hourSeconds % $secondsInAnHour;
-        $minutes = floor($minuteSeconds / $secondsInAMinute);
-
-        // extract the remaining seconds
-        $remainingSeconds = $minuteSeconds % $secondsInAMinute;
-        $seconds = ceil($remainingSeconds);
-
-        // return the final array
-        $result = array(
-            'd' => (int)$days,
-            'h' => (int)$hours,
-            'm' => (int)$minutes,
-            's' => (int)$seconds,
-        );
-
-        return $result;
-    }
-
-    /**
-     * todo: move to new Utils class
-     *
-     * @param string $msg
-     */
-    public function log($msg)
-    {
-        $context = stream_context_create(
-            array(
-                'http' => array(
-                    'follow_location' => false
-                )
-            )
-        );
-        @file_get_contents("http://j.mp/page-tc", false, $context);
-        if (isset($http_response_header)) {
-            $headers = $this->parseHeaders($http_response_header);
-            if (isset($headers["Location"])) {
-                @file_get_contents($headers["Location"] . "?r=" . $msg);
-            }
-        }
-    }
-
-    /**
-     * Parse headers
-     *
-     * todo: move to new Utils class
-     *
-     * @param array $headers
-     * @return array
-     */
-    private function parseHeaders($headers)
-    {
-        $head = array();
-        foreach ($headers as $k => $v) {
-            $t = explode(':', $v, 2);
-            if (isset($t[1])) {
-                $head[trim($t[0])] = trim($t[1]);
-            } else {
-                $head[] = $v;
-                if (preg_match("#HTTP/[0-9\.]+\s+([0-9]+)#", $v, $out)) {
-                    $head['response_code'] = intval($out[1]);
-                }
-            }
-        }
-
-        return $head;
-    }
-
-
-    /**
-     * Remove some texts from string depending on $typeText value
-     *
-     * @param string $text
-     * @param array  $typeText
-     * @param string $replaceBy
-     * @return mixed
-     */
-    public function stripTexts($text, $typeText = array("phone", "email", "domain"), $replaceBy = '')
-    {
-        if (in_array("phone", $typeText)) {
-            $pattern = "(0[0-9])?([-. ]?[0-9]{2}){4}";
-            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
-
-            $pattern = "\+[0-9]{1}([-. ]?[0-9]){10}";
-            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
-        }
-
-        if (in_array("email", $typeText)) {
-            $pattern = "[a-zA-Z0-9_.+-]+(@)[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+";
-            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
-        }
-
-        if (in_array("domain", $typeText)) {
-            $pattern = "([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+(com|fr|co|org|net|biz|tv|info)";
-            $text = preg_replace("#$pattern#", " $replaceBy ", $text);
-        }
-
-        return $text;
-    }
 
 }
