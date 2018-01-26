@@ -29,6 +29,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Changed
 - Update doc
+- Move some GlobalHelper methods to Utils\PHP class
 
 ## [0.4.1] - 2017-11-22
 
