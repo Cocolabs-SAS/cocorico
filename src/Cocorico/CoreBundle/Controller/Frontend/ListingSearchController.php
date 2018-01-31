@@ -109,7 +109,7 @@ class ListingSearchController extends Controller
      *
      * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
      */
-    private function createSearchResultForm(ListingSearchRequest $listingSearchRequest)
+    protected function createSearchResultForm(ListingSearchRequest $listingSearchRequest)
     {
         $form = $this->get('form.factory')->createNamed(
             '',
