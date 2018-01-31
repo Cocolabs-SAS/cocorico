@@ -34,7 +34,7 @@ class ListingFavouriteController extends ListingSearchController
         $nbListings = 0;
 
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
-        $form = $this->createSearchForm($listingSearchRequest);
+        $form = $this->createSearchResultForm($listingSearchRequest);
 
         $form->handleRequest($request);
 
@@ -58,6 +58,7 @@ class ListingFavouriteController extends ListingSearchController
         return $this->render(
             '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array(
+                'form' => $form->createView(),
                 'listings' => $listings,
                 'nb_listings' => $nbListings,
                 'markers' => $markers,
