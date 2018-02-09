@@ -13,6 +13,9 @@ namespace Cocorico\CoreBundle\Model\Manager;
 
 //todo: create a bundle instead
 
+use Cocorico\CoreBundle\Model\Manager\Exception\TranslationKeyIsInvalid;
+use Cocorico\CoreBundle\Model\Manager\Exception\TranslationQuotaExceeded;
+
 class TranslateManager
 {
 
@@ -35,6 +38,10 @@ class TranslateManager
         $this->clientSecret = $clientSecret;
         $this->tokenUrl = $tokenUrl;
         $this->translateUrl = $translateUrl;
+
+        if(empty($this->clientSecret)) {
+            throw new \UnexpectedValueException('Token for translator is missing');
+        }
     }
 
     /**
@@ -62,6 +69,14 @@ class TranslateManager
 
         $strResponse = curl_exec($curlHandler);
         curl_close($curlHandler);
+
+        if(preg_match('/Out of call volume quota/i', $strResponse)) {
+            throw new TranslationQuotaExceeded('quota exceeded for translation');
+        }
+
+        if(preg_match('/invalid subscription key/i', $strResponse)) {
+            throw new TranslationKeyIsInvalid('your key is invalid');
+        }
 
         return $strResponse;
     }
@@ -134,8 +149,9 @@ class TranslateManager
                 <Texts>
 XML;
         foreach ($text as $inputStr) {
+            $inputStr = str_ireplace('<![CDATA', '', $inputStr);
             $xml .= <<<XML
-                    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays">{$inputStr}</string>
+                    <string xmlns="http://schemas.microsoft.com/2003/10/Serialization/Arrays"><![CDATA[{$inputStr}]]></string>
 XML;
         }
         $xml .= <<<XML
@@ -147,6 +163,11 @@ XML;
         $response = $this->getTranslateResponse($xml);
 
         $xmlObj = new \SimpleXMLElement($response);
+
+        if(!isset($xmlObj->TranslateArrayResponse)) {
+            throw new \LogicException('Response from translator is incomplete');
+        }
+
         foreach ($xmlObj->TranslateArrayResponse as $translatedArrObj) {
             $responseArray[] = (string)$translatedArrObj->TranslatedText;
         }
