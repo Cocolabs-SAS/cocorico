@@ -17,7 +17,6 @@ services:
             - "@lexik_currency.currency_extension"
             - "@translator.default"
             - "@session"
-            - "@cocorico.helper.global"
             - parameters:
                 cocorico_locales: "%cocorico.locales%"
                 cocorico_time_unit: "%cocorico.time_unit%"

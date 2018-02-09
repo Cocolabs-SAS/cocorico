@@ -31,6 +31,10 @@
                     }
 
                     translate(to, result, true);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    $("#error").show();
+                    $("#success").hide();
                 }
             });
 
@@ -109,7 +113,5 @@
                 });
             }
         }
-
-
     });
 </script>

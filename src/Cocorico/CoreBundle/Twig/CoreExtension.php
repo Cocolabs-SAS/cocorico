@@ -14,7 +14,7 @@ namespace Cocorico\CoreBundle\Twig;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\CoreBundle\Helper\GlobalHelper;
+use Cocorico\CoreBundle\Utils\PHP;
 use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
@@ -25,7 +25,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $currencyExtension;
     protected $translator;
     protected $session;
-    protected $globalHelper;
     protected $locales;
     protected $timeUnit;
     protected $timeUnitIsDay;
@@ -63,11 +62,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
     /**
      *
-     * @param CurrencyExtension                 $currencyExtension
+     * @param CurrencyExtension          $currencyExtension
      * @param TranslatorInterface $translator
      * @param Session             $session
-     * @param GlobalHelper        $globalHelper
-     * @param array                             $parameters
+     * @param array                      $parameters
      *
      */
 
@@ -75,14 +73,12 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $currencyExtension,
         TranslatorInterface $translator,
         Session $session,
-        GlobalHelper $globalHelper,
         array $parameters
     ) {
         //Services
         $this->currencyExtension = $currencyExtension;
         $this->translator = $translator;
         $this->session = $session;
-        $this->globalHelper = $globalHelper;
 
         $parameters = $parameters['parameters'];
 
@@ -177,7 +173,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      */
     public function formatSecondsFilter($seconds, $format = 'dhm')
     {
-        $time = $this->globalHelper->secondsToTime($seconds);
+        $time = PHP::seconds_to_time($seconds);
         switch ($format) {
             case 'h':
                 $result = ($time['d'] * 24) + $time['h'] . "h";
@@ -279,8 +275,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             );
         }
 
-
-        return $this->globalHelper->stripTexts($text, $typeInfo, $replaceBy);
+        return PHP::strip_texts($text, $typeInfo, $replaceBy);
     }
 
     /**
