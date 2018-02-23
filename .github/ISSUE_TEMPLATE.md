@@ -1,8 +1,8 @@
 | Q                | A
 | ---------------- | -----
-| Bug report?      | yes/no
-| Feature request? | yes/no
-| Support request? | yes/no
+| Bug report?      | [ ]
+| Feature request? | [ ]
+| Support request? | [ ]
 
 <!--
 - For support request or how-tos you can also use Stack Overflow
