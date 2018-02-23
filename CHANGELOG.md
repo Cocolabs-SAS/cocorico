@@ -32,6 +32,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Update doc
 - Move some GlobalHelper methods to Utils\PHP class
 - Handle translator provider errors
+- Change `cocorico.booking.min_start_time_delay` parameter unit from hours to minutes
 
 ## [0.4.1] - 2017-11-22
 

@@ -192,7 +192,7 @@ class BookingManager extends BaseManager
         // Min start date is equal to today plus "minStartDelay" days plus "minStartTimeDelay" hours
         $minStartDate = new \DateTime();
         $minStartDate->setTimezone(new \DateTimeZone($this->getTimeZone()));
-        $intervalFormat = 'P' . $this->minStartDelay . 'DT' . ($this->minStartTimeDelay + 1) . 'H';//Wa add 1 hour to not manage minutes available
+        $intervalFormat = 'P' . $this->minStartDelay . 'DT' . ($this->minStartTimeDelay + 60) . 'M';//Wa add 1 hour to not manage minutes available
         $minStartDate->add(new \DateInterval($intervalFormat));
         //Min start day without time
         $minStartDay = clone $minStartDate;

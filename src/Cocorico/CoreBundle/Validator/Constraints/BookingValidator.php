@@ -166,7 +166,7 @@ class BookingValidator extends ConstraintValidator
             $minStart = new \DateTime();
             $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
             if ($this->minStartTimeDelay > 0) {
-                $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
+                $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
             }
             $violations[] = array(
                 'message' => 'time_range.invalid.min_start {{ min_start_time }}',

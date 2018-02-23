@@ -425,7 +425,8 @@ class Booking extends BaseBooking
 
     /**
      * Return whether a booking can be accepted or refused by offerer
-     * For now a booking can be accepted or refused no later than ($minStartTimeDelay / 2) hours before it starts
+     * A booking can be accepted or refused no later than $acceptationDelay hours before it starts
+     * and no later than $expirationDelay hours after new booking request date
      *
      * @param int    $expirationDelay  in minutes
      * @param int    $acceptationDelay in minutes
@@ -453,7 +454,7 @@ class Booking extends BaseBooking
      * old: hasCorrectStartTime
      *
      * @param int    $minStartDelay     in days
-     * @param int    $minStartTimeDelay in hours
+     * @param int    $minStartTimeDelay in minutes
      * @param bool   $timeUnitIsDay
      * @param string $timeZone          Default user timezone
      *
@@ -474,7 +475,7 @@ class Booking extends BaseBooking
                 return false;
             }
         } else {
-            $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'H'));
+            $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'M'));
             $start = $this->getStartDateAndTime();
 
             if ($start->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {

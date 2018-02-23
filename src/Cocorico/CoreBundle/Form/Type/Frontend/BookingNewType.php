@@ -269,7 +269,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 $minStart = new \DateTime();
                 $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
                 if ($this->minStartTimeDelay > 0) {
-                    $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'H'));
+                    $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
                 }
                 $form['date_range']->addError(
                     new FormError(
