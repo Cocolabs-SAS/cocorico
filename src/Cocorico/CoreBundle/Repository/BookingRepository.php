@@ -464,12 +464,13 @@ SQLQUERY;
      *                                Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
      *                                after booking start date or booking end date.
      * @param int    $validatedDelay  Time after or before the moment the booking is considered as validated (in minutes)
+     * @param string $timeZone        Default user time zone
      *
      * @return \Doctrine\Common\Collections\ArrayCollection|Booking[]
      *
      * @throws \Exception
      */
-    public function findBookingsToValidate($validatedMoment, $validatedDelay)
+    public function findBookingsToValidate($validatedMoment, $validatedDelay, $timeZone)
     {
         if ($validatedMoment != 'start' && $validatedMoment != 'end') {
             throw new \Exception('Wrong argument $validatedMoment in findBookingsToValidate function');
@@ -487,20 +488,24 @@ SQLQUERY;
             )
             ->setParameter('validated', false);
 
-        $dateValidation = new \DateTime();
+        $dateValidation = new \DateTime('now', new \DateTimeZone($timeZone));
         if ($validatedDelay >= 0) {//after moment
             $dateValidation->sub(new \DateInterval('PT' . $validatedDelay . 'M'));
         } else {//before moment
             $dateValidation->add(new \DateInterval('PT' . abs($validatedDelay) . 'M'));
         }
 
+        $sql = <<<SQLQUERY
+            CONCAT(DATE_FORMAT(b.{$validatedMoment}, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.{$validatedMoment}Time, '%H:%i:%s') ) <= :dateValidation
+SQLQUERY;
+
         $queryBuilder
-            ->andWhere('b.' . $validatedMoment . ' <= :dateValidation')
+            ->andWhere($sql)
             ->setParameter('dateValidation', $dateValidation->format('Y-m-d H:i:s'));
 
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());
-
+//die();
         return new ArrayCollection($queryBuilder->getQuery()->getResult());
     }
 

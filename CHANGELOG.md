@@ -27,6 +27,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Replace depreciated 'intention' by 'csrf_token_id' in BookingNewType
 - Fix search categories field displaying
 - Fix #135 issue error when add to favourite
+- Fix booking validation date by adding time to date verification
 
 ### Changed
 - Update doc

@@ -1058,15 +1058,19 @@ class BookingManager extends BaseManager
      *
      * @param string $validatedMoment 'start' or 'end'*
      * @param int    $validatedDelay  Time after or before the moment the booking is considered as validated (in minutes)
+     * @param string $timeZone        Default user time zone
      *
      * @return int
      */
-    public function validateBookings($validatedMoment, $validatedDelay)
+    public function validateBookings($validatedMoment, $validatedDelay, $timeZone = null)
     {
         $result = 0;
+        $timeZone = $timeZone !== null ? $timeZone : $this->getTimeZone();
+
         $bookingsToValidate = $this->getRepository()->findBookingsToValidate(
             $validatedMoment,
-            $validatedDelay
+            $validatedDelay,
+            $timeZone
         );
         foreach ($bookingsToValidate as $bookingToValidate) {
             if ($this->validate($bookingToValidate)) {
