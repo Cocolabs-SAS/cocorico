@@ -23,7 +23,7 @@ services:
             - { name: form.type, alias: star_rating }
 
     cocorico.form.type.review_new:
-        class: Cocorico\ReviewBundle\Form\Type\Frontend\ReviewType
+        class: Cocorico\ReviewBundle\Form\Type\Dashboard\ReviewType
         tags:
             - { name: form.type, alias: review_new }
 

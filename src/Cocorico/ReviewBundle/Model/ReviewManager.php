@@ -103,13 +103,13 @@ class ReviewManager extends BaseManager
     }
 
     /**
-     * checkReviewAllowed will check if the user already added his/her reviews or not
+     * userHasReviewed will check if the user already added his/her reviews or not
      *
      * @param  Booking $booking
      * @param  User    $user
      * @return Review | boolean
      */
-    public function checkReviewAllowed(Booking $booking, User $user)
+    public function userHasReviewed(Booking $booking, User $user)
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('r')

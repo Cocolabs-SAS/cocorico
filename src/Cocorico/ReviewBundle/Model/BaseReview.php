@@ -16,7 +16,6 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
-use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -59,7 +58,7 @@ abstract class BaseReview
     protected $reviewTo;
 
     /**
-     * @Assert\NotBlank(message="cocorico_review.rating.not_blank", groups={"CocoricoReview"})
+     * @Assert\NotBlank(message="cocorico_review.rating.not_blank", groups={"new"})
      * @Assert\Range(
      *      min = 1,
      *      max = 5,
@@ -74,7 +73,7 @@ abstract class BaseReview
     protected $rating;
 
     /**
-     * @Assert\NotBlank(message="cocorico_review.comment.not_blank", groups={"CocoricoReview"})
+     * @Assert\NotBlank(message="cocorico_review.comment.not_blank", groups={"new"})
      *
      * @ORM\Column(name="comment", type="text", length=65535, nullable=false)
      *

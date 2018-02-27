@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\ReviewBundle\Form\Type\Frontend;
+namespace Cocorico\ReviewBundle\Form\Type\Dashboard;
 
-use Cocorico\ReviewBundle\Entity\Review;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
@@ -67,7 +66,8 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
                 'data_class' => 'Cocorico\ReviewBundle\Entity\Review',
                 'translation_domain' => 'cocorico_review',
                 'cascade_validation' => true,
-                'validation_groups' => array('CocoricoReview'),
+                'validation_groups' => array('new'),
+                'csrf_token_id' => 'review_new',
             )
         );
     }

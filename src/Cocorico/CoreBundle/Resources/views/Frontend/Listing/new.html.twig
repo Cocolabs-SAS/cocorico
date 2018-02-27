@@ -39,14 +39,13 @@
                         <!-- alert -->
                         <div class="head">
                             <h1>{{ 'listing.new.title'|trans }}</h1>
-
                             <p><strong>{{ 'listing.new.publish.notice'|trans }}</strong></p>
                         </div>
 
                         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-                        {{ form_errors(form) }}
 
                         <div class="holder">
+                            {{ form_errors(form) }}
                             <div class="form-selection">
                                 <div class="form-block block1">
                                     <div class="selection-holder">

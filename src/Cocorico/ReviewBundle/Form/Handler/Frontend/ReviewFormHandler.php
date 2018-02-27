@@ -47,7 +47,7 @@ class ReviewFormHandler
     public function create(Booking $booking, User $user)
     {
         $review = null;
-        if ($booking->isValidated() && !$this->reviewManager->checkReviewAllowed($booking, $user)) {
+        if ($booking->isValidated() && !$this->reviewManager->userHasReviewed($booking, $user)) {
             $review = new Review();
             $review->setBooking($booking);
             $review->setReviewBy($user);
