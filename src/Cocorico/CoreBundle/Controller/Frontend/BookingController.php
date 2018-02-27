@@ -42,7 +42,7 @@ class BookingController extends Controller
      * )
      *
      *
-     * @Security("is_granted('booking', listing)")
+     * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN')")
      *
      * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
      * @ParamConverter("start", options={"format": "Y-m-d"})

@@ -79,9 +79,10 @@ class BookingVoter implements VoterInterface
         // get current logged in user
         /** @var User $user */
         $user = $token->getUser();
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof UserInterface) { // || $user->hasRole('ROLE_SUPER_ADMIN'
             return VoterInterface::ACCESS_DENIED;
         }
+
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
         $asker = $booking->getUser();

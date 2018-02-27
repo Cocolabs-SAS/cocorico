@@ -30,6 +30,9 @@ class ListingController extends Controller
      * Creates a new Listing entity.
      *
      * @Route("/new", name="cocorico_listing_new")
+     *
+     * @Security("not has_role('ROLE_ADMIN')")
+     *
      * @Method({"GET", "POST"})
      *
      * @param  Request $request
