@@ -378,6 +378,7 @@ class Listing extends BaseListing
     public function removeDiscount(ListingDiscount $discount)
     {
         $this->discounts->removeElement($discount);
+        $discount->setListing(null);
     }
 
     /**

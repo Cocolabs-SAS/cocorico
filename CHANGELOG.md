@@ -28,6 +28,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix search categories field displaying
 - Fix #135 issue error when add to favourite
 - Fix booking validation date by adding time to date verification
+- Fix discount unicity issue while adding / removing discounts
 
 ### Changed
 - Update doc
