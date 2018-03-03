@@ -133,12 +133,12 @@
             {{ 'booking.show.status.title'|trans }} {{ booking.statusText|trans }}
         </span>
 
-        <strong class="expiry">
-            {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
-            {% if expiration > 0 %}
+        {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+        {% if expiration > 0 %}
+            <strong class="expiry">
                 {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}
-            {% endif %}
-        </strong>
+            </strong>
+        {% endif %}
     </footer>
 
 </article>
