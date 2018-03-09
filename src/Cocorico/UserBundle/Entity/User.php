@@ -246,7 +246,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @var boolean
      */
-    protected $phoneVerified;
+    protected $phoneVerified = false;
 
     /**
      *
@@ -254,7 +254,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @var boolean
      */
-    protected $emailVerified;
+    protected $emailVerified = false;
 
     /**
      *
@@ -262,7 +262,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @var boolean
      */
-    protected $idCardVerified;
+    protected $idCardVerified = false;
 
     /**
      *

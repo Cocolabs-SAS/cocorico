@@ -34,6 +34,16 @@
                                             'class': "form-control"
                                         }
                                     }) }}
+
+                                    <span>
+                                        {% if user.emailVerified %}
+                                            <i class="icon-ok"></i>
+                                            <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
+                                        {% else %}
+                                            <i class="icon-cancel"></i>
+                                            <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
 
@@ -71,6 +81,16 @@
                                             'class': "form-control"
                                         }
                                     }) }}
+
+                                    <span>
+                                        {% if user.phoneVerified %}
+                                            <i class="icon-ok"></i>
+                                            <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
+                                        {% else %}
+                                            <i class="icon-cancel"></i>
+                                            <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
+                                        {% endif %}
+                                    </span>
                                 </div>
                             </div>
 
