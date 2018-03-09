@@ -25,7 +25,6 @@ use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\CoreBundle\Repository\BookingRepository;
 use Cocorico\CoreBundle\Repository\ListingDiscountRepository;
-use Cocorico\CoreBundle\Smser\TwigSmser;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
@@ -38,8 +37,8 @@ class BookingManager extends BaseManager
     protected $dm;
     protected $listingAvailabilityManager;
     protected $mailer;
+    /** @var  \Cocorico\SMSBundle\Twig\TwigSmser */
     protected $smser;
-    protected $smsReceiver;
     protected $dispatcher;
     protected $feeAsAsker;
     protected $feeAsOfferer;
@@ -62,14 +61,13 @@ class BookingManager extends BaseManager
     public $maxPerPage;
 
     /**
-     * @param EntityManager                                              $em
-     * @param DocumentManager                                            $dm
-     * @param ListingAvailabilityManager                                 $listingAvailabilityManager
-     * @param TwigSwiftMailer                                            $mailer
-     * @param TwigSmser                                                  $smser
-     * @param                                                            $smsReceiver
-     * @param EventDispatcherInterface                                   $dispatcher
-     * @param array                                                      $parameters
+     * @param EntityManager              $em
+     * @param DocumentManager            $dm
+     * @param ListingAvailabilityManager $listingAvailabilityManager
+     * @param TwigSwiftMailer            $mailer
+     * @param                            $smser
+     * @param EventDispatcherInterface   $dispatcher
+     * @param array                      $parameters
      *        float     $feeAsAsker
      *        float     $feeAsOfferer
      *        boolean   $endDayIncluded
@@ -89,8 +87,7 @@ class BookingManager extends BaseManager
         DocumentManager $dm,
         ListingAvailabilityManager $listingAvailabilityManager,
         TwigSwiftMailer $mailer,
-        TwigSmser $smser,
-        $smsReceiver,
+        $smser,
         EventDispatcherInterface $dispatcher,
         $parameters
     ) {
@@ -99,7 +96,6 @@ class BookingManager extends BaseManager
         $this->listingAvailabilityManager = $listingAvailabilityManager;
         $this->mailer = $mailer;
         $this->smser = $smser;
-        $this->smsReceiver = $smsReceiver;
         $this->dispatcher = $dispatcher;
 
         //Parameters
@@ -1009,6 +1005,8 @@ class BookingManager extends BaseManager
 
                 return $booking;
             } catch (\Exception $e) {
+//                throw new \Exception($e);
+
                 //In case of error while payment for example
                 return false;
             }
@@ -1127,7 +1125,7 @@ class BookingManager extends BaseManager
                 return true;
             } else {
                 $booking->setStatus(Booking::STATUS_PAYMENT_REFUSED);
-                $booking = $this->save($booking);
+                $this->save($booking);
             }
         }
 
@@ -1200,78 +1198,6 @@ class BookingManager extends BaseManager
         }
 
         return false;
-    }
-
-    /**
-     * Accept or refuse booking from sms response
-     *
-     * @return bool|int
-     */
-    public function acceptOrRefuseFromSMS()
-    {
-        $result = 0;
-
-        //Get all last sms response
-        $start = new \DateTime();
-        $interval = new \DateInterval('PT1H');
-        $start->sub($interval);
-        $end = new \DateTime();
-        $end->add($interval);
-        $allSMS = $this->smsReceiver->receiveAll($start, $end);
-
-        //SMS response
-        foreach ($allSMS as $sms) {
-            //Get one sms response
-            $smsReceived = $this->smsReceiver->receiveOne($sms->getId());
-            if ($smsReceived) {
-                //tag is of form: [SMS type]-[User Id]-[Booking Id]. See CoreBundle/TwigSmser->sendBookingMessagesToOfferer
-                $tag = explode("-", $smsReceived->getTag());
-                if (count($tag) == 3) {
-                    $smsType = $tag[0];
-                    $userId = $tag[1];
-                    $bookingId = $tag[2];
-
-                    if ($smsType == "booking_request_offerer" && $userId && $bookingId) {
-                        /** @var Booking $booking */
-                        $booking = $this->getRepository()
-                            ->findOneBy(
-                                array(
-                                    'id' => $bookingId,
-                                    'status' => Booking::STATUS_NEW
-                                )
-                            );
-
-                        //If SMS received is send from offerer
-                        if ($booking && $booking->getListing()->getUser()->getId() == $userId) {
-                            $answer = $smsReceived->getMessage();
-                            $answer = trim($answer);
-                            if (strtolower($answer) == "yes" || strtolower($answer) == "oui") {
-                                if ($this->pay($booking)) {
-                                    $result++;
-                                }
-                            } elseif (strtolower($answer) == "no" || strtolower($answer) == "non") {
-                                if ($this->refuse($booking)) {
-                                    $result++;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        //Check SMS credits left
-        $smsCreditLeft = $this->smsReceiver->getProvider()->checkSMSCreditsLeft();
-        $now = new \DateTime();
-
-        if ($smsCreditLeft && $smsCreditLeft < 30 && $now->format('H:i') == '10:00') {
-            $this->mailer->sendMessageToAdmin(
-                'SMS credits limit reached',
-                'Hello, The number of remaining SMS is ' . $smsCreditLeft . '.'
-            );
-        }
-
-        return $result;
     }
 
 

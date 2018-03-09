@@ -39,6 +39,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Disable listing deposit and new booking to admin user
 - Add phone to registration form
 - Add phone and email verification message on profile edition 
+- Decouple SMSBundle
+
 
 ## [0.4.1] - 2017-11-22
 

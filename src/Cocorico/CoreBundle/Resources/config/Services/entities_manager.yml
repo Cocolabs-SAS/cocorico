@@ -29,8 +29,7 @@ services:
             - "@doctrine.odm.mongodb.document_manager"
             - "@cocorico.listing_availability.manager"
             - "@cocorico.mailer.twig_swift"
-            - "@cocorico.smser.twig"
-            - "@?cocorico_sms.receiver"
+            - "@?cocorico_sms.smser.twig"
             - "@event_dispatcher"
             - parameters:
                 cocorico_fee_as_asker: "%cocorico.fee_as_asker%"

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-11-16T11:41:46Z" source-language="en" target-language="en" datatype="plaintext"
+    <file date="2018-03-09T20:46:27Z" source-language="en" target-language="en" datatype="plaintext"
           original="not.available">
         <header>
             <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
@@ -13,14 +13,14 @@
             <trans-unit id="8a681a2f041f4625cceacf20f0cf8ebf4248b5f1" resname="&lt;=">
                 <source><![CDATA[<=]]></source>
                 <target state="new"><![CDATA[<=]]></target>
-                <jms:reference-file line="526">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="336">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="595">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="359">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="6c22e68f3b484db9779ac9e86488c2648313c410" resname="&gt;=">
                 <source><![CDATA[>=]]></source>
                 <target><![CDATA[>=]]></target>
-                <jms:reference-file line="511">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="321">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="580">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="344">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
                 <source>Asker</source>
@@ -30,7 +30,7 @@
             <trans-unit id="55f8ebc805e65b5b71ddafdae390e3be2bcd69af" resname="Description">
                 <source>Description</source>
                 <target>Description</target>
-                <jms:reference-file line="60">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="66">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
                 <jms:reference-file line="57">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
                 <jms:reference-file line="51">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
                 <jms:reference-file line="46">PageBundle/Admin/PageAdmin.php</jms:reference-file>
@@ -39,7 +39,7 @@
                 <source>Descriptions</source>
                 <target>Descriptions</target>
                 <jms:reference-file line="98">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
-                <jms:reference-file line="130">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="136">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
                 <jms:reference-file line="80">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
                 <jms:reference-file line="75">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
                 <jms:reference-file line="98">PageBundle/Admin/PageAdmin.php</jms:reference-file>
@@ -74,13 +74,13 @@
             <trans-unit id="bb11a8e3f8712e36e7cd9d1c615a4e3dbb03336a" resname="Rules">
                 <source>Rules</source>
                 <target state="new">Rules</target>
-                <jms:reference-file line="63">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="69">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="768e0c1c69573fb588f61f1308a015c11468e05f" resname="Title">
                 <source>Title</source>
                 <target>Title</target>
                 <jms:reference-file line="51">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
-                <jms:reference-file line="57">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="63">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
                 <jms:reference-file line="43">PageBundle/Admin/PageAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="0e2d9b0777a485c1276de0803c12a7d76fbc5c39" resname="URL">
@@ -101,12 +101,12 @@
             <trans-unit id="803aa4542bd0d44bcaf600e05a5a5384487a94b8" resname="admin.booking.alerted_expiring.label">
                 <source>admin.booking.alerted_expiring.label</source>
                 <target>Alerted expiring</target>
-                <jms:reference-file line="222">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="230">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b80ea936399574abb2eea43ee5238d72b719537b" resname="admin.booking.alerted_imminent.label">
                 <source>admin.booking.alerted_imminent.label</source>
                 <target>admin.booking.alerted_imminent.label</target>
-                <jms:reference-file line="231">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="239">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="ae8d498986042136aada4e6ed26d30c2be361d76" resname="admin.booking.amount.label">
                 <source>admin.booking.amount.label</source>
@@ -118,52 +118,52 @@
                         resname="admin.booking.amount_discount_voucher.label">
                 <source>admin.booking.amount_discount_voucher.label</source>
                 <target>admin.booking.amount_discount_voucher.label</target>
-                <jms:reference-file line="160">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="168">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="125">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="5622c70b2981a54981aa56b41dfb742000fa258f" resname="admin.booking.amount_excl_fees.label">
                 <source>admin.booking.amount_excl_fees.label</source>
                 <target>admin.booking.amount_excl_fees.label</target>
-                <jms:reference-file line="114">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="122">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="5d9b71bf09a586a70c76ae3ea38df1a8afe4b42f" resname="admin.booking.amount_fee_as_asker.label">
                 <source>admin.booking.amount_fee_as_asker.label</source>
                 <target>admin.booking.amount_fee_as_asker.label</target>
-                <jms:reference-file line="123">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="131">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b3e163c276d139d8334fddd5789eb45402aa9f22"
                         resname="admin.booking.amount_fee_as_offerer.label">
                 <source>admin.booking.amount_fee_as_offerer.label</source>
                 <target>admin.booking.amount_fee_as_offerer.label</target>
-                <jms:reference-file line="132">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="140">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="90049ba00652c96262c1f87f11b0d20c55481b0a" resname="admin.booking.amount_max.label">
                 <source>admin.booking.amount_max.label</source>
                 <target>admin.booking.amount_max.label</target>
-                <jms:reference-file line="529">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="598">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="7d3dacc817c3e563c3b13d5b1117926c5b40193e" resname="admin.booking.amount_min.label">
                 <source>admin.booking.amount_min.label</source>
                 <target>admin.booking.amount_min.label</target>
-                <jms:reference-file line="514">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="583">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9151eeee10fc46946e6e92538922d7d7af65c473" resname="admin.booking.amount_options.title">
                 <source>admin.booking.amount_options.title</source>
                 <target>admin.booking.amount_options.title</target>
-                <jms:reference-file line="356">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="425">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f98ee00840356c9f0587386b2f139146cbfd35d0"
                         resname="admin.booking.amount_to_pay_by_asker.label">
                 <source>admin.booking.amount_to_pay_by_asker.label</source>
                 <target>Amount to pay by asker</target>
-                <jms:reference-file line="173">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="641">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="181">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="710">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9f0db41b03a7382942b9997e849402994e0582d6"
                         resname="admin.booking.amount_to_pay_to_offerer.label">
                 <source>admin.booking.amount_to_pay_to_offerer.label</source>
                 <target>Amount to pay to offerer</target>
-                <jms:reference-file line="182">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="190">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="1001012d30fa7d6d981c87383152d89df69b0459" resname="admin.booking.amount_to_wire.label">
                 <source>admin.booking.amount_to_wire.label</source>
@@ -174,28 +174,28 @@
             <trans-unit id="0a340257a9f992669bd699cd1ba75f8336286884" resname="admin.booking.asker.label">
                 <source>admin.booking.asker.label</source>
                 <target>Asker</target>
-                <jms:reference-file line="80">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="445">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="620">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="88">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="514">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="689">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="60">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="aa6f071724745deceb7a6aa19fd81018e76f9454"
                         resname="admin.booking.canceled_asker_booking_at.label">
                 <source>admin.booking.canceled_asker_booking_at.label</source>
                 <target>admin.booking.canceled_asker_booking_at.label</target>
-                <jms:reference-file line="303">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="311">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="44c07db2db3b82f328048d3c3c80b0762fdc541a" resname="admin.booking.code_voucher.label">
                 <source>admin.booking.code_voucher.label</source>
                 <target>admin.booking.code_voucher.label</target>
-                <jms:reference-file line="144">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="538">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="152">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="607">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="156">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="de31157454649204b5dbcf4d1c482d2cb3fd0e22" resname="admin.booking.created_at.label">
                 <source>admin.booking.created_at.label</source>
                 <target>Booking creation date</target>
-                <jms:reference-file line="311">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="319">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="208">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="351">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="106">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
@@ -205,38 +205,50 @@
             <trans-unit id="248a758904788198a400d332ab8a775769d09051" resname="admin.booking.delivery_address.label">
                 <source>admin.booking.delivery_address.label</source>
                 <target state="new">admin.booking.delivery_address.label</target>
-                <jms:reference-file line="333">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="341">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="384">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="55a9fe288369ecbd05a7c628a4c76555246ea241" resname="admin.booking.delivery_amount.label">
                 <source>admin.booking.delivery_amount.label</source>
                 <target state="new">admin.booking.delivery_amount.label</target>
-                <jms:reference-file line="341">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="349">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="392">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="807e64e15b176261dc3d0b33ceadf715859a47ea" resname="admin.booking.discount_voucher.label">
                 <source>admin.booking.discount_voucher.label</source>
                 <target>admin.booking.discount_voucher.label</target>
-                <jms:reference-file line="152">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="160">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="164">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="77eb6a930a1bd5acaf3cdb9618c752aca8eef3c5" resname="admin.booking.end.label">
                 <source>admin.booking.end.label</source>
                 <target>Booking end date</target>
-                <jms:reference-file line="249">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="656">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="257">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="725">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="428">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="255">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="0957a6fb845bc519b17be221427fa3fdfe41cf9b" resname="admin.booking.end_time.label">
                 <source>admin.booking.end_time.label</source>
                 <target>Booking end time</target>
-                <jms:reference-file line="268">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="674">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="276">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="743">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d52c84a7339da98d742e115a570be975ce5a8b03" resname="admin.booking.expire_at.label">
                 <source>admin.booking.expire_at.label</source>
                 <target>Expiration date</target>
-                <jms:reference-file line="456">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="685">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="525">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="754">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="7f1af80a760853b4452b790d7684ac5322fecf5f" resname="admin.booking.hatchback.label">
+                <source>admin.booking.hatchback.label</source>
+                <target state="new">admin.booking.hatchback.label</target>
+                <jms:reference-file line="401">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="582617bc386d20e79cec81588b71e822690f0bd9" resname="admin.booking.hatchback_amount.label">
+                <source>admin.booking.hatchback_amount.label</source>
+                <target state="new">admin.booking.hatchback_amount.label</target>
+                <jms:reference-file line="409">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="7dcb7d17e625f1c12af3ea0211f208cd93601299" resname="admin.booking.label">
                 <source>admin.booking.label</source>
@@ -247,42 +259,42 @@
             <trans-unit id="c3309065c21b8919c1d444c558db153aaeec1df9" resname="admin.booking.listing_id.label">
                 <source>admin.booking.listing_id.label</source>
                 <target>Listing ID</target>
-                <jms:reference-file line="435">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="597">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="504">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="666">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b9fbd56cf7483648157bf7df9dcdb57a523c73ef" resname="admin.booking.listing_title.label">
                 <source>admin.booking.listing_title.label</source>
                 <target>Listing title</target>
-                <jms:reference-file line="440">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="509">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="dedf7f641d03fdd866d282cdc7f459e611fd448f" resname="admin.booking.mangopay_card_id.label">
                 <source>admin.booking.mangopay_card_id.label</source>
                 <target>admin.booking.mangopay_card_id.label</target>
-                <jms:reference-file line="393">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="462">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9f74e199b35905fa0c2ad252466831e19094846d"
                         resname="admin.booking.mangopay_card_pre_auth_id.label">
                 <source>admin.booking.mangopay_card_pre_auth_id.label</source>
                 <target>admin.booking.mangopay_card_pre_auth_id.label</target>
-                <jms:reference-file line="401">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="470">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="6144488021b5702f890e0a4b9bcd25a1fbf42d14"
                         resname="admin.booking.mangopay_payin_pre_auth_id.label">
                 <source>admin.booking.mangopay_payin_pre_auth_id.label</source>
                 <target>admin.booking.mangopay_payin_pre_auth_id.label</target>
-                <jms:reference-file line="409">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="478">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="843f66b7c19c823a511961d119f4c831aba22f1b" resname="admin.booking.new_booking_at.label">
                 <source>admin.booking.new_booking_at.label</source>
                 <target>admin.booking.new_booking_at.label</target>
-                <jms:reference-file line="279">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="287">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="e36325fb46d5d03c3b96c5ea34baed28365840a7" resname="admin.booking.offerer.label">
                 <source>admin.booking.offerer.label</source>
                 <target>admin.booking.offerer.label</target>
-                <jms:reference-file line="88">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="450">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="627">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="96">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="519">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="696">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="79">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="345">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="406">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
@@ -292,12 +304,12 @@
             <trans-unit id="70ddaad583d336caa66a08a43ce0b1a66430f22e" resname="admin.booking.payed_booking_at.label">
                 <source>admin.booking.payed_booking_at.label</source>
                 <target>admin.booking.payed_booking_at.label</target>
-                <jms:reference-file line="287">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="295">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="77b329e8477294c0050a9c96364657bef3f719c5" resname="admin.booking.refused_booking_at.label">
                 <source>admin.booking.refused_booking_at.label</source>
                 <target>admin.booking.refused_booking_at.label</target>
-                <jms:reference-file line="295">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="303">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="48a037466406f874d744757a8e5c45e05cb597d8"
                         resname="admin.booking.remaining_amount_to_pay_to_offerer.label">
@@ -308,37 +320,37 @@
             <trans-unit id="4831a617cb1e8153ff54396d192e4c3bc7523ff0" resname="admin.booking.start.label">
                 <source>admin.booking.start.label</source>
                 <target>admin.booking.start.label</target>
-                <jms:reference-file line="241">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="648">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="249">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="717">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="420">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="247">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="ee8a4303b9190e71152d2a7e3fcd742115c2dbb9" resname="admin.booking.start_time.label">
                 <source>admin.booking.start_time.label</source>
                 <target>admin.booking.start_time.label</target>
-                <jms:reference-file line="260">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="667">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="268">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="736">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
                 <source>admin.booking.status.label</source>
                 <target>admin.booking.status.label</target>
-                <jms:reference-file line="604">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="673">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="397">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="224">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f8cb8a28d309e6384c6927bc1553bbf1e05fc839" resname="admin.booking.updated_at.label">
                 <source>admin.booking.updated_at.label</source>
                 <target>admin.booking.updated_at.label</target>
-                <jms:reference-file line="319">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="483">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="327">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="552">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="216">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="114">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="c505ce3c9f9360faf87f28c942bb0b6fed7e22bc" resname="admin.booking.validated.label">
                 <source>admin.booking.validated.label</source>
                 <target>admin.booking.validated.label</target>
-                <jms:reference-file line="214">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="613">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="222">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="682">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f169ff06a484d036641cf596213b6509bc1a3c48" resname="admin.booking_bank_wire.amount.label">
                 <source>admin.booking_bank_wire.amount.label</source>
@@ -456,119 +468,120 @@
             <trans-unit id="f9e1a9ce25a95e878dc2b937b283b8e7a5c0b21c" resname="admin.listing.admin_notation.label">
                 <source>admin.listing.admin_notation.label</source>
                 <target>admin.listing.admin_notation.label</target>
-                <jms:reference-file line="93">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="94">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="99">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="100">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9de142c01d969bf69d0b4d9fc9e105342516c8f6" resname="admin.listing.average_rating.label">
                 <source>admin.listing.average_rating.label</source>
                 <target>admin.listing.average_rating.label</target>
-                <jms:reference-file line="442">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="465">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="f6dade8e850cdaca91701fb0fe31d32642002716" resname="admin.listing.categories.label">
                 <source>admin.listing.categories.label</source>
                 <target>admin.listing.categories.label</target>
-                <jms:reference-file line="146">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="252">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="152">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="275">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="c8cf0690ec3d283cb80449563346a17c44e909dc" resname="admin.listing.certified.label">
                 <source>admin.listing.certified.label</source>
                 <target>admin.listing.certified.label</target>
-                <jms:reference-file line="103">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="109">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="8922c4ad5a8265761c0102a98729b76d8aa8e506" resname="admin.listing.city.label">
                 <source>admin.listing.city.label</source>
                 <target>admin.listing.city.label</target>
-                <jms:reference-file line="345">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="368">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="a31f9358c937af08f21bee24856dce9a011aea6e" resname="admin.listing.country.label">
                 <source>admin.listing.country.label</source>
                 <target>admin.listing.country.label</target>
-                <jms:reference-file line="350">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="373">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="9908be157ce8cc3ed58e0c00284338c97ed648e7" resname="admin.listing.created_at.label">
                 <source>admin.listing.created_at.label</source>
                 <target>admin.listing.created_at.label</target>
-                <jms:reference-file line="201">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="270">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="207">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="293">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="21857127b6b3e10de098e4111cec53343b53fdb5" resname="admin.listing.images.label">
                 <source>admin.listing.images.label</source>
                 <target>admin.listing.images.label</target>
-                <jms:reference-file line="164">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="170">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="e44d86222b7fd4770ab5e2bda614e6c466f4d915" resname="admin.listing.impersonating.label">
                 <source>admin.listing.impersonating.label</source>
                 <target>admin.listing.impersonating.label</target>
-                <jms:reference-file line="462">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="485">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="fef3959e4e3efe81460055add8854c7a313fbbca" resname="admin.listing.label">
                 <source>admin.listing.label</source>
                 <target>admin.listing.label</target>
-                <jms:reference-file line="106">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-                <jms:reference-file line="634">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="114">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="703">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
                 <jms:reference-file line="413">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
                 <jms:reference-file line="240">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="a45d55b4e939c7cde7013de40ed40fb29aa87f06" resname="admin.listing.location.label">
                 <source>admin.listing.location.label</source>
                 <target state="new">admin.listing.location.label</target>
-                <jms:reference-file line="193">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="361">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="199">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="96bc9ef12f9d3d7eef97b3510264c92b9c707d9f" resname="admin.listing.offerer.label">
                 <source>admin.listing.offerer.label</source>
                 <target>admin.listing.offerer.label</target>
-                <jms:reference-file line="236">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="259">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="4f4e4c62dda7d9caa6cb75d78636b8c1483fcde8" resname="admin.listing.price.label">
                 <source>admin.listing.price.label</source>
                 <target>admin.listing.price.label</target>
-                <jms:reference-file line="172">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="436">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="178">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="459">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="44cae676588ea9c319cfee7bcdcf7e0a812372a6" resname="admin.listing.price_max.label">
                 <source>admin.listing.price_max.label</source>
                 <target>admin.listing.price_max.label</target>
-                <jms:reference-file line="339">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="362">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="5afdb4bb0e96626c507e5f518e6b377ffefcc1cf" resname="admin.listing.price_min.label">
                 <source>admin.listing.price_min.label</source>
                 <target>admin.listing.price_min.label</target>
-                <jms:reference-file line="324">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="347">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="70f4bab980aaea77504b06db4a44795d111c90ba" resname="admin.listing.status.label">
                 <source>admin.listing.status.label</source>
                 <target>admin.listing.status.label</target>
-                <jms:reference-file line="407">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="430">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d0f445421194d6d9ec754cdfefaa7aece63b474a" resname="admin.listing.title.label">
                 <source>admin.listing.title.label</source>
                 <target>admin.listing.title.label</target>
-                <jms:reference-file line="430">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="453">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="83f25fea622218e5d171b3385a2e34b633e1b190" resname="admin.listing.updated_at.label">
                 <source>admin.listing.updated_at.label</source>
                 <target>admin.listing.updated_at.label</target>
-                <jms:reference-file line="209">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="293">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="450">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="215">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="316">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="473">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d9ffac21d864a1a1412d85e28f2aeea909b32564" resname="admin.listing.user.label">
                 <source>admin.listing.user.label</source>
                 <target>admin.listing.user.label</target>
-                <jms:reference-file line="138">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="415">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="144">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="438">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="20bbb32c0561e993a306249ad494f9594e7be149" resname="admin.listing.user_email.label">
                 <source>admin.listing.user_email.label</source>
                 <target>admin.listing.user_email.label</target>
-                <jms:reference-file line="242">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="420">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="265">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="443">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="deef8057befff7beee11a6819cf8a17be55a379a" resname="admin.listing.user_phone.label">
                 <source>admin.listing.user_phone.label</source>
                 <target>admin.listing.user_phone.label</target>
-                <jms:reference-file line="247">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-                <jms:reference-file line="425">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="270">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+                <jms:reference-file line="448">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="87ac6419133734b501179c9fd7025db124442894" resname="admin.listing_category.fields.label">
                 <source>admin.listing_category.fields.label</source>
@@ -690,51 +703,57 @@
                 <jms:reference-file line="75">ConfigBundle/Admin/ParameterAdmin.php</jms:reference-file>
                 <jms:reference-file line="91">ConfigBundle/Admin/ParameterAdmin.php</jms:reference-file>
             </trans-unit>
+            <trans-unit id="f770dd493424dc3ace1358fdad34a4d43321cb5f" resname="admin.review.booking.label">
+                <source>admin.review.booking.label</source>
+                <target state="new">admin.review.booking.label</target>
+                <jms:reference-file line="51">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="183">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+            </trans-unit>
             <trans-unit id="18418eba65ff205625eb45e329e363caf297da2a" resname="admin.review.comment.label">
                 <source>admin.review.comment.label</source>
                 <target>admin.review.comment.label</target>
-                <jms:reference-file line="82">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="200">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="97">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="222">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="c255d13e63b96a7d1a6eb25dd4c7b853b5be0ebb" resname="admin.review.created_at.label">
                 <source>admin.review.created_at.label</source>
                 <target>admin.review.created_at.label</target>
-                <jms:reference-file line="89">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="134">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="208">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="104">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="149">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="230">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="b7f5bbd5b72bba1497ddddad38b4b3c0c852c662" resname="admin.review.listing.label">
                 <source>admin.review.listing.label</source>
                 <target>admin.review.listing.label</target>
                 <jms:reference-file line="137">MessageBundle/Admin/ThreadAdmin.php</jms:reference-file>
-                <jms:reference-file line="66">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="128">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="184">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="81">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="143">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="206">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="d9510213b05de69ab0992b67039ba079c2ffa42b" resname="admin.review.rating.label">
                 <source>admin.review.rating.label</source>
                 <target>admin.review.rating.label</target>
-                <jms:reference-file line="73">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="192">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="88">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="214">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="10a4dad943bbd733a35ae8ce714e469853aa2563" resname="admin.review.reviewBy.label">
                 <source>admin.review.reviewBy.label</source>
                 <target>admin.review.reviewBy.label</target>
-                <jms:reference-file line="43">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="118">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="169">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="58">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="133">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="191">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="71fda9868ff725116a5991c1773fefa379de6c38" resname="admin.review.reviewTo.label">
                 <source>admin.review.reviewTo.label</source>
                 <target>admin.review.reviewTo.label</target>
-                <jms:reference-file line="51">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="123">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-                <jms:reference-file line="177">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="66">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="138">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="199">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="bf0ea4810c8cf9a89f9db3c836501f97a492f832" resname="admin.review.search.label">
                 <source>admin.review.search.label</source>
                 <target>admin.review.search.label</target>
-                <jms:reference-file line="156">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
+                <jms:reference-file line="171">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
             </trans-unit>
             <trans-unit id="a5acce54d2bdc98d1f24c24d09c105edb70518f5" resname="admin.thread.booking.label">
                 <source>admin.thread.booking.label</source>
@@ -783,6 +802,12 @@
                 <source>admin.thread.view.label</source>
                 <target>admin.thread.view.label</target>
                 <jms:reference-file line="95">MessageBundle/Admin/ThreadAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="63e537934f93cbdef8e3d3eebc911b78a1c5eb39" resname="listing.form.pallets">
+                <source>listing.form.pallets</source>
+                <target state="new">listing.form.pallets</target>
+                <jms:reference-file line="368">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="237">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
             </trans-unit>
         </body>
     </file>

@@ -32,6 +32,13 @@ services:
             - { name: image_namer }
 
     #Listeners
+    cocorico_user.user.listener:
+        class: Cocorico\UserBundle\Listener\UserEntityListener
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: doctrine.event_subscriber }
+
     cocorico_user.user_image_upload_listener:
         class: Cocorico\UserBundle\Listener\UserImageUploadListener
         arguments:

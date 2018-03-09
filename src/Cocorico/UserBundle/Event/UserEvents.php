@@ -39,4 +39,12 @@ class UserEvents
      * The event listener method receives a Cocorico\UserBundle\Event\UserEvent instance.
      */
     const USER_BANK_ACCOUNT_UPDATE = 'cocorico.user.bank_account_update';
+
+    /**
+     * The USER_PHONE_CHANGE event occurs when user phone change.
+     *
+     * This event allows you to make action relatively to phone change.
+     * The event listener method receives a Cocorico\UserBundle\Event\UserEvent instance.
+     */
+    const USER_PHONE_CHANGE = 'cocorico.user.phone_change';
 }
