@@ -37,6 +37,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Change `cocorico.booking.min_start_time_delay` parameter unit from hours to minutes
 - Add minor corrections to ReviewBundle
 - Disable listing deposit and new booking to admin user
+- Add phone to registration form
 
 ## [0.4.1] - 2017-11-22
 

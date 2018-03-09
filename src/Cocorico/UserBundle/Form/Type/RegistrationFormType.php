@@ -49,6 +49,22 @@ class RegistrationFormType extends AbstractType
                 array('label' => 'form.first_name')
             )
             ->add(
+                'phone_prefix',
+                'text',
+                array(
+                    'label' => 'form.user.phone_prefix',
+                    'required' => false
+                )
+            )
+            ->add(
+                'phone',
+                'text',
+                array(
+                    'label' => 'form.user.phone',
+                    'required' => false
+                )
+            )
+            ->add(
                 'email',
                 'email',
                 array('label' => 'form.email')
