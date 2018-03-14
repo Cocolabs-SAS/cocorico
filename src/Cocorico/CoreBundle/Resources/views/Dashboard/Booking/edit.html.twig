@@ -131,8 +131,7 @@
                     {{ form_widget(form.tac) }}
                     <span class="label">
                         {{ form_label(form.tac, null, {'required': false} ) }}
-                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
-                           target="_blank">
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}" target="_blank">
                             {{ 'booking.new.tac.link'|trans }}
                         </a>*
                     </span>
@@ -142,9 +141,12 @@
             {{ form_end(form) }}
 
             <div class="modal-footer">
-                <a id="booking-edit-return" href="#"
-                   class="btn btn-default">{{ 'booking.modal.action.return'|trans }}</a>
-                <a id="booking-edit-submit" href="#" class="btn btn-default">{{ action_title }}</a>
+                <a id="booking-edit-return" href="#" class="btn btn-default">
+                    {{ 'booking.modal.action.return'|trans }}
+                </a>
+                <a id="booking-edit-submit" href="#" class="btn btn-default">
+                    {{ action_title }}
+                </a>
             </div>
         {% endif %}
     </div>

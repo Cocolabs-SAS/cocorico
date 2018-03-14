@@ -4,6 +4,7 @@ services:
         class: Cocorico\CoreBundle\Request\ListingParamConverter
         arguments:
             - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
         tags:
             - { name: request.param_converter, priority: 0, converter: listing }
 

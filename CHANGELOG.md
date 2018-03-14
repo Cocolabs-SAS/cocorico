@@ -19,6 +19,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add error message on listing calendar edition
 - Set booking status to STATUS_PAYMENT_REFUSED when booking can not be validated
 - Add booking acceptation delay 
+- Add listing show query overriding
 
 ### Fixed
 - Fix js escaping on result

@@ -673,8 +673,8 @@ function initPopups() {
 // align blocks height
 function initSameHeight() {
     jQuery('.listing-holder').sameHeight({
-        elements: '.ad-box',
-        skipClass: 'ad-post',
+        elements: '.listing-box',
+        skipClass: 'listing-post',
         flexible: true,
         multiLine: true
     });

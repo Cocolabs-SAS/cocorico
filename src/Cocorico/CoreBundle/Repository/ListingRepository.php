@@ -61,15 +61,15 @@ class ListingRepository extends EntityRepository
         return $queryBuilder;
     }
 
+
     /**
      * @param string $slug
      * @param string $locale
      * @param bool   $joined
      *
-     * @return mixed|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findOneBySlug($slug, $locale, $joined = true)
+    public function getFindOneBySlugQuery($slug, $locale, $joined = true)
     {
         $queryBuilder = $this->createQueryBuilder('l')
             ->addSelect("t")
@@ -86,24 +86,24 @@ class ListingRepository extends EntityRepository
                 ->leftJoin('u.images', 'i');
         }
 
-//          $queryBuilder
-//            ->addSelect("llc, lc, lct")
-//            ->leftJoin('l.listingListingCharacteristics', 'llc')
-//            ->leftJoin('llc.listingCharacteristic', 'lc')
-//            ->leftJoin('lc.translations', 'lct')
-//            ->leftJoin('lc.listingCharacteristicGroup', 'lcg')
-//            ->leftJoin('lc.translations', 'lcgt')
-//            ->andWhere('lct.locale = :locale')
-//            ->andWhere('lcgt.locale = :locale');
+        return $queryBuilder;
+    }
 
+    /**
+     * @param string $slug
+     * @param string $locale
+     * @param bool   $joined
+     *
+     * @return mixed|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function findOneBySlug($slug, $locale, $joined = true)
+    {
         try {
-            $query = $queryBuilder->getQuery();
-//            $query->useResultCache(true, 3600, 'findOneBySlug');
-//            $query->setFetchMode("Cocorico\CoreBundle\Entity\Listing", "listingListingCharacteristics", ClassMetadata::FETCH_EAGER);
-//            $query->setFetchMode("Cocorico\CoreBundle\Entity\ListingListingCharacteristic", "listingCharacteristic", ClassMetadata::FETCH_EAGER);
-//            $query->setFetchMode("Cocorico\CoreBundle\Entity\ListingCharacteristic", "ListingCharacteristicGroup", ClassMetadata::FETCH_EAGER);
+            $query = $this->getFindOneBySlugQuery($slug, $locale, $joined);
 
-            return $query->getSingleResult();
+            //$query->useResultCache(true, 3600, 'findOneBySlug');
+            return $query->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
             return null;
         }
@@ -244,6 +244,11 @@ class ListingRepository extends EntityRepository
         }
     }
 
+    /**
+     * @param $limit
+     * @param $locale
+     * @return Paginator|null
+     */
     public function findByHighestRanking($limit, $locale)
     {
         $queryBuilder = $this->getFindQueryBuilder();

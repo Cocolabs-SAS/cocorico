@@ -11,10 +11,13 @@
 
 namespace Cocorico\CoreBundle\Request;
 
+use Cocorico\CoreBundle\Event\ListingEvent;
+use Cocorico\CoreBundle\Event\ListingEvents;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Request\ParamConverter\ParamConverterInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -24,10 +27,12 @@ class ListingParamConverter implements ParamConverterInterface
      * @var EntityManager
      */
     protected $em;
+    protected $dispatcher;
 
-    public function __construct(EntityManager $em)
+    public function __construct(EntityManager $em, EventDispatcherInterface $dispatcher)
     {
         $this->em = $em;
+        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -64,9 +69,16 @@ class ListingParamConverter implements ParamConverterInterface
             return false;
         }
 
+        $queryBuilder = $this->em->getRepository("CocoricoCoreBundle:Listing")->getFindOneBySlugQuery($slug, $locale);
+
+        //Dispatch listing show query building event to eventually modify it
+        $event = new ListingEvent($queryBuilder);
+        $this->dispatcher->dispatch(ListingEvents::LISTING_SHOW_QUERY, $event);
+        $query = $event->getQueryBuilder()->getQuery();
+
         try {
-            // $em = $this->getManager($options['entity_manager'], $class);
-            $object = $this->em->getRepository("CocoricoCoreBundle:Listing")->findOneBySlug($slug, $locale);
+            $object = $query->getSingleResult();
+//            $object = $this->em->getRepository("CocoricoCoreBundle:Listing")->findOneBySlug($slug, $locale);
         } catch (NoResultException $e) {
             return null;
         }
