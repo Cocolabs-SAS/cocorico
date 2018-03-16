@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% if object.getType() == 'price' %}
+        {{ (object.getValue() / 100) | format_price(app.request.locale, 2) }}
+    {% elseif object.getType() == 'percent' %}
+        {{ object.getValue() * 100 }} %
+    {% else %}
+        {{ object.getValue() }}
+    {% endif %}
+{% endblock %}

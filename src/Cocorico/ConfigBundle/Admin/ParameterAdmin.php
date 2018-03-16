@@ -11,6 +11,7 @@
 
 namespace Cocorico\ConfigBundle\Admin;
 
+use Cocorico\ConfigBundle\Entity\Parameter;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -34,6 +35,10 @@ class ParameterAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Parameter $parameter */
+        $parameter = $this->getSubject();
+
+
         $formMapper
             ->with(
                 'admin.parameter.title',
@@ -52,7 +57,7 @@ class ParameterAdmin extends Admin
             )
             ->add(
                 'value',
-                null,
+                $parameter ? $parameter->getType() : null,
                 array(
                     'label' => 'admin.parameter.value.label',
                     'required' => false
@@ -88,7 +93,10 @@ class ParameterAdmin extends Admin
             ->add(
                 'value',
                 null,
-                array('label' => 'admin.parameter.value.label')
+                array(
+                    'label' => 'admin.parameter.value.label',
+                    'template' => 'CocoricoConfigBundle::list_parameter_value.html.twig'
+                )
             );
 
         $listMapper->add(
@@ -155,11 +163,8 @@ class ParameterAdmin extends Admin
 
         //Clear cache
         $php = 'php';
-        if (file_exists("/usr/bin/php54")) {//tmp
-            $php = 'php54';
-        }
         $rootDir = $kernel->getRootDir();
-        $command = $php . ' ' . $rootDir . '/console cache:clear --env=' . $kernel->getEnvironment();;
+        $command = $php . ' ' . $rootDir . '/console cache:clear --env=' . $kernel->getEnvironment();
 
         $process = new Process($command);
         try {

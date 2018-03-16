@@ -35,9 +35,10 @@ class LoadParameterData extends AbstractFixture implements OrderedFixtureInterfa
     {
         $parameters = $this->container->getParameter('cocorico_config.parameters_allowed');
         if (is_array($parameters) && count($parameters)) {
-            foreach ($parameters as $parameterName) {
+            foreach ($parameters as $parameterName => $parameterInfo) {
                 $parameter = new Parameter();
                 $parameter->setName($parameterName);
+                $parameter->setType($parameterInfo['type']);
                 $parameter->setValue(null);
                 $manager->persist($parameter);
             }

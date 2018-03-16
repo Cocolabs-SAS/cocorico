@@ -20,6 +20,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Set booking status to STATUS_PAYMENT_REFUSED when booking can not be validated
 - Add booking acceptation delay 
 - Add listing show query overriding
+- Add parameter type in CocoricoConfigBundle
 
 ### Fixed
 - Fix js escaping on result

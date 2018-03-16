@@ -40,6 +40,13 @@ abstract class BaseParameter
     protected $value;
 
     /**
+     * @ORM\Column(type="string", length=255, name="type", nullable=true)
+     *
+     * @var string $type
+     */
+    protected $type;
+
+    /**
      * Get name
      *
      * @return string
@@ -84,6 +91,24 @@ abstract class BaseParameter
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+
 
     public function __toString()
     {

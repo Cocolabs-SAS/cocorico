@@ -227,8 +227,10 @@ parameters:
     cocorico_listing_category_listing_category_field.entity_class: none
     #Config
     cocorico_config.parameters_allowed:
-        - 'cocorico.fee_as_asker'
-        - 'cocorico.fee_as_offerer'
+        cocorico.fee_as_asker:
+            type: 'percent'
+        cocorico.fee_as_offerer:
+            type: 'percent'
 
     #Images
     #User

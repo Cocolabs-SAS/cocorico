@@ -33,12 +33,16 @@ Step 2: Update Database
 Step 3: Set parameters to override
 -------------------------------------
 
+The parameter type is the form type name of the field in admin
+
 Example:
     
     parameters:
         cocorico_config.parameters_allowed:
-            - 'cocorico.fee_as_asker'
-            - 'cocorico.fee_as_offerer'
+            cocorico.fee_as_asker:
+              type: 'percent'
+            cocorico.fee_as_offerer:
+              type: 'percent'
     
     
     

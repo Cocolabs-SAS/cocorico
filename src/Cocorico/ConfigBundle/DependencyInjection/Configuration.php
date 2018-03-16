@@ -32,7 +32,11 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->arrayNode('parameters_allowed')
-            ->prototype('scalar')->end()
+            ->prototype('array')
+            ->children()
+            ->scalarNode('type')->end()
+            ->end()
+            ->end()
             ->end()
             ->end();
 
