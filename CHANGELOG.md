@@ -34,6 +34,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix discount unicity issue while adding / removing discounts
 - Fix similar listings
 - Fix favorites listings
+- Fix googlemaps MarkerWithLabel issue 393
 
 ### Changed
 - Update doc
