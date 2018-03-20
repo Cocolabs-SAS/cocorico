@@ -6,7 +6,17 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
+
 ## [Unreleased]
+
+### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.5.0] - 2018-03-20
 
 ### Added
 - Add minimal tests
