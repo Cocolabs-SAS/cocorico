@@ -46,6 +46,7 @@ class ListingFavouriteController extends ListingSearchController
         $favourites = explode(',', $request->cookies->get('favourite'));
         if (count($favourites) > 0) {
             $results = $this->get("cocorico.listing_search.manager")->getListingsByIds(
+                $listingSearchRequest,
                 $favourites,
                 $listingSearchRequest->getPage(),
                 $request->getLocale()
@@ -61,7 +62,7 @@ class ListingFavouriteController extends ListingSearchController
                 'form' => $form->createView(),
                 'listings' => $listings,
                 'nb_listings' => $nbListings,
-                'markers' => $markers,
+                'markers' => $markers['markers'],
                 'listing_search_request' => $listingSearchRequest,
                 'pagination' => array(
                     'page' => $listingSearchRequest->getPage(),

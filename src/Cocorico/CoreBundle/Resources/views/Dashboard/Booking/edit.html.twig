@@ -7,8 +7,12 @@
 
 {% set amount_total = amount_total | format_price(app.request.locale, 2) %}
 
-{% set booking_can_be_edited = (app.user == booking.user and booking.canBeCanceledByAsker) or
-(app.user == booking.listing.user and booking.status == BookingConstants.STATUS_NEW) %}
+{% set booking_can_be_edited = false %}
+{% if app.user == booking.user %}
+    {% set booking_can_be_edited =  booking.canBeCanceledByAsker %}
+{% elseif app.user == booking.listing.user %}
+    {% set booking_can_be_edited = booking.canBeAcceptedOrRefusedByOfferer(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+{% endif %}
 
 {% set title =  'booking.modal.accept.title'|trans %}
 {% set action_title =   'booking.modal.action.accept'|trans %}

@@ -32,9 +32,11 @@ class HomeController extends Controller
     public function indexAction(Request $request)
     {
         /** @var ListingRepository $listingRepository */
-        $listingRepository = $this->getDoctrine()->getRepository('CocoricoCoreBundle:Listing');
-        $results = $listingRepository->findByHighestRanking(6, $request->getLocale());
-        $listings = $results->getIterator();
+        $listings = $this->get("cocorico.listing_search.manager")->getHighestRanked(
+            $this->get('cocorico.listing_search_request'),
+            6,
+            $request->getLocale()
+        );
 
         return $this->render(
             'CocoricoCoreBundle:Frontend\Home:index.html.twig',

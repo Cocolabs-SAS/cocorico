@@ -58,7 +58,7 @@ class ListingSearchController extends Controller
 
             //Persist similar listings id
 //            print_r($markers);
-            $listingSearchRequest->setSimilarListings(array_column(array_column($markers, 0), 'id'));
+            $listingSearchRequest->setSimilarListings($markers['listingsIds']);
 
             //Persist listing search request in session
             $this->get('session')->set('listing_search_request', $listingSearchRequest);
@@ -89,7 +89,7 @@ class ListingSearchController extends Controller
                     'form' => $form->createView(),
                     'listings' => $listings,
                     'nb_listings' => $nbListings,
-                    'markers' => $markers,
+                    'markers' => $markers['markers'],
                     'listing_search_request' => $listingSearchRequest,
                     'pagination' => array(
                         'page' => $listingSearchRequest->getPage(),
@@ -130,7 +130,10 @@ class ListingSearchController extends Controller
      * @param  Request        $request
      * @param  Paginator      $results
      * @param  \ArrayIterator $resultsIterator
+     *
      * @return array
+     *          array['markers'] markers data
+     *          array['listingsIds'] listings ids
      */
     protected function getMarkers(Request $request, $results, $resultsIterator)
     {
@@ -150,10 +153,11 @@ class ListingSearchController extends Controller
         $locale = $request->getLocale();
         $liipCacheManager = $this->get('liip_imagine.cache.manager');
         $currencyExtension = $this->get('lexik_currency.currency_extension');
-        $markers = array();
+        $markers = $listingsIds = array();
 
         foreach ($results->getIterator() as $i => $result) {
             $listing = $result[0];
+            $listingsIds[] = $listing['id'];
 
             $imageName = count($listing['images']) ? $listing['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
 
@@ -201,7 +205,10 @@ class ListingSearchController extends Controller
             );
         }
 
-        return $markers;
+        return array(
+            'markers' => $markers,
+            'listingsIds' => $listingsIds
+        );
     }
 
     /**
@@ -298,6 +305,7 @@ class ListingSearchController extends Controller
         $ids = ($listingSearchRequest) ? $listingSearchRequest->getSimilarListings() : array();
         if ($listingSearchRequest && count($ids) > 0) {
             $results = $this->get("cocorico.listing_search.manager")->getListingsByIds(
+                $listingSearchRequest,
                 $ids,
                 null,
                 $request->getLocale(),

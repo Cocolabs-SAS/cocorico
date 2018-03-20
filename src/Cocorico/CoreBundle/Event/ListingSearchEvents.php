@@ -31,4 +31,20 @@ class ListingSearchEvents
      * The event listener method receives a Cocorico\CoreBundle\Event\ListingSearchActionEvent instance.
      */
     const LISTING_SEARCH_ACTION = 'cocorico.listing_search.action';
+
+    /**
+     * The LISTING_SEARCH_HIGH_RANK_QUERY event occurs when we want some listings depending on some criterias (Highest rank or last created, ... ) .
+     *
+     * This event allows you to modify the listing high rank query.
+     * The event listener method receives a Cocorico\CoreBundle\Event\ListingSearchEvent instance.
+     */
+    const LISTING_SEARCH_HIGH_RANK_QUERY = 'cocorico.listing_search_high_rank.query';
+
+    /**
+     * The LISTING_SEARCH_BY_IDS_QUERY event occurs when we want listings by ids.
+     *
+     * This event allows you to modify the listing search by ids query.
+     * The event listener method receives a Cocorico\CoreBundle\Event\ListingSearchEvent instance.
+     */
+    const LISTING_SEARCH_BY_IDS_QUERY = 'cocorico.listing_search_by_ids.query';
 }

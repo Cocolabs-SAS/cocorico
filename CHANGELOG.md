@@ -21,6 +21,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add booking acceptation delay 
 - Add listing show query overriding
 - Add parameter type in CocoricoConfigBundle
+- Add LISTING_SEARCH_HIGH_RANK_QUERY and LISTING_SEARCH_BY_IDS_QUERY events
 
 ### Fixed
 - Fix js escaping on result
@@ -31,6 +32,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix #135 issue error when add to favourite
 - Fix booking validation date by adding time to date verification
 - Fix discount unicity issue while adding / removing discounts
+- Fix similar listings
+- Fix favorites listings
 
 ### Changed
 - Update doc

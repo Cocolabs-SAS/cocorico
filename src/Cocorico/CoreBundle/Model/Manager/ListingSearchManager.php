@@ -23,6 +23,7 @@ use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -255,6 +256,33 @@ class ListingSearchManager
     }
 
     /**
+     * Get listings highest ranked
+     *
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param                      $limit
+     * @param                      $locale
+     * @return Paginator
+     */
+    public function getHighestRanked(ListingSearchRequest $listingSearchRequest, $limit, $locale)
+    {
+        $queryBuilder = $this->getRepository()->getFindByHighestRankingQueryBuilder($limit, $locale);
+
+        $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
+        $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH_HIGH_RANK_QUERY, $event);
+        $queryBuilder = $event->getQueryBuilder();
+
+        try {
+            $query = $queryBuilder->getQuery();
+            $query->useResultCache(true, 21600, 'getHighestRanked');
+
+            return new Paginator($query);//Important to manage limit
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
+
+
+    /**
      * Get listings availabilities
      *
      * @param DateRange          $dateRange
@@ -355,16 +383,23 @@ class ListingSearchManager
     /**
      * getListingsByIds returns the listings, depending upon ids provided
      *
-     * @param        ids array $ids
-     * @param        ids array $page
-     * @param string $locale
-     * @param array  $idsExcluded
-     * @param int    $maxPerPage
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param array                $ids
+     * @param int                  $page
+     * @param string               $locale
+     * @param array                $idsExcluded
+     * @param int                  $maxPerPage
      *
      * @return Paginator|null
      */
-    public function getListingsByIds($ids, $page, $locale, array $idsExcluded = array(), $maxPerPage = null)
-    {
+    public function getListingsByIds(
+        $listingSearchRequest,
+        $ids,
+        $page,
+        $locale,
+        array $idsExcluded = array(),
+        $maxPerPage = null
+    ) {
         // Remove the current listing id from the similar listings
         $ids = array_diff($ids, $idsExcluded);
 
@@ -375,13 +410,13 @@ class ListingSearchManager
             ->where('t.locale = :locale')
             ->andWhere('l.status = :listingStatus')
             ->andWhere('l.id IN (:ids)')
-//            ->andWhere('lct.locale = :locale')
-//            ->andWhere('lcgt.locale = :locale')
-//            ->andWhere('lcvt.locale = :locale')
             ->setParameter('locale', $locale)
             ->setParameter('listingStatus', Listing::STATUS_PUBLISHED)
             ->setParameter('ids', $ids);
 
+        $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
+        $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH_BY_IDS_QUERY, $event);
+        $queryBuilder = $event->getQueryBuilder();
 
         if ($maxPerPage === null) {
             //Pagination

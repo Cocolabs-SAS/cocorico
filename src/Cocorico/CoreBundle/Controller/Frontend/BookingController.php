@@ -85,6 +85,7 @@ class BookingController extends Controller
 
         $event = new BookingEvent($booking);
         $dispatcher->dispatch(BookingEvents::BOOKING_INIT, $event);
+        $booking = $event->getBooking();
 
         //Availability is validated through BookingValidator and amounts are setted through Form Event PRE_SET_DATA
         $form = $this->createCreateForm($booking);

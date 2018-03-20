@@ -16,7 +16,6 @@ use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
-use Doctrine\ORM\Tools\Pagination\Paginator;
 
 class ListingRepository extends EntityRepository
 {
@@ -60,7 +59,6 @@ class ListingRepository extends EntityRepository
 
         return $queryBuilder;
     }
-
 
     /**
      * @param string $slug
@@ -247,9 +245,9 @@ class ListingRepository extends EntityRepository
     /**
      * @param $limit
      * @param $locale
-     * @return Paginator|null
+     * @return \Doctrine\ORM\QueryBuilder
      */
-    public function findByHighestRanking($limit, $locale)
+    public function getFindByHighestRankingQueryBuilder($limit, $locale)
     {
         $queryBuilder = $this->getFindQueryBuilder();
 
@@ -261,15 +259,8 @@ class ListingRepository extends EntityRepository
             ->setParameter('listingStatus', Listing::STATUS_PUBLISHED)
             ->setMaxResults($limit)
             ->orderBy('l.createdAt', 'DESC');
-        try {
-            $query = $queryBuilder->getQuery();
-            $query->setHydrationMode(Query::HYDRATE_ARRAY);
-            $query->useResultCache(true, 21600, 'findByHighestRanking');
 
-            return new Paginator($query);
-        } catch (NoResultException $e) {
-            return null;
-        }
+        return $queryBuilder;
     }
 
     /**
