@@ -33,7 +33,7 @@ class ListingFavouriteController extends ListingSearchController
         $listings = new \ArrayIterator();
         $nbListings = 0;
 
-        $listingSearchRequest = $this->get('cocorico.listing_search_request');
+        $listingSearchRequest = $this->getListingSearchRequest();
         $form = $this->createSearchResultForm($listingSearchRequest);
 
         $form->handleRequest($request);

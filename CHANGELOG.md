@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Fix listing favorites search request persisting
 
 ### Changed
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bce46235ecfdf827617da5a5c4ad689c",
+    "content-hash": "1aed1ca7fbae5643657dd58919a577d5",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -70,7 +70,7 @@
                 "translatable",
                 "translation"
             ],
-            "time": "2016-02-04T09:15:49+00:00"
+            "time": "2016-02-04 09:15:49"
         },
         {
             "name": "alcaeus/mongo-php-adapter",
@@ -8214,7 +8214,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.4.0"
+        "php": "^7.1"
     },
     "platform-dev": [],
     "platform-overrides": {

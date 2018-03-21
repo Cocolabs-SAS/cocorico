@@ -35,7 +35,7 @@ class ListingSearchController extends Controller
      */
     public function searchAction(Request $request)
     {
-        $markers = array();
+        $markers = array('listingsIds' => array(), 'markers' => array());
         $listings = new \ArrayIterator();
         $nbListings = 0;
 
@@ -57,7 +57,6 @@ class ListingSearchController extends Controller
             $markers = $this->getMarkers($request, $results, $listings);
 
             //Persist similar listings id
-//            print_r($markers);
             $listingSearchRequest->setSimilarListings($markers['listingsIds']);
 
             //Persist listing search request in session
@@ -324,7 +323,7 @@ class ListingSearchController extends Controller
     /**
      * @return ListingSearchRequest
      */
-    private function getListingSearchRequest()
+    protected function getListingSearchRequest()
     {
         $session = $this->get('session');
         /** @var ListingSearchRequest $listingSearchRequest */
