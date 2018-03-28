@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Fixed
 - Fix listing favorites search request persisting
+- Fix SMS calls when SMS Bundle is not enabled
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers

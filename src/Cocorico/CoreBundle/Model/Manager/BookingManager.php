@@ -37,7 +37,6 @@ class BookingManager extends BaseManager
     protected $dm;
     protected $listingAvailabilityManager;
     protected $mailer;
-    /** @var  \Cocorico\SMSBundle\Twig\TwigSmser */
     protected $smser;
     protected $dispatcher;
     protected $feeAsAsker;
@@ -61,13 +60,13 @@ class BookingManager extends BaseManager
     public $maxPerPage;
 
     /**
-     * @param EntityManager              $em
-     * @param DocumentManager            $dm
-     * @param ListingAvailabilityManager $listingAvailabilityManager
-     * @param TwigSwiftMailer            $mailer
-     * @param                            $smser
-     * @param EventDispatcherInterface   $dispatcher
-     * @param array                      $parameters
+     * @param EntityManager                           $em
+     * @param DocumentManager                         $dm
+     * @param ListingAvailabilityManager              $listingAvailabilityManager
+     * @param TwigSwiftMailer                         $mailer
+     * @param \Cocorico\SMSBundle\Twig\TwigSmser|null $smser
+     * @param EventDispatcherInterface                $dispatcher
+     * @param array                                   $parameters
      *        float     $feeAsAsker
      *        float     $feeAsOfferer
      *        boolean   $endDayIncluded
@@ -774,7 +773,9 @@ class BookingManager extends BaseManager
             $this->mailer->sendBookingRequestMessageToOfferer($booking);
             $this->mailer->sendBookingRequestMessageToAsker($booking);
 
-            $this->smser->sendBookingRequestMessageToOfferer($booking);
+            if ($this->smser) {
+                $this->smser->sendBookingRequestMessageToOfferer($booking);
+            }
 
             return $booking;
         }
@@ -833,7 +834,9 @@ class BookingManager extends BaseManager
             $booking = $this->save($booking);
             //Mail offerer
             $this->mailer->sendBookingExpirationAlertMessageToOfferer($booking);
-            $this->smser->sendBookingExpirationAlertMessageToOfferer($booking);
+            if ($this->smser) {
+                $this->smser->sendBookingExpirationAlertMessageToOfferer($booking);
+            }
 
             return true;
         }
@@ -886,12 +889,14 @@ class BookingManager extends BaseManager
         if (in_array($booking->getStatus(), Booking::$expirableStatus)) {
             $booking->setStatus(Booking::STATUS_EXPIRED);
             $booking = $this->save($booking);
-            //Mail offerer
-            $this->mailer->sendBookingRequestExpiredMessageToOfferer($booking);
-            $this->smser->sendBookingRequestExpiredMessageToOfferer($booking);
-            //Mail asker
-            $this->mailer->sendBookingRequestExpiredMessageToAsker($booking);
-            $this->smser->sendBookingRequestExpiredMessageToAsker($booking);
+
+            $this->mailer->sendBookingRequestExpiredMessageToOfferer($booking);//Mail offerer
+            $this->mailer->sendBookingRequestExpiredMessageToAsker($booking);//Mail asker
+
+            if ($this->smser) {
+                $this->smser->sendBookingRequestExpiredMessageToOfferer($booking);
+                $this->smser->sendBookingRequestExpiredMessageToAsker($booking);
+            }
 
             return true;
         }
@@ -933,12 +938,14 @@ class BookingManager extends BaseManager
         if (in_array($booking->getStatus(), Booking::$validatableStatus)) {
             $booking->setAlertedImminent(true);
             $booking = $this->save($booking);
-            //Mail offerer
-            $this->mailer->sendBookingImminentMessageToOfferer($booking);
-            $this->smser->sendBookingImminentMessageToOfferer($booking);
-            //Mail asker
-            $this->mailer->sendBookingImminentMessageToAsker($booking);
-            $this->smser->sendBookingImminentMessageToAsker($booking);
+
+            $this->mailer->sendBookingImminentMessageToOfferer($booking);//Mail offerer
+            $this->mailer->sendBookingImminentMessageToAsker($booking);//Mail asker
+
+            if ($this->smser) {
+                $this->smser->sendBookingImminentMessageToOfferer($booking);
+                $this->smser->sendBookingImminentMessageToAsker($booking);
+            }
 
             return true;
         }
@@ -991,7 +998,10 @@ class BookingManager extends BaseManager
 
                 $this->mailer->sendBookingAcceptedMessageToAsker($booking);
                 $this->mailer->sendBookingAcceptedMessageToOfferer($booking);
-                $this->smser->sendBookingAcceptedMessageToAsker($booking);
+
+                if ($this->smser) {
+                    $this->smser->sendBookingAcceptedMessageToAsker($booking);
+                }
 
                 //Refuse other booking requests existing in this booking date range
                 $bookingsToRefuse = $this->getRepository()->findBookingsToRefuse(
@@ -1039,10 +1049,11 @@ class BookingManager extends BaseManager
             $booking = $this->save($booking);
 
             $this->mailer->sendBookingRefusedMessageToAsker($booking);
-            $this->smser->sendBookingRefusedMessageToAsker($booking);
-
             $this->mailer->sendBookingRefusedMessageToOfferer($booking);
 
+            if ($this->smser) {
+                $this->smser->sendBookingRefusedMessageToAsker($booking);
+            }
 
             return $booking;
         }
@@ -1191,7 +1202,11 @@ class BookingManager extends BaseManager
 
                 $this->mailer->sendBookingCanceledByAskerMessageToAsker($booking);
                 $this->mailer->sendBookingCanceledByAskerMessageToOfferer($booking);
-                $this->smser->sendBookingCanceledByAskerMessageToOfferer($booking);
+
+                if ($this->smser) {
+                    $this->smser->sendBookingCanceledByAskerMessageToOfferer($booking);
+                }
+
 
                 return $booking;
             }
