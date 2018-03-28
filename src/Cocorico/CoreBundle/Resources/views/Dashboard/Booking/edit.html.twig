@@ -64,7 +64,7 @@
                     {% endif %}
                 </div>
                 <ul class="list-inline booking-detail">
-                    <li content="{{ booking.start|date('Y-m-d') }}">
+                    <li>
                         {{ 'booking.show.start:'|trans }}
                         <time>
                             {{ booking.start|localizeddate('short', 'none', 'fr') }}

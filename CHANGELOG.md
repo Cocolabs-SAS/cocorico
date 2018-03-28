@@ -15,6 +15,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix listing favorites search request persisting
 
 ### Changed
+- Split each dashboard profile actions in multiple controllers
 
 
 ## [0.5.0] - 2018-03-20

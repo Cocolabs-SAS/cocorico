@@ -587,7 +587,7 @@
       </trans-unit>
       <trans-unit id="9f0db41b03a7382942b9997e849402994e0582d6" resname="admin.booking.amount_to_pay_to_offerer.label">
         <source>admin.booking.amount_to_pay_to_offerer.label</source>
-        <target>Montant à payer / payé à l'offreur</target>
+        <target>Montant hors annulation à payer / payé à l'offreur</target>
           <jms:reference-file line="190">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1001012d30fa7d6d981c87383152d89df69b0459" resname="admin.booking.amount_to_wire.label">

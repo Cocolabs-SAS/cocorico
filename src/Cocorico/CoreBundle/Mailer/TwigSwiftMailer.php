@@ -665,7 +665,7 @@ class TwigSwiftMailer implements MailerInterface
         $template = $this->templates['templates']['admin_message'];
 
         $context = array(
-            'user_locale' => 'en',
+            'user_locale' => $this->locale,
             'subject' => $subject,
             'admin_message' => $message
         );
