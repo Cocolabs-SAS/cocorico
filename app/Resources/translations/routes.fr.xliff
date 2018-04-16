@@ -264,15 +264,15 @@
                 <source>/dashboard/user_profile/edit_about_me</source>
                 <target>/tableau-de-bord/profil-utilisateur/editer-a-propos-de-moi</target>
             </trans-unit>
+            <trans-unit id="e8fbe0b88ea4762dc3d577730eb1284d0f1ca2b7"
+                        resname="cocorico_user_dashboard_profile_edit_bank_account">
+                <source>/dashboard/user/edit-bank-account</source>
+                <target state="new">/tableau-de-bord/profil-utilisateur/editer-coordonnees-bancaire</target>
+            </trans-unit>
             <trans-unit id="178052b7e118b3230deb96bdcb8918301fa9bd73"
                         resname="cocorico_user_dashboard_profile_edit_contact">
                 <source>/dashboard/user_profile/edit_contact</source>
                 <target>/tableau-de-bord/profil-utilisateur/editer-contact</target>
-            </trans-unit>
-            <trans-unit id="43179d1dd2c91843f344a5430e8e16cffe175a50"
-                        resname="cocorico_user_dashboard_profile_edit_payment">
-                <source>/dashboard/user_profile/edit_payment</source>
-                <target>/tableau-de-bord/profil-utilisateur/editer-paiement</target>
             </trans-unit>
             <trans-unit id="3c96e3c605ccefef864eaf52d2eed6d263b9dc80" resname="cocorico_user_dashboard_profile_switch">
                 <source>/dashboard/user/profile-switch</source>

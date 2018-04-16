@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Add User delivery address
 
 ### Fixed
 - Fix listing favorites search request persisting
@@ -17,7 +18,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers
-
+- Factorize profile contact edition
+- Change profile payment edition to bank account edition
 
 ## [0.5.0] - 2018-03-20
 

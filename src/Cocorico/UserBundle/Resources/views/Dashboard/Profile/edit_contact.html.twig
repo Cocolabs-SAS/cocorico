@@ -127,7 +127,7 @@
 
                         <div class="column">
                             {% for address in form.addresses %}
-                                <h4>{{ 'form.contact.billingaddress.title'|trans }}</h4>
+                                <h4>{{ address.vars.data.getTypeText()|trans }}</h4>
 
                                 <div class="field-row alt">
                                     {{ form_errors(address.address) }}
@@ -188,6 +188,7 @@
                                         }) }}
                                     </div>
                                 </div>
+                                <br/>
                             {% endfor %}
                         </div>
                     </div>

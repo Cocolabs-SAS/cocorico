@@ -67,6 +67,8 @@ class EntityExtractor implements FileVisitorInterface, NodeVisitor
                 $domain = 'cocorico_contact';
             } elseif (strstr($this->file->getFilename(), "Voucher") !== false) {
                 $domain = 'cocorico_voucher';
+            } elseif (strstr($this->file->getFilename(), "User") !== false) {
+                $domain = 'cocorico_user';
             }
 
             $message = new Message($id, $domain);

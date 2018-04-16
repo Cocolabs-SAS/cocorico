@@ -38,14 +38,14 @@ class ProfileAboutMeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editAboutMeAction(Request $request)
+    public function ediAction(Request $request)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        $form = $this->createEditAboutMeForm($user);
+        $form = $this->createAboutMeForm($user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -78,7 +78,7 @@ class ProfileAboutMeController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditAboutMeForm($user)
+    private function createAboutMeForm($user)
     {
         $form = $this->get('form.factory')->createNamed(
             'user',

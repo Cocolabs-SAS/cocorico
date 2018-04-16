@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProfilePaymentFormType extends AbstractType
+class ProfileBankAccountFormType extends AbstractType
 {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -123,10 +123,10 @@ class ProfilePaymentFormType extends AbstractType
         $resolver->setDefaults(
             array(
                 'data_class' => 'Cocorico\UserBundle\Entity\User',
-                'csrf_token_id' => 'CocoricoProfilePayment',
+                'csrf_token_id' => 'CocoricoProfileBankAccount',
                 'translation_domain' => 'cocorico_user',
                 'cascade_validation' => true,
-                'validation_groups' => array('CocoricoProfilePayment'),
+                'validation_groups' => array('CocoricoProfileBankAccount'),
             )
         );
     }
@@ -145,6 +145,6 @@ class ProfilePaymentFormType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'user_profile_payment';
+        return 'user_profile_bank_account';
     }
 }

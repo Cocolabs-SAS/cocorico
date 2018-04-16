@@ -12,6 +12,7 @@
 
 namespace Cocorico\UserBundle\Controller\Dashboard;
 
+use Cocorico\UserBundle\Form\Type\ProfileBankAccountFormType;
 use Cocorico\UserBundle\Form\Type\ProfilePaymentFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -21,31 +22,31 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Class ProfileController
+ * Class BankAccountFormHandler
  *
  * @Route("/user")
  */
-class ProfilePaymentController extends Controller
+class ProfileBankAccountController extends Controller
 {
     /**
      * Edit user profile
      *
-     * @Route("/edit-payment", name="cocorico_user_dashboard_profile_edit_payment")
+     * @Route("/edit-bank-account", name="cocorico_user_dashboard_profile_edit_bank_account")
      * @Method({"GET", "POST"})
      *
      * @param $request Request
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function editPaymentAction(Request $request)
+    public function editAction(Request $request)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        $form = $this->createEditPaymentForm($user);
-        $success = $this->get('cocorico_user.form.handler.edit_payment')->process($form);
+        $form = $this->createBankAccountForm($user);
+        $success = $this->get('cocorico_user.form.handler.bank_account')->process($form);
 
         $session = $this->container->get('session');
         $translator = $this->container->get('translator');
@@ -58,7 +59,7 @@ class ProfilePaymentController extends Controller
 
             return $this->redirect(
                 $this->generateUrl(
-                    'cocorico_user_dashboard_profile_edit_payment'
+                    'cocorico_user_dashboard_profile_edit_bank_account'
                 )
             );
         } elseif ($success < 0) {
@@ -69,7 +70,7 @@ class ProfilePaymentController extends Controller
         }
 
         return $this->render(
-            'CocoricoUserBundle:Dashboard/Profile:edit_payment.html.twig',
+            'CocoricoUserBundle:Dashboard/Profile:edit_bank_account.html.twig',
             array(
                 'form' => $form->createView(),
                 'user' => $user
@@ -84,15 +85,15 @@ class ProfilePaymentController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createEditPaymentForm($user)
+    private function createBankAccountForm($user)
     {
         $form = $this->get('form.factory')->createNamed(
             'user',
-            new ProfilePaymentFormType(),
+            new ProfileBankAccountFormType(),
             $user,
             array(
                 'method' => 'POST',
-                'action' => $this->generateUrl('cocorico_user_dashboard_profile_edit_payment'),
+                'action' => $this->generateUrl('cocorico_user_dashboard_profile_edit_bank_account'),
             )
         );
 

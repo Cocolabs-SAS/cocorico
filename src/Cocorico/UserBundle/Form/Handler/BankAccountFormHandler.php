@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class EditPaymentFormHandler
+class BankAccountFormHandler
 {
     protected $request;
     protected $userManager;

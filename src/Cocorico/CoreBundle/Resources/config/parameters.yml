@@ -232,8 +232,11 @@ parameters:
         cocorico.fee_as_offerer:
             type: 'percent'
 
-    #Images
     #User
+    #Is there a delivery address
+    cocorico.user.address.delivery: true
+
+    #Images
     #Max/Min images by user
     cocorico.user_img_min: 1
     cocorico.user_img_max: 6

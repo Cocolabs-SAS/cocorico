@@ -13,19 +13,28 @@ namespace Cocorico\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * UserFacebook
  *
  * @ORM\Entity()
  *
- * @ORM\Table(name="`user_address`")
+ * @ORM\Table(name="`user_address`", indexes={
+ *    @ORM\Index(name="user_address_type_idx", columns={"type"})
+ *  })
  *
  */
 class UserAddress
 {
     use ORMBehaviors\Timestampable\Timestampable;
+
+    const TYPE_BILLING = 1;
+    const TYPE_DELIVERY = 2;
+
+    public static $typeValues = array(
+        self::TYPE_BILLING => 'entity.user.type.billing',
+        self::TYPE_DELIVERY => 'entity.user.type.delivery',
+    );
 
     /**
      * @ORM\Id
@@ -39,6 +48,13 @@ class UserAddress
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="type", type="smallint", nullable=false, options={"default" : 1})
+     */
+    protected $type = self::TYPE_BILLING;
 
     /**
      * @var string
@@ -68,6 +84,10 @@ class UserAddress
      */
     protected $country = "FR";
 
+    public function __construct()
+    {
+
+    }
     /**
      * Get id
      *
@@ -76,6 +96,46 @@ class UserAddress
     public function getId()
     {
         return $this->id;
+    }
+
+
+    /**
+     * Set status
+     *
+     * @param  integer $type
+     * @return User
+     */
+    public function setType($type)
+    {
+        if (!in_array($type, array_keys(self::$typeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for user_address.type : %s.', $type)
+            );
+        }
+
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return integer
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Get type Text
+     *
+     * @return string
+     */
+    public function getTypeText()
+    {
+        return self::$typeValues[$this->getType()];
     }
 
     /**
