@@ -53,7 +53,8 @@ class RegistrationFormType extends AbstractType
                 'text',
                 array(
                     'label' => 'form.user.phone_prefix',
-                    'required' => false
+                    'required' => false,
+                    'empty_data' => '+33'
                 )
             )
             ->add(

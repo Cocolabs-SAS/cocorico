@@ -81,7 +81,7 @@ services:
             - "@request_stack"
             - "@cocorico_user.user_manager"
             - "@event_dispatcher"
-            - "%%cocorico.user.address.delivery%"
+            - "%cocorico.user_address_delivery%"
         public: true
 
     #Managers
@@ -97,3 +97,9 @@ services:
         class: Cocorico\UserBundle\Security\OAuthUserProvider
         arguments:
             - "@cocorico_user.user_manager"
+
+    #Forms
+    cocorico_user.form.type.user_address:
+        class: Cocorico\UserBundle\Form\Type\UserAddressFormType
+        tags:
+            - { name: form.type, alias: user_address }

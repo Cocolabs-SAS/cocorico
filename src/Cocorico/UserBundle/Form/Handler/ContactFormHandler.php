@@ -27,24 +27,24 @@ class ContactFormHandler
     protected $request;
     protected $userManager;
     protected $dispatcher;
-    protected $delivery;
+    protected $addressDelivery;
 
     /**
      * @param RequestStack             $requestStack
      * @param UserManager              $userManager
      * @param EventDispatcherInterface $dispatcher
-     * @param bool                     $delivery
+     * @param bool                     $addressDelivery
      */
     public function __construct(
         RequestStack $requestStack,
         UserManager $userManager,
         EventDispatcherInterface $dispatcher,
-        $delivery
+        $addressDelivery
     ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->userManager = $userManager;
         $this->dispatcher = $dispatcher;
-        $this->delivery = $delivery;
+        $this->addressDelivery = $addressDelivery;
     }
 
     /**
@@ -57,12 +57,14 @@ class ContactFormHandler
         if (!$user->getAddressesOfType(UserAddress::TYPE_BILLING)->count()) {
             $address = new UserAddress();
             $address->setType(UserAddress::TYPE_BILLING);
+            $address->setUser($user);
             $user->addAddress($address);
         }
 
-        if ($this->delivery && !$user->getAddressesOfType(UserAddress::TYPE_DELIVERY)->count()) {
+        if ($this->addressDelivery && !$user->getAddressesOfType(UserAddress::TYPE_DELIVERY)->count()) {
             $address = new UserAddress();
             $address->setType(UserAddress::TYPE_DELIVERY);
+            $address->setUser($user);
             $user->addAddress($address);
         }
 

@@ -1363,6 +1363,38 @@ images css for making it 4:3
     display: inline-block;
 }
 
+/** Booking user delivery address*/
+#booking-new .form-area {
+    float: none;
+    width: 100%;
+}
+
+#booking-new .form-area .contact-info {
+    margin: 0 0 20px;
+    padding-bottom: 20px;
+}
+
+#booking-new .form-area .contact-info h2 {
+    margin: 0 0 30px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+#booking-new .form-area .contact-info .label {
+    width: 110px;
+    text-align: right;
+}
+
+#booking-new .form-area .field-row.textarea .jcf-textarea {
+    height: 154px;
+}
+
+#booking-new .form-area .field-row {
+    /*display: inline-block;*/
+    /*width: 33%;*/
+}
+
+
 /** Booking Accept/Cancel Modal */
 .modal .label {
     display: inline-block;
@@ -1666,7 +1698,7 @@ ul.collection {
 }
 
 /* ------------------------------------------------------------ *\
-	Scrollbal
+	Scroll bar
 \* ------------------------------------------------------------ */
 .jcf-scrollbar {
     background: none;

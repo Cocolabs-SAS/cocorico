@@ -50,6 +50,7 @@ services:
                 cocorico_vat: "%cocorico.vat%"
                 cocorico_include_vat: "%cocorico.include_vat%"
                 cocorico_display_vat: "%cocorico.display_vat%"
+                cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:
             - { name: twig.extension }
 

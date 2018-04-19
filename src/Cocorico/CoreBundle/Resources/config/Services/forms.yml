@@ -214,17 +214,13 @@ services:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType
         arguments:
             - "@cocorico.booking.manager"
-            - "@security.token_storage"
-            - "@security.authorization_checker"
-            - "@cocorico_user.login_manager"
-            - "@request_stack"
             - "@event_dispatcher"
-            - "%cocorico.locales%"
-            - "%cocorico.booking.allow_single_day%"
-            - "%cocorico.booking.end_day_included%"
-            - "%cocorico.booking.min_start_delay%"
-            - "%cocorico.booking.min_start_time_delay%"
-            - "%cocorico.currency%"
+            - parameters:
+                cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
+                cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
+                cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
+                cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
+                cocorico_currency: "%cocorico.currency%"
         tags:
             - { name: form.type, alias: booking_new }
 

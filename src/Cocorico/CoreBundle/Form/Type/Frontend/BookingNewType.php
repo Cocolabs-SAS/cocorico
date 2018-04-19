@@ -15,8 +15,6 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Event\BookingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\BookingFormEvents;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
-use Cocorico\UserBundle\Entity\User;
-use Cocorico\UserBundle\Security\LoginManager;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -26,11 +24,8 @@ use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
 class BookingNewType extends AbstractType implements TranslationContainerInterface
@@ -45,13 +40,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     public static $messageDeliveryMaxInvalid = 'booking.new.delivery_max.error';
 
     private $bookingManager;
-    private $loginManager;
-    private $securityTokenStorage;
-    private $securityAuthChecker;
-    private $request;
     private $dispatcher;
-    private $locale;
-    private $locales;
     protected $allowSingleDay;
     protected $endDayInclude;
     protected $minStartDelay;
@@ -60,47 +49,26 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     private $currencySymbol;
 
     /**
-     * @param BookingManager       $bookingManager
-     * @param TokenStorage         $securityTokenStorage
-     * @param AuthorizationChecker $securityAuthChecker
-     * @param LoginManager             $loginManager
-     * @param RequestStack             $requestStack
+     * @param BookingManager           $bookingManager
      * @param EventDispatcherInterface $dispatcher
-     * @param array                    $locales
-     * @param bool                     $allowSingleDay
-     * @param bool                     $endDayIncluded
-     * @param int                      $minStartDelay
-     * @param int                      $minStartTimeDelay
-     * @param string                   $currency
+     * @param array                    $parameters
      */
     public function __construct(
         BookingManager $bookingManager,
-        TokenStorage $securityTokenStorage,
-        AuthorizationChecker $securityAuthChecker,
-        LoginManager $loginManager,
-        RequestStack $requestStack,
         EventDispatcherInterface $dispatcher,
-        $locales,
-        $allowSingleDay,
-        $endDayIncluded,
-        $minStartDelay,
-        $minStartTimeDelay,
-        $currency
+        $parameters
     ) {
         $this->bookingManager = $bookingManager;
-        $this->securityTokenStorage = $securityTokenStorage;
-        $this->securityAuthChecker = $securityAuthChecker;
-        $this->loginManager = $loginManager;
-        $this->request = $requestStack->getCurrentRequest();
+
         $this->dispatcher = $dispatcher;
-        $this->locale = $this->request->getLocale();
-        $this->locales = $locales;
-        $this->allowSingleDay = $allowSingleDay;
-        $this->endDayIncluded = $endDayIncluded;
-        $this->minStartDelay = $minStartDelay;
-        $this->minStartTimeDelay = $minStartTimeDelay;
-        $this->currency = $currency;
-        $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($currency);
+
+        $parameters = $parameters["parameters"];
+        $this->allowSingleDay = $parameters['cocorico_booking_allow_single_day'];
+        $this->endDayIncluded = $parameters['cocorico_booking_end_day_included'];
+        $this->minStartDelay = $parameters['cocorico_booking_min_start_delay'];
+        $this->minStartTimeDelay = $parameters['cocorico_booking_min_start_time_delay'];
+        $this->currency = $parameters['cocorico_currency'];
+        $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($this->currency);
     }
 
     /**
@@ -187,187 +155,13 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             );
 
         //Dispatch BOOKING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
-        //Used for example by some payment provider bundle like mangopay
+        //Used for example by user bundle to manage login / registration, some payment provider bundle like mangopay, ..
         $this->dispatcher->dispatch(BookingFormEvents::BOOKING_NEW_FORM_BUILD, new BookingFormBuilderEvent($builder));
-
-
-        /**
-         * Set the user fields according to his logging status
-         *
-         * @param FormInterface $form
-         */
-        $formUserModifier = function (FormInterface $form) {
-            //Not logged
-            if (!$this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-                $form
-                    ->add(//Login form
-                        'user_login',
-                        'user_login',
-                        array(
-                            'mapped' => false,
-                            /** @Ignore */
-                            'label' => false
-                        )
-                    )->add(//Registration form
-                        'user',
-                        'user_registration',
-                        array(
-                            /** @Ignore */
-                            'label' => false
-                        )
-                    );
-            } else {//Logged
-                //todo: check
-                $form->remove("user");
-                $form->add(
-                    'user',
-                    'entity_hidden',
-                    array(
-                        'data' => $this->securityTokenStorage->getToken()->getUser(),
-                        'class' => 'Cocorico\UserBundle\Entity\User',
-                        'data_class' => null
-                    )
-                );
-            }
-        };
-
-        /**
-         * todo: decouple external bundles errors management
-         *
-         * Add errors to the form if any
-         *
-         * @param FormInterface $form
-         * @param               $errors
-         */
-        $formErrors = function (FormInterface $form, $errors) {
-            $keys = array_keys($errors, 'date_range.invalid.min_start');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $minStart = new \DateTime();
-                $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
-                if ($this->minStartDelay > 0) {
-                    $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
-                }
-                $form['date_range']->addError(
-                    new FormError(
-                        'date_range.invalid.min_start {{ min_start_day }}',
-                        'cocorico',
-                        array(
-                            '{{ min_start_day }}' => $minStart->format('d/m/Y'),
-                        )
-                    )
-                );
-            }
-
-            $keys = array_keys($errors, 'time_range.invalid.min_start');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $minStart = new \DateTime();
-                $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
-                if ($this->minStartTimeDelay > 0) {
-                    $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
-                }
-                $form['date_range']->addError(
-                    new FormError(
-                        'time_range.invalid.min_start {{ min_start_time }}',
-                        'cocorico',
-                        array(
-                            '{{ min_start_time }}' => $minStart->format('d/m/Y H:i'),
-                        )
-                    )
-                );
-            }
-
-            $keys = array_keys($errors, 'unavailable');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $form['date_range']->addError(
-                    new FormError(self::$unavailableError)
-                );
-            }
-
-            $keys = array_keys($errors, 'amount_invalid');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $form['date_range']->addError(
-                    new FormError(
-                        self::$amountError,
-                        'cocorico',
-                        array(
-                            '{{ min_price }}' => $this->bookingManager->minPrice / 100 . " " . $this->currencySymbol,
-                        )
-                    )
-                );
-            }
-
-            $keys = array_keys($errors, 'code_voucher_invalid');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $form['codeVoucher']->addError(
-                    new FormError(
-                        self::$voucherError,
-                        'cocorico_booking',
-                        array()
-                    )
-                );
-            }
-
-            $keys = array_keys($errors, 'delivery_invalid');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $form['deliveryAddress']->addError(
-                    new FormError(
-                        self::$messageDeliveryInvalid,
-                        'cocorico_booking',
-                        array()
-                    )
-                );
-            }
-
-            $keys = array_keys($errors, 'delivery_max_invalid');
-            if (count($keys)) {
-                foreach ($keys as $key) {
-                    unset($errors[$key]);
-                }
-                $form['deliveryAddress']->addError(
-                    new FormError(
-                        self::$messageDeliveryMaxInvalid,
-                        'cocorico_booking',
-                        array()
-                    )
-                );
-            }
-
-            if (count($errors) > 0) {
-                foreach ($errors as $error) {
-                    $form['date_range']->addError(
-                        new FormError($error)
-                    );
-                }
-            }
-
-        };
-
 
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formUserModifier, $formErrors) {
+            function (FormEvent $event) {
                 $form = $event->getForm();
-                $formUserModifier($form);
-
-                //todo: check if needed and not already made in BookingValidator class
                 //Set Booking Amounts or throw Error if booking is invalid
                 /** @var Booking $booking */
                 $booking = $event->getData();
@@ -376,56 +170,15 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 if (!count($errors)) {
                     $event->setData($booking);
                 } else {
-                    $formErrors($form, $errors);
+                    $this->formErrors($form, $errors);
                 }
             }
         );
 
-
-        /**
-         * Login user management
-         *
-         * @param FormInterface $form
-         */
-        $formUserLoginModifier = function (FormInterface $form) {
-            if ($form->has('user_login')) {
-                $userLoginData = $form->get('user_login')->getData();
-                $username = $userLoginData["_username"];
-                $password = $userLoginData["_password"];
-
-                if ($username || $password) {
-                    /** @var $user User */
-                    $user = $this->loginManager->loginUser($username, $password);
-                    if ($user) {
-                        $form->getData()->setUser($user);
-                        //Remove user registration and login form and add user field
-                        $form->remove("user");
-                        $form->remove("user_login");
-                        $form->add(
-                            'user',
-                            'entity_hidden',
-                            array(
-                                'data' => $this->securityTokenStorage->getToken()->getUser(),
-                                'class' => 'Cocorico\UserBundle\Entity\User',
-                                'data_class' => null
-                            )
-                        );
-                    } else {
-                        $form['user_login']['_username']->addError(
-                            new FormError(self::$credentialError)
-                        );
-                    }
-                }
-            }
-        };
-
-
         $builder->addEventListener(
             FormEvents::SUBMIT,
-            function (FormEvent $event) use ($formUserLoginModifier) {
+            function (FormEvent $event) {
                 $form = $event->getForm();
-
-                $formUserLoginModifier($form);
 
                 $tac = $form->get('tac')->getData();
                 if (empty($tac)) {
@@ -442,10 +195,137 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 }
             }
         );
-
-
     }
 
+
+    /**
+     * todo: decouple external bundles errors management
+     *
+     * Add errors to the form if any
+     *
+     * @param FormInterface $form
+     * @param               $errors
+     */
+    private function formErrors(FormInterface $form, $errors)
+    {
+        $keys = array_keys($errors, 'date_range.invalid.min_start');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $minStart = new \DateTime();
+            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            if ($this->minStartDelay > 0) {
+                $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
+            }
+            $form['date_range']->addError(
+                new FormError(
+                    'date_range.invalid.min_start {{ min_start_day }}',
+                    'cocorico',
+                    array(
+                        '{{ min_start_day }}' => $minStart->format('d/m/Y'),
+                    )
+                )
+            );
+        }
+
+        $keys = array_keys($errors, 'time_range.invalid.min_start');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $minStart = new \DateTime();
+            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            if ($this->minStartTimeDelay > 0) {
+                $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
+            }
+            $form['date_range']->addError(
+                new FormError(
+                    'time_range.invalid.min_start {{ min_start_time }}',
+                    'cocorico',
+                    array(
+                        '{{ min_start_time }}' => $minStart->format('d/m/Y H:i'),
+                    )
+                )
+            );
+        }
+
+        $keys = array_keys($errors, 'unavailable');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $form['date_range']->addError(
+                new FormError(self::$unavailableError)
+            );
+        }
+
+        $keys = array_keys($errors, 'amount_invalid');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $form['date_range']->addError(
+                new FormError(
+                    self::$amountError,
+                    'cocorico',
+                    array(
+                        '{{ min_price }}' => $this->bookingManager->minPrice / 100 . " " . $this->currencySymbol,
+                    )
+                )
+            );
+        }
+
+        $keys = array_keys($errors, 'code_voucher_invalid');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $form['codeVoucher']->addError(
+                new FormError(
+                    self::$voucherError,
+                    'cocorico_booking',
+                    array()
+                )
+            );
+        }
+
+        $keys = array_keys($errors, 'delivery_invalid');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $form['deliveryAddress']->addError(
+                new FormError(
+                    self::$messageDeliveryInvalid,
+                    'cocorico_booking',
+                    array()
+                )
+            );
+        }
+
+        $keys = array_keys($errors, 'delivery_max_invalid');
+        if (count($keys)) {
+            foreach ($keys as $key) {
+                unset($errors[$key]);
+            }
+            $form['deliveryAddress']->addError(
+                new FormError(
+                    self::$messageDeliveryMaxInvalid,
+                    'cocorico_booking',
+                    array()
+                )
+            );
+        }
+
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $form['date_range']->addError(
+                    new FormError($error)
+                );
+            }
+        }
+    }
 
     /**
      * @param OptionsResolver $resolver

@@ -13,6 +13,7 @@ namespace Cocorico\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * UserFacebook
@@ -60,6 +61,10 @@ class UserAddress
      * @var string
      *
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $address;
 
@@ -67,6 +72,10 @@ class UserAddress
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $city;
 
@@ -74,6 +83,10 @@ class UserAddress
      * @var string
      *
      * @ORM\Column(name="zip", type="string", length=50, nullable=true)
+     *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $zip;
 
@@ -81,6 +94,10 @@ class UserAddress
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=3, nullable=true)
+     *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $country = "FR";
 
@@ -88,6 +105,7 @@ class UserAddress
     {
 
     }
+
     /**
      * Get id
      *

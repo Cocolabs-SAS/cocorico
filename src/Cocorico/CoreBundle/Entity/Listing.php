@@ -318,6 +318,7 @@ class Listing extends BaseListing
     public function removeImage(ListingImage $image)
     {
         $this->images->removeElement($image);
+        $image->setListing(null);
     }
 
     /**

@@ -172,11 +172,17 @@
                             <!-- /.alert alert-info -->
                         </div>
 
+                        {% if addressDelivery %}
+                            {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
+                                'form' : form.userAddressDelivery
+                            } only %}
+                        {% endif %}
+
                         {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
                             <div class="form-signup validate-form alt">
                                 <fieldset>
                                     <legend class="hidden">form-signup</legend>
-                                    {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
+                                    {% include 'CocoricoUserBundle:Frontend:Common/_login_register.html.twig' with {
                                     'form_registration' : form.user,
                                     'form_login': form.user_login
                                     } only %}
@@ -187,9 +193,7 @@
                         <div class="form-message">
                             <fieldset>
                                 <legend class="hidden">form-message</legend>
-                                <h2>
-                                    {{ form_label(form.message) }}
-                                </h2>
+                                <h2>{{ form_label(form.message) }}</h2>
 
                                 {{ form_errors(form.message) }}
                                 <div class="no-scroll">

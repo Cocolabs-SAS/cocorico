@@ -34,6 +34,7 @@ class ProfileContactFormType extends AbstractType
                 array(
                     'label' => 'form.user.phone_prefix',
                     'required' => false,
+                    'empty_data' => '+33'
                 )
             )
             ->add(
@@ -66,10 +67,10 @@ class ProfileContactFormType extends AbstractType
                 'addresses',
                 'collection',
                 array(
-                    'type' => new UserAddressFormType(),
+                    'type' => 'user_address',
                     /** @Ignore */
                     'label' => false,
-                    'required' => false
+                    'required' => false,
                 )
             );
 

@@ -134,6 +134,8 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->vatRate = $parameters["cocorico_vat"];
         $this->includeVat = $parameters["cocorico_include_vat"];
         $this->displayVat = $parameters["cocorico_display_vat"];
+
+        $this->addressDelivery = $parameters["cocorico_user_address_delivery"];
     }
 
     /**
@@ -471,7 +473,8 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'listingSearchMinResult' => $this->listingSearchMinResult,
             'listingDuplication' => $this->listingDuplication,
             'minStartDelay' => $this->minStartDelay,
-            'minStartTimeDelay' => $this->minStartTimeDelay
+            'minStartTimeDelay' => $this->minStartTimeDelay,
+            'addressDelivery' => $this->addressDelivery
         );
     }
 

@@ -18,6 +18,7 @@ use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
+use Cocorico\UserBundle\Entity\UserAddress;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -141,6 +142,42 @@ class Booking extends BaseBooking
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Get user delivery address
+     *
+     * @return \Cocorico\UserBundle\Entity\UserAddress
+     */
+    public function getUserAddressDelivery()
+    {
+        $address = null;
+        if ($this->user) {
+            $address = $this->user->getAddressesOfType(UserAddress::TYPE_DELIVERY)->first();
+        }
+        if (!$address) {
+            $address = new UserAddress();
+            $address->setType(UserAddress::TYPE_DELIVERY);
+            if ($this->user) {
+                $address->setUser($this->user);
+            }
+        }
+
+        return $address;
+    }
+
+    /**
+     * Set user delivery address
+     *
+     * @param UserAddress $address
+     *
+     * @return \Cocorico\UserBundle\Entity\UserAddress
+     */
+    public function setUserAddressDelivery(UserAddress $address)
+    {
+        $this->user->addAddress($address);
+
+        return $this;
     }
 
     /**

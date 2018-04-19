@@ -20,6 +20,7 @@ use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Model\ListingAlertInterface;
 use Cocorico\UserBundle\Validator\Constraints as CocoricoUserAssert;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Entity\User as BaseUser;
@@ -358,6 +359,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Entity\UserAddress", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"type" = "asc"})
      *
      * @var UserAddress[]
      */
@@ -1155,8 +1157,10 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function addAddress(UserAddress $address)
     {
-        $address->setUser($this);
-        $this->addresses[] = $address;
+        if (!$this->addresses->contains($address)) {
+            $address->setUser($this);
+            $this->addresses->add($address);
+        }
 
         return $this;
     }
@@ -1173,13 +1177,25 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get addresses
+     * Get addresses ordered by type
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection|UserAddress[]
      */
     public function getAddresses()
     {
-        return $this->addresses;
+        $addresses = $this->addresses->toArray();
+        uasort(
+            $addresses,
+            function (UserAddress $a, UserAddress $b) {
+                if ($a->getType() == $b->getType()) {
+                    return 0;
+                }
+
+                return ($a->getType() < $b->getType()) ? -1 : 1;
+            }
+        );
+
+        return new ArrayCollection($addresses);
     }
 
     /**
@@ -1187,7 +1203,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $type
      *
-     * @return \Doctrine\Common\Collections\Collection|UserAddress[]
+     * @return Collection|UserAddress[]
      */
     public function getAddressesOfType($type)
     {

@@ -17,7 +17,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserAddressFormType extends AbstractType
 {
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
