@@ -1,0 +1,9 @@
+{% set address_delivery = booking.userAddress %}
+
+<strong class="title">{{ 'entity.user.type.delivery'|trans({}, 'cocorico_user') }}</strong>
+<span>{{ address_delivery.address }}</span>
+<span>{{ address_delivery.zip }}</span>
+<span>
+    {{ address_delivery.city }}
+    {{ address_delivery.country | country_name(app.request.locale) }}
+</span>

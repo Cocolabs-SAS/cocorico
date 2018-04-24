@@ -174,7 +174,7 @@
 
                         {% if addressDelivery %}
                             {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
-                                'form' : form.userAddressDelivery
+                                'form' : form.userAddress
                             } only %}
                         {% endif %}
 
@@ -309,9 +309,7 @@
         'listing_location': listing_location
         } only %}
     {% elseif carrierBundleEnabled %}
-        {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
-        'listing_location': listing_location
-        } only %}
+        {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {} only %}
     {% endif %}
 
     {% if optionBundleEnabled %}

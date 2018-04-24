@@ -110,11 +110,11 @@ cocorico_user_dashboard_profile_edit_about_me:
     -   text: 'About me'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
 
-cocorico_user_dashboard_profile_edit_payment:
+cocorico_user_dashboard_profile_edit_bank_account:
     -   text: 'Profile'
         route: 'cocorico_user_dashboard_profile_edit_about_me'
     -   text: 'Payment Information'
-        route: 'cocorico_user_dashboard_profile_edit_payment'
+        route: 'cocorico_user_dashboard_profile_edit_bank_account'
 
 cocorico_user_dashboard_profile_edit_contact:
     -   text: 'Profile'

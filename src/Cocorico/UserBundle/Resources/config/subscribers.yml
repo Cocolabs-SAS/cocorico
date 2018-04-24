@@ -11,7 +11,5 @@ services:
             - "@security.token_storage"
             - "@security.authorization_checker"
             - "@cocorico_user.login_manager"
-            - parameters:
-                cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:
             - { name: kernel.event_subscriber}

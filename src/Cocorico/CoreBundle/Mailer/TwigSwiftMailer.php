@@ -156,7 +156,7 @@ class TwigSwiftMailer implements MailerInterface
             true
         );
         $profilePaymentInfoUrl = $this->router->generate(
-            'cocorico_user_dashboard_profile_edit_payment',
+            'cocorico_user_dashboard_profile_edit_bank_account',
             array(
                 '_locale' => $userLocale
             ),
@@ -638,7 +638,7 @@ class TwigSwiftMailer implements MailerInterface
         $template = $this->templates['templates']['booking_canceled_by_asker_asker'];
 
         $profilePaymentInfoUrl = $this->router->generate(
-            'cocorico_user_dashboard_profile_edit_payment',
+            'cocorico_user_dashboard_profile_edit_bank_account',
             array(
                 '_locale' => $userLocale
             ),

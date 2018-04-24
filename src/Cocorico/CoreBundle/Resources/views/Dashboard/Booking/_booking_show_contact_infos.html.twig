@@ -26,9 +26,16 @@
             <strong class="title">{{ 'booking.show.address.title'|trans }}</strong>
             <span>{{ listing_location.streetNumber }} {{ listing_location.route }}</span>
             <span>{{ listing_location.zip }}</span>
-            <span>{{ listing_location.city }}
-                <br>{{ listing_location.country | country_name(app.request.locale) }}
+            <span>
+                {{ listing_location.city }}<br>
+                {{ listing_location.country | country_name(app.request.locale) }}
             </span>
+
+            {% if addressDelivery %}
+                {% include '@CocoricoCore/Dashboard/Booking/_booking_show_address_delivery.html.twig' with {
+                    'booking': booking,
+                } only %}
+            {% endif %}
         </address>
     </div>
 {% endif %}

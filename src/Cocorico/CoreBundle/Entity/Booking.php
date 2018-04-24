@@ -18,7 +18,6 @@ use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
-use Cocorico\UserBundle\Entity\UserAddress;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
@@ -99,11 +98,14 @@ class Booking extends BaseBooking
     private $payinRefund;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Model\BookingOptionInterface", mappedBy="booking", cascade={"persist", "remove"}, orphanRemoval=true)
-     *
      */
     private $options;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cocorico\CoreBundle\Entity\BookingUserAddress", mappedBy="booking", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $userAddress;
 
     public function __construct()
     {
@@ -145,39 +147,27 @@ class Booking extends BaseBooking
     }
 
     /**
-     * Get user delivery address
+     * Set user address
      *
-     * @return \Cocorico\UserBundle\Entity\UserAddress
+     * @param BookingUserAddress $userAddress
+     * @return Booking
      */
-    public function getUserAddressDelivery()
+    public function setUserAddress($userAddress)
     {
-        $address = null;
-        if ($this->user) {
-            $address = $this->user->getAddressesOfType(UserAddress::TYPE_DELIVERY)->first();
-        }
-        if (!$address) {
-            $address = new UserAddress();
-            $address->setType(UserAddress::TYPE_DELIVERY);
-            if ($this->user) {
-                $address->setUser($this->user);
-            }
-        }
+        $userAddress->setBooking($this);
+        $this->userAddress = $userAddress;
 
-        return $address;
+        return $this;
     }
 
     /**
-     * Set user delivery address
+     * Get booking user address
      *
-     * @param UserAddress $address
-     *
-     * @return \Cocorico\UserBundle\Entity\UserAddress
+     * @return BookingUserAddress
      */
-    public function setUserAddressDelivery(UserAddress $address)
+    public function getUserAddress()
     {
-        $this->user->addAddress($address);
-
-        return $this;
+        return $this->userAddress;
     }
 
     /**

@@ -47,6 +47,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     protected $minStartTimeDelay;
     private $currency;
     private $currencySymbol;
+    private $addressDelivery;
 
     /**
      * @param BookingManager           $bookingManager
@@ -59,7 +60,6 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $parameters
     ) {
         $this->bookingManager = $bookingManager;
-
         $this->dispatcher = $dispatcher;
 
         $parameters = $parameters["parameters"];
@@ -69,6 +69,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $this->minStartTimeDelay = $parameters['cocorico_booking_min_start_time_delay'];
         $this->currency = $parameters['cocorico_currency'];
         $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($this->currency);
+        $this->addressDelivery = $parameters['cocorico_user_address_delivery'];
     }
 
     /**
@@ -153,6 +154,19 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'required' => true
                 )
             );
+
+        if ($this->addressDelivery) {
+            $builder
+                ->add(
+                    'userAddress',
+                    'booking_user_address',
+                    array(
+                        /** @Ignore */
+                        'label' => false,
+                        'required' => false,
+                    )
+                );
+        }
 
         //Dispatch BOOKING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
         //Used for example by user bundle to manage login / registration, some payment provider bundle like mangopay, ..

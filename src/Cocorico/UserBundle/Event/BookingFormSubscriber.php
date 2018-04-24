@@ -32,26 +32,20 @@ class BookingFormSubscriber implements EventSubscriberInterface, TranslationCont
     private $loginManager;
     private $securityTokenStorage;
     private $securityAuthChecker;
-    private $addressDelivery;
 
     /**
      * @param TokenStorage         $securityTokenStorage
      * @param AuthorizationChecker $securityAuthChecker
      * @param LoginManager         $loginManager
-     * @param array                $parameters
      */
     public function __construct(
         TokenStorage $securityTokenStorage,
         AuthorizationChecker $securityAuthChecker,
-        LoginManager $loginManager,
-        $parameters
+        LoginManager $loginManager
     ) {
         $this->securityTokenStorage = $securityTokenStorage;
         $this->securityAuthChecker = $securityAuthChecker;
         $this->loginManager = $loginManager;
-
-        $parameters = $parameters["parameters"];
-        $this->addressDelivery = $parameters['cocorico_user_address_delivery'];
     }
 
 
@@ -101,20 +95,6 @@ class BookingFormSubscriber implements EventSubscriberInterface, TranslationCont
                         'data_class' => null
                     )
                 );
-            }
-
-            if ($this->addressDelivery) {
-                $form
-                    ->add(
-                        'userAddressDelivery',
-                        'user_address',
-                        array(
-                            /** @Ignore */
-                            'label' => false,
-                            'required' => false,
-                            'validation_groups' => ('booking_new')
-                        )
-                    );
             }
         };
 

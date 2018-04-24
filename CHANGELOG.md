@@ -10,7 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
-- Add User delivery address
+- Add Booking user delivery address
 - Add delivery address in new booking form
 
 ### Fixed

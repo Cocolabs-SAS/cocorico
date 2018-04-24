@@ -9,32 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\UserBundle\Entity;
+namespace Cocorico\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * UserAddress
+ * BookingUserAddress
  *
  * @ORM\Entity()
  *
- * @ORM\Table(name="`user_address`", indexes={
- *    @ORM\Index(name="user_address_type_idx", columns={"type"})
+ * @ORM\Table(name="`booking_user_address`", indexes={
+ *
  *  })
  *
  */
-class UserAddress
+class BookingUserAddress
 {
     use ORMBehaviors\Timestampable\Timestampable;
-
-    const TYPE_BILLING = 1;
-    const TYPE_DELIVERY = 2;
-
-    public static $typeValues = array(
-        self::TYPE_BILLING => 'entity.user.type.billing',
-        self::TYPE_DELIVERY => 'entity.user.type.delivery',
-    );
 
     /**
      * @ORM\Id
@@ -44,46 +37,54 @@ class UserAddress
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cocorico\UserBundle\Entity\User", inversedBy="addresses")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-     */
-    private $user;
-
-    /**
-     * @var integer
+     * @ORM\OneToOne(targetEntity="Cocorico\CoreBundle\Entity\Booking", inversedBy="userAddress")
+     * @ORM\JoinColumn(name="booking_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *
-     * @ORM\Column(name="type", type="smallint", nullable=false, options={"default" : 1})
+     * @var Booking
      */
-    protected $type = self::TYPE_BILLING;
+    private $booking;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @ORM\Column(name="address", type="string", length=255, nullable=false)
+     *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255, nullable=false)
      *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zip", type="string", length=50, nullable=true)
+     * @ORM\Column(name="zip", type="string", length=50, nullable=false)
      *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $zip;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=3, nullable=true)
+     * @ORM\Column(name="country", type="string", length=3, nullable=false)
      *
+     * @Assert\NotBlank(groups={
+     *      "booking_new"
+     * })
      */
     protected $country = "FR";
 
@@ -102,51 +103,27 @@ class UserAddress
         return $this->id;
     }
 
-
     /**
-     * Set status
-     *
-     * @param  integer $type
-     * @return User
+     * @return Booking
      */
-    public function setType($type)
+    public function getBooking()
     {
-        if (!in_array($type, array_keys(self::$typeValues))) {
-            throw new \InvalidArgumentException(
-                sprintf('Invalid value for user_address.type : %s.', $type)
-            );
-        }
-
-        $this->type = $type;
-
-        return $this;
+        return $this->booking;
     }
 
     /**
-     * Get type
-     *
-     * @return integer
+     * @param Booking $booking
      */
-    public function getType()
+    public function setBooking(Booking $booking)
     {
-        return $this->type;
-    }
-
-    /**
-     * Get type Text
-     *
-     * @return string
-     */
-    public function getTypeText()
-    {
-        return self::$typeValues[$this->getType()];
+        $this->booking = $booking;
     }
 
     /**
      * Set address
      *
      * @param string $address
-     * @return UserAddress
+     * @return BookingUserAddress
      */
     public function setAddress($address)
     {
@@ -170,7 +147,7 @@ class UserAddress
      * Set city
      *
      * @param string $city
-     * @return UserAddress
+     * @return BookingUserAddress
      */
     public function setCity($city)
     {
@@ -193,7 +170,7 @@ class UserAddress
      * Set zip
      *
      * @param string $zip
-     * @return UserAddress
+     * @return BookingUserAddress
      */
     public function setZip($zip)
     {
@@ -216,7 +193,7 @@ class UserAddress
      * Set country
      *
      * @param string $country
-     * @return UserAddress
+     * @return BookingUserAddress
      */
     public function setCountry($country)
     {
@@ -235,26 +212,26 @@ class UserAddress
         return $this->country;
     }
 
-    /**
-     * Set user
-     *
-     * @param User $user
-     * @return UserAddress
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
+//    /**
+//     * Set user
+//     *
+//     * @param User $user
+//     * @return BookingUserAddress
+//     */
+//    public function setUser(User $user)
+//    {
+//        $this->user = $user;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get user
+//     *
+//     * @return User
+//     */
+//    public function getUser()
+//    {
+//        return $this->user;
+//    }
 }

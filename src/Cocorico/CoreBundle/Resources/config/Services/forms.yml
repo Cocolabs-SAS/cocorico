@@ -221,6 +221,7 @@ services:
                 cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
                 cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
                 cocorico_currency: "%cocorico.currency%"
+                cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:
             - { name: form.type, alias: booking_new }
 
@@ -239,6 +240,15 @@ services:
             - "%cocorico.times_display_mode%"
         tags:
             - { name: form.type, alias: booking_price }
+
+    #Booking user address
+    cocorico.form.type.booking_user_address:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\BookingUserAddressFormType
+        arguments:
+            - "@security.token_storage"
+            - "@security.authorization_checker"
+        tags:
+            - { name: form.type, alias: booking_user_address }
 
     cocorico.form.type.weekdays:
         class: Cocorico\CoreBundle\Form\Type\WeekDaysType

@@ -1203,7 +1203,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $type
      *
-     * @return Collection|UserAddress[]
+     * @return UserAddress[]|Collection
      */
     public function getAddressesOfType($type)
     {

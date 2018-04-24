@@ -22,13 +22,20 @@
     {% endblock %}
 
     {% block content %}
-
         <div>
             <strong>{{ 'booking.voucher.address' | trans }} : </strong> {{ listing_address }}
             <br/>
             <strong>{{ 'booking.voucher.phone' | trans }} :</strong> {{ offerer.phone }}
         </div>
 
+        {% if addressDelivery %}
+            <div>
+                <br/>
+                {% include '@CocoricoCore/Dashboard/Booking/_booking_show_address_delivery.html.twig' with {
+                    'booking': booking,
+                } only %}
+            </div>
+        {% endif %}
         <div>
             <br/>
             <strong>{{ 'booking.voucher.date' | trans }}
