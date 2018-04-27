@@ -41,12 +41,7 @@ class BookingOffererFormHandler extends BookingFormHandler
         //Accept or refuse
         $type = $this->request->get('type');
 
-        $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->bookingManager->getExpirationDelay(),
-            $this->bookingManager->getAcceptationDelay(),
-            $this->bookingManager->getTimeZone()
-        );
-
+        $canBeAcceptedOrRefused = $this->bookingManager->canBeAcceptedOrRefusedByOfferer($booking);
         if ($canBeAcceptedOrRefused) {
             if ($type == 'accept') {
                 if ($this->bookingManager->pay($booking)) {

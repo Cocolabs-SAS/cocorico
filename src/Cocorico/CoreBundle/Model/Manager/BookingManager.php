@@ -954,6 +954,55 @@ class BookingManager extends BaseManager
     }
 
     /**
+     * Return whether a booking can be canceled by asker
+     *
+     * @param Booking $booking
+     *
+     * @return bool
+     */
+    public function canBeCanceledByAsker(Booking $booking)
+    {
+        $statusIsOk = in_array($booking->getStatus(), Booking::$cancelableStatus);
+        $hasStarted = $booking->hasStarted();
+
+        if ($statusIsOk && !$hasStarted && !$booking->isValidated()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
+     * Return whether a booking can be accepted or refused by offerer
+     * A booking can be accepted or refused no later than $acceptationDelay hours before it starts
+     * and no later than $expirationDelay hours after new booking request date
+     *
+     * @param Booking $booking
+     *
+     * @return bool
+     */
+    public function canBeAcceptedOrRefusedByOfferer(Booking $booking)
+    {
+        //$refusableStatus is equal to $payableStatus
+        $statusIsOk = in_array($booking->getStatus(), Booking::$payableStatus);
+
+        $isNotExpired = $booking->getTimeBeforeExpiration(
+            $this->expirationDelay,
+            $this->acceptationDelay,
+            $this->timeZone
+        );
+        $isNotExpired = $isNotExpired && $isNotExpired > 0;
+
+        if ($statusIsOk && $isNotExpired) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    /**
      * Pay booking (when offerer accept)
      *
      *  Set listing availabilities status as booked
@@ -966,11 +1015,7 @@ class BookingManager extends BaseManager
      */
     public function pay(Booking $booking)
     {
-        $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->getExpirationDelay(),
-            $this->getAcceptationDelay(),
-            $this->getTimeZone()
-        );
+        $canBeAcceptedOrRefused = $this->canBeAcceptedOrRefusedByOfferer($booking);
         if ($canBeAcceptedOrRefused) {
             try {
                 $event = new BookingEvent($booking);
@@ -1037,12 +1082,7 @@ class BookingManager extends BaseManager
      */
     public function refuse(Booking $booking)
     {
-        $canBeAcceptedOrRefused = $booking->canBeAcceptedOrRefusedByOfferer(
-            $this->getExpirationDelay(),
-            $this->getAcceptationDelay(),
-            $this->getTimeZone()
-        );
-
+        $canBeAcceptedOrRefused = $this->canBeAcceptedOrRefusedByOfferer($booking);
         if ($canBeAcceptedOrRefused) {
             $booking->setStatus(Booking::STATUS_REFUSED);
             $booking->setRefusedBookingAt(new \DateTime());
@@ -1144,6 +1184,7 @@ class BookingManager extends BaseManager
     }
 
 
+
     /**
      * Asker cancel booking.
      *  There are two cases:
@@ -1164,7 +1205,7 @@ class BookingManager extends BaseManager
      */
     public function cancel(Booking $booking)
     {
-        if ($booking->canBeCanceledByAsker()) {
+        if ($this->canBeCanceledByAsker($booking)) {
             $cancelable = false;
 
             if ($booking->getStatus() == Booking::STATUS_PAYED) {

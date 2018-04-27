@@ -1,7 +1,7 @@
 {% trans_default_domain 'cocorico_booking' %}
 <div class="btns-holder text-center">
     {% if app.user == booking.user %}
-        {% if booking.canBeCanceledByAsker %}
+        {% if canBeCanceledByAsker %}
             <a href="{{ path('cocorico_dashboard_booking_edit_asker', {'id': booking.id, 'type': 'cancel'}) }}"
                class="btn btn-default" data-toggle="modal" data-target="#modal">
                 {{ 'booking.show_asker.cancel'|trans }}
@@ -15,7 +15,7 @@
             </a>
         {% endif %}
     {% elseif app.user == booking.listing.user %}
-        {% if booking.canBeAcceptedOrRefusedByOfferer(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+        {% if canBeAcceptedOrRefusedByOfferer %}
             <a href="{{ path('cocorico_dashboard_booking_edit_offerer', {'id': booking.id, 'type': 'refuse'}) }}"
                class="btn btn-refuse" data-toggle="modal" data-target="#modal">
                 {{ 'booking.show_offerer.refuse'|trans }}

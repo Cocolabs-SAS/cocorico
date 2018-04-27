@@ -21,6 +21,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Split each dashboard profile actions in multiple controllers
 - Factorize profile contact edition
 - Change profile payment edition to bank account edition
+- Refactor booking actions checking 
 
 ## [0.5.0] - 2018-03-20
 

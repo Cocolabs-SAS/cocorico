@@ -432,49 +432,6 @@ class Booking extends BaseBooking
         return ($this->getStart()->format('Ymd') <= $now->format('Ymd'));
     }
 
-    /**
-     * Return whether a booking can be canceled by asker
-     *
-     * @return bool
-     */
-    public function canBeCanceledByAsker()
-    {
-        $statusIsOk = in_array($this->getStatus(), self::$cancelableStatus);
-        $hasStarted = $this->hasStarted();
-
-        if ($statusIsOk && !$hasStarted && !$this->isValidated()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    /**
-     * Return whether a booking can be accepted or refused by offerer
-     * A booking can be accepted or refused no later than $acceptationDelay hours before it starts
-     * and no later than $expirationDelay hours after new booking request date
-     *
-     * @param int    $expirationDelay  in minutes
-     * @param int    $acceptationDelay in minutes
-     * @param string $timeZone         Default user timezone
-     *
-     * @return bool
-     */
-    public function canBeAcceptedOrRefusedByOfferer($expirationDelay, $acceptationDelay, $timeZone)
-    {
-        $statusIsOk = in_array($this->getStatus(), self::$payableStatus);//$refusableStatus is equal to $payableStatus
-
-        $isNotExpired = $this->getTimeBeforeExpiration($expirationDelay, $acceptationDelay, $timeZone);
-        $isNotExpired = $isNotExpired && $isNotExpired > 0;
-
-        if ($statusIsOk && $isNotExpired) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
 
     /**
      * Check if booking begin after the minimum start date according to $minStartTimeDelay or $minStartDelay

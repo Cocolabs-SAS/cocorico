@@ -90,11 +90,9 @@ class BookingController extends Controller
     {
         $threadObj = $booking->getThread();
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')
-            ->create($threadObj);
+        $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
 
         $paramArr = $request->get($form->getName());
-
         $request->request->set($form->getName(), $paramArr);
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
@@ -121,10 +119,14 @@ class BookingController extends Controller
             );
         }
 
+        $canBeAcceptedOrRefusedByOfferer = $this->get('cocorico.booking.manager')
+            ->canBeAcceptedOrRefusedByOfferer($booking);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Booking:show.html.twig',
             array(
                 'booking' => $booking,
+                'canBeAcceptedOrRefusedByOfferer' => $canBeAcceptedOrRefusedByOfferer,
                 'form' => $form->createView(),
                 'other_user' => $booking->getUser(),
                 'other_user_rating' => $booking->getUser()->getAverageAskerRating(),
@@ -195,10 +197,14 @@ class BookingController extends Controller
             );
         }
 
+        $canBeAcceptedOrRefusedByOfferer = $this->get('cocorico.booking.manager')
+            ->canBeAcceptedOrRefusedByOfferer($booking);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Booking:edit.html.twig',
             array(
                 'booking' => $booking,
+                'booking_can_be_edited' => $canBeAcceptedOrRefusedByOfferer,
                 'type' => $type,
                 'form' => $form->createView(),
                 'other_user' => $booking->getUser(),

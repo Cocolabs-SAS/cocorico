@@ -26,7 +26,9 @@
             </div>
 
             {% include '@CocoricoCore/Dashboard/Booking/_booking_show_actions.html.twig' with {
-            'booking': booking
+                'booking': booking,
+                'canBeCanceledByAsker': canBeCanceledByAsker|default(false),
+                'canBeAcceptedOrRefusedByOfferer': canBeAcceptedOrRefusedByOfferer|default(false),
             } only %}
 
             {% include '@CocoricoCore/Dashboard/Booking/_booking_show_contact_infos.html.twig' with {

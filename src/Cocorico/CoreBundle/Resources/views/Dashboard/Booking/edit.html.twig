@@ -7,13 +7,6 @@
 
 {% set amount_total = amount_total | format_price(app.request.locale, 2) %}
 
-{% set booking_can_be_edited = false %}
-{% if app.user == booking.user %}
-    {% set booking_can_be_edited =  booking.canBeCanceledByAsker %}
-{% elseif app.user == booking.listing.user %}
-    {% set booking_can_be_edited = booking.canBeAcceptedOrRefusedByOfferer(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
-{% endif %}
-
 {% set title =  'booking.modal.accept.title'|trans %}
 {% set action_title =   'booking.modal.action.accept'|trans %}
 {% set amount_label =   'booking.modal.price'|trans %}
@@ -120,7 +113,7 @@
             </div>
         </div>
 
-        {% if (booking_can_be_edited) %}
+        {% if booking_can_be_edited %}
             {#{{ form_errors(form) }}#}
             {{ form_start(form, {'attr': {'id': 'booking-edit-form', 'class': 'form-message'}}) }}
 

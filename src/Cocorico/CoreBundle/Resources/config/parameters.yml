@@ -233,7 +233,7 @@ parameters:
             type: 'percent'
 
     #User
-    #Is there a delivery address
+    #Is there a delivery address. Should not be enabled if DeliveryBundle is enabled.
     cocorico.user_address_delivery: true
 
     #Images

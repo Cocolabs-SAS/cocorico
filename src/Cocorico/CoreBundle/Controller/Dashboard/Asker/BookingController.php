@@ -110,10 +110,13 @@ class BookingController extends Controller
             return new RedirectResponse($selfUrl);
         }
 
+        $canBeCanceledByAsker = $this->get('cocorico.booking.manager')->canBeCanceledByAsker($booking);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Booking:show.html.twig',
             array(
                 'booking' => $booking,
+                'canBeCanceledByAsker' => $canBeCanceledByAsker,
                 'form' => $form->createView(),
                 'other_user' => $booking->getListing()->getUser(),
                 'other_user_rating' => $booking->getListing()->getUser()->getAverageOffererRating(),
@@ -177,10 +180,13 @@ class BookingController extends Controller
             $session->getFlashBag()->add('error', $errorMsg);
         }
 
+        $canBeCanceledByAsker = $this->get('cocorico.booking.manager')->canBeCanceledByAsker($booking);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Booking:edit.html.twig',
             array(
                 'booking' => $booking,
+                'booking_can_be_edited' => $canBeCanceledByAsker,
                 'type' => $type,
                 'form' => $form->createView(),
                 'other_user' => $booking->getListing()->getUser(),
