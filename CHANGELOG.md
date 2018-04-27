@@ -22,6 +22,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Factorize profile contact edition
 - Change profile payment edition to bank account edition
 - Refactor booking actions checking 
+- Disable booking cancelation if booking has discount voucher amount
 
 ## [0.5.0] - 2018-03-20
 

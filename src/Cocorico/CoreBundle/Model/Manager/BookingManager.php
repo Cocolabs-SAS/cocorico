@@ -965,6 +965,13 @@ class BookingManager extends BaseManager
         $statusIsOk = in_array($booking->getStatus(), Booking::$cancelableStatus);
         $hasStarted = $booking->hasStarted();
 
+        //todo: check if refund can be made with voucher amount
+        if ($this->voucherIsEnabled()) {
+            if ($booking->getAmountDiscountVoucher()) {
+                return false;
+            }
+        }
+
         if ($statusIsOk && !$hasStarted && !$booking->isValidated()) {
             return true;
         } else {
@@ -1317,6 +1324,15 @@ class BookingManager extends BaseManager
     {
         return isset($this->bundles["CocoricoMangoPayBundle"]);
     }
+
+    /**
+     * @return bool
+     */
+    private function voucherIsEnabled()
+    {
+        return isset($this->bundles["CocoricoVoucherBundle"]);
+    }
+
 
     /**
      *
