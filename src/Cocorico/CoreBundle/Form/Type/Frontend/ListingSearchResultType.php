@@ -119,14 +119,6 @@ class ListingSearchResultType extends AbstractType
                 )
             );
 
-
-        //Dispatch LISTING_SEARCH_RESULT_FORM_BUILD Event. Listener listening this event can add fields and validation
-        //Used for example to add fields to listing search form
-        $this->dispatcher->dispatch(
-            ListingSearchFormEvents::LISTING_SEARCH_RESULT_FORM_BUILD,
-            new ListingSearchFormBuilderEvent($builder, $listingSearchRequest)
-        );
-
         //DATE RANGE
         $dateRange = $listingSearchRequest->getDateRange();
         $dateRangeStart = $dateRangeEnd = null;
@@ -239,6 +231,13 @@ class ListingSearchResultType extends AbstractType
                 )
             );
         }
+
+        //Dispatch LISTING_SEARCH_RESULT_FORM_BUILD Event. Listener listening this event can add fields and validation
+        //Used for example to add fields to listing search form
+        $this->dispatcher->dispatch(
+            ListingSearchFormEvents::LISTING_SEARCH_RESULT_FORM_BUILD,
+            new ListingSearchFormBuilderEvent($builder, $listingSearchRequest)
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)

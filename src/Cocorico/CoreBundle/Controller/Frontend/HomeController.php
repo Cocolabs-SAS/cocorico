@@ -41,7 +41,7 @@ class HomeController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Home:index.html.twig',
             array(
-                'listings' => $listings
+                'listings' => $listings->getIterator()
             )
         );
     }

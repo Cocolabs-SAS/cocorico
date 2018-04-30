@@ -1,0 +1,46 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{#home search form fields without start ane end form#}
+
+{#<fieldset>#}
+<legend class="hidden">form-category</legend>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="area">
+                <div class="col">
+                    <strong class="title">
+                        {{ form_label(form.categories) }}
+                    </strong>
+
+                    <div class="multiselect">
+                        {{ form_widget(form.categories) }}
+                    </div>
+                </div>
+
+                <div class="col">
+                    <strong class="title">
+                        {{ form_label(form.location.address, null, {
+                            'required': false
+                        }) }}
+                    </strong>
+
+                    <div class="field-holder">
+                        {{ form_errors(form.location.address) }}
+                        {{ form_widget(form.location.address, {
+                            'id': 'location',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'listing.search.form.address.placeholder'|trans
+                            }
+                        } ) }}
+                        {{ form_rest(form.location) }}
+                    </div>
+                </div>
+                <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
+            </div>
+        </div>
+    </div>
+</div>
+{#</fieldset>#}
+
