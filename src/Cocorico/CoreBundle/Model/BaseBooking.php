@@ -15,6 +15,7 @@ namespace Cocorico\CoreBundle\Model;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
+use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -824,4 +825,19 @@ abstract class BaseBooking
         $this->message = $message;
     }
 
+    /**
+     * @return User
+     */
+    public function getOfferer()
+    {
+        return $this->getListing()->getUser();
+    }
+
+    /**
+     * @return User
+     */
+    public function getAsker()
+    {
+        return $this->getUser();
+    }
 }
