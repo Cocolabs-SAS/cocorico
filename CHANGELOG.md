@@ -16,6 +16,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Fixed
 - Fix listing favorites search request persisting
 - Fix SMS calls when SMS Bundle is not enabled
+- Fix SQL for booking expiration and expiring alert
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers
@@ -189,7 +190,6 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix user image order in listing result
 - Fix Jquery CDN fallback
 - Fix duplicate listing dashboard forms name (to display them into Web Profiler)
-
 
 ### Changed
 - Change listing availabilities route translation

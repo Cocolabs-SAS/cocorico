@@ -294,8 +294,10 @@ class BookingRepository extends EntityRepository
         $dateAcceptationExpiring->add(new \DateInterval('PT' . ($acceptationDelay + $expirationAlertDelay) . 'M'));
 
         $sql = <<<SQLQUERY
+            (
             b.newBookingAt <= :dateExpiring OR
             CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :dateAcceptationExpiring
+            )
 SQLQUERY;
 
         $queryBuilder = $this->getFindQueryBuilder();
@@ -371,9 +373,11 @@ SQLQUERY;
         $dateAcceptationExpired->add(new \DateInterval('PT' . $acceptationDelay . 'M'));
 
         $sql = <<<SQLQUERY
+            (
             b.newBookingAt <= :dateExpired OR
             CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :dateAcceptationExpired OR
             CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :today
+            )
 SQLQUERY;
 
         $queryBuilder = $this->getFindQueryBuilder();
