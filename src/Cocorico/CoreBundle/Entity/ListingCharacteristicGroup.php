@@ -118,6 +118,7 @@ class ListingCharacteristicGroup
      */
     public function addListingCharacteristic(ListingCharacteristic $listingCharacteristics)
     {
+        $listingCharacteristics->setListingCharacteristicGroup($this);
         $this->listingCharacteristics[] = $listingCharacteristics;
 
         return $this;

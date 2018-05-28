@@ -1,43 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2018-03-09T20:46:43Z" source-language="en" target-language="fr" datatype="plaintext"
-          original="not.available">
-        <header>
-            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-            <note>The source node in most cases contains the sample message as written by the developer. If it looks
-                like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
-                default message.
-            </note>
-        </header>
-        <body>
-            <trans-unit id="8250a2a3044490a05da33c749d5af47750ce06fa" resname="account_created_user.email.message">
-                <source>account_created_user.email.message</source>
-                <target>Bienvenue %firstname% !
+  <file date="2018-05-28T10:58:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="8250a2a3044490a05da33c749d5af47750ce06fa" resname="account_created_user.email.message">
+        <source>account_created_user.email.message</source>
+        <target>Bienvenue %firstname% !
 
                     Votre compte a été créé. Nous sommes heureux de vous compter parmi nous.
                 </target>
-                <jms:reference-file line="10">Mails/User/account_created_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="2147122da71224905cdb61c5102009842ff146ca" resname="account_created_user.email.subject">
-                <source>account_created_user.email.subject</source>
-                <target>Votre compte sur %sitename% a été créé</target>
-                <jms:reference-file line="5">Mails/User/account_created_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="3388dd08498dd75d7c1e87ab9f8b9334eed48d3b" resname="all_the_best.email.footer">
-                <source>all_the_best.email.footer</source>
-                <target>A bientôt,</target>
-                <jms:reference-file line="72">views/Mails/layout.html.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="853e97000eb085f59edd323edd4efa73afab7742" resname="booking.time_range.title">
-                <source>booking.time_range.title</source>
-                <target>
+        <jms:reference-file line="10">Mails/User/account_created_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2147122da71224905cdb61c5102009842ff146ca" resname="account_created_user.email.subject">
+        <source>account_created_user.email.subject</source>
+        <target>Votre compte sur %sitename% a été créé</target>
+        <jms:reference-file line="5">Mails/User/account_created_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3388dd08498dd75d7c1e87ab9f8b9334eed48d3b" resname="all_the_best.email.footer">
+        <source>all_the_best.email.footer</source>
+        <target>A bientôt,</target>
+        <jms:reference-file line="72">views/Mails/layout.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="853e97000eb085f59edd323edd4efa73afab7742" resname="booking.time_range.title">
+        <source>booking.time_range.title</source>
+        <target>
                     - Plage horaire :
                 </target>
-                <jms:reference-file line="754">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="f17ef1a038a42f4a585e3645125e101e00c41a0b" resname="booking_accepted_asker.email.message">
-                <source>booking_accepted_asker.email.message</source>
-                <target><![CDATA[Félicitations !
+        <jms:reference-file line="754">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="f17ef1a038a42f4a585e3645125e101e00c41a0b" resname="booking_accepted_asker.email.message">
+        <source>booking_accepted_asker.email.message</source>
+        <target><![CDATA[Félicitations !
 
 Votre demande de réservation a été acceptée ainsi que votre paiement de %booking_amount_asker%.
 
@@ -51,16 +47,16 @@ Voici le récapitulatif de la réservation :
 Vous pouvez contacter %offerer_firstname% %offerer_lastname%  directement sur cette <a href="%booking_request_url%">page</a>.
 
 Vous pouvez télécharger votre facture <a href="%payments_asker_list%">ici</a>.]]></target>
-                <jms:reference-file line="10">Mails/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="7de3e35c21ef34855944aae98a6146526cecbfb3" resname="booking_accepted_asker.email.subject">
-                <source>booking_accepted_asker.email.subject</source>
-                <target>Réservation confirmée %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="321216272ac9efbf8805415343826f3e5d9b9017" resname="booking_accepted_offerer.email.message">
-                <source>booking_accepted_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7de3e35c21ef34855944aae98a6146526cecbfb3" resname="booking_accepted_asker.email.subject">
+        <source>booking_accepted_asker.email.subject</source>
+        <target>Réservation confirmée %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_accepted_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="321216272ac9efbf8805415343826f3e5d9b9017" resname="booking_accepted_offerer.email.message">
+        <source>booking_accepted_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 La réservation faite par %asker_firstname% %asker_lastname% est confirmée.
 Voici le récapitulatif de la réservation :
@@ -80,16 +76,16 @@ La politique d’annulation que vous avez sélectionnée est la suivante :
 %cancellation_policy_description%
 
 Vous pouvez contacter %asker_firstname% %asker_lastname% sur cette <a href="%booking_request_url%">page</a>.]]></target>
-                <jms:reference-file line="10">Mails/Offerer/booking_accepted_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="ff356fd5a389a98a5610a0ca6949dd72dbc3c96f" resname="booking_accepted_offerer.email.subject">
-                <source>booking_accepted_offerer.email.subject</source>
-                <target>Réservation confirmée %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_accepted_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="1aae7914097a983856829b80d9957937ebc4017b" resname="booking_request_asker.email.message">
-                <source>booking_request_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Offerer/booking_accepted_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ff356fd5a389a98a5610a0ca6949dd72dbc3c96f" resname="booking_accepted_offerer.email.subject">
+        <source>booking_accepted_offerer.email.subject</source>
+        <target>Réservation confirmée %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_accepted_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1aae7914097a983856829b80d9957937ebc4017b" resname="booking_request_asker.email.message">
+        <source>booking_request_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Vous avez effectué une nouvelle demande de réservation à %offerer_name%. Voici un récapitulatif de la demande :
 
@@ -102,33 +98,30 @@ Vous avez effectué une nouvelle demande de réservation à %offerer_name%. Voic
 Vous serez débité uniquement si %offerer_name% accepte votre demande.
 
 Cette demande expirera le %booking_request_expiry_date%.]]></target>
-                <jms:reference-file line="10">Mails/Asker/booking_request_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="025a3534373218daba77aba56e2f45ee2dfa7ff5" resname="booking_request_asker.email.subject">
-                <source>booking_request_asker.email.subject</source>
-                <target>Confirmation de votre demande de réservation %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_request_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d386fae1232f9a5c593f10f89f30b4639421502a"
-                        resname="booking_request_expired_asker.email.message">
-                <source>booking_request_expired_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Asker/booking_request_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="025a3534373218daba77aba56e2f45ee2dfa7ff5" resname="booking_request_asker.email.subject">
+        <source>booking_request_asker.email.subject</source>
+        <target>Confirmation de votre demande de réservation %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_request_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d386fae1232f9a5c593f10f89f30b4639421502a" resname="booking_request_expired_asker.email.message">
+        <source>booking_request_expired_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Votre demande de réservation a expirée car nous n’avons pas reçu de confirmation dans les délais impartis. Aucune somme ne vous a été débitée.
 
 Cliquez <a href="%similar_booking_listings_url%">ici</a> pour effectuer une nouvelle demande.]]></target>
-                <jms:reference-file line="10">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="ef4fe83f032b4bf763a8bd0c1916e2681b66cd41"
-                        resname="booking_request_expired_asker.email.subject">
-                <source>booking_request_expired_asker.email.subject</source>
-                <target>Votre demande de réservation a expirée %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="6dbc477da4c4e88ce9ffc03a976c202988d3e21b"
-                        resname="booking_request_expired_offerer.email.message">
-                <source>booking_request_expired_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ef4fe83f032b4bf763a8bd0c1916e2681b66cd41" resname="booking_request_expired_asker.email.subject">
+        <source>booking_request_expired_asker.email.subject</source>
+        <target>Votre demande de réservation a expirée %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_request_expired_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6dbc477da4c4e88ce9ffc03a976c202988d3e21b" resname="booking_request_expired_offerer.email.message">
+        <source>booking_request_expired_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 La demande de réservation suivante a expiré :
 
@@ -141,18 +134,16 @@ La demande de réservation suivante a expiré :
 Si vous le souhaitez, vous pouvez encore contacter %asker_name% en suivant ce <a href="%booking_request_url%">lien</a>.
 
 Nous vous rappelons qu’il est important de ne pas laisser une demande expirer, au risque de voir votre annonce chuter dans les résultats de recherche.]]></target>
-                <jms:reference-file line="10">Mails/Offerer/booking_request_expired_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="14c35b932cf4688868d807cca561641023fd874d"
-                        resname="booking_request_expired_offerer.email.subject">
-                <source>booking_request_expired_offerer.email.subject</source>
-                <target>Une demande de réservation a expiré %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="e8ee94fbbd25b07e53e4d38ba97865fa4fc8cf8c" resname="booking_request_offerer.email.message">
-                <source>booking_request_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="14c35b932cf4688868d807cca561641023fd874d" resname="booking_request_expired_offerer.email.subject">
+        <source>booking_request_expired_offerer.email.subject</source>
+        <target>Une demande de réservation a expiré %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_request_expired_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e8ee94fbbd25b07e53e4d38ba97865fa4fc8cf8c" resname="booking_request_offerer.email.message">
+        <source>booking_request_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Vous avez reçu une nouvelle demande de la part de %asker_name%. Voici un récapitulatif de la demande :
 
@@ -164,18 +155,18 @@ Vous avez reçu une nouvelle demande de la part de %asker_name%. Voici un récap
 
 <a href="%booking_request_url%">Visualisez la demande pour l’accepter ou la refuser</a>.
 Cette demande expirera le %booking_request_expiry_date%.]]></target>
-                <jms:reference-file line="14">Mails/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="3ca436ff3762fd7081bcca967720282c3bd30221" resname="booking_request_offerer.email.subject">
-                <source>booking_request_offerer.email.subject</source>
-                <target>Vous avez reçu une nouvelle demande (%booking_amount_offerer% %booking_currency%) -
+        <jms:reference-file line="14">Mails/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="3ca436ff3762fd7081bcca967720282c3bd30221" resname="booking_request_offerer.email.subject">
+        <source>booking_request_offerer.email.subject</source>
+        <target>Vous avez reçu une nouvelle demande (%booking_amount_offerer% %booking_currency%) -
                     (%booking_uid%)
                 </target>
-                <jms:reference-file line="5">Mails/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="62512cd777a9cdc8ed9359a8cd1e247e6ff6725c" resname="canceled_by_asker_asker.email.message">
-                <source>canceled_by_asker_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="5">Mails/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="62512cd777a9cdc8ed9359a8cd1e247e6ff6725c" resname="canceled_by_asker_asker.email.message">
+        <source>canceled_by_asker_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Vous avez annulé la réservation suivante :
 
@@ -194,16 +185,16 @@ En accord avec ces conditions d’annulation, le montant de votre remboursement 
 Si une somme vous est due votre virement sera exécuté sous 4 jours ouvrés.
 
 Pour recevoir vos fonds vous devez renseigner vos coordonnées bancaires en cliquant sur ce <a href="%profile_payment_info_url%">lien</a>.]]></target>
-                <jms:reference-file line="12">Mails/Asker/booking_canceled_by_asker_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="640ada386bdba3f78c2270c39fd0de60cbe237e4" resname="canceled_by_asker_asker.email.subject">
-                <source>canceled_by_asker_asker.email.subject</source>
-                <target>Vous avez annulé votre réservation %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_canceled_by_asker_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="fbc54bf1e95830362a0185d6b2256c4cabd4ef46" resname="canceled_by_asker_offerer.email.message">
-                <source>canceled_by_asker_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="12">Mails/Asker/booking_canceled_by_asker_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="640ada386bdba3f78c2270c39fd0de60cbe237e4" resname="canceled_by_asker_asker.email.subject">
+        <source>canceled_by_asker_asker.email.subject</source>
+        <target>Vous avez annulé votre réservation %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_canceled_by_asker_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="fbc54bf1e95830362a0185d6b2256c4cabd4ef46" resname="canceled_by_asker_offerer.email.message">
+        <source>canceled_by_asker_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 La réservation suivante a été annulée par %asker_firstname% %asker_lastname%:
 
@@ -218,18 +209,16 @@ La politique d’annulation que vous avez sélectionnée est la suivante :
 %cancellation_policy_description%
 
 En accord avec les conditions d’annulation que vous avez choisi, le montant qui vous est dû est de %offerer_cancellation_amount%. Si une somme vous est due votre virement sera exécuté sous 4 jours ouvrés.]]></target>
-                <jms:reference-file line="14">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="0234973eefac2840f88abdd89192e300e63ee72b" resname="canceled_by_asker_offerer.email.subject">
-                <source>canceled_by_asker_offerer.email.subject</source>
-                <target>%asker_name% a annulé sa reservation %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="43df1fbbbd0a6b7c4c76d3d135a78a35a4884009" resname="contact.email.message">
-                <source>contact.email.message</source>
-                <target>
+        <jms:reference-file line="14">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0234973eefac2840f88abdd89192e300e63ee72b" resname="canceled_by_asker_offerer.email.subject">
+        <source>canceled_by_asker_offerer.email.subject</source>
+        <target>%asker_name% a annulé sa reservation %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_canceled_by_asker_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="43df1fbbbd0a6b7c4c76d3d135a78a35a4884009" resname="contact.email.message">
+        <source>contact.email.message</source>
+        <target>
 
                     Bonjour,
 
@@ -243,16 +232,16 @@ En accord avec les conditions d’annulation que vous avez choisi, le montant qu
                     - Message : %message%
 
                 </target>
-                <jms:reference-file line="10">views/Mails/contact_message.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="86f8eb7accf88310df878c1777c94a84db096ec9" resname="contact.email.subject">
-                <source>contact.email.subject</source>
-                <target>Demande d'information</target>
-                <jms:reference-file line="5">views/Mails/contact_message.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="4964e6d8fd82229616c7dcb1a79b34dcfaced537" resname="expiration_alert_offerer.email.message">
-                <source>expiration_alert_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">views/Mails/contact_message.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="86f8eb7accf88310df878c1777c94a84db096ec9" resname="contact.email.subject">
+        <source>contact.email.subject</source>
+        <target>Demande d'information</target>
+        <jms:reference-file line="5">views/Mails/contact_message.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4964e6d8fd82229616c7dcb1a79b34dcfaced537" resname="expiration_alert_offerer.email.message">
+        <source>expiration_alert_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 La demande de réservation suivante arrive à expiration :
 
@@ -266,30 +255,28 @@ La demande de réservation suivante arrive à expiration :
 Nous vous rappelons qu’il est important de ne pas laisser une demande expirer, au risque de voir votre annonce chuter dans les résultats de recherche.
 
 Vous pouvez accepter ou refuser cette demande en suivant ce <a href="%booking_request_url%">lien</a>.]]></target>
-                <jms:reference-file line="13">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d89d582749df8f693dd725fd5082f6cf7727b1a4" resname="expiration_alert_offerer.email.subject">
-                <source>expiration_alert_offerer.email.subject</source>
-                <target>Une demande de réservation va expirer %booking_amount_offerer% %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="0c5b4117ec234d02dd5733079796b3041c6b9ca8" resname="forgot_password_user.email.message">
-                <source>forgot_password_user.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="13">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d89d582749df8f693dd725fd5082f6cf7727b1a4" resname="expiration_alert_offerer.email.subject">
+        <source>expiration_alert_offerer.email.subject</source>
+        <target>Une demande de réservation va expirer %booking_amount_offerer% %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_request_expiration_alert_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0c5b4117ec234d02dd5733079796b3041c6b9ca8" resname="forgot_password_user.email.message">
+        <source>forgot_password_user.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Cliquez sur ce <a href="%password_reset_link%">lien</a> pour réinitialiser votre mot de passe.]]></target>
-                <jms:reference-file line="10">Mails/User/forgot_password_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="aef43b2d316d5cfb834db5c2851207ad7d603ece" resname="forgot_password_user.email.subject">
-                <source>forgot_password_user.email.subject</source>
-                <target>Réinitialisation de mot de passe</target>
-                <jms:reference-file line="5">Mails/User/forgot_password_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="0a1705934a8d8daaa7e148e554c3625a9a4717d6" resname="imminent_booking_asker.email.message">
-                <source>imminent_booking_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/User/forgot_password_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="aef43b2d316d5cfb834db5c2851207ad7d603ece" resname="forgot_password_user.email.subject">
+        <source>forgot_password_user.email.subject</source>
+        <target>Réinitialisation de mot de passe</target>
+        <jms:reference-file line="5">Mails/User/forgot_password_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0a1705934a8d8daaa7e148e554c3625a9a4717d6" resname="imminent_booking_asker.email.message">
+        <source>imminent_booking_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Ceci est un rappel que votre réservation va bientôt commencer :
 
@@ -299,16 +286,16 @@ Ceci est un rappel que votre réservation va bientôt commencer :
         - Durée: %booking_duration%
 
 Vous pouvez contacter %offerer_firstname% %offerer_lastname% directement sur cette <a href="%booking_request_url%">page</a>.]]></target>
-                <jms:reference-file line="10">Mails/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="7766d32e7e7679e9f09d7880874dbb238ac7adce" resname="imminent_booking_asker.email.subject">
-                <source>imminent_booking_asker.email.subject</source>
-                <target>Votre réservation demain %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="a405d123c1dd474b93a424b60db725c3db19c6da" resname="imminent_booking_offerer.email.message">
-                <source>imminent_booking_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="7766d32e7e7679e9f09d7880874dbb238ac7adce" resname="imminent_booking_asker.email.subject">
+        <source>imminent_booking_asker.email.subject</source>
+        <target>Votre réservation demain %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a405d123c1dd474b93a424b60db725c3db19c6da" resname="imminent_booking_offerer.email.message">
+        <source>imminent_booking_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Ceci est un rappel pour votre réservation de demain :
 
@@ -318,16 +305,16 @@ Ceci est un rappel pour votre réservation de demain :
         - Durée: %booking_duration%
 
 Vous pouvez contacter %asker_firstname% %asker_lastname% directement sur cette <a href="%booking_request_url%">page</a>.]]></target>
-                <jms:reference-file line="12">Mails/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="4dc4a22fca9ad9313e76327aff683f33336e92b5" resname="imminent_booking_offerer.email.subject">
-                <source>imminent_booking_offerer.email.subject</source>
-                <target>Votre réservation de demain %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="31303770c651ac2a4dfa86afc85cece07fd7d770" resname="listing_activated_offerer.email.message">
-                <source>listing_activated_offerer.email.message</source>
-                <target><![CDATA[Félicitations %firstname%!
+        <jms:reference-file line="12">Mails/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="4dc4a22fca9ad9313e76327aff683f33336e92b5" resname="imminent_booking_offerer.email.subject">
+        <source>imminent_booking_offerer.email.subject</source>
+        <target>Votre réservation de demain %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="31303770c651ac2a4dfa86afc85cece07fd7d770" resname="listing_activated_offerer.email.message">
+        <source>listing_activated_offerer.email.message</source>
+        <target><![CDATA[Félicitations %firstname%!
 
 Votre annonce est maintenant publiquement visible. Afin de la faire remonter dans les résultats de recherche suivez ces conseils :
 
@@ -336,75 +323,75 @@ Votre annonce est maintenant publiquement visible. Afin de la faire remonter dan
 	- Répondez rapidement aux demandes que vous recevez, le temps de réponse étant pris en compte dans le classement des résultats (en plus c’est apprécié des utilisateurs).
 
 <a href=%listing_public_url%>Vous pouvez visualiser votre annonce publique ici</a>]]></target>
-                <jms:reference-file line="10">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="38171fd8643b8134e79d43ff77c5369bec1dda89" resname="listing_activated_offerer.email.subject">
-                <source>listing_activated_offerer.email.subject</source>
-                <target>Votre annonce est maintenant visible</target>
-                <jms:reference-file line="5">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="975a850213519192abdaab8f04fecb2e0688ef45" resname="new_message_user.email.message">
-                <source>new_message_user.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="38171fd8643b8134e79d43ff77c5369bec1dda89" resname="listing_activated_offerer.email.subject">
+        <source>listing_activated_offerer.email.subject</source>
+        <target>Votre annonce est maintenant visible</target>
+        <jms:reference-file line="5">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="975a850213519192abdaab8f04fecb2e0688ef45" resname="new_message_user.email.message">
+        <source>new_message_user.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Vous avez reçu un message, cliquez <a href="%thread_url%">ici</a> pour le lire.]]></target>
-                <jms:reference-file line="10">Mails/User/new_message_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="1052d42e2ac25d07448f6a5be017274bd8cbfe55" resname="new_message_user.email.subject">
-                <source>new_message_user.email.subject</source>
-                <target>Vous avez reçu un nouveau message</target>
-                <jms:reference-file line="5">Mails/User/new_message_user.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d483722b73e4238ddffa4901f8c0ea946dc40588" resname="payment_error_asker.email.message">
-                <source>payment_error_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/User/new_message_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1052d42e2ac25d07448f6a5be017274bd8cbfe55" resname="new_message_user.email.subject">
+        <source>new_message_user.email.subject</source>
+        <target>Vous avez reçu un nouveau message</target>
+        <jms:reference-file line="5">Mails/User/new_message_user.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d483722b73e4238ddffa4901f8c0ea946dc40588" resname="payment_error_asker.email.message">
+        <source>payment_error_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
             Malheureusement votre paiement a été refusé. En conséquence votre réservation a été annulée. Vous pouvez
             effectuer une nouvelle demande de réservation en cliquant ici : %listing_public_url%:
 
 Vous pouvez contacter %offerer_name% sur cette <a href="%booking_request_url%">page</a>.]]></target>
-                <jms:reference-file line="11">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
-                <jms:reference-file line="26">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="71b0160e4b1097ac7969a74ffd52a68c2a4326b4" resname="payment_error_asker.email.subject">
-                <source>payment_error_asker.email.subject</source>
-                <target>Paiement refusé %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="363ff680c290656963c0e22a7aa48d89cb5ff8de" resname="payment_error_offerer.email.message">
-                <source>payment_error_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="11">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
+        <jms:reference-file line="26">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="71b0160e4b1097ac7969a74ffd52a68c2a4326b4" resname="payment_error_asker.email.subject">
+        <source>payment_error_asker.email.subject</source>
+        <target>Paiement refusé %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/_payment_error_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="363ff680c290656963c0e22a7aa48d89cb5ff8de" resname="payment_error_offerer.email.message">
+        <source>payment_error_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Le paiement par %asker_name% pour cette réservation a été refusé. Il en a été informé et nous lui avons demandé de renouveler sa demande. Dans ce cas vous recevrez une nouvelle demande de réservation.
 
 Vous pouvez contacter %asker_name% sur cette <a href="%booking_request_url%">page</a>.]]></target>
-                <jms:reference-file line="11">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
-                <jms:reference-file line="25">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="a423a8b7fb26c70317353c0cfd57d024e3a2a13a" resname="payment_error_offerer.email.subject">
-                <source>payment_error_offerer.email.subject</source>
-                <target>Paiement refusé %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="0dfee1582d2a20cf4d66f5b051f65f4750c4d511" resname="refused_booking_asker.email.message">
-                <source>refused_booking_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="11">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
+        <jms:reference-file line="25">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="a423a8b7fb26c70317353c0cfd57d024e3a2a13a" resname="payment_error_offerer.email.subject">
+        <source>payment_error_offerer.email.subject</source>
+        <target>Paiement refusé %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/_payment_error_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="0dfee1582d2a20cf4d66f5b051f65f4750c4d511" resname="refused_booking_asker.email.message">
+        <source>refused_booking_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Votre demande de réservation a été refusée. Bien que rares, les refus sont généralement causés par un calendrier qui a été mal renseigné.
 
 Aucune somme ne vous a été débitée.
 
 Cliquez <a href="%similar_booking_listings_url%">ici</a> pour effectuer une nouvelle demande.]]></target>
-                <jms:reference-file line="10">Mails/Asker/booking_refused_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="701d95af7449341478fdea945b1792c7b648308c" resname="refused_booking_asker.email.subject">
-                <source>refused_booking_asker.email.subject</source>
-                <target>Votre demande de réservation a été refusée %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Asker/booking_refused_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="9460c52a175fef28435239b5dd2734de3fea1c4b" resname="refused_booking_offerer.email.message">
-                <source>refused_booking_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Asker/booking_refused_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="701d95af7449341478fdea945b1792c7b648308c" resname="refused_booking_asker.email.subject">
+        <source>refused_booking_asker.email.subject</source>
+        <target>Votre demande de réservation a été refusée %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Asker/booking_refused_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9460c52a175fef28435239b5dd2734de3fea1c4b" resname="refused_booking_offerer.email.message">
+        <source>refused_booking_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
             Vous avez rejeté une réservation de %booking_amount_offerer%.
 
@@ -415,84 +402,76 @@ Si vous avez refusé cette réservation pour cause d’indisponibilité veuillez
 En mettant votre calendrier à jour régulièrement vous améliorez la position de votre annonce sur les résultats de recherche.
 
 Surtout n’hésitez pas à nous faire part de vos remarques afin que nous améliorions les demandes de réservation qui vous sont envoyées.]]></target>
-                <jms:reference-file line="10">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="c0f1e56fae201d26618424399c9f8c62b532b48c" resname="refused_booking_offerer.email.subject">
-                <source>refused_booking_offerer.email.subject</source>
-                <target>Vous avez rejeté une demande de réservation %booking_uid%</target>
-                <jms:reference-file line="5">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d7c0ead101acaa46a152dfda651b653a7e54024a"
-                        resname="reminder_to_rate_asker_offerer.email.message">
-                <source>reminder_to_rate_asker_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c0f1e56fae201d26618424399c9f8c62b532b48c" resname="refused_booking_offerer.email.subject">
+        <source>refused_booking_offerer.email.subject</source>
+        <target>Vous avez rejeté une demande de réservation %booking_uid%</target>
+        <jms:reference-file line="5">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d7c0ead101acaa46a152dfda651b653a7e54024a" resname="reminder_to_rate_asker_offerer.email.message">
+        <source>reminder_to_rate_asker_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Veuillez laisser votre avis sur %asker_name% en cliquant sur ce <a href="%offerer_to_asker_review_url%">lien</a>.
 
 Les avis vous permettent d’améliorer grandement votre position sur notre moteur de recherche car cela indique que vous êtes un membre actif de notre communauté.]]></target>
-                <jms:reference-file line="13">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d76633bbb4801846d6c282cba90c40b2c888d304"
-                        resname="reminder_to_rate_asker_offerer.email.subject">
-                <source>reminder_to_rate_asker_offerer.email.subject</source>
-                <target>Donnez votre avis sur %asker_name% (%booking_uid%)</target>
-                <jms:reference-file line="5">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="9ec9411a8cb67d78a67b2453d3c1a3a203670b24"
-                        resname="reminder_to_rate_offerer_asker.email.message">
-                <source>reminder_to_rate_offerer_asker.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="13">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d76633bbb4801846d6c282cba90c40b2c888d304" resname="reminder_to_rate_asker_offerer.email.subject">
+        <source>reminder_to_rate_asker_offerer.email.subject</source>
+        <target>Donnez votre avis sur %asker_name% (%booking_uid%)</target>
+        <jms:reference-file line="5">Mails/Offerer/reminder_to_rate_asker_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="9ec9411a8cb67d78a67b2453d3c1a3a203670b24" resname="reminder_to_rate_offerer_asker.email.message">
+        <source>reminder_to_rate_offerer_asker.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 Nous espérons que les avis vous ont étés utiles pour faire votre choix lors de votre réservation. Nous vous encourageons aussi à laisser votre avis pour aider les autres dans leur choix.
 
 Vous pouvez laisser votre avis sur %offerer_name% en cliquant sur ce <a href="%asker_to_offerer_review_url%">lien</a>.]]></target>
-                <jms:reference-file line="13">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="d15001f727b8f27e9ac5d170a987164d9e7cb942"
-                        resname="reminder_to_rate_offerer_asker.email.subject">
-                <source>reminder_to_rate_offerer_asker.email.subject</source>
-                <target>Donnez votre avis sur %offerer_name% (%booking_uid%)</target>
-                <jms:reference-file line="5">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="daee16e3d855da0bc3c0fe343b6a58eb7c9fd948" resname="the_sitename_team.email.footer">
-                <source>the_sitename_team.email.footer</source>
-                <target>L’équipe %sitename%</target>
-                <jms:reference-file line="73">views/Mails/layout.html.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="e03d0327b190096bff51daf6a295ce974e25425a"
-                        resname="update_your_calendar_offerer.email.message">
-                <source>update_your_calendar_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="13">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="d15001f727b8f27e9ac5d170a987164d9e7cb942" resname="reminder_to_rate_offerer_asker.email.subject">
+        <source>reminder_to_rate_offerer_asker.email.subject</source>
+        <target>Donnez votre avis sur %offerer_name% (%booking_uid%)</target>
+        <jms:reference-file line="5">Mails/Asker/reminder_to_rate_offerer_asker.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="daee16e3d855da0bc3c0fe343b6a58eb7c9fd948" resname="the_sitename_team.email.footer">
+        <source>the_sitename_team.email.footer</source>
+        <target>L’équipe %sitename%</target>
+        <jms:reference-file line="73">views/Mails/layout.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e03d0327b190096bff51daf6a295ce974e25425a" resname="update_your_calendar_offerer.email.message">
+        <source>update_your_calendar_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
 En mettant à jour votre agenda vous améliorez automatiquement le positionnement de vos annonces sur notre site. En particulier vous devriez spécifier vos dates de disponibilité plutôt que de les laisser vides.
 
 Vous pouvez mettre à jour votre agenda en suivant ce <a href="%listing_calendar_edit_url%">lien</a>.]]></target>
-                <jms:reference-file line="10">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="ced576971859d17be3425b517e65d6ddcaaf03eb"
-                        resname="update_your_calendar_offerer.email.subject">
-                <source>update_your_calendar_offerer.email.subject</source>
-                <target>Améliorez votre position et obtenez plus de demandes</target>
-                <jms:reference-file line="5">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
-            </trans-unit>
-            <trans-unit id="c021c8309c97569354f5dc6306a92314ecee6ea0" resname="wiretransfer_offerer.email.message">
-                <source>wiretransfer_offerer.email.message</source>
-                <target><![CDATA[Bonjour %firstname%,
+        <jms:reference-file line="10">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="ced576971859d17be3425b517e65d6ddcaaf03eb" resname="update_your_calendar_offerer.email.subject">
+        <source>update_your_calendar_offerer.email.subject</source>
+        <target>Améliorez votre position et obtenez plus de demandes</target>
+        <jms:reference-file line="5">Mails/Offerer/update_your_calendar_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c021c8309c97569354f5dc6306a92314ecee6ea0" resname="wiretransfer_offerer.email.message">
+        <source>wiretransfer_offerer.email.message</source>
+        <target><![CDATA[Bonjour %firstname%,
 
               Un virement de %booking_amount_offerer% pour la réservation <a href="%booking_request_url%">%booking_uid%</a> a été exécuté en votre faveur.
               Il se peut que celui-ci ne soit visible sur votre compte qu’au terme de quelques jours.
 
               Vous pouvez suivre vos paiements: <a href="%offerer_payments_list%">ici</a>]]></target>
-                <jms:reference-file line="13">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-            <trans-unit id="2cd8bf2c0ddd4b4d364fc0fb51ee42ff10ce0733" resname="wiretransfer_offerer.email.subject">
-                <source>wiretransfer_offerer.email.subject</source>
-                <target>Un virement de %booking_amount_offerer% a été exécuté en votre faveur (%booking_uid%)
+        <jms:reference-file line="13">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2cd8bf2c0ddd4b4d364fc0fb51ee42ff10ce0733" resname="wiretransfer_offerer.email.subject">
+        <source>wiretransfer_offerer.email.subject</source>
+        <target>Un virement de %booking_amount_offerer% a été exécuté en votre faveur (%booking_uid%)
                 </target>
-                <jms:reference-file line="5">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig
-                </jms:reference-file>
-            </trans-unit>
-        </body>
-    </file>
+        <jms:reference-file line="5">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig</jms:reference-file>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
