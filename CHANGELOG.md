@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 - Add Booking user delivery address
 - Add delivery address in new booking form
+- Add listing characteristics values and types management in admin
 
 ### Fixed
 - Fix listing favorites search request persisting

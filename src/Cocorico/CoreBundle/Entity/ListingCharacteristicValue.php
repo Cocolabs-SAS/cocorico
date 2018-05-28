@@ -127,10 +127,10 @@ class ListingCharacteristicValue
     /**
      * Set characteristic type
      *
-     * @param $listingCharacteristicType
+     * @param ListingCharacteristicType $listingCharacteristicType
      * @return ListingCharacteristicType
      */
-    public function setListingCharacteristicType(ListingCharacteristicType $listingCharacteristicType)
+    public function setListingCharacteristicType(ListingCharacteristicType $listingCharacteristicType = null)
     {
         $this->listingCharacteristicType = $listingCharacteristicType;
 

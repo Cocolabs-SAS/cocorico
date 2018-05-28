@@ -54,6 +54,30 @@ services:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setLocales, ["%cocorico.locales%"]]
 
+    sonata.admin.listing_characteristic_type:
+        class: Cocorico\CoreBundle\Admin\ListingCharacteristicTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Type", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCharacteristicType
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, ["%cocorico.locales%"]]
+
+    sonata.admin.listing_characteristic_value:
+        class: Cocorico\CoreBundle\Admin\ListingCharacteristicValueAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false, label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\ListingCharacteristicValue
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, ["%cocorico.locales%"]]
+
     sonata.admin.listing_category:
         class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
         tags:

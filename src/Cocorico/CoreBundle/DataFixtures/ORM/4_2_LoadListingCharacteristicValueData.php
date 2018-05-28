@@ -71,7 +71,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('3');
         $listingCharacteristicValue->translate('fr')->setName('3');
-        $listingCharacteristicValue->setPosition(2);
+        $listingCharacteristicValue->setPosition(3);
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
         $manager->persist($listingCharacteristicValue);
         $listingCharacteristicValue->mergeNewTranslations();
