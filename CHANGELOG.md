@@ -25,6 +25,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Change profile payment edition to bank account edition
 - Refactor booking actions checking 
 - Disable booking cancelation if booking has discount voucher amount
+- Accept parameters value equal to 0 from ConfigBundle
 
 ## [0.5.0] - 2018-03-20
 

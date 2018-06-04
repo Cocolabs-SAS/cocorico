@@ -153,7 +153,7 @@ class ContainerBuilder extends BaseContainerBuilder
         foreach ($parameters as $i => $parameter) {
             $name = $parameter['name'];
             $value = $parameter['value'];
-            if (in_array($name, $allowedParameters) && $this->hasParameter($name) && $value) {
+            if (in_array($name, $allowedParameters) && $this->hasParameter($name) && strlen($value)) {
                 $this->setParameter($name, $value);
             }
         }
