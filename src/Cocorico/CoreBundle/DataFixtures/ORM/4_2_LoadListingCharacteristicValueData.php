@@ -28,6 +28,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('Yes');
         $listingCharacteristicValue->translate('fr')->setName('Oui');
+        $listingCharacteristicValue->translate('de')->setName('Oui');
         $listingCharacteristicValue->setPosition(1);
         /** @var ListingCharacteristicType $listingCharacteristicType */
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_yes_no'));
@@ -40,6 +41,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('No');
         $listingCharacteristicValue->translate('fr')->setName('Non');
+        $listingCharacteristicValue->translate('de')->setName('Non');
         $listingCharacteristicValue->setPosition(2);
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
         $manager->persist($listingCharacteristicValue);
@@ -50,6 +52,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('1');
         $listingCharacteristicValue->translate('fr')->setName('1');
+        $listingCharacteristicValue->translate('de')->setName('1');
         $listingCharacteristicValue->setPosition(1);
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_quantity'));
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
@@ -61,6 +64,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('2');
         $listingCharacteristicValue->translate('fr')->setName('2');
+        $listingCharacteristicValue->translate('de')->setName('2');
         $listingCharacteristicValue->setPosition(2);
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
         $manager->persist($listingCharacteristicValue);
@@ -71,6 +75,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('3');
         $listingCharacteristicValue->translate('fr')->setName('3');
+        $listingCharacteristicValue->translate('de')->setName('3');
         $listingCharacteristicValue->setPosition(3);
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
         $manager->persist($listingCharacteristicValue);
@@ -81,6 +86,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue = new ListingCharacteristicValue();
         $listingCharacteristicValue->translate('en')->setName('Custom value 1');
         $listingCharacteristicValue->translate('fr')->setName('Valeur personnalisée 1');
+        $listingCharacteristicValue->translate('de')->setName('Valeur personnalisée 1');
         $listingCharacteristicValue->setPosition(1);
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_custom_1'));
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
@@ -93,6 +99,7 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
         $listingCharacteristicValue->setName("Custom value 2");
         $listingCharacteristicValue->translate('en')->setName('Custom value 2');
         $listingCharacteristicValue->translate('fr')->setName('Valeur personnalisée 2');
+        $listingCharacteristicValue->translate('de')->setName('Valeur personnalisée 2');
         $listingCharacteristicValue->setPosition(2);
         $listingCharacteristicValue->setListingCharacteristicType($listingCharacteristicType);
         $manager->persist($listingCharacteristicValue);
