@@ -63,6 +63,12 @@ class Listing extends BaseListing
     private $user;
 
     /**
+     * @Assert\Isbn(message = "assert.not_isbn")
+     * @ORM\Column(name="isbn", type="string", nullable=true)
+     */
+    protected $isbn;
+
+    /**
      * @ORM\OneToOne(targetEntity="ListingLocation", inversedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="CASCADE")
      *
@@ -578,6 +584,22 @@ class Listing extends BaseListing
     public function getSlug()
     {
         return (string)$this->translate()->getSlug();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsbn()
+    {
+        return $this->isbn;
+    }
+
+    /**
+     * @param mixed $isbn
+     */
+    public function setIsbn($isbn)
+    {
+        $this->isbn = $isbn;
     }
 
     public function __toString()

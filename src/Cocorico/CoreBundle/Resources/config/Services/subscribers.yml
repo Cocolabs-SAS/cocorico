@@ -23,3 +23,9 @@ services:
             - "@logger"
         tags:
             - { name: kernel.event_subscriber}
+
+    #Booking add isbn field subscriber
+    cocorico.booking_add_isbn_field.subscriber:
+        class: Cocorico\CoreBundle\Event\BookingAddIsbnFieldSubscriber
+        tags:
+            - { name: kernel.event_subscriber}
