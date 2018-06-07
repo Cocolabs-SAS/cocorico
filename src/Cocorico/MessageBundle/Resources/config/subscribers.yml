@@ -4,5 +4,6 @@ services:
         class: Cocorico\MessageBundle\Event\BookingSubscriber
         arguments:
             - "@cocorico_message.thread_manager"
+            - "@cocorico.mailer.twig_swift"
         tags:
             - { name: kernel.event_subscriber}

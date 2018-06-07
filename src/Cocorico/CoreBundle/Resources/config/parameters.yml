@@ -21,7 +21,8 @@ parameters:
     cocorico.locales:
             - en
             - fr
-    cocorico.locales_string: en|fr
+            - de
+    cocorico.locales_string: en|fr|de
     #Currencies
     cocorico.currency: EUR
     cocorico.currencies_for_lexik:

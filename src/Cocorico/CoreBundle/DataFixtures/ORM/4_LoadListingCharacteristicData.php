@@ -30,8 +30,10 @@ class LoadListingCharacteristicData extends AbstractFixture implements OrderedFi
         $listingCharacteristic->setPosition(1);
         $listingCharacteristic->translate('en')->setName('Characteristic_1');
         $listingCharacteristic->translate('fr')->setName('Caractéristique_1');
+        $listingCharacteristic->translate('de')->setName('Caractéristique_1');
         $listingCharacteristic->translate('en')->setDescription('Characteristic_1 description');
         $listingCharacteristic->translate('fr')->setDescription('Description de la Caractéristique_1');
+        $listingCharacteristic->translate('de')->setDescription('Description de la Caractéristique_1');
         /** @var ListingCharacteristicType $listingCharacteristicType */
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_yes_no'));
         $listingCharacteristic->setListingCharacteristicType($listingCharacteristicType);
@@ -49,8 +51,10 @@ class LoadListingCharacteristicData extends AbstractFixture implements OrderedFi
         $listingCharacteristic->setPosition(2);
         $listingCharacteristic->translate('en')->setName('Characteristic_2');
         $listingCharacteristic->translate('fr')->setName('Caractéristique_2');
+        $listingCharacteristic->translate('de')->setName('Caractéristique_2');
         $listingCharacteristic->translate('en')->setDescription('Characteristic_2 description');
         $listingCharacteristic->translate('fr')->setDescription('Description de la Caractéristique_2');
+        $listingCharacteristic->translate('de')->setDescription('Description de la Caractéristique_2');
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_quantity'));
         $listingCharacteristic->setListingCharacteristicGroup($listingCharacteristicGroup);
         $listingCharacteristic->setListingCharacteristicType($listingCharacteristicType);
@@ -63,8 +67,10 @@ class LoadListingCharacteristicData extends AbstractFixture implements OrderedFi
         $listingCharacteristic->setPosition(3);
         $listingCharacteristic->translate('en')->setName('Characteristic_3');
         $listingCharacteristic->translate('fr')->setName('Caractéristique_3');
+        $listingCharacteristic->translate('de')->setName('Caractéristique_3');
         $listingCharacteristic->translate('en')->setDescription('Characteristic_3 description');
         $listingCharacteristic->translate('fr')->setDescription('Description de la Caractéristique_3');
+        $listingCharacteristic->translate('de')->setDescription('Description de la Caractéristique_3');
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_custom_1'));
         $listingCharacteristic->setListingCharacteristicType($listingCharacteristicType);
         $listingCharacteristicGroup = $manager->merge($this->getReference('group_2'));
@@ -79,8 +85,10 @@ class LoadListingCharacteristicData extends AbstractFixture implements OrderedFi
         $listingCharacteristic->setPosition(4);
         $listingCharacteristic->translate('en')->setName('Characteristic_4');
         $listingCharacteristic->translate('fr')->setName('Caractéristique_4');
+        $listingCharacteristic->translate('de')->setName('Caractéristique_4');
         $listingCharacteristic->translate('en')->setDescription('Characteristic_4 description');
         $listingCharacteristic->translate('fr')->setDescription('Description de la Caractéristique_4');
+        $listingCharacteristic->translate('de')->setDescription('Description de la Caractéristique_4');
         $listingCharacteristicType = $manager->merge($this->getReference('characteristic_type_custom_1'));
         $listingCharacteristic->setListingCharacteristicType($listingCharacteristicType);
         $listingCharacteristicGroup = $manager->merge($this->getReference('group_2'));
