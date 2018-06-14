@@ -739,6 +739,11 @@
         <jms:reference-file line="149">Frontend/ListingResult/result.html.twig</jms:reference-file>
         <jms:reference-file line="52">Frontend/Home/_high_rank.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="f95d3cebd6aa233ad275dbe4a8b453b5ef7ef1a8" resname="listing.search.result.no_results">
+        <source>listing.search.result.no_results</source>
+        <target state="new">Aucun résultat trouvé. Veuillez modifier vos critères de recherche.</target>
+        <jms:reference-file line="192">Frontend/ListingResult/result.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="e0c7225719f33b2cab0a2b344bd1f92c1963ad00" resname="listing.search.result.results">
         <source>listing.search.result.results</source>
         <target>%nb_results% résultat(s)</target>

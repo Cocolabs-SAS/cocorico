@@ -26,6 +26,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Refactor booking actions checking 
 - Disable booking cancelation if booking has discount voucher amount
 - Accept parameters value equal to 0 from ConfigBundle
+- Add a no results message
 
 ## [0.5.0] - 2018-03-20
 

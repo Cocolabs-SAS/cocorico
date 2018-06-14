@@ -188,6 +188,8 @@
                                     </div>
                                 </a>
                             </article>
+                        {%- else -%}
+                            {{ 'listing.search.result.no_results'|trans }}
                         {%- endfor -%}
                     </div>
 
