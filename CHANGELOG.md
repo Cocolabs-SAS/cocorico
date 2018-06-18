@@ -27,6 +27,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Disable booking cancelation if booking has discount voucher amount
 - Accept parameters value equal to 0 from ConfigBundle
 - Add a no results message
+- Set query hydration to HYDRATE_ARRAY on getHighestRanked 
 
 ## [0.5.0] - 2018-03-20
 
