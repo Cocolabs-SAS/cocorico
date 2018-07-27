@@ -7,14 +7,14 @@
     .. code:: ApacheConf
 
         <VirtualHost 127.0.0.1:80>
-            ServerName cocorico.dev
-            ServerAlias cocorico.dev
+            ServerName cocorico.local
+            ServerAlias cocorico.local
 
             #For multiple images uploads
             LimitRequestBody 240000000
 
-            DocumentRoot /var/www/cocorico.dev/Symfony/web
-            <Directory /var/www/cocorico.dev/Symfony/web>
+            DocumentRoot /var/www/cocorico.local/Symfony/web
+            <Directory /var/www/cocorico.local/Symfony/web>
                 #For performance and security reasons we should not use htaccess in prod
                 AllowOverride Indexes FileInfo AuthConfig
                 Order Allow,Deny
@@ -28,21 +28,21 @@
     .. code:: ApacheConf
 
         <VirtualHost 127.0.0.1:80>
-            ServerName cocorico.dev
-            ServerAlias cocorico.dev
-            Redirect permanent / https://cocorico.dev/
+            ServerName cocorico.local
+            ServerAlias cocorico.local
+            Redirect permanent / https://cocorico.local/
         </VirtualHost>
 
         <VirtualHost 127.0.0.1:443>
-            ServerName cocorico.dev
-            ServerAlias cocorico.dev
+            ServerName cocorico.local
+            ServerAlias cocorico.local
 
             SSLEngine on
             SSLCertificateFile "/etc/ssl/certs/cocorico.pem"
             SSLCertificateKeyFile "/etc/ssl/certs/private.key"
 
-            DocumentRoot /var/www/cocorico.dev/Symfony/web
-            <Directory /var/www/cocorico.dev/Symfony/web>
+            DocumentRoot /var/www/cocorico.local/Symfony/web
+            <Directory /var/www/cocorico.local/Symfony/web>
                 #For performance reason we should not use htaccess
                 AllowOverride Indexes FileInfo AuthConfig
                 Order Allow,Deny

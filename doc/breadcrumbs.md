@@ -1,6 +1,6 @@
 # Breadcrumbs
 
-You need to add your breadcrumbs in `src/Cocorico/CoreBundle/Resources/content/breadcrumbs.yml`
+You need to add your breadcrumbs in `src/Cocorico/BreadcrumbBundle/Resources/content/breadcrumbs.yml`
 
 Format:
 

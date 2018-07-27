@@ -2,7 +2,7 @@
 
 
 Mail content are defined by two keys xxx_subject and xxx_message with xxx specific for each mail.
-Each key is translated through JMS `https://cocorico.dev/[admin]/__translations/`
+Each key is translated through JMS `http://cocorico.local/[admin]/__translations/`
 Translation domain is `cocorico_mail`.
 
 

@@ -3,7 +3,8 @@
 
 ## Table of Contents
 
-- [PHPdoc](http://docs.cocorico.io/phpdoc/index.html)
+- [Server installation](installation-server.md)
+- [Application installation](installation-application.md)
 - [Crons](crons.md)
 - [Mails](mails.md)
 - [Translations](translations.md)
@@ -19,4 +20,3 @@
 - [Deployment](deployment.md)
 - [Troubleshooting](troubleshooting.md)
 - [WkHtml2PDF](wkhtml2pdf.md)
-

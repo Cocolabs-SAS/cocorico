@@ -33,7 +33,7 @@ To extract translations keys from whole application:
 To extract translations keys from external bundle:
     In english languages :
         `php app/console translation:extract en --bundle=CocoricoListingAlertBundle`
-        
+               
 To translate keys you have choice to:
 
 * Edit `app/Resources/translations/` files
