@@ -13,10 +13,6 @@ Cocorico is an open source platform sponsored by [Cocolabs](http://www.cocolabs.
 
 A demo is available at [http://demo.cocorico.io](http://demo.cocorico.io).
 
-## Installation
-
-Please [read installation instructions](doc/installation.md)
-
 ## Documentation
 
 Documentation is available [here](doc/index.md)
