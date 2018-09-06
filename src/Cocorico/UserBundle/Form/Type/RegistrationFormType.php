@@ -11,13 +11,14 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class RegistrationFormType
- *
+ * Class RegistrationFormType.
  */
 class RegistrationFormType extends AbstractType
 {
@@ -39,6 +40,28 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add(
+                'personType',
+                ChoiceType::class,
+                array(
+                    'label' => 'form.person_type',
+                    'choices' => [
+                        User::PERSON_TYPE_NATURAL => 'form.person_type.natural',
+                        User::PERSON_TYPE_LEGAL => 'form.person_type.legal',
+                    ],
+                    'expanded' => true,
+                    'empty_data' => User::PERSON_TYPE_NATURAL,
+                    'required' => true,
+                )
+            )
+            ->add(
+                'companyName',
+                null,
+                array(
+                    'label' => 'form.company_name',
+                    'required' => false,
+                )
+            )
+            ->add(
                 'lastName',
                 null,
                 array('label' => 'form.last_name')
@@ -54,7 +77,7 @@ class RegistrationFormType extends AbstractType
                 array(
                     'label' => 'form.user.phone_prefix',
                     'required' => false,
-                    'empty_data' => '+33'
+                    'empty_data' => '+33',
                 )
             )
             ->add(
@@ -62,7 +85,7 @@ class RegistrationFormType extends AbstractType
                 'text',
                 array(
                     'label' => 'form.user.phone',
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -75,9 +98,9 @@ class RegistrationFormType extends AbstractType
                 'birthday',
                 array(
                     'label' => 'form.user.birthday',
-                    'widget' => "choice",
+                    'widget' => 'choice',
                     'years' => range(date('Y') - 18, date('Y') - 100),
-                    'required' => true
+                    'required' => true,
                 )
             )
             ->add(
@@ -86,8 +109,8 @@ class RegistrationFormType extends AbstractType
                 array(
                     'label' => 'form.user.countryOfResidence',
                     'required' => true,
-                    'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
-                    'data' => 'FR'
+                    'preferred_choices' => array('GB', 'FR', 'ES', 'DE', 'IT', 'CH', 'US', 'RU'),
+                    'data' => 'FR',
                 )
             )
             ->add(
@@ -98,14 +121,14 @@ class RegistrationFormType extends AbstractType
                     'options' => array('translation_domain' => 'cocorico_user'),
                     'first_options' => array(
                         'label' => 'form.password',
-                        'required' => true
+                        'required' => true,
                     ),
                     'second_options' => array(
                         'label' => 'form.password_confirmation',
-                        'required' => true
+                        'required' => true,
                     ),
                     'invalid_message' => 'fos_user.password.mismatch',
-                    'required' => true
+                    'required' => true,
                 )
             );
     }

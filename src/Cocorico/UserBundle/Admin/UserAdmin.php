@@ -11,6 +11,7 @@
 
 namespace Cocorico\UserBundle\Admin;
 
+use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -25,7 +26,7 @@ class UserAdmin extends SonataUserAdmin
 
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
-        '_sort_by' => 'createdAt'
+        '_sort_by' => 'createdAt',
     );
 
     public function setBundlesEnabled($bundles)
@@ -34,7 +35,6 @@ class UserAdmin extends SonataUserAdmin
     }
 
 //    protected $perPageOptions = array(5, 15, 25, 50, 100, 150, 200);
-
 
     /**
      * {@inheritdoc}
@@ -58,7 +58,31 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true
+                    'disabled' => true,
+                )
+            )
+            ->add(
+                'personType',
+                'choice',
+                array(
+                    'translation_domain' => 'cocorico_user',
+                    'empty_data' => User::PERSON_TYPE_NATURAL,
+                    'required' => true,
+                    'disabled' => true,
+                    'multiple' => false,
+                    'expanded' => true,
+                    'choices' => [
+                        User::PERSON_TYPE_NATURAL => 'form.person_type.natural',
+                        User::PERSON_TYPE_LEGAL => 'form.person_type.legal',
+                    ],
+                )
+            )
+            ->add(
+                'companyName',
+                null,
+                array(
+                    'required' => false,
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -66,7 +90,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -74,7 +98,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -82,14 +106,14 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
                 'plainPassword',
                 'text',
                 array(
-                    'required' => (!$subject || is_null($subject->getId()))
+                    'required' => (!$subject || is_null($subject->getId())),
                 )
             )
             ->add(
@@ -114,8 +138,8 @@ class UserAdmin extends SonataUserAdmin
 //                            'locale_options' => $descriptions
                         ),
                     ),
-                    /** @Ignore */
-                    'label' => false
+                    /* @Ignore */
+                    'label' => false,
                 )
             )
             ->add(
@@ -124,7 +148,7 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'format' => 'dd - MMMM - yyyy',
                     'years' => range(date('Y') - 18, date('Y') - 80),
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -145,14 +169,14 @@ class UserAdmin extends SonataUserAdmin
                 'nationality',
                 'country',
                 array(
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
                 'profession',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -160,7 +184,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -168,7 +192,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -176,7 +200,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -184,14 +208,14 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
                 'annualIncome',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -200,9 +224,9 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'attr' => array(
                         'min' => 0,
-                        'max' => 100
+                        'max' => 100,
                     ),
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -211,30 +235,30 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'attr' => array(
                         'min' => 0,
-                        'max' => 100
+                        'max' => 100,
                     ),
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
                 'phoneVerified',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
                 'emailVerified',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
                 'idCardVerified',
                 null,
                 array(
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->add(
@@ -242,7 +266,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -250,7 +274,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -262,14 +286,14 @@ class UserAdmin extends SonataUserAdmin
             )
             ->end();
 
-        if (array_key_exists("CocoricoMangoPayBundle", $this->bundles)) {
+        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
             $formMapper->with('Mangopay')
                 ->add(
                     'mangopayId',
                     null,
                     array(
                         'disabled' => true,
-                        'required' => false
+                        'required' => false,
                     )
                 )
                 ->add(
@@ -277,7 +301,7 @@ class UserAdmin extends SonataUserAdmin
                     null,
                     array(
                         'disabled' => true,
-                        'required' => false
+                        'required' => false,
                     )
                 )
                 ->add(
@@ -285,12 +309,11 @@ class UserAdmin extends SonataUserAdmin
                     null,
                     array(
                         'disabled' => true,
-                        'required' => false
+                        'required' => false,
                     )
                 )
                 ->end();
         }
-
     }
 
     /**
@@ -305,7 +328,7 @@ class UserAdmin extends SonataUserAdmin
                 array()
             );
 
-        if (array_key_exists("CocoricoMangoPayBundle", $this->bundles)) {
+        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
             $listMapper->add(
                 'mangopayId',
                 null,
@@ -325,7 +348,7 @@ class UserAdmin extends SonataUserAdmin
                 'createdAt',
                 null,
                 array(
-                    'format' => "d/m/Y H:i",
+                    'format' => 'd/m/Y H:i',
                 )
             );
 
@@ -345,9 +368,9 @@ class UserAdmin extends SonataUserAdmin
                 'actions' => array(
                     'edit' => array(),
                     'list_user_listings' => array(
-                        'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig'
-                    )
-                )
+                        'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+                    ),
+                ),
             )
         );
     }
@@ -366,7 +389,7 @@ class UserAdmin extends SonataUserAdmin
                     'callback' => array($this, 'getFullNameFilter'),
                     'field_type' => 'text',
                     'operator_type' => 'hidden',
-                    'operator_options' => array()
+                    'operator_options' => array(),
                 )
             )
             ->add('locked')
@@ -402,7 +425,7 @@ class UserAdmin extends SonataUserAdmin
     public function getBatchActions()
     {
         $actions = parent::getBatchActions();
-        unset($actions["delete"]);
+        unset($actions['delete']);
 
         $label = $this->getConfigurationPool()->getContainer()->get('translator')->trans(
             'action_reset_fees',
@@ -411,9 +434,9 @@ class UserAdmin extends SonataUserAdmin
         );
 
         $actions['reset_fees'] = array(
-            /** @Ignore */
+            /* @Ignore */
             'label' => $label,
-            'ask_confirmation' => true
+            'ask_confirmation' => true,
         );
 
         return $actions;
@@ -428,10 +451,10 @@ class UserAdmin extends SonataUserAdmin
             'Email' => 'email',
             'Enabled' => 'enabled',
             'Locked' => 'locked',
-            'Created At' => 'createdAt'
+            'Created At' => 'createdAt',
         );
 
-        if (array_key_exists("CocoricoMangoPayBundle", $this->bundles)) {
+        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
             $mangopayFields = array(
                 'Mangopay Id' => 'mangopayId',
             );
@@ -458,5 +481,4 @@ class UserAdmin extends SonataUserAdmin
         $collection->remove('create');
         $collection->remove('delete');
     }
-
 }

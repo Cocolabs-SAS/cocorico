@@ -70,6 +70,10 @@
         <jms:reference-file line="145">Form/Type/ProfileAboutMeFormType.php</jms:reference-file>
         <jms:reference-file line="90">Type/Dashboard/ListingEditDescriptionType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="977100918635a0cc08241c2bdbefe90485bfa4b1" resname="companyName.missing">
+        <source>companyName.missing</source>
+        <target state="new">companyName.missing</target>
+      </trans-unit>
       <trans-unit id="2e33a41aa053169361b996e132dc6288a51f83f9" resname="entity.user.type.billing">
         <source>entity.user.type.billing</source>
         <target state="new">Adresse de facturation</target>
@@ -105,6 +109,11 @@
         <target>Code postal</target>
         <jms:reference-file line="43">Form/Type/UserAddressFormType.php</jms:reference-file>
         <jms:reference-file line="65">Type/Frontend/BookingUserAddressFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5067bcd438be5b76938f2179e7acb15ead3f9281" resname="form.company_name">
+        <source>form.company_name</source>
+        <target state="new">Nom de l'entreprise</target>
+        <jms:reference-file line="62">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="688577b0535ad8ca72e0c605e4b7eb69a8c90bcb" resname="form.contact.phone.help">
         <source>form.contact.phone.help</source>
@@ -147,6 +156,21 @@
         <target>Vérification :</target>
         <jms:reference-file line="104">Form/Type/RegistrationFormType.php</jms:reference-file>
         <jms:reference-file line="59">Form/Type/ProfileContactFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="39ca6a1fab7c9ecaf8ad225643ded59d1b06b842" resname="form.person_type">
+        <source>form.person_type</source>
+        <target state="new">Forme juridique</target>
+        <jms:reference-file line="48">Form/Type/RegistrationFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="99068f6fe7b1dcd1f2cf775f94ae736e803c0700" resname="form.person_type.legal">
+        <source>form.person_type.legal</source>
+        <target state="new">Entreprise</target>
+        <jms:reference-file line="51">Form/Type/RegistrationFormType.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="6814847ce8b82c08366ce155a0f4a68a602ef4f6" resname="form.person_type.natural">
+        <source>form.person_type.natural</source>
+        <target state="new">Individuel</target>
+        <jms:reference-file line="50">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
         <source>form.user.annual_income</source>

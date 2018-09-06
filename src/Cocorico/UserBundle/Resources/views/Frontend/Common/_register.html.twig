@@ -9,6 +9,37 @@
             <h3>{{ 'user.signup.title'|trans }}</h3>
 
             <div class="field-row validate-row">
+                <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
+                <span class="label">
+                    {{ form_label(form_registration.personType) }}
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_registration.personType, {
+                        'attr': {
+                            'class': "form-control form-control-radio required trigger-company-name"
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="field-row validate-row target-company-name" data-show-if-radio="2">
+                <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
+                <span class="label">
+                    {{ form_label(form_registration.companyName) }}
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_registration.companyName, {
+                        'attr': {
+                            'class': "form-control",
+                            'data-parsley-required-message': 'cocorico_user.companyName.blank'|trans({},'validators')
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
                 <span class="label">
                     {{ form_label(form_registration.lastName) }}

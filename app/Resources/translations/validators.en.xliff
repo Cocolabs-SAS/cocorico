@@ -133,6 +133,11 @@
         <source>cocorico_user.birthday.blank</source>
         <target>Birthday required</target>
       </trans-unit>
+      <trans-unit id="2aed87d00425ba669647b3e6e5a97415c24bc77d" resname="cocorico_user.companyName.blank">
+        <source>cocorico_user.companyName.blank</source>
+        <target state="new">Name of company required</target>
+        <jms:reference-file line="36">Frontend/Common/_register.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="fe5d878ea8abf516340e8d2b6b854ec2a58434e3" resname="cocorico_user.countryOfResidence.blank">
         <source>cocorico_user.countryOfResidence.blank</source>
         <target>Country Of Residence required</target>

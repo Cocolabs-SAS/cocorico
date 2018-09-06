@@ -27,9 +27,10 @@ use FOS\UserBundle\Entity\User as BaseUser;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * User
+ * User.
  *
  * @CocoricoUserAssert\User()
  *
@@ -53,7 +54,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="enabled_idx", columns={"enabled"}),
  *    @ORM\Index(name="email_idx", columns={"email"})
  *  })
- *
  */
 class User extends BaseUser implements ParticipantInterface
 {
@@ -61,13 +61,16 @@ class User extends BaseUser implements ParticipantInterface
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Sluggable\Sluggable;
 
+    const PERSON_TYPE_NATURAL = 1;
+    const PERSON_TYPE_LEGAL = 2;
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Cocorico\CoreBundle\Model\CustomIdGenerator")
      *
-     * @var integer
+     * @var int
      */
     protected $id;
 
@@ -87,6 +90,22 @@ class User extends BaseUser implements ParticipantInterface
      * )
      */
     protected $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="person_type", type="smallint", nullable=true)
+     *
+     * @Assert\NotNull
+     */
+    protected $personType = self::PERSON_TYPE_NATURAL;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="company_name", type="string", length=100, nullable=true)
+     */
+    protected $companyName;
 
     /**
      * @ORM\Column(name="last_name", type="string", length=100)
@@ -136,26 +155,23 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $phone;
 
-
     /**
-     * @var \DateTime $birthday
+     * @var \DateTime
      *
      * @ORM\Column(name="birthday", type="date")
      *
      * @Assert\NotBlank(message="cocorico_user.birthday.blank", groups={
      *  "CocoricoRegistration", "CocoricoProfileBankAccount"
      * })
-     *
      */
     protected $birthday;
-
 
     /**
      * @var string
      *
      * @ORM\Column(name="nationality", type="string", length=3, nullable=true)
      */
-    protected $nationality = "FR";
+    protected $nationality = 'FR';
 
     /**
      * @var string
@@ -166,7 +182,7 @@ class User extends BaseUser implements ParticipantInterface
      *  "CocoricoRegistration", "CocoricoProfileBankAccount"
      * })
      */
-    protected $countryOfResidence = "FR";
+    protected $countryOfResidence = 'FR';
 
     /**
      * @var string
@@ -187,7 +203,6 @@ class User extends BaseUser implements ParticipantInterface
      * @Assert\NotBlank(message="cocorico_user.iban.blank", groups={
      *  "CocoricoProfileBankAccount"
      * })
-     *
      */
     protected $iban;
 
@@ -227,7 +242,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @ORM\Column(name="annual_income", type="decimal", precision=10, scale=2, nullable=true)
      *
-     * @var integer
+     * @var int
      */
     protected $annualIncome;
 
@@ -242,31 +257,27 @@ class User extends BaseUser implements ParticipantInterface
     protected $plainPassword;
 
     /**
-     *
      * @ORM\Column(name="phone_verified", type="boolean", nullable=true)
      *
-     * @var boolean
+     * @var bool
      */
     protected $phoneVerified = false;
 
     /**
-     *
      * @ORM\Column(name="email_verified", type="boolean", nullable=true)
      *
-     * @var boolean
+     * @var bool
      */
     protected $emailVerified = false;
 
     /**
-     *
      * @ORM\Column(name="id_card_verified", type="boolean", nullable=true)
      *
-     * @var boolean
+     * @var bool
      */
     protected $idCardVerified = false;
 
     /**
-     *
      * @ORM\Column(name="nb_bookings_offerer", type="smallint", nullable=true)
      *
      * @var int
@@ -274,7 +285,6 @@ class User extends BaseUser implements ParticipantInterface
     protected $nbBookingsOfferer;
 
     /**
-     *
      * @ORM\Column(name="nb_bookings_asker", type="smallint", nullable=true)
      *
      * @var int
@@ -282,32 +292,30 @@ class User extends BaseUser implements ParticipantInterface
     protected $nbBookingsAsker;
 
     /**
-     *
      * @ORM\Column(name="fee_as_asker", type="smallint", nullable=true)
      *
-     * @var integer Percent
+     * @var int Percent
      */
     protected $feeAsAsker;
 
     /**
      * @ORM\Column(name="fee_as_offerer", type="smallint", nullable=true)
      *
-     * @var integer Percent
+     * @var int Percent
      */
     protected $feeAsOfferer;
 
     /**
      * @ORM\Column(name="average_rating_as_asker", type="smallint", nullable=true)
      *
-     * @var integer
+     * @var int
      */
     protected $averageAskerRating;
-
 
     /**
      * @ORM\Column(name="average_rating_as_offerer", type="smallint", nullable=true)
      *
-     * @var integer
+     * @var int
      */
     protected $averageOffererRating;
 
@@ -323,7 +331,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @ORM\Column(name="answer_delay", type="integer", nullable=true)
      *
-     * @var integer
+     * @var int
      */
     protected $answerDelay;
 
@@ -366,7 +374,7 @@ class User extends BaseUser implements ParticipantInterface
     private $addresses;
 
     /**
-     * For Asserts : @see \Cocorico\UserBundle\Validator\Constraints\UserValidator
+     * For Asserts : @see \Cocorico\UserBundle\Validator\Constraints\UserValidator.
      *
      * @ORM\OneToMany(targetEntity="UserImage", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "asc"})
@@ -383,14 +391,12 @@ class User extends BaseUser implements ParticipantInterface
     protected $languages;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\Booking", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"createdAt" = "desc"})
      *
      * @var Booking[]
      */
     protected $bookings;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\BookingBankWire", mappedBy="user", cascade={"persist", "remove"})
@@ -409,13 +415,12 @@ class User extends BaseUser implements ParticipantInterface
     private $bookingPayinRefunds;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Model\ListingAlertInterface", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $listingAlerts;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -437,11 +442,20 @@ class User extends BaseUser implements ParticipantInterface
         return ['firstName', 'id'];
     }
 
+    public static function getPersonTypeList()
+    {
+        return [
+            self::PERSON_TYPE_NATURAL => 'NATURAL',
+            self::PERSON_TYPE_LEGAL => 'LEGAL',
+        ];
+    }
+
     /**
-     * Translation proxy
+     * Translation proxy.
      *
      * @param $method
      * @param $arguments
+     *
      * @return mixed
      */
     public function __call($method, $arguments)
@@ -450,9 +464,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -460,7 +474,59 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set lastName
+     * Get personType.
+     *
+     * @return int
+     */
+    public function getPersonType()
+    {
+        if (!$this->personType) {
+            $this->personType = self::PERSON_TYPE_NATURAL;
+        }
+
+        return $this->personType;
+    }
+
+    /**
+     * Set PersonType.
+     *
+     * @param int $personType
+     *
+     * @return User
+     */
+    public function setPersonType($personType)
+    {
+        $this->personType = $personType;
+
+        return $this;
+    }
+
+    /**
+     * Get companyName.
+     *
+     * @return string
+     */
+    public function getCompanyName()
+    {
+        return $this->companyName;
+    }
+
+    /**
+     * Set companyName.
+     *
+     * @param string $companyName
+     *
+     * @return User
+     */
+    public function setCompanyName($companyName)
+    {
+        $this->companyName = $companyName;
+
+        return $this;
+    }
+
+    /**
+     * Set lastName.
      *
      * @param string $lastName
      *
@@ -474,7 +540,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get lastName
+     * Get lastName.
      *
      * @return string
      */
@@ -484,7 +550,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set firstName
+     * Set firstName.
      *
      * @param string $firstName
      *
@@ -498,7 +564,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get firstName
+     * Get firstName.
      *
      * @return string
      */
@@ -512,11 +578,12 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function getName()
     {
-        return $this->firstName . " " . ucfirst(substr($this->lastName, 0, 1) . ".");
+        return $this->firstName . ' ' . ucfirst(substr($this->lastName, 0, 1) . '.');
     }
 
     /**
      * @param string $email
+     *
      * @return $this
      */
     public function setEmail($email)
@@ -528,11 +595,11 @@ class User extends BaseUser implements ParticipantInterface
         return $this;
     }
 
-
     /**
-     * Set phoneVerified
+     * Set phoneVerified.
      *
-     * @param boolean $phoneVerified
+     * @param bool $phoneVerified
+     *
      * @return User
      */
     public function setPhoneVerified($phoneVerified)
@@ -543,9 +610,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get phoneVerified
+     * Get phoneVerified.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPhoneVerified()
     {
@@ -553,9 +620,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set emailVerified
+     * Set emailVerified.
      *
-     * @param boolean $emailVerified
+     * @param bool $emailVerified
+     *
      * @return User
      */
     public function setEmailVerified($emailVerified)
@@ -566,9 +634,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get emailVerified
+     * Get emailVerified.
      *
-     * @return boolean
+     * @return bool
      */
     public function getEmailVerified()
     {
@@ -576,9 +644,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set idCardVerified
+     * Set idCardVerified.
      *
-     * @param boolean $idCardVerified
+     * @param bool $idCardVerified
+     *
      * @return User
      */
     public function setIdCardVerified($idCardVerified)
@@ -589,9 +658,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get idCardVerified
+     * Get idCardVerified.
      *
-     * @return boolean
+     * @return bool
      */
     public function getIdCardVerified()
     {
@@ -599,9 +668,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set nbBookingsOfferer
+     * Set nbBookingsOfferer.
      *
      * @param int $nbBookingsOfferer
+     *
      * @return User
      */
     public function setNbBookingsOfferer($nbBookingsOfferer)
@@ -612,7 +682,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get nbBookingsOfferer
+     * Get nbBookingsOfferer.
      *
      * @return int
      */
@@ -829,7 +899,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->phonePrefix = $phonePrefix;
     }
 
-
     /**
      * @return string
      */
@@ -846,11 +915,11 @@ class User extends BaseUser implements ParticipantInterface
         $this->countryOfResidence = $countryOfResidence;
     }
 
-
     /**
-     * Set averageAskerRating
+     * Set averageAskerRating.
      *
-     * @param  integer $averageAskerRating
+     * @param int $averageAskerRating
+     *
      * @return Listing
      */
     public function setAverageAskerRating($averageAskerRating)
@@ -861,20 +930,20 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get averageAskerRating
+     * Get averageAskerRating.
      *
-     * @return integer
+     * @return int
      */
     public function getAverageAskerRating()
     {
         return $this->averageAskerRating;
     }
 
-
     /**
-     * Set averageOffererRating
+     * Set averageOffererRating.
      *
-     * @param  integer $averageOffererRating
+     * @param int $averageOffererRating
+     *
      * @return Listing
      */
     public function setAverageOffererRating($averageOffererRating)
@@ -885,9 +954,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get averageOffererRating
+     * Get averageOffererRating.
      *
-     * @return integer
+     * @return int
      */
     public function getAverageOffererRating()
     {
@@ -895,9 +964,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set answerDelay
+     * Set answerDelay.
      *
-     * @param  integer $answerDelay
+     * @param int $answerDelay
+     *
      * @return Listing
      */
     public function setAnswerDelay($answerDelay)
@@ -908,9 +978,9 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get answerDelay
+     * Get answerDelay.
      *
-     * @return integer
+     * @return int
      */
     public function getAnswerDelay()
     {
@@ -948,9 +1018,7 @@ class User extends BaseUser implements ParticipantInterface
     {
         $userFacebook->setUser($this);
         $this->userFacebook = $userFacebook;
-
     }
-
 
     public function getFullName()
     {
@@ -962,11 +1030,11 @@ class User extends BaseUser implements ParticipantInterface
         return $this->getFullName();
     }
 
-
     /**
-     * Add listings
+     * Add listings.
      *
-     * @param  Listing $listing
+     * @param Listing $listing
+     *
      * @return User
      */
     public function addListing(Listing $listing)
@@ -977,7 +1045,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove listings
+     * Remove listings.
      *
      * @param Listing $listing
      */
@@ -987,7 +1055,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get listings
+     * Get listings.
      *
      * @return Listing[]|\Doctrine\Common\Collections\Collection
      */
@@ -997,7 +1065,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add images
+     * Add images.
      *
      * @param \Cocorico\UserBundle\Entity\UserImage $image
      *
@@ -1012,7 +1080,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove images
+     * Remove images.
      *
      * @param \Cocorico\UserBundle\Entity\UserImage $image
      */
@@ -1022,7 +1090,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get images
+     * Get images.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -1032,7 +1100,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add language
+     * Add language.
      *
      * @param \Cocorico\UserBundle\Entity\UserLanguage $language
      *
@@ -1047,7 +1115,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove language
+     * Remove language.
      *
      * @param \Cocorico\UserBundle\Entity\UserLanguage $language
      */
@@ -1057,7 +1125,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get languages
+     * Get languages.
      *
      * @return \Doctrine\Common\Collections\Collection|UserLanguage[]
      */
@@ -1065,7 +1133,6 @@ class User extends BaseUser implements ParticipantInterface
     {
         return $this->languages;
     }
-
 
     /**
      * @return mixed
@@ -1107,7 +1174,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->messages = $messages;
     }
 
-
     /**
      * @return mixed
      */
@@ -1148,11 +1214,11 @@ class User extends BaseUser implements ParticipantInterface
         $this->reviewsTo = $reviewsTo;
     }
 
-
     /**
-     * Add Address
+     * Add Address.
      *
-     * @param  UserAddress $address
+     * @param UserAddress $address
+     *
      * @return User
      */
     public function addAddress(UserAddress $address)
@@ -1166,7 +1232,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove Address
+     * Remove Address.
      *
      * @param UserAddress $address
      */
@@ -1177,7 +1243,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get addresses ordered by type
+     * Get addresses ordered by type.
      *
      * @return Collection|UserAddress[]
      */
@@ -1199,7 +1265,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get addresses of type
+     * Get addresses of type.
      *
      * @param int $type
      *
@@ -1234,7 +1300,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->bookingBankWires = $bookingBankWires;
     }
 
-
     /**
      * @return BookingPayinRefund[]
      */
@@ -1256,9 +1321,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Add ListingAlert
+     * Add ListingAlert.
      *
-     * @param  ListingAlertInterface $listingAlert
+     * @param ListingAlertInterface $listingAlert
+     *
      * @return User
      */
     public function addListingAlert($listingAlert)
@@ -1270,7 +1336,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Remove ListingAlert
+     * Remove ListingAlert.
      *
      * @param ListingAlertInterface $listingAlert
      */
@@ -1280,7 +1346,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Get ListingAlerts
+     * Get ListingAlerts.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -1291,6 +1357,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @param ArrayCollection $listingAlerts
+     *
      * @return $this
      */
     public function setListingAlerts(ArrayCollection $listingAlerts)
@@ -1302,7 +1369,6 @@ class User extends BaseUser implements ParticipantInterface
         $this->listingAlerts = $listingAlerts;
     }
 
-
     /**
      * @param int  $minImages
      * @param bool $strict
@@ -1312,25 +1378,25 @@ class User extends BaseUser implements ParticipantInterface
     public function getCompletionInformations($minImages, $strict = true)
     {
         return array(
-            "description" => (
+            'description' => (
                 ($strict && $this->getDescription()) ||
                 (!$strict && strlen($this->getDescription()) > 250)
             ) ? 1 : 0,
-            "image" => (
+            'image' => (
                 ($strict && count($this->getImages()) >= $minImages) ||
                 (!$strict && count($this->getImages()) > $minImages)
             ) ? 1 : 0,
         );
     }
 
-
     /**
-     * Guess preferred site language from motherTongue, and spoken languages and  sites locales enabled
+     * Guess preferred site language from motherTongue, and spoken languages and  sites locales enabled.
      *
      * todo: Add "preferred language" field to user entity and set it by default to mother tongue while registration, add it to editable fields and add it to the checked fields of this method.
      *
      * @param array  $siteLocales
      * @param string $defaultLocale
+     *
      * @return string
      */
     public function guessPreferredLanguage($siteLocales, $defaultLocale)
@@ -1346,5 +1412,17 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         return $defaultLocale;
+    }
+
+    /**
+     * @param ExecutionContextInterface $context
+     *
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->personType == self::PERSON_TYPE_LEGAL && empty($this->companyName)) {
+            $context->addViolation('cocorico_user.companyName.blank');
+        }
     }
 }

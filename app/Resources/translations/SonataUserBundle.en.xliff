@@ -91,6 +91,11 @@
         <target>Birthday</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="5d6dc7d4683245c051333b5378753772feebcd7c" resname="form.label_company_name">
+        <source>form.label_company_name</source>
+        <target state="new">Company name</target>
+        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="c259330e043cfc54d5e324fca19cbf44605aac58" resname="form.label_created_at">
         <source>form.label_created_at</source>
         <target>Created at</target>
@@ -164,6 +169,11 @@
       <trans-unit id="6841ad85d96f09359dced016dbfd443a58acd8a3" resname="form.label_nb_bookings_offerer">
         <source>form.label_nb_bookings_offerer</source>
         <target>Bookings as offerer</target>
+        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="73f5069087467286844ca7f154d58057dcd912f8" resname="form.label_person_type">
+        <source>form.label_person_type</source>
+        <target state="new">Legal form</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fa12e1be90ea63bd08ebb826d140e90230fa0347" resname="form.label_phone">

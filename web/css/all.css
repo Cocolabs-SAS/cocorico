@@ -17476,3 +17476,15 @@ body.loading {
 .loading .loader {
     display: block;
 }
+
+.form-control-radio {
+    border: none;
+}
+
+.form-control-radio > span {
+    margin-left: 10%;
+}
+
+.form-control-radio > label > span {
+    display: none;
+}
