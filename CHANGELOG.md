@@ -19,6 +19,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix listing favorites search request persisting
 - Fix SMS calls when SMS Bundle is not enabled
 - Fix SQL for booking expiration and expiring alert
+- Fix Google "Browser API keys cannot have referer restrictions when used with this API"
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers

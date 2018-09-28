@@ -190,6 +190,10 @@
         <source>/geocoding/{id}/create</source>
         <target state="new">/geocoding/{id}/create</target>
       </trans-unit>
+      <trans-unit id="6282d0eb4eb8b9b6a92876cd3ff55f8656b61b5b" resname="cocorico_geo_reverse_geocoding">
+        <source>/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</source>
+        <target state="new">/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</target>
+      </trans-unit>
       <trans-unit id="59be3aa1f035af965016dafe7e8c54a7ab427504" resname="cocorico_home">
         <source>/</source>
         <target>/</target>

@@ -244,8 +244,13 @@
                 if (lang != locale) {
                     dataT[lang] = {};
                     var deferred = new $.Deferred();
+                    var url = "{{ path('cocorico_geo_reverse_geocoding', {'lat': '0.01', 'lng': '0.02', 'lang': app.request.locale}) }}";
+                    url = url.replace('0.01', lat);
+                    url = url.replace('0.02', lng);
+                    url = url.replace('{{ app.request.locale }}', lang);
+                    url += "?token={{ csrf_token("rev_geo") }}";
                     $.getJSON(
-                        "//maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=false&language=" + lang,
+                        url,
                         function (queryResult) {
 
                             if (queryResult.status == 'OK' && queryResult.results.length) {
@@ -450,7 +455,7 @@
         geocodeJSONFunc = function (address) {
             var deferred = new $.Deferred();
             $.getJSON(
-                "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}",
+                "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}{{ gKey|raw }}",
                 function (queryResult) {
                     if (queryResult.status == 'OK' && queryResult.results.length) {
                         deferred.resolve(queryResult.results);

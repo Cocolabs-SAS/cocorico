@@ -22,6 +22,8 @@ use Ivory\HttpAdapter\HttpAdapterInterface;
 
 class GoogleMapsProvider extends GoogleMaps
 {
+    const REVERSE_ENDPOINT_URL_SSL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=%F,%F';
+
     /**
      * @var bool
      */
@@ -173,6 +175,39 @@ class GoogleMapsProvider extends GoogleMaps
         return $this->geocode(sprintf('%F,%F', $latitude, $longitude));
     }
 
+    /**
+     * @param float $latitude
+     * @param float $longitude
+     * @return string
+     */
+    public function reverseJson($latitude, $longitude)
+    {
+        $url = sprintf(
+            self::REVERSE_ENDPOINT_URL_SSL,
+            $latitude,
+            $longitude
+        );
+
+        $this->debug("executeQuery > query:\n" . $url);
+        $url = $this->buildQuery($url);
+        $this->debug("executeQuery > buildQuery > query :\n" . $url);
+
+        $content = (string)$this->getAdapter()->get($url)->getBody();
+        $this->debug("executeQuery > getAdapter > body :\n" . $content);
+
+        // Throw exception if invalid clientID and/or privateKey used with GoogleMapsBusinessProvider
+        if (strpos($content, "Provided 'signature' is not valid for the provided client ID") !== false) {
+            throw new InvalidCredentials(sprintf('Invalid client ID / API Key %s', $url));
+        }
+
+        if (empty($content)) {
+            throw new NoResult(sprintf('Empty content > Could not execute query "%s".', $url));
+        }
+
+        $json = json_decode($content);
+
+        return $json;
+    }
 
     /**
      * {@inheritDoc}
