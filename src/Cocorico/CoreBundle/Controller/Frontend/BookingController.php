@@ -42,7 +42,7 @@ class BookingController extends Controller
      * )
      *
      *
-     * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN')")
+     * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
      * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
      * @ParamConverter("start", options={"format": "Y-m-d"})
@@ -52,12 +52,12 @@ class BookingController extends Controller
      *
      * @Method({"GET", "POST"})
      *
-     * @param  Request   $request
-     * @param  Listing   $listing
-     * @param  \DateTime $start      format yyyy-mm-dd
-     * @param  \DateTime $end        format yyyy-mm-dd
-     * @param  \DateTime $start_time format H:i
-     * @param  \DateTime $end_time   format H:i
+     * @param Request   $request
+     * @param Listing   $listing
+     * @param \DateTime $start      format yyyy-mm-dd
+     * @param \DateTime $end        format yyyy-mm-dd
+     * @param \DateTime $start_time format H:i
+     * @param \DateTime $end_time   format H:i
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -127,7 +127,7 @@ class BookingController extends Controller
                 //Errors message are created in event subscribers
                 $session->getFlashBag()->add(
                     'error',
-                    /** @Ignore */
+                    /* @Ignore */
                     $translator->trans($e->getMessage(), array(), 'cocorico_booking')
                 );
             }
@@ -161,7 +161,6 @@ class BookingController extends Controller
                 'form' => $form->createView(),
             )
         );
-
     }
 
     /**
@@ -170,7 +169,7 @@ class BookingController extends Controller
     private function addFlashError($success)
     {
         $translator = $this->container->get('translator');
-        $errorMsg = $translator->trans('booking.new.unknown.error', array(), 'cocorico_booking');//-4
+        $errorMsg = $translator->trans('booking.new.unknown.error', array(), 'cocorico_booking'); //-4
         $flashType = 'error';
 
         if ($success == -1) {
@@ -218,10 +217,10 @@ class BookingController extends Controller
                         'listing_id' => $booking->getListing()->getId(),
                         'start' => $booking->getStart()->format('Y-m-d'),
                         'end' => $booking->getEnd()->format('Y-m-d'),
-                        'start_time' => $booking->getStartTime() ? $booking->getStartTime()->format('H:i') : "00:00",
-                        'end_time' => $booking->getEndTime() ? $booking->getEndTime()->format('H:i') : "00:00"
+                        'start_time' => $booking->getStartTime() ? $booking->getStartTime()->format('H:i') : '00:00',
+                        'end_time' => $booking->getEndTime() ? $booking->getEndTime()->format('H:i') : '00:00',
                     )
-                )
+                ),
             )
         );
 

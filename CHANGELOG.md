@@ -14,6 +14,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add delivery address in new booking form
 - Add listing characteristics values and types management in admin
 - Add form type for user entity
+- Decouple user login/registration from new listing and booking
+- Force authentication before listing deposit and booking request
 
 ### Fixed
 - Fix listing favorites search request persisting
@@ -30,6 +32,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Accept parameters value equal to 0 from ConfigBundle
 - Add a no results message
 - Set query hydration to HYDRATE_ARRAY on getHighestRanked 
+- Disallow cocorico_user_login_check urls into robots.txt
 
 ## [0.5.0] - 2018-03-20
 

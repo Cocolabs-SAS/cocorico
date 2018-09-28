@@ -3,13 +3,3 @@ services:
         class: Cocorico\UserBundle\Event\UserSubscriber
         tags:
             - { name: kernel.event_subscriber}
-
-    #Booking form subscriber
-    cocorico_user.booking.form.subscriber:
-        class: Cocorico\UserBundle\Event\BookingFormSubscriber
-        arguments:
-            - "@security.token_storage"
-            - "@security.authorization_checker"
-            - "@cocorico_user.login_manager"
-        tags:
-            - { name: kernel.event_subscriber}

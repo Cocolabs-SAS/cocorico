@@ -17,16 +17,11 @@ use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\UserBundle\Entity\User;
-use Cocorico\UserBundle\Security\LoginManager;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
@@ -35,9 +30,7 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 
 /**
  * Class ListingNewType
- * Categories are created trough ajax in ListingNewCategoriesType
- *
- * @package Cocorico\CoreBundle\Form\Type\Frontend
+ * Categories are created trough ajax in ListingNewCategoriesType.
  */
 class ListingNewType extends AbstractType implements TranslationContainerInterface
 {
@@ -46,7 +39,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
     private $securityTokenStorage;
     private $securityAuthChecker;
-    private $loginManager;
     private $request;
     private $locale;
     private $locales;
@@ -54,11 +46,9 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     private $user = null;
     protected $dispatcher;
 
-
     /**
      * @param TokenStorage             $securityTokenStorage
      * @param AuthorizationChecker     $securityAuthChecker
-     * @param LoginManager             $loginManager
      * @param RequestStack             $requestStack
      * @param array                    $locales
      * @param EventDispatcherInterface $dispatcher
@@ -66,14 +56,12 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public function __construct(
         TokenStorage $securityTokenStorage,
         AuthorizationChecker $securityAuthChecker,
-        LoginManager $loginManager,
         RequestStack $requestStack,
         $locales,
         EventDispatcherInterface $dispatcher
     ) {
         $this->securityTokenStorage = $securityTokenStorage;
         $this->securityAuthChecker = $securityAuthChecker;
-        $this->loginManager = $loginManager;
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
@@ -89,22 +77,20 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-//        $listing = $builder->getData();
-
         //Translations fields
         $titles = $descriptions = array();
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'listing.form.title',
                 'attr' => array(
-                    'placeholder' => 'auto'
-                )
+                    'placeholder' => 'auto',
+                ),
             );
             $descriptions[$locale] = array(
                 'label' => 'listing.form.description',
                 'attr' => array(
-                    'placeholder' => 'auto'
-                )
+                    'placeholder' => 'auto',
+                ),
             );
         }
 
@@ -120,21 +106,30 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     ),
                     'description' => array(
                         'field_type' => 'textarea',
-                        'locale_options' => $descriptions
+                        'locale_options' => $descriptions,
                     ),
                     'rules' => array(
-                        'display' => false
+                        'display' => false,
                     ),
                     'slug' => array(
-                        'field_type' => 'hidden'
-                    )
+                        'field_type' => 'hidden',
+                    ),
                 ),
                 /** @Ignore */
-                'label' => false
+                'label' => false,
             )
         );
 
         $builder
+            ->add(
+                'user',
+                'entity_hidden',
+                array(
+                    'class' => 'Cocorico\UserBundle\Entity\User',
+                    'data' => $this->user,
+                    'data_class' => null
+                )
+            )
             ->add(
                 'price',
                 'price',
@@ -173,117 +168,24 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
                     /** @Ignore */
                     'label' => false,
-                    'data' => $listingLocation
+                    'data' => $listingLocation,
                 )
             );
 
         $builder
             ->add(
-                "tac",
-                "checkbox",
+                'tac',
+                'checkbox',
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,
                     'constraints' => new IsTrue(
                         array(
-                            "message" => self::$tacError
+                            'message' => self::$tacError,
                         )
                     ),
                 )
             );
-
-        /**
-         * Set the user fields according to his logging status
-         *
-         * @param FormInterface $form
-         */
-        $formUserModifier = function (FormInterface $form) {
-            //Not logged
-            if (!$this->user) {
-                $form
-                    ->add(//Login form
-                        'user_login',
-                        'user_login',
-                        array(
-                            'mapped' => false,
-                            /** @Ignore */
-                            'label' => false
-                        )
-                    )->add(//Registration form
-                        'user',
-                        'user_registration',
-                        array(
-                            /** @Ignore */
-                            'label' => false
-                        )
-                    );
-            } else {//Logged
-                $form->add(
-                    'user',
-                    'entity_hidden',
-                    array(
-                        'data' => $this->user,
-                        'class' => 'Cocorico\UserBundle\Entity\User',
-                        'data_class' => null
-                    )
-                );
-            }
-        };
-
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($formUserModifier) {
-                $formUserModifier($event->getForm());
-            }
-        );
-
-        /**
-         * Login user management
-         *
-         * @param FormInterface $form
-         */
-        $formUserLoginModifier = function (FormInterface $form) {
-            if ($form->has('user_login')) {
-                $userLoginData = $form->get('user_login')->getData();
-                $username = $userLoginData["_username"];
-                $password = $userLoginData["_password"];
-
-                if ($username || $password) {
-                    /** @var $user User */
-                    $user = $this->loginManager->loginUser($username, $password);
-                    if ($user) {
-                        $form->getData()->setUser($user);
-                        //Remove user registration form
-                        //Remove user registration and login form and add user field
-                        $form->remove("user");
-                        $form->remove("user_login");
-                        $form->add(
-                            'user',
-                            'entity_hidden',
-                            array(
-                                'data' => $user,
-                                'class' => 'Cocorico\UserBundle\Entity\User',
-                                'data_class' => null
-                            )
-                        );
-
-                    } else {
-                        $form['user_login']['_username']->addError(
-                            new FormError(self::$credentialError)
-                        );
-                        //TODO: Disable form register errors when try to login with error
-                    }
-
-                }
-            }
-        };
-
-        $builder->addEventListener(
-            FormEvents::SUBMIT,
-            function (FormEvent $event) use ($formUserLoginModifier) {
-                $formUserLoginModifier($event->getForm());
-            }
-        );
 
         //Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
         //Used for example to add fields to new listing form
@@ -292,7 +194,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             new ListingFormBuilderEvent($builder)
         );
     }
-
 
     /**
      * @param OptionsResolver $resolver
@@ -328,7 +229,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     }
 
     /**
-     * JMS Translation messages
+     * JMS Translation messages.
      *
      * @return array
      */

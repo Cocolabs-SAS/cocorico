@@ -5,7 +5,6 @@ services:
         arguments:
             - "@security.token_storage"
             - "@security.authorization_checker"
-            - "@cocorico_user.login_manager"
             - "@request_stack"
             - "%cocorico.locales%"
             - "@event_dispatcher"

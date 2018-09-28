@@ -31,11 +31,11 @@ class ListingController extends Controller
      *
      * @Route("/new", name="cocorico_listing_new")
      *
-     * @Security("not has_role('ROLE_ADMIN')")
+     * @Security("not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
      * @Method({"GET", "POST"})
      *
-     * @param  Request $request
+     * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -68,7 +68,6 @@ class ListingController extends Controller
                 'form' => $form->createView(),
             )
         );
-
     }
 
     /**
@@ -92,7 +91,6 @@ class ListingController extends Controller
 
         return $form;
     }
-
 
     /**
      * Finds and displays a Listing entity.
@@ -121,9 +119,8 @@ class ListingController extends Controller
             'CocoricoCoreBundle:Frontend/Listing:show.html.twig',
             array(
                 'listing' => $listing,
-                'reviews' => $reviews
+                'reviews' => $reviews,
             )
         );
     }
-
 }

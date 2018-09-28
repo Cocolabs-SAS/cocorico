@@ -66,15 +66,12 @@
             } only %}
         {% endif %}
 
-
-
         {#Redirect after login on referer except for some routes #}
-        {% if app.request.uri != app.request.headers.get('referer')
-        and app.request.get('_route')  != 'cocorico_listing_availabilities'
-        and app.request.get('_route')  != 'cocorico_booking_new'
-        and app.request.get('_route')  != 'cocorico_listing_new' %}
-            {#and app.request.get('_route')  != 'cocorico_user_login'#}
-            {#and app.request.get('_route')  != 'cocorico_user_register'#}
+        {% if app.session.get('_security.main.target_path') is defined %}
+            <input type="hidden" name="redirect_to" value="{{ app.session.get('_security.main.target_path') }}"/>
+        {% elseif
+            app.request.uri != app.request.headers.get('referer')
+            and app.request.get('_route') not in ['cocorico_listing_availabilities', 'cocorico_booking_new', 'cocorico_listing_new'] %}
             <input type="hidden" name="redirect_to" value="{{ app.request.headers.get('referer') }}"/>
         {% endif %}
     </div>
