@@ -29,7 +29,7 @@ class ProfileContactFormType extends AbstractType
                 )
             )
             ->add(
-                'phone_prefix',
+                'phonePrefix',
                 'text',
                 array(
                     'label' => 'form.user.phone_prefix',

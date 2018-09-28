@@ -122,11 +122,11 @@
             </div>
 
             <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.phone_prefix) }}</div>
-                <span class="label" style="margin-top:0">{{ form_label(form_registration.phone_prefix) }}</span>
+                <div class="error-container">{{ form_errors(form_registration.phonePrefix) }}</div>
+                <span class="label" style="margin-top:0">{{ form_label(form_registration.phonePrefix) }}</span>
 
                 <div class="field-holder code">
-                    {{ form_widget(form_registration.phone_prefix, {
+                    {{ form_widget(form_registration.phonePrefix, {
                         'attr': {
                             'class': "form-control"
                         }
@@ -158,7 +158,8 @@
                         'attr': {
                             'class': "form-control required",
                             'data-parsley-required-message': 'cocorico_user.email.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.email.invalid'|trans({}, 'validators')
+                            'data-parsley-invalid-message': 'cocorico_user.email.invalid'|trans({}, 'validators'),
+                            'data-parsley-type-message': 'cocorico_user.email.invalid'|trans({}, 'validators')
                         }
                     }) }}
                 </div>

@@ -22,6 +22,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix SMS calls when SMS Bundle is not enabled
 - Fix SQL for booking expiration and expiring alert
 - Fix Google "Browser API keys cannot have referer restrictions when used with this API"
+- Fix phone_prefix user form field case
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers

@@ -72,7 +72,7 @@ class RegistrationFormType extends AbstractType
                 array('label' => 'form.first_name')
             )
             ->add(
-                'phone_prefix',
+                'phonePrefix',
                 'text',
                 array(
                     'label' => 'form.user.phone_prefix',
