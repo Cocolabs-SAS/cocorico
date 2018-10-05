@@ -7,7 +7,17 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 
+
 ## [Unreleased]
+
+### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.6.0] - 2018-10-05
 
 ### Added
 - Add Booking user delivery address
