@@ -11,6 +11,7 @@
 
 namespace Cocorico\UserBundle\Validator\Constraints;
 
+use Cocorico\UserBundle\Entity\User as UserEntity;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -31,13 +32,13 @@ class UserValidator extends ConstraintValidator
     }
 
     /**
-     * @param \Cocorico\UserBundle\Entity\User $user
-     * @param Constraint                       $constraint
+     * @param UserEntity $user
+     * @param Constraint $constraint
      */
     public function validate($user, Constraint $constraint)
     {
-        /** @var $user \Cocorico\UserBundle\Entity\User */
-        /** @var $constraint \Cocorico\UserBundle\Validator\Constraints\User */
+        /** @var UserEntity $user */
+        /** @var \Cocorico\UserBundle\Validator\Constraints\User $constraint */
 
         //Images
         if ($user->getImages()->count() > $this->maxImages) {

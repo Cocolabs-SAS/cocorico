@@ -16,6 +16,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add form type for user entity
 - Decouple user login/registration from new listing and booking
 - Force authentication before listing deposit and booking request
+- Add user legal type
 
 ### Fixed
 - Fix listing favorites search request persisting

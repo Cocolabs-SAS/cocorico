@@ -64,6 +64,11 @@ class User extends BaseUser implements ParticipantInterface
     const PERSON_TYPE_NATURAL = 1;
     const PERSON_TYPE_LEGAL = 2;
 
+    public static $personTypeValues = array(
+        self::PERSON_TYPE_NATURAL => 'entity.user.person_type.natural',
+        self::PERSON_TYPE_LEGAL => 'entity.user.person_type.legal',
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -442,13 +447,6 @@ class User extends BaseUser implements ParticipantInterface
         return ['firstName', 'id'];
     }
 
-    public static function getPersonTypeList()
-    {
-        return [
-            self::PERSON_TYPE_NATURAL => 'NATURAL',
-            self::PERSON_TYPE_LEGAL => 'LEGAL',
-        ];
-    }
 
     /**
      * Translation proxy.
@@ -474,6 +472,26 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Set PersonType.
+     *
+     * @param int $personType
+     *
+     * @return User
+     */
+    public function setPersonType($personType)
+    {
+        if (!in_array($personType, array_keys(self::$personTypeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for user.person_type : %s.', $personType)
+            );
+        }
+
+        $this->personType = $personType;
+
+        return $this;
+    }
+
+    /**
      * Get personType.
      *
      * @return int
@@ -488,17 +506,13 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * Set PersonType.
+     * Get personType Text.
      *
-     * @param int $personType
-     *
-     * @return User
+     * @return string
      */
-    public function setPersonType($personType)
+    public function getPersonTypeText()
     {
-        $this->personType = $personType;
-
-        return $this;
+        return self::$personTypeValues[$this->getPersonType()];
     }
 
     /**
@@ -1417,12 +1431,15 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @param ExecutionContextInterface $context
      *
-     * @Assert\Callback
+     * @Assert\Callback(groups={"CocoricoRegistration", "CocoricoProfile", "CocoricoProfileContact", "default"},)
      */
     public function validate(ExecutionContextInterface $context)
     {
         if ($this->personType == self::PERSON_TYPE_LEGAL && empty($this->companyName)) {
-            $context->addViolation('cocorico_user.companyName.blank');
+            $context->buildViolation('cocorico_user.companyName.blank')
+                ->atPath('companyName')
+                ->setTranslationDomain('validators')
+                ->addViolation();
         }
     }
 }

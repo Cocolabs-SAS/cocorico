@@ -44,13 +44,11 @@ class RegistrationFormType extends AbstractType
                 ChoiceType::class,
                 array(
                     'label' => 'form.person_type',
-                    'choices' => [
-                        User::PERSON_TYPE_NATURAL => 'form.person_type.natural',
-                        User::PERSON_TYPE_LEGAL => 'form.person_type.legal',
-                    ],
+                    'choices' => array_flip(User::$personTypeValues),
                     'expanded' => true,
                     'empty_data' => User::PERSON_TYPE_NATURAL,
                     'required' => true,
+                    'choices_as_values' => true
                 )
             )
             ->add(

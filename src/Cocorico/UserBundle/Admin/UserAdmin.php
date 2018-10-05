@@ -34,8 +34,6 @@ class UserAdmin extends SonataUserAdmin
         $this->bundles = $bundles;
     }
 
-//    protected $perPageOptions = array(5, 15, 25, 50, 100, 150, 200);
-
     /**
      * {@inheritdoc}
      */
@@ -65,16 +63,15 @@ class UserAdmin extends SonataUserAdmin
                 'personType',
                 'choice',
                 array(
-                    'translation_domain' => 'cocorico_user',
                     'empty_data' => User::PERSON_TYPE_NATURAL,
                     'required' => true,
                     'disabled' => true,
                     'multiple' => false,
                     'expanded' => true,
-                    'choices' => [
-                        User::PERSON_TYPE_NATURAL => 'form.person_type.natural',
-                        User::PERSON_TYPE_LEGAL => 'form.person_type.legal',
-                    ],
+                    'choices' => array_flip(User::$personTypeValues),
+                    'choices_as_values' => true,
+                    'label' => 'Type',
+                    'translation_domain' => 'cocorico_user'
                 )
             )
             ->add(

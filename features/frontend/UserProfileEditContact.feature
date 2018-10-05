@@ -19,7 +19,7 @@ Feature: User profile contact edit
     And I follow "Contact information"
     And I fill in the following:
       | user_email               | username@cocorico.rocks            |
-      | user_phone_prefix        | 14                                 |
+      | user_phonePrefix         | 14                                 |
       | user_phone               | 123456                             |
       | user_addresses_0_address | 36-40 Rue Notre Dame des Victoires |
       | user_addresses_0_city    | Paris                              |

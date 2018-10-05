@@ -115,7 +115,33 @@ $(function () {
     //syncTimeFields(".time-fields");
 
     fixIEMobile10();
+
+    //User type (legal or natural)
+    $('.trigger-company-name input').each(function (k, el) {
+        toggleCompanyNameInput(el);
+        $(el).on('click', function () {
+            toggleCompanyNameInput(el);
+        });
+    });
 });
+
+/**
+ * Toggle user company field depending on type user
+ *
+ * @param input
+ */
+function toggleCompanyNameInput(input) {
+    if (!$(input).is(':checked')) {
+        return;
+    }
+    if ($(input).val() == 2) {
+        $('.target-company-name').show();
+        $('.target-company-name input').addClass('required');
+    } else {
+        $('.target-company-name').hide();
+        $('.target-company-name input').removeClass('required');
+    }
+}
 
 /**
  * Fix IE mobile
