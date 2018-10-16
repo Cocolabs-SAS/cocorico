@@ -78,10 +78,6 @@ class ListingVoter implements VoterInterface
 
         switch ($attribute) {
             case self::BOOKING:
-                if ($listing->getStatus() == Listing::STATUS_PUBLISHED) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
             case self::VIEW:
                 if ($listing->getStatus() == Listing::STATUS_PUBLISHED
                     || (

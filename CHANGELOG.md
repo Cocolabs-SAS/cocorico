@@ -13,8 +13,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Remove error when booking duration is less than 1 hour in booking price form
 
 ### Changed
+- Disable 301 redirect when offerer go to the new booking page of its listing
 
 
 ## [0.6.0] - 2018-10-05
