@@ -159,6 +159,8 @@ class BookingController extends Controller
             array(
                 'booking' => $booking,
                 'form' => $form->createView(),
+                //Used to hide errors fields message when a secondary submission (Voucher, Delivery, ...) is done successfully
+                'display_errors' => ($success < 2)
             )
         );
     }

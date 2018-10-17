@@ -37,6 +37,18 @@
     {{ 'booking.new.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
 {%- endblock -%}
 
+{%- block stylesheets -%}
+    {{ parent() }}
+
+    {% if display_errors is defined and not display_errors %}
+        <style>
+            .errors {
+                display: none;
+            }
+        </style>
+    {% endif %}
+{%- endblock -%}
+
 {% block layout %}
 
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
