@@ -29,7 +29,7 @@
 </style>
 <script>
     var geocoder, map, marker, autoComplete, latlng, boundingBox, markerDraggable;
-    var countriesEnabled = {{ cocorico_listing_location_countries|json_encode|raw }};
+    var countriesEnabled = {{ cocorico_listing_countries|json_encode|raw }};
 
     //Functions
     var initializeGMapFunc, geocodeFunc, geocodeJSONFunc, reverseGeocodeFunc, formatGeocodingResultFunc,
