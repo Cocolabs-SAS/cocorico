@@ -34,6 +34,7 @@
     var initializeGMapFunc, geocodeFunc, geocodeJSONFunc, reverseGeocodeFunc, formatGeocodingResultFunc,
         translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
         geoLocateIPFunc;
+        
     var countriesEnabled = {{ cocorico_listing_location_countries|json_encode|raw }};
     $(function () {
         //var maxZoom = 18;
