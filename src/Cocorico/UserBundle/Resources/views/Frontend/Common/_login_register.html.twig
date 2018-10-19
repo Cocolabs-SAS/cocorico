@@ -67,11 +67,10 @@
         {% endif %}
 
         {#Redirect after login on referer except for some routes #}
-        {% if app.session.get('_security.main.target_path') is defined %}
-            <input type="hidden" name="redirect_to" value="{{ app.session.get('_security.main.target_path') }}"/>
-        {% elseif
-            app.request.uri != app.request.headers.get('referer')
-            and app.request.get('_route') not in ['cocorico_listing_availabilities', 'cocorico_booking_new', 'cocorico_listing_new'] %}
+        {% set targetUrl =  app.session.get('_security.main.target_path')|default('') %}
+        {% if targetUrl %}
+            <input type="hidden" name="redirect_to" value="{{ targetUrl }}"/>
+        {% elseif app.request.uri != app.request.headers.get('referer') and app.request.get('_route') not in ['cocorico_listing_availabilities'] %}
             <input type="hidden" name="redirect_to" value="{{ app.request.headers.get('referer') }}"/>
         {% endif %}
     </div>

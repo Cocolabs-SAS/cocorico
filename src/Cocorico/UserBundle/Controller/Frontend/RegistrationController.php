@@ -40,6 +40,8 @@ class RegistrationController extends ContainerAware
     {
         $session = $this->container->get('session');
         $router = $this->container->get('router');
+        $request = $this->container->get('request');
+
         if ($this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             if (!$session->has('profile')) {
                 $session->set('profile', 'asker');
@@ -66,7 +68,8 @@ class RegistrationController extends ContainerAware
                     $session->set('cocorico_user_send_confirmation_email/email', $user->getEmail());
                     $url = $router->generate('cocorico_user_registration_check_email');
                 } else {
-                    $url = $router->generate('cocorico_user_register_confirmed');
+                    $url = $request->get('redirect_to') ? $request->get('redirect_to') :
+                        $this->container->get('router')->generate('cocorico_user_register_confirmed');
                 }
 
                 return new RedirectResponse($url);
