@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
++- Add new login / registration step before new listing / new booking action
 
 ### Fixed
 - Remove error when booking duration is less than 1 hour in booking price form
