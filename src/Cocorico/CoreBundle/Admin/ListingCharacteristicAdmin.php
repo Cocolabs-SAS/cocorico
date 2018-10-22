@@ -84,7 +84,7 @@ class ListingCharacteristicAdmin extends Admin
             )
             ->add(
                 'listingCharacteristicType',
-                null,
+                'sonata_type_model_list',
                 array(
                     'label' => 'admin.listing_characteristic.type.label'
                 )

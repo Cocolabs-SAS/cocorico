@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-05-28T10:58:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-03-22T17:33:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,27 +9,27 @@
       <trans-unit id="356a192b7913b04c54574d18c28d46e6395428ab" resname="1">
         <source>1</source>
         <target>1</target>
-        <jms:reference-file line="36">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="37">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da4b9237bacccdf19c0760cab7aec4a8359010b0" resname="2">
         <source>2</source>
         <target>2</target>
-        <jms:reference-file line="37">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="38">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="77de68daecd823babbb58edb1c8e14d7106e83bb" resname="3">
         <source>3</source>
         <target>3</target>
-        <jms:reference-file line="38">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="39">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b6453892473a467d07372d45eb05abc2031647a" resname="4">
         <source>4</source>
         <target>4</target>
-        <jms:reference-file line="39">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="40">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4" resname="5">
         <source>5</source>
         <target>5</target>
-        <jms:reference-file line="40">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="41">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f85266aaf970ecc6ccb3bbeb61412845d69c207b" resname="cocorico_review.comment.not_blank">
         <source>cocorico_review.comment.not_blank</source>
@@ -126,8 +126,7 @@
       </trans-unit>
       <trans-unit id="9646891d035d49c9517b979552b7d96f63ccb539" resname="review.comment.textarea.placeholder">
         <source>review.comment.textarea.placeholder</source>
-        <target>Soyez poli, penser à la façon dont votre avis peut aider les autres à se faire une opinion.
-                </target>
+        <target>Soyez poli, penser à la façon dont votre avis peut aider les autres à se faire une opinion.</target>
         <jms:reference-file line="111">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="819692399f501c43f211cfd9ab5b7b6fab38aa7f" resname="review.comment.your_comment">
@@ -138,12 +137,12 @@
       <trans-unit id="779d67710e1d16486e67f1a820695a3a1edbf7d8" resname="review.form.comment.label">
         <source>review.form.comment.label</source>
         <target>review.form.comment.label</target>
-        <jms:reference-file line="53">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="54">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62dd6ff04ed59422378f2043f6552673d5bc4ce0" resname="review.form.rating.label">
         <source>review.form.rating.label</source>
         <target>review.form.rating.label</target>
-        <jms:reference-file line="44">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="45">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="30ac95fbb1ba503dcae7040c9a0dd55dcc7d8f1f" resname="review.new.success">
         <source>review.new.success</source>

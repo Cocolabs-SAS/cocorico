@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-05-28T10:58:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-03-22T17:33:11Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -55,7 +55,7 @@
       <trans-unit id="9e16967be6a7afcf10147cffc7be05f119a726de" resname="cocorico.search.extended.warning %location%">
         <source>cocorico.search.extended.warning %location%</source>
         <target>Nombre de résultats insuffisant, la zone de recherche va être étendue à : %location%</target>
-        <jms:reference-file line="237">Frontend/ListingResult/result.html.twig</jms:reference-file>
+        <jms:reference-file line="239">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e76df2f570186e6fcf3ba0b861b2fe7b1d19dc7" resname="cocorico.search.invalidate.address">
         <source>cocorico.search.invalidate.address</source>
@@ -148,7 +148,7 @@
         <source>footer.all_right_reserved</source>
         <target>tous droits réservés</target>
         <jms:reference-file line="90">Frontend/Common/_footer.html.twig</jms:reference-file>
-        <jms:reference-file line="82">views/Mails/layout.html.twig</jms:reference-file>
+        <jms:reference-file line="83">views/Mails/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="eafbb9e9132e8fc3dfed33243e7fb8781ab79935" resname="footer.contact_us.link">
         <source>footer.contact_us.link</source>
@@ -198,9 +198,9 @@
       <trans-unit id="ccaeec1d1b1dbbc71e18f43031b34b69864d0ec0" resname="form.error">
         <source>form.error</source>
         <target>Une erreur est survenue.</target>
-        <jms:reference-file line="64">views/Form/fields.html.twig</jms:reference-file>
         <jms:reference-file line="70">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
         <jms:reference-file line="71">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
+        <jms:reference-file line="64">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="745132bd15d9bcfd7316d5588bf300eac5bfbc6d" resname="listing.file.button.text">
         <source>listing.file.button.text</source>
@@ -227,26 +227,26 @@
       <trans-unit id="ee1536aec49276b3a23b8861008ee943786bc7cb" resname="multiselect.all_selected">
         <source>multiselect.all_selected</source>
         <target>Toutes</target>
-        <jms:reference-file line="356">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="262">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="529">Frontend/Listing/show.html.twig</jms:reference-file>
         <jms:reference-file line="124">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="534">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="264">Frontend/ListingResult/result.html.twig</jms:reference-file>
+        <jms:reference-file line="356">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="780b109aaf541af74b8adc7fb6222d4fda7a980d" resname="multiselect.none_selected">
         <source>multiselect.none_selected</source>
         <target>Aucune</target>
-        <jms:reference-file line="357">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="263">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="530">Frontend/Listing/show.html.twig</jms:reference-file>
         <jms:reference-file line="125">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="535">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="265">Frontend/ListingResult/result.html.twig</jms:reference-file>
+        <jms:reference-file line="357">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56aef35256504c5def3af2bfea3c78db49dd8cc3" resname="multiselect.num_selected">
         <source>multiselect.num_selected</source>
         <target>selectionnées</target>
-        <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="264">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="531">Frontend/Listing/show.html.twig</jms:reference-file>
         <jms:reference-file line="126">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="536">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="266">Frontend/ListingResult/result.html.twig</jms:reference-file>
+        <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7922207fb51f1d5e34be3c837b7ae78b4587854a" resname="nav.asker.link">
         <source>nav.asker.link</source>
@@ -393,16 +393,16 @@
       </trans-unit>
       <trans-unit id="68583dcb6860292d76e4dc945e64cafcdf868025" resname="private_info_replacement">
         <source>private_info_replacement</source>
-        <target>[xxxxxxx]</target>
+        <target state="new">[xxxxxxx]</target>
         <jms:reference-file line="273">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="774b40fc90dcebf1a82352cb39f44e3e36120bad" resname="time_range.invalid.duration">
         <source>time_range.invalid.duration</source>
-        <target state="new">La durée est plus grande que celle autorisée</target>
+        <target state="new">La durée est plus grande que celle autorisée ou votre horaire est invalide</target>
       </trans-unit>
       <trans-unit id="733820e784b4f0b21c9d15ffe21c3381e9e7f5ff" resname="time_range.invalid.end_before_start">
         <source>time_range.invalid.end_before_start</source>
-        <target>L'heure de fin doit être postérieure à l'heure de début</target>
+        <target>L'heure de fin doit être au plus tard à minuit et postérieure à l'heure de début.</target>
         <jms:reference-file line="14">Frontend/Booking/form_booking_price.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c49a1647ba14067310ff0cb29f154d130f7af325" resname="time_range.invalid.min_start {{ min_start_time }}">
@@ -424,14 +424,12 @@
       </trans-unit>
       <trans-unit id="f1d24cf913356e9f49b26d914a31742608c9cb6b" resname="time_unit_hour">
         <source>time_unit_hour</source>
-        <target state="new">{-3} par heure|{-1} heure(s)|{0} heure|]0,1] %count% heure|]1,Inf]%count% heures
-                </target>
+        <target state="new">{-3} par heure|{-1} heure(s)|{0} heure|{1} %count% heure|]1,Inf]%count% heures</target>
         <jms:reference-file line="218">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f84671b575da92a2471bfb36da94f36cf5b7dfd1" resname="time_unit_night">
         <source>time_unit_night</source>
-        <target state="new">{-3} par nuité|{-1} nuité(s)|{0} nuité|{1} %count% nuité|]1,Inf]%count% nuités
-                </target>
+        <target state="new">{-3} par nuité|{-1} nuité(s)|{0} nuité|{1} %count% nuité|]1,Inf]%count% nuités</target>
         <jms:reference-file line="209">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35d3a7020c09b2a1abbbf65dfa1203bdd1c926bc" resname="user.form.credential.error">

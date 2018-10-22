@@ -135,7 +135,7 @@ class UserAdmin extends SonataUserAdmin
 //                            'locale_options' => $descriptions
                         ),
                     ),
-                    /* @Ignore */
+                    /** @Ignore */
                     'label' => false,
                 )
             )
@@ -431,7 +431,7 @@ class UserAdmin extends SonataUserAdmin
         );
 
         $actions['reset_fees'] = array(
-            /* @Ignore */
+            /** @Ignore */
             'label' => $label,
             'ask_confirmation' => true,
         );
