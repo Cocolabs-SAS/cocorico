@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-05-28T10:58:42Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-03-22T17:33:11Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -26,20 +26,20 @@
       <trans-unit id="55f8ebc805e65b5b71ddafdae390e3be2bcd69af" resname="Description">
         <source>Description</source>
         <target>Description</target>
-        <jms:reference-file line="46">PageBundle/Admin/PageAdmin.php</jms:reference-file>
-        <jms:reference-file line="51">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
         <jms:reference-file line="66">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
         <jms:reference-file line="57">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="51">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
+        <jms:reference-file line="46">PageBundle/Admin/PageAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="72e4c870309b0aaef61e80f369017539df2d6545" resname="Descriptions">
         <source>Descriptions</source>
         <target>Descriptions</target>
         <jms:reference-file line="98">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
-        <jms:reference-file line="98">PageBundle/Admin/PageAdmin.php</jms:reference-file>
-        <jms:reference-file line="75">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
-        <jms:reference-file line="65">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
         <jms:reference-file line="136">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
         <jms:reference-file line="80">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="75">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
+          <jms:reference-file line="65">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
+        <jms:reference-file line="98">PageBundle/Admin/PageAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d0517071aa376e797705058bbad4b658954b9930" resname="Link">
         <source>Link</source>
@@ -59,10 +59,10 @@
       <trans-unit id="709a23220f2c3d64d1e1d6d18c4d5280f8d82fca" resname="Name">
         <source>Name</source>
         <target>Nom</target>
-        <jms:reference-file line="47">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
-        <jms:reference-file line="45">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
-        <jms:reference-file line="47">CoreBundle/Admin/ListingCharacteristicGroupAdmin.php</jms:reference-file>
         <jms:reference-file line="53">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="47">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
+        <jms:reference-file line="47">CoreBundle/Admin/ListingCharacteristicGroupAdmin.php</jms:reference-file>
+          <jms:reference-file line="45">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
         <source>Offerer</source>
@@ -78,8 +78,8 @@
         <source>Title</source>
         <target>Titre</target>
         <jms:reference-file line="51">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
-        <jms:reference-file line="43">PageBundle/Admin/PageAdmin.php</jms:reference-file>
         <jms:reference-file line="63">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+        <jms:reference-file line="43">PageBundle/Admin/PageAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0e2d9b0777a485c1276de0803c12a7d76fbc5c39" resname="URL">
         <source>URL</source>
@@ -601,15 +601,15 @@
         <target>admin.listing_characteristic.name.label</target>
         <jms:reference-file line="108">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
         <jms:reference-file line="130">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
-        <jms:reference-file line="48">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
-        <jms:reference-file line="76">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
+          <jms:reference-file line="48">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
+          <jms:reference-file line="76">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d5b9ab7d77dcadc3077817ecf2332b4776b1b994" resname="admin.listing_characteristic.position.label">
         <source>admin.listing_characteristic.position.label</source>
         <target>admin.listing_characteristic.position.label</target>
         <jms:reference-file line="82">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
         <jms:reference-file line="146">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
-        <jms:reference-file line="72">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
+          <jms:reference-file line="72">CoreBundle/Admin/ListingCharacteristicValueAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4d5a2b94a679ce2dbb4cf10d2b7755ae9fb616c2" resname="admin.listing_characteristic.type.label">
         <source>admin.listing_characteristic.type.label</source>
@@ -629,10 +629,10 @@
         <target>admin.listing_characteristic_group.position.label</target>
         <jms:reference-file line="70">CoreBundle/Admin/ListingCharacteristicGroupAdmin.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="91d19d33cedf8891ac27e5dfe3889062957b40ed" resname="admin.listing_characteristic_type.values.label">
-        <source>admin.listing_characteristic_type.values.label</source>
-        <target state="new">admin.listing_characteristic_type.values.label</target>
-        <jms:reference-file line="56">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
+        <trans-unit id="91d19d33cedf8891ac27e5dfe3889062957b40ed" resname="admin.listing_characteristic_type.values.label">
+            <source>admin.listing_characteristic_type.values.label</source>
+            <target state="new">admin.listing_characteristic_type.values.label</target>
+            <jms:reference-file line="56">CoreBundle/Admin/ListingCharacteristicTypeAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3347b7f78f2611fd44f2ad674af85dc1c151ba71" resname="admin.page.created_at.label">
         <source>admin.page.created_at.label</source>
@@ -716,10 +716,10 @@
       <trans-unit id="b7f5bbd5b72bba1497ddddad38b4b3c0c852c662" resname="admin.review.listing.label">
         <source>admin.review.listing.label</source>
         <target>admin.review.listing.label</target>
+        <jms:reference-file line="137">MessageBundle/Admin/ThreadAdmin.php</jms:reference-file>
         <jms:reference-file line="81">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
         <jms:reference-file line="143">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
         <jms:reference-file line="206">ReviewBundle/Admin/ReviewAdmin.php</jms:reference-file>
-        <jms:reference-file line="137">MessageBundle/Admin/ThreadAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d9510213b05de69ab0992b67039ba079c2ffa42b" resname="admin.review.rating.label">
         <source>admin.review.rating.label</source>

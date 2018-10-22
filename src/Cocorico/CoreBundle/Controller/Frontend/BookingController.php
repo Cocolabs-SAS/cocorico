@@ -127,7 +127,7 @@ class BookingController extends Controller
                 //Errors message are created in event subscribers
                 $session->getFlashBag()->add(
                     'error',
-                    /* @Ignore */
+                    /** @Ignore */
                     $translator->trans($e->getMessage(), array(), 'cocorico_booking')
                 );
             }
