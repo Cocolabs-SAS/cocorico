@@ -106,8 +106,8 @@ parameters:
     #Is new listing published by default (0 or 1)
     cocorico.listing_new_is_published: 1
 
-    #Countries : for France and UK: - FR\n- GB. For all countries set it to ~
-    cocorico.listing_countries: ~
+    #Countries : for France and UK: - FR\n- GB. For all countries set it to []
+    cocorico.listing_countries: []
 
     cocorico.listing_favorite_countries:
         - FR
