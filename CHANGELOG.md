@@ -7,8 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 
-
 ## [Unreleased]
+
+### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.7.0] - (2017-03-27)
 
 ### Added
 +- Add new login / registration step before new listing / new booking action
@@ -19,6 +27,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Changed
 - Disable 301 redirect when offerer go to the new booking page of its listing
+- Change MessageBundle mail notification method
 
 
 ## [0.6.0] - 2018-10-05

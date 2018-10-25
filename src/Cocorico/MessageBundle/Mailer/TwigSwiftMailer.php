@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\UserBundle\Mailer;
+namespace Cocorico\MessageBundle\Mailer;
 
 use Cocorico\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
@@ -23,8 +23,8 @@ class TwigSwiftMailer implements MailerInterface
     protected $router;
     protected $twig;
     protected $requestStack;
-    protected $parameters;
     protected $fromEmail;
+    protected $templates;
 
     /**
      * @param \Swift_Mailer         $mailer
@@ -32,78 +32,58 @@ class TwigSwiftMailer implements MailerInterface
      * @param \Twig_Environment     $twig
      * @param RequestStack          $requestStack
      * @param array                 $parameters
+     * @param array                 $templates
      */
     public function __construct(
         \Swift_Mailer $mailer,
         UrlGeneratorInterface $router,
         \Twig_Environment $twig,
         RequestStack $requestStack,
-        array $parameters
+        array $parameters,
+        array $templates
     ) {
         $this->mailer = $mailer;
         $this->router = $router;
         $this->twig = $twig;
-        $this->parameters = $parameters;
+        $parameters = $parameters['parameters'];
 
-        $this->locales = $parameters['locales'];
-        $this->fromEmail = $parameters['from_email'];
-        $this->locale = $parameters['locale'];
+        $this->fromEmail = $parameters['cocorico_from_email'];
+        $this->locales = $parameters['cocorico_locales'];
+        $this->locale = $parameters['cocorico_locale'];
+
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }
+
+        $this->templates = $templates['templates'];
     }
 
     /**
-     * @param UserInterface $user
+     * @param  int               $threadId
+     * @param UserInterface|User $recipient
+     * @param UserInterface      $sender
      */
-    public function sendAccountCreatedMessageToUser(UserInterface $user)
+    public function sendNewThreadMessageToUser($threadId, UserInterface $recipient, UserInterface $sender)
     {
-        $template = $this->parameters['templates']['account_created_user'];
+        $userLocale = $recipient->guessPreferredLanguage($this->locales, $this->locale);
+        $template = $this->templates['new_thread_message_user'];
 
-        $context = array(
-            'user' => $user,
-            'cocorico_site_name' => $this->parameters['site_name']
-        );
-
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    public function sendResettingEmailMessageToUser(UserInterface $user)
-    {
-        $template = $this->parameters['templates']['forgot_password_user'];
-        $password_reset_link = $this->router->generate(
-            'cocorico_user_resetting_reset',
-            array('token' => $user->getConfirmationToken()),
+        $threadUrl = $this->router->generate(
+            'cocorico_dashboard_message_thread_view',
+            array(
+                'threadId' => $threadId,
+                '_locale' => $userLocale
+            ),
             true
         );
+
         $context = array(
-            'user' => $user,
-            'password_reset_link' => $password_reset_link
+            'user' => $recipient,
+            'sender' => $sender,
+            'thread_url' => $threadUrl
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    public function sendAccountCreationConfirmationMessageToUser(UserInterface $user)
-    {
-        $template = $this->parameters['templates']['account_creation_confirmation_user'];
-        $url = $this->router->generate(
-            'cocorico_user_register_confirmation',
-            array('token' => $user->getConfirmationToken()),
-            true
-        );
-        $context = array(
-            'user' => $user,
-            'confirmationUrl' => $url
-        );
-
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $this->sendMessage($template, $context, $this->fromEmail, $recipient->getEmail());
     }
 
 

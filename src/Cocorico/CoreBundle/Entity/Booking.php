@@ -194,7 +194,7 @@ class Booking extends BaseBooking
     }
 
     /**
-     * @return mixed
+     * @return Thread
      */
     public function getThread()
     {
@@ -211,7 +211,7 @@ class Booking extends BaseBooking
     }
 
     /**
-     * @return mixed
+     * @return Review[]
      */
     public function getReviews()
     {

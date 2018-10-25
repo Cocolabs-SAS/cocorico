@@ -1,5 +1,6 @@
 imports:
     - { resource: subscribers.yml }
+    - { resource: mailer.yml }
     - { resource: admin.yml }
 
 #FOS Message services overriden
@@ -54,5 +55,5 @@ services:
         arguments: 
             - "@fos_message.thread_manager"
             - "@fos_message.message_manager"
-            - "%cocorico.message_max_per_page%"
             - "@cocorico_user.mailer.twig_swift"
+            - "%cocorico.message_max_per_page%"
