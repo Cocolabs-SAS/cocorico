@@ -2,13 +2,13 @@
 
 {% block subject -%}
     {% autoescape false %}
-    {{ 'new_message_user.email.subject'|trans({}, 'cocorico_mail', user_locale) }}
+    {{ 'new_thread_message_user.email.subject'|trans({}, 'cocorico_mail', user_locale) }}
     {% endautoescape %}
 {%- endblock %}
 
 {% block message %}
-    {{ 'new_message_user.email.message'|trans({
-        '%firstname%': user.firstName,
+    {{ 'new_thread_message_user.email.message'|trans({
+        '%recipient_firstname%': user.firstName,
         '%thread_url%': thread_url
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}

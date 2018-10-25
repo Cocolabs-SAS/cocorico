@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\MessageBundle\Entity\Message;
+use Cocorico\MessageBundle\Event\MessageEvent;
+use Cocorico\MessageBundle\Event\MessageEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -88,9 +90,9 @@ class BookingController extends Controller
      */
     public function showAction(Request $request, Booking $booking)
     {
-        $threadObj = $booking->getThread();
+        $thread = $booking->getThread();
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
+        $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
 
         $paramArr = $request->get($form->getName());
         $request->request->set($form->getName(), $paramArr);
@@ -103,10 +105,11 @@ class BookingController extends Controller
                 array('id' => $booking->getId())
             );
 
-            $recipients = $threadObj->getOtherParticipants($this->getUser());
+            $recipients = $thread->getOtherParticipants($this->getUser());
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
-            $this->container->get('cocorico_user.mailer.twig_swift')
-                ->sendNotificationForNewMessageToUser($recipient, $threadObj);
+
+            $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
+            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             return new RedirectResponse($selfUrl);
         }
