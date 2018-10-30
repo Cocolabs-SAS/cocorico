@@ -13,6 +13,9 @@ namespace Cocorico\MessageBundle\Controller\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\MessageBundle\Entity\Message;
+use Cocorico\MessageBundle\Entity\Thread;
+use Cocorico\MessageBundle\Event\MessageEvent;
+use Cocorico\MessageBundle\Event\MessageEvents;
 use Cocorico\MessageBundle\Repository\MessageRepository;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\Model\ThreadInterface;
@@ -77,7 +80,7 @@ class MessageController extends Controller
      *
      * @Route("/{listingId}/new", name="cocorico_dashboard_message_new", requirements={"listingId" = "\d+"})
      * @param Request $request
-     * @param         $listingId
+     * @param int     $listingId
      * @return RedirectResponse
      */
     public function newThreadAction(Request $request, $listingId)
@@ -90,7 +93,7 @@ class MessageController extends Controller
         /** @var Listing $listing */
         $listing = $em->getRepository('CocoricoCoreBundle:Listing')->find($listingId);
 
-        /** @var \Cocorico\MessageBundle\Entity\Thread $thread */
+        /** @var Thread $thread */
         $thread = $form->getData();
         $thread->setListing($listing);
         $thread->setSubject($listing->getTitle());
@@ -100,8 +103,8 @@ class MessageController extends Controller
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
         /** @var Message $message */
         if ($message = $formHandler->process($form)) {
-            $this->container->get('cocorico_user.mailer.twig_swift')
-                ->sendNotificationForNewMessageToUser($listing->getUser(), $message->getThread());
+            $messageEvent = new MessageEvent($message->getThread(), $listing->getUser(), $this->getUser());
+            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
                 ->clearNbUnreadMessageCache($listing->getUser()->getId());
@@ -146,14 +149,14 @@ class MessageController extends Controller
      */
     public function threadAction(Request $request, $threadId)
     {
-        /* @var $threadObj \Cocorico\MessageBundle\Entity\Thread */
-        $threadObj = $this->getProvider()->getThread($threadId);
+        /* @var Thread $thread */
+        $thread = $this->getProvider()->getThread($threadId);
 
         $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
             ->clearNbUnreadMessageCache($this->getUser()->getId());
 
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')->create($threadObj);
+        $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
         $paramArr = $request->get($form->getName());
         $request->request->set($form->getName(), $paramArr);
 
@@ -161,27 +164,28 @@ class MessageController extends Controller
 
         $selfUrl = $this->container->get('router')->generate(
             'cocorico_dashboard_message_thread_view',
-            array('threadId' => $threadObj->getId())
+            array('threadId' => $thread->getId())
         );
 
         if ($formHandler->process($form)) {
-            $recipients = $threadObj->getOtherParticipants($this->getUser());
+            $recipients = $thread->getOtherParticipants($this->getUser());
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
-            $this->container->get('cocorico_user.mailer.twig_swift')
-                ->sendNotificationForNewMessageToUser($recipient, $threadObj);
+
+            $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
+            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             return new RedirectResponse($selfUrl);
         }
 
         //Breadcrumbs
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbs->addThreadViewItems($request, $threadObj, $this->getUser());
+        $breadcrumbs->addThreadViewItems($request, $thread, $this->getUser());
 
         return $this->container->get('templating')->renderResponse(
             'CocoricoMessageBundle:Dashboard/Message:thread.html.twig',
             array(
                 'form' => $form->createView(),
-                'thread' => $threadObj
+                'thread' => $thread
             )
         );
     }

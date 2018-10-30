@@ -34,31 +34,27 @@ class ThreadManager
 {
     protected $fosThreadManager;
     protected $fosMessageManager;
-    public $maxPerPage;
-
-    /**
-     * @var TwigSwiftMailer
-     */
     protected $mailer;
+    public $maxPerPage;
 
     /**
      * Constructor.
      *
      * @param FOSThreadManager  $fosThreadManager
      * @param FOSMessageManager $fosMessageManager
-     * @param integer           $maxPerPage
      * @param TwigSwiftMailer   $mailer
+     * @param integer           $maxPerPage
      */
     public function __construct(
         FOSThreadManager $fosThreadManager,
         FOSMessageManager $fosMessageManager,
-        $maxPerPage,
-        TwigSwiftMailer $mailer
+        TwigSwiftMailer $mailer,
+        $maxPerPage
     ) {
         $this->fosThreadManager = $fosThreadManager;
         $this->fosMessageManager = $fosMessageManager;
-        $this->maxPerPage = $maxPerPage;
         $this->mailer = $mailer;
+        $this->maxPerPage = $maxPerPage;
     }
 
     /**
@@ -144,9 +140,6 @@ class ThreadManager
 
         $threadMessage->getThread()->setIsDeleted(false);
         $this->fosMessageManager->saveMessage($threadMessage);
-
-        //todo: is it really needed?
-        $this->mailer->sendNotificationForNewMessageToUser($listing->getUser(), $thread);
     }
 
     /**
@@ -169,8 +162,6 @@ class ThreadManager
         // send the message
         $threadMessage = $replyBuilder->getMessage();
         $this->fosMessageManager->saveMessage($threadMessage, false);
-
-        //$this->mailer->sendNotificationForNewMessageToUser($listing->getUser(), $thread);
     }
 
     /**

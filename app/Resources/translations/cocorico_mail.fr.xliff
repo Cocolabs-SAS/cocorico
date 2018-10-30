@@ -329,17 +329,17 @@ Votre annonce est maintenant publiquement visible. Afin de la faire remonter dan
         <target>Votre annonce est maintenant visible</target>
         <jms:reference-file line="5">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="975a850213519192abdaab8f04fecb2e0688ef45" resname="new_message_user.email.message">
-        <source>new_message_user.email.message</source>
-        <target><![CDATA[Bonjour %firstname%,
+        <trans-unit id="975a850213519192abdaab8f04fecb2e0688ef45" resname="new_thread_message_user.email.message">
+            <source>new_thread_message_user.email.message</source>
+            <target><![CDATA[Bonjour %recipient_firstname%,
 
 Vous avez reçu un message, cliquez <a href="%thread_url%">ici</a> pour le lire.]]></target>
-        <jms:reference-file line="10">Mails/User/new_message_user.txt.twig</jms:reference-file>
+            <jms:reference-file line="10">Mails/new_thread_message_user.txt.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="1052d42e2ac25d07448f6a5be017274bd8cbfe55" resname="new_message_user.email.subject">
-        <source>new_message_user.email.subject</source>
+        <trans-unit id="1052d42e2ac25d07448f6a5be017274bd8cbfe55" resname="new_thread_message_user.email.subject">
+            <source>new_thread_message_user.email.subject</source>
         <target>Vous avez reçu un nouveau message</target>
-        <jms:reference-file line="5">Mails/User/new_message_user.txt.twig</jms:reference-file>
+            <jms:reference-file line="5">Mails/new_thread_message_user.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d483722b73e4238ddffa4901f8c0ea946dc40588" resname="payment_error_asker.email.message">
         <source>payment_error_asker.email.message</source>

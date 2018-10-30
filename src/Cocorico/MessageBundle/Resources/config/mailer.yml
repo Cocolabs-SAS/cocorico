@@ -1,0 +1,17 @@
+parameters:
+    cocorico_message.new_thread_message_user.email.template: "CocoricoMessageBundle:Mails:new_thread_message_user.txt.twig"
+
+services:
+    cocorico_message.mailer.twig_swift:
+        class: Cocorico\MessageBundle\Mailer\TwigSwiftMailer
+        arguments:
+            - "@mailer"
+            - "@router"
+            - "@twig"
+            - "@request_stack"
+            - parameters:
+                cocorico_locales: "%cocorico.locales%"
+                cocorico_locale: "%cocorico.locale%"
+                cocorico_from_email: "%cocorico.from_email%"
+            - templates:
+                new_thread_message_user: "%cocorico_message.new_thread_message_user.email.template%"

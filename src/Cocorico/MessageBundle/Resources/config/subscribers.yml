@@ -6,3 +6,11 @@ services:
             - "@cocorico_message.thread_manager"
         tags:
             - { name: kernel.event_subscriber}
+
+    #Messages subscriber
+    cocorico_message.message.subscriber:
+        class: Cocorico\MessageBundle\Event\MessageSubscriber
+        arguments:
+            - "@cocorico_message.mailer.twig_swift"
+        tags:
+            - { name: kernel.event_subscriber}

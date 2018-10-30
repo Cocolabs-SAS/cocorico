@@ -27,7 +27,6 @@ class TwigSwiftMailer implements MailerInterface
     protected $twig;
     protected $requestStack;
     protected $translator;
-//    protected $parameters;
     protected $timeUnit;
     protected $timeUnitIsDay;
     /** @var  array locales */
@@ -60,7 +59,6 @@ class TwigSwiftMailer implements MailerInterface
         $this->translator = $translator;
 
         /** parameters */
-//        $this->parameters = $parameters['parameters'];
         $parameters = $parameters['parameters'];
 
         $this->fromEmail = $parameters['cocorico_from_email'];
@@ -70,12 +68,12 @@ class TwigSwiftMailer implements MailerInterface
         $this->timeUnitIsDay = ($this->timeUnit % 1440 == 0) ? true : false;
 
         $this->locales = $parameters['cocorico_locales'];
-
-        $this->templates = $templates;
         $this->locale = $parameters['cocorico_locale'];
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }
+
+        $this->templates = $templates['templates'];
     }
 
     /**
@@ -85,7 +83,7 @@ class TwigSwiftMailer implements MailerInterface
     {
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
-        $template = $this->templates['templates']['listing_activated_offerer'];
+        $template = $this->templates['listing_activated_offerer'];
 
         $listingCalendarEditUrl = $this->router->generate(
             'cocorico_dashboard_listing_edit_availabilities_status',
@@ -114,7 +112,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_request_offerer'];
+        $template = $this->templates['booking_request_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -145,7 +143,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_accepted_offerer'];
+        $template = $this->templates['booking_accepted_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -185,7 +183,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_refused_offerer'];
+        $template = $this->templates['booking_refused_offerer'];
 
         $listingCalendarEditUrl = $this->router->generate(
             'cocorico_dashboard_listing_edit_availabilities_status',
@@ -215,7 +213,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_request_expiration_alert_offerer'];
+        $template = $this->templates['booking_request_expiration_alert_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -246,7 +244,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_request_expired_offerer'];
+        $template = $this->templates['booking_request_expired_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -279,7 +277,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['reminder_to_rate_asker_offerer'];
+        $template = $this->templates['reminder_to_rate_asker_offerer'];
 
         $offererToAskerReviewUrl = $this->router->generate(
             'cocorico_dashboard_review_new',
@@ -308,7 +306,7 @@ class TwigSwiftMailer implements MailerInterface
         $listing = $booking->getListing();
         $user = $listing->getUser();
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_canceled_by_asker_offerer'];
+        $template = $this->templates['booking_canceled_by_asker_offerer'];
 
         $offererCancellationAmount = $booking->getBankWire() ? $booking->getBankWire()->getAmountDecimal() : 0;
 
@@ -332,7 +330,7 @@ class TwigSwiftMailer implements MailerInterface
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $asker = $booking->getUser();
-        $template = $this->templates['templates']['booking_imminent_offerer'];
+        $template = $this->templates['booking_imminent_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -362,7 +360,7 @@ class TwigSwiftMailer implements MailerInterface
         $listing = $booking->getListing();
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
-        $template = $this->templates['templates']['booking_bank_wire_transfer_offerer'];
+        $template = $this->templates['booking_bank_wire_transfer_offerer'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_offerer',
@@ -398,7 +396,7 @@ class TwigSwiftMailer implements MailerInterface
     {
         $user = $listing->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
-        $template = $this->templates['templates']['update_your_calendar_offerer'];
+        $template = $this->templates['update_your_calendar_offerer'];
 
         $listingCalendarEditUrl = $this->router->generate(
             'cocorico_dashboard_listing_edit_availabilities_status',
@@ -451,7 +449,7 @@ class TwigSwiftMailer implements MailerInterface
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
-        $template = $this->templates['templates']['booking_request_asker'];
+        $template = $this->templates['booking_request_asker'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_asker',
@@ -482,7 +480,7 @@ class TwigSwiftMailer implements MailerInterface
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
-        $template = $this->templates['templates']['booking_accepted_asker'];
+        $template = $this->templates['booking_accepted_asker'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_asker',
@@ -520,7 +518,7 @@ class TwigSwiftMailer implements MailerInterface
     {
         $user = $booking->getUser();
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
-        $template = $this->templates['templates']['booking_refused_asker'];
+        $template = $this->templates['booking_refused_asker'];
 
         $similarListingUrl = $this->router->generate(
             'cocorico_home',
@@ -545,7 +543,7 @@ class TwigSwiftMailer implements MailerInterface
     public function sendBookingRequestExpiredMessageToAsker(Booking $booking)
     {
         $user = $booking->getUser();
-        $template = $this->templates['templates']['booking_request_expired_asker'];
+        $template = $this->templates['booking_request_expired_asker'];
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
 
         $similarListingUrl = $this->router->generate(
@@ -574,7 +572,7 @@ class TwigSwiftMailer implements MailerInterface
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
-        $template = $this->templates['templates']['booking_imminent_asker'];
+        $template = $this->templates['booking_imminent_asker'];
 
         $bookingRequestUrl = $this->router->generate(
             'cocorico_dashboard_booking_show_asker',
@@ -605,7 +603,7 @@ class TwigSwiftMailer implements MailerInterface
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
-        $template = $this->templates['templates']['reminder_to_rate_offerer_asker'];
+        $template = $this->templates['reminder_to_rate_offerer_asker'];
 
         $askerToOffererReviewUrl = $this->router->generate(
             'cocorico_dashboard_review_new',
@@ -635,7 +633,7 @@ class TwigSwiftMailer implements MailerInterface
         $userLocale = $user->guessPreferredLanguage($this->locales, $this->locale);
         $listing = $booking->getListing();
         $offerer = $listing->getUser();
-        $template = $this->templates['templates']['booking_canceled_by_asker_asker'];
+        $template = $this->templates['booking_canceled_by_asker_asker'];
 
         $profilePaymentInfoUrl = $this->router->generate(
             'cocorico_user_dashboard_profile_edit_bank_account',
@@ -662,7 +660,7 @@ class TwigSwiftMailer implements MailerInterface
 
     public function sendMessageToAdmin($subject, $message)
     {
-        $template = $this->templates['templates']['admin_message'];
+        $template = $this->templates['admin_message'];
 
         $context = array(
             'user_locale' => $this->locale,
@@ -681,7 +679,7 @@ class TwigSwiftMailer implements MailerInterface
 //        $user = $booking->getUser();
 //        $listing = $booking->getListing();
 //        $offerer = $listing->getUser();
-//        $template = $this->templates['templates']['payment_error_asker'];
+//        $template = $this->templates['payment_error_asker'];
 //
 //        $bookingRequestUrl = $this->router->generate(
 //            'cocorico_dashboard_booking_show_offerer',
