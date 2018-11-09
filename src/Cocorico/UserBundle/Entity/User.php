@@ -1071,7 +1071,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get listings.
      *
-     * @return Listing[]|\Doctrine\Common\Collections\Collection
+     * @return Listing[]|ArrayCollection
      */
     public function getListings()
     {
@@ -1106,7 +1106,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get images.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getImages()
     {
@@ -1141,7 +1141,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get languages.
      *
-     * @return \Doctrine\Common\Collections\Collection|UserLanguage[]
+     * @return ArrayCollection|UserLanguage[]
      */
     public function getLanguages()
     {
@@ -1149,7 +1149,7 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * @return ArrayCollection|Booking[]
      */
     public function getBookings()
     {
@@ -1169,7 +1169,38 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @return mixed
+     * Does the user has booking as asker
+     *
+     * @return ArrayCollection|Booking[]
+     */
+    public function getBookingAsAsker()
+    {
+        return $this->getBookings();
+    }
+
+    /**
+     * Does the user has booking as offerer
+     *
+     * @return ArrayCollection|Booking[]
+     */
+    public function getBookingAsOfferer()
+    {
+        $bookings = new ArrayCollection();
+        $listings = $this->getListings();
+        if ($listings->count()) {
+            foreach ($listings as $listing) {
+                foreach ($listing->getBookings() as $booking) {
+                    $bookings->add($booking);
+                }
+            }
+        }
+
+        return $bookings;
+    }
+
+
+    /**
+     * @return ArrayCollection|Message[]
      */
     public function getMessages()
     {
@@ -1362,7 +1393,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * Get ListingAlerts.
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return ArrayCollection
      */
     public function getListingAlerts()
     {

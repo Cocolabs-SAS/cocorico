@@ -97,6 +97,7 @@ parameters:
     #SMS
     cocorico_sms.enabled: false
     cocorico_sms.phone_check: false
+    cocorico_sms.thread_notification: false
     cocorico_sms.ovh_endpoint_name:      "ovh-eu"
     cocorico_sms.ovh_application_key:    "Application Key"
     cocorico_sms.ovh_application_secret: "Application Secret"
