@@ -13,6 +13,7 @@ namespace Cocorico\MessageBundle\Controller\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\MessageBundle\Entity\Message;
+use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\MessageBundle\Event\MessageEvent;
 use Cocorico\MessageBundle\Event\MessageEvents;
 use Cocorico\MessageBundle\Repository\MessageRepository;
@@ -92,7 +93,7 @@ class MessageController extends Controller
         /** @var Listing $listing */
         $listing = $em->getRepository('CocoricoCoreBundle:Listing')->find($listingId);
 
-        /** @var \Cocorico\MessageBundle\Entity\Thread $thread */
+        /** @var Thread $thread */
         $thread = $form->getData();
         $thread->setListing($listing);
         $thread->setSubject($listing->getTitle());
@@ -148,7 +149,7 @@ class MessageController extends Controller
      */
     public function threadAction(Request $request, $threadId)
     {
-        /* @var $thread\Cocorico\MessageBundle\Entity\Thread */
+        /* @var Thread $thread */
         $thread = $this->getProvider()->getThread($threadId);
 
         $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')

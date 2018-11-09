@@ -405,7 +405,7 @@ class Listing extends BaseListing
     }
 
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection|Booking[]
      */
     public function getBookings()
     {
