@@ -105,6 +105,21 @@
             </div>
 
             <div class="field-row validate-row">
+                <div class="error-container">{{ form_errors(form_registration.nationality) }}</div>
+                <span class="label">
+                    {{ form_label(form_registration.nationality) }}
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_registration.nationality, {
+                        'attr': {
+                            'class': "form-control required no-arrow"
+                        }
+                    }) }}
+                </div>
+            </div>
+
+            <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.countryOfResidence) }}</div>
                 <span class="label">
                     {{ form_label(form_registration.countryOfResidence) }}
@@ -113,7 +128,7 @@
                 <div class="field-holder">
                     {{ form_widget(form_registration.countryOfResidence, {
                         'attr': {
-                            'class': "form-control required",
+                            'class': "form-control required no-arrow",
                             'data-parsley-required-message': 'cocorico_user.countryOfResidence.blank'|trans({},'validators'),
                             'data-parsley-invalid-message': 'cocorico_user.countryOfResidence.invalid'|trans({}, 'validators')
                         }
