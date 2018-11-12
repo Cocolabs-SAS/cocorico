@@ -19,7 +19,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [0.7.0] - (2017-03-27)
 
 ### Added
-+- Add new login / registration step before new listing / new booking action
+- Add new login / registration step before new listing / new booking action
+- Update listing characteristics values and types management in admin
+- Add MessageBundle sms notification and update sms-bundle to  v0.3
+- Add geolocation country filtering
 
 ### Fixed
 - Remove error when booking duration is less than 1 hour in booking price form
