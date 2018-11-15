@@ -52,9 +52,11 @@ class ListingFormHandler
 
     /**
      * @return Listing
+     *
      */
     public function init()
     {
+        //todo: move to ListingManager->initListing() see BookingManager->initBooking
         $listing = new Listing();
         $listing->setUser($this->user);
         $listing = $this->addImages($listing);

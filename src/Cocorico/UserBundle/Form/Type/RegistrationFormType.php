@@ -102,6 +102,15 @@ class RegistrationFormType extends AbstractType
                 )
             )
             ->add(
+                'nationality',
+                'country',
+                array(
+                    'label' => 'form.user.nationality',
+                    'required' => false,
+                    'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
+                )
+            )
+            ->add(
                 'countryOfResidence',
                 'country',
                 array(

@@ -5,8 +5,8 @@ services:
         arguments:
         - "@security.token_storage"
         - "@security.authorization_checker"
-            - "@request_stack"
-            - "@cocorico.listing.manager"
+        - "@request_stack"
+        - "@cocorico.listing.manager"
 
     #Booking
     cocorico.form.handler.booking:

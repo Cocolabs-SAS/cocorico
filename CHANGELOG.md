@@ -16,6 +16,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Optimise user and listing fields in almost admin edition pages (bookingBankWire, PayinRefund, Booking, ...)
 - Add person type in user fixtures
 - Fix listing address geolocation while listing deposit and listing address edition when no click on validate address
+- Add nationality field on registration form
 
 ### Changed
 - Remove unused registration handling in new listing form handler
