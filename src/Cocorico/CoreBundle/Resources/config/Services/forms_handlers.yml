@@ -8,14 +8,12 @@ services:
             - "@request_stack"
             - "@cocorico.listing.manager"
 
-
     #Booking
     cocorico.form.handler.booking:
         class: Cocorico\CoreBundle\Form\Handler\Frontend\BookingFormHandler
         arguments:
             - "@request_stack"
             - "@cocorico.booking.manager"
-            - "@cocorico_user.form.handler.registration"
             - "@event_dispatcher"
 
     cocorico.form.handler.booking.dashboard:

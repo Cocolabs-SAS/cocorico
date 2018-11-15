@@ -20,7 +20,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 - Remove unused registration handling in new listing form handler
 - Set listing user in listing form handler for listing deposit
-
+- Remove unused registration handling in new booking form handler
 ## [0.7.0] - (2017-03-27)
 
 ### Added

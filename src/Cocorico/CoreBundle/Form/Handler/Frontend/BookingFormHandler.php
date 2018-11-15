@@ -19,7 +19,6 @@ use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\UserBundle\Entity\User;
-use Cocorico\UserBundle\Form\Handler\RegistrationFormHandler;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -33,24 +32,20 @@ class BookingFormHandler
     protected $request;
     protected $flashBag;
     protected $bookingManager;
-    protected $registrationHandler;
     protected $dispatcher;
 
     /**
      * @param RequestStack             $requestStack
      * @param BookingManager           $bookingManager
-     * @param RegistrationFormHandler  $registrationHandler
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
         RequestStack $requestStack,
         BookingManager $bookingManager,
-        RegistrationFormHandler $registrationHandler,
         EventDispatcherInterface $dispatcher
     ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->bookingManager = $bookingManager;
-        $this->registrationHandler = $registrationHandler;
         $this->dispatcher = $dispatcher;
     }
 
@@ -157,16 +152,7 @@ class BookingFormHandler
     private function onSuccess(Form $form)
     {
         /** @var Booking $booking */
-        $request = $this->request->request;
         $booking = $form->getData();
-        $user = $booking->getUser();
-
-        //Login is done in BookingNewType form
-        if ($request->get('_username') || $request->get('_password')) {
-        } //Register : Authentication and Welcome email after registration
-        elseif ($form->has('user') && $form->get('user')->has("email")) {
-            $this->registrationHandler->handleRegistration($user);
-        }
 
         //No self booking
         if ($booking->getUser() == $booking->getListing()->getUser()) {
