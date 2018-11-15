@@ -14,6 +14,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Fixed
 - Optimise user and listing fields in almost admin edition pages (bookingBankWire, PayinRefund, Booking, ...)
+- Add person type in user fixtures
 
 ### Changed
 

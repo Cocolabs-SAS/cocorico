@@ -39,6 +39,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         /** @var  User $user */
         $user = $userManager->createUser();
+        $user->setPersonType(User::PERSON_TYPE_NATURAL);
         $user->setUsername('offerer@cocorico.rocks');
         $user->setEmail('offerer@cocorico.rocks');
         $user->setPlainPassword('12345678');
@@ -60,6 +61,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->addReference('offerer', $user);
 
         $user = $userManager->createUser();
+        $user->setPersonType(User::PERSON_TYPE_NATURAL);
         $user->setUsername('asker@cocorico.rocks');
         $user->setEmail('asker@cocorico.rocks');
         $user->setPlainPassword('12345678');
@@ -79,6 +81,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->addReference('asker', $user);
 
         $user = $userManager->createUser();
+        $user->setPersonType(User::PERSON_TYPE_NATURAL);
         $user->setUsername('disableuser@cocorico.rocks');
         $user->setEmail('disableuser@cocorico.rocks');
         $user->setPlainPassword('12345678');
@@ -98,6 +101,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $this->addReference('disable-user', $user);
 
         $user = $userManager->createUser();
+        $user->setPersonType(User::PERSON_TYPE_NATURAL);
         $user->setLastName('super-admin');
         $user->setFirstName('super-admin');
         $user->setUsername('super-admin@cocorico.rocks');

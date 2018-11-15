@@ -99,7 +99,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="person_type", type="smallint", nullable=true)
+     * @ORM\Column(name="person_type", type="smallint", nullable=false)
      *
      * @Assert\NotNull
      */
