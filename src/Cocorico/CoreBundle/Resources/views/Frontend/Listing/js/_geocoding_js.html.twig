@@ -15,17 +15,43 @@
         //Location
         //Geocoding
         $("body").on('click', 'a.validate-location', function (e) {
+            geocode(function (result) {
+                geocodingSuccess(result);
+            });
+        });
+
+        //Geocode address before form submission
+        var submitForm = false;
+        $("#listing_location_country").parents('form:first').submit(function (e) {
+            if (!submitForm) {
+                e.preventDefault();
+
+                geocode(function (result) {
+                    geocodingSuccess(result);
+                    submitForm = true;
+                    $("#listing_location_country").parents('form:first').submit();
+                });
+            }
+
+            return true;
+        });
+
+        /**
+         * Geocode address
+         * @param geocodingSuccessCallback function
+         */
+        function geocode(geocodingSuccessCallback) {
             $listingLocationError.html('');
             $.when(
-                    geocodeFunc(
-                            constructAddressFromAddressFields(),
-                            $("#listing_location_country option:selected").val(),
-                            true, true
-                    )
+                geocodeFunc(
+                    constructAddressFromAddressFields(),
+                    $("#listing_location_country option:selected").val(),
+                    true, true
+                )
             ).then(
-                    geocodingSuccess, geocodingError
+                geocodingSuccessCallback, geocodingError
             );
-        });
+        }
 
         //Marker dragend event > Reverse geocoding
         $(document).on("markerDragendEvt", function (e) {
@@ -156,15 +182,5 @@
                 refreshGeocoding();
             }
         });
-
-
-        //todo: make this work
-        $("[type=submit]").click(function (e) {
-            if (!$("#listing_location_coordinate").val()) {
-                refreshGeocoding();
-            }
-        });
     });
-
-
 </script>
