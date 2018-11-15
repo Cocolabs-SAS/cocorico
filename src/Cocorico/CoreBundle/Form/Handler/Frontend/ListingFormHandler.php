@@ -13,34 +13,40 @@ namespace Cocorico\CoreBundle\Form\Handler\Frontend;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Model\Manager\ListingManager;
-use Cocorico\UserBundle\Form\Handler\RegistrationFormHandler;
+use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
 /**
  * Handle Listing Form
- *
  */
 class ListingFormHandler
 {
     protected $request;
     protected $listingManager;
-    protected $registrationHandler;
-
+    /** @var User|null */
+    private $user = null;
 
     /**
-     * @param RequestStack            $requestStack
-     * @param ListingManager          $listingManager
-     * @param RegistrationFormHandler $registrationHandler
+     * @param TokenStorage         $securityTokenStorage
+     * @param AuthorizationChecker $securityAuthChecker
+     * @param RequestStack         $requestStack
+     * @param ListingManager       $listingManager
      */
     public function __construct(
+        TokenStorage $securityTokenStorage,
+        AuthorizationChecker $securityAuthChecker,
         RequestStack $requestStack,
-        ListingManager $listingManager,
-        RegistrationFormHandler $registrationHandler
+        ListingManager $listingManager
     ) {
+        if ($securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $this->user = $securityTokenStorage->getToken()->getUser();
+        }
         $this->request = $requestStack->getCurrentRequest();
         $this->listingManager = $listingManager;
-        $this->registrationHandler = $registrationHandler;
+
     }
 
 
@@ -50,6 +56,7 @@ class ListingFormHandler
     public function init()
     {
         $listing = new Listing();
+        $listing->setUser($this->user);
         $listing = $this->addImages($listing);
         $listing = $this->addCategories($listing);
 
@@ -82,15 +89,6 @@ class ListingFormHandler
     {
         /** @var Listing $listing */
         $listing = $form->getData();
-
-        //Login is done in BookingNewType form
-        if ($this->request->request->get('_username') || $this->request->request->get('_password')) {
-        } //Register : Authentication and Welcome email after registration
-        elseif ($form->has('user') && $form->get('user')->has("email")) {
-            $user = $listing->getUser();
-            $this->registrationHandler->handleRegistration($user);
-        }
-
         $this->listingManager->save($listing);
 
         return true;

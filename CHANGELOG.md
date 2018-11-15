@@ -18,7 +18,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix listing address geolocation while listing deposit and listing address edition when no click on validate address
 
 ### Changed
-
+- Remove unused registration handling in new listing form handler
+- Set listing user in listing form handler for listing deposit
 
 ## [0.7.0] - (2017-03-27)
 

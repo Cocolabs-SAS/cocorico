@@ -16,7 +16,6 @@ use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
-use Cocorico\UserBundle\Entity\User;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -24,8 +23,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
 /**
@@ -37,37 +34,24 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public static $tacError = 'listing.form.tac.error';
     public static $credentialError = 'user.form.credential.error';
 
-    private $securityTokenStorage;
-    private $securityAuthChecker;
     private $request;
     private $locale;
     private $locales;
-    /** @var User|null */
-    private $user = null;
     protected $dispatcher;
 
     /**
-     * @param TokenStorage             $securityTokenStorage
-     * @param AuthorizationChecker     $securityAuthChecker
      * @param RequestStack             $requestStack
      * @param array                    $locales
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
-        TokenStorage $securityTokenStorage,
-        AuthorizationChecker $securityAuthChecker,
         RequestStack $requestStack,
         $locales,
         EventDispatcherInterface $dispatcher
     ) {
-        $this->securityTokenStorage = $securityTokenStorage;
-        $this->securityAuthChecker = $securityAuthChecker;
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
-        if ($this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $this->user = $this->securityTokenStorage->getToken()->getUser();
-        }
         $this->dispatcher = $dispatcher;
     }
 
@@ -77,6 +61,9 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var Listing $listing */
+        $listing = $builder->getData();
+
         //Translations fields
         $titles = $descriptions = array();
         foreach ($this->locales as $i => $locale) {
@@ -122,15 +109,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
         $builder
             ->add(
-                'user',
-                'entity_hidden',
-                array(
-                    'class' => 'Cocorico\UserBundle\Entity\User',
-                    'data' => $this->user,
-                    'data_class' => null
-                )
-            )
-            ->add(
                 'price',
                 'price',
                 array(
@@ -144,10 +122,11 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
         //Default listing location
         $listingLocation = null;
-        if ($this->user) {
-            if ($this->user->getListings()->count()) {
+        $user = $listing->getUser();
+        if ($user) {
+            if ($user->getListings()->count()) {
                 /** @var Listing $listing */
-                $listing = $this->user->getListings()->first();
+                $listing = $user->getListings()->first();
                 $location = $listing->getLocation();
 
                 $listingLocation = new ListingLocation();

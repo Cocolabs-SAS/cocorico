@@ -3,8 +3,6 @@ services:
     cocorico.form.type.listing_new:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewType
         arguments:
-            - "@security.token_storage"
-            - "@security.authorization_checker"
             - "@request_stack"
             - "%cocorico.locales%"
             - "@event_dispatcher"
