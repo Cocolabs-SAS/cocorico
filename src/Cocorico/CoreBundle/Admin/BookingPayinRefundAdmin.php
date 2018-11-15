@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\BookingPayinRefund;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -50,12 +51,25 @@ class BookingPayinRefundAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var BookingPayinRefund $bookingPayinRefund */
+        $bookingPayinRefund = $this->getSubject();
+
+        $askerQuery = null;
+        if ($bookingPayinRefund) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $askerQuery = $userRepository->getFindOneQueryBuilder($bookingPayinRefund->getUser()->getId());
+        }
+
         $formMapper
             ->with('admin.booking_payin_refund.title')
             ->add(
                 'user',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $askerQuery,
                     'disabled' => true,
                     'label' => 'admin.booking.asker.label'
                 )

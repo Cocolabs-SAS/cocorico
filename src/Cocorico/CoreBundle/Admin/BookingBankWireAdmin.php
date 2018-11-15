@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Admin;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\BookingBankWire;
 use Cocorico\CoreBundle\Model\Manager\BookingBankWireManager;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -69,12 +70,23 @@ class BookingBankWireAdmin extends Admin
         /** @var BookingBankWire $bookingBankWire */
         $bookingBankWire = $this->getSubject();
 
+        $offererQuery = null;
+        if ($bookingBankWire) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $offererQuery = $userRepository->getFindOneQueryBuilder($bookingBankWire->getUser()->getId());
+        }
+
+
         $formMapper
             ->with('admin.booking_bank_wire.title')
             ->add(
                 'user',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $offererQuery,
                     'disabled' => true,
                     'label' => 'admin.booking.offerer.label'
                 )

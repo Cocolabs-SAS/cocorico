@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\ListingImageType;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -55,6 +56,18 @@ class ListingAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Listing $listing */
+        $listing = $this->getSubject();
+
+        $offererQuery = null;
+        if ($listing) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $offererQuery = $userRepository->getFindOneQueryBuilder($listing->getUser()->getId());
+        }
+
 
         //Translations fields
         $titles = $descriptions = $rules = array();
@@ -138,8 +151,9 @@ class ListingAdmin extends Admin
             )
             ->add(
                 'user',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $offererQuery,
                     'disabled' => true,
                     'label' => 'admin.listing.user.label'
                 )

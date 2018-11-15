@@ -12,6 +12,7 @@
 namespace Cocorico\MessageBundle\Admin;
 
 use Cocorico\MessageBundle\Entity\Thread;
+use Cocorico\ReportBundle\Repository\ListingRepository;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -115,29 +116,36 @@ class ThreadAdmin extends Admin
         $thread = $this->getSubject();
 
         $listing = null;
-        if ($thread && $thread->getListing()) {
-            $listing = $thread->getListing();
-        } elseif ($thread && $thread->getBooking()) {
-            $listing = $thread->getBooking()->getListing();
+        if ($thread) {
+            if ($thread->getListing()) {
+                $listing = $thread->getListing();
+            } elseif ($thread->getBooking()) {
+                $listing = $thread->getBooking()->getListing();
+            }
+
+            if ($listing) {
+                /** @var ListingRepository $listingRepository */
+                $listingRepository = $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                    ->getRepository('CocoricoCoreBundle:Listing');
+
+                $listingQuery = $listingRepository->getFindOneByIdAndLocaleQuery(
+                    $listing->getId(),
+                    $this->request ? $this->getRequest()->getLocale() : 'fr'
+                );
+
+                $formMapper
+                    ->add(
+                        'listing',
+                        'sonata_type_model',
+                        array(
+                            'query' => $listingQuery,
+                            'disabled' => true,
+                            'label' => 'admin.review.listing.label',
+                        )
+                    );
+            }
         }
 
-        if ($listing) {
-            $formMapper
-                ->add(
-                    'listing',
-                    'sonata_type_model',
-                    array(
-                        'query' => $listing ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
-                            ->getRepository('CocoricoCoreBundle:Listing')
-                            ->getFindOneByIdAndLocaleQuery(
-                                $listing->getId(),
-                                $this->request ? $this->getRequest()->getLocale() : 'fr'
-                            ) : null,
-                        'disabled' => true,
-                        'label' => 'admin.review.listing.label',
-                    )
-                );
-        }
 
         $formMapper
             ->add(

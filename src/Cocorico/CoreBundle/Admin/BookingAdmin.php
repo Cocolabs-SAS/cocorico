@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Repository\ListingRepository;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -78,38 +80,50 @@ class BookingAdmin extends Admin
         /** @var Booking $booking */
         $booking = $this->getSubject();
 
+        $askerQuery = $offererQuery = $listingQuery = null;
+        if ($booking) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $askerQuery = $userRepository->getFindOneQueryBuilder($booking->getUser()->getId());
+            $offererQuery = $userRepository->getFindOneQueryBuilder($booking->getListing()->getUser()->getId());
+
+            /** @var ListingRepository $listingRepository */
+            $listingRepository = $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                ->getRepository('CocoricoCoreBundle:Listing');
+
+            $listingQuery = $listingRepository->getFindOneByIdAndLocaleQuery(
+                $booking->getListing()->getId(),
+                $this->request ? $this->getRequest()->getLocale() : 'fr'
+            );
+        }
+
         $formMapper
             ->with('admin.booking.title')
             ->add(
                 'user',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $askerQuery,
                     'disabled' => true,
                     'label' => 'admin.booking.asker.label'
                 )
             )
             ->add(
                 'listing.user',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $offererQuery,
                     'disabled' => true,
                     'label' => 'admin.booking.offerer.label',
-                    'data_class' => 'Cocorico\UserBundle\Entity\User'
                 )
-
-            );
-
-        $formMapper
+            )
             ->add(
                 'listing',
                 'sonata_type_model',
                 array(
-                    'query' => $booking ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
-                        ->getRepository('CocoricoCoreBundle:Listing')
-                        ->getFindOneByIdAndLocaleQuery(
-                            $booking->getListing()->getId(),
-                            $this->request ? $this->getRequest()->getLocale() : 'fr'
-                        ) : null,
+                    'query' => $listingQuery,
                     'disabled' => true,
                     'label' => 'admin.listing.label',
                 )

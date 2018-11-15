@@ -33,13 +33,13 @@ class UserRepository extends EntityRepository
      */
     public function getActiveUser($idUser)
     {
-        $qbr = $this->createQueryBuilder('u');
-        $qbr->where('u.id = :idUser')
+        $queryBuilder = $this->createQueryBuilder('u');
+        $queryBuilder->where('u.id = :idUser')
             ->setParameter('idUser', $idUser)
             ->andWhere('u.enabled = :enabled')
             ->setParameter('enabled', 1);
 
-        return $qbr->getQuery()->getOneOrNullResult();
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -63,6 +63,24 @@ class UserRepository extends EntityRepository
         }
     }
 
+    /**
+     * Get  user by id
+     *
+     * @param integer $idUser
+     *
+     * @return mixed
+     */
+    public function getFindOneQueryBuilder($idUser)
+    {
+        $queryBuilder =
+            $this->createQueryBuilder('u')
+                ->addSelect('ut')
+                ->leftJoin('u.translations', 'ut')
+                ->where('u.id = :idUser')
+                ->setParameter('idUser', $idUser);
+
+        return $queryBuilder;
+    }
 
     /**
      * @return array|null

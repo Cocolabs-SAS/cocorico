@@ -10,8 +10,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Add bookings accessor by user type in User entity and CS
 
 ### Fixed
+- Optimise user and listing fields in almost admin edition pages (bookingBankWire, PayinRefund, Booking, ...)
 
 ### Changed
 

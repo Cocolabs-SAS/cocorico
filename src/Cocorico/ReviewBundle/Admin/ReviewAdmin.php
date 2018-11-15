@@ -11,7 +11,9 @@
 
 namespace Cocorico\ReviewBundle\Admin;
 
+use Cocorico\CoreBundle\Repository\ListingRepository;
 use Cocorico\ReviewBundle\Entity\Review;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -34,35 +36,57 @@ class ReviewAdmin extends Admin
         /** @var Review $review */
         $review = $this->getSubject();
 
+        $reviewByQuery = $reviewToQuery = $listingQuery = $bookingQuery = null;
+        if ($review) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $reviewByQuery = $userRepository->getFindOneQueryBuilder($review->getReviewBy()->getId());
+            $reviewToQuery = $userRepository->getFindOneQueryBuilder($review->getReviewTo()->getId());
+
+            /** @var ListingRepository $listingRepository */
+            $listingRepository = $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
+                ->getRepository('CocoricoCoreBundle:Listing');
+
+            $listingQuery = $listingRepository->getFindOneByIdAndLocaleQuery(
+                $review->getBooking()->getListing()->getId(),
+                $this->request ? $this->getRequest()->getLocale() : 'fr'
+            );
+
+            $bookingQuery = $this->modelManager->getEntityManager('CocoricoCoreBundle:Booking')
+                ->getRepository('CocoricoCoreBundle:Booking')
+                ->createQueryBuilder('b')
+                ->where('b.id = :bookingId')
+                ->setParameter('bookingId', $review->getBooking()->getId())->getQuery();
+
+        }
+
         $formMapper
             ->with('admin.review.title')
             ->add(
                 'booking',
                 'sonata_type_model',
                 array(
-                    'query' => $review ?
-                        $this->modelManager->getEntityManager('CocoricoCoreBundle:Booking')
-                            ->getRepository('CocoricoCoreBundle:Booking')
-                            ->createQueryBuilder('b')
-                            ->where('b.id = :bookingId')
-                            ->setParameter('bookingId', $review->getBooking()->getId())->getQuery()
-                        : null,
+                    'query' => $bookingQuery,
                     'disabled' => true,
                     'label' => 'admin.review.booking.label',
                 )
             )
             ->add(
                 'reviewBy',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $reviewByQuery,
                     'label' => 'admin.review.reviewBy.label',
                     'disabled' => true,
                 )
             )
             ->add(
                 'reviewTo',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $reviewToQuery,
                     'label' => 'admin.review.reviewTo.label',
                     'disabled' => true,
                 )
@@ -71,12 +95,7 @@ class ReviewAdmin extends Admin
                 'booking.listing',
                 'sonata_type_model',
                 array(
-                    'query' => $review ? $this->modelManager->getEntityManager('CocoricoCoreBundle:Listing')
-                        ->getRepository('CocoricoCoreBundle:Listing')
-                        ->getFindOneByIdAndLocaleQuery(
-                            $review->getBooking()->getListing()->getId(),
-                            $this->request ? $this->getRequest()->getLocale() : 'fr'
-                        ) : null,
+                    'query' => $listingQuery,
                     'disabled' => true,
                     'label' => 'admin.review.listing.label',
                 )
@@ -187,7 +206,6 @@ class ReviewAdmin extends Admin
                 'reviewBy',
                 null,
                 array(
-                    'disabled' => true,
                     'label' => 'admin.review.reviewBy.label'
                 )
             )
@@ -195,7 +213,6 @@ class ReviewAdmin extends Admin
                 'reviewTo',
                 null,
                 array(
-                    'disabled' => true,
                     'label' => 'admin.review.reviewTo.label',
                 )
             )
@@ -210,7 +227,6 @@ class ReviewAdmin extends Admin
                 'rating',
                 null,
                 array(
-                    'disabled' => true,
                     'label' => 'admin.review.rating.label',
                 )
             )

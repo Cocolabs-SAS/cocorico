@@ -11,6 +11,8 @@
 
 namespace Cocorico\MessageBundle\Admin;
 
+use Cocorico\MessageBundle\Entity\Message;
+use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -35,11 +37,24 @@ class MessageAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
+        /** @var Message $message */
+        $message = $this->getSubject();
+
+        $senderQuery = null;
+        if ($message) {
+            /** @var UserRepository $userRepository */
+            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
+                ->getRepository('CocoricoUserBundle:User');
+
+            $senderQuery = $userRepository->getFindOneQueryBuilder($message->getSender()->getId());
+        }
+
         $formMapper
             ->add(
                 'sender',
-                null,
+                'sonata_type_model',
                 array(
+                    'query' => $senderQuery,
                     'read_only' => true,
                     'disabled' => true,
                 )
