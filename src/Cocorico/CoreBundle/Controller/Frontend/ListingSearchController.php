@@ -35,12 +35,19 @@ class ListingSearchController extends Controller
      */
     public function searchAction(Request $request)
     {
+        //For drag map mode
+        $isXmlHttpRequest = false;
+        if ($request->isXmlHttpRequest()) {
+            $isXmlHttpRequest = true;
+        }
+
         $markers = array('listingsIds' => array(), 'markers' => array());
         $listings = new \ArrayIterator();
         $nbListings = 0;
 
         /** @var ListingSearchRequest $listingSearchRequest */
         $listingSearchRequest = $this->get('cocorico.listing_search_request');
+        $isXmlHttpRequest ? $listingSearchRequest->setSortBy('distance') : null;
         $form = $this->createSearchResultForm($listingSearchRequest);
 
         $form->handleRequest($request);
@@ -60,7 +67,7 @@ class ListingSearchController extends Controller
             $listingSearchRequest->setSimilarListings($markers['listingsIds']);
 
             //Persist listing search request in session
-            $this->get('session')->set('listing_search_request', $listingSearchRequest);
+            $isXmlHttpRequest ? $this->get('session')->set('listing_search_request', $listingSearchRequest) : null;
 
         } else {
             foreach ($form->getErrors(true) as $error) {
@@ -82,7 +89,9 @@ class ListingSearchController extends Controller
         $extraViewParams = $event->getExtraViewParams();
 
         return $this->render(
-            '@CocoricoCore/Frontend/ListingResult/result.html.twig',
+            $isXmlHttpRequest ?
+                '@CocoricoCore/Frontend/ListingResult/result_ajax.html.twig' :
+                '@CocoricoCore/Frontend/ListingResult/result.html.twig',
             array_merge(
                 array(
                     'form' => $form->createView(),

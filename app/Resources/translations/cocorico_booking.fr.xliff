@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-03-22T17:33:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,22 +9,22 @@
       <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
         <source>admin.booking.status.label</source>
         <target>Tous</target>
-        <jms:reference-file line="199">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-        <jms:reference-file line="201">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-        <jms:reference-file line="496">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-        <jms:reference-file line="95">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-        <jms:reference-file line="188">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-        <jms:reference-file line="189">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-        <jms:reference-file line="332">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-        <jms:reference-file line="87">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
-        <jms:reference-file line="88">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
-        <jms:reference-file line="168">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+          <jms:reference-file line="213">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="215">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="510">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="107">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="200">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="201">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="344">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="101">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+          <jms:reference-file line="102">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+          <jms:reference-file line="182">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
         <jms:reference-file line="36">Type/Dashboard/BookingStatusFilterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="12492e16cd91e297d528829d80415eb7cfeab028" resname="admin.booking_bank_wire.booking.status.label">
         <source>admin.booking_bank_wire.booking.status.label</source>
         <target>admin.booking_bank_wire.booking.status.label</target>
-        <jms:reference-file line="96">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="108">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c963936b54415544e2b2c4f28c4590f12c0bfa09" resname="booking.amount.help">
         <source>booking.amount.help</source>
@@ -183,20 +183,20 @@
       <trans-unit id="1f8b18d0d699e8cdef8ccc60f90ba5f21577e44c" resname="booking.edit.error">
         <source>booking.edit.error</source>
         <target>Une erreur est survenue</target>
-        <jms:reference-file line="176">Dashboard/Asker/BookingController.php</jms:reference-file>
-        <jms:reference-file line="185">Dashboard/Offerer/BookingController.php</jms:reference-file>
+          <jms:reference-file line="179">Dashboard/Asker/BookingController.php</jms:reference-file>
+          <jms:reference-file line="188">Dashboard/Offerer/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2cdc19eb8e84aea5c5c49413c844dcfeae1ffd4" resname="booking.edit.payin.error">
         <source>booking.edit.payin.error</source>
         <target>Une erreur est survenue lors du paiement</target>
-        <jms:reference-file line="178">Dashboard/Asker/BookingController.php</jms:reference-file>
-        <jms:reference-file line="187">Dashboard/Offerer/BookingController.php</jms:reference-file>
+          <jms:reference-file line="181">Dashboard/Asker/BookingController.php</jms:reference-file>
+          <jms:reference-file line="190">Dashboard/Offerer/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fbf02df348aa5e34398fd1ab84d0c7e2f9bb8881" resname="booking.edit.success">
         <source>booking.edit.success</source>
         <target>Modification enregistrée</target>
-        <jms:reference-file line="169">Dashboard/Asker/BookingController.php</jms:reference-file>
-        <jms:reference-file line="178">Dashboard/Offerer/BookingController.php</jms:reference-file>
+          <jms:reference-file line="172">Dashboard/Asker/BookingController.php</jms:reference-file>
+          <jms:reference-file line="181">Dashboard/Offerer/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1c1287d4207cf0cf579c1746cd4cb025a400b9dc" resname="booking.expire_in:">
         <source>booking.expire_in:</source>
@@ -358,8 +358,8 @@
       <trans-unit id="ecc3fa0ac15c5eb33b33f1f1be3eeebd95d9ffcc" resname="booking.new.unknown.error">
         <source>booking.new.unknown.error</source>
         <target>Une erreur est survenue</target>
-        <jms:reference-file line="174">Dashboard/Asker/BookingController.php</jms:reference-file>
-        <jms:reference-file line="183">Dashboard/Offerer/BookingController.php</jms:reference-file>
+          <jms:reference-file line="177">Dashboard/Asker/BookingController.php</jms:reference-file>
+          <jms:reference-file line="186">Dashboard/Offerer/BookingController.php</jms:reference-file>
           <jms:reference-file line="173">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b370314c697defb1d7393abebaf775f49845880b" resname="booking.new.validation.submit">

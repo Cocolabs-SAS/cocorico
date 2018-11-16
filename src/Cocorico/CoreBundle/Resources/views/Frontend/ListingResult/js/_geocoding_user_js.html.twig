@@ -1,0 +1,134 @@
+{#
+Guess user location from database user address, geolocation ip or html5 geolocation
+If a user location is found then fill search address field with this value
+#}
+{% trans_default_domain 'cocorico_geo' %}
+
+
+{#Auto fill location search field#}
+{% set user_address = false %}
+{% set user = app.user %}
+{% if user is not null and is_granted("IS_AUTHENTICATED_FULLY") %}
+    {% if user.addresses|length %}
+        {% set address = user.addresses.first %}
+        {% set user_address = { 'zip': address.zip, 'city': address.city, 'country': address.country|country_name } %}
+    {% endif %}
+{% endif %}
+
+<script>
+    $(function () {
+        var html5GeoLocTimeout;
+        var userLocation = [];
+        guessUserLocation();
+
+        function guessUserLocation() {
+            var userAddress = {{ user_address| json_encode | raw  }};
+
+            if (userAddress && userAddress.zip && userAddress.country) {//Database user address
+                userLocation = {
+                    "location": userAddress.zip,
+                    "country": userAddress.country
+                };
+                fillAddressField(userLocation);
+            } else if (navigator.geolocation) {//HTML5 geolocation
+                var timeout = 10000;
+                html5GeoLocTimeout = setTimeout(html5GeoLocError, timeout);
+
+                navigator.geolocation.getCurrentPosition(html5GeoLocSuccess, html5GeoLocError, {
+                    enableHighAccuracy: true, timeout: timeout, maximumAge: 3600000
+                });
+            } else {//IP Geolocation
+                geoLocateIP();
+            }
+        }
+
+        /**
+         * Try to geo locate user through HTML5 geolocation
+         *
+         * @param pos
+         */
+        function html5GeoLocSuccess(pos) {
+            clearTimeout(html5GeoLocTimeout);
+            var position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+            var location = false;
+            var country = false;
+
+            //Reverse geocoding
+            geocoder.geocode({'latLng': position}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var result = results[0];
+                    if (result) {
+                        $.each(result.address_components, function (index, object) {
+                            $.each(object.types, function (index, name) {
+                                if (name == "postal_code" || name == "administrative_area_level_2_short") {
+                                    if (name == "postal_code") {
+                                        location = object.long_name;
+                                    } else {
+                                        var area2 = object.long_name;
+                                        if (area2 && area2.match(/\d+/g) != null) {//is it number in it?
+                                            if (!location) {
+                                                location = object.long_name;
+                                            }
+                                        }
+                                    }
+                                } else if (name == "country") {
+                                    country = object.long_name;
+                                }
+
+                                if (location && country) return false;
+                            });
+                            if (location && country) return false;
+                        });
+
+                        userLocation = {
+                            "location": location,
+                            "country": country
+                        };
+                        fillAddressField(userLocation);
+                    }
+                }//status OK
+            });//geocoder.geocode
+        }
+
+        /**
+         * HTML5 geolocation is not possible
+         *
+         * @param error
+         */
+        function html5GeoLocError(error) {
+            clearTimeout(html5GeoLocTimeout);
+            geoLocateIP();//IP Geolocation
+        }
+
+        /**
+         * Geo locate user through his IP
+         */
+        function geoLocateIP() {
+            geoLocateIPFunc(function (location) {
+                userLocation = {
+                    "location": location.cityName, //location.zipCode,
+                    "country": location.countryName
+                };
+                fillAddressField(userLocation);
+            });
+        }
+
+        /**
+         * Fill address field after guessing user address
+         *
+         * @param userLocation
+         */
+        function fillAddressField(userLocation) {
+            var $location = $("#location");
+            if (!$location.val()) {
+                if (userLocation.location) {
+                    $location.val(userLocation.location + ", ");
+                }
+
+                if (userLocation.country) {
+                    $location.val($location.val() + userLocation.country);
+                }
+            }
+        }
+    });
+</script>

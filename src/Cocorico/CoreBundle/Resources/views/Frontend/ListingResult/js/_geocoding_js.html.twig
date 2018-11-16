@@ -3,7 +3,6 @@
 #}
 {% trans_default_domain 'cocorico_geo' %}
 
-
 {% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
 'map_elt': map_elt,
 'auto_complete_elt': auto_complete_elt,
@@ -13,46 +12,27 @@
 'display_marker': display_marker is not defined ? true : display_marker
 } only %}
 
-{#Auto fill location search field#}
-{% set user_address = false %}
-{% set user = app.user %}
-{% if user is not null and is_granted("IS_AUTHENTICATED_FULLY") %}
-    {% if user.addresses|length %}
-        {% set address = user.addresses.first %}
-        {% set user_address = { 'zip': address.zip, 'city': address.city, 'country': address.country|country_name } %}
-    {% endif %}
-{% endif %}
-
 <script>
     $(function () {
-
         var $searchForm = $("{{ auto_complete_elt }}").closest("form");
 
-        $searchForm.submit(function (e) {
-            e.preventDefault();
-            $.when(
-                    geocodeFunc($("{{ auto_complete_elt }}").val())
-            ).then(
-                    geocodeSuccess, geocodeError
-            );
-        });
-
-        //Center modal dialog box
-        $('.modal').on('show.bs.modal', centerModal);
-
-        $(window).on("resize", function () {
-            $('.modal:visible').each(centerModal);
-        });
+        /*************************************************************************************
+         * handleFormSubmission
+         */
+        handleFormSubmission();
+        function handleFormSubmission() {
+            $searchForm.submit(function (e) {
+                e.preventDefault();
+                $.when(
+                        geocodeFunc($("{{ auto_complete_elt }}").val())
+                ).then(
+                        geocodeSuccess, geocodeError
+                );
+            });
+        }
 
         function geocodeSuccess(result) {
             fillAddressFields(result);
-            //Disable form fields with empty value. These empty fields wont be added to the url
-//            $searchForm.find('select:not(:has(option:selected[value!=""]))').attr('disabled', 'disabled');
-//            $searchForm.find('input[type=text], input[type=time]').each(function(){
-//                if (!$(this).val()) {
-//                    $(this).attr('disabled', 'disabled');
-//                }
-//            });
             $searchForm.unbind('submit').submit();
         }
 
@@ -63,10 +43,11 @@
             modal.modal('show');
         }
 
+
         function fillAddressFields(result) {
             var resultLocale = result[locale];
             var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
-            var $zip = $("#location_zip");
+            var $zip = $searchForm.find("#location_zip");
 
             if (extendSearch) {
                 //Google zip inconsistency: P
@@ -81,135 +62,30 @@
                 }
             }
 
-            $("#page").val(1);
-            $("#location_lat").val(result.lat);
-            $("#location_lng").val(result.lng);
-            $("#location_viewport").val(result.viewport);
-            $("#location_addressType").val(result.types);
-            $("#location_country").val(resultLocale.country_short);
-            $("#location_area").val(resultLocale.administrative_area_level_1);
-            $("#location_department").val(resultLocale.administrative_area_level_2);
-            $("#location_city").val(resultLocale.locality);
+            $searchForm.find("#page").val(1);
+            $searchForm.find("#location_lat").val(result.lat);
+            $searchForm.find("#location_lng").val(result.lng);
+            $searchForm.find("#location_viewport").val(result.viewport);
+            $searchForm.find("#location_addressType").val(result.types);
+            $searchForm.find("#location_country").val(resultLocale.country_short);
+            $searchForm.find("#location_area").val(resultLocale.administrative_area_level_1);
+            $searchForm.find("#location_department").val(resultLocale.administrative_area_level_2);
+            $searchForm.find("#location_city").val(resultLocale.locality);
             $zip.val(resultLocale.postal_code);
-            $("#location_route").val(resultLocale.route);
-            $("#location_streetNumber").val(resultLocale.street_number);
+            $searchForm.find("#location_route").val(resultLocale.route);
+            $searchForm.find("#location_streetNumber").val(resultLocale.street_number);
         }
 
-        guessUserLocation();
-        /**
-         * Guess user location from database user address, geolocation ip or html5 geolocation
-         * If a user location is found then fill search address field with this value
-         */
-        function guessUserLocation() {
-            var $location = $("#location");
-            var userAddress = {{ user_address| json_encode | raw  }};
-            var userLocation = [];
-
-            if (userAddress && userAddress.zip && userAddress.country) {//Database user address
-                userLocation = {
-                    "location": userAddress.zip,
-                    "country": userAddress.country
-                };
-                fillAddressField(userLocation);
-            } else if (navigator.geolocation) {//HTML5 geolocation
-                var timeout = 10000;
-                var html5GeoLocTimeout = setTimeout(html5GeoLocError, timeout);
-
-                navigator.geolocation.getCurrentPosition(html5GeoLocSuccess, html5GeoLocError, {
-                    enableHighAccuracy: true, timeout: timeout, maximumAge: 3600000
-                });
-            } else {//IP Geolocation
-                geoLocateIP();
-            }
-
-
-            /**
-             * Try to geo locate user through HTML5 geolocation
-             *
-             * @param pos
-             */
-            function html5GeoLocSuccess(pos) {
-                clearTimeout(html5GeoLocTimeout);
-                var position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-                var location = false;
-                var country = false;
-
-                //Reverse geocoding
-                geocoder.geocode({'latLng': position}, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        var result = results[0];
-                        if (result) {
-                            $.each(result.address_components, function (index, object) {
-                                $.each(object.types, function (index, name) {
-                                    if (name == "postal_code" || name == "administrative_area_level_2_short") {
-                                        if (name == "postal_code") {
-                                            location = object.long_name;
-                                        } else {
-                                            var area2 = object.long_name;
-                                            if (area2 && area2.match(/\d+/g) != null) {//is it number in it?
-                                                if (!location) {
-                                                    location = object.long_name;
-                                                }
-                                            }
-                                        }
-                                    } else if (name == "country") {
-                                        country = object.long_name;
-                                    }
-
-                                    if (location && country) return false;
-                                });
-                                if (location && country) return false;
-                            });
-
-                            userLocation = {
-                                "location": location,
-                                "country": country
-                            };
-                            fillAddressField(userLocation);
-                        }
-                    }//status OK
-                });//geocoder.geocode
-            }
-
-            /**
-             * HTML5 geolocation is not possible
-             *
-             * @param error
-             */
-            function html5GeoLocError(error) {
-                clearTimeout(html5GeoLocTimeout);
-                geoLocateIP();//IP Geolocation
-            }
-
-            /**
-             * Geo locate user through his IP
-             */
-            function geoLocateIP() {
-                geoLocateIPFunc(function (location) {
-                    userLocation = {
-                        "location": location.cityName, //location.zipCode,
-                        "country": location.countryName
-                    };
-                    fillAddressField(userLocation);
-                });
-            }
-
-            /**
-             * Fill address field after guessing user address
-             *
-             * @param userLocation
-             */
-            function fillAddressField(userLocation) {
-                if (!$location.val()) {
-                    if (userLocation.location) {
-                        $location.val(userLocation.location + ", ");
-                    }
-
-                    if (userLocation.country) {
-                        $location.val($location.val() + userLocation.country);
-                    }
-                }
-            }
-        }
+        //Center modal dialog box
+        $('.modal').on('show.bs.modal', centerModal);
+        $(window).on("resize", function () {
+            $('.modal:visible').each(centerModal);
+        });
     });
 </script>
+
+{% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_map_drag_js.html.twig'  with {
+'auto_complete_elt': auto_complete_elt,
+} only %}
+
+{% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_user_js.html.twig' only %}

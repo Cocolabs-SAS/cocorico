@@ -2961,3 +2961,18 @@ div.cluster.cluster-overlay img {
     -webkit-transition: .3s ease-in-out;
     transition: .3s ease-in-out;
 }
+
+/* Map drag checkbox*/
+.search-on-drag-cb-wrapper {
+    box-shadow: transparent 0 0 0 0 inset;
+    position: absolute;
+    background-color: #fff;
+    z-index: 1;
+    margin: 0;
+    padding: 10px 10px 10px 10px;
+    opacity: 0.9;
+}
+
+h1[data-id="result-title"] {
+    font-size: 21px;
+}
