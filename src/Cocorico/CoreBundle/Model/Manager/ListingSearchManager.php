@@ -236,10 +236,11 @@ class ListingSearchManager
         $queryBuilder->addOrderBy("l.averageRating", "DESC");
         $queryBuilder->addOrderBy("l.adminNotation", "DESC");
 
-
-        $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
-        $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH, $event);
-        $queryBuilder = $event->getQueryBuilder();
+        if (!$listingSearchRequest->getIsXmlHttpRequest()) {
+            $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
+            $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH, $event);
+            $queryBuilder = $event->getQueryBuilder();
+        }
 
         //Pagination
         if ($listingSearchRequest->getMaxPerPage()) {

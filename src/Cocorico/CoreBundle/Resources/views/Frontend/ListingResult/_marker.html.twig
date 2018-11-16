@@ -98,3 +98,7 @@
 
     {% endautoescape %}
 {% endspaceless %}
+
+{# Data Markers used to displayed markers on map#}
+<span id="data-markers"
+      data-markers="{{ markers|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_APOS') )|e('html') }}"></span>

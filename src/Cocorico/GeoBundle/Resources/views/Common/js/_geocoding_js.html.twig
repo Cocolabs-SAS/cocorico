@@ -29,21 +29,24 @@
 </style>
 <script>
     var geocoder, map, marker, autoComplete, latlng, boundingBox, markerDraggable;
-    var countriesEnabled = {{ cocorico_listing_countries|json_encode|raw }};
+    var displayMarker = {{ display_marker is not defined or display_marker ? "true" : "false" }};
+    var markers = {};//Markers on the listing result map
+    var markerCluster;//Markers cluster on the listing result map
+    var mapDragMode = false; // True when the user drag or zoom the map on listing result page
+    var mapIsLoaded = false;//True when the map has been loaded the first time
 
     //Functions
     var initializeGMapFunc, geocodeFunc, geocodeJSONFunc, reverseGeocodeFunc, formatGeocodingResultFunc,
-        translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
-        geoLocateIPFunc;
-        
+            translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
+            geoLocateIPFunc;
+
     $(function () {
         //var maxZoom = 18;
-        var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
-        var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
-        var defaultZoom = {{ (default_zoom|default(4))|e('js') }};
+        var defaultLat = {{ default_lat|default(46.227638) }};
+        var defaultLng = {{ default_lng|default(2.213749000000007) }};
+        var defaultZoom = {{ default_zoom|default(4) }};
         var mapElt = $("{{ map_elt|default('') }}");
         var autoCompleteElt = $("{{ auto_complete_elt|default('') }}");
-        var displayMarker = {{ display_marker is not defined or display_marker ? "true" : "false" }};
         var markerDraggable = {{ marker_draggable is not defined or not marker_draggable ? "false" : "true" }};
         var ipInfoDbAPIKey = "{{ ipInfoDbAPIKey|default('') }}";
 
@@ -61,7 +64,10 @@
                 var mapOptions = {
                     zoom: defaultZoom,
                     center: latlng,
-                    scrollwheel: false
+                    scrollwheel: false,
+                    zoomControlOptions: {
+                        position: google.maps.ControlPosition.RIGHT_TOP
+                    }
                 };
                 map = new google.maps.Map(mapElt, mapOptions);
 
@@ -89,15 +95,9 @@
 
             if (autoCompleteElt) {
                 autoComplete = new google.maps.places.Autocomplete(
-                    autoCompleteElt,
-                    {types: ['geocode']}
+                        autoCompleteElt,
+                        {types: ['geocode']}
                 );
-                
-                if (countriesEnabled.length) {
-                    autoComplete.setComponentRestrictions(
-                        {'country': countriesEnabled}
-                    );
-                }
             }
 
 
@@ -141,13 +141,13 @@
                         //Translate geocoding
                         if (typeof translate !== 'undefined' && translate == true) {
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
-                                function (resultsTranslated) {
+                                    function (resultsTranslated) {
 //                                        console_log("resultsTranslated", resultsTranslated);
 //                                        console_log("formattedResult", formattedResult);
-                                    deferred.resolve(
-                                        $.extend(formattedResult, resultsTranslated)
-                                    );
-                                }
+                                        deferred.resolve(
+                                                $.extend(formattedResult, resultsTranslated)
+                                        );
+                                    }
                             );
                         } else {
                             deferred.resolve(formattedResult);
@@ -182,11 +182,11 @@
 
                             //Translate geocoding
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
-                                function (resultsTranslated) {
-                                    deferred.resolve(
-                                        $.extend(formattedResult, resultsTranslated)
-                                    );
-                                }
+                                    function (resultsTranslated) {
+                                        deferred.resolve(
+                                                $.extend(formattedResult, resultsTranslated)
+                                        );
+                                    }
                             );
                         } else {
                             deferred.reject("{{ 'geo.location.no_result'|trans }}");
@@ -251,35 +251,30 @@
                 if (lang != locale) {
                     dataT[lang] = {};
                     var deferred = new $.Deferred();
-                    var url = "{{ path('cocorico_geo_reverse_geocoding', {'lat': '0.01', 'lng': '0.02', 'lang': app.request.locale}) }}";
-                    url = url.replace('0.01', lat);
-                    url = url.replace('0.02', lng);
-                    url = url.replace('{{ app.request.locale }}', lang);
-                    url += "?token={{ csrf_token("rev_geo") }}";
                     $.getJSON(
-                        url,
-                        function (queryResult) {
+                            "//maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=false&language=" + lang,
+                            function (queryResult) {
 
-                            if (queryResult.status == 'OK' && queryResult.results.length) {
-                                var resultsT = queryResult.results;
-                                var resultT = resultsT[0];
+                                if (queryResult.status == 'OK' && queryResult.results.length) {
+                                    var resultsT = queryResult.results;
+                                    var resultT = resultsT[0];
 
-                                $.each(resultT.address_components, function (index, objectT) {
-                                    if (objectT) {
-                                        $.each(objectT.types, function (index, name) {
-                                            dataT[lang][name] = objectT.long_name;
-                                            dataT[lang][name + "_short"] = objectT.short_name;
-                                        });
-                                    }
-                                });
-                                deferred.resolve(dataT);
-                            } else {
-                                //datasT[lang]=null;
-                                {#deferred.reject("{{ 'geo.location.no_result'|trans }}");#}
-                            }
-                        }).fail(function () {
+                                    $.each(resultT.address_components, function (index, objectT) {
+                                        if (objectT) {
+                                            $.each(objectT.types, function (index, name) {
+                                                dataT[lang][name] = objectT.long_name;
+                                                dataT[lang][name + "_short"] = objectT.short_name;
+                                            });
+                                        }
+                                    });
+                                    deferred.resolve(dataT);
+                                } else {
+                                    //datasT[lang]=null;
+                                    {#deferred.reject("{{ 'geo.location.no_result'|trans }}");#}
+                                }
+                            }).fail(function () {
 
-                    });
+                            });
                     promises.push(deferred);
                 }
             });
@@ -317,14 +312,15 @@
                         sw = viewport.getSouthWest();
                     }
 
-
-                    map.fitBounds(viewport);
-                    //fit bounds happens asynchronously, so we have to wait for a bounds_changed event before setting zoom works.
-                    google.maps.event.addListenerOnce(map, 'bounds_changed', function (event) {
+                    if (!mapDragMode) {
+                        map.fitBounds(viewport);
+                        //fit bounds happens asynchronously, so we have to wait for a bounds_changed event before setting zoom works.
+                        google.maps.event.addListenerOnce(map, 'bounds_changed', function (event) {
 //                        console_log('bounds_changed' + getBoundsZoomLevel(ne, sw, mapElt));
-                        this.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
-                    });
-
+                            this.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
+//                            addNeSwMarkers();
+                        });
+                    }
                     drawZone(ne, sw);
 
                     if (displayMarker) {
@@ -332,14 +328,40 @@
                         marker.setPosition(location);
                         marker.setVisible(true);
                     }
-
-
                 } else {
                     //Try to get viewport through map api json
                     refreshMapJSONFunc($(autoCompleteElt).val());
                 }
             }
         };
+
+        /**
+         * Add markers to viewport coordinates
+         */
+        function addNeSwMarkers() {
+            var currentMapViewport = map.getBounds();
+
+            var ne2 = currentMapViewport.getNorthEast();
+            latlng = new google.maps.LatLng(ne2.lat(), ne2.lng());
+
+            var markerA = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                draggable: false,
+                zIndex: 0
+            });
+            markerA.setVisible(true);
+
+            var sw2 = currentMapViewport.getSouthWest();
+            latlng = new google.maps.LatLng(sw2.lat(), sw2.lng());
+            var markerB = new google.maps.Marker({
+                map: map,
+                position: latlng,
+                draggable: false,
+                zIndex: 0
+            });
+            markerB.setVisible(true);
+        }
 
 
         /**
@@ -423,34 +445,36 @@
          */
         refreshMapJSONFunc = function (address) {
             $.when(
-                geocodeJSONFunc(address)
+                    geocodeJSONFunc(address)
             ).then(
-                function (results) {
-                    if (results) {
-                        var result = results[0];
-                        var geometry = result.geometry;
+                    function (results) {
+                        if (results) {
+                            var result = results[0];
+                            var geometry = result.geometry;
 
-                        if (geometry.viewport) {
-                            var ne = geometry.viewport.northeast;
-                            var sw = geometry.viewport.southwest;
-                            ne = new google.maps.LatLng(ne.lat, ne.lng);
-                            sw = new google.maps.LatLng(sw.lat, sw.lng);
-                            var viewport = new google.maps.LatLngBounds(sw, ne);
+                            if (geometry.viewport) {
+                                if (!mapDragMode) {
+                                    var ne = geometry.viewport.northeast;
+                                    var sw = geometry.viewport.southwest;
+                                    ne = new google.maps.LatLng(ne.lat, ne.lng);
+                                    sw = new google.maps.LatLng(sw.lat, sw.lng);
+                                    var viewport = new google.maps.LatLngBounds(sw, ne);
 
-                            map.fitBounds(viewport);
-                            map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
-                            drawZone(ne, sw);
-                        } else {
-                            map.setCenter(geometry.location);
-                            map.setZoom(17);
+                                    map.fitBounds(viewport);
+                                    map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
+                                    drawZone(ne, sw);
+                                }
+                            } else {
+                                map.setCenter(geometry.location);
+                                map.setZoom(17);
+                            }
+                            if (displayMarker) {
+                                marker.setPosition(geometry.location);
+                                marker.setVisible(true);
+                            }
+
                         }
-                        if (displayMarker) {
-                            marker.setPosition(geometry.location);
-                            marker.setVisible(true);
-                        }
-
                     }
-                }
             );
         };
 
@@ -462,14 +486,14 @@
         geocodeJSONFunc = function (address) {
             var deferred = new $.Deferred();
             $.getJSON(
-                "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}{{ gKey|raw }}",
-                function (queryResult) {
-                    if (queryResult.status == 'OK' && queryResult.results.length) {
-                        deferred.resolve(queryResult.results);
-                    } else {
-                        deferred.reject(false);
-                    }
-                });
+                    "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}",
+                    function (queryResult) {
+                        if (queryResult.status == 'OK' && queryResult.results.length) {
+                            deferred.resolve(queryResult.results);
+                        } else {
+                            deferred.reject(false);
+                        }
+                    });
             return deferred.promise();
         };
 
@@ -507,9 +531,14 @@
             //Compute InfoBox Y Offset and height
             var infoBoxHeight = 270;
             var infoBoxWidth = 275;
-            var offsetY = -infoBoxHeight - 34;
+            var offsetY = -infoBoxHeight - 54;
 
-            var markers = {};
+            //Remove markers before adding them
+            $.each(markers, function (index, marker) {
+                marker.setMap(null);
+                google.maps.event.clearListeners(marker, 'click');
+            });
+            markers = {};
 
             //Construct InfoBox for each marker with different location
             $.each(markersGroupedByLocation, function (cptMarker, markersForOneLocation) {//cptMarker is of form lat-lng
@@ -574,6 +603,12 @@
 
                         //Add slider and pan map
                         setTimeout(function () {
+                            //Load images on marker click
+                            var $infoBoxImages = $popupElt.find(".img-holder img");
+                            $.each($infoBoxImages, function (i, infoBoxImage) {
+                                $(infoBoxImage).attr("src", $(infoBoxImage).data("src"));
+                            });
+
                             addSlider(nbMarkersWithSameLocation);
                             map.panTo(myLatLng);
                             map.panBy(0, Math.round(offsetY / 2));
@@ -606,18 +641,26 @@
             });//end loop of info boxes construction
 
             /**
-             * Extend map to fit bounds on visible markers
+             * Extend map to fit bounds on visible markers if we are not in map dragging mode
              */
             google.maps.event.addListenerOnce(map, 'idle', function () {
-                var viewport = this.getBounds();
-
-                for (var m in markers) {
-                    if (markers.hasOwnProperty(m)) {
-                        viewport = viewport.extend(markers[m].getPosition());
+                if (!mapDragMode) {
+                    var viewport = this.getBounds();
+                    var fitBounds = false;
+                    for (var m in markers) {
+                        if (markers.hasOwnProperty(m)) {
+                            if (!viewport.contains(markers[m].getPosition())) {
+                                viewport = viewport.extend(markers[m].getPosition());
+                                fitBounds = true;
+                            }
+                        }
+                    }
+                    if (fitBounds) {
+                        map.fitBounds(viewport);
                     }
                 }
 
-                map.fitBounds(viewport);
+                mapIsLoaded = true;//Map has been loaded .
             });
 
             /**
@@ -632,7 +675,8 @@
 
                 $.each(markersForOneLocation, function (i, marker) {
                     var tmpContent = markerTemplate.replace('%title%', marker['title']);
-                    tmpContent = tmpContent.replace('/images/img.png', marker['image']);
+//                    tmpContent = tmpContent.replace('/images/img.png', marker['image']);
+                    tmpContent = tmpContent.replace('%data-src%', marker['image']);
                     tmpContent = tmpContent.replace('%price%', marker['price']);
                     tmpContent = tmpContent.replace('%certified%', marker['certified']);
                     tmpContent = tmpContent.replace('%url%', marker['url']);
@@ -674,10 +718,16 @@
             }
 
             //Cluster
-            var markerCluster = new MarkerClusterer(map, markers, {
+            //Remove cluster markers before adding them
+            if (typeof markerCluster != 'undefined') {
+                markerCluster.clearMarkers();
+                markerCluster.repaint();
+            }
+            markerCluster = new MarkerClusterer(map, markers, {
                 maxZoom: 15,
                 gridSize: 30,
                 styles: null,
+                zoomOnClick: false,
                 calculator: function (markers, numStyles) {
                     var index = 0;
                     var title = "";
@@ -705,7 +755,25 @@
                 }
             });
 
+            //Override cluster click
+            google.maps.event.addListener(markerCluster, 'click', function (cluster) {
+                var mc = cluster.getMarkerClusterer();
+                // Zoom into the cluster.
+                var mz = mc.getMaxZoom();
+                var theBounds = cluster.getBounds();
+                mc.getMap().fitBounds(theBounds);
+                // There is a fix for Issue 170 here:
+                setTimeout(function () {
+                    mc.getMap().fitBounds(theBounds);
+                    // Don't zoom beyond the max zoom level
+                    if (mz !== null && (mc.getMap().getZoom() > mz)) {
+                        mc.getMap().setZoom(mz + 1);
+                    }
+                }, 100);
+            });
+
             //Associate each marker to its cluster to manage cluster overlay effect on listing mouseover
+            google.maps.event.clearListeners(markerCluster, 'clusteringend');
             google.maps.event.addListener(markerCluster, 'clusteringend', function (e) {
                 var clusters = this.getClusters();
                 for (var i = 0; i < clusters.length; i++) {
@@ -715,7 +783,6 @@
                 }
             });
         };//end setMarkersFunc
-
 
         /**
          * Geo localisation by ip through IPInfoDB

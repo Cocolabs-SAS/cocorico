@@ -65,9 +65,9 @@
             {{ form_end(form) }}
             {#end search form with filters#}
 
-            <h1>
-                {{ seo_title }}
-                <small>
+            <h1 data-id="result-title">
+                <span data-id="title">{{ seo_title }}</span>
+                <small data-id="nb-result">
                     {{ 'listing.search.result.results'|trans({'%nb_results%': nb_listings}) }}
                 </small>
 
@@ -80,7 +80,6 @@
                     </div>
                     <div data-id="listing-alert-dialog"></div>
                 {% endif %}
-
             </h1>
             {#TO NOT DELETE#}
             <div data-id="seo-desc">
@@ -91,108 +90,30 @@
             <div class="twocolumns row">
                 <!-- maparea -->
                 <div class="maparea col-xs-12 col-sm-4">
-                    <div class="map-holder">
-                        <div id="map-canvas"></div>
-                        {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig' only %}
+                    <div class="maparea">
+                        <div class="checkbox search-on-drag-cb-wrapper">
+                            <input type="checkbox" name="search-on-drag" id="search-on-drag">
+                            <label class="form-label" for="search-on-drag">
+                                {{ 'search-on-map-drag'|trans }}
+                            </label>
+                        </div>
+                        <div class="map-holder">
+                            <div id="map-canvas"></div>
+                            {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
+                            'markers': markers,
+                            } only %}
+                        </div>
                     </div>
                 </div>
 
                 <!-- postarea -->
                 <section class="listing-area col-xs-12 col-sm-8">
                     <div class="listing-holder row">
-                        <!-- post -->
-                        {%- for listingTmp in listings -%}
-                            {% set listing = listingTmp[0] %}
-                            {% set listing_translation = listing.translations[app.request.locale] %}
-                            {% set listing_location = listing.location %}
-                            {% set listing_user = listing.user %}
-                            {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
-                            {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
-                            {% set user_image = listing_user.images|length ? listing_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
-
-                            <article class="listing-post col-sm-6 col-xs-12" data-lid="{{ listing.id }}">
-                                <a href="javascript:void(0)" id="favourite-{{ listing.id }}" class="favourit">
-                                    <i class="icon-heart"></i>
-                                    <span class="hidden">favourit</span>
-                                </a>
-                                <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}"
-                                   class="listing-box">
-                                    <div class="frame">
-
-                                        <div class="post-info">
-                                            <div class="img-holder">
-                                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~  listing_image) | imagine_filter('listing_large') }}"
-                                                     alt="{{ listing_translation.title ~ " " ~ price }}"/>
-                                            </div>
-
-                                            <div class="box">
-                                                <div class="box-holder">
-                                                    <div class="head">
-                                                        <div class="time-price">
-                                                            <strong class="price">{{ price }}</strong>
-
-                                                            <p>
-                                                                {{ vatInclusionText(app.request.getLocale()) }}
-                                                                / {{ (0)|add_time_unit_text }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="foot">
-                                                        <div class="area">
-                                                            <!-- rating -->
-                                                            {% if listing.averageRating %}
-                                                                {{ listing.averageRating | cocorico_star_rating }}
-                                                            {% endif %}
-                                                            {% if  listing.certified %}
-                                                                <span class="certified">
-                                                                    <i class="icon-ok"></i>
-                                                                    {{ 'listing.search.result.certified'|trans }}
-                                                                </span>
-                                                            {% endif %}
-                                                        </div>
-                                                        <strong class="title">
-                                                            {% for listingListingCategory in listing.listingListingCategories %}
-                                                                {{ listingListingCategory.category.translations[app.request.locale].name }},
-                                                            {% endfor %}
-                                                        </strong>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-content">
-                                            <div class="alignleft">
-                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
-                                                     alt="{{ listing_user.firstName }}"/>
-                                            </div>
-                                            <div class="textbox">
-                                                {% if bundleExist('CocoricoDeliveryBundle') %}
-                                                    {% include 'CocoricoDeliveryBundle:Frontend:Listing/_show_delivery.html.twig' with {
-                                                    'listing_delivery': listing.delivery
-                                                    } only %}
-                                                {% endif %}
-
-                                                <h2>{{ listing_translation.title }}</h2>
-
-                                                <p>{{ listing_location.city }} </p>
-
-                                                {#<!--Debug:#}
-                                                {#accuracy : {{ listingTmp.accuracy|default(-1) }}<br/>#}
-                                                {#distance : {{ listingTmp.distance|default(-1) }}<br/>#}
-                                                {#distance_range : {{ listingTmp.distance_range|default(-1) }}<br/>#}
-                                                {#platformNotation : {{ listing.platformNotation|default(-1) }}<br/>#}
-                                                {#reallyAvailable : {{ listingTmp.really_available|default(-1) }}<br/>#}
-                                                {#-->#}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </article>
-                        {%- else -%}
-                            {{ 'listing.search.result.no_results'|trans }}
-                        {%- endfor -%}
+                        {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
+                        'listings': listings,
+                        'nb_listings': nb_listings
+                        } only %}
                     </div>
-
                     {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
                     'pagination': pagination
                     } only %}
@@ -252,8 +173,8 @@
             refreshMapFunc('{{location.viewport }}', '{{ location.lat }}', '{{ location.lng }}');
 
             //Set listings markers on load
-            var markers = '{{ markers|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_APOS') )|e('js') }}';
-            setMarkersFunc($.parseJSON(markers));
+            //Set listings markers on load through data-markers attribute
+            setMarkersFunc($("span#data-markers").data("markers"));
 
             // Set default favourites in the listing
             setDefaultFavourites();

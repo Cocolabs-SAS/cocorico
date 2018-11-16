@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="fr">
+<head><title></title></head>
+<body>
+<div>
+    <div class="listing-holder row">
+        {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
+        'listings': listings,
+        'nb_listings': nb_listings
+        } only %}
+    </div>
+</div>
+<div>
+    {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+    'pagination': pagination
+    } only %}
+
+</div>
+<div>
+    <span id="data-markers"
+          data-markers="{{ markers|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_APOS') )|e('html') }}">
+    </span>
+</div>
+</body>
+</html>

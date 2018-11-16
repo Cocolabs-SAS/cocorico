@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### Added
 - Add bookings accessor by user type in User entity and CS
+- Add map drag refreshing results functionality 
 
 ### Fixed
 - Optimise user and listing fields in almost admin edition pages (bookingBankWire, PayinRefund, Booking, ...)

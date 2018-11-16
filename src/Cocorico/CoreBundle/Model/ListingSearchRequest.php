@@ -41,6 +41,7 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $request;
     protected $similarListings;
     protected $locale;
+    protected $isXmlHttpRequest = false;
     //todo: decouple category fields and delivery
     protected $categoriesFields;
     protected $delivery;
@@ -62,6 +63,9 @@ class ListingSearchRequest implements TranslationContainerInterface
         $this->request = $this->requestStack->getCurrentRequest();
         if ($this->request) {
             $this->locale = $this->request->getLocale();
+            if ($this->request->isXmlHttpRequest()) {
+                $this->isXmlHttpRequest = true;
+            }
         }
         $this->maxPerPage = $maxPerPage;
         $this->page = 1;
@@ -344,6 +348,23 @@ class ListingSearchRequest implements TranslationContainerInterface
     {
         $this->categoriesFields = $categoriesFields;
     }
+
+    /**
+     * @return boolean
+     */
+    public function getIsXmlHttpRequest()
+    {
+        return $this->isXmlHttpRequest;
+    }
+
+    /**
+     * @param boolean $isXmlHttpRequest
+     */
+    public function setIsXmlHttpRequest($isXmlHttpRequest)
+    {
+        $this->isXmlHttpRequest = $isXmlHttpRequest;
+    }
+
 
     /**
      * Remove some Object properties while serialisation

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-03-22T17:33:11Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -29,7 +29,7 @@
         <target>
                     - Plage horaire :
                 </target>
-        <jms:reference-file line="754">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
+          <jms:reference-file line="752">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f17ef1a038a42f4a585e3645125e101e00c41a0b" resname="booking_accepted_asker.email.message">
         <source>booking_accepted_asker.email.message</source>
@@ -329,17 +329,17 @@ Votre annonce est maintenant publiquement visible. Afin de la faire remonter dan
         <target>Votre annonce est maintenant visible</target>
         <jms:reference-file line="5">Mails/Offerer/listing_activated_offerer.txt.twig</jms:reference-file>
       </trans-unit>
-        <trans-unit id="975a850213519192abdaab8f04fecb2e0688ef45" resname="new_thread_message_user.email.message">
+        <trans-unit id="b30941fcbc1d20fefdfb2ea166f6500e881906ce" resname="new_thread_message_user.email.message">
             <source>new_thread_message_user.email.message</source>
             <target><![CDATA[Bonjour %recipient_firstname%,
 
 Vous avez reçu un message, cliquez <a href="%thread_url%">ici</a> pour le lire.]]></target>
-            <jms:reference-file line="10">Mails/new_thread_message_user.txt.twig</jms:reference-file>
+            <jms:reference-file line="10">views/Mails/new_thread_message_user.txt.twig</jms:reference-file>
       </trans-unit>
-        <trans-unit id="1052d42e2ac25d07448f6a5be017274bd8cbfe55" resname="new_thread_message_user.email.subject">
+        <trans-unit id="1242aa398987cf62869000b99fa52b3f4688b9e5" resname="new_thread_message_user.email.subject">
             <source>new_thread_message_user.email.subject</source>
         <target>Vous avez reçu un nouveau message</target>
-            <jms:reference-file line="5">Mails/new_thread_message_user.txt.twig</jms:reference-file>
+            <jms:reference-file line="5">views/Mails/new_thread_message_user.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d483722b73e4238ddffa4901f8c0ea946dc40588" resname="payment_error_asker.email.message">
         <source>payment_error_asker.email.message</source>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-03-22T17:33:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -14,7 +14,7 @@
       <trans-unit id="7434fa918f1cff45a2f9455ad4b6d3de9edd5560" resname="BIC">
         <source>BIC</source>
         <target>BIC</target>
-        <jms:reference-file line="113">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="111">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fbe2f800f0f4a7c6f623967e6fa7235892cbe24d" resname="Bad credentials.">
         <source>Bad credentials.</source>
@@ -23,7 +23,7 @@
       <trans-unit id="e81566a5d5243429545b3a76547f60514550632b" resname="IBAN">
         <source>IBAN</source>
         <target>IBAN</target>
-        <jms:reference-file line="105">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="103">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
         <source>Offerer</source>
@@ -160,13 +160,13 @@
         <source>form.password</source>
         <target>Mot de passe :</target>
         <jms:reference-file line="55">Form/Type/ProfileContactFormType.php</jms:reference-file>
-          <jms:reference-file line="121">Form/Type/RegistrationFormType.php</jms:reference-file>
+          <jms:reference-file line="130">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="30de94712c8550862006ed6a664870c398c9482d" resname="form.password_confirmation">
         <source>form.password_confirmation</source>
         <target>Vérification :</target>
         <jms:reference-file line="59">Form/Type/ProfileContactFormType.php</jms:reference-file>
-          <jms:reference-file line="125">Form/Type/RegistrationFormType.php</jms:reference-file>
+          <jms:reference-file line="134">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="39ca6a1fab7c9ecaf8ad225643ded59d1b06b842" resname="form.person_type">
         <source>form.person_type</source>
@@ -176,12 +176,12 @@
       <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
         <source>form.user.annual_income</source>
         <target>Revenus annuels</target>
-        <jms:reference-file line="79">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="78">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d45413bab3db2bfb0f28eb800bb8cfc772c3ccfc" resname="form.user.bank_owner_address">
         <source>form.user.bank_owner_address</source>
         <target>Votre adresse</target>
-        <jms:reference-file line="97">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="95">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb1370b89f5b24926ad82c569574ce9acc0bff61" resname="form.user.bank_owner_address.help">
         <source>form.user.bank_owner_address.help</source>
@@ -191,7 +191,7 @@
       <trans-unit id="2ee502191b684c7674d67e6b430bbb723fee67ce" resname="form.user.bank_owner_name">
         <source>form.user.bank_owner_name</source>
         <target>Nom</target>
-        <jms:reference-file line="88">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="87">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="27dd741dbbd8e3b73c5ce3f06b593f86fe6d5f98" resname="form.user.bank_owner_name.help">
         <source>form.user.bank_owner_name.help</source>
@@ -212,8 +212,8 @@
       <trans-unit id="de7924085357b56b06a5cbfebff2d624266c5960" resname="form.user.countryOfResidence">
         <source>form.user.countryOfResidence</source>
         <target>Pays de résidence</target>
-        <jms:reference-file line="62">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
-          <jms:reference-file line="108">Form/Type/RegistrationFormType.php</jms:reference-file>
+          <jms:reference-file line="61">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="117">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5bbad741fe8166df8f96758bac68e00f4d5fbca1" resname="form.user.email">
         <source>form.user.email</source>
@@ -244,7 +244,8 @@
       <trans-unit id="a9ddf3450c6c2189750a388c61a246e1dc8f34ac" resname="form.user.nationality">
         <source>form.user.nationality</source>
         <target>Nationalité</target>
-        <jms:reference-file line="53">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="52">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="108">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fac62ecee873d75e35c7969ee91109062cace1f8" resname="form.user.nb_bookings_asker:">
         <source>form.user.nb_bookings_asker:</source>
@@ -280,7 +281,7 @@
       <trans-unit id="feb654da8645b3c7a91fb2b5e9c9b99f8fe06af8" resname="form.user.profession">
         <source>form.user.profession</source>
         <target>Profession</target>
-        <jms:reference-file line="71">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="70">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f912106675d47c1f3f01082da2f4b303de0a8d14" resname="form.user.username:">
         <source>form.user.username:</source>
@@ -490,13 +491,13 @@
         <source>user.facebook.login</source>
         <target>Connexion avec Facebook</target>
         <jms:reference-file line="50">Frontend/Common/_login.html.twig</jms:reference-file>
-          <jms:reference-file line="206">Frontend/Common/_register.html.twig</jms:reference-file>
+          <jms:reference-file line="221">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d075f3f1f8a3430b41490ddd8497be9e9106102d" resname="user.facebook.login.title">
         <source>user.facebook.login.title</source>
         <target>Ou connectez-vous avec votre compte Facebook</target>
         <jms:reference-file line="47">Frontend/Common/_login.html.twig</jms:reference-file>
-          <jms:reference-file line="203">Frontend/Common/_register.html.twig</jms:reference-file>
+          <jms:reference-file line="218">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b25f30d71bfa16486eb2ae7200fbd102f4a1274e" resname="user.login.password">
         <source>user.login.password</source>
