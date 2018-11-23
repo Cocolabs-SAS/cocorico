@@ -161,6 +161,7 @@ class ListingSearchController extends Controller
         $locale = $request->getLocale();
         $liipCacheManager = $this->get('liip_imagine.cache.manager');
         $currencyExtension = $this->get('lexik_currency.currency_extension');
+        $currencyExtension->getFormatter()->setLocale($locale);
         $markers = $listingsIds = array();
 
         foreach ($results->getIterator() as $i => $result) {
