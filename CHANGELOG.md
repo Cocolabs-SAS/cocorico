@@ -18,6 +18,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add person type in user fixtures
 - Fix listing address geolocation while listing deposit and listing address edition when no click on validate address
 - Add nationality field on registration form
+- Fix currency locale format on map infobox
+- Fix infobox image loading by loading it only on box click
 
 ### Changed
 - Remove unused registration handling in new listing form handler
