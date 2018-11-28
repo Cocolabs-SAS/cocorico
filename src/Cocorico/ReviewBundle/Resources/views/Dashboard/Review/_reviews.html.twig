@@ -12,12 +12,17 @@
                 {% set listing = booking.listing %}
                 {% set listing_translation = listing.translations[app.request.locale] %}
                 {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
-                {% set image_reviewer = reviewer.images|length ? reviewer.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
 
                 {%- if user.id == booking.user.id -%}{# current user is asker #}
                     {% set booking_url = path('cocorico_dashboard_booking_show_asker', {'id' : booking.id }) %}
                 {% else %}{# current user is offerer #}
                     {% set booking_url = path('cocorico_dashboard_booking_show_offerer', {'id' : booking.id }) %}
+                {% endif %}
+
+                {%- if user.id == reviewer.id -%}{# current user is reviewer #}
+                    {% set image_review = reviewed_user.images|length ? reviewed_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+                {% else %}{# current user is reviewed user #}
+                    {% set image_review = reviewer.images|length ? reviewer.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
                 {% endif %}
 
                 <article class="post">
@@ -56,14 +61,12 @@
                                             {%- if user.id == reviewer.id -%}{# current user is the reviewer #}
                                                 {{ 'review.comment.reviewed_user' | trans }}:
                                                 <a href="{{ path('cocorico_user_profile_show', { 'id': reviewed_user.id }) }}">
-                                                    {{ reviewed_user.firstName  ~ " " ~ reviewed_user.lastName|first|capitalize }}
-                                                    .
+                                                    {{ reviewed_user.firstName  ~ " " ~ reviewed_user.lastName|first|capitalize ~ "." }}
                                                 </a>
                                             {% elseif user.id == reviewed_user.id %}{# current user is the reveiwed user #}
                                                 {{ 'review.comment.reviewer' | trans }}:
                                                 <a href="{{ path('cocorico_user_profile_show', { 'id': reviewer.id }) }}">
-                                                    {{ reviewer.firstName ~ " " ~  reviewer.lastName|first|capitalize }}
-                                                    .
+                                                    {{ reviewer.firstName ~ " " ~  reviewer.lastName|first|capitalize ~ "." }}
                                                 </a>
                                             {% endif %}
                                         </li>
@@ -80,8 +83,8 @@
 
                         <div class="post-content">
                             <div class="author-img">
-                                <img alt="{{ reviewer.firstName }}"
-                                     src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_reviewer) | imagine_filter('user_xsmall') }}">
+                                <img alt="image user"
+                                     src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_review) | imagine_filter('user_xsmall') }}">
                             </div>
                             <div class="textbox">
                                 <p>

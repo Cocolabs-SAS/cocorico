@@ -1441,6 +1441,13 @@ images css for making it 4:3
     margin-right: 11px;
 }
 
+.form-area .payment-info .same-height-right .field-row:nth-child(4) .label {
+    width: 90px;
+}
+
+.form-area .payment-info .same-height-right .field-row:nth-child(4) .form-control {
+    text-align: left;
+}
 /** Contact */
 .form-area .contact-info .code + .tooltip-btn {
     right: auto;

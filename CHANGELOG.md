@@ -166,6 +166,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix responsive of search form
 - Fix cron docs
 - Fix new booking form handler without BOOKING_NEW_FORM_PROCESS listeners
+- Fix user label translation in payin refund in sonata admin
+- Fix IBAN form field length
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 

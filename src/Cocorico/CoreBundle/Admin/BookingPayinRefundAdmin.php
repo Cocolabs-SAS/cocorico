@@ -244,7 +244,7 @@ class BookingPayinRefundAdmin extends Admin
                 'user',
                 null,
                 array(
-                    'label' => 'admin.booking.offerer.label',
+                    'label' => 'admin.booking.asker.label',
                 )
             )
             ->add(
