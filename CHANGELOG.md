@@ -23,6 +23,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Remove unused registration handling in new listing form handler
 - Set listing user in listing form handler for listing deposit
 - Remove unused registration handling in new booking form handler
+- Change reviewer images in reviews list
 ## [0.7.0] - (2017-03-27)
 
 ### Added
@@ -38,7 +39,6 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 - Disable 301 redirect when offerer go to the new booking page of its listing
 - Change MessageBundle mail notification method
-- Change reviewer images in reviews list
 
 
 ## [0.6.0] - 2018-10-05
