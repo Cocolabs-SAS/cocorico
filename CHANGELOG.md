@@ -38,6 +38,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 - Disable 301 redirect when offerer go to the new booking page of its listing
 - Change MessageBundle mail notification method
+- Change reviewer images in reviews list
 
 
 ## [0.6.0] - 2018-10-05
