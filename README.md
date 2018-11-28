@@ -29,6 +29,7 @@ review the [guidelines for contributing](CONTRIBUTING.md).
 The [ROADMAP](ROADMAP.md) list the planned features.
 
 ## Changelog
+ - Fix similar listings session persisting
 
 [CHANGELOG.md](CHANGELOG.md) list the relevant changes done for each release.
 
