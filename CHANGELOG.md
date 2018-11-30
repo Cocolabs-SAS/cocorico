@@ -25,6 +25,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Remove unused registration handling in new listing form handler
 - Set listing user in listing form handler for listing deposit
 - Remove unused registration handling in new booking form handler
+- Change reviewer images in reviews list
 ## [0.7.0] - (2017-03-27)
 
 ### Added
@@ -168,6 +169,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix responsive of search form
 - Fix cron docs
 - Fix new booking form handler without BOOKING_NEW_FORM_PROCESS listeners
+- Fix user label translation in payin refund in sonata admin
+- Fix IBAN form field length
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 
