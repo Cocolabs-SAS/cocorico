@@ -38,299 +38,301 @@
 
             <!-- two-columns -->
             {{ '<div class="twocolumns row">' }}
-                <!-- contain the main content of the page -->
-                <div id="content" class="listing-area col-xs-12 col-sm-8 col-md-9 pull-right">
-                    <!-- profile-detail -->
-                    <section class="profile-detail">
-                        <header class="head">
-                            <h1>{{ 'user.profile.h1'|trans }}</h1>
-                            <address>
+            <!-- contain the main content of the page -->
+            <div id="content" class="listing-area col-xs-12 col-sm-8 col-md-9 pull-right">
+                <!-- profile-detail -->
+                <section class="profile-detail">
+                    <header class="head">
+                        <h1>{{ 'user.profile.h1'|trans }}</h1>
+                        <address>
                                 <span class="locality">
                                     {{ user.name }}
                                 </span>
 
-                                {% if user_address %}
-                                    {{ user_address.zip }},
-                                    {{ user_address.city }},
-                                    {{ user_address.country | country_name(app.request.locale) }}
-                                {% endif %}
-                            </address>
-
-                            {% if user_description %}
-                                <blockquote>
-                                    <q>"{{ user_description }}"</q>
-                                </blockquote>
+                            {% if user_address %}
+                                {{ user_address.zip }},
+                                {{ user_address.city }},
+                                {{ user_address.country | country_name(app.request.locale) }}
                             {% endif %}
-                        </header>
-                        <!-- blog -->
-                        <div class="blog">
-                            <div class="head">
-                                <strong class="comments-counter">
-                                    {{ 'user.comments.count.label'|trans }}
-                                    ({{ user.reviewsTo | length }})
-                                </strong>
-                                <!-- rating -->
-                                {% if user.averageAskerRating == 0 %}
-                                    {% set rating = user.averageOffererRating %}
-                                {% elseif user.averageOffererRating == 0 %}
-                                    {% set rating = user.averageAskerRating %}
-                                {% else %}
-                                    {% set rating = (user.averageAskerRating + user.averageOffererRating) / 2 %}
-                                {% endif %}
+                        </address>
 
-                                {% if rating %}
-                                    {{ rating | cocorico_star_rating }}
-                                {% endif %}
-                            </div>
-                            <div class="posts-holder">
-                                {% for review in user.reviewsTo %}
-                                    <!-- post -->
-                                    {% set reviewBy = review.reviewBy %}
-                                    {% set image_user = reviewBy.images|length ? reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
-                                    <article class="post">
-                                        <header class="head">
-                                            <div class="author-img">
-                                                <div class="img-holder">
-                                                    <img alt="{{ reviewBy.name }}"
-                                                         src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
-                                                </div>
-                                                <a href="{{ path('cocorico_user_profile_show', { 'id': reviewBy.id }) }}"
-                                                   class="author-name">{{ reviewBy.name }}</a>
-                                            </div>
-                                            <div class="meta">
-                                                <time datetime="{{ review.createdAt|date('Y-m-d') }}">
-                                                    {{ review.createdAt|localizeddate('short', 'none', 'fr') }}
-                                                </time>
-                                            </div>
-                                        </header>
-                                        <div class="post-content">
-                                            <p>{{ review.comment|strip_private_info }}</p>
-                                        </div>
-                                        <footer class="footer">
-                                            {% if review.booking.listing.user == user %}
-                                                {% set listing_translation = review.booking.listing.translations[app.request.locale] %}
+                        {% if user_description %}
+                            <blockquote>
+                                <q>"{{ user_description }}"</q>
+                            </blockquote>
+                        {% endif %}
+                    </header>
+                    <!-- blog -->
+                    <div class="blog">
+                        <div class="head">
+                            <strong class="comments-counter">
+                                {{ 'user.comments.count.label'|trans }}
+                                ({{ user.reviewsTo | length }})
+                            </strong>
+                            <!-- rating -->
+                            {% if user.averageAskerRating == 0 %}
+                                {% set rating = user.averageOffererRating %}
+                            {% elseif user.averageOffererRating == 0 %}
+                                {% set rating = user.averageAskerRating %}
+                            {% else %}
+                                {% set rating = (user.averageAskerRating + user.averageOffererRating) / 2 %}
+                            {% endif %}
 
-                                                <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
-                                                   class="link">
-                                                    {{ listing_translation.title }}
-                                                </a>
-                                            {% endif %}
-                                            <!-- rating -->
-                                            {% if review.rating %}
-                                                {{ review.rating | cocorico_star_rating }}
-                                            {% endif %}
-                                        </footer>
-                                    </article>
-                                {% endfor %}
-                            </div>
+                            {% if rating %}
+                                {{ rating | cocorico_star_rating }}
+                            {% endif %}
                         </div>
-                    </section>
-                </div>
-                <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-3">
-                    <div class="holder">
-                        <!-- gallery-small -->
-                        <div id="user_profile" class="gallery-small slideshow">
-                            <div class="slideset">
-                                {% if user_images|length %}
-                                    {% for image in user_images %}
-                                        <div class="slide">
-                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                                 alt="{{ user.name }}"/>
+                        <div class="posts-holder">
+                            {% for review in user.reviewsTo %}
+                                <!-- post -->
+                                {% set reviewBy = review.reviewBy %}
+                                {% set image_user = reviewBy.images|length ? reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+                                <article class="post">
+                                    <header class="head">
+                                        <div class="author-img">
+                                            <div class="img-holder">
+                                                <img alt="{{ reviewBy.name }}"
+                                                     src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
+                                            </div>
+                                            <a href="{{ path('cocorico_user_profile_show', { 'id': reviewBy.id }) }}"
+                                               class="author-name">{{ reviewBy.name }}</a>
                                         </div>
-                                    {% endfor %}
-                                {% else %}
+                                        <div class="meta">
+                                            <time datetime="{{ review.createdAt|date('Y-m-d') }}">
+                                                {{ review.createdAt|localizeddate('short', 'none', 'fr') }}
+                                            </time>
+                                        </div>
+                                    </header>
+                                    <div class="post-content">
+                                        <p>{{ review.comment|strip_private_info }}</p>
+                                    </div>
+                                    <footer class="footer">
+                                        {% if review.booking.listing.user == user %}
+                                            {% set listing_translation = review.booking.listing.translations[app.request.locale] %}
+
+                                            <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
+                                               class="link">
+                                                {{ listing_translation.title }}
+                                            </a>
+                                        {% endif %}
+                                        <!-- rating -->
+                                        {% if review.rating %}
+                                            {{ review.rating | cocorico_star_rating }}
+                                        {% endif %}
+                                    </footer>
+                                </article>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-3">
+                <div class="holder">
+                    <!-- gallery-small -->
+                    <div id="user_profile" class="gallery-small slideshow">
+                        <div class="slideset">
+                            {% if user_images|length %}
+                                {% for image in user_images %}
                                     <div class="slide">
-                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
                                              alt="{{ user.name }}"/>
                                     </div>
-                                {% endif %}
-                            </div>
-                            <a href="#" class="btn-prev">previous</a>
-                            <a href="#" class="btn-next">next</a>
+                                {% endfor %}
+                            {% else %}
+                                <div class="slide">
+                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                         alt="{{ user.name }}"/>
+                                </div>
+                            {% endif %}
                         </div>
-                        <!-- widget members-list -->
-                        <section class="widget members-list">
-                            <h1>
-                                {{ 'user.profile.subscribe-date.title'|trans }}
-                                <time datetime="{{ user.createdAt|date("Y-m-d") }}">
-                                    {{ user.createdAt|localizeddate('short', 'none', 'fr') }}
-                                </time>
-                            </h1>
-                            <!-- info-list -->
-                            <ul class="info-list">
-                                <li>
-                                    {% if user.phoneVerified %}
-                                        <i class="icon-ok"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.phone_verified.help'|trans({},'cocorico_listing') }}">
-                                        ?
-                                    </button>
-                                </li>
+                        <a href="#" class="btn-prev">previous</a>
+                        <a href="#" class="btn-next">next</a>
+                    </div>
+                    <!-- widget members-list -->
+                    <section class="widget members-list">
+                        <h1>
+                            {{ 'user.profile.subscribe-date.title'|trans }}
+                            <time datetime="{{ user.createdAt|date("Y-m-d") }}">
+                                {{ user.createdAt|localizeddate('short', 'none', 'fr') }}
+                            </time>
+                        </h1>
+                        <!-- info-list -->
+                        <ul class="info-list">
+                            <li>
+                                {% if user.phoneVerified %}
+                                    <i class="icon-ok"></i>
+                                    {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
+                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
+                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.phone_verified.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
 
-                                <li>
-                                    {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
-                                    {% if user.emailVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.email_verified.help'|trans({},'cocorico_listing') }}">
-                                        ?
-                                    </button>
-                                </li>
-                                <li>
-                                    {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
-                                    {% if user.idCardVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.id_card_verified.help'|trans({},'cocorico_listing') }}">
-                                        ?
-                                    </button>
-                                </li>
-                                <li>
-                                    {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
-                                    {% if user.nbBookingsOfferer %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans({},'cocorico_listing') }}">
-                                        ?
-                                    </button>
-                                </li>
-                                <li>
-                                    {{ 'form.user.nb_bookings_asker:'|trans({}, 'cocorico_user') }}
-                                    {% if user.nbBookingsAsker %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_bookings_asker.help'|trans({},'cocorico_listing') }}">
-                                        ?
-                                    </button>
-                                </li>
-                                <li>
-                                    {% if user_listings|length %}
-                                        {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
-                                        <strong>{{ user_listings.0.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
-
-                                        <button title="{{ cancellationPolicies()|e }}" data-placement="right"
-                                                data-toggle="tooltip" data-html="true"
-                                                class="tooltip-button"
-                                                type="button"
-                                                data-original-title="">
-                                            ?
-                                        </button>
-                                    {% endif %}
-                                </li>
-                                <li>
-                                    {{ 'user.profile.languages'|trans }}
-                                    <strong>
-                                        {{ user.motherTongue|language_name(app.request.locale) }},
-                                        {% for cpt_lang, language in user.languages %}
-                                            {% if cpt_lang != 0 %}, {% endif %}
-                                            {{ language.code|language_name(app.request.locale) }}
-                                            {% set cpt_lang = cpt_lang + 1 %}
-                                        {% endfor %}
-                                    </strong>
-                                </li>
-                            </ul>
-                        </section>
-                        {# listings #}
-                        <section class="widget property-list">
-                            <h1>{{ 'user.profile.my-listing'|trans }}</h1>
-
-                            <div class="listing-holder">
+                            <li>
+                                {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
+                                {% if user.emailVerified %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.email_verified.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+                            <li>
+                                {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
+                                {% if user.idCardVerified %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.id_card_verified.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+                            <li>
+                                {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
+                                {% if user.nbBookingsOfferer %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+                            <li>
+                                {{ 'form.user.nb_bookings_asker:'|trans({}, 'cocorico_user') }}
+                                {% if user.nbBookingsAsker %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.nb_bookings_asker.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+                            <li>
                                 {% if user_listings|length %}
-                                    {% for listing in user_listings %}
-                                        {% set listing_translation = listing.translations[app.request.locale] %}
-                                        <!-- listing-post -->
-                                        <article class="listing-post small">
-                                            <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
-                                               class="listing-box">
-                                                <div class="frame">
-                                                    <div class="post-info">
-                                                        <div class="img-holder">
-                                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~  listing.images[0].name) | imagine_filter('listing_medium') }}"
-                                                                 alt="listing image"/>
-                                                        </div>
-                                                        <div class="box">
-                                                            <div class="box-holder">
-                                                                <div class="head">
-                                                                    <!-- rating -->
-                                                                    {% if listing.averageRating %}
-                                                                        {{ listing.averageRating | cocorico_star_rating }}
-                                                                    {% endif %}
-                                                                    <div class="time-price">
-                                                                        {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+                                    {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
+                                    <strong>{{ user_listings.0.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
 
-                                                                        <strong class="price">
-                                                                            {{ price }}
-                                                                        </strong>
+                                    <button title="{{ cancellationPolicies()|e }}" data-placement="right"
+                                            data-toggle="tooltip" data-html="true"
+                                            class="tooltip-button"
+                                            type="button"
+                                            data-original-title="">
+                                        ?
+                                    </button>
+                                {% endif %}
+                            </li>
+                            <li>
+                                {{ 'user.profile.languages'|trans }}
+                                <strong>
+                                    {%- if user.motherTongue %}
+                                        {{ user.motherTongue|language_name(app.request.locale) }},
+                                    {% endif -%}
+                                    {% for cpt_lang, language in user.languages -%}
+                                        {%- if cpt_lang != 0 %}, {% endif -%}
+                                        {{ language.code|language_name(app.request.locale) }}
+                                        {%- set cpt_lang = cpt_lang + 1 -%}
+                                    {%- endfor %}
+                                </strong>
+                            </li>
+                        </ul>
+                    </section>
+                    {# listings #}
+                    <section class="widget property-list">
+                        <h1>{{ 'user.profile.my-listing'|trans }}</h1>
 
-                                                                        <p>
-                                                                            <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
-                                                                            / {{ (0)|add_time_unit_text }}
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="foot">
-                                                                    <strong class="title">
-                                                                        {% for listingListingCategory in listing.listingListingCategories %}
-                                                                            {{ listingListingCategory.category.name }},
-                                                                        {% endfor %}
+                        <div class="listing-holder">
+                            {% if user_listings|length %}
+                                {% for listing in user_listings %}
+                                    {% set listing_translation = listing.translations[app.request.locale] %}
+                                    <!-- listing-post -->
+                                    <article class="listing-post small">
+                                        <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
+                                           class="listing-box">
+                                            <div class="frame">
+                                                <div class="post-info">
+                                                    <div class="img-holder">
+                                                        <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~  listing.images[0].name) | imagine_filter('listing_medium') }}"
+                                                             alt="listing image"/>
+                                                    </div>
+                                                    <div class="box">
+                                                        <div class="box-holder">
+                                                            <div class="head">
+                                                                <!-- rating -->
+                                                                {% if listing.averageRating %}
+                                                                    {{ listing.averageRating | cocorico_star_rating }}
+                                                                {% endif %}
+                                                                <div class="time-price">
+                                                                    {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+
+                                                                    <strong class="price">
+                                                                        {{ price }}
                                                                     </strong>
+
+                                                                    <p>
+                                                                        <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                                                                        / {{ (0)|add_time_unit_text }}
+                                                                    </p>
                                                                 </div>
+                                                            </div>
+                                                            <div class="foot">
+                                                                <strong class="title">
+                                                                    {% for listingListingCategory in listing.listingListingCategories %}
+                                                                        {{ listingListingCategory.category.name }},
+                                                                    {% endfor %}
+                                                                </strong>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="post-content">
-                                                        <div class="textbox">
-                                                            <h2>{{ listing_translation.title }}</h2>
-                                                            {% if  listing.certified %}
-                                                                <span class="certified">
+                                                </div>
+                                                <div class="post-content">
+                                                    <div class="textbox">
+                                                        <h2>{{ listing_translation.title }}</h2>
+                                                        {% if  listing.certified %}
+                                                            <span class="certified">
                                                                     <i class="icon-ok"></i>
                                                                     {{ 'listing.edit.index.certified'|trans({},'cocorico_listing') }}
                                                                 </span>
-                                                            {% endif %}
+                                                        {% endif %}
 
-                                                        </div>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </article>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                        </section>
-                    </div>
-                </aside>
+                                            </div>
+                                        </a>
+                                    </article>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </section>
+                </div>
+            </aside>
             {#</div>#}
         {% endblock %}
 
@@ -344,18 +346,18 @@
     {{ parent() }}
 
     {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
-    'map_elt': '',
-    'auto_complete_elt': '#location'
+        'map_elt': '',
+        'auto_complete_elt': '#location'
     } only %}
 
     <script>
         $(function () {
             // Categories
             initMultiSelect(
-                    '#categories',
-                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+                '#categories',
+                '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
+                '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
+                '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
             );
         });
     </script>
@@ -365,9 +367,9 @@
     {{ parent() }}
 
     {% include 'CocoricoSeoBundle:Frontend:Profile/_show_markup.jsonld.twig' ignore missing with {
-    'user': user,
-    'user_listings': user_listings,
-    'user_description': user_description,
-    'user_address': user_address
+        'user': user,
+        'user_listings': user_listings,
+        'user_description': user_description,
+        'user_address': user_address
     } only %}
 {% endblock %}

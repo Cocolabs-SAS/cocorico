@@ -477,5 +477,6 @@ class UserAdmin extends SonataUserAdmin
     {
         $collection->remove('create');
         $collection->remove('delete');
+        $collection->remove('show');
     }
 }
