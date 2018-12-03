@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-19T16:14:31Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -55,13 +55,13 @@
       <trans-unit id="9e16967be6a7afcf10147cffc7be05f119a726de" resname="cocorico.search.extended.warning %location%">
         <source>cocorico.search.extended.warning %location%</source>
         <target>Nombre de résultats insuffisant, la zone de recherche va être étendue à : %location%</target>
-          <jms:reference-file line="161">Frontend/ListingResult/result.html.twig</jms:reference-file>
+          <jms:reference-file line="160">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e76df2f570186e6fcf3ba0b861b2fe7b1d19dc7" resname="cocorico.search.invalidate.address">
         <source>cocorico.search.invalidate.address</source>
         <target>Veuillez renseigner une adresse pour lancer la recherche.</target>
-          <jms:reference-file line="43">ListingResult/js/_geocoding_js.html.twig</jms:reference-file>
-          <jms:reference-file line="178">ListingResult/js/_geocoding_map_drag_js.html.twig</jms:reference-file>
+          <jms:reference-file line="42">ListingResult/js/_geocoding_js.html.twig</jms:reference-file>
+          <jms:reference-file line="182">ListingResult/js/_geocoding_map_drag_js.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8e0d9c9ce43a45ffe8e790a561f78cf215d4c13" resname="cocorico.sunday">
         <source>cocorico.sunday</source>
@@ -230,24 +230,24 @@
         <target>Toutes</target>
         <jms:reference-file line="124">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="534">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="356">Frontend/Profile/show.html.twig</jms:reference-file>
+          <jms:reference-file line="184">Frontend/ListingResult/result.html.twig</jms:reference-file>
+          <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="780b109aaf541af74b8adc7fb6222d4fda7a980d" resname="multiselect.none_selected">
         <source>multiselect.none_selected</source>
         <target>Aucune</target>
         <jms:reference-file line="125">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="535">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="187">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="357">Frontend/Profile/show.html.twig</jms:reference-file>
+          <jms:reference-file line="185">Frontend/ListingResult/result.html.twig</jms:reference-file>
+          <jms:reference-file line="359">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56aef35256504c5def3af2bfea3c78db49dd8cc3" resname="multiselect.num_selected">
         <source>multiselect.num_selected</source>
         <target>selectionnées</target>
         <jms:reference-file line="126">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="536">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="188">Frontend/ListingResult/result.html.twig</jms:reference-file>
-        <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
+          <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
+          <jms:reference-file line="360">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7922207fb51f1d5e34be3c837b7ae78b4587854a" resname="nav.asker.link">
         <source>nav.asker.link</source>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-19T16:14:31Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -345,7 +345,7 @@
         <source>listing.edit.index.certified</source>
         <target>Annonce certifiée</target>
         <jms:reference-file line="58">Dashboard/Listing/index.html.twig</jms:reference-file>
-        <jms:reference-file line="319">Frontend/Profile/show.html.twig</jms:reference-file>
+          <jms:reference-file line="321">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c75b4ce0fe7a516c4d8346a86942da24eeaee7ef" resname="listing.edit.location.title">
         <source>listing.edit.location.title</source>
@@ -640,12 +640,11 @@
       <trans-unit id="f9b32384b68743661c0683cfa182d4db14a5eabc" resname="listing.new.save">
         <source>listing.new.save</source>
         <target>Publier mon annonce</target>
-        <jms:reference-file line="293">Frontend/Listing/new.html.twig</jms:reference-file>
+          <jms:reference-file line="282">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a81c08ca39057623265fcf541e0aab54c70ec3de" resname="listing.new.signup.title">
         <source>listing.new.signup.title</source>
         <target>Créer un compte ou s'identifier</target>
-        <jms:reference-file line="266">Frontend/Listing/new.html.twig</jms:reference-file>
         <jms:reference-file line="12">Frontend/Registration/register.html.twig</jms:reference-file>
         <jms:reference-file line="12">Frontend/Security/login.html.twig</jms:reference-file>
       </trans-unit>
@@ -657,7 +656,7 @@
       <trans-unit id="91f0ae365b42ca15297e24469531596860d6e62c" resname="listing.new.tac.link">
         <source>listing.new.tac.link</source>
         <target>les conditions générales</target>
-        <jms:reference-file line="282">Frontend/Listing/new.html.twig</jms:reference-file>
+          <jms:reference-file line="271">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="099bd9fd3eb8ecdfa47a2bf51cd486c5094cfae0" resname="listing.new.title">
         <source>listing.new.title</source>
@@ -745,6 +744,7 @@
         <source>listing.search.result.results</source>
         <target>%nb_results% résultat(s)</target>
         <jms:reference-file line="71">Frontend/ListingResult/result.html.twig</jms:reference-file>
+          <jms:reference-file line="96">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="811628da617a8da9696d216392c3eaab3c1c0c9f" resname="listing.search.result.title">
         <source>listing.search.result.title</source>
@@ -773,7 +773,7 @@
         <source>listing.show.cancellation_policy:</source>
         <target>Politique d'annulation :</target>
         <jms:reference-file line="108">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="294">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="282">Frontend/Booking/new.html.twig</jms:reference-file>
         <jms:reference-file line="301">Frontend/Listing/show.html.twig</jms:reference-file>
         <jms:reference-file line="240">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
@@ -786,7 +786,7 @@
       <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="listing.show.categories:">
         <source>listing.show.categories:</source>
         <target>Catégories</target>
-          <jms:reference-file line="282">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="270">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="listing.show.characteristics">
         <source>listing.show.characteristics</source>
@@ -832,7 +832,7 @@
       <trans-unit id="49ff4bce3e52dd086b802ffa369d62b7e99d537b" resname="listing.show.location:">
         <source>listing.show.location:</source>
         <target>Lieu :</target>
-          <jms:reference-file line="290">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="278">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="368a7d80b53cf610605714c046875ad7fd4d19b6" resname="listing.show.map">
         <source>listing.show.map</source>
@@ -1142,7 +1142,7 @@
       <trans-unit id="c7a4298347ed905bf82c406276876396d2b49a12" resname="nav.tac.slug">
         <source>nav.tac.slug</source>
         <target>conditions-generales-d-utilisation</target>
-        <jms:reference-file line="280">Frontend/Listing/new.html.twig</jms:reference-file>
+          <jms:reference-file line="269">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fd1286353570c5703799ba76999323b7c7447b06" resname="no">
         <source>no</source>
@@ -1171,7 +1171,7 @@
         <trans-unit id="deaa330c72d94793c121327de0423c1dce952689" resname="search-on-map-drag">
             <source>search-on-map-drag</source>
             <target>Rechercher quand je déplace la carte</target>
-            <jms:reference-file line="98">Frontend/ListingResult/result.html.twig</jms:reference-file>
+            <jms:reference-file line="97">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="53a5687cb26dc41f2ab4033e97e13adefd3740d6" resname="success">
         <source>success</source>
