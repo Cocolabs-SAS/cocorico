@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-19T16:14:31Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -23,7 +23,7 @@
       </trans-unit>
       <trans-unit id="718a7e8a582e982e452dd5700addba4ffc1cf40d" resname="Body">
         <source>Body</source>
-        <target>Body</target>
+          <target>Message</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="28abf6c8c36ac61c4d1af5c91915bf7d818ef8a1" resname="Booking Bank Wire Batch">
@@ -213,7 +213,7 @@
       </trans-unit>
       <trans-unit id="5db1542e683b0540dc5a4544657851d8020c91d9" resname="Created At">
         <source>Created At</source>
-        <target>Created At</target>
+          <target>Créé le</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d87f47b47e4d5794d53fe0734c49417bd046cde0" resname="Dashboard">
@@ -719,12 +719,12 @@
       </trans-unit>
       <trans-unit id="17b874d289117b1353bc5080960074585aed4227" resname="Sender">
         <source>Sender</source>
-        <target>Sender</target>
+          <target>Expéditeur</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bae7d5be70820ed56467bd9a63744e23b47bd711" resname="Status">
         <source>Status</source>
-        <target>Status</target>
+          <target>Statut</target>
         <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1020d4545c096a444c10520339ea8a1149220be9" resname="Thread Batch">
@@ -749,7 +749,7 @@
       </trans-unit>
       <trans-unit id="a7bc04075346dd048d60c1dc360dd4763a3e4c2c" resname="Thread List">
         <source>Thread List</source>
-        <target>Thread List</target>
+          <target>Messages</target>
         <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d2dbc92dbbf80d00edb68ec84113f35e418638e" resname="Thread Update">
@@ -798,6 +798,11 @@
         <target>Value</target>
         <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
+        <trans-unit id="943d2f7a2fd4d140bb0df74f991e8fcba8dd3d99" resname="View Thread">
+            <source>View Thread</source>
+            <target state="new">Voir</target>
+            <jms:reference-file line="4">views/Admin/view_thread.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="36522f9fece5a8cb38f5e17dcb432bb9f824ef9d" resname="Wire Reference">
         <source>Wire Reference</source>
         <target>Wire Reference</target>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-19T16:14:31Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -90,11 +90,6 @@
         <source>URL Hash</source>
         <target state="new">URL Hash</target>
         <jms:reference-file line="61">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="943d2f7a2fd4d140bb0df74f991e8fcba8dd3d99" resname="View Thread">
-        <source>View Thread</source>
-        <target>View Thread</target>
-        <jms:reference-file line="4">views/Admin/view_thread.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="803aa4542bd0d44bcaf600e05a5a5384487a94b8" resname="admin.booking.alerted_expiring.label">
         <source>admin.booking.alerted_expiring.label</source>

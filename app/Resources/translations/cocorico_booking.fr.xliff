@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-11T12:47:37Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-04-19T16:14:31Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -327,7 +327,7 @@
       <trans-unit id="c7de4f52f1bf3074e96c0f94b6fb806ad7c2e469" resname="booking.new.message.placeholder">
         <source>booking.new.message.placeholder</source>
         <target>Rédiger votre message de demande à l'attention de l'offreur</target>
-          <jms:reference-file line="214">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="202">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1703c3a03d2cf45800ecb3b3f93e1a5b8bb6573f" resname="booking.new.options.success">
         <source>booking.new.options.success</source>
@@ -337,7 +337,7 @@
       <trans-unit id="083c618c0d6cea305c1e7472bcceb15434994011" resname="booking.new.provider.title">
         <source>booking.new.provider.title</source>
         <target>Dites bonjour !</target>
-          <jms:reference-file line="259">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="247">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="28b9e3c63b01f9d312668d113cd7eb5c04157a3c" resname="booking.new.self_booking.error">
         <source>booking.new.self_booking.error</source>
@@ -353,7 +353,7 @@
         <source>booking.new.tac.link</source>
         <target>les termes et conditions</target>
         <jms:reference-file line="132">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="236">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="224">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ecc3fa0ac15c5eb33b33f1f1be3eeebd95d9ffcc" resname="booking.new.unknown.error">
         <source>booking.new.unknown.error</source>
@@ -365,7 +365,7 @@
       <trans-unit id="b370314c697defb1d7393abebaf775f49845880b" resname="booking.new.validation.submit">
         <source>booking.new.validation.submit</source>
         <target>Payer</target>
-          <jms:reference-file line="241">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="229">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0462988b55dd0888cce21c33dc9ad8ecff7e38c6" resname="booking.new.voucher.success">
         <source>booking.new.voucher.success</source>
@@ -458,7 +458,7 @@
           <jms:reference-file line="83">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
           <jms:reference-file line="65">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
         <jms:reference-file line="81">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
-        <jms:reference-file line="65">Dashboard/Review/new.html.twig</jms:reference-file>
+          <jms:reference-file line="64">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="34716d25ac314241bc32f408fcdaec7710e1259d" resname="booking.show.number.title">
         <source>booking.show.number.title</source>
@@ -497,7 +497,7 @@
           <jms:reference-file line="77">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
           <jms:reference-file line="59">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
         <jms:reference-file line="77">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
-        <jms:reference-file line="59">Dashboard/Review/new.html.twig</jms:reference-file>
+          <jms:reference-file line="58">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c59391c8637532ef23057cbad54259e48d919917" resname="booking.show.status.title">
         <source>booking.show.status.title</source>
@@ -656,13 +656,13 @@
       <trans-unit id="40cdccf226cbb6688a25713f9628b0f3e7959bb4" resname="listing.show.rules:">
         <source>listing.show.rules:</source>
         <target>Règles</target>
-          <jms:reference-file line="302">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="290">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c7a4298347ed905bf82c406276876396d2b49a12" resname="nav.tac.slug">
         <source>nav.tac.slug</source>
         <target>conditions-generales-d-utilisation</target>
         <jms:reference-file line="131">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="234">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="222">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cdf7e925f5746741c316f5fbcf39ad0dfca90775" resname="results">
         <source>results</source>
