@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-19T16:15:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2017-04-20T13:44:41Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -15,6 +15,41 @@
         <source>home.feeds.section.header.title</source>
         <target state="new">Last news</target>
         <jms:reference-file line="6">Frontend/Home/rss_feed.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="57960e01faa7446200e4df1ad9627d366db31149" resname="home.header.title">
+            <source>home.header.title</source>
+            <target><![CDATA[<span class="thin-text">Lorem</span> ipsum dolor <span class="text">sit amet,</span> consectetur suspendisse.]]></target>
+        <jms:reference-file line="27">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="dfb71b63ab2b6bfa53cb1c2219141a20ba43629c" resname="home.subinfo.desc1">
+            <source>home.subinfo.desc1</source>
+        <target>Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</target>
+        <jms:reference-file line="54">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="faed099f1fed864a375cd3655810dfc623fb89d6" resname="home.subinfo.desc2">
+            <source>home.subinfo.desc2</source>
+        <target>Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</target>
+        <jms:reference-file line="69">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="a1adcf57bdd76e6ec8b339459dc9cfaa50995378" resname="home.subinfo.desc3">
+            <source>home.subinfo.desc3</source>
+        <target>Mipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</target>
+        <jms:reference-file line="85">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="fa3fd316ca61c75bfef668d3e2264c9b82945436" resname="home.subinfo.title1">
+            <source>home.subinfo.title1</source>
+        <target>Lorem ipsum dolor sit amet, consectetur adipiscing.</target>
+        <jms:reference-file line="51">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="23013050e503fc1006a320aee7880b844d75b24c" resname="home.subinfo.title2">
+            <source>home.subinfo.title2</source>
+        <target>Lorem ipsum dolor sit amet ?</target>
+        <jms:reference-file line="66">Frontend/Home/index.html.twig</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="deab60096bbb39c62aba5abaf60c4e973cea3e20" resname="home.subinfo.title3">
+            <source>home.subinfo.title3</source>
+        <target>Lorem ipsum dolor sit amet, consect</target>
+        <jms:reference-file line="82">Frontend/Home/index.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>
