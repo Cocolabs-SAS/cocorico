@@ -43,7 +43,7 @@
                         </a>
                     </h2>
 
-                    <p>{{ listing_translation.description | truncate(50,true) }}</p>
+                    <p>{{ listing_translation.description | strip_private_info | truncate(50,true) }}</p>
                 </div>
             </article>
         {% endfor %}
