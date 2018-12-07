@@ -20,33 +20,47 @@
         {% include 'CocoricoListingCategoryFieldBundle:Dashboard:Listing/_form_categories_fields_values.html.twig' with {
         'form': form
         } only %}
+    {% else %}
+        <div class="btn-block text-center">
+            <button data-id="submit-category" type="submit" class="btn btn-default btn-primary">
+                <span>{{ 'listing.save'|trans }}</span>
+            </button>
+        </div>
     {% endif %}
 
     {{ form_end(form) }}
 
     <script>
         $(function () {
+            var categoryFieldBundle = {{ bundleExist('CocoricoListingCategoryFieldBundle') ? 'true' : 'false' }};
             var $formContainer = $("#category-form-container");
             $formContainer.submitAjaxForm(function () {
                 jcf.replaceAll("#category-form-container");
             });
 
-            var changeIsDisabled = false;
-            //Edition
-            $("#listing_categories_listingListingCategories").on('change', function (e) {
-                if (!changeIsDisabled) {
-                    changeIsDisabled = true;
+            if (categoryFieldBundle) {
+                var changeIsDisabled = false;
+                //Edition
+                $("#listing_categories_listingListingCategories").on('change', function (e) {
+                    if (!changeIsDisabled) {
+                        changeIsDisabled = true;
 
-                    $(this).closest('form').submit();
+                        $(this).closest('form').submit();
 
-                    $(this).find("option:not(:selected)").each(function () {
-                        $(this).attr('disabled', 'disabled');
-                    });
-                    $(this).next('.jcf-list-box').css('opacity', '0.5');
-                } else {
+                        $(this).find("option:not(:selected)").each(function () {
+                            $(this).attr('disabled', 'disabled');
+                        });
+                        $(this).next('.jcf-list-box').css('opacity', '0.5');
+                    } else {
+                        e.preventDefault();
+                    }
+                });
+            } else {
+                $("[data-id='submit-category']").on('click', function (e) {
                     e.preventDefault();
-                }
-            });
+                    $(this).closest('form').submit();
+                });
+            }
         });
     </script>
 </div>
