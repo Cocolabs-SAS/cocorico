@@ -64,7 +64,7 @@ class ReviewManager extends BaseManager
     {
         $queryBuilder = $this->getRepository()
             ->createQueryBuilder('r')
-            ->addSelect("b, l, t, i, rb, rt, rbi, u")
+            ->addSelect("b, l, t, i, rb, rbi, rt, rti, u")
             ->leftJoin('r.booking', 'b')
             ->leftJoin('b.user', 'u')
             ->leftJoin('b.listing', 'l')
@@ -72,6 +72,7 @@ class ReviewManager extends BaseManager
             ->leftJoin('r.reviewBy', 'rb')
             ->leftJoin('rb.images', 'rbi')
             ->leftJoin('r.reviewTo', 'rt')
+            ->leftJoin('rt.images', 'rti')
             ->leftJoin('l.translations', 't')
             ->orderBy('r.createdAt', 'DESC');
 
