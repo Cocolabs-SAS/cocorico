@@ -134,7 +134,8 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_excl_fees.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2
                 )
             )
             ->add(
@@ -143,7 +144,8 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_fee_as_asker.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2
                 )
             )
             ->add(
@@ -152,7 +154,8 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_fee_as_offerer.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2
                 )
             );
 
@@ -180,7 +183,8 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_discount_voucher.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2
                     )
                 );
         }
@@ -193,7 +197,8 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_to_pay_by_asker.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2
                 )
             )
             ->add(
@@ -202,7 +207,8 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_to_pay_to_offerer.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2
                 )
             )
             ->add(
@@ -360,7 +366,8 @@ class BookingAdmin extends Admin
                     'price',
                     array(
                         'disabled' => true,
-                        'label' => 'admin.booking.delivery_amount.label'
+                        'label' => 'admin.booking.delivery_amount.label',
+                        'scale' => 2
                     )
                 )
                 ->end();
@@ -404,7 +411,8 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.delivery_amount.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2
                     )
                 )
                 ->add(
@@ -421,7 +429,8 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.hatchback_amount.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2
                     )
                 )
                 ->end();
@@ -437,7 +446,8 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_options.title',
-                        'include_vat' => $this->includeVat
+                        'include_vat' => $this->includeVat,
+                        'scale' => 2
                     )
                 )
                 ->add(

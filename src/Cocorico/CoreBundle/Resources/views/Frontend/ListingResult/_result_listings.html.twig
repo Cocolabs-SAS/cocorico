@@ -51,9 +51,10 @@
                                     {% endif %}
                                 </div>
                                 <strong class="title">
-                                    {% for listingListingCategory in listing.listingListingCategories %}
-                                        {{ listingListingCategory.category.translations[app.request.locale].name }},
-                                    {% endfor %}
+                                    {%- for listingListingCategory in listing.listingListingCategories -%}
+                                        {{ listingListingCategory.category.translations[app.request.locale].name }}
+                                        {%- if not loop.last -%}, {% endif -%}
+                                    {%- endfor -%}
                                 </strong>
                             </div>
                         </div>

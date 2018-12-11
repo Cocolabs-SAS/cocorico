@@ -61,6 +61,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix SQL for booking expiration and expiring alert
 - Fix Google "Browser API keys cannot have referer restrictions when used with this API"
 - Fix phone_prefix user form field case
+- Fix price scales fields in admin if price precision parameter is equal to 0
 
 ### Changed
 - Split each dashboard profile actions in multiple controllers
