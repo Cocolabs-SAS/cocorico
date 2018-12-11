@@ -725,30 +725,32 @@
                 {{ form_widget(form.end) }}
             </div>
         {% else %}
-            <strong class="title">
-                {{ form_label(form.end) }}
-            </strong>
+            <div class="col">
+                <strong class="title">
+                    {{ form_label(form.end) }}
+                </strong>
 
-            {{ form_errors(form.end) }}
-            {% if timePicker %}
-                <div class='input-group date' id='datetimepicker3'>
-                    {{ form_widget(form.end_picker,{
-                        'attr': {
-                            'class': 'form-control',
-                            'placeholder': '--:--',
-                        }
-                    }) }}
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-time"></span>
-                    </span>
-                </div>
-                {#hide end time field#}
-                <div class="hidden">
+                {{ form_errors(form.end) }}
+                {% if timePicker %}
+                    <div class='input-group date' id='datetimepicker3'>
+                        {{ form_widget(form.end_picker,{
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': '--:--',
+                            }
+                        }) }}
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-time"></span>
+                        </span>
+                    </div>
+                    {#hide end time field#}
+                    <div class="hidden">
+                        {{ form_widget(form.end) }}
+                    </div>
+                {% else %}
                     {{ form_widget(form.end) }}
-                </div>
-            {% else %}
-                {{ form_widget(form.end) }}
-            {% endif %}
+                {% endif %}
+            </div>
         {% endif %}
     </div>
 {%- endblock -%}
