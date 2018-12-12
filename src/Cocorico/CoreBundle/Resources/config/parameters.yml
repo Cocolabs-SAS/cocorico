@@ -307,6 +307,8 @@ parameters:
 
     #translator key
     cocorico.translator.secret.key: ~
+    cocorico.translator.translate.url: http://api.microsofttranslator.com/v2/Http.svc/TranslateArray
+    cocorico.translator.token.url: https://api.cognitive.microsoft.com/sts/v1.0/issueToken
 
     #facebook
     cocorico.facebook.app_id: ~
