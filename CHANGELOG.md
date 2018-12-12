@@ -173,6 +173,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix new booking form handler without BOOKING_NEW_FORM_PROCESS listeners
 - Fix user label translation in payin refund in sonata admin
 - Fix IBAN form field length
+- Fix times search fields in range display mode
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 
