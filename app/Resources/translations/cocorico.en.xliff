@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-19T16:15:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-04-27T23:20:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -86,19 +86,19 @@
       <trans-unit id="92e4199a6cbc855202f30c836d970f76bbd3a517" resname="collection.add_item">
         <source>collection.add_item</source>
         <target>Add</target>
-        <jms:reference-file line="238">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="334">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="417">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1096">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1126">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="246">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="342">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="425">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="1106">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="1136">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b369460718f0b8112273eb3930153ba99d63a373" resname="collection.remove_item">
         <source>collection.remove_item</source>
         <target>Remove</target>
-        <jms:reference-file line="207">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="307">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="387">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1053">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="215">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="315">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="395">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="1063">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="45b97052db6fdc4abdcdefcc65952e83c06f682c" resname="company_info">
         <source>company_info</source>
@@ -201,17 +201,17 @@
         <target>An error has occurred.</target>
         <jms:reference-file line="70">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
         <jms:reference-file line="71">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
-        <jms:reference-file line="64">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="72">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="745132bd15d9bcfd7316d5588bf300eac5bfbc6d" resname="listing.file.button.text">
         <source>listing.file.button.text</source>
         <target>Choose file</target>
-        <jms:reference-file line="173">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21c97cc111d6d483759f2f7a212d3010eba47ae2" resname="listing.file.placeholder.text">
         <source>listing.file.placeholder.text</source>
         <target>No file chosen</target>
-        <jms:reference-file line="173">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d7ce250577bc878ff98c5a30f972ab064b3bbe3" resname="listing.form.tac.error">
         <source>listing.form.tac.error</source>
@@ -228,7 +228,7 @@
       <trans-unit id="ee1536aec49276b3a23b8861008ee943786bc7cb" resname="multiselect.all_selected">
         <source>multiselect.all_selected</source>
         <target>All selected</target>
-        <jms:reference-file line="124">Frontend/Home/index.html.twig</jms:reference-file>
+          <jms:reference-file line="121">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="534">Frontend/Listing/show.html.twig</jms:reference-file>
           <jms:reference-file line="184">Frontend/ListingResult/result.html.twig</jms:reference-file>
           <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
@@ -236,7 +236,7 @@
       <trans-unit id="780b109aaf541af74b8adc7fb6222d4fda7a980d" resname="multiselect.none_selected">
         <source>multiselect.none_selected</source>
         <target>None selected</target>
-        <jms:reference-file line="125">Frontend/Home/index.html.twig</jms:reference-file>
+          <jms:reference-file line="122">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="535">Frontend/Listing/show.html.twig</jms:reference-file>
           <jms:reference-file line="185">Frontend/ListingResult/result.html.twig</jms:reference-file>
           <jms:reference-file line="359">Frontend/Profile/show.html.twig</jms:reference-file>
@@ -244,7 +244,7 @@
       <trans-unit id="56aef35256504c5def3af2bfea3c78db49dd8cc3" resname="multiselect.num_selected">
         <source>multiselect.num_selected</source>
         <target>selected</target>
-        <jms:reference-file line="126">Frontend/Home/index.html.twig</jms:reference-file>
+          <jms:reference-file line="123">Frontend/Home/index.html.twig</jms:reference-file>
         <jms:reference-file line="536">Frontend/Listing/show.html.twig</jms:reference-file>
           <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
           <jms:reference-file line="360">Frontend/Profile/show.html.twig</jms:reference-file>

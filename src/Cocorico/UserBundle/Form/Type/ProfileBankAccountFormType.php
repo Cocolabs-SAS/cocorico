@@ -50,7 +50,6 @@ class ProfileBankAccountFormType extends AbstractType
                 'country',
                 array(
                     'label' => 'form.user.nationality',
-                    'required' => false,
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
             )
@@ -58,7 +57,7 @@ class ProfileBankAccountFormType extends AbstractType
                 'countryOfResidence',
                 'country',
                 array(
-                    'label' => 'form.user.countryOfResidence',
+                    'label' => 'form.user.country_of_residence',
                     'required' => true,
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )

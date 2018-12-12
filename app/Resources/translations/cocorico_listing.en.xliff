@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-19T16:15:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-04-27T23:20:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -16,8 +16,8 @@
       <trans-unit id="85b9440b9a481e9ef8452c609753af0fb75c28de" resname="admin.listing.cancellation_policy.label">
         <source>admin.listing.cancellation_policy.label</source>
         <target>Cancellation policy</target>
-          <jms:reference-file line="225">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="227">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="231">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="233">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
           <jms:reference-file line="201">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
           <jms:reference-file line="203">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
       </trans-unit>
@@ -701,6 +701,7 @@
         <jms:reference-file line="62">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
         <jms:reference-file line="139">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="62">Dashboard/Listing/edit_presentation.html.twig</jms:reference-file>
+          <jms:reference-file line="26">Dashboard/Listing/form_categories_ajax.html.twig</jms:reference-file>
         <jms:reference-file line="26">Dashboard/Listing/form_categories_extra.html.twig</jms:reference-file>
         <jms:reference-file line="64">Dashboard/Listing/form_duration.html.twig</jms:reference-file>
       </trans-unit>
@@ -736,13 +737,13 @@
       <trans-unit id="f95d3cebd6aa233ad275dbe4a8b453b5ef7ef1a8" resname="listing.search.result.no_results">
         <source>listing.search.result.no_results</source>
         <target state="new">No results found. Please change your criterias</target>
-          <jms:reference-file line="92">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
+          <jms:reference-file line="93">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e0c7225719f33b2cab0a2b344bd1f92c1963ad00" resname="listing.search.result.results">
         <source>listing.search.result.results</source>
         <target>%nb_results% results</target>
         <jms:reference-file line="71">Frontend/ListingResult/result.html.twig</jms:reference-file>
-          <jms:reference-file line="96">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
+          <jms:reference-file line="97">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="811628da617a8da9696d216392c3eaab3c1c0c9f" resname="listing.search.result.title">
         <source>listing.search.result.title</source>
@@ -969,7 +970,7 @@
       <trans-unit id="f8f32c1d94fa3fde6587937808b7f381e8d393c4" resname="listing_edit.form.from_quantity.bought">
         <source>listing_edit.form.from_quantity.bought</source>
         <target>%quantity_text% ordered</target>
-        <jms:reference-file line="303">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="311">views/Form/fields.html.twig</jms:reference-file>
         <jms:reference-file line="338">Frontend/Listing/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="840e18571bfc4e9f516fd60527195d3b2a1f9836" resname="listing_edit.form.max_duration">

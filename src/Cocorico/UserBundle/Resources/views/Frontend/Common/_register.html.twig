@@ -14,16 +14,16 @@
                     {{ form_label(form_registration.personType) }}
                 </span>
 
-                <div class="field-holder">
+                <div class="field-holder" data-id="person-type">
                     {{ form_widget(form_registration.personType, {
                         'attr': {
-                            'class': "form-control form-control-radio required trigger-company-name"
+                            'class': "form-control form-control-radio required"
                         }
                     }) }}
                 </div>
             </div>
 
-            <div class="field-row validate-row target-company-name" data-show-if-radio="2">
+            <div class="field-row validate-row" data-id="company-name">
                 <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
                 <span class="label">
                     {{ form_label(form_registration.companyName) }}
@@ -32,8 +32,8 @@
                 <div class="field-holder">
                     {{ form_widget(form_registration.companyName, {
                         'attr': {
-                            'class': "form-control",
-                            'data-parsley-required-message': 'cocorico_user.companyName.blank'|trans({},'validators')
+                            'class': 'form-control',
+                            'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
                         }
                     }) }}
                 </div>
@@ -42,13 +42,18 @@
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
                 <span class="label">
-                    {{ form_label(form_registration.lastName) }}
+
+                    {{ form_label(form_registration.lastName, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.last_name.legal'|trans
+                        }
+                    }) }}
                 </span>
 
                 <div class="field-holder">
                     {{ form_widget(form_registration.lastName, {
                         'attr': {
-                            'class': "form-control required",
+                            'class': 'form-control required',
                             'data-parsley-required-message': 'cocorico_user.last_name.blank'|trans({},'validators'),
                             'data-parsley-invalid-message': 'cocorico_user.last_name.invalid'|trans({}, 'validators')
                         }
@@ -59,7 +64,11 @@
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.firstName) }}</div>
                 <span class="label">
-                    {{ form_label(form_registration.firstName) }}
+                    {{ form_label(form_registration.firstName, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.first_name.legal'|trans
+                        }
+                    }) }}
                 </span>
 
                 <div class="field-holder">
@@ -76,7 +85,11 @@
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.birthday) }}</div>
                 <span class="label">
-                    {{ form_label(form_registration.birthday) }}
+                    {{ form_label(form_registration.birthday, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.birthday.legal'|trans
+                        }
+                    }) }}
                 </span>
 
                 <div class="field-holder">
@@ -107,7 +120,11 @@
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.nationality) }}</div>
                 <span class="label">
-                    {{ form_label(form_registration.nationality) }}
+                    {{ form_label(form_registration.nationality, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.nationality.legal'|trans
+                        }
+                    }) }}
                 </span>
 
                 <div class="field-holder">
@@ -122,7 +139,11 @@
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.countryOfResidence) }}</div>
                 <span class="label">
-                    {{ form_label(form_registration.countryOfResidence) }}
+                    {{ form_label(form_registration.countryOfResidence, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.country_of_residence.legal'|trans
+                        }
+                    }) }}
                 </span>
 
                 <div class="field-holder">

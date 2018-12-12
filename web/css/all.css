@@ -8556,8 +8556,9 @@ label {
 
 .form-signup .label {
     float: left;
-    width: 132px;
+    width: 224px;
     margin: 7px 10px 0 0;
+    text-align: right;
 }
 
 .form-signup .field-holder {
@@ -8680,7 +8681,7 @@ label {
 
 .tab-holder .column {
     position: relative;
-    padding: 0 0 0 100px;
+    padding: 0 0 0 160px;
     display: table-cell;
     vertical-align: middle;
 }
@@ -8697,7 +8698,7 @@ label {
 }
 
 .tab-holder .column:first-child {
-    padding: 0 100px 0 0;
+    padding: 0 40px 0 0;
 }
 
 .tab-holder .column:first-child:before {
