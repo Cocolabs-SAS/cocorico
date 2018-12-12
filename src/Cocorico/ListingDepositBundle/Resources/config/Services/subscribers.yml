@@ -1,0 +1,17 @@
+services:
+    #Booking amount subscriber
+    cocorico_listing_deposit.booking.amount.subscriber:
+        class: Cocorico\ListingDepositBundle\Event\BookingAmountSubscriber
+        arguments:
+            - "%cocorico.booking_price_min%"
+        tags:
+            - { name: kernel.event_subscriber}
+
+    #BookingDepositRefund  subscriber
+    cocorico.booking_deposit_refund.subscriber:
+        class: Cocorico\ListingDepositBundle\Event\BookingDepositRefundSubscriber
+        arguments:
+            - "@cocorico_listing_deposit.booking_deposit_refund.manager"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber}

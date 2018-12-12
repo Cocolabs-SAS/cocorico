@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-04-19T16:14:32Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T10:30:43Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -117,6 +117,10 @@
       <trans-unit id="a216a5a5291083528778c77e203b1f363db82f21" resname="cocorico_dashboard_listing_edit_characteristic">
         <source>/dashboard/listing/{id}/edit_characteristic</source>
         <target>/tableau-de-bord/annonce/{id}/editer-characteristiques</target>
+      </trans-unit>
+        <trans-unit id="652e5b8fc61ecfd9feb8572f850420ca937f2832" resname="cocorico_dashboard_listing_edit_deposit">
+            <source>/dashboard/listing/{id}/edit_deposit</source>
+            <target state="new">/dashboard/listing/{id}/edit_deposit</target>
       </trans-unit>
       <trans-unit id="fc559d0e8f25b44a804997a0139edf552b1cb1cf" resname="cocorico_dashboard_listing_edit_discount">
         <source>/dashboard/listing/{id}/edit_discount</source>

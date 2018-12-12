@@ -72,7 +72,7 @@ abstract class BaseBookingBankWire
      * Set status
      *
      * @param  integer $status
-     * @return BaseBooking
+     * @return BaseBookingBankWire
      */
     public function setStatus($status)
     {

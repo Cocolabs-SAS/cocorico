@@ -186,7 +186,7 @@ class BookingPayinRefundManager extends BaseManager
                 $amountTotal = 0;//Canceled while not payed
             }
         } elseif ($booking->getStatus() == Booking::STATUS_NEW) {//Not already canceled no refunded
-            $amountTotal = 0;
+            $amountTotal = 0;//nothing to refund because amount not already payed
         }
 
         return $amountTotal;

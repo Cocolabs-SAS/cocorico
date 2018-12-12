@@ -66,6 +66,12 @@
             'listing_pallets': booking.listing.pallets
             } only %}
         {% endif %}
+
+        {% if bundleExist('CocoricoListingDepositBundle') %}
+            {% include 'CocoricoListingDepositBundle:Frontend:Listing/_show_amount_deposit.html.twig' with {
+            'listing_deposit': booking.listing.amountDepositDecimal
+            } only %}
+        {% endif %}
     </div>
 
 

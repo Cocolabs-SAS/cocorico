@@ -66,7 +66,7 @@ abstract class BaseBookingPayinRefund
      * Set status
      *
      * @param  integer $status
-     * @return BaseBooking
+     * @return BaseBookingPayinRefund
      */
     public function setStatus($status)
     {

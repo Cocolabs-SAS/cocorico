@@ -105,6 +105,13 @@
                     </strong>
                 </div>
 
+                {% if bundleExist('CocoricoListingDepositBundle') %}
+                    {% include 'CocoricoListingDepositBundle:Dashboard:Booking/_show_amount_deposit.html.twig' with {
+                    'booking': booking
+                    } only %}
+                    <br/>
+                {% endif %}
+
                 {{ 'listing.show.cancellation_policy:'|trans({}, 'cocorico_listing') }}
                 <strong data-id="booking-policy">{{ booking.cancellationPolicyText|trans({}, 'cocorico_listing') }}</strong>
                 <button data-html="true" data-placement="right" data-toggle="tooltip" class="tooltip-button"

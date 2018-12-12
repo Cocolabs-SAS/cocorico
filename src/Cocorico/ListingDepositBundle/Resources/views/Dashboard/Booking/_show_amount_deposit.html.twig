@@ -1,0 +1,11 @@
+{% trans_default_domain 'cocorico_listing_deposit' %}
+
+{% if booking.amountDeposit %}
+    <div class="textbox author-address">
+        <strong>{{ 'listing.edit.deposit.title'|trans }} :</strong>
+        {{ booking.amountDepositDecimal | format_price(app.request.locale, 2, false) }}
+        <sup>
+            <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+        </sup>
+    </div>
+{% endif %}

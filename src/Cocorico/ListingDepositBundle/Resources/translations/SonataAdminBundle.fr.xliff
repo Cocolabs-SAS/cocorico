@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2017-05-10T10:30:43Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="ae8d498986042136aada4e6ed26d30c2be361d76" resname="admin.booking.amount.label">
+                <source>admin.booking.amount.label</source>
+                <target>Montant payé par le demandeur</target>
+                <jms:reference-file line="468">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="293">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="508">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+
+            <trans-unit id="0a340257a9f992669bd699cd1ba75f8336286884" resname="admin.booking.asker.label">
+                <source>admin.booking.asker.label</source>
+                <target>Demandeur</target>
+                <jms:reference-file line="110">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="553">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="728">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="74">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="203">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="255">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="81">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="402">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="463">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="de31157454649204b5dbcf4d1c482d2cb3fd0e22" resname="admin.booking.created_at.label">
+                <source>admin.booking.created_at.label</source>
+                <target>Date de création</target>
+                <jms:reference-file line="354">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="240">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="383">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="120">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="209">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="285">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="178">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="408">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="500">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="77eb6a930a1bd5acaf3cdb9618c752aca8eef3c5" resname="admin.booking.end.label">
+                <source>admin.booking.end.label</source>
+                <target>Dernier jour de la réservation</target>
+                <jms:reference-file line="292">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="764">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="460">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="277">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="492">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="7dcb7d17e625f1c12af3ea0211f208cd93601299" resname="admin.booking.label">
+                <source>admin.booking.label</source>
+                <target>Réservation</target>
+                <jms:reference-file line="99">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="82">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="98">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="6144488021b5702f890e0a4b9bcd25a1fbf42d14" resname="admin.booking.mangopay_payin_pre_auth_id.label">
+                <source>admin.booking.mangopay_payin_pre_auth_id.label</source>
+                <target>Mangopay Payin Pre Auth ID</target>
+                <jms:reference-file line="517">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="163">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="221">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="e36325fb46d5d03c3b96c5ea34baed28365840a7" resname="admin.booking.offerer.label">
+                <source>admin.booking.offerer.label</source>
+                <target>Offreur</target>
+                <jms:reference-file line="119">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="558">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="735">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="91">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="377">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="438">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="90">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="470">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4831a617cb1e8153ff54396d192e4c3bc7523ff0" resname="admin.booking.start.label">
+                <source>admin.booking.start.label</source>
+                <target>1er jour de la réservation</target>
+                <jms:reference-file line="284">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="756">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="452">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="269">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="484">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
+                <source>admin.booking.status.label</source>
+                <target>Statut</target>
+                <jms:reference-file line="234">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="236">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="535">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="712">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="107">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="220">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="221">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="364">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="429">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="101">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="102">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="190">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="246">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="139">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="151">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="f8cb8a28d309e6384c6927bc1553bbf1e05fc839" resname="admin.booking.updated_at.label">
+                <source>admin.booking.updated_at.label</source>
+                <target>Mis à jour</target>
+                <jms:reference-file line="362">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="591">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="248">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="128">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="186">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="95bb4116c0679152a6b3f653de417088a4a1d3a9" resname="admin.booking_bank_wire.booking.label">
+                <source>admin.booking_bank_wire.booking.label</source>
+                <target>Réservation</target>
+                <jms:reference-file line="422">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="239">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="438">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="a454b7b9eee97aa126786987ba4352d8e21f07d6" resname="admin.booking_bank_wire.booking_id.label">
+                <source>admin.booking_bank_wire.booking_id.label</source>
+                <target>Réservation id</target>
+                <jms:reference-file line="372">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="198">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="397">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="676a49d9ec34818d6dbe195b4a9f7a9c207d6e03" resname="admin.booking_deposit_refund.amount.label">
+                <source>admin.booking_deposit_refund.amount.label</source>
+                <target state="new">Montant de la caution</target>
+                <jms:reference-file line="106">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="515">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="d139e9a3f16856169e773d356001a98f2afc3baa" resname="admin.booking_deposit_refund.amount_asker.label">
+                <source>admin.booking_deposit_refund.amount_asker.label</source>
+                <target state="new">Montant de la caution à rembourser au demandeur</target>
+                <jms:reference-file line="117">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="239">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="6f2bb77f17729e250d85b88fbd63a49f5b42b63e" resname="admin.booking_deposit_refund.amount_offerer.label">
+                <source>admin.booking_deposit_refund.amount_offerer.label</source>
+                <target state="new">Montant de la caution à rembourser à l'offreur</target>
+                <jms:reference-file line="128">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="298">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="664e76e0ea338bde0fced9fc607fac8c30948b3a" resname="admin.booking_deposit_refund.asker_mangopay_id.label">
+                <source>admin.booking_deposit_refund.asker_mangopay_id.label</source>
+                <target state="new">Demandeur Mangopay Id</target>
+                <jms:reference-file line="230">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="3a6ed059549de8ebc0e2a91ce860efffc7c1eaf2" resname="admin.booking_deposit_refund.asker_payed_at.label">
+                <source>admin.booking_deposit_refund.asker_payed_at.label</source>
+                <target state="new">Caution remboursé au demandeur le</target>
+                <jms:reference-file line="170">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="e9bf2f8bb30f433834f621f501d7e547fc082fa5" resname="admin.booking_deposit_refund.asker_tag.label">
+                <source>admin.booking_deposit_refund.asker_tag.label</source>
+                <target state="new">Tag (Booking Deposit Refund Id)</target>
+                <jms:reference-file line="212">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="89e489836ff6e138f59780dd7da7b5f7f4cd5040" resname="admin.booking_deposit_refund.bank_account_id_offerer.label">
+                <source>admin.booking_deposit_refund.bank_account_id_offerer.label</source>
+                <target state="new">Offreur Mangopay Bank account id</target>
+                <jms:reference-file line="339">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4b60ebfc12300c83b0d41cec480ec9ca32503cbb" resname="admin.booking_deposit_refund.fees_asker.label">
+                <source>admin.booking_deposit_refund.fees_asker.label</source>
+                <target state="new">Commissions</target>
+                <jms:reference-file line="249">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="efcb561a82b721d24246a01524c6049b8dead7f8" resname="admin.booking_deposit_refund.fees_offerer.label">
+                <source>admin.booking_deposit_refund.fees_offerer.label</source>
+                <target state="new">Commissions</target>
+                <jms:reference-file line="309">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="81e51bf0e7ea949b0233c2206e2e1be2be268fec" resname="admin.booking_deposit_refund.offerer_mangopay_id.label">
+                <source>admin.booking_deposit_refund.offerer_mangopay_id.label</source>
+                <target state="new">Offreur Mangopay Id</target>
+                <jms:reference-file line="290">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="5e5c70b99f6888c4d7a66a404b9645bacb6a6dc6" resname="admin.booking_deposit_refund.offerer_payed_at.label">
+                <source>admin.booking_deposit_refund.offerer_payed_at.label</source>
+                <target state="new">Caution payé à l'offreur le</target>
+                <jms:reference-file line="162">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="8d6b074dff9e22f664059ebfd4954102924549bd" resname="admin.booking_deposit_refund.offerer_tag.label">
+                <source>admin.booking_deposit_refund.offerer_tag.label</source>
+                <target state="new">Tag (Booking Deposit Refund Id)</target>
+                <jms:reference-file line="281">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4d9bd8ec8527439c18e5f1ce2ae207d880e34690" resname="admin.booking_deposit_refund.status_asker.label">
+                <source>admin.booking_deposit_refund.status_asker.label</source>
+                <target state="new">Statut du paiement de la caution au demandeur</target>
+                <jms:reference-file line="140">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="377">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="445">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="3fa4b7477793348da9be35d00e7bad73749f9cc1" resname="admin.booking_deposit_refund.status_offerer.label">
+                <source>admin.booking_deposit_refund.status_offerer.label</source>
+                <target state="new">Statut du paiement de la caution à l'offreur</target>
+                <jms:reference-file line="152">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="389">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="454">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="f864eed18127d28c2c0053b91a592654e3e3c47e" resname="admin.booking_deposit_refund.title">
+                <source>admin.booking_deposit_refund.title</source>
+                <target state="new">Remboursement de caution</target>
+                <jms:reference-file line="69">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="17b8048934387ff5cd8de08f5d4f2a090ceef835" resname="admin.booking_deposit_refund.wallet_id_asker.label">
+                <source>admin.booking_deposit_refund.wallet_id_asker.label</source>
+                <target state="new">Demandeur Mangopay Wallet Id</target>
+                <jms:reference-file line="320">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="68778731778d46fa8f6fa556445ac028d97af03a" resname="admin.deposit_refund_actions_help">
+                <source>admin.deposit_refund_actions_help</source>
+                <target state="new">
+                    Pour pouvoir rembourser la caution au demandeur et/ou à l'offreur vous devez renseigner les champs
+                    "Montant de la caution à rembourser au demandeur" et "Montant de la caution à rembourser à l'offreur".
+                    Saisissez 0 dans l'un des champs pour indiquer qu'il n'y a pas de remboursement de caution à faire pour l'un des deux acteurs.
+                    La somme des deux champs doit être égal au montant total de la caution.
+                    Une fois ces montants saisis sauvegardez les, vous verrez alors aparaitre en bas du formulaire le ou les boutons permettant de rembourser la caution.
+                </target>
+                <jms:reference-file line="71">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="48c21d1007f8d2897d50c76ace282bd84cb7a961" resname="admin.deposit_refund_mangopay_asker_help">
+                <source>admin.deposit_refund_mangopay_asker_help</source>
+                <target state="new">Ces informations correspondent à ce qui doit être renseignés dans le dashboard Mangopay lors d'un remboursement de caution au demandeur</target>
+                <jms:reference-file line="200">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="f24d627d331e67d1a3cd4104c0a5fa328e6cf1b8" resname="admin.deposit_refund_mangopay_offerer_help">
+                <source>admin.deposit_refund_mangopay_offerer_help</source>
+                <target state="new">Ces informations correspondent à ce qui doit être renseignés dans le dashboard Mangopay lors d'un paiement de caution à l'offreur</target>
+                <jms:reference-file line="269">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="fef3959e4e3efe81460055add8854c7a313fbbca" resname="admin.listing.label">
+                <source>admin.listing.label</source>
+                <target>Annonce</target>
+                <jms:reference-file line="128">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="742">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+                <jms:reference-file line="445">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+                <jms:reference-file line="262">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="477">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="ae1e269cd097767fbad8ce49bffb242f6db71b82" resname="admin.mangopay_deposit_refund_asker">
+                <source>admin.mangopay_deposit_refund_asker</source>
+                <target state="new">Mangopay Demandeur</target>
+                <jms:reference-file line="198">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="e7bd5f9f36adf7d36f4add9ee339e2b7fc9248b1" resname="admin.mangopay_deposit_refund_offerer">
+                <source>admin.mangopay_deposit_refund_offerer</source>
+                <target state="new">Mangopay Offreur</target>
+                <jms:reference-file line="267">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,41 @@
+{% trans_default_domain 'cocorico_listing_deposit' %}
+
+<div id="deposit-form-container" class="column">
+    <h3>{{ 'listing.edit.deposit.title'|trans }}</h3>
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="field-row">
+        {{ form_errors(form.amountDeposit) }}
+
+        <span class="label">
+            {{ form_label(form.amountDeposit) }}
+        </span>
+
+        {{ form_widget(form.amountDeposit, {
+            'attr': {'class': 'numbers-only form-control' },
+            'help':  'listing.edit.deposit.help'|trans
+        }) }}
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-default">{{ 'listing.price_save'|trans }}</button>
+    </div>
+
+    {{ form_end(form) }}
+
+    <script>
+        $(function () {
+            $("#deposit-form-container").submitAjaxForm(
+                    function () {
+                        jcf.replaceAll("#deposit-form-container");
+                    }
+            );
+            $("[data-toggle='tooltip']").tooltip();
+        });
+    </script>
+</div>

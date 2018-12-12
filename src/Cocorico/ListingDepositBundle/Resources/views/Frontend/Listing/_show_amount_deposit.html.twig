@@ -1,0 +1,9 @@
+{% trans_default_domain 'cocorico_listing_deposit' %}
+
+{% if listing_deposit %}
+    <p>
+        <em class="text">
+            {{ 'listing_edit.form.deposit'|trans }} : {{ listing_deposit | format_price(app.request.locale, 2, false) }}
+        </em>
+    </p>
+{% endif %}

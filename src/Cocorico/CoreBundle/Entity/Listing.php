@@ -41,6 +41,7 @@ class Listing extends BaseListing
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Translatable\Translatable;
+    use \Cocorico\ListingDepositBundle\Model\ListingDepositableTrait;
 
     /**
      * @ORM\Id

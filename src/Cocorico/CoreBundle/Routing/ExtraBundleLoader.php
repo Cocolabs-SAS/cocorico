@@ -74,6 +74,12 @@ class ExtraBundleLoader extends Loader
                 $collection->addCollection($importedRoutes);
             }
 
+            if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
+                $resource = '@CocoricoListingDepositBundle/Resources/config/routing.yml';
+                $type = 'yaml';
+                $importedRoutes = $this->import($resource, $type);
+                $collection->addCollection($importedRoutes);
+            }
 
         } catch (FileLoaderLoadException  $e) {
             throw new FileLoaderLoadException($resource);

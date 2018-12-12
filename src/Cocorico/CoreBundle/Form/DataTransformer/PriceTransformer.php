@@ -65,6 +65,10 @@ class PriceTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (!$value) {
+            if ($value == 0) {
+                return 0;
+            }
+
             return null;
         }
 

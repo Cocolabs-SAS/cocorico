@@ -1,0 +1,10 @@
+parameters:
+    #Booking deposit refund generation delay in minutes.
+    #Booking deposit refund will be generated after this delay from booking end date
+    cocorico_listing_deposit.booking.deposit_refund_delay: 1440
+
+imports:
+    - { resource: "Services/subscribers.yml" }
+    - { resource: "Services/entities_manager.yml" }
+    - { resource: "Services/admin.yml" }
+    - { resource: "Services/twig_extensions.yml" }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+    <file date="2017-05-10T10:30:43Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+        </header>
+        <body>
+            <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
+                <source>admin.booking.status.label</source>
+                <target state="new">admin.booking.status.label</target>
+                <jms:reference-file line="139">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="151">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4d9bd8ec8527439c18e5f1ce2ae207d880e34690" resname="admin.booking_deposit_refund.status_asker.label">
+                <source>admin.booking_deposit_refund.status_asker.label</source>
+                <target state="new">admin.booking_deposit_refund.status_asker.label</target>
+                <jms:reference-file line="140">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="377">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="3fa4b7477793348da9be35d00e7bad73749f9cc1" resname="admin.booking_deposit_refund.status_offerer.label">
+                <source>admin.booking_deposit_refund.status_offerer.label</source>
+                <target state="new">admin.booking_deposit_refund.status_offerer.label</target>
+                <jms:reference-file line="152">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+                <jms:reference-file line="389">ListingDepositBundle/Admin/BookingDepositRefundAdmin.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="694980f06b133c6bfdfcb41863e5eb20c26f48cc" resname="entity.booking.deposit_refund.status.failed">
+                <source>entity.booking.deposit_refund.status.failed</source>
+                <target state="new">Echoué</target>
+                <jms:reference-file line="40">ListingDepositBundle/Model/BaseBookingDepositRefund.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="c1b443f99787e05b91905bbcae58c80408415812" resname="entity.booking.deposit_refund.status.nothing_to_do">
+                <source>entity.booking.deposit_refund.status.nothing_to_do</source>
+                <target state="new">A ne pas faire</target>
+                <jms:reference-file line="38">ListingDepositBundle/Model/BaseBookingDepositRefund.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="5d365035ffc306c478ef354329aa034a97be166b" resname="entity.booking.deposit_refund.status.payed">
+                <source>entity.booking.deposit_refund.status.payed</source>
+                <target state="new">Payé</target>
+                <jms:reference-file line="39">ListingDepositBundle/Model/BaseBookingDepositRefund.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4aa17c8fdc1af89f14bc5d3e5bb13361df77d734" resname="entity.booking.deposit_refund.status.to_do">
+                <source>entity.booking.deposit_refund.status.to_do</source>
+                <target state="new">A Faire</target>
+                <jms:reference-file line="37">ListingDepositBundle/Model/BaseBookingDepositRefund.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="bb03c1cd1182ee373e8a9ee3ddd0c050afe9490c" resname="listing.edit.deposit.help">
+                <source>listing.edit.deposit.help</source>
+                <target state="new">listing.edit.deposit.help</target>
+                <jms:reference-file line="21">Dashboard/Listing/form_deposit.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="99c4b3f5b723b0ed41a09b1bb1537a7ad8728d40" resname="listing.edit.deposit.title">
+                <source>listing.edit.deposit.title</source>
+                <target state="new">Caution</target>
+                <jms:reference-file line="5">Dashboard/Booking/_show_amount_deposit.html.twig</jms:reference-file>
+                <jms:reference-file line="4">Dashboard/Listing/form_deposit.html.twig</jms:reference-file>
+                <jms:reference-file line="5">Frontend/Booking/_show_amount_deposit.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="38120a2de64eb3b73c1b29a4451d192d491b7d90" resname="listing.edit_deposit.success">
+                <source>listing.edit_deposit.success</source>
+                <target state="new">Modification effectué</target>
+                <jms:reference-file line="138">Dashboard/Offerer/ListingDepositController.php</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="a385c95efe54f5b3d6707f5106282c2ae14fc04f" resname="listing.price_save">
+                <source>listing.price_save</source>
+                <target state="new">Enregistré</target>
+                <jms:reference-file line="26">Dashboard/Listing/form_deposit.html.twig</jms:reference-file>
+            </trans-unit>
+            <trans-unit id="4a9abfce93aca738c376f46499e43330dbfe43a7" resname="listing_edit.form.deposit">
+                <source>listing_edit.form.deposit</source>
+                <target state="new">Montant de la caution</target>
+                <jms:reference-file line="23">Type/Dashboard/ListingEditDepositType.php</jms:reference-file>
+                <jms:reference-file line="8">Frontend/Booking/_show_amount_deposit.html.twig</jms:reference-file>
+                <jms:reference-file line="6">Frontend/Listing/_show_amount_deposit.html.twig</jms:reference-file>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

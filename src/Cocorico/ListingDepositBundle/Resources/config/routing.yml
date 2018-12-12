@@ -1,0 +1,4 @@
+cocorico_listing_deposit_dashboard:
+    resource: "@CocoricoListingDepositBundle/Controller/Dashboard"
+    type:     annotation
+    prefix: /dashboard

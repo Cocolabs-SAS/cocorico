@@ -1,0 +1,7 @@
+services:
+    #Global twig variables
+    cocorico_listing_deposit.twig.deposit_extension:
+        class: Cocorico\ListingDepositBundle\Twig\DepositExtension
+        arguments: ~
+        tags:
+            - { name: twig.extension }

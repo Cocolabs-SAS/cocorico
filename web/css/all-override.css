@@ -737,6 +737,14 @@ li.time-fields {
     min-height: 255px;
 }
 
+#deposit-form-container {
+    margin-bottom: 20px;
+}
+
+#deposit-form-container .field-row {
+    max-width: 346px;
+}
+
 #prices-form .day-fields {
     width: 64%;
 }
@@ -1389,7 +1397,6 @@ images css for making it 4:3
     height: 154px;
 }
 
-
 /** Booking Accept/Cancel Modal */
 .modal .label {
     display: inline-block;
@@ -1448,6 +1455,7 @@ images css for making it 4:3
 .form-area .payment-info .same-height-right .field-row:nth-child(4) .form-control {
     text-align: left;
 }
+
 /** Contact */
 .form-area .contact-info .code + .tooltip-btn {
     right: auto;
@@ -2982,4 +2990,24 @@ div.cluster.cluster-overlay img {
 
 h1[data-id="result-title"] {
     font-size: 21px;
+}
+
+/* Deposit */
+/* new booking deposit  */
+.booking-deposit {
+    color: #58595b;
+    margin: 0 0 20px;
+    border-radius: 5px;
+    padding: 19px 19px 19px;
+    border: #eaebec solid 1px;
+}
+
+.booking-deposit h2 {
+    margin: 0 10px 10px 0;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.postarea .posts-holder .post strong {
+    color: #58595b;
 }

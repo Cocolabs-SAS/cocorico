@@ -1,0 +1,26 @@
+{
+  "name": "cocorico/listing-deposit-bundle",
+  "license": "Proprietary",
+  "type": "symfony-bundle",
+  "description": "Cocorico Listing Deposit Bundle",
+  "keywords": ["deposit"],
+  "homepage": "http://cocorico.io",
+  "authors": [
+    {
+      "name": "Cocolabs SAS",
+      "email": "support@cocorico.io"
+    }
+  ],
+  "support": {
+    "email": "support@cocorico.io"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cocorico\\ListingDepositBundle\\": ""
+    }
+  },
+  "require": {
+    "php": ">=5.3.9",
+    "symfony/framework-bundle": "2.8.*"
+  }
+}

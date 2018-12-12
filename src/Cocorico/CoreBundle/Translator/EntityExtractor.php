@@ -55,7 +55,10 @@ class EntityExtractor implements FileVisitorInterface, NodeVisitor
             //echo $this->file->getFilename() . PHP_EOL;
 
             //Add here Custom entities and corresponding domains
-            if (strstr($this->file->getFilename(), "ListingOption") !== false ||
+            if (strstr($this->file->getFilename(), "BookingDepositRefund") !== false) {
+                $domain = 'cocorico_listing_deposit';
+            } elseif (
+                strstr($this->file->getFilename(), "ListingOption") !== false ||
                 strstr($this->file->getFilename(), "BookingOption") !== false
             ) {
                 $domain = 'cocorico_listing_option';

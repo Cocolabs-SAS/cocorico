@@ -1,0 +1,15 @@
+services:
+    #Admin
+    sonata.admin.booking_deposit_refund:
+        class: Cocorico\ListingDepositBundle\Admin\BookingDepositRefundAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Deposit Refunds", label_catalogue: "cocorico_admin_menu" }
+        arguments:
+            - ~
+            - Cocorico\ListingDepositBundle\Entity\BookingDepositRefund
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setCurrency, ["%cocorico.currency%"]]

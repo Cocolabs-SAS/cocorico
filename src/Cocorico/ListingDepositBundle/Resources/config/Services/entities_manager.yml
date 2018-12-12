@@ -1,0 +1,10 @@
+services:
+    #Manager
+    cocorico_listing_deposit.booking_deposit_refund.manager:
+        class: Cocorico\ListingDepositBundle\Model\Manager\BookingDepositRefundManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@cocorico.mailer.twig_swift"
+            - "@event_dispatcher"
+            - parameters:
+                cocorico_time_zone: "%cocorico.time_zone%"

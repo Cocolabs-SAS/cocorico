@@ -105,6 +105,7 @@ doctrine:
             Cocorico\CoreBundle\Model\ListingCategoryFieldInterface: %cocorico_listing_category_field.entity_class%
             Cocorico\CoreBundle\Model\ListingCategoryFieldValueInterface: %cocorico_listing_category_field_value.entity_class%
             Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface: %cocorico_listing_category_listing_category_field.entity_class%
+            Cocorico\CoreBundle\Model\BookingDepositRefundInterface: %cocorico_listing_deposit.booking_deposit_refund.entity_class%
 
     dbal:
         types:
