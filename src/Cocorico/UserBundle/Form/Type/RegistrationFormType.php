@@ -13,7 +13,6 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,7 +40,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add(
                 'personType',
-                ChoiceType::class,
+                'choice',
                 array(
                     'label' => 'form.person_type',
                     'choices' => array_flip(User::$personTypeValues),
