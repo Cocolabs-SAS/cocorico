@@ -123,10 +123,10 @@ class BookingBankWireAdmin extends Admin
                     'amount',
                     'price',
                     array(
-                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount_excl_discount_voucher.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2,
                     )
                 )
                 ->add(
@@ -135,7 +135,8 @@ class BookingBankWireAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_discount_voucher.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2,
                     )
                 )
                 ->add(
@@ -146,7 +147,8 @@ class BookingBankWireAdmin extends Admin
                         'label' => 'admin.booking.amount_to_wire.label',
                         'mapped' => false,
                         'data' => isset($amountToWire) ? $amountToWire : null,
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2,
                     )
                 )
                 ->add(
@@ -157,7 +159,8 @@ class BookingBankWireAdmin extends Admin
                         'label' => 'admin.booking.remaining_amount_to_pay_to_offerer.label',
                         'mapped' => false,
                         'data' => isset($remainingAmount) ? $remainingAmount : null,
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2,
                     )
                 )
                 ->add(
@@ -183,10 +186,10 @@ class BookingBankWireAdmin extends Admin
                     'amount',
                     'price',
                     array(
-                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount.label',
-                        'include_vat' => true
+                        'include_vat' => true,
+                        'scale' => 2,
                     )
                 );
         }
@@ -270,10 +273,10 @@ class BookingBankWireAdmin extends Admin
                         'amountDecimal',
                         'number',
                         array(
-                            'scale' => 2,
                             'disabled' => true,
                             'label' => 'admin.booking_bank_wire.amount.label',
-                            'help' => 'Debited funds (' . $this->currency . ')'
+                            'help' => 'Debited funds (' . $this->currency . ')',
+                            'scale' => 2,
                         )
                     );
             }

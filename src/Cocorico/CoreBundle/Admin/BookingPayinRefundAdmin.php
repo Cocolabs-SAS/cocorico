@@ -86,10 +86,10 @@ class BookingPayinRefundAdmin extends Admin
                 'amount',
                 'price',
                 array(
-                    'scale' => 2,
                     'disabled' => true,
                     'label' => 'admin.booking_payin_refund.amount.label',
-                    'include_vat' => true
+                    'include_vat' => true,
+                    'scale' => 2,
                 )
             )
             ->add(
@@ -151,9 +151,9 @@ class BookingPayinRefundAdmin extends Admin
                     'amountDecimal',
                     'number',
                     array(
-                        'scale' => 2,
                         'disabled' => true,
                         'label' => 'admin.booking_payin_refund.amount.label',
+                        'scale' => 2,
                     )
                 )
                 ->add(
