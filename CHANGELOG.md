@@ -175,6 +175,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix user label translation in payin refund in sonata admin
 - Fix IBAN form field length
 - Fix times search fields in range display mode
+- Fix bank wire amount in mail send to offerer when booking is canceled by asker
 
 ### Changed
 - Upgrade Microsoft Translator API request method from Bing to Azur 
