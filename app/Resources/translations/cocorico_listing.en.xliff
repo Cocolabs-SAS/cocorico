@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-06-01T20:21:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,9 +9,9 @@
       <trans-unit id="da39a3ee5e6b4b0d3255bfef95601890afd80709" resname="">
         <source></source>
         <target></target>
-        <jms:reference-file line="68">Form/Type/TimeRangeType.php</jms:reference-file>
-        <jms:reference-file line="86">Form/Type/TimeRangeType.php</jms:reference-file>
-        <jms:reference-file line="151">Form/Type/TimeRangeType.php</jms:reference-file>
+          <jms:reference-file line="70">Form/Type/TimeRangeType.php</jms:reference-file>
+          <jms:reference-file line="88">Form/Type/TimeRangeType.php</jms:reference-file>
+          <jms:reference-file line="157">Form/Type/TimeRangeType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="85b9440b9a481e9ef8452c609753af0fb75c28de" resname="admin.listing.cancellation_policy.label">
         <source>admin.listing.cancellation_policy.label</source>
@@ -567,27 +567,27 @@
       <trans-unit id="c1a5788f52b0e02947fa1b8c2c9a2d65b256f6bd" resname="listing.location.address_found">
         <source>listing.location.address_found</source>
         <target>Address found:</target>
-        <jms:reference-file line="118">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="123">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="238">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e098776bc2b93ce4d38c8b72e044a5cd6d2e58bc" resname="listing.location.drag_message">
         <source>listing.location.drag_message</source>
         <target>If the marker on the map is not accurate, you can drag it.</target>
-        <jms:reference-file line="131">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="136">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="245">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2d4c746a395b8487b029d9e747289898947c6216" resname="listing.location.help">
         <source>listing.location.help</source>
         <target>Ex: 12Bis, 12Ter, 12, ...</target>
-        <jms:reference-file line="72">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="76">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="80">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="198">Frontend/Listing/new.html.twig</jms:reference-file>
         <jms:reference-file line="202">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="327b1c4301569c35ced92438b22c4e4dca42b0dd" resname="listing.location.none">
         <source>listing.location.none</source>
         <target>None</target>
-        <jms:reference-file line="119">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="124">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="239">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="36828233d750b8f4e5317f5aff28d1cbf07f9512" resname="listing.location.private_message">
@@ -603,7 +603,7 @@
       <trans-unit id="9353f38b69e641a50c61bed7f2c8bc93dc9c3a76" resname="listing.location.validate">
         <source>listing.location.validate</source>
         <target>Validate this address</target>
-        <jms:reference-file line="123">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="128">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="233">Frontend/Listing/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8fa76a7978cae2530ff2c22d810fd827e3446e66" resname="listing.new.address.title">
@@ -699,7 +699,7 @@
         <jms:reference-file line="89">Dashboard/Listing/edit_availabilities_status.html.twig</jms:reference-file>
         <jms:reference-file line="67">Dashboard/Listing/edit_characteristic.html.twig</jms:reference-file>
         <jms:reference-file line="62">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
-        <jms:reference-file line="139">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
+          <jms:reference-file line="144">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="62">Dashboard/Listing/edit_presentation.html.twig</jms:reference-file>
           <jms:reference-file line="26">Dashboard/Listing/form_categories_ajax.html.twig</jms:reference-file>
         <jms:reference-file line="26">Dashboard/Listing/form_categories_extra.html.twig</jms:reference-file>
@@ -1182,12 +1182,12 @@
       <trans-unit id="60dafa6d967ed8605e96d3b806aa9fb5f63b6172" resname="time_range.end">
         <source>time_range.end</source>
         <target>End time</target>
-        <jms:reference-file line="84">Form/Type/TimeRangeType.php</jms:reference-file>
+          <jms:reference-file line="86">Form/Type/TimeRangeType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="50eb95c072e0187fbf8b1e684eece48fd4867088" resname="time_range.start">
         <source>time_range.start</source>
         <target>Start time</target>
-        <jms:reference-file line="66">Form/Type/TimeRangeType.php</jms:reference-file>
+          <jms:reference-file line="68">Form/Type/TimeRangeType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="11ae32270b0770b4d753dd9e62d262f26ab2086b" resname="time_ranges.max {{ limit }}">
         <source>time_ranges.max {{ limit }}</source>

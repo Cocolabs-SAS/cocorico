@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-06-01T20:21:28Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -29,7 +29,7 @@
         <target>
                     - Time range:
                 </target>
-          <jms:reference-file line="752">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
+          <jms:reference-file line="758">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f17ef1a038a42f4a585e3645125e101e00c41a0b" resname="booking_accepted_asker.email.message">
         <source>booking_accepted_asker.email.message</source>
@@ -420,6 +420,11 @@ Don’t hesitate to let us know if there is anything we can do to make these req
                 the Team.
             </target>
             <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
+            <source>registration.email.subject</source>
+            <target state="new">registration.email.subject</target>
+            <jms:reference-file line="5">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
         </trans-unit>
       <trans-unit id="d7c0ead101acaa46a152dfda651b653a7e54024a" resname="reminder_to_rate_asker_offerer.email.message">
         <source>reminder_to_rate_asker_offerer.email.message</source>

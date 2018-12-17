@@ -173,6 +173,22 @@ class BookingPayinRefundAdmin extends Admin
                     )
                 )
                 ->add(
+                    'booking.mangopayPayinPreAuthId',
+                    null,
+                    array(
+                        'label' => 'admin.booking.mangopay_payin_pre_auth_id.label',
+                        'disabled' => true,
+                    )
+                )
+                ->add(
+                    'booking.mangopayPayinPreAuthId',
+                    null,
+                    array(
+                        'label' => 'admin.booking.mangopay_payin_pre_auth_id.label',
+                        'disabled' => true,
+                    )
+                )
+                ->add(
                     'user.mangopayWalletId',
                     null,
                     array(
