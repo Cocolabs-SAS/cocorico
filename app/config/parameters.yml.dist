@@ -104,3 +104,7 @@ parameters:
     cocorico_sms.ovh_consumer_key:       "Consumer Key"
     cocorico_sms.ovh_service_name:       "Service Name"
     cocorico_sms.ovh_debug: false
+
+    #Deposit
+    #Booking deposit refund generation delay in minutes.
+    #cocorico_listing_deposit.booking.deposit_refund_delay: ~

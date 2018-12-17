@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-19T16:15:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -16,17 +16,17 @@
       <trans-unit id="85b9440b9a481e9ef8452c609753af0fb75c28de" resname="admin.listing.cancellation_policy.label">
         <source>admin.listing.cancellation_policy.label</source>
         <target>Cancellation policy</target>
-          <jms:reference-file line="225">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="227">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="201">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-          <jms:reference-file line="203">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+          <jms:reference-file line="246">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="248">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="220">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+          <jms:reference-file line="222">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="70f4bab980aaea77504b06db4a44795d111c90ba" resname="admin.listing.status.label">
         <source>admin.listing.status.label</source>
         <target>Status</target>
           <jms:reference-file line="93">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
           <jms:reference-file line="95">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-          <jms:reference-file line="299">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
+          <jms:reference-file line="319">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0d612c12d2ac33625bf3e0351b6f5e4f73829fa8" resname="auto">
         <source>auto</source>
@@ -319,7 +319,7 @@
       <trans-unit id="485da2407741b15d7c6f27d864eb61ebad955d51" resname="listing.edit.discount.title">
         <source>listing.edit.discount.title</source>
         <target>Discounts</target>
-        <jms:reference-file line="44">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="49">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ea208681b37ea11611f7f779c59dd530d4c2c265" resname="listing.edit.duplicate">
         <source>listing.edit.duplicate</source>
@@ -356,12 +356,12 @@
       <trans-unit id="646b42ecb84e81022f999bf28eaa9369b44eaca1" resname="listing.edit.options.title">
         <source>listing.edit.options.title</source>
         <target>Options management</target>
-        <jms:reference-file line="50">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="55">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d976ad74e1adbd7ccaf23c0cef3b6ce3b088ce98" resname="listing.edit.policy.title">
         <source>listing.edit.policy.title</source>
         <target>Cancellation policy and durations</target>
-        <jms:reference-file line="56">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="61">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="95463bdf30bf84edaa50d763ddc9aeca65a0b7d2" resname="listing.edit.presentation.title">
         <source>listing.edit.presentation.title</source>
@@ -371,22 +371,22 @@
       <trans-unit id="46a1de37336014d8f90160340a054c528c47e55c" resname="listing.edit.price.calendar.day_click.info">
         <source>listing.edit.price.calendar.day_click.info</source>
         <target>You can click on a date to change its price</target>
-        <jms:reference-file line="117">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="122">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f32b8e73229cf9aa24db9ddab747c98594ae763b" resname="listing.edit.price.calendar.show.title">
         <source>listing.edit.price.calendar.show.title</source>
         <target>Calendar prices</target>
-        <jms:reference-file line="114">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="119">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="043225b403bfc7cf84e9fcaa75c5ad42ffb2ace0" resname="listing.edit.price.choose_times.title">
         <source>listing.edit.price.choose_times.title</source>
         <target>Choose times</target>
-        <jms:reference-file line="82">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="87">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="109f29495c61d977b6aa62f816a82d80d2f73f5f" resname="listing.edit.price.choose_weekdays.title">
         <source>listing.edit.price.choose_weekdays.title</source>
         <target>Choose weekdays</target>
-        <jms:reference-file line="75">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="80">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d6bfdec6bacedf752d6b0b8d615fc18ff394bcd7" resname="listing.edit.price.default.title">
         <source>listing.edit.price.default.title</source>
@@ -403,7 +403,7 @@
       <trans-unit id="1b5a8ab3a8ba981de8c48e9ba6b250125aa32b90" resname="listing.edit.price.range.title">
         <source>listing.edit.price.range.title</source>
         <target>Prices range</target>
-        <jms:reference-file line="65">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="70">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="68ec1a49888802380a72848c5538bef07d9dbfc2" resname="listing.edit.price.simulator.title">
         <source>listing.edit.price.simulator.title</source>
@@ -695,12 +695,13 @@
       <trans-unit id="b6da107330f9826fd55158c97436c400a516d276" resname="listing.save">
         <source>listing.save</source>
         <target>Save</target>
-        <jms:reference-file line="104">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+          <jms:reference-file line="109">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
         <jms:reference-file line="89">Dashboard/Listing/edit_availabilities_status.html.twig</jms:reference-file>
         <jms:reference-file line="67">Dashboard/Listing/edit_characteristic.html.twig</jms:reference-file>
         <jms:reference-file line="62">Dashboard/Listing/edit_images.html.twig</jms:reference-file>
         <jms:reference-file line="139">Dashboard/Listing/edit_location.html.twig</jms:reference-file>
         <jms:reference-file line="62">Dashboard/Listing/edit_presentation.html.twig</jms:reference-file>
+          <jms:reference-file line="26">Dashboard/Listing/form_categories_ajax.html.twig</jms:reference-file>
         <jms:reference-file line="26">Dashboard/Listing/form_categories_extra.html.twig</jms:reference-file>
         <jms:reference-file line="64">Dashboard/Listing/form_duration.html.twig</jms:reference-file>
       </trans-unit>
@@ -736,13 +737,13 @@
       <trans-unit id="f95d3cebd6aa233ad275dbe4a8b453b5ef7ef1a8" resname="listing.search.result.no_results">
         <source>listing.search.result.no_results</source>
         <target state="new">No results found. Please change your criterias</target>
-          <jms:reference-file line="92">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
+          <jms:reference-file line="93">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e0c7225719f33b2cab0a2b344bd1f92c1963ad00" resname="listing.search.result.results">
         <source>listing.search.result.results</source>
         <target>%nb_results% results</target>
         <jms:reference-file line="71">Frontend/ListingResult/result.html.twig</jms:reference-file>
-          <jms:reference-file line="96">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
+          <jms:reference-file line="97">Frontend/ListingResult/_result_listings.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="811628da617a8da9696d216392c3eaab3c1c0c9f" resname="listing.search.result.title">
         <source>listing.search.result.title</source>
@@ -770,8 +771,8 @@
       <trans-unit id="50bdda2cc153c4d642eefabaa13e25344b9fb55c" resname="listing.show.cancellation_policy:">
         <source>listing.show.cancellation_policy:</source>
         <target>Cancellation policy:</target>
-        <jms:reference-file line="108">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="282">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="115">Dashboard/Booking/edit.html.twig</jms:reference-file>
+          <jms:reference-file line="287">Frontend/Booking/new.html.twig</jms:reference-file>
         <jms:reference-file line="301">Frontend/Listing/show.html.twig</jms:reference-file>
         <jms:reference-file line="240">Frontend/Profile/show.html.twig</jms:reference-file>
       </trans-unit>
@@ -784,7 +785,7 @@
       <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="listing.show.categories:">
         <source>listing.show.categories:</source>
         <target>Categories:</target>
-          <jms:reference-file line="270">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="275">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="listing.show.characteristics">
         <source>listing.show.characteristics</source>
@@ -830,7 +831,7 @@
       <trans-unit id="49ff4bce3e52dd086b802ffa369d62b7e99d537b" resname="listing.show.location:">
         <source>listing.show.location:</source>
         <target>Location:</target>
-          <jms:reference-file line="278">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="283">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="368a7d80b53cf610605714c046875ad7fd4d19b6" resname="listing.show.map">
         <source>listing.show.map</source>
@@ -969,7 +970,7 @@
       <trans-unit id="f8f32c1d94fa3fde6587937808b7f381e8d393c4" resname="listing_edit.form.from_quantity.bought">
         <source>listing_edit.form.from_quantity.bought</source>
         <target>%quantity_text% ordered</target>
-        <jms:reference-file line="303">views/Form/fields.html.twig</jms:reference-file>
+          <jms:reference-file line="311">views/Form/fields.html.twig</jms:reference-file>
         <jms:reference-file line="338">Frontend/Listing/show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="840e18571bfc4e9f516fd60527195d3b2a1f9836" resname="listing_edit.form.max_duration">

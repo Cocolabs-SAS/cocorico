@@ -7,6 +7,7 @@
 {% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
 {% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
 {% set carrierBundleEnabled = bundleExist('CocoricoCarrierBundle') %}
+{% set depositBundleEnabled = bundleExist('CocoricoListingDepositBundle') %}
 
 {% set listing = booking.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
@@ -142,6 +143,10 @@
 
                         {% if voucherBundleEnabled %}
                             {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {'form': form, 'booking': booking} only %}
+                        {% endif %}
+
+                        {% if depositBundleEnabled %}
+                            {% include 'CocoricoListingDepositBundle:Frontend/Booking:_show_amount_deposit.html.twig' with {'booking': booking} only %}
                         {% endif %}
 
                         <div class="total-reservation">

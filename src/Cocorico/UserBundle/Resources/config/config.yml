@@ -72,6 +72,8 @@ doctrine:
         resolve_target_entities:
             #Don't put double quotes!
             Cocorico\UserBundle\Model\ListingAlertInterface: %cocorico_listing_alert.entity_class%
+            Cocorico\UserBundle\Model\BookingDepositRefundAsAskerInterface: %cocorico_listing_deposit.booking_deposit_refund.entity_class%
+            Cocorico\UserBundle\Model\BookingDepositRefundAsOffererInterface: %cocorico_listing_deposit.booking_deposit_refund.entity_class%
 
 oneup_uploader:
     mappings:

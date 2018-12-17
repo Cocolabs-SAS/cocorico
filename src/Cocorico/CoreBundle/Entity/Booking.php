@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Entity;
 
 use Cocorico\CoreBundle\Model\BaseBooking;
+use Cocorico\CoreBundle\Model\BookingDepositRefundInterface;
 use Cocorico\CoreBundle\Model\BookingOptionInterface;
 use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\TimeRange;
@@ -22,6 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
+use \Cocorico\ListingDepositBundle\Model\BookingDepositableTrait;
 
 
 /**
@@ -106,6 +108,11 @@ class Booking extends BaseBooking
      * @ORM\OneToOne(targetEntity="Cocorico\CoreBundle\Entity\BookingUserAddress", mappedBy="booking", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $userAddress;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Cocorico\CoreBundle\Model\BookingDepositRefundInterface", mappedBy="booking", cascade={"remove"}, orphanRemoval=true)
+     **/
+    private $depositRefund;
 
     public function __construct()
     {
@@ -519,6 +526,21 @@ class Booking extends BaseBooking
         $this->options = $options;
     }
 
+    /**
+     * @return BookingDepositRefundInterface
+     */
+    public function getDepositRefund()
+    {
+        return $this->depositRefund;
+    }
+
+    /**
+     * @param BookingDepositRefundInterface $depositRefund
+     */
+    public function setDepositRefund($depositRefund)
+    {
+        $this->depositRefund = $depositRefund;
+    }
 
     /**
      * @return string

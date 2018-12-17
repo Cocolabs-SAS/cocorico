@@ -17,6 +17,9 @@ use Cocorico\CoreBundle\Entity\BookingPayinRefund;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\MessageBundle\Entity\Message;
 use Cocorico\ReviewBundle\Entity\Review;
+use Cocorico\UserBundle\Model\BookingDepositRefundAsAskerInterface;
+use Cocorico\UserBundle\Model\BookingDepositRefundAsOffererInterface;
+use Cocorico\UserBundle\Model\BookingDepositRefundInterface;
 use Cocorico\UserBundle\Model\ListingAlertInterface;
 use Cocorico\UserBundle\Validator\Constraints as CocoricoUserAssert;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -425,6 +428,17 @@ class User extends BaseUser implements ParticipantInterface
     private $listingAlerts;
 
     /**
+     * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Model\BookingDepositRefundAsAskerInterface", mappedBy="asker", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $bookingDepositRefundsAsAsker;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Model\BookingDepositRefundAsOffererInterface", mappedBy="offerer", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $bookingDepositRefundsAsOfferer;
+
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -439,6 +453,8 @@ class User extends BaseUser implements ParticipantInterface
         $this->bookingBankWires = new ArrayCollection();
         $this->bookingPayinRefunds = new ArrayCollection();
         $this->listingAlerts = new ArrayCollection();
+        $this->bookingDepositRefundsAsAsker = new ArrayCollection();
+        $this->bookingDepositRefundsAsOfferer = new ArrayCollection();
         parent::__construct();
     }
 
@@ -1412,6 +1428,106 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->listingAlerts = $listingAlerts;
+    }
+
+
+    /**
+     * Add BookingDepositRefundAsAsker.
+     *
+     * @param BookingDepositRefundAsAskerInterface $bookingDepositRefundAsAsker
+     *
+     * @return User
+     */
+    public function addBookingDepositRefundAsAsker($bookingDepositRefundAsAsker)
+    {
+        $bookingDepositRefundAsAsker->setAsker($this);
+        $this->bookingDepositRefundsAsAsker[] = $bookingDepositRefundAsAsker;
+
+        return $this;
+    }
+
+    /**
+     * Remove BookingDepositRefundAsAsker.
+     *
+     * @param BookingDepositRefundAsAskerInterface $bookingDepositRefundAsAsker
+     */
+    public function removeBookingDepositRefundAsAsker($bookingDepositRefundAsAsker)
+    {
+        $this->bookingDepositRefundsAsAsker->removeElement($bookingDepositRefundAsAsker);
+    }
+
+    /**
+     * Get BookingDepositRefundsAsAsker.
+     *
+     * @return ArrayCollection
+     */
+    public function getBookingDepositRefundsAsAsker()
+    {
+        return $this->bookingDepositRefundsAsAsker;
+    }
+
+    /**
+     * @param ArrayCollection $bookingDepositRefundsAsAsker
+     *
+     * @return $this
+     */
+    public function setBookingDepositRefundsAsAsker(ArrayCollection $bookingDepositRefundsAsAsker)
+    {
+        foreach ($bookingDepositRefundsAsAsker as $bookingDepositRefundAsAsker) {
+            $bookingDepositRefundAsAsker->setAsker($this);
+        }
+
+        $this->bookingDepositRefundsAsAsker = $bookingDepositRefundsAsAsker;
+    }
+
+
+    /**
+     * Add BookingDepositRefundAsOfferer.
+     *
+     * @param BookingDepositRefundAsOffererInterface $bookingDepositRefundAsOfferer
+     *
+     * @return User
+     */
+    public function addBookingDepositRefundAsOfferer($bookingDepositRefundAsOfferer)
+    {
+        $bookingDepositRefundAsOfferer->setOfferer($this);
+        $this->bookingDepositRefundsAsOfferer[] = $bookingDepositRefundAsOfferer;
+
+        return $this;
+    }
+
+    /**
+     * Remove BookingDepositRefundAsOfferer.
+     *
+     * @param BookingDepositRefundAsOffererInterface $bookingDepositRefundAsOfferer
+     */
+    public function removeBookingDepositRefundAsOfferer($bookingDepositRefundAsOfferer)
+    {
+        $this->bookingDepositRefundsAsOfferer->removeElement($bookingDepositRefundAsOfferer);
+    }
+
+    /**
+     * Get BookingDepositRefundsAsOfferer.
+     *
+     * @return ArrayCollection
+     */
+    public function getBookingDepositRefundsAsOfferer()
+    {
+        return $this->bookingDepositRefundsAsOfferer;
+    }
+
+    /**
+     * @param ArrayCollection $bookingDepositRefundsAsOfferer
+     *
+     * @return $this
+     */
+    public function setBookingDepositRefundsAsOfferer(ArrayCollection $bookingDepositRefundsAsOfferer)
+    {
+        foreach ($bookingDepositRefundsAsOfferer as $bookingDepositRefundAsOfferer) {
+            $bookingDepositRefundAsOfferer->setAsker($this);
+        }
+
+        $this->bookingDepositRefundsAsOfferer = $bookingDepositRefundsAsOfferer;
     }
 
     /**

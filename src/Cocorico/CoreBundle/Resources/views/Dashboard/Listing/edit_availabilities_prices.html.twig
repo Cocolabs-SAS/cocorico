@@ -35,6 +35,11 @@
                     <!-- price-section -->
                     <div class="price-section">
                         {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:priceForm', {'listing': listing})) }}
+
+                        {% if bundleExist('CocoricoListingDepositBundle') %}
+                            {{ render(controller('CocoricoListingDepositBundle:Dashboard/Offerer/ListingDeposit:depositForm', {'listing': listing})) }}
+                        {% endif %}
+
                         <!-- simulator -->
                         {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/ListingPriceSimulator:priceSimulatorForm', {'listing': listing})) }}
                     </div>
