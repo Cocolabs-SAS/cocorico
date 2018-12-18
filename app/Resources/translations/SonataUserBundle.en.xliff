@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2018-12-18T13:46:09Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -151,21 +151,6 @@
         <target>Last Name</target>
         <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
-      <trans-unit id="dec748472ae984224dd5285ca21576d008a26e39" resname="form.label_mangopay_bank_account_id">
-        <source>form.label_mangopay_bank_account_id</source>
-        <target>Mangopay bank account id</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="1005db2ddcc3b9a50700ee773a3fc6d97c32cd79" resname="form.label_mangopay_id">
-        <source>form.label_mangopay_id</source>
-        <target>Mangopay ID</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="1b0695536032994f08401f0113cc6a8008669daa" resname="form.label_mangopay_wallet_id">
-        <source>form.label_mangopay_wallet_id</source>
-        <target>Mangopay wallet id</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
-      </trans-unit>
       <trans-unit id="6135f0d1e01c34820b5ae3b0f5bee68f14ebd519" resname="form.label_mother_tongue">
         <source>form.label_mother_tongue</source>
         <target>Where are you from</target>
@@ -259,11 +244,6 @@
       <trans-unit id="d832a7ec4617049cd2da61a11b6539925558428e" resname="list.label_locked">
         <source>list.label_locked</source>
         <target>Locked</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="242b98deb754c7f781a2c018e2bccfcb2195eb68" resname="list.label_mangopay_id">
-        <source>list.label_mangopay_id</source>
-        <target>Mangopay id</target>
         <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="56fee11d331aa7f17be36d2c2d6a7f884fa8cd1a" resname="show.label_biography">
@@ -370,7 +350,7 @@
         <source>switch_user</source>
         <target>Switch user</target>
         <jms:reference-file line="8">Resources/views/impersonating.html.twig</jms:reference-file>
-        <jms:reference-file line="9">Resources/views/impersonating.html.twig</jms:reference-file>
+        <jms:reference-file line="10">Resources/views/impersonating.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="30296748403bb9ca684e2020409f15bd250f6639" resname="user_block_logout">
         <source>user_block_logout</source>

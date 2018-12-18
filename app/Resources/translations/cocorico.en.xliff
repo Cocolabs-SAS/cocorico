@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file date="2018-12-18T13:46:08Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -55,13 +55,13 @@
       <trans-unit id="9e16967be6a7afcf10147cffc7be05f119a726de" resname="cocorico.search.extended.warning %location%">
         <source>cocorico.search.extended.warning %location%</source>
         <target>Insufficient results, search area is going to be expanded to: %location%</target>
-          <jms:reference-file line="160">Frontend/ListingResult/result.html.twig</jms:reference-file>
+        <jms:reference-file line="160">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e76df2f570186e6fcf3ba0b861b2fe7b1d19dc7" resname="cocorico.search.invalidate.address">
         <source>cocorico.search.invalidate.address</source>
         <target>Please enter an address to view make a search.</target>
-          <jms:reference-file line="42">ListingResult/js/_geocoding_js.html.twig</jms:reference-file>
-          <jms:reference-file line="182">ListingResult/js/_geocoding_map_drag_js.html.twig</jms:reference-file>
+        <jms:reference-file line="42">ListingResult/js/_geocoding_js.html.twig</jms:reference-file>
+        <jms:reference-file line="182">ListingResult/js/_geocoding_map_drag_js.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8e0d9c9ce43a45ffe8e790a561f78cf215d4c13" resname="cocorico.sunday">
         <source>cocorico.sunday</source>
@@ -86,19 +86,19 @@
       <trans-unit id="92e4199a6cbc855202f30c836d970f76bbd3a517" resname="collection.add_item">
         <source>collection.add_item</source>
         <target>Add</target>
-          <jms:reference-file line="246">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="342">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="425">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="1106">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="1136">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="246">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="342">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="425">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="1106">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="1136">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b369460718f0b8112273eb3930153ba99d63a373" resname="collection.remove_item">
         <source>collection.remove_item</source>
         <target>Remove</target>
-          <jms:reference-file line="215">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="315">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="395">views/Form/fields.html.twig</jms:reference-file>
-          <jms:reference-file line="1063">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="215">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="315">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="395">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="1063">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="45b97052db6fdc4abdcdefcc65952e83c06f682c" resname="company_info">
         <source>company_info</source>
@@ -148,8 +148,8 @@
       <trans-unit id="5e1d2c2c71162e0c24eddb9cae78b0296d9f6425" resname="footer.all_right_reserved">
         <source>footer.all_right_reserved</source>
         <target>all right reserved</target>
+        <jms:reference-file line="82">views/Mails/layout.html.twig</jms:reference-file>
         <jms:reference-file line="90">Frontend/Common/_footer.html.twig</jms:reference-file>
-        <jms:reference-file line="83">views/Mails/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="eafbb9e9132e8fc3dfed33243e7fb8781ab79935" resname="footer.contact_us.link">
         <source>footer.contact_us.link</source>
@@ -199,19 +199,19 @@
       <trans-unit id="ccaeec1d1b1dbbc71e18f43031b34b69864d0ec0" resname="form.error">
         <source>form.error</source>
         <target>An error has occurred.</target>
+        <jms:reference-file line="72">views/Form/fields.html.twig</jms:reference-file>
         <jms:reference-file line="70">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
         <jms:reference-file line="71">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
-          <jms:reference-file line="72">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="745132bd15d9bcfd7316d5588bf300eac5bfbc6d" resname="listing.file.button.text">
         <source>listing.file.button.text</source>
         <target>Choose file</target>
-          <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21c97cc111d6d483759f2f7a212d3010eba47ae2" resname="listing.file.placeholder.text">
         <source>listing.file.placeholder.text</source>
         <target>No file chosen</target>
-          <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
+        <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d7ce250577bc878ff98c5a30f972ab064b3bbe3" resname="listing.form.tac.error">
         <source>listing.form.tac.error</source>
@@ -228,26 +228,26 @@
       <trans-unit id="ee1536aec49276b3a23b8861008ee943786bc7cb" resname="multiselect.all_selected">
         <source>multiselect.all_selected</source>
         <target>All selected</target>
-          <jms:reference-file line="121">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="534">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="184">Frontend/ListingResult/result.html.twig</jms:reference-file>
-          <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="121">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="529">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="185">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="780b109aaf541af74b8adc7fb6222d4fda7a980d" resname="multiselect.none_selected">
         <source>multiselect.none_selected</source>
         <target>None selected</target>
-          <jms:reference-file line="122">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="535">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="185">Frontend/ListingResult/result.html.twig</jms:reference-file>
-          <jms:reference-file line="359">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="359">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="122">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="530">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56aef35256504c5def3af2bfea3c78db49dd8cc3" resname="multiselect.num_selected">
         <source>multiselect.num_selected</source>
         <target>selected</target>
-          <jms:reference-file line="123">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="536">Frontend/Listing/show.html.twig</jms:reference-file>
-          <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
-          <jms:reference-file line="360">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="360">Frontend/Profile/show.html.twig</jms:reference-file>
+        <jms:reference-file line="123">Frontend/Home/index.html.twig</jms:reference-file>
+        <jms:reference-file line="531">Frontend/Listing/show.html.twig</jms:reference-file>
+        <jms:reference-file line="187">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7922207fb51f1d5e34be3c837b7ae78b4587854a" resname="nav.asker.link">
         <source>nav.asker.link</source>
@@ -257,18 +257,18 @@
       <trans-unit id="64b6d2da31ab9586cf0bb982e17ac89b0c341592" resname="nav.dashboard.bookings.link">
         <source>nav.dashboard.bookings.link</source>
         <target>Bookings</target>
-        <jms:reference-file line="13">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="52">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="10">Frontend/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="41">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="13">Dashboard/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="52">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b34b7d4b69d704f8578cff80e633119b04efdeb3" resname="nav.dashboard.comments.link">
         <source>nav.dashboard.comments.link</source>
         <target>Comments</target>
-        <jms:reference-file line="31">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="64">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="22">Frontend/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="49">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="31">Dashboard/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="64">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="00968900491344d2b7b09d638da429219ae8f879" resname="nav.dashboard.link">
         <source>nav.dashboard.link</source>
@@ -278,32 +278,32 @@
       <trans-unit id="2b90079d3b97e0e14afdfe1289c39edc3548586d" resname="nav.dashboard.listings.link">
         <source>nav.dashboard.listings.link</source>
         <target>Listings</target>
-        <jms:reference-file line="19">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="14">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="19">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d09d54f19020722643f87ff71f432cb58e355e57" resname="nav.dashboard.messages.link">
         <source>nav.dashboard.messages.link</source>
         <target>Messages</target>
-        <jms:reference-file line="7">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="46">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="6">Frontend/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="37">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="7">Dashboard/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="46">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="eb4abbef7397113b32f5ebef47c0746de14d333a" resname="nav.dashboard.payments.link">
         <source>nav.dashboard.payments.link</source>
         <target>Payments</target>
-        <jms:reference-file line="25">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="58">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="18">Frontend/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="45">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="25">Dashboard/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="58">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3dadf751fe0bf63fffa61621c6903a1bf4f05b24" resname="nav.dashboard.profile.link">
         <source>nav.dashboard.profile.link</source>
         <target>Profile</target>
-        <jms:reference-file line="37">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="70">Dashboard/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="26">Frontend/Common/_nav.html.twig</jms:reference-file>
         <jms:reference-file line="53">Frontend/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="37">Dashboard/Common/_nav.html.twig</jms:reference-file>
+        <jms:reference-file line="70">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9cdd94fbd5223a9896cf916b4a1d12bf4909a0bb" resname="nav.faq.slug">
         <source>nav.faq.slug</source>
@@ -374,8 +374,8 @@
       <trans-unit id="25752f0500683a8055d9b148a43277a0977e61ce" resname="nav.who_we_are.slug">
         <source>nav.who_we_are.slug</source>
         <target>who-we-are</target>
-        <jms:reference-file line="35">Frontend/Common/_footer.html.twig</jms:reference-file>
         <jms:reference-file line="52">Frontend/Common/_header.html.twig</jms:reference-file>
+        <jms:reference-file line="35">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2a004ec467e55618ba224e27867bcb893ae731bc" resname="page.error">
         <source>page.error</source>

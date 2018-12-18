@@ -342,6 +342,15 @@ parameters:
 
     ################################# Optional bundles #################################
 
+    #Mangopay
+    cocorico_mangopay.client_id: ~
+    cocorico_mangopay.client_password: ~
+    cocorico_mangopay.base_url: 'https://api.sandbox.mangopay.com'
+    cocorico_mangopay.debug: false
+    cocorico_mangopay.temporary_folder: '%kernel.root_dir%/../tmp/mangopay/'
+    cocorico_mangopay.card_register_redirect_url: 'cocorico_booking_register_card'
+    cocorico_mangopay.pre_auth_3d_secure_redirect_url: 'cocorico_booking_redirect_after_3d_secure'
+
     #SMS
     cocorico_sms.enabled:                false
     cocorico_sms.phone_check:            false
@@ -352,3 +361,9 @@ parameters:
     cocorico_sms.ovh_consumer_key:       ~
     cocorico_sms.ovh_service_name:       ~
     cocorico_sms.ovh_debug:              false
+
+    #Deposit
+    #Booking deposit refund generation delay in minutes.
+    cocorico_listing_deposit.booking.deposit_refund_delay: ~
+    #Min deposit amount
+    cocorico_listing_deposit.listing.min_deposit_amount: ~

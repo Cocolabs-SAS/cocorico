@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T11:47:35Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -133,20 +133,20 @@
         <source>cocorico_user.birthday.blank</source>
         <target>Veuillez renseigner votre date de naissance.</target>
       </trans-unit>
-        <trans-unit id="6f1d7c2905f917c9e517d4caf10711b4c5e0ef7d" resname="cocorico_user.company_name.blank">
-            <source>cocorico_user.company_name.blank</source>
-            <target state="new">Veuillez renseigner votre nom d'entreprise.</target>
+      <trans-unit id="6f1d7c2905f917c9e517d4caf10711b4c5e0ef7d" resname="cocorico_user.company_name.blank">
+        <source>cocorico_user.company_name.blank</source>
+        <target state="new">Veuillez renseigner votre nom d'entreprise.</target>
         <jms:reference-file line="36">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fe5d878ea8abf516340e8d2b6b854ec2a58434e3" resname="cocorico_user.countryOfResidence.blank">
         <source>cocorico_user.countryOfResidence.blank</source>
         <target>Veuillez renseigner votre pays de résidence.</target>
-          <jms:reference-file line="153">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="153">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a233f035a152744ca09d068f6a9aeb53621ca167" resname="cocorico_user.countryOfResidence.invalid">
         <source>cocorico_user.countryOfResidence.invalid</source>
         <target>Le pays de résidence que vous avez renseigné n'est pas valide.</target>
-          <jms:reference-file line="154">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="154">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="71295e47e2b3ee1530f73b690a9560a634d1e6fc" resname="cocorico_user.country_of_residence.blank">
         <source>cocorico_user.country_of_residence.blank</source>
@@ -159,23 +159,23 @@
       <trans-unit id="c13c24d6514fc2dc31ad98da18a6c49e697fc3c8" resname="cocorico_user.email.blank">
         <source>cocorico_user.email.blank</source>
         <target>Veuillez saisir votre e-mail.</target>
-          <jms:reference-file line="196">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="196">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="db713e66548186388828ad1111f9e1201f0f08a3" resname="cocorico_user.email.invalid">
         <source>cocorico_user.email.invalid</source>
         <target>Cet e-mail n'est pas valide.</target>
-          <jms:reference-file line="197">Frontend/Common/_register.html.twig</jms:reference-file>
-          <jms:reference-file line="198">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="197">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="198">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8749b7c68b8d94ce3c06e29aafa4b1dc45a7e0e9" resname="cocorico_user.first_name.blank">
         <source>cocorico_user.first_name.blank</source>
         <target>Veuillez saisir votre prénom</target>
-          <jms:reference-file line="78">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="78">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c5dd48821c07a5471ec7b2ef084c970a2d7c8742" resname="cocorico_user.first_name.invalid">
         <source>cocorico_user.first_name.invalid</source>
         <target>Votre prénom ne peut pas être enregistré.</target>
-          <jms:reference-file line="79">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="79">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c960bcfd83a148a8a67094c7a1c0a112b6102f41" resname="cocorico_user.first_name.long">
         <source>cocorico_user.first_name.long</source>
@@ -196,12 +196,12 @@
       <trans-unit id="09c6d74c9313b0ab1056b88f1d17cd3a8ed201c5" resname="cocorico_user.last_name.blank">
         <source>cocorico_user.last_name.blank</source>
         <target>Veuillez saisir votre nom.</target>
-          <jms:reference-file line="57">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="57">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d775e43f9a7ec33bf6c3702b1c3ef2944d5b0b90" resname="cocorico_user.last_name.invalid">
         <source>cocorico_user.last_name.invalid</source>
         <target>Votre nom ne peut pas être enregistré.</target>
-          <jms:reference-file line="58">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="58">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="75c3ba06f411658aeb6d9f03385d716e335d9947" resname="cocorico_user.last_name.long">
         <source>cocorico_user.last_name.long</source>
@@ -218,29 +218,29 @@
       <trans-unit id="4aaa7d9890cd4ab830e8b64aa59770817442c795" resname="cocorico_user.phone.invalid">
         <source>cocorico_user.phone.invalid</source>
         <target state="new">Le téléphone est invalide</target>
-          <jms:reference-file line="182">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="182">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0f2d86402d8a9d5e8fe265b62714c7e0eed2c6c8" resname="cocorico_user.plainPassword.first.blank">
         <source>cocorico_user.plainPassword.first.blank</source>
         <target>Vous devez saisir votre mot de passe.</target>
-          <jms:reference-file line="213">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="213">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="524738120a2dc5410296f69a349f6352e49122b4" resname="cocorico_user.plainPassword.first.invalid">
         <source>cocorico_user.plainPassword.first.invalid</source>
         <target>Votre mot de passe est erroné.</target>
+        <jms:reference-file line="214">Frontend/Common/_register.html.twig</jms:reference-file>
         <jms:reference-file line="105">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
-          <jms:reference-file line="214">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c1c4aacc55ad92c8cc767e9aa99c6eb2cba3d779" resname="cocorico_user.plainPassword.second.blank">
         <source>cocorico_user.plainPassword.second.blank</source>
         <target>Mot de passe requis</target>
-          <jms:reference-file line="230">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="230">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="22192abddfc401abebde09731ecd36e6bc65660d" resname="cocorico_user.plainPassword.second.invalid">
         <source>cocorico_user.plainPassword.second.invalid</source>
         <target>Mot de passe incorrect</target>
+        <jms:reference-file line="231">Frontend/Common/_register.html.twig</jms:reference-file>
         <jms:reference-file line="121">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
-          <jms:reference-file line="231">Frontend/Common/_register.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b51c7f162e47525994805f406bbb5efe382b7364" resname="cocorico_user.username.long">
         <source>cocorico_user.username.long</source>
@@ -301,11 +301,11 @@
       <trans-unit id="ce9dc38b0d001e3346c2c1d8202e01bdecb121ef" resname="fos_user.password.mismatch">
         <source>fos_user.password.mismatch</source>
         <target>Les deux mots de passe ne concordent pas</target>
-        <jms:reference-file line="62">Form/Type/ProfileContactFormType.php</jms:reference-file>
-          <jms:reference-file line="140">Form/Type/RegistrationFormType.php</jms:reference-file>
-        <jms:reference-file line="40">Form/Type/ResettingFormType.php</jms:reference-file>
+        <jms:reference-file line="229">Frontend/Common/_register.html.twig</jms:reference-file>
         <jms:reference-file line="120">Dashboard/Profile/edit_contact.html.twig</jms:reference-file>
-          <jms:reference-file line="229">Frontend/Common/_register.html.twig</jms:reference-file>
+        <jms:reference-file line="140">Form/Type/RegistrationFormType.php</jms:reference-file>
+        <jms:reference-file line="40">Form/Type/ResettingFormType.php</jms:reference-file>
+        <jms:reference-file line="62">Form/Type/ProfileContactFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4b3130df261ac66147653997d2d83952a330faac" resname="fos_user.password.short">
         <source>fos_user.password.short</source>

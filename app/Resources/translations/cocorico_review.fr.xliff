@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-05-10T11:47:35Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,27 +9,27 @@
       <trans-unit id="356a192b7913b04c54574d18c28d46e6395428ab" resname="1">
         <source>1</source>
         <target>1</target>
-        <jms:reference-file line="37">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="36">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="da4b9237bacccdf19c0760cab7aec4a8359010b0" resname="2">
         <source>2</source>
         <target>2</target>
-        <jms:reference-file line="38">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="37">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="77de68daecd823babbb58edb1c8e14d7106e83bb" resname="3">
         <source>3</source>
         <target>3</target>
-        <jms:reference-file line="39">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="38">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1b6453892473a467d07372d45eb05abc2031647a" resname="4">
         <source>4</source>
         <target>4</target>
-        <jms:reference-file line="40">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="39">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4" resname="5">
         <source>5</source>
         <target>5</target>
-        <jms:reference-file line="41">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="40">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f85266aaf970ecc6ccb3bbeb61412845d69c207b" resname="cocorico_review.comment.not_blank">
         <source>cocorico_review.comment.not_blank</source>
@@ -47,7 +47,7 @@
       <trans-unit id="f9489ed60fc2d5d0a30b98df526f87b5dc1c4010" resname="review.comment.cancel">
         <source>review.comment.cancel</source>
         <target>Annuler</target>
-          <jms:reference-file line="116">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="119">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1ed554aeaf19ab46528bd1ce10fdbbef3a4ff713" resname="review.comment.concerning">
         <source>review.comment.concerning</source>
@@ -57,32 +57,32 @@
       <trans-unit id="9bca5f99586180a660a0a3fb77ec58ff169570b8" resname="review.comment.desc">
         <source>review.comment.desc</source>
         <target>Commentaire</target>
-          <jms:reference-file line="91">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="91">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3c749de46454a2ce8cda37e30ae24cd571e098e6" resname="review.comment.end_date">
         <source>review.comment.end_date</source>
         <target>Date de fin</target>
-          <jms:reference-file line="51">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="52">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3d6bc643d9ad5e5de61c9c6801eaf11a1ff54fe1" resname="review.comment.for_ad">
         <source>review.comment.for_ad</source>
         <target>pour l'annonce</target>
-          <jms:reference-file line="43">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="43">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e595ae4b9d2c8d6dabf1d093bc07225499aac010" resname="review.comment.note">
         <source>review.comment.note</source>
         <target>Note</target>
-          <jms:reference-file line="52">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="52">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a680dcdc222670c9f52fc0f20a7c6ab85d15329" resname="review.comment.publish_this_comment">
         <source>review.comment.publish_this_comment</source>
         <target>Publier ce commentaire</target>
-          <jms:reference-file line="118">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="121">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3aa6b958ff0de3389098857259724e2f7cc4d544" resname="review.comment.rate_user">
         <source>review.comment.rate_user</source>
         <target>Noter cet utilisateur</target>
-          <jms:reference-file line="77">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="78">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ce5f410a640649ff9ae44c5a148c1324753faffd" resname="review.comment.rating_made">
         <source>review.comment.rating_made</source>
@@ -102,47 +102,47 @@
       <trans-unit id="ec1599bb0d3051c768b20b80016ef1920c7510dc" resname="review.comment.ratings_to">
         <source>review.comment.ratings_to</source>
         <target>Personne que vous notez</target>
-          <jms:reference-file line="38">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="39">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="863a7ca450a2e877c3c4ec5fb8f05f9c9ff44ae6" resname="review.comment.reservation">
         <source>review.comment.reservation</source>
         <target>Reservation</target>
-          <jms:reference-file line="40">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="40">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ead95da854790aade615a878757d1b5820670a6c" resname="review.comment.reviewed_user">
         <source>review.comment.reviewed_user</source>
         <target>Personne que vous avez notée</target>
-          <jms:reference-file line="62">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="62">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="61e65ede52354892c7e595264d7b92731597e892" resname="review.comment.reviewer">
         <source>review.comment.reviewer</source>
         <target state="new">Personne qui vous a notée</target>
-          <jms:reference-file line="67">Dashboard/Review/_reviews.html.twig</jms:reference-file>
+        <jms:reference-file line="67">Dashboard/Review/_reviews.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d2144bfb149404dfd4ad9eec9ccc2a7f2ff98100" resname="review.comment.start_date">
         <source>review.comment.start_date</source>
         <target>Date de debut</target>
-          <jms:reference-file line="45">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="46">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9646891d035d49c9517b979552b7d96f63ccb539" resname="review.comment.textarea.placeholder">
         <source>review.comment.textarea.placeholder</source>
         <target>Soyez poli, penser à la façon dont votre avis peut aider les autres à se faire une opinion.</target>
-          <jms:reference-file line="110">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="111">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="819692399f501c43f211cfd9ab5b7b6fab38aa7f" resname="review.comment.your_comment">
         <source>review.comment.your_comment</source>
         <target>Votre commentaire</target>
-          <jms:reference-file line="105">Dashboard/Review/new.html.twig</jms:reference-file>
+        <jms:reference-file line="106">Dashboard/Review/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="779d67710e1d16486e67f1a820695a3a1edbf7d8" resname="review.form.comment.label">
         <source>review.form.comment.label</source>
         <target>review.form.comment.label</target>
-        <jms:reference-file line="54">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="53">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62dd6ff04ed59422378f2043f6552673d5bc4ce0" resname="review.form.rating.label">
         <source>review.form.rating.label</source>
         <target>review.form.rating.label</target>
-        <jms:reference-file line="45">Type/Dashboard/ReviewType.php</jms:reference-file>
+        <jms:reference-file line="44">Type/Dashboard/ReviewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="30ac95fbb1ba503dcae7040c9a0dd55dcc7d8f1f" resname="review.new.success">
         <source>review.new.success</source>
