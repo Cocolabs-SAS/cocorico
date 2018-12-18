@@ -379,11 +379,17 @@ class TwigSwiftMailer implements MailerInterface
             true
         );
 
+        $wireAmount = $booking->getAmountToPayToOffererDecimal();
+        if ($booking->getBankWire()->getAmountDecimal()) {
+            $wireAmount = $booking->getBankWire()->getAmountDecimal();
+        }
+
         $context = array(
             'user' => $user,
             'booking' => $booking,
             'booking_request_url' => $bookingRequestUrl,
-            'offerer_payments_list' => $paymentOffererUrl
+            'offerer_payments_list' => $paymentOffererUrl,
+            'bank_wire_amount' => $wireAmount,
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());

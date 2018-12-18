@@ -3,7 +3,7 @@
 {% block subject -%}
     {% autoescape false %}
     {{ 'wiretransfer_offerer.email.subject'|trans({
-        '%booking_amount_offerer%':  booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
+        '%booking_amount_offerer%':  bank_wire_amount|format_price(user_locale, 2, false),
         '%booking_uid%': booking.id
     }, 'cocorico_mail', user_locale) }}
     {% endautoescape %}
@@ -15,7 +15,7 @@
         '%booking_uid%': booking.id,
         '%booking_request_url%': booking_request_url,
         '%offerer_payments_list%': offerer_payments_list,
-        '%booking_amount_offerer%':  booking.amountToPayToOffererDecimal|format_price(user_locale, 2, false),
+        '%booking_amount_offerer%': bank_wire_amount|format_price(user_locale, 2, false),
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
 
