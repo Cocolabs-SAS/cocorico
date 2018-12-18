@@ -104,3 +104,6 @@ parameters:
     cocorico_sms.ovh_consumer_key:       "Consumer Key"
     cocorico_sms.ovh_service_name:       "Service Name"
     cocorico_sms.ovh_debug: false
+
+    #Min deposit amount
+    cocorico_listing_deposit.listing.min_deposit_amount: 0

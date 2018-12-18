@@ -2,7 +2,7 @@
 
 {% block subject -%}
     {% autoescape false %}
-    {{ 'registration.email.subject'|trans({'%firstname%': user.firstName}, 'cocorico_user', user_locale) }}
+    {{ 'registration.email.subject'|trans({'%firstname%': user.firstName}, 'cocorico_mail', user_locale) }}
     {% endautoescape %}
 {%- endblock %}
 
