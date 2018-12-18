@@ -14,25 +14,33 @@
             {% set label_required = "" %}
             {% if required %}
                 {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-                {% set label_required %}
-                <span>*</span>
-                {% endset %}
+                {% set label_required %}<span> *</span>{% endset %}
             {% endif %}
 
             {% if label is empty %}
                 {% set label = name|humanize %}
             {% endif %}
 
-            <label{% for attrname, attrvalue in label_attr if attrname != 'data-icon' %} {{ attrname }}="{{ attrvalue }}"{% endfor %}>
-            {% if 'data-icon' in label_attr|keys %}
+            {{ '<label ' }}
+            {%- for attrname, attrvalue in label_attr -%}
+                {%- if attrname != 'data-icon' -%}
+                    {{ attrname }}="{{ attrvalue }}"
+                {%- endif -%}
+            {%- endfor -%}
+            {{ '>' }}
+
+            {%- if 'data-icon' in label_attr|keys -%}
                 <i class="ico-beta {{label_attr['data-icon']}}"></i>
-            {% endif %}
-            {% autoescape false %}
-            {{ label|trans({}, translation_domain) }}
-            {% endautoescape %}
+            {%- endif -%}
+
+            {%- autoescape false -%}
+                {{ label|trans({}, translation_domain) }}
+            {%- endautoescape -%}
+
             {{ label_required }}
-            </label>
-        {% endif %}
+
+            {{ '</label>' }}
+        {%- endif -%}
     {% endspaceless %}
 {% endblock %}
 {#@formatter:on#}

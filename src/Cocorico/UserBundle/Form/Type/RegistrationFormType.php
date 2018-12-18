@@ -61,12 +61,16 @@ class RegistrationFormType extends AbstractType
             ->add(
                 'lastName',
                 null,
-                array('label' => 'form.last_name')
+                array(
+                    'label' => 'form.last_name',
+                )
             )
             ->add(
                 'firstName',
                 null,
-                array('label' => 'form.first_name')
+                array(
+                    'label' => 'form.first_name',
+                )
             )
             ->add(
                 'phonePrefix',
@@ -105,7 +109,7 @@ class RegistrationFormType extends AbstractType
                 'country',
                 array(
                     'label' => 'form.user.nationality',
-                    'required' => false,
+                    'required' => true,
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
                 )
             )
@@ -113,7 +117,7 @@ class RegistrationFormType extends AbstractType
                 'countryOfResidence',
                 'country',
                 array(
-                    'label' => 'form.user.countryOfResidence',
+                    'label' => 'form.user.country_of_residence',
                     'required' => true,
                     'preferred_choices' => array('GB', 'FR', 'ES', 'DE', 'IT', 'CH', 'US', 'RU'),
                     'data' => 'FR',

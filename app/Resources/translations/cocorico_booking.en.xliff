@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-19T16:15:30Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-04-27T23:20:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,13 +9,13 @@
       <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
         <source>admin.booking.status.label</source>
         <target>Status</target>
-          <jms:reference-file line="213">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="215">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="510">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="219">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="221">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="520">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
           <jms:reference-file line="107">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="200">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="201">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="344">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="203">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="204">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="347">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
           <jms:reference-file line="101">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
           <jms:reference-file line="102">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
           <jms:reference-file line="182">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>

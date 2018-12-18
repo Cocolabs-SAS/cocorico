@@ -1467,7 +1467,7 @@ class User extends BaseUser implements ParticipantInterface
     public function validate(ExecutionContextInterface $context)
     {
         if ($this->personType == self::PERSON_TYPE_LEGAL && empty($this->companyName)) {
-            $context->buildViolation('cocorico_user.companyName.blank')
+            $context->buildViolation('cocorico_user.company_name.blank')
                 ->atPath('companyName')
                 ->setTranslationDomain('validators')
                 ->addViolation();

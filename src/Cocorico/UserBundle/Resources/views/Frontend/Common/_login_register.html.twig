@@ -81,6 +81,62 @@
 
 <script>
     $(function () {
+        //User type (legal or natural)
+        $('[data-id=person-type] input').each(function (k, personType) {
+            toggleCompanyName(personType);
+            toggleLabels(personType);
+
+            $(personType).on('click', function () {
+                toggleCompanyName(this);
+                toggleLabels(this);
+            });
+        });
+
+
+        /**
+         * Toggle user company field depending on type user
+         * @param personType
+         */
+        function toggleCompanyName(personType) {
+            if (!$(personType).is(':checked')) {
+                return;
+            }
+
+            if ($(personType).val() == 2) {//legal
+                $('[data-id=company-name]').show();
+                $('[data-id=company-name] input').addClass('required');
+            } else {//natural
+                $('[data-id=company-name]').hide();
+                $('[data-id=company-name] input').removeClass('required');
+            }
+        }
+
+        /**
+         * Toggle labels fields depending on type user
+         * @param personType
+         */
+        function toggleLabels(personType) {
+            if (!$(personType).is(':checked')) {
+                return;
+            }
+
+            if ($(personType).val() == 2) {//legal
+                $('[data-label-legal]').each(function (k, label) {
+                    $(this).attr('data-label-natural', $(this).text());//memorize label natural text
+                    $(this).text($(this).data('label-legal'));//change label text to legal  text
+
+                    if ($('#' + $(this).attr('for')).attr('required') || $(this).hasClass('required')) {//add * for required fields
+                        $(this).text($(this).text() + ' *');
+                    }
+                });
+            } else {//natural
+                $('[data-label-legal]').each(function (k, label) {
+                    $(this).text($(this).data('label-natural'));//change label text to natural  text
+                });
+            }
+        }
+
+        //Errors
         $('#form-registerlogin form').parsley({
             errorsContainer: function (ParsleyField) {
                 return ParsleyField.$element
