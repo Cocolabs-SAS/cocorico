@@ -34,19 +34,21 @@
     var markerCluster;//Markers cluster on the listing result map
     var mapDragMode = false; // True when the user drag or zoom the map on listing result page
     var mapIsLoaded = false;//True when the map has been loaded the first time
+    var countriesEnabled = {{ cocorico_listing_countries|json_encode|raw }};
 
     //Functions
     var initializeGMapFunc, geocodeFunc, geocodeJSONFunc, reverseGeocodeFunc, formatGeocodingResultFunc,
-            translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
-            geoLocateIPFunc;
+        translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
+        geoLocateIPFunc;
 
     $(function () {
         //var maxZoom = 18;
-        var defaultLat = {{ default_lat|default(46.227638) }};
-        var defaultLng = {{ default_lng|default(2.213749000000007) }};
-        var defaultZoom = {{ default_zoom|default(4) }};
+        var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
+        var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
+        var defaultZoom = {{ (default_zoom|default(4))|e('js') }};
         var mapElt = $("{{ map_elt|default('') }}");
         var autoCompleteElt = $("{{ auto_complete_elt|default('') }}");
+        var displayMarker = {{ display_marker is not defined or display_marker ? "true" : "false" }};
         var markerDraggable = {{ marker_draggable is not defined or not marker_draggable ? "false" : "true" }};
         var ipInfoDbAPIKey = "{{ ipInfoDbAPIKey|default('') }}";
 
@@ -95,9 +97,15 @@
 
             if (autoCompleteElt) {
                 autoComplete = new google.maps.places.Autocomplete(
-                        autoCompleteElt,
-                        {types: ['geocode']}
+                    autoCompleteElt,
+                    {types: ['geocode']}
                 );
+
+                if (countriesEnabled.length) {
+                    autoComplete.setComponentRestrictions(
+                        {'country': countriesEnabled}
+                    );
+                }
             }
 
 
@@ -141,13 +149,13 @@
                         //Translate geocoding
                         if (typeof translate !== 'undefined' && translate == true) {
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
-                                    function (resultsTranslated) {
+                                function (resultsTranslated) {
 //                                        console_log("resultsTranslated", resultsTranslated);
 //                                        console_log("formattedResult", formattedResult);
-                                        deferred.resolve(
-                                                $.extend(formattedResult, resultsTranslated)
-                                        );
-                                    }
+                                    deferred.resolve(
+                                        $.extend(formattedResult, resultsTranslated)
+                                    );
+                                }
                             );
                         } else {
                             deferred.resolve(formattedResult);
@@ -182,11 +190,11 @@
 
                             //Translate geocoding
                             translateGeocodeResultFunc(formattedResult.lat, formattedResult.lng).done(
-                                    function (resultsTranslated) {
-                                        deferred.resolve(
-                                                $.extend(formattedResult, resultsTranslated)
-                                        );
-                                    }
+                                function (resultsTranslated) {
+                                    deferred.resolve(
+                                        $.extend(formattedResult, resultsTranslated)
+                                    );
+                                }
                             );
                         } else {
                             deferred.reject("{{ 'geo.location.no_result'|trans }}");
@@ -251,30 +259,35 @@
                 if (lang != locale) {
                     dataT[lang] = {};
                     var deferred = new $.Deferred();
+                    var url = "{{ path('cocorico_geo_reverse_geocoding', {'lat': '0.01', 'lng': '0.02', 'lang': app.request.locale}) }}";
+                    url = url.replace('0.01', lat);
+                    url = url.replace('0.02', lng);
+                    url = url.replace('{{ app.request.locale }}', lang);
+                    url += "?token={{ csrf_token("rev_geo") }}";
                     $.getJSON(
-                            "//maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&sensor=false&language=" + lang,
-                            function (queryResult) {
+                        url,
+                        function (queryResult) {
 
-                                if (queryResult.status == 'OK' && queryResult.results.length) {
-                                    var resultsT = queryResult.results;
-                                    var resultT = resultsT[0];
+                            if (queryResult.status == 'OK' && queryResult.results.length) {
+                                var resultsT = queryResult.results;
+                                var resultT = resultsT[0];
 
-                                    $.each(resultT.address_components, function (index, objectT) {
-                                        if (objectT) {
-                                            $.each(objectT.types, function (index, name) {
-                                                dataT[lang][name] = objectT.long_name;
-                                                dataT[lang][name + "_short"] = objectT.short_name;
-                                            });
-                                        }
-                                    });
-                                    deferred.resolve(dataT);
-                                } else {
-                                    //datasT[lang]=null;
-                                    {#deferred.reject("{{ 'geo.location.no_result'|trans }}");#}
-                                }
-                            }).fail(function () {
+                                $.each(resultT.address_components, function (index, objectT) {
+                                    if (objectT) {
+                                        $.each(objectT.types, function (index, name) {
+                                            dataT[lang][name] = objectT.long_name;
+                                            dataT[lang][name + "_short"] = objectT.short_name;
+                                        });
+                                    }
+                                });
+                                deferred.resolve(dataT);
+                            } else {
+                                //datasT[lang]=null;
+                                {#deferred.reject("{{ 'geo.location.no_result'|trans }}");#}
+                            }
+                        }).fail(function () {
 
-                            });
+                    });
                     promises.push(deferred);
                 }
             });
@@ -445,36 +458,36 @@
          */
         refreshMapJSONFunc = function (address) {
             $.when(
-                    geocodeJSONFunc(address)
+                geocodeJSONFunc(address)
             ).then(
-                    function (results) {
-                        if (results) {
-                            var result = results[0];
-                            var geometry = result.geometry;
+                function (results) {
+                    if (results) {
+                        var result = results[0];
+                        var geometry = result.geometry;
 
-                            if (geometry.viewport) {
-                                if (!mapDragMode) {
-                                    var ne = geometry.viewport.northeast;
-                                    var sw = geometry.viewport.southwest;
-                                    ne = new google.maps.LatLng(ne.lat, ne.lng);
-                                    sw = new google.maps.LatLng(sw.lat, sw.lng);
-                                    var viewport = new google.maps.LatLngBounds(sw, ne);
+                        if (geometry.viewport) {
+                            if (!mapDragMode) {
+                                var ne = geometry.viewport.northeast;
+                                var sw = geometry.viewport.southwest;
+                                ne = new google.maps.LatLng(ne.lat, ne.lng);
+                                sw = new google.maps.LatLng(sw.lat, sw.lng);
+                                var viewport = new google.maps.LatLngBounds(sw, ne);
 
-                                    map.fitBounds(viewport);
-                                    map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
-                                    drawZone(ne, sw);
-                                }
-                            } else {
-                                map.setCenter(geometry.location);
-                                map.setZoom(17);
+                                map.fitBounds(viewport);
+                                map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
+                                drawZone(ne, sw);
                             }
-                            if (displayMarker) {
-                                marker.setPosition(geometry.location);
-                                marker.setVisible(true);
-                            }
-
+                        } else {
+                            map.setCenter(geometry.location);
+                            map.setZoom(17);
                         }
+                        if (displayMarker) {
+                            marker.setPosition(geometry.location);
+                            marker.setVisible(true);
+                        }
+
                     }
+                }
             );
         };
 
@@ -486,14 +499,14 @@
         geocodeJSONFunc = function (address) {
             var deferred = new $.Deferred();
             $.getJSON(
-                    "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}",
-                    function (queryResult) {
-                        if (queryResult.status == 'OK' && queryResult.results.length) {
-                            deferred.resolve(queryResult.results);
-                        } else {
-                            deferred.reject(false);
-                        }
-                    });
+                "//maps.googleapis.com/maps/api/geocode/json?address=" + address + "&sensor=false&language=" + "{{ app.request.locale }}{{ gKey|raw }}",
+                function (queryResult) {
+                    if (queryResult.status == 'OK' && queryResult.results.length) {
+                        deferred.resolve(queryResult.results);
+                    } else {
+                        deferred.reject(false);
+                    }
+                });
             return deferred.promise();
         };
 
@@ -675,7 +688,6 @@
 
                 $.each(markersForOneLocation, function (i, marker) {
                     var tmpContent = markerTemplate.replace('%title%', marker['title']);
-//                    tmpContent = tmpContent.replace('/images/img.png', marker['image']);
                     tmpContent = tmpContent.replace('%data-src%', marker['image']);
                     tmpContent = tmpContent.replace('%price%', marker['price']);
                     tmpContent = tmpContent.replace('%certified%', marker['certified']);
