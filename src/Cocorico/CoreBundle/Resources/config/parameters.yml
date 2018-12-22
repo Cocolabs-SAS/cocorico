@@ -225,6 +225,11 @@ parameters:
     cocorico_listing_category_field_value.entity_class: none
     #ListingCategoryFieldValue: none or Cocorico\ListingCategoryFieldBundle\Entity\ListingCategoryFieldValue
     cocorico_listing_category_listing_category_field.entity_class: none
+
+    #ListingDepositBundle:
+    #BookingDepositRefund : none or Cocorico\ListingDepositBundle\Entity\BookingDepositRefund (without quotes!)
+    cocorico_listing_deposit.booking_deposit_refund.entity_class: none
+
     #Config
     cocorico_config.parameters_allowed:
         cocorico.fee_as_asker:

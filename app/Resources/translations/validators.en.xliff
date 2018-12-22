@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-27T23:20:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -133,7 +133,7 @@
         <source>cocorico_user.birthday.blank</source>
         <target>Birthday required</target>
       </trans-unit>
-        <trans-unit id="2aed87d00425ba669647b3e6e5a97415c24bc77d" resname="cocorico_user.company_name.blank">
+        <trans-unit id="6f1d7c2905f917c9e517d4caf10711b4c5e0ef7d" resname="cocorico_user.company_name.blank">
             <source>cocorico_user.company_name.blank</source>
             <target state="new">Required</target>
             <jms:reference-file line="36">Frontend/Common/_register.html.twig</jms:reference-file>

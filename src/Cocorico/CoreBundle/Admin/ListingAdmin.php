@@ -192,7 +192,26 @@ class ListingAdmin extends Admin
                     'label' => 'admin.listing.price.label',
                     'include_vat' => $this->includeVat
                 )
-            )
+            );
+
+        if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
+            $formMapper
+                ->add(
+                    'amountDeposit',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'listing_edit.form.deposit',
+                        'required' => false,
+                    ),
+                    array(
+                        'translation_domain' => 'cocorico_listing_deposit',
+                    )
+                )
+                ->end();
+        }
+
+        $formMapper
             ->add(
                 'cancellationPolicy',
                 'choice',
@@ -240,6 +259,7 @@ class ListingAdmin extends Admin
 //                )
 //            )
             ->end();
+
 
         if (array_key_exists("CocoricoCarrierBundle", $this->bundles)) {
             $formMapper

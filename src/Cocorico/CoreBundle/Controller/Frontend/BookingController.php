@@ -131,7 +131,36 @@ class BookingController extends Controller
                     $translator->trans($e->getMessage(), array(), 'cocorico_booking')
                 );
             }
-        } elseif ($success === 2) {//Voucher code is valid
+        } else {
+            $this->addFormMessagesToFlashBag($success);
+        }
+
+        //Breadcrumbs
+        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addBookingNewItems($request, $booking);
+
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Booking:new.html.twig',
+            array(
+                'booking' => $booking,
+                'form' => $form->createView(),
+                //Used to hide errors fields message when a secondary submission (Voucher, Delivery, ...) is done successfully
+                'display_errors' => ($success < 2),
+            )
+        );
+    }
+
+    /**
+     * Form message for specific bundles
+     *
+     * @param int $success
+     */
+    private function addFormMessagesToFlashBag($success)
+    {
+        $session = $this->container->get('session');
+        $translator = $this->container->get('translator');
+
+        if ($success === 2) {//Voucher code is valid
             $session->getFlashBag()->add(
                 'success_voucher',
                 $translator->trans('booking.new.voucher.success', array(), 'cocorico_booking')
@@ -149,20 +178,6 @@ class BookingController extends Controller
         } elseif ($success < 0) {//Errors
             $this->addFlashError($success);
         }
-
-        //Breadcrumbs
-        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
-        $breadcrumbs->addBookingNewItems($request, $booking);
-
-        return $this->render(
-            'CocoricoCoreBundle:Frontend/Booking:new.html.twig',
-            array(
-                'booking' => $booking,
-                'form' => $form->createView(),
-                //Used to hide errors fields message when a secondary submission (Voucher, Delivery, ...) is done successfully
-                'display_errors' => ($success < 2)
-            )
-        );
     }
 
     /**

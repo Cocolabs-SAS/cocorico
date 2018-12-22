@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-04-27T23:21:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T11:47:35Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -118,6 +118,10 @@
         <source>/dashboard/listing/{id}/edit_characteristic</source>
         <target>/tableau-de-bord/annonce/{id}/editer-characteristiques</target>
       </trans-unit>
+        <trans-unit id="652e5b8fc61ecfd9feb8572f850420ca937f2832" resname="cocorico_dashboard_listing_edit_deposit">
+            <source>/dashboard/listing/{id}/edit_deposit</source>
+            <target state="new">/dashboard/listing/{id}/edit_deposit</target>
+      </trans-unit>
       <trans-unit id="fc559d0e8f25b44a804997a0139edf552b1cb1cf" resname="cocorico_dashboard_listing_edit_discount">
         <source>/dashboard/listing/{id}/edit_discount</source>
         <target>/tableau-de-bord/annonce/{id}/editer-reductions</target>
@@ -201,10 +205,6 @@
       <trans-unit id="eacc06390851235e3e6074a5ae93961daa151fe4" resname="cocorico_geo_create">
         <source>/geocoding/{id}/create</source>
         <target state="new">/geocoding/{id}/create</target>
-      </trans-unit>
-      <trans-unit id="6282d0eb4eb8b9b6a92876cd3ff55f8656b61b5b" resname="cocorico_geo_reverse_geocoding">
-        <source>/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</source>
-        <target state="new">/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</target>
       </trans-unit>
       <trans-unit id="59be3aa1f035af965016dafe7e8c54a7ab427504" resname="cocorico_home">
         <source>/</source>

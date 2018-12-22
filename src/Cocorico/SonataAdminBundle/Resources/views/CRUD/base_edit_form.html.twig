@@ -46,7 +46,7 @@
                                             <div class="box-body  container-fluid">
                                                 <div class="sonata-ba-collapsed-fields">
                                                     {% if form_tab.description != false %}
-                                                        <p>{{ form_tab.description|raw }}</p>
+                                                        <p>{{ admin.trans(form_tab.description, {}, form_tab.translation_domain) }}</p>
                                                     {% endif %}
 
                                                     {{ form_helper.render_groups(admin, form, form_tab['groups'], has_tab) }}
@@ -106,8 +106,14 @@
                                 </a>
                             {% endif %}
 
-                            {% if bundleExist('CocoricoMangoPayBundle') and admin.hasroute('mangopay_withdraw') and admin.isGranted('EDIT', object) and object.status == BookingBankWireConstants.STATUS_TO_DO %}
-                                {% include 'CocoricoMangoPayBundle:Admin:list_action_do_bank_wire.html.twig' with {'object': object} only %}
+                            {#Mangopay dashboard access for bank wire payout and payin refund#}
+                            {% if bundleExist('CocoricoMangoPayBundle') and admin.isGranted('EDIT', object) %}
+                                {% if admin.hasroute('mangopay_withdraw')  and object.status == BookingBankWireConstants.STATUS_TO_DO %}
+                                    {% include 'CocoricoMangoPayBundle:Admin:list_action_do_bank_wire.html.twig' with {'object': object} only %}
+                                {% elseif bundleExist('CocoricoListingDepositBundle') and admin.hasroute('mangopay_deposit_refund') %}
+                                    {% include 'CocoricoMangoPayBundle:Admin:list_action_do_deposit_payin_refund.html.twig' with {'object': object} only %}
+                                    {% include 'CocoricoMangoPayBundle:Admin:list_action_do_deposit_bankwire.html.twig' with {'object': object} only %}
+                                {% endif %}
                             {% endif %}
 
                             {% if admin.isAclEnabled() and admin.hasroute('acl') and admin.isGranted('MASTER', object) %}

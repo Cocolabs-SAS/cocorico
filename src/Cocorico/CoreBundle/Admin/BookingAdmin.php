@@ -189,6 +189,21 @@ class BookingAdmin extends Admin
                 );
         }
 
+        if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
+            $formMapper
+                ->add(
+                    'amountDeposit',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'listing_edit.form.deposit',
+                        'required' => false,
+                    ),
+                    array(
+                        'translation_domain' => 'cocorico_listing_deposit',
+                    )
+                );
+        }
 
         $formMapper
             ->add(

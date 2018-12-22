@@ -81,7 +81,8 @@ class BookingBankWireAdmin extends Admin
 
 
         $formMapper
-            ->with('admin.booking_bank_wire.title')
+            ->tab('admin.booking_bank_wire.title')
+            ->with('')
             ->add(
                 'user',
                 'sonata_type_model',
@@ -194,6 +195,27 @@ class BookingBankWireAdmin extends Admin
                 );
         }
 
+        if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
+            $formMapper
+                ->add(
+                    'booking.amountDeposit',
+                    'price',
+                    array(
+                        'disabled' => true,
+                        'label' => 'listing_edit.form.deposit',
+                        'required' => false,
+                    ),
+                    array(
+                        'translation_domain' => 'cocorico_listing_deposit',
+                    )
+                );
+        }
+
+        $statusDisabled = true;
+        if ($bookingBankWire && $bookingBankWire->getStatus() == BookingBankWire::STATUS_TO_DO) {
+            $statusDisabled = false;
+        }
+
         $formMapper
             ->add(
                 'status',
@@ -204,7 +226,8 @@ class BookingBankWireAdmin extends Admin
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
                     'help' => 'admin.booking_bank_wire.status.help',
-                    'choices_as_values' => true
+                    'choices_as_values' => true,
+                    'disabled' => $statusDisabled,
                 )
             )
             ->add(
@@ -231,11 +254,13 @@ class BookingBankWireAdmin extends Admin
                     'label' => 'admin.booking.updated_at.label',
                 )
             )
+            ->end()
             ->end();
 
         if (array_key_exists("CocoricoMangoPayBundle", $this->bundles)) {
             $formMapper
-                ->with('Mangopay')
+                ->tab('Mangopay')
+                ->with('')
                 ->add(
                     'mangopayTransferId',
                     null,
@@ -329,6 +354,7 @@ class BookingBankWireAdmin extends Admin
                         'disabled' => true,
                     )
                 )
+                ->end()
                 ->end();
         }
     }

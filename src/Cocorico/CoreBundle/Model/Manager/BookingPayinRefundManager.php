@@ -132,13 +132,19 @@ class BookingPayinRefundManager extends BaseManager
                     $amountToRefund -= $booking->getAmountDiscountVoucher();//Discount amount is not refunded
                 }
             }
-            $feeToCollectWhileRefund = 0;
 
+            $feeToCollectWhileRefund = 0;
             //If refund to asker is 100% then offerer fees are also refunded to asker
             //And asker fees are collected while refunding
             if ($refundPercentage == 1) {
                 $amountToRefund += $booking->getAmountFeeAsOfferer();
                 $feeToCollectWhileRefund = $booking->getAmountTotalFee() - $booking->getAmountFeeAsOfferer();
+            }
+
+            if ($this->depositIsEnabled()) {
+                if ($booking->getAmountDeposit()) {
+                    $amountToRefund += $booking->getAmountDeposit();//Deposit amount is refunded totally
+                }
             }
 
             return array(
@@ -186,7 +192,7 @@ class BookingPayinRefundManager extends BaseManager
                 $amountTotal = 0;//Canceled while not payed
             }
         } elseif ($booking->getStatus() == Booking::STATUS_NEW) {//Not already canceled no refunded
-            $amountTotal = 0;
+            $amountTotal = 0;//nothing to refund because amount not already payed
         }
 
         return $amountTotal;
@@ -221,6 +227,14 @@ class BookingPayinRefundManager extends BaseManager
     public function voucherIsEnabled()
     {
         return isset($this->bundles["CocoricoVoucherBundle"]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function depositIsEnabled()
+    {
+        return isset($this->bundles["CocoricoListingDepositBundle"]);
     }
 
     /**

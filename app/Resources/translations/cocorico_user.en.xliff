@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-27T23:20:37Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T10:31:16Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -14,7 +14,7 @@
       <trans-unit id="7434fa918f1cff45a2f9455ad4b6d3de9edd5560" resname="BIC">
         <source>BIC</source>
         <target>BIC</target>
-          <jms:reference-file line="111">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="110">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fbe2f800f0f4a7c6f623967e6fa7235892cbe24d" resname="Bad credentials.">
         <source>Bad credentials.</source>
@@ -23,7 +23,7 @@
       <trans-unit id="e81566a5d5243429545b3a76547f60514550632b" resname="IBAN">
         <source>IBAN</source>
         <target>IBAN</target>
-          <jms:reference-file line="103">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="102">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
         <source>Offerer</source>
@@ -78,12 +78,12 @@
         <trans-unit id="60c631ca4801f9e9855b51bcc362f46ecfd0690c" resname="entity.user.person_type.legal">
             <source>entity.user.person_type.legal</source>
             <target state="new">A company</target>
-            <jms:reference-file line="70">UserBundle/Entity/User.php</jms:reference-file>
+            <jms:reference-file line="73">UserBundle/Entity/User.php</jms:reference-file>
       </trans-unit>
         <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b2" resname="entity.user.person_type.natural">
             <source>entity.user.person_type.natural</source>
             <target state="new">A person</target>
-            <jms:reference-file line="69">UserBundle/Entity/User.php</jms:reference-file>
+            <jms:reference-file line="72">UserBundle/Entity/User.php</jms:reference-file>
         </trans-unit>
       <trans-unit id="2e33a41aa053169361b996e132dc6288a51f83f9" resname="entity.user.type.billing">
         <source>entity.user.type.billing</source>
@@ -201,12 +201,12 @@
       <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
         <source>form.user.annual_income</source>
         <target>Annual income</target>
-          <jms:reference-file line="78">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="77">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d45413bab3db2bfb0f28eb800bb8cfc772c3ccfc" resname="form.user.bank_owner_address">
         <source>form.user.bank_owner_address</source>
         <target>Bank owner address</target>
-          <jms:reference-file line="95">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="94">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb1370b89f5b24926ad82c569574ce9acc0bff61" resname="form.user.bank_owner_address.help">
         <source>form.user.bank_owner_address.help</source>
@@ -216,7 +216,7 @@
       <trans-unit id="2ee502191b684c7674d67e6b430bbb723fee67ce" resname="form.user.bank_owner_name">
         <source>form.user.bank_owner_name</source>
         <target>Bank owner name</target>
-          <jms:reference-file line="87">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="86">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="27dd741dbbd8e3b73c5ce3f06b593f86fe6d5f98" resname="form.user.bank_owner_name.help">
         <source>form.user.bank_owner_name.help</source>
@@ -237,7 +237,7 @@
         <trans-unit id="57fbbe30dff3fc41edc6457021dcef2a3544d4c3" resname="form.user.country_of_residence">
             <source>form.user.country_of_residence</source>
         <target>Country of Residence</target>
-            <jms:reference-file line="61">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+            <jms:reference-file line="60">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
             <jms:reference-file line="120">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5bbad741fe8166df8f96758bac68e00f4d5fbca1" resname="form.user.email">
@@ -306,7 +306,7 @@
       <trans-unit id="feb654da8645b3c7a91fb2b5e9c9b99f8fe06af8" resname="form.user.profession">
         <source>form.user.profession</source>
         <target>Profession</target>
-          <jms:reference-file line="70">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
+          <jms:reference-file line="69">Form/Type/ProfileBankAccountFormType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f912106675d47c1f3f01082da2f4b303de0a8d14" resname="form.user.username:">
         <source>form.user.username:</source>
@@ -398,22 +398,11 @@
         <target>Registration confirmed</target>
         <jms:reference-file line="10">Frontend/Registration/confirmed.html.twig</jms:reference-file>
       </trans-unit>
-      <trans-unit id="6362bc7b7a8f72b782ffd590744ab069327bbe4a" resname="registration.email.message">
-        <source>registration.email.message</source>
-        <target>Hello %firstname%!
-
-                    To finish activating your account - please visit %confirmationUrl%
-
-                    Regards,
-                    the Team.
-                </target>
-        <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
-        <source>registration.email.subject</source>
-        <target>Welcome %firstname%!</target>
-        <jms:reference-file line="5">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
-      </trans-unit>
+        <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
+            <source>registration.email.subject</source>
+            <target state="new">registration.email.subject</target>
+            <jms:reference-file line="5">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="4ef79d57e94b4b74349d6533a231e09dc5be0ce2" resname="registration.submit">
         <source>registration.submit</source>
         <target>Register</target>

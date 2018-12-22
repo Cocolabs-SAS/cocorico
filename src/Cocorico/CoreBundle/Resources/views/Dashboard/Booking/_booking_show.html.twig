@@ -120,6 +120,12 @@
             </button>
         </strong>
 
+        {% if bundleExist('CocoricoListingDepositBundle') %}
+            {% include 'CocoricoListingDepositBundle:Dashboard:Booking/_show_amount_deposit.html.twig' with {
+                'booking': booking
+            } only %}
+        {% endif %}
+
         <strong class="booking-duration">
             {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
             {{ 'booking.duration:'|trans }}

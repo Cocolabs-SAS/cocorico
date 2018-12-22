@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-    <file date="2017-04-27T23:21:12Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-05-10T11:47:35Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,16 +9,16 @@
       <trans-unit id="2842dd817f166672262625e977a646d0e2fa8334" resname="admin.booking.status.label">
         <source>admin.booking.status.label</source>
         <target>Tous</target>
-          <jms:reference-file line="219">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="221">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
-          <jms:reference-file line="520">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="234">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="236">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+          <jms:reference-file line="535">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
           <jms:reference-file line="107">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="203">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="204">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
-          <jms:reference-file line="347">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="224">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="225">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
+          <jms:reference-file line="369">CoreBundle/Admin/BookingBankWireAdmin.php</jms:reference-file>
           <jms:reference-file line="101">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
           <jms:reference-file line="102">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
-          <jms:reference-file line="182">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
+          <jms:reference-file line="190">CoreBundle/Admin/BookingPayinRefundAdmin.php</jms:reference-file>
         <jms:reference-file line="36">Type/Dashboard/BookingStatusFilterType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="12492e16cd91e297d528829d80415eb7cfeab028" resname="admin.booking_bank_wire.booking.status.label">
@@ -29,13 +29,13 @@
       <trans-unit id="c963936b54415544e2b2c4f28c4590f12c0bfa09" resname="booking.amount.help">
         <source>booking.amount.help</source>
         <target>booking.amount.help</target>
-          <jms:reference-file line="159">Frontend/Booking/new.html.twig</jms:reference-file>
-          <jms:reference-file line="161">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="164">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="166">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a7cc6a2d75bb2bae7a95a4b8f099e8a7d9e62d8c" resname="booking.amount.total:">
         <source>booking.amount.total:</source>
         <target>Total TTC :</target>
-          <jms:reference-file line="154">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="159">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="22075545a9ac9feae48656294d7a1076e3104207" resname="booking.amount_total.help">
         <source>booking.amount_total.help</source>
@@ -159,7 +159,7 @@
         <source>booking.bill.title.vat</source>
         <target>TVA</target>
         <jms:reference-file line="103">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
-          <jms:reference-file line="167">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="172">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b89b51b92e96cf733f4340a7a89bcd9c28af6b29" resname="booking.bill.user.address">
         <source>booking.bill.user.address</source>
@@ -176,9 +176,9 @@
         <target>Durée :</target>
           <jms:reference-file line="90">Dashboard/Booking/edit.html.twig</jms:reference-file>
         <jms:reference-file line="92">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
-        <jms:reference-file line="125">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
+          <jms:reference-file line="131">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
         <jms:reference-file line="60">Frontend/Booking/form_booking_price.html.twig</jms:reference-file>
-          <jms:reference-file line="113">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="114">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1f8b18d0d699e8cdef8ccc60f90ba5f21577e44c" resname="booking.edit.error">
         <source>booking.edit.error</source>
@@ -202,18 +202,18 @@
         <source>booking.expire_in:</source>
         <target>Expire dans</target>
         <jms:reference-file line="145">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
-        <jms:reference-file line="139">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
+          <jms:reference-file line="145">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1fe5c2a60d90e8d61c5148504d6fc6524b147bbe" resname="booking.fees.amount:">
         <source>booking.fees.amount:</source>
         <target>Dont frais de service :</target>
-          <jms:reference-file line="175">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="180">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="45f4286d5f0a88a711ab63b8d7e18b9517fd9c21" resname="booking.fees.help">
         <source>booking.fees.help</source>
         <target>booking.fees.help</target>
-          <jms:reference-file line="177">Frontend/Booking/new.html.twig</jms:reference-file>
-          <jms:reference-file line="179">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="182">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="184">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ebee020ab091ca03d795dbe10632c32fb11f480" resname="booking.form.end">
         <source>booking.form.end</source>
@@ -266,7 +266,7 @@
       <trans-unit id="c24af435b4a0d04a204568fc5ce722b8dff44053" resname="booking.modal.action.return">
         <source>booking.modal.action.return</source>
         <target>Retour</target>
-        <jms:reference-file line="142">Dashboard/Booking/edit.html.twig</jms:reference-file>
+          <jms:reference-file line="149">Dashboard/Booking/edit.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ed9559baadfa9c681160f7026f65f3054dd9d5f0" resname="booking.modal.amount_to_refund">
         <source>booking.modal.amount_to_refund</source>
@@ -291,17 +291,17 @@
       <trans-unit id="de1727b52b15b37b38993a85d41786d382c35f3d" resname="booking.new.delivery.error">
         <source>booking.new.delivery.error</source>
         <target state="new">Livraison impossible</target>
-          <jms:reference-file line="190">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="205">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="ac0ca9b37979902af8065324b68a1854cba66a35" resname="booking.new.delivery.success">
         <source>booking.new.delivery.success</source>
         <target state="new">Votre demande de livraison a été mise à jour</target>
-        <jms:reference-file line="141">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="170">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="56c15ae0e9dd3422fe84d16dc8e32cfb769a06f2" resname="booking.new.delivery_max.error">
         <source>booking.new.delivery_max.error</source>
         <target state="new">Ce lieu de livraison est trop éloigné</target>
-          <jms:reference-file line="187">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="202">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9cc287ca6419b68c601007f17a971052386de774" resname="booking.new.error.amount_invalid {{ min_price }}">
         <source>booking.new.error.amount_invalid {{ min_price }}</source>
@@ -322,27 +322,27 @@
       <trans-unit id="42f63b537bae10ae0037c14333bb589d2cae56d9" resname="booking.new.form.error">
         <source>booking.new.form.error</source>
         <target>Une erreur est survenue.</target>
-          <jms:reference-file line="177">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="192">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c7de4f52f1bf3074e96c0f94b6fb806ad7c2e469" resname="booking.new.message.placeholder">
         <source>booking.new.message.placeholder</source>
         <target>Rédiger votre message de demande à l'attention de l'offreur</target>
-          <jms:reference-file line="202">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="207">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="1703c3a03d2cf45800ecb3b3f93e1a5b8bb6573f" resname="booking.new.options.success">
         <source>booking.new.options.success</source>
         <target state="new">Vos options ont été mises à jour</target>
-        <jms:reference-file line="146">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="175">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="083c618c0d6cea305c1e7472bcceb15434994011" resname="booking.new.provider.title">
         <source>booking.new.provider.title</source>
         <target>Dites bonjour !</target>
-          <jms:reference-file line="247">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="252">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="28b9e3c63b01f9d312668d113cd7eb5c04157a3c" resname="booking.new.self_booking.error">
         <source>booking.new.self_booking.error</source>
         <target>Vous ne pouvez pas vous réserver à vous même</target>
-          <jms:reference-file line="179">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="194">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="925b7c8ca8556c7b560a5a904ec979fe4916a304" resname="booking.new.success">
         <source>booking.new.success</source>
@@ -352,35 +352,35 @@
       <trans-unit id="339b4d363003c41683cf58282a0895c975c66f6f" resname="booking.new.tac.link">
         <source>booking.new.tac.link</source>
         <target>les termes et conditions</target>
-        <jms:reference-file line="132">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="224">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="139">Dashboard/Booking/edit.html.twig</jms:reference-file>
+          <jms:reference-file line="229">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ecc3fa0ac15c5eb33b33f1f1be3eeebd95d9ffcc" resname="booking.new.unknown.error">
         <source>booking.new.unknown.error</source>
         <target>Une erreur est survenue</target>
           <jms:reference-file line="177">Dashboard/Asker/BookingController.php</jms:reference-file>
           <jms:reference-file line="186">Dashboard/Offerer/BookingController.php</jms:reference-file>
-          <jms:reference-file line="173">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="188">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b370314c697defb1d7393abebaf775f49845880b" resname="booking.new.validation.submit">
         <source>booking.new.validation.submit</source>
         <target>Payer</target>
-          <jms:reference-file line="229">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="234">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0462988b55dd0888cce21c33dc9ad8ecff7e38c6" resname="booking.new.voucher.success">
         <source>booking.new.voucher.success</source>
         <target>Votre code promotionnel est valide. Vous bénéficiez d'une réduction.</target>
-        <jms:reference-file line="136">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="165">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="34d6eabc34fbcd0e218de0639d3c36b1ae87127c" resname="booking.new.voucher_amount.error">
         <source>booking.new.voucher_amount.error</source>
         <target>Le montant de votre réservation est insuffisant pour profiter de ce code.</target>
-          <jms:reference-file line="184">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="199">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="42217431f6de6e7c4326a18f5e57ba8d637b0539" resname="booking.new.voucher_code.error">
         <source>booking.new.voucher_code.error</source>
         <target>Ce code est invalide.</target>
-          <jms:reference-file line="181">Controller/Frontend/BookingController.php</jms:reference-file>
+          <jms:reference-file line="196">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="120b92535d73cd274ad24e0314361747252b8251" resname="booking.payin.amount.title">
         <source>booking.payin.amount.title</source>
@@ -426,7 +426,7 @@
       <trans-unit id="8d81b919f32669b6c9f8cd9be5b45f48d7463736" resname="booking.secured_message">
         <source>booking.secured_message</source>
         <target>Cette page est sécurisée par le moyen d’un cryptage AES 256 bits.</target>
-          <jms:reference-file line="81">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="82">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3ea7b9c6dd9eb1fa552b8b32f97421f386d40dee" resname="booking.show.address.title">
         <source>booking.show.address.title</source>
@@ -503,7 +503,7 @@
         <source>booking.show.status.title</source>
         <target>Statut :</target>
         <jms:reference-file line="134">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
-        <jms:reference-file line="133">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
+          <jms:reference-file line="139">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="bf3dffc0590e29525fe8c4556e1eb2aa009f2c41" resname="booking.show.textarea.placeholder">
         <source>booking.show.textarea.placeholder</source>
@@ -534,7 +534,7 @@
       <trans-unit id="7ada668f56cd492d11deebbaaea62c263b8b5cdd" resname="booking.total_amount">
         <source>booking.total_amount</source>
         <target>Montant total de la réservation</target>
-          <jms:reference-file line="148">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="153">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9fa474d1bd7c96c0e054f6d8e275e48455bd1573" resname="booking.voucher.address">
         <source>booking.voucher.address</source>
@@ -656,13 +656,13 @@
       <trans-unit id="40cdccf226cbb6688a25713f9628b0f3e7959bb4" resname="listing.show.rules:">
         <source>listing.show.rules:</source>
         <target>Règles</target>
-          <jms:reference-file line="290">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="295">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c7a4298347ed905bf82c406276876396d2b49a12" resname="nav.tac.slug">
         <source>nav.tac.slug</source>
         <target>conditions-generales-d-utilisation</target>
-        <jms:reference-file line="131">Dashboard/Booking/edit.html.twig</jms:reference-file>
-          <jms:reference-file line="222">Frontend/Booking/new.html.twig</jms:reference-file>
+          <jms:reference-file line="138">Dashboard/Booking/edit.html.twig</jms:reference-file>
+          <jms:reference-file line="227">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cdf7e925f5746741c316f5fbcf39ad0dfca90775" resname="results">
         <source>results</source>
