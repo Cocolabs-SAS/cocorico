@@ -38,7 +38,7 @@ class ProfileAboutMeController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function ediAction(Request $request)
+    public function editAction(Request $request)
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
