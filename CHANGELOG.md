@@ -10,22 +10,45 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.8.0] - (2019-01-02)
+
+### Added
 - Add bookings accessor by user type in User entity and CS
 - Add map drag refreshing results functionality 
+- Add ListingDepositBundle functionality
 
 ### Fixed
 - Optimise user and listing fields in almost admin edition pages (bookingBankWire, PayinRefund, Booking, ...)
-- Add person type in user fixtures
 - Fix listing address geolocation while listing deposit and listing address edition when no click on validate address
+- Add person type in user fixtures
 - Add nationality field on registration form
 - Fix currency locale format on map infobox
 - Fix infobox image loading by loading it only on box click
+- Fix google map issue while listing deposit
+- Fix translations in HP
+- Fix price scales fields in admin if price precision parameter is equal to 0
+- Fix missing translator parameters
+- Fix IBAN form field length
+- Fix bank wire amount in mail send to offerer when booking is canceled by asker
+- Fix registration email subject translation
 
 ### Changed
+- Change labels on registration form when person type is legal
 - Remove unused registration handling in new listing form handler
 - Set listing user in listing form handler for listing deposit
 - Remove unused registration handling in new booking form handler
+- Remove sonata admin user show action
 - Change reviewer images in reviews list
+- Enhance categories edition submission without CategoryFieldBundle
+- Remove unused parameters
+
+
 ## [0.7.0] - (2017-03-27)
 
 ### Added
