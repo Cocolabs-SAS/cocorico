@@ -36,6 +36,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
     public function load(ObjectManager $manager)
     {
         $userManager = $this->container->get('cocorico_user.user_manager');
+        $locale = $this->container->getParameter('cocorico.locale');
 
         /** @var  User $user */
         $user = $userManager->createUser();
@@ -51,7 +52,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setAnnualIncome(1000);
         $user->setEmailVerified(true);
         $user->setPhoneVerified(true);
-        $user->setMotherTongue("en");
+        $user->setMotherTongue($locale);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
@@ -71,7 +72,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setBirthday(new \DateTime('1975-08-27'));
         $user->setEnabled(true);
         $user->setAnnualIncome(1000);
-        $user->setMotherTongue("en");
+        $user->setMotherTongue($locale);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
@@ -91,7 +92,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setBirthday(new \DateTime('1978-08-27'));
         $user->setEnabled(false);
         $user->setAnnualIncome(1000);
-        $user->setMotherTongue("en");
+        $user->setMotherTongue($locale);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
