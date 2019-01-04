@@ -19,6 +19,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -98,7 +100,7 @@ class TimeRangeType extends AbstractType
 
 
                 //TimePicker
-                if ($this->timePicker) {
+                if ($options['time_picker']) {
                     $form
                         ->add(
                             'start_picker',
@@ -125,14 +127,14 @@ class TimeRangeType extends AbstractType
 
                 //Times display mode: range or duration
                 if ($options['display_mode'] == "duration") {
-                    if ($this->timesMax > 1) { //Create times unit choice list limited to timesMax
+                    if ($options['times_max'] > 1) { //Create times unit choice list limited to timesMax
                         $nbMinutes = null;
                         if (isset($options['start_options']['data']) && isset($options['end_options']['data'])) {
                             $timeRange = new TimeRange(
                                 $options['start_options']['data'],
                                 $options['end_options']['data']
                             );
-                            $nbMinutes = $timeRange->getDuration($this->timeUnit) * $this->timeUnit;
+                            $nbMinutes = $timeRange->getDuration($options['time_unit']) * $options['time_unit'];
                         }
 
                         /** @var DateRange $dateRange */
@@ -143,8 +145,12 @@ class TimeRangeType extends AbstractType
                                 array(
                                     //from one time unit to timesMax * timeUnit
                                     'choices' => array_combine(
-                                        range(1, $this->timesMax),
-                                        range($this->timeUnit, $this->timesMax * $this->timeUnit, $this->timeUnit)
+                                        range(1, $options['times_max']),
+                                        range(
+                                            $options['time_unit'],
+                                            $options['times_max'] * $options['time_unit'],
+                                            $options['time_unit']
+                                        )
                                     ),
                                     'data' => $nbMinutes,
                                     /** @Ignore */
@@ -161,7 +167,7 @@ class TimeRangeType extends AbstractType
                                 'nb_minutes',
                                 'hidden',
                                 array(
-                                    'data' => $this->timeUnit
+                                    'data' => $options['time_unit'],
                                 )
                             );
                     }
@@ -171,6 +177,18 @@ class TimeRangeType extends AbstractType
 
         $builder->addViewTransformer($options['transformer']);
         $builder->addEventSubscriber($options['validator']);
+    }
+
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        parent::buildView($view, $form, $options);
+
+        $view->vars = array_merge(
+            $view->vars,
+            array(
+                'time_picker' => $options['time_picker'],
+            )
+        );
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -184,6 +202,10 @@ class TimeRangeType extends AbstractType
                 'validator' => null,
                 'translation_domain' => 'cocorico_listing',
                 'display_mode' => 'range',
+                //Override default parameters.yml values
+                'time_picker' => $this->timePicker,
+                'time_unit' => $this->timeUnit,
+                'times_max' => $this->timesMax,
             )
         );
 

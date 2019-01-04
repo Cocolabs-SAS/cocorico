@@ -692,7 +692,7 @@
             </strong>
 
             {{ form_errors(form.start) }}
-            {% if timePicker %}
+            {% if form.vars.time_picker %}
                 <div class='input-group date' id='datetimepicker3'>
                     {{ form_widget(form.start_picker,{
                         'attr': {
@@ -739,7 +739,7 @@
                 </strong>
 
                 {{ form_errors(form.end) }}
-                {% if timePicker %}
+                {% if form.vars.time_picker %}
                     <div class='input-group date' id='datetimepicker3'>
                         {{ form_widget(form.end_picker,{
                             'attr': {
@@ -790,7 +790,7 @@
             {{ form_widget(form.end) }}
         </div>
         {#hide time picker because all date and time fields are hidden in this page#}
-        {% if timePicker %}
+        {% if form.vars.time_picker %}
             <div class="hidden">
                 {{ form_widget(form.start_picker) }}
             </div>
@@ -812,7 +812,7 @@
                 {{ form_label(form.start) }}
             </strong>
 
-            {% if timePicker %}
+            {% if form.vars.time_picker %}
                 <div class='input-group date' id='datetimepicker3'>
                     <span class="add-on">
                         <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
@@ -857,7 +857,7 @@
                     {{ form_label(form.end) }}
                 </strong>
 
-                {% if timePicker %}
+                {% if form.vars.time_picker %}
                     <div class='input-group date' id='datetimepicker3'>
                         <span class="add-on">
                             <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
