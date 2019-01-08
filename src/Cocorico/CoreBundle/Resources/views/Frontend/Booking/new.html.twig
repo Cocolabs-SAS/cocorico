@@ -12,26 +12,10 @@
 {% set listing = booking.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_location = listing.location %}
-{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
 
-{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
-{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
-{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
-{#{% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}#}
-{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
-{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
-
-
-{% if optionBundleEnabled %}
-    {% set amount = (booking.amountDecimal - booking.amountOptionsDecimal) | format_price(app.request.locale, 2, false) %}
-{% endif %}
-
-{% set user = listing.user %}
-{% set user_image = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
-
 {%- block meta_title -%}
-    {{ 'booking.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " : " ~  amount_total ~ " - " ~ cocorico_site_name }} }}
+    {{ 'booking.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " : "  ~ " - " ~ cocorico_site_name }} }}
 {%- endblock -%}
 
 {%- block meta_description -%}
@@ -50,8 +34,8 @@
     {% endif %}
 {%- endblock -%}
 
-{% block layout %}
 
+{% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
         {% trans_default_domain 'cocorico_booking' %}
 
@@ -63,63 +47,20 @@
         {% endblock %}
 
         {% block main %}
-            {#<a href="{{ path('cocorico_listing_show', {'slug':translation.slug} ) }}">#}
-            {#&lt; {{ 'booking.new.back'|trans }}#}
-            {#</a>#}
+            <a href="{{ path('cocorico_listing_show', {'slug':listing_translation.slug} ) }}">
+                &lt; {{ 'booking.new.back'|trans }}
+            </a>
             <!-- two-columns -->
             <div class="twocolumns row alt">
                 <!-- contain the main content of the page -->
                 <div id="content" class="listing-area col-xs-12 col-md-9">
                     <div class="content-holder">
-                        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-
-                        {{ form_start(form, {'attr': {'id': 'booking-new'}}) }}
-
-                        <!-- alert -->
-                        <div role="alert" class="alert alert-success">
-                            <i class="ico lock">lock</i>
-
-                            <p>{{ 'booking.secured_message'|trans }}</p>
-                        </div>
-
-                        <!-- schedule -->
-                        {#{{ form_errors(form) }}#}
-                        {{ form_errors(form.date_range) }}
-                        <div class="price-area">
-                            <ul class="list-inline timing">
-                                <li>
-                                    {{ form_errors(form.date_range.start) }}
-                                    {{ form_label(form.date_range.start, null, {'required': false} ) }}
-                                    <time datetime="{{ booking.start|date('Y-m-d') }}">
-                                        <i class="icon-calendar"></i>
-                                        {{ booking.start|localizeddate('short', 'none', 'fr') }}
-                                    </time>
-                                    {{ form_widget(form.date_range.start, {
-                                        'type': 'hidden'
-                                    }) }}
-                                </li>
-                                <li>
-                                    {{ form_errors(form.date_range.end) }}
-                                    {{ form_label(form.date_range.end, null, {'required': false}) }}
-
-                                    <time datetime="{{ booking.end|date('Y-m-d') }}">
-                                        <i class="icon-calendar"></i>
-                                        {{ booking.end|localizeddate('short', 'none', 'fr') }}
-                                    </time>
-                                    {{ form_widget(form.date_range.end, {
-                                        'type': 'hidden'
-                                    }) }}
-                                </li>
-                                <li>
-                                    <strong> {{ 'booking.duration:'|trans }}</strong>
-                                    {{ booking_duration|add_time_unit_text }}
-                                </li>
-
-                                {% if not timeUnitIsDay %}
-                                    {{ form_widget(form.time_range) }}
-                                {% endif %}
-                            </ul>
-                        </div>
+                        {% include 'CocoricoCoreBundle:Frontend:Booking/_form_new.html.twig' with {
+                        'booking' : booking,
+                        'form': form
+                        } only %}
+                    </div>
+                </div>
 
                         {#Delivery OR Carrier bundle form#}
                         {% if deliveryBundleEnabled %}

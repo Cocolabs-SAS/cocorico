@@ -1,0 +1,68 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+{% set user = listing.user %}
+{% set user_image = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+
+<aside id="sidebar" class="col-xs-12 col-md-3">
+    <div class="holder">
+        <!-- widget article -->
+        <section class="widget article">
+            <div class="img-holder">
+
+                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_medium') }}"
+                     alt="{{ listing_translation.title }}"/>
+            </div>
+            <h1>{{ 'booking.new.provider.title'|trans }}</h1>
+
+            <div class="author-area">
+
+                <div class="author-img">
+                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
+                         alt="{{ user.name }}"/>
+                </div>
+                <div class="textbox">
+                    <span class="author-name">
+                        <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
+                            {{ user.name }}
+                        </a>
+                    </span>
+                    <!-- rating -->
+                    {% if user.averageOffererRating %}
+                        {{ user.averageOffererRating | cocorico_star_rating }}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- info-list -->
+            <ul class="info-list">
+                <li>
+                    {{ 'listing.show.categories:'|trans({},'cocorico_listing') }}
+                    <strong>
+                        {% for listingListingCategory in listing.listingListingCategories %}
+                            {{ listingListingCategory.category.name }},
+                        {% endfor %}
+                    </strong>
+                </li>
+                <li>
+                    {{ 'listing.show.location:'|trans({},'cocorico_listing') }}
+                    <strong>{{ listing_location.city ~ ", " ~ listing_location.country|country_name }}</strong>
+                </li>
+                <li>
+                    {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
+                    <strong>{{ listing.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
+                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                            data-html="true" type="button"
+                            data-original-title="{{ cancellationPolicies() }}"> ?
+                    </button>
+                </li>
+                <li>
+                    <strong>{{ 'listing.show.rules:'|trans }} :</strong>
+                    {{ listing_translation.rules|strip_private_info }}
+                </li>
+            </ul>
+        </section>
+    </div>
+</aside>

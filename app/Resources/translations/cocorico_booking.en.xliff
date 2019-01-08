@@ -214,6 +214,21 @@
         <jms:reference-file line="177">Frontend/Booking/new.html.twig</jms:reference-file>
         <jms:reference-file line="179">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="17005b9408ba83e99054c3644785fe107d5a79e5" resname="booking.form.card_cvv:">
+            <source>booking.form.card_cvv:</source>
+            <target state="new">CVV:</target>
+            <jms:reference-file line="78">Form/Type/CardType.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="710d752f2eeec9b7a21c5107ea78e672ee4ff0d4" resname="booking.form.card_exp_date:">
+            <source>booking.form.card_exp_date:</source>
+            <target state="new">Expiration date:</target>
+            <jms:reference-file line="59">Form/Type/CardType.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="2986ec04246402588869b76f92d11163b092b602" resname="booking.form.card_number:">
+            <source>booking.form.card_number:</source>
+            <target state="new">Card number:</target>
+            <jms:reference-file line="50">Form/Type/CardType.php</jms:reference-file>
+        </trans-unit>
       <trans-unit id="0ebee020ab091ca03d795dbe10632c32fb11f480" resname="booking.form.end">
         <source>booking.form.end</source>
         <target>End</target>
@@ -287,6 +302,37 @@
         <target>Decline a booking</target>
         <jms:reference-file line="15">Dashboard/Booking/edit.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="03819a1322d08e9188f2b476cb643c13c956255e" resname="booking.new.back">
+            <source>booking.new.back</source>
+            <target state="new">Back to the listing page</target>
+            <jms:reference-file line="51">Frontend/Booking/new.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="e53db87a04cae4ec702d9ce6b1557d5fe416af86" resname="booking.new.card.error">
+            <source>booking.new.card.error</source>
+            <target state="new">An error has occurred while registering card</target>
+        </trans-unit>
+        <trans-unit id="b1c0e9d5a6b71b3ca4ac1e735d763b948db2bb98" resname="booking.new.cb.cvv.help">
+            <source>booking.new.cb.cvv.help</source>
+            <target state="new">CVV</target>
+            <jms:reference-file line="99">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="25ef8f60458b279a0a95292bd75c63f92018513a" resname="booking.new.cb.notice">
+            <source>booking.new.cb.notice</source>
+            <target state="new">No charge will be made ​​to your card until the supplier accepts your request. We do not store your
+                card number, only the payment operator stores it.
+            </target>
+            <jms:reference-file line="21">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="9ec65407f921f41e90308f83763c836f025d7cbd" resname="booking.new.cb.title">
+            <source>booking.new.cb.title</source>
+            <target state="new">Input credit card</target>
+            <jms:reference-file line="10">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="67d397addaf81398c7529d74d10c34de8a8c7940" resname="booking.new.cb.type.title">
+            <source>booking.new.cb.type.title</source>
+            <target state="new">Credit card types:</target>
+            <jms:reference-file line="24">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="de1727b52b15b37b38993a85d41786d382c35f3d" resname="booking.new.delivery.error">
         <source>booking.new.delivery.error</source>
         <target state="new">Delivery unavailable</target>
@@ -328,11 +374,20 @@
         <target>Send a request message to the offerer</target>
         <jms:reference-file line="214">Frontend/Booking/new.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="651f96c89b2db73a7ffb9ddcd9b3fcd8a42ac653" resname="booking.new.month">
+            <source>booking.new.month</source>
+            <target state="new">Month (MM)</target>
+            <jms:reference-file line="83">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="1703c3a03d2cf45800ecb3b3f93e1a5b8bb6573f" resname="booking.new.options.success">
         <source>booking.new.options.success</source>
         <target state="new">Your booking options have been updated</target>
         <jms:reference-file line="147">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
+        <trans-unit id="da0d55019258d86a7629b1f0c2f488eb510649e6" resname="booking.new.pre_auth.error">
+            <source>booking.new.pre_auth.error</source>
+            <target state="new">An error has occurred while pre authorisation card</target>
+        </trans-unit>
       <trans-unit id="083c618c0d6cea305c1e7472bcceb15434994011" resname="booking.new.provider.title">
         <source>booking.new.provider.title</source>
         <target>Say hello to your provider</target>
@@ -381,6 +436,11 @@
         <target state="new">This code is not correct</target>
         <jms:reference-file line="182">Controller/Frontend/BookingController.php</jms:reference-file>
       </trans-unit>
+        <trans-unit id="4f1775528b1168b14ac1ff3383222d6f4976f0e3" resname="booking.new.year">
+            <source>booking.new.year</source>
+            <target state="new">Year (YY)</target>
+            <jms:reference-file line="89">Frontend/Card/_form_payment_card.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="120b92535d73cd274ad24e0314361747252b8251" resname="booking.payin.amount.title">
         <source>booking.payin.amount.title</source>
         <target>Amount payed</target>
@@ -581,6 +641,11 @@
         <target>Voucher</target>
         <jms:reference-file line="12">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="80bd57c63c6cc4edc530c9c446f359b034180e01" resname="card.new.back">
+            <source>card.new.back</source>
+            <target state="new">Back to the booking</target>
+            <jms:reference-file line="35">Frontend/Card/new.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="7583a4df4c40fa7d408ffb88165907f42c23a04a" resname="entity.booking.bank_wire.status.done">
         <source>entity.booking.bank_wire.status.done</source>
         <target>Done</target>

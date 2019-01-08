@@ -1,0 +1,53 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set amount = booking.amountDecimal | format_price(app.request.locale, 2, false) %}
+{% set amount_excl_vat = booking.amountExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set amount_total = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2, false) %}
+{#{% set amount_total_excl_vat = booking.amountTotalExcludingVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}#}
+{% set amount_total_vat = booking.amountTotalVATDecimal(vatRate) | format_price(app.request.locale, 2, false) %}
+{% set fee_as_asker = booking.amountFeeAsAskerDecimal | format_price(app.request.locale, 2, false) %}
+
+{% if optionBundleEnabled %}
+    {% set amount = (booking.amountDecimal - booking.amountOptionsDecimal) | format_price(app.request.locale, 2, false) %}
+{% endif %}
+
+<div class="total-reservation">
+    <h3>{{ 'booking.total_amount'|trans }}</h3>
+
+    <div class="alert alert-info">
+        <ul class="list-inline">
+
+            <li>
+                {{ 'booking.amount.total:'|trans }}
+                <strong data-id="total-amount" class="price">
+                    {{ amount_total }}
+                </strong>
+
+                <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
+                        data-toggle="tooltip" class="tooltip-button" type="button"
+                        data-original-title="{{ 'booking.amount.help'|trans }}">?
+                </button>
+
+                <span class="price">
+                    <small>
+                        (
+                        <strong>{{ 'booking.bill.title.vat'|trans }} : </strong>
+                        <span data-id="total-amount-vat">{{ amount_total_vat }}</span>
+                        )
+                    </small>
+                </span>
+            </li>
+
+            <li>
+                {{ 'booking.fees.amount:'|trans }}
+                <strong data-id="fee-asker">{{ fee_as_asker }}</strong>
+                <button title="{{ 'booking.fees.help'|trans }}" data-placement="right"
+                        data-toggle="tooltip" class="tooltip-button" type="button"
+                        data-original-title="{{ 'booking.fees.help'|trans }}">?
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -19,6 +20,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class BookingVoter implements VoterInterface
 {
+    const CREATE = 'create';
     const VIEW_AS_ASKER = 'view_as_asker';
     const VIEW_AS_OFFERER = 'view_as_offerer';
     const EDIT_AS_OFFERER = 'edit_as_offerer';
@@ -30,6 +32,7 @@ class BookingVoter implements VoterInterface
         return in_array(
             $attribute,
             array(
+                self::CREATE,
                 self::VIEW_AS_ASKER,
                 self::VIEW_AS_OFFERER,
                 self::EDIT_AS_OFFERER,
@@ -87,7 +90,14 @@ class BookingVoter implements VoterInterface
         $offerer = $listing->getUser();
         $asker = $booking->getUser();
 
-        if ($attribute == self::VIEW_AS_ASKER || $attribute == self::EDIT_AS_ASKER) {
+        if ($attribute == self::CREATE) {
+            if ($user->getId() === $asker->getId() &&
+                $listing->getStatus() == Listing::STATUS_PUBLISHED &&
+                in_array($booking->getStatus(), Booking::$newableStatus)
+            ) {
+                return VoterInterface::ACCESS_GRANTED;
+            }
+        } elseif ($attribute == self::VIEW_AS_ASKER || $attribute == self::EDIT_AS_ASKER) {
             if ($user->getId() === $asker->getId()) {
                 return VoterInterface::ACCESS_GRANTED;
             }
