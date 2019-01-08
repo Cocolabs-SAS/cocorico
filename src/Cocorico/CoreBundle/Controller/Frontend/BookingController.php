@@ -70,10 +70,10 @@ class BookingController extends Controller
         \DateTime $end_time
     ) {
         $dispatcher = $this->get('event_dispatcher');
-        $session = $this->container->get('session');
-        $translator = $this->container->get('translator');
-
+        $session = $this->get('session');
+        $translator = $this->get('translator');
         $bookingHandler = $this->get('cocorico.form.handler.booking');
+
         $booking = $bookingHandler->init(
             $this->getUser(),
             $listing,
@@ -82,10 +82,6 @@ class BookingController extends Controller
             $start_time,
             $end_time
         );
-
-        $event = new BookingEvent($booking);
-        $dispatcher->dispatch(BookingEvents::BOOKING_INIT, $event);
-        $booking = $event->getBooking();
 
         //Availability is validated through BookingValidator and amounts are setted through Form Event PRE_SET_DATA
         $form = $this->createCreateForm($booking);
@@ -100,11 +96,7 @@ class BookingController extends Controller
                 $response = $event->getResponse();
 
                 if ($response === null) {//No response means we can create new booking
-                    $booking = $this->get('cocorico.booking.manager')->create($event->getBooking());
                     if ($booking) {
-                        $event->setBooking($booking);
-                        $dispatcher->dispatch(BookingEvents::BOOKING_NEW_CREATED, $event);
-
                         //New Booking confirmation
                         $session->getFlashBag()->add(
                             'success',
@@ -157,8 +149,8 @@ class BookingController extends Controller
      */
     private function addFormMessagesToFlashBag($success)
     {
-        $session = $this->container->get('session');
-        $translator = $this->container->get('translator');
+        $session = $this->get('session');
+        $translator = $this->get('translator');
 
         if ($success === 2) {//Voucher code is valid
             $session->getFlashBag()->add(
@@ -185,7 +177,7 @@ class BookingController extends Controller
      */
     private function addFlashError($success)
     {
-        $translator = $this->container->get('translator');
+        $translator = $this->get('translator');
         $errorMsg = $translator->trans('booking.new.unknown.error', array(), 'cocorico_booking'); //-4
         $flashType = 'error';
 
@@ -207,7 +199,7 @@ class BookingController extends Controller
             $flashType = 'error';
         }
 
-        $this->container->get('session')->getFlashBag()->add(
+        $this->get('session')->getFlashBag()->add(
             $flashType,
             $errorMsg
         );
