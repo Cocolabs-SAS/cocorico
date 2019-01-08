@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Fix refund amount with 3 decimals
 
 ### Changed
 
