@@ -5,6 +5,8 @@
         {{ (object.getValue() / 100) | format_price(app.request.locale, 2) }}
     {% elseif object.getType() == 'percent' %}
         {{ object.getValue() * 100 }} %
+    {% elseif object.getType() == 'checkbox' %}
+        {{ object.getValue() ? true : false }}
     {% else %}
         {{ object.getValue() }}
     {% endif %}

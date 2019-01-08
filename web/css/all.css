@@ -7080,7 +7080,7 @@ span.btn:focus {
 
 .date-selection .col {
     float: left;
-    width: 48%;
+    width: 48.7%;
     position: relative;
 }
 
@@ -8637,7 +8637,11 @@ label {
 }
 
 .nav-tabs > li {
-    margin-right: 6px;
+    margin-right: 5px;
+}
+
+.nav-tabs > li:last-child {
+    margin-right: 0;
 }
 
 .nav-tabs > li > a {

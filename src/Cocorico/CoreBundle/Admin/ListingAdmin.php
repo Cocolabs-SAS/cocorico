@@ -207,8 +207,7 @@ class ListingAdmin extends Admin
                     array(
                         'translation_domain' => 'cocorico_listing_deposit',
                     )
-                )
-                ->end();
+                );
         }
 
         $formMapper

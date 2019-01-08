@@ -36,6 +36,8 @@ parameters:
     cocorico.admin: admin
     #Admin Web JMS translations activation
     cocorico.admin_translation: false
+    #To check if site texts are translatable
+    cocorico.check_translation: false
 
     #Microsoft Translator key
     cocorico.translator.secret.key: ~
