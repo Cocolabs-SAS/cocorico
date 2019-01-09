@@ -408,6 +408,17 @@ Surtout n’hésitez pas à nous faire part de vos remarques afin que nous amél
         <target>Vous avez rejeté une demande de réservation %booking_uid%</target>
         <jms:reference-file line="5">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="6362bc7b7a8f72b782ffd590744ab069327bbe4a" resname="registration.email.message">
+            <source>registration.email.message</source>
+            <target>Bonjour %firstname% !
+
+                Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
+
+                Cordialement,
+                L'équipe.
+            </target>
+            <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
         <source>registration.email.subject</source>
         <target state="new">registration.email.subject</target>

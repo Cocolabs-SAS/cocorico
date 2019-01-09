@@ -20,6 +20,11 @@
         <source>Bad credentials.</source>
         <target>Identifiants erronés</target>
       </trans-unit>
+        <trans-unit id="d87f47b47e4d5794d53fe0734c49417bd046cde0" resname="Dashboard">
+            <source>Dashboard</source>
+            <target state="new">Dashboard</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="e81566a5d5243429545b3a76547f60514550632b" resname="IBAN">
         <source>IBAN</source>
         <target>IBAN :</target>
@@ -34,6 +39,36 @@
         <source>Type</source>
         <target state="new">Type</target>
         <jms:reference-file line="73">UserBundle/Admin/UserAdmin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="e6b55e309c0fd34f11593e222785392b13cfc32e" resname="User Address Batch">
+            <source>User Address Batch</source>
+            <target state="new">User Address Batch</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="6beaadbfd9666d258d7bd6f67e2a9495ef433664" resname="User Address Create">
+            <source>User Address Create</source>
+            <target state="new">User Address Create</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="923af6e85acdb16f33d6ced17bee53a94da6c8c4" resname="User Address Delete">
+            <source>User Address Delete</source>
+            <target state="new">User Address Delete</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="c7e238c437a00b6eeb79ba541b33d69722aac0dc" resname="User Address Edit">
+            <source>User Address Edit</source>
+            <target state="new">User Address Edit</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="71b5353869c44cd332fd3609c123c0b2bd8e195a" resname="User Address List">
+            <source>User Address List</source>
+            <target state="new">User Address List</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="87ebb286bf6b2f2509ebf1b7f51568ab90c4d2df" resname="User Address Update">
+            <source>User Address Update</source>
+            <target state="new">User Address Update</target>
+            <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0d612c12d2ac33625bf3e0351b6f5e4f73829fa8" resname="auto">
         <source>auto</source>
@@ -112,8 +147,13 @@
       <trans-unit id="02b8acf448f3cd8e8c6ca63d7047bfb91b59bca9" resname="form.address.country">
         <source>form.address.country</source>
         <target>Pays</target>
-        <jms:reference-file line="51">Form/Type/UserAddressFormType.php</jms:reference-file>
         <jms:reference-file line="73">Type/Frontend/BookingUserAddressFormType.php</jms:reference-file>
+        <jms:reference-file line="52">Form/Type/UserAddressFormType.php</jms:reference-file>
+      </trans-unit>
+        <trans-unit id="4667c63593a53fb5487b7e195a238bff0e6b0b71" resname="form.address.type">
+            <source>form.address.type</source>
+            <target state="new">Type</target>
+            <jms:reference-file line="29">UserBundle/Admin/UserAddressAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e429cf6802a2864ffd2d99ad6110a91682010c8" resname="form.address.zip">
         <source>form.address.zip</source>
@@ -397,17 +437,6 @@
         <source>registration.confirmed.title</source>
         <target>Inscription confirmée</target>
         <jms:reference-file line="10">Frontend/Registration/confirmed.html.twig</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="6362bc7b7a8f72b782ffd590744ab069327bbe4a" resname="registration.email.message">
-        <source>registration.email.message</source>
-        <target>Bonjour %firstname% !
-
-                    Pour valider votre compte utilisateur, merci de vous rendre sur %confirmationUrl%
-
-                    Cordialement,
-                    L'équipe.
-                </target>
-        <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4ef79d57e94b4b74349d6533a231e09dc5be0ce2" resname="registration.submit">
         <source>registration.submit</source>

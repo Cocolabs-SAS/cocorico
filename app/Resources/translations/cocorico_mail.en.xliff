@@ -410,6 +410,17 @@ Don’t hesitate to let us know if there is anything we can do to make these req
         <target>You have turned down a reservation %booking_uid%</target>
         <jms:reference-file line="5">Mails/Offerer/booking_refused_offerer.txt.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="6362bc7b7a8f72b782ffd590744ab069327bbe4a" resname="registration.email.message">
+            <source>registration.email.message</source>
+            <target>Hello %firstname%!
+
+                To finish activating your account - please visit %confirmationUrl%
+
+                Regards,
+                the Team.
+            </target>
+            <jms:reference-file line="10">Mails/User/account_creation_confirmation_user.txt.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="10df4e23ec43b671aafea0a3a9ebc8dcc92b1bd0" resname="registration.email.subject">
         <source>registration.email.subject</source>
         <target state="new">registration.email.subject</target>

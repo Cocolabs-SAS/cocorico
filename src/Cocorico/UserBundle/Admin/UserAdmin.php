@@ -283,6 +283,35 @@ class UserAdmin extends SonataUserAdmin
             )
             ->end();
 
+        $formMapper
+            ->with('Address')
+            ->add(
+                'addresses',
+                'sonata_type_collection',
+                array(
+                    'type_options' => array(
+                        'delete' => false,
+                        'delete_options' => array(
+                            // You may otherwise choose to put the field but hide it
+                            'type' => 'hidden',
+                            // In that case, you need to fill in the options as well
+                            'type_options' => array(
+                                'mapped' => false,
+                                'required' => false,
+                            ),
+                        ),
+                    ),
+                    'disabled' => true,
+                    'label' => false,
+                ),
+                array(
+                    'edit' => 'inline',
+                    'inline' => 'table',
+                )
+            )
+            ->end();
+
+
         if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
             $formMapper->with('Mangopay')
                 ->add(
