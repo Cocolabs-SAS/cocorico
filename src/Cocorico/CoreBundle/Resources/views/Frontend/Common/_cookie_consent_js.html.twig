@@ -1,0 +1,29 @@
+{% trans_default_domain 'cocorico' %}
+
+{#"message": "{{ "cookie_consent_text"|trans }}",#}
+{#"dismiss": "{{ "cookie_consent_ok"|trans }}",#}
+{#"link": "{{ "cookie_consent_link"|trans }}"#}
+<script>
+    $(function () {
+        window.addEventListener("load", function () {
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#f7f7f7",
+                        "text": "#58595b"
+                    },
+                    "button": {
+                        "background": "#c6ccd2",
+                        "text": "#ffffff"
+                    }
+                },
+                "theme": "edgeless",
+                "content": {
+                    "message": "{{ "cookie_consent_text"|trans|escape("js") }}",
+                    "dismiss": "{{ "cookie_consent_ok"|trans|escape("js") }}",
+                    "link": "{{ "cookie_consent_link"|trans|escape("js") }}"
+                }
+            })
+        });
+    });
+</script>
