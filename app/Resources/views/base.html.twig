@@ -35,6 +35,7 @@
         'css/vendor/bootstrap-datetimepicker.css'
         'css/vendor/bootstrap-multiselect.css'
         'css/vendor/unslider.css'
+        'css/vendor/cookie-consent.css'
         'css/all-override.css'
 
         filter='cssrewrite, ?minifycsscompressor' output='css/compiled/all.css' %}
@@ -72,6 +73,8 @@
     {%- block markup_jsonld -%}
         {% include 'CocoricoSeoBundle:Frontend:Common/_markup.jsonld.twig' ignore missing only %}
     {%- endblock -%}
+
+    {% include '@CocoricoCore/Frontend/Common/_cookie_consent_js.html.twig' only %}
 </head>
 
 <body class="loading {% block theme %}{% endblock %}">
@@ -155,6 +158,7 @@
     'js/jquery.main.js'
     'js/jquery.main-override.js'
     'js/common.js'
+    'js/vendor/cookie-consent.js'
 
     filter="?jsqueeze" output='js/compiled/all.js' %}
     <script src="{{ asset_url }}"></script>
@@ -170,7 +174,6 @@
             handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
         });
     </script>
-
 {% endblock %}
 
 </body>

@@ -105,6 +105,23 @@
         <target>company_info</target>
         <jms:reference-file line="181">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="b00b8c5d4f2925002545ca1ee8681e1bb4dbbf12" resname="cookie_consent_link">
+            <source>cookie_consent_link</source>
+            <target state="new">En savoir plus</target>
+            <jms:reference-file line="19">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="d22eda72c562facdefd09e8b58ae26cb484daaed" resname="cookie_consent_ok">
+            <source>cookie_consent_ok</source>
+            <target state="new">OK</target>
+            <jms:reference-file line="18">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
+        </trans-unit>
+        <trans-unit id="548ca6c0ebcf302b1dac13cacc412ab35a6566cb" resname="cookie_consent_text">
+            <source>cookie_consent_text</source>
+            <target state="new">
+                <![CDATA[<strong>Utilisation des cookies</strong><br>En poursuivant votre navigation sur ce site, vous acceptez l’utilisation de Cookies à des fins statistiques et pour améliorer l’intérêt et l’ergonomie de nos services.]]>
+            </target>
+            <jms:reference-file line="17">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
+        </trans-unit>
       <trans-unit id="4336563d509b02ea6d3d7a3c74d3322408f65679" resname="date_range.invalid.end_before_start">
         <source>date_range.invalid.end_before_start</source>
         <target>La date de fin doit être postérieure à la date de début.</target>
