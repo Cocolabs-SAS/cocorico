@@ -148,7 +148,7 @@ class BookingPayinRefundManager extends BaseManager
             }
 
             return array(
-                "refund_amount" => $amountToRefund,
+                "refund_amount" => round($amountToRefund),//We are in cents: Remove decimal if any
                 "refund_percent" => $refundPercentage,
                 "fee_to_collect_while_refund" => $feeToCollectWhileRefund
             );
