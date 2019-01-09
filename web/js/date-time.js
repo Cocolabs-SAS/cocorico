@@ -69,7 +69,7 @@ function initDatepicker() {
 /**
  * Init timePicker fields.
  *
- * @param string parentTimesElt
+ * @param parentTimesElt string
  */
 function initTimePicker(parentTimesElt) {
     var timePickerCompatible = true;
@@ -136,7 +136,7 @@ function initTimePicker(parentTimesElt) {
 /**
  * Sync time fields if exist. Sync times in duration mode for now.
  *
- * @param string parentTimesElt
+ * @param  parentTimesElt string
  */
 function syncTimeFields(parentTimesElt) {
     $(parentTimesElt).each(function () {
@@ -222,9 +222,9 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
     });
 
     //Time picker
-    initTimePicker('.timepicker-holder-ajax');
+    initTimePicker(parentDatesElt + '.timepicker-holder-ajax');
 
-    $('.timepicker-holder-ajax').each(function () {
+    $(parentDatesElt + '.timepicker-holder-ajax').each(function () {
         var holder = $(this);
 
         //Handle times select field change
@@ -290,11 +290,10 @@ function timesAreValid(startHour, endHour, startMinute, endMinute) {
     if (startHour.length && endHour.length) {
         if ($.isNumeric(startHour.val()) && $.isNumeric(endHour.val()) &&
             $.isNumeric(startMinute.val()) && $.isNumeric(endMinute.val())) {
-            var startHourVal = parseInt(startHour.val());
-            var endHourVal = parseInt(endHour.val());
 
-            //if (startHourVal > endHourVal && endHourVal != '0') {//To test: Should be the solution to avoid error when booking duration is less than 1 hour
-            if (startHourVal >= endHourVal && endHourVal != '0') {
+            var startTime = moment(parseInt(startHour.val()) + ':' + parseInt(startMinute.val()), 'HH:mm');
+            var endTime = moment(parseInt(endHour.val()) + ':' + parseInt(endMinute.val()), 'HH:mm');
+            if (!startTime.isBefore(endTime) && endTime.format('HH:mm') != '00:00') {
                 $("#time-error").show();
                 return false;
             }
@@ -323,6 +322,7 @@ function submitDatePickerAjaxForm(callbackSuccess, parentDatesElt) {
         var from = inputs.filter('input.from');
         var to = inputs.filter('input.to');
 
+        //var holderTimes = $(parentDatesElt + ".time-fields");
         var holderTimes = $(parentDatesElt + ".ajax-container .time-fields");
         var startHour = holderTimes.find("[id$=_start_hour]").first();
         var endHour = holderTimes.find("[id$=_end_hour]").first();
