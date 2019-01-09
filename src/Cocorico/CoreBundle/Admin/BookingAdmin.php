@@ -449,6 +449,18 @@ class BookingAdmin extends Admin
                     )
                 )
                 ->end();
+        } else {
+            $formMapper
+                ->with('admin.booking.delivery')
+                ->add(
+                    'userAddress',
+                    'sonata_type_admin',
+                    array(
+                        'delete' => false,
+                        'disabled' => true,
+                        'label' => false,
+                    )
+                )->end();
         }
 
 

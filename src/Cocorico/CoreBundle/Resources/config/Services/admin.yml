@@ -121,3 +121,14 @@ services:
             - [ setTimeUnit, ["%cocorico.time_unit%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
+    sonata.admin.booking_user_address:
+        class: Cocorico\CoreBundle\Admin\BookingUserAddressAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\BookingUserAddress
+            - ~
+        calls:
+            - [ setTranslationDomain, [cocorico_user]]
+            - [ setLocales, ["%cocorico.locales%"]]
