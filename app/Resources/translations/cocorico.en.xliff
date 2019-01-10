@@ -21,6 +21,18 @@
         <target>Success</target>
         <jms:reference-file line="33">Frontend/Common/_flash.html.twig</jms:reference-file>
       </trans-unit>
+        <trans-unit id="5d1b61d863e6ef9df9006c8ad85a673d13ec647c" resname="booking.form.card_cvx.error">
+            <source>booking.form.card_cvx.error</source>
+            <target state="new">booking.form.card_cvx.error</target>
+        </trans-unit>
+        <trans-unit id="372cba9768edb7defa7d058f277ba7526b57c018" resname="booking.form.card_expiration_date.error">
+            <source>booking.form.card_expiration_date.error</source>
+            <target state="new">booking.form.card_expiration_date.error</target>
+        </trans-unit>
+        <trans-unit id="ae5a8e0be6523fb4ca7c1b7372dae44158099e13" resname="booking.form.card_number.error">
+            <source>booking.form.card_number.error</source>
+            <target state="new">booking.form.card_number.error</target>
+        </trans-unit>
       <trans-unit id="4553617369a88b3ab4dfdca6c8d4b1a6def76cee" resname="booking.form.message.error">
         <source>booking.form.message.error</source>
         <target>Please let a message</target>

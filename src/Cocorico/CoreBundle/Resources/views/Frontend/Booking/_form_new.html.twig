@@ -1,0 +1,131 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set voucherBundleEnabled = bundleExist('CocoricoVoucherBundle') %}
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+{% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+{% set deliveryBundleEnabled = bundleExist('CocoricoDeliveryBundle') %}
+{% set carrierBundleEnabled = bundleExist('CocoricoCarrierBundle') %}
+{% set depositBundleEnabled = bundleExist('CocoricoListingDepositBundle') %}
+
+{% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+
+{% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+{{ form_start(form, {'attr': {'id': 'booking-new'}}) }}
+
+<!-- schedule -->
+{#{{ form_errors(form) }}#}
+{{ form_errors(form.date_range) }}
+<div class="price-area">
+    <ul class="list-inline timing">
+        <li>
+            {{ form_errors(form.date_range.start) }}
+            {{ form_label(form.date_range.start, null, {'required': false} ) }}
+            <time datetime="{{ booking.start|date('Y-m-d') }}">
+                <i class="icon-calendar"></i>
+                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+            </time>
+            {{ form_widget(form.date_range.start, {
+                'type': 'hidden'
+            }) }}
+        </li>
+        <li>
+            {{ form_errors(form.date_range.end) }}
+            {{ form_label(form.date_range.end, null, {'required': false}) }}
+
+            <time datetime="{{ booking.end|date('Y-m-d') }}">
+                <i class="icon-calendar"></i>
+                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+            </time>
+            {{ form_widget(form.date_range.end, {
+                'type': 'hidden'
+            }) }}
+        </li>
+        <li>
+            <strong> {{ 'booking.duration:'|trans }}</strong>
+            {{ booking_duration|add_time_unit_text }}
+        </li>
+
+        {% if not timeUnitIsDay %}
+            {{ form_widget(form.time_range) }}
+        {% endif %}
+    </ul>
+</div>
+
+{#Delivery OR Carrier bundle form#}
+{% if deliveryBundleEnabled %}
+    {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
+    'form': form,
+    'booking': booking
+    } only %}
+{% elseif carrierBundleEnabled %}
+    {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
+    'form': form,
+    'booking': booking
+    } only %}
+{% endif %}
+
+{% if optionBundleEnabled %}
+    {% include 'CocoricoListingOptionBundle:Frontend:Booking/_form_options.html.twig' with {
+    'form': form,
+    'booking': booking
+    } only %}
+{% endif %}
+
+{% if voucherBundleEnabled %}
+    {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {
+    'form': form,
+    'booking': booking
+    } only %}
+{% endif %}
+
+{% if depositBundleEnabled %}
+    {% include 'CocoricoListingDepositBundle:Frontend/Booking:_show_amount_deposit.html.twig' with {
+    'booking': booking
+    } only %}
+{% endif %}
+
+{% include 'CocoricoCoreBundle:Frontend:Booking/_amounts.html.twig' with {
+'booking' : booking
+} only %}
+
+{% if addressDelivery %}
+    {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
+    'form' : form.userAddress
+    } only %}
+{% endif %}
+
+<div class="form-message">
+    <fieldset>
+        <legend class="hidden">form-message</legend>
+        <h2>{{ form_label(form.message) }}</h2>
+
+        {{ form_errors(form.message) }}
+        <div class="no-scroll">
+            {{ form_widget(form.message,{
+                'attr': {
+                    'placeholder': 'booking.new.message.placeholder'|trans
+                }
+            }) }}
+        </div>
+        <input type="submit" class="hidden" value="submit">
+    </fieldset>
+</div>
+
+<div class="btns-area">
+    {{ form_errors(form.tac) }}
+    <div class="agreement">
+        {{ form_widget(form.tac) }}
+        <span class="label">
+            {{ form_label(form.tac, null, {'required': false} ) }}
+            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+               target="_blank">
+                {{ 'booking.new.tac.link'|trans }}
+            </a>*
+        </span>
+    </div>
+
+    <input type="submit" value="{{ 'booking.new.validation.submit'|trans }}" class="btn btn-primary">
+</div>
+
+{{ form_end(form) }}

@@ -231,6 +231,18 @@
         <source>/listing/similar_result/{id}</source>
         <target>/listing/similar_result/{id}</target>
       </trans-unit>
+        <trans-unit id="0efb1dd469c3a1cfd84d310318728567cbe1e470" resname="cocorico_mangopay_card_complete_registration">
+            <source>/card/{booking_id}/register-card/{card_register_id}</source>
+            <target state="new">/card/{booking_id}/register-card/{card_register_id}</target>
+        </trans-unit>
+        <trans-unit id="36b58b7c7c00dda63b39332d6305b8dc66a07d1c" resname="cocorico_mangopay_card_new">
+            <source>/card/{booking_id}/new</source>
+            <target state="new">/card/{booking_id}/new</target>
+        </trans-unit>
+        <trans-unit id="793a68ff31381adfcf297eef2326d8cc07a021e5" resname="cocorico_mangopay_redirect_after_3d_secure">
+            <source>/card/redirect-after-3d-secure/</source>
+            <target state="new">/card/redirect-after-3d-secure/</target>
+      </trans-unit>
       <trans-unit id="08287e8d950d47856d8c09d38255f293609de0c2" resname="cocorico_page_show">
         <source>/page/{slug}</source>
         <target>/page/{slug}</target>
