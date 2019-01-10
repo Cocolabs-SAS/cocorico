@@ -230,12 +230,14 @@ parameters:
     #BookingDepositRefund : none or Cocorico\ListingDepositBundle\Entity\BookingDepositRefund (without quotes!)
     cocorico_listing_deposit.booking_deposit_refund.entity_class: none
 
-    #Config
+    #Config. types  taken into account for now are  percent, price, checkbox
     cocorico_config.parameters_allowed:
         cocorico.fee_as_asker:
             type: 'percent'
         cocorico.fee_as_offerer:
             type: 'percent'
+        cocorico.check_translation:
+            type: 'text'
 
     #User
     #Is there a delivery address. Should not be enabled if DeliveryBundle is enabled.
@@ -309,6 +311,8 @@ parameters:
     cocorico.admin: ~
     #Admin Web JMS translations activation
     cocorico.admin_translation: ~
+    #To check if site texts are translatable
+    cocorico.check_translation: ~
 
     #translator key
     cocorico.translator.secret.key: ~
