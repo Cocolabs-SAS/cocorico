@@ -56,202 +56,15 @@
                 <div id="content" class="listing-area col-xs-12 col-md-9">
                     <div class="content-holder">
                         {% include 'CocoricoCoreBundle:Frontend:Booking/_form_new.html.twig' with {
-                        'booking' : booking,
-                        'form': form
+                            'booking' : booking,
+                            'form': form
                         } only %}
                     </div>
                 </div>
 
-                        {#Delivery OR Carrier bundle form#}
-                        {% if deliveryBundleEnabled %}
-                            {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
-                            'form': form,
-                            'booking': booking
-                            } only %}
-                        {% elseif carrierBundleEnabled %}
-                            {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
-                            'form': form,
-                            'booking': booking
-                            } only %}
-                        {% endif %}
-
-                        {% if optionBundleEnabled %}
-                            {% include 'CocoricoListingOptionBundle:Frontend:Booking/_form_options.html.twig' with {
-                            'form': form,
-                            'booking': booking
-                            } only %}
-                        {% endif %}
-
-                        {% if voucherBundleEnabled %}
-                            {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {'form': form, 'booking': booking} only %}
-                        {% endif %}
-
-                        {% if depositBundleEnabled %}
-                            {% include 'CocoricoListingDepositBundle:Frontend/Booking:_show_amount_deposit.html.twig' with {'booking': booking} only %}
-                        {% endif %}
-
-                        <div class="total-reservation">
-                            <h3>{{ 'booking.total_amount'|trans }}</h3>
-
-                            <div class="alert alert-info">
-                                <ul class="list-inline">
-
-                                    <li>
-                                        {{ 'booking.amount.total:'|trans }}
-                                        <strong data-id="total-amount" class="price">
-                                            {{ amount_total }}
-                                        </strong>
-
-                                        <button title="{{ 'booking.amount.help'|trans }}" data-placement="right"
-                                                data-toggle="tooltip" class="tooltip-button" type="button"
-                                                data-original-title="{{ 'booking.amount.help'|trans }}">?
-                                        </button>
-
-                                        <span class="price">
-                                            <small>
-                                                (
-                                                <strong>{{ 'booking.bill.title.vat'|trans }} : </strong>
-                                                <span data-id="total-amount-vat">{{ amount_total_vat }}</span>
-                                                )
-                                            </small>
-                                        </span>
-                                    </li>
-
-                                    <li>
-                                        {{ 'booking.fees.amount:'|trans }}
-                                        <strong data-id="fee-asker">{{ fee_as_asker }}</strong>
-                                        <button title="{{ 'booking.fees.help'|trans }}" data-placement="right"
-                                                data-toggle="tooltip" class="tooltip-button" type="button"
-                                                data-original-title="{{ 'booking.fees.help'|trans }}">?
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.alert alert-info -->
-                        </div>
-
-                        {% if addressDelivery %}
-                            {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
-                                'form' : form.userAddress
-                            } only %}
-                        {% endif %}
-
-                        {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
-                            <div class="form-signup validate-form alt">
-                                <fieldset>
-                                    <legend class="hidden">form-signup</legend>
-                                    {% include 'CocoricoUserBundle:Frontend:Common/_login_register.html.twig' with {
-                                    'form_registration' : form.user,
-                                    'form_login': form.user_login
-                                    } only %}
-                                </fieldset>
-                            </div>
-                        {% endif %}
-
-                        <div class="form-message">
-                            <fieldset>
-                                <legend class="hidden">form-message</legend>
-                                <h2>{{ form_label(form.message) }}</h2>
-
-                                {{ form_errors(form.message) }}
-                                <div class="no-scroll">
-                                    {{ form_widget(form.message,{
-                                        'attr': {
-                                            'placeholder': 'booking.new.message.placeholder'|trans
-                                        }
-                                    }) }}
-                                </div>
-                                <input type="submit" class="hidden" value="submit">
-                            </fieldset>
-                        </div>
-
-                        {% if mangopayBundleEnabled %}
-                            {% include 'CocoricoMangoPayBundle:Frontend:Booking/_form_payment_card.html.twig' with {
-                            'form' : form
-                            } only %}
-                        {% endif %}
-
-                        <div class="btns-area">
-                            {{ form_errors(form.tac) }}
-                            <div class="agreement">
-                                {{ form_widget(form.tac) }}
-                                <span class="label">
-                                    {{ form_label(form.tac, null, {'required': false} ) }}
-                                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
-                                       target="_blank">
-                                        {{ 'booking.new.tac.link'|trans }}
-                                    </a>*
-                                </span>
-                            </div>
-
-                            <input type="submit" value="{{ 'booking.new.validation.submit'|trans }}"
-                                   class="btn btn-primary">
-                        </div>
-
-                        {{ form_end(form) }}
-                    </div>
-                </div>
-
-                <!-- contain sidebar of the page -->
-                <aside id="sidebar" class="col-xs-12 col-md-3">
-                    <div class="holder">
-                        <!-- widget article -->
-                        <section class="widget article">
-                            <div class="img-holder">
-
-                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_medium') }}"
-                                     alt="{{ listing_translation.title }}"/>
-                            </div>
-                            <h1>{{ 'booking.new.provider.title'|trans }}</h1>
-
-                            <div class="author-area">
-
-                                <div class="author-img">
-                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
-                                         alt="{{ user.name }}"/>
-                                </div>
-                                <div class="textbox">
-                                    <span class="author-name">
-                                        <a href="{{ path('cocorico_user_profile_show', { 'id': user.id }) }}">
-                                            {{ user.name }}
-                                        </a>
-                                    </span>
-                                    <!-- rating -->
-                                    {% if user.averageOffererRating %}
-                                        {{ user.averageOffererRating | cocorico_star_rating }}
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <!-- info-list -->
-                            <ul class="info-list">
-                                <li>
-                                    {{ 'listing.show.categories:'|trans({},'cocorico_listing') }}
-                                    <strong>
-                                        {% for listingListingCategory in listing.listingListingCategories %}
-                                            {{ listingListingCategory.category.name }},
-                                        {% endfor %}
-                                    </strong>
-                                </li>
-                                <li>
-                                    {{ 'listing.show.location:'|trans({},'cocorico_listing') }}
-                                    <strong>{{ listing_location.city ~ ", " ~ listing_location.country|country_name }}</strong>
-                                </li>
-                                <li>
-                                    {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
-                                    <strong>{{ listing.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
-                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            data-html="true" type="button"
-                                            data-original-title="{{ cancellationPolicies() }}"> ?
-                                    </button>
-                                </li>
-                                <li>
-                                    <strong>{{ 'listing.show.rules:'|trans }} :</strong>
-                                    {{ listing_translation.rules }}
-                                </li>
-                            </ul>
-                        </section>
-                    </div>
-                </aside>
+                {% include 'CocoricoCoreBundle:Frontend:Booking/_side.html.twig' with {
+                    'booking' : booking
+                } only %}
             </div>
         {% endblock %}
 
@@ -264,7 +77,7 @@
 
     {% if deliveryBundleEnabled %}
         {% include 'CocoricoDeliveryBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {
-        'listing_location': listing_location
+            'listing_location': listing_location
         } only %}
     {% elseif carrierBundleEnabled %}
         {% include 'CocoricoCarrierBundle:Frontend:Booking/js/_geocoding_js.html.twig' with {} only %}
