@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Form\Handler\Frontend;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Event\BookingEvent;
+use Cocorico\CoreBundle\Event\BookingEvents;
 use Cocorico\CoreBundle\Event\BookingFormEvent;
 use Cocorico\CoreBundle\Event\BookingFormEvents;
 use Cocorico\CoreBundle\Model\DateRange;
@@ -70,24 +72,42 @@ class BookingFormHandler
         \DateTime $startTime = null,
         \DateTime $endTime = null
     ) {
-        $dateRange = $timeRange = null;
-        if ($start && $end) {
-            $dateRange = new DateRange($start, $end);
-        }
-        if ($startTime && $endTime) {
-            $timeRange = new TimeRange(
-                new \DateTime('1970-01-01 ' . $startTime->format('H:i')),
-                new \DateTime('1970-01-01 ' . $endTime->format('H:i'))
+        //Id of an eventual booking draft
+        $bookingId = $this->request->query->get('id');
+        //If no booking draft exists a new booking is initialized
+        if (!$bookingId) {
+            $dateRange = $timeRange = null;
+            if ($start && $end) {
+                $dateRange = new DateRange($start, $end);
+            }
+            if ($startTime && $endTime) {
+                $timeRange = new TimeRange(
+                    new \DateTime('1970-01-01 ' . $startTime->format('H:i')),
+                    new \DateTime('1970-01-01 ' . $endTime->format('H:i'))
+                );
+            }
+
+            //Get date range from post request if any
+            if ($this->request->getMethod() == 'POST') {
+                $dateRange = DateRange::createFromArray($this->request->request->get('date_range'));
+                $timeRange = TimeRange::createFromArray($this->request->request->get('time_range'));
+            }
+
+            $booking = $this->bookingManager->initBooking($listing, $user, $dateRange, $timeRange);
+
+            $event = new BookingEvent($booking);
+            $this->dispatcher->dispatch(BookingEvents::BOOKING_INIT, $event);
+            $booking = $event->getBooking();
+        } else {
+            //If booking draft exists it is returned
+            $booking = $this->bookingManager->getRepository()->findOneBy(
+                array(
+                    'id' => $bookingId,
+                    'status' => Booking::STATUS_DRAFT,
+                    'user' => $user->getId()
+                )
             );
         }
-
-        //Get date range from post request if any
-        if ($this->request->getMethod() == 'POST') {
-            $dateRange = DateRange::createFromArray($this->request->request->get('date_range'));
-            $timeRange = TimeRange::createFromArray($this->request->request->get('time_range'));
-        }
-
-        $booking = $this->bookingManager->initBooking($listing, $user, $dateRange, $timeRange);
 
         return $booking;
     }

@@ -1,4 +1,13 @@
 services:
+    #Booking subscriber
+    cocorico.booking.subscriber:
+        class: Cocorico\CoreBundle\Event\BookingSubscriber
+        arguments:
+            - "@cocorico.booking.manager"
+            - "@event_dispatcher"
+        tags:
+            - { name: kernel.event_subscriber}
+
     #Booking Refund subscriber
     cocorico.booking_payin_refund.subscriber:
         class: Cocorico\CoreBundle\Event\BookingPayinRefundSubscriber
