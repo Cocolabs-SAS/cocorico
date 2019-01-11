@@ -374,10 +374,11 @@
                             </h2>
 
                             {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                {# contact button and form #}
-                                {{ render(controller('CocoricoMessageBundle:Dashboard/Message:newThread',
-                                { 'listingId': listing.id } )) }}
-                                {# end of contact button and form #}
+                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
+                                   class="contact-opener btn btn-default no-margin" data-toggle="modal"
+                                   data-target="#modal">
+                                    {{ 'thread.new.contact_me'|trans({}, 'cocorico_message') }}
+                                </a>
                             {%- else -%}
                                 <a class="contact-opener btn btn-default no-margin"
                                    href=" {{ path('cocorico_user_login') }}">

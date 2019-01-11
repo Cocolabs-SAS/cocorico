@@ -12,6 +12,12 @@
     display: block !important;
 }
 
+.form-msg {
+    margin: 0 auto 20px;
+    padding: 0;
+    width: 90%;
+}
+
 .form-msg .btn-default {
     display: block;
     font-size: 16px;
@@ -19,19 +25,6 @@
     padding: 5px 14px;
     text-transform: none;
     width: 190px;
-}
-
-.form-msg {
-    background: none repeat scroll 0 0 #f7f7f7;
-    border-radius: 4px;
-    margin: 0 auto 14px;
-    padding: 0;
-    width: 190px;
-}
-
-.form-msg .form-holder {
-    color: #fff;
-    padding: 0;
 }
 
 /* user ratings */
