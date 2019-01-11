@@ -795,6 +795,11 @@
         <jms:reference-file line="251">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
         <jms:reference-file line="389">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="2cf5545619ad7b18a8c464fb62fee6587df5d842" resname="form.card.alias">
+        <source>form.card.alias</source>
+        <target state="new">form.card.alias</target>
+        <jms:reference-file line="28">MangoPayCardSavingBundle/Admin/UserCardAdmin.php</jms:reference-file>
+      </trans-unit>
     </body>
   </file>
 </xliff>
