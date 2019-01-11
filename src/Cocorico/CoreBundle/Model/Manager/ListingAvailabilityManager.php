@@ -25,7 +25,6 @@ class ListingAvailabilityManager
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $defaultListingStatus;
-    protected $collection;
 
     /**
      * @param DocumentManager $dm
@@ -38,7 +37,6 @@ class ListingAvailabilityManager
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $this->defaultListingStatus = $defaultListingStatus;
-        $this->collection = $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability');
     }
 
     /**
@@ -142,6 +140,7 @@ class ListingAvailabilityManager
         $endDayIncluded,
         $bookingCancellation
     ) {
+        $collection = $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability');
         $typeModification = $status ? "status" : "price";
 
         $start = clone $dateRange->getStart();
@@ -207,7 +206,7 @@ class ListingAvailabilityManager
                     $availability["ts"] = $times;
                 }
 
-                $this->collection->save($availability);
+                $collection->save($availability);
             }
         }
 
@@ -407,7 +406,7 @@ class ListingAvailabilityManager
 
         $availability["ts"] = $times;
 
-        $this->collection->save($availability);
+        $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability')->save($availability);
     }
 
     /**
@@ -668,7 +667,7 @@ class ListingAvailabilityManager
             $newAvailabilities[] = $availability;
         }
         if (count($newAvailabilities)) {
-            $this->collection->batchInsert($newAvailabilities);
+            $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability')->batchInsert($newAvailabilities);
         }
     }
 
