@@ -18,10 +18,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 /*
  * Bookings imminent alert
- * Every hour
+ * Every 5 minutes
  */
 
-//Cron: 0 */1 * * *  user   php app/console cocorico:bookings:alertImminent
+//Cron: */5 * * * *  user   php app/console cocorico:bookings:alertImminent
 
 class AlertImminentBookingsCommand extends ContainerAwareCommand
 {
