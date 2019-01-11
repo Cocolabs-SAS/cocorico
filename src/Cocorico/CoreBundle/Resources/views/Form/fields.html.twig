@@ -193,20 +193,20 @@
 {#
      Common Collection widget item
 #}
-{% macro collectionItem(rows, allow_delete) %}
+{% macro collectionItem(child_form, allow_delete) %}
     {% spaceless %}
         <li>
             {% set fieldNum = 1 %}
-            {% for row in rows %}
-                {% if "hidden" not in row.vars.block_prefixes %}
-                    <div class="{{ row.vars.id }}">
-                        {{ form_errors(row) }}
-                        {{ form_label(row) }}
-                        {{ form_widget(row) }}
+            {% for field in child_form %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    <div class="{{ field.vars.id }}">
+                        {{ form_errors(field) }}
+                        {{ form_label(field) }}
+                        {{ form_widget(field) }}
                     </div>
                     {% set fieldNum = fieldNum + 1 %}
                 {% else %}
-                    {{ form_widget(row) }}
+                    {{ form_widget(field) }}
                 {% endif %}
             {% endfor %}
 
@@ -234,8 +234,8 @@
         <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
 
             <ul class="collection">
-                {% for rows in form %}
-                    {{ _self.collectionItem(rows, allow_delete) }}
+                {% for child_form in form %}
+                    {{ _self.collectionItem(child_form, allow_delete) }}
                 {% endfor %}
             </ul>
 
@@ -255,14 +255,14 @@
 {#
     Discounts collection widget
 #}
-{% macro discountCollectionItem(rows, allow_delete) %}
+{% macro discountCollectionItem(child_form, allow_delete) %}
     {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
     {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
 
     {% spaceless %}
         <ul class="discount-list list-inline js-removed-row">
             {% set fieldNum = 1 %}
-            {% for field in rows %}
+            {% for field in child_form %}
                 {#{{ form_errors(field) }}#}
                 {% if "hidden" not in field.vars.block_prefixes %}
                     <li class="{{ field.vars.id }}">
@@ -330,8 +330,8 @@
 
     <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
         <div class="collection">
-            {% for rows in form %}
-                {{ _self.discountCollectionItem(rows, allow_delete) }}
+            {% for child_form in form %}
+                {{ _self.discountCollectionItem(child_form, allow_delete) }}
             {% endfor %}
         </div>
 
@@ -348,11 +348,11 @@
 
 
 
-{% macro timeRangesCollectionItem(rows, allow_delete) %}
+{% macro timeRangesCollectionItem(child_form, allow_delete) %}
     {% spaceless %}
         <li class="timepicker-holder time-fields">
             {% set fieldNum = 1 %}
-            {% for field in rows %}
+            {% for field in child_form %}
                 {% if "hidden" not in field.vars.block_prefixes %}
                     {% if field.vars.name == "start" or field.vars.name == "end" %}
                         <div class="{{ field.vars.id }} hidden">
@@ -364,11 +364,11 @@
                         </div>
                     {% elseif field.vars.name == "start_picker" or field.vars.name == "end_picker" %}
                         {% if field.vars.name == "start_picker" %}
-                            {{ form_errors(rows.start) }}
-                            {{ form_label(rows.start) }}
+                            {{ form_errors(child_form.start) }}
+                            {{ form_label(child_form.start) }}
                         {% else %}
-                            {{ form_errors(rows.end) }}
-                            {{ form_label(rows.end) }}
+                            {{ form_errors(child_form.end) }}
+                            {{ form_label(child_form.end) }}
                         {% endif %}
                         <div class='input-group date' id='datetimepicker3'>
                             {{ form_widget(field,{
@@ -413,8 +413,8 @@
         <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
 
             <ul class="collection">
-                {% for rows in form %}
-                    {{ _self.timeRangesCollectionItem(rows, allow_delete) }}
+                {% for child_form in form %}
+                    {{ _self.timeRangesCollectionItem(child_form, allow_delete) }}
                 {% endfor %}
             </ul>
 
@@ -1052,7 +1052,7 @@
 {#
     Images collection
 #}
-{% macro imagesCollectionItem(rows, allow_delete) %}
+{% macro imagesCollectionItem(child_form, allow_delete) %}
     {% spaceless %}
         <div class="img-thumbnail">
 
@@ -1066,15 +1066,15 @@
             {% endif %}
 
             {% set fieldNum = 1 %}
-            {% for row in rows %}
-                {% if "hidden" not in row.vars.block_prefixes %}
-                    {{ form_errors(row) }}
-                    {{ form_label(row) }}
+            {% for field in child_form %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    {{ form_errors(field) }}
+                    {{ form_label(field) }}
                     <!-- img-thumbnail -->
-                    {{ form_widget(row) }}
+                    {{ form_widget(field) }}
                     {% set fieldNum = fieldNum + 1 %}
                 {% else %}
-                    {{ form_widget(row) }}
+                    {{ form_widget(field) }}
                 {% endif %}
             {% endfor %}
         </div>
@@ -1094,8 +1094,8 @@
         <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
             <!-- files-list -->
             <div class="files-list collection">
-                {% for rows in form %}
-                    {{ _self.imagesCollectionItem(rows, allow_delete) }}
+                {% for child_form in form %}
+                    {{ _self.imagesCollectionItem(child_form, allow_delete) }}
                 {% endfor %}
             </div>
 
@@ -1124,8 +1124,8 @@
         <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
             <!-- images-list -->
             <div class="list-inline collection files-list js-drag-holder">
-                {% for rows in form %}
-                    {{ _self.imagesCollectionItem(rows, allow_delete) }}
+                {% for child_form in form %}
+                    {{ _self.imagesCollectionItem(child_form, allow_delete) }}
                 {% endfor %}
             </div>
 
