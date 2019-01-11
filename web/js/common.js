@@ -96,13 +96,6 @@ $(function () {
         });
     }
 
-    // Contact me form show hide
-    $('form.form-msg').on('click', 'a.contact-opener', function (evt) {
-        $('.jcf-textarea .jcf-scrollable-wrapper').css('height', '143px');
-        $('#message_body').css('height', '143px');
-        $(this).next('.form-holder').slideToggle();
-    });
-
     //Payin dashboard switcher
     $("input[name=radio-payin-switcher]:radio").change(function () {
         window.location = $(this).val();

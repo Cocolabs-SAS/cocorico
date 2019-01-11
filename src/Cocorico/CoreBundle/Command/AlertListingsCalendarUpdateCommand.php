@@ -36,10 +36,7 @@ class AlertListingsCalendarUpdateCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        $listingManager = $container->get('cocorico.listing.manager');
-
-        $result = $listingManager->alertUpdateCalendars();
-
+        $result = $container->get('cocorico.listing.manager')->alertUpdateCalendars();
         $output->writeln($result . " listing(s) calendar update alerted");
     }
 

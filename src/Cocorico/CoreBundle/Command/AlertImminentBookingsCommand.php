@@ -49,14 +49,11 @@ class AlertImminentBookingsCommand extends ContainerAwareCommand
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $delay = $this->getContainer()->getParameter('cocorico.booking.alert_imminent_delay');
-        if ($input->getOption('test') && $input->hasOption('delay')) {
+        if ($input->getOption('test') && $input->getOption('delay')) {
             $delay = $input->getOption('delay');
         }
 
-        $container = $this->getContainer();
-        $bookingManager = $container->get('cocorico.booking.manager');
-
-        $result = $bookingManager->alertImminentBookings($delay);
+        $result = $this->getContainer()->get('cocorico.booking.manager')->alertImminentBookings($delay);
         $output->writeln($result . " booking(s) imminent alerted");
     }
 
