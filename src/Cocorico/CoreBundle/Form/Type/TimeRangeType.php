@@ -167,7 +167,7 @@ class TimeRangeType extends AbstractType
                                 'nb_minutes',
                                 'hidden',
                                 array(
-                                    'data' => $options['time_unit'],
+                                    'data' => $options['time_unit']
                                 )
                             );
                     }
@@ -186,7 +186,7 @@ class TimeRangeType extends AbstractType
         $view->vars = array_merge(
             $view->vars,
             array(
-                'time_picker' => $options['time_picker'],
+                'time_picker' => $options['time_picker']
             )
         );
     }
