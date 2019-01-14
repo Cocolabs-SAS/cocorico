@@ -99,10 +99,11 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     }
 
     /**
-     * @param  User $user
-     * @param       $images
-     * @param       $persist
+     * @param User $user
+     * @param      $images
+     * @param bool $persist
      * @return User
+     * @throws AccessDeniedException
      */
     public function addImages(User $user, $images, $persist = false)
     {

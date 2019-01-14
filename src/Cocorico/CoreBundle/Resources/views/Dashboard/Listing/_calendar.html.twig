@@ -28,6 +28,10 @@
                 {{ 'listing.calendar.prices_help'|trans ~ " " ~ (0)|add_time_unit_text }}
                 {{ vatInclusionText(app.request.getLocale()) }}
             </em>
+
+            <em class="pull-right">
+                ({{ 'form.time_zone'|trans({}, 'cocorico_user') }} : {{ app.session.get('timezone')|timezone_name }})
+            </em>
         </li>
         <li>
             <div class="cal-available-evt"></div>

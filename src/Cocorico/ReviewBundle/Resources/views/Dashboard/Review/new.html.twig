@@ -1,10 +1,12 @@
 {% extends 'CocoricoCoreBundle:Dashboard:layout.html.twig' %}
 
+{% trans_default_domain 'cocorico_review' %}
+
 {% set listing = booking.listing %}
 {% set translation = listing.translations[app.request.locale] %}
 {% set image_user = reviewTo.images|length ? reviewTo.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
 
-{% trans_default_domain 'cocorico_review' %}
+
 
 {% block nav_dashboard -%}
     {% set nav_dashboard_current = 'comments' %}

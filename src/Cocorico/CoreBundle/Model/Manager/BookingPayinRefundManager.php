@@ -26,7 +26,6 @@ class BookingPayinRefundManager extends BaseManager
     protected $cancellationPolicyRules;
     protected $mailer;
     public $maxPerPage;
-    protected $timeZone;
     protected $bundles;
 
     /**
@@ -34,7 +33,6 @@ class BookingPayinRefundManager extends BaseManager
      * @param array           $cancellationPolicyRules
      * @param TwigSwiftMailer $mailer
      * @param int             $maxPerPage
-     * @param string          $timeZone
      * @param array           $bundles
      */
     public function __construct(
@@ -42,14 +40,12 @@ class BookingPayinRefundManager extends BaseManager
         array $cancellationPolicyRules,
         TwigSwiftMailer $mailer,
         $maxPerPage,
-        $timeZone,
         $bundles
     ) {
         $this->em = $em;
         $this->cancellationPolicyRules = $cancellationPolicyRules;
         $this->mailer = $mailer;
         $this->maxPerPage = $maxPerPage;
-        $this->timeZone = $timeZone;
         $this->bundles = $bundles;
     }
 
@@ -119,7 +115,7 @@ class BookingPayinRefundManager extends BaseManager
             }
 
             //If time before checkin is less than the limit then the refund is minimum
-            if ($booking->getTimeBeforeStart($this->timeZone) < $rules["time_before_start"]) {
+            if ($booking->getTimeBeforeStart() < $rules["time_before_start"]) {
                 $refundPercentage = $rules["refund_min"];
             } else {
                 $refundPercentage = $rules["refund_max"];

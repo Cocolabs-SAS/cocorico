@@ -84,7 +84,11 @@
                             {{ form_widget(form_prices.weekdays) }}
 
                             {% if ( not timeUnitIsDay ) %}
-                                <h4>{{ 'listing.edit.price.choose_times.title'|trans }}</h4>
+                                <h4>
+                                    {{ 'listing.edit.price.choose_times.title'|trans }}
+                                    ({{ 'form.time_zone'|trans({}, 'cocorico_user') }} :
+                                    {{ app.session.get('timezone')|timezone_name }})
+                                </h4>
                                 <div class="time-ranges">
                                     {{ form_errors(form_prices.time_ranges) }}
                                     {{ form_label(form_prices.time_ranges) }}

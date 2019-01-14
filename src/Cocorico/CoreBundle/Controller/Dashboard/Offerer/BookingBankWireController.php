@@ -63,12 +63,13 @@ class BookingBankWireController extends Controller
      * Show booking Bank Wire bill.
      *
      * @Route("/{id}/show-bill", name="cocorico_dashboard_booking_bank_wire_show_bill_offerer", requirements={"id" = "\d+"})
-     *
      * @Method("GET")
      *
      * @param  int $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showBillAction($id)
     {

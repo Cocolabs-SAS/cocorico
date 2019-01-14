@@ -12,29 +12,37 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
- * Doctrine ORM listener updating the canonical fields and the password.
+ * Doctrine ORM listener
  *
  */
 class UserEntityListener implements EventSubscriber
 {
 
     private $dispatcher;
+    private $session;
+    private $timezone;
 
     /**
-     * Constructor
+     * UserEntityListener constructor.
      *
      * @param EventDispatcherInterface $dispatcher
+     * @param Session                  $session
+     * @param string                   $timezone
      */
-    public function __construct(EventDispatcherInterface $dispatcher)
+    public function __construct(EventDispatcherInterface $dispatcher, Session $session, $timezone)
     {
         $this->dispatcher = $dispatcher;
+        $this->session = $session;
+        $this->timezone = $timezone;
     }
 
     public function getSubscribedEvents()
     {
         return array(
+//            Events::prePersist,
             Events::postPersist,
             Events::preUpdate,
         );
@@ -63,6 +71,9 @@ class UserEntityListener implements EventSubscriber
 
                 $this->dispatcher->dispatch(UserEvents::USER_PHONE_CHANGE, $event);
             }
+
+            //Session
+            $this->handleTimezoneChange($user, $args);
         }
     }
 
@@ -101,5 +112,15 @@ class UserEntityListener implements EventSubscriber
 
 
         return $phoneHasChanged;
+    }
+
+    /**
+     * @param UserInterface|User $user
+     * @param LifecycleEventArgs $args
+     */
+    private function handleTimezoneChange(UserInterface $user, LifecycleEventArgs $args)
+    {
+        $timezone = $user->getTimeZone() ? $user->getTimeZone() : $this->timezone;
+        $this->session->set('timezone', $timezone);
     }
 }

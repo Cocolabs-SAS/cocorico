@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Validator\Constraints;
 use Cocorico\CoreBundle\Entity\Booking as BookingEntity;
 use Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -21,21 +22,32 @@ use Symfony\Component\Validator\ConstraintValidator;
 class BookingValidator extends ConstraintValidator
 {
     private $bookingManager;
+    private $session;
     private $minStartDelay;
     private $minStartTimeDelay;
     private $currency;
     private $currencySymbol;
+    private $timezone;
 
     /**
      * @param BookingManager $bookingManager
+     * @param Session        $session
      * @param int            $minStartDelay
      * @param int            $minStartTimeDelay
      * @param string         $currency
      */
-    public function __construct(BookingManager $bookingManager, $minStartDelay, $minStartTimeDelay, $currency)
+    public function __construct(
+        BookingManager $bookingManager,
+        Session $session,
+        $minStartDelay,
+        $minStartTimeDelay,
+        $currency
+    )
     {
         $this->bookingManager = $bookingManager;
+        $this->session = $session;
         $this->minStartDelay = $minStartDelay;
+        $this->timezone = $this->session->get('timezone');
         $this->minStartTimeDelay = $minStartTimeDelay;
         $this->currency = $currency;
         $this->currencySymbol = Intl::getCurrencyBundle()->getCurrencySymbol($currency);
@@ -48,7 +60,6 @@ class BookingValidator extends ConstraintValidator
     public function validate($booking, Constraint $constraint)
     {
         if ($booking->getStart() && $booking->getEnd()) {
-
             $violations = $this->getViolations($booking, $constraint);
 
             if (count($violations)) {
@@ -88,14 +99,11 @@ class BookingValidator extends ConstraintValidator
     {
         $violations = array();
 
-//        if ($booking->getUser() == $booking->getListing()->getUser()) {
-//            $violations[] = array(
-//                'message' => $constraint::$messageSelfBooking,
-//            );
-//        }
+        $result = $this->bookingManager->checkBookingAndSetAmounts($booking);
+        /** @var BookingEntity $booking */
+        $booking = $result->booking;
+        $errors = $result->errors;
 
-
-        $errors = $this->bookingManager->checkBookingAvailabilityAndSetAmounts($booking);
         //Availability error
         if (in_array('unavailable', $errors)) {
             $violations[] = array(
@@ -113,7 +121,7 @@ class BookingValidator extends ConstraintValidator
         //Date Time errors
         if (in_array('date_range.invalid.min_start', $errors)) {
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($this->timezone));
             if ($this->minStartDelay > 0) {
                 $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
             }
@@ -164,7 +172,7 @@ class BookingValidator extends ConstraintValidator
 
         if (in_array('time_range.invalid.min_start', $errors)) {
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($this->timezone));
             if ($this->minStartTimeDelay > 0) {
                 $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
             }

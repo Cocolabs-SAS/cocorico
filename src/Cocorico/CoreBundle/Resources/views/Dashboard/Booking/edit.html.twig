@@ -56,11 +56,17 @@
                         {{ other_user_rating| cocorico_star_rating }}
                     {% endif %}
                 </div>
+
+                <div>
+                    <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                    {{ user_timezone|timezone_name }}
+                </div>
+
                 <ul class="list-inline booking-detail">
                     <li>
                         {{ 'booking.show.start:'|trans }}
                         <time>
-                            {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                            {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
                         </time>
                     </li>
                     <li>
@@ -73,13 +79,13 @@
                         <li>
                             {{ 'booking.show.start_time:'|trans }}
                             <time>
-                                {{ booking.startTime|date('H:i') }}
+                                {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                             </time>
                         </li>
                         <li>
                             {{ 'booking.show.end_time:'|trans }}
                             <time>
-                                {{ booking.endTime|date('H:i') }}
+                                {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                             </time>
                         </li>
                     {% endif %}

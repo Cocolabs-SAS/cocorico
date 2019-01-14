@@ -33,7 +33,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $timesDisplayMode;
     protected $timeUnitFlexibility;
     protected $timeUnitAllDay;
-    protected $timePicker;
     protected $timeHoursAvailable;
     protected $allowSingleDay;
     protected $endDayIncluded;
@@ -59,13 +58,14 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $listingDuplication;
     protected $minStartDelay;
     protected $minStartTimeDelay;
+    protected $addressDelivery;
 
     /**
      *
-     * @param CurrencyExtension          $currencyExtension
+     * @param CurrencyExtension   $currencyExtension
      * @param TranslatorInterface $translator
      * @param Session             $session
-     * @param array                      $parameters
+     * @param array               $parameters
      *
      */
 
@@ -92,7 +92,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->timeUnitFlexibility = $parameters["cocorico_time_unit_flexibility"];
         $this->daysDisplayMode = $parameters["cocorico_days_display_mode"];
         $this->timesDisplayMode = $parameters["cocorico_times_display_mode"];
-        $this->timePicker = $parameters["cocorico_time_picker"];
         $this->timeHoursAvailable = $parameters["cocorico_time_hours_available"];
 
         //Currencies
@@ -147,11 +146,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         return array(
             new \Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
-            new \Twig_SimpleFilter('format_seconds', array($this, 'formatSecondsFilter')),
             new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new \Twig_SimpleFilter('ucwords', 'ucwords'),
             new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
-            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfo'))
+            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
         );
     }
 
@@ -163,28 +161,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function stringRepeatFilter($input, $multiplier)
     {
         return str_repeat($input, $multiplier);
-    }
-
-    /**
-     * Format time from seconds to unit
-     *
-     * @param int $seconds
-     * @param string $format
-     *
-     * @return string
-     */
-    public function formatSecondsFilter($seconds, $format = 'dhm')
-    {
-        $time = PHP::seconds_to_time($seconds);
-        switch ($format) {
-            case 'h':
-                $result = ($time['d'] * 24) + $time['h'] . "h";
-                break;
-            default:
-                $result = ($time['d'] * 24) + $time['h'] . "h " . $time['m'] . "m";
-        }
-
-        return $result;
     }
 
     /**
@@ -263,7 +239,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      *
      * @return string
      */
-    public function stripPrivateInfo(
+    public function stripPrivateInfoFilter(
         $text,
         $typeInfo = array("phone", "email", "domain"),
         $replaceBy = 'default'
@@ -279,6 +255,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
         return PHP::strip_texts($text, $typeInfo, $replaceBy);
     }
+
 
     /**
      * @inheritdoc
@@ -416,12 +393,12 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $bookingStatusClass = array(
             Booking::STATUS_DRAFT => 'btn-yellow',
             Booking::STATUS_NEW => 'btn-yellow',
-//            Booking::STATUS_ACCEPTED => 'btn-polo-blue',
+            //            Booking::STATUS_ACCEPTED => 'btn-polo-blue',
             Booking::STATUS_PAYED => 'btn-algae-green',
             Booking::STATUS_EXPIRED => 'btn-nomad',
             Booking::STATUS_REFUSED => 'btn-flamingo',
             Booking::STATUS_CANCELED_ASKER => 'btn-salmon',
-//            Booking::STATUS_CANCELED_OFFERER => 'btn-salmon',
+            //            Booking::STATUS_CANCELED_OFFERER => 'btn-salmon',
             Booking::STATUS_PAYMENT_REFUSED => 'btn-fuzzy-brown'
         );
 
@@ -445,7 +422,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'timeUnitIsDay' => $this->timeUnitIsDay,
             'timeZone' => $this->timeZone,
             'timeUnitAllDay' => $this->timeUnitAllDay,
-            'timePicker' => $this->timePicker,
             'timeHoursAvailable' => $this->timeHoursAvailable,
             'daysDisplayMode' => $this->daysDisplayMode,
             'timesDisplayMode' => $this->timesDisplayMode,

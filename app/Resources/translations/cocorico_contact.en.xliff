@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:09Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+    <file date="2017-10-17T22:16:23Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -83,32 +84,32 @@
       <trans-unit id="fce58b916a70eb53f56001f10e807cdf1cc7fee2" resname="contact.form.email.label">
         <source>contact.form.email.label</source>
         <target>Email</target>
-        <jms:reference-file line="48">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="47">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="865cca75d194e7c01a07dceb026e56b14c6b88cf" resname="contact.form.first_name.label">
         <source>contact.form.first_name.label</source>
         <target>First name</target>
-        <jms:reference-file line="34">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="33">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cb9e2195bca982ce48c1aa3da3ac02c48e8589d4" resname="contact.form.last_name.label">
         <source>contact.form.last_name.label</source>
         <target>Last name</target>
-        <jms:reference-file line="41">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="40">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="413caa3b4f3493ea303fa1cdc80d7e87671fee8f" resname="contact.form.message.label">
         <source>contact.form.message.label</source>
         <target>Message</target>
-        <jms:reference-file line="69">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="68">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4c2d77679ee1915b3d0bc40a5a4da90ae4f9f601" resname="contact.form.phone.label">
         <source>contact.form.phone.label</source>
         <target>Phone</target>
-        <jms:reference-file line="55">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="54">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fb57c7da2be9d8e65c5161a43d8108ca429b6947" resname="contact.form.subject.label">
         <source>contact.form.subject.label</source>
         <target>Subject</target>
-        <jms:reference-file line="62">Type/Frontend/ContactNewType.php</jms:reference-file>
+        <jms:reference-file line="61">Type/Frontend/ContactNewType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35d8ee3612fd226f9cfbbc9b23fdc9534ee90792" resname="contact.form.submit.button">
         <source>contact.form.submit.button</source>

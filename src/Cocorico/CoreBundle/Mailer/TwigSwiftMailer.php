@@ -31,6 +31,7 @@ class TwigSwiftMailer implements MailerInterface
     protected $timeUnitIsDay;
     /** @var  array locales */
     protected $locales;
+    protected $timezone;
     protected $templates;
     protected $fromEmail;
     protected $adminEmail;
@@ -69,6 +70,8 @@ class TwigSwiftMailer implements MailerInterface
 
         $this->locales = $parameters['cocorico_locales'];
         $this->locale = $parameters['cocorico_locale'];
+        $this->timezone = $parameters['cocorico_time_zone'];
+
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }
@@ -708,16 +711,18 @@ class TwigSwiftMailer implements MailerInterface
     /**
      * @param string $templateName
      * @param array  $context
-     * @param string $fromEmail
+     * @param array  $fromEmail
      * @param string $toEmail
      */
     protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
     {
+        $user = null;
         $context['trans_domain'] = self::TRANS_DOMAIN;
 
         $context['user_locale'] = $this->locale;
         $context['locale'] = $this->locale;
         $context['app']['request']['locale'] = $this->locale;
+        $context['user_timezone'] = $this->timezone;
 
         if (isset($context['user'])) {//user receiving the email
             /** @var User $user */
@@ -725,6 +730,7 @@ class TwigSwiftMailer implements MailerInterface
             $context['user_locale'] = $user->guessPreferredLanguage($this->locales, $this->locale);
             $context['locale'] = $context['user_locale'];
             $context['app']['request']['locale'] = $context['user_locale'];
+            $context['user_timezone'] = $user->getTimeZone();
         }
 
         if (isset($context['listing'])) {
@@ -752,6 +758,7 @@ class TwigSwiftMailer implements MailerInterface
 
         if (isset($context['booking'])) {
             $context['booking_time_range_title'] = $context['booking_time_range'] = '';
+
             if (!$this->timeUnitIsDay) {
                 /** @var Booking $booking */
                 $booking = $context['booking'];
@@ -761,8 +768,23 @@ class TwigSwiftMailer implements MailerInterface
                     'cocorico_mail',
                     $context['user_locale']
                 );
-                $context['booking_time_range'] .= $booking->getStartTime()->format('H:i') . " - " .
-                    $booking->getEndTime()->format('H:i');
+
+                $timezone = $this->timezone;
+                if ($user) {
+                    if ($booking->getUser() == $user) {
+                        $timezone = $booking->getTimeZoneAsker();
+                    } elseif ($booking->getListing()->getUser() == $user) {
+                        $timezone = $booking->getTimeZoneOfferer();
+                    }
+                }
+
+                $startTime = clone $booking->getStartTime();
+                $startTime->setTimezone(new \DateTimeZone($timezone));
+                $endTIme = clone $booking->getEndTime();
+                $endTIme->setTimezone(new \DateTimeZone($timezone));
+
+                $context['booking_time_range'] .= $startTime->format('H:i') . " - " . $endTIme->format('H:i');
+                $context['user_timezone'] = $timezone;
             }
         }
 

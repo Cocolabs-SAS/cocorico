@@ -8,6 +8,7 @@
         {% set amount_total = booking.amountToPayByAskerDecimal %}
         {% set other_user_rating = other_user.averageOffererRating %}
         {% set vat_inclusion_text = vatInclusionText(app.request.getLocale(), true, true ) %}
+        {% set user_timezone = booking.timeZoneAsker %}
     {% elseif app.user == booking.listing.user %}{#offerer#}
         {% set other_user = booking.user %}
         {% set booking_show_route = 'cocorico_dashboard_booking_show_offerer' %}
@@ -19,6 +20,7 @@
         {% set vat_inclusion_text = vatInclusionText(app.request.getLocale()) %}
 
         {% set other_user_rating = other_user.averageAskerRating %}
+        {% set user_timezone = booking.timeZoneOfferer %}
     {% endif %}
 
     {% set user_image = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
@@ -57,11 +59,15 @@
                         </span>
                     </div>
                     <div class="booking-detail">
+                        <div class="timezone">
+                            <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                            {{ user_timezone|timezone_name }}
+                        </div>
                         <ul class="list-inline" id="booking-asker-date">
                             <li content="{{ booking.start|date('Y-m-d') }}">
                                 {{ 'booking.show.start:'|trans }}
                                 <time>
-                                    {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                                    {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
                                 </time>
                             </li>
 
@@ -76,13 +82,13 @@
                                 <li>
                                     {{ 'booking.show.start_time:'|trans }}
                                     <time>
-                                        {{ booking.startTime|date('H:i') }}
+                                        {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                                     </time>
                                 </li>
                                 <li>
                                     {{ 'booking.show.end_time:'|trans }}
                                     <time>
-                                        {{ booking.endTime|date('H:i') }}
+                                        {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                                     </time>
                                 </li>
                             {% endif %}
@@ -139,7 +145,7 @@
                 {{ 'booking.index.show'|trans }}
             </a>
 
-            {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+            {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay) %}
             {% if expiration > 0 %}
                 <strong class="expiry">
                     {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}

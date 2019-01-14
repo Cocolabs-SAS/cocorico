@@ -67,7 +67,9 @@ class ListingSearchController extends Controller
             $listingSearchRequest->setSimilarListings($markers['listingsIds']);
 
             //Persist listing search request in session
-            !$isXmlHttpRequest ? $this->get('session')->set('listing_search_request', $listingSearchRequest) : null;
+            if (!$isXmlHttpRequest) {
+                $this->get('session')->set('listing_search_request', $listingSearchRequest);
+            }
         } else {
             foreach ($form->getErrors(true) as $error) {
                 $this->get('session')->getFlashBag()->add(
@@ -108,7 +110,6 @@ class ListingSearchController extends Controller
                 $extraViewParams
             )
         );
-
     }
 
     /**

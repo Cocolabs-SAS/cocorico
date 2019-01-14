@@ -1,5 +1,6 @@
 imports:
     - { resource: subscribers.yml }
+    - { resource: listeners.yml }
     - { resource: admin.yml }
 
 services:
@@ -31,28 +32,6 @@ services:
         tags:
             - { name: image_namer }
 
-    #Listeners
-    cocorico_user.user.listener:
-        class: Cocorico\UserBundle\Listener\UserEntityListener
-        arguments:
-            - "@event_dispatcher"
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    cocorico_user.user_image_upload_listener:
-        class: Cocorico\UserBundle\Listener\UserImageUploadListener
-        arguments:
-            - "@cocorico_user.user_manager"
-        tags:
-            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: "onUpload" }
-
-    cocorico_user.listing_image_upload_validation_listener:
-        class: Cocorico\UserBundle\Listener\UserImageUploadValidationListener
-        arguments:
-            - "%cocorico.user_img_max_upload_size%"
-        tags:
-            - { name: kernel.event_listener, event: oneup_uploader.validation, method: "onValidate" }
-
     #Form Handler
     cocorico_user.form.handler.registration:
         class: Cocorico\UserBundle\Form\Handler\RegistrationFormHandler
@@ -65,7 +44,6 @@ services:
             - "@cocorico_user.login_manager"
             - "@event_dispatcher"
         public: false
-
 
     cocorico_user.form.handler.bank_account:
         class: Cocorico\UserBundle\Form\Handler\BankAccountFormHandler

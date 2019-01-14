@@ -35,7 +35,6 @@ services:
         class: Cocorico\CoreBundle\Form\Handler\Frontend\BookingPriceFormHandler
         arguments:
             - "@session"
-            - "@cocorico.form.type.booking_price"
             - "@request_stack"
             - "@cocorico.listing_search_request"
             - "@cocorico.booking.manager"

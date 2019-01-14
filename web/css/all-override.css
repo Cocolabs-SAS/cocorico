@@ -414,11 +414,15 @@ li.time-fields {
 }
 
 #price-simulator-form .time-fields .col {
-    width: 52%;
+    width: 53%;
 }
 
 #price-simulator-form .time-fields .col + .col {
     width: 47%;
+}
+
+.icon-time:before {
+    content: '\e804';
 }
 
 #price-simulator-form .time-fields .title {
@@ -461,6 +465,10 @@ li.time-fields {
     font-size: 11px;
 }
 
+.icon-time:before {
+    content: '\e804';
+}
+
 .time-ranges label {
     display: inline-block;
     margin-right: 10px;
@@ -492,7 +500,7 @@ li.time-fields {
 }
 
 .discount-list {
-    max-width: 780px;
+    max-width: 810px;
 }
 
 /*Edit_images.html.twig*/
@@ -1350,19 +1358,19 @@ images css for making it 4:3
     text-align: right;
 }
 
-#booking-new .timing {
+#booking-new .timing, .payment .timing {
     margin: 0;
 }
 
-#booking-new .timing li {
+#booking-new .timing li, .payment .timing li {
     width: 35%;
 }
 
-#booking-new .timing li:nth-child(3n+0) {
+#booking-new .timing li:nth-child(3n+0), .payment .timing li:nth-child(3n+0) {
     width: 30%;
 }
 
-#booking-new .timing li label {
+#booking-new .timing li label, .payment .timing li label {
     width: 115px;
 }
 

@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\AopBundle\JMSAopBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\DiExtraBundle\JMSDiExtraBundle(),
             new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),

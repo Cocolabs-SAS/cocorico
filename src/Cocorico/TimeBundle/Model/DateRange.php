@@ -9,19 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Model;
+namespace Cocorico\TimeBundle\Model;
 
-use DateTime;
 
 class DateRange
 {
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     public $start;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     public $end;
 
@@ -30,25 +29,26 @@ class DateRange
      */
     public $nbDays;
 
-    public function __construct(DateTime $start = null, DateTime $end = null)
+    public function __construct(\DateTime $start = null, \DateTime $end = null)
     {
         if (!$start) {
-            $start = new DateTime();
-            $start->setTime(0, 0, 0);
+            $start = new \DateTime();
         }
 
         if (!$end) {
-            $end = new DateTime();
-            $end->setTime(0, 0, 0);
+            $end = new \DateTime();
         }
+
+//        $start->setTime(0, 0, 0);
+//        $end->setTime(0, 0, 0);
 
         $this->start = $start;
         $this->end = $end;
-        //$this->nbDays = $start->diff($end)->days;
+        $this->nbDays = $start->diff($end)->days;
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getStart()
     {
@@ -56,7 +56,7 @@ class DateRange
     }
 
     /**
-     * @param DateTime $start
+     * @param \DateTime $start
      */
     public function setStart($start)
     {
@@ -64,7 +64,7 @@ class DateRange
     }
 
     /**
-     * @return DateTime
+     * @return \DateTime
      */
     public function getEnd()
     {
@@ -72,7 +72,7 @@ class DateRange
     }
 
     /**
-     * @param DateTime $end
+     * @param \DateTime $end
      */
     public function setEnd($end)
     {
@@ -111,22 +111,15 @@ class DateRange
         return $duration;
     }
 
-    /**
-     * Create DateRange instance from array
-     *
-     * @param array $dateR
-     * @return null|DateRange
-     */
-    public static function createFromArray($dateR)
+    public function log($prefix = '')
     {
-        if (isset($dateR['start']) && isset($dateR['end']) && $dateR['start'] && $dateR['end']) {
-            $start = \DateTime::createFromFormat('d/m/Y', $dateR['start']);
-            $end = \DateTime::createFromFormat('d/m/Y', $dateR['end']);
-
-            return new static($start, $end);
+        echo "<br>DateRange";
+        if ($prefix) {
+            echo "<br>$prefix";
         }
 
-        return null;
+        if ($this->getStart() && $this->getEnd()) {
+            echo $this->getStart()->format('Y-m-d H:i') . ' / ' . $this->getEnd()->format('Y-m-d H:i') . '<br>';
+        }
     }
-
 }

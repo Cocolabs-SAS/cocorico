@@ -18,6 +18,7 @@ use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReviewBundle\Entity\Review;
+use Cocorico\TimeBundle\Model\DayTimeRange;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -285,8 +286,7 @@ class Booking extends BaseBooking
         }
 
         $timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
-        $dateRange = new DateRange($this->getStart(), $this->getEnd());
-        $durationDay = $dateRange->getDuration($endDayIncluded);
+        $durationDay = $this->getDateRange()->getDuration($endDayIncluded);
 
         if ($durationDay < 1) {
             return false;
@@ -298,8 +298,7 @@ class Booking extends BaseBooking
             if (!$this->getStartTime() || !$this->getEndTime()) {
                 return false;
             }
-            $timeRange = new TimeRange($this->getStartTime(), $this->getEndTime());
-            $durationTime = $timeRange->getDuration($timeUnit);
+            $durationTime = $this->getTimeRange()->getDuration($timeUnit);
             $duration = $durationDay * $durationTime;
         }
 
@@ -309,22 +308,21 @@ class Booking extends BaseBooking
     /**
      * Get time in seconds before booking request expire depending on its status
      *
-     * @param int    $expirationDelay  in minutes
-     * @param int    $acceptationDelay in minutes
-     * @param string $timeZone         default user time zone
+     * @param int $expirationDelay  in minutes
+     * @param int $acceptationDelay in minutes
      *
      * @return bool|int nb seconds before expiration
      */
-    public function getTimeBeforeExpiration($expirationDelay, $acceptationDelay, $timeZone)
+    public function getTimeBeforeExpiration($expirationDelay, $acceptationDelay)
     {
         switch ($this->getStatus()) {
             case self::STATUS_DRAFT:
                 return false;
                 break;
             case self::STATUS_NEW:
-                $expirationDate = $this->getExpirationDate($expirationDelay, $acceptationDelay, $timeZone);
+                $expirationDate = $this->getExpirationDate($expirationDelay, $acceptationDelay);
                 if ($expirationDate) {
-                    $now = new \DateTime('now', new \DateTimeZone($timeZone));
+                    $now = new \DateTime('now');
 
                     return round($expirationDate->getTimestamp() - $now->getTimestamp());
                 }
@@ -342,24 +340,18 @@ class Booking extends BaseBooking
      * Get booking expiration date:
      *   Equal to the smallest date between (new booking date + expiration delay) and (booking start date + acceptation delay)
      *
-     * @param int    $bookingExpirationDelay  in minutes
-     * @param int    $bookingAcceptationDelay in minutes
-     * @param string $timeZone                default user time zone
+     * @param int $bookingExpirationDelay  in minutes
+     * @param int $bookingAcceptationDelay in minutes
      *
-     * @return \Datetime|bool
+     * @return \Datetime|bool (in UTC)
      */
-    public function getExpirationDate($bookingExpirationDelay, $bookingAcceptationDelay, $timeZone)
+    public function getExpirationDate($bookingExpirationDelay, $bookingAcceptationDelay)
     {
-        //todo: check in day mode
         if ($this->getNewBookingAt()) {
             $expirationDate = clone $this->getNewBookingAt();
-            $expirationDate->setTimezone(new \DateTimeZone($timeZone));
             $expirationDate->add(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
 
-            $acceptationDate = new \DateTime(
-                $this->getStartDateAndTime()->format('Y-m-d H:i:s'),
-                new \DateTimeZone($timeZone)
-            );
+            $acceptationDate = clone $this->getStart();
             $acceptationDate->sub(new \DateInterval('PT' . $bookingAcceptationDelay . 'M'));
 
             //Return minus date
@@ -383,7 +375,7 @@ class Booking extends BaseBooking
      * @param string $bookingValidationMoment ("start"|"end")
      * @param int    $bookingValidationDelay  in minutes
      *
-     * @return \Datetime|bool
+     * @return \Datetime|bool (in UTC)
      */
     public function getValidationDate($bookingValidationMoment, $bookingValidationDelay)
     {
@@ -408,19 +400,14 @@ class Booking extends BaseBooking
     /**
      * Get time in seconds before booking start
      *
-     * @param string $timeZone
-     *
      * @return bool|int nb seconds before start
      */
-    public function getTimeBeforeStart($timeZone)
+    public function getTimeBeforeStart()
     {
         if ($this->getStart()) {
-            $now = new \DateTime('now', new \DateTimeZone($timeZone));
+            $now = new \DateTime('now');
 
-            $start = $this->getStartDateAndTime();
-            $start->setTimezone(new \DateTimeZone($timeZone));
-
-            return $start->getTimestamp() - $now->getTimestamp();
+            return $this->getStart()->getTimestamp() - $now->getTimestamp();
         }
 
         return false;
@@ -443,32 +430,27 @@ class Booking extends BaseBooking
      * Check if booking begin after the minimum start date according to $minStartTimeDelay or $minStartDelay
      * old: hasCorrectStartTime
      *
-     * @param int    $minStartDelay     in days
-     * @param int    $minStartTimeDelay in minutes
-     * @param bool   $timeUnitIsDay
-     * @param string $timeZone          Default user timezone
+     * @param int  $minStartDelay     in days
+     * @param int  $minStartTimeDelay in minutes
+     * @param bool $timeUnitIsDay
      *
      * @return bool
      */
-    public function beginAfterMinStartDate($minStartDelay, $minStartTimeDelay, $timeUnitIsDay, $timeZone)
+    public function beginAfterMinStartDate($minStartDelay, $minStartTimeDelay, $timeUnitIsDay)
     {
         $minStartTime = new \DateTime();
-        $minStartTime->setTimezone(new \DateTimeZone($timeZone));
 
         if ($timeUnitIsDay) {
             $minStartTime->add(new \DateInterval('P' . $minStartDelay . 'D'));
             $minStartTime->setTime(0, 0, 0);
 
-            $start = $this->getStart();
-
-            if ($start->format('Ymd') < $minStartTime->format('Ymd')) {
+            if ($this->getStart()->format('Ymd') < $minStartTime->format('Ymd')) {
                 return false;
             }
         } else {
             $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'M'));
-            $start = $this->getStartDateAndTime();
 
-            if ($start->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
+            if ($this->getStart()->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
                 return false;
             }
         }

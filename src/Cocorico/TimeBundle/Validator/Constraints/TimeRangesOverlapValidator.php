@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Validator\Constraints;
+namespace Cocorico\TimeBundle\Validator\Constraints;
 
-use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;

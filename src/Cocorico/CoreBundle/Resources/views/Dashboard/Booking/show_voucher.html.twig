@@ -4,6 +4,7 @@
     {% set listing = booking.listing %}
     {% set asker = booking.user %}
     {% set offerer = listing.user %}
+    {% set user_timezone = booking.timeZoneAsker %}
 
     {% set translation = listing.translations[app.request.locale] %}
     {% set listing_address = listing.location.getCompleteAddress %}
@@ -38,22 +39,30 @@
         {% endif %}
         <div>
             <br/>
-            <strong>{{ 'booking.voucher.date' | trans }}
-                : </strong>{{ booking.start|localizeddate('short', 'none', 'fr') }}
+            <strong>{{ 'booking.voucher.date' | trans }} : </strong>
+            {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }} -
+            {{ booking.end|localizeddate('short', 'none', 'fr', user_timezone) }}
 
             {% if not timeUnitIsDay %}
                 <br/>
                 <strong>{{ 'booking.show.start_time:'|trans }} </strong>
-                {{ booking.startTime|date('H:i') }}
+                {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                 <br/>
                 <strong>{{ 'booking.show.end_time:'|trans }}</strong>
-                {{ booking.endTime|date('H:i') }}
+                {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
             {% endif %}
 
             <br/>
 
             <strong>{{ 'booking.voucher.duration' | trans }} :</strong>
             {{ booking.duration(endDayIncluded, timeUnit, timeUnitIsDay) | add_time_unit_text }}
+
+            <br/>
+
+            <div>
+                <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                {{ user_timezone|timezone_name }}
+            </div>
         </div>
 
         {% if bundleExist('CocoricoDeliveryBundle') %}

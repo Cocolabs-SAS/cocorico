@@ -52,10 +52,6 @@ services:
             - "%cocorico.translator.token.url%"
             - "%cocorico.translator.translate.url%"
 
-    cocorico.user_type.cookie.listener:
-        class: Cocorico\CoreBundle\Listener\UserTypeCookieListener
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
 
     #Extra bundles routing loader
     cocorico.extra_bundle.routing_loader:

@@ -11,6 +11,9 @@
 
 namespace Cocorico\CoreBundle\Model;
 
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +30,7 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $location;
     protected $categories;
     protected $characteristics;
+    /** @var  DateRange */
     protected $dateRange;
     protected $timeRange;
     //Number of flexibility days
@@ -67,14 +71,9 @@ class ListingSearchRequest implements TranslationContainerInterface
                 $this->isXmlHttpRequest = true;
             }
         }
+
         $this->maxPerPage = $maxPerPage;
         $this->page = 1;
-
-        //Set date range and time range only while listing search
-        if ($this->request && $this->request->get('_route') == 'cocorico_listing_search_result') {
-            $this->setDateRange(DateRange::createFromArray($this->request->query->get("date_range")));
-            $this->setTimeRange(TimeRange::createFromArray($this->request->query->get("time_range")));
-        }
 
         //Flexibility
         $this->flexibility = 0;
@@ -169,6 +168,14 @@ class ListingSearchRequest implements TranslationContainerInterface
     public function setTimeRange(TimeRange $timeRange = null)
     {
         $this->timeRange = $timeRange;
+    }
+
+    /**
+     * @return DateTimeRange
+     */
+    public function getDateTimeRange()
+    {
+        return new DateTimeRange($this->getDateRange(), array($this->getTimeRange()));
     }
 
     /**

@@ -8,22 +8,23 @@
 {% set depositBundleEnabled = bundleExist('CocoricoListingDepositBundle') %}
 
 {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+{% set user_timezone = app.session.get('timezone', timeZone) %}
 
 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 
 {{ form_start(form, {'attr': {'id': 'booking-new'}}) }}
 
-<!-- schedule -->
+
 {#{{ form_errors(form) }}#}
 {{ form_errors(form.date_range) }}
 <div class="price-area">
     <ul class="list-inline timing">
         <li>
             {{ form_errors(form.date_range.start) }}
-            {{ form_label(form.date_range.start, null, {'required': false} ) }}
+            {{ form_label(form.date_range.start, null, {'required': false}) }}
             <time datetime="{{ booking.start|date('Y-m-d') }}">
                 <i class="icon-calendar"></i>
-                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
             </time>
             {{ form_widget(form.date_range.start, {
                 'type': 'hidden'
@@ -42,13 +43,39 @@
             }) }}
         </li>
         <li>
-            <strong> {{ 'booking.duration:'|trans }}</strong>
-            {{ booking_duration|add_time_unit_text }}
+            {{ 'booking.duration:'|trans }} <strong>{{ booking_duration|add_time_unit_text }}</strong>
         </li>
 
         {% if not timeUnitIsDay %}
-            {{ form_widget(form.time_range) }}
+            <li>
+                {{ form_errors(form.time_range.start) }}
+                {{ form_label(form.time_range.start, null, {'required': false}) }}
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+                <div class="hidden">
+                    {{ form_widget(form.time_range.start) }}
+                    {{ form_widget(form.time_range.start_picker) }}
+                </div>
+            </li>
+            <li>
+                {{ form_errors(form.time_range.end) }}
+                {{ form_label(form.time_range.end, null, {'required': false}) }}
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+                <div class="hidden">
+                    {{ form_widget(form.time_range.end) }}
+                    {{ form_widget(form.time_range.end_picker) }}
+                </div>
+            </li>
         {% endif %}
+
+        <li class="pull-right">
+            {{ 'form.time_zone'|trans({}, 'cocorico_user') }}: <strong>{{ user_timezone|timezone_name }}</strong>
+        </li>
     </ul>
 </div>
 
