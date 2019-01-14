@@ -30,7 +30,7 @@
             {{ '>' }}
 
             {%- if 'data-icon' in label_attr|keys -%}
-                <i class="ico-beta {{label_attr['data-icon']}}"></i>
+                <i class="ico-beta {{ label_attr['data-icon'] }}"></i>
             {%- endif -%}
 
             {%- autoescape false -%}
@@ -284,7 +284,7 @@
                             {{ form_errors(field) }}
                             <span class="label">
                                 {{ form_label(field,
-                                field.vars.label|trans(quantityText, 'cocorico_listing')) }}
+                                    field.vars.label|trans(quantityText, 'cocorico_listing')) }}
                             </span>
                             <div class="field-holder">
                                 {{ form_widget(field,{

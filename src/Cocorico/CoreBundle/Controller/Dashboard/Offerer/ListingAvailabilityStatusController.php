@@ -211,6 +211,7 @@ class ListingAvailabilityStatusController extends Controller
      * @param  string              $end_time
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAction(
         Request $request,

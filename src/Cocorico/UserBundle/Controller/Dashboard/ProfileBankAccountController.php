@@ -34,9 +34,10 @@ class ProfileBankAccountController extends Controller
      * @Route("/edit-bank-account", name="cocorico_user_dashboard_profile_edit_bank_account")
      * @Method({"GET", "POST"})
      *
-     * @param $request Request
+     * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
      */
     public function editAction(Request $request)
     {
