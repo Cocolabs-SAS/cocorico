@@ -1,4 +1,5 @@
 var DEBUG = true;
+
 function console_log() {
     if (DEBUG) {
         if (console) {
@@ -12,6 +13,8 @@ $(window).load(function () {
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
+
+    handleButtonClick();
 });
 
 $(function () {
@@ -114,6 +117,20 @@ $(function () {
     fixIEMobile10();
 
 });
+
+/**
+ * Simulate user click on a button type submit to make SF isClicked working if the click is done programmatically
+ */
+function handleButtonClick() {
+    $("button[type=submit]").on('click', function (e) {
+        var btnName = $(this).attr('name');
+        var btnId = $(this).attr('id');
+        if (btnId && btnName) {
+            $(this).closest('form').find("input[type=hidden]#" + btnId).remove();
+            $(this).closest('form').append('<input id="' + btnId + '" name="' + btnName + '" type="hidden" value="1">');
+        }
+    });
+}
 
 /**
  * Fix IE mobile
