@@ -526,9 +526,9 @@
             // Categories
             initMultiSelect(
                     '#categories',
-                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
             );
         });
     </script>
