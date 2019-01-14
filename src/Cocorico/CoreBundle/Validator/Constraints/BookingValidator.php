@@ -48,7 +48,6 @@ class BookingValidator extends ConstraintValidator
     public function validate($booking, Constraint $constraint)
     {
         if ($booking->getStart() && $booking->getEnd()) {
-
             $violations = $this->getViolations($booking, $constraint);
 
             if (count($violations)) {
@@ -88,14 +87,10 @@ class BookingValidator extends ConstraintValidator
     {
         $violations = array();
 
-//        if ($booking->getUser() == $booking->getListing()->getUser()) {
-//            $violations[] = array(
-//                'message' => $constraint::$messageSelfBooking,
-//            );
-//        }
+        $result = $this->bookingManager->checkBookingAndSetAmounts($booking);
+        $booking = $result->booking;
+        $errors = $result->errors;
 
-
-        $errors = $this->bookingManager->checkBookingAvailabilityAndSetAmounts($booking);
         //Availability error
         if (in_array('unavailable', $errors)) {
             $violations[] = array(

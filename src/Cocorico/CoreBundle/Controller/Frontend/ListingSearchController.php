@@ -36,10 +36,7 @@ class ListingSearchController extends Controller
     public function searchAction(Request $request)
     {
         //For drag map mode
-        $isXmlHttpRequest = false;
-        if ($request->isXmlHttpRequest()) {
-            $isXmlHttpRequest = true;
-        }
+        $isXmlHttpRequest = $request->isXmlHttpRequest() ? true : false;
 
         $markers = array('listingsIds' => array(), 'markers' => array());
         $listings = new \ArrayIterator();

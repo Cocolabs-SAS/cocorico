@@ -67,6 +67,10 @@ twig:
     form:
         resources:
             - 'CocoricoCoreBundle:Form:fields.html.twig'
+            - 'CocoricoCoreBundle:Form:fields_date_time.html.twig'
+            - 'CocoricoCoreBundle:Form:fields_collection.html.twig'
+            - 'CocoricoCoreBundle:Form:fields_category.html.twig'
+            - 'CocoricoCoreBundle:Form:fields_price.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
 
 assetic:
@@ -139,7 +143,7 @@ a2lix_translation_form:
     locales: "%cocorico.locales%"
     #required_locales: [%cocorico.locale%]
     manager_registry: doctrine
-    templating: "CocoricoCoreBundle:Form:translations.html.twig"
+    templating: "CocoricoCoreBundle:Form:fields_translations.html.twig"
 
 
 stof_doctrine_extensions:

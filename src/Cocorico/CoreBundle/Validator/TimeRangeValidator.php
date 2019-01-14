@@ -72,9 +72,9 @@ class TimeRangeValidator implements EventSubscriberInterface, TranslationContain
                 $form->addError(new FormError('time_range.invalid.required'));
             }
 
-            if ($start > $end && $end->format('H:i') != '00:00') {
-                $form->addError(new FormError('time_range.invalid.end_before_start'));
-            }
+//            if ($start > $end && $end->format('H:i') != '00:00') {
+//                $form->addError(new FormError('time_range.invalid.end_before_start'));
+//            }
 
             if (($start->format('H:i') === $end->format('H:i')) && ($start->format('H:i') != '00:00')) {
                 $form->addError(new FormError('time_range.invalid.single_time'));

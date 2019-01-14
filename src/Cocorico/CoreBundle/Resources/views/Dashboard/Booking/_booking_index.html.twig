@@ -41,7 +41,7 @@
             </div>
             <div class="area">
                 <header class="head">
-                    <div class="area">
+                    <div class="area pull-left">
                         <h2>
                             <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
                                 {{ listing_translation.title }}
@@ -68,7 +68,7 @@
                             <li>
                                 {{ 'booking.show.end:'|trans }}
                                 <time>
-                                    {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                    {{ booking.endDay|localizeddate('short', 'none', 'fr') }}
                                 </time>
                             </li>
 

@@ -285,7 +285,7 @@ class BookingAdmin extends Admin
                 )
             )
             ->add(
-                'end',
+                'endDay',
                 'date',
                 array(
                     'disabled' => true,
@@ -770,7 +770,7 @@ class BookingAdmin extends Admin
                 )
             )
             ->add(
-                'end',
+                'endDay',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',

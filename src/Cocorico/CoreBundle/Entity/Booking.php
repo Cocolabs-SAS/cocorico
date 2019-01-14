@@ -15,6 +15,7 @@ use Cocorico\CoreBundle\Model\BaseBooking;
 use Cocorico\CoreBundle\Model\BookingDepositRefundInterface;
 use Cocorico\CoreBundle\Model\BookingOptionInterface;
 use Cocorico\CoreBundle\Model\DateRange;
+use Cocorico\CoreBundle\Model\DayTimeRange;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReviewBundle\Entity\Review;
@@ -474,6 +475,54 @@ class Booking extends BaseBooking
         }
 
         return true;
+    }
+
+
+    /**
+     * Check if two booking overlap their dates time ranges
+     *
+     * @param Booking $booking
+     * @param  bool   $endDayIncluded
+     * @return bool
+     */
+    public function overlap(Booking $booking, $endDayIncluded)
+    {
+        $timeRanges = $this->getDateRange()->getTimeRangesByDay(
+            array($this->getTimeRange()),
+            $endDayIncluded,
+            false
+        );
+
+        $timeRangesToCheck = $booking->getDateRange()->getTimeRangesByDay(
+            array($booking->getTimeRange()),
+            $endDayIncluded,
+            false
+        );
+
+        return DayTimeRange::overlap($timeRanges, $timeRangesToCheck);
+    }
+
+
+    /**
+     * Get bookings overlapping this booking
+     *
+     * @param Booking[] $bookings
+     * @param bool      $endDayIncluded
+     * @return Booking[]
+     */
+    public function getOverlapping($bookings, $endDayIncluded)
+    {
+        $result = array();
+
+//        echo 'Bookings before time range checking<br>';
+        foreach ($bookings as $index => $booking) {
+//            echo $booking->getId() . '<br>';
+            if ($this->overlap($booking, $endDayIncluded)) {
+                $result[] = $booking;
+            }
+        }
+
+        return $result;
     }
 
     /**

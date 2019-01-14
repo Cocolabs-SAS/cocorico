@@ -33,7 +33,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $timesDisplayMode;
     protected $timeUnitFlexibility;
     protected $timeUnitAllDay;
-    protected $timePicker;
     protected $timeHoursAvailable;
     protected $allowSingleDay;
     protected $endDayIncluded;
@@ -92,7 +91,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->timeUnitFlexibility = $parameters["cocorico_time_unit_flexibility"];
         $this->daysDisplayMode = $parameters["cocorico_days_display_mode"];
         $this->timesDisplayMode = $parameters["cocorico_times_display_mode"];
-        $this->timePicker = $parameters["cocorico_time_picker"];
         $this->timeHoursAvailable = $parameters["cocorico_time_hours_available"];
 
         //Currencies
@@ -445,7 +443,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'timeUnitIsDay' => $this->timeUnitIsDay,
             'timeZone' => $this->timeZone,
             'timeUnitAllDay' => $this->timeUnitAllDay,
-            'timePicker' => $this->timePicker,
             'timeHoursAvailable' => $this->timeHoursAvailable,
             'daysDisplayMode' => $this->daysDisplayMode,
             'timesDisplayMode' => $this->timesDisplayMode,

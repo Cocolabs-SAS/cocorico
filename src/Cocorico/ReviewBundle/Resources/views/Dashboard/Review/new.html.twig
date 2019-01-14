@@ -52,6 +52,7 @@
                                     {{ 'review.comment.end_date' | trans }} :
                                     <time>
                                         {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                        {{ booking.endDay|localizeddate('short', 'none', 'fr') }}
                                     </time>
                                 </li>
                                 {% if not timeUnitIsDay %}

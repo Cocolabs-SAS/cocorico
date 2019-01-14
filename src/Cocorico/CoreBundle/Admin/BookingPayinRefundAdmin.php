@@ -279,7 +279,7 @@ class BookingPayinRefundAdmin extends Admin
                 )
             )
             ->add(
-                'booking.end',
+                'booking.endDay',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',

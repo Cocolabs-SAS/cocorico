@@ -24,8 +24,8 @@ abstract class ListingAvailabilityFormHandler
 {
     /** @var Request $request */
     protected $request;
-    /** @var ListingAvailabilityManager $listingAvailabilityManager */
-    protected $listingAvailabilityManager;
+    /** @var ListingAvailabilityManager $availabilityManager */
+    protected $availabilityManager;
     /** @var  EntityManager $entityManager */
     protected $entityManager;
 
@@ -38,11 +38,11 @@ abstract class ListingAvailabilityFormHandler
     }
 
     /**
-     * @param ListingAvailabilityManager $listingAvailabilityManager
+     * @param ListingAvailabilityManager $availabilityManager
      */
-    public function setListingAvailabilityManager(ListingAvailabilityManager $listingAvailabilityManager)
+    public function setListingAvailabilityManager(ListingAvailabilityManager $availabilityManager)
     {
-        $this->listingAvailabilityManager = $listingAvailabilityManager;
+        $this->availabilityManager = $availabilityManager;
     }
 
     /**

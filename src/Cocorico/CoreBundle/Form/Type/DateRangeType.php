@@ -77,7 +77,7 @@ class DateRangeType extends AbstractType
                                     /** @Ignore */
                                     'empty_value' => '',
                                     'attr' => array(
-                                        'class' => 'no-scroll no-arrow'
+                                        'class' => 'no-arrow'
                                     ),
                                     'label' => 'date_range.nb_days',
                                     'translation_domain' => 'cocorico',

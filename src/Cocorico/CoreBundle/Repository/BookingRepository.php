@@ -399,8 +399,12 @@ SQLQUERY;
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());
 
-        return new ArrayCollection($queryBuilder->getQuery()->getResult());
-    }
+        /** @var Booking[] $bookings */
+        $bookings = $queryBuilder->getQuery()->getResult();
+
+        $bookingToRefused = $bookingAccepted->getOverlapping($bookings, $endDayIncluded);
+
+        return new ArrayCollection($bookingToRefused);
 
 
     /**
@@ -414,15 +418,72 @@ SQLQUERY;
      * @param bool    $endDayIncluded
      * @param bool    $timeUnitIsDay
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return \Doctrine\Common\Collections\ArrayCollection|Booking[]
      */
     public function findBookingsToRefuse($bookingAccepted, $endDayIncluded, $timeUnitIsDay)
+    {
+        if ($timeUnitIsDay) {
+            return $this->findBookingInDayMode($bookingAccepted, $endDayIncluded);
+        } else {
+            return $this->findBookingInNoDayMode($bookingAccepted, $endDayIncluded);
+        }
+    }
+
+    /**
+     * @param Booking $bookingAccepted
+     * @param         $endDayIncluded
+     * @return ArrayCollection
+     */
+    private function findBookingInDayMode(Booking $bookingAccepted, $endDayIncluded)
     {
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
-            ->andWhere('b.end >= :start')
+            ->andWhere('b.listing = :listing')
+            ->andWhere('b.end >= :start');
+
+        //If end day is included in booking, we refuse booking starting at this end date
+        if ($endDayIncluded) {
+            $queryBuilder
+                ->andWhere('b.start <= :end');
+        } else {
+            $queryBuilder
+                ->andWhere('b.start < :end');
+        }
+
+        $queryBuilder->setParameter('status', array(Booking::STATUS_NEW))
+            ->setParameter('start', $bookingAccepted->getStart()->format('Y-m-d H:i:s'))
+            ->setParameter('end', $bookingAccepted->getEnd()->format('Y-m-d H:i:s'))
+            ->setParameter('listing', $bookingAccepted->getListing());
+
+        return new ArrayCollection($queryBuilder->getQuery()->getResult());
+
+    }
+
+    /**
+     * @param Booking $bookingAccepted
+     * @param         $endDayIncluded
+     * @return ArrayCollection
+     */
+    private function findBookingInNoDayMode(Booking $bookingAccepted, $endDayIncluded)
+    {
+        $queryBuilder = $this->getFindQueryBuilder();
+        $queryBuilder
+            ->where('b.status IN (:status)')
             ->andWhere('b.listing = :listing');
+
+        //if booking time range overlaps end day we extend the search to next day of booking end day
+        $sql = <<<SQLQUERY
+            ((
+            DATE_FORMAT(b.endTime, '%Y-%m-%d') <> '1970-01-02' AND b.end >= :start 
+            )
+            OR
+            ( 
+            DATE_FORMAT(b.endTime, '%Y-%m-%d') = '1970-01-02' AND DATE_ADD(b.end, 1, 'DAY') >= :start 
+            ))
+SQLQUERY;
+
+        $queryBuilder->andWhere($sql);
 
         //If end day is included in booking, we refuse booking starting at this end date
         if ($endDayIncluded) {
@@ -434,25 +495,16 @@ SQLQUERY;
         }
 
         $queryBuilder
-            ->setParameter(
-                'status',
-                array(
-                    Booking::STATUS_NEW,
-                )
-            )
+            ->setParameter('status', array(Booking::STATUS_NEW))
             ->setParameter('start', $bookingAccepted->getStart()->format('Y-m-d H:i:s'))
             ->setParameter('end', $bookingAccepted->getEnd()->format('Y-m-d H:i:s'))
             ->setParameter('listing', $bookingAccepted->getListing());
 
-        //If time unit is not day we refuse bookings with time range overlapping the accepted booking time range 
-        if (!$timeUnitIsDay) {
-            $queryBuilder
-                ->andWhere('b.startTime < :endTime')
-                ->andWhere('b.endTime > :startTime')
-                ->setParameter('startTime', $bookingAccepted->getStartTime()->format('Y-m-d H:i:s'))
-                ->setParameter('endTime', $bookingAccepted->getEndTime()->format('Y-m-d H:i:s'));
+        //Refuse bookings with time range overlapping the accepted booking time range
+        //If time range overlap days the real end date is one day later
+        if ($bookingAccepted->getTimeRange()->overlapDays()) {
+            $queryBuilder->setParameter('end', $bookingAccepted->getEndDay()->format('Y-m-d H:i:s'));
         }
-
 
 //        echo $queryBuilder->getQuery()->getSQL();
 //        print_r($queryBuilder->getQuery()->getParameters()->toArray());
@@ -460,6 +512,7 @@ SQLQUERY;
         return new ArrayCollection($queryBuilder->getQuery()->getResult());
     }
 
+    }
 
     /**
      * Find Bookings to validate
@@ -499,8 +552,17 @@ SQLQUERY;
             $dateValidation->add(new \DateInterval('PT' . abs($validatedDelay) . 'M'));
         }
 
+        //if booking time range overlaps end day we extend the search to next day of booking end day
         $sql = <<<SQLQUERY
+            ((
+            DATE_FORMAT(b.{$validatedMoment}Time, '%Y-%m-%d') <> '1970-01-02' AND
             CONCAT(DATE_FORMAT(b.{$validatedMoment}, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.{$validatedMoment}Time, '%H:%i:%s') ) <= :dateValidation
+            )
+            OR
+            (
+             DATE_FORMAT(b.{$validatedMoment}Time, '%Y-%m-%d') = '1970-01-02' AND
+             CONCAT(DATE_FORMAT(DATE_ADD(b.{$validatedMoment}, 1, 'DAY'), '%Y-%m-%d'), ' ',  DATE_FORMAT(b.{$validatedMoment}Time, '%H:%i:%s') ) <= :dateValidation
+            ))
 SQLQUERY;
 
         $queryBuilder

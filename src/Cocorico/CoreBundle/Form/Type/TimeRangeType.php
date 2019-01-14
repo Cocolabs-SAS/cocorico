@@ -19,8 +19,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,21 +28,18 @@ class TimeRangeType extends AbstractType
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $timesMax;
-    protected $timePicker;
     protected $hoursAvailable;
 
     /**
      * @param int   $timeUnit in minute
      * @param int   $timesMax
-     * @param bool  $timePicker
      * @param array $hoursAvailable
      */
-    public function __construct($timeUnit, $timesMax, $timePicker, $hoursAvailable)
+    public function __construct($timeUnit, $timesMax, $hoursAvailable)
     {
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $this->timesMax = $timesMax;
-        $this->timePicker = $timePicker;
         $this->hoursAvailable = $hoursAvailable;
     }
 
@@ -100,29 +95,27 @@ class TimeRangeType extends AbstractType
 
 
                 //TimePicker
-                if ($options['time_picker']) {
-                    $form
-                        ->add(
-                            'start_picker',
-                            'time',
-                            array(
-                                'mapped' => false,
-                                'widget' => 'single_text',
-                                /** @Ignore */
-                                'label' => false
-                            )
+                $form
+                    ->add(
+                        'start_picker',
+                        'time',
+                        array(
+                            'mapped' => false,
+                            'widget' => 'single_text',
+                            /** @Ignore */
+                            'label' => false
                         )
-                        ->add(
-                            'end_picker',
-                            'time',
-                            array(
-                                'mapped' => false,
-                                'widget' => 'single_text',
-                                /** @Ignore */
-                                'label' => false
-                            )
-                        );
-                }
+                    )
+                    ->add(
+                        'end_picker',
+                        'time',
+                        array(
+                            'mapped' => false,
+                            'widget' => 'single_text',
+                            /** @Ignore */
+                            'label' => false
+                        )
+                    );
 
 
                 //Times display mode: range or duration
@@ -202,8 +195,6 @@ class TimeRangeType extends AbstractType
                 'validator' => null,
                 'translation_domain' => 'cocorico_listing',
                 'display_mode' => 'range',
-                //Override default parameters.yml values
-                'time_picker' => $this->timePicker,
                 'time_unit' => $this->timeUnit,
                 'times_max' => $this->timesMax,
             )

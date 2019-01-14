@@ -21,7 +21,7 @@ services:
             - "%cocorico.dashboard_max_per_page%"
             - "@cocorico.mailer.twig_swift"
 
-    #todo: Split it in muliple services
+    #todo: Split it in multiple services
     cocorico.booking.manager:
         class: Cocorico\CoreBundle\Model\Manager\BookingManager
         arguments:
@@ -82,6 +82,15 @@ services:
     #Documents Manager
     cocorico.listing_availability.manager:
         class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager
+        arguments:
+            - "@doctrine.odm.mongodb.document_manager"
+            - "@cocorico.listing_availability_time.manager"
+            - "%cocorico.time_unit%"
+            - "%cocorico.listing_availability_status%"
+            - "%cocorico.booking.end_day_included%"
+
+    cocorico.listing_availability_time.manager:
+        class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityTimeManager
         arguments:
             - "@doctrine.odm.mongodb.document_manager"
             - "%cocorico.time_unit%"

@@ -179,7 +179,9 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 //Set Booking Amounts or throw Error if booking is invalid
                 /** @var Booking $booking */
                 $booking = $event->getData();
-                $errors = $this->bookingManager->checkBookingAvailabilityAndSetAmounts($booking);
+                $result = $this->bookingManager->checkBookingAndSetAmounts($booking);
+                $booking = $result->booking;
+                $errors = $result->errors;
 
                 if (!count($errors)) {
                     $event->setData($booking);

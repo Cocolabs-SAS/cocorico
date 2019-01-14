@@ -28,6 +28,7 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $categories;
     protected $characteristics;
     protected $dateRange;
+    /** @var  TimeRange */
     protected $timeRange;
     //Number of flexibility days
     protected $flexibility;
@@ -160,6 +161,12 @@ class ListingSearchRequest implements TranslationContainerInterface
      */
     public function getTimeRange()
     {
+        //Tmp solution to resolve some missing TimeRange constructor call
+        //Ensure if end is greater than start then end will be incremented  by one day
+        if ($this->timeRange) {
+            $this->timeRange = new TimeRange($this->timeRange->getStart(), $this->timeRange->getEnd());
+        }
+
         return $this->timeRange;
     }
 

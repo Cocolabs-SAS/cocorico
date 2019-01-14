@@ -284,6 +284,25 @@ abstract class BaseBooking
     }
 
     /**
+     * Return end date depending on overlapping time range.
+     * If time range overlap days then end date will be incremented by one day.
+     * ex :
+     * - 27/05/2017 > 29/05/2017 22h > 23h : real end date = 29/05/2017
+     * - 27/05/2017 > 29/05/2017 22h > 4h : real end date = 30/05/2017
+     *
+     * @return \DateTime
+     */
+    public function getEndDay()
+    {
+        $end = clone $this->getEnd();
+        if ($this->getTimeRange()->overlapDays()) {
+            $end->modify('+1 day');
+        }
+
+        return $end;
+    }
+
+    /**
      * @param \DateTime $end
      */
     public function setEnd($end)
@@ -334,6 +353,26 @@ abstract class BaseBooking
         }
 
         return new \DateTime($start);
+    }
+
+    /**
+     * Return date range according to booking start and end date
+     *
+     * @return DateRange
+     */
+    public function getDateRange()
+    {
+        return new DateRange($this->getStart(), $this->getEnd());
+    }
+
+    /**
+     * Return time range according to booking start time and end time
+     *
+     * @return TimeRange
+     */
+    public function getTimeRange()
+    {
+        return new TimeRange($this->getStartTime(), $this->getEndTime());
     }
 
     /**
