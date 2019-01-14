@@ -191,18 +191,18 @@ liip_imagine:
                 auto_rotate: ~
                 thumbnail: { size: ["%cocorico.listing_img_medium_w%", "%cocorico.listing_img_medium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_xxlarge:
-            quality: 100
+            quality: 80
             filters:
                 auto_rotate: ~
                 thumbnail: { size: ["%cocorico.listing_img_xxlarge_w%", "%cocorico.listing_img_xxlarge_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         listing_xlarge:
-            quality: 100
+            quality: 85
             filters:
                 auto_rotate: ~
                 upscale: { min: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"] }
                 thumbnail: { size: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
         listing_large:
-            quality: 85
+            quality: 90
             filters:
                 auto_rotate: ~
                 upscale: { min: ["%cocorico.listing_img_large_w%", "%cocorico.listing_img_large_h%"] }
