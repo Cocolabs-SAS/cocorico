@@ -29,6 +29,7 @@ class TwigSwiftMailer implements MailerInterface
     protected $translator;
     protected $timeUnit;
     protected $timeUnitIsDay;
+    protected $locale;
     /** @var  array locales */
     protected $locales;
     protected $templates;
