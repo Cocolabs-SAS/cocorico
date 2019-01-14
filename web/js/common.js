@@ -112,6 +112,11 @@ $(function () {
     cleanHash();
 
     fixIEMobile10();
+    // Clearable input types
+    $('input.clearable, .clearable input[type=text]').clearSearch({
+        callback: function () {
+        }
+    });
 
 });
 

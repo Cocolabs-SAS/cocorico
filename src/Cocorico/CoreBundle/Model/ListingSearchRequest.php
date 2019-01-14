@@ -45,6 +45,7 @@ class ListingSearchRequest implements TranslationContainerInterface
     //todo: decouple category fields and delivery
     protected $categoriesFields;
     protected $delivery;
+    protected $keywords;
 
     public static $sortByValues = array(
         'recommended' => 'listing.search.sort_by.recommended',
@@ -112,6 +113,12 @@ class ListingSearchRequest implements TranslationContainerInterface
         $delivery = $this->request->query->get("delivery");
         if ($delivery) {
             $this->delivery = $delivery;
+        }
+
+        //Keywords
+        $keywords = $this->request->query->get("keywords");
+        if ($keywords) {
+            $this->keywords = $keywords;
         }
     }
 
@@ -331,6 +338,22 @@ class ListingSearchRequest implements TranslationContainerInterface
     public function setDelivery($delivery)
     {
         $this->delivery = $delivery;
+    }
+
+    /**
+     * @return string
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
+    }
+
+    /**
+     * @param string $keywords
+     */
+    public function setKeywords($keywords)
+    {
+        $this->keywords = $keywords;
     }
 
     /**

@@ -2202,11 +2202,37 @@ ul.collection {
     text-decoration: none;
     color: #c6ccd2;
     transition: background 0.4s;
-    font-size: 36px;
+    font-size: 20px;
 }
 
 .clear_input:hover {
     color: #afb8c0;
+}
+
+/**
+* Elastic search
+*/
+.form-category .keyword {
+    margin-top: -55px;
+    float: right;
+}
+
+.form-category .keyword .col {
+    margin-right: 0;
+}
+
+.form-category .keyword label {
+    display: none;
+}
+
+.form-category .keyword .field-holder {
+    width: 220px;
+}
+
+@media screen and (max-width: 767px) {
+    .form-category .keyword {
+        display: none;
+    }
 }
 
 .author-info a {
