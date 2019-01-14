@@ -11,7 +11,6 @@
 
 namespace Cocorico\PageBundle\Repository;
 
-use Cocorico\PageBundle\Entity\PageTranslation;
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;

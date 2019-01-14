@@ -37,7 +37,7 @@ class ListingListingCategoriesToListingCategoriesTransformer implements DataTran
      * Used to convert data from the model to the normalized format.
      *
      * @param  ListingListingCategory[] $listingListingCategories
-     * @return ArrayCollection
+     * @return array
      */
     public function transform($listingListingCategories)
     {

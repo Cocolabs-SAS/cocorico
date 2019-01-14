@@ -45,7 +45,8 @@ class BookingFormHandler
         RequestStack $requestStack,
         BookingManager $bookingManager,
         EventDispatcherInterface $dispatcher
-    ) {
+    )
+    {
         $this->request = $requestStack->getCurrentRequest();
         $this->bookingManager = $bookingManager;
         $this->dispatcher = $dispatcher;
@@ -71,7 +72,8 @@ class BookingFormHandler
         \DateTime $end = null,
         \DateTime $startTime = null,
         \DateTime $endTime = null
-    ) {
+    )
+    {
         //Id of an eventual booking draft
         $bookingId = $this->request->query->get('id');
         //If no booking draft exists a new booking is initialized

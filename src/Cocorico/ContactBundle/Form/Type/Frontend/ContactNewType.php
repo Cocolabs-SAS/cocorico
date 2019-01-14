@@ -11,7 +11,6 @@
 
 namespace Cocorico\ContactBundle\Form\Type\Frontend;
 
-use Cocorico\ContactBundle\Entity\Contact;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;

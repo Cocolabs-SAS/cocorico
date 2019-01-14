@@ -59,6 +59,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $listingDuplication;
     protected $minStartDelay;
     protected $minStartTimeDelay;
+    protected $addressDelivery;
 
     /**
      *

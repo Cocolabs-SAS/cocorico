@@ -22,6 +22,7 @@ class TwigSwiftMailer implements MailerInterface
 {
     const TRANS_DOMAIN = 'cocorico_mail';
 
+    protected $locale;
     protected $mailer;
     protected $router;
     protected $twig;

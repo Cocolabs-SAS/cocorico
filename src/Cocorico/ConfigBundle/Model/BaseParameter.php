@@ -11,7 +11,6 @@
 
 namespace Cocorico\ConfigBundle\Model;
 
-use Cocorico\ConfigBundle\Entity\Parameter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -60,7 +59,7 @@ abstract class BaseParameter
      * Set name
      *
      * @param string $name
-     * @return Parameter
+     * @return $this
      */
     public function setName($name)
     {
@@ -83,7 +82,7 @@ abstract class BaseParameter
      * Set value
      *
      * @param string $value
-     * @return Parameter
+     * @return $this
      */
     public function setValue($value)
     {

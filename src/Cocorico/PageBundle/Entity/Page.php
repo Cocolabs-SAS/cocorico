@@ -43,7 +43,6 @@ class Page extends BasePage
 
     public function __construct()
     {
-        $this->published = false;
     }
 
     /**

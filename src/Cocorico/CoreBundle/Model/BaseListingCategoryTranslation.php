@@ -12,7 +12,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\ListingCategoryTranslation;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -59,7 +58,7 @@ abstract class BaseListingCategoryTranslation
      * Set name
      *
      * @param  string $name
-     * @return ListingCategoryTranslation
+     * @return $this
      */
     public function setName($name)
     {

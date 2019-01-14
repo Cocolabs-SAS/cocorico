@@ -124,7 +124,7 @@ class TranslateManager
      * @param  string $fromLanguage
      * @param  string $toLanguage
      * @param  array  $text
-     * @return string
+     * @return array
      */
     public function getTranslation($fromLanguage, $toLanguage, $text = array())
     {

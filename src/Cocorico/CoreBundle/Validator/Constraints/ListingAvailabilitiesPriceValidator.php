@@ -27,8 +27,8 @@ class ListingAvailabilitiesPriceValidator extends ConstraintValidator
     }
 
     /**
-     * @param int        $value
-     * @param Constraint $constraint
+     * @param int                                   $value
+     * @param ListingAvailabilitiesPrice|Constraint $constraint
      */
     public function validate($value, Constraint $constraint)
     {

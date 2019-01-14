@@ -42,7 +42,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     private $bookingManager;
     private $dispatcher;
     protected $allowSingleDay;
-    protected $endDayInclude;
+    protected $endDayIncluded;
     protected $minStartDelay;
     protected $minStartTimeDelay;
     private $currency;

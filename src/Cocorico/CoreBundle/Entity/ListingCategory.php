@@ -212,11 +212,13 @@ class ListingCategory extends BaseListingCategory
 
     /**
      * @param ArrayCollection $listingListingCategories
-     * @return ArrayCollection
+     * @return $this
      */
     public function setListingListingCategories(ArrayCollection $listingListingCategories)
     {
         $this->listingListingCategories = $listingListingCategories;
+
+        return $this;
     }
 
     public function getName()

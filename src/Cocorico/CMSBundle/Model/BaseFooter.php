@@ -26,7 +26,7 @@ abstract class BaseFooter
      *
      * @var boolean
      */
-    protected $published;
+    protected $published = false;
 
     /**
      * Translation proxy

@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\ListingCategory;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -63,7 +62,7 @@ abstract class BaseListingCategory
      * Set lft
      *
      * @param  integer $lft
-     * @return ListingCategory
+     * @return $this
      */
     public function setLft($lft)
     {
@@ -86,7 +85,7 @@ abstract class BaseListingCategory
      * Set lvl
      *
      * @param  integer $lvl
-     * @return ListingCategory
+     * @return $this
      */
     public function setLvl($lvl)
     {
@@ -109,7 +108,7 @@ abstract class BaseListingCategory
      * Set rgt
      *
      * @param  integer $rgt
-     * @return ListingCategory
+     * @return $this
      */
     public function setRgt($rgt)
     {
@@ -132,7 +131,7 @@ abstract class BaseListingCategory
      * Set root
      *
      * @param  integer $root
-     * @return ListingCategory
+     * @return $this
      */
     public function setRoot($root)
     {

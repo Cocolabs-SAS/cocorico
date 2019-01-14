@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
-use Cocorico\CoreBundle\Model\ListingLocationSearchRequest;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
