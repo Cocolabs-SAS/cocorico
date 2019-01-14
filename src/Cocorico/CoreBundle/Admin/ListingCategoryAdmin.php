@@ -12,6 +12,9 @@
 namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\ListingCategory;
+use Doctrine\ORM\Query;
+use Doctrine\ORM\QueryBuilder;
+use Exporter\Source\DoctrineORMQuerySourceIterator;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -24,12 +27,6 @@ class ListingCategoryAdmin extends Admin
     protected $baseRoutePattern = 'listing-category';
     protected $locales;
     protected $bundles;
-
-    // setup the default sort column and order
-    protected $datagridValues = array(
-        '_sort_order' => 'ASC',
-        '_sort_by' => 'root, lft'
-    );
 
     public function setLocales($locales)
     {
@@ -166,8 +163,21 @@ class ListingCategoryAdmin extends Admin
         return array(
             'Id' => 'id',
             'name' => 'name',
-            'category' => 'parent'
+            'parent' => 'parent',
         );
+    }
+
+    public function createQuery($context = 'list')
+    {
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+
+        if ($context === 'list') {
+            $query->orderBy('o.root', 'ASC');
+            $query->addOrderBy('o.lft', 'ASC');
+        }
+
+        return $query;
     }
 
     public function getDataSourceIterator()
@@ -175,6 +185,7 @@ class ListingCategoryAdmin extends Admin
         $datagrid = $this->getDatagrid();
         $datagrid->buildPager();
 
+        /** @var DoctrineORMQuerySourceIterator $dataSourceIt */
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y');
 
