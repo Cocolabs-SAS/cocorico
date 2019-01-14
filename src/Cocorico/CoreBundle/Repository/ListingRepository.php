@@ -69,12 +69,15 @@ class ListingRepository extends EntityRepository
      */
     public function getFindOneBySlugQuery($slug, $locale, $joined = true)
     {
+        $slugParts = explode('-', $slug);
+        $listingId = end($slugParts);
+
         $queryBuilder = $this->createQueryBuilder('l')
             ->addSelect("t")
             ->leftJoin('l.translations', 't')
-            ->where('t.slug = :slug')
+            ->where('l.id = :listingId')
             ->andWhere('t.locale = :locale')
-            ->setParameter('slug', $slug)
+            ->setParameter('listingId', $listingId)
             ->setParameter('locale', $locale);
 
         if ($joined) {
@@ -98,10 +101,10 @@ class ListingRepository extends EntityRepository
     public function findOneBySlug($slug, $locale, $joined = true)
     {
         try {
-            $query = $this->getFindOneBySlugQuery($slug, $locale, $joined);
+            $queryBuilder = $this->getFindOneBySlugQuery($slug, $locale, $joined);
 
             //$query->useResultCache(true, 3600, 'findOneBySlug');
-            return $query->getQuery()->getSingleResult();
+            return $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
             return null;
         }
@@ -279,5 +282,72 @@ class ListingRepository extends EntityRepository
             ->setParameter('locale', $locale);
 
         return $queryBuilder;
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingTranslationId
+     * @return array
+     */
+    public function findByTranslationId($listingTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.translations', 'lt')
+            ->where('lt.id = :listingTranslationId')
+            ->setParameter('listingTranslationId', $listingTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingListingCategoryId
+     * @return array
+     */
+    public function findByListingListingCategoryId($listingListingCategoryId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->where('llc.id = :listingListingCategoryId')
+            ->setParameter('listingListingCategoryId', $listingListingCategoryId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingCategoryTranslationId
+     * @return array
+     */
+    public function findByListingCategoryTranslationId($listingCategoryTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->innerJoin('llc.category', 'lc')
+            ->innerJoin('lc.translations', 'lct')
+            ->where('lct.id = :listingCategoryTranslationId')
+            ->setParameter('listingCategoryTranslationId', $listingCategoryTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $userTranslationId
+     * @return array
+     */
+    public function findByUserTranslationId($userTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.user', 'lu')
+            ->innerJoin('lu.translations', 'lut')
+            ->where('lut.id = :userTranslationId')
+            ->setParameter('userTranslationId', $userTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 }
