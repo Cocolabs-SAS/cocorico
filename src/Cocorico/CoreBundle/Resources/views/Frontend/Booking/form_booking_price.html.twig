@@ -57,7 +57,7 @@
         {% set duration = booking.duration(endDayIncluded, timeUnit) %}
         {% if duration %}
             <em class="text">
-                {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
+                {{ 'booking.duration:'|trans ~ " " ~ duration|add_time_unit_text }}
             </em>
         {% endif %}
 
