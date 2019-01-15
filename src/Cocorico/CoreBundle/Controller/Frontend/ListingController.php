@@ -109,6 +109,9 @@ class ListingController extends Controller
      */
     public function showAction(Request $request, Listing $listing)
     {
+        if ($redirect = $this->handleSlugChange($listing, $request->get('slug'))) {
+            return $redirect;
+        }
         $reviews = $this->container->get('cocorico.review.manager')->getListingReviews($listing);
 
         //Breadcrumbs
@@ -122,5 +125,24 @@ class ListingController extends Controller
                 'reviews' => $reviews,
             )
         );
+    }
+
+    /**
+     * Handle listing slug change 301 redirection
+     *
+     * @param Listing $listing
+     * @param         $slug
+     * @return bool|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    private function handleSlugChange(Listing $listing, $slug)
+    {
+        if ($slug != $listing->getSlug()) {
+            return $this->redirect(
+                $this->generateUrl('cocorico_listing_show', array('slug' => $listing->getSlug())),
+                301
+            );
+        }
+
+        return false;
     }
 }
