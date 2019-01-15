@@ -12,9 +12,52 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
-- Fix JS time range minutes comparison
 
 ### Changed
+
+
+## [0.9.1] - (2019-01-15)
+
+### Added
+- Add translations checking functionality
+- Add Cookie consent box
+- Add 301 redirect to listing show URL when slug has changed
+
+### Fixed
+- Fix registration email subject translation
+- Fix JS time range minutes comparison
+- Fix warning messages while route translations extractions
+
+### Changed
+- Ensure that one to many entities are not removing in sonata admin through sonata_type_collection
+- Enhance booking button in booking price form
+
+
+## [0.9.0] - (2019-01-10)
+
+### Added
+
+### Fixed
+
+### Changed
+- Add BookingSubscriber for new booking
+- Update MangopayBundle to 0.5
+
+
+## [0.8.1] - (2019-01-10)
+
+### Added
+- Add user addresses in admin
+- Add user delivery addresses in admin
+
+### Fixed
+- Add form errors in edit listing location
+- Fix refund amount with 3 decimals
+
+### Changed
+- Move date and time js to a separate file
+- Set TimeRangeType options overridable
+- Set user locale equal to default app locale in User DataFixtures
 
 
 ## [0.8.0] - (2019-01-02)
