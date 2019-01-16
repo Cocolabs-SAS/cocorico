@@ -69,12 +69,15 @@ class ListingRepository extends EntityRepository
      */
     public function getFindOneBySlugQuery($slug, $locale, $joined = true)
     {
+        $slugParts = explode('-', $slug);
+        $listingId = end($slugParts);
+
         $queryBuilder = $this->createQueryBuilder('l')
             ->addSelect("t")
             ->leftJoin('l.translations', 't')
-            ->where('t.slug = :slug')
+            ->where('l.id = :listingId')
             ->andWhere('t.locale = :locale')
-            ->setParameter('slug', $slug)
+            ->setParameter('listingId', $listingId)
             ->setParameter('locale', $locale);
 
         if ($joined) {
@@ -98,10 +101,10 @@ class ListingRepository extends EntityRepository
     public function findOneBySlug($slug, $locale, $joined = true)
     {
         try {
-            $query = $this->getFindOneBySlugQuery($slug, $locale, $joined);
+            $queryBuilder = $this->getFindOneBySlugQuery($slug, $locale, $joined);
 
             //$query->useResultCache(true, 3600, 'findOneBySlug');
-            return $query->getQuery()->getSingleResult();
+            return $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $e) {
             return null;
         }

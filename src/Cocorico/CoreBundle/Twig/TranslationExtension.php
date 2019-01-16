@@ -64,12 +64,17 @@ class TranslationExtension extends BaseTranslationExtension
         if (null === $domain) {
             $domain = 'messages';
         }
-
         if ('messages' !== $domain && false === $this->translationExists($id, $domain, $locale)) {
             $domain = 'messages';
         }
 
-        return $this->getTranslator()->trans($id, $parameters, $domain, $locale) . self::TRANS_SUFFIX;
+        return $this->getTranslator()->trans(
+        /** @Ignore */
+            $id,
+            $parameters,
+            $domain,
+            $locale
+        ) . self::TRANS_SUFFIX;
     }
 
     public function transchoiceOverride($id, $number, array $parameters = array(), $domain = null, $locale = null)
@@ -87,6 +92,7 @@ class TranslationExtension extends BaseTranslationExtension
         }
 
         return $this->getTranslator()->transChoice(
+        /** @Ignore */
             $id,
             $number,
             array_merge(array('%count%' => $number), $parameters),

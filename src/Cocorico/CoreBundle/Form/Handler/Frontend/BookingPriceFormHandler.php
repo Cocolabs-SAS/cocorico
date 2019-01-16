@@ -91,34 +91,4 @@ class BookingPriceFormHandler
         return $booking;
     }
 
-    /**
-     * Process form
-     *
-     * @return boolean
-     */
-    public function process()
-    {
-        // Check the method
-        if ('POST' == $this->request->getMethod()) {
-            // Bind value with form
-            $this->form->handleRequest($this->request);
-
-            $data = $this->form->getData();
-            $this->onSuccess($data);
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     *
-     * @param array $data
-     *
-     */
-    protected function onSuccess($data)
-    {
-
-    }
 }

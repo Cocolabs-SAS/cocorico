@@ -381,8 +381,8 @@ $.fn.submitAjaxForm = function (callbackSuccess) {
             beforeSend: function (xhr) {
                 $container.find(".flashes").hide();
             },
-            success: function (html) {
-                $container.replaceWith(html);
+            success: function (response, status, xhr) {
+                $container.replaceWith(response);
                 callbackSuccess();
             }
         });

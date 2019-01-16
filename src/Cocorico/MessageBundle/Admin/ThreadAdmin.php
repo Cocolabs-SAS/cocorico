@@ -152,6 +152,9 @@ class ThreadAdmin extends Admin
                 'messages',
                 'sonata_type_collection',
                 array(
+                    // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
+                    // then the child entities will be removed while saving
+                    'disabled' => true,
                     'type_options' => array(
                         // Prevents the "Delete" option from being displayed
                         'delete' => false,
