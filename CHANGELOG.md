@@ -16,6 +16,18 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 
 
+## [0.10.0] - (2019-01-16)
+
+### Added
+- Add compatibility for Mangopay Card Saving Bundle v0.1.0 and MangoPay Bundle v0.6
+- Add InsertNewTranslationsCommand to copy existing translatable contents into new locale contents
+
+### Fixed
+- Fix listing availabilities checking in not day mode and with availabilities by default unavailable
+
+### Changed
+
+
 ## [0.9.1] - (2019-01-15)
 
 ### Added
