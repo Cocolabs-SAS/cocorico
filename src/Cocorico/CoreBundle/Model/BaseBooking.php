@@ -32,12 +32,10 @@ abstract class BaseBooking
     /* Status */
     const STATUS_DRAFT = 0;
     const STATUS_NEW = 1;
-//    const STATUS_ACCEPTED = 2;
     const STATUS_PAYED = 3;
     const STATUS_EXPIRED = 4;
     const STATUS_REFUSED = 5;
     const STATUS_CANCELED_ASKER = 6;
-//    const STATUS_CANCELED_OFFERER = 7;
     const STATUS_PAYMENT_REFUSED = 8;
 
     public static $statusValues = array(

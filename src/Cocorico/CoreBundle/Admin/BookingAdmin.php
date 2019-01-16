@@ -532,8 +532,21 @@ class BookingAdmin extends Admin
                         'disabled' => true,
                         'label' => 'admin.booking.mangopay_payin_pre_auth_id.label',
                     )
-                )
-                ->end();
+                );
+
+            if (array_key_exists("CocoricoMangoPayCardSavingBundle", $this->bundles)) {
+                $formMapper
+                    ->add(
+                        'card',
+                        null,
+                        array(
+                            'disabled' => true,
+                            'label' => 'admin.booking.user_card.label',
+                        )
+                    );
+            }
+
+            $formMapper->end();
         }
     }
 
