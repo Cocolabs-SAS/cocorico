@@ -473,13 +473,22 @@ class BookingManager extends BaseManager
                                 $errors[] = 'unavailable';
                                 break;
                             }
+
                             //We add to amount the corresponding price reported to one minute
                             $amount -= $amountByMinute;
                             $amount += $times[$k]["p"] / $this->timeUnit;
-                        } else {
-                            //We add to amount the price for the corresponding day reported to one minute
-                            $amount -= $amountByMinute;
-                            $amount += $listing->getPrice() / $this->timeUnit;
+                        } else {//No times defined for this minute
+                            //If listing is by default available then it means listing is available
+                            if ($this->defaultListingStatus == ListingAvailability::STATUS_AVAILABLE) {
+                                //We add to amount the price for the corresponding day reported to one minute
+                                $amount -= $amountByMinute;
+                                $amount += $listing->getPrice() / $this->timeUnit;
+                            } else {
+                                //If listing is by default unavailable then it means listing is unavailable
+                                $amount = 0;
+                                $errors[] = 'unavailable';
+                                break;
+                            }
                         }
                     }
 
@@ -1189,7 +1198,6 @@ class BookingManager extends BaseManager
 
         return false;
     }
-
 
 
     /**
