@@ -40,30 +40,32 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $page->translate('en')->setDescription(
             '<p>We are Cocorico of course!</p>
-            <h2>What is it?</h2>
+            <h3>What is it?</h3>
             <p>Cocorico is an open source project dedicated to building a powerful (and free) solution for rental and service marketplaces.</p>
-            <h2>Who&rsquo;s paying for all of this?</h2>
-            <p><a href="http://www.cocolabs.io" target="_blank">Cocolabs</a>&nbsp;are. They are a Paris based web agency specialised in building collaborative marketplaces for the rental and service industry. Over the years they decided to share their work by funding the development of Cocorico.</p>
-            <h2>What did you use to build Cocorico?</h2>
+            <h3>Who&rsquo;s paying for all of this?</h3>
+            <p><a href="http://www.sofracs.com" target="_blank" title="marketplace solution">SOFRACS</a>&nbsp;is. They are a Paris based web agency specialised in building collaborative marketplaces for the rental and service industry. Over the years they decided to share their work by funding the development of Cocorico.</p>
+            <h3>What did you use to build Cocorico?</h3>
             <p>Cocorico is based on Symfony 2.</p>
-            <h2>Where can I get it?</h2>
-            <p>Here: <a href="https://github.com/Cocolabs-SAS/cocorico" target="_blank">https://github.com/Cocolabs-SAS/cocorico</a></p>
-            <h2>Do you have a mascot?</h2>
-            <p>Here&rsquo;s a video of our cute hen &ldquo;Cocotte&rdquo;: <a href="http://cocorico.rocks/">http://cocorico.rocks/</a></p>'
+            <h3>Where can I get it?</h3>
+            <p>Here: <a target="_blank" href="https://github.com/Cocolabs-SAS/cocorico">https://github.com/Cocolabs-SAS/cocorico</a></p>
+            <h3>Do you have a mascot?</h3>
+            <p>Here&rsquo;s a video of our cute hen &ldquo;Cocotte&rdquo;: <a href="http://cocorico.rocks/">http://cocorico.rocks/</a></p>
+            '
         );
         $page->translate('fr')->setDescription(
             '<p>Nous sommes Cocorico bien s&ucirc;r !</p>
-            <h2>Qu&#39;est-ce que c&#39;est?</h2>
+            <h3>Qu&#39;est-ce que c&#39;est?</h3>
             <p>Cocorico est un projet open source d&eacute;di&eacute; &agrave; la r&eacute;alisation d&#39;une solution puissante (et gratuite) pour les places de march&eacute; collaboratives (ou pas &agrave; vrai dire).</p>
-            <h2>Qui finance tout &ccedil;a ?</h2>
-            <p><a href="http://www.cocolabs.io" target="_blank">Cocolabs</a>. Nous r&eacute;alisons des marketplaces pour de nombreuses entreprises &agrave; travers le monde et sommes les cr&eacute;teurs de Cocorico.&nbsp;</p>
-            <h2>Qu&rsquo;utilisez-vous sur Cocorico ?</h2>
+            <h3>Qui finance tout &ccedil;a ?</h3>
+            <p>La <a href="http://www.sofracs.com" title="création de marketplace">SOFRACS</a>. C&rsquo;est une agence web bas&eacute;e &agrave; Paris sp&eacute;cialis&eacute;e dans la r&eacute;alisation de places de march&eacute; collaboratives de location, de services, et de vente. Au fil des ans, ils ont d&eacute;cid&eacute; de partager leurs connaissances en finan&ccedil;ant le d&eacute;veloppement de Cocorico.</p>
+            <h3>Qu&rsquo;utilisez-vous sur Cocorico ?</h3>
             <p>Cocorico utilise Symfony 2.</p>
-            <h2>O&ugrave; puis-je l&rsquo;obtenir?</h2>
-            <p>Ici : <a href="https://github.com/Cocolabs-SAS/cocorico" target="_blank">https://github.com/Cocolabs-SAS/cocorico</a></p>
-            <h2>Avez-vous une mascotte ?</h2>
-            <p>Voici une vid&eacute;o de &quot;Cocotte&quot;&nbsp;: http://<a href="http://cocorico.rocks/">cocorico.rocks/</a></p>'
+            <h3>O&ugrave; puis-je l&rsquo;obtenir?</h3>
+            <p>Ici : <a target="_blank" href="https://github.com/Cocolabs-SAS/cocorico">https://github.com/Cocolabs-SAS/cocorico</a></p>
+            <h3>Avez-vous une mascotte ?</h3>
+            <p>Voici une vid&eacute;o de &quot;Cocotte&quot;&nbsp;: <a href="http://cocorico.rocks/">http://cocorico.rocks/</a></p>'
         );
+
 
         //Page How it Works
         $page1 = new Page();
