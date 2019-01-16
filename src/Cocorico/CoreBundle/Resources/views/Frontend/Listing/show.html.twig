@@ -245,19 +245,21 @@
 
                                     <!-- comments -->
                                     <div role="tabpanel" class="tab-pane" id="comments">
-                                        <div class="blog">
-                                            <div class="head">
-                                                <h2>{{ 'listing.comments.header'|trans }}</h2>
-                                                <!-- rating -->
-                                                {% if listing.averageRating %}
-                                                    {{ listing.averageRating | cocorico_star_rating }}
-                                                {% endif %}
+                                        {% if reviews|length > 0 %}
+                                            <div class="blog">
+                                                <div class="head">
+                                                    <h2>{{ 'listing.comments.header'|trans }}</h2>
+                                                    <!-- rating -->
+                                                    {% if listing.averageRating %}
+                                                        {{ listing.averageRating | cocorico_star_rating }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="posts-holder">
+                                                    <!-- post -->
+                                                    {% include 'CocoricoCoreBundle:Dashboard/Listing:_rating_comments.html.twig' with {'reviews': reviews} only %}
+                                                </div>
                                             </div>
-                                            <div class="posts-holder">
-                                                <!-- post -->
-                                                {% include 'CocoricoCoreBundle:Dashboard/Listing:_rating_comments.html.twig' with {'reviews': reviews} only %}
-                                            </div>
-                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
