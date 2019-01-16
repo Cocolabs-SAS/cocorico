@@ -128,6 +128,11 @@ cocorico_listing_alert_dashboard_alert:
     -   text: 'My Alerts'
         route: 'cocorico_listing_alert_dashboard_alert'
 
+cocorico_mangopay_card_saving_dashboard_card:
+    -   text: 'Profile'
+        route: 'cocorico_user_dashboard_profile_edit_about_me'
+    -   text: 'Payment cards'
+        route: 'cocorico_mangopay_card_saving_dashboard_card'
 
 ##Message
 cocorico_dashboard_message:
