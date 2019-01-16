@@ -491,6 +491,13 @@ $.fn.extend({
     }
 });
 
+/**
+ * Refresh modal on load
+ */
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+    $(this).find(".modal-content").html('');
+});
 
 /**
  * Handle Unauthorised Ajax Access
