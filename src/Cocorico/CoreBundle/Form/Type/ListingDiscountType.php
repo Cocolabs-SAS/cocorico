@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,7 +27,7 @@ class ListingDiscountType extends AbstractType
         $builder
             ->add(
                 'discount',
-                'integer',
+                IntegerType::class,
                 array(
                     'label' => 'listing_edit.form.discount',
                     'attr' => array(
@@ -39,7 +40,7 @@ class ListingDiscountType extends AbstractType
             )
             ->add(
                 'fromQuantity',
-                'integer',
+                IntegerType::class,
                 array(
                     'label' => 'listing_edit.form.from_quantity',
                     'attr' => array(

@@ -12,6 +12,8 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +24,7 @@ class UserAddressFormType extends AbstractType
         $builder
             ->add(
                 'address',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.address.address',
                     'required' => false
@@ -46,7 +48,7 @@ class UserAddressFormType extends AbstractType
             )
             ->add(
                 'country',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.address.country',
                     'required' => false,

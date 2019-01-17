@@ -19,6 +19,8 @@ use Cocorico\CoreBundle\Repository\ListingCategoryRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -172,7 +174,7 @@ class ListingSearchResultType extends AbstractType
             )
             ->add(
                 'sort_by',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(ListingSearchRequest::$sortByValues),
                     'empty_value' => 'listing_search.form.sort_by.empty_value',
@@ -181,7 +183,7 @@ class ListingSearchResultType extends AbstractType
             )
             ->add(
                 'page',
-                'hidden'
+                HiddenType::class
             );
 
         //If time unit is not day then we add time in search engine
@@ -218,7 +220,7 @@ class ListingSearchResultType extends AbstractType
         if ($this->timeUnitFlexibility) {
             $builder->add(
                 'flexibility',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing_search.form.flexibility',
                     'empty_value' => 'listing_search.form.flexibility',

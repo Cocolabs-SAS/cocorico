@@ -15,6 +15,8 @@ use Cocorico\CoreBundle\Entity\BookingUserAddress;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Entity\UserAddress;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -44,7 +46,7 @@ class BookingUserAddressFormType extends AbstractType
         $builder
             ->add(
                 'address',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.address.address',
                     'required' => true
@@ -68,7 +70,7 @@ class BookingUserAddressFormType extends AbstractType
             )
             ->add(
                 'country',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.address.country',
                     'required' => true,

@@ -18,6 +18,8 @@ use Cocorico\UserBundle\Entity\UserImage;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -88,7 +90,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'images',
-                'collection',
+                CollectionType::class,
                 array(
                     'allow_delete' => true,
                     'type' => new UserImageType(),
@@ -98,7 +100,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'language',
-                'language',
+                LanguageType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.language',
@@ -109,7 +111,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'languages',
-                'collection',
+                CollectionType::class,
                 array(
                     'allow_delete' => true,
                     'allow_add' => true,
@@ -121,7 +123,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'motherTongue',
-                'language',
+                LanguageType::class,
                 array(
                     'label' => 'cocorico.motherTongue',
                     'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),

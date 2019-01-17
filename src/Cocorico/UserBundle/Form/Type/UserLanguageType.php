@@ -12,6 +12,7 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,7 @@ class UserLanguageType extends AbstractType
         $builder
             ->add(
                 'code',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false

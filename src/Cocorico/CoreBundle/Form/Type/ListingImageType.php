@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Form\Type;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,7 +30,7 @@ class ListingImageType extends AbstractType
         $builder
             ->add(
                 'name',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false
@@ -36,7 +38,7 @@ class ListingImageType extends AbstractType
             )
             ->add(
                 'file',
-                'file',
+                FileType::class,
                 array(
                     'image_path' => 'webPath',
                     'imagine_filter' => 'listing_xxmedium',
@@ -50,7 +52,7 @@ class ListingImageType extends AbstractType
             )
             ->add(
                 'position',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false,

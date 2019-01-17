@@ -14,6 +14,7 @@ namespace Cocorico\ReviewBundle\Form\Type\Dashboard;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,7 +49,7 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
             )
             ->add(
                 'comment',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'review.form.comment.label',
                     'required' => true,

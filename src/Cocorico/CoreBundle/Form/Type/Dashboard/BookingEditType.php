@@ -15,6 +15,8 @@ use Cocorico\CoreBundle\Entity\Booking;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -35,7 +37,7 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
         $builder
             ->add(
                 "tac",
-                "checkbox",
+                CheckboxType::class,
                 array(
                     'label' => 'booking.form.tac',
                     'mapped' => false,
@@ -48,7 +50,7 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
             )
             ->add(
                 'message',
-                'textarea',
+                TextareaType::class,
                 array(
                     'mapped' => false,
                     'label' => 'booking.form.message',

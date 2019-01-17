@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Form\Type\ListingDiscountType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +25,7 @@ class ListingEditDiscountType extends AbstractType
         $builder
             ->add(
                 'discounts',
-                'collection',
+                CollectionType::class,
                 array(
                     'allow_delete' => true,
                     'allow_add' => true,

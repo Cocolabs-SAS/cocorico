@@ -12,6 +12,8 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +29,7 @@ class UserImageType extends AbstractType
         $builder
             ->add(
                 'name',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false
@@ -35,7 +37,7 @@ class UserImageType extends AbstractType
             )
             ->add(
                 'file',
-                'file',
+                FileType::class,
                 array(
                     'image_path' => 'webPath',
                     'imagine_filter' => 'user_small',
@@ -49,7 +51,7 @@ class UserImageType extends AbstractType
             )
             ->add(
                 'position',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false,

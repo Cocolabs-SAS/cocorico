@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -29,7 +30,7 @@ class ListingEditAvailabilityStatusType extends AbstractType
         $builder
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(ListingAvailability::$visibleValues),
                     'choices_as_values' => true

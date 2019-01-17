@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Type;
@@ -25,7 +26,7 @@ class NumberRangeType extends AbstractType
         $builder
             ->add(
                 'min',
-                'number',
+                NumberType::class,
                 array_merge(
                     array(
                         'constraints' => array(
@@ -38,7 +39,7 @@ class NumberRangeType extends AbstractType
                 )
             )->add(
                 'max',
-                'number',
+                NumberType::class,
                 array_merge(
                     array(
                         'constraints' => array(

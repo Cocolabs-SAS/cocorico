@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,7 +36,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'city',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.city',
                     'translation_domain' => 'cocorico_listing',
@@ -44,7 +45,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'zip',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.zip',
                     'translation_domain' => 'cocorico_listing',
@@ -53,7 +54,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'route',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.route',
                     'translation_domain' => 'cocorico_listing',
@@ -62,7 +63,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'street_number',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.street_number',
                     'translation_domain' => 'cocorico_listing',

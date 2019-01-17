@@ -20,6 +20,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -154,7 +155,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'tac',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,

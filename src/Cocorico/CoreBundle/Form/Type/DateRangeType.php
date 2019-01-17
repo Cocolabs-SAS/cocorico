@@ -15,6 +15,9 @@ use Cocorico\CoreBundle\Form\DataTransformer\DateRangeViewTransformer;
 use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Validator\DateRangeValidator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -70,7 +73,7 @@ class DateRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_days',
-                                'choice',
+                                ChoiceType::class,
                                 array(
                                     'choices' => array_combine(range(1, $this->daysMax), range(1, $this->daysMax)),
                                     'data' => $nbDays,
@@ -88,7 +91,7 @@ class DateRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_days',
-                                'hidden',
+                                HiddenType::class,
                                 array(
                                     'data' => 1
                                 )
@@ -99,7 +102,7 @@ class DateRangeType extends AbstractType
                 $form
                     ->add(
                         'start',
-                        'date',
+                        DateType::class,
                         array_merge(
                             array(
                                 'property_path' => 'start',

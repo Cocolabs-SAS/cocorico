@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,7 @@ class BookingStatusFilterType extends AbstractType
         $builder
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */

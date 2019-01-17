@@ -12,6 +12,11 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,14 +28,14 @@ class ProfileContactFormType extends AbstractType
         $builder
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array(
                     'label' => 'form.user.email'
                 )
             )
             ->add(
                 'phonePrefix',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.phone_prefix',
                     'required' => false,
@@ -39,7 +44,7 @@ class ProfileContactFormType extends AbstractType
             )
             ->add(
                 'phone',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.phone',
                     'required' => false
@@ -47,7 +52,7 @@ class ProfileContactFormType extends AbstractType
             )
             ->add(
                 'plainPassword',
-                'repeated',
+                RepeatedType::class,
                 array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'cocorico_user'),
@@ -65,7 +70,7 @@ class ProfileContactFormType extends AbstractType
             )
             ->add(
                 'addresses',
-                'collection',
+                CollectionType::class,
                 array(
                     'type' => 'user_address',
                     /** @Ignore */

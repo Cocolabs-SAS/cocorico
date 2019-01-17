@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Validator\Constraints\TimeRangesOverlap;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -69,7 +70,7 @@ class ListingEditAvailabilitiesType extends AbstractType
         if (!$this->timeUnitIsDay) {
             $builder->add(
                 'time_ranges',
-                'collection',
+                CollectionType::class,
                 array(
                     'mapped' => false,
                     'type' => 'time_range',

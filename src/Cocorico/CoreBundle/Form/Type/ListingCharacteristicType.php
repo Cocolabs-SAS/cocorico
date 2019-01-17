@@ -16,6 +16,7 @@ use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
 use Cocorico\CoreBundle\Repository\ListingCharacteristicRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -102,7 +103,7 @@ class ListingCharacteristicType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**

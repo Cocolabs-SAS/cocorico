@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +28,7 @@ class ListingEditDurationType extends AbstractType
         $builder
             ->add(
                 'min_duration',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing_edit.form.min_duration',
                     'choices' => array_combine(range(1, 30), range(1, 30)),
@@ -39,7 +40,7 @@ class ListingEditDurationType extends AbstractType
             )
             ->add(
                 'max_duration',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing_edit.form.max_duration',
                     'choices' => array_combine(range(1, 30), range(1, 30)),
@@ -51,7 +52,7 @@ class ListingEditDurationType extends AbstractType
             )
             ->add(
                 'cancellation_policy',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing_edit.form.cancellation_policy',
                     'choices' => array_flip(Listing::$cancellationPolicyValues),

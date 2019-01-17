@@ -16,6 +16,10 @@ use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\CoreBundle\Validator\TimeRangeValidator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -62,7 +66,7 @@ class TimeRangeType extends AbstractType
                 $form
                     ->add(
                         'start',
-                        'time',
+                        TimeType::class,
                         array_merge(
                             array(
                                 'label' => 'time_range.start',
@@ -80,7 +84,7 @@ class TimeRangeType extends AbstractType
                         )
                     )->add(
                         'end',
-                        'time',
+                        TimeType::class,
                         array_merge(
                             array(
                                 'label' => 'time_range.end',
@@ -104,7 +108,7 @@ class TimeRangeType extends AbstractType
                     $form
                         ->add(
                             'start_picker',
-                            'time',
+                            TimeType::class,
                             array(
                                 'mapped' => false,
                                 'widget' => 'single_text',
@@ -114,7 +118,7 @@ class TimeRangeType extends AbstractType
                         )
                         ->add(
                             'end_picker',
-                            'time',
+                            TimeType::class,
                             array(
                                 'mapped' => false,
                                 'widget' => 'single_text',
@@ -141,7 +145,7 @@ class TimeRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_minutes',
-                                'choice',
+                                ChoiceType::class,
                                 array(
                                     //from one time unit to timesMax * timeUnit
                                     'choices' => array_combine(
@@ -165,7 +169,7 @@ class TimeRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_minutes',
-                                'hidden',
+                                HiddenType::class,
                                 array(
                                     'data' => $options['time_unit'],
                                 )
