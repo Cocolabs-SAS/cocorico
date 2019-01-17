@@ -93,3 +93,8 @@ parameters:
     ##Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
     ##Set to false in prod env
     cocorico.bankwire_checking_simulation: false
+    
+    #Elasticsearch
+    cocorico_elasticsearch.host: localhost
+    cocorico_elasticsearch.port: 9200
+    cocorico_elasticsearch.index_name: cocorico_dev

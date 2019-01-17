@@ -283,4 +283,67 @@ class ListingRepository extends EntityRepository
 
         return $queryBuilder;
     }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingTranslationId
+     * @return array|null
+     */
+    public function findByTranslationId($listingTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.translations', 'lt')
+            ->where('lt.id = :listingTranslationId')
+            ->setParameter('listingTranslationId', $listingTranslationId);
+
+        try {
+            return $queryBuilder->getQuery()->getResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingCategoryTranslationId
+     * @return array|null
+     */
+    public function findByListingCategoryTranslationId($listingCategoryTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->innerJoin('llc.category', 'lc')
+            ->innerJoin('lc.translations', 'lct')
+            ->where('lct.id = :listingCategoryTranslationId')
+            ->setParameter('listingCategoryTranslationId', $listingCategoryTranslationId);
+
+        try {
+            return $queryBuilder->getQuery()->getResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $userTranslationId
+     * @return array|null
+     */
+    public function findByUserTranslationId($userTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.user', 'lu')
+            ->innerJoin('lu.translations', 'lut')
+            ->where('lut.id = :userTranslationId')
+            ->setParameter('userTranslationId', $userTranslationId);
+
+        try {
+            return $queryBuilder->getQuery()->getResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
+    }
 }
