@@ -17,7 +17,7 @@
         </header>
         <div class="post-content">
             <p>
-                {{ review.comment|strip_private_info }}
+                {{ review.comment|strip_private_info|nl2br }}
             </p>
         </div>
         <footer class="footer">
