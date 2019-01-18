@@ -81,11 +81,10 @@ class BankAccountFormHandler
             $event = new UserEvent($user);
             $this->dispatcher->dispatch(UserEvents::USER_BANK_ACCOUNT_UPDATE, $event);
             $user = $event->getUser();
+            $this->userManager->updateUser($user);
         } catch (\Exception $e) {
             $result = -1;
         }
-
-        $this->userManager->updateUser($user);
 
         return $result;
     }
