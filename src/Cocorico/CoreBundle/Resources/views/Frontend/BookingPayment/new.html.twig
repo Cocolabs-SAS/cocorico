@@ -10,7 +10,7 @@
 {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
 
 {%- block meta_title -%}
-    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " - " ~ cocorico_site_name }} }}
+    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 
 {%- block meta_description -%}
