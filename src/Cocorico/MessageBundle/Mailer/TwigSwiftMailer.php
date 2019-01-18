@@ -19,6 +19,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TwigSwiftMailer implements MailerInterface
 {
+    protected $locales;
+    protected $locale;
     protected $mailer;
     protected $router;
     protected $twig;

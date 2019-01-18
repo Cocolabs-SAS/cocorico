@@ -84,7 +84,7 @@ class UserLanguage
      * Set user
      *
      * @param  User $user
-     * @return UserImage
+     * @return $this
      */
     public function setUser(User $user = null)
     {

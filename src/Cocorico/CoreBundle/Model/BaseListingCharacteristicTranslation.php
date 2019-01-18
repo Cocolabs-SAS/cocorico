@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\ListingCharacteristicTranslation;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -43,7 +42,7 @@ abstract class BaseListingCharacteristicTranslation
      * Sets name.
      *
      * @param $name
-     * @return ListingCharacteristicTranslation
+     * @return $this
      */
     public function setName($name)
     {
@@ -66,7 +65,7 @@ abstract class BaseListingCharacteristicTranslation
      * Set description
      *
      * @param  string $description
-     * @return ListingCharacteristicTranslation
+     * @return $this
      */
     public function setDescription($description)
     {

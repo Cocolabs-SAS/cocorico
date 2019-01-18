@@ -13,7 +13,6 @@
 namespace Cocorico\UserBundle\Controller\Dashboard;
 
 use Cocorico\UserBundle\Form\Type\ProfileBankAccountFormType;
-use Cocorico\UserBundle\Form\Type\ProfilePaymentFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

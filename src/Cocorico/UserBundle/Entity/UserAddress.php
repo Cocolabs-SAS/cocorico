@@ -107,7 +107,7 @@ class UserAddress
      * Set status
      *
      * @param  integer $type
-     * @return User
+     * @return $this
      */
     public function setType($type)
     {

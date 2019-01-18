@@ -11,8 +11,10 @@
 
 namespace Cocorico\CoreBundle\Validator\Constraints;
 
+use Cocorico\CoreBundle\Document\ListingAvailability as ListingAvailabilityDocument;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+
 
 class ListingAvailabilityValidator extends ConstraintValidator
 {
@@ -28,14 +30,13 @@ class ListingAvailabilityValidator extends ConstraintValidator
     }
 
     /**
-     * @param mixed      $listingAvailability
-     * @param Constraint $constraint
+     * @param ListingAvailabilityDocument    $listingAvailability
+     * @param ListingAvailability|Constraint $constraint
      */
     public function validate($listingAvailability, Constraint $constraint)
     {
-        /** @var $listingAvailability \Cocorico\CoreBundle\Document\ListingAvailability */
+        /** @var ListingAvailabilityDocument $listingAvailability */
         //Price
-
         if ($listingAvailability->getPrice() < $this->minPrice) {
             $this->context->buildViolation($constraint::$messageMinPrice)
                 ->atPath('price')

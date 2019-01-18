@@ -234,7 +234,7 @@ class ListingAvailability
      *
      * @param  ArrayCollection $times
      *
-     * @return ArrayCollection|ListingAvailabilityTime[] $times
+     * @return $this
      */
     public function setTimes(ArrayCollection $times)
     {

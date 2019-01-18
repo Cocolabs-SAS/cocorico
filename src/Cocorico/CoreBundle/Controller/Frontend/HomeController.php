@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
-use Cocorico\CoreBundle\Repository\ListingRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,7 +30,6 @@ class HomeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        /** @var ListingRepository $listingRepository */
         $listings = $this->get("cocorico.listing_search.manager")->getHighestRanked(
             $this->get('cocorico.listing_search_request'),
             6,
@@ -41,7 +39,7 @@ class HomeController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Home:index.html.twig',
             array(
-                'listings' => $listings->getIterator()
+                'listings' => $listings->getIterator(),
             )
         );
     }
@@ -70,8 +68,8 @@ class HomeController extends Controller
             $options = array(
                 'http' => array(
                     'user_agent' => 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1',
-                    'timeout' => 5
-                )
+                    'timeout' => 5,
+                ),
             );
 
             $content = @file_get_contents($feed, false, stream_context_create($options));
@@ -109,7 +107,7 @@ class HomeController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend/Home:rss_feed.html.twig',
             array(
-                'feeds' => $renderFeeds
+                'feeds' => $renderFeeds,
             )
         );
     }

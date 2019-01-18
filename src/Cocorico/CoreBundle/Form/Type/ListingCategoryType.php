@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Form\Type;
 
-use Cocorico\CoreBundle\Entity\ListingCategory;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

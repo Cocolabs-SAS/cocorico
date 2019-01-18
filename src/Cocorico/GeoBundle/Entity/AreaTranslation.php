@@ -67,7 +67,7 @@ class AreaTranslation
      * Set name
      *
      * @param  string $name
-     * @return Area
+     * @return $this
      */
     public function setName($name)
     {

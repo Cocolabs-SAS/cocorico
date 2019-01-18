@@ -33,7 +33,7 @@ class PHP
      * @param string $locale       ISO 639-1-alpha 2 language code
      * @param string $country_code ISO 3166-2-alpha 2 country code
      *
-     * @return array|null a locale, formatted like en_US, or null if not found
+     * @return string|null a locale, formatted like en_US, or null if not found
      **/
     public static function locale_get_culture($locale, $country_code = '')
     {

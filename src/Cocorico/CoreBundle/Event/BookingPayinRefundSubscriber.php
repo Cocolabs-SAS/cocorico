@@ -34,7 +34,6 @@ class BookingPayinRefundSubscriber implements EventSubscriberInterface
      * @param BookingPayinRefundEvent  $event
      * @param  string                  $eventName
      * @param EventDispatcherInterface $dispatcher
-     * @return bool
      * @throws \Exception
      */
     public function onBookingRefund(BookingPayinRefundEvent $event, $eventName, EventDispatcherInterface $dispatcher)

@@ -958,7 +958,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageAskerRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageAskerRating($averageAskerRating)
     {
@@ -982,7 +982,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageOffererRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageOffererRating($averageOffererRating)
     {
@@ -1006,7 +1006,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $answerDelay
      *
-     * @return Listing
+     * @return $this
      */
     public function setAnswerDelay($answerDelay)
     {
@@ -1107,7 +1107,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserImage $image
      *
-     * @return Listing
+     * @return $this
      */
     public function addImage(UserImage $image)
     {
@@ -1142,7 +1142,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserLanguage $language
      *
-     * @return Listing
+     * @return $this
      */
     public function addLanguage(UserLanguage $language)
     {
@@ -1436,6 +1436,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->listingAlerts = $listingAlerts;
+
+        return $this;
     }
 
 
@@ -1486,6 +1488,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsAsker = $bookingDepositRefundsAsAsker;
+
+        return $this;
     }
 
 
@@ -1536,6 +1540,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsOfferer = $bookingDepositRefundsAsOfferer;
+
+        return $this;
     }
 
 

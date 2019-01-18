@@ -127,7 +127,7 @@ class RegistrationFormHandler
     }
 
     /**
-     * @return User
+     * @return \FOS\UserBundle\Model\UserInterface
      */
     protected function createUser()
     {

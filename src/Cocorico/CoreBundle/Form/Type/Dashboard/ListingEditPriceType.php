@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
-use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

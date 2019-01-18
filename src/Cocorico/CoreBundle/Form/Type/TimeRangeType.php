@@ -210,10 +210,11 @@ class TimeRangeType extends AbstractType
         );
 
         $resolver->setAllowedTypes(
-            array(
-                'transformer' => array('Symfony\Component\Form\DataTransformerInterface', 'null'),
-                'validator' => array('Symfony\Component\EventDispatcher\EventSubscriberInterface', 'null'),
-            )
+            'transformer', array('Symfony\Component\Form\DataTransformerInterface', 'null')
+        );
+
+        $resolver->setAllowedTypes(
+            'validator', array('Symfony\Component\EventDispatcher\EventSubscriberInterface', 'null')
         );
 
         // Those normalizers lazily create the required objects, if none given.

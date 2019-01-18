@@ -51,14 +51,14 @@ class ReviewManager extends BaseManager
     }
 
     /**
-     * getUserReviews will return the paginator object of the reviews added or made for
-     * the user object provided
+     * getUserReviews will return the paginator object of the reviews added or made for the user object provided
      *
      * @param  string  $userType
      * @param  User    $user
      * @param  string  $type 'made' or 'received'
      * @param  integer $page
-     * @return Review
+     *
+     * @return Paginator
      */
     public function getUserReviews($userType, User $user, $type, $page = 1)
     {
@@ -134,7 +134,7 @@ class ReviewManager extends BaseManager
      *
      * @param  string $userType
      * @param  User   $user
-     * @return Array Booking | Null
+     * @return array Booking | Null
      */
     public function getUnreviewedBookings($userType, User $user)
     {
@@ -152,7 +152,7 @@ class ReviewManager extends BaseManager
      * getListingReview returns the list of reviews available for the specific listing
      *
      * @param  Listing $listing
-     * @return Array objects
+     * @return array objects
      */
     public function getListingReviews(Listing $listing)
     {

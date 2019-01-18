@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -179,7 +178,7 @@ abstract class BaseListing
      * Set status
      *
      * @param  integer $status
-     * @return Listing
+     * @return $this
      */
     public function setStatus($status)
     {
@@ -252,7 +251,7 @@ abstract class BaseListing
      * Set price
      *
      * @param  integer $price
-     * @return Listing
+     * @return $this
      */
     public function setPrice($price)
     {
@@ -371,7 +370,7 @@ abstract class BaseListing
      * Set type
      *
      * @param  integer $type
-     * @return Listing
+     * @return $this
      */
     public function setType($type)
     {
@@ -489,7 +488,7 @@ abstract class BaseListing
      * Set averageRating
      *
      * @param  integer $averageRating
-     * @return Listing
+     * @return $this
      */
     public function setAverageRating($averageRating)
     {
@@ -513,7 +512,7 @@ abstract class BaseListing
      * Set commentCount
      *
      * @param  integer $commentCount
-     * @return Listing
+     * @return $this
      */
     public function setCommentCount($commentCount)
     {

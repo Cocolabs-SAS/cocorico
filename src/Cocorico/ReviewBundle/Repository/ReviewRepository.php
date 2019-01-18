@@ -14,7 +14,6 @@ namespace Cocorico\ReviewBundle\Repository;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 
 class ReviewRepository extends EntityRepository
@@ -24,7 +23,7 @@ class ReviewRepository extends EntityRepository
      * asker and as offerer.
      *
      * @param  Review $review
-     * @return Array
+     * @return array
      */
     public function getUserAverage(Review $review)
     {
@@ -57,7 +56,7 @@ class ReviewRepository extends EntityRepository
      * depending upon the existing inputs for the listing
      *
      * @param  Review $review
-     * @return Array
+     * @return array
      */
     public function getListingAverage(Review $review)
     {
@@ -86,7 +85,7 @@ class ReviewRepository extends EntityRepository
      * by the provided user
      *
      * @param  User $user
-     * @return Array
+     * @return array
      */
     public function getReviewedBookingIds(User $user)
     {

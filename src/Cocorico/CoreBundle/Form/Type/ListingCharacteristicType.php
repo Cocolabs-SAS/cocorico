@@ -26,6 +26,7 @@ class ListingCharacteristicType extends AbstractType
 
     private $request;
     private $locale;
+    private $entityManager;
 
     /**
      * @param RequestStack  $requestStack

@@ -12,7 +12,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
@@ -378,7 +377,7 @@ abstract class BaseBooking
      * Set amount
      *
      * @param int $amount
-     * @return Booking
+     * @return $this
      */
     public function setAmount($amount)
     {
