@@ -1004,7 +1004,7 @@ li.time-fields {
 /** time picker */
 /** search form */
 .form-category .form-holder .col.time .time-fields .form-control {
-    width: 117px;
+    width: 80%;
 }
 
 .form-category .form-holder .col.time .time-fields #datetimepicker3 {
@@ -1021,16 +1021,6 @@ li.time-fields {
 .form-category .time-fields .add-on {
     top: 43%;
 }
-
-.form-category .time-fields.display-range .col {
-    float: none;
-    display: inline-block;
-}
-
-.form-category .form-holder .col.time .time-fields.display-range #datetimepicker3 {
-    width: 42%;
-}
-
 
 /** time picker */
 /** global */
@@ -1349,6 +1339,7 @@ images css for making it 4:3
 
 #booking-new .timing li {
     width: 35%;
+    padding: 0;
 }
 
 #booking-new .timing li:nth-child(3n+0) {
@@ -1356,7 +1347,7 @@ images css for making it 4:3
 }
 
 #booking-new .timing li label {
-    width: 115px;
+    width: 128px;
 }
 
 .col.expiry input {
@@ -1670,6 +1661,7 @@ ul.collection {
     margin-right: 10px;
 }
 
+/** Form payment */
 .form-payment .form-holder .col.cvv {
     width: 33.1%;
 }
@@ -1684,6 +1676,12 @@ ul.collection {
     bottom: auto;
     margin-top: 0;
 }
+
+.payment a.btn.btn-primary {
+    line-height: 36px;
+}
+
+/** end Form payment */
 
 .btn.btn-default.multiselect-clear-filter {
     display: none;
@@ -2110,7 +2108,7 @@ ul.collection {
     min-height: 300px;
 }
 
-/** Listing Alert**/
+/** Listing Alert / User Cards**/
 .listing-alert {
     display: inline-block;
     padding: 0 0 0 10px;
@@ -2122,27 +2120,27 @@ ul.collection {
     padding: 6px 10px;
 }
 
-#listing-alerts td {
+#listing-alerts td, #cards td {
     padding: 10px;
     vertical-align: middle;
     border-width: 0 0 0 1px;
 }
 
-#listing-alerts .col1 {
+#listing-alerts .col1, #cards .col1 {
     text-align: left;
     width: 80%;
 }
 
-#listing-alerts .col1:first-letter {
+#listing-alerts .col1:first-letter, #cards .col1:first-letter {
     text-transform: uppercase;
 }
 
-#listing-alerts .col2 {
+#listing-alerts .col2, #cards .col2 {
     text-align: center;
     width: 10%;
 }
 
-#listing-alerts button[type=submit].close {
+#listing-alerts button[type=submit].close, #cards button[type=submit].close {
     top: 0;
     right: 0;
     position: relative;
@@ -2154,6 +2152,8 @@ ul.collection {
     background: #fff;
     cursor: pointer;
 }
+
+/** End listing alerts **/
 
 .form-area .about-info .label {
     max-width: 190px;
@@ -2200,32 +2200,6 @@ ul.collection {
 
 .clear_input:hover {
     color: #afb8c0;
-}
-
-/**
-* Elastic search
-*/
-.form-category .keyword {
-    margin-top: -55px;
-    float: right;
-}
-
-.form-category .keyword .col {
-    margin-right: 0;
-}
-
-.form-category .keyword label {
-    display: none;
-}
-
-.form-category .keyword .field-holder {
-    width: 220px;
-}
-
-@media screen and (max-width: 767px) {
-    .form-category .keyword {
-        display: none;
-    }
 }
 
 .author-info a {
@@ -3031,22 +3005,51 @@ h1[data-id="result-title"] {
     color: #58595b;
 }
 
-/* Deposit */
-/* new booking deposit  */
-.booking-deposit {
-    color: #58595b;
-    margin: 0 0 20px;
-    border-radius: 5px;
-    padding: 19px 19px 19px;
-    border: #eaebec solid 1px;
+/** Booking card saving */
+#booking-card-form .form-payment {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-.booking-deposit h2 {
-    margin: 0 10px 10px 0;
-    font-size: 14px;
-    line-height: 17px;
+#booking-card-form .form-payment .field-row {
+    float: left;
+    clear: both;
+    line-height: 36px;
+    height: 36px;
 }
 
-.postarea .posts-holder .post strong {
-    color: #58595b;
+#booking-card-form .form-payment .select-holder.cards {
+    width: 200px;
+    margin-left: 20px;
+}
+
+/**
+* Elastic search
+*/
+.form-category .keyword {
+    margin-top: -55px;
+    float: right;
+}
+
+.form-category .keyword .col {
+    margin-right: 0;
+}
+
+.form-category .keyword label {
+    display: none;
+}
+
+.form-category .keyword .field-holder {
+    width: 220px;
+}
+
+@media screen and (max-width: 767px) {
+    .form-category .keyword {
+        display: none;
+    }
+}
+
+/* Reviews*/
+.notation-booking .textbox p {
+    padding-left: 10px;
 }
