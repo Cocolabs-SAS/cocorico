@@ -19,7 +19,6 @@ use Doctrine\ORM\Query;
 
 class BookingRepository extends EntityRepository
 {
-
     /**
      *
      * @return \Doctrine\ORM\QueryBuilder
@@ -322,20 +321,27 @@ SQLQUERY;
     /**
      * Find imminent Bookings to alert
      *
-     * @param int $bookingImminentDelay Delay in minutes to consider a booking as imminent.
+     * @param int    $bookingImminentDelay Delay in minutes to consider a booking as imminent.
+     * @param string $timeZone
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsImminentToAlert($bookingImminentDelay)
+    public function findBookingsImminentToAlert($bookingImminentDelay, $timeZone)
     {
         //Imminent date
-        $dateImminent = new \DateTime();
+        $dateImminent = new \DateTime('now', new \DateTimeZone($timeZone));
         $dateImminent->add(new \DateInterval('PT' . $bookingImminentDelay . 'M'));
+
+        $sql = <<<SQLQUERY
+            (
+            CONCAT(DATE_FORMAT(b.start, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.startTime, '%H:%i:%s') ) <= :dateImminent
+            )
+SQLQUERY;
 
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
-            ->andWhere('b.start <= :dateImminent')
             ->andWhere('b.alertedImminent = :alertedImminent')
+            ->andWhere($sql)
             ->setParameter(
                 'status',
                 array(

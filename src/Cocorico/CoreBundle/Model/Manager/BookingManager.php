@@ -924,7 +924,8 @@ class BookingManager extends BaseManager
     {
         $result = 0;
         $bookingsImminentToAlert = $this->getRepository()->findBookingsImminentToAlert(
-            $imminentDelay
+            $imminentDelay,
+            $this->getTimeZone()
         );
         foreach ($bookingsImminentToAlert as $bookingImminentToAlert) {
             if ($this->alertImminent($bookingImminentToAlert)) {
