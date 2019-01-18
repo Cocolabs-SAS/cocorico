@@ -22,7 +22,7 @@
 
         <div class="area">
             <header class="head">
-                <div class="area">
+                <div class="area pull-left">
                     <h2>
                         <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
                             {{ listing_translation.title }}
@@ -30,7 +30,7 @@
                     </h2>
                 </div>
 
-                <div class="meta">
+                <div class="meta pull-right">
                     <span class="booking-info">
                         {{ 'booking.show.number.title'|trans }} :
                         <strong>
@@ -41,7 +41,7 @@
 
                 <div class="booking-detail">
                     <ul class="list-inline" id="booking-asker-date">
-                        <li content="{{ booking.start|date('Y-m-d') }}">
+                        <li>
                             {{ 'booking.show.start:'|trans }}
                             <time>
                                 {{ booking.start|localizeddate('short', 'none', 'fr') }}
@@ -50,7 +50,7 @@
                         <li>
                             {{ 'booking.show.end:'|trans }}
                             <time>
-                                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                {{ booking.endDay|localizeddate('short', 'none', 'fr') }}
                             </time>
                         </li>
 

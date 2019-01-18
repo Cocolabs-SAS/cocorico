@@ -40,17 +40,18 @@ class ListingSearchManager
     protected $listingDefaultStatus;
 
     /**
-     * @param EntityManager            $em
-     * @param DocumentManager          $dm
+     * @param EntityManager $em
+     * @param DocumentManager $dm
      * @param EventDispatcherInterface $dispatcher
-     * @param array                    $parameters
+     * @param array $parameters
      */
     public function __construct(
         EntityManager $em,
         DocumentManager $dm,
         EventDispatcherInterface $dispatcher,
         array $parameters
-    ) {
+    )
+    {
         $this->em = $em;
         $this->dm = $dm;
         $this->dispatcher = $dispatcher;
@@ -74,6 +75,80 @@ class ListingSearchManager
         //Select
         $queryBuilder = $this->getRepository()->getFindQueryBuilder();
 
+        //Geo location
+        $queryBuilder = $this->getSearchByGeoLocationQueryBuilder($listingSearchRequest, $queryBuilder);
+
+        $queryBuilder
+            ->andWhere('t.locale = :locale')
+            ->andWhere('l.status = :listingStatus')
+            ->setParameter('locale', $locale)
+            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED);
+
+        //Dates
+        $queryBuilder = $this->getSearchByDateQueryBuilder($listingSearchRequest, $queryBuilder);
+
+        //Prices
+        $priceRange = $listingSearchRequest->getPriceRange();
+        if ($priceRange->getMin() && $priceRange->getMax()) {
+            $queryBuilder
+                ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
+                ->setParameter('minPrice', $priceRange->getMin())
+                ->setParameter('maxPrice', $priceRange->getMax());
+        }
+
+        //Categories
+        $categories = $listingSearchRequest->getCategories();
+        if (count($categories)) {
+            $queryBuilder
+                ->andWhere("llcat.category IN (:categories)")
+                ->setParameter("categories", $categories);
+        }
+
+        //Characteristics
+        $queryBuilder = $this->getSearchByCharacteristicsQueryBuilder($listingSearchRequest, $queryBuilder);
+
+        //Order
+        switch ($listingSearchRequest->getSortBy()) {
+            case 'price':
+                $queryBuilder->orderBy("l.price", "ASC");
+                break;
+            case 'distance':
+                $queryBuilder->orderBy("distance", "ASC");
+                break;
+            default:
+                $queryBuilder->orderBy("distance", "ASC");
+                break;
+        }
+        $queryBuilder->addOrderBy("l.averageRating", "DESC");
+        $queryBuilder->addOrderBy("l.adminNotation", "DESC");
+
+        if (!$listingSearchRequest->getIsXmlHttpRequest()) {
+            $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
+            $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH, $event);
+            $queryBuilder = $event->getQueryBuilder();
+        }
+
+        //Pagination
+        if ($listingSearchRequest->getMaxPerPage()) {
+            $queryBuilder
+                ->setFirstResult(($listingSearchRequest->getPage() - 1) * $listingSearchRequest->getMaxPerPage())
+                ->setMaxResults($listingSearchRequest->getMaxPerPage());
+        }
+
+        //Query
+        $query = $queryBuilder->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+
+        return new Paginator($query);
+    }
+
+    /**
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function getSearchByGeoLocationQueryBuilder(ListingSearchRequest $listingSearchRequest, $queryBuilder)
+    {
         $searchLocation = $listingSearchRequest->getLocation();
         //Select distance
         $queryBuilder
@@ -82,7 +157,6 @@ class ListingSearchManager
             ->setParameter('lng', $searchLocation->getLng());
 
         $viewport = $searchLocation->getBound();
-        //Where
         $queryBuilder
             ->where('co.lat < :neLat')
             ->andWhere('co.lat > :swLat')
@@ -93,14 +167,16 @@ class ListingSearchManager
             ->setParameter('neLng', $viewport["ne"]["lng"])
             ->setParameter('swLng', $viewport["sw"]["lng"]);
 
+        return $queryBuilder;
+    }
 
-        $queryBuilder
-            ->andWhere('t.locale = :locale')
-            ->andWhere('l.status = :listingStatus')
-            ->setParameter('locale', $locale)
-            ->setParameter('listingStatus', Listing::STATUS_PUBLISHED);
-
-
+    /**
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function getSearchByDateQueryBuilder(ListingSearchRequest $listingSearchRequest, $queryBuilder)
+    {
         //Dates availabilities (from MongoDB)
         $dateRange = $listingSearchRequest->getDateRange();
         if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
@@ -163,28 +239,18 @@ class ListingSearchManager
                     )
                     ->setParameter('duration', $duration);
             }
-
         }
 
-        //Prices
-        $priceRange = $listingSearchRequest->getPriceRange();
-        if ($priceRange->getMin() && $priceRange->getMax()) {
-            $queryBuilder
-                ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
-                ->setParameter('minPrice', $priceRange->getMin())
-                ->setParameter('maxPrice', $priceRange->getMax());
-        }
+        return $queryBuilder;
+    }
 
-
-        //Categories
-        $categories = $listingSearchRequest->getCategories();
-        if (count($categories)) {
-            $queryBuilder
-                ->andWhere("llcat.category IN (:categories)")
-                ->setParameter("categories", $categories);
-        }
-
-        //Characteristics
+    /**
+     * @param ListingSearchRequest $listingSearchRequest
+     * @param \Doctrine\ORM\QueryBuilder $queryBuilder
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function getSearchByCharacteristicsQueryBuilder(ListingSearchRequest $listingSearchRequest, $queryBuilder)
+    {
         $characteristics = $listingSearchRequest->getCharacteristics();
         $characteristics = array_filter($characteristics);
         if (count($characteristics)) {
@@ -221,39 +287,7 @@ class ListingSearchManager
                 );
         }
 
-        //Order
-        switch ($listingSearchRequest->getSortBy()) {
-            case 'price':
-                $queryBuilder->orderBy("l.price", "ASC");
-                break;
-            case 'distance':
-                $queryBuilder->orderBy("distance", "ASC");
-                break;
-            default:
-                $queryBuilder->orderBy("distance", "ASC");
-                break;
-        }
-        $queryBuilder->addOrderBy("l.averageRating", "DESC");
-        $queryBuilder->addOrderBy("l.adminNotation", "DESC");
-
-        if (!$listingSearchRequest->getIsXmlHttpRequest()) {
-            $event = new ListingSearchEvent($listingSearchRequest, $queryBuilder);
-            $this->dispatcher->dispatch(ListingSearchEvents::LISTING_SEARCH, $event);
-            $queryBuilder = $event->getQueryBuilder();
-        }
-
-        //Pagination
-        if ($listingSearchRequest->getMaxPerPage()) {
-            $queryBuilder
-                ->setFirstResult(($listingSearchRequest->getPage() - 1) * $listingSearchRequest->getMaxPerPage())
-                ->setMaxResults($listingSearchRequest->getMaxPerPage());
-        }
-
-        //Query
-        $query = $queryBuilder->getQuery();
-        $query->setHydrationMode(Query::HYDRATE_ARRAY);
-
-        return new Paginator($query);
+        return $queryBuilder;
     }
 
     /**
@@ -287,11 +321,11 @@ class ListingSearchManager
     /**
      * Get listings availabilities
      *
-     * @param DateRange          $dateRange
+     * @param DateRange $dateRange
      * @param  TimeRange|boolean $timeRange
-     * @param  int               $flexibility in number of days
-     * @param  PriceRange|null   $priceRange
-     * @param  array             $status
+     * @param  int $flexibility in number of days
+     * @param  PriceRange|null $priceRange
+     * @param  array $status
      *
      * @return int[] ListingId   array key = Id listing, value = number of times listing is available inside date ranges
      */
@@ -301,7 +335,8 @@ class ListingSearchManager
         $flexibility,
         $priceRange = null,
         $status
-    ) {
+    )
+    {
         $daysFlexibility = $flexibility ? $flexibility : 0;
 
         //Create first date range from flexibility days
@@ -315,10 +350,7 @@ class ListingSearchManager
             $newEnd = new \DateTime($dateRange->getEnd()->format('Y-m-d'));
         }
         $newEnd->sub(new \DateInterval('P' . $daysFlexibility . 'D'));
-        $newDateRange = new DateRange(
-            $newStart,
-            $newEnd
-        );
+        $newDateRange = new DateRange($newStart, $newEnd);
 
         /** @var ListingAvailabilityRepository $listingAvailabilityRepository */
         $listingAvailabilityRepository = $this->dm->getRepository("CocoricoCoreBundle:ListingAvailability");
@@ -331,7 +363,7 @@ class ListingSearchManager
             if ($newStart->format('Ymd') >= $now) {
                 $nbDateRanges++;
                 $listingsTmp =
-                    $listingAvailabilityRepository->getAvailabilitiesByDateTimeRangeAndStatusAndPrice(
+                    $listingAvailabilityRepository->findAvailabilities(
                         $newDateRange,
                         $timeRange,
                         $status,
@@ -386,11 +418,11 @@ class ListingSearchManager
      * getListingsByIds returns the listings, depending upon ids provided
      *
      * @param ListingSearchRequest $listingSearchRequest
-     * @param array                $ids
-     * @param int                  $page
-     * @param string               $locale
-     * @param array                $idsExcluded
-     * @param int                  $maxPerPage
+     * @param array $ids
+     * @param int $page
+     * @param string $locale
+     * @param array $idsExcluded
+     * @param int $maxPerPage
      *
      * @return Paginator|null
      */
@@ -401,7 +433,8 @@ class ListingSearchManager
         $locale,
         array $idsExcluded = array(),
         $maxPerPage = null
-    ) {
+    )
+    {
         // Remove the current listing id from the similar listings
         $ids = array_diff($ids, $idsExcluded);
 

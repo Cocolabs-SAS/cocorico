@@ -1,5 +1,4 @@
 app/DoctrineMigrations
-app/bootstrap.php.cache
 app/spool
 app/cache
 app/bootstrap.php.cache
@@ -69,6 +68,7 @@ features/_datas/cocorico_test.db
 tmp/patch
 
 php
+web/myco*.php
 
 /auth.json
 
@@ -79,6 +79,6 @@ tmp/bu
 tmp/tmp.json
 
 #Mangopay
-#!tmp/mangopay/
-#!tmp/mangopay/.gitkeep
-#tmp/mangopay/MangoPaySdkStorage.tmp.php
+!tmp/mangopay/
+!tmp/mangopay/.gitkeep
+tmp/mangopay/MangoPaySdkStorage.tmp.php

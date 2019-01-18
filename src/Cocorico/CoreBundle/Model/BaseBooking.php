@@ -40,12 +40,10 @@ abstract class BaseBooking
     public static $statusValues = array(
         self::STATUS_DRAFT => 'entity.booking.status.draft',
         self::STATUS_NEW => 'entity.booking.status.new',
-//        self::STATUS_ACCEPTED => 'entity.booking.status.accepted',
         self::STATUS_PAYED => 'entity.booking.status.payed',
         self::STATUS_EXPIRED => 'entity.booking.status.expired',
         self::STATUS_REFUSED => 'entity.booking.status.refused',
         self::STATUS_CANCELED_ASKER => 'entity.booking.status.canceled_asker',
-//        self::STATUS_CANCELED_OFFERER => 'entity.booking.status.canceled_offerer',
         self::STATUS_PAYMENT_REFUSED => 'entity.booking.status.payment_refused'
     );
 
@@ -281,6 +279,25 @@ abstract class BaseBooking
     }
 
     /**
+     * Return end date depending on overlapping time range.
+     * If time range overlap days then end date will be incremented by one day.
+     * ex :
+     * - 27/05/2017 > 29/05/2017 22h > 23h : real end date = 29/05/2017
+     * - 27/05/2017 > 29/05/2017 22h > 4h : real end date = 30/05/2017
+     *
+     * @return \DateTime
+     */
+    public function getEndDay()
+    {
+        $end = clone $this->getEnd();
+        if ($this->getTimeRange()->overlapDays()) {
+            $end->modify('+1 day');
+        }
+
+        return $end;
+    }
+
+    /**
      * @param \DateTime $end
      */
     public function setEnd($end)
@@ -331,6 +348,26 @@ abstract class BaseBooking
         }
 
         return new \DateTime($start);
+    }
+
+    /**
+     * Return date range according to booking start and end date
+     *
+     * @return DateRange
+     */
+    public function getDateRange()
+    {
+        return new DateRange($this->getStart(), $this->getEnd());
+    }
+
+    /**
+     * Return time range according to booking start time and end time
+     *
+     * @return TimeRange
+     */
+    public function getTimeRange()
+    {
+        return new TimeRange($this->getStartTime(), $this->getEndTime());
     }
 
     /**

@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -138,7 +139,7 @@ class ListingAvailabilityPriceController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get("cocorico.listing_availability.manager")->saveAvailability(
+            $this->get("cocorico.listing_availability.manager")->save(
                 $form->getData()
             );
 
@@ -208,6 +209,9 @@ class ListingAvailabilityPriceController extends Controller
      * @param  string              $end_time
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws AccessDeniedHttpException
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAction(
         Request $request,
@@ -216,14 +220,15 @@ class ListingAvailabilityPriceController extends Controller
         $start_time,
         $end_time
     ) {
-        $listingAvailabilityManager = $this->get("cocorico.listing_availability.manager");
+        /** @var ListingAvailabilityManager $availabilityManager */
+        $availabilityManager = $this->get("cocorico.listing_availability.manager");
 
         if ($listing->getId() != $listing_availability->getListingId()) {
             throw new AccessDeniedHttpException("Edition impossible");
         }
 
         //No status edition if already booked
-        if ($listingAvailabilityManager->getTimeUnitIsDay() &&
+        if ($availabilityManager->getTimeUnitIsDay() &&
             $listing_availability->getStatus() == ListingAvailability::STATUS_BOOKED
         ) {
             throw $this->createNotFoundException('Edition impossible');
@@ -237,9 +242,9 @@ class ListingAvailabilityPriceController extends Controller
             $listing_availability = $form->getData();
 
             //convert object to array
-            $listingAvailability = $listingAvailabilityManager->listingAvailabilityToArray($listing_availability);
+            $listingAvailability = $availabilityManager->listingAvailabilityToArray($listing_availability);
 
-            $listingAvailabilityManager->saveAvailabilityTimes(
+            $availabilityManager->getTimeManager()->saveAvailabilityTimes(
                 $listingAvailability,
                 $start_time,
                 $end_time,

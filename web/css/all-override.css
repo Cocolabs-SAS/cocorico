@@ -28,8 +28,13 @@
 }
 
 /* user ratings */
+.form-message .img-holder {
+    margin-right: 10px;
+}
+
 .form-message .booking-detail li {
-    width: 35%;
+    width: 49%;
+    margin-right: 0;
 }
 
 .form-message .user-rating {
@@ -365,13 +370,17 @@ li.time-fields {
     width: 24px;
 }
 
+.jcf-list .jcf-option {
+    padding-left: 15px;
+}
+
 .jcf-select-no-scroll .jcf-scrollbar {
     display: none;
     width: 0;
 }
 
-.jcf-select-no-scroll .jcf-list .jcf-option {
-    padding-left: 15px;
+.jcf-list .jcf-option {
+    padding-left: 10px;
 }
 
 .time-fields label, .form-category .nb-days .title label {
@@ -433,8 +442,16 @@ li.time-fields {
 }
 
 /* Booking price */
+#booking-price-form .col {
+    width: 49.7%;
+}
+
 #booking-price-form .nb-days {
     float: right;
+}
+
+#booking-price-form .nb-days .title {
+    margin: 0 0 10px 43px;
 }
 
 #booking-price-form .time-field {
@@ -447,11 +464,15 @@ li.time-fields {
 
 #booking-price-form .time-fields .col .title {
     clear: both;
-    margin-right: 35px;
+    margin-right: 10px;
+}
+
+#booking-price-form .time-fields .col + .col .title {
+    margin: 0 0 0 43px;
 }
 
 #booking-price-form .time-fields label {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 .time-ranges label {
@@ -970,6 +991,12 @@ li.time-fields {
     width: 49%;
 }
 
+.form-category .form-holder .col.time .col.day-fields.display-duration .input-append.date {
+    position: relative;
+    padding: 0 35px 0 0;
+    width: 152px;
+}
+
 .form-category .form-holder .col.time .time-fields {
     display: inline-block;
     line-height: 36px;
@@ -980,6 +1007,10 @@ li.time-fields {
 .form-category .form-holder .col.time .time-fields.col {
     margin-top: 4px;
     width: 99%;
+}
+
+.form-category .form-holder .col.time .time-fields .col {
+    margin-right: -6px;
 }
 
 .form-category .form-holder .col.time #time_range_start {
@@ -1004,7 +1035,7 @@ li.time-fields {
 /** time picker */
 /** search form */
 .form-category .form-holder .col.time .time-fields .form-control {
-    width: 80%;
+    width: 117px;
 }
 
 .form-category .form-holder .col.time .time-fields #datetimepicker3 {
@@ -1406,12 +1437,22 @@ images css for making it 4:3
 }
 
 .modal .booking-detail li {
-    width: 42%;
+    width: 44%;
 }
 
 /** Booking show **/
+.postarea .booking-detail {
+    clear: both;
+}
+
+.postarea .booking-detail ul {
+    width: 74%;
+}
+
+
 .postarea .booking-detail ul li, .postarea .booking-detail ul li:last-child {
     text-align: left;
+    width: 47%;
 }
 
 /* Profile payment */

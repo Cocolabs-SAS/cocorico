@@ -66,7 +66,7 @@
                     <li>
                         {{ 'booking.show.end:'|trans }}
                         <time>
-                            {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                            {{ booking.endDay|localizeddate('short', 'none', 'fr') }}
                         </time>
                     </li>
                     {% if not timeUnitIsDay %}

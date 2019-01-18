@@ -57,7 +57,7 @@
                             <br/>
 
                             <div>
-                                {#Date démission#}
+                                {#Date d'émission#}
                                 <strong>{{ bill_date_title }}</strong>
                                 {% if  bill_date %}
                                     {{ bill_date }}
@@ -156,7 +156,7 @@
                                     <div>{{ booking.start|localizeddate('short', 'none', 'fr') }}</div>
                                 </td>
                                 <td class="col3" data-label="booking end date">
-                                    <div>{{ booking.end|localizeddate('short', 'none','fr') }}</div>
+                                    <div>{{ booking.endDay|localizeddate('short', 'none','fr') }}</div>
                                 </td>
                                 <td class="col4" data-label="booking_total_amount">
                                     <div>

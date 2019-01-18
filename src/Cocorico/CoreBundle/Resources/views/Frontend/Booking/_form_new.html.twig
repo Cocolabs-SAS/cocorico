@@ -21,7 +21,7 @@
         <li>
             {{ form_errors(form.date_range.start) }}
             {{ form_label(form.date_range.start, null, {'required': false} ) }}
-            <time datetime="{{ booking.start|date('Y-m-d') }}">
+            <time>
                 <i class="icon-calendar"></i>
                 {{ booking.start|localizeddate('short', 'none', 'fr') }}
             </time>
@@ -32,11 +32,11 @@
         <li>
             {{ form_errors(form.date_range.end) }}
             {{ form_label(form.date_range.end, null, {'required': false}) }}
-
-            <time datetime="{{ booking.end|date('Y-m-d') }}">
+            <time>
                 <i class="icon-calendar"></i>
-                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                {{ booking.endDay|localizeddate('short', 'none', 'fr') }}
             </time>
+
             {{ form_widget(form.date_range.end, {
                 'type': 'hidden'
             }) }}

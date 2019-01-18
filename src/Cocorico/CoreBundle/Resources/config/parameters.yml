@@ -74,10 +74,7 @@ parameters:
     cocorico.days_max_edition: 180
 
     #Days display mode. (range or duration)
-    cocorico.days_display_mode: range
-
-    #Enable time picker on time fields
-    cocorico.time_picker: true
+    cocorico.days_display_mode: duration
 
     #Available hours for listing availabilities hours edition and booking hours request
     #Hours must be consecutive

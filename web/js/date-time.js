@@ -46,11 +46,11 @@ function initDatepicker() {
 
                 if (input.is(from)) {
                     //abe++
-                    if (to.attr('type') == 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
+                    if (to.attr('type') === 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
                         setTimeout(function () {
                             to.focus();
                         }, 100);
-                    } else if (to.attr('type') == 'hidden') {//Day are displayed in duration mode
+                    } else if (to.attr('type') === 'hidden') {//Day are displayed in duration mode
                         setEndDay(input, to, nbDays);
                     }
                 }
@@ -86,17 +86,17 @@ function initTimePicker(parentTimesElt) {
 
             if ($picker.length) {
                 if (!timePickerCompatible) $picker.attr('type', 'text');
-                $picker.prev('.add-on').find('.icon-clock').on('click', function (e) {
+                $picker.prev('.add-on').find('.icon-clock').on('click', function () {
                     $picker.focus();
                 });
-                $picker.next('.add-on').find('.icon-clock').on('click', function (e) {
+                $picker.next('.add-on').find('.icon-clock').on('click', function () {
                     $picker.focus();
                 });
                 var $hour = holder.find("[id$=_" + picker + "_hour]").first();
                 var $minute = holder.find("[id$=_" + picker + "_minute]").first();
 
                 var defaultTime = '';
-                if ($hour.val() != '' && $minute.val() != '') {
+                if ($hour.val() !== '' && $minute.val() !== '') {
                     defaultTime = moment($hour.val() + ":" + $minute.val(), 'HH:mm');
                 }
 
@@ -190,7 +190,7 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
         inputs.datepicker({
             dateFormat: "dd/mm/yy",
             minDate: today,
-            onSelect: function (selectedDate, inst) {
+            onSelect: function (selectedDate) {
                 var input = $(this);
                 var option = input.is(from) ? 'minDate' : 'maxDate';
                 var instance = input.data('datepicker');
@@ -199,11 +199,11 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
                 inputs.not(input).filter('input:text').datepicker('option', option, date);
 
                 if (input.is(from)) {
-                    if (to.attr('type') == 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
+                    if (to.attr('type') === 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
                         setTimeout(function () {
                             to.focus();
                         }, 100);
-                    } else if (to.attr('type') == 'hidden') {//Day are displayed in duration mode
+                    } else if (to.attr('type') === 'hidden') {//Day are displayed in duration mode
                         setEndDay(input, to, nbDays);
                         submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
                     }
@@ -232,7 +232,7 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
         timeSelects.each(function () {
             var $timeSelect = $(this);
 
-            $timeSelect.on('change', function (e) {
+            $timeSelect.on('change', function () {
                 submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
             });
         });
@@ -266,7 +266,7 @@ function setEndDay($from, $to, $nbDays) {
  * @param $nbMinutes
  */
 function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
-    if ($fromHour.val() != '' && $fromMinute.val() != '' && $nbMinutes.val() != '') {
+    if ($fromHour.val() !== '' && $fromMinute.val() !== '' && $nbMinutes.val() !== '') {
         var startTime = moment($fromHour.val() + ":" + $fromMinute.val(), "HH:mm");
         startTime = startTime.add($nbMinutes.val(), "minute");
         $toHour.val(startTime.format("H"));
@@ -290,13 +290,12 @@ function timesAreValid(startHour, endHour, startMinute, endMinute) {
     if (startHour.length && endHour.length) {
         if ($.isNumeric(startHour.val()) && $.isNumeric(endHour.val()) &&
             $.isNumeric(startMinute.val()) && $.isNumeric(endMinute.val())) {
-
-            var startTime = moment(parseInt(startHour.val()) + ':' + parseInt(startMinute.val()), 'HH:mm');
-            var endTime = moment(parseInt(endHour.val()) + ':' + parseInt(endMinute.val()), 'HH:mm');
-            if (!startTime.isBefore(endTime) && endTime.format('HH:mm') != '00:00') {
-                $("#time-error").show();
-                return false;
-            }
+            // var startTime = moment(parseInt(startHour.val()) + ':' + parseInt(startMinute.val()), 'HH:mm');
+            // var endTime = moment(parseInt(endHour.val()) + ':' + parseInt(endMinute.val()), 'HH:mm');
+            // if (!startTime.isBefore(endTime) && endTime.format('HH:mm') !== '00:00') {
+            //     $("#time-error").show();
+            //     return false;
+            // }
         } else {
             return false;
         }

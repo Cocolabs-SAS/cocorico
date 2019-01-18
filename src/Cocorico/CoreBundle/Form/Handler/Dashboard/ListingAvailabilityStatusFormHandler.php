@@ -31,14 +31,14 @@ class ListingAvailabilityStatusFormHandler extends ListingAvailabilityFormHandle
     {
         /** @var Listing $listing */
         $listing = $form->getData();
-        $this->listingAvailabilityManager->saveAvailabilitiesStatus(
+        $this->availabilityManager->saveAvailabilitiesStatus(
             $listing->getId(),
             $form->get('date_range')->getData(),
             $form->get('weekdays')->getData(),
             $form->has('time_ranges') ? $form->get('time_ranges')->getData() : array(),
             $form->get('status')->getData(),
             $listing->getPrice(),
-            false,
+//            false,
             false
         );
 

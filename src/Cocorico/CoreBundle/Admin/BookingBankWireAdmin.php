@@ -463,7 +463,7 @@ class BookingBankWireAdmin extends Admin
                 )
             )
             ->add(
-                'booking.end',
+                'booking.endDay',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',
