@@ -288,7 +288,7 @@ class ListingRepository extends EntityRepository
      * Used by ElasticsearchBundle
      *
      * @param int $listingTranslationId
-     * @return array|null
+     * @return array
      */
     public function findByTranslationId($listingTranslationId)
     {
@@ -297,18 +297,30 @@ class ListingRepository extends EntityRepository
             ->where('lt.id = :listingTranslationId')
             ->setParameter('listingTranslationId', $listingTranslationId);
 
-        try {
-            return $queryBuilder->getQuery()->getResult();
-        } catch (NoResultException $e) {
-            return null;
-        }
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingListingCategoryId
+     * @return array
+     */
+    public function findByListingListingCategoryId($listingListingCategoryId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->where('llc.id = :listingListingCategoryId')
+            ->setParameter('listingListingCategoryId', $listingListingCategoryId);
+
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
      * Used by ElasticsearchBundle
      *
      * @param int $listingCategoryTranslationId
-     * @return array|null
+     * @return array
      */
     public function findByListingCategoryTranslationId($listingCategoryTranslationId)
     {
@@ -319,18 +331,14 @@ class ListingRepository extends EntityRepository
             ->where('lct.id = :listingCategoryTranslationId')
             ->setParameter('listingCategoryTranslationId', $listingCategoryTranslationId);
 
-        try {
-            return $queryBuilder->getQuery()->getResult();
-        } catch (NoResultException $e) {
-            return null;
-        }
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
      * Used by ElasticsearchBundle
      *
      * @param int $userTranslationId
-     * @return array|null
+     * @return array
      */
     public function findByUserTranslationId($userTranslationId)
     {
@@ -340,10 +348,6 @@ class ListingRepository extends EntityRepository
             ->where('lut.id = :userTranslationId')
             ->setParameter('userTranslationId', $userTranslationId);
 
-        try {
-            return $queryBuilder->getQuery()->getResult();
-        } catch (NoResultException $e) {
-            return null;
-        }
+        return $queryBuilder->getQuery()->getResult();
     }
 }
