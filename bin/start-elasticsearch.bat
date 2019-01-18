@@ -1,3 +1,3 @@
 @ECHO OFF
 
-C:\elasticsearch\bin\.\elasticsearch.bat
+start "" "C:\elasticsearch\bin\.\elasticsearch.bat"
