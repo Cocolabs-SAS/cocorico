@@ -16,6 +16,45 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 
 
+## [0.11.0] - (2019-01-19)
+
+### Added
+- Add payment cards breadcrumbs 
+- Add CocoricoElasticSearchBundle compatibility
+- Add CocoricoSwiftReaderBundle
+- Add Elastic search starting script
+
+### Fixed
+- Fix categories export in sonata
+- Replace hasOption by getOption in Cocorico commands conditions
+- Fix user language code too short
+- Fix various CS
+- Add time range form errors
+- Set phoneVerified to false by default in user fixtures
+- Fix feed blocks on HP if no feed items 
+- Prevent bank account data saving in DB in case of wrong bank account data filled
+- Fix tel link phone
+- Fix bug #71 - Listing status available while duplication
+- Remove unneeded '}}' at the end of some meta titles
+- Fix user facebook mother tongue
+
+### Changed
+- Change who we are page content
+- Move rating_reviews twig file
+- Change new message displaying to modal popin on listing show page 
+- Update SMSBundle to v0.3.1
+- Add JS escaping on initMultiSelect
+- Add app/bootstrap.php.cache to .gitignore
+- Replace nl to br in review comments
+- Add hours and timeZone to bookings imminent email alert checking
+- Split global twig form fields templates
+- Remove time_picker parameter and force form time fields to be handled by timepicker
+- Update Facebook version to 2.10 (JS SDK and HWI Oauth Bundle)
+- Update Elastic search bundle
+- Update Listing Deposit Bundle to 0.2
+- Update MangoPay Bundle to 0.6.2
+
+
 ## [0.10.0] - (2019-01-16)
 
 ### Added
