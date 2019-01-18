@@ -289,6 +289,9 @@ class UserAdmin extends SonataUserAdmin
                 'addresses',
                 'sonata_type_collection',
                 array(
+                    // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
+                    // then the child entities will be removed while saving
+                    'disabled' => true,
                     'type_options' => array(
                         'delete' => false,
                         'delete_options' => array(
@@ -307,6 +310,7 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'edit' => 'inline',
                     'inline' => 'table',
+                    'delete' => 'false',
                 )
             )
             ->end();

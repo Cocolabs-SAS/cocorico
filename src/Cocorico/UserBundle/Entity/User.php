@@ -20,6 +20,7 @@ use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Model\BookingDepositRefundAsAskerInterface;
 use Cocorico\UserBundle\Model\BookingDepositRefundAsOffererInterface;
 use Cocorico\UserBundle\Model\ListingAlertInterface;
+use Cocorico\UserBundle\Model\UserCardInterface;
 use Cocorico\UserBundle\Validator\Constraints as CocoricoUserAssert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -436,6 +437,13 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $bookingDepositRefundsAsOfferer;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Model\UserCardInterface", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"expirationDate" = "asc"})
+     *
+     * @var UserCardInterface[]
+     */
+    private $cards;
 
     /**
      * Constructor.
@@ -454,6 +462,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->listingAlerts = new ArrayCollection();
         $this->bookingDepositRefundsAsAsker = new ArrayCollection();
         $this->bookingDepositRefundsAsOfferer = new ArrayCollection();
+        $this->cards = new ArrayCollection();
         parent::__construct();
     }
 
@@ -949,7 +958,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageAskerRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageAskerRating($averageAskerRating)
     {
@@ -973,7 +982,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageOffererRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageOffererRating($averageOffererRating)
     {
@@ -997,7 +1006,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $answerDelay
      *
-     * @return Listing
+     * @return $this
      */
     public function setAnswerDelay($answerDelay)
     {
@@ -1098,7 +1107,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserImage $image
      *
-     * @return Listing
+     * @return $this
      */
     public function addImage(UserImage $image)
     {
@@ -1133,7 +1142,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserLanguage $language
      *
-     * @return Listing
+     * @return $this
      */
     public function addLanguage(UserLanguage $language)
     {
@@ -1427,6 +1436,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->listingAlerts = $listingAlerts;
+
+        return $this;
     }
 
 
@@ -1477,6 +1488,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsAsker = $bookingDepositRefundsAsAsker;
+
+        return $this;
     }
 
 
@@ -1527,6 +1540,71 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsOfferer = $bookingDepositRefundsAsOfferer;
+
+        return $this;
+    }
+
+
+    /**
+     * Add UserCard.
+     *
+     * @param UserCardInterface $card
+     *
+     * @return User
+     */
+    public function addCard($card)
+    {
+        $card->setUser($this);
+        $this->cards[] = $card;
+
+        return $this;
+    }
+
+    /**
+     * Remove UserCard.
+     *
+     * @param UserCardInterface $card
+     */
+    public function removeCard($card)
+    {
+        $this->cards->removeElement($card);
+    }
+
+    /**
+     * Get UserCards.
+     *
+     * @return ArrayCollection
+     */
+    public function getCards()
+    {
+        return $this->cards;
+    }
+
+    /**
+     * @param UserCardInterface[]|ArrayCollection $cards
+     *
+     * @return $this
+     */
+    public function setCards($cards)
+    {
+        foreach ($cards as $card) {
+            $card->setUser($this);
+        }
+
+        $this->cards = $cards;
+    }
+
+
+    /**
+     * @return UserCardInterface[]|Collection
+     */
+    public function getCardsActive()
+    {
+        return $this->cards->filter(
+            function (UserCardInterface $element) {
+                return $element->isActive();// && $element->getValidity() == UserCardInterface::VALIDITY_VALID
+            }
+        );
     }
 
     /**

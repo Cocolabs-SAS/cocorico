@@ -110,7 +110,6 @@ class GlobalHelper
      *
      * @param Form              $form
      * @param FlashBagInterface $flashBag
-     * @return array
      */
     public function addFormErrorMessagesToFlashBag(Form $form, $flashBag)
     {
@@ -160,7 +159,7 @@ class GlobalHelper
             curl_setopt($ch, CURLOPT_VERBOSE, true);
         }
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, count($postData));
+//        curl_setopt($ch, CURLOPT_POST, count($postData));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
         //To avoid to have a certificate in non prod env

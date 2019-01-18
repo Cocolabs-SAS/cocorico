@@ -95,7 +95,7 @@ class ListingCharacteristicValue
      * Set position
      *
      * @param  boolean $position
-     * @return ListingImage
+     * @return $this
      */
     public function setPosition($position)
     {
@@ -128,7 +128,7 @@ class ListingCharacteristicValue
      * Set characteristic type
      *
      * @param ListingCharacteristicType $listingCharacteristicType
-     * @return ListingCharacteristicType
+     * @return $this
      */
     public function setListingCharacteristicType(ListingCharacteristicType $listingCharacteristicType = null)
     {

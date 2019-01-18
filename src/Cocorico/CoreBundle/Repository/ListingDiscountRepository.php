@@ -14,8 +14,6 @@ namespace Cocorico\CoreBundle\Repository;
 use Cocorico\CoreBundle\Entity\ListingDiscount;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
-
 
 class ListingDiscountRepository extends EntityRepository
 {

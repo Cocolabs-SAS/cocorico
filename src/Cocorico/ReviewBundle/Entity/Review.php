@@ -46,7 +46,7 @@ class Review extends BaseReview
 
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     /**

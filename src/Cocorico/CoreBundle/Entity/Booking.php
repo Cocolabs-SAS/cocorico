@@ -217,7 +217,7 @@ class Booking extends BaseBooking
     }
 
     /**
-     * @return Review[]
+     * @return Review[]|ArrayCollection
      */
     public function getReviews()
     {
@@ -523,6 +523,8 @@ class Booking extends BaseBooking
         }
 
         $this->options = $options;
+
+        return $this;
     }
 
     /**

@@ -607,6 +607,24 @@
         <target>Remise à zéro des commissions</target>
         <jms:reference-file line="427">UserBundle/Admin/UserAdmin.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="74172be9672429f2b00a81b6d8719fb1a2e9f19d" resname="action_do_bank_wire">
+        <source>action_do_bank_wire</source>
+        <target state="new">Faire le virement</target>
+        <jms:reference-file line="11">views/Admin/list_action_do_bank_wire.html.twig</jms:reference-file>
+        <jms:reference-file line="13">views/Admin/list_action_do_bank_wire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="749bd5159391caf04257a9917a4854bb39266e7a" resname="action_do_bankwire_for_deposit">
+        <source>action_do_bankwire_for_deposit</source>
+        <target state="new">Payer la caution à l'offreur</target>
+        <jms:reference-file line="13">views/Admin/list_action_do_deposit_bankwire.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Admin/list_action_do_deposit_bankwire.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="1bbd26abe37f02bcdc368a04eea7e1e31ddb575c" resname="action_do_payin_refund_for_deposit">
+        <source>action_do_payin_refund_for_deposit</source>
+        <target state="new">Rembourser la caution au demandeur</target>
+        <jms:reference-file line="13">views/Admin/list_action_do_deposit_payin_refund.html.twig</jms:reference-file>
+        <jms:reference-file line="15">views/Admin/list_action_do_deposit_payin_refund.html.twig</jms:reference-file>
+      </trans-unit>
       <trans-unit id="803aa4542bd0d44bcaf600e05a5a5384487a94b8" resname="admin.booking.alerted_expiring.label">
         <source>admin.booking.alerted_expiring.label</source>
         <target>Alerte réservation expirante</target>

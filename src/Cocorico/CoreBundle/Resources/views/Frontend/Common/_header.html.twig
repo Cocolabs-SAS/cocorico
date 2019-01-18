@@ -9,7 +9,7 @@
                 <div class="col-xs-12">
                     <ul class="list-inline">
                         <li>
-                            <a href="tel:{{ cocorico_phone|replace({'+': '', '(': '', ')': '', ' ': ''}) }}"
+                            <a href="tel:{{ cocorico_phone|replace({'(0)': '', ' ': ''}) }}"
                                tabindex="10">
                                 <i class="icon-phone"></i>{{ cocorico_phone }}
                             </a>

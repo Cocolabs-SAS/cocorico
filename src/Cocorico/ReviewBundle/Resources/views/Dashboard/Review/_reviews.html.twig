@@ -89,7 +89,8 @@
                             <div class="textbox">
                                 <p>
                                     <strong>{{ 'review.comment.desc' | trans }}:</strong>
-                                    <em>{{ review.comment|strip_private_info }}</em>
+                                    <br/>
+                                    <em>{{ review.comment|strip_private_info|nl2br }}</em>
                                 </p>
                             </div>
                         </div>

@@ -78,11 +78,13 @@ class Thread extends BaseThread
 
     /**
      * @param Listing $listing
-     * @return null
+     * @return $this
      */
     public function setListing(Listing $listing)
     {
         $this->listing = $listing;
+
+        return $this;
     }
 
     /**
@@ -95,11 +97,13 @@ class Thread extends BaseThread
 
     /**
      * @param  BaseBooking $booking
-     * @return null
+     * @return $this
      */
     public function setBooking(BaseBooking $booking = null)
     {
         $this->booking = $booking;
+
+        return $this;
     }
 
     public function __toString()

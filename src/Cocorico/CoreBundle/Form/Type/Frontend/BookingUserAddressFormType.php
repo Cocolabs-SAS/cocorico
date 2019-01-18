@@ -81,8 +81,6 @@ class BookingUserAddressFormType extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
-                $form = $event->getForm();
-//                $booking = $event->getData();
                 if ($this->securityAuthChecker->isGranted('IS_AUTHENTICATED_FULLY')) {
                     /** @var User $user */
                     $user = $this->securityTokenStorage->getToken()->getUser();

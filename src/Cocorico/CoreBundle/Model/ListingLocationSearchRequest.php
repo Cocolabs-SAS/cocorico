@@ -481,7 +481,7 @@ class ListingLocationSearchRequest
     /**
      * Return the Coordinate entity fields mapping for a given accuracy
      *
-     * @return array|null
+     * @return array|bool
      */
     public function getAccuracyMapping()
     {

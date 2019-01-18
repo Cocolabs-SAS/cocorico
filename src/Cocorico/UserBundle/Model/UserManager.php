@@ -57,7 +57,8 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $class,
         $kernelRoot,
         EventDispatcherInterface $dispatcher
-    ) {
+    )
+    {
         parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer, $objectManager, $class);
 
         $this->objectManager = $objectManager;
@@ -135,7 +136,6 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      * @param  string  $existingPicture
      * @param  boolean $persist
      *
-     * @return User
      */
     public function addImagesSetFirst(User $user, $imageName, $existingPicture, $persist = false)
     {

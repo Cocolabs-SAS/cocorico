@@ -13,7 +13,6 @@
 namespace Cocorico\ReviewBundle\Model;
 
 use Cocorico\CoreBundle\Entity\Booking;
-use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -123,7 +122,7 @@ abstract class BaseReview
      * Set ReviewBy
      *
      * @param \Cocorico\UserBundle\Entity\User|null $reviewBy
-     * @return Review
+     * @return $this
      */
     public function setReviewBy($reviewBy)
     {
@@ -147,7 +146,7 @@ abstract class BaseReview
      * Set ReviewTo
      *
      * @param \Cocorico\UserBundle\Entity\User|null $reviewTo
-     * @return Review
+     * @return $this
      */
     public function setReviewTo($reviewTo)
     {
@@ -170,7 +169,7 @@ abstract class BaseReview
      * Set booking
      *
      * @param \Cocorico\CoreBundle\Entity\Booking $booking
-     * @return Review
+     * @return $this
      */
     public function setBooking(Booking $booking)
     {

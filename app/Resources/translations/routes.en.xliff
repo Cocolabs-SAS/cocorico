@@ -164,8 +164,8 @@
         <target>/dashboard/message/get-nb-unread-messages</target>
       </trans-unit>
       <trans-unit id="69e16c8d093b9f82bf95b03b4f43020614a71f2c" resname="cocorico_dashboard_message_new">
-        <source>/dashboard/message/{listingId}/new</source>
-        <target>/dashboard/message/{listingId}/new</target>
+        <source>/dashboard/message/{slug}/new</source>
+        <target>/dashboard/message/{slug}/new</target>
       </trans-unit>
       <trans-unit id="3ff5893c78ff114edc675b2c648aff354f246c15" resname="cocorico_dashboard_message_thread_delete">
         <source>/dashboard/message/delete/{threadId}</source>

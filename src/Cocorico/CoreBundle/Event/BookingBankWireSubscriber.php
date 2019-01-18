@@ -38,7 +38,6 @@ class BookingBankWireSubscriber implements EventSubscriberInterface
      *
      * @param BookingBankWireEvent $event
      *
-     * @return bool
      * @throws \Exception
      */
     public function onBookingBankWireCheck(BookingBankWireEvent $event)

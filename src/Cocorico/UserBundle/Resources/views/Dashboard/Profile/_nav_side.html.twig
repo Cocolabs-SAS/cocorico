@@ -22,6 +22,14 @@
                     {{ 'nav.user.payment.link'|trans }}
                 </a>
             </li>
+            {% if bundleExist('CocoricoMangoPayCardSavingBundle') %}
+                <li role="presentation" class="{{ nav_side_dashboard_current == "card" ? 'active' : '' }}">
+                    <a href="{{ path('cocorico_mangopay_card_saving_dashboard_card') }}" aria-controls="card"
+                       role="tab" data-text="Cartes">
+                        {{ 'nav.user.cards.link'|trans }}
+                    </a>
+                </li>
+            {% endif %}
             <li role="presentation" class="{{ nav_side_dashboard_current == "contact" ? 'active' : '' }}">
                 <a href="{{ path('cocorico_user_dashboard_profile_edit_contact') }}" aria-controls="contact information"
                    role="tab" data-text="Information de contact">

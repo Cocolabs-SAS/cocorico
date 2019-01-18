@@ -481,6 +481,9 @@ class BookingAdmin extends Admin
                     'options',
                     'sonata_type_collection',
                     array(
+                        // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
+                        // then the child entities will be removed while saving
+                        'disabled' => true,
                         'type_options' => array(
                             'delete' => false,
                             'delete_options' => array(
@@ -497,6 +500,7 @@ class BookingAdmin extends Admin
                     array(
                         'edit' => 'inline',
                         'inline' => 'table',
+                        'delete' => 'false',
                     )
                 )
                 ->end();
@@ -528,8 +532,21 @@ class BookingAdmin extends Admin
                         'disabled' => true,
                         'label' => 'admin.booking.mangopay_payin_pre_auth_id.label',
                     )
-                )
-                ->end();
+                );
+
+            if (array_key_exists("CocoricoMangoPayCardSavingBundle", $this->bundles)) {
+                $formMapper
+                    ->add(
+                        'card',
+                        null,
+                        array(
+                            'disabled' => true,
+                            'label' => 'admin.booking.user_card.label',
+                        )
+                    );
+            }
+
+            $formMapper->end();
         }
     }
 

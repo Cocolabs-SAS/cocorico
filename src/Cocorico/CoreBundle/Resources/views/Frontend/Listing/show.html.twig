@@ -12,7 +12,7 @@
 {% set listing_user = listing.user %}
 
 {%- block meta_title -%}
-    {{ 'listing.show.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ " - " ~ listing_location.city ~ " - " ~ listing.priceDecimal ~ " " ~ currencySymbol(currentCurrency) ~ "/" ~  0|add_time_unit_text ~ " - " ~ cocorico_site_name }} }}
+    {{ 'listing.show.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ " - " ~ listing_location.city ~ " - " ~ listing.priceDecimal ~ " " ~ currencySymbol(currentCurrency) ~ "/" ~  0|add_time_unit_text ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 
 {%- block meta_description -%}
@@ -245,19 +245,21 @@
 
                                     <!-- comments -->
                                     <div role="tabpanel" class="tab-pane" id="comments">
-                                        <div class="blog">
-                                            <div class="head">
-                                                <h2>{{ 'listing.comments.header'|trans }}</h2>
-                                                <!-- rating -->
-                                                {% if listing.averageRating %}
-                                                    {{ listing.averageRating | cocorico_star_rating }}
-                                                {% endif %}
+                                        {% if reviews|length > 0 %}
+                                            <div class="blog">
+                                                <div class="head">
+                                                    <h2>{{ 'listing.comments.header'|trans }}</h2>
+                                                    <!-- rating -->
+                                                    {% if listing.averageRating %}
+                                                        {{ listing.averageRating | cocorico_star_rating }}
+                                                    {% endif %}
+                                                </div>
+                                                <div class="posts-holder">
+                                                    <!-- post -->
+                                                    {% include 'CocoricoCoreBundle:Frontend/Listing:_rating_reviews.html.twig' with {'reviews': reviews} only %}
+                                                </div>
                                             </div>
-                                            <div class="posts-holder">
-                                                <!-- post -->
-                                                {% include 'CocoricoCoreBundle:Dashboard/Listing:_rating_comments.html.twig' with {'reviews': reviews} only %}
-                                            </div>
-                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
@@ -374,10 +376,11 @@
                             </h2>
 
                             {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                {# contact button and form #}
-                                {{ render(controller('CocoricoMessageBundle:Dashboard/Message:newThread',
-                                { 'listingId': listing.id } )) }}
-                                {# end of contact button and form #}
+                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
+                                   class="contact-opener btn btn-default no-margin" data-toggle="modal"
+                                   data-target="#modal">
+                                    {{ 'thread.new.contact_me'|trans({}, 'cocorico_message') }}
+                                </a>
                             {%- else -%}
                                 <a class="contact-opener btn btn-default no-margin"
                                    href=" {{ path('cocorico_user_login') }}">
@@ -526,9 +529,9 @@
             // Categories
             initMultiSelect(
                     '#categories',
-                    '{{ "multiselect.all_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.none_selected"|trans({}, "cocorico") }}',
-                    '{{ "multiselect.num_selected"|trans({}, "cocorico") }}'
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
             );
         });
     </script>

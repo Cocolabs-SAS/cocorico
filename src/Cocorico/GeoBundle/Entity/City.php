@@ -106,7 +106,7 @@ class City
      * Set country
      *
      * @param  \Cocorico\GeoBundle\Entity\Country $country
-     * @return Area
+     * @return $this
      */
     public function setCountry(Country $country)
     {
@@ -129,7 +129,7 @@ class City
      * Add coordinate
      *
      * @param  \Cocorico\GeoBundle\Entity\Coordinate $coordinate
-     * @return Area
+     * @return $this
      */
     public function addCoordinate(Coordinate $coordinate)
     {

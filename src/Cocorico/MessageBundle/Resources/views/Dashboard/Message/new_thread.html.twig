@@ -1,0 +1,71 @@
+{% trans_default_domain 'cocorico_message' %}
+
+<div id="message-form-container">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong class="title">{{ 'message.modal.title'|trans }} {{ listing.user.name }}</strong> <br/>
+    </div>
+
+    <div class="modal-body">
+        {% if app.request.isXmlHttpRequest %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
+        {% endif %}
+
+        {% if not form.vars.submitted or not form.vars.valid %}
+            <form id="message-form" class="form-msg" method="post"
+                  action="{{ path('cocorico_dashboard_message_new', { 'slug': listing.slug }) }}">
+                <fieldset>
+                    <strong class="title text-center">{{ 'message.modal.sub_title'|trans }}
+                        : {{ listing.title }}</strong>
+                    <br/>
+
+                    <div class="no-scroll">
+                        {{ form_errors(form.body) }}
+                        {{ form_widget(form.body) }}
+                    </div>
+                </fieldset>
+
+                {{ form_rest(form) }}
+            </form>
+
+            <div class="modal-footer">
+                <a id="message-return" href="#" class="btn btn-default">
+                    {{ 'message.modal.action.return'|trans }}
+                </a>
+                <a id="message-submit" href="#" class="btn btn-default">
+                    {{ 'message.modal.action.send'|trans }}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <script>
+        $(function () {
+            jcf.replaceAll("#message-form-container");
+            $('[data-toggle="tooltip"]').tooltip({});
+
+            //Submit form
+            var $formContainer = $("#message-form-container");
+            $formContainer.submitAjaxForm(function () {
+                jcf.replaceAll("#message-form-container");
+            });
+
+            $("#message-submit").on("click", function (e) {
+                $(this).parent('.modal-footer').html('<img src="{{ asset('images/loading.gif') }}" />');
+                e.preventDefault();
+                $("#message-form").submit();
+                return false;
+            });
+
+            $("#message-return").on("click", function (e) {
+                e.preventDefault();
+                $("#modal").modal('hide');
+                return false;
+            });
+        });
+    </script>
+</div>
+

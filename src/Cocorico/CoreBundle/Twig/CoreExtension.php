@@ -59,6 +59,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $listingDuplication;
     protected $minStartDelay;
     protected $minStartTimeDelay;
+    protected $addressDelivery;
 
     /**
      *
@@ -151,7 +152,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new \Twig_SimpleFilter('ucwords', 'ucwords'),
             new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
-            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfo'))
+            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter'))
         );
     }
 
@@ -263,7 +264,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      *
      * @return string
      */
-    public function stripPrivateInfo(
+    public function stripPrivateInfoFilter(
         $text,
         $typeInfo = array("phone", "email", "domain"),
         $replaceBy = 'default'

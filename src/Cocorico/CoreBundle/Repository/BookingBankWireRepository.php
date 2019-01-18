@@ -14,8 +14,6 @@ namespace Cocorico\CoreBundle\Repository;
 use Cocorico\CoreBundle\Entity\BookingBankWire;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
-
 
 class BookingBankWireRepository extends EntityRepository
 {
