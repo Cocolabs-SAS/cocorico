@@ -351,6 +351,7 @@
 {% macro timeRangesCollectionItem(child_form, allow_delete) %}
     {% spaceless %}
         <li class="timepicker-holder time-fields">
+            {{ form_errors(child_form) }}
             {% set fieldNum = 1 %}
             {% for field in child_form %}
                 {% if "hidden" not in field.vars.block_prefixes %}
