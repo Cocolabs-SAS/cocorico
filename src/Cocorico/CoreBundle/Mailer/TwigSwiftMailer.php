@@ -92,7 +92,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -121,7 +121,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -152,14 +152,14 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $profilePaymentInfoUrl = $this->router->generate(
             'cocorico_user_dashboard_profile_edit_bank_account',
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -192,7 +192,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -222,7 +222,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -253,7 +253,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -286,7 +286,7 @@ class TwigSwiftMailer implements MailerInterface
                 'booking_id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -339,7 +339,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -369,7 +369,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $paymentOffererUrl = $this->router->generate(
@@ -377,7 +377,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $wireAmount = $booking->getAmountToPayToOffererDecimal();
@@ -411,7 +411,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -434,7 +434,7 @@ class TwigSwiftMailer implements MailerInterface
 //        $bookingRequestUrl = $this->router->generate(
 //            'cocorico_dashboard_booking_show_offerer',
 //            array('id' => $booking->getId()),
-//            true
+//            UrlGeneratorInterface::ABSOLUTE_URL
 //        );
 //
 //        $context = array(
@@ -464,7 +464,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -495,14 +495,14 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $paymentAskerUrl = $this->router->generate(
             'cocorico_dashboard_booking_payin_asker',
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -532,7 +532,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -558,7 +558,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -587,7 +587,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -618,7 +618,7 @@ class TwigSwiftMailer implements MailerInterface
                 'booking_id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -647,7 +647,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $askerCancellationAmount = $booking->getPayinRefund() ? $booking->getPayinRefund()->getAmountDecimal() : 0;
@@ -691,7 +691,7 @@ class TwigSwiftMailer implements MailerInterface
 //        $bookingRequestUrl = $this->router->generate(
 //            'cocorico_dashboard_booking_show_offerer',
 //            array('id' => $booking->getId()),
-//            true
+//            UrlGeneratorInterface::ABSOLUTE_URL
 //        );
 //
 //        $context = array(
@@ -745,7 +745,7 @@ class TwigSwiftMailer implements MailerInterface
                     '_locale' => $context['user_locale'],
                     'slug' => $slug
                 ),
-                true
+                UrlGeneratorInterface::ABSOLUTE_URL
             );
 
             $context['listing_title'] = $title;

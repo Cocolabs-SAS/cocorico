@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Admin;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Repository\ListingRepository;
+use Cocorico\MangoPayBundle\Form\Type\CardType;
 use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -537,7 +538,7 @@ class BookingAdmin extends Admin
             if (array_key_exists("CocoricoMangoPayCardSavingBundle", $this->bundles)) {
                 $formMapper
                     ->add(
-                        'card',
+                        CardType::class,
                         null,
                         array(
                             'disabled' => true,

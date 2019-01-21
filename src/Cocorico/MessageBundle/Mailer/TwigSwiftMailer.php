@@ -76,7 +76,7 @@ class TwigSwiftMailer implements MailerInterface
                 'threadId' => $threadId,
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(

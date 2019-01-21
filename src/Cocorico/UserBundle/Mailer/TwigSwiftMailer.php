@@ -80,7 +80,7 @@ class TwigSwiftMailer implements MailerInterface
         $password_reset_link = $this->router->generate(
             'cocorico_user_resetting_reset',
             array('token' => $user->getConfirmationToken()),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $context = array(
             'user' => $user,
@@ -99,7 +99,7 @@ class TwigSwiftMailer implements MailerInterface
         $url = $this->router->generate(
             'cocorico_user_register_confirmation',
             array('token' => $user->getConfirmationToken()),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $context = array(
             'user' => $user,

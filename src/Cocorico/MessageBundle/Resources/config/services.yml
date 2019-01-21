@@ -28,7 +28,7 @@ services:
         class: Cocorico\MessageBundle\Form\Type\Frontend\ReplyMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-        - { name: form.type, alias: cocorico_message_reply }
+            - { name: form.type, alias: cocorico_message_reply }
         public: true
         
         
