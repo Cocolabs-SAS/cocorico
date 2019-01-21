@@ -1,53 +1,39 @@
-# Cocorico
-
-Cocorico is an open source platform to create collaborative consumption marketplaces.
-You can find more information about this project on [http://www.cocolabs.io](http://www.cocolabs.io).
-
-This document contains information on how to download, install, and start using Cocorico:
-
-- [Installation](#installation)
-- [Versioning](#versioning)
-- [Changes](#changes)
-- [Contribute](#contribute)
-- [Roadmap](#roadmap)
-- [Technical documentation](#technical-documentation)
-- [License](#license)
-
-# Installation
-
-For Docker see [Docker installation](https://github.com/Cocolabs-SAS/cocorico-docker)
-
-For Windows see [Windows installation](src/Cocorico/CoreBundle/Resources/doc/installation-windows.md)
+# Windows installation
 
 ## Requirements
 
 ### Apache 2 (or Nginx)
 
-Activate following modules
+Activate following modules:
 
     - mod_headers
     - mod_rewrite
-    - mod_ssl
+    - mod_ssl 
+    
+SSL with WAMP: 
+
+    - Install Win32 OpenSSL here http://slproweb.com/products/Win32OpenSSL.html
+    - Copy/paste libeay32.dll, ssleay32.dll into php bin folder (ex: C:\wamp64\bin\php\phpx.x)
+
 
 Create your virtual host: [dev virtual host sample](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
 
+### MongoDB
 
-### MongoDB 
+#### Install MongoDB:
 
-#### Install MongoDB 
+See https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/
 
-See https://docs.mongodb.com/manual/administration/install-on-linux/
-
-#### Install PHP MongoDB Driver 
+#### Install PHP MongoDB Driver
 
 See http://docs.mongodb.org/ecosystem/drivers/php/
     
 **Note:** *For PHP 7 install mongodb extension and not mongo extension*
 
-#### Start MongoDB 
+#### Start MongoDB
 
-See http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/
-    
+    bin\start-mongodb.bat "C:\Program Files\MongoDB\data"
+            
     
 ### PHP
     
@@ -62,7 +48,7 @@ Activate following extensions:
     - soap
     - exif
     - mongodb
-    - imagick
+    - gd
     - pdo_sqlite
     - pdo_mysql
     - opcache
@@ -86,7 +72,6 @@ Create your database and your database user
     CREATE DATABASE IF NOT EXISTS {DB} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
     GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, REFERENCES ON {DB}.* TO {DBUSER}@localhost IDENTIFIED BY '{DBUSERPWD}'
 
-
 ## Application installation
 
 ### Get project sources
@@ -95,36 +80,36 @@ Fork Cocorico Git Repository then get sources:
              
 #### From PhpStorm:
 
- - Close all projects
- - Menu > VCS > Checkout from VC > Git
-    - Git Repo: New forked repository address
-    - Parent Dir: Choose parent of Symfony folder
-    - Dir name: Symfony
- - Menu > File > Open: Symfony folder 
- - Change Project name
- - Activate Symfony2 framework
- - Configure automatically namespace root from Event log Dialog box for example
+     - Close all projects
+     - Menu > VCS > Checkout from VC > Git
+        - Git Repo: New forked repository address
+        - Parent Dir: Choose parent of Symfony folder
+        - Dir name: Symfony
+     - Menu > File > Open: Symfony folder 
+     - Change Project name
+     - Activate Symfony2 framework
+     - Configure automatically namespace root from Event log Dialog box for example
      
 #### From command line:
 
-Go to to your parent "Document Root" directory and clone repository:
+Change to your parent "Document Root" directory and clone repository:
 
     cd /var/www/cocorico.dev/
     git clone https://github.com/[gituser]/cocorico.git Symfony
                      
-                     
+                        
 ### Create services accounts
 
-See [Services account creation ](src/Cocorico/CoreBundle/Resources/doc/services-creation.rst)
+See  [Services account creation ](src/Cocorico/CoreBundle/Resources/doc/services-creation.rst)
 
-
+    
 ### Install composer
 
 If you don't have Composer yet, run the following command in the root folder of your Symfony project:
 
     cd Symfony
-    curl -s http://getcomposer.org/installer | php
-     
+    php -r "readfile('https://getcomposer.org/installer');" | php
+    
     
 ### Install Cocorico dependencies
 
@@ -153,15 +138,14 @@ Copy and paste web/.htaccess.dist and rename it to web/.htaccess. (It's configur
 
 #### SQL database initialisation:
  
-    chmod 744 bin/init-db
-    ./bin/init-db php --env=dev
+    .\bin\init-db.bat --env=dev
         
 #### MongoDB initialisation:
 
-    chmod 744 bin/init-mongodb
-    ./bin/init-mongodb php --env=dev
+    .\bin\init-mongodb.bat --env=dev
     
-## Check your System Configuration
+    
+## Checking your System Configuration
 
 Before starting coding, make sure that your local system is properly configured for Cocorico.
 
@@ -208,47 +192,3 @@ Admin access is here :
 Don't forget to Change your super-admin password. 
 
 Enjoy!
-
-
-# Versioning
-
-Cocorico follows the Semantic Versioning 2 as far as possible:
-
-> Given a version number MAJOR.MINOR.PATCH, increment the:
->
-> MAJOR version when you make incompatible API changes,
->
-> MINOR version when you add functionality in a backwards-compatible manner, and
->
-> PATCH version when you make backwards-compatible bug fixes.
-
-
-# Changes
-
-[CHANGELOG.md](CHANGELOG.md) list the relevant changes done for each release.
-
-# Contribute
-
-Anyone and everyone is welcome to contribute. Please take a moment to
-review the [guidelines for contributing](CONTRIBUTING.md).
-
-* [Bug reports](CONTRIBUTING.md#bugs)
-* [Feature requests](CONTRIBUTING.md#features)
-* [Pull requests](CONTRIBUTING.md#pull-requests)
-
-# Roadmap
-
-[ROADMAP](ROADMAP.md) list the planned features.
-
-# Technical documentation
-
-* [General](src/Cocorico/CoreBundle/Resources/doc/index.rst)
-* [Parameters](src/Cocorico/CoreBundle/Resources/doc/parameters.rst)
-* [Virtual Host](src/Cocorico/CoreBundle/Resources/doc/virtual-hosts.rst)
-* [Tests](src/Cocorico/CoreBundle/Resources/doc/tests.rst)
-* [Deployment](src/Cocorico/CoreBundle/Resources/doc/deployment.rst)
-
-# License
-
-Cocorico is released under the [MIT license](LICENSE).
-
