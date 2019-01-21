@@ -44,9 +44,9 @@ class BookingController extends Controller
      *
      * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
-     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
-     * @ParamConverter("start", options={"format": "Y-m-d"})
-     * @ParamConverter("end", options={"format": "Y-m-d"})
+     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"}, converter="doctrine.orm")
+     * @ParamConverter("start", options={"format": "Y-m-d"}, converter="datetime")
+     * @ParamConverter("end", options={"format": "Y-m-d"}, converter="datetime")
      * @ParamConverter("start_time", options={"format": "H:i"})
      * @ParamConverter("end_time", options={"format": "H:i"})
      *
