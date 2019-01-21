@@ -41,8 +41,7 @@ class TwigSwiftMailer implements MailerInterface
         \Twig_Environment $twig,
         RequestStack $requestStack,
         array $parameters
-    )
-    {
+    ) {
         $this->mailer = $mailer;
         $this->router = $router;
         $this->twig = $twig;
@@ -129,29 +128,32 @@ class TwigSwiftMailer implements MailerInterface
             $context['locale'] = $context['user_locale'];
             $context['app']['request']['locale'] = $context['user_locale'];
         }
-        /** @var \Twig_Template $template */
-        $template = $this->twig->loadTemplate($templateName);
-        $context = $this->twig->mergeGlobals($context);
 
-        $subject = $template->renderBlock('subject', $context);
-        $context["message"] = $template->renderBlock('message', $context);
+        try {
+            /** @var \Twig_Template $template */
+            $template = $this->twig->loadTemplate($templateName);
+            $context = $this->twig->mergeGlobals($context);
 
-        $textBody = $template->renderBlock('body_text', $context);
-        $htmlBody = $template->renderBlock('body_html', $context);
+            $subject = $template->renderBlock('subject', $context);
+            $context["message"] = $template->renderBlock('message', $context);
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail);
+            $textBody = $template->renderBlock('body_text', $context);
+            $htmlBody = $template->renderBlock('body_html', $context);
 
-        if (!empty($htmlBody)) {
-            $message
-                ->setBody($htmlBody, 'text/html')
-                ->addPart($textBody, 'text/plain');
-        } else {
-            $message->setBody($textBody);
+            $message = (new \Swift_Message($subject))
+                ->setFrom($fromEmail)
+                ->setTo($toEmail);
+
+            if (!empty($htmlBody)) {
+                $message
+                    ->setBody($htmlBody, 'text/html')
+                    ->addPart($textBody, 'text/plain');
+            } else {
+                $message->setBody($textBody);
+            }
+
+            $this->mailer->send($message);
+        } catch (\Exception $e) {
         }
-
-        $this->mailer->send($message);
     }
 }
