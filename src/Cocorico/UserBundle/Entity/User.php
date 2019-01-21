@@ -1222,6 +1222,47 @@ class User extends BaseUser implements ParticipantInterface
         return $bookings;
     }
 
+    /**
+     * Does the user has booking in progress (some money operations still to be made (withdrawals, refund, ...))
+     *
+     * @return bool
+     */
+    public function hasBookingsInProgress()
+    {
+        $bookingsAsAsker = $this->getBookingAsAsker();
+        $bookingsAsOfferer = $this->getBookingAsOfferer();
+
+        /** @var Booking[] $bookings */
+        $bookings = new ArrayCollection(array_merge($bookingsAsAsker->toArray(), $bookingsAsOfferer->toArray()));
+
+        foreach ($bookings as $index => $booking) {
+            if ($booking->getStatus() == Booking::STATUS_NEW) {
+                return true;
+            } elseif ($booking->getStatus() == Booking::STATUS_PAYMENT_REFUSED) {
+                return true;
+            } elseif ($booking->getStatus() == Booking::STATUS_PAYED) {
+                //If there is no bank wire or there is a bank wire not payed
+                $bankWire = $booking->getBankWire();
+                if (!$bankWire || ($bankWire &&
+                        ($bankWire->getStatus() != BookingBankWire::STATUS_PAYED || !$bankWire->getMangopayPayoutId())
+                    )
+                ) {
+                    return true;
+                }
+            } elseif ($booking->getStatus() == Booking::STATUS_CANCELED_ASKER) {
+                //If there is a bank wire not payed
+                $bankWire = $booking->getBankWire();
+                if (($bankWire &&
+                    ($bankWire->getStatus() != BookingBankWire::STATUS_PAYED || !$bankWire->getMangopayPayoutId())
+                )
+                ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @return ArrayCollection|Message[]
