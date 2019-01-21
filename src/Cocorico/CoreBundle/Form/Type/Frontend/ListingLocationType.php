@@ -11,9 +11,12 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use Cocorico\CoreBundle\Form\Type\CountryFilteredType;
+use Cocorico\GeoBundle\Form\Type\GeocodingToCoordinateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * ListingLocationType
@@ -26,7 +29,7 @@ class ListingLocationType extends AbstractType
         $builder
             ->add(
                 'country',
-                'country_filtered',
+                CountryFilteredType::class,
                 array(
                     'label' => 'listing.form.location.country',
                     'translation_domain' => 'cocorico_listing',//Not recognized elsewhere
@@ -73,7 +76,7 @@ class ListingLocationType extends AbstractType
             //Its value is transformed to Coordinate entity through data transformer
             ->add(
                 'coordinate',
-                'geocoding_to_coordinate'
+                GeocodingToCoordinateType::class
             );
 
     }
@@ -88,18 +91,9 @@ class ListingLocationType extends AbstractType
             array(
                 'translation_domain' => 'cocorico_listing',
                 'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

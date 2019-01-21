@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
 class ThreadAdmin extends Admin
@@ -189,13 +190,13 @@ class ThreadAdmin extends Admin
                     'field_type' => 'choice',
                     'label' => 'admin.thread.type.label'
                 ),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array(
                         'Reservation Message' => 'booking',
                         'Message' => 'message'
                     ),
-                    'empty_value' => 'admin.thread.type.label',
+                    'placeholder' => 'admin.thread.type.label',
                     'translation_domain' => 'SonataAdminBundle',
                     'choices_as_values' => true
                 )

@@ -11,6 +11,7 @@
 
 namespace Cocorico\MessageBundle\Form\Type\Frontend;
 
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
@@ -33,12 +34,12 @@ class NewThreadMessageFormType extends AbstractType implements TranslationContai
         $builder
             ->add(
                 'listing',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array('class' => 'Cocorico\CoreBundle\Entity\Listing')
             )
             ->add(
                 'recipient',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array('class' => 'Cocorico\UserBundle\Entity\User')
             )
             ->add(
@@ -69,15 +70,6 @@ class NewThreadMessageFormType extends AbstractType implements TranslationContai
                 'csrf_token_id' => 'message',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

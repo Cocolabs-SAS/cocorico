@@ -31,7 +31,7 @@ class ListingEditDurationType extends AbstractType
                 array(
                     'label' => 'listing_edit.form.min_duration',
                     'choices' => array_combine(range(1, 30), range(1, 30)),
-                    'empty_value' => 'listing_edit.form.choose',
+                    'placeholder' => 'listing_edit.form.choose',
                     'empty_data' => null,
                     'required' => false,
                     'choices_as_values' => true
@@ -43,7 +43,7 @@ class ListingEditDurationType extends AbstractType
                 array(
                     'label' => 'listing_edit.form.max_duration',
                     'choices' => array_combine(range(1, 30), range(1, 30)),
-                    'empty_value' => 'listing_edit.form.choose',
+                    'placeholder' => 'listing_edit.form.choose',
                     'empty_data' => null,
                     'required' => false,
                     'choices_as_values' => true
@@ -72,15 +72,6 @@ class ListingEditDurationType extends AbstractType
                 'translation_domain' => 'cocorico_listing',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

@@ -11,9 +11,11 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class UserLanguageType extends AbstractType
 {
@@ -35,7 +37,7 @@ class UserLanguageType extends AbstractType
             )
             ->add(
                 'user',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array(
                     'class' => 'Cocorico\UserBundle\Entity\User',
                     /** @Ignore */
@@ -54,7 +56,7 @@ class UserLanguageType extends AbstractType
                 'data_class' => 'Cocorico\UserBundle\Entity\UserLanguage',
                 'csrf_token_id' => 'user_language',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 /** @Ignore */
                 'label' => false
             )

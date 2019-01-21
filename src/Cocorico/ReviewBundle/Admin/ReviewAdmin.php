@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ReviewAdmin extends Admin
 {
@@ -134,14 +135,14 @@ class ReviewAdmin extends Admin
                 'rating',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'admin.review.rating.label',
                     'choices' => array_combine(
                         range(1, 5),
                         range(1, 5)
                     ),
-                    'empty_value' => 'admin.review.rating.label',
+                    'placeholder' => 'admin.review.rating.label',
                     'translation_domain' => 'SonataAdminBundle',
                     'choices_as_values' => true
                 )

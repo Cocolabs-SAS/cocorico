@@ -21,6 +21,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityPriceType;
 
 /**
  * Listing Dashboard controller.
@@ -93,7 +95,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availabilities_prices',
-            'listing_edit_availabilities_prices',
+            ListingEditAvailabilitiesPricesType::class,
             $listing,
             array(
                 'action' => $this->generateUrl(
@@ -166,7 +168,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availability',
-            'listing_edit_availability_price',
+            ListingEditAvailabilityPriceType::class,
             $availability,
             array(
                 'method' => 'POST',
@@ -277,7 +279,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availability',
-            'listing_edit_availability_price',
+            ListingEditAvailabilityPriceType::class,
             $availability,
             array(
                 'method' => 'POST',

@@ -11,6 +11,7 @@
 
 namespace Cocorico\CMSBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CMSBundle\Entity\Footer;
 use Cocorico\CMSBundle\Model\Manager\FooterManager;
 use Sonata\AdminBundle\Admin\Admin;
@@ -66,7 +67,7 @@ class FooterAdmin extends Admin
             ->with('admin.footer.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -246,6 +247,7 @@ class FooterAdmin extends Admin
 
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $dataSourceIt;
     }
 

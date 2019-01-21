@@ -29,16 +29,6 @@ class StarRatingType extends AbstractType
         return 'choice';
     }
 
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
     /**
      * {@inheritdoc}
      */

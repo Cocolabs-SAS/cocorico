@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type\Frontend;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\DataTransformer\ListingListingCategoriesToListingCategoriesTransformer;
+use Cocorico\CoreBundle\Form\Type\ListingCategoryType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +41,7 @@ class ListingNewCategoriesType extends AbstractType
         $builder
             ->add(
                 'listingListingCategories',
-                'listing_category'
+                ListingCategoryType::class
             );
 
         $builder
@@ -67,7 +68,7 @@ class ListingNewCategoriesType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_new_categories',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => false,//To have error on collection item field,
+//                'cascade_validation' => false,//To have error on collection item field,
                 'validation_groups' => false,//To not have listing validation errors when categories are only edited
             )
         );

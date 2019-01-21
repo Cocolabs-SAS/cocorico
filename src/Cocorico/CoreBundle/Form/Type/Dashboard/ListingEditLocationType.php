@@ -28,7 +28,7 @@ class ListingEditLocationType extends ListingEditType
         $builder
             ->add(
                 'location',
-                new ListingLocationType(),
+                ListingLocationType::class,
                 array(
                     'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
                     /** @Ignore */
@@ -41,16 +41,6 @@ class ListingEditLocationType extends ListingEditType
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-    }
-
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

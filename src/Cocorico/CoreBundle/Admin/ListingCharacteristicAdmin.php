@@ -11,6 +11,7 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCharacteristic;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -57,7 +58,7 @@ class ListingCharacteristicAdmin extends Admin
             ->with('admin.listing_characteristic.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -177,6 +178,7 @@ class ListingCharacteristicAdmin extends Admin
 
         $datasourceit = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $datasourceit->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $datasourceit;
     }
 

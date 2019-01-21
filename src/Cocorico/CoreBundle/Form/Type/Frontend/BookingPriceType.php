@@ -11,11 +11,14 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use Cocorico\TimeBundle\Form\Type\DateRangeType;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingPriceType extends AbstractType
 {
@@ -58,7 +61,7 @@ class BookingPriceType extends AbstractType
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */
@@ -87,7 +90,7 @@ class BookingPriceType extends AbstractType
         if (!$this->bookingManager->getTimeUnitIsDay()) {
             $builder->add(
                 'time_range',
-                'time_range',
+                TimeRangeType::class,
                 array(
                     'mapped' => false,
                     'start_options' => array(

@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ContactAdmin extends Admin
 {
@@ -77,7 +78,7 @@ class ContactAdmin extends Admin
             )
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Contact::$statusValues),
                     'label' => 'admin.contact.status.label',
@@ -111,7 +112,7 @@ class ContactAdmin extends Admin
                 'status',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Contact::$statusValues),
                     'label' => 'admin.contact.status.label',

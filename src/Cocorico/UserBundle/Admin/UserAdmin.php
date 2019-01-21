@@ -11,6 +11,7 @@
 
 namespace Cocorico\UserBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -18,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\UserBundle\Admin\Model\UserAdmin as SonataUserAdmin;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserAdmin extends SonataUserAdmin
 {
@@ -61,7 +63,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'personType',
-                'choice',
+                ChoiceType::class,
                 array(
                     'empty_data' => User::PERSON_TYPE_NATURAL,
                     'required' => true,
@@ -125,7 +127,7 @@ class UserAdmin extends SonataUserAdmin
         $formMapper->with('Profile-2')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     //'locales' => $this->locales,
 //                    'required_locales' => array($this->locale),

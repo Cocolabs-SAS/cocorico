@@ -11,6 +11,7 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCategory;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -60,7 +61,7 @@ class ListingCategoryAdmin extends Admin
             ->with('admin.listing_category.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -93,7 +94,7 @@ class ListingCategoryAdmin extends Admin
                     array(
                         'label' => 'admin.listing_category.fields.label',
                         'disabled' => true,
-                        'property' => 'field'
+                        'choice_label' => 'field'
                     )
                 );
         }

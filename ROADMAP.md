@@ -54,6 +54,30 @@
 * Add PHP 7.1 compatibility
 
     
+## [0.15.0] - 2017-12-04
+
+### Upgrade PHP to 7.1
+
+* Last LTS version : See http://php.net/supported-versions.php
+
+
+### Update Symfony from 2.8 to 3.4 (see https://github.com/symfony/symfony/blob/3.4/UPGRADE-3.0.md)
+
+
+### Fix remaining SF 2.x deprecations
+
+* Accessing form type by its fully-qualified type class name instead string name
+
+* Use "constraints" with a Valid constraint instead of "cascade_validation" in form types.
+
+* Use form option "entry_type" instead of "type"
+
+* Replace "empty_value" option in types "choice", "date", ...by "placeholder". 
+
+
+
+    
+    
 ## [0.4.0] - 2016-12-02
 
 * Add PHP 5.6 compatibility

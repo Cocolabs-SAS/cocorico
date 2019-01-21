@@ -12,6 +12,8 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Form\Type\Dashboard\BookingEditType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType;
 use Cocorico\MessageBundle\Entity\Message;
 use Cocorico\MessageBundle\Event\MessageEvent;
 use Cocorico\MessageBundle\Event\MessageEvents;
@@ -92,15 +94,15 @@ class BookingController extends Controller
     {
         $thread = $booking->getThread();
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
+        $form = $this->get('fos_message.reply_form.factory')->create($thread);
 
         $paramArr = $request->get($form->getName());
         $request->request->set($form->getName(), $paramArr);
-        $formHandler = $this->container->get('fos_message.reply_form.handler');
+        $formHandler = $this->get('fos_message.reply_form.handler');
 
         /** @var Message $message */
         if ($message = $formHandler->process($form)) {
-            $selfUrl = $this->container->get('router')->generate(
+            $selfUrl = $this->get('router')->generate(
                 'cocorico_dashboard_booking_show_offerer',
                 array('id' => $booking->getId())
             );
@@ -109,16 +111,16 @@ class BookingController extends Controller
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
 
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
-            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
+            $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             return new RedirectResponse($selfUrl);
         }
 
         //Amount excl or incl tax
         $amountTotal = $booking->getAmountToPayToOffererDecimal();
-        if (!$this->container->getParameter('cocorico.include_vat')) {
+        if (!$this->getParameter('cocorico.include_vat')) {
             $amountTotal = $booking->getAmountToPayToOffererExcludingVATDecimal(
-                $this->container->getParameter('cocorico.vat')
+                $this->getParameter('cocorico.vat')
             );
         }
 
@@ -165,8 +167,8 @@ class BookingController extends Controller
 
         $success = $bookingHandler->process($form);
 
-        $translator = $this->container->get('translator');
-        $session = $this->container->get('session');
+        $translator = $this->get('translator');
+        $session = $this->get('session');
         if ($success == 1) {
             $url = $this->generateUrl(
                 'cocorico_dashboard_booking_edit_offerer',
@@ -194,9 +196,9 @@ class BookingController extends Controller
 
         //Amount excl or incl tax
         $amountTotal = $booking->getAmountToPayToOffererDecimal();
-        if (!$this->container->getParameter('cocorico.include_vat')) {
+        if (!$this->getParameter('cocorico.include_vat')) {
             $amountTotal = $booking->getAmountToPayToOffererExcludingVATDecimal(
-                $this->container->getParameter('cocorico.vat')
+                $this->getParameter('cocorico.vat')
             );
         }
 
@@ -232,7 +234,7 @@ class BookingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'booking',
-            'booking_edit',
+            BookingEditType::class,
             $booking,
             array(
                 'method' => 'POST',
@@ -258,7 +260,7 @@ class BookingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_status_filter',
+            BookingStatusFilterType::class,
             null,
             array(
                 'action' => $this->generateUrl(

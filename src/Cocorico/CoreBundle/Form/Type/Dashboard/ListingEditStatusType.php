@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -42,7 +43,7 @@ class ListingEditStatusType extends ListingEditType
         $form
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing.form.status',
                     'choices' => array_flip($choices),
@@ -62,15 +63,6 @@ class ListingEditStatusType extends ListingEditType
                 'translation_domain' => 'cocorico_listing',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

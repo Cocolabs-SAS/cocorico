@@ -11,13 +11,17 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProfileBankAccountFormType extends AbstractType
 {
-
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -72,7 +76,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'annualIncome',
-                'price',
+                PriceType::class,
                 array(
                     'label' => 'form.user.annual_income',
                     'translation_domain' => 'cocorico_user',
@@ -81,7 +85,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'bankOwnerName',
-                null,
+                TextType::class,
                 array(
                     'label' => 'form.user.bank_owner_name',
                     'required' => true,
@@ -115,6 +119,9 @@ class ProfileBankAccountFormType extends AbstractType
 
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
@@ -122,19 +129,10 @@ class ProfileBankAccountFormType extends AbstractType
                 'data_class' => 'Cocorico\UserBundle\Entity\User',
                 'csrf_token_id' => 'CocoricoProfileBankAccount',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('CocoricoProfileBankAccount'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

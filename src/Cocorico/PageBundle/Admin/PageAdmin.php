@@ -11,6 +11,7 @@
 
 namespace Cocorico\PageBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -58,7 +59,7 @@ class PageAdmin extends Admin
             ->with('Page')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -235,6 +236,7 @@ class PageAdmin extends Admin
 
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $dataSourceIt;
     }
 

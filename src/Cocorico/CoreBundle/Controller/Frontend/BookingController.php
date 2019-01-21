@@ -15,6 +15,7 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\BookingEvent;
 use Cocorico\CoreBundle\Event\BookingEvents;
+use Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,6 +45,8 @@ class BookingController extends Controller
      *
      * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
+     * @ParamConverter("start", options={"format": "Y-m-d H:i"})
+     * @ParamConverter("end", options={"format": "Y-m-d H:i"})
      * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
      * @ParamConverter("start", options={"format": "Y-m-d"})
      * @ParamConverter("end", options={"format": "Y-m-d"})
@@ -216,7 +219,7 @@ class BookingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_new',
+            BookingNewType::class,
             $booking,
             array(
                 'method' => 'POST',

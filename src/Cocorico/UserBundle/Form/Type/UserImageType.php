@@ -11,9 +11,11 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class UserImageType extends AbstractType
 {
@@ -60,7 +62,7 @@ class UserImageType extends AbstractType
             )
             ->add(
                 'user',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array(
                     'class' => 'Cocorico\UserBundle\Entity\User',
                     /** @Ignore */
@@ -79,20 +81,11 @@ class UserImageType extends AbstractType
                 'data_class' => 'Cocorico\UserBundle\Entity\UserImage',
                 'csrf_token_id' => 'user_image',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 /** @Ignore */
                 'label' => false
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

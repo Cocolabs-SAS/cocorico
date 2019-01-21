@@ -22,7 +22,7 @@ fos_user:
         confirmation:
             enabled:    "%cocorico.registration_confirmation%"
         form:
-            type: user_registration
+            type: Cocorico\UserBundle\Form\Type\RegistrationFormType
             name: user_registration
             validation_groups: [CocoricoRegistration]
             handler: cocorico_user.form.handler.registration

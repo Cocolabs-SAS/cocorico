@@ -17,15 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 class DateHiddenType extends DateType
 {
     /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()

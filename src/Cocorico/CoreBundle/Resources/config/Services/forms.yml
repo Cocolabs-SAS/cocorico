@@ -126,6 +126,14 @@ services:
         tags:
             - { name: form.type, alias: price }
 
+    cocorico.form.type.price_range:
+        class: Cocorico\CoreBundle\Form\Type\PriceRangeType
+        arguments:
+            - "@session"
+            - "%cocorico.currency%"
+        tags:
+            - { name: form.type, alias: price_range }
+
     cocorico.form.type.entity_hidden:
         class: Cocorico\CoreBundle\Form\Type\EntityHiddenType
         arguments:
@@ -200,6 +208,13 @@ services:
             - "%cocorico.time_hours_available%"
         tags:
             - { name: form.type, alias: time_range }
+
+    cocorico.form.type.listing_listing_characteristic:
+        class: Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: listing_listing_characteristic }
 
     cocorico.form.type.listing_edit_duration:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType

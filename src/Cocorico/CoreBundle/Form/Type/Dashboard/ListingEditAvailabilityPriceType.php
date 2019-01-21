@@ -11,6 +11,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,7 @@ class ListingEditAvailabilityPriceType extends AbstractType
         $builder
             ->add(
                 'price',
-                'price',
+                PriceType::class,
                 array(
                     'label' => 'listing_edit.form.price_custom',
                 )
@@ -66,15 +67,6 @@ class ListingEditAvailabilityPriceType extends AbstractType
                 'translation_domain' => 'cocorico_listing'
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

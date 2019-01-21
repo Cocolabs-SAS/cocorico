@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ListingDiscountType extends AbstractType
 {
@@ -62,18 +63,9 @@ class ListingDiscountType extends AbstractType
             array(
                 'data_class' => 'Cocorico\CoreBundle\Entity\ListingDiscount',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

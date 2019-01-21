@@ -11,7 +11,9 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -48,41 +50,45 @@ class ListingCharacteristicValueAdmin extends Admin
 
         }
 
-        $formMapper
-            ->add(
-                'translations',
-                'a2lix_translations',
-                array(
-                    'locales' => $this->locales,
-                    'required_locales' => $this->locales,
-                    'fields' => array(
-                        'name' => array(
-                            'field_type' => 'text',
-                            'locale_options' => $titles,
+        try {
+            $formMapper
+                ->add(
+                    'translations',
+                    TranslationsType::class,
+                    array(
+                        'locales' => $this->locales,
+                        'required_locales' => $this->locales,
+                        'fields' => array(
+                            'name' => array(
+                                'field_type' => 'text',
+                                'locale_options' => $titles,
+                            ),
                         ),
-                    ),
-                    /** @Ignore */
-                    'label' => 'Descriptions'
+                        /** @Ignore */
+                        'label' => 'Descriptions'
+                    )
                 )
-            )
-            ->add(
-                'position',
-                null,
-                array(
-                    'label' => 'admin.listing_characteristic.position.label'
+                ->add(
+                    'position',
+                    null,
+                    array(
+                        'label' => 'admin.listing_characteristic.position.label'
+                    )
                 )
-            )
-            ->add(
-                'listingCharacteristicType',
-                'entity_hidden',
-                array(
-                    /** @Ignore */
-                    'label' => false,
-                    'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicType',
-                    'data_class' => null
+                ->add(
+                    'listingCharacteristicType',
+                    EntityHiddenType::class,
+                    array(
+                        /** @Ignore */
+                        'label' => false,
+                        'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicType',
+                        'data_class' => null
+                    )
                 )
-            )
-            ->end();
+                ->end();
+        } catch (\Exception $e) {
+
+        }
     }
 
 

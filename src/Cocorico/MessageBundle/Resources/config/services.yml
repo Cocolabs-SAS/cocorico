@@ -9,7 +9,7 @@ services:
         class: Cocorico\MessageBundle\Form\Type\Frontend\NewThreadMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-        - { name: form.type, alias: cocorico_message_new_thread }
+            - { name: form.type, alias: cocorico_message_new_thread }
         public: true
         
         

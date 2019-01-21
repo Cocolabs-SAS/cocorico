@@ -15,10 +15,12 @@ use Cocorico\CoreBundle\Entity\Booking;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingEditType extends AbstractType implements TranslationContainerInterface
 {
@@ -48,7 +50,7 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
             )
             ->add(
                 'message',
-                'textarea',
+                TextareaType::class,
                 array(
                     'mapped' => false,
                     'label' => 'booking.form.message',
@@ -70,19 +72,10 @@ class BookingEditType extends AbstractType implements TranslationContainerInterf
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
                 'csrf_token_id' => 'booking_edit',
                 'translation_domain' => 'cocorico_booking',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
 //                'validation_groups' => array('edit', 'default'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

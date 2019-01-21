@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -28,7 +29,7 @@ class ListingEditAvailabilitiesStatusType extends ListingEditAvailabilitiesType
         $builder
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing.form.status',
                     'mapped' => false,
@@ -49,15 +50,6 @@ class ListingEditAvailabilitiesStatusType extends ListingEditAvailabilitiesType
                 'translation_domain' => 'cocorico_listing',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

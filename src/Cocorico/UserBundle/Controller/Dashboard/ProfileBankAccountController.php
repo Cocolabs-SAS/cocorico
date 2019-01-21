@@ -89,7 +89,7 @@ class ProfileBankAccountController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'user',
-            new ProfileBankAccountFormType(),
+            ProfileBankAccountFormType::class,
             $user,
             array(
                 'method' => 'POST',

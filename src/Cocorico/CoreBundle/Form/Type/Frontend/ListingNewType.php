@@ -11,11 +11,13 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -24,6 +26,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * Class ListingNewType
@@ -83,7 +86,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
         $builder->add(
             'translations',
-            'a2lix_translations',
+            TranslationsType::class,
             array(
                 'required_locales' => array($this->locale),
                 'fields' => array(
@@ -110,14 +113,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'price',
-                'price',
+                PriceType::class,
                 array(
                     'label' => 'listing.form.price',
                 )
             )
             ->add(
                 'image',
-                new ImageType()
+                ImageType::class
             );
 
         //Default listing location
@@ -142,7 +145,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'location',
-                new ListingLocationType(),
+                ListingLocationType::class,
                 array(
                     'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
                     /** @Ignore */
@@ -184,7 +187,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_new',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 //'validation_groups' => array('Listing'),
             )
         );

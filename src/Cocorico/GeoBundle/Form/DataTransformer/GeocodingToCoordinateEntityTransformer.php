@@ -16,10 +16,10 @@ use Cocorico\GeoBundle\Entity\City;
 use Cocorico\GeoBundle\Entity\Coordinate;
 use Cocorico\GeoBundle\Entity\Country;
 use Cocorico\GeoBundle\Entity\Department;
-use Cocorico\GeoBundle\Geocoder\Provider\GoogleMapsProvider;
 use Doctrine\Common\Persistence\ObjectManager;
-use Geocoder\Exception\NoResult;
-use Ivory\HttpAdapter\CurlHttpAdapter;
+use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\StatefulGeocoder;
+use Http\Adapter\Guzzle6\Client;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -176,12 +176,14 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
         //Server geocoding. If we can we use it instead of client geocoding
         try {
             $geocodingsServer = $geocodingI18nServer = array();
+
+            $httpClient = new Client();
+            $provider = new GoogleMaps($httpClient);
+
             //Geocoding for each locale
             foreach ($this->locales as $locale) {
-                $geocoder = new GoogleMapsProvider(
-                    new CurlHttpAdapter(), $locale, $region, true, $this->googlePlaceAPIKey
-                );
-                $geocoder->limit(1);
+                $geocoder = new StatefulGeocoder($provider, $locale);
+                $geocoder->setLimit(1);
                 $geocodingsServer[$locale] = $geocoder->reverse($lat, $lng);
             }
 
@@ -194,10 +196,12 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
 
             //Merge them
             foreach ($geocodingsServer as $geocodingServer) {
-                $geocodingI18nServer = array_merge($geocodingI18nServer, $geocodingServer);
+//                foreach ($geocodingServer as $address) {
+//                    $geocodingI18nServer = array_merge($geocodingI18nServer, $address);
+//                }
             }
 
-        } catch (NoResult $e) {
+        } catch (\RuntimeException $e) {
             $this->debug("getGeocodingServer NoResult Error:\n" . $e->getMessage());
             throw new TransformationFailedException();
         }

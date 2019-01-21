@@ -51,9 +51,9 @@ class DateRangeType extends AbstractType
                 $form = $event->getForm();
 
                 //Days display mode: range or duration
-                $dateEndType = 'date';
+                $dateEndType = DateType::class;
                 if ($options['display_mode'] == "duration") {
-                    $dateEndType = 'date_hidden';
+                    $dateEndType = DateHiddenType::class;
 
                     if ($this->daysMax > 1) {
                         $endDayIncluded = isset($options["end_day_included"]) ? $options["end_day_included"] : true;
@@ -75,7 +75,7 @@ class DateRangeType extends AbstractType
                                     'choices' => array_combine(range(1, $this->daysMax), range(1, $this->daysMax)),
                                     'data' => $nbDays,
                                     /** @Ignore */
-                                    'empty_value' => '',
+                                    'placeholder' => '',
                                     'attr' => array(
                                         'class' => 'no-arrow'
                                     ),

@@ -11,6 +11,9 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use Cocorico\TimeBundle\Form\Type\DateRangeTyp;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
+use Cocorico\TimeBundle\Form\Type\WeekDaysType;
 use Cocorico\CoreBundle\Validator\Constraints\TimeRangesOverlap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -45,7 +48,7 @@ class ListingEditAvailabilitiesType extends AbstractType
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */
@@ -63,7 +66,7 @@ class ListingEditAvailabilitiesType extends AbstractType
             )
             ->add(
                 'weekdays',
-                'weekdays'
+                WeekDaysType::class
             );
 
         if (!$this->timeUnitIsDay) {
@@ -72,7 +75,7 @@ class ListingEditAvailabilitiesType extends AbstractType
                 'collection',
                 array(
                     'mapped' => false,
-                    'type' => 'time_range',
+                    'entry_type' => TimeRangeType::class,
                     'allow_add' => true,
                     'allow_delete' => true,
                     'required' => false,

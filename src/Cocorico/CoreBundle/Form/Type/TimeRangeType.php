@@ -62,7 +62,7 @@ class TimeRangeType extends AbstractType
                             array(
                                 'label' => 'time_range.start',
                                 'property_path' => 'start',
-                                'empty_value' => '',
+                                'placeholder' => '',
                                 'widget' => 'choice',
                                 'input' => 'datetime',
                                 'model_timezone' => 'UTC',
@@ -80,7 +80,7 @@ class TimeRangeType extends AbstractType
                             array(
                                 'label' => 'time_range.end',
                                 'property_path' => 'end',
-                                'empty_value' => '',
+                                'placeholder' => '',
                                 'widget' => 'choice',
                                 'input' => 'datetime',
                                 'model_timezone' => 'UTC',
@@ -147,7 +147,7 @@ class TimeRangeType extends AbstractType
                                     ),
                                     'data' => $nbMinutes,
                                     /** @Ignore */
-                                    'empty_value' => '',
+                                    'placeholder' => '',
                                     'attr' => array(
                                         'class' => 'no-scroll no-arrow'
                                     ),

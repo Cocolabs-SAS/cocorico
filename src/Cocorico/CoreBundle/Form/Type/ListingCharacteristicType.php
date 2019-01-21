@@ -16,6 +16,7 @@ use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
 use Cocorico\CoreBundle\Repository\ListingCharacteristicRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -23,8 +24,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ListingCharacteristicType extends AbstractType
 {
-
-    private $request;
     private $locale;
     private $entityManager;
 
@@ -34,8 +33,7 @@ class ListingCharacteristicType extends AbstractType
      */
     public function __construct(RequestStack $requestStack, EntityManager $entityManager)
     {
-        $this->request = $requestStack->getCurrentRequest();
-        $this->locale = $this->request->getLocale();
+        $this->locale = $requestStack->getCurrentRequest()->getLocale();
         $this->entityManager = $entityManager;
     }
 
@@ -63,7 +61,7 @@ class ListingCharacteristicType extends AbstractType
 
                     $form->add(
                         $id,
-                        'choice',
+                        ChoiceType::class,
                         array(
                             'data' => $selected,
                             'required' => false,
@@ -104,15 +102,6 @@ class ListingCharacteristicType extends AbstractType
     public function getParent()
     {
         return 'collection';
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

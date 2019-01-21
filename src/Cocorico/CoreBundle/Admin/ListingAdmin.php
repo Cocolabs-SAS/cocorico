@@ -11,8 +11,10 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\ListingImageType;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Admin\Admin;
@@ -21,6 +23,8 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ListingAdmin extends Admin
 {
@@ -87,10 +91,10 @@ class ListingAdmin extends Admin
             ->with('admin.listing.title')
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Listing::$statusValues),
-                    'empty_value' => 'admin.listing.status.label',
+                    'placeholder' => 'admin.listing.status.label',
                     'translation_domain' => 'cocorico_listing',
                     'label' => 'admin.listing.status.label',
                     'choices_as_values' => true
@@ -98,7 +102,7 @@ class ListingAdmin extends Admin
             )
             ->add(
                 'adminNotation',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_combine(
                         range(0, 10, 0.5),
@@ -109,7 +113,7 @@ class ListingAdmin extends Admin
                             range(0, 10, 0.5)
                         )
                     ),
-                    'empty_value' => 'admin.listing.admin_notation.label',
+                    'placeholder' => 'admin.listing.admin_notation.label',
                     'label' => 'admin.listing.admin_notation.label',
                     'required' => false,
                     'choices_as_values' => true
@@ -124,7 +128,7 @@ class ListingAdmin extends Admin
             )
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -168,9 +172,9 @@ class ListingAdmin extends Admin
             )
             ->add(
                 'images',
-                'collection',
+                CollectionType::class,
                 array(
-                    'type' => new ListingImageType(),
+                    'entry_type' => ListingImageType::class,
                     'by_reference' => false,
                     'required' => false,
                     'disabled' => true,
@@ -186,7 +190,7 @@ class ListingAdmin extends Admin
             )
             ->add(
                 'price',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.listing.price.label',
@@ -198,7 +202,7 @@ class ListingAdmin extends Admin
             $formMapper
                 ->add(
                     'amountDeposit',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'listing_edit.form.deposit',
@@ -213,10 +217,10 @@ class ListingAdmin extends Admin
         $formMapper
             ->add(
                 'cancellationPolicy',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Listing::$cancellationPolicyValues),
-                    'empty_value' => 'admin.listing.cancellation_policy.label',
+                    'placeholder' => 'admin.listing.cancellation_policy.label',
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
                     'translation_domain' => 'cocorico_listing',
@@ -311,7 +315,7 @@ class ListingAdmin extends Admin
                 'status',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Listing::$statusValues),
                     'translation_domain' => 'cocorico_listing',
@@ -587,6 +591,7 @@ class ListingAdmin extends Admin
 
         $datasourceit = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $datasourceit->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $datasourceit;
     }
 

@@ -76,14 +76,6 @@ class LanguageFilteredType extends LanguageType
         return 'language';
     }
 
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     /**
      * {@inheritdoc}

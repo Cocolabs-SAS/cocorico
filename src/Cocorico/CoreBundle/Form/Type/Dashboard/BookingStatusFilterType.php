@@ -33,7 +33,7 @@ class BookingStatusFilterType extends AbstractType
                     /** @Ignore */
                     'label' => false,
                     'choices' => array_flip(Booking::getVisibleStatusValues()),
-                    'empty_value' => 'admin.booking.status.label',
+                    'placeholder' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
                     'choices_as_values' => true
                 )
@@ -52,15 +52,6 @@ class BookingStatusFilterType extends AbstractType
                 'translation_domain' => 'cocorico_booking',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**
