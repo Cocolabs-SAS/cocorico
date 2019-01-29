@@ -27,10 +27,18 @@
       "app/AppCache.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    },
+    "files": [
+      "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
+    ]
+  },
   "require": {
     "php": "^7.1",
     "symfony/symfony": "2.8.*",
-    "doctrine/orm": "^2.4.8",
+    "doctrine/orm": "^2.5",
     "doctrine/doctrine-bundle": "~1.4",
     "doctrine/doctrine-migrations-bundle": "^1.0",
     "alcaeus/mongo-php-adapter": "^1.1",
@@ -86,7 +94,7 @@
     "hpatoio/deploy-bundle": "~1.5"
   },
   "scripts": {
-    "post-install-cmd": [
+    "symfony-scripts": [
       "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
@@ -94,13 +102,11 @@
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
       "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
     ],
+    "post-install-cmd": [
+      "@symfony-scripts"
+    ],
     "post-update-cmd": [
-      "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-      "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+      "@symfony-scripts"
     ]
   },
   "config": {
@@ -108,11 +114,15 @@
     "platform": {
       "php": "7.1"
     },
-    "component-dir": "web/assets"
+    "component-dir": "web/assets",
+    "sort-packages": true
   },
   "extra": {
     "symfony-app-dir": "app",
+    "symfony-bin-dir": "bin",
+    "symfony-var-dir": "var",
     "symfony-web-dir": "web",
+    "symfony-tests-dir": "tests",
     "symfony-assets-install": "relative",
     "incenteev-parameters": {
       "file": "app/config/parameters.yml"
