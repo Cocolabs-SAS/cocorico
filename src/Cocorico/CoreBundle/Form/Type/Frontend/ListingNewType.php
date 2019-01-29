@@ -24,6 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * Class ListingNewType
@@ -69,12 +70,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'listing.form.title',
+                'constraints' => array(new NotBlank()),
                 'attr' => array(
                     'placeholder' => 'auto',
                 ),
             );
             $descriptions[$locale] = array(
                 'label' => 'listing.form.description',
+                'constraints' => array(new NotBlank()),
                 'attr' => array(
                     'placeholder' => 'auto',
                 ),
@@ -99,7 +102,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                         'display' => false,
                     ),
                     'slug' => array(
-                        'field_type' => 'hidden',
+                        'display' => false
                     ),
                 ),
                 /** @Ignore */

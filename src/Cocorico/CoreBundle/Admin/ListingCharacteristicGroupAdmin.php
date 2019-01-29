@@ -17,6 +17,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicGroupAdmin extends Admin
 {
@@ -45,7 +46,7 @@ class ListingCharacteristicGroupAdmin extends Admin
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Name',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
         }
 

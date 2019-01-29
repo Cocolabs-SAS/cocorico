@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FooterAdmin extends Admin
 {
@@ -48,17 +49,18 @@ class FooterAdmin extends Admin
         $titles = $links = $urls = $urlsHash = array();
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
-                'label' => 'Title'
+                'label' => 'Title',
+                'constraints' => array(new NotBlank())
             );
             $links[$locale] = array(
                 'label' => 'Link',
-                'required' => true,
+                'constraints' => array(new NotBlank())
             );
             $urls[$locale] = array(
                 'label' => 'URL',
             );
             $urlsHash[$locale] = array(
-                'label' => 'URL Hash'
+                'label' => 'URL Hash',
             );
         }
 

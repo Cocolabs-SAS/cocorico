@@ -22,6 +22,9 @@
             <call method="setBundlesEnabled">
                 <argument>%kernel.bundles%</argument>
             </call>
+            <call method="setLocales">
+                <argument>%cocorico.locales%</argument>
+            </call>
         </service>
     </services>
 

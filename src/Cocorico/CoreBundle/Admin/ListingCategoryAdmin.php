@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCategoryAdmin extends Admin
 {
@@ -48,11 +49,11 @@ class ListingCategoryAdmin extends Admin
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Name',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
             $descriptions[$locale] = array(
                 'label' => 'Description',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
         }
 
@@ -70,7 +71,7 @@ class ListingCategoryAdmin extends Admin
                             'locale_options' => $titles,
                         ),
                         'slug' => array(
-                            'field_type' => 'hidden'
+                            'display' => false
                         )
                     ),
                     /** @Ignore */

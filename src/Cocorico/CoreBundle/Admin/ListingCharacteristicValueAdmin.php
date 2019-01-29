@@ -15,6 +15,7 @@ use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicValueAdmin extends Admin
 {
@@ -43,7 +44,7 @@ class ListingCharacteristicValueAdmin extends Admin
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Name',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
 
         }

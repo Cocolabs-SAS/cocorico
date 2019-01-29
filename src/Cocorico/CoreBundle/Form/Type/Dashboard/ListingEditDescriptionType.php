@@ -16,6 +16,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
 {
@@ -33,11 +34,13 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 /** @Ignore */
-                'label' => "listing.form.title.$locale"
+                'label' => "listing.form.title.$locale",
+                'constraints' => array(new NotBlank())
             );
             $descriptions[$locale] = array(
                 /** @Ignore */
-                'label' => "listing.form.description.$locale"
+                'label' => "listing.form.description.$locale",
+                'constraints' => array(new NotBlank())
             );
             $rules[$locale] = array(
                 /** @Ignore */
@@ -65,7 +68,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                             'locale_options' => $rules
                         ),
                         'slug' => array(
-                            'field_type' => 'hidden'
+                            'display' => false
                         )
                     ),
                     /** @Ignore */

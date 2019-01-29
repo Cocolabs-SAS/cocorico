@@ -140,11 +140,12 @@ jms_translation:
 
 
 a2lix_translation_form:
+    locale_provider: default
     locales: "%cocorico.locales%"
-    #required_locales: [%cocorico.locale%]
+    default_locale: "%cocorico.locale%"
+    required_locales: "%cocorico.locales%"
     manager_registry: doctrine
     templating: "CocoricoCoreBundle:Form:fields_translations.html.twig"
-
 
 stof_doctrine_extensions:
     default_locale: "%cocorico.locale%"
