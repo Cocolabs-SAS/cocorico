@@ -93,7 +93,6 @@ class ListingAdmin extends Admin
                     'empty_value' => 'admin.listing.status.label',
                     'translation_domain' => 'cocorico_listing',
                     'label' => 'admin.listing.status.label',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -112,7 +111,6 @@ class ListingAdmin extends Admin
                     'empty_value' => 'admin.listing.admin_notation.label',
                     'label' => 'admin.listing.admin_notation.label',
                     'required' => false,
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -220,7 +218,6 @@ class ListingAdmin extends Admin
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
                     'translation_domain' => 'cocorico_listing',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -316,7 +313,6 @@ class ListingAdmin extends Admin
                     'choices' => array_flip(Listing::$statusValues),
                     'translation_domain' => 'cocorico_listing',
                     'label' => 'admin.listing.status.label',
-                    'choices_as_values' => true,
                 )
             )
             ->add(

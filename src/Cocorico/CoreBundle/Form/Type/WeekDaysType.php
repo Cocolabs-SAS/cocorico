@@ -55,7 +55,6 @@ class WeekDaysType extends AbstractType
                 /** @Ignore */
                 'label' => false,
                 'data' => array('1', '2', '3', '4', '5', '6', '7'),
-                'choices_as_values' => true
             )
         );
     }

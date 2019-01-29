@@ -235,7 +235,6 @@ class BookingAdmin extends Admin
                     'disabled' => true,
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -247,7 +246,6 @@ class BookingAdmin extends Admin
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
                     'translation_domain' => 'cocorico_listing',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -563,7 +561,6 @@ class BookingAdmin extends Admin
                     'choices' => array_flip(Booking::$statusValues),
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'choices_as_values' => true
                 )
             )
             ->add(

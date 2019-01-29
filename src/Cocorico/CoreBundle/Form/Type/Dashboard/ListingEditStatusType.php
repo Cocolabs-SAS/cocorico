@@ -46,7 +46,6 @@ class ListingEditStatusType extends ListingEditType
                 array(
                     'label' => 'listing.form.status',
                     'choices' => array_flip($choices),
-                    'choices_as_values' => true
                 )
             );
     }

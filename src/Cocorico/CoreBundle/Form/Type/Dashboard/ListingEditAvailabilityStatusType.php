@@ -32,7 +32,6 @@ class ListingEditAvailabilityStatusType extends AbstractType
                 'choice',
                 array(
                     'choices' => array_flip(ListingAvailability::$visibleValues),
-                    'choices_as_values' => true
                 )
             );
 

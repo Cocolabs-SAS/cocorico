@@ -43,6 +43,7 @@ class TimeRangeType extends AbstractType
         $this->hoursAvailable = $hoursAvailable;
     }
 
+    /** @inheritdoc */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ($this->timeUnitIsDay) {
@@ -151,7 +152,6 @@ class TimeRangeType extends AbstractType
                                     'attr' => array(
                                         'class' => 'no-scroll no-arrow'
                                     ),
-                                    'choices_as_values' => true
                                 )
                             );
                     } else {//One time unit. $this->timesMax = 1

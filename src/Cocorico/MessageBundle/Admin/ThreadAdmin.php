@@ -197,7 +197,6 @@ class ThreadAdmin extends Admin
                     ),
                     'empty_value' => 'admin.thread.type.label',
                     'translation_domain' => 'SonataAdminBundle',
-                    'choices_as_values' => true
                 )
             )
             ->add(

@@ -28,7 +28,6 @@ class UserAddressAdmin extends Admin
                     'choices' => array_flip(UserAddress::$typeValues),
                     'label' => 'form.address.type',
                     'translation_domain' => 'cocorico_user',
-                    'choices_as_values' => true,
                     'required' => false,
                 )
             )

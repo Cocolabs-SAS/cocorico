@@ -34,7 +34,6 @@ class ListingEditDurationType extends AbstractType
                     'empty_value' => 'listing_edit.form.choose',
                     'empty_data' => null,
                     'required' => false,
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -46,7 +45,6 @@ class ListingEditDurationType extends AbstractType
                     'empty_value' => 'listing_edit.form.choose',
                     'empty_data' => null,
                     'required' => false,
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -55,7 +53,6 @@ class ListingEditDurationType extends AbstractType
                 array(
                     'label' => 'listing_edit.form.cancellation_policy',
                     'choices' => array_flip(Listing::$cancellationPolicyValues),
-                    'choices_as_values' => true
                 )
             );
     }

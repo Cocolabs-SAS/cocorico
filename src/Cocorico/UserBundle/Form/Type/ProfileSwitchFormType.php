@@ -28,7 +28,6 @@ class ProfileSwitchFormType extends AbstractType
                     /** @Ignore */
                     'label' => false,
                     'expanded' => true,
-                    'choices_as_values' => true
                 )
             );
 

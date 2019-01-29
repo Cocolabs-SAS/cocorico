@@ -43,7 +43,6 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
                     'multiple' => false,
                     'label' => 'review.form.rating.label',
                     'required' => true,
-                    'choices_as_values' => true
                 )
             )
             ->add(

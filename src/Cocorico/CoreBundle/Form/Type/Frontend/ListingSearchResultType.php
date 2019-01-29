@@ -176,7 +176,6 @@ class ListingSearchResultType extends AbstractType
                 array(
                     'choices' => array_flip(ListingSearchRequest::$sortByValues),
                     'empty_value' => 'listing_search.form.sort_by.empty_value',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -227,7 +226,6 @@ class ListingSearchResultType extends AbstractType
                         range(1, $this->timeUnitFlexibility)
                     ),
                     'required' => false,
-                    'choices_as_values' => true
                 )
             );
         }

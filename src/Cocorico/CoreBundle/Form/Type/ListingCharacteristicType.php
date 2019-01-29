@@ -74,7 +74,6 @@ class ListingCharacteristicType extends AbstractType
                             ),
                             'mapped' => false,
                             'choices' => $this->buildCharacteristicValuesChoices($listingCharacteristic),
-                            'choices_as_values' => true
                         )
                     );
                 }

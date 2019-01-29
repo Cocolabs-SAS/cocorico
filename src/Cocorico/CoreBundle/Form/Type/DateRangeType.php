@@ -81,7 +81,6 @@ class DateRangeType extends AbstractType
                                     ),
                                     'label' => 'date_range.nb_days',
                                     'translation_domain' => 'cocorico',
-                                    'choices_as_values' => true
                                 )
                             );
                     } else {//$this->daysMax = 1

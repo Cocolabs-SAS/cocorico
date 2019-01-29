@@ -101,7 +101,6 @@ class BookingPayinRefundAdmin extends Admin
                     'empty_value' => 'admin.booking.status.label',
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'choices_as_values' => true
                 )
             )
             ->add(
@@ -189,7 +188,6 @@ class BookingPayinRefundAdmin extends Admin
                     'choices' => array_flip(BookingPayinRefund::$statusValues),
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'choices_as_values' => true
                 )
             )
             ->add(

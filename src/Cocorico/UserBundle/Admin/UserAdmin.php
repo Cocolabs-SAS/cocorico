@@ -69,7 +69,6 @@ class UserAdmin extends SonataUserAdmin
                     'multiple' => false,
                     'expanded' => true,
                     'choices' => array_flip(User::$personTypeValues),
-                    'choices_as_values' => true,
                     'label' => 'Type',
                     'translation_domain' => 'cocorico_user'
                 )
