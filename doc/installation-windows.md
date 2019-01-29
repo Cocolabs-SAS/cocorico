@@ -67,6 +67,7 @@ Activate following extensions:
     - pdo_sqlite
     - pdo_mysql
     - opcache
+    - apcu
     
 Add the following lines to php.ini:
 
@@ -186,8 +187,8 @@ In case of error "An error occurred: SSL certificate problem: unable to get loca
 
 ## Dump assets
 
-    php app/console assets:install --symlink web --env=dev
-    php app/console assetic:dump --env=dev
+    php bin/console assets:install --symlink web --env=dev
+    php bin/console assetic:dump --env=dev
 
 ## Add crons
 
