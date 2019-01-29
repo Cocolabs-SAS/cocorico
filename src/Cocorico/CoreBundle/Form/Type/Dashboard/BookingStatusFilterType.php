@@ -36,7 +36,6 @@ class BookingStatusFilterType extends AbstractType
                     'choices' => array_flip(Booking::getVisibleStatusValues()),
                     'placeholder' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
-                    'choices_as_values' => true
                 )
             );
     }

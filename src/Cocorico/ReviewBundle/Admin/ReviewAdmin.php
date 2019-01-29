@@ -146,7 +146,6 @@ class ReviewAdmin extends AbstractAdmin
                     ),
                     'placeholder' => 'admin.review.rating.label',
                     'translation_domain' => 'SonataAdminBundle',
-                    'choices_as_values' => true
                 )
             )
             ->add(

@@ -45,7 +45,6 @@ class RegistrationFormType extends AbstractType
                     'expanded' => true,
                     'empty_data' => User::PERSON_TYPE_NATURAL,
                     'required' => true,
-                    'choices_as_values' => true
                 )
             )
             ->add(

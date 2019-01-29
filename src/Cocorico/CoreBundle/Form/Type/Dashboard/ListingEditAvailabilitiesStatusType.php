@@ -34,7 +34,6 @@ class ListingEditAvailabilitiesStatusType extends ListingEditAvailabilitiesType
                     'label' => 'listing.form.status',
                     'mapped' => false,
                     'choices' => array_flip(ListingAvailability::$visibleValues),
-                    'choices_as_values' => true
                 )
             );
     }

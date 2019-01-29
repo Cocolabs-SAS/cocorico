@@ -32,7 +32,6 @@ class ListingEditCategoriesType extends AbstractType
 //                    'required' => false,
 //                    'translation_domain' => 'cocorico_listing',
 //                    'label' => 'listing.form.type',
-//                    'choices_as_values' => true
 //                )
 //            );
     }
