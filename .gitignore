@@ -6,7 +6,7 @@ app/bootstrap.php.cache
 app/config/parameters.yml
 app/config/parameters_test.yml
 app/SymfonyRequirements.php
-/app/phpunit.xml
+
 app/logs
 !app/logs/.gitkeep
 !app/build/logs/.gitkeep
@@ -82,3 +82,7 @@ tmp/tmp.json
 !tmp/mangopay/
 !tmp/mangopay/.gitkeep
 tmp/mangopay/MangoPaySdkStorage.tmp.php
+
+doc/phpdocs/sami.phar
+
+phpunit.xml

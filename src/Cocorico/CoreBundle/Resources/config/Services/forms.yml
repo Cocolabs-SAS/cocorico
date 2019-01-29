@@ -7,7 +7,7 @@ services:
             - "%cocorico.locales%"
             - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_new }
+            - { name: form.type }
 
     ##Listing edition
     cocorico.form.type.listing_edit:
@@ -19,44 +19,44 @@ services:
             - "@cocorico.listing.manager"
             - "%cocorico.time_unit%"
         tags:
-            - { name: form.type, alias: listing_edit }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_status:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditStatusType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_status }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_description:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDescriptionType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_description }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_price:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType
         arguments:
             - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_edit_price }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_images:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditImagesType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_images }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_location:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditLocationType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_location }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_characteristic:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCharacteristicType
         parent: cocorico.form.type.listing_edit
         tags:
-            - { name: form.type, alias: listing_edit_characteristic }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_availabilities:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesType
@@ -64,43 +64,43 @@ services:
             - "%cocorico.time_unit%"
             - "%cocorico.days_max_edition%"
         tags:
-            - { name: form.type, alias: listing_edit_availabilities }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_availabilities_status:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesStatusType
         parent: cocorico.form.type.listing_edit_availabilities
         tags:
-            - { name: form.type, alias: listing_edit_availabilities_status }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_availabilities_prices:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType
         parent: cocorico.form.type.listing_edit_availabilities
         tags:
-            - { name: form.type, alias: listing_edit_availabilities_prices }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_availability_price:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityPriceType
         tags:
-            - { name: form.type, alias: listing_edit_availability_price }
+            - { name: form.type }
 
     cocorico.form.type.listing_new_categories:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCategoriesType
         arguments:
             - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_new_categories }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_categories:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCategoriesType
         tags:
-            - { name: form.type, alias: listing_edit_categories }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_categories_ajax:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCategoriesAjaxType
         arguments:
             - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_edit_categories_ajax }
+            - { name: form.type }
 
     cocorico.form.type.country_filtered:
         class: Cocorico\CoreBundle\Form\Type\CountryFilteredType
@@ -108,14 +108,14 @@ services:
             - "%cocorico.listing_countries%"
             - "%cocorico.listing_favorite_countries%"
         tags:
-            - { name: form.type, alias: country_filtered }
+            - { name: form.type }
 
     cocorico.form.type.language_filtered:
         class: Cocorico\CoreBundle\Form\Type\LanguageFilteredType
         arguments:
             - "%cocorico.locales%"
         tags:
-            - { name: form.type, alias: language_filtered }
+            - { name: form.type }
 
     cocorico.form.type.price:
         class: Cocorico\CoreBundle\Form\Type\PriceType
@@ -124,14 +124,14 @@ services:
             - "%cocorico.listing_price_precision%"
             - "@lexik_currency.converter"
         tags:
-            - { name: form.type, alias: price }
+            - { name: form.type }
 
     cocorico.form.type.entity_hidden:
         class: Cocorico\CoreBundle\Form\Type\EntityHiddenType
         arguments:
             - "@doctrine.orm.entity_manager"
         tags:
-            - { name: form.type, alias: entity_hidden }
+            - { name: form.type }
 
     cocorico.form.type.listing_category:
         class: Cocorico\CoreBundle\Form\Type\ListingCategoryType
@@ -139,7 +139,7 @@ services:
             - "@request_stack"
             - "@doctrine.orm.entity_manager"
         tags:
-            - { name: form.type, alias: listing_category }
+            - { name: form.type }
 
     cocorico.form.type.listing_search_result:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchResultType
@@ -157,19 +157,19 @@ services:
             - "%cocorico.booking.min_start_delay%"
             - "@event_dispatcher"
         tags:
-            - { name: form.type, alias: listing_search_result }
+            - { name: form.type }
 
     cocorico.form.type.listing_search:
         class:  Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchType
         parent:  cocorico.form.type.listing_search_result
         tags:
-            - { name: form.type, alias: listing_search }
+            - { name: form.type }
 
     cocorico.form.type.listing_search_home:
         class:  Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchHomeType
         parent:  cocorico.form.type.listing_search_result
         tags:
-            - { name: form.type, alias: listing_search_home }
+            - { name: form.type }
 
     cocorico.form.type.listing_characteristic:
         class: Cocorico\CoreBundle\Form\Type\ListingCharacteristicType
@@ -177,7 +177,7 @@ services:
             - "@request_stack"
             - "@doctrine.orm.entity_manager"
         tags:
-            - { name: form.type, alias: listing_characteristic }
+            - { name: form.type }
 
     cocorico.form.type.date_range:
         class: Cocorico\CoreBundle\Form\Type\DateRangeType
@@ -185,12 +185,12 @@ services:
             - "%cocorico.time_unit%"
             - "%cocorico.days_max%"
         tags:
-            - { name: form.type, alias: date_range }
+            - { name: form.type }
 
     cocorico.form.type.date_hidden:
         class:  Cocorico\CoreBundle\Form\Type\DateHiddenType
         tags:
-            - { name: form.type, alias: date_hidden }
+            - { name: form.type }
 
     cocorico.form.type.time_range:
         class: Cocorico\CoreBundle\Form\Type\TimeRangeType
@@ -199,12 +199,12 @@ services:
             - "%cocorico.times_max%"
             - "%cocorico.time_hours_available%"
         tags:
-            - { name: form.type, alias: time_range }
+            - { name: form.type }
 
     cocorico.form.type.listing_edit_duration:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType
         tags:
-            - { name: form.type, alias: listing_edit_duration }
+            - { name: form.type }
 
     cocorico.form.type.booking_new:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType
@@ -219,12 +219,12 @@ services:
                 cocorico_currency: "%cocorico.currency%"
                 cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:
-            - { name: form.type, alias: booking_new }
+            - { name: form.type }
 
     cocorico.form.type.booking_edit:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingEditType
         tags:
-            - { name: form.type, alias: booking_edit }
+            - { name: form.type }
 
     cocorico.form.type.booking_price:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
@@ -235,7 +235,7 @@ services:
             - "%cocorico.days_display_mode%"
             - "%cocorico.times_display_mode%"
         tags:
-            - { name: form.type, alias: booking_price }
+            - { name: form.type }
 
     #Booking user address
     cocorico.form.type.booking_user_address:
@@ -244,12 +244,12 @@ services:
             - "@security.token_storage"
             - "@security.authorization_checker"
         tags:
-            - { name: form.type, alias: booking_user_address }
+            - { name: form.type }
 
     cocorico.form.type.weekdays:
         class: Cocorico\CoreBundle\Form\Type\WeekDaysType
         tags:
-            - { name: form.type, alias: weekdays }
+            - { name: form.type }
 
     #Form extensions
     cocorico.image_type_extension:
@@ -260,4 +260,4 @@ services:
     cocorico.form.booking.status_filter:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType
         tags:
-            - { name: form.type, alias: booking_status_filter }
+            - { name: form.type }

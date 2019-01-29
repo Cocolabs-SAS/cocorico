@@ -7,7 +7,7 @@ services:
             - "@request_stack"
             - "%cocorico_geo.google_place_server_api_key%"
         tags:
-        - { name: form.type, alias: geocoding_to_coordinate }
+        - { name: form.type }
 
     cocorico_geo.twig.cocorico_geo_extension:
         class: Cocorico\GeoBundle\Twig\GeoExtension

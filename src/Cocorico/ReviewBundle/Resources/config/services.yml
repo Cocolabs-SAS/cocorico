@@ -20,12 +20,12 @@ services:
     cocorico.star_rating.form.type:
         class: Cocorico\ReviewBundle\Form\Type\StarRatingType
         tags:
-            - { name: form.type, alias: star_rating }
+            - { name: form.type }
 
     cocorico.form.type.review_new:
         class: Cocorico\ReviewBundle\Form\Type\Dashboard\ReviewType
         tags:
-            - { name: form.type, alias: review_new }
+            - { name: form.type }
 
 
     cocorico.form.handler.review:
