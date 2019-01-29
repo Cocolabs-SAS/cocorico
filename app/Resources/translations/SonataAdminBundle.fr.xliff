@@ -1586,6 +1586,70 @@
         <target>Auteur</target>
         <jms:reference-file line="29">views/CRUD/base_history.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="Listings">
+          <source>Listings</source>
+          <target>Annonces</target>
+      </trans-unit>
+      <trans-unit id="Category">
+          <source>Category</source>
+          <target>Catégories</target>
+      </trans-unit>
+      <trans-unit id="Characteristic">
+          <source>Characteristic</source>
+          <target>Caractéristiques</target>
+      </trans-unit>
+      <trans-unit id="Characteristic Group">
+          <source>Characteristic Group</source>
+          <target>Caractéristiques groupes</target>
+      </trans-unit>
+      <trans-unit id="Characteristic Type">
+          <source>Characteristic Type</source>
+          <target>Caractéristiques types</target>
+      </trans-unit>
+      <trans-unit id="Bookings">
+          <source>Bookings</source>
+          <target>Réservations</target>
+      </trans-unit>
+      <trans-unit id="Bank Wires">
+          <source>Bank Wires</source>
+          <target>Virements</target>
+      </trans-unit>
+      <trans-unit id="Payin Refunds">
+          <source>Payin Refunds</source>
+          <target>Remboursements</target>
+      </trans-unit>
+      <trans-unit id="Users">
+          <source>Users</source>
+          <target>Utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="Reviews">
+          <source>Reviews</source>
+          <target>Notes et commentaires</target>
+      </trans-unit>
+      <trans-unit id="Content">
+          <source>Content</source>
+          <target>Contenus</target>
+      </trans-unit>
+      <trans-unit id="Footers">
+          <source>Footers</source>
+          <target>Pieds de page</target>
+      </trans-unit>
+      <trans-unit id="Vouchers">
+          <source>Vouchers</source>
+          <target>Codes promotionnels</target>
+      </trans-unit>
+      <trans-unit id="Categories fields">
+          <source>Categories fields</source>
+          <target>Catégories champs</target>
+      </trans-unit>
+      <trans-unit id="Categories fields groups">
+          <source>Categories fields groups</source>
+          <target>Catégories groupe de champs</target>
+      </trans-unit>
+      <trans-unit id="Deposit Refunds">
+          <source>Deposit Refunds</source>
+          <target>Remboursements des cautions</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

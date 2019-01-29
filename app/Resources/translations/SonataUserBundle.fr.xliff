@@ -357,6 +357,10 @@
         <target>Déconnexion</target>
         <jms:reference-file line="14">Resources/views/user_block.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="Users">
+          <source>Users</source>
+          <target>Utilisateurs</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

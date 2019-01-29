@@ -5,6 +5,8 @@
 
     <parameters>
         <parameter key="sonata.user.admin.groupname">Users</parameter>
+        <parameter key="sonata.user.admin.label_catalogue">SonataUserBundle</parameter>
+        <parameter key="sonata.user.admin.groupicon"><![CDATA[<i class='fa fa-users'></i>]]></parameter>
     </parameters>
 
     <services>

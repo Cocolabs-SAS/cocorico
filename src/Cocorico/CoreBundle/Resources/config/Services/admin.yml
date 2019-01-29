@@ -2,7 +2,7 @@ services:
     sonata.admin.listing:
         class: Cocorico\CoreBundle\Admin\ListingAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings", label: "Listings", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Listings", label: "Listings" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\Listing
@@ -16,7 +16,7 @@ services:
     sonata.admin.booking:
         class: Cocorico\CoreBundle\Admin\BookingAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bookings", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bookings" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\Booking
@@ -33,7 +33,7 @@ services:
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\ListingCharacteristic
@@ -45,7 +45,7 @@ services:
     sonata.admin.listing_characteristic_group:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicGroupAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Group", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Group"}
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\ListingCharacteristicGroup
@@ -57,7 +57,7 @@ services:
     sonata.admin.listing_characteristic_type:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicTypeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Type", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Characteristic Type" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\ListingCharacteristicType
@@ -69,7 +69,7 @@ services:
     sonata.admin.listing_characteristic_value:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicValueAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false, label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false}
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\ListingCharacteristicValue
@@ -81,7 +81,7 @@ services:
     sonata.admin.listing_category:
         class: Cocorico\CoreBundle\Admin\ListingCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Category", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Listings",  label: "Category" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\ListingCategory
@@ -94,7 +94,7 @@ services:
     sonata.admin.booking_bank_wire:
         class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bank Wires", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bank Wires"}
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\BookingBankWire
@@ -110,7 +110,7 @@ services:
     sonata.admin.booking_payin_refund:
         class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Payin Refunds", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Payin Refunds" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\BookingPayinRefund
