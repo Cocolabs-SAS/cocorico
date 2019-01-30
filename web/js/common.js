@@ -13,8 +13,6 @@ $(window).load(function () {
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
-
-    handleButtonClick();
 });
 
 $(function () {
@@ -113,7 +111,8 @@ $(function () {
         callback: function () {
         }
     });
-
+    
+    handleButtonClick();
 });
 
 /**
