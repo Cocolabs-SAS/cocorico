@@ -288,15 +288,9 @@ function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
  */
 function timesAreValid(startHour, endHour, startMinute, endMinute) {
     if (startHour.length && endHour.length) {
-        if ($.isNumeric(startHour.val()) && $.isNumeric(endHour.val()) &&
-            $.isNumeric(startMinute.val()) && $.isNumeric(endMinute.val())) {
-            // var startTime = moment(parseInt(startHour.val()) + ':' + parseInt(startMinute.val()), 'HH:mm');
-            // var endTime = moment(parseInt(endHour.val()) + ':' + parseInt(endMinute.val()), 'HH:mm');
-            // if (!startTime.isBefore(endTime) && endTime.format('HH:mm') !== '00:00') {
-            //     $("#time-error").show();
-            //     return false;
-            // }
-        } else {
+        if (!$.isNumeric(startHour.val()) || !$.isNumeric(endHour.val()) ||
+            !$.isNumeric(startMinute.val()) || !$.isNumeric(endMinute.val())) {
+
             return false;
         }
     }
