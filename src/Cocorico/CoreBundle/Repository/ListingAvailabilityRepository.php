@@ -187,11 +187,72 @@ class ListingAvailabilityRepository extends DocumentRepository
                 $embeddedQbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailabilityTime');
 
                 if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
+                    if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+                        //search listings unavailable
                     $qbDMDatesExp->field('times')->elemMatch(
                         $embeddedQbDM->expr()
                             ->field('id')->in(range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1))
                             ->field('status')->in($status)
                     );
+                    } else {
+                        //Search listings available
+                        //Search listings not having at least one minute unavailable in the time range
+                        //todo: handle search time range  between existing minutes and non existing minutes
+                        $qbDMDatesExp
+                            ->addAnd(
+                                $qbDMDatesExp->field('times')->elemMatch(
+                                    $embeddedQbDM->expr()
+                                        ->field('id')->in(
+                                            range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1)
+                                        )
+                                )
+                            )
+                            ->addAnd(
+                                $qbDMDatesExp->field('times')->not(
+                                    $embeddedQbDM->expr()->elemMatch(
+                                        $embeddedQbDM->expr()
+                                            ->field('id')->in(
+                                                range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1)
+                                            )
+                                            ->field('status')->in(
+                                                array(
+                                                    ListingAvailability::STATUS_UNAVAILABLE,
+                                                    ListingAvailability::STATUS_BOOKED
+                                                )
+                                            )
+                                    )
+                                )
+                            );
+
+
+//                        //Interesting solutions to search in array elements on multiple fields (id=1 and s=1, id=2 and s=1, ...)
+//                        $criterias = array();
+
+//                        //First solution by object
+//                        $startMinutes = range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1);
+//                        foreach ($startMinutes as $i => $startMinute) {
+//                            # Add expression as a sub query to array
+//                            $criterias[] = $embeddedQbDM->expr()->elemMatch(
+//                                $embeddedQbDM->expr()
+//                                    ->field('id')->equals($startMinute)
+//                                    ->field('status')->equals(ListingAvailability::STATUS_AVAILABLE)
+//                            )->getQuery();
+//                        }
+//                        $qbDMDatesExp->field('times')->all($criterias);
+
+//                        //Second solution by array
+//                        $startMinutes = range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1);
+//                        foreach ($startMinutes as $startMinute) {
+//                            $criterias[] = array(
+//                                '$elemMatch' => array(
+//                                    "_id" => $startMinute,
+//                                    "s" => ListingAvailability::STATUS_AVAILABLE
+//                                )
+//                            );
+//                        }
+//                        $qbDMDatesExp->field('times')->all($criterias);
+                    }
+
                 } else {
                     //No time unit in the day is available
                     if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
