@@ -16,6 +16,27 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 
 
+## [0.12.0] - (2019-01-30)
+
+### Added
+- Add CocoricoElasticSearchBundle custom parameters
+- Add multi timezones functionality
+- Add hasBookingsInProgress method in User
+
+### Fixed
+- Fix add_time_unit_text filter for duration < 1 hour
+- Fix DST while availabilities edition
+- Fix localizeddate timezone errors due to old ICU version. (To revert when ICU will be updated to a recent version on servers)
+- Fix search without time range in no day mode
+- Fix booking availability checking in No Day Mode, add missing user timezone texts
+- Fix search by times
+
+### Changed
+- Update migration script for times date equal to 1970-01-01
+- Update liip image listing image sizes
+- Factorize booking validator errors
+
+
 ## [0.11.0] - (2019-01-19)
 
 ### Added
