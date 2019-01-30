@@ -25,6 +25,5 @@
     {% set user_address = user.getAddresses %}
     {% set user_address = (user_address is empty) ? null : user_address[0] %}
     {% set bill_date_title = 'booking.bank_wire.date.title'|trans %}
-    {% set bill_date =  booking_bank_wire.getPayedAt ?
-    booking_bank_wire.getPayedAt|localizeddate('short', 'none', 'fr') : '' %}
+    {% set bill_date = booking_bank_wire.getPayedAt ? booking_bank_wire.getPayedAt|localizeddate('short', 'none', 'fr', user_timezone) : '' %}
 {% endembed %}

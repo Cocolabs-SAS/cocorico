@@ -612,7 +612,7 @@ class BookingManager extends BaseManager
         $result->errors = array();
         $result->booking = $booking;
 
-        $isAvailable = $this->defaultListingStatus == ListingAvailability::STATUS_AVAILABLE;
+        $isAvailableByDefault = $this->defaultListingStatus == ListingAvailability::STATUS_AVAILABLE;
 
         $daysTimeRanges = $booking->getDateTimeRange()->getDaysTimeRanges(true);
 
@@ -645,7 +645,7 @@ class BookingManager extends BaseManager
             for ($k = $timeRange->getStartMinute(); $k < $timeRange->getEndMinute(); $k++) {
                 $isAvailable =
                     (isset($times[$k]) && $times[$k]["s"] == ListingAvailability::STATUS_AVAILABLE) ||
-                    (!isset($times[$k]) && $isAvailable);
+                    (!isset($times[$k]) && $isAvailableByDefault);
 
                 if (!$isAvailable) {
                     $booking->setAmount(0);
