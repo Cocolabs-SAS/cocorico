@@ -138,7 +138,7 @@ class DateTimeRange
         }
 
         $firstDayTimeRange = array();
-        if (count($this->getTimeRanges())) {
+        if (count($this->getTimeRanges()) && $this->getFirstTimeRange()->getStart()) {
             $this->adjustStartAndEndDay($start, $end);
             $firstDayTimeRange = $this->getInitialTimeRanges($start);
         }
