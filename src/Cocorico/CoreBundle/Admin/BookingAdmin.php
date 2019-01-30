@@ -35,6 +35,7 @@ class BookingAdmin extends Admin
     protected $bookingAcceptationDelay;
     protected $includeVat;
     protected $bundles;
+    protected $timezone;
 
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
@@ -65,6 +66,11 @@ class BookingAdmin extends Admin
     public function setBundlesEnabled($bundles)
     {
         $this->bundles = $bundles;
+    }
+
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
     }
 
     /**
@@ -197,7 +203,7 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'listing_edit.form.deposit',
-                        'required' => false,
+                        'required' => false
                     ),
                     array(
                         'translation_domain' => 'cocorico_listing_deposit',
@@ -282,14 +288,16 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.start.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
-                'endDay',
+                'end',
                 'date',
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.end.label',
+                    'view_timezone' => $this->timezone
                 )
             );
 
@@ -301,6 +309,7 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.start_time.label',
+                        'view_timezone' => $this->timezone
                     )
                 )
                 ->add(
@@ -309,6 +318,23 @@ class BookingAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.end_time.label',
+                        'view_timezone' => $this->timezone
+                    )
+                )
+                ->add(
+                    'timeZoneAsker',
+                    null,
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.timezone_asker.label',
+                    )
+                )
+                ->add(
+                    'timeZoneOfferer',
+                    null,
+                    array(
+                        'disabled' => true,
+                        'label' => 'admin.booking.timezone_offerer.label',
                     )
                 );
         }
@@ -320,6 +346,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.new_booking_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -328,6 +355,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.payed_booking_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -336,6 +364,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.refused_booking_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -344,6 +373,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.canceled_asker_booking_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -352,6 +382,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.created_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -360,6 +391,7 @@ class BookingAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.updated_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->end();
@@ -458,7 +490,7 @@ class BookingAdmin extends Admin
                     array(
                         'delete' => false,
                         'disabled' => true,
-                        'label' => false,
+                        'label' => false
                     )
                 )->end();
         }
@@ -481,8 +513,7 @@ class BookingAdmin extends Admin
                     'options',
                     'sonata_type_collection',
                     array(
-                        // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
-                        // then the child entities will be removed while saving
+                        //IMPORTANT!: Disable this field else if child form has all its fields disabled then the child entities will be removed while saving
                         'disabled' => true,
                         'type_options' => array(
                             'delete' => false,
@@ -783,15 +814,15 @@ class BookingAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.start.label',
-                    'format' => 'd/m/Y'
+                    'format' => 'd/m/Y',
                 )
             )
             ->add(
-                'endDay',
+                'end',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',
-                    'format' => 'd/m/Y'
+                    'format' => 'd/m/Y',
                 )
             );
 

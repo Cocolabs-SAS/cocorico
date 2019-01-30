@@ -32,6 +32,7 @@ class BookingBankWireAdmin extends Admin
     /** @var  BookingBankWireManager $bookingBankWireManager */
     protected $bookingBankWireManager;
     protected $bundles;
+    protected $timezone;
 
     // setup the default sort column and order
     protected $datagridValues = array(
@@ -63,6 +64,11 @@ class BookingBankWireAdmin extends Admin
     public function setBundlesEnabled($bundles)
     {
         $this->bundles = $bundles;
+    }
+
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -203,7 +209,7 @@ class BookingBankWireAdmin extends Admin
                     array(
                         'disabled' => true,
                         'label' => 'listing_edit.form.deposit',
-                        'required' => false,
+                        'required' => false
                     ),
                     array(
                         'translation_domain' => 'cocorico_listing_deposit',
@@ -227,7 +233,7 @@ class BookingBankWireAdmin extends Admin
                     'translation_domain' => 'cocorico_booking',
                     'help' => 'admin.booking_bank_wire.status.help',
                     'choices_as_values' => true,
-                    'disabled' => $statusDisabled,
+                    'disabled' => $statusDisabled
                 )
             )
             ->add(
@@ -236,6 +242,7 @@ class BookingBankWireAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking_bank_wire.payed_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -244,6 +251,7 @@ class BookingBankWireAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.created_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -252,6 +260,7 @@ class BookingBankWireAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.updated_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->end()
@@ -463,7 +472,7 @@ class BookingBankWireAdmin extends Admin
                 )
             )
             ->add(
-                'booking.endDay',
+                'booking.end',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',

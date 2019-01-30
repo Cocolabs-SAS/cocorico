@@ -1,0 +1,28 @@
+services:
+    cocorico_time.form.type.date_range:
+        class: Cocorico\TimeBundle\Form\Type\DateRangeType
+        arguments:
+            - "%cocorico.time_unit%"
+            - "%cocorico.days_max%"
+        tags:
+            - { name: form.type, alias: date_range }
+
+    cocorico_time.form.type.date_hidden:
+        class:  Cocorico\TimeBundle\Form\Type\DateHiddenType
+        tags:
+            - { name: form.type, alias: date_hidden }
+
+    cocorico_time.form.type.time_range:
+        class: Cocorico\TimeBundle\Form\Type\TimeRangeType
+        arguments:
+            - "@session"
+            - "%cocorico.time_unit%"
+            - "%cocorico.times_max%"
+            - "%cocorico.time_hours_available%"
+        tags:
+            - { name: form.type, alias: time_range }
+
+    cocorico_time.form.type.weekdays:
+        class: Cocorico\TimeBundle\Form\Type\WeekDaysType
+        tags:
+            - { name: form.type, alias: weekdays }

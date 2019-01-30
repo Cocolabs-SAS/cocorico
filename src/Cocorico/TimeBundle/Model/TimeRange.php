@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Model;
+namespace Cocorico\TimeBundle\Model;
 
 
 class TimeRange
@@ -25,11 +25,22 @@ class TimeRange
     public $end;
 
     /**
+     * @var \DateTime
+     */
+    private $date;
+
+    /**
      * @var int
      */
     public $nbMinutes;
 
-    public function __construct(\DateTime $start = null, \DateTime $end = null)
+    /**
+     * TimeRange constructor.
+     * @param \DateTime|null $start
+     * @param \DateTime|null $end
+     * @param \DateTime|null $date
+     */
+    public function __construct(\DateTime $start = null, \DateTime $end = null, \DateTime $date = null)
     {
         if (!$start) {
             $start = new \DateTime("1970-01-01 00:00:00");
@@ -39,6 +50,14 @@ class TimeRange
             $end = new \DateTime("1970-01-01 23:59:59");
         }
 
+        if (!$date) {
+            $date = new \DateTime();
+            $date->setTime(0, 0, 0);
+        }
+
+        $this->date = $date;
+//        $date->setTime(0, 0, 0);
+
         //if start time is greater than end time then end time correspond to the next day of start day
         if ($start->getTimestamp() > $end->getTimestamp()) {
             $end->add(new \DateInterval('P1D'));
@@ -47,6 +66,22 @@ class TimeRange
         $this->start = $start;
         $this->end = $end;
         $this->nbMinutes = abs($end->getTimestamp() - $start->getTimestamp()) / 60;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
     }
 
     /**
@@ -65,7 +100,9 @@ class TimeRange
         $this->start = $start;
 
         //Update nb minutes if start is changed
-        $this->nbMinutes = abs($this->end->getTimestamp() - $this->start->getTimestamp()) / 60;
+        if ($this->start && $this->end) {
+            $this->nbMinutes = abs($this->end->getTimestamp() - $this->start->getTimestamp()) / 60;
+        }
     }
 
     /**
@@ -83,7 +120,9 @@ class TimeRange
     {
         $this->end = $end;
         //Update nb minutes if end is changed
-        $this->nbMinutes = abs($this->end->getTimestamp() - $this->start->getTimestamp()) / 60;
+        if ($this->start && $this->end) {
+            $this->nbMinutes = abs($this->end->getTimestamp() - $this->start->getTimestamp()) / 60;
+        }
     }
 
     /**
@@ -104,46 +143,48 @@ class TimeRange
 
 
     /**
+     * Return start minute since midnight
+     *
+     * @return int
+     */
+    public function getStartMinute()
+    {
+        $midnight = clone $this->getStart();
+        $midnight->setTime(0, 0, 0);
+
+        return intval(($this->getStart()->getTimestamp() - $midnight->getTimestamp()) / 60);
+    }
+
+    /**
+     * Return end minute in the day
+     *
+     * @return int
+     */
+    public function getEndMinute()
+    {
+        $midnight = clone $this->getEnd();
+        $midnight->setTime(0, 0, 0);
+
+        $endMinute = intval(($this->getEnd()->getTimestamp() - $midnight->getTimestamp()) / 60);
+        if ($this->getEnd()->format('H:i') == '00:00') {
+            $endMinute = 1440;
+        }
+
+        return $endMinute;
+
+    }
+
+    /**
      * @param int $timeUnit
      * @return int number of times unit
      */
     public function getDuration($timeUnit)
     {
-        if ($this->getEnd()->format('H:i') == '00:00') {//End minute is equal to 1440*60=86400 and not 0
-            $duration = (86400 - $this->getStart()->getTimestamp()) / 60;
-        } else {
-            $duration = ($this->getEnd()->getTimestamp() - $this->getStart()->getTimestamp()) / 60;
-        }
-
-        $duration = $duration / $timeUnit;
+        $duration = ($this->getEnd()->getTimestamp() - $this->getStart()->getTimestamp()) / 60 / $timeUnit;
 
         return max($duration, 0);
     }
 
-    /**
-     * Create TimeRange instance from array
-     *
-     * @param array $timeR
-     * @return null|TimeRange
-     */
-    public static function createFromArray($timeR)
-    {
-        if (isset($timeR['start']) && isset($timeR['end']) &&
-            is_numeric($timeR['start']['hour']) && is_numeric($timeR['end']['hour']) &&
-            is_numeric($timeR['start']['minute']) && is_numeric($timeR['end']['minute'])
-        ) {
-            $start = new \DateTime("1970-01-01 " . $timeR['start']['hour'] . ":" . $timeR['start']['minute']);
-            $end = new \DateTime("1970-01-01 " . $timeR['end']['hour'] . ":" . $timeR['end']['minute']);
-
-            if ($start->getTimestamp() > $end->getTimestamp()) {
-                $end->add(new \DateInterval('P1D'));
-            }
-
-            return new static($start, $end);
-        }
-
-        return null;
-    }
 
     /**
      * Check if a time range is overlapping two consecutive days (22h -> 02h)
@@ -185,29 +226,15 @@ class TimeRange
         return false;
     }
 
-    /**
-     * Return start minute in the day
-     *
-     * @return int
-     */
-    public function getStartMinute()
-    {
-        return intval($this->getStart()->getTimestamp() / 60);
-    }
 
-    /**
-     * Return end minute in the day
-     *
-     * @return int
-     */
-    public function getEndMinute()
+    public function log($prefix = '')
     {
-        $endMinute = $this->getStartMinute() + $this->getNbMinutes();
-        if ($this->getEnd()->format('H:i') == '00:00') {
-            $endMinute = 1440;
+        echo "TimeRange";
+        if ($prefix) {
+            echo "<br>$prefix";
         }
-
-        return $endMinute;
-
+        if ($this->getStart() && $this->getEnd()) {
+            echo $this->getStart()->format('Y-m-d H:i') . ' / ' . $this->getEnd()->format('Y-m-d H:i') . '<br>';
+        }
     }
 }

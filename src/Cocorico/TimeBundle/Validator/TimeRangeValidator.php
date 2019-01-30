@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Validator;
+namespace Cocorico\TimeBundle\Validator;
 
-use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

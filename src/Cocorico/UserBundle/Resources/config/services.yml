@@ -1,5 +1,6 @@
 imports:
     - { resource: subscribers.yml }
+    - { resource: listeners.yml }
     - { resource: admin.yml }
 
 services:

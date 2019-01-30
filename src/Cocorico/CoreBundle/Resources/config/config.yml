@@ -67,7 +67,6 @@ twig:
     form:
         resources:
             - 'CocoricoCoreBundle:Form:fields.html.twig'
-            - 'CocoricoCoreBundle:Form:fields_date_time.html.twig'
             - 'CocoricoCoreBundle:Form:fields_collection.html.twig'
             - 'CocoricoCoreBundle:Form:fields_category.html.twig'
             - 'CocoricoCoreBundle:Form:fields_price.html.twig'

@@ -12,38 +12,42 @@
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Cocorico\CoreBundle\Entity\Booking;
-use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookingPriceType extends AbstractType
 {
-    protected $bookingManager;
     protected $allowSingleDay;
     protected $endDayIncluded;
     protected $daysDisplayMode;
     protected $timesDisplayMode;
+    protected $timeUnitIsDay;
 
     /**
-     * @param BookingManager $bookingManager
-     * @param bool           $allowSingleDay
-     * @param bool           $endDayIncluded
-     * @param string         $daysDisplayMode
-     * @param string         $timesDisplayMode
+     * @param bool   $allowSingleDay
+     * @param bool   $endDayIncluded
+     * @param string $daysDisplayMode
+     * @param string $timesDisplayMode
+     * @param int    $timeUnit
      */
     public function __construct(
-        BookingManager $bookingManager,
         $allowSingleDay,
         $endDayIncluded,
         $daysDisplayMode,
-        $timesDisplayMode
+        $timesDisplayMode,
+        $timeUnit
     ) {
-        $this->bookingManager = $bookingManager;
         $this->allowSingleDay = $allowSingleDay;
         $this->endDayIncluded = $endDayIncluded;
         $this->daysDisplayMode = $daysDisplayMode;
         $this->timesDisplayMode = $timesDisplayMode;
+        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
     }
 
     /**
@@ -84,7 +88,7 @@ class BookingPriceType extends AbstractType
 
             );
 
-        if (!$this->bookingManager->getTimeUnitIsDay()) {
+        if (!$this->timeUnitIsDay) {
             $builder->add(
                 'time_range',
                 'time_range',
@@ -106,8 +110,35 @@ class BookingPriceType extends AbstractType
                 )
             );
         }
-    }
 
+        //Sync date and time
+        $builder->addEventListener(
+            FormEvents::SUBMIT,
+            function (FormEvent $event) {
+                /** @var Booking $booking */
+                $booking = $event->getData();
+                $form = $event->getForm();
+                /** @var DateRange $dateRange */
+                $dateRange = clone $form->get('date_range')->getData();
+                /** @var TimeRange $timeRange */
+                $timeRange = clone $form->get('time_range')->getData();
+
+                $booking->setStart($dateRange->getStart());
+                $booking->setEnd($dateRange->getEnd());
+                $booking->setStartTime(new \DateTime('1970-01-01 00:00'));
+                $booking->setEndTime(new \DateTime('1970-01-01 00:00'));
+
+                if (!$this->timeUnitIsDay) {
+                    //Sync booking date and time from date and time range
+                    $dateTimeRange = DateTimeRange::addTimesToDates($dateRange, $timeRange);
+                    $booking->setDateRange($dateTimeRange->getDateRange());
+                    $booking->setTimeRange($dateTimeRange->getFirstTimeRange());
+                }
+
+                $event->setData($booking);
+            }
+        );
+    }
 
     /**
      * @param OptionsResolver $resolver
@@ -121,6 +152,11 @@ class BookingPriceType extends AbstractType
                 'translation_domain' => 'cocorico_booking',
                 'cascade_validation' => true,
                 'validation_groups' => array('new'),
+//                'error_bubbling' => false,//To prevent errors bubbling up to the parent form
+//                //To map errors of all unmapped properties (date_range) to a particular field (date_range)
+//                'error_mapping' => array(
+//                    '.' => 'date_range',
+//                ),
             )
         );
     }

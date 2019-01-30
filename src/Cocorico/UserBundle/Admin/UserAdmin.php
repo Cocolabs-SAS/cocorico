@@ -118,6 +118,7 @@ class UserAdmin extends SonataUserAdmin
                 'language',
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
             ->end();
@@ -160,6 +161,18 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
+                )
+            )
+            ->add(
+                'timeZone',
+                'timezone',
+                array(
+                    'label' => 'form.time_zone',
+                    'required' => true,
+                    'disabled' => true
+                ),
+                array(
+                    'translation_domain' => 'cocorico_user',
                 )
             )
             ->add(

@@ -21,10 +21,12 @@ use Symfony\Component\Validator\ConstraintValidator;
 class BookingValidator extends ConstraintValidator
 {
     private $bookingManager;
+    private $session;
     private $minStartDelay;
     private $minStartTimeDelay;
     private $currency;
     private $currencySymbol;
+    private $timezone;
 
     /**
      * @param BookingManager $bookingManager
@@ -108,7 +110,7 @@ class BookingValidator extends ConstraintValidator
         //Date Time errors
         if (in_array('date_range.invalid.min_start', $errors)) {
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($this->timezone));
             if ($this->minStartDelay > 0) {
                 $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
             }

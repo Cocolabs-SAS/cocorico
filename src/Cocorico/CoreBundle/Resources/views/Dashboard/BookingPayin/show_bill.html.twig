@@ -19,8 +19,9 @@
     {% set listing = booking.listing %}
     {% set listing_translation = listing.translations[app.request.locale] %}
     {% set user = booking.user %}
+    {% set user_timezone = booking.timeZoneAsker %}
     {% set user_address = user.getAddresses %}
     {% set user_address = (user_address is empty) ? null : user_address[0] %}
     {% set bill_date_title = 'booking.bill.date.title'|trans %}
-    {% set bill_date = booking.getPayedBookingAt|localizeddate('short', 'none', 'fr') %}
+    {% set bill_date = booking.getPayedBookingAt|localizeddate('short', 'none', 'fr', user_timezone) %}
 {% endembed %}

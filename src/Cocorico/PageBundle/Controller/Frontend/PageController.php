@@ -26,6 +26,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class PageController extends Controller
 {
+
     /**
      * show page depending upon the slug available.
      *
@@ -37,6 +38,8 @@ class PageController extends Controller
      * @param  string  $slug
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws NotFoundHttpException
      */
     public function showAction(Request $request, $slug)
     {

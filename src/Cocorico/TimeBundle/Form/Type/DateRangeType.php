@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Form\Type;
+namespace Cocorico\TimeBundle\Form\Type;
 
-use Cocorico\CoreBundle\Form\DataTransformer\DateRangeViewTransformer;
-use Cocorico\CoreBundle\Model\DateRange;
-use Cocorico\CoreBundle\Validator\DateRangeValidator;
+use Cocorico\TimeBundle\Form\DataTransformer\DateRangeViewTransformer;
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Validator\DateRangeValidator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -135,7 +135,7 @@ class DateRangeType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Cocorico\CoreBundle\Model\DateRange',
+                'data_class' => 'Cocorico\TimeBundle\Model\DateRange',
                 'end_options' => array(),
                 'start_options' => array(),
 //                'transformer' => null,

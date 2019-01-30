@@ -105,7 +105,6 @@ class ListingSearchController extends Controller
                 $extraViewParams
             )
         );
-
     }
 
     /**

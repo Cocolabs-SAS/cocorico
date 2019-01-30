@@ -16,10 +16,14 @@ use Cocorico\CoreBundle\Event\ListingSearchFormEvents;
 use Cocorico\CoreBundle\Form\Type\PriceRangeType;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Repository\ListingCategoryRepository;
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,62 +32,50 @@ class ListingSearchResultType extends AbstractType
 {
 
     protected $session;
-    protected $currency;
     protected $entityManager;
     protected $request;
+    protected $dispatcher;
+    protected $currency;
     protected $locale;
-    protected $timeUnit;
-    protected $timeUnitFlexibility;
     protected $timeUnitIsDay;
-    protected $allowSingleDay;
-    protected $endDayIncluded;
+    protected $timeUnitFlexibility;
     protected $daysDisplayMode;
     protected $timesDisplayMode;
+    protected $allowSingleDay;
+    protected $endDayIncluded;
     protected $minStartDelay;
-    protected $dispatcher;
+
 
     /**
      * @param Session                  $session
-     * @param string                   $defaultCurrency
      * @param EntityManager            $entityManager
      * @param RequestStack             $requestStack
-     * @param int                      $timeUnit
-     * @param boolean                  $timeUnitFlexibility
-     * @param boolean                  $allowSingleDay
-     * @param boolean                  $endDayIncluded
-     * @param string                   $daysDisplayMode
-     * @param string                   $timesDisplayMode
-     * @param int                      $minStartDelay
      * @param EventDispatcherInterface $dispatcher
+     * @param array                    $parameters
      */
     public function __construct(
         Session $session,
-        $defaultCurrency,
         EntityManager $entityManager,
         RequestStack $requestStack,
-        $timeUnit,
-        $timeUnitFlexibility,
-        $allowSingleDay,
-        $endDayIncluded,
-        $daysDisplayMode,
-        $timesDisplayMode,
-        $minStartDelay,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        $parameters
     ) {
         $this->session = $session;
-        $this->currency = $this->session->has('currency') ? $this->session->get('currency') : $defaultCurrency;
         $this->entityManager = $entityManager;
         $this->request = $requestStack->getCurrentRequest();
+        $this->dispatcher = $dispatcher;
+
         $this->locale = $this->request->getLocale();
-        $this->timeUnit = $timeUnit;
-        $this->timeUnitFlexibility = $timeUnitFlexibility;
-        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
-        $this->allowSingleDay = $allowSingleDay;
-        $this->endDayIncluded = $endDayIncluded;
-        $this->daysDisplayMode = $daysDisplayMode;
-        $this->timesDisplayMode = $timesDisplayMode;
-        $this->minStartDelay = $minStartDelay;
-        $this->dispatcher = $dispatcher;;
+
+        $parameters = $parameters["parameters"];
+        $this->currency = $this->session->get('currency', $parameters['cocorico_currency']);
+        $this->timeUnitIsDay = ($parameters['cocorico_time_unit'] % 1440 == 0) ? true : false;
+        $this->timeUnitFlexibility = $parameters['cocorico_time_unit_flexibility'];
+        $this->daysDisplayMode = $parameters['cocorico_days_display_mode'];
+        $this->timesDisplayMode = $parameters['cocorico_times_display_mode'];
+        $this->allowSingleDay = $parameters['cocorico_booking_allow_single_day'];
+        $this->endDayIncluded = $parameters['cocorico_booking_end_day_included'];
+        $this->minStartDelay = $parameters['cocorico_booking_min_start_delay'];
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -92,10 +84,7 @@ class ListingSearchResultType extends AbstractType
         $listingSearchRequest = $builder->getData();
 
         $builder
-            ->add(
-                'location',
-                new ListingLocationSearchType()
-            );
+            ->add('location', new ListingLocationSearchType());
 
         //CATEGORIES
         /** @var ListingCategoryRepository $categoryRepository */
@@ -121,12 +110,6 @@ class ListingSearchResultType extends AbstractType
 
         //DATE RANGE
         $dateRange = $listingSearchRequest->getDateRange();
-        $dateRangeStart = $dateRangeEnd = null;
-        if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
-            $dateRangeStart = $dateRange->getStart();
-            $dateRangeEnd = $dateRange->getEnd();
-        }
-
         $builder
             ->add(
                 'date_range',
@@ -134,11 +117,11 @@ class ListingSearchResultType extends AbstractType
                 array(
                     'start_options' => array(
                         'label' => 'listing_search.form.start',
-                        'data' => $dateRangeStart
+                        'data' => $dateRange && $dateRange->getStart() ? $dateRange->getStart() : null
                     ),
                     'end_options' => array(
                         'label' => 'listing_search.form.end',
-                        'data' => $dateRangeEnd
+                        'data' => $dateRange && $dateRange->getEnd() ? $dateRange->getEnd() : null
                     ),
                     'allow_single_day' => $this->allowSingleDay,
                     'end_day_included' => $this->endDayIncluded,
@@ -187,11 +170,6 @@ class ListingSearchResultType extends AbstractType
         //If time unit is not day then we add time in search engine
         if (!$this->timeUnitIsDay) {
             $timeRange = $listingSearchRequest->getTimeRange();
-            $timeRangeStart = $timeRangeEnd = null;
-            if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
-                $timeRangeStart = $timeRange->getStart();
-                $timeRangeEnd = $timeRange->getEnd();
-            }
 
             $builder->add(
                 'time_range',
@@ -199,11 +177,11 @@ class ListingSearchResultType extends AbstractType
                 array(
                     'start_options' => array(
                         'label' => 'listing_search.form.start_time',
-                        'data' => $timeRangeStart
+                        'data' => $timeRange && $timeRange->getStart() ? $timeRange->getStart() : null
                     ),
                     'end_options' => array(
                         'label' => 'listing_search.form.end_time',
-                        'data' => $timeRangeEnd
+                        'data' => $timeRange && $timeRange->getEnd() ? $timeRange->getEnd() : null
                     ),
                     'required' => false,
                     /** @Ignore */
@@ -231,6 +209,25 @@ class ListingSearchResultType extends AbstractType
                 )
             );
         }
+
+        //Sync date and time
+        $builder->addEventListener(
+            FormEvents::SUBMIT,
+            function (FormEvent $event) {
+                /** @var ListingSearchRequest $searchRequest */
+                $searchRequest = $event->getData();
+                $form = $event->getForm();
+                /** @var DateRange $dateRange */
+                $dateRange = $form->get('date_range')->getData();
+                /** @var TimeRange $timeRange */
+                $timeRange = $form->get('time_range')->getData();
+
+                $searchRequest->setDateRange($dateRange);
+                $searchRequest->setTimeRange($timeRange);
+
+                $event->setData($searchRequest);
+            }
+        );
 
         //Dispatch LISTING_SEARCH_RESULT_FORM_BUILD Event. Listener listening this event can add fields and validation
         //Used for example to add fields to listing search form

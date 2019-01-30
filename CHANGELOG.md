@@ -23,6 +23,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Add CocoricoElasticSearchBundle compatibility
 - Add CocoricoSwiftReaderBundle
 - Add Elastic search starting script
+- Add multi time range overlapping days functionality
 
 ### Fixed
 - Fix categories export in sonata
@@ -37,6 +38,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix bug #71 - Listing status available while duplication
 - Remove unneeded '}}' at the end of some meta titles
 - Fix user facebook mother tongue
+- Fix booking duration in not day mode
+- Fix MP BankAccount retrieval when bank account id is not set
 
 ### Changed
 - Change who we are page content
@@ -53,6 +56,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Update Elastic search bundle
 - Update Listing Deposit Bundle to 0.2
 - Update MangoPay Bundle to 0.6.2
+- Update Report Bundle to 0.1.2
 
 
 ## [0.10.0] - (2019-01-16)

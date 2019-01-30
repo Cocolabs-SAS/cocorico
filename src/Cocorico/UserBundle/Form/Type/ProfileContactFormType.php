@@ -72,6 +72,14 @@ class ProfileContactFormType extends AbstractType
                     'label' => false,
                     'required' => false,
                 )
+            )
+            ->add(
+                'timeZone',
+                'timezone',
+                array(
+                    'label' => 'form.time_zone',
+                    'required' => true,
+                )
             );
 
 

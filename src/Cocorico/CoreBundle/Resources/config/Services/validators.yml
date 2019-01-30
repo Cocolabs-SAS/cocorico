@@ -37,6 +37,7 @@ services:
         class: Cocorico\CoreBundle\Validator\Constraints\BookingValidator
         arguments:
             - "@cocorico.booking.manager"
+            - "@session"
             - "%cocorico.booking.min_start_delay%"
             - "%cocorico.booking.min_start_time_delay%"
             - "%cocorico.currency%"

@@ -29,6 +29,7 @@ services:
             - [ setBookingAcceptationDelay, ["%cocorico.booking.acceptation_delay%"]]
             - [ setIncludeVat, ["%cocorico.include_vat%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setTimezone, ["%cocorico.time_zone%"]]
 
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
@@ -106,6 +107,7 @@ services:
             - [ setCurrency, ["%cocorico.currency%"]]
             - [ setBookingBankWireManager, ["@cocorico.booking_bank_wire.manager"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setTimezone, ["%cocorico.time_zone%"]]
 
     sonata.admin.booking_payin_refund:
         class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
@@ -120,6 +122,7 @@ services:
             - [ setLocales, ["%cocorico.locales%"]]
             - [ setTimeUnit, ["%cocorico.time_unit%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setTimezone, ["%cocorico.time_zone%"]]
 
     sonata.admin.booking_user_address:
         class: Cocorico\CoreBundle\Admin\BookingUserAddressAdmin

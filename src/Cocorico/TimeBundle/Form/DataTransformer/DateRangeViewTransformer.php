@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Form\DataTransformer;
+namespace Cocorico\TimeBundle\Form\DataTransformer;
 
-use Cocorico\CoreBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\DateRange;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +45,7 @@ class DateRangeViewTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof DateRange) {
-            throw new UnexpectedTypeException($value, 'Cocorico\CoreBundle\Model\DateRange');
+            throw new UnexpectedTypeException($value, 'Cocorico\TimeBundle\Model\DateRange');
         }
 
         return $value;
@@ -58,7 +58,7 @@ class DateRangeViewTransformer implements DataTransformerInterface
         }
 
         if (!$value instanceof DateRange) {
-            throw new UnexpectedTypeException($value, 'Cocorico\CoreBundle\Model\DateRange');
+            throw new UnexpectedTypeException($value, 'Cocorico\TimeBundle\Model\DateRange');
         }
 
         if ($this->options['end_day_included'] && $value->end) {

@@ -344,6 +344,13 @@ class User extends BaseUser implements ParticipantInterface
     protected $answerDelay;
 
     /**
+     * @ORM\Column(name="time_zone", type="string", length=100,  nullable=false)
+     *
+     * @var string
+     */
+    protected $timeZone = 'Europe/Paris';
+
+    /**
      * @ORM\OneToMany(targetEntity="Cocorico\MessageBundle\Entity\Message", mappedBy="sender", cascade={"remove"}, orphanRemoval=true)
      */
     private $messages;
@@ -1592,6 +1599,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->cards = $cards;
+
+        return $this;
     }
 
 
@@ -1605,6 +1614,23 @@ class User extends BaseUser implements ParticipantInterface
                 return $element->isActive();// && $element->getValidity() == UserCardInterface::VALIDITY_VALID
             }
         );
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->timeZone;
+    }
+
+    /**
+     * @param string $timeZone
+     */
+    public function setTimeZone($timeZone)
+    {
+        $this->timeZone = $timeZone;
     }
 
     /**

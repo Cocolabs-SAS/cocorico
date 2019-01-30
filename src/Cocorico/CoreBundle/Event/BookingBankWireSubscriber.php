@@ -52,7 +52,7 @@ class BookingBankWireSubscriber implements EventSubscriberInterface
         $bookingBankWire->setStatus(BookingBankWire::STATUS_PAYED);
         $bookingBankWire->setPayedAt(new \DateTime());
         $bookingBankWire = $this->bookingBankWireManager->save($bookingBankWire);
-        $this->bookingBankWireManager->getMailer()->sendWireTransferMessageToOfferer($bookingBankWire->getBooking());
+//        $this->bookingBankWireManager->getMailer()->sendWireTransferMessageToOfferer($bookingBankWire->getBooking());
 
         $event->setChecked(true);
         $event->setBookingBankWire($bookingBankWire);

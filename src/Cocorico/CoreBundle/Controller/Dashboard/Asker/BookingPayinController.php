@@ -71,6 +71,8 @@ class BookingPayinController extends Controller
      * @param  int     $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showBillAction(Request $request, $id)
     {

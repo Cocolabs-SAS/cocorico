@@ -27,6 +27,7 @@ class BookingPayinRefundAdmin extends Admin
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $bundles;
+    protected $timezone;
 
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
@@ -47,6 +48,11 @@ class BookingPayinRefundAdmin extends Admin
     public function setBundlesEnabled($bundles)
     {
         $this->bundles = $bundles;
+    }
+
+    public function setTimezone($timezone)
+    {
+        $this->timezone = $timezone;
     }
 
     protected function configureFormFields(FormMapper $formMapper)
@@ -110,6 +116,7 @@ class BookingPayinRefundAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking_payin_refund.payed_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -118,6 +125,7 @@ class BookingPayinRefundAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.created_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->add(
@@ -126,6 +134,7 @@ class BookingPayinRefundAdmin extends Admin
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.updated_at.label',
+                    'view_timezone' => $this->timezone
                 )
             )
             ->end();
@@ -271,7 +280,7 @@ class BookingPayinRefundAdmin extends Admin
                 )
             )
             ->add(
-                'booking.endDay',
+                'booking.end',
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',

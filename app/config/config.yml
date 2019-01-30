@@ -9,6 +9,7 @@ imports:
     - { resource: "@CocoricoBreadcrumbBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoPageBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoConfigBundle/Resources/config/config.yml"}
+    - { resource: "@CocoricoTimeBundle/Resources/config/config.yml"}
 
 framework:
     #esi:             ~
@@ -32,7 +33,7 @@ framework:
         handler_id:  ~
         name: _csess
         #on debian there is a /etc/cron.d/php5 doing the job
-        gc_probability: 0
+        gc_probability: 0 #todo check in prod
     fragments:       ~
     http_method_override: true
 

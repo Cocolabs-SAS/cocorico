@@ -14,7 +14,6 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityStatusType;
-use Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,7 +30,7 @@ class ListingAvailabilityStatusController extends Controller
 {
 
     /**
-     * Edits an existing Listing entity.
+     * Edits listing availabilities status.
      *
      * @Route("/{listing_id}/edit_availabilities_status",
      *      name="cocorico_dashboard_listing_edit_availabilities_status",
@@ -49,7 +48,6 @@ class ListingAvailabilityStatusController extends Controller
      */
     public function editAvailabilitiesStatusAction(Request $request, Listing $listing)
     {
-        $translator = $this->get('translator');
         $selfUrl = $this->generateUrl(
             'cocorico_dashboard_listing_edit_availabilities_status',
             array('listing_id' => $listing->getId())
@@ -57,12 +55,12 @@ class ListingAvailabilityStatusController extends Controller
 
         $listingAvailabilityHandler = $this->get('cocorico.form.handler.listing_availability.status.dashboard');
         $form = $this->createEditAvailabilitiesStatusForm($listing);
-        $success = $listingAvailabilityHandler->process($form);
+        $success = $listingAvailabilityHandler->processMany($form);
 
         if ($success == 1) {
             $this->get('session')->getFlashBag()->add(
                 'success',
-                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
+                $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($selfUrl);
@@ -110,6 +108,96 @@ class ListingAvailabilityStatusController extends Controller
 
 
     /**
+     * Update a ListingAvailability Document.
+     *
+     * @Route("/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_status",
+     *      name="cocorico_dashboard_listing_edit_availability_status",
+     *      requirements={
+     *          "listing_id" = "\d+",
+     *          "day"= "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$",
+     *          "start_time" = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+     *          "end_time" = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+     *      },
+     * )
+     * @Security("is_granted('edit', listing)")
+     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @param  Request $request
+     * @param  Listing $listing
+     * @param  string  $day
+     * @param  string  $start_time
+     * @param  string  $end_time
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function editAvailabilityStatusAction(
+        Request $request,
+        Listing $listing,
+        $day,
+        $start_time,
+        $end_time
+    ) {
+        $listingAvailabilityHandler = $this->get('cocorico.form.handler.listing_availability.status.dashboard');
+        $form = $this->createEditAvailabilityStatusForm($listing->getId(), $day, $start_time, $end_time);
+        $success = $listingAvailabilityHandler->processOne($form, $listing, $day, $start_time, $end_time);
+
+        if ($success == 1) {
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('listing.availability.edit.success', array(), 'cocorico_listing')
+            );
+        } elseif ($success == -1) {
+            $this->get('session')->getFlashBag()->add(
+                'error',
+                $this->get('translator')->trans('form.error', array(), 'cocorico')
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Listing:form_availability_status.html.twig',
+            array(
+                'form' => $form->createView(),
+            )
+        );
+    }
+
+
+    /**
+     * @param int     $listingId
+     * @param string  $day
+     * @param  string $startTime
+     * @param  string $endTime
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createEditAvailabilityStatusForm($listingId, $day, $startTime, $endTime)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'listing_availability',
+            'listing_edit_availability_status',
+            null,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_listing_edit_availability_status',
+                    array(
+                        'listing_id' => $listingId,
+                        'day' => $day,
+                        'start_time' => $startTime,
+                        'end_time' => $endTime,
+                    )
+                ),
+            )
+        );
+
+        return $form;
+    }
+
+
+    /**
      * New ListingAvailability Document.
      *
      * @Route("/{listing_id}/{day}/new_availability_status",
@@ -129,6 +217,8 @@ class ListingAvailabilityStatusController extends Controller
      * @param  string  $day format yyyy-mm-dd
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function newAction(Request $request, Listing $listing, $day)
     {
@@ -139,9 +229,7 @@ class ListingAvailabilityStatusController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->get("cocorico.listing_availability.manager")->save(
-                $form->getData()
-            );
+            $this->get("cocorico.listing_availability.manager")->save($form->getData());
 
             $this->get('session')->getFlashBag()->add(
                 'success',
@@ -184,115 +272,5 @@ class ListingAvailabilityStatusController extends Controller
 
         return $form;
     }
-
-
-    /**
-     * Create Or Update a ListingAvailability Document.
-     *
-     * @Route("/{listing_id}/{id}/{start_time}/{end_time}/edit_availability_status",
-     *      name="cocorico_dashboard_listing_edit_availability_status",
-     *      requirements={
-     *          "listing_id" = "\d+",
-     *          "id" = "^[a-z0-9]+$",
-     *          "start_time" = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
-     *          "end_time" = "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
-     *          "day"= "^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$"
-     *      },
-     * )
-     * @Security("is_granted('edit', listing)")
-     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
-     * @ParamConverter("listing_availability", class="Cocorico\CoreBundle\Document\ListingAvailability")
-     *
-     * @Method({"GET", "POST"})
-     *
-     * @param  Request             $request
-     * @param  Listing             $listing
-     * @param  ListingAvailability $listing_availability
-     * @param  string              $start_time
-     * @param  string              $end_time
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-    public function editAction(
-        Request $request,
-        Listing $listing,
-        ListingAvailability $listing_availability,
-        $start_time,
-        $end_time
-    ) {
-        /** @var ListingAvailabilityManager $availabilityManager */
-        $availabilityManager = $this->get("cocorico.listing_availability.manager");
-
-        //No status edition if already booked
-        if ($availabilityManager->getTimeUnitIsDay() &&
-            $listing_availability->getStatus() == ListingAvailability::STATUS_BOOKED
-        ) {
-            throw $this->createNotFoundException('Edition impossible');
-        }
-
-        $form = $this->createEditForm($listing_availability, $start_time, $end_time);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var ListingAvailability $listing_availability */
-            $listing_availability = $form->getData();
-
-            //convert object to array
-            $listingAvailability = $availabilityManager->listingAvailabilityToArray($listing_availability);
-
-            $availabilityManager->getTimeManager()->saveAvailabilityTimes(
-                $listingAvailability,
-                $start_time,
-                $end_time,
-                "status",
-                $listing->getPrice()
-            );
-
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                $this->get('translator')->trans('listing.availability.edit.success', array(), 'cocorico_listing')
-            );
-        }
-
-        return $this->render(
-            'CocoricoCoreBundle:Dashboard/Listing:form_availability_status.html.twig',
-            array(
-                'form' => $form->createView(),
-            )
-        );
-    }
-
-
-    /**
-     * @param ListingAvailability $availability
-     * @param  string             $start_time
-     * @param  string             $end_time
-     *
-     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
-     */
-    private function createEditForm(ListingAvailability $availability, $start_time, $end_time)
-    {
-        $form = $this->get('form.factory')->createNamed(
-            'listing_availability',
-            new ListingEditAvailabilityStatusType(),
-            $availability,
-            array(
-                'method' => 'POST',
-                'action' => $this->generateUrl(
-                    'cocorico_dashboard_listing_edit_availability_status',
-                    array(
-                        'listing_id' => $availability->getListingId(),
-                        'id' => $availability->getId(),
-                        'start_time' => $start_time,
-                        'end_time' => $end_time,
-                    )
-                ),
-            )
-        );
-
-        return $form;
-    }
-
 
 }

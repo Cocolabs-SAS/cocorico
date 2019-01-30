@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Validator;
+namespace Cocorico\TimeBundle\Validator;
 
-use Cocorico\CoreBundle\Model\DateRange;
-use DateTime;
+use Cocorico\TimeBundle\Model\DateRange;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -149,7 +148,7 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
 
         //End date in past
         if ($dateRange->end) {
-            if (!$this->options['allow_end_in_past'] and ($dateRange->end < new DateTime())) {
+            if (!$this->options['allow_end_in_past'] and ($dateRange->end < new \DateTime())) {
                 $form->addError(new FormError('date_range.invalid.end_in_past'));
             }
         }

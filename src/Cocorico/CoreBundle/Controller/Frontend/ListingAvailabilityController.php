@@ -55,26 +55,27 @@ class ListingAvailabilityController extends Controller
      */
     public function indexAction(Request $request, Listing $listing, $start, $end)
     {
+        $timezone = $this->get('session')->get('timezone');
+
         $start = new \DateTime($start);
+        $start->modify('-1 day');//For timezone purposes
         $end = new \DateTime($end);
 
-        $availabilities = $this->get("cocorico.listing_availability.manager")->getAvailabilitiesByListingAndDateRange(
+        $availabilities = $this->get("cocorico.listing_availability.manager")->getCalendarEvents(
             $listing->getId(),
             $start,
             $end,
-            "calendar"
+            false,
+            $timezone
         );
 
-        $locale = $request->getLocale();
         //Convert and format prices
+        $locale = $request->getLocale();
+        $coreExtension = $this->get('cocorico.twig.core_extension');
         array_walk(
             $availabilities,
-            function (&$el, $key, $locale) {
-                $el["title"] = $this->get('cocorico.twig.core_extension')->formatPriceFilter(
-                    $el["title"],
-                    $locale,
-                    0
-                );
+            function (&$el, $key, $locale) use ($coreExtension) {
+                $el["title"] = $coreExtension->formatPriceFilter($el["title"], $locale, 0);
             },
             $locale
         );

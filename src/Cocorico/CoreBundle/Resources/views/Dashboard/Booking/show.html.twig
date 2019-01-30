@@ -17,11 +17,12 @@
         <section class="postarea alt3">
             <div class="posts-holder">
                 {% include '@CocoricoCore/Dashboard/Booking/_booking_show.html.twig' with {
-                'booking': booking,
-                'other_user': other_user,
-                'amount_total': amount_total,
-                'other_user_rating': other_user_rating,
-                'vat_inclusion_text': vat_inclusion_text
+                    'booking': booking,
+                    'other_user': other_user,
+                    'amount_total': amount_total,
+                    'other_user_rating': other_user_rating,
+                    'vat_inclusion_text': vat_inclusion_text,
+                    'user_timezone': user_timezone,
                 } only %}
             </div>
 
@@ -32,8 +33,8 @@
             } only %}
 
             {% include '@CocoricoCore/Dashboard/Booking/_booking_show_contact_infos.html.twig' with {
-            'booking': booking,
-            'other_user': other_user
+                'booking': booking,
+                'other_user': other_user
             } only %}
         </section>
 
@@ -62,7 +63,7 @@
             <div class="posts-holder">
                 <!-- post -->
                 {% include 'CocoricoMessageBundle:Dashboard/Message:conversation_list.html.twig' with {
-                'thread': booking.thread
+                    'thread': booking.thread
                 } only %}
             </div>
         </div>

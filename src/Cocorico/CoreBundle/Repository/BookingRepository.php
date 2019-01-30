@@ -273,23 +273,21 @@ class BookingRepository extends EntityRepository
     /**
      * Find expiring bookings to alert
      *
-     * @param int    $expirationAlertDelay Delay in minutes to consider a booking as expiring.
-     * @param int    $expirationDelay      Delay in minutes to consider a booking as expiring.
-     * @param int    $acceptationDelay     Delay in minutes to consider a booking as expiring for acceptation.
-     * @param string $timeZone             Default user timezone
+     * @param int $expirationAlertDelay Delay in minutes to consider a booking as expiring.
+     * @param int $expirationDelay      Delay in minutes to consider a booking as expiring.
+     * @param int $acceptationDelay     Delay in minutes to consider a booking as expiring for acceptation.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function findBookingsExpiringToAlert(
         $expirationAlertDelay,
         $expirationDelay,
-        $acceptationDelay,
-        $timeZone
+        $acceptationDelay
     ) {
         $dateExpiring = new \DateTime();
         $dateExpiring->sub(new \DateInterval('PT' . ($expirationDelay - $expirationAlertDelay) . 'M'));
 
-        $dateAcceptationExpiring = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateAcceptationExpiring = new \DateTime('now');
         $dateAcceptationExpiring->add(new \DateInterval('PT' . ($acceptationDelay + $expirationAlertDelay) . 'M'));
 
         $sql = <<<SQLQUERY
@@ -321,14 +319,13 @@ SQLQUERY;
     /**
      * Find imminent Bookings to alert
      *
-     * @param int    $bookingImminentDelay Delay in minutes to consider a booking as imminent.
-     * @param string $timeZone
+     * @param int $bookingImminentDelay Delay in minutes to consider a booking as imminent.
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsImminentToAlert($bookingImminentDelay, $timeZone)
+    public function findBookingsImminentToAlert($bookingImminentDelay)
     {
         //Imminent date
-        $dateImminent = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateImminent = new \DateTime('now');
         $dateImminent->add(new \DateInterval('PT' . $bookingImminentDelay . 'M'));
 
         $sql = <<<SQLQUERY
@@ -362,20 +359,19 @@ SQLQUERY;
      * Either newBookingAt is less than today minus $bookingExpirationDelay
      * Either booking start date concatenated to start time is less than today date time
      *
-     * @param int    $expirationDelay  Delay in minutes to consider a booking as expired.
-     * @param int    $acceptationDelay Delay in minutes to consider a booking as expired for acceptation.
-     * @param string $timeZone         Default user timezone
+     * @param int $expirationDelay  Delay in minutes to consider a booking as expired.
+     * @param int $acceptationDelay Delay in minutes to consider a booking as expired for acceptation.
      *
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
-    public function findBookingsToExpire($expirationDelay, $acceptationDelay, $timeZone)
+    public function findBookingsToExpire($expirationDelay, $acceptationDelay)
     {
-        $today = new \DateTime('now', new \DateTimeZone($timeZone));
+        $today = new \DateTime('now');
 
         $dateExpired = new \DateTime();
         $dateExpired->sub(new \DateInterval('PT' . $expirationDelay . 'M'));
 
-        $dateAcceptationExpired = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateAcceptationExpired = new \DateTime('now');
         $dateAcceptationExpired->add(new \DateInterval('PT' . $acceptationDelay . 'M'));
 
         $sql = <<<SQLQUERY
@@ -424,20 +420,6 @@ SQLQUERY;
      */
     public function findBookingsToRefuse($bookingAccepted, $endDayIncluded, $timeUnitIsDay)
     {
-        if ($timeUnitIsDay) {
-            return $this->findBookingInDayMode($bookingAccepted, $endDayIncluded);
-        } else {
-            return $this->findBookingInNoDayMode($bookingAccepted, $endDayIncluded);
-        }
-    }
-
-    /**
-     * @param Booking $bookingAccepted
-     * @param         $endDayIncluded
-     * @return ArrayCollection
-     */
-    private function findBookingInDayMode(Booking $bookingAccepted, $endDayIncluded)
-    {
         $queryBuilder = $this->getFindQueryBuilder();
         $queryBuilder
             ->where('b.status IN (:status)')
@@ -458,67 +440,13 @@ SQLQUERY;
             ->setParameter('end', $bookingAccepted->getEnd()->format('Y-m-d H:i:s'))
             ->setParameter('listing', $bookingAccepted->getListing());
 
-        return new ArrayCollection($queryBuilder->getQuery()->getResult());
+        $bookingsToRefused = $queryBuilder->getQuery()->getResult();
 
-    }
-
-    /**
-     * @param Booking $bookingAccepted
-     * @param         $endDayIncluded
-     * @return ArrayCollection
-     */
-    private function findBookingInNoDayMode(Booking $bookingAccepted, $endDayIncluded)
-    {
-        $queryBuilder = $this->getFindQueryBuilder();
-        $queryBuilder
-            ->where('b.status IN (:status)')
-            ->andWhere('b.listing = :listing');
-
-        //if booking time range overlaps end day we extend the search to next day of booking end day
-        $sql = <<<SQLQUERY
-            ((
-            DATE_FORMAT(b.endTime, '%Y-%m-%d') <> '1970-01-02' AND b.end >= :start 
-            )
-            OR
-            ( 
-            DATE_FORMAT(b.endTime, '%Y-%m-%d') = '1970-01-02' AND DATE_ADD(b.end, 1, 'DAY') >= :start 
-            ))
-SQLQUERY;
-
-        $queryBuilder->andWhere($sql);
-
-        //If end day is included in booking, we refuse booking starting at this end date
-        if ($endDayIncluded) {
-            $queryBuilder
-                ->andWhere('b.start <= :end');
-        } else {
-            $queryBuilder
-                ->andWhere('b.start < :end');
+        if (!$timeUnitIsDay) {
+            $bookingsToRefused = $bookingAccepted->getOverlapping($bookingsToRefused, $endDayIncluded);
         }
 
-        $queryBuilder
-            ->setParameter('status', array(Booking::STATUS_NEW))
-            ->setParameter('start', $bookingAccepted->getStart()->format('Y-m-d H:i:s'))
-            ->setParameter('end', $bookingAccepted->getEnd()->format('Y-m-d H:i:s'))
-            ->setParameter('listing', $bookingAccepted->getListing());
-
-        //Refuse bookings with time range overlapping the accepted booking time range
-        //If time range overlap days the real end date is one day later
-        if ($bookingAccepted->getTimeRange()->overlapDays()) {
-            $queryBuilder->setParameter('end', $bookingAccepted->getEndDay()->format('Y-m-d H:i:s'));
-        }
-
-
-//        echo $queryBuilder->getQuery()->getSQL();
-//        print_r($queryBuilder->getQuery()->getParameters()->toArray());
-
-        /** @var Booking[] $bookings */
-        $bookings = $queryBuilder->getQuery()->getResult();
-
-        $bookingToRefused = $bookingAccepted->getOverlapping($bookings, $endDayIncluded);
-
-        return new ArrayCollection($bookingToRefused);
-
+        return new ArrayCollection($bookingsToRefused);
     }
 
 
@@ -529,13 +457,12 @@ SQLQUERY;
      *                                Does the booking object (apartment, service, ...) is considered as validated (Offerer can be payed)
      *                                after booking start date or booking end date.
      * @param int    $validatedDelay  Time after or before the moment the booking is considered as validated (in minutes)
-     * @param string $timeZone        Default user time zone
      *
      * @return \Doctrine\Common\Collections\ArrayCollection|Booking[]
      *
      * @throws \Exception
      */
-    public function findBookingsToValidate($validatedMoment, $validatedDelay, $timeZone)
+    public function findBookingsToValidate($validatedMoment, $validatedDelay)
     {
         if ($validatedMoment != 'start' && $validatedMoment != 'end') {
             throw new \Exception('Wrong argument $validatedMoment in findBookingsToValidate function');
@@ -553,24 +480,17 @@ SQLQUERY;
             )
             ->setParameter('validated', false);
 
-        $dateValidation = new \DateTime('now', new \DateTimeZone($timeZone));
+        $dateValidation = new \DateTime('now');
         if ($validatedDelay >= 0) {//after moment
             $dateValidation->sub(new \DateInterval('PT' . $validatedDelay . 'M'));
         } else {//before moment
             $dateValidation->add(new \DateInterval('PT' . abs($validatedDelay) . 'M'));
         }
 
-        //if booking time range overlaps end day we extend the search to next day of booking end day
         $sql = <<<SQLQUERY
-            ((
-            DATE_FORMAT(b.{$validatedMoment}Time, '%Y-%m-%d') <> '1970-01-02' AND
+            (
             CONCAT(DATE_FORMAT(b.{$validatedMoment}, '%Y-%m-%d'), ' ',  DATE_FORMAT(b.{$validatedMoment}Time, '%H:%i:%s') ) <= :dateValidation
             )
-            OR
-            (
-             DATE_FORMAT(b.{$validatedMoment}Time, '%Y-%m-%d') = '1970-01-02' AND
-             CONCAT(DATE_FORMAT(DATE_ADD(b.{$validatedMoment}, 1, 'DAY'), '%Y-%m-%d'), ' ',  DATE_FORMAT(b.{$validatedMoment}Time, '%H:%i:%s') ) <= :dateValidation
-            ))
 SQLQUERY;
 
         $queryBuilder

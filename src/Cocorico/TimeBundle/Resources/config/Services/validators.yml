@@ -1,0 +1,6 @@
+services:
+    #Validators
+    cocorico_time.times_range_overlap_validator:
+        class: Cocorico\TimeBundle\Validator\Constraints\TimeRangesOverlapValidator
+        tags:
+            - { name: validator.constraint_validator, alias: time_ranges_overlap }

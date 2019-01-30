@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Model;
+namespace Cocorico\TimeBundle\Model;
 
 
 class DayTimeRange
@@ -20,13 +20,13 @@ class DayTimeRange
     public $day;
 
     /**
-     * @var \DateTime[]
+     * @var TimeRange[]
      */
     public $timeRanges;
 
     /**
      * DayTimeRange constructor.
-     * @param \DateTime $day
+     * @param \DateTime  $day
      * @param array|null $timeRanges
      */
     public function __construct(\DateTime $day, array $timeRanges = array())
@@ -52,7 +52,7 @@ class DayTimeRange
     }
 
     /**
-     * @return \DateTime[]
+     * @return TimeRange[]
      */
     public function getTimeRanges()
     {
@@ -60,7 +60,7 @@ class DayTimeRange
     }
 
     /**
-     * @param \DateTime[] $timeRanges
+     * @param TimeRange[] $timeRanges
      */
     public function setTimeRanges($timeRanges)
     {
@@ -97,33 +97,5 @@ class DayTimeRange
 
         return false;
     }
-
-
-//    /**
-//     * Get the first time range of a day
-//     *
-//     * @param \DateTime      $day
-//     * @param DayTimeRange[] $daysTimeRanges
-//     * @return TimeRange|bool
-//     * @throws \Exception
-//     */
-//    public static function getTimeRangeByDay(\DateTime $day, array $daysTimeRanges)
-//    {
-//        $timeRange = false;
-//
-//        foreach ($daysTimeRanges as $dayTimeRanges) {
-//            if ($dayTimeRanges->day->format('Ymd') == $day->format("Ymd")) {
-//                $timeRange = reset($dayTimeRanges->timeRanges);
-//                break;
-//            }
-//        }
-//
-//        if (!$timeRange) {
-//            throw new \Exception('Missing time range');
-//        }
-//
-//        return $timeRange;
-//    }
-
 
 }

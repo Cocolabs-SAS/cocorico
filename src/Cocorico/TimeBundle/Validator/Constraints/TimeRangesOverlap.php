@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Cocorico\CoreBundle\Validator\Constraints;
+namespace Cocorico\TimeBundle\Validator\Constraints;
 
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;

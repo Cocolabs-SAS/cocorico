@@ -33,6 +33,7 @@ services:
                 cocorico_time_unit: "%cocorico.time_unit%"
                 cocorico_locales: "%cocorico.locales%"
                 cocorico_locale: "%cocorico.locale%"
+                cocorico_time_zone: "%cocorico.time_zone%"
                 cocorico_from_email: "%cocorico.from_email%"
                 cocorico_contact_email: "%cocorico.contact_mail%"
             - templates:

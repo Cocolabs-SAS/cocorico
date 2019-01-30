@@ -21,6 +21,7 @@
     {% set listing = booking.listing %}
     {% set listing_translation = listing.translations[app.request.locale] %}
     {% set user = listing.user %}
+    {% set user_timezone = booking.timeZoneOfferer %}
     {% set user_address = user.getAddresses %}
     {% set user_address = (user_address is empty) ? null : user_address[0] %}
     {% set bill_date_title = 'booking.bank_wire.date.title'|trans %}

@@ -11,7 +11,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
-use Cocorico\CoreBundle\Validator\Constraints\TimeRangesOverlap;
+use Cocorico\TimeBundle\Validator\Constraints\TimeRangesOverlap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -98,6 +98,7 @@ class ListingEditAvailabilitiesType extends AbstractType
         $resolver->setDefaults(
             array(
                 'translation_domain' => 'cocorico_listing',
+                'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
             )
         );
     }
