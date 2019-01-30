@@ -3,8 +3,8 @@
 {% block field %}
     {{ object.newBookingAt ?
     object.getExpirationDate(
-    field_description.options.bookingExpirationDelay,
-    field_description.options.bookingAcceptationDelay
-    )|date("d/m/Y H:i", timeZone)
+        field_description.options.bookingExpirationDelay,
+        field_description.options.bookingAcceptationDelay
+    )|localizeddate(field_description.options.dateFormat|default('medium'), field_description.options.timeFormat|default('short'), null, timeZone)
     : '' }}
 {% endblock %}

@@ -17,6 +17,6 @@ file that was distributed with this source code.
     {%- elseif field_description.options.format is defined -%}
         {{ value|date(field_description.options.format, timeZone) }}
     {%- else -%}
-        {{ value|localizeddate(field_description.options.dateFormat|default('short'), field_description.options.timeFormat|default('short'), 'fr', timeZone) }}
+        {{ value|localizeddate(field_description.options.dateFormat|default('short'), field_description.options.timeFormat|default('short'), null, timeZone) }}
     {%- endif -%}
 {% endblock %}

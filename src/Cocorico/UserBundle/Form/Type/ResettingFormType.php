@@ -12,6 +12,7 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,7 +32,7 @@ class ResettingFormType extends AbstractType
     {
         $builder->add(
             'new',
-            'repeated',
+            RepeatedType::class,
             array(
                 'type' => 'password',
                 'options' => array('translation_domain' => 'cocorico_user'),

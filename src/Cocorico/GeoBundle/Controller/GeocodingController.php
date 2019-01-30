@@ -12,8 +12,9 @@
 namespace Cocorico\GeoBundle\Controller;
 
 use Cocorico\GeoBundle\Entity\Coordinate;
-use Cocorico\GeoBundle\Geocoder\Provider\GoogleMapsProvider;
-use Ivory\HttpAdapter\CurlHttpAdapter;
+use Cocorico\GeoBundle\Geocoder\Provider\GoogleMaps;
+use Cocorico\GeoBundle\Geocoder\StatefulGeocoder;
+use Http\Adapter\Guzzle6\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,12 +54,13 @@ class GeocodingController extends Controller
         return new Response('true');
     }
 
+
     /**
      * Reverse geocoding from server
      *
      * @Route("/{lat}/{lng}/{lang}/reverse_geocoding", name="cocorico_geo_reverse_geocoding", requirements={
-     *      "lat" = "[-0-9.]+",
-     *      "lng" = "[-0-9.]+",
+     *      "lat" = "[0-9.-]+",
+     *      "lng" = "[0-9.-]+",
      *      "lang" = "%cocorico.locales_string%",
      * })
      * @Method("GET")
@@ -69,19 +71,22 @@ class GeocodingController extends Controller
      * @param         $lang
      *
      * @return Response
-     * @throws \Exception
      */
     public function reverseGeocode(Request $request, $lat, $lng, $lang)
     {
         if (!$request->isXmlHttpRequest() || !$this->isCsrfTokenValid('rev_geo', $request->query->get('token'))) {
             throw $this->createAccessDeniedException('Access denied');
         }
-        $geocoder = new GoogleMapsProvider(
-            new CurlHttpAdapter(), $lang, null, true, $this->getParameter('cocorico_geo.google_place_server_api_key')
-        );
-        $geocoder->limit(1);
-        $geocodings = $geocoder->reverseJson($lat, $lng);
 
-        return new JsonResponse($geocodings);
+        $provider = new GoogleMaps(
+            new Client(),
+            null,
+            $this->getParameter('cocorico_geo.google_place_server_api_key')
+        );
+        $geocoder = new StatefulGeocoder($provider, $lang);
+        $geocoder->setLimit(1);
+
+        return new JsonResponse($geocoder->reverseAsJson($lat, $lng));
     }
 }
+

@@ -2,6 +2,7 @@ imports:
     - { resource: "@CocoricoCoreBundle/Resources/config/parameters.yml"}
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
     - { resource: "@CocoricoCoreBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoUserBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoMessageBundle/Resources/config/config.yml"}
@@ -13,7 +14,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallback: "%cocorico.locale%" }
+    translator:      { fallbacks: ["%cocorico.locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"

@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 use Cocorico\CoreBundle\Form\DataTransformer\PriceTransformer;
 use Lexik\Bundle\CurrencyBundle\Currency\Converter;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -94,7 +95,7 @@ class PriceType extends AbstractType
      */
     public function getParent()
     {
-        return 'money';
+        return MoneyType::class;
     }
 
     /**

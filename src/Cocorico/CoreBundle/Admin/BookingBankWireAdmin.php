@@ -13,15 +13,17 @@ namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\BookingBankWire;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\CoreBundle\Model\Manager\BookingBankWireManager;
 use Cocorico\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class BookingBankWireAdmin extends Admin
+class BookingBankWireAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'booking-bank-wire';
@@ -71,6 +73,7 @@ class BookingBankWireAdmin extends Admin
         $this->timezone = $timezone;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var BookingBankWire $bookingBankWire */
@@ -107,11 +110,11 @@ class BookingBankWireAdmin extends Admin
                 )
             )->add(
                 'booking.status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'disabled' => true,
                     'choices' => array_flip(Booking::$statusValues),
-                    'empty_value' => 'admin.booking.status.label',
+                    'placeholder' => 'admin.booking.status.label',
                     'label' => 'admin.booking_bank_wire.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
                     'choices_as_values' => true
@@ -128,7 +131,7 @@ class BookingBankWireAdmin extends Admin
             $formMapper
                 ->add(
                     'amount',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount_excl_discount_voucher.label',
@@ -138,7 +141,7 @@ class BookingBankWireAdmin extends Admin
                 )
                 ->add(
                     'booking.amountDiscountVoucher',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_discount_voucher.label',
@@ -148,7 +151,7 @@ class BookingBankWireAdmin extends Admin
                 )
                 ->add(
                     'amountToWire',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_to_wire.label',
@@ -160,7 +163,7 @@ class BookingBankWireAdmin extends Admin
                 )
                 ->add(
                     'remainingAmount',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.remaining_amount_to_pay_to_offerer.label',
@@ -191,7 +194,7 @@ class BookingBankWireAdmin extends Admin
             $formMapper
                 ->add(
                     'amount',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking_bank_wire.amount.label',
@@ -205,7 +208,7 @@ class BookingBankWireAdmin extends Admin
             $formMapper
                 ->add(
                     'booking.amountDeposit',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'listing_edit.form.deposit',
@@ -225,10 +228,10 @@ class BookingBankWireAdmin extends Admin
         $formMapper
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(BookingBankWire::$statusValues),
-                    'empty_value' => 'admin.booking.status.label',
+                    'placeholder' => 'admin.booking.status.label',
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
                     'help' => 'admin.booking_bank_wire.status.help',
@@ -368,6 +371,7 @@ class BookingBankWireAdmin extends Admin
         }
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -376,7 +380,7 @@ class BookingBankWireAdmin extends Admin
                 'status',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(BookingBankWire::$statusValues),
                     'label' => 'admin.booking.status.label',
@@ -419,7 +423,7 @@ class BookingBankWireAdmin extends Admin
             );
     }
 
-
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -468,7 +472,6 @@ class BookingBankWireAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.start.label',
-                    'format' => 'd/m/Y'
                 )
             )
             ->add(
@@ -476,7 +479,6 @@ class BookingBankWireAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',
-                    'format' => 'd/m/Y'
                 )
             )
             ->add(

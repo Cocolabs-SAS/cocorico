@@ -11,11 +11,14 @@
 
 namespace Cocorico\ReviewBundle\Form\Type\Dashboard;
 
+use Cocorico\ReviewBundle\Form\Type\StarRatingType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ReviewType extends AbstractType implements TranslationContainerInterface
 {
@@ -28,7 +31,7 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
         $builder
             ->add(
                 'rating',
-                'star_rating',
+                StarRatingType::class,
                 array(
                     /** @Ignore */
                     'choices' =>
@@ -48,7 +51,7 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
             )
             ->add(
                 'comment',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'review.form.comment.label',
                     'required' => true,
@@ -65,21 +68,13 @@ class ReviewType extends AbstractType implements TranslationContainerInterface
             array(
                 'data_class' => 'Cocorico\ReviewBundle\Entity\Review',
                 'translation_domain' => 'cocorico_review',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('new'),
                 'csrf_token_id' => 'review_new',
             )
         );
     }
 
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     /**
      * {@inheritdoc}

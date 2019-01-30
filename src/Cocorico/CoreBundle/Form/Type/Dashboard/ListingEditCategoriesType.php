@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ListingEditCategoriesType extends AbstractType
 {
@@ -24,10 +25,10 @@ class ListingEditCategoriesType extends AbstractType
 //        $builder
 //            ->add(
 //                'type',
-//                'choice',
+//                ChoiceType::class,
 //                array(
 //                    'choices' => array_flip(Listing::$typeValues),
-//                    'empty_value' => 'listing_edit.form.choose',
+//                    'placeholder' => 'listing_edit.form.choose',
 //                    'required' => false,
 //                    'translation_domain' => 'cocorico_listing',
 //                    'label' => 'listing.form.type',
@@ -47,18 +48,9 @@ class ListingEditCategoriesType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_edit',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,//To have error on collection item field,
+                'constraints' => new Valid(),//To have error on collection item field,
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

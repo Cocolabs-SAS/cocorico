@@ -16,6 +16,10 @@ use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\TimeRange;
 use Cocorico\TimeBundle\Validator\TimeRangeValidator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -61,12 +65,12 @@ class TimeRangeType extends AbstractType
                 $form
                     ->add(
                         'start',
-                        'time',
+                        TimeType::class,
                         array_merge(
                             array(
                                 'label' => 'time_range.start',
                                 'property_path' => 'start',
-                                'empty_value' => '',
+                                'placeholder' => '',
                                 'widget' => 'choice',
                                 'input' => 'datetime',
                                 'model_timezone' => 'UTC',
@@ -79,12 +83,12 @@ class TimeRangeType extends AbstractType
                         )
                     )->add(
                         'end',
-                        'time',
+                        TimeType::class,
                         array_merge(
                             array(
                                 'label' => 'time_range.end',
                                 'property_path' => 'end',
-                                'empty_value' => '',
+                                'placeholder' => '',
                                 'widget' => 'choice',
                                 'input' => 'datetime',
                                 'model_timezone' => 'UTC',
@@ -98,7 +102,7 @@ class TimeRangeType extends AbstractType
                     )
                     ->add(
                         'date',//sync with DateRage start date for DST purpose
-                        'date',
+                        DateType::class,
                         array(
                             'widget' => 'single_text'
                         )
@@ -109,7 +113,7 @@ class TimeRangeType extends AbstractType
                 $form
                     ->add(
                         'start_picker',
-                        'time',
+                        TimeType::class,
                         array(
                             'mapped' => false,
                             'widget' => 'single_text',
@@ -119,7 +123,7 @@ class TimeRangeType extends AbstractType
                     )
                     ->add(
                         'end_picker',
-                        'time',
+                        TimeType::class,
                         array(
                             'mapped' => false,
                             'widget' => 'single_text',
@@ -147,7 +151,7 @@ class TimeRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_minutes',
-                                'choice',
+                                ChoiceType::class,
                                 array(
                                     //from one time unit to timesMax * timeUnit
                                     'choices' => array_combine(
@@ -162,7 +166,7 @@ class TimeRangeType extends AbstractType
                                     ),
                                     'data' => $nbMinutes,
                                     /** @Ignore */
-                                    'empty_value' => '',
+                                    'placeholder' => '',
                                     'attr' => array(
                                         'class' => 'no-scroll no-arrow'
                                     ),
@@ -173,7 +177,7 @@ class TimeRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_minutes',
-                                'hidden',
+                                HiddenType::class,
                                 array(
                                     'data' => $this->timeUnit,
 //                                    'data' => $options['time_unit']

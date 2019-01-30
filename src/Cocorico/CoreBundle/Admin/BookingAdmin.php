@@ -13,18 +13,20 @@ namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Cocorico\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
-class BookingAdmin extends Admin
+class BookingAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'booking';
@@ -81,6 +83,7 @@ class BookingAdmin extends Admin
         $this->includeVat = $includeVat;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var Booking $booking */
@@ -136,7 +139,7 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'amountExcludingFees',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_excl_fees.label',
@@ -146,7 +149,7 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'amountFeeAsAsker',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_fee_as_asker.label',
@@ -156,7 +159,7 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'amountFeeAsOfferer',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_fee_as_offerer.label',
@@ -185,7 +188,7 @@ class BookingAdmin extends Admin
                     )
                 )->add(
                     'amountDiscountVoucher',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_discount_voucher.label',
@@ -199,7 +202,7 @@ class BookingAdmin extends Admin
             $formMapper
                 ->add(
                     'amountDeposit',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'listing_edit.form.deposit',
@@ -214,7 +217,7 @@ class BookingAdmin extends Admin
         $formMapper
             ->add(
                 'amountToPayByAsker',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_to_pay_by_asker.label',
@@ -224,7 +227,7 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'amountToPayToOfferer',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.amount_to_pay_to_offerer.label',
@@ -234,10 +237,10 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Booking::$statusValues),
-                    'empty_value' => 'admin.booking.status.label',
+                    'placeholder' => 'admin.booking.status.label',
                     'disabled' => true,
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
@@ -246,10 +249,10 @@ class BookingAdmin extends Admin
             )
             ->add(
                 'listing.cancellationPolicy',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Listing::$cancellationPolicyValues),
-                    'empty_value' => 'admin.listing.cancellation_policy.label',
+                    'placeholder' => 'admin.listing.cancellation_policy.label',
                     'disabled' => true,
                     'label' => 'admin.listing.cancellation_policy.label',
                     'translation_domain' => 'cocorico_listing',
@@ -410,7 +413,7 @@ class BookingAdmin extends Admin
                 )
                 ->add(
                     'amountDelivery',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.delivery_amount.label',
@@ -454,7 +457,7 @@ class BookingAdmin extends Admin
                 )
                 ->add(
                     'amountDelivery',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.delivery_amount.label',
@@ -472,7 +475,7 @@ class BookingAdmin extends Admin
                 )
                 ->add(
                     'amountHatchback',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.hatchback_amount.label',
@@ -501,7 +504,7 @@ class BookingAdmin extends Admin
                 ->with('Options')
                 ->add(
                     'amountOptions',
-                    'price',
+                    PriceType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.amount_options.title',
@@ -581,6 +584,7 @@ class BookingAdmin extends Admin
         }
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -589,7 +593,7 @@ class BookingAdmin extends Admin
                 'status',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(Booking::$statusValues),
                     'label' => 'admin.booking.status.label',
@@ -754,6 +758,7 @@ class BookingAdmin extends Admin
         return false;
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -814,7 +819,6 @@ class BookingAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.start.label',
-                    'format' => 'd/m/Y',
                 )
             )
             ->add(
@@ -822,7 +826,6 @@ class BookingAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',
-                    'format' => 'd/m/Y',
                 )
             );
 
@@ -860,7 +863,6 @@ class BookingAdmin extends Admin
 //                null,
 //                array(
 //                    'label' => 'admin.booking.updated_at.label',
-//                    'format' => 'd/m/Y'
 //                )
 //            );
 

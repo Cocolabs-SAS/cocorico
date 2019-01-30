@@ -9,14 +9,14 @@ services:
         class: Cocorico\MessageBundle\Form\Type\Frontend\NewThreadMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-        - { name: form.type, alias: cocorico_message_new_thread }
+            - { name: form.type, alias: cocorico_message_new_thread }
         public: true
         
         
     cocorico_message.new_thread.form.handler:
         class: Cocorico\MessageBundle\FormHandler\NewThreadMessageFormHandler
         arguments: 
-            - "@request"
+            - "@request_stack"
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"
@@ -28,14 +28,14 @@ services:
         class: Cocorico\MessageBundle\Form\Type\Frontend\ReplyMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-        - { name: form.type, alias: cocorico_message_reply }
+            - { name: form.type, alias: cocorico_message_reply }
         public: true
         
         
     cocorico_message.reply.form.handler:
         class: Cocorico\MessageBundle\FormHandler\ReplyMessageFormHandler
         arguments: 
-            - "@request"
+            - "@request_stack"
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"

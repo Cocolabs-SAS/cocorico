@@ -12,11 +12,10 @@
 namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
 use Cocorico\CoreBundle\Entity\ListingCharacteristicType;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadListingCharacteristicTypeData extends AbstractFixture implements OrderedFixtureInterface
+class ListingCharacteristicTypeFixtures extends Fixture
 {
 
     /**
@@ -41,16 +40,6 @@ class LoadListingCharacteristicTypeData extends AbstractFixture implements Order
         $manager->persist($listingCharacteristicType);
         $manager->flush();
         $this->addReference('characteristic_type_custom_1', $listingCharacteristicType);
-
-
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 4;
     }
 
 }

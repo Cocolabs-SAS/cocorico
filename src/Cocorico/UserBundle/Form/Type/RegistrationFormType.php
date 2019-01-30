@@ -13,6 +13,13 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -40,7 +47,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add(
                 'personType',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'form.person_type',
                     'choices' => array_flip(User::$personTypeValues),
@@ -74,7 +81,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'phonePrefix',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.phone_prefix',
                     'required' => false,
@@ -83,7 +90,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'phone',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.phone',
                     'required' => false,
@@ -91,12 +98,12 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array('label' => 'form.email')
             )
             ->add(
                 'birthday',
-                'birthday',
+                BirthdayType::class,
                 array(
                     'label' => 'form.user.birthday',
                     'widget' => 'choice',
@@ -106,7 +113,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'nationality',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.user.nationality',
                     'required' => true,
@@ -115,7 +122,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'countryOfResidence',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.user.country_of_residence',
                     'required' => true,
@@ -125,7 +132,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'plainPassword',
-                'repeated',
+                RepeatedType::class,
                 array(
                     'type' => 'password',
                     'options' => array('translation_domain' => 'cocorico_user'),
@@ -143,7 +150,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'timeZone',
-                'timezone',
+                TimezoneType::class,
                 array(
                     'label' => 'form.time_zone',
                     'required' => true,
@@ -166,14 +173,6 @@ class RegistrationFormType extends AbstractType
         );
     }
 
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     /**
      * {@inheritdoc}

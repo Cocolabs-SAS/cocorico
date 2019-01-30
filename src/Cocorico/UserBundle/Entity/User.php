@@ -26,11 +26,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
+//use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * User.
@@ -457,6 +459,8 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->listings = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->languages = new ArrayCollection();

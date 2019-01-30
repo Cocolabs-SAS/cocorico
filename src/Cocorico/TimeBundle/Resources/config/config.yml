@@ -1,5 +1,4 @@
 twig:
     #Forms customization
-    form:
-        resources:
-            - 'CocoricoTimeBundle:Form:fields_date_time.html.twig'
+    form_themes:
+        - 'CocoricoTimeBundle:Form:fields_date_time.html.twig'

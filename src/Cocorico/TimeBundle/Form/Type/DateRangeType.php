@@ -15,6 +15,9 @@ use Cocorico\TimeBundle\Form\DataTransformer\DateRangeViewTransformer;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Validator\DateRangeValidator;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -51,9 +54,9 @@ class DateRangeType extends AbstractType
                 $form = $event->getForm();
 
                 //Days display mode: range or duration
-                $dateEndType = 'date';
+                $dateEndType = DateType::class;
                 if ($options['display_mode'] == "duration") {
-                    $dateEndType = 'date_hidden';
+                    $dateEndType = DateHiddenType::class;
 
                     if ($this->daysMax > 1) {
                         $endDayIncluded = isset($options["end_day_included"]) ? $options["end_day_included"] : true;
@@ -70,12 +73,12 @@ class DateRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_days',
-                                'choice',
+                                ChoiceType::class,
                                 array(
                                     'choices' => array_combine(range(1, $this->daysMax), range(1, $this->daysMax)),
                                     'data' => $nbDays,
                                     /** @Ignore */
-                                    'empty_value' => '',
+                                    'placeholder' => '',
                                     'attr' => array(
                                         'class' => 'no-arrow'
                                     ),
@@ -88,7 +91,7 @@ class DateRangeType extends AbstractType
                         $form
                             ->add(
                                 'nb_days',
-                                'hidden',
+                                HiddenType::class,
                                 array(
                                     'data' => 1
                                 )
@@ -99,7 +102,7 @@ class DateRangeType extends AbstractType
                 $form
                     ->add(
                         'start',
-                        'date',
+                        DateType::class,
                         array_merge(
                             array(
                                 'property_path' => 'start',

@@ -12,11 +12,10 @@
 namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
 use Cocorico\CoreBundle\Entity\ListingCharacteristicGroup;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadListingCharacteristicGroupData extends AbstractFixture implements OrderedFixtureInterface
+class ListingCharacteristicGroupFixtures extends Fixture
 {
 
     /**
@@ -42,14 +41,6 @@ class LoadListingCharacteristicGroupData extends AbstractFixture implements Orde
         $manager->flush();
         $this->addReference('group_2', $listingCharacteristicGroup);
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 6;
     }
 
 }

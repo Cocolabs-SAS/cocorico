@@ -13,11 +13,11 @@ namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
 use Cocorico\CoreBundle\Entity\ListingCharacteristicType;
 use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadListingCharacteristicValueData extends AbstractFixture implements OrderedFixtureInterface
+class ListingCharacteristicValueFixtures extends Fixture implements DependentFixtureInterface
 {
 
     /**
@@ -104,9 +104,11 @@ class LoadListingCharacteristicValueData extends AbstractFixture implements Orde
     /**
      * {@inheritDoc}
      */
-    public function getOrder()
+    public function getDependencies()
     {
-        return 5;
+        return array(
+            ListingCharacteristicTypeFixtures::class,
+        );
     }
 
 }

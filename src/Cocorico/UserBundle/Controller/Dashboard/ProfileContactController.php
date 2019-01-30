@@ -91,7 +91,7 @@ class ProfileContactController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'user',
-            new ProfileContactFormType(),
+            ProfileContactFormType::class,
             $user,
             array(
                 'method' => 'POST',

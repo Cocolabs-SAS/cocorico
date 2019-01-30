@@ -11,13 +11,15 @@
 
 namespace Cocorico\PageBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class PageAdmin extends Admin
+class PageAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'page';
@@ -34,6 +36,7 @@ class PageAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         //Translations fields
@@ -58,7 +61,7 @@ class PageAdmin extends Admin
             ->with('Page')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -69,7 +72,7 @@ class PageAdmin extends Admin
                             'required' => true,
                         ),
                         'description' => array(
-                            'field_type' => 'ckeditor',
+                            'field_type' => CKEditorType::class,
                             'locale_options' => $descriptions,
                             'required' => true,
                             'config' => array(
@@ -124,6 +127,7 @@ class PageAdmin extends Admin
             ->end();
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -167,6 +171,7 @@ class PageAdmin extends Admin
             );
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -197,10 +202,9 @@ class PageAdmin extends Admin
             )
             ->add(
                 'createdAt',
-                null,
+                'date',
                 array(
                     'label' => 'admin.page.created_at.label',
-                    'format' => 'd/m/Y'
                 )
             );
 
@@ -235,6 +239,7 @@ class PageAdmin extends Admin
 
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $dataSourceIt;
     }
 

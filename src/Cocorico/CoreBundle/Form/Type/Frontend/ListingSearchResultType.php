@@ -13,25 +13,28 @@ namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Cocorico\CoreBundle\Event\ListingSearchFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingSearchFormEvents;
+use Cocorico\CoreBundle\Form\Type\ListingCategoryType;
+use Cocorico\CoreBundle\Form\Type\ListingCharacteristicType;
 use Cocorico\CoreBundle\Form\Type\PriceRangeType;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Repository\ListingCategoryRepository;
+use Cocorico\TimeBundle\Form\Type\DateRangeType;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\TimeRange;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingSearchResultType extends AbstractType
 {
-
-    protected $session;
     protected $entityManager;
     protected $request;
     protected $dispatcher;
@@ -45,22 +48,18 @@ class ListingSearchResultType extends AbstractType
     protected $endDayIncluded;
     protected $minStartDelay;
 
-
     /**
-     * @param Session                  $session
      * @param EntityManager            $entityManager
      * @param RequestStack             $requestStack
      * @param EventDispatcherInterface $dispatcher
      * @param array                    $parameters
      */
     public function __construct(
-        Session $session,
         EntityManager $entityManager,
         RequestStack $requestStack,
         EventDispatcherInterface $dispatcher,
         $parameters
     ) {
-        $this->session = $session;
         $this->entityManager = $entityManager;
         $this->request = $requestStack->getCurrentRequest();
         $this->dispatcher = $dispatcher;
@@ -68,7 +67,6 @@ class ListingSearchResultType extends AbstractType
         $this->locale = $this->request->getLocale();
 
         $parameters = $parameters["parameters"];
-        $this->currency = $this->session->get('currency', $parameters['cocorico_currency']);
         $this->timeUnitIsDay = ($parameters['cocorico_time_unit'] % 1440 == 0) ? true : false;
         $this->timeUnitFlexibility = $parameters['cocorico_time_unit_flexibility'];
         $this->daysDisplayMode = $parameters['cocorico_days_display_mode'];
@@ -84,7 +82,7 @@ class ListingSearchResultType extends AbstractType
         $listingSearchRequest = $builder->getData();
 
         $builder
-            ->add('location', new ListingLocationSearchType());
+            ->add('location', ListingLocationSearchType::class);
 
         //CATEGORIES
         /** @var ListingCategoryRepository $categoryRepository */
@@ -97,14 +95,14 @@ class ListingSearchResultType extends AbstractType
         $builder
             ->add(
                 'categories',
-                'listing_category',
+                ListingCategoryType::class,
                 array(
                     'label' => 'listing_search.form.categories',
                     'mapped' => false,
                     'data' => $categories,
                     'block_name' => 'listing_categories',
                     'multiple' => true,
-                    'empty_value' => 'listing_search.form.categories.empty_value',
+                    'placeholder' => 'listing_search.form.categories.empty_value',
                 )
             );
 
@@ -113,7 +111,7 @@ class ListingSearchResultType extends AbstractType
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'start_options' => array(
                         'label' => 'listing_search.form.start',
@@ -135,7 +133,7 @@ class ListingSearchResultType extends AbstractType
             )
             ->add(
                 'price_range',
-                new PriceRangeType($this->currency),
+                PriceRangeType::class,
                 array(
                     /** @Ignore */
                     'label' => false
@@ -147,7 +145,7 @@ class ListingSearchResultType extends AbstractType
         $builder
             ->add(
                 'characteristics',
-                'listing_characteristic',
+                ListingCharacteristicType::class,
                 array(
                     'mapped' => false,
                     'data' => $characteristics
@@ -155,16 +153,16 @@ class ListingSearchResultType extends AbstractType
             )
             ->add(
                 'sort_by',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(ListingSearchRequest::$sortByValues),
-                    'empty_value' => 'listing_search.form.sort_by.empty_value',
+                    'placeholder' => 'listing_search.form.sort_by.empty_value',
                     'choices_as_values' => true
                 )
             )
             ->add(
                 'page',
-                'hidden'
+                HiddenType::class
             );
 
         //If time unit is not day then we add time in search engine
@@ -173,7 +171,7 @@ class ListingSearchResultType extends AbstractType
 
             $builder->add(
                 'time_range',
-                'time_range',
+                TimeRangeType::class,
                 array(
                     'start_options' => array(
                         'label' => 'listing_search.form.start_time',
@@ -196,10 +194,10 @@ class ListingSearchResultType extends AbstractType
         if ($this->timeUnitFlexibility) {
             $builder->add(
                 'flexibility',
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'listing_search.form.flexibility',
-                    'empty_value' => 'listing_search.form.flexibility',
+                    'placeholder' => 'listing_search.form.flexibility',
                     'choices' => array_combine(
                         range(1, $this->timeUnitFlexibility),
                         range(1, $this->timeUnitFlexibility)
@@ -248,15 +246,6 @@ class ListingSearchResultType extends AbstractType
                 'translation_domain' => 'cocorico_listing',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

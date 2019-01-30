@@ -60,7 +60,7 @@ parameters:
     cocorico.fee_as_asker: 0.1
     cocorico.fee_as_offerer: 0.05
 
-    #Time unit in minute
+    #Time unit in minute (1440 or 60)
     cocorico.time_unit: 60
 
     #Default users timezone
@@ -68,10 +68,10 @@ parameters:
 
     #Max search and booking days number.
     #Min 1. If set to 1 and days_display_mode = duration then only start date is displayed
-    cocorico.days_max: 360
+    cocorico.days_max: 180
 
     #Max availabilities edition days number
-    cocorico.days_max_edition: 180
+    cocorico.days_max_edition: 360
 
     #Days display mode. (range or duration)
     cocorico.days_display_mode: duration
@@ -208,8 +208,8 @@ parameters:
     #ListingOptionBundle:
     #ListingOption: none or Cocorico\ListingOptionBundle\Entity\ListingOption (without quotes!)
     #BookingOption: none or Cocorico\ListingOptionBundle\Entity\BookingOption (without quotes!)
-    cocorico_listing_option.listing_option.entity_class: Cocorico\ListingOptionBundle\Entity\ListingOption
-    cocorico_listing_option.booking_option.entity_class: Cocorico\ListingOptionBundle\Entity\BookingOption
+    cocorico_listing_option.listing_option.entity_class: none
+    cocorico_listing_option.booking_option.entity_class: none
 
     #ListingAlertBundle:
     #ListingAlert: none or Cocorico\ListingAlertBundle\Entity\ListingAlert

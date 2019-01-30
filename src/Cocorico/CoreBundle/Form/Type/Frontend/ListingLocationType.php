@@ -11,9 +11,13 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use Cocorico\CoreBundle\Form\Type\CountryFilteredType;
+use Cocorico\GeoBundle\Form\Type\GeocodingToCoordinateType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * ListingLocationType
@@ -26,7 +30,7 @@ class ListingLocationType extends AbstractType
         $builder
             ->add(
                 'country',
-                'country_filtered',
+                CountryFilteredType::class,
                 array(
                     'label' => 'listing.form.location.country',
                     'translation_domain' => 'cocorico_listing',//Not recognized elsewhere
@@ -35,7 +39,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'city',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.city',
                     'translation_domain' => 'cocorico_listing',
@@ -44,7 +48,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'zip',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.zip',
                     'translation_domain' => 'cocorico_listing',
@@ -53,7 +57,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'route',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.route',
                     'translation_domain' => 'cocorico_listing',
@@ -62,7 +66,7 @@ class ListingLocationType extends AbstractType
             )
             ->add(
                 'street_number',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'listing.form.location.street_number',
                     'translation_domain' => 'cocorico_listing',
@@ -73,7 +77,7 @@ class ListingLocationType extends AbstractType
             //Its value is transformed to Coordinate entity through data transformer
             ->add(
                 'coordinate',
-                'geocoding_to_coordinate'
+                GeocodingToCoordinateType::class
             );
 
     }
@@ -88,18 +92,9 @@ class ListingLocationType extends AbstractType
             array(
                 'translation_domain' => 'cocorico_listing',
                 'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

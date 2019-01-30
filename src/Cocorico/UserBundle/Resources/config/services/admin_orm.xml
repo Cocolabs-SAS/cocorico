@@ -5,11 +5,15 @@
 
     <parameters>
         <parameter key="sonata.user.admin.groupname">Users</parameter>
+        <parameter key="sonata.user.admin.label_catalogue">cocorico_admin_menu</parameter>
+        <parameter key="sonata.user.admin.groupicon"><![CDATA[<i class='fa fa-users'></i>]]></parameter>
     </parameters>
 
     <services>
-        <service id="sonata.user.admin.user" class="%sonata.user.admin.user.class%">
-            <tag name="sonata.admin" manager_type="orm" group="%sonata.user.admin.groupname%" label="Users" label_catalogue="cocorico_admin_menu" label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+        <service id="sonata.user.admin.user" class="%sonata.user.admin.user.class%" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="%sonata.user.admin.groupname%" label="Users"
+                 label_catalogue="%sonata.user.admin.label_catalogue%"
+                 label_translator_strategy="sonata.admin.label.strategy.underscore"/>
             <argument/>
             <argument>%sonata.user.admin.user.entity%</argument>
             <argument>%sonata.user.admin.user.controller%</argument>
@@ -21,6 +25,17 @@
             </call>
             <call method="setBundlesEnabled">
                 <argument>%kernel.bundles%</argument>
+            </call>
+        </service>
+        <service id="sonata.user.admin.group" class="%sonata.user.admin.group.class%" public="true">
+            <tag name="sonata.admin" manager_type="orm" group="%sonata.user.admin.groupname%" label="groups"
+                 label_catalogue="%sonata.user.admin.label_catalogue%"
+                 label_translator_strategy="sonata.admin.label.strategy.underscore"/>
+            <argument/>
+            <argument>%sonata.user.admin.group.entity%</argument>
+            <argument>%sonata.user.admin.group.controller%</argument>
+            <call method="setTranslationDomain">
+                <argument>%sonata.user.admin.group.translation_domain%</argument>
             </call>
         </service>
     </services>

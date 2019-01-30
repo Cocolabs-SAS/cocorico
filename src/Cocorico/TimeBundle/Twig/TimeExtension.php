@@ -70,19 +70,23 @@ class TimeExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         $parts = explode('/', $timezone);
         if (count($parts) > 2) {
-//            $region = $parts[0];
             $name = $parts[1] . ' - ' . $parts[2];
         } elseif (count($parts) > 1) {
-//            $region = $parts[0];
             $name = $parts[1];
         } else {
-//            $region = 'Other';
             $name = $parts[0];
         }
 
         return str_replace('_', ' ', $name);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
 
     /**
      * @inheritdoc

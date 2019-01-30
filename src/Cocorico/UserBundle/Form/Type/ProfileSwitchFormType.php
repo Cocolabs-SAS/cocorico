@@ -12,6 +12,7 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -22,7 +23,7 @@ class ProfileSwitchFormType extends AbstractType
         $builder
             ->add(
                 'profile',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array('Asker' => 'asker', 'Offerer' => 'offerer'),
                     /** @Ignore */
@@ -42,15 +43,6 @@ class ProfileSwitchFormType extends AbstractType
                 'csrf_token_id' => 'profile',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

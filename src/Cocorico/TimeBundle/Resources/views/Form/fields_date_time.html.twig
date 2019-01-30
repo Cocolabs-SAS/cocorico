@@ -68,16 +68,18 @@
    Time ranges
 #}
 {% block _time_ranges_widget %}
+    {% import _self as self %}
+
     {% spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
-            {% set data_prototype =  _self.timeRangesCollectionItem(form.vars.prototype, allow_delete) %}
+            {% set data_prototype =  self.timeRangesCollectionItem(form.vars.prototype, allow_delete) %}
         {% endif %}
         <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
 
             <ul class="collection">
                 {% for child_form in form %}
-                    {{ _self.timeRangesCollectionItem(child_form, allow_delete) }}
+                    {{ self.timeRangesCollectionItem(child_form, allow_delete) }}
                 {% endfor %}
             </ul>
 

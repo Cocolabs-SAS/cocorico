@@ -1,3 +1,12 @@
+/** Global */
+th, label, .checkbox label, .radio label, .label {
+    font-weight: 600;
+}
+
+.sonata-ba-list td.sonata-ba-list-field a.sonata-link-identifier {
+    font-weight: normal;
+}
+
 .field-row span.label {
     color: #333;
     font-size: 14px;
@@ -13,56 +22,10 @@ div.connection {
     padding-bottom: 20px;
 }
 
-/** Logo size responsive */
-body > .header .logo {
-    width: 220px;
-    height: 122px;
-}
-
-body > .header .logo img {
-    width: 134px;
-    height: 122px;
-    max-width: 134px;
-    max-height: 122px;
-}
-
-.left-side {
-    top: 122px;
-}
-
-@media screen and (max-width: 992px) {
-    body > .header .logo {
-        width: 220px;
-        height: 50px;
-    }
-
-    body > .header .logo img {
-        width: 55px;
-        height: 50px;
-    }
-}
-
-@media screen and (max-width: 560px) {
-    body > .header .logo {
-        width: 100%;
-    }
-}
-
-.right-side > .content-header {
-    padding-top: 30px;
-}
-
-div.sonata-medium-date .select2-container {
-    width: 85px !important;
-}
-
-div.sonata-medium-date > div {
-    float: left;
-}
-
-div[id$='_hour'], div[id$='_minute'] {
-    width: 60px !important;
-    display: inline-block !important;
+/** Date Time fields */
+div.sonata-medium-date .col-sm-2, div.sonata-medium-date .col-sm-4, div.form-group div[id$=Time] .col-sm-6 {
+    width: auto !important;
+    padding: 0 0 0 15px;
 }
 
 /** Report bundle */
@@ -79,17 +42,3 @@ div[id$='_hour'], div[id$='_minute'] {
         min-height: 132px;
     }
 }
-
-/** one to many column in list view */
-/*td.sonata-ba-list-field-orm_one_to_many {*/
-/*display: block;*/
-/*height: 80px;*/
-/*overflow: hidden;*/
-/*font-size: 0;*/
-/*}*/
-
-/*td.sonata-ba-list-field-orm_one_to_many a {*/
-/*display: block;*/
-/*width: 90%;*/
-/*font-size: 14px;*/
-/*}*/

@@ -11,17 +11,17 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCategory;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Exporter\Source\DoctrineORMQuerySourceIterator;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class ListingCategoryAdmin extends Admin
+class ListingCategoryAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'listing-category';
@@ -38,6 +38,7 @@ class ListingCategoryAdmin extends Admin
         $this->bundles = $bundles;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var ListingCategory $subject */
@@ -60,7 +61,7 @@ class ListingCategoryAdmin extends Admin
             ->with('admin.listing_category.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -93,7 +94,7 @@ class ListingCategoryAdmin extends Admin
                     array(
                         'label' => 'admin.listing_category.fields.label',
                         'disabled' => true,
-                        'property' => 'field'
+                        'choice_label' => 'field'
                     )
                 );
         }
@@ -102,6 +103,7 @@ class ListingCategoryAdmin extends Admin
             ->end();
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -117,6 +119,7 @@ class ListingCategoryAdmin extends Admin
             );
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper

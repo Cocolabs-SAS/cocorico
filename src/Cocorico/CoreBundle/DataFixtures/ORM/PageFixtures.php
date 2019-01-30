@@ -13,11 +13,10 @@ namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
 use Cocorico\PageBundle\Entity\Page;
 use Cocorico\PageBundle\Entity\PageTranslation;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
+class PageFixtures extends Fixture
 {
 
     /**
@@ -201,12 +200,5 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 9;
-    }
 
 }

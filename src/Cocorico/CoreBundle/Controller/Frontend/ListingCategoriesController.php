@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCategoriesType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -51,7 +52,7 @@ class ListingCategoriesController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_categories',
-            'listing_new_categories',
+            ListingNewCategoriesType::class,
             $listing,
             array(
                 'method' => 'POST',

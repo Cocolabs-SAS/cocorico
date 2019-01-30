@@ -12,14 +12,16 @@
 namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\BookingPayinRefund;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class BookingPayinRefundAdmin extends Admin
+class BookingPayinRefundAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'booking-payin-refund';
@@ -55,6 +57,7 @@ class BookingPayinRefundAdmin extends Admin
         $this->timezone = $timezone;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var BookingPayinRefund $bookingPayinRefund */
@@ -90,7 +93,7 @@ class BookingPayinRefundAdmin extends Admin
             )
             ->add(
                 'amount',
-                'price',
+                PriceType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking_payin_refund.amount.label',
@@ -100,11 +103,11 @@ class BookingPayinRefundAdmin extends Admin
             )
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'disabled' => true,
                     'choices' => array_flip(BookingPayinRefund::$statusValues),
-                    'empty_value' => 'admin.booking.status.label',
+                    'placeholder' => 'admin.booking.status.label',
                     'label' => 'admin.booking.status.label',
                     'translation_domain' => 'cocorico_booking',
                     'choices_as_values' => true
@@ -185,6 +188,7 @@ class BookingPayinRefundAdmin extends Admin
 
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -193,7 +197,7 @@ class BookingPayinRefundAdmin extends Admin
                 'status',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(BookingPayinRefund::$statusValues),
                     'label' => 'admin.booking.status.label',
@@ -236,7 +240,7 @@ class BookingPayinRefundAdmin extends Admin
             );
     }
 
-
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -276,7 +280,6 @@ class BookingPayinRefundAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.start.label',
-                    'format' => 'd/m/Y'
                 )
             )
             ->add(
@@ -284,7 +287,6 @@ class BookingPayinRefundAdmin extends Admin
                 'date',
                 array(
                     'label' => 'admin.booking.end.label',
-                    'format' => 'd/m/Y'
                 )
             )
             ->add(
@@ -292,7 +294,6 @@ class BookingPayinRefundAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.booking.created_at.label',
-                    'format' => 'd/m/Y'
                 )
             )
             ->add(
@@ -314,7 +315,6 @@ class BookingPayinRefundAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.booking_payin_refund.payed_at.label',
-                    'format' => 'd/m/Y'
                 )
             );
 

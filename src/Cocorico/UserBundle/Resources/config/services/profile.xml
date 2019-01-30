@@ -12,8 +12,8 @@
 
     <services>
 
-        <service id="fos_user.profile.form" factory-method="createNamed" factory-service="form.factory"
-                 class="Symfony\Component\Form\Form">
+        <service id="fos_user.profile.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
+            <argument type="service" id="form.factory"/>
             <argument>%fos_user.profile.form.name%</argument>
             <argument>%fos_user.profile.form.type%</argument>
             <argument>null</argument>
@@ -26,16 +26,8 @@
         <service id="cocorico_user.profile_about_me.form.type" class="%cocorico_user.profile_about_me.form.class%">
             <argument>%fos_user.model.user.class%</argument>
             <argument type="service" id="request_stack"/>
-            <tag name="form.type" alias="user_profile_about_me"/>
             <argument>%cocorico.locales%</argument>
-        </service>
-
-
-        <service id="fos_user.profile.form.handler.default" class="FOS\UserBundle\Form\Handler\ProfileFormHandler"
-                 scope="request" public="false">
-            <argument type="service" id="fos_user.profile.form"/>
-            <argument type="service" id="request"/>
-            <argument type="service" id="fos_user.user_manager"/>
+            <tag name="form.type" alias="user_profile_about_me"/>
         </service>
 
     </services>

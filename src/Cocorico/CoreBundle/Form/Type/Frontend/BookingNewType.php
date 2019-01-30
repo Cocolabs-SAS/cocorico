@@ -15,10 +15,14 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Event\BookingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\BookingFormEvents;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Cocorico\TimeBundle\Form\Type\DateRangeType;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
@@ -27,6 +31,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingNewType extends AbstractType implements TranslationContainerInterface
 {
@@ -84,7 +89,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */
@@ -107,7 +112,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             )
             ->add(
                 'tac',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,
@@ -123,7 +128,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             //All date and time fields are hidden in this form
             $builder->add(
                 'time_range',
-                'time_range',
+                TimeRangeType::class,
                 array(
                     'mapped' => false,
                     'start_options' => array(
@@ -150,7 +155,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'message',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'booking.form.message',
                     'required' => true
@@ -161,7 +166,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             $builder
                 ->add(
                     'userAddress',
-                    'booking_user_address',
+                    BookingUserAddressFormType::class,
                     array(
                         /** @Ignore */
                         'label' => false,
@@ -356,7 +361,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
                 'csrf_token_id' => 'booking_new',
                 'translation_domain' => 'cocorico_booking',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('new', 'default'),
             )
         );

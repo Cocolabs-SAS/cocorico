@@ -15,12 +15,15 @@ use Cocorico\CoreBundle\Entity\BookingUserAddress;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Entity\UserAddress;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingUserAddressFormType extends AbstractType
 {
@@ -44,7 +47,7 @@ class BookingUserAddressFormType extends AbstractType
         $builder
             ->add(
                 'address',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.address.address',
                     'required' => true
@@ -68,7 +71,7 @@ class BookingUserAddressFormType extends AbstractType
             )
             ->add(
                 'country',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.address.country',
                     'required' => true,
@@ -107,7 +110,7 @@ class BookingUserAddressFormType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\BookingUserAddress',
                 'csrf_token_id' => 'booking_user_address',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('booking_new'),
             )
         );

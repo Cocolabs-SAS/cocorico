@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesStatusType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityStatusType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -92,7 +93,7 @@ class ListingAvailabilityStatusController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availabilities_status',
-            'listing_edit_availabilities_status',
+            ListingEditAvailabilitiesStatusType::class,
             $listing,
             array(
                 'action' => $this->generateUrl(
@@ -177,7 +178,7 @@ class ListingAvailabilityStatusController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availability',
-            'listing_edit_availability_status',
+            ListingEditAvailabilityStatusType::class,
             null,
             array(
                 'method' => 'POST',

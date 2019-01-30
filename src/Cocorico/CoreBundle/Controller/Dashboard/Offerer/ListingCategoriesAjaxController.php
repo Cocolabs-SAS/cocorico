@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCategoriesAjaxType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -52,7 +53,7 @@ class ListingCategoriesAjaxController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_categories',
-            'listing_edit_categories_ajax',
+            ListingEditCategoriesAjaxType::class,
             $listing,
             array(
                 'method' => 'POST',

@@ -54,7 +54,7 @@ class ListingDiscountController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_discount',
-            new ListingEditDiscountType(),
+            ListingEditDiscountType::class,
             $listing,
             array(
                 'method' => 'POST',

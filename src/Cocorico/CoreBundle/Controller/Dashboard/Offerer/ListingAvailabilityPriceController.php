@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityPriceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -91,7 +93,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availabilities_prices',
-            'listing_edit_availabilities_prices',
+            ListingEditAvailabilitiesPricesType::class,
             $listing,
             array(
                 'action' => $this->generateUrl(
@@ -132,7 +134,6 @@ class ListingAvailabilityPriceController extends Controller
      * @param  string  $end_time
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAvailabilityPriceAction(
         Request $request,
@@ -178,7 +179,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availability',
-            'listing_edit_availability_price',
+            ListingEditAvailabilityPriceType::class,
             null,
             array(
                 'method' => 'POST',
@@ -255,7 +256,7 @@ class ListingAvailabilityPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_availability',
-            'listing_edit_availability_price',
+            ListingEditAvailabilityPriceType::class,
             $availability,
             array(
                 'method' => 'POST',

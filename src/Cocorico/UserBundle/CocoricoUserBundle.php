@@ -19,9 +19,9 @@ class CocoricoUserBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function getParent()
-    {
-        return 'SonataUserBundle';
-    }
+//    public function getParent()
+//    {
+//        return 'SonataUserBundle';
+//    }
 
 }

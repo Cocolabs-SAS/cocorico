@@ -12,6 +12,8 @@
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\TimeBundle\Form\Type\DateRangeType;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\TimeBundle\Model\TimeRange;
@@ -20,6 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingPriceType extends AbstractType
 {
@@ -62,7 +65,7 @@ class BookingPriceType extends AbstractType
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */
@@ -91,7 +94,7 @@ class BookingPriceType extends AbstractType
         if (!$this->timeUnitIsDay) {
             $builder->add(
                 'time_range',
-                'time_range',
+                TimeRangeType::class,
                 array(
                     'mapped' => false,
                     'start_options' => array(
@@ -150,7 +153,7 @@ class BookingPriceType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
                 'csrf_token_id' => 'booking_price',
                 'translation_domain' => 'cocorico_booking',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('new'),
 //                'error_bubbling' => false,//To prevent errors bubbling up to the parent form
 //                //To map errors of all unmapped properties (date_range) to a particular field (date_range)

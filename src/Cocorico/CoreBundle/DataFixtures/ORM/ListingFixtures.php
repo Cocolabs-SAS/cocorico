@@ -26,11 +26,11 @@ use Cocorico\GeoBundle\Entity\Coordinate;
 use Cocorico\GeoBundle\Entity\Country;
 use Cocorico\GeoBundle\Entity\Department;
 use Cocorico\UserBundle\Entity\User;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadListingData extends AbstractFixture implements OrderedFixtureInterface
+class ListingFixtures extends Fixture implements DependentFixtureInterface
 {
 
     /**
@@ -182,12 +182,14 @@ class LoadListingData extends AbstractFixture implements OrderedFixtureInterface
         $this->addReference('listing-one', $listing);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
+    public function getDependencies()
     {
-        return 8;
+        return array(
+            UserFixtures::class,
+            ListingCategoryFixtures::class,
+            ListingCharacteristicFixtures::class,
+            ListingCharacteristicValueFixtures::class,
+        );
     }
 
 }

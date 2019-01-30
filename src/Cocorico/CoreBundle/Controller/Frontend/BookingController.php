@@ -15,6 +15,7 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\BookingEvent;
 use Cocorico\CoreBundle\Event\BookingEvents;
+use Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -43,16 +44,17 @@ class BookingController extends Controller
      *
      * @Security("is_granted('booking', listing) and not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
-     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"})
-     * @ParamConverter("start", options={"format": "Y-m-d-H:i"})
-     * @ParamConverter("end", options={"format": "Y-m-d-H:i"})
+     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"}, converter="doctrine.orm")
+     * @ParamConverter("start", options={"format": "Y-m-d-H:i"}, converter="datetime")
+     * @ParamConverter("end", options={"format": "Y-m-d-H:i"}, converter="datetime")
+     *
      *
      * @Method({"GET", "POST"})
      *
-     * @param Request $request
-     * @param Listing $listing
+     * @param Request   $request
+     * @param Listing   $listing
      * @param \DateTime $start format yyyy-mm-dd-H:i
-     * @param \DateTime $end format yyyy-mm-dd-H:i
+     * @param \DateTime $end   format yyyy-mm-dd-H:i
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -61,8 +63,7 @@ class BookingController extends Controller
         Listing $listing,
         \DateTime $start,
         \DateTime $end
-    )
-    {
+    ) {
         $bookingHandler = $this->get('cocorico.form.handler.booking');
         $booking = $bookingHandler->init($this->getUser(), $listing, $start, $end);
         //Availability is validated through BookingValidator and amounts are setted through Form Event PRE_SET_DATA
@@ -194,7 +195,7 @@ class BookingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_new',
+            BookingNewType::class,
             $booking,
             array(
                 'method' => 'POST',

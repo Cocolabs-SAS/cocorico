@@ -11,12 +11,11 @@
 
 namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Lexik\Bundle\CurrencyBundle\Entity\Currency;
 
-class LoadCurrencyData extends AbstractFixture implements OrderedFixtureInterface
+class CurrencyFixtures extends Fixture
 {
 
     /**
@@ -45,14 +44,6 @@ class LoadCurrencyData extends AbstractFixture implements OrderedFixtureInterfac
         $manager->persist($currency);
 
         $manager->flush();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 1;
     }
 
 }

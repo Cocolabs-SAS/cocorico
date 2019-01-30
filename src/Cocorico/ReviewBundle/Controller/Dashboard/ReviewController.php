@@ -13,6 +13,7 @@ namespace Cocorico\ReviewBundle\Controller\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\ReviewBundle\Entity\Review;
+use Cocorico\ReviewBundle\Form\Type\Dashboard\ReviewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -89,7 +90,7 @@ class ReviewController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'review_new',
+            ReviewType::class,
             $review
         );
 

@@ -12,11 +12,10 @@
 namespace Cocorico\CoreBundle\DataFixtures\ORM;
 
 use Cocorico\CoreBundle\Entity\ListingCategory;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadListingCategoryData extends AbstractFixture implements OrderedFixtureInterface
+class ListingCategoryFixtures extends Fixture
 {
 
     /**
@@ -79,14 +78,6 @@ class LoadListingCategoryData extends AbstractFixture implements OrderedFixtureI
         $subCategory2->mergeNewTranslations();
         $manager->flush();
 
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 3;
     }
 
 }

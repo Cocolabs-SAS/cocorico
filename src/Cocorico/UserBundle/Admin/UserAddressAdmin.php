@@ -6,6 +6,7 @@ use Cocorico\UserBundle\Entity\UserAddress;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserAddressAdmin extends Admin
 {
@@ -23,7 +24,7 @@ class UserAddressAdmin extends Admin
         $formMapper
             ->add(
                 'type',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(UserAddress::$typeValues),
                     'label' => 'form.address.type',

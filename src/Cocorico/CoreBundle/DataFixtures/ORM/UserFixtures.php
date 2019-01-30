@@ -14,13 +14,12 @@ namespace Cocorico\CoreBundle\DataFixtures\ORM;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Event\UserEvent;
 use Cocorico\UserBundle\Event\UserEvents;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class UserFixtures extends Fixture implements ContainerAwareInterface
 {
     /** @var  ContainerInterface container */
     private $container;
@@ -119,14 +118,6 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
 
         $userManager->updateUser($user);
         $this->addReference('super-admin', $user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 2;
     }
 
 }

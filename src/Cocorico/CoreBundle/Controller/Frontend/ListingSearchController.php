@@ -14,6 +14,9 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 use Cocorico\CoreBundle\Entity\ListingImage;
 use Cocorico\CoreBundle\Event\ListingSearchActionEvent;
 use Cocorico\CoreBundle\Event\ListingSearchEvents;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchHomeType;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchResultType;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchType;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -116,7 +119,7 @@ class ListingSearchController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'listing_search_result',
+            ListingSearchResultType::class,
             $listingSearchRequest,
             array(
                 'method' => 'GET',
@@ -241,7 +244,7 @@ class ListingSearchController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'listing_search_home',
+            ListingSearchHomeType::class,
             $listingSearchRequest,
             array(
                 'method' => 'GET',
@@ -278,7 +281,7 @@ class ListingSearchController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'listing_search',
+            ListingSearchType::class,
             $listingSearchRequest,
             array(
                 'method' => 'GET',

@@ -131,6 +131,14 @@ services:
         tags:
             - { name: form.type, alias: price }
 
+    cocorico.form.type.price_range:
+        class: Cocorico\CoreBundle\Form\Type\PriceRangeType
+        arguments:
+            - "@session"
+            - "%cocorico.currency%"
+        tags:
+            - { name: form.type, alias: price_range }
+
     cocorico.form.type.entity_hidden:
         class: Cocorico\CoreBundle\Form\Type\EntityHiddenType
         arguments:
@@ -149,12 +157,10 @@ services:
     cocorico.form.type.listing_search_result:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchResultType
         arguments:
-            - "@session"
             - "@doctrine.orm.entity_manager"
             - "@request_stack"
             - "@event_dispatcher"
             - parameters:
-                  cocorico_currency: "%cocorico.currency%"
                   cocorico_time_unit: "%cocorico.time_unit%"
                   cocorico_time_unit_flexibility: "%cocorico.time_unit_flexibility%"
                   cocorico_days_display_mode: "%cocorico.days_display_mode%"
@@ -184,6 +190,13 @@ services:
             - "@doctrine.orm.entity_manager"
         tags:
             - { name: form.type, alias: listing_characteristic }
+
+    cocorico.form.type.listing_listing_characteristic:
+        class: Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType
+        arguments:
+            - "@request_stack"
+        tags:
+            - { name: form.type, alias: listing_listing_characteristic }
 
     cocorico.form.type.listing_edit_duration:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType
@@ -234,7 +247,7 @@ services:
     cocorico.image_type_extension:
         class: Cocorico\CoreBundle\Form\Extension\ImageTypeExtension
         tags:
-            - { name: form.type_extension, alias: file }
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
 
     cocorico.form.booking.status_filter:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType
