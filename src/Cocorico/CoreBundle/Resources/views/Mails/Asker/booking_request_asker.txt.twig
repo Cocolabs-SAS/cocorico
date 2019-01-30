@@ -18,7 +18,7 @@
         '%booking_time_range%': booking_time_range,
         '%booking_duration%': booking.duration(endDayIncluded, timeUnit)|add_time_unit_text(user_locale),
         '%booking_amount_asker%': booking.amountToPayByAskerDecimal|format_price(user_locale, 2, false),
-        '%booking_request_expiry_date%': booking.expirationDate(bookingExpirationDelay, bookingAcceptationDelay)|localizeddate('short', 'medium', 'fr', user_timezone),
+        '%booking_request_expiry_date%': booking.expirationDate(bookingExpirationDelay, bookingAcceptationDelay)|localizeddate('short', 'short', 'fr', user_timezone),
         '%user_timezone%': user_timezone|timezone_name
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
