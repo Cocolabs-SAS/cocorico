@@ -217,11 +217,11 @@ class DateTimeRange
     /**
      * Return DayTimeRange objects for all time ranges of all days of this date range and initial time range
      *
-     * @param \DateTime    $start
-     * @param \DateTime    $end
+     * @param \DateTime $start
+     * @param \DateTime $end
      * @param  array    $initialTimeRanges see getInitialTimeRanges
-     * @param  array       $weekDays
-     * @param  string      $timezone
+     * @param  array    $weekDays
+     * @param  string   $timezone
      *
      * @return array with date string as index
      */
@@ -245,67 +245,20 @@ class DateTimeRange
             $day->modify('+' . $d . ' day');
             $day->setTime(0, 0, 0);
 
-            foreach ($initialTimeRanges as $diffDay => $timeRanges) {
-                /** @var TimeRange $timeRange */
-                foreach ($timeRanges as $nbMinutes => $startMinutes) {
-                    foreach ($startMinutes as $startMinute) {
-//                        echo $newOffset . '<br>';
-                        $startMinute += $newOffset;//Add/remove DST offset if any DST transition occurs in time ranges
-                        $startMinute = $startMinute >= 0 ? '+ ' . $startMinute . ' minute' : $startMinute . ' minute';
-                        //Start time
-                        $startTime = clone $day;
-                        $startTime->modify('+' . $diffDay . ' day');
-                        $startTime->modify($startMinute);
-                        $offset = $this->getDSTOffset($startTime, $dstTransitions);
-                        if ($offset) {
-                            $offsetString = $offset >= 0 ? '+ ' . $offset . ' minute' : $offset . ' minute';
-                            $startTime->modify($offsetString);
-                            $newOffset = $newOffset + $offset;
-                        }
-
-                        //End time
-                        $endTime = clone $startTime;
-                        $endTime->modify('+ ' . $nbMinutes . ' minute');
-                        $offset = $this->getDSTOffset($endTime, $dstTransitions);
-                        if ($offset) {
-                            $offsetString = $offset >= 0 ? '+ ' . $offset . ' minute' : $offset . ' minute';
-                            $endTime->modify($offsetString);
-                            $newOffset = $newOffset + $offset;
-                            //todo: check multiple DST transitions in the date range
-                        }
-
-                        $startDayString = $startTime->format('Y-m-d');
-                        $endDayString = $endTime->format('Y-m-d');
-                        /** @var \DateTime[][] $newTimeRanges */
-                        $newTimeRanges = array($startDayString => array($startTime, $endTime));
-                        //If endTime is tomorrow then time range is splitted on spanning days
-                        if ($endDayString != $startDayString && $endTime->format('H:i') != '00:00') {
-                            $midnight = clone $endTime;
-                            $midnight->setTime(0, 0, 0);
-
-                            $newTimeRanges[$startDayString][1] = $midnight;
-                            $newTimeRanges[$endDayString] = array($midnight, $endTime);
-                        }
-
-                        //Fill $daysTimeRanges day by day and time range by time range
-                        foreach ($newTimeRanges as $dayString => $newTimeRange) {
-                            if (isset($daysTimeRanges[$dayString])) {
-                                $dayTimeRange = $daysTimeRanges[$dayString];
-                            } else {
-                                $newDay = clone $newTimeRange[0];
-                                $newDay->setTime(0, 0, 0);
-                                $dayTimeRange = new DayTimeRange($newDay, array());
-                            }
-
-//                            echo $newTimeRange[0]->format('Y-m-d H:i') . ' / ' . $newTimeRange[1]->format('Y-m-d H:i') . '<br>';
-
-                            $dayTimeRange->timeRanges[] = new TimeRange($newTimeRange[0], $newTimeRange[1]);
-                            $daysTimeRanges[$dayString] = $dayTimeRange;
-                        }
-//                        echo $startTime->format('Y-m-d H:i') . ' / ' . $endTime->format('Y-m-d H:i') . '<br>';
-                    }
-                }
+            if ($hasTimeRanges) {
+                $this->iterateInitialTimeRangesOnDay(
+                    $day,
+                    $initialTimeRanges,
+                    $dstTransitions,
+                    $newOffset,
+                    $daysTimeRanges
+                );
+            } else {
+                $newDay = clone $day;
+                $startDayString = $day->format('Y-m-d');
+                $daysTimeRanges[$startDayString] = new DayTimeRange($newDay, array());
             }
+
         }
 
         if ($hasWeekDays) {
@@ -319,6 +272,95 @@ class DateTimeRange
     }
 
     /**
+     * Iterate initial time range on a day
+     *
+     * @param \DateTime             $day
+     * @param                       $initialTimeRanges
+     * @param  array                $dstTransitions
+     * @param  int                  $newOffset      DST offset in minutes
+     * @param  DayTimeRange[]       $daysTimeRanges result
+     */
+    private function iterateInitialTimeRangesOnDay(
+        \DateTime $day,
+        $initialTimeRanges,
+        &$dstTransitions,
+        &$newOffset,
+        &$daysTimeRanges
+    ) {
+        foreach ($initialTimeRanges as $diffDay => $timeRanges) {
+            /** @var TimeRange $timeRange */
+            foreach ($timeRanges as $nbMinutes => $startMinutes) {
+                foreach ($startMinutes as $startMinute) {
+//                        echo $newOffset . '<br>';
+                    $startMinute += $newOffset;//Add/remove DST offset if any DST transition occurs in time ranges
+                    $startMinute = $startMinute >= 0 ? '+ ' . $startMinute . ' minute' : $startMinute . ' minute';
+                    //Start time
+                    $startTime = clone $day;
+                    $startTime->modify('+' . $diffDay . ' day');
+                    $startTime->modify($startMinute);
+                    $offset = $this->getDSTOffset($startTime, $dstTransitions);
+                    if ($offset) {
+                        $offsetString = $offset >= 0 ? '+ ' . $offset . ' minute' : $offset . ' minute';
+                        $startTime->modify($offsetString);
+                        $newOffset = $newOffset + $offset;
+                    }
+
+                    //End time
+                    $endTime = clone $startTime;
+                    $endTime->modify('+ ' . $nbMinutes . ' minute');
+                    $offset = $this->getDSTOffset($endTime, $dstTransitions);
+                    if ($offset) {
+                        $offsetString = $offset >= 0 ? '+ ' . $offset . ' minute' : $offset . ' minute';
+                        $endTime->modify($offsetString);
+                        $newOffset = $newOffset + $offset;
+                        //todo: check multiple DST transitions in the date range
+                    }
+
+                    $this->addDayTimeRange($startTime, $endTime, $daysTimeRanges);
+//                        echo $startTime->format('Y-m-d H:i') . ' / ' . $endTime->format('Y-m-d H:i') . '<br>';
+                }
+            }
+        }
+    }
+
+    /**
+     * @param \DateTime       $startTime
+     * @param \DateTime       $endTime
+     * @param  DayTimeRange[] $daysTimeRanges result
+     */
+    private function addDayTimeRange(\DateTime $startTime, \DateTime $endTime, &$daysTimeRanges)
+    {
+        $startDayString = $startTime->format('Y-m-d');
+        $endDayString = $endTime->format('Y-m-d');
+        /** @var \DateTime[][] $newTimeRanges */
+        $newTimeRanges = array($startDayString => array($startTime, $endTime));
+        //If endTime is tomorrow then time range is splitted on spanning days
+        if ($endDayString != $startDayString && $endTime->format('H:i') != '00:00') {
+            $midnight = clone $endTime;
+            $midnight->setTime(0, 0, 0);
+
+            $newTimeRanges[$startDayString][1] = $midnight;
+            $newTimeRanges[$endDayString] = array($midnight, $endTime);
+        }
+
+        //Fill $daysTimeRanges day by day and time range by time range
+        foreach ($newTimeRanges as $dayString => $newTimeRange) {
+            if (isset($daysTimeRanges[$dayString])) {
+                $dayTimeRange = $daysTimeRanges[$dayString];
+            } else {
+                $newDay = clone $newTimeRange[0];
+                $newDay->setTime(0, 0, 0);
+                $dayTimeRange = new DayTimeRange($newDay, array());
+            }
+
+//                            echo $newTimeRange[0]->format('Y-m-d H:i') . ' / ' . $newTimeRange[1]->format('Y-m-d H:i') . '<br>';
+
+            $dayTimeRange->timeRanges[] = new TimeRange($newTimeRange[0], $newTimeRange[1]);
+            $daysTimeRanges[$dayString] = $dayTimeRange;
+        }
+    }
+
+    /**
      * Return DST offset if DST transition occurs before $time.
      * If DST transition occurs then it is removed from DSTs to apply.
      * As time ranges are checked time after time DST offset has to be apply only one time.
@@ -327,7 +369,7 @@ class DateTimeRange
      *
      * @param \DateTime $time
      * @param array     $dstTransitions decreasing ordered
-     * @return int dst offset in minutes
+     * @return int DST offset in minutes
      */
     private function getDSTOffset($time, &$dstTransitions)
     {
@@ -358,7 +400,8 @@ class DateTimeRange
         //We only need DST transitions from first lowest date time so if fist time range exists
         // then start is equal to start time
         $start = clone $start;
-        $start = $this->getFirstTimeRange() ? $this->getFirstTimeRange()->getStart() : $start;
+        $start = $this->getFirstTimeRange() && $this->getFirstTimeRange()->getStart() ?
+            $this->getFirstTimeRange()->getStart() : $start;
 
         $tz = new \DateTimeZone($timezone);
         $transitions = $tz->getTransitions($start->getTimestamp(), $end->getTimestamp());
