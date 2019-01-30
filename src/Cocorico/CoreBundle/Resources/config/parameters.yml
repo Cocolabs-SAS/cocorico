@@ -370,3 +370,10 @@ parameters:
     cocorico_listing_deposit.booking.deposit_refund_delay: ~
     #Min deposit amount
     cocorico_listing_deposit.listing.min_deposit_amount: ~
+
+    #Elasticsearch
+    cocorico_elasticsearch.keyword_delimiter: ' '
+    cocorico_elasticsearch.listing_title_boost: 5
+    cocorico_elasticsearch.listing_description_boost: 5
+    cocorico_elasticsearch.listing_category_names_boost: 5
+    cocorico_elasticsearch.listing_user_description_boost: 5
