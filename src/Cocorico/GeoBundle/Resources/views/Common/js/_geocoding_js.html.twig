@@ -43,12 +43,11 @@
 
     $(function () {
         //var maxZoom = 18;
-        var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
-        var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
+        var defaultLat = {{ (default_lat|default(46.227638))|e('js') }};
+        var defaultLng = {{ (default_lng|default(2.213749000000007))|e('js') }};
         var defaultZoom = {{ (default_zoom|default(4))|e('js') }};
         var mapElt = $("{{ map_elt|default('') }}");
         var autoCompleteElt = $("{{ auto_complete_elt|default('') }}");
-        var displayMarker = {{ display_marker is not defined or display_marker ? "true" : "false" }};
         var markerDraggable = {{ marker_draggable is not defined or not marker_draggable ? "false" : "true" }};
         var ipInfoDbAPIKey = "{{ ipInfoDbAPIKey|default('') }}";
 
