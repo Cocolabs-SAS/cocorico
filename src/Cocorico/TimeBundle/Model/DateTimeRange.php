@@ -219,7 +219,7 @@ class DateTimeRange
      *
      * @param \DateTime    $start
      * @param \DateTime    $end
-     * @param  TimeRange[] $initialTimeRanges
+     * @param  array    $initialTimeRanges see getInitialTimeRanges
      * @param  array       $weekDays
      * @param  string      $timezone
      *
