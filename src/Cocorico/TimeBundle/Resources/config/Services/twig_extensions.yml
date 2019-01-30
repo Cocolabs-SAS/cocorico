@@ -1,0 +1,15 @@
+services:
+    #Time twig extension
+    cocorico_time.twig.time_extension:
+        class: Cocorico\TimeBundle\Twig\TimeExtension
+        arguments:
+          - "%cocorico.time_unit%"
+          - "%cocorico.time_unit_allday%"
+        tags:
+            - { name: twig.extension }
+
+    #Twig localizeddate filter override
+    cocorico_time.twig.intl_extension:
+        class: Cocorico\TimeBundle\Twig\IntlExtension
+        tags:
+            - { name: twig.extension }

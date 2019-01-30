@@ -1,0 +1,83 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_booking' %}
+
+{% set mangopayBundleEnabled = bundleExist('CocoricoMangoPayBundle') %}
+
+{% set listing = booking.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+{% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+{% set user_timezone = app.session.get('timezone', timeZone) %}
+
+{%- block meta_title -%}
+    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'booking.payment.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+{%- endblock -%}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_booking' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
+
+        {% block main %}
+            <a href="{{ booking.urlDraft }}">
+                &lt; {{ 'card.new.back'|trans }}
+            </a>
+
+            <!-- two-columns -->
+            <div class="twocolumns row alt">
+                <!-- contain the main content of the page -->
+                <div id="content" class="listing-area col-xs-12 col-md-9">
+                    <div class="content-holder payment">
+                        <!-- alert -->
+                        <div role="alert" class="alert alert-success">
+                            <i class="ico lock">lock</i>
+
+                            <p>{{ 'booking.secured_message'|trans }}</p>
+                        </div>
+
+                        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+                        {% include 'CocoricoCoreBundle:Frontend:Booking/_amounts.html.twig' with {
+                            'booking' : booking
+                        } only %}
+
+                        {% if mangopayBundleEnabled %}
+                            {% include '@CocoricoMangoPay/Frontend/BookingPayment/_card.html.twig' with {
+                                'booking' : booking
+                            } only %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                {% include 'CocoricoCoreBundle:Frontend:Booking/_side.html.twig' with {
+                    'booking' : booking
+                } only %}
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if mangopayBundleEnabled %}
+        {% include 'CocoricoMangoPayBundle:Frontend:BookingPayment/js/_card_js.html.twig' only %}
+    {% endif %}
+{% endblock %}

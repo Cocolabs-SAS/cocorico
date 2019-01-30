@@ -15,7 +15,6 @@ namespace Cocorico\CoreBundle\Entity;
 use Cocorico\CoreBundle\Model\BaseListingDiscount;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ListingDiscount

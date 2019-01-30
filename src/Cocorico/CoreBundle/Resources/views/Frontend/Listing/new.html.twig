@@ -56,7 +56,7 @@
 
                             <div class="form-listing-info">
                                 <h2>{{ 'listing.description.title'|trans }}</h2>
-                                {#For html customizations see views\form\translations.html.twig#}
+                                {#For html customizations see views\form\fields_translations.html.twig#}
                                 {{ form_widget(form.translations) }}
                             </div>
                             <div class="file-selection">
@@ -259,18 +259,7 @@
                         </div>
                     </fieldset>
                 </div>
-                {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
-                    <div class="form-signup validate-form">
-                        <fieldset>
-                            <legend class="hidden">form signup</legend>
-                            <h2>{{ 'listing.new.signup.title'|trans }}</h2>
-                            {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
-                            'form_registration' : form.user,
-                            'form_login': form.user_login
-                            } only %}
-                        </fieldset>
-                    </div>
-                {% endif %}
+
                 <div class="btns-area new-listing">
                     {{ form_errors(form.tac) }}
                     <div class="agreement">

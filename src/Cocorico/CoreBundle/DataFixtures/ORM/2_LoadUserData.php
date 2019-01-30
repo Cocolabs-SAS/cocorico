@@ -51,7 +51,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface, C
         $user->setEnabled(true);
         $user->setAnnualIncome(1000);
         $user->setEmailVerified(true);
-        $user->setPhoneVerified(true);
+        $user->setPhoneVerified(false);
         $user->setMotherTongue($locale);
 
         $event = new UserEvent($user);

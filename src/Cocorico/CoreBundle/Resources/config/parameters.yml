@@ -1,6 +1,6 @@
 parameters:
-    #### Environment independant parameters. Same values in dev, staging, prod environments  ####
-    #Site general infos
+    #### Environment independent parameters. Same values in dev, staging, prod environments  ####
+    #Site general info
     cocorico.site_name: Cocorico
     cocorico.phone: +33(0) 1 43 79 86 30
     cocorico.address: 67 rue de Provence, 75009
@@ -74,10 +74,7 @@ parameters:
     cocorico.days_max_edition: 180
 
     #Days display mode. (range or duration)
-    cocorico.days_display_mode: range
-
-    #Enable time picker on time fields
-    cocorico.time_picker: true
+    cocorico.days_display_mode: duration
 
     #Available hours for listing availabilities hours edition and booking hours request
     #Hours must be consecutive
@@ -230,6 +227,10 @@ parameters:
     #BookingDepositRefund : none or Cocorico\ListingDepositBundle\Entity\BookingDepositRefund (without quotes!)
     cocorico_listing_deposit.booking_deposit_refund.entity_class: none
 
+    #MangoPayCardSavingBundle:
+    #UserCard : none or Cocorico\MangoPayCardSavingBundle\Entity\UserCard (without quotes!)
+    cocorico_mangopay_card_saving.user_card.entity_class: none
+
     #Config. types  taken into account for now are  percent, price, checkbox
     cocorico_config.parameters_allowed:
         cocorico.fee_as_asker:
@@ -369,3 +370,10 @@ parameters:
     cocorico_listing_deposit.booking.deposit_refund_delay: ~
     #Min deposit amount
     cocorico_listing_deposit.listing.min_deposit_amount: ~
+
+    #Elasticsearch
+    cocorico_elasticsearch.keyword_delimiter: ' '
+    cocorico_elasticsearch.listing_title_boost: 5
+    cocorico_elasticsearch.listing_description_boost: 5
+    cocorico_elasticsearch.listing_category_names_boost: 5
+    cocorico_elasticsearch.listing_user_description_boost: 5

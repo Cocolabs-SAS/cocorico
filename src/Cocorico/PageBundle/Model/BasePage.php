@@ -28,7 +28,7 @@ abstract class BasePage
      *
      * @var boolean
      */
-    protected $published;
+    protected $published = false;
 
     /**
      * Translation proxy

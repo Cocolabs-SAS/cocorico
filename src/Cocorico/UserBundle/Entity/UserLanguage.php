@@ -35,7 +35,7 @@ class UserLanguage
     /**
      * @Assert\NotBlank(message="assert.not_blank")
      *
-     * @ORM\Column(type="string", length=3, name="code", nullable=false)
+     * @ORM\Column(type="string", length=12, name="code", nullable=false)
      *
      * @var string $name
      */
@@ -84,7 +84,7 @@ class UserLanguage
      * Set user
      *
      * @param  User $user
-     * @return UserImage
+     * @return $this
      */
     public function setUser(User $user = null)
     {

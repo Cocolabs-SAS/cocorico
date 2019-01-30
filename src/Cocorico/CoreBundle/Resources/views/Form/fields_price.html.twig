@@ -1,0 +1,87 @@
+{% extends 'CocoricoCoreBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{#
+    Price widget
+#}
+{%- block price_widget -%}
+    {% set help_text="" %}
+    {% if help is defined %}
+        {% set  help_text = help %}
+    {% elseif  attr.help is defined %}
+        {% set  help_text = attr.help %}
+    {% endif %}
+
+    {#VAT include or exclude text#}
+    {% set vatInclusionText = vatInclusionText(app.request.getLocale() ) %}
+    {% if include_vat|default(null) is not null %}
+        {% set vatInclusionText = vatInclusionText(app.request.getLocale(), null, include_vat ) %}
+    {% endif %}
+
+    {% if help_text %}
+        <span class="info">
+            {{ money_pattern|replace({ '{{ widget }}':''}) }}
+            <span class="vat">
+                {{ vatInclusionText }}
+            </span>
+            <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                    type="button" data-original-title="{{ help_text|trans }}">?
+            </button>
+        </span>
+    {% elseif attr.nosign is not defined %}
+        <span class="sign">
+            {{ money_pattern|replace({ '{{ widget }}':''}) }}
+            <span class="vat">
+                {{ vatInclusionText }}
+            </span>
+        </span>
+    {% endif %}
+
+    <div class="field-holder">
+        {%- set type = type|default('text') -%}
+        <input type="{{ type }}" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    </div>
+{%- endblock -%}
+
+{%- block price_range_widget -%}
+    {% set price_min_default = priceMin / 100 %}
+    {% set price_max_default = priceMax / 100 %}
+
+    {% set price_min = form.min.vars.value|default(price_min_default) %}
+    {% set price_max = form.max.vars.value|default(price_max_default) %}
+    {% set average_search_price = (price_min + price_max) / 2 %}
+    {% set currentCurrencySymbol = currencySymbol(currentCurrency) %}
+
+    <div class="range-holder">
+        <strong class="title">{{ form_label(form.min) }}</strong>
+        <!-- range-box -->
+        <div class="range-box">
+            <div class="range-bar ui-slider" data-min="{{ price_min_default }}" data-max="{{ price_max_default }}"
+                 data-value="{{ average_search_price }}" data-step="10">
+                <span class="ui-slider-handle">
+                    <span class="value value-left">
+                        <span class="text"></span>
+                        {{ currentCurrencySymbol }}
+                    </span>
+                </span>
+                <span class="ui-slider-handle">
+                    <span class="value value-right">
+                        <span class="text"></span>
+                        {{ currentCurrencySymbol }}
+                    </span>
+                </span>
+                <input type="hidden" id="{{ form.min.vars.id }}" class="value-min"
+                       name="{{ form.min.vars.full_name }}"
+                       value="{{ price_min }}">
+                <input type="hidden" id="{{ form.max.vars.id }}" class="value-max"
+                       name="{{ form.max.vars.full_name }}"
+                       value="{{ price_max }}">
+            </div>
+            <div class="range-price">
+                <span class="price">{{ price_min_default }} {{ currentCurrencySymbol }}</span>
+                <span class="price right">{{ price_max_default }} {{ currentCurrencySymbol }}</span>
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

@@ -1,0 +1,38 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% set user_timezone = app.session.get('timezone') %}
+
+{% for review in reviews %}
+    {% set image_user = review.reviewBy.images|length ? review.reviewBy.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    <article class="post">
+        <header class="head">
+            <div class="author-img">
+                <div class="img-holder">
+                    <img alt="{{ review.reviewBy.name }}"
+                         src="{{ (UserImageConstants.IMAGE_FOLDER ~ image_user) | imagine_filter('user_xsmall') }}">
+                </div>
+                <a href="{{ path('cocorico_user_profile_show', { 'id': review.reviewBy.id }) }}" class="author-name">
+                    {{ review.reviewBy.name }}
+                </a>
+            </div>
+            <div class="meta">
+                <time>{{ review.createdAt|localizeddate('short', 'none', 'fr', user_timezone) }} </time>
+            </div>
+        </header>
+        <div class="post-content">
+            <p>
+                {{ review.comment|strip_private_info|nl2br }}
+            </p>
+        </div>
+        <footer class="footer">
+            <span class="time">
+                <i class="icon-clock"></i>{{ review.createdAt|localizeddate('none', 'short', 'fr', user_timezone) }}
+                {{ user_timezone|timezone_name }}
+            </span>
+            <!-- rating -->
+            {% if review.rating %}
+                {{ review.rating |cocorico_star_rating }}
+            {% endif %}
+        </footer>
+    </article>
+{% endfor %}

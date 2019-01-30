@@ -46,6 +46,13 @@ class ExtraBundleLoader extends Loader
                 $collection->addCollection($importedRoutes);
             }
 
+            if (array_key_exists("CocoricoMangoPayCardSavingBundle", $this->bundles)) {
+                $resource = '@CocoricoMangoPayCardSavingBundle/Resources/config/routing.yml';
+                $type = 'yaml';
+                $importedRoutes = $this->import($resource, $type);
+                $collection->addCollection($importedRoutes);
+            }
+
             if (array_key_exists("CocoricoListingAlertBundle", $this->bundles)) {
                 $resource = '@CocoricoListingAlertBundle/Resources/config/routing.yml';
                 $type = 'yaml';

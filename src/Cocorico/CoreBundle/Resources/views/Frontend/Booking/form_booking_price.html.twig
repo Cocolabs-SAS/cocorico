@@ -9,10 +9,10 @@
 
     {{ form_errors(form) }}
 
-    <div id="time-error" class="errors" style="display:none">
-        <i class="icon-error-field"></i>
-        {{ 'time_range.invalid.end_before_start'|trans({}, 'cocorico') }}<br>
-    </div>
+    {#<div id="time-error" class="errors" style="display:none">#}
+    {#<i class="icon-error-field"></i>#}
+    {#{{ 'time_range.invalid.end_before_start'|trans({}, 'cocorico') }}<br>#}
+    {#</div>#}
 
     <fieldset>
         <legend class="hidden">date-selection</legend>
@@ -49,8 +49,12 @@
             } only %}
         {% endif %}
 
-        {% if form.vars['errors'] is empty %}
-            <a href="" data-id="submit-booking" class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
+        {#{% if form.vars['errors'] is empty %}#}
+        {% if form.vars.submitted and form.vars.valid %}
+            <a href="#" data-id="submit-booking"
+               class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
+        {% else %}
+            <a disabled data-id="submit-booking" class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
         {% endif %}
         <span class="text">*{{ 'listing.show.excluding_booking_fees'|trans }}</span>
 

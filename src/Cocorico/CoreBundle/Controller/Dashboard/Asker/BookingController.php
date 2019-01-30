@@ -125,7 +125,8 @@ class BookingController extends Controller
                 'other_user_rating' => $booking->getListing()->getUser()->getAverageOffererRating(),
                 'amount_total' => $booking->getAmountToPayByAskerDecimal(),
                 'vat_inclusion_text' => $this->get('cocorico.twig.core_extension')
-                    ->vatInclusionText($request->getLocale(), true, true)
+                    ->vatInclusionText($request->getLocale(), true, true),
+                'user_timezone' => $booking->getTimeZoneAsker(),
             )
         );
     }
@@ -196,7 +197,8 @@ class BookingController extends Controller
                 'other_user_rating' => $booking->getListing()->getUser()->getAverageOffererRating(),
                 'amount_total' => $bookingRefundManger->getAmountDecimalToRefundOrRefundedToAsker($booking),
                 'vat_inclusion_text' => $this->get('cocorico.twig.core_extension')
-                    ->vatInclusionText($request->getLocale(), true, true)
+                    ->vatInclusionText($request->getLocale(), true, true),
+                'user_timezone' => $booking->getTimeZoneAsker(),
             )
         );
     }

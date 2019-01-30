@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\AopBundle\JMSAopBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
+            new JMS\DiExtraBundle\JMSDiExtraBundle(),
             new A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
@@ -56,6 +56,7 @@ class AppKernel extends Kernel
             new Cocorico\ContactBundle\CocoricoContactBundle(),
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
             new Cocorico\ConfigBundle\CocoricoConfigBundle(),
+            new Cocorico\TimeBundle\CocoricoTimeBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {

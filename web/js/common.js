@@ -96,13 +96,6 @@ $(function () {
         });
     }
 
-    // Contact me form show hide
-    $('form.form-msg').on('click', 'a.contact-opener', function (evt) {
-        $('.jcf-textarea .jcf-scrollable-wrapper').css('height', '143px');
-        $('#message_body').css('height', '143px');
-        $(this).next('.form-holder').slideToggle();
-    });
-
     //Payin dashboard switcher
     $("input[name=radio-payin-switcher]:radio").change(function () {
         window.location = $(this).val();
@@ -112,6 +105,11 @@ $(function () {
     cleanHash();
 
     fixIEMobile10();
+    // Clearable input types
+    $('input.clearable, .clearable input[type=text]').clearSearch({
+        callback: function () {
+        }
+    });
 
 });
 
@@ -381,8 +379,8 @@ $.fn.submitAjaxForm = function (callbackSuccess) {
             beforeSend: function (xhr) {
                 $container.find(".flashes").hide();
             },
-            success: function (html) {
-                $container.replaceWith(html);
+            success: function (response, status, xhr) {
+                $container.replaceWith(response);
                 callbackSuccess();
             }
         });
@@ -491,6 +489,13 @@ $.fn.extend({
     }
 });
 
+/**
+ * Refresh modal on load
+ */
+$('body').on('hidden.bs.modal', '.modal', function () {
+    $(this).removeData('bs.modal');
+    $(this).find(".modal-content").html('');
+});
 
 /**
  * Handle Unauthorised Ajax Access

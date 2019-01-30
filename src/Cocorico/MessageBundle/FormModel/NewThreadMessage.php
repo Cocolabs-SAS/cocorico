@@ -36,14 +36,14 @@ class NewThreadMessage extends AbstractMessage
     /**
      * The thread listing
      *
-     * @var string
+     * @var Listing
      */
     protected $listing;
 
     /**
      * The thread booking
      *
-     * @var string
+     * @var Booking
      */
     protected $booking;
 
@@ -57,11 +57,13 @@ class NewThreadMessage extends AbstractMessage
 
     /**
      * @param  Listing $listing
-     * @return null
+     * @return $this
      */
     public function setListing(Listing $listing = null)
     {
         $this->listing = $listing;
+
+        return $this;
     }
 
     /**
@@ -74,11 +76,13 @@ class NewThreadMessage extends AbstractMessage
 
     /**
      * @param  Booking $booking
-     * @return null
+     * @return $this
      */
     public function setBooking(Booking $booking = null)
     {
         $this->booking = $booking;
+
+        return $this;
     }
 
     /**
@@ -91,11 +95,13 @@ class NewThreadMessage extends AbstractMessage
 
     /**
      * @param  string
-     * @return null
+     * @return $this
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
+
+        return $this;
     }
 
     /**
@@ -108,10 +114,12 @@ class NewThreadMessage extends AbstractMessage
 
     /**
      * @param  ParticipantInterface
-     * @return null
+     * @return $this
      */
     public function setRecipient($recipient)
     {
         $this->recipient = $recipient;
+
+        return $this;
     }
 }

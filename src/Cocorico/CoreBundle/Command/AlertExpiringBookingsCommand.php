@@ -63,8 +63,8 @@ class AlertExpiringBookingsCommand extends ContainerAwareCommand
         $expirationDelay = $acceptationDelay = null;
         $alertDelay = $this->getContainer()->getParameter('cocorico.booking.alert_expiration_delay');
 
-        if ($input->getOption('test') && $input->hasOption('alert-delay') &&
-            $input->hasOption('expiration-delay') && $input->hasOption('acceptation-delay')
+        if ($input->getOption('test') && $input->getOption('alert-delay') &&
+            $input->getOption('expiration-delay') && $input->getOption('acceptation-delay')
         ) {
             $expirationDelay = $input->getOption('expiration-delay');
             $acceptationDelay = $input->getOption('acceptation-delay');

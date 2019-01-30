@@ -13,14 +13,15 @@
         '%firstname%': user.firstName,
         '%listing_title%': listing_title,
         '%listing_public_url%': listing_public_url,
-        '%booking_start_date%': booking.start|localizeddate('short', 'none', 'fr'),
-        '%booking_end_date%': booking.end|localizeddate('short', 'none', 'fr'),
+        '%booking_start_date%': booking.start|localizeddate('short', 'none', 'fr', user_timezone),
+        '%booking_end_date%': booking.end|localizeddate('short', 'none', 'fr', user_timezone),
         '%booking_time_range_title%': booking_time_range_title,
         '%booking_time_range%': booking_time_range,
         '%booking_duration%': booking.duration(endDayIncluded, timeUnit)|add_time_unit_text(user_locale),
         '%asker_firstname%': asker.firstName,
         '%asker_lastname%': asker.lastName,
-        '%booking_request_url%': booking_request_url
+        '%booking_request_url%': booking_request_url,
+        '%user_timezone%': user_timezone|timezone_name
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
 

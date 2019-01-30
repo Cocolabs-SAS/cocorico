@@ -1,4 +1,5 @@
 <?php
+
 namespace Cocorico\CoreBundle\Utils;
 
 /*
@@ -33,7 +34,7 @@ class PHP
      * @param string $locale       ISO 639-1-alpha 2 language code
      * @param string $country_code ISO 3166-2-alpha 2 country code
      *
-     * @return array|null a locale, formatted like en_US, or null if not found
+     * @return string|null a locale, formatted like en_US, or null if not found
      **/
     public static function locale_get_culture($locale, $country_code = '')
     {
@@ -119,46 +120,6 @@ class PHP
     }
 
     /**
-     * Convert number of seconds into hours, minutes and seconds
-     * and return an array containing those values
-     *
-     * @param integer $input_seconds Number of seconds to parse
-     * @return array
-     */
-    public static function seconds_to_time($input_seconds)
-    {
-        $seconds_in_a_minute = 60;
-        $seconds_in_an_hour = 60 * $seconds_in_a_minute;
-        $seconds_in_a_day = 24 * $seconds_in_an_hour;
-
-        // extract days
-        $days = floor($input_seconds / $seconds_in_a_day);
-
-        // extract hours
-        $hour_seconds = $input_seconds % $seconds_in_a_day;
-        $hours = floor($hour_seconds / $seconds_in_an_hour);
-
-        // extract minutes
-        $minute_seconds = $hour_seconds % $seconds_in_an_hour;
-        $minutes = floor($minute_seconds / $seconds_in_a_minute);
-
-        // extract the remaining seconds
-        $remaining_seconds = $minute_seconds % $seconds_in_a_minute;
-        $seconds = ceil($remaining_seconds);
-
-        // return the final array
-        $result = array(
-            'd' => (int)$days,
-            'h' => (int)$hours,
-            'm' => (int)$minutes,
-            's' => (int)$seconds,
-        );
-
-        return $result;
-    }
-
-
-    /**
      * Remove some texts from string depending on $typeText value
      *
      * @param string $text
@@ -188,4 +149,16 @@ class PHP
 
         return $text;
     }
+
+//    public static function array_combine($keys, $values)
+//    {
+//        $result = array();
+//        foreach ($keys as $i => $k) {
+//            $result[$k][] = $values[$i];
+//        }
+//        array_walk($result, create_function('&$v', '$v = (count($v) == 1)? array_pop($v): $v;'));
+//
+//        return $result;
+//    }
+
 }

@@ -7,8 +7,12 @@
     </header>
     <body>
       <trans-unit id="9b81dbdb23890155a309ef09d92759b18552ea0c" resname="cocorico_booking_new">
-        <source>/booking/{listing_id}/{start}/{end}/{start_time}/{end_time}/new</source>
-        <target>/reservation/{listing_id}/{start}/{end}/{start_time}/{end_time}/creer</target>
+          <source>/booking/{listing_id}/{start}/{end}/new</source>
+          <target>/reservation/{listing_id}/{start}/{end}/creer</target>
+      </trans-unit>
+        <trans-unit id="26cd4974c433beba7b353006962d40cb0959353d" resname="cocorico_booking_payment_new">
+            <source>/booking/payment/{booking_id}/new</source>
+            <target state="new">/booking/payment/{booking_id}/new</target>
       </trans-unit>
       <trans-unit id="81a1cea4ee90d53ca7904aac09cd6dbda96fc3dc" resname="cocorico_booking_price">
         <source>/booking/{listing_id}/price</source>
@@ -91,12 +95,12 @@
         <target>/tableau-de-bord/annonce/{listing_id}/editer-dispo-status</target>
       </trans-unit>
       <trans-unit id="0155b8a3ca222b0ee0a625a35585c778160ccd1d" resname="cocorico_dashboard_listing_edit_availability_price">
-        <source>/dashboard/listing/{listing_id}/{id}/{start_time}/{end_time}/edit_availability_price</source>
-        <target>/tableau-de-bord/annonce/{listing_id}/{id}/{start_time}/{end_time}/editer-dispo-prix</target>
+          <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_price</source>
+          <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-prix</target>
       </trans-unit>
       <trans-unit id="ff5b4844cb008a0353536668a6b736e4102bfbf5" resname="cocorico_dashboard_listing_edit_availability_status">
-        <source>/dashboard/listing/{listing_id}/{id}/{start_time}/{end_time}/edit_availability_status</source>
-        <target>/tableau-de-bord/annonce/{listing_id}/{id}/{start_time}/{end_time}/editer-dispo-status</target>
+          <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_status</source>
+          <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-status</target>
       </trans-unit>
       <trans-unit id="41a3cb94e244fe988983f3fedeebb17285dd65e9" resname="cocorico_dashboard_listing_edit_categories">
         <source>/dashboard/listing/{id}/edit_categories</source>
@@ -163,8 +167,8 @@
         <target>/tableau-de-bord/message/nombres-de-message</target>
       </trans-unit>
       <trans-unit id="69e16c8d093b9f82bf95b03b4f43020614a71f2c" resname="cocorico_dashboard_message_new">
-        <source>/dashboard/message/{listingId}/new</source>
-        <target>/tableau-de-bord/message/{listingId}/creer</target>
+        <source>/dashboard/message/{slug}/new</source>
+        <target>/tableau-de-bord/message/{slug}/creer</target>
       </trans-unit>
       <trans-unit id="3ff5893c78ff114edc675b2c648aff354f246c15" resname="cocorico_dashboard_message_thread_delete">
         <source>/dashboard/message/delete/{threadId}</source>

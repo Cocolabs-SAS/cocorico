@@ -46,11 +46,11 @@ function initDatepicker() {
 
                 if (input.is(from)) {
                     //abe++
-                    if (to.attr('type') == 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
+                    if (to.attr('type') === 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
                         setTimeout(function () {
                             to.focus();
                         }, 100);
-                    } else if (to.attr('type') == 'hidden') {//Day are displayed in duration mode
+                    } else if (to.attr('type') === 'hidden') {//Day are displayed in duration mode
                         setEndDay(input, to, nbDays);
                     }
                 }
@@ -69,7 +69,7 @@ function initDatepicker() {
 /**
  * Init timePicker fields.
  *
- * @param string parentTimesElt
+ * @param parentTimesElt string
  */
 function initTimePicker(parentTimesElt) {
     var timePickerCompatible = true;
@@ -86,17 +86,17 @@ function initTimePicker(parentTimesElt) {
 
             if ($picker.length) {
                 if (!timePickerCompatible) $picker.attr('type', 'text');
-                $picker.prev('.add-on').find('.icon-clock').on('click', function (e) {
+                $picker.prev('.add-on').find('.icon-clock').on('click', function () {
                     $picker.focus();
                 });
-                $picker.next('.add-on').find('.icon-clock').on('click', function (e) {
+                $picker.next('.add-on').find('.icon-clock').on('click', function () {
                     $picker.focus();
                 });
                 var $hour = holder.find("[id$=_" + picker + "_hour]").first();
                 var $minute = holder.find("[id$=_" + picker + "_minute]").first();
 
                 var defaultTime = '';
-                if ($hour.val() != '' && $minute.val() != '') {
+                if ($hour.val() !== '' && $minute.val() !== '') {
                     defaultTime = moment($hour.val() + ":" + $minute.val(), 'HH:mm');
                 }
 
@@ -136,7 +136,7 @@ function initTimePicker(parentTimesElt) {
 /**
  * Sync time fields if exist. Sync times in duration mode for now.
  *
- * @param string parentTimesElt
+ * @param  parentTimesElt string
  */
 function syncTimeFields(parentTimesElt) {
     $(parentTimesElt).each(function () {
@@ -190,7 +190,7 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
         inputs.datepicker({
             dateFormat: "dd/mm/yy",
             minDate: today,
-            onSelect: function (selectedDate, inst) {
+            onSelect: function (selectedDate) {
                 var input = $(this);
                 var option = input.is(from) ? 'minDate' : 'maxDate';
                 var instance = input.data('datepicker');
@@ -199,11 +199,11 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
                 inputs.not(input).filter('input:text').datepicker('option', option, date);
 
                 if (input.is(from)) {
-                    if (to.attr('type') == 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
+                    if (to.attr('type') === 'text') {//Days are displayed range mode (cocorico.days_display_mode: range)
                         setTimeout(function () {
                             to.focus();
                         }, 100);
-                    } else if (to.attr('type') == 'hidden') {//Day are displayed in duration mode
+                    } else if (to.attr('type') === 'hidden') {//Day are displayed in duration mode
                         setEndDay(input, to, nbDays);
                         submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
                     }
@@ -222,9 +222,9 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
     });
 
     //Time picker
-    initTimePicker('.timepicker-holder-ajax');
+    initTimePicker(parentDatesElt + '.timepicker-holder-ajax');
 
-    $('.timepicker-holder-ajax').each(function () {
+    $(parentDatesElt + '.timepicker-holder-ajax').each(function () {
         var holder = $(this);
 
         //Handle times select field change
@@ -232,7 +232,7 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
         timeSelects.each(function () {
             var $timeSelect = $(this);
 
-            $timeSelect.on('change', function (e) {
+            $timeSelect.on('change', function () {
                 submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
             });
         });
@@ -266,7 +266,7 @@ function setEndDay($from, $to, $nbDays) {
  * @param $nbMinutes
  */
 function setEndTime($fromHour, $fromMinute, $toHour, $toMinute, $nbMinutes) {
-    if ($fromHour.val() != '' && $fromMinute.val() != '' && $nbMinutes.val() != '') {
+    if ($fromHour.val() !== '' && $fromMinute.val() !== '' && $nbMinutes.val() !== '') {
         var startTime = moment($fromHour.val() + ":" + $fromMinute.val(), "HH:mm");
         startTime = startTime.add($nbMinutes.val(), "minute");
         $toHour.val(startTime.format("H"));
@@ -315,6 +315,7 @@ function submitDatePickerAjaxForm(callbackSuccess, parentDatesElt) {
         var from = inputs.filter('input.from');
         var to = inputs.filter('input.to');
 
+        //var holderTimes = $(parentDatesElt + ".time-fields");
         var holderTimes = $(parentDatesElt + ".ajax-container .time-fields");
         var startHour = holderTimes.find("[id$=_start_hour]").first();
         var endHour = holderTimes.find("[id$=_end_hour]").first();

@@ -56,8 +56,8 @@ class ExpireBookingsCommand extends ContainerAwareCommand
     {
         $expirationDelay = $acceptationDelay = null;
 
-        if ($input->getOption('test') && $input->hasOption('expiration-delay') &&
-            $input->hasOption('acceptation-delay')
+        if ($input->getOption('test') && $input->getOption('expiration-delay') &&
+            $input->getOption('acceptation-delay')
         ) {
             $expirationDelay = $input->getOption('expiration-delay');
             $acceptationDelay = $input->getOption('acceptation-delay');

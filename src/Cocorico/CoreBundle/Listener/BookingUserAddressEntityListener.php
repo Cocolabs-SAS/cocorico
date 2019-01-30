@@ -43,7 +43,6 @@ class BookingUserAddressEntityListener implements EventSubscriber
      *
      * @param BookingUserAddress $address
      * @param LifecycleEventArgs $args
-     * @return bool
      */
     private function handleBookingUserAddressPostPersistEvent(BookingUserAddress $address, LifecycleEventArgs $args)
     {

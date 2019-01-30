@@ -21,7 +21,9 @@ use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\MessageBundle\Model\ThreadInterface;
 use FOS\MessageBundle\Provider\ProviderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,7 +31,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 
 /**
  * Message controller.
@@ -78,20 +79,24 @@ class MessageController extends Controller
     /**
      * Creates a new message thread.
      *
-     * @Route("/{listingId}/new", name="cocorico_dashboard_message_new", requirements={"listingId" = "\d+"})
+     * @Route("/{slug}/new", name="cocorico_dashboard_message_new", requirements={
+     *      "slug" = "[a-z0-9-]+$"
+     * })
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @Security("is_granted('view', listing)")
+     * @ParamConverter("listing", class="Cocorico\CoreBundle\Entity\Listing", options={"repository_method" = "findOneBySlug"})
+     *
      * @param Request $request
-     * @param int     $listingId
+     * @param Listing $listing
      * @return RedirectResponse
      */
-    public function newThreadAction(Request $request, $listingId)
+    public function newThreadAction(Request $request, Listing $listing)
     {
-        $em = $this->container->get('doctrine')->getManager();
-
         /** @var Form $form */
-        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
-
-        /** @var Listing $listing */
-        $listing = $em->getRepository('CocoricoCoreBundle:Listing')->find($listingId);
+        $form = $this->get('fos_message.new_thread_form.factory')->create();
+        $formHandler = $this->get('fos_message.new_thread_form.handler');
 
         /** @var Thread $thread */
         $thread = $form->getData();
@@ -100,35 +105,41 @@ class MessageController extends Controller
         $thread->setRecipient($listing->getUser());
         $form->setData($thread);
 
-        $formHandler = $this->container->get('fos_message.new_thread_form.handler');
         /** @var Message $message */
-        if ($message = $formHandler->process($form)) {
+        $message = $formHandler->process($form);
+
+        $translator = $this->container->get('translator');
+        $session = $this->container->get('session');
+
+        if ($message) {
             $messageEvent = new MessageEvent($message->getThread(), $listing->getUser(), $this->getUser());
-            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
+            $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
                 ->clearNbUnreadMessageCache($listing->getUser()->getId());
 
-            return new RedirectResponse(
-                $this->container->get('router')
-                    ->generate(
-                        'cocorico_dashboard_message_thread_view',
-                        array(
-                            'threadId' => $message->getThread()->getId()
-                        )
-                    )
-            );
-        } elseif ($form->isSubmitted() && !$form->isValid()) {
-            $this->get('cocorico.helper.global')->addFormErrorMessagesToFlashBag(
-                $form,
-                $this->get('session')->getFlashBag()
+            $url = $this->generateUrl(
+                'cocorico_dashboard_message_new',
+                array(
+                    'slug' => $listing->getSlug(),
+                )
             );
 
-            return $this->redirect($request->headers->get('referer'));
+            $session->getFlashBag()->add(
+                'success',
+                $translator->trans('message.new.success', array(), 'cocorico_message')
+            );
+
+            return $this->redirect($url);
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $session->getFlashBag()->add(
+                'error',
+                $translator->trans('message.new.error', array(), 'cocorico_message')
+            );
         }
 
         return $this->container->get('templating')->renderResponse(
-            'CocoricoMessageBundle:Dashboard/Message:newThread.html.twig',
+            'CocoricoMessageBundle:Dashboard/Message:new_thread.html.twig',
             array(
                 'form' => $form->createView(),
                 'thread' => $form->getData(),

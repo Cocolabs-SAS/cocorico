@@ -60,7 +60,7 @@
                                             }
                                         }) }}
                                     </div>
-                                    <span class="tooltip-btn" style="right:none">
+                                    <span class="tooltip-btn" style="right:0">
                                         <button title="" data-placement="right"
                                                 data-toggle="tooltip" class="tooltip-button"
                                                 type="button"
@@ -91,6 +91,23 @@
                                             <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
                                         {% endif %}
                                     </span>
+                                </div>
+                            </div>
+
+                            <div class="field-row">
+                                {{ form_errors(form.timeZone) }}
+                                <span class="label">
+                                    {{ form_label(form.timeZone) }}
+                                </span>
+
+                                <div class="field-holder">
+                                    <div>
+                                        {{ form_widget(form.timeZone, {
+                                            'attr': {
+                                                'class': "form-control no-arrow"
+                                            }
+                                        }) }}
+                                    </div>
                                 </div>
                             </div>
 

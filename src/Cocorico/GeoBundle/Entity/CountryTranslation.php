@@ -64,7 +64,7 @@ class CountryTranslation
      * Set name
      *
      * @param  string $name
-     * @return Country
+     * @return $this
      */
     public function setName($name)
     {

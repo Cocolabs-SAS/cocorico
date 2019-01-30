@@ -42,7 +42,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     private $bookingManager;
     private $dispatcher;
     protected $allowSingleDay;
-    protected $endDayInclude;
+    protected $endDayIncluded;
     protected $minStartDelay;
     protected $minStartTimeDelay;
     private $currency;
@@ -93,16 +93,16 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'start_options' => array(
                         'label' => 'booking.form.start',
                         'mapped' => true,
-                        'data' => $booking->getStart()
+                        'data' => $booking->getStart(),
                     ),
                     'end_options' => array(
                         'label' => 'booking.form.end',
                         'mapped' => true,
-                        'data' => $booking->getEnd()
+                        'data' => $booking->getEnd(),
                     ),
                     'allow_single_day' => $this->allowSingleDay,
                     'end_day_included' => $this->endDayIncluded,
-                    'error_bubbling' => false
+                    'error_bubbling' => false,
                 )
             )
             ->add(
@@ -128,11 +128,13 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'mapped' => false,
                     'start_options' => array(
                         'mapped' => true,
-                        'data' => $booking->getStartTime()
+                        'data' => $booking->getStartTime(),
+                        'view_timezone' => 'UTC'
                     ),
                     'end_options' => array(
                         'mapped' => true,
-                        'data' => $booking->getEndTime()
+                        'data' => $booking->getEndTime(),
+                        'view_timezone' => 'UTC'
                     ),
                     'required' => true,
                     /** @Ignore */
@@ -179,12 +181,14 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 //Set Booking Amounts or throw Error if booking is invalid
                 /** @var Booking $booking */
                 $booking = $event->getData();
-                $errors = $this->bookingManager->checkBookingAvailabilityAndSetAmounts($booking);
+                $result = $this->bookingManager->checkBookingAndSetAmounts($booking);
+                $booking = $result->booking;
+                $errors = $result->errors;
 
                 if (!count($errors)) {
                     $event->setData($booking);
                 } else {
-                    $this->formErrors($form, $errors);
+                    $this->formErrors($form, $errors, $booking->getUser()->getTimeZone());
                 }
             }
         );
@@ -218,9 +222,10 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
      * Add errors to the form if any
      *
      * @param FormInterface $form
-     * @param               $errors
+     * @param array         $errors
+     * @param  string       $timezone
      */
-    private function formErrors(FormInterface $form, $errors)
+    private function formErrors(FormInterface $form, $errors, $timezone)
     {
         $keys = array_keys($errors, 'date_range.invalid.min_start');
         if (count($keys)) {
@@ -228,7 +233,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 unset($errors[$key]);
             }
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($timezone));
             if ($this->minStartDelay > 0) {
                 $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
             }
@@ -249,7 +254,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 unset($errors[$key]);
             }
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($timezone));
             if ($this->minStartTimeDelay > 0) {
                 $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
             }

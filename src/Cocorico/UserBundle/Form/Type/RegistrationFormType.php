@@ -140,6 +140,14 @@ class RegistrationFormType extends AbstractType
                     'invalid_message' => 'fos_user.password.mismatch',
                     'required' => true,
                 )
+            )
+            ->add(
+                'timeZone',
+                'timezone',
+                array(
+                    'label' => 'form.time_zone',
+                    'required' => true,
+                )
             );
     }
 

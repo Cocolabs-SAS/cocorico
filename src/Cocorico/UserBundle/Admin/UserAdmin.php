@@ -118,6 +118,7 @@ class UserAdmin extends SonataUserAdmin
                 'language',
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
             ->end();
@@ -160,6 +161,18 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
+                )
+            )
+            ->add(
+                'timeZone',
+                'timezone',
+                array(
+                    'label' => 'form.time_zone',
+                    'required' => true,
+                    'disabled' => true
+                ),
+                array(
+                    'translation_domain' => 'cocorico_user',
                 )
             )
             ->add(
@@ -289,6 +302,9 @@ class UserAdmin extends SonataUserAdmin
                 'addresses',
                 'sonata_type_collection',
                 array(
+                    // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
+                    // then the child entities will be removed while saving
+                    'disabled' => true,
                     'type_options' => array(
                         'delete' => false,
                         'delete_options' => array(
@@ -307,6 +323,7 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'edit' => 'inline',
                     'inline' => 'table',
+                    'delete' => 'false',
                 )
             )
             ->end();

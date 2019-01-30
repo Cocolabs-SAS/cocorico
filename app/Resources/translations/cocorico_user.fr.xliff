@@ -238,6 +238,23 @@
         <target state="new">Vous êtes</target>
         <jms:reference-file line="45">Form/Type/RegistrationFormType.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
+        <source>form.time_zone</source>
+        <target>Fuseau</target>
+        <jms:reference-file line="61">Dashboard/Booking/edit.html.twig</jms:reference-file>
+        <jms:reference-file line="63">Dashboard/Booking/show_voucher.html.twig</jms:reference-file>
+        <jms:reference-file line="63">Dashboard/Booking/_booking_index.html.twig</jms:reference-file>
+        <jms:reference-file line="42">Dashboard/Booking/_booking_show.html.twig</jms:reference-file>
+        <jms:reference-file line="93">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
+        <jms:reference-file line="89">Dashboard/Listing/edit_availabilities_prices.html.twig</jms:reference-file>
+        <jms:reference-file line="67">Dashboard/Listing/edit_availabilities_status.html.twig</jms:reference-file>
+        <jms:reference-file line="33">Dashboard/Listing/_calendar.html.twig</jms:reference-file>
+        <jms:reference-file line="69">Frontend/Booking/form_booking_price.html.twig</jms:reference-file>
+        <jms:reference-file line="42">Frontend/Booking/_details.html.twig</jms:reference-file>
+        <jms:reference-file line="76">Frontend/Booking/_form_new.html.twig</jms:reference-file>
+        <jms:reference-file line="80">Form/Type/ProfileContactFormType.php</jms:reference-file>
+        <jms:reference-file line="148">Form/Type/RegistrationFormType.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
         <source>form.user.annual_income</source>
         <target>Revenus annuels :</target>

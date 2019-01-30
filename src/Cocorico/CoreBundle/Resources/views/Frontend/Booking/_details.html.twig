@@ -1,0 +1,46 @@
+{% trans_default_domain 'cocorico_booking' %}
+
+<div class="price-area">
+    <ul class="list-inline timing">
+        <li>
+            <label>{{ 'booking.form.start'|trans }}</label>
+            <time>
+                <i class="icon-calendar"></i>
+                {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
+            </time>
+        </li>
+        <li>
+            <label>{{ 'booking.form.end'|trans }}</label>
+            <time>
+                <i class="icon-calendar"></i>
+                {{ booking.end|localizeddate('short', 'none', 'fr', user_timezone) }}
+            </time>
+        </li>
+        <li>
+            {{ 'booking.duration:'|trans }}
+            <strong>{{ booking_duration|add_time_unit_text }}</strong>
+        </li>
+
+        {% if not timeUnitIsDay %}
+            <li>
+                <label>{{ 'time_range.start'|trans({}, 'cocorico_listing') }}</label>
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+            </li>
+            <li>
+                <label>{{ 'time_range.end'|trans({}, 'cocorico_listing') }}</label>
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+            </li>
+        {% endif %}
+
+        <li class="pull-right">
+            {{ 'form.time_zone'|trans({}, 'cocorico_user') }}:
+            <strong>{{ user_timezone|timezone_name }}</strong>
+        </li>
+    </ul>
+</div>

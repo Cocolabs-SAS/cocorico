@@ -15,8 +15,8 @@ use Cocorico\CoreBundle\Entity\Listing;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Zend\Diactoros\Response\RedirectResponse;
 
 /**
  * Listing Dashboard category controller.
@@ -83,9 +83,9 @@ class ListingCategoriesController extends Controller
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        if ($formIsValid) {
-
-        }
+//        if ($formIsValid) {
+//
+//        }
 
         if ($request->isXmlHttpRequest()) {
             return $this->render(

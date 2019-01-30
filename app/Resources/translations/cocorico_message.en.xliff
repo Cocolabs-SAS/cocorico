@@ -6,6 +6,36 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="43d16710d19ba5f0543ef6121766b77f69d4cfb8" resname="message.modal.action.return">
+        <source>message.modal.action.return</source>
+        <target state="new">Return</target>
+        <jms:reference-file line="31">Dashboard/Message/new_thread.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="c802370aae0b9f68401cfd7f2b123f70d651b378" resname="message.modal.action.send">
+        <source>message.modal.action.send</source>
+        <target state="new">Send</target>
+        <jms:reference-file line="34">Dashboard/Message/new_thread.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="34c79e0b98782fb25e18fb222d72543acd21f917" resname="message.modal.sub_title">
+        <source>message.modal.sub_title</source>
+        <target state="new">Listing</target>
+        <jms:reference-file line="9">Dashboard/Message/new_thread.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="729ffd38433684305fc7982f6c0fff04e57ac203" resname="message.modal.title">
+        <source>message.modal.title</source>
+        <target state="new">Contact</target>
+        <jms:reference-file line="8">Dashboard/Message/new_thread.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5cb4d07a0def722149d276c5fd2ed7986a8507a8" resname="message.new.error">
+        <source>message.new.error</source>
+        <target state="new">An error occurred while message sending</target>
+        <jms:reference-file line="134">Controller/Dashboard/MessageController.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="20e3dee4a40ba1ad79b295e719ea6e6e57896e6e" resname="message.new.success">
+        <source>message.new.success</source>
+        <target state="new">Message send</target>
+        <jms:reference-file line="127">Controller/Dashboard/MessageController.php</jms:reference-file>
+      </trans-unit>
       <trans-unit id="cdf7e925f5746741c316f5fbcf39ad0dfca90775" resname="results">
         <source>results</source>
         <target>{0} No result|{1} 1 result|]1,Inf] %count% results</target>

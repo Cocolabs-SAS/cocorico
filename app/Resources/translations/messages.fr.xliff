@@ -28,7 +28,7 @@
         <target>Description</target>
         <jms:reference-file line="46">PageBundle/Admin/PageAdmin.php</jms:reference-file>
         <jms:reference-file line="79">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
-        <jms:reference-file line="57">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="54">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
         <jms:reference-file line="51">CoreBundle/Admin/ListingCharacteristicAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="72e4c870309b0aaef61e80f369017539df2d6545" resname="Descriptions">
@@ -568,21 +568,21 @@
       <trans-unit id="87ac6419133734b501179c9fd7025db124442894" resname="admin.listing_category.fields.label">
         <source>admin.listing_category.fields.label</source>
         <target state="new">admin.listing_category.fields.label</target>
-        <jms:reference-file line="97">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
-        <jms:reference-file line="146">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="94">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="143">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3a345af3f979ed5c2ca523c8d12a8d194974a82b" resname="admin.listing_category.name.label">
         <source>admin.listing_category.name.label</source>
         <target>admin.listing_category.name.label</target>
-        <jms:reference-file line="114">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
-        <jms:reference-file line="131">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="111">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="128">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="23d05406e5a7f3b876f3185d4517cf2fc05444f4" resname="admin.listing_category.parent.label">
         <source>admin.listing_category.parent.label</source>
         <target>admin.listing_category.parent.label</target>
-        <jms:reference-file line="87">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
-        <jms:reference-file line="119">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
-        <jms:reference-file line="137">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="84">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="116">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
+        <jms:reference-file line="134">CoreBundle/Admin/ListingCategoryAdmin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e1982f501539fbfafb8415c260bdbf65195508f7" resname="admin.listing_characteristic.group.label">
         <source>admin.listing_characteristic.group.label</source>
@@ -794,6 +794,11 @@
         <target state="new">listing.form.pallets</target>
         <jms:reference-file line="251">CoreBundle/Admin/ListingAdmin.php</jms:reference-file>
         <jms:reference-file line="389">CoreBundle/Admin/BookingAdmin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="2cf5545619ad7b18a8c464fb62fee6587df5d842" resname="form.card.alias">
+        <source>form.card.alias</source>
+        <target state="new">form.card.alias</target>
+        <jms:reference-file line="28">MangoPayCardSavingBundle/Admin/UserCardAdmin.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

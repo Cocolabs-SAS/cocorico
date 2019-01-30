@@ -12,7 +12,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\Booking;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -103,7 +102,7 @@ abstract class BaseBookingPayinRefund
      * Set amount
      *
      * @param int $amount
-     * @return Booking
+     * @return $this
      */
     public function setAmount($amount)
     {

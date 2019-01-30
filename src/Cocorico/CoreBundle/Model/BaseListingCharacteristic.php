@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\ListingCharacteristic;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -47,7 +46,7 @@ abstract class BaseListingCharacteristic
      * Set position
      *
      * @param  boolean $position
-     * @return ListingCharacteristic
+     * @return $this
      */
     public function setPosition($position)
     {
