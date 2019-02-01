@@ -1,7 +1,7 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 
 {% block field %}
-    {% set user = object.user|default(object) %}
+    {% set user = object.impersonating %}
     {% if app.user and user.username != app.user.username and sonata_user.impersonating %}
         <a target="_blank"
            href="{{ url(sonata_user.impersonating.route, sonata_user.impersonating.parameters | merge({'_become_who_you_are': user.username})) }}"

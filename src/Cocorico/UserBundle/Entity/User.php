@@ -1737,4 +1737,14 @@ class User extends BaseUser implements ParticipantInterface
                 ->addViolation();
         }
     }
+
+    /**
+     * To add impersonating link into admin :
+     *
+     * @return User
+     */
+    public function getImpersonating()
+    {
+        return $this;
+    }
 }
