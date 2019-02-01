@@ -62,15 +62,6 @@ class CountryFilteredType extends BaseCountryType
     }
 
     /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()
