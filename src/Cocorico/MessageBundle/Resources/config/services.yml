@@ -20,7 +20,6 @@ services:
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"
-        scope: request
         public: false
     
 
@@ -39,7 +38,6 @@ services:
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"
-        scope: request
         public: false
         
         

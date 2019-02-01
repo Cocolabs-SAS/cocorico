@@ -18,6 +18,7 @@ services:
         arguments:
             - "@request_stack"
             - "%cocorico.listing_search_max_per_page%"
+        public: true
 
     #Namers
     cocorico.namer.image_namer:

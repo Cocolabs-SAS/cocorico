@@ -7,3 +7,4 @@ services:
         class: Cocorico\CMSBundle\Model\Manager\FooterManager
         arguments:
             - "@doctrine.orm.entity_manager"
+        public: true
