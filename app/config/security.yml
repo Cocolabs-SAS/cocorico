@@ -9,8 +9,6 @@ security:
 
     providers:
         fos_userbundle:
-#            id: fos_user.user_provider.username_email
-#            id: fos_user.user_provider.username
 #             id: fos_user.user_manager
              id: fos_user.user_provider.username
     firewalls:
@@ -36,7 +34,6 @@ security:
             #if some changes are done make same change in Cocorico/CoreBundle/Resources/config/Services/listeners.yml
             form_login:
                 provider: fos_userbundle
-#                csrf_token_generator: form.csrf_provider
                 csrf_token_generator: security.csrf.token_manager
                 csrf_parameter: _token
                 csrf_token_id: authentication

@@ -21,7 +21,8 @@ use Cocorico\UserBundle\Model\UserManager;
 use Cocorico\UserBundle\Security\LoginManager;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\Exception\RuntimeException;
+use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class RegistrationFormHandler
@@ -31,14 +32,12 @@ class RegistrationFormHandler
     protected $mailer;
     /** @var  UserManager */
     protected $userManager;
-    /** @var FormInterface */
-    protected $form;
+    protected $formFactory;
     protected $tokenGenerator;
     protected $loginManager;
     protected $dispatcher;
 
     /**
-     * @param FormInterface            $form
      * @param RequestStack             $requestStack
      * @param UserManager              $userManager
      * @param MailerInterface          $mailer
@@ -47,7 +46,6 @@ class RegistrationFormHandler
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
-        FormInterface $form,
         RequestStack $requestStack,
         UserManager $userManager,
         MailerInterface $mailer,
@@ -55,7 +53,6 @@ class RegistrationFormHandler
         LoginManager $loginManager,
         EventDispatcherInterface $dispatcher
     ) {
-        $this->form = $form;
         $this->request = $requestStack->getCurrentRequest();
         $this->userManager = $userManager;
         $this->mailer = $mailer;
@@ -65,19 +62,19 @@ class RegistrationFormHandler
     }
 
     /**
+     * @param Form $form
      * @param bool $confirmation
      * @return bool
+     * @throws RuntimeException
      */
-    public function process($confirmation = false)
+    public function process($form, $confirmation = false)
     {
-        /** @var User $user */
-        $user = $this->createUser();
-        $this->form->setData($user);
+        $user = $form->getData();
 
         if ('POST' === $this->request->getMethod()) {
-            $this->form->handleRequest($this->request);
+            $form->handleRequest($this->request);
 
-            if ($this->form->isValid()) {
+            if ($form->isValid()) {
                 $this->onSuccess($user, $confirmation);
 
                 return true;
@@ -126,11 +123,4 @@ class RegistrationFormHandler
         }
     }
 
-    /**
-     * @return \FOS\UserBundle\Model\UserInterface
-     */
-    protected function createUser()
-    {
-        return $this->userManager->createUser();
-    }
 }

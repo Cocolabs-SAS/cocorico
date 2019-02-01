@@ -1,0 +1,9 @@
+services:
+    #Validators
+    cocorico_user.user.validator:
+        class: Cocorico\UserBundle\Validator\Constraints\UserValidator
+        arguments:
+            - "%cocorico.user_img_max%"
+            - "%cocorico.user_img_min%"
+        tags:
+            - { name: validator.constraint_validator, alias: user }

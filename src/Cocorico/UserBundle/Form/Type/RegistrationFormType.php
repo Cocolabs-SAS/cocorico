@@ -28,15 +28,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RegistrationFormType extends AbstractType
 {
-    private $class;
-
-    /**
-     * @param string $class
-     */
-    public function __construct($class)
-    {
-        $this->class = $class;
-    }
 
     /**
      * @param FormBuilderInterface $builder
@@ -59,7 +50,7 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'companyName',
-                null,
+                TextType::class,
                 array(
                     'label' => 'form.company_name',
                     'required' => false,
@@ -67,14 +58,14 @@ class RegistrationFormType extends AbstractType
             )
             ->add(
                 'lastName',
-                null,
+                TextType::class,
                 array(
                     'label' => 'form.last_name',
                 )
             )
             ->add(
                 'firstName',
-                null,
+                TextType::class,
                 array(
                     'label' => 'form.first_name',
                 )
@@ -165,7 +156,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => $this->class,
+                'data_class' => 'Cocorico\UserBundle\Entity\User',
                 'csrf_token_id' => 'user_registration',
                 'translation_domain' => 'cocorico_user',
                 'validation_groups' => array('CocoricoRegistration'),

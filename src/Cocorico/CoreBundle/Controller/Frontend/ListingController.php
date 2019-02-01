@@ -42,11 +42,11 @@ class ListingController extends Controller
      */
     public function newAction(Request $request)
     {
-        $listingHandler = $this->get('cocorico.form.handler.listing');
+        $formHandler = $this->get('cocorico.form.handler.listing');
 
-        $listing = $listingHandler->init();
+        $listing = $formHandler->init();
         $form = $this->createCreateForm($listing);
-        $success = $listingHandler->process($form);
+        $success = $formHandler->process($form);
 
         if ($success) {
             $url = $this->generateUrl(
@@ -54,9 +54,9 @@ class ListingController extends Controller
                 array('id' => $listing->getId())
             );
 
-            $this->container->get('session')->getFlashBag()->add(
+            $this->get('session')->getFlashBag()->add(
                 'success',
-                $this->container->get('translator')->trans('listing.new.success', array(), 'cocorico_listing')
+                $this->get('translator')->trans('listing.new.success', array(), 'cocorico_listing')
             );
 
             return $this->redirect($url);
@@ -113,7 +113,7 @@ class ListingController extends Controller
         if ($redirect = $this->handleSlugChange($listing, $request->get('slug'))) {
             return $redirect;
         }
-        $reviews = $this->container->get('cocorico.review.manager')->getListingReviews($listing);
+        $reviews = $this->get('cocorico.review.manager')->getListingReviews($listing);
 
         //Breadcrumbs
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');

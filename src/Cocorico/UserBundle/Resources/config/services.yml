@@ -1,31 +1,14 @@
 imports:
-    - { resource: subscribers.yml }
-    - { resource: listeners.yml }
-    - { resource: admin.yml }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/forms.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/form_handlers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/voters.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/validators.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/managers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/subscribers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/listeners.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/admin.yml" }
 
 services:
-    #Validators
-    cocorico_user.user.validator:
-        class: Cocorico\UserBundle\Validator\Constraints\UserValidator
-        arguments:
-            - "%cocorico.user_img_max%"
-            - "%cocorico.user_img_min%"
-        tags:
-            - { name: validator.constraint_validator, alias: user }
-
-    #Voters
-    security.access.user_image_voter:
-        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
-        public:     false
-        tags:
-           - { name: security.voter }
-
-    cocorico_user.security.access.user_image_voter:
-        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
-        public:     false
-        tags:
-           - { name: security.voter }
-
     #Namers
     cocorico_user.namer.image_namer:
         class:  Cocorico\UserBundle\Namer\ImageNamer

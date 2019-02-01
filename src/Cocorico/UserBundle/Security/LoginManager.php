@@ -47,11 +47,10 @@ class LoginManager
     }
 
     /**
-     * Login user
-     *
      * @param $username
      * @param $password
-     * @return bool|User
+     * @return bool|User|\FOS\UserBundle\Model\UserInterface|null|object
+     * @throws \RuntimeException
      */
     public function loginUser($username, $password)
     {
