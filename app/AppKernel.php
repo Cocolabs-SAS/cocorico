@@ -53,6 +53,7 @@ class AppKernel extends Kernel
             new Cocorico\CMSBundle\CocoricoCMSBundle(),
             new Cocorico\BreadcrumbBundle\CocoricoBreadcrumbBundle(),
             new Cocorico\SonataAdminBundle\CocoricoSonataAdminBundle(),
+            new Cocorico\SonataUserBundle\CocoricoSonataUserBundle(),
             new Cocorico\MessageBundle\CocoricoMessageBundle(),
             new Cocorico\ContactBundle\CocoricoContactBundle(),
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
