@@ -18,8 +18,17 @@ namespace Cocorico\TimeBundle\Twig;
  * To remove when ICU will be updated on servers
  *
  */
-class IntlExtension extends \Twig_Extension
+class IntlExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
+
+    /** @inheritdoc */
     public function __construct()
     {
         if (!class_exists('IntlDateFormatter')) {

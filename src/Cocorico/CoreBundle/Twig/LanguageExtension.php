@@ -15,8 +15,15 @@ use Symfony\Component\Intl\Intl;
 /**
  * LanguageExtension will render the name of the language depending upon the code used for languages
  */
-class LanguageExtension extends \Twig_Extension
+class LanguageExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
 
     /** @inheritdoc */
     public function getFilters()
