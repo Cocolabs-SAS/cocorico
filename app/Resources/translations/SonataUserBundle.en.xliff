@@ -236,6 +236,10 @@
         <target>Impersonating</target>
         <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
+        <trans-unit id="332d099fbb742861ea4a8ddbe0ce43467d6600fa" resname="list.label_impersonating">
+            <source>list.label_impersonating</source>
+            <target state="new">Impersonating</target>
+        </trans-unit>
       <trans-unit id="8a0feda74cd7514d97c55cb823aa45c73abd73b9" resname="list.label_listings">
         <source>list.label_listings</source>
         <target state="new">Listings</target>

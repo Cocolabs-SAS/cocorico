@@ -7,6 +7,10 @@
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
+      <trans-unit id="3bc15c8aae3e4124dd409035f32ea2fd6835efc9" resname="-">
+        <source>-</source>
+        <target state="new">-</target>
+      </trans-unit>
       <trans-unit id="657031b30b9600b53fdb1415ff5e5913363bb212" resname="Access site">
         <source>Access site</source>
         <target state="new">Access site</target>
@@ -21,6 +25,14 @@
         <source>Admin</source>
         <target>Admin</target>
         <jms:reference-file line="72">Resources/views/standard_layout.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="5b6825d3c67a35898b7b65fd986a7fe6ca47771d" resname="Site">
+        <source>Site</source>
+        <target state="new">Site</target>
+      </trans-unit>
+      <trans-unit id="7bce262bc0a1b579013ff8050f152a9f72131d2f" resname="Bank Wires">
+        <source>Bank Wires</source>
+        <target>Bank Wires</target>
       </trans-unit>
       <trans-unit id="718a7e8a582e982e452dd5700addba4ffc1cf40d" resname="Body">
         <source>Body</source>
@@ -176,6 +188,18 @@
         <source>Booking Update</source>
         <target>Booking Update</target>
         <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="135229c7beadb48dd31d1567028d035586fb41f3" resname="Bookings">
+        <source>Bookings</source>
+        <target>Bookings</target>
+      </trans-unit>
+      <trans-unit id="96c2a911d864a2c86108245d56240f88ddc721b7" resname="Categories fields">
+        <source>Categories fields</source>
+        <target state="new">Categories fields</target>
+      </trans-unit>
+      <trans-unit id="9af7a0e69825d723069fcde2617220b372230178" resname="Categories fields groups">
+        <source>Categories fields groups</source>
+        <target state="new">Categories fields groups</target>
       </trans-unit>
         <trans-unit id="a3c686e711e4720f99b4562bb3dbaae7ab658cf2" resname="Category">
             <source>Category</source>
@@ -1370,6 +1394,18 @@
         <target state="new">Footer</target>
         <jms:reference-file line="66">CMSBundle/Admin/FooterAdmin.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="b83c4cdafef5813f0872892b666e2b04466198c4" resname="Reviews">
+        <source>Reviews</source>
+        <target>Reviews</target>
+      </trans-unit>
+      <trans-unit id="0607869e05567e53ae50120a9680bb55fdf9d803" resname="SEO">
+        <source>SEO</source>
+        <target state="new">SEO</target>
+      </trans-unit>
+      <trans-unit id="600584c2d5ccb97c0c0c424d9f32d6b102fcb040" resname="Pages">
+        <source>Pages</source>
+        <target state="new">Pages</target>
+      </trans-unit>
       <trans-unit id="ff974eb8fd8417b553a204d4abe7efc6532f370e" resname="admin.footer.url.label">
         <source>admin.footer.url.label</source>
         <target state="new">URL</target>
@@ -1605,6 +1641,34 @@
         <jms:reference-file line="138">PageBundle/Admin/PageAdmin.php</jms:reference-file>
         <jms:reference-file line="183">PageBundle/Admin/PageAdmin.php</jms:reference-file>
       </trans-unit>
+      <trans-unit id="cdf8cb90a5029548db08a3400753c839b0a8694f" resname="Footers">
+        <source>Footers</source>
+        <target>Footers</target>
+      </trans-unit>
+      <trans-unit id="102f7e195a05f4abbbe83bf04cca7961af548930" resname="Characteristic Type">
+        <source>Characteristic Type</source>
+        <target state="new">Characteristic Type</target>
+      </trans-unit>
+      <trans-unit id="6149f7b79c71262d90997cda8a7ebda11183c08e" resname="Deposit Refunds">
+        <source>Deposit Refunds</source>
+        <target>Deposit Refunds</target>
+      </trans-unit>
+      <trans-unit id="754164850f38c1ecdaf6b8ed894cb192bc36c5f4" resname="Configuration">
+        <source>Configuration</source>
+        <target state="new">Configuration</target>
+      </trans-unit>
+      <trans-unit id="783838c43513ad2f1209ee7ff5f1c8e6a76fcfe7" resname="DictionaryEntry">
+        <source>DictionaryEntry</source>
+        <target state="new">DictionaryEntry</target>
+      </trans-unit>
+      <trans-unit id="85bb5d88d7f7c89b76d36dfc3c4155f873032a5e" resname="Elasticsearch">
+        <source>Elasticsearch</source>
+        <target state="new">Elasticsearch</target>
+      </trans-unit>
+      <trans-unit id="b37456c4530be810dc040f50da72eda09addfb0a" resname="Contact">
+        <source>Contact</source>
+        <target state="new">Contact</target>
+      </trans-unit>
       <trans-unit id="a46c15d43bc71e28ca80d224916d42279ab75fa9" resname="admin.page.link.label">
         <source>admin.page.link.label</source>
         <target state="new">Link</target>
@@ -1792,6 +1856,14 @@
         <target state="new">Create and return to list</target>
           <jms:reference-file line="133">views/CRUD/base_edit_form.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="cfb8d26471a8763e3a8e561d62c9cf1894cbe39e" resname="link_action_list">
+        <source>link_action_list</source>
+        <target state="new">Return to list</target>
+      </trans-unit>
+      <trans-unit id="cc1817a322e46165771bac71e2f506fc1d720d95" resname="btn_execute_batch_action">
+        <source>btn_execute_batch_action</source>
+        <target state="new">btn_execute_batch_action</target>
+      </trans-unit>
       <trans-unit id="ce4e17fb96cf876215a3d191ed681e50c3e035fb" resname="btn_preview">
         <source>btn_preview</source>
         <target state="new">Preview</target>
@@ -1868,11 +1940,19 @@
         <jms:reference-file line="5">Resources/views/list_action_list_booking_with_voucher.html.twig</jms:reference-file>
         <jms:reference-file line="7">Resources/views/list_action_list_booking_with_voucher.html.twig</jms:reference-file>
       </trans-unit>
+      <trans-unit id="1a78af87389138a9af2d6be9f4d523bb9873db50" resname="list_results_count">
+        <source>list_results_count</source>
+        <target state="new">1 result|%count% results</target>
+      </trans-unit>
       <trans-unit id="d1efc8fdd25b69e8584a12ffd3d488513b99a811" resname="list_user_listings">
         <source>list_user_listings</source>
         <target state="new">Display his listings</target>
         <jms:reference-file line="5">Resources/views/list_action_list_user_listings.html.twig</jms:reference-file>
         <jms:reference-file line="7">Resources/views/list_action_list_user_listings.html.twig</jms:reference-file>
+      </trans-unit>
+      <trans-unit id="e539f597db1f90ad18e9093b2b7f1268953063f4" resname="Listings">
+        <source>Listings</source>
+        <target>Listings</target>
       </trans-unit>
       <trans-unit id="3c812e2dc11dbc915b3a77521b3ba8a50ca23660" resname="message_form_group_empty">
         <source>message_form_group_empty</source>
