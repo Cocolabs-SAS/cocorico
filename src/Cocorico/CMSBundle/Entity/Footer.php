@@ -42,7 +42,6 @@ class Footer extends BaseFooter
 
     public function __construct()
     {
-        $this->published = false;
     }
 
     /**

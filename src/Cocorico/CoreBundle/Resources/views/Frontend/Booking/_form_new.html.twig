@@ -8,22 +8,23 @@
 {% set depositBundleEnabled = bundleExist('CocoricoListingDepositBundle') %}
 
 {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+{% set user_timezone = app.session.get('timezone', timeZone) %}
 
 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 
 {{ form_start(form, {'attr': {'id': 'booking-new'}}) }}
 
-<!-- schedule -->
+
 {#{{ form_errors(form) }}#}
 {{ form_errors(form.date_range) }}
 <div class="price-area">
     <ul class="list-inline timing">
         <li>
             {{ form_errors(form.date_range.start) }}
-            {{ form_label(form.date_range.start, null, {'required': false} ) }}
-            <time datetime="{{ booking.start|date('Y-m-d') }}">
+            {{ form_label(form.date_range.start, null, {'required': false}) }}
+            <time>
                 <i class="icon-calendar"></i>
-                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
             </time>
             {{ form_widget(form.date_range.start, {
                 'type': 'hidden'
@@ -32,66 +33,91 @@
         <li>
             {{ form_errors(form.date_range.end) }}
             {{ form_label(form.date_range.end, null, {'required': false}) }}
-
-            <time datetime="{{ booking.end|date('Y-m-d') }}">
+            <time>
                 <i class="icon-calendar"></i>
-                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                {{ booking.end|localizeddate('short', 'none', 'fr', user_timezone) }}
             </time>
             {{ form_widget(form.date_range.end, {
                 'type': 'hidden'
             }) }}
         </li>
         <li>
-            <strong> {{ 'booking.duration:'|trans }}</strong>
-            {{ booking_duration|add_time_unit_text }}
+            {{ 'booking.duration:'|trans }} <strong>{{ booking_duration|add_time_unit_text }}</strong>
         </li>
 
         {% if not timeUnitIsDay %}
-            {{ form_widget(form.time_range) }}
+            <li>
+                {{ form_errors(form.time_range.start) }}
+                {{ form_label(form.time_range.start, null, {'required': false}) }}
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+                <div class="hidden">
+                    {{ form_widget(form.time_range.start) }}
+                    {{ form_widget(form.time_range.start_picker) }}
+                </div>
+            </li>
+            <li>
+                {{ form_errors(form.time_range.end) }}
+                {{ form_label(form.time_range.end, null, {'required': false}) }}
+                <time>
+                    <i class="icon-time"></i>
+                    {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
+                </time>
+                <div class="hidden">
+                    {{ form_widget(form.time_range.end) }}
+                    {{ form_widget(form.time_range.end_picker) }}
+                </div>
+            </li>
         {% endif %}
+
+        <li class="pull-right">
+            {{ 'form.time_zone'|trans({}, 'cocorico_user') }}: <strong>{{ user_timezone|timezone_name }}</strong>
+        </li>
     </ul>
 </div>
 
 {#Delivery OR Carrier bundle form#}
 {% if deliveryBundleEnabled %}
     {% include 'CocoricoDeliveryBundle:Frontend:Booking/_form_delivery.html.twig' with {
-    'form': form,
-    'booking': booking
+        'form': form,
+        'booking': booking
     } only %}
 {% elseif carrierBundleEnabled %}
     {% include 'CocoricoCarrierBundle:Frontend:Booking/_form_carrier.html.twig' with {
-    'form': form,
-    'booking': booking
+        'form': form,
+        'booking': booking
     } only %}
 {% endif %}
 
 {% if optionBundleEnabled %}
     {% include 'CocoricoListingOptionBundle:Frontend:Booking/_form_options.html.twig' with {
-    'form': form,
-    'booking': booking
+        'form': form,
+        'booking': booking
     } only %}
 {% endif %}
 
 {% if voucherBundleEnabled %}
     {% include 'CocoricoVoucherBundle:Frontend/Booking:_form_voucher.html.twig' with {
-    'form': form,
-    'booking': booking
+        'form': form,
+        'booking': booking
     } only %}
 {% endif %}
 
 {% if depositBundleEnabled %}
     {% include 'CocoricoListingDepositBundle:Frontend/Booking:_show_amount_deposit.html.twig' with {
-    'booking': booking
+        'booking': booking
     } only %}
 {% endif %}
 
 {% include 'CocoricoCoreBundle:Frontend:Booking/_amounts.html.twig' with {
-'booking' : booking
+    'booking' : booking
 } only %}
 
 {% if addressDelivery %}
     {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
-    'form' : form.userAddress
+        'form' : form.userAddress
     } only %}
 {% endif %}
 

@@ -24,16 +24,16 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
-use FOS\UserBundle\Util\CanonicalizerInterface;
+use FOS\UserBundle\Util\CanonicalFieldsUpdater;
+use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class UserManager extends BaseUserManager implements UserManagerInterface
 {
     protected $objectManager;
-    protected $class;
+//    protected $class;
     protected $repository;
     protected $kernelRoot;
     protected $dispatcher;
@@ -41,30 +41,29 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     /**
      * Constructor.
      *
-     * @param EncoderFactoryInterface  $encoderFactory
-     * @param CanonicalizerInterface   $usernameCanonicalizer
-     * @param CanonicalizerInterface   $emailCanonicalizer
+     *
+     * @param PasswordUpdaterInterface $passwordUpdater
+     * @param CanonicalFieldsUpdater   $canonicalFieldsUpdater
      * @param ObjectManager            $objectManager
      * @param string                   $class
      * @param String                   $kernelRoot
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(
-        EncoderFactoryInterface $encoderFactory,
-        CanonicalizerInterface $usernameCanonicalizer,
-        CanonicalizerInterface $emailCanonicalizer,
+        PasswordUpdaterInterface $passwordUpdater,
+        CanonicalFieldsUpdater $canonicalFieldsUpdater,
         ObjectManager $objectManager,
         $class,
         $kernelRoot,
         EventDispatcherInterface $dispatcher
     ) {
-        parent::__construct($encoderFactory, $usernameCanonicalizer, $emailCanonicalizer, $objectManager, $class);
+        parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $objectManager, $class);
 
         $this->objectManager = $objectManager;
         $this->repository = $objectManager->getRepository($class);
 
-        $metadata = $objectManager->getClassMetadata($class);
-        $this->class = $metadata->getName();
+//        $metadata = $objectManager->getClassMetadata($class);
+//        $this->class = $metadata->getName();
         $this->kernelRoot = $kernelRoot;
         $this->dispatcher = $dispatcher;
     }
@@ -135,7 +134,6 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      * @param  string  $existingPicture
      * @param  boolean $persist
      *
-     * @return User
      */
     public function addImagesSetFirst(User $user, $imageName, $existingPicture, $persist = false)
     {
@@ -195,7 +193,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
                     $user->setFirstName($responseArray['first_name']);
                     $user->setPassword(uniqid());
                     $user->setEnabled(true);
-                    $user->setMotherTongue($responseArray['locale']);
+                    $user->setMotherTongue(substr($responseArray['locale'], 0, 2));
                     if (array_key_exists('birthday', $responseArray)) {
                         $birthDate = new \DateTime($responseArray['birthday']);
                     } else {

@@ -16,6 +16,70 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 
 
+## [0.12.0] - (2019-01-30)
+
+### Added
+- Add CocoricoElasticSearchBundle custom parameters
+- Add multi timezones functionality
+- Add hasBookingsInProgress method in User
+
+### Fixed
+- Fix add_time_unit_text filter for duration < 1 hour
+- Fix DST while availabilities edition
+- Fix localizeddate timezone errors due to old ICU version. (To revert when ICU will be updated to a recent version on servers)
+- Fix search without time range in no day mode
+- Fix booking availability checking in No Day Mode, add missing user timezone texts
+- Fix search by times
+
+### Changed
+- Update migration script for times date equal to 1970-01-01
+- Update liip image listing image sizes
+- Factorize booking validator errors
+
+
+## [0.11.0] - (2019-01-19)
+
+### Added
+- Add payment cards breadcrumbs 
+- Add CocoricoElasticSearchBundle compatibility
+- Add CocoricoSwiftReaderBundle
+- Add Elastic search starting script
+- Add multi time range overlapping days functionality
+
+### Fixed
+- Fix categories export in sonata
+- Replace hasOption by getOption in Cocorico commands conditions
+- Fix user language code too short
+- Fix various CS
+- Add time range form errors
+- Set phoneVerified to false by default in user fixtures
+- Fix feed blocks on HP if no feed items 
+- Prevent bank account data saving in DB in case of wrong bank account data filled
+- Fix tel link phone
+- Fix bug #71 - Listing status available while duplication
+- Remove unneeded '}}' at the end of some meta titles
+- Fix user facebook mother tongue
+- Fix booking duration in not day mode
+- Fix MP BankAccount retrieval when bank account id is not set
+
+### Changed
+- Change who we are page content
+- Move rating_reviews twig file
+- Change new message displaying to modal popin on listing show page 
+- Update SMSBundle to v0.3.1
+- Add JS escaping on initMultiSelect
+- Add app/bootstrap.php.cache to .gitignore
+- Replace nl to br in review comments
+- Add hours and timeZone to bookings imminent email alert checking
+- Split global twig form fields templates
+- Remove time_picker parameter and force form time fields to be handled by timepicker
+- Update Facebook version to 2.10 (JS SDK and HWI Oauth Bundle)
+- Update Elastic search bundle
+- Update Listing Deposit Bundle to 0.2
+- Update MangoPay Bundle to 0.6.2
+- Update Report Bundle to 0.1.2
+
+
 ## [0.10.0] - (2019-01-16)
 
 ### Added

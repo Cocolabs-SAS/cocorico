@@ -12,11 +12,12 @@
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCategoriesType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Zend\Diactoros\Response\RedirectResponse;
 
 /**
  * Listing Dashboard category controller.
@@ -51,7 +52,7 @@ class ListingCategoriesController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_categories',
-            'listing_new_categories',
+            ListingNewCategoriesType::class,
             $listing,
             array(
                 'method' => 'POST',
@@ -83,9 +84,9 @@ class ListingCategoriesController extends Controller
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        if ($formIsValid) {
-
-        }
+//        if ($formIsValid) {
+//
+//        }
 
         if ($request->isXmlHttpRequest()) {
             return $this->render(

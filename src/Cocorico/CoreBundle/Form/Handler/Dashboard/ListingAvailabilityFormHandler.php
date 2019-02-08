@@ -8,8 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Cocorico\CoreBundle\Form\Handler\Dashboard;
 
+use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\Form;
@@ -24,8 +26,8 @@ abstract class ListingAvailabilityFormHandler
 {
     /** @var Request $request */
     protected $request;
-    /** @var ListingAvailabilityManager $listingAvailabilityManager */
-    protected $listingAvailabilityManager;
+    /** @var ListingAvailabilityManager $availabilityManager */
+    protected $availabilityManager;
     /** @var  EntityManager $entityManager */
     protected $entityManager;
 
@@ -38,11 +40,11 @@ abstract class ListingAvailabilityFormHandler
     }
 
     /**
-     * @param ListingAvailabilityManager $listingAvailabilityManager
+     * @param ListingAvailabilityManager $availabilityManager
      */
-    public function setListingAvailabilityManager(ListingAvailabilityManager $listingAvailabilityManager)
+    public function setListingAvailabilityManager(ListingAvailabilityManager $availabilityManager)
     {
-        $this->listingAvailabilityManager = $listingAvailabilityManager;
+        $this->availabilityManager = $availabilityManager;
     }
 
     /**
@@ -64,13 +66,13 @@ abstract class ListingAvailabilityFormHandler
      * -1: if form is not valid
      *
      */
-    public function process(Form $form)
+    public function processMany(Form $form)
     {
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $this->request->isMethod('POST')) {
             if ($form->isValid()) {
-                $result = $this->onSuccess($form);
+                $result = $this->onSuccessMany($form);
             } else {
                 $result = -1;//form not valid
             }
@@ -89,7 +91,53 @@ abstract class ListingAvailabilityFormHandler
      * @return int equal to :
      * 1: Success
      */
-    abstract protected function onSuccess(Form $form);
+    abstract protected function onSuccessMany(Form $form);
 
+    /**
+     * Process form
+     *
+     * @param Form    $form
+     * @param Listing $listing
+     * @param string  $day
+     * @param string  $start_time
+     * @param string  $end_time
+     *
+     * @return int equal to :
+     * 1: Success
+     * 0: if form is not submitted:
+     * -1: if form is not valid
+     *
+     */
+    public function processOne(Form $form, Listing $listing, $day, $start_time, $end_time)
+    {
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $this->request->isMethod('POST')) {
+            if ($form->isValid()) {
+                $result = $this->onSuccessOne($form, $listing, $day, $start_time, $end_time);
+            } else {
+                $result = -1;//form not valid
+            }
+        } else {
+            $result = 0; //Not submitted
+        }
+
+        return $result;
+    }
+
+
+    /**
+     * To override
+     *
+     * @param Form    $form
+     * @param Listing $listing
+     * @param string  $day
+     * @param string  $start_time
+     * @param string  $end_time
+     *
+     * @return int equal to :
+     * 1: Success
+     */
+    abstract protected function onSuccessOne(Form $form, Listing $listing, $day, $start_time, $end_time);
 
 }

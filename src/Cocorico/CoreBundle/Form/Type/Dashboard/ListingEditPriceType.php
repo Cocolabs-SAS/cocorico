@@ -11,9 +11,9 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
-use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +40,7 @@ class ListingEditPriceType extends AbstractType
         $builder
             ->add(
                 'price',
-                'price',
+                PriceType::class,
                 array(
                     'label' => 'listing_edit.form.price',
                 )
@@ -66,15 +66,6 @@ class ListingEditPriceType extends AbstractType
                 'translation_domain' => 'cocorico_listing',
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

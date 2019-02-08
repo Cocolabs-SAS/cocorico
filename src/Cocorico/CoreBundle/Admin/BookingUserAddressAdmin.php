@@ -2,11 +2,11 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
-class BookingUserAddressAdmin extends Admin
+class BookingUserAddressAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'cocorico_user';
     protected $baseRoutePattern = 'booking-user-address';
@@ -17,6 +17,7 @@ class BookingUserAddressAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

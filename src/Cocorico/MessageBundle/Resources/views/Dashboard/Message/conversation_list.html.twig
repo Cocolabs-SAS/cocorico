@@ -1,7 +1,10 @@
 <!-- post -->
 {#todo-ravi: order messages in entity via annotation instead here#}
+{% set  user_timezone = app.user.timezone %}
+
 {% for message in thread.messages | reverse %}
     {% set user = message.sender %}
+    {#{% set user_timezone = user.timezone %}#}
     {% set image_user = user.images|length ? user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
     <article class="post">
         <header class="head">
@@ -16,7 +19,7 @@
                 </a>
             </div>
             <div class="meta">
-                <time>{{ message.createdAt|date("d/m/Y") }}</time>
+                <time>{{ message.createdAt|localizeddate('short', 'none', 'fr', user_timezone) }}</time>
             </div>
         </header>
         <div class="post-content">
@@ -24,7 +27,8 @@
         </div>
         <footer class="footer">
             <span class="time">
-                <i class="icon-clock"></i>{{ message.createdAt|date("H:i") }} GMT
+                <i class="icon-clock"></i>{{ message.createdAt|localizeddate('none', 'short', 'fr', user_timezone) }}
+                <small><em>({{ user_timezone|timezone_name }})</em></small>
             </span>
         </footer>
     </article>

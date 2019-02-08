@@ -23,7 +23,6 @@ services:
                 cocorico_time_zone: "%cocorico.time_zone%"
                 cocorico_time_unit_allday: "%cocorico.time_unit_allday%"
                 cocorico_time_unit_flexibility: "%cocorico.time_unit_flexibility%"
-                cocorico_time_picker: "%cocorico.time_picker%"
                 cocorico_time_hours_available: "%cocorico.time_hours_available%"
                 cocorico_days_display_mode: "%cocorico.days_display_mode%"
                 cocorico_times_display_mode: "%cocorico.times_display_mode%"
@@ -78,13 +77,12 @@ services:
         tags:
             - { name: twig.extension }
 
-    #Override trans filters. Don't change service name
-    twig.extension.trans:
-        class: Cocorico\CoreBundle\Twig\TranslationExtension
-        public: false
-        arguments:
-            - '@translator'
-        calls:
-            - [setCheckTranslation, ["%cocorico.check_translation%"]]
-        tags:
-             - { name: twig.extension }
+    #Override trans filters.
+#    twig.extension.trans:
+#        class: Cocorico\CoreBundle\Twig\TranslationExtension
+#        arguments:
+#            - '@translator'
+#        calls:
+#            - [setCheckTranslation, ["%cocorico.check_translation%"]]
+#        tags:
+#             - { name: twig.extension }

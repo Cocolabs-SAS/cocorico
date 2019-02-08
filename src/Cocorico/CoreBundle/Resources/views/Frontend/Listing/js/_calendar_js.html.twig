@@ -103,6 +103,7 @@
                 week: 'H:mm',
                 day: 'H:mm'
             },
+            nextDayThreshold: '00:00:00',
             dayRender: function (date, cell) {
                 cell.prepend($("#default-cell-content").html());
             },
@@ -119,7 +120,7 @@
             events: function (start, end, timezone, callback) {
                 var url = "{{ path('cocorico_listing_availabilities',{
                     'listing_id':  listing_id, 'start':'1971-05-29', 'end':'1971-05-30'
-                    })}}";
+                }) }}";
                 url = url.replace('1971-05-29', moment(start).format('YYYY-MM-DD'));
                 url = url.replace('1971-05-30', moment(end).format('YYYY-MM-DD'));
 
@@ -137,13 +138,13 @@
             dayClick: function (date, jsEvent, view) {
                 var classList = jsEvent.target.classList;
                 var isNotEvent = $.inArray('cal-booked-evt', classList) == -1 &&
-                        $.inArray('cal-unavailable-evt', classList) == -1 &&
-                        $.inArray('cal-available-evt', classList) == -1;
+                    $.inArray('cal-unavailable-evt', classList) == -1 &&
+                    $.inArray('cal-available-evt', classList) == -1;
                 //Edition allowed only for current day or future days
                 if (moment(date).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD') && isNotEvent) {
                     var url = "{{ path('cocorico_dashboard_listing_new_availability_' ~ edit_type,{
-                            'listing_id': listing_id, 'day':'1971-05-29'
-                            })}}";
+                        'listing_id': listing_id, 'day':'1971-05-29'
+                    }) }}";
                     url = url.replace('1971-05-29', moment(date).format('YYYY-MM-DD'));
 
                     openEditEventDialog(url, moment(date).format("L"));
@@ -152,16 +153,17 @@
             {% endif %}
             eventClick: function (event, jsEvent, view) {
                 //Edition allowed only for current day or future days
-                if (moment(event.start).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD') &&
-                        $.inArray('cal-booked-evt', event.className) == -1
+                if (
+                    moment(event.start).format('YYYY-MM-DD') >= moment(new Date()).format('YYYY-MM-DD') &&
+                    $.inArray('cal-booked-evt', event.className) == -1
                 ) {
                     var url = "{{ path('cocorico_dashboard_listing_edit_availability_' ~ edit_type,{
-                            'listing_id': listing_id, 'id':'availabilityid', 'start_time':'00:00', 'end_time':'00:01'
-                            })}}";
+                        'listing_id': listing_id, 'day': '1971-05-29', 'start_time':'00:00', 'end_time':'00:01'
+                    }) }}";
 
-                    url = url.replace('availabilityid', event.id.slice(0, -4));
-                    url = url.replace('00:00', moment(event.start).format("HH:mm"));
-                    url = url.replace('00:01', moment(event.end).subtract(1, 'minutes').format("HH:mm"));
+                    url = url.replace('1971-05-29', moment(event.startUTC).format("YYYY-MM-DD"));
+                    url = url.replace('00:00', moment(event.startUTC).format("HH:mm"));
+                    url = url.replace('00:01', moment(event.endUTC).format("HH:mm"));
 
                     var title = moment(event.start).format("DD/MM/YYYY HH:mm") + "-" + moment(event.end).format("HH:mm");
                     if (timeUnitIsDay) {

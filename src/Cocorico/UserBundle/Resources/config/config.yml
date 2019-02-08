@@ -22,10 +22,10 @@ fos_user:
         confirmation:
             enabled:    "%cocorico.registration_confirmation%"
         form:
-            type: user_registration
+            type: Cocorico\UserBundle\Form\Type\RegistrationFormType
             name: user_registration
             validation_groups: [CocoricoRegistration]
-            handler: cocorico_user.form.handler.registration
+#            handler: cocorico_user.form.handler.registration
     resetting:
         form:
             type: user_resetting
@@ -44,11 +44,11 @@ sonata_user:
     class:
         user: Cocorico\UserBundle\Entity\User
         group: Cocorico\UserBundle\Entity\Group
-    profile:
-        form:
-            type: user_profile
-            name: user_profile
-            validation_groups: [CocoricoProfile]
+#    profile:
+#        form:
+#            type: user_profile
+#            name: user_profile
+#            validation_groups: [CocoricoProfile]
     admin:
         user:
           class: Cocorico\UserBundle\Admin\UserAdmin
@@ -59,7 +59,7 @@ sonata_user:
         route: cocorico_home
 
 #    google_authenticator:
-#        enabled: true
+#        enabled: false
 #        server:  cocorico.dev
 
 doctrine:
@@ -67,8 +67,9 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-                    #ApplicationSonataUserBundle: ~
-                    SonataUserBundle: ~
+#                    CocoricoUserBundle:
+#                    SonataUserBundle: ~
+#                    FOSUserBundle: ~
         resolve_target_entities:
             #Don't put double quotes!
             Cocorico\UserBundle\Model\ListingAlertInterface: %cocorico_listing_alert.entity_class%
@@ -119,8 +120,7 @@ liip_imagine:
 hwi_oauth:
     connect:
         account_connector: cocorico_user.oauth.user.provider.entity
-    # name of the firewall in which this bundle is active, this setting MUST be set
-    firewall_name: main
+    firewall_names: [main]
     resource_owners:
         facebook:
             type:                facebook

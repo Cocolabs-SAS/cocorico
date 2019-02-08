@@ -11,10 +11,11 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
-use Cocorico\CoreBundle\Model\ListingLocationSearchRequest;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -29,17 +30,17 @@ class ListingLocationSearchType extends AbstractType implements TranslationConta
         $builder
             ->add(
                 'address',
-                'search',
+                SearchType::class,
                 array(
                     'label' => 'listing.search.form.address'
                 )
             )
-            ->add('lat', 'hidden')
-            ->add('lng', 'hidden')
-            ->add('viewport', 'hidden')
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class)
+            ->add('viewport', HiddenType::class)
             ->add(
                 'country',
-                'hidden',
+                HiddenType::class,
                 array(
                     'constraints' => array(
                         new NotBlank(
@@ -50,13 +51,13 @@ class ListingLocationSearchType extends AbstractType implements TranslationConta
                     ),
                 )
             )
-            ->add('area', 'hidden')
-            ->add('department', 'hidden')
-            ->add('city', 'hidden')
-            ->add('zip', 'hidden')
-            ->add('route', 'hidden')
-            ->add('streetNumber', 'hidden')
-            ->add('addressType', 'hidden');
+            ->add('area', HiddenType::class)
+            ->add('department', HiddenType::class)
+            ->add('city', HiddenType::class)
+            ->add('zip', HiddenType::class)
+            ->add('route', HiddenType::class)
+            ->add('streetNumber', HiddenType::class)
+            ->add('addressType', HiddenType::class);
 
     }
 

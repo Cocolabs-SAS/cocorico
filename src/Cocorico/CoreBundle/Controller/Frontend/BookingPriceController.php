@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -60,7 +61,7 @@ class BookingPriceController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_price',
+            BookingPriceType::class,
             $booking,
             array(
                 'method' => 'POST',
@@ -112,17 +113,14 @@ class BookingPriceController extends Controller
                         'booking' => $booking
                     )
                 );
-
         } else {//Redirect to new Booking page if no ajax request
             return $this->redirect(
                 $this->generateUrl(
                     'cocorico_booking_new',
                     array(
                         'listing_id' => $listing->getId(),
-                        'start' => $booking->getStart()->format('Y-m-d'),
-                        'end' => $booking->getEnd()->format('Y-m-d'),
-                        'start_time' => $booking->getStartTime() ? $booking->getStartTime()->format('H:i') : "00:00",
-                        'end_time' => $booking->getEndTime() ? $booking->getEndTime()->format('H:i') : "00:00"
+                        'start' => $booking->getStart()->format('Y-m-d-H:i'),
+                        'end' => $booking->getEnd()->format('Y-m-d-H:i'),
                     )
                 )
             );

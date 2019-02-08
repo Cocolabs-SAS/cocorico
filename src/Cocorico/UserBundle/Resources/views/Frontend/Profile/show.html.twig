@@ -10,7 +10,7 @@
 
 
 {%- block meta_title -%}
-    {{ 'user.show.meta_title'|trans({}, 'cocorico_meta') ~ " "  ~ user.name ~ " - " ~ cocorico_site_name }} }}
+    {{ 'user.show.meta_title'|trans({}, 'cocorico_meta') ~ " "  ~ user.name ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 
 {%- block meta_description -%}
@@ -104,7 +104,7 @@
                                         </div>
                                     </header>
                                     <div class="post-content">
-                                        <p>{{ review.comment|strip_private_info }}</p>
+                                        <p>{{ review.comment|strip_private_info|nl2br }}</p>
                                     </div>
                                     <footer class="footer">
                                         {% if review.booking.listing.user == user %}

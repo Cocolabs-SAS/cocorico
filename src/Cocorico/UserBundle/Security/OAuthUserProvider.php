@@ -33,7 +33,7 @@ class OAuthUserProvider extends BaseClass
      */
     public function __construct(UserManager $cocoricoUserManager)
     {
-
+        parent::__construct($cocoricoUserManager, array());
         $this->cocoricoUserManager = $cocoricoUserManager;
     }
 

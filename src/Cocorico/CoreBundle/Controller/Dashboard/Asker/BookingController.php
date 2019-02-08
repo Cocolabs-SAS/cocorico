@@ -12,6 +12,8 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Asker;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Form\Type\Dashboard\BookingEditType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType;
 use Cocorico\MessageBundle\Event\MessageEvent;
 use Cocorico\MessageBundle\Event\MessageEvents;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -92,14 +94,14 @@ class BookingController extends Controller
     {
         $thread = $booking->getThread();
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
+        $form = $this->get('fos_message.reply_form.factory')->create($thread);
         $paramArr = $request->get($form->getName());
         $request->request->set($form->getName(), $paramArr);
 
-        $formHandler = $this->container->get('fos_message.reply_form.handler');
+        $formHandler = $this->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            $selfUrl = $this->container->get('router')->generate(
+            $selfUrl = $this->get('router')->generate(
                 'cocorico_dashboard_booking_show_asker',
                 array('id' => $booking->getId())
             );
@@ -108,7 +110,7 @@ class BookingController extends Controller
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
 
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
-            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
+            $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             return new RedirectResponse($selfUrl);
         }
@@ -125,7 +127,8 @@ class BookingController extends Controller
                 'other_user_rating' => $booking->getListing()->getUser()->getAverageOffererRating(),
                 'amount_total' => $booking->getAmountToPayByAskerDecimal(),
                 'vat_inclusion_text' => $this->get('cocorico.twig.core_extension')
-                    ->vatInclusionText($request->getLocale(), true, true)
+                    ->vatInclusionText($request->getLocale(), true, true),
+                'user_timezone' => $booking->getTimeZoneAsker(),
             )
         );
     }
@@ -156,8 +159,8 @@ class BookingController extends Controller
 
         $success = $bookingHandler->process($form);
 
-        $translator = $this->container->get('translator');
-        $session = $this->container->get('session');
+        $translator = $this->get('translator');
+        $session = $this->get('session');
         if ($success == 1) {
             $url = $this->generateUrl(
                 'cocorico_dashboard_booking_edit_asker',
@@ -196,7 +199,8 @@ class BookingController extends Controller
                 'other_user_rating' => $booking->getListing()->getUser()->getAverageOffererRating(),
                 'amount_total' => $bookingRefundManger->getAmountDecimalToRefundOrRefundedToAsker($booking),
                 'vat_inclusion_text' => $this->get('cocorico.twig.core_extension')
-                    ->vatInclusionText($request->getLocale(), true, true)
+                    ->vatInclusionText($request->getLocale(), true, true),
+                'user_timezone' => $booking->getTimeZoneAsker(),
             )
         );
     }
@@ -213,7 +217,7 @@ class BookingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'booking',
-            'booking_edit',
+            BookingEditType::class,
             $booking,
             array(
                 'method' => 'POST',
@@ -233,14 +237,13 @@ class BookingController extends Controller
     /**
      * Creates a form to filter bookings
      *
-     *
      * @return \Symfony\Component\Form\Form The form
      */
     private function createBookingFilterForm()
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_status_filter',
+            BookingStatusFilterType::class,
             null,
             array(
                 'action' => $this->generateUrl(

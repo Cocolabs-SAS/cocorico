@@ -33,10 +33,12 @@ class ReplyMessage extends AbstractMessage
 
     /**
      * @param  ThreadInterface $thread
-     * @return null
+     * @return $this
      */
     public function setThread(ThreadInterface $thread)
     {
         $this->thread = $thread;
+
+        return $this;
     }
 }

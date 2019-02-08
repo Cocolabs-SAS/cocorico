@@ -11,7 +11,6 @@
 
 namespace Cocorico\CMSBundle\Model;
 
-use Cocorico\PageBundle\Entity\PageTranslation;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -75,7 +74,7 @@ abstract class BaseFooterTranslation
      * Set title
      *
      * @param  string $title
-     * @return PageTranslation
+     * @return $this
      */
     public function setTitle($title)
     {

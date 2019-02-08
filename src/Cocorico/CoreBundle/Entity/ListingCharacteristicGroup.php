@@ -90,7 +90,7 @@ class ListingCharacteristicGroup
      * Set position
      *
      * @param  boolean $position
-     * @return ListingImage
+     * @return $this
      */
     public function setPosition($position)
     {
@@ -114,7 +114,7 @@ class ListingCharacteristicGroup
      * Add listingCharacteristics
      *
      * @param  \Cocorico\CoreBundle\Entity\ListingCharacteristic $listingCharacteristics
-     * @return ListingCharacteristicType
+     * @return $this
      */
     public function addListingCharacteristic(ListingCharacteristic $listingCharacteristics)
     {
@@ -149,8 +149,11 @@ class ListingCharacteristicGroup
         return $this->translate()->getName();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->translate()->getName();
+        return (string)$this->translate()->getName();
     }
 }

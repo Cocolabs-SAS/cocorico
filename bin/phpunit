@@ -1,7 +1,1 @@
-#!/usr/bin/env sh
-SRC_DIR="`pwd`"
-cd "`dirname "$0"`"
-cd "../vendor/phpunit/phpunit"
-BIN_TARGET="`pwd`/phpunit"
-cd "$SRC_DIR"
-"$BIN_TARGET" "$@"
+../vendor/phpunit/phpunit/phpunit

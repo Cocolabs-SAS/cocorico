@@ -11,12 +11,12 @@
 
 namespace Cocorico\ContactBundle\Form\Type\Frontend;
 
-use Cocorico\ContactBundle\Entity\Contact;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ContactNewType extends AbstractType implements TranslationContainerInterface
 {
@@ -80,19 +80,10 @@ class ContactNewType extends AbstractType implements TranslationContainerInterfa
             array(
                 'data_class' => 'Cocorico\ContactBundle\Entity\Contact',
                 'translation_domain' => 'cocorico_contact',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('CocoricoContact'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

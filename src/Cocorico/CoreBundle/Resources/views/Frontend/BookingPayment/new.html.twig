@@ -8,9 +8,10 @@
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_location = listing.location %}
 {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+{% set user_timezone = app.session.get('timezone', timeZone) %}
 
 {%- block meta_title -%}
-    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " - " ~ cocorico_site_name }} }}
+    {{ 'booking.payment.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ booking.start|localizeddate('short', 'none', 'fr') ~ ", " ~ booking_duration|add_time_unit_text ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 
 {%- block meta_description -%}

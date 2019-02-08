@@ -11,6 +11,7 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\CoreBundle\Form\Type\LanguageFilteredType;
 use Cocorico\UserBundle\Entity\User;
@@ -18,11 +19,14 @@ use Cocorico\UserBundle\Entity\UserImage;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProfileAboutMeFormType extends AbstractType implements TranslationContainerInterface
 {
@@ -31,7 +35,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
     private $locale;
     private $locales;
     /**
-     * @var array uploaded files
+     * @var array|string uploaded files
      */
     protected $uploaded;
 
@@ -67,7 +71,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
 
         $builder->add(
             'translations',
-            'a2lix_translations',
+            TranslationsType::class,
             array(
                 'required_locales' => array($this->locale),
                 'fields' => array(
@@ -84,44 +88,44 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
         $builder
             ->add(
                 'image',
-                new ImageType()
+                ImageType::class
             )
             ->add(
                 'images',
-                'collection',
+                CollectionType::class,
                 array(
                     'allow_delete' => true,
-                    'type' => new UserImageType(),
+                    'entry_type' => UserImageType::class,
                     /** @Ignore */
                     'label' => false
                 )
             )
             ->add(
                 'language',
-                'language',
+                LanguageType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.language',
                     'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
-                    'empty_value' => 'user.about.language.select',
+                    'placeholder' => 'user.about.language.select',
                     'required' => false
                 )
             )
             ->add(
                 'languages',
-                'collection',
+                CollectionType::class,
                 array(
                     'allow_delete' => true,
                     'allow_add' => true,
                     'by_reference' => false,
-                    'type' => new UserLanguageType(),
+                    'entry_type' => UserLanguageType::class,
                     /** @Ignore */
                     'label' => false
                 )
             )
             ->add(
                 'motherTongue',
-                'language',
+                LanguageType::class,
                 array(
                     'label' => 'cocorico.motherTongue',
                     'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
@@ -130,7 +134,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'fromLang',
-                'language_filtered',
+                LanguageFilteredType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.from',
@@ -139,7 +143,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             )
             ->add(
                 'toLang',
-                'language_filtered',
+                LanguageFilteredType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.to',
@@ -192,19 +196,10 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                 'data_class' => $this->class,
                 'csrf_token_id' => 'profile',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('CocoricoProfile'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

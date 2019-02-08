@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditLocationType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,7 +86,7 @@ class ListingLocationController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing',
-            'listing_edit_location',
+            ListingEditLocationType::class,
             $listing,
             array(
                 'action' => $this->generateUrl(

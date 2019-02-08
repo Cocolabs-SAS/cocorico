@@ -283,4 +283,71 @@ class ListingRepository extends EntityRepository
 
         return $queryBuilder;
     }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingTranslationId
+     * @return array
+     */
+    public function findByTranslationId($listingTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.translations', 'lt')
+            ->where('lt.id = :listingTranslationId')
+            ->setParameter('listingTranslationId', $listingTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingListingCategoryId
+     * @return array
+     */
+    public function findByListingListingCategoryId($listingListingCategoryId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->where('llc.id = :listingListingCategoryId')
+            ->setParameter('listingListingCategoryId', $listingListingCategoryId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $listingCategoryTranslationId
+     * @return array
+     */
+    public function findByListingCategoryTranslationId($listingCategoryTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.listingListingCategories', 'llc')
+            ->innerJoin('llc.category', 'lc')
+            ->innerJoin('lc.translations', 'lct')
+            ->where('lct.id = :listingCategoryTranslationId')
+            ->setParameter('listingCategoryTranslationId', $listingCategoryTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * Used by ElasticsearchBundle
+     *
+     * @param int $userTranslationId
+     * @return array
+     */
+    public function findByUserTranslationId($userTranslationId)
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->innerJoin('l.user', 'lu')
+            ->innerJoin('lu.translations', 'lut')
+            ->where('lut.id = :userTranslationId')
+            ->setParameter('userTranslationId', $userTranslationId);
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

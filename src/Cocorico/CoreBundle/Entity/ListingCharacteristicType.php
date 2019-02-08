@@ -79,7 +79,7 @@ class ListingCharacteristicType
      * Add characteristic value
      *
      * @param  \Cocorico\CoreBundle\Entity\ListingCharacteristicValue $listingCharacteristicValue
-     * @return ListingCharacteristic
+     * @return $this
      */
     public function addListingCharacteristicValue(ListingCharacteristicValue $listingCharacteristicValue)
     {
@@ -168,6 +168,6 @@ class ListingCharacteristicType
 
     public function __toString()
     {
-        return $this->name;
+        return (string)$this->name;
     }
 }

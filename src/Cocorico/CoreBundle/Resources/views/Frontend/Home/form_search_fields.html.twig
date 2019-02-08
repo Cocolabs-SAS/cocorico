@@ -1,10 +1,14 @@
 {% trans_default_domain 'cocorico_listing' %}
 
 {#home search form fields without start ane end form#}
-
 {#<fieldset>#}
 <legend class="hidden">form-category</legend>
 <div class="container">
+    <div class="keyword clearable">
+        {% if bundleExist('CocoricoElasticsearchBundle') %}
+            {% include '@CocoricoElasticsearch/_form_keywords.html.twig' %}
+        {% endif %}
+    </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="area">

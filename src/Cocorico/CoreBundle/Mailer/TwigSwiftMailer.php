@@ -29,8 +29,10 @@ class TwigSwiftMailer implements MailerInterface
     protected $translator;
     protected $timeUnit;
     protected $timeUnitIsDay;
+    protected $locale;
     /** @var  array locales */
     protected $locales;
+    protected $timezone;
     protected $templates;
     protected $fromEmail;
     protected $adminEmail;
@@ -69,6 +71,8 @@ class TwigSwiftMailer implements MailerInterface
 
         $this->locales = $parameters['cocorico_locales'];
         $this->locale = $parameters['cocorico_locale'];
+        $this->timezone = $parameters['cocorico_time_zone'];
+
         if ($requestStack->getCurrentRequest()) {
             $this->locale = $requestStack->getCurrentRequest()->getLocale();
         }
@@ -91,7 +95,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -120,7 +124,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -151,14 +155,14 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $profilePaymentInfoUrl = $this->router->generate(
             'cocorico_user_dashboard_profile_edit_bank_account',
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -191,7 +195,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -221,7 +225,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -252,7 +256,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -285,7 +289,7 @@ class TwigSwiftMailer implements MailerInterface
                 'booking_id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -338,7 +342,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -368,7 +372,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $paymentOffererUrl = $this->router->generate(
@@ -376,7 +380,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $wireAmount = $booking->getAmountToPayToOffererDecimal();
@@ -410,7 +414,7 @@ class TwigSwiftMailer implements MailerInterface
                 'listing_id' => $listing->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -433,7 +437,7 @@ class TwigSwiftMailer implements MailerInterface
 //        $bookingRequestUrl = $this->router->generate(
 //            'cocorico_dashboard_booking_show_offerer',
 //            array('id' => $booking->getId()),
-//            true
+//            UrlGeneratorInterface::ABSOLUTE_URL
 //        );
 //
 //        $context = array(
@@ -463,7 +467,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -494,14 +498,14 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
         $paymentAskerUrl = $this->router->generate(
             'cocorico_dashboard_booking_payin_asker',
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -531,7 +535,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -557,7 +561,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -586,7 +590,7 @@ class TwigSwiftMailer implements MailerInterface
                 'id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -617,7 +621,7 @@ class TwigSwiftMailer implements MailerInterface
                 'booking_id' => $booking->getId(),
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $context = array(
@@ -646,7 +650,7 @@ class TwigSwiftMailer implements MailerInterface
             array(
                 '_locale' => $userLocale
             ),
-            true
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
         $askerCancellationAmount = $booking->getPayinRefund() ? $booking->getPayinRefund()->getAmountDecimal() : 0;
@@ -690,7 +694,7 @@ class TwigSwiftMailer implements MailerInterface
 //        $bookingRequestUrl = $this->router->generate(
 //            'cocorico_dashboard_booking_show_offerer',
 //            array('id' => $booking->getId()),
-//            true
+//            UrlGeneratorInterface::ABSOLUTE_URL
 //        );
 //
 //        $context = array(
@@ -708,16 +712,18 @@ class TwigSwiftMailer implements MailerInterface
     /**
      * @param string $templateName
      * @param array  $context
-     * @param string $fromEmail
+     * @param array  $fromEmail
      * @param string $toEmail
      */
     protected function sendMessage($templateName, $context, $fromEmail, $toEmail)
     {
+        $user = null;
         $context['trans_domain'] = self::TRANS_DOMAIN;
 
         $context['user_locale'] = $this->locale;
         $context['locale'] = $this->locale;
         $context['app']['request']['locale'] = $this->locale;
+        $context['user_timezone'] = $this->timezone;
 
         if (isset($context['user'])) {//user receiving the email
             /** @var User $user */
@@ -725,6 +731,7 @@ class TwigSwiftMailer implements MailerInterface
             $context['user_locale'] = $user->guessPreferredLanguage($this->locales, $this->locale);
             $context['locale'] = $context['user_locale'];
             $context['app']['request']['locale'] = $context['user_locale'];
+            $context['user_timezone'] = $user->getTimeZone();
         }
 
         if (isset($context['listing'])) {
@@ -744,7 +751,7 @@ class TwigSwiftMailer implements MailerInterface
                     '_locale' => $context['user_locale'],
                     'slug' => $slug
                 ),
-                true
+                UrlGeneratorInterface::ABSOLUTE_URL
             );
 
             $context['listing_title'] = $title;
@@ -752,6 +759,7 @@ class TwigSwiftMailer implements MailerInterface
 
         if (isset($context['booking'])) {
             $context['booking_time_range_title'] = $context['booking_time_range'] = '';
+
             if (!$this->timeUnitIsDay) {
                 /** @var Booking $booking */
                 $booking = $context['booking'];
@@ -761,39 +769,52 @@ class TwigSwiftMailer implements MailerInterface
                     'cocorico_mail',
                     $context['user_locale']
                 );
-                $context['booking_time_range'] .= $booking->getStartTime()->format('H:i') . " - " .
-                    $booking->getEndTime()->format('H:i');
+
+                $timezone = $this->timezone;
+                if ($user) {
+                    if ($booking->getUser() == $user) {
+                        $timezone = $booking->getTimeZoneAsker();
+                    } elseif ($booking->getListing()->getUser() == $user) {
+                        $timezone = $booking->getTimeZoneOfferer();
+                    }
+                }
+
+                $startTime = clone $booking->getStartTime();
+                $startTime->setTimezone(new \DateTimeZone($timezone));
+                $endTIme = clone $booking->getEndTime();
+                $endTIme->setTimezone(new \DateTimeZone($timezone));
+
+                $context['booking_time_range'] .= $startTime->format('H:i') . " - " . $endTIme->format('H:i');
+                $context['user_timezone'] = $timezone;
             }
         }
 
-        /** @var \Twig_Template $template */
-        $template = $this->twig->loadTemplate($templateName);
-        $context = $this->twig->mergeGlobals($context);
+        try {
+            /** @var \Twig_Template $template */
+            $template = $this->twig->loadTemplate($templateName);
+            $context = $this->twig->mergeGlobals($context);
 
-        $subject = $template->renderBlock('subject', $context);
-        $context["message"] = $template->renderBlock('message', $context);
+            $subject = $template->renderBlock('subject', $context);
+            $context["message"] = $template->renderBlock('message', $context);
 
-        $textBody = $template->renderBlock('body_text', $context);
-        $htmlBody = $template->renderBlock('body_html', $context);
+            $textBody = $template->renderBlock('body_text', $context);
+            $htmlBody = $template->renderBlock('body_html', $context);
 
-//        echo 'subject:' . $subject . 'endsubject';
-//        echo 'htmlBody:' . $htmlBody . 'endhtmlBody';
-//        echo 'textBody:' . $textBody . 'endtextBody';
+            $message = (new \Swift_Message($subject))
+                ->setFrom($fromEmail)
+                ->setTo($toEmail);
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail);
+            if (!empty($htmlBody)) {
+                $message
+                    ->setBody($htmlBody, 'text/html')
+                    ->addPart($textBody, 'text/plain');
+            } else {
+                $message->setBody($textBody);
+            }
 
-        if (!empty($htmlBody)) {
-            $message
-                ->setBody($htmlBody, 'text/html')
-                ->addPart($textBody, 'text/plain');
-        } else {
-            $message->setBody($textBody);
+            $this->mailer->send($message);
+        } catch (\Exception $e) {
         }
-
-        $this->mailer->send($message);
     }
 
 }

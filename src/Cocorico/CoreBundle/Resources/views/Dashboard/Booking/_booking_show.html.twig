@@ -22,7 +22,7 @@
 
         <div class="area">
             <header class="head">
-                <div class="area">
+                <div class="area pull-left">
                     <h2>
                         <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
                             {{ listing_translation.title }}
@@ -30,27 +30,29 @@
                     </h2>
                 </div>
 
-                <div class="meta">
+                <div class="meta pull-right">
                     <span class="booking-info">
                         {{ 'booking.show.number.title'|trans }} :
-                        <strong>
-                            {{ booking.id }}
-                        </strong>
+                        <strong>{{ booking.id }}</strong>
                     </span>
                 </div>
 
                 <div class="booking-detail">
+                    <div class="timezone">
+                        <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                        {{ user_timezone|timezone_name }}
+                    </div>
                     <ul class="list-inline" id="booking-asker-date">
-                        <li content="{{ booking.start|date('Y-m-d') }}">
+                        <li>
                             {{ 'booking.show.start:'|trans }}
                             <time>
-                                {{ booking.start|localizeddate('short', 'none', 'fr') }}
+                                {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }}
                             </time>
                         </li>
                         <li>
                             {{ 'booking.show.end:'|trans }}
                             <time>
-                                {{ booking.end|localizeddate('short', 'none', 'fr') }}
+                                {{ booking.end|localizeddate('short', 'none', 'fr', user_timezone) }}
                             </time>
                         </li>
 
@@ -58,16 +60,25 @@
                             <li>
                                 {{ 'booking.show.start_time:'|trans }}
                                 <time>
-                                    {{ booking.startTime|date('H:i') }}
+                                    {{ booking.startTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                                 </time>
                             </li>
                             <li>
                                 {{ 'booking.show.end_time:'|trans }}
                                 <time>
-                                    {{ booking.endTime|date('H:i') }}
+                                    {{ booking.endTime|localizeddate('none', 'short', 'fr', user_timezone) }}
                                 </time>
                             </li>
                         {% endif %}
+                        <li class="booking-duration">
+                            <strong>
+                                {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
+                                {{ 'booking.duration:'|trans }}
+                                <span class="normal-text">
+                                    {{ booking_duration|add_time_unit_text }}
+                                </span>
+                            </strong>
+                        </li>
                     </ul>
                 </div>
             </header>
@@ -79,7 +90,9 @@
                 </div>
                 <div class="textbox">
                     <span class="author-info">
-                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.name }}</strong></a>
+                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
+                            <strong>{{ other_user.name }}</strong>
+                        </a>
                     </span>
                     {% if other_user_rating %}
                         {{ other_user_rating | cocorico_star_rating }}
@@ -88,21 +101,20 @@
 
                 {% if bundleExist('CocoricoDeliveryBundle') %}
                     {% include 'CocoricoDeliveryBundle:Dashboard:Booking/_show_delivery.html.twig' with {
-                    'booking': booking
+                        'booking': booking
                     } only %}
                 {% elseif bundleExist('CocoricoCarrierBundle') %}
                     {% include 'CocoricoCarrierBundle:Dashboard:Booking/_show_carrier.html.twig' with {
-                    'booking': booking
+                        'booking': booking
                     } only %}
                 {% endif %}
             </div>
 
             {% if bundleExist('CocoricoListingOptionBundle') %}
                 {% include 'CocoricoListingOptionBundle:Dashboard:Booking/_booking_show_options.html.twig' with {
-                'booking': booking
+                    'booking': booking
                 } only %}
             {% endif %}
-
         </div>
     </div>
 
@@ -126,20 +138,12 @@
             } only %}
         {% endif %}
 
-        <strong class="booking-duration">
-            {% set booking_duration = booking.duration(endDayIncluded, timeUnit) %}
-            {{ 'booking.duration:'|trans }}
-            <span class="normal-text">
-                {{ booking_duration|add_time_unit_text }}
-            </span>
-        </strong>
-
         {% set status_class = bookingStatusClass[booking.status] %}
         <span class="btn {{ status_class }}">
             {{ 'booking.show.status.title'|trans }} {{ booking.statusText|trans }}
         </span>
 
-        {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay, timeZone) %}
+        {% set expiration = booking.getTimeBeforeExpiration(bookingExpirationDelay, bookingAcceptationDelay) %}
         {% if expiration > 0 %}
             <strong class="expiry">
                 {{ 'booking.expire_in:'|trans }} {{ expiration|format_seconds }}

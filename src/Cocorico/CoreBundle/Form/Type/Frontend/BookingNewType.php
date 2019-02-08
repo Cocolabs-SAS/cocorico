@@ -15,10 +15,14 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Event\BookingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\BookingFormEvents;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Cocorico\TimeBundle\Form\Type\DateRangeType;
+use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormEvent;
@@ -27,6 +31,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingNewType extends AbstractType implements TranslationContainerInterface
 {
@@ -42,7 +47,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
     private $bookingManager;
     private $dispatcher;
     protected $allowSingleDay;
-    protected $endDayInclude;
+    protected $endDayIncluded;
     protected $minStartDelay;
     protected $minStartTimeDelay;
     private $currency;
@@ -84,7 +89,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'date_range',
-                'date_range',
+                DateRangeType::class,
                 array(
                     'mapped' => false,
                     /** @Ignore */
@@ -93,21 +98,21 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                     'start_options' => array(
                         'label' => 'booking.form.start',
                         'mapped' => true,
-                        'data' => $booking->getStart()
+                        'data' => $booking->getStart(),
                     ),
                     'end_options' => array(
                         'label' => 'booking.form.end',
                         'mapped' => true,
-                        'data' => $booking->getEnd()
+                        'data' => $booking->getEnd(),
                     ),
                     'allow_single_day' => $this->allowSingleDay,
                     'end_day_included' => $this->endDayIncluded,
-                    'error_bubbling' => false
+                    'error_bubbling' => false,
                 )
             )
             ->add(
                 'tac',
-                'checkbox',
+                CheckboxType::class,
                 array(
                     'label' => 'listing.form.tac',
                     'mapped' => false,
@@ -123,16 +128,18 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             //All date and time fields are hidden in this form
             $builder->add(
                 'time_range',
-                'time_range',
+                TimeRangeType::class,
                 array(
                     'mapped' => false,
                     'start_options' => array(
                         'mapped' => true,
-                        'data' => $booking->getStartTime()
+                        'data' => $booking->getStartTime(),
+                        'view_timezone' => 'UTC'
                     ),
                     'end_options' => array(
                         'mapped' => true,
-                        'data' => $booking->getEndTime()
+                        'data' => $booking->getEndTime(),
+                        'view_timezone' => 'UTC'
                     ),
                     'required' => true,
                     /** @Ignore */
@@ -148,7 +155,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'message',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'booking.form.message',
                     'required' => true
@@ -159,7 +166,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
             $builder
                 ->add(
                     'userAddress',
-                    'booking_user_address',
+                    BookingUserAddressFormType::class,
                     array(
                         /** @Ignore */
                         'label' => false,
@@ -179,12 +186,14 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 //Set Booking Amounts or throw Error if booking is invalid
                 /** @var Booking $booking */
                 $booking = $event->getData();
-                $errors = $this->bookingManager->checkBookingAvailabilityAndSetAmounts($booking);
+                $result = $this->bookingManager->checkBookingAndSetAmounts($booking);
+                $booking = $result->booking;
+                $errors = $result->errors;
 
                 if (!count($errors)) {
                     $event->setData($booking);
                 } else {
-                    $this->formErrors($form, $errors);
+                    $this->formErrors($form, $errors, $booking->getUser()->getTimeZone());
                 }
             }
         );
@@ -218,9 +227,10 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
      * Add errors to the form if any
      *
      * @param FormInterface $form
-     * @param               $errors
+     * @param array         $errors
+     * @param  string       $timezone
      */
-    private function formErrors(FormInterface $form, $errors)
+    private function formErrors(FormInterface $form, $errors, $timezone)
     {
         $keys = array_keys($errors, 'date_range.invalid.min_start');
         if (count($keys)) {
@@ -228,7 +238,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 unset($errors[$key]);
             }
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($timezone));
             if ($this->minStartDelay > 0) {
                 $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
             }
@@ -249,7 +259,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 unset($errors[$key]);
             }
             $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->bookingManager->getTimeZone()));
+            $minStart->setTimezone(new \DateTimeZone($timezone));
             if ($this->minStartTimeDelay > 0) {
                 $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
             }
@@ -351,7 +361,7 @@ class BookingNewType extends AbstractType implements TranslationContainerInterfa
                 'data_class' => 'Cocorico\CoreBundle\Entity\Booking',
                 'csrf_token_id' => 'booking_new',
                 'translation_domain' => 'cocorico_booking',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('new', 'default'),
             )
         );

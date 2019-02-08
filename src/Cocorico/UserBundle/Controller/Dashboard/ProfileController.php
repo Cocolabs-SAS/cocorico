@@ -95,7 +95,7 @@ class ProfileController extends Controller
 
         $form = $this->get('form.factory')->createNamed(
             'profileSwitch',
-            new ProfileSwitchFormType(),
+            ProfileSwitchFormType::class,
             array('profile' => $selectedProfile),
             array(
                 'method' => 'POST',

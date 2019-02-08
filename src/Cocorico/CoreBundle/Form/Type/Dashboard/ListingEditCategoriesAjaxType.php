@@ -14,10 +14,12 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\DataTransformer\ListingListingCategoriesToListingCategoriesTransformer;
+use Cocorico\CoreBundle\Form\Type\ListingCategoryType;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ListingEditCategoriesAjaxType extends AbstractType
 {
@@ -40,10 +42,10 @@ class ListingEditCategoriesAjaxType extends AbstractType
         $builder
             ->add(
                 'listingListingCategories',
-                'listing_category',
+                ListingCategoryType::class,
                 array(
                     'label' => 'listing_search.form.categories',
-                    'empty_value' => 'listing_search.form.categories.empty_value',
+                    'placeholder' => 'listing_search.form.categories.empty_value',
                 )
             );
 
@@ -71,18 +73,9 @@ class ListingEditCategoriesAjaxType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_edit',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,//To have error on collection item field,
+                'constraints' => new Valid(),//To have error on collection item field,
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

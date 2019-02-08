@@ -17,20 +17,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingListingCharacteristicType extends AbstractType
 {
-    protected $locale;
+    private $locale;
 
     /**
-     * @param   $locale
+     * @param RequestStack $requestStack
      */
-    public function __construct($locale)
+    public function __construct(RequestStack $requestStack)
     {
-        $this->locale = $locale;
+        $this->locale = $requestStack->getCurrentRequest()->getLocale();
     }
 
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(
@@ -52,8 +56,8 @@ class ListingListingCharacteristicType extends AbstractType
                                 $this->locale
                             );
                         },
-                        'empty_value' => 'listing.form.characteristic.choose',
-                        'property' => 'translations[' . $this->locale . '].name',
+                        'placeholder' => 'listing.form.characteristic.choose',
+                        'choice_label' => 'translations[' . $this->locale . '].name',
                         'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicValue',
                     )
                 );
@@ -62,7 +66,7 @@ class ListingListingCharacteristicType extends AbstractType
     }
 
     /**
-     * @param OptionsResolver $resolver
+     * @inheritdoc
      */
     public function configureOptions(OptionsResolver $resolver)
     {
@@ -72,15 +76,6 @@ class ListingListingCharacteristicType extends AbstractType
                 'translation_domain' => 'cocorico_listing'
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

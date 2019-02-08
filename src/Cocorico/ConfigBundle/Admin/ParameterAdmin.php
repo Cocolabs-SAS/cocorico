@@ -12,7 +12,7 @@
 namespace Cocorico\ConfigBundle\Admin;
 
 use Cocorico\ConfigBundle\Entity\Parameter;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -21,7 +21,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
-class ParameterAdmin extends Admin
+class ParameterAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'parameter';
@@ -32,7 +32,7 @@ class ParameterAdmin extends Admin
         '_sort_by' => 'name'
     );
 
-
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var Parameter $parameter */
@@ -66,6 +66,8 @@ class ParameterAdmin extends Admin
             ->end();
     }
 
+
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -81,6 +83,8 @@ class ParameterAdmin extends Admin
             );
     }
 
+
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -105,14 +109,14 @@ class ParameterAdmin extends Admin
             array(
                 'actions' => array(
                     'show' => array(),
-//                    'create' => array(),
                     'edit' => array(),
-//                    'delete' => array(),
                 )
             )
         );
     }
 
+
+    /** @inheritdoc */
     public function configureShowFields(ShowMapper $showMapper)
     {
         $showMapper

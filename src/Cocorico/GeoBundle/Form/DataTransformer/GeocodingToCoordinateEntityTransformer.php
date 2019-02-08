@@ -16,10 +16,10 @@ use Cocorico\GeoBundle\Entity\City;
 use Cocorico\GeoBundle\Entity\Coordinate;
 use Cocorico\GeoBundle\Entity\Country;
 use Cocorico\GeoBundle\Entity\Department;
-use Cocorico\GeoBundle\Geocoder\Provider\GoogleMapsProvider;
+use Cocorico\GeoBundle\Geocoder\Provider\GoogleMaps;
+use Cocorico\GeoBundle\Geocoder\StatefulGeocoder;
 use Doctrine\Common\Persistence\ObjectManager;
-use Geocoder\Exception\NoResult;
-use Ivory\HttpAdapter\CurlHttpAdapter;
+use Http\Adapter\Guzzle6\Client;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
@@ -153,7 +153,7 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
                 $coordinate->setDepartment($geographicalEntities["department"]);
                 $coordinate->setCity($geographicalEntities["city"]);
 
-            } catch (TransformationFailedException $e) {
+            } catch (\Exception $e) {
                 throw new TransformationFailedException();
             }
 
@@ -170,19 +170,23 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
      * @param $lat
      * @param $lng
      * @return bool|mixed
+     * @throws TransformationFailedException
      */
     private function getGeocodingServer($region, $lat, $lng)
     {
         //Server geocoding. If we can we use it instead of client geocoding
         try {
             $geocodingsServer = $geocodingI18nServer = array();
+
+            $httpClient = new Client();
+            $provider = new GoogleMaps($httpClient, $region, $this->googlePlaceAPIKey);
+
             //Geocoding for each locale
             foreach ($this->locales as $locale) {
-                $geocoder = new GoogleMapsProvider(
-                    new CurlHttpAdapter(), $locale, $region, true, $this->googlePlaceAPIKey
-                );
-                $geocoder->limit(1);
-                $geocodingsServer[$locale] = $geocoder->reverse($lat, $lng);
+                $geocoder = new StatefulGeocoder($provider, $locale);
+                $geocoder->setLimit(1);
+                $geocodingsServers = $geocoder->reverse($lat, $lng)->all();
+                $geocodingsServer[$locale] = $geocodingsServers[0];
             }
 
             //Move current locale to end of array. The current locale is the reference.
@@ -197,7 +201,7 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
                 $geocodingI18nServer = array_merge($geocodingI18nServer, $geocodingServer);
             }
 
-        } catch (NoResult $e) {
+        } catch (\Exception $e) {
             $this->debug("getGeocodingServer NoResult Error:\n" . $e->getMessage());
             throw new TransformationFailedException();
         }
@@ -213,9 +217,10 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     /**
      * Get and/or set Geographical Entities from geocoding information
      *
-     * @param object $geocodingI18n
-     *
+     * @param $geocodingI18n
      * @return array
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function getGeographicalEntities($geocodingI18n)
     {
@@ -246,24 +251,10 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
                 );
         }
 
-        $country = $this->getOrCreateCountry(
-            $geocodingI18n->{$this->locale}->country_short,
-            $countries
-        );
-
-        $area = $this->getOrCreateArea(
-            $areas,
-            $country
-        );
-        $department = $this->getOrCreateDepartment(
-            $departments,
-            $area
-        );
-
-        $city = $this->getOrCreateCity(
-            $cities,
-            $department
-        );
+        $country = $this->getOrCreateCountry($geocodingI18n->{$this->locale}->country_short, $countries);
+        $area = $this->getOrCreateArea($areas, $country);
+        $department = $this->getOrCreateDepartment($departments, $area);
+        $city = $this->getOrCreateCity($cities, $department);
 
         return array(
             "country" => $country,
@@ -287,7 +278,6 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
             return false;
         }
         $geocoding = $geocodingI18n->{$this->locale};
-        //die(print_r($geocoding, 1));
         if (!isset($geocodingI18n->lat) || !isset($geocodingI18n->lng) ||
             !isset($geocoding->country_short) || !isset($geocodingI18n->formatted_address) ||
             (
@@ -335,6 +325,9 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
      * @param  array   $names
      * @param  Country $country
      * @return Area|mixed|null
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function getOrCreateArea($names, $country)
     {
@@ -361,11 +354,14 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     }
 
     /**
-     * Get or create and translate department
+     ** Get or create and translate department
      *
      * @param  array $names
      * @param  Area  $area
      * @return mixed
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function getOrCreateDepartment($names, $area)
     {
@@ -398,6 +394,9 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
      * @param  array      $names
      * @param  Department $department
      * @return City
+     *
+     * @throws \Doctrine\ORM\NoResultException
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function getOrCreateCity($names, $department)
     {
@@ -430,7 +429,7 @@ class GeocodingToCoordinateEntityTransformer implements DataTransformerInterface
     private function debug($message)
     {
         if (self::DEBUG) {
-            echo nl2br($message) . "<br>";
+            echo '<pre>' . nl2br($message) . "</pre><br>";
         }
     }
 }

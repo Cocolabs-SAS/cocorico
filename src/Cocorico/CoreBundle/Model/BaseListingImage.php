@@ -11,7 +11,6 @@
 
 namespace Cocorico\CoreBundle\Model;
 
-use Cocorico\CoreBundle\Entity\ListingImage;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -71,7 +70,7 @@ abstract class BaseListingImage
      * Set position
      *
      * @param  boolean $position
-     * @return ListingImage
+     * @return $this
      */
     public function setPosition($position)
     {

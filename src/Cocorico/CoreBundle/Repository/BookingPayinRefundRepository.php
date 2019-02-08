@@ -12,8 +12,6 @@
 namespace Cocorico\CoreBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
-
 
 class BookingPayinRefundRepository extends EntityRepository
 {

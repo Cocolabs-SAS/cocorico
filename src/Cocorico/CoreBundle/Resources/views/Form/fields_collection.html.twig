@@ -1,0 +1,258 @@
+{% extends 'CocoricoCoreBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+
+{#Common Collection widget item#}
+{% macro collectionItem(child_form, allow_delete) %}
+    {% spaceless %}
+        <li>
+            {% set fieldNum = 1 %}
+            {% for field in child_form %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    <div class="{{ field.vars.id }}">
+                        {{ form_errors(field) }}
+                        {{ form_label(field) }}
+                        {{ form_widget(field) }}
+                    </div>
+                    {% set fieldNum = fieldNum + 1 %}
+                {% else %}
+                    {{ form_widget(field) }}
+                {% endif %}
+            {% endfor %}
+
+            {% if allow_delete|default(null) is not null %}
+                <a class="remove" title="Remove" href="javascript:void(0)" onclick="$(this).parent().remove();">
+                    <span>{{ 'collection.remove_item'|trans }}</span>
+                </a>
+            {% endif %}
+
+        </li>
+
+    {% endspaceless %}
+{% endmacro %}
+
+
+{#
+   Common Collection widget
+#}
+{% block collection_widget %}
+    {% import _self as self %}
+
+    {% spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.collectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+
+            <ul class="collection">
+                {% for child_form in form %}
+                    {{ self.collectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </ul>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-block">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock collection_widget %}
+
+
+{#
+    Discounts collection widget
+#}
+{% macro discountCollectionItem(child_form, allow_delete) %}
+    {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
+    {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
+
+    {% spaceless %}
+        <ul class="discount-list list-inline js-removed-row">
+            {% set fieldNum = 1 %}
+            {% for field in child_form %}
+                {#{{ form_errors(field) }}#}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    <li class="{{ field.vars.id }}">
+                        {% if field.vars.name == "discount" %}
+                            {{ form_errors(field) }}
+                            <span class="label">{{ form_label(field) }}</span>
+                            <div class="field-holder">
+                                {{ form_widget(field,{
+                                    'id': 'decrement',
+                                    'attr': {
+                                        'data-ending': '%',
+                                        'type': 'number',
+                                        'class': 'form-control jcf-real-element',
+
+                                    }
+                                }) }}
+                            </div>
+                        {% elseif field.vars.name == "fromQuantity" %}
+                            {{ form_errors(field) }}
+                            <span class="label">
+                                {{ form_label(field,
+                                    field.vars.label|trans(quantityText, 'cocorico_listing')) }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(field,{
+                                    'id': 'per-day-price2',
+                                    'attr': {
+                                        'type': 'number',
+                                        'class': 'form-control',
+                                    }
+                                }) }}
+                            </div>
+                        {% endif %}
+                    </li>
+
+                    {% set fieldNum = fieldNum + 1 %}
+                {% else %}
+                    {{ form_widget(field) }}
+                {% endif %}
+            {% endfor %}
+
+            {% if allow_delete|default(null) is not null %}
+                {#remove#}
+                <li>
+                    <span class="label">
+                        {{ 'listing_edit.form.from_quantity.bought'|trans(quantitiesText, 'cocorico_listing') }}
+                    </span>
+                    <a class="close" title="Remove" href="javascript:void(0)"
+                       onclick="$(this).closest('ul').remove();">
+                        <span class="hidden">{{ 'collection.remove_item'|trans }}</span>
+                        <i class="icon-cancel"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    {% endspaceless %}
+{% endmacro %}
+
+
+{%- block _listing_discount_discounts_widget -%}
+    {% import _self as self %}
+
+    {% set data_prototype = "" %}
+    {% if prototype is defined %}
+        {% set data_prototype =  self.discountCollectionItem(form.vars.prototype, allow_delete) %}
+    {% endif %}
+
+    <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+        <div class="collection">
+            {% for child_form in form %}
+                {{ self.discountCollectionItem(child_form, allow_delete) }}
+            {% endfor %}
+        </div>
+
+        {% if allow_add|default(null) is not null %}
+            <div class="btn-block text-center collection-add-block">
+                <a class="add" title="Add" href="">
+                    <div style="display: none;"></div>
+                    <span>{{ 'collection.add_item'|trans }}</span>
+                </a>
+            </div>
+        {% endif %}
+    </div>
+{%- endblock -%}
+
+{#
+    Images collection
+#}
+{% macro imagesCollectionItem(child_form, allow_delete) %}
+    {% spaceless %}
+        <div class="img-thumbnail">
+
+            {% if allow_delete|default(null) is not null %}
+                <a href="javascript:void(0)" onclick="$(this).parent().remove();" title="Remove"
+                   class="close remove"
+                   data-dismiss="alert" aria-label="Close">
+                    <span class="hidden">{{ 'collection.remove_item'|trans }}</span>
+                    <i class="icon-cancel"></i>
+                </a>
+            {% endif %}
+
+            {% set fieldNum = 1 %}
+            {% for field in child_form %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    {{ form_errors(field) }}
+                    {{ form_label(field) }}
+                    <!-- img-thumbnail -->
+                    {{ form_widget(field) }}
+                    {% set fieldNum = fieldNum + 1 %}
+                {% else %}
+                    {{ form_widget(field) }}
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endmacro %}
+
+
+{#
+   Images Collection widget
+#}
+{% block _listing_images_widget %}
+    {% import _self as self %}
+
+    {% spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+            <!-- files-list -->
+            <div class="files-list collection">
+                {% for child_form in form %}
+                    {{ self.imagesCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </div>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-blocks">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+
+{#
+   Images Collection widget for user profile
+#}
+{% block _user_images_widget %}
+    {% import _self as self %}
+
+    {% spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.profileImagesCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+            <!-- images-list -->
+            <div class="list-inline collection files-list js-drag-holder">
+                {% for child_form in form %}
+                    {{ self.imagesCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </div>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-block">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}

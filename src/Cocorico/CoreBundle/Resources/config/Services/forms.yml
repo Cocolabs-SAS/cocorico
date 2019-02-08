@@ -72,6 +72,11 @@ services:
         tags:
             - { name: form.type, alias: listing_edit_availabilities_status }
 
+    cocorico.form.type.listing_edit_availability_status:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityStatusType
+        tags:
+            - { name: form.type, alias: listing_edit_availability_status }
+
     cocorico.form.type.listing_edit_availabilities_prices:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType
         parent: cocorico.form.type.listing_edit_availabilities
@@ -126,6 +131,14 @@ services:
         tags:
             - { name: form.type, alias: price }
 
+    cocorico.form.type.price_range:
+        class: Cocorico\CoreBundle\Form\Type\PriceRangeType
+        arguments:
+            - "@session"
+            - "%cocorico.currency%"
+        tags:
+            - { name: form.type, alias: price_range }
+
     cocorico.form.type.entity_hidden:
         class: Cocorico\CoreBundle\Form\Type\EntityHiddenType
         arguments:
@@ -144,18 +157,17 @@ services:
     cocorico.form.type.listing_search_result:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingSearchResultType
         arguments:
-            - "@session"
-            - "%cocorico.currency%"
             - "@doctrine.orm.entity_manager"
             - "@request_stack"
-            - "%cocorico.time_unit%"
-            - "%cocorico.time_unit_flexibility%"
-            - "%cocorico.booking.allow_single_day%"
-            - "%cocorico.booking.end_day_included%"
-            - "%cocorico.days_display_mode%"
-            - "%cocorico.times_display_mode%"
-            - "%cocorico.booking.min_start_delay%"
             - "@event_dispatcher"
+            - parameters:
+                  cocorico_time_unit: "%cocorico.time_unit%"
+                  cocorico_time_unit_flexibility: "%cocorico.time_unit_flexibility%"
+                  cocorico_days_display_mode: "%cocorico.days_display_mode%"
+                  cocorico_times_display_mode: "%cocorico.times_display_mode%"
+                  cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
+                  cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
+                  cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
         tags:
             - { name: form.type, alias: listing_search_result }
 
@@ -179,28 +191,12 @@ services:
         tags:
             - { name: form.type, alias: listing_characteristic }
 
-    cocorico.form.type.date_range:
-        class: Cocorico\CoreBundle\Form\Type\DateRangeType
+    cocorico.form.type.listing_listing_characteristic:
+        class: Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType
         arguments:
-            - "%cocorico.time_unit%"
-            - "%cocorico.days_max%"
+            - "@request_stack"
         tags:
-            - { name: form.type, alias: date_range }
-
-    cocorico.form.type.date_hidden:
-        class:  Cocorico\CoreBundle\Form\Type\DateHiddenType
-        tags:
-            - { name: form.type, alias: date_hidden }
-
-    cocorico.form.type.time_range:
-        class: Cocorico\CoreBundle\Form\Type\TimeRangeType
-        arguments:
-            - "%cocorico.time_unit%"
-            - "%cocorico.times_max%"
-            - "%cocorico.time_picker%"
-            - "%cocorico.time_hours_available%"
-        tags:
-            - { name: form.type, alias: time_range }
+            - { name: form.type, alias: listing_listing_characteristic }
 
     cocorico.form.type.listing_edit_duration:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType
@@ -213,12 +209,12 @@ services:
             - "@cocorico.booking.manager"
             - "@event_dispatcher"
             - parameters:
-                cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
-                cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
-                cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
-                cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
-                cocorico_currency: "%cocorico.currency%"
-                cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
+                  cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
+                  cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
+                  cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
+                  cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
+                  cocorico_currency: "%cocorico.currency%"
+                  cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:
             - { name: form.type, alias: booking_new }
 
@@ -230,11 +226,11 @@ services:
     cocorico.form.type.booking_price:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
         arguments:
-            - "@cocorico.booking.manager"
             - "%cocorico.booking.allow_single_day%"
             - "%cocorico.booking.end_day_included%"
             - "%cocorico.days_display_mode%"
             - "%cocorico.times_display_mode%"
+            - "%cocorico.time_unit%"
         tags:
             - { name: form.type, alias: booking_price }
 
@@ -247,16 +243,11 @@ services:
         tags:
             - { name: form.type, alias: booking_user_address }
 
-    cocorico.form.type.weekdays:
-        class: Cocorico\CoreBundle\Form\Type\WeekDaysType
-        tags:
-            - { name: form.type, alias: weekdays }
-
     #Form extensions
     cocorico.image_type_extension:
         class: Cocorico\CoreBundle\Form\Extension\ImageTypeExtension
         tags:
-            - { name: form.type_extension, alias: file }
+            - { name: form.type_extension, extended_type: Symfony\Component\Form\Extension\Core\Type\FileType }
 
     cocorico.form.booking.status_filter:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType

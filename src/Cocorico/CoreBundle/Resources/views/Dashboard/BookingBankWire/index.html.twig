@@ -10,6 +10,9 @@
 
 
 {% block main_dashboard %}
+
+    {% set user_timezone = app.user.timeZone %}
+
     <div class="tab-content no-border">
         <!-- payments -->
         <div role="tabpanel" class="tab-pane active">
@@ -45,7 +48,7 @@
                         <td class="col2" data-label="{{ "booking.bank_wire.date.title"| trans }}">
                             <div>
                                 {% if is_payed and booking_bank_wire.payedAt %}
-                                    {{ booking_bank_wire.payedAt|localizeddate('short', 'none', 'fr') }}
+                                    {{ booking_bank_wire.payedAt|localizeddate('short', 'none', 'fr', user_timezone) }}
                                 {% endif %}
                             </div>
                         </td>

@@ -26,11 +26,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use FOS\UserBundle\Entity\User as BaseUser;
+use FOS\UserBundle\Model\User as BaseUser;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
+//use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * User.
@@ -344,6 +346,13 @@ class User extends BaseUser implements ParticipantInterface
     protected $answerDelay;
 
     /**
+     * @ORM\Column(name="time_zone", type="string", length=100,  nullable=false)
+     *
+     * @var string
+     */
+    protected $timeZone = 'Europe/Paris';
+
+    /**
      * @ORM\OneToMany(targetEntity="Cocorico\MessageBundle\Entity\Message", mappedBy="sender", cascade={"remove"}, orphanRemoval=true)
      */
     private $messages;
@@ -450,6 +459,8 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->listings = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->languages = new ArrayCollection();
@@ -958,7 +969,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageAskerRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageAskerRating($averageAskerRating)
     {
@@ -982,7 +993,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $averageOffererRating
      *
-     * @return Listing
+     * @return $this
      */
     public function setAverageOffererRating($averageOffererRating)
     {
@@ -1006,7 +1017,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param int $answerDelay
      *
-     * @return Listing
+     * @return $this
      */
     public function setAnswerDelay($answerDelay)
     {
@@ -1107,7 +1118,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserImage $image
      *
-     * @return Listing
+     * @return $this
      */
     public function addImage(UserImage $image)
     {
@@ -1142,7 +1153,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @param \Cocorico\UserBundle\Entity\UserLanguage $language
      *
-     * @return Listing
+     * @return $this
      */
     public function addLanguage(UserLanguage $language)
     {
@@ -1222,6 +1233,47 @@ class User extends BaseUser implements ParticipantInterface
         return $bookings;
     }
 
+    /**
+     * Does the user has booking in progress (some money operations still to be made (withdrawals, refund, ...))
+     *
+     * @return bool
+     */
+    public function hasBookingsInProgress()
+    {
+        $bookingsAsAsker = $this->getBookingAsAsker();
+        $bookingsAsOfferer = $this->getBookingAsOfferer();
+
+        /** @var Booking[] $bookings */
+        $bookings = new ArrayCollection(array_merge($bookingsAsAsker->toArray(), $bookingsAsOfferer->toArray()));
+
+        foreach ($bookings as $index => $booking) {
+            if ($booking->getStatus() == Booking::STATUS_NEW) {
+                return true;
+            } elseif ($booking->getStatus() == Booking::STATUS_PAYMENT_REFUSED) {
+                return true;
+            } elseif ($booking->getStatus() == Booking::STATUS_PAYED) {
+                //If there is no bank wire or there is a bank wire not payed
+                $bankWire = $booking->getBankWire();
+                if (!$bankWire || ($bankWire &&
+                        ($bankWire->getStatus() != BookingBankWire::STATUS_PAYED || !$bankWire->getMangopayPayoutId())
+                    )
+                ) {
+                    return true;
+                }
+            } elseif ($booking->getStatus() == Booking::STATUS_CANCELED_ASKER) {
+                //If there is a bank wire not payed
+                $bankWire = $booking->getBankWire();
+                if (($bankWire &&
+                    ($bankWire->getStatus() != BookingBankWire::STATUS_PAYED || !$bankWire->getMangopayPayoutId())
+                )
+                ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 
     /**
      * @return ArrayCollection|Message[]
@@ -1436,6 +1488,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->listingAlerts = $listingAlerts;
+
+        return $this;
     }
 
 
@@ -1486,6 +1540,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsAsker = $bookingDepositRefundsAsAsker;
+
+        return $this;
     }
 
 
@@ -1536,6 +1592,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->bookingDepositRefundsAsOfferer = $bookingDepositRefundsAsOfferer;
+
+        return $this;
     }
 
 
@@ -1586,6 +1644,8 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         $this->cards = $cards;
+
+        return $this;
     }
 
 
@@ -1599,6 +1659,23 @@ class User extends BaseUser implements ParticipantInterface
                 return $element->isActive();// && $element->getValidity() == UserCardInterface::VALIDITY_VALID
             }
         );
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->timeZone;
+    }
+
+    /**
+     * @param string $timeZone
+     */
+    public function setTimeZone($timeZone)
+    {
+        $this->timeZone = $timeZone;
     }
 
     /**

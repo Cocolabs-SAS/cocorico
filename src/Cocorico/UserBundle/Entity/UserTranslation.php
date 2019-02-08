@@ -49,7 +49,7 @@ class UserTranslation
      * Set description
      *
      * @param  string $description
-     * @return User
+     * @return $this
      */
     public function setDescription($description)
     {

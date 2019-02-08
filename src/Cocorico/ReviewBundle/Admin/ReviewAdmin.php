@@ -14,13 +14,14 @@ namespace Cocorico\ReviewBundle\Admin;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ReviewAdmin extends Admin
+class ReviewAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'review';
@@ -31,6 +32,7 @@ class ReviewAdmin extends Admin
         '_sort_by' => 'createdAt'
     );
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var Review $review */
@@ -127,6 +129,7 @@ class ReviewAdmin extends Admin
             ->end();
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -134,14 +137,14 @@ class ReviewAdmin extends Admin
                 'rating',
                 'doctrine_orm_string',
                 array(),
-                'choice',
+                ChoiceType::class,
                 array(
                     'label' => 'admin.review.rating.label',
                     'choices' => array_combine(
                         range(1, 5),
                         range(1, 5)
                     ),
-                    'empty_value' => 'admin.review.rating.label',
+                    'placeholder' => 'admin.review.rating.label',
                     'translation_domain' => 'SonataAdminBundle',
                     'choices_as_values' => true
                 )
@@ -191,6 +194,7 @@ class ReviewAdmin extends Admin
             );
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -242,7 +246,6 @@ class ReviewAdmin extends Admin
                 'createdAt',
                 null,
                 array(
-                    'format' => "d/m/Y H:i",
                     'label' => 'admin.review.created_at.label',
                 )
             );

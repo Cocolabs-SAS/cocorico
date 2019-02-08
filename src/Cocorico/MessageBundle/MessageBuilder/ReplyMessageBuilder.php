@@ -25,7 +25,7 @@ class ReplyMessageBuilder extends AbstractMessageBuilder
      * Sets $createdAt message.
      *
      * @param  date
-     * @return NewThreadMessageBuilder (fluent interface)
+     * @return $this (fluent interface)
      */
     public function setCreatedAt($createdAt)
     {

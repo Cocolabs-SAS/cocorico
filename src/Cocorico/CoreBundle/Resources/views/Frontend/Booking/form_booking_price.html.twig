@@ -9,11 +9,6 @@
 
     {{ form_errors(form) }}
 
-    <div id="time-error" class="errors" style="display:none">
-        <i class="icon-error-field"></i>
-        {{ 'time_range.invalid.end_before_start'|trans({}, 'cocorico') }}<br>
-    </div>
-
     <fieldset>
         <legend class="hidden">date-selection</legend>
 
@@ -61,7 +56,7 @@
         {% set duration = booking.duration(endDayIncluded, timeUnit) %}
         {% if duration %}
             <em class="text">
-                {{ 'booking.duration:'|trans ~ " " ~ booking.duration(endDayIncluded, timeUnit) ~ " " ~ (-1)|add_time_unit_text }}
+                {{ 'booking.duration:'|trans ~ " " ~ duration|add_time_unit_text }}
             </em>
         {% endif %}
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <file date="2017-10-17T22:15:31Z" source-language="en" target-language="fr" datatype="plaintext"
+          original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,8 +11,8 @@
         <source>account_created_user.email.message</source>
         <target>Bienvenue %firstname% !
 
-                    Votre compte a été créé. Nous sommes heureux de vous compter parmi nous.
-                </target>
+            Votre compte a été créé. Nous sommes heureux de vous compter parmi nous.
+        </target>
         <jms:reference-file line="10">Mails/User/account_created_user.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2147122da71224905cdb61c5102009842ff146ca" resname="account_created_user.email.subject">
@@ -27,9 +28,9 @@
       <trans-unit id="853e97000eb085f59edd323edd4efa73afab7742" resname="booking.time_range.title">
         <source>booking.time_range.title</source>
         <target>
-                    - Plage horaire :
-                </target>
-        <jms:reference-file line="758">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
+            - Plage horaire :
+        </target>
+          <jms:reference-file line="766">CoreBundle/Mailer/TwigSwiftMailer.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f17ef1a038a42f4a585e3645125e101e00c41a0b" resname="booking_accepted_asker.email.message">
         <source>booking_accepted_asker.email.message</source>
@@ -43,6 +44,7 @@ Voici le récapitulatif de la réservation :
         - Date de début: %booking_start_date%
         - Date de fin: %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée: %booking_duration%
+        - Fuseau Horaire: %user_timezone%
 
 Vous pouvez contacter %offerer_firstname% %offerer_lastname%  directement sur cette <a href="%booking_request_url%">page</a>.
 
@@ -65,6 +67,7 @@ Voici le récapitulatif de la réservation :
         - Date de début: %booking_start_date%
         - Date de fin: %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée: %booking_duration%
+        - Fuseau Horaire: %user_timezone%
 
 Un virement en votre faveur de %booking_amount_offerer% sera effectué à la date suivante : %offerer_wiretransfer_date%
 
@@ -93,6 +96,7 @@ Vous avez effectué une nouvelle demande de réservation à %offerer_name%. Voic
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée : %booking_duration%
+        - Fuseau Horaire: %user_timezone%
         - Montant : %booking_amount_asker%
 
 Vous serez débité uniquement si %offerer_name% accepte votre demande.
@@ -129,6 +133,7 @@ La demande de réservation suivante a expiré :
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée : %booking_duration%
+        - Fuseau Horaire: %user_timezone%
         - Vos revenus : %booking_amount_offerer%
 
 Si vous le souhaitez, vous pouvez encore contacter %asker_name% en suivant ce <a href="%booking_request_url%">lien</a>.
@@ -151,6 +156,7 @@ Vous avez reçu une nouvelle demande de la part de %asker_name%. Voici un récap
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée: %booking_duration%
+        - Fuseau Horaire: %user_timezone%
         - Vos revenus: %booking_amount_offerer%
 
 <a href="%booking_request_url%">Visualisez la demande pour l’accepter ou la refuser</a>.
@@ -160,7 +166,7 @@ Cette demande expirera le %booking_request_expiry_date%.]]></target>
       <trans-unit id="3ca436ff3762fd7081bcca967720282c3bd30221" resname="booking_request_offerer.email.subject">
         <source>booking_request_offerer.email.subject</source>
         <target>Vous avez reçu une nouvelle demande (%booking_amount_offerer% %booking_currency%) - (%booking_uid%)
-                </target>
+        </target>
         <jms:reference-file line="5">Mails/Offerer/booking_request_offerer.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="62512cd777a9cdc8ed9359a8cd1e247e6ff6725c" resname="canceled_by_asker_asker.email.message">
@@ -172,6 +178,7 @@ Vous avez annulé la réservation suivante :
         - Annonce : <a href="%listing_public_url%">%listing_title%</a>
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
+        - Fuseau Horaire: %user_timezone%
         - Numéro de réservation : %booking_uid%
 
 La politique d’annulation de cette réservation est la suivante :
@@ -200,6 +207,7 @@ La réservation suivante a été annulée par %asker_firstname% %asker_lastname%
         - Annonce : <a href="%listing_public_url%">%listing_title%</a>
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
+        - Fuseau Horaire: %user_timezone%
         - Numéro de réservation : %booking_uid%
 
 La politique d’annulation que vous avez sélectionnée est la suivante :
@@ -219,18 +227,18 @@ En accord avec les conditions d’annulation que vous avez choisi, le montant qu
         <source>contact.email.message</source>
         <target>
 
-                Bonjour,
+            Bonjour,
 
-                    Vous avez une nouvelle demande d'information via le formulaire de contact :
-                    - Prénom : %first_name%
-                    - Nom : %last_name%
-                    - Email : %email%
-                    - Téléphone : %phone%
+            Vous avez une nouvelle demande d'information via le formulaire de contact :
+            - Prénom : %first_name%
+            - Nom : %last_name%
+            - Email : %email%
+            - Téléphone : %phone%
 
-                    - Sujet : %subject%
-                    - Message : %message%
+            - Sujet : %subject%
+            - Message : %message%
 
-                </target>
+        </target>
         <jms:reference-file line="10">views/Mails/contact_message.txt.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="86f8eb7accf88310df878c1777c94a84db096ec9" resname="contact.email.subject">
@@ -248,6 +256,7 @@ La demande de réservation suivante arrive à expiration :
         - Date de début : %booking_start_date%
         - Date de fin : %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée : %booking_duration%
+        - Fuseau Horaire: %user_timezone%
         - Vos revenus : %booking_amount_offerer%
         - Heure d’expiration : %booking_request_expiry_date%
 
@@ -283,6 +292,7 @@ Ceci est un rappel que votre réservation va bientôt commencer :
         - Date de début: %booking_start_date%
         - Date de fin: %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée: %booking_duration%
+        - Fuseau Horaire: %user_timezone%
 
 Vous pouvez contacter %offerer_firstname% %offerer_lastname% directement sur cette <a href="%booking_request_url%">page</a>.]]></target>
         <jms:reference-file line="10">Mails/Asker/booking_imminent_asker.txt.twig</jms:reference-file>
@@ -302,6 +312,7 @@ Ceci est un rappel pour votre réservation de demain :
         - Date de début: %booking_start_date%
         - Date de fin: %booking_end_date% %booking_time_range_title% %booking_time_range%
         - Durée: %booking_duration%
+        - Fuseau Horaire: %user_timezone%
 
 Vous pouvez contacter %asker_firstname% %asker_lastname% directement sur cette <a href="%booking_request_url%">page</a>.]]></target>
         <jms:reference-file line="12">Mails/Offerer/booking_imminent_offerer.txt.twig</jms:reference-file>
@@ -484,7 +495,7 @@ Vous pouvez mettre à jour votre agenda en suivant ce <a href="%listing_calendar
       <trans-unit id="2cd8bf2c0ddd4b4d364fc0fb51ee42ff10ce0733" resname="wiretransfer_offerer.email.subject">
         <source>wiretransfer_offerer.email.subject</source>
         <target>Un virement de %booking_amount_offerer% a été exécuté en votre faveur (%booking_uid%)
-                </target>
+        </target>
         <jms:reference-file line="5">Mails/Offerer/booking_bank_wire_transfer_offerer.txt.twig</jms:reference-file>
       </trans-unit>
     </body>

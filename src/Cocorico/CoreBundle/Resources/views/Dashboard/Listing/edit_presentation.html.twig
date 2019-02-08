@@ -23,7 +23,7 @@
                 <!-- form-holder -->
                 <div class="form-holder">
                     <h2>{{ 'listing.edit.presentation.title'|trans }}</h2>
-                    {# For html customizations see views\form\translations.html.twig #}
+                    {# For html customizations see views\form\fields_translations.html.twig #}
                     {{ form_widget(form.translations) }}
 
                     <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">

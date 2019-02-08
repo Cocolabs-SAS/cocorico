@@ -13,9 +13,8 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditAvailabilityStatusType extends AbstractType
@@ -29,7 +28,7 @@ class ListingEditAvailabilityStatusType extends AbstractType
         $builder
             ->add(
                 'status',
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array_flip(ListingAvailability::$visibleValues),
                     'choices_as_values' => true
@@ -37,23 +36,23 @@ class ListingEditAvailabilityStatusType extends AbstractType
             );
 
         //Set default price for new availability
-        $defaultPrice = $options["defaultPrice"];
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) use ($defaultPrice) {
-                /** @var ListingAvailability $availability */
-                $availability = $event->getData();
-                $form = $event->getForm();
-
-                if ((!$availability || null === $availability->getId()) && $defaultPrice) {
-                    $form->add('price', 'hidden');
-                    if ($availability) {
-                        $availability->setPrice($defaultPrice);
-                    }
-                    $event->setData($availability);
-                }
-            }
-        );
+//        $defaultPrice = $options["defaultPrice"];
+//        $builder->addEventListener(
+//            FormEvents::PRE_SET_DATA,
+//            function (FormEvent $event) use ($defaultPrice) {
+//                /** @var ListingAvailability $availability */
+//                $availability = $event->getData();
+//                $form = $event->getForm();
+//
+//                if ((!$availability || null === $availability->getId()) && $defaultPrice) {
+//                    $form->add('price', 'hidden');
+//                    if ($availability) {
+//                        $availability->setPrice($defaultPrice);
+//                    }
+//                    $event->setData($availability);
+//                }
+//            }
+//        );
 
 
     }
@@ -66,20 +65,10 @@ class ListingEditAvailabilityStatusType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Cocorico\CoreBundle\Document\ListingAvailability',
                 'translation_domain' => 'cocorico_listing',
                 'defaultPrice' => null
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

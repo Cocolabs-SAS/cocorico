@@ -1,0 +1,46 @@
+{% extends 'CocoricoCoreBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{# Categories tree  widget #}
+{% block _listing_categories_listingListingCategories_widget -%}
+    {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
+        {% set required = false %}
+    {%- endif -%}
+    <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %} class="hidden">
+        {% if placeholder is not none -%}
+            <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
+        {%- endif %}
+        {%- if preferred_choices|length > 0 -%}
+            {% set options = preferred_choices %}
+            {{- block('listing_category_widget_options_tree') -}}
+            {% if choices|length > 0 and separator is not none -%}
+                <option disabled="disabled">{{ separator }}</option>
+            {%- endif %}
+        {%- endif -%}
+        {% set options = choices -%}
+        {{- block('listing_category_widget_options_tree') -}}
+    </select>
+{%- endblock %}
+
+{% block listing_category_widget_options_tree -%}
+    {% for group_label, choice in options %}
+        {% set category = choice.data %}
+        {% set indent = '&#160;&#160;&#160;'|repeat(category.getLvl) %}
+
+        {%- if not category.isLeaf -%}
+            <optgroup label="{{ indent  ~ category.getName() }}">
+                {% set options = choice %}
+                {{- block('listing_category_widget_options_tree') -}}
+            </optgroup>
+        {%- else -%}
+            <option value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>
+                {{ indent  ~ choice.label }}
+            </option>
+        {%- endif -%}
+    {% endfor %}
+{%- endblock listing_category_widget_options_tree %}
+
+{% block _listing_categories_widget %}
+    {{ block('_listing_categories_listingListingCategories_widget') }}
+{% endblock %}

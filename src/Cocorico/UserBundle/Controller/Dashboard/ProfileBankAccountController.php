@@ -13,7 +13,6 @@
 namespace Cocorico\UserBundle\Controller\Dashboard;
 
 use Cocorico\UserBundle\Form\Type\ProfileBankAccountFormType;
-use Cocorico\UserBundle\Form\Type\ProfilePaymentFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,9 +33,10 @@ class ProfileBankAccountController extends Controller
      * @Route("/edit-bank-account", name="cocorico_user_dashboard_profile_edit_bank_account")
      * @Method({"GET", "POST"})
      *
-     * @param $request Request
+     * @param Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
      */
     public function editAction(Request $request)
     {
@@ -89,7 +89,7 @@ class ProfileBankAccountController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'user',
-            new ProfileBankAccountFormType(),
+            ProfileBankAccountFormType::class,
             $user,
             array(
                 'method' => 'POST',

@@ -4,6 +4,7 @@
     {% set listing = booking.listing %}
     {% set asker = booking.user %}
     {% set offerer = listing.user %}
+    {% set user_timezone = booking.timeZoneAsker %}
 
     {% set translation = listing.translations[app.request.locale] %}
     {% set listing_address = listing.location.getCompleteAddress %}
@@ -38,8 +39,9 @@
         {% endif %}
         <div>
             <br/>
-            <strong>{{ 'booking.voucher.date' | trans }}
-                : </strong>{{ booking.start|localizeddate('short', 'none', 'fr') }}
+            <strong>{{ 'booking.voucher.date' | trans }} : </strong>
+            {{ booking.start|localizeddate('short', 'none', 'fr', user_timezone) }} -
+            {{ booking.end|localizeddate('short', 'none', 'fr', user_timezone) }}
 
             {% if not timeUnitIsDay %}
                 <br/>

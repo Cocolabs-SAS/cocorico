@@ -11,33 +11,41 @@
 
 namespace Cocorico\UserBundle\Form\Type;
 
+use Cocorico\CoreBundle\Form\Type\PriceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ProfileBankAccountFormType extends AbstractType
 {
-
+    /**
+     * @inheritdoc
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add(
                 'lastName',
-                'text',
+                TextareaType::class,
                 array(
                     'label' => 'form.user.last_name',
                 )
             )
             ->add(
                 'firstName',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.first_name'
                 )
             )
             ->add(
                 'birthday',
-                'birthday',
+                BirthdayType::class,
                 array(
                     'label' => 'form.user.birthday',
                     'widget' => "choice",
@@ -47,7 +55,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'nationality',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.user.nationality',
                     'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
@@ -55,7 +63,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'countryOfResidence',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.user.country_of_residence',
                     'required' => true,
@@ -64,7 +72,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'profession',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'form.user.profession',
                     'required' => false
@@ -72,7 +80,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'annualIncome',
-                'price',
+                PriceType::class,
                 array(
                     'label' => 'form.user.annual_income',
                     'translation_domain' => 'cocorico_user',
@@ -81,7 +89,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'bankOwnerName',
-                null,
+                TextType::class,
                 array(
                     'label' => 'form.user.bank_owner_name',
                     'required' => true,
@@ -89,7 +97,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'bankOwnerAddress',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.user.bank_owner_address',
                     'required' => true,
@@ -97,7 +105,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'iban',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'IBAN',
                     'required' => true
@@ -105,7 +113,7 @@ class ProfileBankAccountFormType extends AbstractType
             )
             ->add(
                 'bic',
-                'text',
+                TextType::class,
                 array(
                     'label' => 'BIC',
                     'required' => true
@@ -115,6 +123,9 @@ class ProfileBankAccountFormType extends AbstractType
 
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
@@ -122,19 +133,10 @@ class ProfileBankAccountFormType extends AbstractType
                 'data_class' => 'Cocorico\UserBundle\Entity\User',
                 'csrf_token_id' => 'CocoricoProfileBankAccount',
                 'translation_domain' => 'cocorico_user',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 'validation_groups' => array('CocoricoProfileBankAccount'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**
