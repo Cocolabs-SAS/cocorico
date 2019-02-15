@@ -8,15 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Cocorico\CoreBundle\Twig;
 
 /**
  * ExtraBundleExtension check if bundle exist
  */
-class ExtraBundleExtension extends \Twig_Extension
+class ExtraBundleExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
-
     protected $bundles;
+
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
 
     /**
      * @param array $bundles
