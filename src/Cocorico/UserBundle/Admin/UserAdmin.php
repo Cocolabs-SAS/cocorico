@@ -390,26 +390,29 @@ class UserAdmin extends SonataUserAdmin
             ->add('createdAt', null, array());
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-//            $listMapper
-//                ->add(
-//                    'impersonating',
-//                    'string',
-//                    array('template' => 'CocoricoSonataAdminBundle::impersonating.html.twig')
-//                );
+            $listMapper
+                ->add(
+                    'impersonating',
+                    'string',
+                    array(
+                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                    )
+                );
         }
 
-        $listMapper->add(
-            '_action',
-            'actions',
-            array(
-                'actions' => array(
-                    'edit' => array(),
-                    'list_user_listings' => array(
-                        'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+        $listMapper
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'edit' => array(),
+                        'list_user_listings' => array(
+                            'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+                        ),
                     ),
-                ),
-            )
-        );
+                )
+            );
     }
 
 

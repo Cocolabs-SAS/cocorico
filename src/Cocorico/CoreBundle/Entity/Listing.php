@@ -216,8 +216,7 @@ class Listing extends BaseListing
      */
     public function addListingListingCharacteristicsOrderedByGroup(
         ListingListingCharacteristic $listingListingCharacteristic
-    )
-    {
+    ) {
         return $this->addListingListingCharacteristic($listingListingCharacteristic);
     }
 
@@ -229,8 +228,7 @@ class Listing extends BaseListing
      */
     public function removeListingListingCharacteristicsOrderedByGroup(
         ListingListingCharacteristic $listingListingCharacteristic
-    )
-    {
+    ) {
         $this->removeListingListingCharacteristic($listingListingCharacteristic);
     }
 
@@ -646,5 +644,15 @@ class Listing extends BaseListing
                 }
             }
         }
+    }
+
+    /**
+     * To add impersonating link into admin :
+     *
+     * @return User
+     */
+    public function getImpersonating()
+    {
+        return $this->getUser();
     }
 }
