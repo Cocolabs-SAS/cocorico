@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:46:04Z" source-language="en" target-language="fr" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -485,7 +484,7 @@
       </trans-unit>
       <trans-unit id="d51330e2f2746000508926561dc532bd4bc77a3a" resname="listing.new.publish.notice">
         <source>listing.new.publish.notice</source>
-          <target xml:space="preserve">Vous aurez la possibilité de préciser d'autres informations sur votre annonce dans votre espace
+        <target xml:space="preserve">Vous aurez la possibilité de préciser d'autres informations sur votre annonce dans votre espace
               utilisateur.
           </target>
       </trans-unit>
@@ -507,7 +506,7 @@
       </trans-unit>
       <trans-unit id="099bd9fd3eb8ecdfa47a2bf51cd486c5094cfae0" resname="listing.new.title">
         <source>listing.new.title</source>
-          <target xml:space="preserve">Publier votre annonce
+        <target xml:space="preserve">Publier votre annonce
           </target>
       </trans-unit>
       <trans-unit id="a385c95efe54f5b3d6707f5106282c2ae14fc04f" resname="listing.price_save">

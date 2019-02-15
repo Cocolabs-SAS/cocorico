@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:52:31Z" source-language="en" target-language="en" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -81,7 +80,7 @@
       </trans-unit>
       <trans-unit id="e7f2f111241f34143bdef2586a6a2ed54a6ad688" resname="booking.bill.title.information">
         <source>booking.bill.title.information</source>
-          <target xml:space="preserve">This invoice corresponds to the expenses collected by the platform.
+        <target xml:space="preserve">This invoice corresponds to the expenses collected by the platform.
             You will find below the total amount paid.
         </target>
       </trans-unit>

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:52:31Z" source-language="en" target-language="en" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-        <trans-unit id="57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9" resname="Users">
-            <source>Users</source>
-            <target>Users</target>
+      <trans-unit id="57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9" resname="Users">
+        <source>Users</source>
+        <target>Users</target>
       </trans-unit>
       <trans-unit id="dd218fc1da748f3247369d4c6e6f95afe1b0a160" resname="breadcrumb.link_user_batch">
         <source>breadcrumb.link_user_batch</source>
@@ -119,18 +118,6 @@
         <source>form.label_last_name</source>
         <target>Last Name</target>
       </trans-unit>
-      <trans-unit id="dec748472ae984224dd5285ca21576d008a26e39" resname="form.label_mangopay_bank_account_id">
-        <source>form.label_mangopay_bank_account_id</source>
-        <target>Mangopay bank account id</target>
-      </trans-unit>
-      <trans-unit id="1005db2ddcc3b9a50700ee773a3fc6d97c32cd79" resname="form.label_mangopay_id">
-        <source>form.label_mangopay_id</source>
-        <target>Mangopay ID</target>
-      </trans-unit>
-      <trans-unit id="1b0695536032994f08401f0113cc6a8008669daa" resname="form.label_mangopay_wallet_id">
-        <source>form.label_mangopay_wallet_id</source>
-        <target>Mangopay wallet id</target>
-      </trans-unit>
       <trans-unit id="6135f0d1e01c34820b5ae3b0f5bee68f14ebd519" resname="form.label_mother_tongue">
         <source>form.label_mother_tongue</source>
         <target>Where are you from</target>
@@ -198,10 +185,6 @@
       <trans-unit id="8a0feda74cd7514d97c55cb823aa45c73abd73b9" resname="list.label_listings">
         <source>list.label_listings</source>
         <target state="new">Listings</target>
-      </trans-unit>
-      <trans-unit id="242b98deb754c7f781a2c018e2bccfcb2195eb68" resname="list.label_mangopay_id">
-        <source>list.label_mangopay_id</source>
-        <target>Mangopay id</target>
       </trans-unit>
       <trans-unit id="56fee11d331aa7f17be36d2c2d6a7f884fa8cd1a" resname="show.label_biography">
         <source>show.label_biography</source>

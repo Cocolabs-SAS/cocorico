@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:46:04Z" source-language="en" target-language="fr" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -211,13 +210,13 @@
         <source>admin.booking.status.label</source>
         <target>Statut de la réservation</target>
       </trans-unit>
-        <trans-unit id="3fc2057bca15d6bbbe3a3825c09662429e9fb1f3" resname="admin.booking.timezone_asker.label">
-            <source>admin.booking.timezone_asker.label</source>
-            <target state="new">admin.booking.timezone_asker.label</target>
-        </trans-unit>
-        <trans-unit id="212ce6077f70e2c3f065d50f0123c020dc224aff" resname="admin.booking.timezone_offerer.label">
-            <source>admin.booking.timezone_offerer.label</source>
-            <target state="new">admin.booking.timezone_offerer.label</target>
+      <trans-unit id="3fc2057bca15d6bbbe3a3825c09662429e9fb1f3" resname="admin.booking.timezone_asker.label">
+        <source>admin.booking.timezone_asker.label</source>
+        <target state="new">admin.booking.timezone_asker.label</target>
+      </trans-unit>
+      <trans-unit id="212ce6077f70e2c3f065d50f0123c020dc224aff" resname="admin.booking.timezone_offerer.label">
+        <source>admin.booking.timezone_offerer.label</source>
+        <target state="new">admin.booking.timezone_offerer.label</target>
       </trans-unit>
       <trans-unit id="f8cb8a28d309e6384c6927bc1553bbf1e05fc839" resname="admin.booking.updated_at.label">
         <source>admin.booking.updated_at.label</source>
@@ -539,10 +538,10 @@
         <source>form.address.zip</source>
         <target state="new">form.address.zip</target>
       </trans-unit>
-        <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
-            <source>form.time_zone</source>
-            <target state="new">form.time_zone</target>
-        </trans-unit>
+      <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
+        <source>form.time_zone</source>
+        <target state="new">form.time_zone</target>
+      </trans-unit>
       <trans-unit id="63e537934f93cbdef8e3d3eebc911b78a1c5eb39" resname="listing.form.pallets">
         <source>listing.form.pallets</source>
         <target state="new">listing.form.pallets</target>

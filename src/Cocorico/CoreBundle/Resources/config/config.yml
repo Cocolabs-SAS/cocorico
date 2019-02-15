@@ -129,6 +129,9 @@ jms_i18n_routing:
 
 
 jms_translation:
+    dumper:
+        add_references: false
+        add_date: false
     configs:
         cocorico:
             dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:52:31Z" source-language="en" target-language="en" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -339,7 +338,7 @@
       </trans-unit>
       <trans-unit id="f1d24cf913356e9f49b26d914a31742608c9cb6b" resname="time_unit_hour">
         <source>time_unit_hour</source>
-          <target>{-3} by hour|{-1} hour(s)|{0} hour|]0,1] %count% hour|]1,Inf]%count% hours</target>
+        <target>{-3} by hour|{-1} hour(s)|{0} hour|]0,1] %count% hour|]1,Inf]%count% hours</target>
       </trans-unit>
       <trans-unit id="f84671b575da92a2471bfb36da94f36cf5b7dfd1" resname="time_unit_night">
         <source>time_unit_night</source>

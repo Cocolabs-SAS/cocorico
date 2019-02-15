@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-    <file date="2017-12-07T17:46:04Z" source-language="en" target-language="fr" datatype="plaintext"
-          original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-        <trans-unit id="3bc15c8aae3e4124dd409035f32ea2fd6835efc9" resname="-">
-            <source>-</source>
-            <target state="new">-</target>
-        </trans-unit>
+      <trans-unit id="3bc15c8aae3e4124dd409035f32ea2fd6835efc9" resname="-">
+        <source>-</source>
+        <target state="new">-</target>
+      </trans-unit>
       <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
         <source>Asker</source>
         <target>Demandeur</target>
@@ -211,10 +210,10 @@
         <source>form.person_type</source>
         <target state="new">Vous êtes</target>
       </trans-unit>
-        <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
-            <source>form.time_zone</source>
-            <target>Fuseau</target>
-        </trans-unit>
+      <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
+        <source>form.time_zone</source>
+        <target>Fuseau</target>
+      </trans-unit>
       <trans-unit id="fb270ffdb0aecc48a246ffa57e8820e26170da5d" resname="form.user.annual_income">
         <source>form.user.annual_income</source>
         <target>Revenus annuels :</target>
@@ -353,7 +352,7 @@
       </trans-unit>
       <trans-unit id="85a4eff0132a6f92eae3057837f285b3aedf38b8" resname="registration.check_email">
         <source>registration.check_email</source>
-          <target xml:space="preserve">Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra
+        <target xml:space="preserve">Un e-mail a été envoyé à l'adresse %email%. Il contient un lien d'activation sur lequel il vous faudra
               cliquer afin d'activer votre compte.
           </target>
       </trans-unit>
@@ -375,13 +374,13 @@
       </trans-unit>
       <trans-unit id="40c1a483571045e24d606bf00361cfd4d021ba05" resname="resetting.check_email">
         <source>resetting.check_email</source>
-          <target xml:space="preserve">Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin
+        <target xml:space="preserve">Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin
               de réinitialiser votre mot de passe.
                 </target>
       </trans-unit>
       <trans-unit id="f0b3476bec045fac67c256d17a54e4f8a8d05335" resname="resetting.password_already_requested">
         <source>resetting.password_already_requested</source>
-          <target xml:space="preserve">Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
+        <target xml:space="preserve">Un nouveau mot de passe a déjà été demandé pour cet utilisateur dans les dernières 24 heures.
                 </target>
       </trans-unit>
       <trans-unit id="c3474ad1b73a0d0db019eec986ee675e8afaf640" resname="resetting.request.invalid_username">
