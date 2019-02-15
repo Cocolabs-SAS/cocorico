@@ -148,7 +148,7 @@ class ListingAdmin extends AbstractAdmin
                             'required' => false,
                         ),
                         'slug' => array(
-                            'field_type' => 'hidden'
+                            'display' => false
                         )
                     ),
                     'label' => 'Descriptions'

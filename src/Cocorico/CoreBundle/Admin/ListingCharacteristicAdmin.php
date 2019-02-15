@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicAdmin extends AbstractAdmin
 {
@@ -47,11 +48,11 @@ class ListingCharacteristicAdmin extends AbstractAdmin
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Name',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
             $descriptions[$locale] = array(
                 'label' => 'Description',
-                'required' => false
+                'constraints' => array(new NotBlank())
             );
         }
 
@@ -88,14 +89,16 @@ class ListingCharacteristicAdmin extends AbstractAdmin
                 'listingCharacteristicType',
                 'sonata_type_model_list',
                 array(
-                    'label' => 'admin.listing_characteristic.type.label'
+                    'label' => 'admin.listing_characteristic.type.label',
+                    'constraints' => array(new NotBlank())
                 )
             )
             ->add(
                 'listingCharacteristicGroup',
                 'sonata_type_model_list',
                 array(
-                    'label' => 'admin.listing_characteristic.group.label'
+                    'label' => 'admin.listing_characteristic.group.label',
+                    'constraints' => array(new NotBlank())
                 )
             )
             ->end();

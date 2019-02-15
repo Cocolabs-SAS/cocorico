@@ -26,6 +26,9 @@
             <call method="setBundlesEnabled">
                 <argument>%kernel.bundles%</argument>
             </call>
+            <call method="setLocales">
+                <argument>%cocorico.locales%</argument>
+            </call>
         </service>
         <service id="sonata.user.admin.group" class="%sonata.user.admin.group.class%" public="true">
             <tag name="sonata.admin" manager_type="orm" group="%sonata.user.admin.groupname%" label="groups"

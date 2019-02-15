@@ -171,6 +171,6 @@ class ListingCharacteristic extends BaseListingCharacteristic
      */
     public function __toString()
     {
-        return $this->translate()->getName();
+        return (string)$this->translate()->getName();
     }
 }

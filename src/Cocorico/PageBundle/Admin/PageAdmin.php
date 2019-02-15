@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PageAdmin extends AbstractAdmin
 {
@@ -43,17 +44,20 @@ class PageAdmin extends AbstractAdmin
         $titles = $descriptions = $metaTitles = $metaDescriptions = array();
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
-                'label' => 'Title'
+                'label' => 'Title',
+                'constraints' => array(new NotBlank())
             );
             $descriptions[$locale] = array(
                 'label' => 'Description',
-                'required' => true,
+                'constraints' => array(new NotBlank())
             );
             $metaTitles[$locale] = array(
-                'label' => 'Meta Title'
+                'label' => 'Meta Title',
+                'constraints' => array(new NotBlank())
             );
             $metaDescriptions[$locale] = array(
-                'label' => 'Meta Description'
+                'label' => 'Meta Description',
+                'constraints' => array(new NotBlank())
             );
         }
 

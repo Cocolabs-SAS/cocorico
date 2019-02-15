@@ -20,11 +20,13 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\UserBundle\Admin\Model\UserAdmin as SonataUserAdmin;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserAdmin extends SonataUserAdmin
 {
     protected $baseRoutePattern = 'user';
     protected $bundles;
+    protected $locales;
 
     protected $datagridValues = array(
         '_sort_order' => 'DESC',
@@ -36,6 +38,10 @@ class UserAdmin extends SonataUserAdmin
         $this->bundles = $bundles;
     }
 
+    public function setLocales($locales)
+    {
+        $this->locales = $locales;
+    }
 
     /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper): void
@@ -124,17 +130,26 @@ class UserAdmin extends SonataUserAdmin
             )
             ->end();
 
+        //Translations fields
+        $descriptions = array();
+        foreach ($this->locales as $i => $locale) {
+            $descriptions[$locale] = array(
+                'label' => 'Description',
+                'constraints' => array(new NotBlank())
+            );
+        }
         $formMapper->with('Profile-2')
             ->add(
                 'translations',
                 TranslationsType::class,
                 array(
-                    //'locales' => $this->locales,
-//                    'required_locales' => array($this->locale),
+                    'locales' => $this->locales,
+                    'required_locales' => $this->locales,
                     'fields' => array(
                         'description' => array(
                             'field_type' => 'textarea',
-//                            'locale_options' => $descriptions
+                            'locale_options' => $descriptions,
+                            'required' => true
                         ),
                     ),
                     /** @Ignore */
