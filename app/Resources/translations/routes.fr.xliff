@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file date="2017-12-07T17:46:04Z" source-language="en" target-language="fr" datatype="plaintext"
+          original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -10,9 +11,9 @@
           <source>/booking/{listing_id}/{start}/{end}/new</source>
           <target>/reservation/{listing_id}/{start}/{end}/creer</target>
       </trans-unit>
-        <trans-unit id="26cd4974c433beba7b353006962d40cb0959353d" resname="cocorico_booking_payment_new">
-            <source>/booking/payment/{booking_id}/new</source>
-            <target state="new">/booking/payment/{booking_id}/new</target>
+      <trans-unit id="26cd4974c433beba7b353006962d40cb0959353d" resname="cocorico_booking_payment_new">
+        <source>/booking/payment/{booking_id}/new</source>
+        <target state="new">/booking/payment/{booking_id}/new</target>
       </trans-unit>
       <trans-unit id="81a1cea4ee90d53ca7904aac09cd6dbda96fc3dc" resname="cocorico_booking_price">
         <source>/booking/{listing_id}/price</source>
@@ -114,6 +115,10 @@
         <source>/dashboard/listing/{id}/edit_characteristic</source>
         <target>/tableau-de-bord/annonce/{id}/editer-characteristiques</target>
       </trans-unit>
+      <trans-unit id="652e5b8fc61ecfd9feb8572f850420ca937f2832" resname="cocorico_dashboard_listing_edit_deposit">
+        <source>/dashboard/listing/{id}/edit_deposit</source>
+        <target state="new">/dashboard/listing/{id}/edit_deposit</target>
+      </trans-unit>
       <trans-unit id="fc559d0e8f25b44a804997a0139edf552b1cb1cf" resname="cocorico_dashboard_listing_edit_discount">
         <source>/dashboard/listing/{id}/edit_discount</source>
         <target>/tableau-de-bord/annonce/{id}/editer-reductions</target>
@@ -129,6 +134,10 @@
       <trans-unit id="efd024f32b7dbbc957e1dec4d6735ec04227cb12" resname="cocorico_dashboard_listing_edit_location">
         <source>/dashboard/listing/{id}/edit_location</source>
         <target state="new">/tableau-de-bord/annonce/{id}/editer-adresse</target>
+      </trans-unit>
+      <trans-unit id="223734d9283ac4aeb6d32c439d689da41659170a" resname="cocorico_dashboard_listing_edit_option">
+        <source>/dashboard/listing/{id}/edit_option</source>
+        <target state="new">/dashboard/listing/{id}/edit_option</target>
       </trans-unit>
       <trans-unit id="5f2acf99fb0b0e7f40210605e40c5c3004a3cf04" resname="cocorico_dashboard_listing_edit_presentation">
         <source>/dashboard/listing/{id}/edit_presentation</source>
@@ -194,10 +203,6 @@
         <source>/geocoding/{id}/create</source>
         <target state="new">/geocoding/{id}/create</target>
       </trans-unit>
-      <trans-unit id="6282d0eb4eb8b9b6a92876cd3ff55f8656b61b5b" resname="cocorico_geo_reverse_geocoding">
-        <source>/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</source>
-        <target state="new">/geocoding/{lat}/{lng}/{lang}/reverse_geocoding</target>
-      </trans-unit>
       <trans-unit id="59be3aa1f035af965016dafe7e8c54a7ab427504" resname="cocorico_home">
         <source>/</source>
         <target>/</target>
@@ -206,9 +211,25 @@
         <source>/language/translate</source>
         <target>/langage/traduire</target>
       </trans-unit>
+      <trans-unit id="311bb8223f58f33333cbf7332c4ff0b4d31d3420" resname="cocorico_listing_alert_dashboard_alert">
+        <source>/dashboard/listing-alert/{page}</source>
+        <target state="new">/dashboard/listing-alert/{page}</target>
+      </trans-unit>
+      <trans-unit id="c82f3ece898b0cd5915c56eed0ae6a6cfbca85a8" resname="cocorico_listing_alert_dashboard_alert_delete">
+        <source>/dashboard/listing-alert/{id}/delete</source>
+        <target state="new">/dashboard/listing-alert/{id}/delete</target>
+      </trans-unit>
+      <trans-unit id="7503f38efaf75f94d521690c4fcb8a82f31801c5" resname="cocorico_listing_alert_new">
+        <source>/listing-alert/new</source>
+        <target state="new">/listing-alert/new</target>
+      </trans-unit>
       <trans-unit id="0d035f070813a7d01ed570d64541854d8c9518d5" resname="cocorico_listing_availabilities">
         <source>/listing_availabilities/{listing_id}/{start}/{end}</source>
         <target>/annonce-disponibilitee/{listing_id}/{start}/{end}</target>
+      </trans-unit>
+      <trans-unit id="15307a65a4a9f76a9b870e34ece7073293cd2331" resname="cocorico_listing_category_field_listing_search_categories_fields">
+        <source>/category_field/search</source>
+        <target state="new">/category_field/search</target>
       </trans-unit>
       <trans-unit id="b03dfac5699e4ae360dc374ea980b05a5e0b626a" resname="cocorico_listing_favourite">
         <source>/listing/favourite</source>
@@ -234,21 +255,57 @@
         <source>/listing/similar_result/{id}</source>
         <target>/annonce/resultat-similaire/{id}</target>
       </trans-unit>
-        <trans-unit id="0efb1dd469c3a1cfd84d310318728567cbe1e470" resname="cocorico_mangopay_card_complete_registration">
-            <source>/card/{booking_id}/register-card/{card_register_id}</source>
-            <target state="new">/card/{booking_id}/register-card/{card_register_id}</target>
-        </trans-unit>
-        <trans-unit id="36b58b7c7c00dda63b39332d6305b8dc66a07d1c" resname="cocorico_mangopay_card_new">
-            <source>/card/{booking_id}/new</source>
-            <target state="new">/card/{booking_id}/new</target>
-        </trans-unit>
-        <trans-unit id="793a68ff31381adfcf297eef2326d8cc07a021e5" resname="cocorico_mangopay_redirect_after_3d_secure">
-            <source>/card/redirect-after-3d-secure/</source>
-            <target state="new">/card/redirect-after-3d-secure/</target>
+      <trans-unit id="0efb1dd469c3a1cfd84d310318728567cbe1e470" resname="cocorico_mangopay_card_complete_registration">
+        <source>/card/{booking_id}/register-card/{card_register_id}</source>
+        <target state="new">/card/{booking_id}/register-card/{card_register_id}</target>
+      </trans-unit>
+      <trans-unit id="4036c525c06fc92e3c514884178b04dc82676301" resname="cocorico_mangopay_card_saving_booking_card_edit">
+        <source>/booking-card/{booking_id}/edit</source>
+        <target state="new">/booking-card/{booking_id}/edit</target>
+      </trans-unit>
+      <trans-unit id="34f5feb703c48537ac8c74ca95017fb73391bf4c" resname="cocorico_mangopay_card_saving_dashboard_card">
+        <source>/user-card/</source>
+        <target state="new">/user-card/</target>
+      </trans-unit>
+      <trans-unit id="c77f0c56cc6cf6ba7faa28fafdd1449612971533" resname="cocorico_mangopay_card_saving_dashboard_card_delete">
+        <source>/user-card/{id}/delete</source>
+        <target state="new">/user-card/{id}/delete</target>
+      </trans-unit>
+      <trans-unit id="793a68ff31381adfcf297eef2326d8cc07a021e5" resname="cocorico_mangopay_redirect_after_3d_secure">
+        <source>/card/redirect-after-3d-secure/</source>
+        <target state="new">/card/redirect-after-3d-secure/</target>
       </trans-unit>
       <trans-unit id="08287e8d950d47856d8c09d38255f293609de0c2" resname="cocorico_page_show">
         <source>/page/{slug}</source>
         <target>/page/{slug}</target>
+      </trans-unit>
+      <trans-unit id="73a05d2b193a482aa4e524a30c720500da1bb276" resname="cocorico_sms_check">
+        <source>/sms/check</source>
+        <target state="new">/sms/check</target>
+      </trans-unit>
+      <trans-unit id="0f50b6d6a7f1ba9db75155f459b4f907a094a274" resname="cocorico_swift_reader_message_clear">
+        <source>/_cocorico_swift_reader/clear</source>
+        <target state="new">/_cocorico_swift_reader/clear</target>
+      </trans-unit>
+      <trans-unit id="f87c1ae8c62bd22f542a5cbf9f247b221acb72e8" resname="cocorico_swift_reader_message_delete">
+        <source>/_cocorico_swift_reader/delete/{filename}</source>
+        <target state="new">/_cocorico_swift_reader/delete/{filename}</target>
+      </trans-unit>
+      <trans-unit id="b3d53ba181ce4c0138899da498098771b0b4bd1e" resname="cocorico_swift_reader_message_fetch">
+        <source>/_cocorico_swift_reader/fetch/{filename}</source>
+        <target state="new">/_cocorico_swift_reader/fetch/{filename}</target>
+      </trans-unit>
+      <trans-unit id="e3eb5ee4fe00fdfff2b189e451f2241aa8e3b3f4" resname="cocorico_swift_reader_message_index">
+        <source>/_cocorico_swift_reader/</source>
+        <target state="new">/_cocorico_swift_reader/</target>
+      </trans-unit>
+      <trans-unit id="41014381a6f397faa54724d7230f7dc00cabedab" resname="cocorico_swift_reader_message_refresh">
+        <source>/_cocorico_swift_reader/refresh</source>
+        <target state="new">/_cocorico_swift_reader/refresh</target>
+      </trans-unit>
+      <trans-unit id="da4cc8241ff8d3ff76b00013801395130e5a53bf" resname="cocorico_swift_reader_message_show">
+        <source>/_cocorico_swift_reader/show/{filename}</source>
+        <target state="new">/_cocorico_swift_reader/show/{filename}</target>
       </trans-unit>
       <trans-unit id="a46a768e4fd64905558a97d6b0bff4efd0ba3eda" resname="cocorico_user_change_password">
         <source>/change-password</source>
@@ -358,6 +415,22 @@
         <source>/media/cache/resolve/{filter}/rc/{hash}/{path}</source>
         <target>/media/cache/resolve/{filter}/rc/{hash}/{path}</target>
       </trans-unit>
+        <trans-unit id="3112bb79cecb75cdfbcb527526d7db718850c3a4" resname="sonata_user_admin_resetting_check_email">
+            <source>/admin/resetting/check-email</source>
+            <target state="new">/admin/resetting/check-email</target>
+        </trans-unit>
+        <trans-unit id="0cc5fd574f05cad6796f3efddbb568a01ee5ee64" resname="sonata_user_admin_resetting_request">
+            <source>/admin/resetting/request</source>
+            <target state="new">/admin/resetting/request</target>
+        </trans-unit>
+        <trans-unit id="9dc00e54897b05b65eda1c81afca6a79ee631464" resname="sonata_user_admin_resetting_reset">
+            <source>/admin/resetting/reset/{token}</source>
+            <target state="new">/admin/resetting/reset/{token}</target>
+        </trans-unit>
+        <trans-unit id="c97356da99e03a47aef7faa2902d8e08eaeb1aed" resname="sonata_user_admin_resetting_send_email">
+            <source>/admin/resetting/send-email</source>
+            <target state="new">/admin/resetting/send-email</target>
+        </trans-unit>
     </body>
   </file>
 </xliff>
