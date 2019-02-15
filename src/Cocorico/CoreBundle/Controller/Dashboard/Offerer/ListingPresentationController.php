@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDescriptionType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -85,7 +86,7 @@ class ListingPresentationController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing',
-            'listing_edit_description',
+            ListingEditDescriptionType::class,
             $listing,
             array(
                 'action' => $this->generateUrl(

@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -57,7 +58,7 @@ class ListingPriceSimulatorController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'booking_price',
+            BookingPriceType::class,
             $booking,
             array(
                 'method' => 'POST',

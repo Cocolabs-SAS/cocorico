@@ -11,6 +11,7 @@
 
 namespace Cocorico\UserBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\UserBundle\Entity\User;
 use Doctrine\ORM\Query\Expr;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -18,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\UserBundle\Admin\Model\UserAdmin as SonataUserAdmin;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserAdmin extends SonataUserAdmin
@@ -41,10 +43,8 @@ class UserAdmin extends SonataUserAdmin
         $this->locales = $locales;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureFormFields(FormMapper $formMapper)
+    /** @inheritdoc */
+    protected function configureFormFields(FormMapper $formMapper): void
     {
         /* @var $subject \Cocorico\UserBundle\Entity\User */
         $subject = $this->getSubject();
@@ -68,7 +68,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'personType',
-                'choice',
+                ChoiceType::class,
                 array(
                     'empty_data' => User::PERSON_TYPE_NATURAL,
                     'required' => true,
@@ -125,6 +125,7 @@ class UserAdmin extends SonataUserAdmin
                 'language',
                 array(
                     'required' => true,
+                    'disabled' => true
                 )
             )
             ->end();
@@ -140,7 +141,7 @@ class UserAdmin extends SonataUserAdmin
         $formMapper->with('Profile-2')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -176,6 +177,18 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
+                )
+            )
+            ->add(
+                'timeZone',
+                'timezone',
+                array(
+                    'label' => 'form.time_zone',
+                    'required' => true,
+                    'disabled' => true
+                ),
+                array(
+                    'translation_domain' => 'cocorico_user',
                 )
             )
             ->add(
@@ -362,10 +375,9 @@ class UserAdmin extends SonataUserAdmin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureListFields(ListMapper $listMapper)
+
+    /** @inheritdoc */
+    protected function configureListFields(ListMapper $listMapper): void
     {
         $listMapper
             ->addIdentifier(
@@ -386,45 +398,41 @@ class UserAdmin extends SonataUserAdmin
             ->addIdentifier('fullname')
 //            ->add('email')
             ->add('enabled', null, array('editable' => true))
-            ->add('locked', null, array('editable' => true))
+//            ->add('locked', null, array('editable' => true))
             ->add('feeAsAsker', null, array('editable' => true))
             ->add('feeAsOfferer', null, array('editable' => true))
             ->add('listings', null, array('associated_property' => 'getTitle'))
-            ->add(
-                'createdAt',
-                null,
-                array(
-                    'format' => 'd/m/Y H:i',
-                )
-            );
+            ->add('createdAt', null, array());
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
             $listMapper
                 ->add(
                     'impersonating',
                     'string',
-                    array('template' => 'CocoricoSonataAdminBundle::impersonating.html.twig')
+                    array(
+                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                    )
                 );
         }
 
-        $listMapper->add(
-            '_action',
-            'actions',
-            array(
-                'actions' => array(
-                    'edit' => array(),
-                    'list_user_listings' => array(
-                        'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+        $listMapper
+            ->add(
+                '_action',
+                'actions',
+                array(
+                    'actions' => array(
+                        'edit' => array(),
+                        'list_user_listings' => array(
+                            'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+                        ),
                     ),
-                ),
-            )
-        );
+                )
+            );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureDatagridFilters(DatagridMapper $filterMapper)
+
+    /** @inheritdoc */
+    protected function configureDatagridFilters(DatagridMapper $filterMapper): void
     {
         $filterMapper
             ->add('id')
@@ -438,7 +446,7 @@ class UserAdmin extends SonataUserAdmin
                     'operator_options' => array(),
                 )
             )
-            ->add('locked')
+//            ->add('locked')
             ->add('email')
             ->add('groups');
     }
@@ -496,7 +504,7 @@ class UserAdmin extends SonataUserAdmin
             'Last name' => 'lastName',
             'Email' => 'email',
             'Enabled' => 'enabled',
-            'Locked' => 'locked',
+//            'Locked' => 'locked',
             'Created At' => 'createdAt',
         );
 

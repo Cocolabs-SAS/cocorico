@@ -15,12 +15,12 @@ use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\ListingSearchEvent;
 use Cocorico\CoreBundle\Event\ListingSearchEvents;
-use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Model\PriceRange;
-use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\CoreBundle\Repository\ListingRepository;
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
@@ -40,18 +40,17 @@ class ListingSearchManager
     protected $listingDefaultStatus;
 
     /**
-     * @param EntityManager $em
-     * @param DocumentManager $dm
+     * @param EntityManager            $em
+     * @param DocumentManager          $dm
      * @param EventDispatcherInterface $dispatcher
-     * @param array $parameters
+     * @param array                    $parameters
      */
     public function __construct(
         EntityManager $em,
         DocumentManager $dm,
         EventDispatcherInterface $dispatcher,
         array $parameters
-    )
-    {
+    ) {
         $this->em = $em;
         $this->dm = $dm;
         $this->dispatcher = $dispatcher;
@@ -143,7 +142,7 @@ class ListingSearchManager
     }
 
     /**
-     * @param ListingSearchRequest $listingSearchRequest
+     * @param ListingSearchRequest       $listingSearchRequest
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -171,24 +170,25 @@ class ListingSearchManager
     }
 
     /**
-     * @param ListingSearchRequest $listingSearchRequest
+     * @param ListingSearchRequest       $listingSearchRequest
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Doctrine\ORM\QueryBuilder
      */
     private function getSearchByDateQueryBuilder(ListingSearchRequest $listingSearchRequest, $queryBuilder)
     {
         //Dates availabilities (from MongoDB)
-        $dateRange = $listingSearchRequest->getDateRange();
+        $dateTimeRange = $listingSearchRequest->getDateTimeRange();
+        $dateRange = $dateTimeRange->getDateRange();
         if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
             if ($this->listingDefaultStatus == ListingAvailability::STATUS_AVAILABLE) {
                 //Get listings unavailable for searched dates
                 $listingsUnavailable = $this->getListingsAvailability(
-                    $dateRange,
-                    $listingSearchRequest->getTimeRange(),
+                    $dateTimeRange,
                     $listingSearchRequest->getFlexibility(),
                     null,
                     array(ListingAvailability::STATUS_UNAVAILABLE, ListingAvailability::STATUS_BOOKED)
                 );
+//                print_r($listingsUnavailable);
 
                 if (count($listingsUnavailable)) {
                     $queryBuilder
@@ -199,8 +199,7 @@ class ListingSearchManager
             } else {//By default listing are unavailable
                 //Get listings available for searched dates
                 $listingsAvailable = $this->getListingsAvailability(
-                    $dateRange,
-                    $listingSearchRequest->getTimeRange(),
+                    $dateTimeRange,
                     $listingSearchRequest->getFlexibility(),
                     null,
                     array(ListingAvailability::STATUS_AVAILABLE)
@@ -222,7 +221,7 @@ class ListingSearchManager
             if ($this->timeUnitIsDay) {
                 $duration = $dateRange->getDuration($this->endDayIncluded);
             } else {
-                $timeRange = $listingSearchRequest->getTimeRange();
+                $timeRange = $dateTimeRange->getFirstTimeRange();
                 if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
                     if ($timeRange->getStart()->format('H:i') !== $timeRange->getEnd()->format('H:i')
                         && ($timeRange->getStart()->format('H:i') != '00:00')
@@ -245,7 +244,7 @@ class ListingSearchManager
     }
 
     /**
-     * @param ListingSearchRequest $listingSearchRequest
+     * @param ListingSearchRequest       $listingSearchRequest
      * @param \Doctrine\ORM\QueryBuilder $queryBuilder
      * @return \Doctrine\ORM\QueryBuilder
      */
@@ -321,23 +320,21 @@ class ListingSearchManager
     /**
      * Get listings availabilities
      *
-     * @param DateRange $dateRange
-     * @param  TimeRange|boolean $timeRange
-     * @param  int $flexibility in number of days
+     * @param DateTimeRange    $dateTimeRange
+     * @param  int             $flexibility in number of days
      * @param  PriceRange|null $priceRange
-     * @param  array $status
+     * @param  array           $status
      *
      * @return int[] ListingId   array key = Id listing, value = number of times listing is available inside date ranges
      */
     public function getListingsAvailability(
-        DateRange $dateRange,
-        $timeRange,
+        DateTimeRange $dateTimeRange,
         $flexibility,
         $priceRange = null,
         $status
-    )
-    {
+    ) {
         $daysFlexibility = $flexibility ? $flexibility : 0;
+        $dateRange = $dateTimeRange->getDateRange();
 
         //Create first date range from flexibility days
         $now = date('Ymd');
@@ -350,7 +347,7 @@ class ListingSearchManager
             $newEnd = new \DateTime($dateRange->getEnd()->format('Y-m-d'));
         }
         $newEnd->sub(new \DateInterval('P' . $daysFlexibility . 'D'));
-        $newDateRange = new DateRange($newStart, $newEnd);
+        $dateTimeRange->setDateRange(new DateRange($newStart, $newEnd));
 
         /** @var ListingAvailabilityRepository $listingAvailabilityRepository */
         $listingAvailabilityRepository = $this->dm->getRepository("CocoricoCoreBundle:ListingAvailability");
@@ -362,17 +359,15 @@ class ListingSearchManager
             //Only for date range greater than or equal to today
             if ($newStart->format('Ymd') >= $now) {
                 $nbDateRanges++;
-                $listingsTmp =
-                    $listingAvailabilityRepository->findAvailabilities(
-                        $newDateRange,
-                        $timeRange,
-                        $status,
-                        $priceRange,
-                        $this->timeUnitIsDay
-                    );
+                $listingsTmp = $listingAvailabilityRepository->findAvailabilities(
+                    $dateTimeRange,
+                    $status,
+                    $priceRange,
+                    $this->timeUnitIsDay
+                );
 
 //                echo "<br />" . $newStart->format('Y-m-d') . "/" . $newEnd->format('Y-m-d') . ":";
-//               print_r($listingsTmp);
+//                print_r($listingsTmp);
 
                 /**
                  * All listings are (un)available for this date:
@@ -394,9 +389,8 @@ class ListingSearchManager
             }
 
             //Next date range
-            $newDateRange = new DateRange(
-                $newStart->add(new \DateInterval('P1D')),
-                $newEnd->add(new \DateInterval('P1D'))
+            $dateTimeRange->setDateRange(
+                new DateRange($newStart->add(new \DateInterval('P1D')), $newEnd->add(new \DateInterval('P1D')))
             );
         }
 
@@ -406,10 +400,12 @@ class ListingSearchManager
         if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
             //Get listings unavailable for all dates ranges
             $listings = array_diff($listings, range(0, ($nbDateRanges - 1)));
-        } else {
-            //Get listings available for one of the dates ranges. $listings already contains them
         }
+//        else {
+//            Get listings available for one of the dates ranges. $listings already contains them
+//        }
 
+//        print_r($listings);
         return $listings;
     }
 
@@ -418,11 +414,11 @@ class ListingSearchManager
      * getListingsByIds returns the listings, depending upon ids provided
      *
      * @param ListingSearchRequest $listingSearchRequest
-     * @param array $ids
-     * @param int $page
-     * @param string $locale
-     * @param array $idsExcluded
-     * @param int $maxPerPage
+     * @param array                $ids
+     * @param int                  $page
+     * @param string               $locale
+     * @param array                $idsExcluded
+     * @param int                  $maxPerPage
      *
      * @return Paginator|null
      */
@@ -433,8 +429,7 @@ class ListingSearchManager
         $locale,
         array $idsExcluded = array(),
         $maxPerPage = null
-    )
-    {
+    ) {
         // Remove the current listing id from the similar listings
         $ids = array_diff($ids, $idsExcluded);
 

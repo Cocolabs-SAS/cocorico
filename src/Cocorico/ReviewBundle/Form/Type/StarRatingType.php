@@ -11,6 +11,7 @@
 namespace Cocorico\ReviewBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Star Rating type for the rating, extended from the choices
@@ -26,17 +27,7 @@ class StarRatingType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
-    }
-
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
+        return ChoiceType::class;
     }
 
     /**

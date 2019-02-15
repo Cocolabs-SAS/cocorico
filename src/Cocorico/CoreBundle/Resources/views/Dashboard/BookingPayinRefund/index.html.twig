@@ -14,6 +14,8 @@
         <!-- payments -->
         <div role="tabpanel" class="tab-pane active">
 
+            {% set user_timezone = app.user.timeZone %}
+
             {% include '@CocoricoCore/Dashboard/BookingPayin/_switcher.html.twig'  with {
             'checked_payin': '',
             'checked_refund': 'checked',
@@ -48,7 +50,7 @@
                         <td class="col2" data-label="{{ "booking.bank_wire.date.title"| trans }}">
                             <div>
                                 {% if is_payed and booking_payin_refund.payedAt %}
-                                    {{ booking_payin_refund.payedAt|localizeddate('short', 'none', 'fr') }}
+                                    {{ booking_payin_refund.payedAt|localizeddate('short', 'none', 'fr', user_timezone) }}
                                 {% endif %}
                             </div>
                         </td>

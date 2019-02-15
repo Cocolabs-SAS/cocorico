@@ -70,14 +70,6 @@ class ListingCategoryType extends AbstractType
         return 'entity';
     }
 
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     /**
      * {@inheritdoc}

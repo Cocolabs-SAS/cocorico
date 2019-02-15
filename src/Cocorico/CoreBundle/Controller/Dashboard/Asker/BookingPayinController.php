@@ -71,18 +71,20 @@ class BookingPayinController extends Controller
      * @param  int     $id
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function showBillAction(Request $request, $id)
     {
         $bookingManager = $this->get('cocorico.booking.manager');
-        $booking = $bookingManager->findOneByAsker(
-            $id,
-            $this->getUser()->getId(),
-            $request->getLocale(),
-            array(Booking::STATUS_PAYED, Booking::STATUS_CANCELED_ASKER)
-        );
-
-        if (!$booking) {
+        try {
+            $booking = $bookingManager->findOneByAsker(
+                $id,
+                $this->getUser()->getId(),
+                $request->getLocale(),
+                array(Booking::STATUS_PAYED, Booking::STATUS_CANCELED_ASKER)
+            );
+        } catch (\Exception $e) {
             throw $this->createNotFoundException('Bill not found');
         }
 

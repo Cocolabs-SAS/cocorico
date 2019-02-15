@@ -12,6 +12,9 @@
 namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditStatusType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -74,7 +77,7 @@ class ListingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_status',
-            'listing_edit_status',
+            ListingEditStatusType::class,
             $listing,
             array(
                 'method' => 'POST',
@@ -161,7 +164,7 @@ class ListingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_price',
-            'listing_edit_price',
+            ListingEditPriceType::class,
             $listing,
             array(
                 'method' => 'POST',
@@ -268,7 +271,7 @@ class ListingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing_duration',
-            'listing_edit_duration',
+            ListingEditDurationType::class,
             $listing,
             array(
                 'method' => 'POST',

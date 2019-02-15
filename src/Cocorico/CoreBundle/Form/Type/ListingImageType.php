@@ -12,8 +12,11 @@
 namespace Cocorico\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ListingImageType extends AbstractType
 {
@@ -27,7 +30,7 @@ class ListingImageType extends AbstractType
         $builder
             ->add(
                 'name',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false
@@ -35,7 +38,7 @@ class ListingImageType extends AbstractType
             )
             ->add(
                 'file',
-                'file',
+                FileType::class,
                 array(
                     'image_path' => 'webPath',
                     'imagine_filter' => 'listing_xxmedium',
@@ -49,7 +52,7 @@ class ListingImageType extends AbstractType
             )
             ->add(
                 'position',
-                'hidden',
+                HiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false,
@@ -60,7 +63,7 @@ class ListingImageType extends AbstractType
             )
             ->add(
                 'listing',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array(
                     'class' => 'Cocorico\CoreBundle\Entity\Listing',
                     /** @Ignore */
@@ -79,20 +82,11 @@ class ListingImageType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\ListingImage',
                 'csrf_token_id' => 'listing_image',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 /** @Ignore */
                 'label' => false
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

@@ -12,12 +12,11 @@
 namespace Cocorico\CoreBundle\Repository;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
-use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\PriceRange;
-use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\DocumentRepository;
-
 
 class ListingAvailabilityRepository extends DocumentRepository
 {
@@ -40,6 +39,9 @@ class ListingAvailabilityRepository extends DocumentRepository
         $endDayIncluded = false,
         $hydrate = true
     ) {
+//        echo 'findAvailabilitiesByListing' . '<br>';
+//        echo $start->format('Y-m-d H:i') . ' /' .  $end->format('Y-m-d H:i') . '<br>';
+
         $qbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailability')
             ->hydrate($hydrate)
             ->select('day', 'status', 'price', 'times', 'listingId')
@@ -64,18 +66,16 @@ class ListingAvailabilityRepository extends DocumentRepository
     }
 
     /**
-     * @param DateRange         $dateRange
-     * @param TimeRange|boolean $timeRange
-     * @param array             $status
-     * @param PriceRange|null   $priceRange
-     * @param boolean           $timeUnitIsDay
+     * @param DateTimeRange   $dateTimeRange
+     * @param array           $status
+     * @param PriceRange|null $priceRange
+     * @param boolean         $timeUnitIsDay
      *
      * @return \Cocorico\CoreBundle\Document\ListingAvailability[]
      * @throws \Doctrine\ODM\MongoDB\MongoDBException
      */
     public function findAvailabilities(
-        DateRange $dateRange,
-        $timeRange,
+        DateTimeRange $dateTimeRange,
         $status,
         $priceRange = null,
         $timeUnitIsDay
@@ -85,11 +85,10 @@ class ListingAvailabilityRepository extends DocumentRepository
         $priceMax = $priceRange ? $priceRange->getMax() : false;
 
         if ($timeUnitIsDay) {
-            $result = $this->findAvailabilitiesInDayMode($dateRange, $status, $priceMin, $priceMax);
+            $result = $this->findAvailabilitiesInDayMode($dateTimeRange, $status, $priceMin, $priceMax);
         } else {
             $result = $this->findAvailabilitiesInNoDayMode(
-                $dateRange,
-                $timeRange,
+                $dateTimeRange,
                 $status,
                 $priceMin,
                 $priceMax
@@ -101,27 +100,26 @@ class ListingAvailabilityRepository extends DocumentRepository
     }
 
     /**
-     * @param DateRange $dateRange
+     * @param DateTimeRange                       $dateTimeRange
      * @param                                     $status
      * @param                                     $priceMin
      * @param                                     $priceMax
      *
      * @return array
      */
-    private function findAvailabilitiesInDayMode(DateRange $dateRange, $status, $priceMin, $priceMax)
+    private function findAvailabilitiesInDayMode(DateTimeRange $dateTimeRange, $status, $priceMin, $priceMax)
     {
         $qbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailability');
         $qbDM
             ->hydrate(false)
             ->distinct('lId');
 
-        $start = $dateRange->getStart();
-        $end = $dateRange->getEnd();
+        $start = $dateTimeRange->getDateRange()->getStart();
+        $end = $dateTimeRange->getDateRange()->getEnd();
 
         if (is_numeric($priceMin) && $priceMin && is_numeric($priceMax) && $priceMax) {//not use for now
             //Unavailable or not in price range
         } else {
-
             //If listing availability status searched is "unavailable" then
             //we search listings having at least one date unavailable in date range
             if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
@@ -130,11 +128,7 @@ class ListingAvailabilityRepository extends DocumentRepository
                     ->field('status')->in($status);
             }//Else we search listings having all dates available for date range
             else {
-                $periods = new \DatePeriod(
-                    $start,
-                    new \DateInterval('P1D'),
-                    $end
-                );
+                $periods = new \DatePeriod($start, new \DateInterval('P1D'), $end);
 
                 /** @var \DateTime $period */
                 foreach ($periods as $period) {
@@ -151,8 +145,7 @@ class ListingAvailabilityRepository extends DocumentRepository
 
 
     /**
-     * @param DateRange $dateRange
-     * @param TimeRange $timeRange
+     * @param DateTimeRange                       $dateTimeRange
      * @param                                     $status
      * @param                                     $priceMin
      * @param                                     $priceMax
@@ -160,13 +153,11 @@ class ListingAvailabilityRepository extends DocumentRepository
      * @return array
      */
     private function findAvailabilitiesInNoDayMode(
-        DateRange $dateRange,
-        TimeRange $timeRange = null,
+        DateTimeRange $dateTimeRange,
         $status,
         $priceMin,
         $priceMax
-    )
-    {
+    ) {
         $result = array();
 
         $qbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailability');
@@ -174,10 +165,9 @@ class ListingAvailabilityRepository extends DocumentRepository
             ->hydrate(false)
             ->distinct('lId');
 
-        $timeRange = $timeRange ? array($timeRange) : array();
-        $daysTimeRanges = $dateRange->getTimeRangesByDay($timeRange, true, false);
+        $daysTimeRanges = $dateTimeRange->getDaysTimeRanges(true);
 
-        foreach ($daysTimeRanges as $index => $dayTimeRanges) {
+        foreach ($daysTimeRanges as $dayTimeRanges) {
             /** @var \DateTime $start */
             $start = $dayTimeRanges->day;
             $end = clone $start;
@@ -197,11 +187,71 @@ class ListingAvailabilityRepository extends DocumentRepository
                 $embeddedQbDM = $this->dm->createQueryBuilder('CocoricoCoreBundle:ListingAvailabilityTime');
 
                 if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
+                    if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+                        //search listings unavailable
                     $qbDMDatesExp->field('times')->elemMatch(
                         $embeddedQbDM->expr()
                             ->field('id')->in(range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1))
                             ->field('status')->in($status)
                     );
+                    } else {
+                        //Search listings available
+                        //Search listings not having at least one minute unavailable in the time range
+                        //todo: handle search time range  between existing minutes and non existing minutes
+                        $qbDMDatesExp
+                            ->addAnd(
+                                $qbDMDatesExp->field('times')->elemMatch(
+                                    $embeddedQbDM->expr()
+                                        ->field('id')->in(
+                                            range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1)
+                                        )
+                                )
+                            )
+                            ->addAnd(
+                                $qbDMDatesExp->field('times')->not(
+                                    $embeddedQbDM->expr()->elemMatch(
+                                        $embeddedQbDM->expr()
+                                            ->field('id')->in(
+                                                range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1)
+                                            )
+                                            ->field('status')->in(
+                                                array(
+                                                    ListingAvailability::STATUS_UNAVAILABLE,
+                                                    ListingAvailability::STATUS_BOOKED
+                                                )
+                                            )
+                                    )
+                                )
+                            );
+
+
+//                        //Interesting solutions to search in array elements on multiple fields (id=1 and s=1, id=2 and s=1, ...)
+//                        $criterias = array();
+
+//                        //First solution by object
+//                        $startMinutes = range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1);
+//                        foreach ($startMinutes as $i => $startMinute) {
+//                            # Add expression as a sub query to array
+//                            $criterias[] = $embeddedQbDM->expr()->elemMatch(
+//                                $embeddedQbDM->expr()
+//                                    ->field('id')->equals($startMinute)
+//                                    ->field('status')->equals(ListingAvailability::STATUS_AVAILABLE)
+//                            )->getQuery();
+//                        }
+//                        $qbDMDatesExp->field('times')->all($criterias);
+
+//                        //Second solution by array
+//                        $startMinutes = range($timeRange->getStartMinute(), $timeRange->getEndMinute() - 1);
+//                        foreach ($startMinutes as $startMinute) {
+//                            $criterias[] = array(
+//                                '$elemMatch' => array(
+//                                    "_id" => $startMinute,
+//                                    "s" => ListingAvailability::STATUS_AVAILABLE
+//                                )
+//                            );
+//                        }
+//                        $qbDMDatesExp->field('times')->all($criterias);
+                    }
 
                 } else {
                     //No time unit in the day is available

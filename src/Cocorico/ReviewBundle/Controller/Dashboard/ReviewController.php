@@ -13,6 +13,7 @@ namespace Cocorico\ReviewBundle\Controller\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\ReviewBundle\Entity\Review;
+use Cocorico\ReviewBundle\Form\Type\Dashboard\ReviewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,7 +42,8 @@ class ReviewController extends Controller
      * @param  Request $request
      * @param  Booking $booking
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
      */
     public function newAction(Request $request, Booking $booking)
     {
@@ -70,7 +72,9 @@ class ReviewController extends Controller
             array(
                 'form' => $form->createView(),
                 'booking' => $booking,
-                'reviewTo' => $review->getReviewTo()
+                'reviewTo' => $review->getReviewTo(),
+                'user_timezone' => $user == $booking->getUser() ?
+                    $booking->getTimeZoneAsker() : $booking->getTimeZoneOfferer()
             )
         );
     }
@@ -86,7 +90,7 @@ class ReviewController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            'review_new',
+            ReviewType::class,
             $review
         );
 

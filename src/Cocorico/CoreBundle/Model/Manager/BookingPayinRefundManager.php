@@ -26,7 +26,6 @@ class BookingPayinRefundManager extends BaseManager
     protected $cancellationPolicyRules;
     protected $mailer;
     public $maxPerPage;
-    protected $timeZone;
     protected $bundles;
 
     /**
@@ -34,7 +33,6 @@ class BookingPayinRefundManager extends BaseManager
      * @param array           $cancellationPolicyRules
      * @param TwigSwiftMailer $mailer
      * @param int             $maxPerPage
-     * @param string          $timeZone
      * @param array           $bundles
      */
     public function __construct(
@@ -42,14 +40,12 @@ class BookingPayinRefundManager extends BaseManager
         array $cancellationPolicyRules,
         TwigSwiftMailer $mailer,
         $maxPerPage,
-        $timeZone,
         $bundles
     ) {
         $this->em = $em;
         $this->cancellationPolicyRules = $cancellationPolicyRules;
         $this->mailer = $mailer;
         $this->maxPerPage = $maxPerPage;
-        $this->timeZone = $timeZone;
         $this->bundles = $bundles;
     }
 

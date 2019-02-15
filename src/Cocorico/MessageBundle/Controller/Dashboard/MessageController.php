@@ -58,7 +58,7 @@ class MessageController extends Controller
         }
 
         $userType = $request->getSession()->get('profile', 'asker');
-        $threadManager = $this->container->get('cocorico_message.thread_manager');
+        $threadManager = $this->get('cocorico_message.thread_manager');
         $threads = $threadManager->getListingInboxThreads($user, $userType, $page);
 
         return $this->render(
@@ -108,8 +108,8 @@ class MessageController extends Controller
         /** @var Message $message */
         $message = $formHandler->process($form);
 
-        $translator = $this->container->get('translator');
-        $session = $this->container->get('session');
+        $translator = $this->get('translator');
+        $session = $this->get('session');
 
         if ($message) {
             $messageEvent = new MessageEvent($message->getThread(), $listing->getUser(), $this->getUser());
@@ -138,7 +138,7 @@ class MessageController extends Controller
             );
         }
 
-        return $this->container->get('templating')->renderResponse(
+        return $this->get('templating')->renderResponse(
             'CocoricoMessageBundle:Dashboard/Message:new_thread.html.twig',
             array(
                 'form' => $form->createView(),
@@ -167,13 +167,13 @@ class MessageController extends Controller
             ->clearNbUnreadMessageCache($this->getUser()->getId());
 
         /** @var Form $form */
-        $form = $this->container->get('fos_message.reply_form.factory')->create($thread);
+        $form = $this->get('fos_message.reply_form.factory')->create($thread);
         $paramArr = $request->get($form->getName());
         $request->request->set($form->getName(), $paramArr);
 
-        $formHandler = $this->container->get('fos_message.reply_form.handler');
+        $formHandler = $this->get('fos_message.reply_form.handler');
 
-        $selfUrl = $this->container->get('router')->generate(
+        $selfUrl = $this->get('router')->generate(
             'cocorico_dashboard_message_thread_view',
             array('threadId' => $thread->getId())
         );
@@ -183,7 +183,7 @@ class MessageController extends Controller
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
 
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
-            $this->container->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
+            $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
             return new RedirectResponse($selfUrl);
         }
@@ -192,7 +192,7 @@ class MessageController extends Controller
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         $breadcrumbs->addThreadViewItems($request, $thread, $this->getUser());
 
-        return $this->container->get('templating')->renderResponse(
+        return $this->get('templating')->renderResponse(
             'CocoricoMessageBundle:Dashboard/Message:thread.html.twig',
             array(
                 'form' => $form->createView(),
@@ -216,14 +216,14 @@ class MessageController extends Controller
     {
         /** @var ThreadInterface $thread */
         $thread = $this->getProvider()->getThread($threadId);
-        $this->container->get('fos_message.deleter')->markAsDeleted($thread);
-        $this->container->get('fos_message.thread_manager')->saveThread($thread);
+        $this->get('fos_message.deleter')->markAsDeleted($thread);
+        $this->get('fos_message.thread_manager')->saveThread($thread);
 
         $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
             ->clearNbUnreadMessageCache($this->getUser()->getId());
 
         return new RedirectResponse(
-            $this->container->get('router')->generate('cocorico_dashboard_message')
+            $this->get('router')->generate('cocorico_dashboard_message')
         );
     }
 
@@ -234,7 +234,7 @@ class MessageController extends Controller
      */
     protected function getProvider()
     {
-        return $this->container->get('fos_message.provider');
+        return $this->get('fos_message.provider');
     }
 
     /**
@@ -253,7 +253,7 @@ class MessageController extends Controller
         $response = array('asker' => 0, 'offerer' => 0, 'total' => 0);
         if ($request->isXmlHttpRequest()) {
             $user = $this->getUser();
-            $em = $this->container->get('doctrine')->getManager();
+            $em = $this->get('doctrine')->getManager();
             /** @var MessageRepository $repo */
             $repo = $em->getRepository('CocoricoMessageBundle:Message');
             $nbMessages = $repo->getNbUnreadMessage($user, true);

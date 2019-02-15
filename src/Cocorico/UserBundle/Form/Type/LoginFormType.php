@@ -21,6 +21,7 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -42,7 +43,7 @@ class LoginFormType extends AbstractType
                 )
             )->add(
                 '_password',
-                'password',
+                PasswordType::class,
                 array(
                     'label' => 'user.login.password',
                     'error_bubbling' => false

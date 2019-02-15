@@ -1,0 +1,539 @@
+{% extends 'CocoricoCoreBundle:Form:fields.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+{% macro timeRangesCollectionItem(child_form, allow_delete) %}
+    {% spaceless %}
+        <li class="timepicker-holder time-fields">
+            {{ form_errors(child_form) }}
+            {% set fieldNum = 1 %}
+            {% for field in child_form %}
+                {% if "hidden" not in field.vars.block_prefixes %}
+                    {% if field.vars.name == "start" or field.vars.name == "end" %}
+                        <div class="{{ field.vars.id }} hidden">
+                            {{ form_widget(field,{
+                                'attr': {
+                                    'class': 'time-field no-arrow',
+                                }
+                            }) }}
+                        </div>
+                    {% elseif field.vars.name == "start_picker" or field.vars.name == "end_picker" %}
+                        {% if field.vars.name == "start_picker" %}
+                            {{ form_errors(child_form.start) }}
+                            {{ form_label(child_form.start) }}
+                        {% else %}
+                            {{ form_errors(child_form.end) }}
+                            {{ form_label(child_form.end) }}
+                        {% endif %}
+                        <div class='input-group date' id='datetimepicker3'>
+                            {{ form_widget(field,{
+                                'attr': {
+                                    'class': 'form-control',
+                                    'placeholder': '--:--',
+                                }
+                            }) }}
+                            <span class="add-on">
+                                <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                            </span>
+                        </div>
+                    {% elseif field.vars.name == "date" %}
+                        <div class="hidden">
+                            {{ form_widget(field,{
+                                'attr': {
+                                    'class': 'no-arrow',
+                                }
+                            }) }}
+                        </div>
+                    {% endif %}
+
+                    {% set fieldNum = fieldNum + 1 %}
+                {% else %}
+                    {{ form_widget(field) }}
+                {% endif %}
+            {% endfor %}
+
+            {% if allow_delete|default(null) is not null %}
+                <a class="close" title="Remove" href="javascript:void(0)"
+                   onclick="$(this).parent().remove();">
+                    <span class="hidden">{{ 'collection.remove_item'|trans }}</span>
+                    <i class="icon-cancel"></i>
+                </a>
+            {% endif %}
+        </li>
+
+    {% endspaceless %}
+{% endmacro %}
+
+{#
+   Time ranges
+#}
+{% block _time_ranges_widget %}
+    {% import _self as self %}
+
+    {% spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.timeRangesCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+
+            <ul class="collection">
+                {% for child_form in form %}
+                    {{ self.timeRangesCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </ul>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-block">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+
+{#
+    Date range widget
+#}
+{%- block date_range_widget -%}
+    <div class="col datepicker-holder day-fields display-{{ daysDisplayMode }}">
+        <div class="col">
+            {{ form_errors(form.start) }}
+            {% if form.start.vars.label %}
+                <strong class="title">{{ form_label(form.start) }}</strong>
+            {% endif %}
+
+            <div class="input-append date field-holder">
+                {{ form_widget(form.start,{
+                    'type': 'text',
+                    'attr': {
+                        'class': 'form-control from ' ~ form.start.vars.attr.class|default(''),
+                        'placeholder': "/      /"
+                    }
+                }) }}
+                <span class="add-on">
+                    <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        {% if "date_hidden" not in form.end.vars.block_prefixes %}
+            <div class="col">
+                {{ form_errors(form.end) }}
+                {% if form.end.vars.label %}
+                    <strong class="title">{{ form_label(form.end) }}</strong>
+                {% endif %}
+
+                <div class="input-append date field-holder">
+                    {{ form_widget(form.end,{
+                        'type': 'text',
+                        'attr': {
+                            'class': 'form-control to ' ~ form.end.vars.attr.class|default(''),
+                            'placeholder': "/      /"
+                        }
+                    }) }}
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.end) }}
+            {{ form_widget(form.end) }}
+        {% endif %}
+    </div>
+
+    {% if form.nb_days is defined %}
+        {% if "hidden" not in form.nb_days.vars.block_prefixes %}
+            <div class="col day-fields nb-days">
+                <strong class="title">
+                    {{ form_label(form.nb_days) }}
+                </strong>
+
+                {{ form_errors(form.nb_days) }}
+                {{ form_widget(form.nb_days) }}
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.nb_days) }}
+            {{ form_widget(form.nb_days) }}
+        {% endif %}
+    {% endif %}
+
+{%- endblock -%}
+
+
+{#
+    Date range ajax widget
+#}
+{%- block _date_range_ajax_widget -%}
+    <div class="datepicker-holder-ajax">
+        <div class="col">
+            {{ form_errors(form.start) }}
+            <strong class="title">
+                {{ form_label(form.start, null, {'required': false}) }}
+            </strong>
+
+            <div class="input-append date field-holder">
+                <span class="add-on">
+                    <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                </span>
+
+                {{ form_widget(form.start, {
+                    'id': 'start-date',
+                    'type': 'text',
+                    'attr': {
+                        'class': 'form-control from',
+                        'placeholder': '/      /',
+                        'title': 'start-date'
+                    }
+                }) }}
+            </div>
+        </div>
+        {% if "date_hidden" not in form.end.vars.block_prefixes %}
+            <div class="col">
+                {{ form_errors(form.end) }}
+                <strong class="title">
+                    {{ form_label(form.end, null, {'required': false}) }}
+                </strong>
+
+                <div class="input-append date field-holder">
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                    </span>
+
+                    {{ form_widget(form.end, {
+                        'id': 'end-date',
+                        'type': 'text',
+                        'attr': {
+                            'class': 'form-control to',
+                            'placeholder': '/      /',
+                            'title': 'date'
+                        }
+                    }) }}
+                </div>
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.end) }}
+            {{ form_widget(form.end, {
+                'id': 'end-date'
+            }) }}
+        {% endif %}
+    </div>
+
+    {% if form.nb_days is defined %}
+        {% if "hidden" not in form.nb_days.vars.block_prefixes %}
+            <div class="col day-fields nb-days">
+                <strong class="title">
+                    {{ form_label(form.nb_days) }}
+                </strong>
+
+                {{ form_errors(form.nb_days) }}
+                {{ form_widget(form.nb_days) }}
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.nb_days) }}
+            {{ form_widget(form.nb_days) }}
+        {% endif %}
+    {% endif %}
+{%- endblock -%}
+
+
+{#
+    Time range widget:
+    If timesDisplayMode parameter is equal to 'duration' then end time field is hidden and duration field is added
+    select time fields are replaced by timepicker
+#}
+{%- block time_range_widget -%}
+    <div class="col timepicker-holder time-fields display-{{ timesDisplayMode }}">
+        <div class="col">
+            <strong class="title">
+                {{ form_label(form.start) }}
+            </strong>
+
+            {{ form_errors(form.start) }}
+            <div class='input-group date' id='datetimepicker3'>
+                {{ form_widget(form.start_picker,{
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': '--:--',
+                    }
+                }) }}
+                <span class="add-on">
+                    <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                 </span>
+            </div>
+            {#hide start time field#}
+            <div class="hidden">
+                {{ form_widget(form.start) }}
+            </div>
+        </div>
+
+        {% if timesDisplayMode == "duration" %}
+            {#In new booking page there is no nb_minute fields#}
+            {% if form.nb_minutes is defined %}
+                {#display duration label if field is not hidden #}
+                {% if "hidden" not in form.nb_minutes.vars.block_prefixes %}
+                    <strong class="title">
+                        {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize) }}
+                    </strong>
+                {% endif %}
+
+                {#display duration field#}
+                {{ form_errors(form.nb_minutes) }}
+                {{ form_widget(form.nb_minutes) }}
+            {% endif %}
+
+            {#hide end time field#}
+            <div class="hidden">
+                {{ form_widget(form.end) }}
+            </div>
+        {% else %}
+            <div class="col">
+                <strong class="title">
+                    {{ form_label(form.end) }}
+                </strong>
+
+                {{ form_errors(form.end) }}
+                <div class='input-group date' id='datetimepicker3'>
+                    {{ form_widget(form.end_picker,{
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '--:--',
+                        }
+                    }) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-time"></span>
+                    </span>
+                </div>
+                {#hide end time field#}
+                <div class="hidden">
+                    {{ form_widget(form.end) }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{%- endblock -%}
+
+{#
+    Time range hidden widget:
+    Used to disable default time_range block rendering
+#}
+{%- block _time_range_hidden_widget -%}{%- endblock -%}
+
+{#
+    Time range ajax widget:
+    If timesDisplayMode parameter is equal to 'duration' then end time field is hidden and duration field is added
+    select time fields are replaced by timepicker
+#}
+{%- block _time_range_ajax_widget -%}
+    <div class="timepicker-holder-ajax time-fields display-{{ timesDisplayMode }}">
+        <div class="col">
+            {{ form_errors(form.start) }}
+            <strong class="title">
+                {{ form_label(form.start, null, {'required': false}) }}
+            </strong>
+
+            <div class='input-group date' id='datetimepicker3'>
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                    </span>
+                {{ form_widget(form.start_picker,{
+                    'attr': {
+                        'class': 'form-control',
+                        'placeholder': '--:--',
+                    }
+                }) }}
+            </div>
+
+            <div class="hidden">
+                {{ form_widget(form.start) }}
+            </div>
+        </div>
+        <div class="col">
+            {% if timesDisplayMode == "duration" %}
+                {{ form_errors(form.nb_minutes) }}
+
+                {% if "hidden" not in form.nb_minutes.vars.block_prefixes %}
+                    <strong class="title">
+                        {{ form_label(form.nb_minutes, (-1)|add_time_unit_text|capitalize, {'required': false}) }}
+                    </strong>
+                {% endif %}
+
+                {{ form_widget(form.nb_minutes) }}
+                {#hide end time field#}
+                <div class="hidden">
+                    {{ form_widget(form.end) }}
+                </div>
+            {% else %}
+                {{ form_errors(form.end) }}
+                <strong class="title">
+                    {{ form_label(form.end, null, {'required': false}) }}
+                </strong>
+
+                <div class='input-group date' id='datetimepicker3'>
+                        <span class="add-on">
+                            <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-clock"></i>
+                        </span>
+                    {{ form_widget(form.end_picker,{
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '--:--',
+                        }
+                    }) }}
+                </div>
+                {#hide end time field#}
+                <div class="hidden">
+                    {{ form_widget(form.end) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{%- endblock -%}
+
+{#
+    Time widget
+#}
+{%- block time_widget -%}
+    {%- if widget == 'single_text' -%}
+        {{ block('form_widget_simple') }}
+    {%- else -%}
+        {% if widget == 'text' %}
+            {% set vars = {'attr': { 'size': 1 }} %}
+        {% else %}
+            {% set vars = {'attr': { 'class': 'no-scroll no-arrow'}} %}
+        {% endif %}
+
+        <div {{ block('widget_container_attributes') }}>
+            {{ form_widget(form.hour, vars) }}
+            {% if with_minutes %}
+                :{{ form_widget(form.minute, vars) }}
+            {% endif %}
+            {% if with_seconds %}
+                :{{ form_widget(form.second, vars) }}
+            {% endif %}
+        </div>
+    {%- endif -%}
+{%- endblock time_widget -%}
+
+{#
+    Weekdays check boxes
+#}
+{%- block weekdays_widget -%}
+    <div {{ block('widget_container_attributes') }}>
+        <ul class="list-inline check-list">
+            {%- for child in form %}
+                <li>
+                    {{- form_widget(child) -}}
+                    <span class="label">{{- form_label(child) -}}</span>
+                </li>
+            {% endfor -%}
+        </ul>
+    </div>
+{%- endblock -%}
+
+
+
+{#
+   Time ranges for prices edition
+#}
+{% block _listing_availabilities_prices_time_ranges_widget %}
+    {{ block('_time_ranges_widget') }}
+{% endblock %}
+
+{#
+   Time ranges for status edition
+#}
+{% block _listing_availabilities_status_time_ranges_widget %}
+    {{ block('_time_ranges_widget') }}
+{% endblock %}
+
+
+{#
+   Date ranges for prices edition
+#}
+{% block _listing_availabilities_prices_date_range_widget %}
+    {{ block('_date_range_availability_widget') }}
+{% endblock %}
+
+{#
+   Date ranges for status edition
+#}
+{% block _listing_availabilities_status_date_range_widget %}
+    {{ block('_date_range_availability_widget') }}
+{% endblock %}
+
+
+{#
+    Date range widget listing edition
+#}
+{%- block _date_range_availability_widget -%}
+    <div class="col datepicker-holder day-fields display-{{ daysDisplayMode }}">
+        <div class="col">
+            {{ form_errors(form.start) }}
+            <strong class="title">{{ form_label(form.start) }}</strong>
+
+            <div class="input-append date field-holder">
+                {{ form_widget(form.start,{
+                    'type': 'text',
+                    'attr': {
+                        'class': 'form-control from',
+                        'placeholder': "/      /"
+                    }
+                }) }}
+                <span class="add-on">
+                    <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        {% if "date_hidden" not in form.end.vars.block_prefixes %}
+            <div class="col">
+                {{ form_errors(form.end) }}
+                <strong class="title">{{ form_label(form.end) }}</strong>
+
+                <div class="input-append date field-holder">
+                    {{ form_widget(form.end,{
+                        'type': 'text',
+                        'attr': {
+                            'class': 'form-control to',
+                            'placeholder': "/      /"
+                        }
+                    }) }}
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                    </span>
+                </div>
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.end) }}
+            {{ form_widget(form.end) }}
+        {% endif %}
+    </div>
+
+    {% if form.nb_days is defined %}
+        {% if "hidden" not in form.nb_days.vars.block_prefixes %}
+            <div class="col day-fields nb-days">
+                <strong class="title">
+                    {{ form_label(form.nb_days) }}
+                </strong>
+
+                {{ form_errors(form.nb_days) }}
+                {{ form_widget(form.nb_days) }}
+            </div>
+        {% else %}
+            {#hidden#}
+            {{ form_errors(form.nb_days) }}
+            {{ form_widget(form.nb_days) }}
+        {% endif %}
+    {% endif %}
+
+{%- endblock -%}

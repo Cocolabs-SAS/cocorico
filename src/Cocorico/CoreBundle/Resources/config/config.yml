@@ -13,10 +13,9 @@ framework:
         enabled: true
         enable_annotations: true
 #        api: 2.5-bc
-     templating:
-        assets_base_urls:
-            http: ["%cocorico.assets_base_urls%"]
-            ssl: ["%cocorico.assets_base_urls%"]
+     assets:
+        base_urls:
+            - '%cocorico.assets_base_urls%'
      session:
         gc_probability: 0
 
@@ -64,10 +63,8 @@ twig:
 
 
     #Forms customization
-    form:
-        resources:
+    form_themes:
             - 'CocoricoCoreBundle:Form:fields.html.twig'
-            - 'CocoricoCoreBundle:Form:fields_date_time.html.twig'
             - 'CocoricoCoreBundle:Form:fields_collection.html.twig'
             - 'CocoricoCoreBundle:Form:fields_category.html.twig'
             - 'CocoricoCoreBundle:Form:fields_price.html.twig'
@@ -92,6 +89,9 @@ doctrine:
                         dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Tree/Entity"
                         alias: GedmoTree # this one is optional and will default to the name set for the mapping
                         is_bundle: false
+#                    CocoricoUserBundle: ~
+                    SonataUserBundle: ~
+                    FOSUserBundle: ~  # If SonataUserBundle extends it
                 dql:
                     datetime_functions:
                         DATE_FORMAT: Cocorico\CoreBundle\DQL\DateFormatFunction
@@ -129,6 +129,9 @@ jms_i18n_routing:
 
 
 jms_translation:
+    dumper:
+        add_references: false
+        add_date: false
     configs:
         cocorico:
             dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
@@ -196,18 +199,18 @@ liip_imagine:
                 auto_rotate: ~
                 thumbnail: { size: ["%cocorico.listing_img_medium_w%", "%cocorico.listing_img_medium_h%"], mode: outbound , cache_type: public, cache_expires: 1 months }
         listing_xxlarge:
-            quality: 100
+            quality: 80
             filters:
                 auto_rotate: ~
                 thumbnail: { size: ["%cocorico.listing_img_xxlarge_w%", "%cocorico.listing_img_xxlarge_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
         listing_xlarge:
-            quality: 100
+            quality: 85
             filters:
                 auto_rotate: ~
                 upscale: { min: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"] }
                 thumbnail: { size: ["%cocorico.listing_img_xlarge_w%", "%cocorico.listing_img_xlarge_h%"], mode: outbound, cache_type: public, cache_expires: 1 months, allow_upscale: true }
         listing_large:
-            quality: 85
+            quality: 90
             filters:
                 auto_rotate: ~
                 upscale: { min: ["%cocorico.listing_img_large_w%", "%cocorico.listing_img_large_h%"] }
@@ -225,18 +228,11 @@ lexik_currency:
 
 bazinga_geocoder:
     providers:
-#        cache:
-#            adapter:              ~ # Required
-#            provider:             ~ # Required
-#            locale:               null
-#            lifetime:             86400
         google_maps:
-            locale:               null
-            region:               null
-            use_ssl:              false
-            api_key:              null
-
-
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            options:
+                api_key: "%cocorico_geo.google_place_server_api_key%"
+                region:  null
 
 
 sonata_block:
@@ -249,7 +245,7 @@ sonata_block:
             contexts:   [admin]
         sonata.user.block.menu:    # used to display the menu in profile pages
         sonata.user.block.account: # used to display menu option (login option)
-        sonata.block.service.text:
+        sonata.block.service.text: # used to if you plan to use Sonata user routes
 
 
 sonata_admin:

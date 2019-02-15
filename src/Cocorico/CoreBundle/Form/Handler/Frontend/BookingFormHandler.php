@@ -17,9 +17,8 @@ use Cocorico\CoreBundle\Event\BookingEvent;
 use Cocorico\CoreBundle\Event\BookingEvents;
 use Cocorico\CoreBundle\Event\BookingFormEvent;
 use Cocorico\CoreBundle\Event\BookingFormEvents;
-use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
-use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Form;
@@ -45,8 +44,7 @@ class BookingFormHandler
         RequestStack $requestStack,
         BookingManager $bookingManager,
         EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->bookingManager = $bookingManager;
         $this->dispatcher = $dispatcher;
@@ -56,46 +54,30 @@ class BookingFormHandler
     /**
      * Init booking
      *
-     * @param User|null  $user
-     * @param Listing    $listing
-     * @param  \DateTime $start     format yyyy-mm-dd
-     * @param  \DateTime $end       format yyyy-mm-dd
-     * @param  \DateTime $startTime format H:i
-     * @param  \DateTime $endTime   format H:i
+     * @param User|null $user
+     * @param Listing   $listing
+     * @param \DateTime $start format yyyy-mm-dd
+     * @param \DateTime $end   format yyyy-mm-dd
      *
      * @return Booking $booking
      */
     public function init(
         $user,
         Listing $listing,
-        \DateTime $start = null,
-        \DateTime $end = null,
-        \DateTime $startTime = null,
-        \DateTime $endTime = null
-    )
-    {
+        \DateTime $start,
+        \DateTime $end
+    ) {
         //Id of an eventual booking draft
         $bookingId = $this->request->query->get('id');
         //If no booking draft exists a new booking is initialized
         if (!$bookingId) {
-            $dateRange = $timeRange = null;
-            if ($start && $end) {
-                $dateRange = new DateRange($start, $end);
-            }
-            if ($startTime && $endTime) {
-                $timeRange = new TimeRange(
-                    new \DateTime('1970-01-01 ' . $startTime->format('H:i')),
-                    new \DateTime('1970-01-01 ' . $endTime->format('H:i'))
-                );
-            }
+            //Deduct time range from date range
+            $startTime = clone $start;
+            $endTime = clone $end;
+            $endTime->modify('-' . $start->diff($end)->days . ' days');
 
-            //Get date range from post request if any
-            if ($this->request->getMethod() == 'POST') {
-                $dateRange = DateRange::createFromArray($this->request->request->get('date_range'));
-                $timeRange = TimeRange::createFromArray($this->request->request->get('time_range'));
-            }
-
-            $booking = $this->bookingManager->initBooking($listing, $user, $dateRange, $timeRange);
+            $dateTimeRange = DateTimeRange::createFromDateTimes($start, $end, $startTime, $endTime);
+            $booking = $this->bookingManager->initBooking($listing, $user, $dateTimeRange);
 
             $event = new BookingEvent($booking);
             $this->dispatcher->dispatch(BookingEvents::BOOKING_INIT, $event);
@@ -134,7 +116,6 @@ class BookingFormHandler
      */
     public function process(Form $form)
     {
-//        var_dump($success);
         $form->handleRequest($this->request);
 
         if ($form->isSubmitted() && $this->request->isMethod('POST')) {
@@ -157,7 +138,6 @@ class BookingFormHandler
                 $result = -1;//form not valid
             }
         } else {
-
             $result = 0; //Not submitted
         }
 

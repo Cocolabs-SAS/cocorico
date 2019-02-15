@@ -11,9 +11,16 @@
 
 namespace Cocorico\CoreBundle\Twig;
 
-
-use Symfony\Bridge\Twig\Extension\TranslationExtension as BaseTranslationExtension;
+use Symfony\Bridge\Twig\NodeVisitor\TranslationDefaultDomainNodeVisitor;
+use Symfony\Bridge\Twig\NodeVisitor\TranslationNodeVisitor;
+use Symfony\Bridge\Twig\TokenParser\TransChoiceTokenParser;
+use Symfony\Bridge\Twig\TokenParser\TransDefaultDomainTokenParser;
+use Symfony\Bridge\Twig\TokenParser\TransTokenParser;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\NodeVisitor\NodeVisitorInterface;
+use Twig\TokenParser\AbstractTokenParser;
+use Twig\TwigFilter;
 
 /**
  * Class TranslationExtension
@@ -21,23 +28,36 @@ use Symfony\Component\Translation\TranslatorInterface;
  * Override trans filter by adding suffix to translations to know if a text has been translated through web interface
  *
  * @package Cocorico\CoreBundle\Twig
+ *
+ * @author  Fabien Potencier <fabien@symfony.com>
+ * @author  Cocolabs SAS <contact@cocolabs.io>
  */
-class TranslationExtension extends BaseTranslationExtension
+class TranslationExtension extends AbstractExtension
 {
-    private $checkTranslation;
+    private $translator;
+    private $translationNodeVisitor;
+    private $suffix = '';
 
     const TRANS_SUFFIX = '☮';
 
     public function __construct(
-        TranslatorInterface $translator,
-        \Twig_NodeVisitorInterface $translationNodeVisitor = null
+        TranslatorInterface $translator = null,
+        NodeVisitorInterface $translationNodeVisitor = null
     ) {
-        parent::__construct($translator, $translationNodeVisitor);
+        $this->translator = $translator;
+        $this->translationNodeVisitor = $translationNodeVisitor;
     }
 
     public function setCheckTranslation($checkTranslation)
     {
-        $this->checkTranslation = $checkTranslation;
+        if ($checkTranslation) {
+            $this->suffix = self::TRANS_SUFFIX;
+        }
+    }
+
+    public function getTranslator()
+    {
+        return $this->translator;
     }
 
     /**
@@ -45,66 +65,75 @@ class TranslationExtension extends BaseTranslationExtension
      */
     public function getFilters()
     {
-        if ($this->checkTranslation) {
-            return array(
-                new \Twig_SimpleFilter('trans', array($this, 'transOverride')),
-                new \Twig_SimpleFilter('transchoice', array($this, 'transchoiceOverride')),
-            );
-        }
-
-        return parent::getFilters();
+        return array(
+            new TwigFilter('trans', array($this, 'trans')),
+            new TwigFilter('transchoice', array($this, 'transchoice')),
+        );
     }
 
-    public function transOverride($id, array $parameters = array(), $domain = null, $locale = null)
+    /**
+     * Returns the token parser instance to add to the existing list.
+     *
+     * @return AbstractTokenParser[]
+     */
+    public function getTokenParsers()
     {
-        if (null === $locale) {
-            $locale = $this->getTranslator()->getLocale();
-        }
+        return array(
+            // {% trans %}Symfony is great!{% endtrans %}
+            new TransTokenParser(),
 
-        if (null === $domain) {
-            $domain = 'messages';
-        }
-        if ('messages' !== $domain && false === $this->translationExists($id, $domain, $locale)) {
-            $domain = 'messages';
-        }
+            // {% transchoice count %}
+            //     {0} There is no apples|{1} There is one apple|]1,Inf] There is {{ count }} apples
+            // {% endtranschoice %}
+            new TransChoiceTokenParser(),
 
-        return $this->getTranslator()->trans(
-        /** @Ignore */
-            $id,
-            $parameters,
-            $domain,
-            $locale
-        ) . self::TRANS_SUFFIX;
+            // {% trans_default_domain "foobar" %}
+            new TransDefaultDomainTokenParser(),
+        );
     }
 
-    public function transchoiceOverride($id, $number, array $parameters = array(), $domain = null, $locale = null)
+    /**
+     * {@inheritdoc}
+     */
+    public function getNodeVisitors()
     {
-        if (null === $locale) {
-            $locale = $this->getTranslator()->getLocale();
-        }
-
-        if (null === $domain) {
-            $domain = 'messages';
-        }
-
-        if ('messages' !== $domain && false === $this->translationExists($id, $domain, $locale)) {
-            $domain = 'messages';
-        }
-
-        return $this->getTranslator()->transChoice(
-        /** @Ignore */
-            $id,
-            $number,
-            array_merge(array('%count%' => $number), $parameters),
-            $domain,
-            $locale
-        ) . self::TRANS_SUFFIX;
+        return array($this->getTranslationNodeVisitor(), new TranslationDefaultDomainNodeVisitor());
     }
 
-    protected function translationExists($id, $domain, $locale)
+    public function getTranslationNodeVisitor()
     {
-        return $this->getTranslator()->getCatalogue($locale)->has((string)$id, $domain);
+        return $this->translationNodeVisitor ?: $this->translationNodeVisitor = new TranslationNodeVisitor();
     }
+
+    public function trans($message, array $arguments = array(), $domain = null, $locale = null)
+    {
+        if (null === $this->translator) {
+            return strtr($message, $arguments);
+        }
+
+        return $this->translator->trans(
+                $message,
+                $arguments,
+                $domain,
+                $locale
+            ) . $this->suffix;
+    }
+
+    public function transchoice($message, $count, array $arguments = array(), $domain = null, $locale = null)
+    {
+        if (null === $this->translator) {
+            return strtr($message, $arguments);
+        }
+
+        return $this->translator->transChoice(
+                $message,
+                $count,
+                array_merge(array('%count%' => $count), $arguments),
+                $domain,
+                $locale
+            ) . $this->suffix;
+    }
+
 
     /**
      * {@inheritdoc}

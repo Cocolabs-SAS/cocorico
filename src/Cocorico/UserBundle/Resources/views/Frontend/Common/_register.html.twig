@@ -201,6 +201,17 @@
                 </div>
             </div>
 
+            <div class="field-row validate-row">
+                <div class="error-container">{{ form_errors(form_registration.timeZone) }}</div>
+                <span class="label">{{ form_label(form_registration.timeZone) }}</span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_registration.timeZone, {
+                        'attr': {'class': "form-control no-arrow"}
+                    }) }}
+                </div>
+            </div>
+
             {# dont work when empty value #}
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.plainPassword.first) }}</div>

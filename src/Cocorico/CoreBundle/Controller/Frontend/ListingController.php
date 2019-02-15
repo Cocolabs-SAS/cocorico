@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingNewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -81,7 +82,7 @@ class ListingController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'listing',
-            'listing_new',
+            ListingNewType::class,
             $listing,
             array(
                 'method' => 'POST',

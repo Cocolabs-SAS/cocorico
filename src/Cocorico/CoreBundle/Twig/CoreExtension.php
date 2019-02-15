@@ -62,10 +62,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
     /**
      *
-     * @param CurrencyExtension          $currencyExtension
+     * @param CurrencyExtension   $currencyExtension
      * @param TranslatorInterface $translator
      * @param Session             $session
-     * @param array                      $parameters
+     * @param array               $parameters
      *
      */
 
@@ -146,11 +146,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     {
         return array(
             new \Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
-            new \Twig_SimpleFilter('format_seconds', array($this, 'formatSecondsFilter')),
             new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new \Twig_SimpleFilter('ucwords', 'ucwords'),
             new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
-            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter'))
+            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
         );
     }
 
@@ -162,28 +161,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function stringRepeatFilter($input, $multiplier)
     {
         return str_repeat($input, $multiplier);
-    }
-
-    /**
-     * Format time from seconds to unit
-     *
-     * @param int $seconds
-     * @param string $format
-     *
-     * @return string
-     */
-    public function formatSecondsFilter($seconds, $format = 'dhm')
-    {
-        $time = PHP::seconds_to_time($seconds);
-        switch ($format) {
-            case 'h':
-                $result = ($time['d'] * 24) + $time['h'] . "h";
-                break;
-            default:
-                $result = ($time['d'] * 24) + $time['h'] . "h " . $time['m'] . "m";
-        }
-
-        return $result;
     }
 
     /**
@@ -278,6 +255,7 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
 
         return PHP::strip_texts($text, $typeInfo, $replaceBy);
     }
+
 
     /**
      * @inheritdoc

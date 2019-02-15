@@ -11,13 +11,15 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCharacteristicValue;
-use Sonata\AdminBundle\Admin\Admin;
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ListingCharacteristicValueAdmin extends Admin
+class ListingCharacteristicValueAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'listing-characteristic-value';
@@ -34,6 +36,7 @@ class ListingCharacteristicValueAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var ListingCharacteristicValue $subject */
@@ -46,13 +49,12 @@ class ListingCharacteristicValueAdmin extends Admin
                 'label' => 'Name',
                 'constraints' => array(new NotBlank())
             );
-
         }
 
         $formMapper
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -75,7 +77,7 @@ class ListingCharacteristicValueAdmin extends Admin
             )
             ->add(
                 'listingCharacteristicType',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array(
                     /** @Ignore */
                     'label' => false,

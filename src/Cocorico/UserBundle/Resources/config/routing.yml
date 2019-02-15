@@ -12,10 +12,14 @@ sonata_user:
     prefix: /%cocorico.admin%
     options: { i18n: false }
 
-sonata_user_profile:
-    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
-    prefix: /%cocorico.admin%/user
-    options: { i18n: false }
+sonata_user_admin_resetting:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+    prefix: /admin/resetting
+
+#sonata_user_profile:
+#    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+#    prefix: /%cocorico.admin%/user
+#    options: { i18n: false }
 
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"

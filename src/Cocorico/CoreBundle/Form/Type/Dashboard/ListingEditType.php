@@ -11,12 +11,14 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Cocorico\CoreBundle\Model\Manager\ListingManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\Validator\Constraints\Valid;
 
 class ListingEditType extends AbstractType
 {
@@ -60,7 +62,7 @@ class ListingEditType extends AbstractType
         $builder
             ->add(
                 'user',
-                'entity_hidden',
+                EntityHiddenType::class,
                 array(
                     'data' => $this->securityTokenStorage->getToken()->getUser(),
                     'class' => 'Cocorico\UserBundle\Entity\User',
@@ -80,19 +82,10 @@ class ListingEditType extends AbstractType
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_edit',
                 'translation_domain' => 'cocorico_listing',
-                'cascade_validation' => true,
+                'constraints' => new Valid(),
                 //'validation_groups' => array('Listing'),
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

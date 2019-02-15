@@ -13,7 +13,7 @@ namespace Cocorico\CoreBundle\Model\Manager;
 
 use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Document\ListingAvailabilityTime;
-use Cocorico\CoreBundle\Model\TimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Doctrine\ODM\MongoDB\DocumentManager;
 
 class ListingAvailabilityTimeManager
@@ -24,7 +24,7 @@ class ListingAvailabilityTimeManager
 
     /**
      * @param DocumentManager $dm
-     * @param int $timeUnit
+     * @param int             $timeUnit
      */
     public function __construct(DocumentManager $dm, $timeUnit)
     {
@@ -38,11 +38,11 @@ class ListingAvailabilityTimeManager
      * Merge existing and new times. The result will replace all existing embedded ListingAvailabilityTime embed documents
      * for this day and this listing.
      *
-     * @param array $availability
+     * @param array        $availability
      * @param TimeRange [] $timeRanges times don't overlap days (accept for example 02h->22h but not 22h->02h)
      * @param              string      (price|status) $typeModification
-     * @param int $defaultPrice
-     * @param bool $bookingCancellation
+     * @param int          $defaultPrice
+     * @param bool         $bookingCancellation
      *
      * @return ListingAvailabilityTime[]
      */
@@ -52,19 +52,22 @@ class ListingAvailabilityTimeManager
         $typeModification,
         $defaultPrice,
         $bookingCancellation
-    )
-    {
+    ) {
+        /** @var \MongoDate $dayMD */
+        $dayMD = $availability['d'];
+        $day = new \DateTime();
+        $day->setTimestamp($dayMD->sec);
 
         $times = array();
-        if (isset($availability["ts"])) {
-            foreach ($availability["ts"] as $l => $existingTime) {
-                $times[intval($existingTime["_id"])] = $existingTime;
+        if (isset($availability['ts'])) {
+            foreach ($availability['ts'] as $l => $existingTime) {
+                $times[intval($existingTime['_id'])] = $existingTime;
             }
         }
 
         //Get new times
-        $status = $availability["s"];
-        $price = $availability["p"];
+        $status = $availability['s'];
+        $price = $availability['p'];
         foreach ($timeRanges as $j => $timeRange) {
             //Replace existing minutes with new ones and add new ones if they don't exist
             for ($k = $timeRange->getStartMinute(); $k < $timeRange->getEndMinute(); $k++) {
@@ -72,19 +75,19 @@ class ListingAvailabilityTimeManager
                     $time = $times[$k];
                 } else {
                     $time = array(
-                        "_id" => null,
-                        "s" => null,
-                        "p" => null,
+                        '_id' => null,
+                        's' => null,
+                        'p' => null,
                     );
                 }
 
-                if ($typeModification == "status") {
+                if ($typeModification == 'status') {
                     $time = $this->setAvailabilityTimeStatus($time, $status, $defaultPrice, $bookingCancellation);
                 } else {
                     $time = $this->setAvailabilityTimePrice($time, $price);
                 }
                 //For new time
-                $time["_id"] = $k;
+                $time['_id'] = $k;
 
                 $times[$k] = $time;
             }
@@ -103,9 +106,9 @@ class ListingAvailabilityTimeManager
      * Set availabilities Status
      *
      * @param array $availabilityTime
-     * @param int $status
-     * @param int $defaultPrice
-     * @param bool $bookingCancellation
+     * @param int   $status
+     * @param int   $defaultPrice
+     * @param bool  $bookingCancellation
      *
      * @return array
      */
@@ -127,7 +130,7 @@ class ListingAvailabilityTimeManager
      * Set availabilities Price
      *
      * @param array $availabilityTime
-     * @param int $price
+     * @param int   $price
      *
      * @return array
      */
@@ -146,54 +149,11 @@ class ListingAvailabilityTimeManager
     }
 
     /**
-     * Save availability times for one availability
-     *
-     * @param array $availability
-     * @param                        $startTime
-     * @param                        $endTime
-     * @param                        string (price|status) $typeModification
-     * @param int $defaultPrice
-     */
-
-    public function saveAvailabilityTimes(
-        $availability,
-        $startTime,
-        $endTime,
-        $typeModification,
-        $defaultPrice = null
-    )
-    {
-        $timeRanges = array();
-
-        if (!$this->timeUnitIsDay) {
-            $startTime = new \DateTime('01-01-1970 ' . $startTime);
-            $endTime = new \DateTime('01-01-1970 ' . $endTime);
-            $endTime->add(new \DateInterval('PT1M'));
-
-            $timeRanges = array(0 => new TimeRange($startTime, $endTime));
-        }
-
-        $times = $this->mergeAvailabilityTimes(
-            $availability,
-            $timeRanges,
-            $typeModification,
-            $defaultPrice,
-            false
-        );
-
-        $availability["ts"] = $times;
-
-//        print_r($times);
-//        die();
-        $this->dm->getDocumentCollection('CocoricoCoreBundle:ListingAvailability')->save($availability);
-    }
-
-    /**
      * Construct time ranges from ListingAvailabilityTimes
      *
-     * @param ListingAvailability $availability
-     * @param int $addOneMinuteToEndTime 1 or 0
-     * @param bool $timeAsString
+     * @param array $availability
+     * @param int   $addOneMinuteToEndTime 1 or 0
+     * @param bool  $timeAsString
      *
      * @return array
      */

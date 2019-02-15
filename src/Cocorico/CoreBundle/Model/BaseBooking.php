@@ -12,8 +12,12 @@
 
 namespace Cocorico\CoreBundle\Model;
 
+use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
+use Cocorico\TimeBundle\Model\DateRange;
+use Cocorico\TimeBundle\Model\DateTimeRange;
+use Cocorico\TimeBundle\Model\TimeRange;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -234,6 +238,20 @@ abstract class BaseBooking
      */
     protected $message;
 
+    /**
+     * @ORM\Column(name="time_zone_asker", type="string", length=100,  nullable=false)
+     *
+     * @var string
+     */
+    protected $timeZoneAsker = 'Europe/Paris';
+
+    /**
+     * @ORM\Column(name="time_zone_offerer", type="string", length=100,  nullable=false)
+     *
+     * @var string
+     */
+    protected $timeZoneOfferer = 'Europe/Paris';
+
     public function __construct()
     {
 
@@ -246,10 +264,7 @@ abstract class BaseBooking
      */
     public static function getVisibleStatusValues()
     {
-        $status = array_intersect_key(
-            self::$statusValues,
-            array_flip(self::$visibleStatus)
-        );
+        $status = array_intersect_key(self::$statusValues, array_flip(self::$visibleStatus));
 
         return $status;
     }
@@ -276,25 +291,6 @@ abstract class BaseBooking
     public function getEnd()
     {
         return $this->end;
-    }
-
-    /**
-     * Return end date depending on overlapping time range.
-     * If time range overlap days then end date will be incremented by one day.
-     * ex :
-     * - 27/05/2017 > 29/05/2017 22h > 23h : real end date = 29/05/2017
-     * - 27/05/2017 > 29/05/2017 22h > 4h : real end date = 30/05/2017
-     *
-     * @return \DateTime
-     */
-    public function getEndDay()
-    {
-        $end = clone $this->getEnd();
-        if ($this->getTimeRange()->overlapDays()) {
-            $end->modify('+1 day');
-        }
-
-        return $end;
     }
 
     /**
@@ -338,19 +334,6 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
-     */
-    public function getStartDateAndTime()
-    {
-        $start = $this->getStart()->format('Y-m-d');
-        if ($this->getStartTime()) {
-            $start .= ' ' . $this->getStartTime()->format('H:i:s');
-        }
-
-        return new \DateTime($start);
-    }
-
-    /**
      * Return date range according to booking start and end date
      *
      * @return DateRange
@@ -360,6 +343,19 @@ abstract class BaseBooking
         return new DateRange($this->getStart(), $this->getEnd());
     }
 
+
+    /**
+     * @param DateRange $dateRange
+     * @return Booking|BaseBooking
+     */
+    public function setDateRange(DateRange $dateRange)
+    {
+        $this->setStart($dateRange->getStart());
+        $this->setEnd($dateRange->getEnd());
+
+        return $this;
+    }
+
     /**
      * Return time range according to booking start time and end time
      *
@@ -367,7 +363,27 @@ abstract class BaseBooking
      */
     public function getTimeRange()
     {
-        return new TimeRange($this->getStartTime(), $this->getEndTime());
+        return new TimeRange($this->getStartTime(), $this->getEndTime(), $this->getStart());
+    }
+
+    /**
+     * @param TimeRange $timeRange
+     * @return $this
+     */
+    public function setTimeRange(TimeRange $timeRange)
+    {
+        $this->setStartTime($timeRange->getStart());
+        $this->setEndTime($timeRange->getEnd());
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeRange
+     */
+    public function getDateTimeRange()
+    {
+        return new DateTimeRange($this->getDateRange(), array($this->getTimeRange()));
     }
 
     /**
@@ -858,4 +874,54 @@ abstract class BaseBooking
         $this->message = $message;
     }
 
+    /**
+     * @return string
+     */
+    public function getTimeZoneAsker()
+    {
+        return $this->timeZoneAsker;
+    }
+
+    /**
+     * @param string $timeZoneAsker
+     */
+    public function setTimeZoneAsker($timeZoneAsker)
+    {
+        $this->timeZoneAsker = $timeZoneAsker;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeZoneOfferer()
+    {
+        return $this->timeZoneOfferer;
+    }
+
+    /**
+     * @param string $timeZoneOfferer
+     */
+    public function setTimeZoneOfferer($timeZoneOfferer)
+    {
+        $this->timeZoneOfferer = $timeZoneOfferer;
+    }
+
+    public function log($prefix = '')
+    {
+        echo "<br>Booking";
+        if ($prefix) {
+            echo "<br>$prefix";
+        }
+
+        echo '<br>Date: ';
+        if ($this->getStart() && $this->getEnd()) {
+            echo $this->getStart()->format('Y-m-d H:i') . ' / ' . $this->getEnd()->format('Y-m-d H:i') . '<br>';
+        }
+
+
+        echo 'Time: ';
+        if ($this->getStartTime() && $this->getEndTime()) {
+            echo $this->getStartTime()->format('Y-m-d H:i') . ' / ' . $this->getEndTime()->format('Y-m-d H:i') . '<br>';
+        }
+    }
 }

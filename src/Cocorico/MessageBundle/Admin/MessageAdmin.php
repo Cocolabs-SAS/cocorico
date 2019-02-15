@@ -13,12 +13,12 @@ namespace Cocorico\MessageBundle\Admin;
 
 use Cocorico\MessageBundle\Entity\Message;
 use Cocorico\UserBundle\Repository\UserRepository;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 
-class MessageAdmin extends Admin
+class MessageAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'message';
@@ -35,6 +35,7 @@ class MessageAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var Message $message */
@@ -55,7 +56,6 @@ class MessageAdmin extends Admin
                 'sonata_type_model',
                 array(
                     'query' => $senderQuery,
-                    'read_only' => true,
                     'disabled' => true,
                 )
             )
@@ -63,7 +63,6 @@ class MessageAdmin extends Admin
                 'createdAt',
                 null,
                 array(
-                    'read_only' => true,
                     'disabled' => true,
                 )
             )
@@ -72,7 +71,6 @@ class MessageAdmin extends Admin
                 null,
                 array(
                     'disabled' => true,
-                    'read_only' => true,
                 )
             )
             ->end();

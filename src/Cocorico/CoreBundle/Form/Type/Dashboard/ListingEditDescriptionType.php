@@ -11,6 +11,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Form\Type\LanguageFilteredType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
@@ -51,7 +52,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
         $builder
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'required_locales' => array($this->locale),
                     'fields' => array(
@@ -77,7 +78,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
             )
             ->add(
                 'fromLang',
-                'language_filtered',
+                LanguageFilteredType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.from',
@@ -87,7 +88,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
             )
             ->add(
                 'toLang',
-                'language_filtered',
+                LanguageFilteredType::class,
                 array(
                     'mapped' => false,
                     'label' => 'cocorico.to',
@@ -107,15 +108,6 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

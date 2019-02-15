@@ -12,6 +12,7 @@
 
 namespace Cocorico\UserBundle\Controller\Dashboard;
 
+use Cocorico\UserBundle\Form\Type\ProfileAboutMeFormType;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -82,7 +83,7 @@ class ProfileAboutMeController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             'user',
-            'user_profile_about_me',
+            ProfileAboutMeFormType::class,
             $user,
             array(
                 'method' => 'POST',

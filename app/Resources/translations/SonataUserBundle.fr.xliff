@@ -1,361 +1,278 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
-      <trans-unit id="6616e4d4787a6b08012bc1b29a451ae927e2eb03" resname="breadcrumb.link_dashboard">
-        <source>breadcrumb.link_dashboard</source>
-        <target>Tableau de bord</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
+      <trans-unit id="57f2b181d0a5e79a147ea1cdf41457f58dbbb3c9" resname="Users">
+        <source>Users</source>
+        <target>Utilisateurs</target>
       </trans-unit>
       <trans-unit id="dd218fc1da748f3247369d4c6e6f95afe1b0a160" resname="breadcrumb.link_user_batch">
         <source>breadcrumb.link_user_batch</source>
         <target>Actions groupées</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f2fd1ccd2313babffc4ae0bfa2f1f9c7bb2a52a9" resname="breadcrumb.link_user_create">
         <source>breadcrumb.link_user_create</source>
         <target>Création</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="75e8eb7f2025252b3ad80f50ad943e429e7a1e1e" resname="breadcrumb.link_user_delete">
         <source>breadcrumb.link_user_delete</source>
         <target>Supprimer</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6a934bd0f4caae988c5b540d9378da109f50c376" resname="breadcrumb.link_user_edit">
         <source>breadcrumb.link_user_edit</source>
         <target>Modifier</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="86d4789db2f443b5441f5009720f252ada993135" resname="breadcrumb.link_user_list">
         <source>breadcrumb.link_user_list</source>
         <target>Utilisateurs</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="77793400416ca8a23552fb2cbdbd41388ef366f1" resname="breadcrumb.link_user_update">
         <source>breadcrumb.link_user_update</source>
         <target>Modification</target>
-        <jms:reference-file>admin-bundle/Admin/Admin.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="533a2369f7d9f2db95b80c5e6632608adf3db982" resname="filter.label_email">
         <source>filter.label_email</source>
         <target>Email</target>
-        <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ac435910a3540a54b409a3e58f8f59c9bd5ee39" resname="filter.label_fullname">
         <source>filter.label_fullname</source>
         <target>Nom</target>
-        <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="d02c0c860caf408d8002df3db943b5d87e651d95" resname="filter.label_groups">
         <source>filter.label_groups</source>
         <target>Groupes</target>
-        <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="882776942c325f0ec06fc5a2a38f93cb2b183ec5" resname="filter.label_id">
         <source>filter.label_id</source>
         <target>Id</target>
-        <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="64fb93afacd9b00c72572534c0cfb3dfb1daaed6" resname="filter.label_locked">
-        <source>filter.label_locked</source>
-        <target>Verouillé</target>
-        <jms:reference-file>doctrine-orm-admin-bundle/Builder/DatagridBuilder.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9eb6804b53babeebb4fb2f404d0bce091ebd2c74" resname="form.label_annual_income">
         <source>form.label_annual_income</source>
         <target>Revenu annuel</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e8b44257238017d055418394ca4b56c05366c82f" resname="form.label_bank_owner_address">
         <source>form.label_bank_owner_address</source>
         <target>Adresse (compte bancaire)</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b364717d770aca4bbe885a0988bf34998eaaac1b" resname="form.label_bank_owner_name">
         <source>form.label_bank_owner_name</source>
         <target>Nom (compte bancaire)</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1df23cc61ff4653736fc578b860a4609e6bfaf56" resname="form.label_bic">
         <source>form.label_bic</source>
         <target>BIC</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="296ea8bf9da5b60f6439012df3ca488344a93144" resname="form.label_birthday">
         <source>form.label_birthday</source>
         <target>Date de naissance</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="5d6dc7d4683245c051333b5378753772feebcd7c" resname="form.label_company_name">
         <source>form.label_company_name</source>
         <target state="new">Nom de l'entreprise</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c259330e043cfc54d5e324fca19cbf44605aac58" resname="form.label_created_at">
         <source>form.label_created_at</source>
         <target>Créé le</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6831ae1f5b600f4b8673f697f894dad7f5aa5f18" resname="form.label_email">
         <source>form.label_email</source>
         <target>Email</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="eb3c8cf3f531dd44f9a5a7940e27ff80b4a4895b" resname="form.label_email_verified">
         <source>form.label_email_verified</source>
         <target>Email verifié</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="96a3c7e8e0cd00818edcebde0c9a9176a99828e6" resname="form.label_enabled">
         <source>form.label_enabled</source>
         <target>Activé</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd957d4ca8c10ac2c7cb470758585e6db9599659" resname="form.label_fee_as_asker">
         <source>form.label_fee_as_asker</source>
         <target>% Commission en tant que demandeur (ex : 10)</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f1d07cf41f0ac55e21ce474b7861ab27c585c5c6" resname="form.label_fee_as_offerer">
         <source>form.label_fee_as_offerer</source>
         <target>% Commission en tant qu'offreur (ex : 10)</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4005831bcbc16e8559dee8d011be8484c5e3bafb" resname="form.label_first_name">
         <source>form.label_first_name</source>
         <target>Prénom</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="4f0676231a848e7a463d0ca0fb9e8cd30e55bd55" resname="form.label_iban">
         <source>form.label_iban</source>
         <target>IBAN</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6c0e2d210eb0c639718b4848483faa1788f13bb1" resname="form.label_id">
         <source>form.label_id</source>
         <target>Id</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f0ab54758c2c0e0e906194a2b8a116f6ce846956" resname="form.label_id_card_verified">
         <source>form.label_id_card_verified</source>
         <target>CI verifiée</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9ecfc611c5617283240db6f78db97f4f75e7e460" resname="form.label_last_name">
         <source>form.label_last_name</source>
         <target>Nom</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6135f0d1e01c34820b5ae3b0f5bee68f14ebd519" resname="form.label_mother_tongue">
         <source>form.label_mother_tongue</source>
         <target>Langue Maternelle</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a6e9005bfeb670d70e56716dcfd2e0be7f2f763f" resname="form.label_nationality">
         <source>form.label_nationality</source>
         <target>Nationalité</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="314c8ce85451cc64580cf4c03f0153182ba713e5" resname="form.label_nb_bookings_asker">
         <source>form.label_nb_bookings_asker</source>
         <target>Locations en tant que demandeur</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6841ad85d96f09359dced016dbfd443a58acd8a3" resname="form.label_nb_bookings_offerer">
         <source>form.label_nb_bookings_offerer</source>
         <target>Locations en tant qu'offreur</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="fa12e1be90ea63bd08ebb826d140e90230fa0347" resname="form.label_phone">
         <source>form.label_phone</source>
         <target>Télephone</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="88679c65a418454023ea948b1db7c3b88cdc89fc" resname="form.label_phone_prefix">
         <source>form.label_phone_prefix</source>
         <target>Tél. prefix</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b01530de1aea13657ba033af70d809f6e00a4d24" resname="form.label_phone_verified">
         <source>form.label_phone_verified</source>
         <target>Tél. vérifié</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="be117d58ffc6879ff0cd84f859e17f60dc595d34" resname="form.label_plain_password">
         <source>form.label_plain_password</source>
         <target>Mot de passe</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="611bbd9471547c07fb18a6065accbf4787f15ccd" resname="form.label_profession">
         <source>form.label_profession</source>
         <target>Profession</target>
-        <jms:reference-file>admin-bundle/Form/FormMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1706de171efc487ada66e0e74a5c1d16b710b3af" resname="list.label__action">
         <source>list.label__action</source>
         <target>Action</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9f30fa0e79538b21033e95fdd2217c9dd11bdfc3" resname="list.label_created_at">
         <source>list.label_created_at</source>
         <target>Créé le</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6c847e6aed394db187a151d6ded703ce6fa13b8c" resname="list.label_enabled">
         <source>list.label_enabled</source>
         <target>Activé</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="6400a85212ae2e2dc56cfebf0df719cab6247adb" resname="list.label_fee_as_asker">
         <source>list.label_fee_as_asker</source>
         <target>Commission demandeur (entier)</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="c0ae6d8c27ae9e898656d3ecedea5e9245997d73" resname="list.label_fee_as_offerer">
         <source>list.label_fee_as_offerer</source>
         <target>Commission offreur (entier)</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f08dc3408d89f35c2a2fd085714c5128eaee986b" resname="list.label_fullname">
         <source>list.label_fullname</source>
         <target><![CDATA[Nom & Prénom]]></target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0ddac6dabd4a0ad2d7a1f8175f9ccb8549b184fa" resname="list.label_id">
         <source>list.label_id</source>
         <target>Id</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="332d099fbb742861ea4a8ddbe0ce43467d6600fa" resname="list.label_impersonating">
-        <source>list.label_impersonating</source>
-        <target>Imiter</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8a0feda74cd7514d97c55cb823aa45c73abd73b9" resname="list.label_listings">
         <source>list.label_listings</source>
         <target state="new">Annonces</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
-      </trans-unit>
-      <trans-unit id="d832a7ec4617049cd2da61a11b6539925558428e" resname="list.label_locked">
-        <source>list.label_locked</source>
-        <target>Verouillé</target>
-        <jms:reference-file>admin-bundle/Datagrid/ListMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="56fee11d331aa7f17be36d2c2d6a7f884fa8cd1a" resname="show.label_biography">
         <source>show.label_biography</source>
         <target>show.label_biography</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1f6bea5cd8ebf21461b740baffe127b383ece139" resname="show.label_date_of_birth">
         <source>show.label_date_of_birth</source>
         <target>show.label_date_of_birth</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="884b0e254700aff5ce6abbe331c02e18951a89f3" resname="show.label_email">
         <source>show.label_email</source>
         <target>show.label_email</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a8c04a1f1d3a5461f2cb2a8a1ab16ada7eb55f68" resname="show.label_facebook_name">
         <source>show.label_facebook_name</source>
         <target>Nom Facebook</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="e20fb0c785702147bca4a8d655125b6999ad95a3" resname="show.label_facebook_uid">
         <source>show.label_facebook_uid</source>
         <target>Id Facebook</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="11c75043627b97eb192104aa4f26c8d9cf508806" resname="show.label_firstname">
         <source>show.label_firstname</source>
         <target>Prénom</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a72bd64ed6ecb828e4446729a0b38228d1bbe1bd" resname="show.label_gender">
         <source>show.label_gender</source>
         <target>show.label_gender</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="987aa13dc314e9edb73bdc299b73063a70793ea0" resname="show.label_gplus_name">
         <source>show.label_gplus_name</source>
         <target>show.label_gplus_name</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="8bdf759c9f085864c971937ba53401ed8d868e42" resname="show.label_gplus_uid">
         <source>show.label_gplus_uid</source>
         <target>show.label_gplus_uid</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="14f520d31284195e2fdfa587c8aef0a1db257e5d" resname="show.label_groups">
         <source>show.label_groups</source>
         <target>show.label_groups</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cc8e302cf5e154fc5a4641aa99f8073a50857b0b" resname="show.label_lastname">
         <source>show.label_lastname</source>
         <target>show.label_lastname</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="bb5aca467c673647f7e9c10e49c174313ffc5433" resname="show.label_locale">
         <source>show.label_locale</source>
         <target>show.label_locale</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="62b62688fac32edbaf81a1426d8e341808b65255" resname="show.label_phone">
         <source>show.label_phone</source>
         <target>show.label_phone</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b0d38e1c687a735c78560eac1403afb601d4db6e" resname="show.label_timezone">
         <source>show.label_timezone</source>
         <target>show.label_timezone</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="efa3be8807c742cc2bbc580cf4fdbeed63e82060" resname="show.label_token">
         <source>show.label_token</source>
         <target>show.label_token</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f7f52a8130b40175b33438efe8760b03341e6936" resname="show.label_twitter_name">
         <source>show.label_twitter_name</source>
         <target>show.label_twitter_name</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9af1e70e664162ad1cf712a9ec9747a1d03ff95f" resname="show.label_twitter_uid">
         <source>show.label_twitter_uid</source>
         <target>show.label_twitter_uid</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f1e3f29ced183c96d5c3f850e21353acfd00e38d" resname="show.label_two_step_verification_code">
         <source>show.label_two_step_verification_code</source>
         <target>show.label_two_step_verification_code</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="cb66613d3c4009f00f3eaf4918a08edd3d0b2682" resname="show.label_username">
         <source>show.label_username</source>
         <target>show.label_username</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7639153476e3aa728b934f8f7cbb9e70b161973a" resname="show.label_website">
         <source>show.label_website</source>
         <target>show.label_website</target>
-        <jms:reference-file>admin-bundle/Show/ShowMapper.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="1d9a2b2670efd868a3deb215ea057ade89d012e3" resname="switch_user">
         <source>switch_user</source>
         <target>switch_user</target>
-        <jms:reference-file line="8">Resources/views/impersonating.html.twig</jms:reference-file>
-        <jms:reference-file line="10">Resources/views/impersonating.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="30296748403bb9ca684e2020409f15bd250f6639" resname="user_block_logout">
         <source>user_block_logout</source>
         <target>Déconnexion</target>
-        <jms:reference-file line="14">Resources/views/user_block.html.twig</jms:reference-file>
       </trans-unit>
     </body>
   </file>

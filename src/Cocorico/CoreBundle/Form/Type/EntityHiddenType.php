@@ -55,14 +55,6 @@ class EntityHiddenType extends AbstractType
         return 'hidden';
     }
 
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
 
     /**
      * {@inheritdoc}

@@ -13,6 +13,7 @@ namespace Cocorico\MessageBundle\Form\Type\Frontend;
 
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -28,7 +29,7 @@ class ReplyMessageFormType extends AbstractType implements TranslationContainerI
     {
         $builder->add(
             'body',
-            'textarea',
+            TextareaType::class,
             array(
                 /** @Ignore */
                 'label' => false,

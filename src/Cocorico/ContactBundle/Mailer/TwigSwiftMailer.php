@@ -74,30 +74,33 @@ class TwigSwiftMailer implements MailerInterface
         $context['locale'] = $this->locale;
         $context['app']['request']['locale'] = $this->locale;
 
-        /** @var \Twig_Template $template */
-        $template = $this->twig->loadTemplate($templateName);
-        $context = $this->twig->mergeGlobals($context);
+        try {
+            /** @var \Twig_Template $template */
+            $template = $this->twig->loadTemplate($templateName);
+            $context = $this->twig->mergeGlobals($context);
 
-        $subject = $template->renderBlock('subject', $context);
-        $context["message"] = $template->renderBlock('message', $context);
+            $subject = $template->renderBlock('subject', $context);
+            $context["message"] = $template->renderBlock('message', $context);
 
-        $textBody = $template->renderBlock('body_text', $context);
-        $htmlBody = $template->renderBlock('body_html', $context);
+            $textBody = $template->renderBlock('body_text', $context);
+            $htmlBody = $template->renderBlock('body_html', $context);
 
-        $message = \Swift_Message::newInstance()
-            ->setSubject($subject)
-            ->setFrom($fromEmail)
-            ->setTo($toEmail);
+            $message = (new \Swift_Message($subject))
+                ->setFrom($fromEmail)
+                ->setTo($toEmail);
 
-        if (!empty($htmlBody)) {
-            $message
-                ->setBody($htmlBody, 'text/html')
-                ->addPart($textBody, 'text/plain');
-        } else {
-            $message->setBody($textBody);
+            if (!empty($htmlBody)) {
+                $message
+                    ->setBody($htmlBody, 'text/html')
+                    ->addPart($textBody, 'text/plain');
+            } else {
+                $message->setBody($textBody);
+            }
+
+            $this->mailer->send($message);
+        } catch (\Exception $e) {
         }
 
-        $this->mailer->send($message);
     }
 
 }

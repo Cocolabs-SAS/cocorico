@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -17,7 +17,6 @@
       <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
         <source>Asker</source>
         <target>Demandeur</target>
-        <jms:reference-file line="127">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3310eafbbbcd08a70af2c5d250fb2ba82046f114" resname="Bank wire">
         <source>Bank wire</source>
@@ -50,12 +49,10 @@
       <trans-unit id="f698304ac534eb0140704d37cf1379f93172da13" resname="Discussion with %name%">
         <source>Discussion with %name%</source>
         <target>Discussion avec %name%</target>
-        <jms:reference-file line="158">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="70f8bb9a8a5393ef080507a89e4b98d139000d65" resname="Home">
         <source>Home</source>
         <target>Accueil</target>
-        <jms:reference-file line="118">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="a449cfcd6da83b2fd0daa2df4a9a96fc34009bc2" resname="Listing">
         <source>Listing</source>
@@ -64,7 +61,6 @@
       <trans-unit id="f1702b4686278becffc88baabe6f4b7a8355532c" resname="Messages">
         <source>Messages</source>
         <target>Messages</target>
-        <jms:reference-file line="150">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="27a372ec5448ccccde2d678d3d8d2720d0cae107" resname="My Alerts">
         <source>My Alerts</source>
@@ -77,15 +73,14 @@
       <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
         <source>Offerer</source>
         <target>Offreur</target>
-        <jms:reference-file line="132">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="88b8328c7c39e37b8d82a35c17ed0db8a89f16ca" resname="Payment Information">
         <source>Payment Information</source>
         <target>Coordonnées bancaires</target>
       </trans-unit>
-        <trans-unit id="7dd2ad616489d5356d1ea0e7956255acfb86d372" resname="Payment cards">
-            <source>Payment cards</source>
-            <target state="new">Cartes de paiement</target>
+      <trans-unit id="7dd2ad616489d5356d1ea0e7956255acfb86d372" resname="Payment cards">
+        <source>Payment cards</source>
+        <target state="new">Cartes de paiement</target>
       </trans-unit>
       <trans-unit id="44357ae55a217646f4d1c3bb7cb7b437fa838999" resname="Payments">
         <source>Payments</source>
@@ -114,7 +109,6 @@
       <trans-unit id="ff4fc0276e960c348647b647235f68200887c9d2" resname="Profile">
         <source>Profile</source>
         <target>Profil</target>
-        <jms:reference-file line="332">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0b93bf5178a751618641797b695c219f0f2397f1" resname="Rating Made">
         <source>Rating Made</source>
@@ -127,13 +121,10 @@
       <trans-unit id="18d5c8fe5b4b201008b78c20cab30e09864fac38" resname="Reservation">
         <source>Reservation</source>
         <target state="new">Reservation</target>
-        <jms:reference-file line="318">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="0144dae8fb18fc9c75bdd6b191b93bae5f7a68f8" resname="Search results">
         <source>Search results</source>
         <target state="new">Résultats de recherche</target>
-        <jms:reference-file line="178">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
-        <jms:reference-file line="233">BreadcrumbBundle/Services/BreadcrumbsManager.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

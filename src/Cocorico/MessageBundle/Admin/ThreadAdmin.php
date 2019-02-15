@@ -14,14 +14,15 @@ namespace Cocorico\MessageBundle\Admin;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReportBundle\Repository\ListingRepository;
 use Doctrine\ORM\Query\Expr;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
-class ThreadAdmin extends Admin
+class ThreadAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'thread';
@@ -38,6 +39,7 @@ class ThreadAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -85,7 +87,6 @@ class ThreadAdmin extends Admin
                 'createdAt',
                 null,
                 array(
-                    'format' => "d/m/Y H:i",
                     'label' => 'admin.thread.createdAt.label'
                 )
             )
@@ -110,6 +111,7 @@ class ThreadAdmin extends Admin
         );
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var Thread $thread */
@@ -178,6 +180,7 @@ class ThreadAdmin extends Admin
         );
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -189,13 +192,13 @@ class ThreadAdmin extends Admin
                     'field_type' => 'choice',
                     'label' => 'admin.thread.type.label'
                 ),
-                'choice',
+                ChoiceType::class,
                 array(
                     'choices' => array(
                         'Reservation Message' => 'booking',
                         'Message' => 'message'
                     ),
-                    'empty_value' => 'admin.thread.type.label',
+                    'placeholder' => 'admin.thread.type.label',
                     'translation_domain' => 'SonataAdminBundle',
                     'choices_as_values' => true
                 )

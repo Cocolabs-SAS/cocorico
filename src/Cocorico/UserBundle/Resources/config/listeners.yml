@@ -1,0 +1,32 @@
+services:
+    #Listeners
+    cocorico_user.user_request.listener:
+        class: Cocorico\UserBundle\Listener\UserRequestListener
+        arguments:
+            - "@security.token_storage"
+            - "%cocorico.time_zone%"
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 0 }
+
+    cocorico_user.user_entity_listener:
+        class: Cocorico\UserBundle\Listener\UserEntityListener
+        arguments:
+            - "@event_dispatcher"
+            - "@session"
+            - "%cocorico.time_zone%"
+        tags:
+            - { name: doctrine.event_subscriber }
+
+    cocorico_user.user_image_upload_listener:
+        class: Cocorico\UserBundle\Listener\UserImageUploadListener
+        arguments:
+            - "@cocorico_user.user_manager"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: "onUpload" }
+
+    cocorico_user.listing_image_upload_validation_listener:
+        class: Cocorico\UserBundle\Listener\UserImageUploadValidationListener
+        arguments:
+            - "%cocorico.user_img_max_upload_size%"
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.validation, method: "onValidate" }

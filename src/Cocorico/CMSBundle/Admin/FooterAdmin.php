@@ -11,16 +11,17 @@
 
 namespace Cocorico\CMSBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CMSBundle\Entity\Footer;
 use Cocorico\CMSBundle\Model\Manager\FooterManager;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class FooterAdmin extends Admin
+class FooterAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'footer';
@@ -43,6 +44,7 @@ class FooterAdmin extends Admin
         $this->footerManager = $footerManager;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         //Translations fields
@@ -68,7 +70,7 @@ class FooterAdmin extends Admin
             ->with('admin.footer.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -127,6 +129,7 @@ class FooterAdmin extends Admin
             ->end();
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -170,6 +173,7 @@ class FooterAdmin extends Admin
             );
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -213,7 +217,6 @@ class FooterAdmin extends Admin
                 null,
                 array(
                     'label' => 'admin.page.created_at.label',
-                    'format' => 'd/m/Y'
                 )
             );
 
@@ -248,6 +251,7 @@ class FooterAdmin extends Admin
 
         $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
         $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
         return $dataSourceIt;
     }
 

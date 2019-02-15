@@ -11,15 +11,16 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Entity\ListingCharacteristic;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class ListingCharacteristicGroupAdmin extends Admin
+class ListingCharacteristicGroupAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'listing-characteristic-group';
@@ -36,6 +37,7 @@ class ListingCharacteristicGroupAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         /** @var ListingCharacteristic $subject */
@@ -54,7 +56,7 @@ class ListingCharacteristicGroupAdmin extends Admin
             ->with('admin.listing_characteristic_group.title')
             ->add(
                 'translations',
-                'a2lix_translations',
+                TranslationsType::class,
                 array(
                     'locales' => $this->locales,
                     'required_locales' => $this->locales,
@@ -72,6 +74,7 @@ class ListingCharacteristicGroupAdmin extends Admin
             ->end();
     }
 
+    /** @inheritdoc */
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
@@ -82,6 +85,7 @@ class ListingCharacteristicGroupAdmin extends Admin
             );
     }
 
+    /** @inheritdoc */
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
@@ -120,9 +124,10 @@ class ListingCharacteristicGroupAdmin extends Admin
         $datagrid = $this->getDatagrid();
         $datagrid->buildPager();
 
-        $datasourceit = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
-        $datasourceit->setDateTimeFormat('d M Y'); //change this to suit your needs
-        return $datasourceit;
+        $dataSourceIt = $this->getModelManager()->getDataSourceIterator($datagrid, $this->getExportFields());
+        $dataSourceIt->setDateTimeFormat('d M Y'); //change this to suit your needs
+
+        return $dataSourceIt;
     }
 
     public function getBatchActions()

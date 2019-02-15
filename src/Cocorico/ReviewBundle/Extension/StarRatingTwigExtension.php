@@ -8,16 +8,25 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Cocorico\ReviewBundle\Extension;
 
 /**
  * StarRatingTwigExtension will render the star ratings in the twig,
  * using single line, depending upon the values for rating
  */
-class StarRatingTwigExtension extends \Twig_Extension
+class StarRatingTwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
     /**
-     * [getFilters returns the filter method for the twig]
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
+
+    /**
+     * Returns the filter method for the twig
      *
      * @return array
      */
@@ -31,25 +40,25 @@ class StarRatingTwigExtension extends \Twig_Extension
         );
     }
 
-    /**
-     * getName returns the name of the filter to render twig extension
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return 'cocorico_star_rating';
-    }
 
     /**
      * startRatingFilter outputs the readonly starts
      *
      * @param \Twig_Environment $env
      * @param                   $rating
+     *
      * @return string
+     * @inheritdoc
      */
     public function starRatingFilter(\Twig_Environment $env, $rating)
     {
         return $env->render('CocoricoReviewBundle:Frontend/Twig:star_rating.html.twig', array('rating' => $rating));
     }
+
+    /** @inheritdoc */
+    public function getName()
+    {
+        return 'cocorico_star_rating';
+    }
+
 }

@@ -35,7 +35,6 @@ services:
                 cocorico_fee_as_asker: "%cocorico.fee_as_asker%"
                 cocorico_fee_as_offerer: "%cocorico.fee_as_offerer%"
                 cocorico_time_unit: "%cocorico.time_unit%"
-                cocorico_time_zone: "%cocorico.time_zone%"
                 cocorico_time_max: "%cocorico.times_max%"
                 cocorico_time_hours_available: "%cocorico.time_hours_available%"
                 cocorico_booking_expiration_delay: "%cocorico.booking.expiration_delay%"
@@ -69,7 +68,6 @@ services:
             - "%cocorico.booking.cancelation_policy%"
             - "@cocorico.mailer.twig_swift"
             - "%cocorico.dashboard_max_per_page%"
-            - "%cocorico.time_zone%"
             - "%kernel.bundles%"
 
     cocorico.language.manager:

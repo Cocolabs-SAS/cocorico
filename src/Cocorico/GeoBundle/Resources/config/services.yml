@@ -21,3 +21,10 @@ services:
         class: Cocorico\GeoBundle\Model\Manager\GeocodingManager
         arguments:
             - "@doctrine.orm.entity_manager"
+
+#    cocorico_geo.google_maps.provider:
+#        class: Cocorico\GeoBundle\Geocoder\Provider\GoogleMapsProvider
+#        arguments:
+#            - "@doctrine.orm.entity_manager"
+#        tags:
+#            - { name: bazinga_geocoder.provider }
