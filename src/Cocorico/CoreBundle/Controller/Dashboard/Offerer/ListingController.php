@@ -202,14 +202,12 @@ class ListingController extends Controller
             $listing = $this->get("cocorico.listing.manager")->save($listing);
             $this->addFormSuccessMessagesToFlashBag('price');
 
-            $selfUrl = $this->generateUrl(
+            return $this->redirectToRoute(
                 'cocorico_dashboard_listing_edit_price',
                 array(
                     'id' => $listing->getId()
                 )
             );
-
-            return $this->redirect($selfUrl);
         }
 
 

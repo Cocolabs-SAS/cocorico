@@ -83,12 +83,10 @@ class ListingCategoriesController extends Controller
                 $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            $selfUrl = $this->generateUrl(
+            return $this->redirectToRoute(
                 'cocorico_dashboard_listing_edit_categories',
                 array('id' => $listing->getId())
             );
-
-            return $this->redirect($selfUrl);
         }
 
         return $this->render(

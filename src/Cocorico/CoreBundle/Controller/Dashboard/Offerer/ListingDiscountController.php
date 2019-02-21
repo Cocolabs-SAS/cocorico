@@ -96,14 +96,10 @@ class ListingDiscountController extends Controller
                 $this->get('translator')->trans('listing.edit_discount.success', array(), 'cocorico_listing')
             );
 
-            $selfUrl = $this->generateUrl(
+            return $this->redirectToRoute(
                 'cocorico_dashboard_listing_edit_discount',
-                array(
-                    'id' => $listing->getId()
-                )
+                array('id' => $listing->getId())
             );
-
-            return $this->redirect($selfUrl);
         }
 
         if ($request->isXmlHttpRequest()) {

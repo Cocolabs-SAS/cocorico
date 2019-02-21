@@ -101,10 +101,6 @@ class BookingController extends Controller
         $formHandler = $this->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            $selfUrl = $this->get('router')->generate(
-                'cocorico_dashboard_booking_show_asker',
-                array('id' => $booking->getId())
-            );
 
             $recipients = $thread->getOtherParticipants($this->getUser());
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
@@ -112,7 +108,10 @@ class BookingController extends Controller
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
             $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
-            return new RedirectResponse($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_booking_show_asker',
+                array('id' => $booking->getId())
+            );
         }
 
         $canBeCanceledByAsker = $this->get('cocorico.booking.manager')->canBeCanceledByAsker($booking);
@@ -162,20 +161,19 @@ class BookingController extends Controller
         $translator = $this->get('translator');
         $session = $this->get('session');
         if ($success == 1) {
-            $url = $this->generateUrl(
-                'cocorico_dashboard_booking_edit_asker',
-                array(
-                    'id' => $booking->getId(),
-                    'type' => $type
-                )
-            );
 
             $session->getFlashBag()->add(
                 'success',
                 $translator->trans('booking.edit.success', array(), 'cocorico_booking')
             );
 
-            return $this->redirect($url);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_booking_edit_asker',
+                array(
+                    'id' => $booking->getId(),
+                    'type' => $type
+                )
+            );
         } elseif ($success < 0) {
             $errorMsg = $translator->trans('booking.new.unknown.error', array(), 'cocorico_booking');
             if ($success == -1 || $success == -2 || $success == -4) {

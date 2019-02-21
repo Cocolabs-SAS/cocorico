@@ -102,10 +102,6 @@ class BookingController extends Controller
 
         /** @var Message $message */
         if ($message = $formHandler->process($form)) {
-            $selfUrl = $this->get('router')->generate(
-                'cocorico_dashboard_booking_show_offerer',
-                array('id' => $booking->getId())
-            );
 
             $recipients = $thread->getOtherParticipants($this->getUser());
             $recipient = (count($recipients) > 0) ? $recipients[0] : $this->getUser();
@@ -113,7 +109,10 @@ class BookingController extends Controller
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
             $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
 
-            return new RedirectResponse($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_booking_show_offerer',
+                array('id' => $booking->getId())
+            );
         }
 
         //Amount excl or incl tax

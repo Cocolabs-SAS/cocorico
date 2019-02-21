@@ -48,12 +48,6 @@ class ListingCharacteristicController extends Controller
         $editForm = $this->createEditCharacteristicForm($listing);
         $editForm->handleRequest($request);
 
-        $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_characteristic',
-            array(
-                'id' => $listing->getId()
-            )
-        );
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->get("cocorico.listing.manager")->save($listing);
 
@@ -62,7 +56,10 @@ class ListingCharacteristicController extends Controller
                 $translator->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            return $this->redirect($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_listing_edit_characteristic',
+                array('id' => $listing->getId())
+            );
         }
 
         return $this->render(
