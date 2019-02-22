@@ -42,18 +42,12 @@ class ListingAvailabilityStatusController extends Controller
      *
      * @Method({"GET", "POST"})
      *
-     * @param Request $request
      * @param         $listing
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editAvailabilitiesStatusAction(Request $request, Listing $listing)
+    public function editAvailabilitiesStatusAction(Listing $listing)
     {
-        $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_availabilities_status',
-            array('listing_id' => $listing->getId())
-        );
-
         $listingAvailabilityHandler = $this->get('cocorico.form.handler.listing_availability.status.dashboard');
         $form = $this->createEditAvailabilitiesStatusForm($listing);
         $success = $listingAvailabilityHandler->processMany($form);
@@ -64,7 +58,10 @@ class ListingAvailabilityStatusController extends Controller
                 $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            return $this->redirect($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_listing_edit_availabilities_status',
+                array('listing_id' => $listing->getId())
+            );
         } elseif ($success == -1) {
             $this->get('session')->getFlashBag()->add(
                 'error',
@@ -125,7 +122,6 @@ class ListingAvailabilityStatusController extends Controller
      *
      * @Method({"GET", "POST"})
      *
-     * @param  Request $request
      * @param  Listing $listing
      * @param  string  $day
      * @param  string  $start_time
@@ -135,7 +131,6 @@ class ListingAvailabilityStatusController extends Controller
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function editAvailabilityStatusAction(
-        Request $request,
         Listing $listing,
         $day,
         $start_time,

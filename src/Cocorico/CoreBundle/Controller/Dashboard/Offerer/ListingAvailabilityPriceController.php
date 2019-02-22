@@ -49,11 +49,6 @@ class ListingAvailabilityPriceController extends Controller
      */
     public function editAvailabilitiesPricesAction(Request $request, Listing $listing)
     {
-        $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_availabilities_prices',
-            array('listing_id' => $listing->getId())
-        );
-
         $listingAvailabilityHandler = $this->get('cocorico.form.handler.listing_availability.price.dashboard');
         $form = $this->createEditAvailabilitiesPricesForm($listing);
         $success = $listingAvailabilityHandler->processMany($form);
@@ -64,7 +59,10 @@ class ListingAvailabilityPriceController extends Controller
                 $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            return $this->redirect($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_listing_edit_availabilities_prices',
+                array('listing_id' => $listing->getId())
+            );
         } elseif ($success == -1) {
             $this->get('session')->getFlashBag()->add(
                 'error',
