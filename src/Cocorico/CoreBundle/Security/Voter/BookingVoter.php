@@ -13,106 +13,131 @@ namespace Cocorico\CoreBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class BookingVoter implements VoterInterface
+class BookingVoter extends Voter
 {
     const CREATE = 'create';
+    const EDIT_AS_ASKER = 'edit_as_asker';
+    const EDIT_AS_OFFERER = 'edit_as_offerer';
     const VIEW_AS_ASKER = 'view_as_asker';
     const VIEW_AS_OFFERER = 'view_as_offerer';
-    const EDIT_AS_OFFERER = 'edit_as_offerer';
-    const EDIT_AS_ASKER = 'edit_as_asker';
     const VIEW_VOUCHER_AS_ASKER = 'view_voucher_as_asker';
 
-    public function supportsAttribute($attribute)
-    {
-        return in_array(
-            $attribute,
-            array(
-                self::CREATE,
-                self::VIEW_AS_ASKER,
-                self::VIEW_AS_OFFERER,
-                self::EDIT_AS_OFFERER,
-                self::EDIT_AS_ASKER,
-                self::VIEW_VOUCHER_AS_ASKER,
-            )
-        );
-    }
+    const ATTRIBUTES = [
+        self::CREATE,
+        self::EDIT_AS_OFFERER,
+        self::EDIT_AS_ASKER,
+        self::VIEW_AS_ASKER,
+        self::VIEW_AS_OFFERER,
+        self::VIEW_VOUCHER_AS_ASKER,
+    ];
 
-    public function supportsClass($class)
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     *
+     * @return boolean
+     */
+    public function supports($attribute, $subject)
     {
-        $supportedClass = 'Cocorico\CoreBundle\Entity\Booking';
-
-        return $supportedClass === $class || is_subclass_of($class, $supportedClass);
+        return ($subject instanceof Booking) && in_array($attribute, self::ATTRIBUTES);
     }
 
     /**
-     * @param  TokenInterface $token
-     * @param  null|Booking   $booking
-     * @param  array          $attributes
-     * @return int
+     * @param string $attribute
+     * @param mixed $subject
+     * @param TokenInterface $token
+     *
+     * @return boolean
      */
-    public function vote(TokenInterface $token, $booking, array $attributes)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        // check if class of this object is supported by this voter
-        if (!$this->supportsClass(get_class($booking))) {
-            return VoterInterface::ACCESS_ABSTAIN;
+        // make sure there is a user object (i.e. that the user is logged in)
+        if (!$token->getUser() instanceof UserInterface) {
+            return Voter::ACCESS_DENIED;
         }
 
-        // check if the voter is used correct, only allow one attribute
-        // this isn't a requirement, it's just one easy way for you to
-        // design your voter
-        if (1 !== count($attributes)) {
-            throw new \InvalidArgumentException(
-                'Only one attribute is allowed for VIEW_AS_ASKER or VIEW_AS_OFFERER or EDIT_AS_OFFERER or EDIT_AS_ASKER or VIEW_VOUCHER_AS_ASKER'
-            );
+        $method = 'voteOn' . str_replace('_', '', ucwords($attribute, '_'));
+        if (!method_exists($this, $method)) {
+            throw new \BadMethodCallException('Expected method ' . $method . ' was not found.');
         }
 
-        // set the attribute to check against
-        $attribute = $attributes[0];
+        return $this->{$method}($subject, $token);
+    }
 
-        // check if the given attribute is covered by this voter
-        if (!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnCreate(Booking $booking, TokenInterface $token)
+    {
+        return (
+            $token->getUser()->getId() === $booking->getUser()->getId()
+            && $booking->getListing()->getStatus() == Listing::STATUS_PUBLISHED
+            && in_array($booking->getStatus(), Booking::$newableStatus)
+        );
+    }
 
-        // get current logged in user
-        /** @var User $user */
-        $user = $token->getUser();
-        if (!$user instanceof UserInterface) { // || $user->hasRole('ROLE_SUPER_ADMIN'
-            return VoterInterface::ACCESS_DENIED;
-        }
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnViewAsAsker(Booking $booking, TokenInterface $token)
+    {
+        return ($token->getUser()->getId() === $booking->getUser()->getId());
+    }
 
-        $listing = $booking->getListing();
-        $offerer = $listing->getUser();
-        $asker = $booking->getUser();
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnEditAsAsker(Booking $booking, TokenInterface $token)
+    {
+        return ($token->getUser()->getId() === $booking->getUser()->getId());
+    }
 
-        if ($attribute == self::CREATE) {
-            if ($user->getId() === $asker->getId() &&
-                $listing->getStatus() == Listing::STATUS_PUBLISHED &&
-                in_array($booking->getStatus(), Booking::$newableStatus)
-            ) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        } elseif ($attribute == self::VIEW_AS_ASKER || $attribute == self::EDIT_AS_ASKER) {
-            if ($user->getId() === $asker->getId()) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        } elseif ($attribute == self::VIEW_VOUCHER_AS_ASKER) {
-            if ($user->getId() === $asker->getId() && in_array($booking->getStatus(), Booking::$payedStatus)) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        } elseif ($attribute == self::VIEW_AS_OFFERER || $attribute == self::EDIT_AS_OFFERER) {
-            if ($user->getId() === $offerer->getId()) {
-                return VoterInterface::ACCESS_GRANTED;
-            }
-        } else {
-            return VoterInterface::ACCESS_DENIED;
-        }
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnViewVoucherAsAsker(Booking $booking, TokenInterface $token)
+    {
+        return (
+            $token->getUser()->getId() === $booking->getUser()->getId()
+            && in_array($booking->getStatus(), Booking::$payedStatus)
+        );
+    }
 
-        return VoterInterface::ACCESS_DENIED;
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnViewAsOfferer(Booking $booking, TokenInterface $token)
+    {
+        return ($token->getUser()->getId() === $booking->getListing()->getUser()->getId());
+    }
+
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnEditAsOfferer(Booking $booking, TokenInterface $token)
+    {
+        return ($token->getUser()->getId() === $booking->getListing()->getUser()->getId());
     }
 }
