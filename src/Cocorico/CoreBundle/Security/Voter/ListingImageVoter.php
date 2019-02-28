@@ -12,78 +12,72 @@
 namespace Cocorico\CoreBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\ListingImage;
-use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ListingImageVoter implements VoterInterface
+class ListingImageVoter extends Voter
 {
-    const VIEW = 'view';
     const EDIT = 'edit';
+    const VIEW = 'view';
 
-    public function supportsAttribute($attribute)
+    const ATTRIBUTES = [
+        self::EDIT,
+        self::VIEW,
+    ];
+
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     *
+     * @return boolean
+     */
+    public function supports($attribute, $subject)
     {
-        return in_array(
-            $attribute,
-            array(
-                self::VIEW,
-                self::EDIT,
-            )
-        );
-    }
-
-    public function supportsClass($class)
-    {
-        $supportedClass = 'Cocorico\CoreBundle\Entity\ListingImage';
-
-        return $supportedClass === $class || is_subclass_of($class, $supportedClass);
+        return ($subject instanceof ListingImage) && in_array($attribute, self::ATTRIBUTES);
     }
 
     /**
-     * @param  TokenInterface    $token
-     * @param  null|ListingImage $listingImage
-     * @param  array             $attributes
-     * @return int
+     * @param string $attribute
+     * @param mixed $subject
+     * @param TokenInterface $token
+     *
+     * @return boolean
      */
-    public function vote(TokenInterface $token, $listingImage, array $attributes)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        if (!$this->supportsClass(get_class($listingImage))) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        if (1 !== count($attributes)) {
-            throw new \InvalidArgumentException(
-                'Only one attribute is allowed for VIEW or EDIT'
-            );
-        }
-
-        $attribute = $attributes[0];
-
-        if (!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        /** @var User $user */
-        $user = $token->getUser();
-
         // make sure there is a user object (i.e. that the user is logged in)
-        if (!$user instanceof UserInterface) {
-            return VoterInterface::ACCESS_DENIED;
+        if (!$token->getUser() instanceof UserInterface) {
+            return Voter::ACCESS_DENIED;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-                return VoterInterface::ACCESS_GRANTED;
-                break;
-
-            case self::EDIT:
-                if ($user->getId() === $listingImage->getListing()->getUser()->getId()) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
+        $method = 'voteOn' . str_replace('_', '', ucwords($attribute, '_'));
+        if (!method_exists($this, $method)) {
+            throw new \BadMethodCallException('Expected method ' . $method . ' was not found.');
         }
 
-        return VoterInterface::ACCESS_DENIED;
+        return $this->{$method}($subject, $token);
+    }
+
+    /**
+     * @param ListingImage $listingImage
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnView(ListingImage $listingImage, TokenInterface $token)
+    {
+        return Voter::ACCESS_GRANTED;
+    }
+
+    /**
+     * @param ListingImage $listingImage
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnEdit(ListingImage $listingImage, TokenInterface $token)
+    {
+        return ($token->getUser()->getId() === $listingImage->getListing()->getUser()->getId());
     }
 }

@@ -12,94 +12,97 @@
 namespace Cocorico\CoreBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ListingVoter implements VoterInterface
+class ListingVoter extends Voter
 {
-    const VIEW = 'view';
+    const BOOKING = 'booking';
     const EDIT = 'edit';
-    const BOOKING = 'booking';//For new booking
+    const VIEW = 'view';
 
-    public function supportsAttribute($attribute)
+    const ATTRIBUTES = [
+        self::BOOKING,
+        self::VIEW,
+        self::EDIT,
+    ];
+
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     *
+     * @return boolean
+     */
+    public function supports($attribute, $subject)
     {
-        return in_array(
-            $attribute,
-            array(
-                self::VIEW,
-                self::EDIT,
-                self::BOOKING,
+        return ($subject instanceof Listing) && in_array($attribute, self::ATTRIBUTES);
+    }
+
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     * @param TokenInterface $token
+     *
+     * @return integer
+     */
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
+        // make sure there is a user object (i.e. that the user is logged in)
+        if (!$token->getUser() instanceof UserInterface) {
+            return Voter::ACCESS_DENIED;
+        }
+
+        $method = 'voteOn' . str_replace('_', '', ucwords($attribute, '_'));
+        if (!method_exists($this, $method)) {
+            throw new \BadMethodCallException('Expected method ' . $method . ' was not found.');
+        }
+
+        return $this->{$method}($subject, $token);
+    }
+
+    /**
+     * @param Listing $listing
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnBooking(Listing $listing, TokenInterface $token)
+    {
+        return (
+            $listing->getStatus() == Listing::STATUS_PUBLISHED
+            || (
+                $token->getUser()->getId() === $listing->getUser()->getId()
+                && $listing->getStatus() != Listing::STATUS_DELETED
             )
         );
     }
 
-    public function supportsClass($class)
+    /**
+     * @param Listing $listing
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnEdit(Listing $listing, TokenInterface $token)
     {
-        $supportedClass = 'Cocorico\CoreBundle\Entity\Listing';
-
-        return $supportedClass === $class || is_subclass_of($class, $supportedClass);
+        return ($token->getUser()->getId() === $listing->getUser()->getId());
     }
 
     /**
-     * @param  TokenInterface $token
-     * @param  null|Listing   $listing
-     * @param  array          $attributes
-     * @return int
+     * @param Listing $listing
+     * @param TokenInterface $token
+     *
+     * @return boolean
      */
-    public function vote(TokenInterface $token, $listing, array $attributes)
+    protected function voteOnView(Listing $listing, TokenInterface $token)
     {
-        // check if class of this object is supported by this voter
-        if (!$this->supportsClass(get_class($listing))) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        // check if the voter is used correct, only allow one attribute
-        // this isn't a requirement, it's just one easy way for you to
-        // design your voter
-        if (1 !== count($attributes)) {
-            throw new \InvalidArgumentException(
-                'Only one attribute is allowed for VIEW or EDIT'
-            );
-        }
-
-        // set the attribute to check against
-        $attribute = $attributes[0];
-
-        // check if the given attribute is covered by this voter
-        if (!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        // get current logged in user
-        /** @var User $user */
-        $user = $token->getUser();
-
-        switch ($attribute) {
-            case self::BOOKING:
-            case self::VIEW:
-                if ($listing->getStatus() == Listing::STATUS_PUBLISHED
-                    || (
-                        $user instanceof UserInterface &&
-                        $user->getId() === $listing->getUser()->getId() &&
-                        $listing->getStatus() != Listing::STATUS_DELETED
-                    )
-                ) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-            case self::EDIT:
-                // make sure there is a user object (i.e. that the user is logged in)
-                if (!$user instanceof UserInterface) {
-                    return VoterInterface::ACCESS_DENIED;
-                }
-                if ($user->getId() === $listing->getUser()->getId()) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-        }
-
-        return VoterInterface::ACCESS_DENIED;
+        return (
+            $listing->getStatus() == Listing::STATUS_PUBLISHED
+            || (
+                $token->getUser()->getId() === $listing->getUser()->getId()
+                && $listing->getStatus() != Listing::STATUS_DELETED
+            )
+        );
     }
 }
