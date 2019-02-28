@@ -32,7 +32,7 @@ Cocorico works also with Nginx.
             
 #### Create your virtual host: 
 
-See [dev virtual host sample](doc/virtual-hosts.md)
+See [dev virtual host sample](virtual-hosts.md)
 
 ### MongoDB
 
