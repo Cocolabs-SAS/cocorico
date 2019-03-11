@@ -11,17 +11,21 @@
                 <form class="form-signup validate-form form-reset-password-2"
                       action="{{ path('cocorico_user_resetting_reset', {'token': token}) }}"
                       method="POST">
+
+                    {{ form_errors(form) }}
+
                     <fieldset>
                         <legend class="hidden">form-reset-password</legend>
                         <h1>{{ 'user.reset.h1'|trans }}</h1>
 
                         <div class="field-row">
+                            <div>{{ form_errors(form.plainPassword.first) }}</div>
                             <span class="label">
-                                {{ form_label(form.new.first) }}
+                                {{ form_label(form.plainPassword.first) }}
                             </span>
 
                             <div class="field-holder">
-                                {{ form_widget(form.new.first, {
+                                {{ form_widget(form.plainPassword.first, {
                                     'attr': {
                                         'class': "form-control"
                                     }
@@ -29,12 +33,13 @@
                             </div>
                         </div>
                         <div class="field-row">
+                            <div>{{ form_errors(form.plainPassword.second) }}</div>
                             <span class="label">
-                                {{ form_label(form.new.second) }}
+                                {{ form_label(form.plainPassword.second) }}
                             </span>
 
                             <div class="field-holder">
-                                {{ form_widget(form.new.second, {
+                                {{ form_widget(form.plainPassword.second, {
                                     'attr': {
                                         'class': "form-control"
                                     }

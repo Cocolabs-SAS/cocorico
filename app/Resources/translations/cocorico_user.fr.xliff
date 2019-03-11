@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file date="2017-12-08T00:45:28Z" source-language="en" target-language="fr" datatype="plaintext"
+        original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks
+        like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+        default message.
+      </note>
     </header>
     <body>
       <trans-unit id="3bc15c8aae3e4124dd409035f32ea2fd6835efc9" resname="-">
@@ -374,8 +378,11 @@
       </trans-unit>
       <trans-unit id="40c1a483571045e24d606bf00361cfd4d021ba05" resname="resetting.check_email">
         <source>resetting.check_email</source>
-        <target xml:space="preserve">Un e-mail a été envoyé à l'adresse %email%. Il contient un lien sur lequel il vous faudra cliquer afin
-              de réinitialiser votre mot de passe.
+        <target xml:space="preserve">
+                    Un e-mail vous a été envoyé à l'adresse %username%. Il contient un lien sur lequel il vous faudra cliquer afin de réinitialiser votre mot de passe.
+                    Remarques:
+                      - Vous ne pouvez demander un nouveau mot de passe que toutes les %tokenLifetime% heures.
+                      - Si vous ne recevez pas l'email, vérifiez votre dossier spam ou essayez à nouveau.
                 </target>
       </trans-unit>
       <trans-unit id="f0b3476bec045fac67c256d17a54e4f8a8d05335" resname="resetting.password_already_requested">
@@ -417,7 +424,9 @@
       </trans-unit>
       <trans-unit id="bde1a863d677579f32c5cb7e7c38c5a1f433c001" resname="user.edit.completion_notice">
         <source>user.edit.completion_notice</source>
-        <target>Améliorez vos annonces ou les chances que vos requêtes soient acceptées en renseignant les informations de votre profil</target>
+        <target>Améliorez vos annonces ou les chances que vos requêtes soient acceptées en renseignant les
+          informations de votre profil
+        </target>
       </trans-unit>
       <trans-unit id="25d8733622777f6a85263b5cf59cbddaaada6529" resname="user.edit.contact.error">
         <source>user.edit.contact.error</source>
@@ -487,6 +496,10 @@
         <source>user.profile.subscribe-date.title</source>
         <target>Membre depuis le</target>
       </trans-unit>
+      <trans-unit id="8b14373c89f426fb1db4d41571f9ab2718134368" resname="user.register.success">
+        <source>user.register.success</source>
+        <target>Votre compte a été créé avec succès</target>
+      </trans-unit>
       <trans-unit id="31e2cd9615198589f3489f7b13ce92bdc31c2ada" resname="user.request.h1">
         <source>user.request.h1</source>
         <target>Demande de réinitialisation de mot de passe</target>
@@ -527,11 +540,13 @@
         <source>user_images.min {{ min_images }}</source>
         <target>Min {{ min_images }}</target>
       </trans-unit>
-      <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13" resname="user_translations_en_description_placeholder">
+      <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13"
+                  resname="user_translations_en_description_placeholder">
         <source>user_translations_en_description_placeholder</source>
         <target>Introduction</target>
       </trans-unit>
-      <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1" resname="user_translations_fr_description_placeholder">
+      <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1"
+                  resname="user_translations_fr_description_placeholder">
         <source>user_translations_fr_description_placeholder</source>
         <target>Présentation</target>
       </trans-unit>

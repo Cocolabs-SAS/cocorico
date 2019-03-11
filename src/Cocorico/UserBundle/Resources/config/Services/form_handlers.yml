@@ -1,0 +1,29 @@
+services:
+    #Form Handler
+    cocorico_user.form.handler.registration:
+        class: Cocorico\UserBundle\Form\Handler\RegistrationFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_user.user_manager"
+            - "@cocorico_user.mailer.twig_swift"
+            - "@fos_user.util.token_generator"
+            - "@cocorico_user.login_manager"
+            - "@event_dispatcher"
+        public: true
+
+    cocorico_user.form.handler.bank_account:
+        class: Cocorico\UserBundle\Form\Handler\BankAccountFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_user.user_manager"
+            - "@event_dispatcher"
+        public: true
+
+    cocorico_user.form.handler.contact:
+        class: Cocorico\UserBundle\Form\Handler\ContactFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico_user.user_manager"
+            - "@event_dispatcher"
+            - "%cocorico.user_address_delivery%"
+        public: true

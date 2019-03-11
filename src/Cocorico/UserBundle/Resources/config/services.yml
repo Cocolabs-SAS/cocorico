@@ -1,106 +1,16 @@
 imports:
-    - { resource: subscribers.yml }
-    - { resource: listeners.yml }
-    - { resource: admin.yml }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/forms.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/form_handlers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/voters.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/validators.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/managers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/subscribers.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/listeners.yml" }
+    - { resource: "@CocoricoUserBundle/Resources/config/Services/admin.yml" }
 
 services:
-    #Validators
-    cocorico_user.user.validator:
-        class: Cocorico\UserBundle\Validator\Constraints\UserValidator
-        arguments:
-            - "%cocorico.user_img_max%"
-            - "%cocorico.user_img_min%"
-        tags:
-            - { name: validator.constraint_validator, alias: user }
-
-    #Voters
-    security.access.user_image_voter:
-        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
-        public:     false
-        tags:
-           - { name: security.voter }
-
-    cocorico_user.security.access.user_image_voter:
-        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
-        public:     false
-        tags:
-           - { name: security.voter }
-
     #Namers
     cocorico_user.namer.image_namer:
         class:  Cocorico\UserBundle\Namer\ImageNamer
         tags:
             - { name: image_namer }
-
-    #Listeners
-    cocorico_user.user.listener:
-        class: Cocorico\UserBundle\Listener\UserEntityListener
-        arguments:
-            - "@event_dispatcher"
-        tags:
-            - { name: doctrine.event_subscriber }
-
-    cocorico_user.user_image_upload_listener:
-        class: Cocorico\UserBundle\Listener\UserImageUploadListener
-        arguments:
-            - "@cocorico_user.user_manager"
-        tags:
-            - { name: kernel.event_listener, event: oneup_uploader.post_upload, method: "onUpload" }
-
-    cocorico_user.listing_image_upload_validation_listener:
-        class: Cocorico\UserBundle\Listener\UserImageUploadValidationListener
-        arguments:
-            - "%cocorico.user_img_max_upload_size%"
-        tags:
-            - { name: kernel.event_listener, event: oneup_uploader.validation, method: "onValidate" }
-
-    #Form Handler
-    cocorico_user.form.handler.registration:
-        class: Cocorico\UserBundle\Form\Handler\RegistrationFormHandler
-        arguments:
-            - "@fos_user.registration.form"
-            - "@request_stack"
-            - "@cocorico_user.user_manager"
-            - "@cocorico_user.mailer.twig_swift"
-            - "@fos_user.util.token_generator"
-            - "@cocorico_user.login_manager"
-            - "@event_dispatcher"
-        public: false
-
-
-    cocorico_user.form.handler.bank_account:
-        class: Cocorico\UserBundle\Form\Handler\BankAccountFormHandler
-        arguments:
-            - "@request_stack"
-            - "@cocorico_user.user_manager"
-            - "@event_dispatcher"
-        public: true
-
-    cocorico_user.form.handler.contact:
-        class: Cocorico\UserBundle\Form\Handler\ContactFormHandler
-        arguments:
-            - "@request_stack"
-            - "@cocorico_user.user_manager"
-            - "@event_dispatcher"
-            - "%cocorico.user_address_delivery%"
-        public: true
-
-    #Managers
-    cocorico_user.login_manager:
-        class: Cocorico\UserBundle\Security\LoginManager
-        arguments:
-            - "@fos_user.user_manager"
-            - "@fos_user.security.login_manager"
-            - "@security.encoder_factory"
-            - "%fos_user.firewall_name%"
-
-    cocorico_user.oauth.user.provider.entity:
-        class: Cocorico\UserBundle\Security\OAuthUserProvider
-        arguments:
-            - "@cocorico_user.user_manager"
-
-    #Forms
-    cocorico_user.form.type.user_address:
-        class: Cocorico\UserBundle\Form\Type\UserAddressFormType
-        tags:
-            - { name: form.type, alias: user_address }

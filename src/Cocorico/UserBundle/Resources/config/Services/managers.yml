@@ -1,0 +1,25 @@
+services:
+    #Managers
+    cocorico_user.login_manager:
+        class: Cocorico\UserBundle\Security\LoginManager
+        arguments:
+            - "@fos_user.user_manager"
+            - "@fos_user.security.login_manager"
+            - "@security.encoder_factory"
+            - "%fos_user.firewall_name%"
+
+    cocorico_user.oauth.user.provider.entity:
+        class: Cocorico\UserBundle\Security\OAuthUserProvider
+        arguments:
+            - "@cocorico_user.user_manager"
+
+    cocorico_user.user_manager:
+        class: Cocorico\UserBundle\Model\UserManager
+        arguments:
+            - "@fos_user.util.password_updater"
+            - "@fos_user.util.canonical_fields_updater"
+            - "@fos_user.object_manager"
+            - "%fos_user.model.user.class%"
+            - "%kernel.root_dir%"
+            - "@event_dispatcher"
+        public: true

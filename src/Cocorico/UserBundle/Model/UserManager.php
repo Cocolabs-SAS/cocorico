@@ -33,7 +33,6 @@ use Symfony\Component\Finder\Exception\AccessDeniedException;
 class UserManager extends BaseUserManager implements UserManagerInterface
 {
     protected $objectManager;
-//    protected $class;
     protected $repository;
     protected $kernelRoot;
     protected $dispatcher;
@@ -62,8 +61,6 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         $this->objectManager = $objectManager;
         $this->repository = $objectManager->getRepository($class);
 
-//        $metadata = $objectManager->getClassMetadata($class);
-//        $this->class = $metadata->getName();
         $this->kernelRoot = $kernelRoot;
         $this->dispatcher = $dispatcher;
     }
@@ -100,8 +97,9 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     /**
      * @param  User $user
      * @param       $images
-     * @param       $persist
+     * @param bool $persist
      * @return User
+     * @throws AccessDeniedException
      */
     public function addImages(User $user, $images, $persist = false)
     {
@@ -133,7 +131,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      * @param  string  $imageName
      * @param  string  $existingPicture
      * @param  boolean $persist
-     *
+     * @throws AccessDeniedException
      */
     public function addImagesSetFirst(User $user, $imageName, $existingPicture, $persist = false)
     {
@@ -170,6 +168,8 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      *
      * @param  UserResponseInterface $response
      * @return User|bool
+     *
+     * @throws
      */
     public function checkAndCreateOrUpdateUserByOAuth(UserResponseInterface $response)
     {

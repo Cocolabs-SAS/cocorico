@@ -6,8 +6,3 @@ services:
             - "%cocorico.time_zone%"
         tags:
             - { name: kernel.event_subscriber }
-
-    cocorico_user.subscriber:
-        class: Cocorico\UserBundle\Event\UserSubscriber
-        tags:
-            - { name: kernel.event_subscriber}

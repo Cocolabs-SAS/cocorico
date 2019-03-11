@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file date="2017-12-08T00:52:07Z" source-language="en" target-language="en" datatype="plaintext"
+        original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
-      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks
+        like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a
+        default message.
+      </note>
     </header>
     <body>
       <trans-unit id="3bc15c8aae3e4124dd409035f32ea2fd6835efc9" resname="-">
@@ -374,7 +378,11 @@
       </trans-unit>
       <trans-unit id="40c1a483571045e24d606bf00361cfd4d021ba05" resname="resetting.check_email">
         <source>resetting.check_email</source>
-        <target xml:space="preserve">An email has been sent to %email%. It contains a link you must click to reset your password.
+        <target xml:space="preserve">
+                    An email has been sent to you at %username%. It contains a link you must click to reset your password.
+                     Notes:
+                        - You can only request a new password once within %tokenLifetime% hours.
+                        - If you don't get an email check your spam folder or try again.
                 </target>
       </trans-unit>
       <trans-unit id="f0b3476bec045fac67c256d17a54e4f8a8d05335" resname="resetting.password_already_requested">
@@ -415,7 +423,9 @@
       </trans-unit>
       <trans-unit id="bde1a863d677579f32c5cb7e7c38c5a1f433c001" resname="user.edit.completion_notice">
         <source>user.edit.completion_notice</source>
-        <target>Increase your chances to rent your listing or to be accepted for a booking by filling your profile informations.</target>
+        <target>Increase your chances to rent your listing or to be accepted for a booking by filling your
+          profile informations.
+        </target>
       </trans-unit>
       <trans-unit id="25d8733622777f6a85263b5cf59cbddaaada6529" resname="user.edit.contact.error">
         <source>user.edit.contact.error</source>
@@ -525,11 +535,13 @@
         <source>user_images.min {{ min_images }}</source>
         <target>Min {{ min_images }}</target>
       </trans-unit>
-      <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13" resname="user_translations_en_description_placeholder">
+      <trans-unit id="37e00c91f30773a4b84992ea9a33c850b8385a13"
+                  resname="user_translations_en_description_placeholder">
         <source>user_translations_en_description_placeholder</source>
         <target>Introduction</target>
       </trans-unit>
-      <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1" resname="user_translations_fr_description_placeholder">
+      <trans-unit id="a6734def089c4975532c9b0b49814bd2c38926d1"
+                  resname="user_translations_fr_description_placeholder">
         <source>user_translations_fr_description_placeholder</source>
         <target>Introduction</target>
       </trans-unit>

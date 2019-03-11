@@ -1,3 +1,6 @@
+imports:
+    - { resource: services.yml }
+
 twig:
     globals:
         user_img_max: "%cocorico.user_img_max%"
@@ -25,10 +28,9 @@ fos_user:
             type: Cocorico\UserBundle\Form\Type\RegistrationFormType
             name: user_registration
             validation_groups: [CocoricoRegistration]
-#            handler: cocorico_user.form.handler.registration
     resetting:
         form:
-            type: user_resetting
+            type: Cocorico\UserBundle\Form\Type\ResettingFormType
             name: user_resetting
     profile:
         form:

@@ -22,6 +22,7 @@ namespace Cocorico\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -36,10 +37,11 @@ class LoginFormType extends AbstractType
         $builder
             ->add(
                 '_username',
-                null,
+                TextType::class,
                 array(
                     'label' => 'user.login.username',
-                    'error_bubbling' => false
+                    'error_bubbling' => false,
+                    'data' => $options['username']
                 )
             )->add(
                 '_password',
@@ -59,17 +61,9 @@ class LoginFormType extends AbstractType
                 'translation_domain' => 'cocorico_user',
                 'csrf_token_id' => 'authentication',
 //                'validation_groups' => array('Login'),
+                'username' => ''
             )
         );
-    }
-
-    /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
     }
 
     /**

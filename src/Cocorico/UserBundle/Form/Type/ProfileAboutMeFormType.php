@@ -77,7 +77,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             TranslationsType::class,
             array(
                 'locales' => $this->locales,
-                'required_locales' => array($this->locales),
+                'required_locales' => $this->locales,
                 'fields' => array(
                     'description' => array(
                         'field_type' => 'textarea',

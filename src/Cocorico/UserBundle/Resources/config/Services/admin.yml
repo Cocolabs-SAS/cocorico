@@ -1,9 +1,4 @@
- #Disable Sonata Admin User Group
 services:
-    sonata.user.admin.group:
-        abstract: true
-        public: false
-
     sonata.admin.user_address:
         class: Cocorico\UserBundle\Admin\UserAddressAdmin
         tags:

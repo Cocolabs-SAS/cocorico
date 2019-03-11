@@ -10,10 +10,7 @@
             <argument type="service" id="form.factory"/>
             <argument>%fos_user.resetting.form.name%</argument>
             <argument>%fos_user.resetting.form.type%</argument>
-            <argument>null</argument>
-            <argument type="collection">
-                <argument key="validation_groups">%fos_user.resetting.form.validation_groups%</argument>
-            </argument>
+            <argument>%fos_user.resetting.form.validation_groups%</argument>
         </service>
 
         <service id="fos_user.resetting.form.type" class="Cocorico\UserBundle\Form\Type\ResettingFormType">

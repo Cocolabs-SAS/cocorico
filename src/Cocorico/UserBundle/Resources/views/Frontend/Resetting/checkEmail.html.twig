@@ -13,7 +13,8 @@
                     <i class="ico icon-success">&nbsp;</i>
 
                     <p>
-                        {{ 'user.reset.success'|trans|upper }}! {{ 'resetting.check_email'|trans({'%email%': email}) }}
+                        {{ 'user.reset.success'|trans|upper }}!
+                        {{ 'resetting.check_email'|trans({'%username%': username , '%tokenLifetime%': tokenLifetime})|nl2br }}
                     </p>
                 </div>
             </div>
