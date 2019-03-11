@@ -9,10 +9,6 @@ imports:
     - { resource: "../../../../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml" }
 
 framework:
-     validation:
-        enabled: true
-        enable_annotations: true
-#        api: 2.5-bc
      assets:
         base_urls:
             - '%cocorico.assets_base_urls%'

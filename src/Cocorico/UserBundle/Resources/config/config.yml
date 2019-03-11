@@ -34,7 +34,7 @@ fos_user:
             name: user_resetting
     profile:
         form:
-            type: user_profile
+            type: Cocorico\UserBundle\Form\Type\ProfileAboutMeFormType
             name: user_profile
             validation_groups: [CocoricoProfile]
 

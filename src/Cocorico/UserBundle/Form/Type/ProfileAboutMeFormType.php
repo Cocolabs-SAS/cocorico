@@ -65,7 +65,6 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                 /** @Ignore */
                 'label' => false,
                 'constraints' => array(new NotBlank()),
-                'required' => true,
                 'attr' => array(
                     'placeholder' => 'auto'
                 )
