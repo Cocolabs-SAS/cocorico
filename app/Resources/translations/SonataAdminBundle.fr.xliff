@@ -847,6 +847,22 @@
         <source>admin.listing.images.label</source>
         <target>Images</target>
       </trans-unit>
+      <trans-unit id="aa53a0c4b90c64eece438ff9e4d672d1bb41c55b" resname="label_per_page">
+        <source>label_per_page</source>
+        <target state="new">Par page</target>
+      </trans-unit>
+      <trans-unit id="8aa34ad9e845101822857e558f8dc78e00501e62" resname="label_type_no">
+        <source>label_type_no</source>
+        <target state="new">non</target>
+      </trans-unit>
+      <trans-unit id="5c992a29b7ec338cc633f16b6b009696710c9555" resname="label_type_yes">
+        <source>label_type_yes</source>
+        <target state="new">oui</target>
+      </trans-unit>
+      <trans-unit id="c0cb1018a06cf45bf6b2be4e789c91b38f6d01e3" resname="Impersonating">
+        <source>Impersonating</source>
+        <target state="new">Impersonating</target>
+      </trans-unit>
       <trans-unit id="fef3959e4e3efe81460055add8854c7a313fbbca" resname="admin.listing.label">
         <source>admin.listing.label</source>
         <target>Annonce</target>
@@ -1083,6 +1099,14 @@
         <source>btn_execute_batch_action</source>
         <target state="new">btn_execute_batch_action</target>
       </trans-unit>
+      <trans-unit id="cfb8d26471a8763e3a8e561d62c9cf1894cbe39e" resname="link_action_list">
+        <source>link_action_list</source>
+        <target state="new">Retourner à la liste</target>
+      </trans-unit>
+      <trans-unit id="cc1817a322e46165771bac71e2f506fc1d720d95" resname="btn_execute_batch_action">
+        <source>btn_execute_batch_action</source>
+        <target state="new">Oui, exécuter</target>
+      </trans-unit>
       <trans-unit id="ce4e17fb96cf876215a3d191ed681e50c3e035fb" resname="btn_preview">
         <source>btn_preview</source>
         <target>Prévisualiser</target>
@@ -1163,17 +1187,39 @@
         <source>list_results_count</source>
         <target state="new">list_results_count</target>
       </trans-unit>
+      <trans-unit id="1a78af87389138a9af2d6be9f4d523bb9873db50" resname="list_results_count">
+        <source>list_results_count</source>
+        <target state="new">1 résultat|%count% résultats</target>
+      </trans-unit>
       <trans-unit id="d1efc8fdd25b69e8584a12ffd3d488513b99a811" resname="list_user_listings">
         <source>list_user_listings</source>
         <target>Voir ses annonces</target>
       </trans-unit>
       <trans-unit id="5fd1ee9cd7febbc39e51a8a29a3c621648214ad6" resname="message_batch_all_confirmation">
         <source>message_batch_all_confirmation</source>
+        <target state="new">Êtes-vous sûr de vouloir confirmer cette action et de l'exécuter pour tous les éléments?
+        </target>
+      </trans-unit>
+      <trans-unit id="77912dbfce8dc11473bd96234c4e73e1694ce6f2" resname="message_batch_confirmation">
+        <source>message_batch_confirmation</source>
+        <target state="new">Êtes-vous sûr de vouloir confirmer cette action et de l'exécuter pour l'élément
+          sélectionné?|Êtes-vous sûr de vouloir confirmer cette action et de l'exécuter pour les %count% éléments
+          sélectionnés?
+        </target>
+      </trans-unit>
+      <trans-unit id="3c812e2dc11dbc915b3a77521b3ba8a50ca23660" resname="message_form_group_empty">
+        <source>message_form_group_empty</source>
+        <target>Pas de champs disponibles.</target>
+        <jms:reference-file line="28">views/CRUD/base_edit_form_macro.html.twig</jms:reference-file>
         <target state="new">message_batch_all_confirmation</target>
       </trans-unit>
       <trans-unit id="77912dbfce8dc11473bd96234c4e73e1694ce6f2" resname="message_batch_confirmation">
         <source>message_batch_confirmation</source>
         <target state="new">message_batch_confirmation</target>
+      </trans-unit>
+      <trans-unit id="bd1084ecb02deca4f6d8547ce67ac97add09f26c" resname="title_batch_confirmation">
+        <source>title_batch_confirmation</source>
+        <target state="new">Confirmation d'un traitement par lots : '%action%'</target>
       </trans-unit>
       <trans-unit id="99b270e3e2f21c989cf73a039fa7a291f0ef53ee" resname="noscript_warning">
         <source>noscript_warning</source>
