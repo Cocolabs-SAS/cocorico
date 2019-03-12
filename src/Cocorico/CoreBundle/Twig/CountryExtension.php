@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Cocorico\CoreBundle\Twig;
 
 use Cocorico\CoreBundle\Utils\PHP;
@@ -16,7 +17,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * CountryExtension will render the name of the country
  */
-class CountryExtension extends \Twig_Extension
+class CountryExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
 
 //    private $request;
@@ -27,6 +28,14 @@ class CountryExtension extends \Twig_Extension
 //            $this->locale = $this->request->getLocale();
 //        }
 //    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getGlobals()
+    {
+        return array();
+    }
 
     /** @inheritdoc */
     public function getFilters()

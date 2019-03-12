@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:40Z" source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
     </header>
     <body>
       <trans-unit id="9b81dbdb23890155a309ef09d92759b18552ea0c" resname="cocorico_booking_new">
-          <source>/booking/{listing_id}/{start}/{end}/new</source>
-          <target>/reservation/{listing_id}/{start}/{end}/creer</target>
+        <source>/booking/{listing_id}/{start}/{end}/new</source>
+        <target>/reservation/{listing_id}/{start}/{end}/creer</target>
       </trans-unit>
-        <trans-unit id="26cd4974c433beba7b353006962d40cb0959353d" resname="cocorico_booking_payment_new">
-            <source>/booking/payment/{booking_id}/new</source>
-            <target state="new">/booking/payment/{booking_id}/new</target>
+      <trans-unit id="26cd4974c433beba7b353006962d40cb0959353d" resname="cocorico_booking_payment_new">
+        <source>/booking/payment/{booking_id}/new</source>
+        <target state="new">/booking/payment/{booking_id}/new</target>
       </trans-unit>
       <trans-unit id="81a1cea4ee90d53ca7904aac09cd6dbda96fc3dc" resname="cocorico_booking_price">
         <source>/booking/{listing_id}/price</source>
@@ -95,12 +95,12 @@
         <target>/tableau-de-bord/annonce/{listing_id}/editer-dispo-status</target>
       </trans-unit>
       <trans-unit id="0155b8a3ca222b0ee0a625a35585c778160ccd1d" resname="cocorico_dashboard_listing_edit_availability_price">
-          <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_price</source>
-          <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-prix</target>
+        <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_price</source>
+        <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-prix</target>
       </trans-unit>
       <trans-unit id="ff5b4844cb008a0353536668a6b736e4102bfbf5" resname="cocorico_dashboard_listing_edit_availability_status">
-          <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_status</source>
-          <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-status</target>
+        <source>/dashboard/listing/{listing_id}/{day}/{start_time}/{end_time}/edit_availability_status</source>
+        <target>/tableau-de-bord/annonce/{listing_id}/{day}/{start_time}/{end_time}/editer-dispo-status</target>
       </trans-unit>
       <trans-unit id="41a3cb94e244fe988983f3fedeebb17285dd65e9" resname="cocorico_dashboard_listing_edit_categories">
         <source>/dashboard/listing/{id}/edit_categories</source>
@@ -234,18 +234,6 @@
         <source>/listing/similar_result/{id}</source>
         <target>/annonce/resultat-similaire/{id}</target>
       </trans-unit>
-        <trans-unit id="0efb1dd469c3a1cfd84d310318728567cbe1e470" resname="cocorico_mangopay_card_complete_registration">
-            <source>/card/{booking_id}/register-card/{card_register_id}</source>
-            <target state="new">/card/{booking_id}/register-card/{card_register_id}</target>
-        </trans-unit>
-        <trans-unit id="36b58b7c7c00dda63b39332d6305b8dc66a07d1c" resname="cocorico_mangopay_card_new">
-            <source>/card/{booking_id}/new</source>
-            <target state="new">/card/{booking_id}/new</target>
-        </trans-unit>
-        <trans-unit id="793a68ff31381adfcf297eef2326d8cc07a021e5" resname="cocorico_mangopay_redirect_after_3d_secure">
-            <source>/card/redirect-after-3d-secure/</source>
-            <target state="new">/card/redirect-after-3d-secure/</target>
-      </trans-unit>
       <trans-unit id="08287e8d950d47856d8c09d38255f293609de0c2" resname="cocorico_page_show">
         <source>/page/{slug}</source>
         <target>/page/{slug}</target>
@@ -357,6 +345,22 @@
       <trans-unit id="cc9da47695fc3217da654fdf973462ef7c25ab02" resname="liip_imagine_filter_runtime">
         <source>/media/cache/resolve/{filter}/rc/{hash}/{path}</source>
         <target>/media/cache/resolve/{filter}/rc/{hash}/{path}</target>
+      </trans-unit>
+      <trans-unit id="3112bb79cecb75cdfbcb527526d7db718850c3a4" resname="sonata_user_admin_resetting_check_email">
+        <source>/admin/resetting/check-email</source>
+        <target state="new">/admin/resetting/check-email</target>
+      </trans-unit>
+      <trans-unit id="0cc5fd574f05cad6796f3efddbb568a01ee5ee64" resname="sonata_user_admin_resetting_request">
+        <source>/admin/resetting/request</source>
+        <target state="new">/admin/resetting/request</target>
+      </trans-unit>
+      <trans-unit id="9dc00e54897b05b65eda1c81afca6a79ee631464" resname="sonata_user_admin_resetting_reset">
+        <source>/admin/resetting/reset/{token}</source>
+        <target state="new">/admin/resetting/reset/{token}</target>
+      </trans-unit>
+      <trans-unit id="c97356da99e03a47aef7faa2902d8e08eaeb1aed" resname="sonata_user_admin_resetting_send_email">
+        <source>/admin/resetting/send-email</source>
+        <target state="new">/admin/resetting/send-email</target>
       </trans-unit>
     </body>
   </file>

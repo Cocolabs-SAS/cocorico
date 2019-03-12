@@ -1,0 +1,13 @@
+services:
+    #Voters
+    security.access.user_image_voter:
+        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    cocorico_user.security.access.user_image_voter:
+        class:      Cocorico\UserBundle\Security\Voter\UserImageVoter
+        public:     false
+        tags:
+           - { name: security.voter }

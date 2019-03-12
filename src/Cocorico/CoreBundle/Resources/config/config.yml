@@ -9,10 +9,6 @@ imports:
     - { resource: "../../../../../vendor/knplabs/doctrine-behaviors/config/orm-services.yml" }
 
 framework:
-     validation:
-        enabled: true
-        enable_annotations: true
-#        api: 2.5-bc
      assets:
         base_urls:
             - '%cocorico.assets_base_urls%'
@@ -129,6 +125,9 @@ jms_i18n_routing:
 
 
 jms_translation:
+    dumper:
+        add_references: false
+        add_date: false
     configs:
         cocorico:
             dirs: ["%kernel.root_dir%", "%kernel.root_dir%/../src"]
@@ -140,11 +139,12 @@ jms_translation:
 
 
 a2lix_translation_form:
+    locale_provider: default
     locales: "%cocorico.locales%"
-    #required_locales: [%cocorico.locale%]
+    default_locale: "%cocorico.locale%"
+    required_locales: "%cocorico.locales%"
     manager_registry: doctrine
     templating: "CocoricoCoreBundle:Form:fields_translations.html.twig"
-
 
 stof_doctrine_extensions:
     default_locale: "%cocorico.locale%"

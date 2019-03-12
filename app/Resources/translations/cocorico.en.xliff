@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
-  <file date="2018-12-18T13:46:08Z" source-language="en" target-language="en" datatype="plaintext" original="not.available">
+  <file source-language="en" target-language="en" datatype="plaintext" original="not.available">
     <header>
       <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
       <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
@@ -9,30 +9,15 @@
       <trans-unit id="da39a3ee5e6b4b0d3255bfef95601890afd80709" resname="">
         <source></source>
         <target></target>
-        <jms:reference-file line="78">Form/Type/DateRangeType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="7f2f6a15cf8da2b27e5a4af47b58e7ad71c0b3d9" resname="Error">
         <source>Error</source>
         <target>Error</target>
-        <jms:reference-file line="35">Frontend/Common/_flash.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="42a8f651d79fd005eeac0612df6442b983a01184" resname="Success">
         <source>Success</source>
         <target>Success</target>
-        <jms:reference-file line="33">Frontend/Common/_flash.html.twig</jms:reference-file>
       </trans-unit>
-        <trans-unit id="5d1b61d863e6ef9df9006c8ad85a673d13ec647c" resname="booking.form.card_cvx.error">
-            <source>booking.form.card_cvx.error</source>
-            <target state="new">booking.form.card_cvx.error</target>
-        </trans-unit>
-        <trans-unit id="372cba9768edb7defa7d058f277ba7526b57c018" resname="booking.form.card_expiration_date.error">
-            <source>booking.form.card_expiration_date.error</source>
-            <target state="new">booking.form.card_expiration_date.error</target>
-        </trans-unit>
-        <trans-unit id="ae5a8e0be6523fb4ca7c1b7372dae44158099e13" resname="booking.form.card_number.error">
-            <source>booking.form.card_number.error</source>
-            <target state="new">booking.form.card_number.error</target>
-        </trans-unit>
       <trans-unit id="4553617369a88b3ab4dfdca6c8d4b1a6def76cee" resname="booking.form.message.error">
         <source>booking.form.message.error</source>
         <target>Please let a message</target>
@@ -52,88 +37,65 @@
       <trans-unit id="4da89bd144135116aad9c6584946213240130eb1" resname="cocorico.friday">
         <source>cocorico.friday</source>
         <target>Friday</target>
-        <jms:reference-file line="48">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="b20763c2a44932dd6e4695b47b11aa0c6001f05c" resname="cocorico.monday">
         <source>cocorico.monday</source>
         <target>Monday</target>
-        <jms:reference-file line="44">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="beea54cb43ad898f45b5f3e3aeee514a3bd3871d" resname="cocorico.saturday">
         <source>cocorico.saturday</source>
         <target>Saturday</target>
-        <jms:reference-file line="49">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="9e16967be6a7afcf10147cffc7be05f119a726de" resname="cocorico.search.extended.warning %location%">
         <source>cocorico.search.extended.warning %location%</source>
         <target>Insufficient results, search area is going to be expanded to: %location%</target>
-        <jms:reference-file line="160">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="8e76df2f570186e6fcf3ba0b861b2fe7b1d19dc7" resname="cocorico.search.invalidate.address">
         <source>cocorico.search.invalidate.address</source>
         <target>Please enter an address to view make a search.</target>
-        <jms:reference-file line="42">ListingResult/js/_geocoding_js.html.twig</jms:reference-file>
-        <jms:reference-file line="182">ListingResult/js/_geocoding_map_drag_js.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c8e0d9c9ce43a45ffe8e790a561f78cf215d4c13" resname="cocorico.sunday">
         <source>cocorico.sunday</source>
         <target>Sunday</target>
-        <jms:reference-file line="50">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="800c9b792a8964d42cf790f873e36752203beb0d" resname="cocorico.thursday">
         <source>cocorico.thursday</source>
         <target>Thursday</target>
-        <jms:reference-file line="47">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="2164d0d79b16c065b49297417b1d57d31296b934" resname="cocorico.tuesday">
         <source>cocorico.tuesday</source>
         <target>Tuesday</target>
-        <jms:reference-file line="45">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd837494c7c95678fdc92f86e01d1daeda4aee21" resname="cocorico.wednesday">
         <source>cocorico.wednesday</source>
         <target>Wednesday</target>
-        <jms:reference-file line="46">Form/Type/WeekDaysType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="92e4199a6cbc855202f30c836d970f76bbd3a517" resname="collection.add_item">
         <source>collection.add_item</source>
         <target>Add</target>
-        <jms:reference-file line="246">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="342">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="425">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1106">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1136">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b369460718f0b8112273eb3930153ba99d63a373" resname="collection.remove_item">
         <source>collection.remove_item</source>
         <target>Remove</target>
-        <jms:reference-file line="215">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="315">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="395">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="1063">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="45b97052db6fdc4abdcdefcc65952e83c06f682c" resname="company_info">
         <source>company_info</source>
         <target>company_info</target>
-        <jms:reference-file line="181">views/Dashboard/layout_show_bill.html.twig</jms:reference-file>
       </trans-unit>
-        <trans-unit id="b00b8c5d4f2925002545ca1ee8681e1bb4dbbf12" resname="cookie_consent_link">
-            <source>cookie_consent_link</source>
-            <target state="new">cookie_consent_link</target>
-            <jms:reference-file line="19">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
-        </trans-unit>
-        <trans-unit id="d22eda72c562facdefd09e8b58ae26cb484daaed" resname="cookie_consent_ok">
-            <source>cookie_consent_ok</source>
-            <target state="new">OK</target>
-            <jms:reference-file line="18">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
-        </trans-unit>
-        <trans-unit id="548ca6c0ebcf302b1dac13cacc412ab35a6566cb" resname="cookie_consent_text">
-            <source>cookie_consent_text</source>
-            <target state="new">
-                <![CDATA[<strong>Cookies use</strong><br>By continuing your browsing on this site, you agree to the use of Cookies for statistical purposes and to improve the interest and the ergonomics of our services.]]>
-            </target>
-            <jms:reference-file line="17">Frontend/Common/_cookie_consent_js.html.twig</jms:reference-file>
-        </trans-unit>
+      <trans-unit id="b00b8c5d4f2925002545ca1ee8681e1bb4dbbf12" resname="cookie_consent_link">
+        <source>cookie_consent_link</source>
+        <target state="new">cookie_consent_link</target>
+      </trans-unit>
+      <trans-unit id="d22eda72c562facdefd09e8b58ae26cb484daaed" resname="cookie_consent_ok">
+        <source>cookie_consent_ok</source>
+        <target state="new">OK</target>
+      </trans-unit>
+      <trans-unit id="548ca6c0ebcf302b1dac13cacc412ab35a6566cb" resname="cookie_consent_text">
+        <source>cookie_consent_text</source>
+        <target state="new"><![CDATA[
+                <strong>Cookies use</strong><br>By continuing your browsing on this site, you agree to the use of Cookies for statistical purposes and to improve the interest and the ergonomics of our services.
+            ]]></target>
+      </trans-unit>
       <trans-unit id="4336563d509b02ea6d3d7a3c74d3322408f65679" resname="date_range.invalid.end_before_start">
         <source>date_range.invalid.end_before_start</source>
         <target>End date must be after start date</target>
@@ -161,86 +123,66 @@
       <trans-unit id="eace95250e745fa6b5472e5eba652429b09ee0e0" resname="date_range.nb_days">
         <source>date_range.nb_days</source>
         <target>Day(s)</target>
-        <jms:reference-file line="82">Form/Type/DateRangeType.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="137c81c2394468aeb69c3b7e2dc99c21a1656f58" resname="exit_impersonation">
         <source>exit_impersonation</source>
         <target>Exit Impersonation</target>
-        <jms:reference-file line="94">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="115">Frontend/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a949baa3fcb4d3b0ab046dccd4e8b71bf5974dcb" resname="footer.about.title">
         <source>footer.about.title</source>
         <target>About</target>
-        <jms:reference-file line="33">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5e1d2c2c71162e0c24eddb9cae78b0296d9f6425" resname="footer.all_right_reserved">
         <source>footer.all_right_reserved</source>
         <target>all right reserved</target>
-        <jms:reference-file line="82">views/Mails/layout.html.twig</jms:reference-file>
-        <jms:reference-file line="90">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="eafbb9e9132e8fc3dfed33243e7fb8781ab79935" resname="footer.contact_us.link">
         <source>footer.contact_us.link</source>
         <target>Contact us</target>
-        <jms:reference-file line="59">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="a650649eef07e27013b9ce411e4b9491b00f80b6" resname="footer.contact_us.title">
         <source>footer.contact_us.title</source>
         <target>Contact us</target>
-        <jms:reference-file line="12">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="28ad4e2c00f3d990a04f9ab8768495124bb6c10a" resname="footer.faq.link">
         <source>footer.faq.link</source>
         <target>FAQ</target>
-        <jms:reference-file line="54">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="f29216648f11b939a46dacd7be3882453ad8dc5f" resname="footer.help.title">
         <source>footer.help.title</source>
         <target><![CDATA[Help & Contact]]></target>
-        <jms:reference-file line="51">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e0e024ec17d9d12220ca5b17920924967e9d9f4d" resname="footer.how_it_works.link">
         <source>footer.how_it_works.link</source>
         <target>How it works?</target>
-        <jms:reference-file line="41">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="67cf5390e62e92e302c2101585471ebf0c1c3d02" resname="footer.legal_notices.link">
         <source>footer.legal_notices.link</source>
         <target>Legal notices</target>
-        <jms:reference-file line="80">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e961dfa45f7be14560d14913711c071c88968d3c" resname="footer.the_team.link">
         <source>footer.the_team.link</source>
         <target>The team</target>
-        <jms:reference-file line="46">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="69a1518dded704dee13c212c8fa93bfdbec43543" resname="footer.title.various">
         <source>footer.title.various</source>
         <target state="new">Various</target>
-        <jms:reference-file line="8">Frontend/Footer/index.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5f64194a8d285094204c3ef94b8dc3b6bebfa2d0" resname="footer.who_we_are.link">
         <source>footer.who_we_are.link</source>
         <target>Who we are?</target>
-        <jms:reference-file line="36">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ccaeec1d1b1dbbc71e18f43031b34b69864d0ec0" resname="form.error">
         <source>form.error</source>
         <target>An error has occurred.</target>
-        <jms:reference-file line="72">views/Form/fields.html.twig</jms:reference-file>
-        <jms:reference-file line="70">Dashboard/Offerer/ListingAvailabilityPriceController.php</jms:reference-file>
-        <jms:reference-file line="71">Dashboard/Offerer/ListingAvailabilityStatusController.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="745132bd15d9bcfd7316d5588bf300eac5bfbc6d" resname="listing.file.button.text">
         <source>listing.file.button.text</source>
         <target>Choose file</target>
-        <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="21c97cc111d6d483759f2f7a212d3010eba47ae2" resname="listing.file.placeholder.text">
         <source>listing.file.placeholder.text</source>
         <target>No file chosen</target>
-        <jms:reference-file line="181">views/Form/fields.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9d7ce250577bc878ff98c5a30f972ab064b3bbe3" resname="listing.form.tac.error">
         <source>listing.form.tac.error</source>
@@ -257,174 +199,118 @@
       <trans-unit id="ee1536aec49276b3a23b8861008ee943786bc7cb" resname="multiselect.all_selected">
         <source>multiselect.all_selected</source>
         <target>All selected</target>
-        <jms:reference-file line="358">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="121">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="529">Frontend/Listing/show.html.twig</jms:reference-file>
-        <jms:reference-file line="185">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="780b109aaf541af74b8adc7fb6222d4fda7a980d" resname="multiselect.none_selected">
         <source>multiselect.none_selected</source>
         <target>None selected</target>
-        <jms:reference-file line="359">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="122">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="530">Frontend/Listing/show.html.twig</jms:reference-file>
-        <jms:reference-file line="186">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="56aef35256504c5def3af2bfea3c78db49dd8cc3" resname="multiselect.num_selected">
         <source>multiselect.num_selected</source>
         <target>selected</target>
-        <jms:reference-file line="360">Frontend/Profile/show.html.twig</jms:reference-file>
-        <jms:reference-file line="123">Frontend/Home/index.html.twig</jms:reference-file>
-        <jms:reference-file line="531">Frontend/Listing/show.html.twig</jms:reference-file>
-        <jms:reference-file line="187">Frontend/ListingResult/result.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7922207fb51f1d5e34be3c837b7ae78b4587854a" resname="nav.asker.link">
         <source>nav.asker.link</source>
         <target>Asker</target>
-        <jms:reference-file line="67">Frontend/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="64b6d2da31ab9586cf0bb982e17ac89b0c341592" resname="nav.dashboard.bookings.link">
         <source>nav.dashboard.bookings.link</source>
         <target>Bookings</target>
-        <jms:reference-file line="10">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="41">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="13">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="52">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="b34b7d4b69d704f8578cff80e633119b04efdeb3" resname="nav.dashboard.comments.link">
         <source>nav.dashboard.comments.link</source>
         <target>Comments</target>
-        <jms:reference-file line="22">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="49">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="31">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="64">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="00968900491344d2b7b09d638da429219ae8f879" resname="nav.dashboard.link">
         <source>nav.dashboard.link</source>
         <target>My Dashboard</target>
-        <jms:reference-file line="69">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2b90079d3b97e0e14afdfe1289c39edc3548586d" resname="nav.dashboard.listings.link">
         <source>nav.dashboard.listings.link</source>
         <target>Listings</target>
-        <jms:reference-file line="14">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="19">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d09d54f19020722643f87ff71f432cb58e355e57" resname="nav.dashboard.messages.link">
         <source>nav.dashboard.messages.link</source>
         <target>Messages</target>
-        <jms:reference-file line="6">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="37">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="7">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="46">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="eb4abbef7397113b32f5ebef47c0746de14d333a" resname="nav.dashboard.payments.link">
         <source>nav.dashboard.payments.link</source>
         <target>Payments</target>
-        <jms:reference-file line="18">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="45">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="25">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="58">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="3dadf751fe0bf63fffa61621c6903a1bf4f05b24" resname="nav.dashboard.profile.link">
         <source>nav.dashboard.profile.link</source>
         <target>Profile</target>
-        <jms:reference-file line="26">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="53">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="37">Dashboard/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="70">Dashboard/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="9cdd94fbd5223a9896cf916b4a1d12bf4909a0bb" resname="nav.faq.slug">
         <source>nav.faq.slug</source>
         <target>faq</target>
-        <jms:reference-file line="53">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="5d333c9dad0a06048316f4b2174c9fce03a73b2a" resname="nav.favorites.link">
         <source>nav.favorites.link</source>
         <target>Favorites</target>
-        <jms:reference-file line="58">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4b578fb3be67b06f105daa2f8d907066fe9993ce" resname="nav.home.link">
         <source>nav.home.link</source>
         <target>Home</target>
-        <jms:reference-file line="44">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="7b82d68a47d23888af84cb20db4bcd9734f3b056" resname="nav.how_it_works.slug">
         <source>nav.how_it_works.slug</source>
         <target>how-it-works</target>
-        <jms:reference-file line="40">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="dd86d14d6bac7137d6121b41fd4994663f7ea987" resname="nav.legal_notices.slug">
         <source>nav.legal_notices.slug</source>
         <target>legal-notices</target>
-        <jms:reference-file line="78">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e02bfbaa7fa4edd8c578a1be1def202e6c3220ac" resname="nav.listing.new.link">
         <source>nav.listing.new.link</source>
         <target>Publish your listing</target>
-        <jms:reference-file line="98">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="fed928e18fb9eaf3aa5370a5b1165bc628687578" resname="nav.listing.show.link">
         <source>nav.listing.show.link</source>
         <target>Show my listing</target>
-        <jms:reference-file line="24">Dashboard/Listing/layout.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="e81ca0f115e88b1aa90d0ca41cfeb6dc9ff53a07" resname="nav.login.link">
         <source>nav.login.link</source>
         <target>Login</target>
-        <jms:reference-file line="83">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="d13f16f09cc2e151ed6ba6daafb7dc57387b3fa0" resname="nav.logout.link">
         <source>nav.logout.link</source>
         <target>Logout</target>
-        <jms:reference-file line="30">Frontend/Common/_nav.html.twig</jms:reference-file>
-        <jms:reference-file line="57">Frontend/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c196e5e09e7055e5a42642875a4c0891203888db" resname="nav.offerer.link">
         <source>nav.offerer.link</source>
         <target>Offerer</target>
-        <jms:reference-file line="73">Frontend/Common/_nav.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="405cbec13b0e25e8c2f8c13ce8d130ef15189168" resname="nav.register.link">
         <source>nav.register.link</source>
         <target>Register</target>
-        <jms:reference-file line="78">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="4d66148bc56e54a9936116977b8f8bbdf6092335" resname="nav.the_team.slug">
         <source>nav.the_team.slug</source>
         <target>the-team</target>
-        <jms:reference-file line="45">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="ae075cd0545e4ced4f09a93784ae2fc0dfc5e6cf" resname="nav.who_we_are.link">
         <source>nav.who_we_are.link</source>
         <target>Who we are?</target>
-        <jms:reference-file line="53">Frontend/Common/_header.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="25752f0500683a8055d9b148a43277a0977e61ce" resname="nav.who_we_are.slug">
         <source>nav.who_we_are.slug</source>
         <target>who-we-are</target>
-        <jms:reference-file line="52">Frontend/Common/_header.html.twig</jms:reference-file>
-        <jms:reference-file line="35">Frontend/Common/_footer.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="2a004ec467e55618ba224e27867bcb893ae731bc" resname="page.error">
         <source>page.error</source>
         <target>Erreur</target>
-        <jms:reference-file line="8">views/Exception/error.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="cdae46d3a5003ced136ae32725222f26085e174a" resname="page.forbidden">
         <source>page.forbidden</source>
         <target state="new">Access forbidden</target>
-        <jms:reference-file line="8">views/Exception/error403.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="0c3080174d88613f6d6f124231c6b2e279e89250" resname="page.not.found">
         <source>page.not.found</source>
         <target>Page not found</target>
-        <jms:reference-file line="8">views/Exception/error404.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="68583dcb6860292d76e4dc945e64cafcdf868025" resname="private_info_replacement">
         <source>private_info_replacement</source>
         <target state="new">[xxxxxxx]</target>
-        <jms:reference-file line="273">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="774b40fc90dcebf1a82352cb39f44e3e36120bad" resname="time_range.invalid.duration">
         <source>time_range.invalid.duration</source>
@@ -433,7 +319,6 @@
       <trans-unit id="733820e784b4f0b21c9d15ffe21c3381e9e7f5ff" resname="time_range.invalid.end_before_start">
         <source>time_range.invalid.end_before_start</source>
         <target>End time must be before midnight and after the start time</target>
-        <jms:reference-file line="14">Frontend/Booking/form_booking_price.html.twig</jms:reference-file>
       </trans-unit>
       <trans-unit id="c49a1647ba14067310ff0cb29f154d130f7af325" resname="time_range.invalid.min_start {{ min_start_time }}">
         <source>time_range.invalid.min_start {{ min_start_time }}</source>
@@ -450,17 +335,14 @@
       <trans-unit id="b6e6d9e4278ebf117483fbbfdd7a2da3d50bc08b" resname="time_unit_day">
         <source>time_unit_day</source>
         <target>{-3} by day|{-1} day(s)|{0} day|{1} %count% day|]1,Inf]%count% days</target>
-        <jms:reference-file line="201">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="f1d24cf913356e9f49b26d914a31742608c9cb6b" resname="time_unit_hour">
         <source>time_unit_hour</source>
-          <target>{-3} by hour|{-1} hour(s)|{0} hour|]0,1] %count% hour|]1,Inf]%count% hours</target>
-        <jms:reference-file line="218">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
+        <target>{-3} by hour|{-1} hour(s)|{0} hour|]0,1] %count% hour|]1,Inf]%count% hours</target>
       </trans-unit>
       <trans-unit id="f84671b575da92a2471bfb36da94f36cf5b7dfd1" resname="time_unit_night">
         <source>time_unit_night</source>
         <target>{-3} by night|{-1} night(s)|{0} night|{1} %count% night|]1,Inf]%count% nights</target>
-        <jms:reference-file line="209">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="35d3a7020c09b2a1abbbf65dfa1203bdd1c926bc" resname="user.form.credential.error">
         <source>user.form.credential.error</source>
@@ -469,12 +351,10 @@
       <trans-unit id="073ffb64ccf920f1a33525a61d1b543a3907a521" resname="vat_excluded">
         <source>vat_excluded</source>
         <target>excl tax</target>
-        <jms:reference-file line="364">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
       <trans-unit id="3eb12fce24d524d679506e43144649ff1b6e6fb3" resname="vat_included">
         <source>vat_included</source>
         <target>incl tax</target>
-        <jms:reference-file line="357">CoreBundle/Twig/CoreExtension.php</jms:reference-file>
       </trans-unit>
     </body>
   </file>

@@ -2,7 +2,7 @@ services:
     sonata.admin.review:
         class: Cocorico\ReviewBundle\Admin\ReviewAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Users", label: "Reviews", label_catalogue: "cocorico_admin_menu" }
+            - { name: sonata.admin, manager_type: orm, group: "Users", label: "Reviews" }
         arguments:
             - ~
             - Cocorico\ReviewBundle\Entity\Review

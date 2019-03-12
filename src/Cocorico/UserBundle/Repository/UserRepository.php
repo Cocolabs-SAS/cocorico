@@ -30,6 +30,8 @@ class UserRepository extends EntityRepository
      * @param integer $idUser
      *
      * @return mixed
+     *
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getActiveUser($idUser)
     {
@@ -46,7 +48,6 @@ class UserRepository extends EntityRepository
      * @param $email
      *
      * @return mixed|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function findOneByEmail($email)
     {

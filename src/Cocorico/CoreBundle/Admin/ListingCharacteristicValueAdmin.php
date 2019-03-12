@@ -17,6 +17,7 @@ use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicValueAdmin extends AbstractAdmin
 {
@@ -46,7 +47,7 @@ class ListingCharacteristicValueAdmin extends AbstractAdmin
         foreach ($this->locales as $i => $locale) {
             $titles[$locale] = array(
                 'label' => 'Name',
-                'required' => true
+                'constraints' => array(new NotBlank())
             );
         }
 

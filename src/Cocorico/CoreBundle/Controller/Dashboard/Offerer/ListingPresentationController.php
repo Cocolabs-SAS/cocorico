@@ -47,12 +47,6 @@ class ListingPresentationController extends Controller
         $editForm = $this->createEditPresentationForm($listing);
         $editForm->handleRequest($request);
 
-        $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_presentation',
-            array(
-                'id' => $listing->getId()
-            )
-        );
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->get("cocorico.listing.manager")->save($listing);
 
@@ -62,7 +56,10 @@ class ListingPresentationController extends Controller
 
             );
 
-            return $this->redirect($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_listing_edit_presentation',
+                array('id' => $listing->getId())
+            );
         }
 
         return $this->render(

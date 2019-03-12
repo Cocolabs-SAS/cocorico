@@ -95,12 +95,10 @@ class ListingCategoriesAjaxController extends Controller
                 $this->get('translator')->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            $selfUrl = $this->generateUrl(
+            return $this->redirectToRoute(
                 'cocorico_dashboard_listing_edit_categories_ajax',
                 array('id' => $listing->getId())
             );
-
-            return $this->redirect($selfUrl);
         }
 
         return $this->render(

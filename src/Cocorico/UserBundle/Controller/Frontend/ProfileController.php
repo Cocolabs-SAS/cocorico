@@ -12,7 +12,7 @@
 namespace Cocorico\UserBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\CoreBundle\Repository\ListingRepository;
+use Cocorico\UserBundle\Entity\User;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -38,20 +38,19 @@ class ProfileController extends Controller
      * @ParamConverter("user", class="CocoricoUserBundle:User")
      *
      * @param  Request $request
+     * @param  User    $user
      *
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws AccessDeniedException
      */
-    public function showAction(Request $request)
+
+    public function showAction(Request $request, User $user)
     {
-        $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
-        /** @var ListingRepository $listingRepository */
-        $listingRepository = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Listing');
-        $userListings = $listingRepository->findByOwner(
+        $userListings = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Listing')->findByOwner(
             $user->getId(),
             $request->getLocale(),
             array(Listing::STATUS_PUBLISHED)

@@ -1,0 +1,16 @@
+services:
+    #Forms
+    cocorico_user.form.type.login:
+        class: Cocorico\UserBundle\Form\Type\LoginFormType
+        tags:
+            - { name: form.type, alias: user_login }
+
+    cocorico_user.form.type.register:
+        class: Cocorico\UserBundle\Form\Type\RegistrationFormType
+        tags:
+            - { name: form.type, alias: user_registration }
+
+    cocorico_user.form.type.user_address:
+        class: Cocorico\UserBundle\Form\Type\UserAddressFormType
+        tags:
+            - { name: form.type, alias: user_address }

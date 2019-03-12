@@ -48,12 +48,6 @@ class ListingLocationController extends Controller
         $editForm = $this->createEditLocationForm($listing);
         $editForm->handleRequest($request);
 
-        $selfUrl = $this->generateUrl(
-            'cocorico_dashboard_listing_edit_location',
-            array(
-                'id' => $listing->getId()
-            )
-        );
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->get("cocorico.listing.manager")->save($listing);
 
@@ -62,7 +56,10 @@ class ListingLocationController extends Controller
                 $translator->trans('listing.edit.success', array(), 'cocorico_listing')
             );
 
-            return $this->redirect($selfUrl);
+            return $this->redirectToRoute(
+                'cocorico_dashboard_listing_edit_location',
+                array('id' => $listing->getId())
+            );
         }
 
         return $this->render(

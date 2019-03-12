@@ -12,80 +12,62 @@
 namespace Cocorico\ReviewBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\Booking;
-use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class ReviewVoter implements VoterInterface
+class ReviewVoter extends Voter
 {
     const ADD = 'add';
 
-    public function supportsAttribute($attribute)
-    {
-        return in_array(
-            $attribute,
-            array(
-                self::ADD,
-            )
-        );
-    }
+    const ATTRIBUTES = [
+        self::ADD,
+    ];
 
-    public function supportsClass($class)
+    /**
+     * @param string $attribute
+     * @param mixed $subject
+     *
+     * @return boolean
+     */
+    public function supports($attribute, $subject)
     {
-        $supportedClass = 'Cocorico\CoreBundle\Entity\Booking';
-
-        return $supportedClass === $class || is_subclass_of($class, $supportedClass);
+        return ($subject instanceof Booking) && in_array($attribute, self::ATTRIBUTES);
     }
 
     /**
-     * @param  TokenInterface $token
-     * @param  null|Booking   $booking
-     * @param  array          $attributes
-     * @return int
+     * @param string $attribute
+     * @param mixed $subject
+     * @param TokenInterface $token
+     *
+     * @return boolean
      */
-    public function vote(TokenInterface $token, $booking, array $attributes)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        // check if class of this object is supported by this voter
-        if (!$this->supportsClass(get_class($booking))) {
-            return VoterInterface::ACCESS_ABSTAIN;
+        // make sure there is a user object (i.e. that the user is logged in)
+        if (!$token->getUser() instanceof UserInterface) {
+            return Voter::ACCESS_DENIED;
         }
 
-        // check if the voter is used correct, only allow one attribute
-        // this isn't a requirement, it's just one easy way for you to
-        // design your voter
-        if (1 !== count($attributes)) {
-            throw new \InvalidArgumentException(
-                'Only one attribute is allowed for ADD review'
-            );
+        $method = 'voteOn' . str_replace('_', '', ucwords($attribute, '_'));
+        if (!method_exists($this, $method)) {
+            throw new \BadMethodCallException('Expected method ' . $method . ' was not found.');
         }
 
-        // set the attribute to check against
-        $attribute = $attributes[0];
+        return $this->{$method}($subject, $token);
+    }
 
-        // check if the given attribute is covered by this voter
-        if (!$this->supportsAttribute($attribute)) {
-            return VoterInterface::ACCESS_ABSTAIN;
-        }
-
-        // get current logged in user
-        /** @var User $user */
-        $user = $token->getUser();
-
-        switch ($attribute) {
-            case self::ADD:
-                // make sure there is a user object (i.e. that the user is logged in)
-                if (!$user instanceof UserInterface) {
-                    return VoterInterface::ACCESS_DENIED;
-                }
-                if ($user->getId() === $booking->getUser()->getId() ||
-                    $user->getId() === $booking->getListing()->getUser()->getId()
-                ) {
-                    return VoterInterface::ACCESS_GRANTED;
-                }
-                break;
-        }
-
-        return VoterInterface::ACCESS_DENIED;
+    /**
+     * @param Booking $booking
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    public function voteOnAdd(Booking $booking, TokenInterface $token)
+    {
+        return (
+            $token->getUser()->getId() === $booking->getUser()->getId()
+            || $token->getUser()->getId() === $booking->getListing()->getUser()->getId()
+        );
     }
 }

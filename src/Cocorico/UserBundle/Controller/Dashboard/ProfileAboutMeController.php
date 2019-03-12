@@ -30,14 +30,15 @@ class ProfileAboutMeController extends Controller
 {
 
     /**
-     * Edit user profile
+     *  Edit user profile
      *
      * @Route("/edit-about-me", name="cocorico_user_dashboard_profile_edit_about_me")
      * @Method({"GET", "POST"})
      *
      * @param $request Request
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
      */
     public function editAction(Request $request)
     {
@@ -51,9 +52,9 @@ class ProfileAboutMeController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->get("cocorico_user.user_manager")->updateUser($user);
-            $this->container->get('session')->getFlashBag()->add(
+            $this->get('session')->getFlashBag()->add(
                 'success',
-                $this->container->get('translator')->trans('user.edit.about_me.success', array(), 'cocorico_user')
+                $this->get('translator')->trans('user.edit.about_me.success', array(), 'cocorico_user')
             );
 
             $url = $this->generateUrl('cocorico_user_dashboard_profile_edit_about_me');
@@ -61,7 +62,7 @@ class ProfileAboutMeController extends Controller
             return new RedirectResponse($url);
         }
 
-        return $this->container->get('templating')->renderResponse(
+        return $this->render(
             'CocoricoUserBundle:Dashboard/Profile:edit_about_me.html.twig',
             array(
                 'form' => $form->createView(),

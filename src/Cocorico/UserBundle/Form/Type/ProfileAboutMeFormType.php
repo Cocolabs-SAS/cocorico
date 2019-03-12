@@ -26,6 +26,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Valid;
 
 class ProfileAboutMeFormType extends AbstractType implements TranslationContainerInterface
@@ -63,6 +64,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             $descriptions[$locale] = array(
                 /** @Ignore */
                 'label' => false,
+                'constraints' => array(new NotBlank()),
                 'attr' => array(
                     'placeholder' => 'auto'
                 )
@@ -73,11 +75,12 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             'translations',
             TranslationsType::class,
             array(
-                'required_locales' => array($this->locale),
+                'locales' => $this->locales,
+                'required_locales' => $this->locales,
                 'fields' => array(
                     'description' => array(
                         'field_type' => 'textarea',
-                        'locale_options' => $descriptions
+                        'locale_options' => $descriptions,
                     ),
                 ),
                 /** @Ignore */

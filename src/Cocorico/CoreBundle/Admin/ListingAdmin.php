@@ -148,7 +148,7 @@ class ListingAdmin extends AbstractAdmin
                             'required' => false,
                         ),
                         'slug' => array(
-                            'field_type' => 'hidden'
+                            'display' => false
                         )
                     ),
                     'label' => 'Descriptions'
@@ -512,16 +512,14 @@ class ListingAdmin extends AbstractAdmin
             );
 
         if ($this->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
-//            $listMapper
-//                ->add(
-//                    'impersonating',
-//                    'string',
-//                    array(
-//                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
-//                        'label' => 'admin.listing.impersonating.label',
-//                        'mapped'=>false,
-//                    )
-//                );
+            $listMapper
+                ->add(
+                    'impersonating',
+                    'string',
+                    array(
+                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                    )
+                );
         }
 
         $listMapper->add(

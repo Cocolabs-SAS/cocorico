@@ -23,11 +23,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UserTranslation
 {
-
     use ORMBehaviors\Translatable\Translation;
 
     /**
      * @Assert\NotBlank(message="assert.not_blank", groups={"CocoricoRegistration", "CocoricoProfile"})
+     * @Assert\NotNull(message="assert.not_blank", groups={"CocoricoRegistration", "CocoricoProfile"})
      *
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      *

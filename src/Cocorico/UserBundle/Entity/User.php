@@ -66,6 +66,13 @@ class User extends BaseUser implements ParticipantInterface
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Sluggable\Sluggable;
 
+    /**
+     * Fix missing validation on translations fields
+     * @Assert\Valid
+     */
+    protected $translations;
+
+
     const PERSON_TYPE_NATURAL = 1;
     const PERSON_TYPE_LEGAL = 2;
 
@@ -1736,5 +1743,15 @@ class User extends BaseUser implements ParticipantInterface
                 ->setTranslationDomain('validators')
                 ->addViolation();
         }
+    }
+
+    /**
+     * To add impersonating link into admin :
+     *
+     * @return User
+     */
+    public function getImpersonating()
+    {
+        return $this;
     }
 }
