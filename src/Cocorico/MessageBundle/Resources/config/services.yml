@@ -9,50 +9,50 @@ services:
         class: Cocorico\MessageBundle\Form\Type\Frontend\NewThreadMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-            - { name: form.type, alias: cocorico_message_new_thread }
+            - { name: form.type }
         public: true
-        
-        
+
+
     cocorico_message.new_thread.form.handler:
         class: Cocorico\MessageBundle\FormHandler\NewThreadMessageFormHandler
-        arguments: 
+        arguments:
             - "@request_stack"
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"
         scope: request
         public: false
-    
+
 
     cocorico_message.reply.form.type:
         class: Cocorico\MessageBundle\Form\Type\Frontend\ReplyMessageFormType
         arguments: ["%fos_message.thread_class%"]
         tags:
-            - { name: form.type, alias: cocorico_message_reply }
+            - { name: form.type }
         public: true
-        
-        
+
+
     cocorico_message.reply.form.handler:
         class: Cocorico\MessageBundle\FormHandler\ReplyMessageFormHandler
-        arguments: 
+        arguments:
             - "@request_stack"
             - "@fos_message.composer"
             - "@fos_message.sender"
             - "@fos_message.participant_provider"
         scope: request
         public: false
-        
-        
+
+
     cocorico_message.composer:
         class: Cocorico\MessageBundle\Composer\Composer
-        arguments: 
+        arguments:
             - "@fos_message.message_manager"
             - "@fos_message.thread_manager"
         public: false
 
     cocorico_message.thread_manager:
         class: Cocorico\MessageBundle\Model\ThreadManager
-        arguments: 
+        arguments:
             - "@fos_message.thread_manager"
             - "@fos_message.message_manager"
             - "@cocorico_user.mailer.twig_swift"

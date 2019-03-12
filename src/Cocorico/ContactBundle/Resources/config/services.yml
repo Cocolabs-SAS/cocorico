@@ -5,7 +5,7 @@ services:
     cocorico_contact.form.type.contact_new:
         class: Cocorico\ContactBundle\Form\Type\Frontend\ContactNewType
         tags:
-            - { name: form.type, alias: contact_new }
+            - { name: form.type }
 
     cocorico_contact.contact.manager:
         class: Cocorico\ContactBundle\Model\Manager\ContactManager
