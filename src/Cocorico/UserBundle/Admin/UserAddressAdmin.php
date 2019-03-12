@@ -3,12 +3,12 @@
 namespace Cocorico\UserBundle\Admin;
 
 use Cocorico\UserBundle\Entity\UserAddress;
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class UserAddressAdmin extends Admin
+class UserAddressAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
     protected $baseRoutePattern = 'user-address';
@@ -19,6 +19,7 @@ class UserAddressAdmin extends Admin
         $this->locales = $locales;
     }
 
+    /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper

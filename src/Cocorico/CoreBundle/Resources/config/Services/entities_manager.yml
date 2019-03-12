@@ -11,6 +11,7 @@ services:
                 cocorico_time_unit: "%cocorico.time_unit%"
                 cocorico_listing_search_max_per_page: "%cocorico.listing_search_max_per_page%"
                 cocorico_listing_availability_status: "%cocorico.listing_availability_status%"
+        public: true
 
     cocorico.listing.manager:
         class: Cocorico\CoreBundle\Model\Manager\ListingManager
@@ -76,6 +77,7 @@ services:
             - "@doctrine.orm.entity_manager"
             - "@router"
             - "%cocorico.locales%"
+        public: true
 
     #Documents Manager
     cocorico.listing_availability.manager:
