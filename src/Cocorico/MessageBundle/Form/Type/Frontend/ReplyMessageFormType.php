@@ -51,20 +51,11 @@ class ReplyMessageFormType extends AbstractType implements TranslationContainerI
     }
 
     /**
-     * BC
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->getBlockPrefix();
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getBlockPrefix()
     {
-        return 'fos_message_reply_message';
+        return 'message_reply_message';
     }
 
     /**
