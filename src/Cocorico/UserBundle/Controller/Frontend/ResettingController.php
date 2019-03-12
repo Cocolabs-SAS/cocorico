@@ -136,7 +136,7 @@ class ResettingController extends Controller
             'CocoricoUserBundle:Frontend/Resetting:checkEmail.html.twig',
             array(
                 'username' => $username,
-                'tokenLifetime' => ceil($this->container->getParameter('fos_user.resetting.retry_ttl') / 3600),
+                'tokenLifetime' => ceil($this->getParameter('fos_user.resetting.retry_ttl') / 3600),
             )
         );
     }

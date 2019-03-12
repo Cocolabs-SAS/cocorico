@@ -48,8 +48,8 @@ class ProfileBankAccountController extends Controller
         $form = $this->createBankAccountForm($user);
         $success = $this->get('cocorico_user.form.handler.bank_account')->process($form);
 
-        $session = $this->container->get('session');
-        $translator = $this->container->get('translator');
+        $session = $this->get('session');
+        $translator = $this->get('translator');
 
         if ($success > 0) {
             $session->getFlashBag()->add(

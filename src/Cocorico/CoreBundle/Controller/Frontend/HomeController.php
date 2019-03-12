@@ -57,7 +57,7 @@ class HomeController extends Controller
         }
 
         $cacheTime = 3600 * 12;
-        $cacheDir = $this->container->getParameter('kernel.cache_dir');
+        $cacheDir = $this->getParameter('kernel.cache_dir');
         $cacheFile = $cacheDir . '/rss-home-feed.json';
         $timeDif = @(time() - filemtime($cacheFile));
         $renderFeeds = array();

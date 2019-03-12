@@ -50,8 +50,8 @@ class ProfileContactController extends Controller
         $form = $this->createContactForm($user);
         $success = $formHandler->process($form);
 
-        $session = $this->container->get('session');
-        $translator = $this->container->get('translator');
+        $session = $this->get('session');
+        $translator = $this->get('translator');
 
         if ($success > 0) {
             $session->getFlashBag()->add(

@@ -50,7 +50,7 @@ class ListingDuplicateController extends Controller
             $this->get("cocorico.listing_availability.manager")->duplicate(
                 $listing->getId(),
                 $duplicatedListing->getId(),
-                $this->container->getParameter('cocorico.days_max_edition')
+                $this->getParameter('cocorico.days_max_edition')
             );
 
             $url = $this->generateUrl(

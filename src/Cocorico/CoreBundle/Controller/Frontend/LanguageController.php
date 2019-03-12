@@ -34,7 +34,7 @@ class LanguageController extends Controller
         $routeParams = $request->attributes->get('_route_params');
         $queryString = $request->query->all();
 
-        $languagesLinks = $this->container->get('cocorico.language.manager')
+        $languagesLinks = $this->get('cocorico.language.manager')
             ->getLanguageLinks($routeName, $routeParams, $queryString);
 
         return $this->render(
@@ -63,7 +63,7 @@ class LanguageController extends Controller
             $to = $request->request->get('to');
             $text = $request->request->get('textData');
 
-            $translateManager = $this->container->get('cocorico.translator.manager');
+            $translateManager = $this->get('cocorico.translator.manager');
             $response['textData'] = $translateManager->getTranslation($from, $to, $text);
         }
 

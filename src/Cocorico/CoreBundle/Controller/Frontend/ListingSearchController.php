@@ -155,7 +155,7 @@ class ListingSearchController extends Controller
         $nbResults = $results->count();
 
         $imagePath = ListingImage::IMAGE_FOLDER;
-        $currentCurrency = $this->get('session')->get('currency', $this->container->getParameter('cocorico.currency'));
+        $currentCurrency = $this->get('session')->get('currency', $this->getParameter('cocorico.currency'));
         $locale = $request->getLocale();
         $liipCacheManager = $this->get('liip_imagine.cache.manager');
         $currencyExtension = $this->get('lexik_currency.currency_extension');

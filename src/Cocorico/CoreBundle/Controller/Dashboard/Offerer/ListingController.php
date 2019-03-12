@@ -235,7 +235,7 @@ class ListingController extends Controller
      */
     private function getFeeAsOfferer(User $user)
     {
-        $feeAsOfferer = $this->container->getParameter('cocorico.fee_as_offerer');
+        $feeAsOfferer = $this->getParameter('cocorico.fee_as_offerer');
         if ($user->getFeeAsOfferer() || $user->getFeeAsOfferer() === 0) {
             $feeAsOfferer = $user->getFeeAsOfferer() / 100;
         }
@@ -405,10 +405,10 @@ class ListingController extends Controller
     public function completionNoticeAction(Listing $listing)
     {
         $listingCompletion = $listing->getCompletionInformations(
-            $this->container->getParameter("cocorico.listing_img_min")
+            $this->getParameter("cocorico.listing_img_min")
         );
         $userCompletion = $listing->getUser()->getCompletionInformations(
-            $this->container->getParameter("cocorico.user_img_min")
+            $this->getParameter("cocorico.user_img_min")
         );
 
         return $this->render(

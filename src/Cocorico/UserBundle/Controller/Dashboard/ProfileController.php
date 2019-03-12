@@ -17,6 +17,7 @@ use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -37,6 +38,7 @@ class ProfileController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException|RuntimeException
      */
     public function profileSwitchAction(Request $request)
     {
@@ -61,9 +63,9 @@ class ProfileController extends Controller
         }
 
         $type = $request->getSession()->get('profile', 'asker');
-
-        $em = $this->container->get('doctrine')->getManager();
-        $nbMessages = $em->getRepository('CocoricoMessageBundle:Message')->getNbUnreadMessage($user, $type);
+        $nbMessages = $this->get('doctrine')->getManager()->getRepository(
+            'CocoricoMessageBundle:Message'
+        )->getNbUnreadMessage($user, $type);
 
         return $this->render(
             'CocoricoUserBundle:Dashboard/Profile:profile_switch.html.twig',
