@@ -43,8 +43,8 @@
 
     $(function () {
         //var maxZoom = 18;
-        var defaultLat = {{ (default_lat|default(46.227638))|e('js') }};
-        var defaultLng = {{ (default_lng|default(2.213749000000007))|e('js') }};
+        var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
+        var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
         var defaultZoom = {{ (default_zoom|default(4))|e('js') }};
         var mapElt = $("{{ map_elt|default('') }}");
         var autoCompleteElt = $("{{ auto_complete_elt|default('') }}");
