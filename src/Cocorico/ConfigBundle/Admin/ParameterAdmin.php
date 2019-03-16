@@ -173,14 +173,9 @@ class ParameterAdmin extends AbstractAdmin
         $process = new Process($command);
         try {
             $process->mustRun();
-            $content = $process->getOutput();
         } catch (ProcessFailedException $e) {
-            $content = $e->getMessage();
-
             return false;
         }
-
-//        $this->getRequest()->getSession()->getFlashBag()->add("success", $content);
 
         return true;
     }

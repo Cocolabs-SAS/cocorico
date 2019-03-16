@@ -32,11 +32,9 @@ class ContactController extends Controller
      *
      * @Method({"GET", "POST"})
      *
-     * @param  Request $request
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function newAction(Request $request)
+    public function newAction()
     {
         $contact = new Contact();
         $form = $this->createCreateForm($contact);
