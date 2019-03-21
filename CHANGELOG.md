@@ -16,10 +16,27 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 
 
+## [0.15.0] - (2019-03-21)
+
+### Added
+- Add favicon for all devices
+- Upgrade Symfony from 2.8 to 3.4
+- Upgrade all dependencies to their last stable versions
+- Add PHP7.1 compatibility
+
+### Fixed
+- Fix js escaping on result
+- Simulate user click on a button type submit to make SF isClicked working if the click is done programmatically
+
+### Changed
+- Update doc for PHP7, Docker usage
+- Improve all documentation
+
+
+
 ## [0.12.0] - (2019-01-30)
 
 ### Added
-- Add CocoricoElasticSearchBundle custom parameters
 - Add multi timezones functionality
 - Add hasBookingsInProgress method in User
 
