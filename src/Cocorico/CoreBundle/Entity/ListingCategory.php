@@ -149,6 +149,7 @@ class ListingCategory extends BaseListingCategory
      */
     public function addField($field)
     {
+        $field->setCategory($this);
         $this->fields[] = $field;
 
         return $this;
