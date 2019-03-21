@@ -20,11 +20,11 @@ Deployment use https://github.com/hpatoio/DeployBundle
 
     * Dry-Run:
     
-            php app/console project:deploy prod
+            php bin/console project:deploy prod
     
     * Real:
     
-            php app/console project:deploy --go prod
+            php bin/console project:deploy --go prod
     
      For more informations see https://github.com/hpatoio/DeployBundle
 
@@ -37,11 +37,11 @@ Deployment use https://github.com/hpatoio/DeployBundle
     
     * Clear Symfony Cache:
     
-            php app/console cache:clear --env=prod --no-debug
+            php bin/console cache:clear --env=prod --no-debug
     
     * Dump Assetic Assets:
     
-            php app/console assetic:dump --env=prod --no-debug
+            php bin/console assetic:dump --env=prod --no-debug
 
 4. Add crons
 

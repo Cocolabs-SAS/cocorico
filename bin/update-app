@@ -6,7 +6,7 @@
 PHP_CMD="php"
 
 "$PHP_CMD" composer.phar install --prefer-dist -vvv
-"$PHP_CMD" app/console doctrine:schema:update --force "$@"
-"$PHP_CMD" app/console cache:clear "$@"
-"$PHP_CMD" app/console assets:install --symlink web "$@"
-"$PHP_CMD" app/console assetic:dump "$@"
+"$PHP_CMD" bin/console doctrine:schema:update --force "$@"
+"$PHP_CMD" bin/console cache:clear "$@"
+"$PHP_CMD" bin/console assets:install --symlink web "$@"
+"$PHP_CMD" bin/console assetic:dump "$@"

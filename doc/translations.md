@@ -27,12 +27,12 @@ There are two types of translations:
 
 To extract translations keys from whole application:
     In english languages:
-        `php app/console translation:extract en --config=cocorico`
-        `php app/console cache:clear --env=dev`
+        `php bin/console translation:extract en --config=cocorico`
+        `php bin/console cache:clear --env=dev`
 
 To extract translations keys from external bundle:
     In english languages :
-        `php app/console translation:extract en --bundle=CocoricoListingAlertBundle`
+        `php bin/console translation:extract en --bundle=CocoricoListingAlertBundle`
                
 To translate keys you have choice to:
 

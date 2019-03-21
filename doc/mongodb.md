@@ -5,11 +5,11 @@ documents.
 
 * To create schema
     
-    `php app/console doctrine:mongodb:schema:create`
+    `php bin/console doctrine:mongodb:schema:create`
 
 * To update schema
     
-    `php app/console doctrine:mongodb:schema:update`
+    `php bin/console doctrine:mongodb:schema:update`
     
 * To execute command
 
