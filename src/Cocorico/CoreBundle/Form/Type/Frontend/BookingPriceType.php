@@ -123,9 +123,6 @@ class BookingPriceType extends AbstractType
                 $form = $event->getForm();
                 /** @var DateRange $dateRange */
                 $dateRange = clone $form->get('date_range')->getData();
-                /** @var TimeRange $timeRange */
-                $timeRange = clone $form->get('time_range')->getData();
-
                 $booking->setStart($dateRange->getStart());
                 $booking->setEnd($dateRange->getEnd());
                 $booking->setStartTime(new \DateTime('1970-01-01 00:00'));
@@ -133,6 +130,7 @@ class BookingPriceType extends AbstractType
 
                 if (!$this->timeUnitIsDay) {
                     //Sync booking date and time from date and time range
+                    $timeRange = clone $form->get('time_range')->getData();
                     $dateTimeRange = DateTimeRange::addTimesToDates($dateRange, $timeRange);
                     $booking->setDateRange($dateTimeRange->getDateRange());
                     $booking->setTimeRange($dateTimeRange->getFirstTimeRange());
