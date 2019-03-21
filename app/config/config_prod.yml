@@ -59,5 +59,3 @@ monolog:
 swiftmailer:
     spool:
         type: memory
-#        type: file
-#        path: "%kernel.root_dir%/spool"

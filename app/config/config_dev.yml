@@ -43,4 +43,4 @@ swiftmailer:
 #    delivery_address: me@example.com
     spool:
         type: file
-        path: "%kernel.root_dir%/spool"
+        path: "%kernel.root_dir%/../var/spool"

@@ -13,7 +13,7 @@ then
 fi
 
 # "${PHP_ARG}" app/console doctrine:database:drop --force "${ENV_ARG}"
-"${PHP_ARG}" app/console doctrine:database:create --if-not-exists "${ENV_ARG}"
-"${PHP_ARG}" app/console doctrine:schema:update --force "${ENV_ARG}"
-"${PHP_ARG}" app/console doctrine:fixtures:load "${ENV_ARG}"
-"${PHP_ARG}" app/console cocorico:currency:update "${ENV_ARG}"
+"${PHP_ARG}" bin/console doctrine:database:create --if-not-exists "${ENV_ARG}"
+"${PHP_ARG}" bin/console doctrine:schema:update --force "${ENV_ARG}"
+"${PHP_ARG}" bin/console doctrine:fixtures:load "${ENV_ARG}"
+"${PHP_ARG}" bin/console cocorico:currency:update "${ENV_ARG}"

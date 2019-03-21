@@ -42,10 +42,6 @@ php
 /app/config/*_test.yml.dist
 /app/config/parameters.yml
 /app/bootstrap.php.cache
-/app/phpunit.xml.dist
-/app/phpunit.xml
-/app/phpmd.xml
-/app/spool
 /app/rsync_exclude.txt
 
 
@@ -81,13 +77,21 @@ php
 /features/*
 /tmp/*.txt
 
-###Docs
-/README.md
-/LICENSE
-
 ###Tests
 /build.xml
 behat.*
 
 ###Auth
 auth.json
+
+###Mangopay
+/tmp/mangopay/*.php
+/tmp/mangopay/.gitkeep
+
+#Doc
+/doc/phpdocs/sami.phar
+
+/var
+/var/phpunit.xml.dist
+/var/phpunit.xml
+/var/phpmd.xml
