@@ -3,6 +3,6 @@
 REM Mongo DB initialisation
 REM Usage: .\bin\init-mongodb.bat --env=dev
 
-php app/console doctrine:mongodb:schema:drop %*
-php app/console doctrine:mongodb:schema:create %*
+php bin/console doctrine:mongodb:schema:drop %*
+php bin/console doctrine:mongodb:schema:create %*
 

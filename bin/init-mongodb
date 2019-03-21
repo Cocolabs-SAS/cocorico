@@ -12,6 +12,6 @@ then
 	exit 1
 fi
 
-"${PHP_ARG}" app/console doctrine:mongodb:schema:drop "${ENV_ARG}"
-"${PHP_ARG}" app/console doctrine:mongodb:schema:create "${ENV_ARG}"
+"${PHP_ARG}" bin/console doctrine:mongodb:schema:drop "${ENV_ARG}"
+"${PHP_ARG}" bin/console doctrine:mongodb:schema:create "${ENV_ARG}"
 

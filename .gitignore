@@ -23,6 +23,7 @@ bin/doctrine.bat
 bin/security-checker
 bin/security-checker.bat
 
+composer.dev.json
 composer.phar
 .idea/*
 
@@ -56,6 +57,7 @@ web/images/Thumbs.db
 web/assets/*
 web/Thumbs.db
 web/sitemap.xml
+web/phpdocs/*
 
 watch
 
@@ -63,14 +65,13 @@ watch
 C_local.0
 C_local.ns
 *.php~
-*.patch
 
 behat.yml
 
 features/_datas/cocorico_test.db
 tmp/patch
 
-php
+/php
 web/myco*.php
 
 /auth.json

@@ -3,10 +3,10 @@
 REM DB initialisation
 REM Usage: .\bin\init-db.bat --env=dev
 
-REM php app/console doctrine:database:drop --force %*
-php app/console doctrine:database:create --if-not-exists %*
-php app/console doctrine:schema:update --force %*
-php app/console doctrine:fixtures:load %*
-php app/console cocorico:currency:update %*
+REM php bin/console doctrine:database:drop --force %*
+php bin/console doctrine:database:create --if-not-exists %*
+php bin/console doctrine:schema:update --force %*
+php bin/console doctrine:fixtures:load %*
+php bin/console cocorico:currency:update %*
 
 

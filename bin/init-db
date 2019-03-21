@@ -12,7 +12,7 @@ then
 	exit 1
 fi
 
-# "${PHP_ARG}" app/console doctrine:database:drop --force "${ENV_ARG}"
+# "${PHP_ARG}" bin/console doctrine:database:drop --force "${ENV_ARG}"
 "${PHP_ARG}" bin/console doctrine:database:create --if-not-exists "${ENV_ARG}"
 "${PHP_ARG}" bin/console doctrine:schema:update --force "${ENV_ARG}"
 "${PHP_ARG}" bin/console doctrine:fixtures:load "${ENV_ARG}"
