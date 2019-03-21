@@ -69,7 +69,7 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-#                    CocoricoUserBundle:
+#                    CocoricoUserBundle: ~
 #                    SonataUserBundle: ~
 #                    FOSUserBundle: ~
         resolve_target_entities:

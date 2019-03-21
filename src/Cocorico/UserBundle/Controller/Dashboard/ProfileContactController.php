@@ -36,6 +36,7 @@ class ProfileContactController extends Controller
      * @param $request Request
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
      */
     public function editAction(Request $request)
     {

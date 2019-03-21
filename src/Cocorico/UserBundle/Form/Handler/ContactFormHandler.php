@@ -101,6 +101,8 @@ class ContactFormHandler
      * @return int equal to :
      * 1: Success
      * -1: if error while listening USER_BANK_ACCOUNT_UPDATE event
+     *
+     * @throws \RuntimeException
      */
     protected function onSuccess($form)
     {
