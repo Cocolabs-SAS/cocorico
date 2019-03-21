@@ -37,6 +37,12 @@
       "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
     ]
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/Cocolabs-SAS/SonataUserBundle"
+    }
+  ],
   "require": {
     "php": "^7.1",
     "alcaeus/mongo-php-adapter": "^1.1",
@@ -45,7 +51,7 @@
     "doctrine/doctrine-fixtures-bundle": "^3.0",
     "doctrine/doctrine-migrations-bundle": "^1.3",
     "doctrine/mongodb-odm-bundle": "^3.0",
-    "doctrine/orm": "^2.4.8",
+    "doctrine/orm": "^2.5",
     "egeloen/ckeditor-bundle": "^6.0",
     "egulias/email-validator": "^2.1",
     "friendsofsymfony/message-bundle": "^1.3",
