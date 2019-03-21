@@ -29,9 +29,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Simulate user click on a button type submit to make SF isClicked working if the click is done programmatically
 
 ### Changed
+- Replace app/console by bin/console in bin init scripts
 - Update doc for PHP7, Docker usage
 - Improve all documentation
-
 
 
 ## [0.12.0] - (2019-01-30)
