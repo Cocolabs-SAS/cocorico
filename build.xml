@@ -173,7 +173,7 @@
 
     <target name="cache" description="Cleanup cache">
         <exec executable="${php.cmd}">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="cache:clear"/>
             <arg value="--env=test"/>
         </exec>
@@ -192,7 +192,7 @@
 
     <target name="assetic" description="Dumping assets">
         <exec executable="${php.cmd}">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="assetic:dump"/>
             <arg value="--env=test"/>
         </exec>
@@ -200,7 +200,7 @@
 
     <target name="assets" description="Installing assets">
         <exec executable="${php.cmd}">
-            <arg value="${basedir}/app/console"/>
+            <arg value="${basedir}/bin/console"/>
             <arg value="assets:install"/>
             <arg value="--symlink"/>
             <arg value="${basedir}/web"/>
