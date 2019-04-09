@@ -68,7 +68,7 @@
                             <h1>
                                 {{ listing_translation.title }}
 
-                                {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") and app.user == listing_user %}
+                                {%- if app.user is not null and app.user is same as(listing_user) and is_granted("IS_AUTHENTICATED_FULLY") %}
                                     <a class="btn btn-default"
                                        href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
                                         {{ 'listing.edit.edit'|trans }}

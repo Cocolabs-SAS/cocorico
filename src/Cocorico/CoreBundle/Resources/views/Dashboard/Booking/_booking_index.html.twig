@@ -2,14 +2,14 @@
 
 {% for booking in bookings.iterator %}
 
-    {% if app.user == booking.user %} {#asker#}
+    {% if app.user is same as(booking.user) %} {#asker#}
         {% set other_user = booking.listing.user %}
         {% set booking_show_route = 'cocorico_dashboard_booking_show_asker' %}
         {% set amount_total = booking.amountToPayByAskerDecimal %}
         {% set other_user_rating = other_user.averageOffererRating %}
         {% set vat_inclusion_text = vatInclusionText(app.request.getLocale(), true, true ) %}
         {% set user_timezone = booking.timeZoneAsker %}
-    {% elseif app.user == booking.listing.user %}{#offerer#}
+    {% elseif app.user is same as(booking.listing.user) %}{#offerer#}
         {% set other_user = booking.user %}
         {% set booking_show_route = 'cocorico_dashboard_booking_show_offerer' %}
         {% if includeVat %}

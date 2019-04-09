@@ -33,9 +33,9 @@
                 </thead>
                 <tbody>
                 {% for cpt, booking in bookings.iterator %}
-                    {% if app.user == booking.user %} {#asker#}
+                    {% if app.user is same as(booking.user) %} {#asker#}
                         {% set booking_show_route = 'cocorico_dashboard_booking_show_asker' %}
-                    {% elseif app.user == booking.listing.user %}{#offerer#}
+                    {% elseif app.user is same as(booking.listing.user) %}{#offerer#}
                         {% set booking_show_route = 'cocorico_dashboard_booking_show_offerer' %}
                     {% endif %}
                     {% set amount = booking.amountToPayByAskerDecimal | format_price(app.request.locale, 2) %}
