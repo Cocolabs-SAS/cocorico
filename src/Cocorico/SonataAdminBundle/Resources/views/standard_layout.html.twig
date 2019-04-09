@@ -256,24 +256,22 @@ file that was distributed with this source code.
                         {% endblock side_bar_nav %}
                         {% block side_bar_after_nav %}
                             {% if app.user and is_granted(sonata_admin.adminPool.getOption('role_admin')) %}
-                                {% if cocorico_admin_translation %}
-                                    <ul class="sidebar-menu">
-                                        {% if cocorico_admin_translation %}
-                                            <li>
-                                                <a href="{{ path('jms_translation_index') }}" target="_blank">
-                                                    <i class="fa fa-flag-o"></i>
-                                                    <span>{{ 'Translations'|trans({}, 'SonataAdminBundle') }}</span>
-                                                </a>
-                                            </li>
-                                        {% endif %}
+                                <ul class="sidebar-menu">
+                                    {% if cocorico_admin_translation %}
                                         <li>
-                                            <a href="{{ path('cocorico_home') }}" target="_blank">
-                                                <i class="fa fa-home"></i>
-                                                <span>{{ 'Access site'|trans({}, 'SonataAdminBundle') }}</span>
+                                            <a href="{{ path('jms_translation_index') }}" target="_blank">
+                                                <i class="fa fa-flag-o"></i>
+                                                <span>{{ 'Translations'|trans({}, 'SonataAdminBundle') }}</span>
                                             </a>
                                         </li>
-                                    </ul>
-                                {% endif %}
+                                    {% endif %}
+                                    <li>
+                                        <a href="{{ path('cocorico_home') }}" target="_blank">
+                                            <i class="fa fa-home"></i>
+                                            <span>{{ 'Access site'|trans({}, 'SonataAdminBundle') }}</span>
+                                        </a>
+                                    </li>
+                                </ul>
                             {% endif %}
                         {% endblock %}
                     {% endblock sonata_side_nav %}
