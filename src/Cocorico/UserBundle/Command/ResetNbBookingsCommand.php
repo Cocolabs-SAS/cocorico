@@ -30,6 +30,7 @@ class ResetNbBookingsCommand extends ContainerAwareCommand
             ->setHelp("Usage php app/console cocorico_user:reset_nb_bookings");
     }
 
+    /** @inheritdoc */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 //        return false;

@@ -35,6 +35,7 @@ class MigrateBookingsDatesCommand extends ContainerAwareCommand
             ->setHelp("Usage php app/console cocorico:bookings:migrate-dates");
     }
 
+    /** @inheritdoc */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $bookingManager = $this->getContainer()->get('cocorico.booking.manager');

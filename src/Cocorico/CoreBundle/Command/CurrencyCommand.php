@@ -29,6 +29,7 @@ class CurrencyCommand extends ContainerAwareCommand
             ->setDescription('Update DB currencies rates and generate JSON file. To execute daily around 5PM.');
     }
 
+    /** @inheritdoc */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $command = $this->getApplication()->find('lexik:currency:import');

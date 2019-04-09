@@ -52,6 +52,7 @@ class ValidateBookingsCommand extends ContainerAwareCommand
             ->setHelp("Usage php app/console cocorico:bookings:validate");
     }
 
+    /** @inheritdoc */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $moment = $this->getContainer()->getParameter('cocorico.booking.validated_moment');

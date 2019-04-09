@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AlertListingsCalendarUpdateCommand extends ContainerAwareCommand
 {
-
+    /** @inheritdoc */
     public function configure()
     {
         $this
@@ -33,6 +33,7 @@ class AlertListingsCalendarUpdateCommand extends ContainerAwareCommand
             ->setHelp("Usage php app/console cocorico:listings:alertUpdateCalendars");
     }
 
+    /** @inheritdoc */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $result = $this->getContainer()->get('cocorico.listing.manager')->alertUpdateCalendars();
