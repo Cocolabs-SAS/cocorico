@@ -108,7 +108,7 @@ class ListingController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Request $request, Listing $listing)
+    public function showAction(Request $request, Listing $listing = null)
     {
         if ($redirect = $this->handleSlugChange($listing, $request->get('slug'))) {
             return $redirect;

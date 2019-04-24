@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Security\Voter;
 
 use Cocorico\CoreBundle\Entity\Listing;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -36,7 +37,15 @@ class ListingVoter extends Voter
      */
     public function supports($attribute, $subject)
     {
-        return ($subject instanceof Listing) && in_array($attribute, self::ATTRIBUTES);
+        if (!in_array($attribute, self::ATTRIBUTES)) {
+            return false;
+        }
+
+        if (!$subject instanceof Listing) {
+            throw new NotFoundHttpException();
+        }
+
+        return true;
     }
 
     /**
@@ -48,11 +57,6 @@ class ListingVoter extends Voter
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        // make sure there is a user object (i.e. that the user is logged in)
-        if (!$token->getUser() instanceof UserInterface) {
-            return Voter::ACCESS_DENIED;
-        }
-
         $method = 'voteOn' . str_replace('_', '', ucwords($attribute, '_'));
         if (!method_exists($this, $method)) {
             throw new \BadMethodCallException('Expected method ' . $method . ' was not found.');
@@ -72,8 +76,9 @@ class ListingVoter extends Voter
         return (
             $listing->getStatus() == Listing::STATUS_PUBLISHED
             || (
-                $token->getUser()->getId() === $listing->getUser()->getId()
-                && $listing->getStatus() != Listing::STATUS_DELETED
+                $token->getUser() instanceof UserInterface &&
+                $token->getUser()->getId() === $listing->getUser()->getId() &&
+                $listing->getStatus() != Listing::STATUS_DELETED
             )
         );
     }
@@ -86,7 +91,10 @@ class ListingVoter extends Voter
      */
     protected function voteOnEdit(Listing $listing, TokenInterface $token)
     {
-        return ($token->getUser()->getId() === $listing->getUser()->getId());
+        return (
+            $token->getUser() instanceof UserInterface &&
+            $token->getUser()->getId() === $listing->getUser()->getId()
+        );
     }
 
     /**
@@ -100,8 +108,9 @@ class ListingVoter extends Voter
         return (
             $listing->getStatus() == Listing::STATUS_PUBLISHED
             || (
-                $token->getUser()->getId() === $listing->getUser()->getId()
-                && $listing->getStatus() != Listing::STATUS_DELETED
+                $token->getUser() instanceof UserInterface &&
+                $token->getUser()->getId() === $listing->getUser()->getId() &&
+                $listing->getStatus() != Listing::STATUS_DELETED
             )
         );
     }

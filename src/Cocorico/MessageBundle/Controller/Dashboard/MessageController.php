@@ -47,8 +47,9 @@ class MessageController extends Controller
      * @Route("/{page}", name="cocorico_dashboard_message", requirements={"page" = "\d+"}, defaults={"page" = 1})
      *
      * @param Request $request
-     * @param Integer $page
+     * @param int     $page
      * @return Response
+     * @throws AccessDeniedException
      */
     public function indexAction(Request $request, $page)
     {
@@ -88,11 +89,12 @@ class MessageController extends Controller
      * @Security("is_granted('view', listing)")
      * @ParamConverter("listing", class="Cocorico\CoreBundle\Entity\Listing", options={"repository_method" = "findOneBySlug"})
      *
-     * @param Request $request
-     * @param Listing $listing
-     * @return RedirectResponse
+     * @param Request      $request
+     * @param Listing|null $listing
+     * @return RedirectResponse|Response
+     * @throws \Symfony\Component\Form\Exception\RuntimeException
      */
-    public function newThreadAction(Request $request, Listing $listing)
+    public function newThreadAction(Request $request, Listing $listing = null)
     {
         /** @var Form $form */
         $form = $this->get('fos_message.new_thread_form.factory')->create();
@@ -138,7 +140,7 @@ class MessageController extends Controller
             );
         }
 
-        return $this->get('templating')->renderResponse(
+        return $this->render(
             'CocoricoMessageBundle:Dashboard/Message:new_thread.html.twig',
             array(
                 'form' => $form->createView(),
@@ -150,13 +152,14 @@ class MessageController extends Controller
 
     /**
      * Displays a thread, also allows to reply to it.
+     *
      * @Route("/conversation/{threadId}", name="cocorico_dashboard_message_thread_view", requirements={"threadId" = "\d+"})
      *
      * Security is managed by FOSMessageProvider
      *
      * @param Request $request
-     * @param         $threadId
-     * @return RedirectResponse
+     * @param int     $threadId
+     * @return RedirectResponse|Response
      */
     public function threadAction(Request $request, $threadId)
     {
@@ -173,7 +176,7 @@ class MessageController extends Controller
 
         $formHandler = $this->get('fos_message.reply_form.handler');
 
-        $selfUrl = $this->get('router')->generate(
+        $selfUrl = $this->generateUrl(
             'cocorico_dashboard_message_thread_view',
             array('threadId' => $thread->getId())
         );
@@ -192,7 +195,7 @@ class MessageController extends Controller
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         $breadcrumbs->addThreadViewItems($request, $thread, $this->getUser());
 
-        return $this->get('templating')->renderResponse(
+        return $this->render(
             'CocoricoMessageBundle:Dashboard/Message:thread.html.twig',
             array(
                 'form' => $form->createView(),
@@ -211,6 +214,7 @@ class MessageController extends Controller
      * @param string $threadId the thread id
      *
      * @return RedirectResponse
+     * @throws AccessDeniedException
      */
     public function deleteAction($threadId)
     {
@@ -223,7 +227,7 @@ class MessageController extends Controller
             ->clearNbUnreadMessageCache($this->getUser()->getId());
 
         return new RedirectResponse(
-            $this->get('router')->generate('cocorico_dashboard_message')
+            $this->generateUrl('cocorico_dashboard_message')
         );
     }
 

@@ -18,6 +18,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Handle Listing Form
@@ -30,10 +31,12 @@ class ListingFormHandler
     private $user = null;
 
     /**
+     * ListingFormHandler constructor.
      * @param TokenStorage         $securityTokenStorage
      * @param AuthorizationChecker $securityAuthChecker
      * @param RequestStack         $requestStack
      * @param ListingManager       $listingManager
+     * @throws \Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException
      */
     public function __construct(
         TokenStorage $securityTokenStorage,
@@ -52,7 +55,7 @@ class ListingFormHandler
 
     /**
      * @return Listing
-     *
+     * @throws AccessDeniedException
      */
     public function init()
     {
@@ -71,6 +74,7 @@ class ListingFormHandler
      * @param Form $form
      *
      * @return Booking|string
+     * @throws \Symfony\Component\Form\Exception\RuntimeException
      */
     public function process($form)
     {
@@ -85,7 +89,8 @@ class ListingFormHandler
 
     /**
      * @param Form $form
-     * @return boolean
+     * @return bool
+     * @throws \Symfony\Component\Form\Exception\RuntimeException
      */
     private function onSuccess(Form $form)
     {
@@ -99,6 +104,7 @@ class ListingFormHandler
 
     /**
      * @param  Listing $listing
+     * @throws AccessDeniedException
      * @return Listing
      */
     private function addImages(Listing $listing)
