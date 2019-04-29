@@ -251,14 +251,12 @@
                             </li>
                             <li>
                                 {{ 'user.profile.languages'|trans }}
-                                <strong>
+                                <strong class="list-comma">
                                     {%- if user.motherTongue %}
-                                        {{ user.motherTongue|language_name(app.request.locale) }},
+                                        <span>{{ user.motherTongue|language_name(app.request.locale) }}</span>
                                     {% endif -%}
-                                    {% for cpt_lang, language in user.languages -%}
-                                        {%- if cpt_lang != 0 %}, {% endif -%}
-                                        {{ language.code|language_name(app.request.locale) }}
-                                        {%- set cpt_lang = cpt_lang + 1 -%}
+                                    {% for language in user.languages -%}
+                                        <span>{{ language.code|language_name(app.request.locale) }}</span>
                                     {%- endfor %}
                                 </strong>
                             </li>

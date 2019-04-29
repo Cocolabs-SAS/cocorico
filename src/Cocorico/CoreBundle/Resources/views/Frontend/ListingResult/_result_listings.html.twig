@@ -50,10 +50,9 @@
                                         </span>
                                     {% endif %}
                                 </div>
-                                <strong class="title">
+                                <strong class="title list-comma">
                                     {%- for listingListingCategory in listing.listingListingCategories -%}
-                                        {{ listingListingCategory.category.translations[app.request.locale].name }}
-                                        {%- if not loop.last -%}, {% endif -%}
+                                        <span>{{ listingListingCategory.category.translations[app.request.locale].name }}</span>
                                     {%- endfor -%}
                                 </strong>
                             </div>

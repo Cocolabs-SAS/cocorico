@@ -895,7 +895,7 @@ li.time-fields {
 /** form field error message **/
 .errors, .error {
     color: #d8292f;
-    font-size: 10px;
+    font-size: 13px;
     margin: 5px;
 }
 
@@ -3076,9 +3076,39 @@ h1[data-id="result-title"] {
     width: 220px;
 }
 
+.comment-counter {
+    float: right;
+    margin-left: 10px;
+    line-height: 40px;
+    font-size: 16px;
+    text-shadow: -1px 0 #999, 0 1px #999, 1px 0 #999, 0 -1px #999;
+}
+
+.rating-block {
+    display: inline-block;
+}
+
+.tips-section .home-comment-counter {
+    float: left;
+    margin-left: 10px;
+    line-height: 40px;
+    font-size: 16px;
+    text-shadow: -1px 0 #999, 0 1px #999, 1px 0 #999, 0 -1px #999;
+}
+
+@media screen and (max-width: 1230px) {
+    .comment-counter {
+        line-height: 17px;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .form-category .keyword {
         display: none;
+    }
+
+    .comment-counter {
+        line-height: 15px;
     }
 }
 

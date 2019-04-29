@@ -27,7 +27,7 @@ class ListingRepository extends EntityRepository
     {
         $queryBuilder = $this->_em->createQueryBuilder()
             //Select
-            ->select("partial l.{id, price, averageRating, certified, createdAt}")
+            ->select("partial l.{id, price, averageRating, certified, createdAt, commentCount}")
             ->addSelect("partial t.{id, locale, slug, title, description}")
             ->addSelect("partial llcat.{id, listing, category}")
             ->addSelect("partial ca.{id, lft, lvl, rgt, root}")
