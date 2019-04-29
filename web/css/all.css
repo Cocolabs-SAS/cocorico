@@ -5596,7 +5596,7 @@ span.btn:focus {
 
 .form-category .form-holder input.btn-default {
     display: inline-block;
-    width: 139px;
+    width: 130px;
 }
 
 .form-category .form-holder .col {
@@ -7679,12 +7679,8 @@ span.btn:focus {
 .form-selection {
     margin: 0 0 19px;
     border-radius: 5px;
-    padding: 18px 4px 19px;
+    padding: 18px 15px 19px;
     border: #eaebec solid 1px;
-}
-
-.form-selection h2 {
-    margin: 0 15px 21px;
 }
 
 .form-selection .selection-area:before,
@@ -9934,23 +9930,27 @@ h1.listing-title a {
 /* features-list */
 .features-list {
     float: left;
-    width: 28.333%;
+    width: auto;
     color: #3f3f3f;
-    margin: 0 0 -16px;
+    margin: 0 20px;
 }
 
-/*.features-list:first-child {*/
-/*width: 38.033%;*/
-/*}*/
+#features h3 {
+    font-size: 20px;
+}
 
-/*.features-list:last-child {*/
-/*float: right;*/
-/*width: 22.933%;*/
-/*}*/
+/*.features-list:first-child {
+    width: 38.033%;
+}
 
-/*.features-list li {*/
-/*padding: 0 0 0 22px;*/
-/*}*/
+.features-list:last-child {
+    float: right;
+    width: 22.933%;
+}
+
+.features-list li {
+    padding: 0 0 0 22px;
+}*/
 
 .features-list li + li {
     margin: 20px 0 0;
