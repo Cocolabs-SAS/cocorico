@@ -7741,6 +7741,13 @@ span.btn:focus {
     max-height: 269px;
 }
 
+.form-selection .block1 {
+    border-radius: 5px;
+    border: #eaebec solid 1px;
+    padding: 16px 19px 19px 17px;
+    /*margin: 10px;*/
+}
+
 label {
     margin: 0;
     padding: 0;
@@ -7751,10 +7758,12 @@ label {
 /* form-listing-info */
 .form-listing-info {
     color: #58595b;
-    margin: 0 0 19px;
+    margin: 0 0 19px 2%;
     border-radius: 5px;
     border: #eaebec solid 1px;
     padding: 16px 19px 19px 17px;
+    width: 48%;
+
 }
 
 .form-listing-info .field-row:before,
@@ -9233,7 +9242,7 @@ label {
 
 .form-payment {
     color: #58595b;
-    margin: 0 0 38px;
+    margin: 0 0 18px;
     border-radius: 5px;
     padding: 19px 19px 29px;
     border: #eaebec solid 1px;
