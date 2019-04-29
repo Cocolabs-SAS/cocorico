@@ -45,25 +45,25 @@
     <script>
         $(function () {
             $("#status-form-container-{{ listing.id }}").submitAjaxForm(
-                    function () {
-                        jcf.replaceAll("#status-form-container-{{ listing.id }}");
-                    }
+                function () {
+                    jcf.replaceAll("#status-form-container-{{ listing.id }}");
+                }
             );
 
+            //Handle listing status change
             var $statusSelectElt = $("#listing_status-{{ listing.id }}");
+            var statusVal = $statusSelectElt.val();
             $statusSelectElt.change(function (e) {
                 if ($statusSelectElt.val() == '{{ ListingConstants.STATUS_DELETED }}') {
-                    var $confirmDelete = confirm("{{ 'listing.confirm.delete'|trans }}");
-                    if ($confirmDelete) {
+                    if (confirm("{{ 'listing.confirm.delete'|trans }}")) {
+                        //Remove listing if its status is deleted
                         $(this).closest('form').submit();
-                        //Remove listing from list if its status is deleted
                         $("#status-form-container-{{ listing.id }}").closest('article').hide();
-                    }
-                    else {
+                    } else {
+                        $statusSelectElt.val(statusVal);
                         return false;
                     }
-                }
-                else {
+                } else {
                     $(this).closest('form').submit();
                 }
             });

@@ -34,19 +34,29 @@
     <script>
         $(function () {
             $("#status-form-container").submitAjaxForm(
-                    function () {
-                        jcf.replaceAll("#status-form-container");
-                    }
+                function () {
+                    jcf.replaceAll("#status-form-container");
+                }
             );
-            var $statusSelectElt = $("#listing_status_status");
-            $statusSelectElt.change(function (e) {
-                $(this).closest('form').submit();
-            });
 
-            //Remove listing from list if its status is deleted
-            if ($statusSelectElt.val() == '{{ ListingConstants.STATUS_DELETED }}') {
-                window.location = '{{ path('cocorico_dashboard_listing') }}';
-            }
+
+            //Handle listing status change
+            var $statusSelectElt = $("#listing_status_status");
+            var statusVal = $statusSelectElt.val();
+            $statusSelectElt.change(function (e) {
+                if ($statusSelectElt.val() == '{{ ListingConstants.STATUS_DELETED }}') {
+                    if (confirm("{{ 'listing.confirm.delete'|trans }}")) {
+                        //Remove listing if its status is deleted
+                        $(this).closest('form').submit();
+                        window.location = '{{ path('cocorico_dashboard_listing') }}';
+                    } else {
+                        $statusSelectElt.val(statusVal);
+                        return false;
+                    }
+                } else {
+                    $(this).closest('form').submit();
+                }
+            });
         });
     </script>
 
