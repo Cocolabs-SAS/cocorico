@@ -3090,3 +3090,12 @@ h1[data-id="result-title"] {
 .tab-holder .column:first-child {
     padding: 0 10px 0 0;
 }
+
+/** List comma separation */
+.list-comma span:after {
+    content: ", ";
+}
+
+.list-comma span:last-child:after {
+    content: ".";
+}
