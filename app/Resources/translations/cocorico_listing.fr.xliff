@@ -597,6 +597,10 @@
         <source>listing.show.characteristics</source>
         <target>Caractéristiques</target>
       </trans-unit>
+      <trans-unit id="49814edfe335fbfce2bc3582fbc6ecf400d23993" resname="listing.show.nb_comments">
+        <source>listing.show.nb_comments</source>
+        <target>{0} 0 commentaire|{1} 1 commentaire| %count% commentaires</target>
+      </trans-unit>
       <trans-unit id="89814edfe335fbfce2cc3582fbc6ecf400d23995" resname="listing.show.comments">
         <source>listing.show.comments</source>
         <target>Commentaires</target>

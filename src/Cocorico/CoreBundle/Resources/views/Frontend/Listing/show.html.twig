@@ -280,9 +280,7 @@
                                 {{ listing.averageRating | cocorico_star_rating }}
                             {% endif %}
                             <span class="counter">
-                                (
-                                <span>{{ listing.commentCount }}</span>
-                                {{ 'listing.show.comments'|trans }})
+                                ({{ 'listing.show.nb_comments'|transchoice(listing.commentCount) }})
                             </span>
                         </div>
 
