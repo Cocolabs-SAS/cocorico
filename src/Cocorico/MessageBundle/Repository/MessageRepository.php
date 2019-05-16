@@ -12,8 +12,11 @@
 namespace Cocorico\MessageBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Model\UserInterface;
+use PDO;
 
 /**
  * MessageRepository
@@ -27,8 +30,11 @@ class MessageRepository extends EntityRepository
      * Tells how many unread messages this participant has
      *
      * @param ParticipantInterface|UserInterface $participant
-     * @param boolean                            $type
+     * @param boolean $type
      * @return int the number of unread messages
+     *
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function getNbUnreadMessage(ParticipantInterface $participant, $type = false)
     {
@@ -42,7 +48,7 @@ class MessageRepository extends EntityRepository
             ->andWhere('mm.isRead = :isRead')
             ->setParameter('participant_id', $participant->getId())
             ->setParameter('sender', $participant->getId())
-            ->setParameter('isRead', false, \PDO::PARAM_BOOL);
+            ->setParameter('isRead', false, PDO::PARAM_BOOL);
 
         // case when needed count of unread messages depending upon the user types
         if ($type) {

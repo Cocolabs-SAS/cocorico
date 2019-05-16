@@ -17,19 +17,22 @@ use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\MessageBundle\Event\MessageEvent;
 use Cocorico\MessageBundle\Event\MessageEvents;
 use Cocorico\MessageBundle\Repository\MessageRepository;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use FOS\MessageBundle\Model\ThreadInterface;
-use FOS\MessageBundle\Provider\ProviderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -47,7 +50,7 @@ class MessageController extends Controller
      * @Route("/{page}", name="cocorico_dashboard_message", requirements={"page" = "\d+"}, defaults={"page" = 1})
      *
      * @param Request $request
-     * @param int     $page
+     * @param int $page
      * @return Response
      * @throws AccessDeniedException
      */
@@ -70,7 +73,7 @@ class MessageController extends Controller
                     'page' => $page,
                     'pages_count' => ceil($threads->count() / $threadManager->maxPerPage),
                     'route' => $request->get('_route'),
-                    'route_params' => $request->query->all()
+                    'route_params' => $request->query->all(),
                 ),
             )
         );
@@ -89,10 +92,10 @@ class MessageController extends Controller
      * @Security("is_granted('view', listing)")
      * @ParamConverter("listing", class="Cocorico\CoreBundle\Entity\Listing", options={"repository_method" = "findOneBySlug"})
      *
-     * @param Request      $request
+     * @param Request $request
      * @param Listing|null $listing
      * @return RedirectResponse|Response
-     * @throws \Symfony\Component\Form\Exception\RuntimeException
+     * @throws RuntimeException
      */
     public function newThreadAction(Request $request, Listing $listing = null)
     {
@@ -116,21 +119,14 @@ class MessageController extends Controller
         if ($message) {
             $messageEvent = new MessageEvent($message->getThread(), $listing->getUser(), $this->getUser());
             $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
-
-            $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
-                ->clearNbUnreadMessageCache($listing->getUser()->getId());
-
-            $url = $this->generateUrl(
-                'cocorico_dashboard_message_new',
-                array(
-                    'slug' => $listing->getSlug(),
-                )
-            );
+            $this->getRepository()->clearNbUnreadMessageCache($listing->getUser()->getId());
 
             $session->getFlashBag()->add(
                 'success',
                 $translator->trans('message.new.success', array(), 'cocorico_message')
             );
+
+            $url = $this->generateUrl('cocorico_dashboard_message_new', array('slug' => $listing->getSlug()));
 
             return $this->redirect($url);
         } elseif ($form->isSubmitted() && !$form->isValid()) {
@@ -145,7 +141,7 @@ class MessageController extends Controller
             array(
                 'form' => $form->createView(),
                 'thread' => $form->getData(),
-                'listing' => $listing
+                'listing' => $listing,
             )
         );
     }
@@ -155,19 +151,18 @@ class MessageController extends Controller
      *
      * @Route("/conversation/{threadId}", name="cocorico_dashboard_message_thread_view", requirements={"threadId" = "\d+"})
      *
-     * Security is managed by FOSMessageProvider
-     *
      * @param Request $request
-     * @param int     $threadId
+     * @param int $threadId
      * @return RedirectResponse|Response
+     *
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
      */
     public function threadAction(Request $request, $threadId)
     {
-        /* @var Thread $thread */
-        $thread = $this->getProvider()->getThread($threadId);
-
-        $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
-            ->clearNbUnreadMessageCache($this->getUser()->getId());
+        /** @var Thread $thread */
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
+        $this->getRepository()->clearNbUnreadMessageCache($this->getUser()->getId());
 
         /** @var Form $form */
         $form = $this->get('fos_message.reply_form.factory')->create($thread);
@@ -199,68 +194,51 @@ class MessageController extends Controller
             'CocoricoMessageBundle:Dashboard/Message:thread.html.twig',
             array(
                 'form' => $form->createView(),
-                'thread' => $thread
+                'thread' => $thread,
             )
         );
     }
 
     /**
      * Deletes a thread
+     * Security is managed by FOSMessageProvider
      *
      * @Route("/delete/{threadId}", name="cocorico_dashboard_message_thread_delete", requirements={"threadId" = "\d+"})
-     *
-     * Security is managed by FOSMessageProvider
      *
      * @param string $threadId the thread id
      *
      * @return RedirectResponse
      * @throws AccessDeniedException
+     * @throws NotFoundHttpException
      */
     public function deleteAction($threadId)
     {
-        /** @var ThreadInterface $thread */
-        $thread = $this->getProvider()->getThread($threadId);
+        $thread = $this->get('fos_message.provider')->getThread($threadId);
         $this->get('fos_message.deleter')->markAsDeleted($thread);
         $this->get('fos_message.thread_manager')->saveThread($thread);
 
-        $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message')
-            ->clearNbUnreadMessageCache($this->getUser()->getId());
+        $this->getRepository()->clearNbUnreadMessageCache($this->getUser()->getId());
 
-        return new RedirectResponse(
-            $this->generateUrl('cocorico_dashboard_message')
-        );
-    }
-
-    /**
-     * Gets the provider service
-     *
-     * @return ProviderInterface
-     */
-    protected function getProvider()
-    {
-        return $this->get('fos_message.provider');
+        return new RedirectResponse($this->generateUrl('cocorico_dashboard_message'));
     }
 
     /**
      * Get number of unread messages for user
      *
      * @Route("/get-nb-unread-messages", name="cocorico_dashboard_message_nb_unread")
-     *
      * @Method("GET")
      *
      * @param Request $request
-     *
-     * @return Response
+     * @return JsonResponse
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function nbUnReadMessagesAction(Request $request)
     {
         $response = array('asker' => 0, 'offerer' => 0, 'total' => 0);
         if ($request->isXmlHttpRequest()) {
             $user = $this->getUser();
-            $em = $this->get('doctrine')->getManager();
-            /** @var MessageRepository $repo */
-            $repo = $em->getRepository('CocoricoMessageBundle:Message');
-            $nbMessages = $repo->getNbUnreadMessage($user, true);
+            $nbMessages = $this->getRepository()->getNbUnreadMessage($user, true);
 
             $response['asker'] = ($nbMessages[0]['asker']) ? $nbMessages[0]['asker'] : 0;
             $response['offerer'] = $nbMessages[0]['offerer'] ? $nbMessages[0]['offerer'] : 0;
@@ -270,4 +248,11 @@ class MessageController extends Controller
         return new JsonResponse($response);
     }
 
+    /**
+     * @return MessageRepository|ObjectRepository
+     */
+    private function getRepository()
+    {
+        return $this->get('doctrine')->getManager()->getRepository('CocoricoMessageBundle:Message');
+    }
 }
