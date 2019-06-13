@@ -73,7 +73,7 @@ class LanguageFilteredType extends LanguageType
      */
     public function getParent()
     {
-        return 'language';
+        return LanguageType::class;
     }
 
 

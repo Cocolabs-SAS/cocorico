@@ -58,7 +58,7 @@ class CountryFilteredType extends BaseCountryType
      */
     public function getParent()
     {
-        return 'country';
+        return BaseCountryType::class;
     }
 
     /**
