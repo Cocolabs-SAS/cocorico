@@ -12,7 +12,7 @@
 namespace Cocorico\TimeBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class DateHiddenType extends DateType
 {
@@ -26,6 +26,6 @@ class DateHiddenType extends DateType
 
     public function getParent()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 }
