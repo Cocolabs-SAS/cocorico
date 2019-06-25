@@ -17,7 +17,11 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelListType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicAdmin extends AbstractAdmin
@@ -66,11 +70,11 @@ class ListingCharacteristicAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'name' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                         ),
                         'description' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $descriptions,
                         )
                     ),
@@ -87,7 +91,7 @@ class ListingCharacteristicAdmin extends AbstractAdmin
             )
             ->add(
                 'listingCharacteristicType',
-                'sonata_type_model_list',
+                ModelListType::class,
                 array(
                     'label' => 'admin.listing_characteristic.type.label',
                     'constraints' => array(new NotBlank())
@@ -95,7 +99,7 @@ class ListingCharacteristicAdmin extends AbstractAdmin
             )
             ->add(
                 'listingCharacteristicGroup',
-                'sonata_type_model_list',
+                ModelListType::class,
                 array(
                     'label' => 'admin.listing_characteristic.group.label',
                     'constraints' => array(new NotBlank())

@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ContactAdmin extends AbstractAdmin
 {
@@ -51,7 +52,7 @@ class ContactAdmin extends AbstractAdmin
             )
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array(
                     'label' => 'admin.contact.email.label',
                 )

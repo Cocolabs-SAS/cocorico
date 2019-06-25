@@ -20,6 +20,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCategoryAdmin extends AbstractAdmin
@@ -68,7 +69,7 @@ class ListingCategoryAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'name' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                         ),
                         'slug' => array(

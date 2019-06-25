@@ -17,6 +17,7 @@ use Cocorico\CoreBundle\Form\Type\EntityHiddenType;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingCharacteristicValueAdmin extends AbstractAdmin
@@ -60,7 +61,7 @@ class ListingCharacteristicValueAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'name' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                         ),
                     ),

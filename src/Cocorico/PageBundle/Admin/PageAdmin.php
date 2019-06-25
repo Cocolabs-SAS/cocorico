@@ -18,6 +18,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\DatePickerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class PageAdmin extends AbstractAdmin
@@ -71,7 +74,7 @@ class PageAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'title' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                             'required' => true,
                         ),
@@ -87,17 +90,17 @@ class PageAdmin extends AbstractAdmin
                             )
                         ),
                         'metaTitle' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $metaTitles,
                             'required' => true,
                         ),
                         'metaDescription' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $metaDescriptions,
                             'required' => true,
                         ),
                         'slug' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'disabled' => true,
                         )
                     ),
@@ -168,7 +171,7 @@ class PageAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null

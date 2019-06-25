@@ -21,8 +21,17 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
+use Sonata\AdminBundle\Form\Type\AdminType;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\CollectionType;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
@@ -112,7 +121,7 @@ class BookingAdmin extends AbstractAdmin
             ->with('admin.booking.title')
             ->add(
                 'user',
-                'sonata_type_model',
+                ModelAutocompleteType::class,
                 array(
                     'query' => $askerQuery,
                     'disabled' => true,
@@ -121,7 +130,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'listing.user',
-                'sonata_type_model',
+                ModelAutocompleteType::class,
                 array(
                     'query' => $offererQuery,
                     'disabled' => true,
@@ -130,7 +139,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'listing',
-                'sonata_type_model',
+                ModelAutocompleteType::class,
                 array(
                     'query' => $listingQuery,
                     'disabled' => true,
@@ -180,7 +189,7 @@ class BookingAdmin extends AbstractAdmin
                 )
                 ->add(
                     'discountVoucher',
-                    'integer',
+                    IntegerType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.discount_voucher.label',
@@ -285,7 +294,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'start',
-                'date',
+                DateType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.start.label',
@@ -294,7 +303,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'end',
-                'date',
+                DateType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.booking.end.label',
@@ -306,7 +315,7 @@ class BookingAdmin extends AbstractAdmin
             $formMapper
                 ->add(
                     'startTime',
-                    'time',
+                    TimeType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.start_time.label',
@@ -315,7 +324,7 @@ class BookingAdmin extends AbstractAdmin
                 )
                 ->add(
                     'endTime',
-                    'time',
+                    TimeType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.end_time.label',
@@ -424,7 +433,7 @@ class BookingAdmin extends AbstractAdmin
                 ->with('admin.booking.delivery')
                 ->add(
                     'listing.location.completeAddress',
-                    'text',
+                    TextType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.listing.location.label'
@@ -487,7 +496,7 @@ class BookingAdmin extends AbstractAdmin
                 ->with('admin.booking.delivery')
                 ->add(
                     'userAddress',
-                    'sonata_type_admin',
+                    AdminType::class,
                     array(
                         'delete' => false,
                         'disabled' => true,
@@ -512,7 +521,7 @@ class BookingAdmin extends AbstractAdmin
                 )
                 ->add(
                     'options',
-                    'sonata_type_collection',
+                    CollectionType::class,
                     array(
                         //IMPORTANT!: Disable this field else if child form has all its fields disabled then the child entities will be removed while saving
                         'disabled' => true,
@@ -520,7 +529,7 @@ class BookingAdmin extends AbstractAdmin
                             'delete' => false,
                             'delete_options' => array(
                                 // You may otherwise choose to put the field but hide it
-                                'type' => 'hidden',
+                                'type' => HiddenType::class,
                                 // In that case, you need to fill in the options as well
                                 'type_options' => array(
                                     'mapped' => false,
@@ -640,7 +649,7 @@ class BookingAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
@@ -663,7 +672,7 @@ class BookingAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
@@ -673,8 +682,8 @@ class BookingAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getAmountMinFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'choice',
+                    'field_type' => TextType::class,
+                    'operator_type' => ChoiceType::class,
                     'operator_options' => array(
                         'choices' => array(
                             NumberType::TYPE_GREATER_THAN => '>=',
@@ -688,8 +697,8 @@ class BookingAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getAmountMaxFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'choice',
+                    'field_type' => TextType::class,
+                    'operator_type' => ChoiceType::class,
                     'operator_options' => array(
                         'choices' => array(
                             NumberType::TYPE_LESS_EQUAL => '<=',

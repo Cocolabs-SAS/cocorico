@@ -17,6 +17,8 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
@@ -57,15 +59,15 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     'required_locales' => array($this->locale),
                     'fields' => array(
                         'title' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles
                         ),
                         'description' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $descriptions
                         ),
                         'rules' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $rules
                         ),
                         'slug' => array(

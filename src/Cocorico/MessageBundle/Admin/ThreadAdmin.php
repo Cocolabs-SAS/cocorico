@@ -18,8 +18,13 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\CollectionType;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 
 class ThreadAdmin extends AbstractAdmin
@@ -138,7 +143,7 @@ class ThreadAdmin extends AbstractAdmin
                 $formMapper
                     ->add(
                         'listing',
-                        'sonata_type_model',
+                        ModelAutocompleteType::class,
                         array(
                             'query' => $listingQuery,
                             'disabled' => true,
@@ -152,7 +157,7 @@ class ThreadAdmin extends AbstractAdmin
         $formMapper
             ->add(
                 'messages',
-                'sonata_type_collection',
+                CollectionType::class,
                 array(
                     // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
                     // then the child entities will be removed while saving
@@ -189,7 +194,7 @@ class ThreadAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getMessageTypeFilter'),
-                    'field_type' => 'choice',
+                    'field_type' => ChoiceType::class,
                     'label' => 'admin.thread.type.label'
                 ),
                 ChoiceType::class,
@@ -207,8 +212,8 @@ class ThreadAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getFromNameFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'hidden',
+                    'field_type' => TextType::class,
+                    'operator_type' => HiddenType::class,
                     'operator_options' => array(),
                     'label' => 'admin.thread.from.label'
                 )
@@ -218,8 +223,8 @@ class ThreadAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getToNameFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'hidden',
+                    'field_type' => TextType::class,
+                    'operator_type' => HiddenType::class,
                     'operator_options' => array(),
                     'label' => 'admin.thread.to.label'
                 )
@@ -242,7 +247,7 @@ class ThreadAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
