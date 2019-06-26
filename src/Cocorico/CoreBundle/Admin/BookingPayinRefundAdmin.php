@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -78,7 +78,7 @@ class BookingPayinRefundAdmin extends AbstractAdmin
             ->with('admin.booking_payin_refund.title')
             ->add(
                 'user',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $askerQuery,
                     'disabled' => true,
@@ -257,7 +257,7 @@ class BookingPayinRefundAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.booking.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_booking'
                 )
             )

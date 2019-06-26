@@ -418,7 +418,7 @@ class UserAdmin extends SonataUserAdmin
                     'impersonating',
                     'string',
                     array(
-                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                        'template' => 'admin/impersonating.html.twig',
                     )
                 );
         }
@@ -431,7 +431,7 @@ class UserAdmin extends SonataUserAdmin
                     'actions' => array(
                         'edit' => array(),
                         'list_user_listings' => array(
-                            'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+                            'template' => 'admin/list_action_list_user_listings.html.twig',
                         ),
                     ),
                 )

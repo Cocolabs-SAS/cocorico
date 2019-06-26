@@ -18,7 +18,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -70,7 +70,7 @@ class ReviewAdmin extends AbstractAdmin
             ->with('admin.review.title')
             ->add(
                 'booking',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $bookingQuery,
                     'disabled' => true,
@@ -79,7 +79,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'reviewBy',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $reviewByQuery,
                     'label' => 'admin.review.reviewBy.label',
@@ -88,7 +88,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'reviewTo',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $reviewToQuery,
                     'label' => 'admin.review.reviewTo.label',
@@ -97,7 +97,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'booking.listing',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $listingQuery,
                     'disabled' => true,

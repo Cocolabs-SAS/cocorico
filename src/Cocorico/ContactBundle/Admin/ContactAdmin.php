@@ -170,7 +170,7 @@ class ContactAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.contact.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_contact'
                 )
             )

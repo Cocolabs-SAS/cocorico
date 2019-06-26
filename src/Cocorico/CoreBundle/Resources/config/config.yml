@@ -245,23 +245,10 @@ sonata_block:
 
 
 sonata_admin:
-    title:      "%cocorico.site_name% administration"
+    title: "%cocorico.site_name% administration"
     title_logo: /images/logo2.gif
-
     templates:
-        layout: CocoricoSonataAdminBundle::standard_layout.html.twig
-        user_block: CocoricoSonataAdminBundle::user_block.html.twig
-#        show: SonataAdminBundle:CRUD:show.html.twig
-
-    dashboard:
-        blocks:
-#            - position: left
-#              type: sonata.admin.block.admin_list
-#            - position: right
-#              type: sonata.block.service.text
-#              settings:
-#                content: '<h2>Welcome</h2><p>...</p>'
-
+        user_block: "admin/user_block.html.twig"
 
 sonata_doctrine_orm_admin:
     audit:

@@ -22,7 +22,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -159,7 +159,7 @@ class ListingAdmin extends AbstractAdmin
             )
             ->add(
                 'user',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $offererQuery,
                     'disabled' => true,
@@ -466,7 +466,7 @@ class ListingAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.listing.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_listing'
                 )
             )
@@ -518,7 +518,7 @@ class ListingAdmin extends AbstractAdmin
                     'impersonating',
                     'string',
                     array(
-                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                        'template' => 'admin/impersonating.html.twig',
                     )
                 );
         }

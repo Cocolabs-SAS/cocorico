@@ -22,7 +22,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Form\Type\AdminType;
-use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\Form\Type\CollectionType;
 use Sonata\Form\Type\DatePickerType;
@@ -121,7 +121,7 @@ class BookingAdmin extends AbstractAdmin
             ->with('admin.booking.title')
             ->add(
                 'user',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $askerQuery,
                     'disabled' => true,
@@ -130,7 +130,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'listing.user',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $offererQuery,
                     'disabled' => true,
@@ -139,7 +139,7 @@ class BookingAdmin extends AbstractAdmin
             )
             ->add(
                 'listing',
-                ModelAutocompleteType::class,
+                ModelType::class,
                 array(
                     'query' => $listingQuery,
                     'disabled' => true,
@@ -781,7 +781,7 @@ class BookingAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.booking.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_booking'
                 )
             )
@@ -858,7 +858,7 @@ class BookingAdmin extends AbstractAdmin
                 'expiration',
                 null,
                 array(
-                    'template' => 'CocoricoSonataAdminBundle::list_booking_expiration_date.html.twig',
+                    'template' => 'admin/list_booking_expiration_date.html.twig',
                     'label' => 'admin.booking.expire_at.label',
                     'bookingExpirationDelay' => $this->bookingExpirationDelay,
                     'bookingAcceptationDelay' => $this->bookingAcceptationDelay,
