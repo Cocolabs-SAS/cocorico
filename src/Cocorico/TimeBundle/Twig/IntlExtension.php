@@ -2,6 +2,8 @@
 
 namespace Cocorico\TimeBundle\Twig;
 
+use Twig\Extension\GlobalsInterface;
+
 /*
  * This file is part of the Cocorico package.
  *
@@ -18,7 +20,7 @@ namespace Cocorico\TimeBundle\Twig;
  * To remove when ICU will be updated on servers
  *
  */
-class IntlExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class IntlExtension extends \Twig_Extension implements GlobalsInterface
 {
     /**
      * @inheritdoc

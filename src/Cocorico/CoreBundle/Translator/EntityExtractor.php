@@ -17,6 +17,7 @@ use JMS\TranslationBundle\Translation\Extractor\FileVisitorInterface;
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitor;
+use Twig\Node\Node as TwigNode;
 
 class EntityExtractor implements FileVisitorInterface, NodeVisitor
 {
@@ -111,7 +112,7 @@ class EntityExtractor implements FileVisitorInterface, NodeVisitor
     {
     }
 
-    public function visitTwigFile(\SplFileInfo $file, MessageCatalogue $catalogue, \Twig_Node $ast)
+    public function visitTwigFile(\SplFileInfo $file, MessageCatalogue $catalogue, TwigNode $ast)
     {
     }
 }

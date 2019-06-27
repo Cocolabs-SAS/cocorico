@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * This file is part of the Cocorico package.
  *
@@ -19,8 +20,9 @@ use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig\Extension\GlobalsInterface;
 
-class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class CoreExtension extends \Twig_Extension implements GlobalsInterface
 {
     protected $currencyExtension;
     protected $translator;

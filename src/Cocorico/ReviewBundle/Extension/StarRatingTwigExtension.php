@@ -11,11 +11,13 @@
 
 namespace Cocorico\ReviewBundle\Extension;
 
+use Twig\Extension\GlobalsInterface;
+
 /**
  * StarRatingTwigExtension will render the star ratings in the twig,
  * using single line, depending upon the values for rating
  */
-class StarRatingTwigExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class StarRatingTwigExtension extends \Twig_Extension implements GlobalsInterface
 {
     /**
      * @inheritdoc

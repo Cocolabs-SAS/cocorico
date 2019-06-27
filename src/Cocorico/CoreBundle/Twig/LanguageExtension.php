@@ -11,11 +11,12 @@
 namespace Cocorico\CoreBundle\Twig;
 
 use Symfony\Component\Intl\Intl;
+use Twig\Extension\GlobalsInterface;
 
 /**
  * LanguageExtension will render the name of the language depending upon the code used for languages
  */
-class LanguageExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class LanguageExtension extends \Twig_Extension implements GlobalsInterface
 {
     /**
      * @inheritdoc
