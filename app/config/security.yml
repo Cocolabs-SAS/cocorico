@@ -27,7 +27,7 @@ security:
                 target:         /%cocorico.admin%/
 #                invalidate_session: false #uncomment it to avoid to logout from all firewall
             anonymous:          true
-
+            logout_on_user_change: true
         main:
             context: frontend
             pattern: ^/(%cocorico.locales_string%)
@@ -63,7 +63,7 @@ security:
             anonymous:    true
             switch_user: { role: ROLE_SUPER_ADMIN, parameter: _become_who_you_are }
 #            switch_user: true
-
+            logout_on_user_change: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
