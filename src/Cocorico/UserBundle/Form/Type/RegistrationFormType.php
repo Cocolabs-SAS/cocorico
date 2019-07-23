@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
@@ -124,7 +125,7 @@ class RegistrationFormType extends AbstractType
                 'plainPassword',
                 RepeatedType::class,
                 array(
-                    'type' => 'password',
+                    'type' => PasswordType::class,
                     'options' => array('translation_domain' => 'cocorico_user'),
                     'first_options' => array(
                         'label' => 'form.password',
