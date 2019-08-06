@@ -41,7 +41,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),

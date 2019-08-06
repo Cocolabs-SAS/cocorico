@@ -46,6 +46,7 @@ Activate following extensions:
     - pdo_mysql
     - opcache
     - apcu
+    - zip
     
 Add the following lines to php.ini:
 
