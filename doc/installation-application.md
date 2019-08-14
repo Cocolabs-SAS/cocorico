@@ -109,6 +109,10 @@ In case of error "An error occurred: SSL certificate problem: unable to get loca
     php bin/console assets:install --symlink web --env=dev
     php bin/console assetic:dump --env=dev
 
+## Install CKEditor
+
+    php bin/console ckeditor:install
+    
 ## Add crons
 
 See [Crons documentation](crons.md)
