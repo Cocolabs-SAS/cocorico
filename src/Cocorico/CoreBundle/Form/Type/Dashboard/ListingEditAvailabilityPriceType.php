@@ -32,24 +32,6 @@ class ListingEditAvailabilityPriceType extends AbstractType
                     'label' => 'listing_edit.form.price_custom',
                 )
             );
-
-        //Set default status for new availability
-//        $builder->addEventListener(
-//            FormEvents::PRE_SET_DATA,
-//            function (FormEvent $event) {
-//                /** @var ListingAvailability $availability */
-//                $availability = $event->getData();
-//                $form = $event->getForm();
-//
-//                if ((!$availability || null === $availability->getId())) {
-//                    $form->add('status', 'hidden');
-//                    if ($availability) {
-//                        $availability->setStatus(ListingAvailability::STATUS_AVAILABLE);
-//                    }
-//                    $event->setData($availability);
-//                }
-//            }
-//        );
     }
 
 

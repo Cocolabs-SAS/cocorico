@@ -27,7 +27,7 @@ class ResetNbBookingsCommand extends ContainerAwareCommand
             ->setDescription(
                 'Reset nb bookings as asker and offerer'
             )
-            ->setHelp("Usage php app/console cocorico_user:reset_nb_bookings");
+            ->setHelp("Usage php bin/console cocorico_user:reset_nb_bookings");
     }
 
     /** @inheritdoc */

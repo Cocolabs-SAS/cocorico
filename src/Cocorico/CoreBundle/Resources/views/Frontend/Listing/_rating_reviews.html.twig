@@ -26,8 +26,10 @@
         </div>
         <footer class="footer">
             <span class="time">
-                <i class="icon-clock"></i>{{ review.createdAt|localizeddate('none', 'short', 'fr', user_timezone) }}
-                {{ user_timezone|timezone_name }}
+                <i class="icon-clock"></i>
+                {{ review.createdAt|localizeddate('none', 'short', 'fr', user_timezone) }}
+                <small><em>({{ user_timezone|timezone_name }})</em></small>
+
             </span>
             <!-- rating -->
             {% if review.rating %}

@@ -16,7 +16,7 @@ use Cocorico\TimeBundle\Form\Type\DateRangeType;
 use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\DateTimeRange;
-use Cocorico\TimeBundle\Model\TimeRange;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -121,12 +121,13 @@ class BookingPriceType extends AbstractType
                 /** @var Booking $booking */
                 $booking = $event->getData();
                 $form = $event->getForm();
+
                 /** @var DateRange $dateRange */
                 $dateRange = clone $form->get('date_range')->getData();
                 $booking->setStart($dateRange->getStart());
                 $booking->setEnd($dateRange->getEnd());
-                $booking->setStartTime(new \DateTime('1970-01-01 00:00'));
-                $booking->setEndTime(new \DateTime('1970-01-01 00:00'));
+                $booking->setStartTime(new DateTime('1970-01-01 00:00'));
+                $booking->setEndTime(new DateTime('1970-01-01 00:00'));
 
                 if (!$this->timeUnitIsDay) {
                     //Sync booking date and time from date and time range

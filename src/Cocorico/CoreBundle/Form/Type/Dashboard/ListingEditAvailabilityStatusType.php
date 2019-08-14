@@ -33,27 +33,6 @@ class ListingEditAvailabilityStatusType extends AbstractType
                     'choices' => array_flip(ListingAvailability::$visibleValues),
                 )
             );
-
-        //Set default price for new availability
-//        $defaultPrice = $options["defaultPrice"];
-//        $builder->addEventListener(
-//            FormEvents::PRE_SET_DATA,
-//            function (FormEvent $event) use ($defaultPrice) {
-//                /** @var ListingAvailability $availability */
-//                $availability = $event->getData();
-//                $form = $event->getForm();
-//
-//                if ((!$availability || null === $availability->getId()) && $defaultPrice) {
-//                    $form->add('price', 'hidden');
-//                    if ($availability) {
-//                        $availability->setPrice($defaultPrice);
-//                    }
-//                    $event->setData($availability);
-//                }
-//            }
-//        );
-
-
     }
 
 

@@ -7,10 +7,19 @@ services:
 
     cocorico_user.form.type.register:
         class: Cocorico\UserBundle\Form\Type\RegistrationFormType
+        arguments:
+            - "%cocorico.time_unit%"
         tags:
             - { name: form.type, alias: user_registration }
 
     cocorico_user.form.type.user_address:
         class: Cocorico\UserBundle\Form\Type\UserAddressFormType
+        tags:
+            - { name: form.type }
+
+    cocorico_user.form.type.contact:
+        class: Cocorico\UserBundle\Form\Type\ProfileContactFormType
+        arguments:
+            - "%cocorico.time_unit%"
         tags:
             - { name: form.type, alias: user_address }

@@ -12,20 +12,23 @@
 namespace Cocorico\TimeBundle\Model;
 
 
+use DateInterval;
+use DateTime;
+
 class TimeRange
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     public $start;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     public $end;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      */
     private $date;
 
@@ -36,31 +39,30 @@ class TimeRange
 
     /**
      * TimeRange constructor.
-     * @param \DateTime|null $start
-     * @param \DateTime|null $end
-     * @param \DateTime|null $date
+     * @param DateTime|null $start
+     * @param DateTime|null $end
+     * @param DateTime|null $date
      */
-    public function __construct(\DateTime $start = null, \DateTime $end = null, \DateTime $date = null)
+    public function __construct(DateTime $start = null, DateTime $end = null, DateTime $date = null)
     {
         if (!$start) {
-            $start = new \DateTime("1970-01-01 00:00:00");
+            $start = new DateTime("1970-01-01 00:00:00");
         }
 
         if (!$end) {
-            $end = new \DateTime("1970-01-01 23:59:59");
+            $end = new DateTime("1970-01-01 23:59:59");
         }
 
         if (!$date) {
-            $date = new \DateTime();
+            $date = new DateTime();
             $date->setTime(0, 0, 0);
         }
 
         $this->date = $date;
-//        $date->setTime(0, 0, 0);
 
         //if start time is greater than end time then end time correspond to the next day of start day
         if ($start->getTimestamp() > $end->getTimestamp()) {
-            $end->add(new \DateInterval('P1D'));
+            $end->add(new DateInterval('P1D'));
         }
 
         $this->start = $start;
@@ -69,7 +71,7 @@ class TimeRange
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDate()
     {
@@ -77,7 +79,7 @@ class TimeRange
     }
 
     /**
-     * @param \DateTime $date
+     * @param DateTime $date
      */
     public function setDate($date)
     {
@@ -85,7 +87,7 @@ class TimeRange
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStart()
     {
@@ -93,7 +95,7 @@ class TimeRange
     }
 
     /**
-     * @param \DateTime $start
+     * @param DateTime $start
      */
     public function setStart($start)
     {
@@ -106,7 +108,7 @@ class TimeRange
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getEnd()
     {
@@ -114,7 +116,7 @@ class TimeRange
     }
 
     /**
-     * @param \DateTime $end
+     * @param DateTime $end
      */
     public function setEnd($end)
     {

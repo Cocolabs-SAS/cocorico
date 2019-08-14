@@ -40,6 +40,7 @@ class DateRangeType extends AbstractType
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = $timeUnit % 1440 ? true : false;
         $this->daysMax = $daysMax;
+
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -158,7 +159,9 @@ class DateRangeType extends AbstractType
                 'transformer',
                 function (Options $options, $value) {
                     if (!$value) {
-                        $value = new DateRangeViewTransformer(new OptionsResolver());
+                        $value = new DateRangeViewTransformer(
+                            new OptionsResolver(), array('end_day_included' => $options['end_day_included'])
+                        );
                     }
 
                     return $value;

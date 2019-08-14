@@ -57,11 +57,13 @@
                     {% endif %}
                 </div>
 
-                <div>
-                    <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
-                    {{ user_timezone|timezone_name }}
-                </div>
-
+                {% if not timeUnitIsDay %}
+                    <div>
+                        <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                        {{ user_timezone|timezone_name }}
+                    </div>
+                {% endif %}
+                
                 <ul class="list-inline booking-detail">
                     <li>
                         {{ 'booking.show.start:'|trans }}

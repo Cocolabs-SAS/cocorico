@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\DataFixtures\ORM;
 use Cocorico\UserBundle\Entity\User;
 use Cocorico\UserBundle\Event\UserEvent;
 use Cocorico\UserBundle\Event\UserEvents;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -36,6 +37,7 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
     {
         $userManager = $this->container->get('cocorico_user.user_manager');
         $locale = $this->container->getParameter('cocorico.locale');
+        $timeZone = $this->getDefaultUserTimeZone();
 
         /** @var  User $user */
         $user = $userManager->createUser();
@@ -46,12 +48,13 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $user->setLastName('OffererName');
         $user->setFirstName('OffererFirstName');
         $user->setCountryOfResidence('FR');
-        $user->setBirthday(new \DateTime('1973-05-29'));
+        $user->setBirthday(new DateTime('1973-05-29'));
         $user->setEnabled(true);
         $user->setAnnualIncome(1000);
         $user->setEmailVerified(true);
         $user->setPhoneVerified(false);
         $user->setMotherTongue($locale);
+        $user->setTimeZone($timeZone);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
@@ -68,10 +71,11 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $user->setLastName('AskerName');
         $user->setFirstName('AskerFirstName');
         $user->setCountryOfResidence('FR');
-        $user->setBirthday(new \DateTime('1975-08-27'));
+        $user->setBirthday(new DateTime('1975-08-27'));
         $user->setEnabled(true);
         $user->setAnnualIncome(1000);
         $user->setMotherTongue($locale);
+        $user->setTimeZone($timeZone);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
@@ -88,10 +92,11 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $user->setLastName('DisableUserLastName');
         $user->setFirstName('DisableUserFirstName');
         $user->setCountryOfResidence('FR');
-        $user->setBirthday(new \DateTime('1978-08-27'));
+        $user->setBirthday(new DateTime('1978-08-27'));
         $user->setEnabled(false);
         $user->setAnnualIncome(1000);
         $user->setMotherTongue($locale);
+        $user->setTimeZone($timeZone);
 
         $event = new UserEvent($user);
         $this->container->get('event_dispatcher')->dispatch(UserEvents::USER_REGISTER, $event);
@@ -108,8 +113,9 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $user->setEmail('super-admin@cocorico.rocks');
         $user->setPlainPassword('super-admin');
         $user->setCountryOfResidence('FR');
-        $user->setBirthday(new \DateTime('1978-07-01'));
+        $user->setBirthday(new DateTime('1978-07-01'));
         $user->setEnabled(true);
+        $user->setTimeZone($timeZone);
         $user->addRole('ROLE_SUPER_ADMIN');
 
         $event = new UserEvent($user);
@@ -120,4 +126,19 @@ class UserFixtures extends Fixture implements ContainerAwareInterface
         $this->addReference('super-admin', $user);
     }
 
+    /**
+     * Get default user time zone
+     * If time unit is day default user timezone = UTC else user timezone = default app time zone
+     * @return mixed|string
+     */
+    private function getDefaultUserTimeZone()
+    {
+        $userTimeZone = 'UTC';
+        $timeUnitIsDay = ($this->container->getParameter('cocorico.time_unit') % 1440 == 0) ? true : false;
+        if (!$timeUnitIsDay) {
+            $userTimeZone = $this->container->getParameter('cocorico.time_zone');
+        }
+
+        return $userTimeZone;
+    }
 }

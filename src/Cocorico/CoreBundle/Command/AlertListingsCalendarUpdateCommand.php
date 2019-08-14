@@ -30,7 +30,7 @@ class AlertListingsCalendarUpdateCommand extends ContainerAwareCommand
         $this
             ->setName('cocorico:listings:alertUpdateCalendars')
             ->setDescription('Alert listings calendars update.')
-            ->setHelp("Usage php app/console cocorico:listings:alertUpdateCalendars");
+            ->setHelp("Usage php bin/console cocorico:listings:alertUpdateCalendars");
     }
 
     /** @inheritdoc */

@@ -83,7 +83,7 @@
                             {{ form_label(form_prices.weekdays) }}
                             {{ form_widget(form_prices.weekdays) }}
 
-                            {% if ( not timeUnitIsDay ) %}
+                            {% if not timeUnitIsDay %}
                                 <h4>{{ 'listing.edit.price.choose_times.title'|trans }}</h4>
                                 <div class="time-ranges">
                                     {{ form_errors(form_prices.time_ranges) }}

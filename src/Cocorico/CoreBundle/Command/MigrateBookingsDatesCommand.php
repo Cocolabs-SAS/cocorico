@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Command;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\TimeBundle\Model\DateTimeRange;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -32,7 +33,7 @@ class MigrateBookingsDatesCommand extends ContainerAwareCommand
         $this
             ->setName('cocorico:bookings:migrate-dates')
             ->setDescription('Migrate booking dates.')
-            ->setHelp("Usage php app/console cocorico:bookings:migrate-dates");
+            ->setHelp("Usage php bin/console cocorico:bookings:migrate-dates");
     }
 
     /** @inheritdoc */
@@ -54,12 +55,12 @@ class MigrateBookingsDatesCommand extends ContainerAwareCommand
                 $startTime = $timeRange->getStart()->format('H:i');
                 $endTime = $timeRange->getEnd()->format('H:i');
 
-                $startDateTime = new \DateTime($start . ' ' . $startTime);
+                $startDateTime = new DateTime($start.' '.$startTime);
                 $dateRange->setStart($startDateTime);
-                $dateRange->setEnd(new \DateTime($end . ' ' . $endTime));
+                $dateRange->setEnd(new DateTime($end.' '.$endTime));
 
                 $timeRange->setStart($startDateTime);
-                $timeRange->setEnd(new \DateTime($start . ' ' . $endTime));
+                $timeRange->setEnd(new DateTime($start.' '.$endTime));
                 $dateTimeRange = new DateTimeRange($dateRange, $timeRange);
             }
 

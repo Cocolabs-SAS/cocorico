@@ -22,4 +22,6 @@ services:
             - "%fos_user.model.user.class%"
             - "%kernel.root_dir%"
             - "@event_dispatcher"
+            - "%cocorico.time_unit%"
+            - "%cocorico.time_zone%"
         public: true

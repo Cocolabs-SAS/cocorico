@@ -223,6 +223,11 @@ class ListingSearchResultType extends AbstractType
                     $searchRequest->setTimeRange($timeRange);
                 }
 
+                if (!$this->timeUnitIsDay) {
+                    /** @var TimeRange $timeRange */
+                    $timeRange = $form->get('time_range')->getData();
+                    $searchRequest->setTimeRange($timeRange);
+                }
                 $event->setData($searchRequest);
             }
         );

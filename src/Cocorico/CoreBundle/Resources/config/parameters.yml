@@ -156,7 +156,7 @@ parameters:
     #Or Number of days to add to the current date to consider start date as valid
     #Ex : 0 -> the booking can be requested and start the current day
     #     1 -> the booking can be requested at least one day before it start.
-    cocorico.booking.min_start_delay: 0
+    cocorico.booking.min_start_delay: 1
 
     #Minimum minutes between booking request and booking starting time
     #Or Number of minutes to add to the current time to consider start time as valid

@@ -20,6 +20,7 @@ use Cocorico\UserBundle\Event\UserEvent;
 use Cocorico\UserBundle\Event\UserEvents;
 use Cocorico\UserBundle\Repository\UserFacebookRepository;
 use Cocorico\UserBundle\Repository\UserRepository;
+use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\UserBundle\Doctrine\UserManager as BaseUserManager;
 use FOS\UserBundle\Model\UserInterface;
@@ -36,6 +37,8 @@ class UserManager extends BaseUserManager implements UserManagerInterface
     protected $repository;
     protected $kernelRoot;
     protected $dispatcher;
+    protected $timeUnitIsDay;
+    protected $timeZone;
 
     /**
      * Constructor.
@@ -47,6 +50,8 @@ class UserManager extends BaseUserManager implements UserManagerInterface
      * @param string                   $class
      * @param String                   $kernelRoot
      * @param EventDispatcherInterface $dispatcher
+     * @param int                      $timeUnit
+     * @param string                   $timeZone
      */
     public function __construct(
         PasswordUpdaterInterface $passwordUpdater,
@@ -54,7 +59,9 @@ class UserManager extends BaseUserManager implements UserManagerInterface
         ObjectManager $objectManager,
         $class,
         $kernelRoot,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        $timeUnit,
+        $timeZone
     ) {
         parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $objectManager, $class);
 
@@ -63,6 +70,22 @@ class UserManager extends BaseUserManager implements UserManagerInterface
 
         $this->kernelRoot = $kernelRoot;
         $this->dispatcher = $dispatcher;
+        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
+        $this->timeZone = $timeZone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createUser()
+    {
+        $user = parent::createUser();
+        //Set user timezone to default app timezone
+        if (!$this->timeUnitIsDay) {
+            $user->setTimeZone($this->timeZone);
+        }
+
+        return $user;
     }
 
     /**
@@ -195,9 +218,9 @@ class UserManager extends BaseUserManager implements UserManagerInterface
                     $user->setEnabled(true);
                     $user->setMotherTongue(substr($responseArray['locale'], 0, 2));
                     if (array_key_exists('birthday', $responseArray)) {
-                        $birthDate = new \DateTime($responseArray['birthday']);
+                        $birthDate = new DateTime($responseArray['birthday']);
                     } else {
-                        $birthDate = new \DateTime('1915-01-01');
+                        $birthDate = new DateTime('1915-01-01');
                     }
                     $user->setBirthday($birthDate);
                     //todo: transform location and hometown country to iso code
@@ -229,7 +252,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
             $fbUser->setTimezone($responseArray['timezone']);
 
             if (array_key_exists('birthday', $responseArray)) {
-                $birthDate = new \DateTime($responseArray['birthday']);
+                $birthDate = new DateTime($responseArray['birthday']);
                 $fbUser->setBirthday($birthDate);
             }
 

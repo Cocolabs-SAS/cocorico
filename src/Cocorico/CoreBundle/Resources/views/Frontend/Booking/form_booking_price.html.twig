@@ -60,6 +60,12 @@
             </em>
         {% endif %}
 
+        {% if not timeUnitIsDay %}
+            <em class="text">
+                {{ 'form.time_zone'|trans({}, 'cocorico_user') }} : {{ app.session.get('timezone')|timezone_name }}
+            </em>
+        {% endif %}
+
         {% if bundleExist('CocoricoCarrierBundle') %}
             {% include 'CocoricoCarrierBundle:Frontend:Listing/_show_carrier.html.twig' with {
             'listing_pallets': booking.listing.pallets

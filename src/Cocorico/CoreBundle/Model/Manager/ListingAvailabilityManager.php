@@ -15,8 +15,15 @@ use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\TimeBundle\Model\TimeRange;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ODM\MongoDB\Cursor;
 use Doctrine\ODM\MongoDB\DocumentManager;
+use Doctrine\ODM\MongoDB\MongoDBException;
+use Exception;
+use MongoDate;
+use MongoId;
 
 class ListingAvailabilityManager
 {
@@ -63,7 +70,7 @@ class ListingAvailabilityManager
      * @param bool          $bookingCancellation Booked status can be only modified when booking is canceled
      * @param string        $timezone
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function saveAvailabilitiesStatus(
         $listingId,
@@ -96,7 +103,7 @@ class ListingAvailabilityManager
      * @param bool          $bookingCancellation Booked status can be only modified when booking is canceled
      * @param string        $timezone
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function saveAvailabilitiesPrices(
         $listingId,
@@ -130,7 +137,7 @@ class ListingAvailabilityManager
      * @param bool          $bookingCancellation Booked status can be only modified when booking is canceled
      * @param string        $timezone
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function saveAvailabilities(
         $listingId,
@@ -143,6 +150,9 @@ class ListingAvailabilityManager
         $timezone = 'UTC'
     ) {
 
+        if ($this->timeUnitIsDay) {
+            $dateTimeRange->setTimeRanges(array());
+        }
         $daysTimeRanges = $dateTimeRange->getDaysTimeRanges($this->endDayIncluded, $weekDays, $timezone);
 
 //        print_r($daysTimeRanges);
@@ -164,17 +174,19 @@ class ListingAvailabilityManager
     /**
      * Save availability status or price depending on status or price value
      *
-     * @param int       $listingId
-     * @param \DateTime $day
-     * @param array     $timeRanges
-     * @param int       $status
-     * @param int       $price
-     * @param int|null  $defaultPrice
-     * @param bool      $bookingCancellation
+     * @param int      $listingId
+     * @param DateTime $day
+     * @param array    $timeRanges
+     * @param int      $status
+     * @param int      $price
+     * @param int|null $defaultPrice
+     * @param bool     $bookingCancellation
+     *
+     * @throws MongoDBException
      */
     private function saveAvailability(
         $listingId,
-        \DateTime $day,
+        DateTime $day,
         array $timeRanges,
         $status,
         $price,
@@ -221,15 +233,15 @@ class ListingAvailabilityManager
     /**
      * Get availability by listingId and day
      *
-     * @param int       $listingId
-     * @param \DateTime $day
+     * @param int      $listingId
+     * @param DateTime $day
      *
      * @return array
      */
     private function getAvailability($listingId, $day)
     {
-        $dayP1 = new \DateTime($day->format('Y-m-d'));
-        $dayP1->add(new \DateInterval('P1D'));
+        $dayP1 = new DateTime($day->format('Y-m-d'));
+        $dayP1->add(new DateInterval('P1D'));
 
         //Get availability for this day if exist
         $existingAvailability = $this->getAvailabilitiesByListingAndDateRange(
@@ -244,7 +256,7 @@ class ListingAvailabilityManager
         } else {
             $availability = array();
             $availability['lId'] = $listingId;
-            $availability['d'] = new \MongoDate($day->getTimestamp());
+            $availability['d'] = new MongoDate($day->getTimestamp());
             $availability['s'] = null;
         }
 
@@ -292,17 +304,17 @@ class ListingAvailabilityManager
     /**
      * Get ListingAvailability of a listing by date range
      *
-     * @param int       $listingId
-     * @param \DateTime $start
-     * @param \DateTime $end
-     * @param boolean   $endDayIncluded
+     * @param int      $listingId
+     * @param DateTime $start
+     * @param DateTime $end
+     * @param boolean  $endDayIncluded
      *
      * @return array|Cursor|ListingAvailability[]
      */
     public function getAvailabilitiesByListingAndDateRange(
         $listingId,
-        \DateTime $start,
-        \DateTime $end,
+        DateTime $start,
+        DateTime $end,
         $endDayIncluded = false
     ) {
         return $this->getRepository()->findAvailabilitiesByListing(
@@ -316,17 +328,17 @@ class ListingAvailabilityManager
 
 
     /**
-     * @param int       $listingId
-     * @param \DateTime $start
-     * @param \DateTime $end
-     * @param bool      $endDayIncluded
-     * @param string    $timezone
+     * @param int      $listingId
+     * @param DateTime $start
+     * @param DateTime $end
+     * @param bool     $endDayIncluded
+     * @param string   $timezone
      * @return array
      */
     public function getCalendarEvents(
         $listingId,
-        \DateTime $start,
-        \DateTime $end,
+        DateTime $start,
+        DateTime $end,
         $endDayIncluded = false,
         $timezone
     ) {
@@ -342,16 +354,16 @@ class ListingAvailabilityManager
 
 
     /**
-     * @param int       $listingId
-     * @param \DateTime $start
-     * @param \DateTime $end
-     * @param bool      $endDayIncluded
+     * @param int      $listingId
+     * @param DateTime $start
+     * @param DateTime $end
+     * @param bool     $endDayIncluded
      * @return array
      */
     public function getAvailabilitiesStatus(
         $listingId,
-        \DateTime $start,
-        \DateTime $end,
+        DateTime $start,
+        DateTime $end,
         $endDayIncluded = false
     ) {
         $status = array();
@@ -380,9 +392,9 @@ class ListingAvailabilityManager
      */
     public function asStatus($availability)
     {
-        /** @var \MongoDate $dayMD */
+        /** @var MongoDate $dayMD */
         $dayMD = $availability['d'];
-        $day = new \DateTime();
+        $day = new DateTime();
         $day->setTimestamp($dayMD->sec);
         $day = $day->format('Ymd');
 
@@ -441,10 +453,10 @@ class ListingAvailabilityManager
                 $prevEvent = $event;
 
                 //Get start and end in UTC
-                $startUTC = new \DateTime($event['start'], new \DateTimeZone($timezone));
-                $startUTC->setTimezone(new \DateTimeZone('UTC'));
-                $endUTC = new \DateTime($event['end'], new \DateTimeZone($timezone));
-                $endUTC->setTimezone(new \DateTimeZone('UTC'));
+                $startUTC = new DateTime($event['start'], new DateTimeZone($timezone));
+                $startUTC->setTimezone(new DateTimeZone('UTC'));
+                $endUTC = new DateTime($event['end'], new DateTimeZone($timezone));
+                $endUTC->setTimezone(new DateTimeZone('UTC'));
 
                 $result[] = array(
                     'id' => $event['id'],
@@ -473,14 +485,14 @@ class ListingAvailabilityManager
      */
     private function asCalendarDayEvents($availability, $timezone)
     {
-        /** @var \MongoDate $dayMD */
+        /** @var MongoDate $dayMD */
         $dayMD = $availability['d'];
-        $day = new \DateTime();
+        $day = new DateTime();
         $day->setTimestamp($dayMD->sec);
         $dayAsString = $dayEndAsString = $day->format('Y-m-d');//by default day is the same for an event
 
         $nextDay = clone $day;//if end time is 00:00 the day will be the next one
-        $nextDay->add(new \DateInterval('P1D'));
+        $nextDay->add(new DateInterval('P1D'));
         $nextDayAsString = $nextDay->format('Y-m-d');
 
         //time ranges array in UTC
@@ -495,15 +507,15 @@ class ListingAvailabilityManager
                     $dayEndAsString = $nextDayAsString;
                 }
 
-                $startUTC = new \DateTime($dayAsString . ' ' . $timeRange['start']);
-                $endUTC = new \DateTime($dayEndAsString . ' ' . $timeRange['end']);
+                $startUTC = new DateTime($dayAsString.' '.$timeRange['start']);
+                $endUTC = new DateTime($dayEndAsString.' '.$timeRange['end']);
 
 //                echo $startUTC->format('Y-m-d H:i') . ' / ' . $endUTC->format('Y-m-d H:i') . '<br>';
 
                 $start = clone $startUTC;
                 $end = clone $endUTC;
-                $start->setTimezone(new \DateTimeZone($timezone));
-                $end->setTimezone(new \DateTimeZone($timezone));
+                $start->setTimezone(new DateTimeZone($timezone));
+                $end->setTimezone(new DateTimeZone($timezone));
 
 //                echo $start->format('Y-m-d H:i') . ' / ' . $end->format('Y-m-d H:i') . '<br>';
 
@@ -536,8 +548,8 @@ class ListingAvailabilityManager
                 }
             }
         } else {
-            $start = new \DateTime($dayAsString . ' ' . '00:00');
-            $end = new \DateTime($dayAsString . ' ' . '23:59');
+            $start = new DateTime($dayAsString.' '.'00:00');
+            $end = new DateTime($dayAsString.' '.'23:59');
 
             $events[$start->format('Y-m-d')][] = array(
                 'id' => $availability['_id'] . '0000',
@@ -560,10 +572,10 @@ class ListingAvailabilityManager
      */
     public function duplicate($listingId, $duplicatedListingId, $daysMaxEdition)
     {
-        $start = new \DateTime();
-        $start->sub(new \DateInterval('P1D'));
-        $end = new \DateTime();
-        $end = $end->add(new \DateInterval('P' . $daysMaxEdition . 'D'));
+        $start = new DateTime();
+        $start->sub(new DateInterval('P1D'));
+        $end = new DateTime();
+        $end = $end->add(new DateInterval('P'.$daysMaxEdition.'D'));
 
         $availabilities = $this->getAvailabilitiesByListingAndDateRange($listingId, $start, $end);
         $newAvailabilities = array();
@@ -587,9 +599,9 @@ class ListingAvailabilityManager
     {
         //convert object to array
         $availabilityAsArray = array(
-            '_id' => new \MongoId($availability->getId()),
+            '_id' => new MongoId($availability->getId()),
             'lId' => $availability->getListingId(),
-            'd' => new \MongoDate($availability->getDay()->getTimestamp()),
+            'd' => new MongoDate($availability->getDay()->getTimestamp()),
             's' => $availability->getStatus(),
             'p' => intval($availability->getPrice()),
         );

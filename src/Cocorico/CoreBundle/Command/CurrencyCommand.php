@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 
-//Cron: 30 17  * * *  user   php app/console cocorico:currency:update
+//Cron: 30 17  * * *  user   php bin/console cocorico:currency:update
 
 class CurrencyCommand extends ContainerAwareCommand
 {
@@ -26,7 +26,8 @@ class CurrencyCommand extends ContainerAwareCommand
     {
         $this
             ->setName('cocorico:currency:update')
-            ->setDescription('Update DB currencies rates and generate JSON file. To execute daily around 5PM.');
+            ->setDescription('Update DB currencies rates and generate JSON file. To execute daily around 5PM.')
+            ->setHelp("Usage php bin/console cocorico:currency:update");
     }
 
     /** @inheritdoc */

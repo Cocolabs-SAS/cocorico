@@ -30,7 +30,7 @@ class CheckBookingsBankWiresCommand extends ContainerAwareCommand
         $this
             ->setName('cocorico:bookings:checkBankWires')
             ->setDescription('Check Bookings Bank Wires. Set status to done if bank wire has been transferred')
-            ->setHelp("Usage php app/console cocorico:bookings:checkBankWires");
+            ->setHelp("Usage php bin/console cocorico:bookings:checkBankWires");
     }
 
     /** @inheritdoc */

@@ -12,8 +12,10 @@
 namespace Cocorico\CoreBundle\Document;
 
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use InvalidArgumentException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -82,12 +84,6 @@ class ListingAvailability
      */
     protected $times;
 
-
-    /**
-     * //Gedmo\ReferenceOne(type="entity", class="Cocorico\CoreBundle\Entity\Listing", inversedBy="listingAvailabilities", identifier="listingId")
-     */
-//    protected $listing;
-
     public function __construct()
     {
         $this->times = new ArrayCollection();
@@ -129,12 +125,11 @@ class ListingAvailability
     /**
      * Set day
      *
-     * @param \DateTime $day
+     * @param DateTime $day
      * @return self
      */
     public function setDay($day)
     {
-//        $day->setTimestamp($day->getTimestamp() - 3600);
         $this->day = $day;
 
         return $this;
@@ -143,7 +138,7 @@ class ListingAvailability
     /**
      * Get day
      *
-     * @return \DateTime $day
+     * @return DateTime $day
      */
     public function getDay()
     {
@@ -159,7 +154,7 @@ class ListingAvailability
     public function setStatus($status)
     {
         if (!in_array($status, array_keys(self::$statusValues))) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Invalid value for availability.status : %s.', $status)
             );
         }

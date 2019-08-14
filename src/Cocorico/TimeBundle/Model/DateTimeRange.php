@@ -11,6 +11,11 @@
 
 namespace Cocorico\TimeBundle\Model;
 
+use DateInterval;
+use DatePeriod;
+use DateTime;
+use DateTimeZone;
+
 /**
  * Class DateTimeRange
  *
@@ -42,17 +47,17 @@ class DateTimeRange
     }
 
     /**
-     * @param \DateTime|null $start
-     * @param \DateTime|null $end
-     * @param \DateTime|null $startTime
-     * @param \DateTime|null $endTime
+     * @param DateTime|null $start
+     * @param DateTime|null $end
+     * @param DateTime|null $startTime
+     * @param DateTime|null $endTime
      * @return static
      */
     public static function createFromDateTimes(
-        \DateTime $start = null,
-        \DateTime $end = null,
-        \DateTime $startTime = null,
-        \DateTime $endTime = null
+        DateTime $start = null,
+        DateTime $end = null,
+        DateTime $startTime = null,
+        DateTime $endTime = null
     ) {
         $dateRange = new DateRange($start, $end);
         $timeRanges = array(new TimeRange($startTime, $endTime, $start));
@@ -89,7 +94,7 @@ class DateTimeRange
      */
     public function setTimeRanges($timeRanges)
     {
-        if ($timeRanges) {
+        if ($timeRanges && count($timeRanges)) {
             //Order descending
             usort(
                 $timeRanges,
@@ -143,16 +148,24 @@ class DateTimeRange
             $firstDayTimeRange = $this->getInitialTimeRanges($start);
         }
 
-        return $this->iterateInitialTimeRangesOnDays($start, $end, $firstDayTimeRange, $weekDays, $timezone);
+        $daysTimeRanges = $this->iterateInitialTimeRangesOnDays($start, $end, $firstDayTimeRange, $timezone);
+
+        if (count($weekDays)) {
+            $hasTimeRanges = count($firstDayTimeRange);
+            $daysTimeRanges = $this->filterByWeekDays($daysTimeRanges, $weekDays, $timezone, $hasTimeRanges);
+        }
+
+        return $daysTimeRanges;
+
     }
 
     /**
      *  Adjustment of first and last day of date range depending on first smaller day of time ranges
      *
-     * @param \DateTime $start
-     * @param \DateTime $end
+     * @param DateTime $start
+     * @param DateTime $end
      */
-    private function adjustStartAndEndDay(\DateTime &$start, \DateTime &$end)
+    private function adjustStartAndEndDay(DateTime &$start, DateTime &$end)
     {
         //First day is equal to the first smaller day of time ranges
         $firstDay = clone $this->getFirstTimeRange()->getStart();
@@ -170,13 +183,13 @@ class DateTimeRange
     /**
      * Return initial time ranges by day since first day
      *
-     * @param \DateTime $firstDay
+     * @param DateTime $firstDay
      * @return array [offsetDay][nbMinutes] => array( 0 => firstStartMinute, 1 => secondStartMinute, ...)
      *               - offsetDay: number of day since $firstDay (ex: 1 => time range day is equal to $firstDay + 1 day)
      *               - nbMinutes: time range duration in minutes (ex: 60 => time range duration is 60 minutes)
      *               - firstStartMinute, ...: time range start at this minute in the day (ex: 120 => 02h00 AM)
      */
-    private function getInitialTimeRanges(\DateTime $firstDay)
+    private function getInitialTimeRanges(DateTime $firstDay)
     {
         $ranges = array();
         $nextDayTimeRange = null;
@@ -217,24 +230,21 @@ class DateTimeRange
     /**
      * Return DayTimeRange objects for all time ranges of all days of this date range and initial time range
      *
-     * @param \DateTime $start
-     * @param \DateTime $end
-     * @param  array    $initialTimeRanges see getInitialTimeRanges
-     * @param  array    $weekDays
-     * @param  string   $timezone
+     * @param DateTime $start
+     * @param DateTime $end
+     * @param  array   $initialTimeRanges see getInitialTimeRanges
+     * @param  string  $timezone
      *
      * @return array with date string as index
      */
-    private function iterateInitialTimeRangesOnDays($start, $end, $initialTimeRanges, $weekDays, $timezone)
+    private function iterateInitialTimeRangesOnDays($start, $end, $initialTimeRanges, $timezone)
     {
 //        echo '<pre>';
         $hasTimeRanges = count($initialTimeRanges);
-        $hasWeekDays = count($weekDays);
-
         $dstTransitions = $this->getDSTTransitions($start, $end, $timezone);
 
-        $interval = new \DateInterval('P1D');
-        $days = new \DatePeriod($start, $interval, $end);
+        $interval = new DateInterval('P1D');
+        $days = new DatePeriod($start, $interval, $end);
         $nbDays = max(iterator_count($days), 1);
 
         /** @var DayTimeRange[] $daysTimeRanges */
@@ -258,13 +268,7 @@ class DateTimeRange
                 $startDayString = $day->format('Y-m-d');
                 $daysTimeRanges[$startDayString] = new DayTimeRange($newDay, array());
             }
-
         }
-
-        if ($hasWeekDays) {
-            $daysTimeRanges = $this->filterByWeekDays($daysTimeRanges, $weekDays, $timezone, $hasTimeRanges);
-        }
-
 //        print_r($daysTimeRanges);
 //        die();
 
@@ -274,14 +278,14 @@ class DateTimeRange
     /**
      * Iterate initial time range on a day
      *
-     * @param \DateTime             $day
+     * @param DateTime              $day
      * @param                       $initialTimeRanges
      * @param  array                $dstTransitions
      * @param  int                  $newOffset      DST offset in minutes
      * @param  DayTimeRange[]       $daysTimeRanges result
      */
     private function iterateInitialTimeRangesOnDay(
-        \DateTime $day,
+        DateTime $day,
         $initialTimeRanges,
         &$dstTransitions,
         &$newOffset,
@@ -324,15 +328,15 @@ class DateTimeRange
     }
 
     /**
-     * @param \DateTime       $startTime
-     * @param \DateTime       $endTime
+     * @param DateTime        $startTime
+     * @param DateTime        $endTime
      * @param  DayTimeRange[] $daysTimeRanges result
      */
-    private function addDayTimeRange(\DateTime $startTime, \DateTime $endTime, &$daysTimeRanges)
+    private function addDayTimeRange(DateTime $startTime, DateTime $endTime, &$daysTimeRanges)
     {
         $startDayString = $startTime->format('Y-m-d');
         $endDayString = $endTime->format('Y-m-d');
-        /** @var \DateTime[][] $newTimeRanges */
+        /** @var DateTime[][] $newTimeRanges */
         $newTimeRanges = array($startDayString => array($startTime, $endTime));
         //If endTime is tomorrow then time range is splitted on spanning days
         if ($endDayString != $startDayString && $endTime->format('H:i') != '00:00') {
@@ -367,8 +371,8 @@ class DateTimeRange
      *
      * Ex: With DST change at 2017-10-29 01:00 in Paris timezone (UTC +2)
      *
-     * @param \DateTime $time
-     * @param array     $dstTransitions decreasing ordered
+     * @param DateTime $time
+     * @param array    $dstTransitions decreasing ordered
      * @return int DST offset in minutes
      */
     private function getDSTOffset($time, &$dstTransitions)
@@ -389,13 +393,13 @@ class DateTimeRange
     /**
      * Get date and offset in hour for DST transitions between start and end date
      *
-     * @param \DateTime $start
-     * @param \DateTime $end
-     * @param  string   $timezone
+     * @param DateTime $start
+     * @param DateTime $end
+     * @param  string  $timezone
      *
      * @return array
      */
-    private function getDSTTransitions(\DateTime $start, \DateTime $end, $timezone)
+    private function getDSTTransitions(DateTime $start, DateTime $end, $timezone)
     {
         //We only need DST transitions from first lowest date time so if fist time range exists
         // then start is equal to start time
@@ -403,7 +407,7 @@ class DateTimeRange
         $start = $this->getFirstTimeRange() && $this->getFirstTimeRange()->getStart() ?
             $this->getFirstTimeRange()->getStart() : $start;
 
-        $tz = new \DateTimeZone($timezone);
+        $tz = new DateTimeZone($timezone);
         $transitions = $tz->getTransitions($start->getTimestamp(), $end->getTimestamp());
 
         $dstTransitions = array();
@@ -412,7 +416,7 @@ class DateTimeRange
                 if ($i == 0) {
                     continue;
                 }
-                $date = new \DateTime();
+                $date = new DateTime();
                 $date->setTimestamp($transition['ts']);
                 $offset = round(($transitions[$i - 1]['offset'] - $transition['offset']) / 3600);
                 $dstTransitions[$date->format('Y-m-d H:i')] = $offset;
@@ -442,30 +446,39 @@ class DateTimeRange
     {
         $prevEnd = $added = false;
         foreach ($daysTimeRanges as $day => $dayTimeRanges) {
-            foreach ($dayTimeRanges->getTimeRanges() as $index => $timeRange) {
-                $start = clone $timeRange->getStart();
-                $end = clone $timeRange->getEnd();
-                $start->setTimezone(new \DateTimeZone($timezone));
-                $end->setTimezone(new \DateTimeZone($timezone));
-
-                $isInWeekDays = in_array($start->format('N'), $weekDays) &&
-                    (in_array($end->format('N'), $weekDays) || $end->format('H:i') == '00:00');
-                if ((!$prevEnd && $isInWeekDays) ||
-                    ($prevEnd && $isInWeekDays && ($start != $prevEnd || $start->format('H:i') == '00:00' || $added))) {
-//                        echo 'added';
-                    $added = true;
-                } else {
-                    unset($daysTimeRanges[$day]->timeRanges[$index]);
-//                        echo 'not added';
-                    $added = false;
+            if (!$hasTimeRanges) {
+                $isInWeekDays = in_array($dayTimeRanges->getDay()->format('N'), $weekDays);
+                if (!$isInWeekDays) {
+                    unset($daysTimeRanges[$day]);
                 }
-                $prevEnd = $end;
+            } else {
+                foreach ($dayTimeRanges->getTimeRanges() as $index => $timeRange) {
+                    $start = clone $timeRange->getStart();
+                    $end = clone $timeRange->getEnd();
+                    $start->setTimezone(new DateTimeZone($timezone));
+                    $end->setTimezone(new DateTimeZone($timezone));
+
+                    $isInWeekDays = in_array($start->format('N'), $weekDays) &&
+                        (in_array($end->format('N'), $weekDays) || $end->format('H:i') == '00:00');
+                    if ((!$prevEnd && $isInWeekDays) ||
+                        ($prevEnd && $isInWeekDays && ($start != $prevEnd || $start->format(
+                                    'H:i'
+                                ) == '00:00' || $added))) {
+//                        echo 'added';
+                        $added = true;
+                    } else {
+                        unset($daysTimeRanges[$day]->timeRanges[$index]);
+//                        echo 'not added';
+                        $added = false;
+                    }
+                    $prevEnd = $end;
+                }
+
+                if (!count($daysTimeRanges[$day]->getTimeRanges())) {
+                    unset($daysTimeRanges[$day]);
+                }
             }
 
-            //Remove DayTimeRange without timeRanges
-            if ($hasTimeRanges && !count($daysTimeRanges[$day]->getTimeRanges())) {
-                unset($daysTimeRanges[$day]);
-            }
         }
 
         return $daysTimeRanges;

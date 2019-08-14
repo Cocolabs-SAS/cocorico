@@ -14,6 +14,10 @@ namespace Cocorico\CoreBundle\Validator\Constraints;
 use Cocorico\CoreBundle\Entity\Booking as BookingEntity;
 use Cocorico\CoreBundle\Form\Type\Frontend\BookingNewType;
 use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
+use Exception;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraint;
@@ -58,6 +62,8 @@ class BookingValidator extends ConstraintValidator
     /**
      * @param BookingEntity|mixed $booking
      * @param Booking|Constraint  $constraint
+     *
+     * @throws Exception
      */
     public function validate($booking, Constraint $constraint)
     {
@@ -71,6 +77,8 @@ class BookingValidator extends ConstraintValidator
      * @param BookingEntity      $booking
      * @param Booking|Constraint $constraint
      * @return array
+     *
+     * @throws Exception
      */
     private function getViolations($booking, $constraint)
     {
@@ -97,10 +105,10 @@ class BookingValidator extends ConstraintValidator
 
         //Date Time errors
         if (in_array('date_range.invalid.min_start', $errors)) {
-            $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->timezone));
+            $minStart = new DateTime();
+            $minStart->setTimezone(new DateTimeZone($this->timezone));
             if ($this->minStartDelay > 0) {
-                $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
+                $minStart->add(new DateInterval('P'.$this->minStartDelay.'D'));
             }
             $violations[] = array(
                 'message' => 'date_range.invalid.min_start {{ min_start_day }}',
@@ -148,10 +156,10 @@ class BookingValidator extends ConstraintValidator
         }
 
         if (in_array('time_range.invalid.min_start', $errors)) {
-            $minStart = new \DateTime();
-            $minStart->setTimezone(new \DateTimeZone($this->timezone));
+            $minStart = new DateTime();
+            $minStart->setTimezone(new DateTimeZone($this->timezone));
             if ($this->minStartTimeDelay > 0) {
-                $minStart->add(new \DateInterval('PT' . $this->minStartTimeDelay . 'M'));
+                $minStart->add(new DateInterval('PT'.$this->minStartTimeDelay.'M'));
             }
             $violations[] = array(
                 'message' => 'time_range.invalid.min_start {{ min_start_time }}',

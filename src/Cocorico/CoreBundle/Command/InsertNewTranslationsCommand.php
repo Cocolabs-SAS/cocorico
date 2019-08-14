@@ -28,7 +28,7 @@ class InsertNewTranslationsCommand extends ContainerAwareCommand
         $this
             ->setName('cocorico:db:insert-new-translations')
             ->setDescription('Copy DB translations content from existing locale to a new locale')
-            ->setHelp("Usage php app/console cocorico:db:insert-new-translations");
+            ->setHelp("Usage php bin/console cocorico:db:insert-new-translations");
     }
 
     /** @inheritdoc */

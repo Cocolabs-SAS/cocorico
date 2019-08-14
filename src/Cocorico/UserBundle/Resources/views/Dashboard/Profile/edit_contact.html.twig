@@ -94,22 +94,22 @@
                                 </div>
                             </div>
 
-                            <div class="field-row">
-                                {{ form_errors(form.timeZone) }}
-                                <span class="label">
-                                    {{ form_label(form.timeZone) }}
-                                </span>
+                            {% if not timeUnitIsDay %}
+                                <div class="field-row">
+                                    {{ form_errors(form.timeZone) }}
+                                    <span class="label">{{ form_label(form.timeZone) }}</span>
 
-                                <div class="field-holder">
-                                    <div>
-                                        {{ form_widget(form.timeZone, {
-                                            'attr': {
-                                                'class': "form-control no-arrow"
-                                            }
-                                        }) }}
+                                    <div class="field-holder">
+                                        <div>
+                                            {{ form_widget(form.timeZone, {
+                                                'attr': {
+                                                    'class': "form-control no-arrow"
+                                                }
+                                            }) }}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            {% endif %}
 
                             <div class="field-row">
                                 <div class="error-container">{{ form_errors(form.plainPassword.first) }}</div>

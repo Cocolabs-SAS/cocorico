@@ -49,7 +49,7 @@ class ValidateBookingsCommand extends ContainerAwareCommand
                 InputOption::VALUE_NONE,
                 'Extra precaution to ensure to use on test mode'
             )
-            ->setHelp("Usage php app/console cocorico:bookings:validate");
+            ->setHelp("Usage php bin/console cocorico:bookings:validate");
     }
 
     /** @inheritdoc */
