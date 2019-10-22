@@ -19,6 +19,9 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\DatePickerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class FooterAdmin extends AbstractAdmin
@@ -76,23 +79,23 @@ class FooterAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'url' => array(
-                            'field_type' => 'url',
+                            'field_type' => UrlType::class,
                             'locale_options' => $urls,
                             'required' => false,
                         ),
                         'urlHash' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $urlsHash,
                             'required' => false,
                             'disabled' => true
                         ),
                         'title' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                             'required' => true,
                         ),
                         'link' => array(
-                            'field_type' => 'url',
+                            'field_type' => UrlType::class,
                             'locale_options' => $links,
                             'required' => true,
 
@@ -166,7 +169,7 @@ class FooterAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null

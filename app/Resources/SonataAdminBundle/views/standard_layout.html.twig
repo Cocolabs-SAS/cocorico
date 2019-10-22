@@ -1,0 +1,50 @@
+{% extends '@!SonataAdmin/standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('js/admin.js') }}"></script>
+{% endblock %}
+
+{% block logo %}
+    {% spaceless %}
+        <a class="logo" href="{{ path('sonata_admin_dashboard') }}">
+            {% if 'single_image' == sonata_admin.adminPool.getOption('title_mode') or 'both' == sonata_admin.adminPool.getOption('title_mode') %}
+                <img src="{{ asset(sonata_admin.adminPool.titlelogo) }}" alt="{{ sonata_admin.adminPool.title }}">
+            {% endif %}
+        </a>
+    {% endspaceless %}
+{% endblock %}
+
+{% block sonata_top_nav_menu_user_block %}
+    <li class="dropdown user-menu">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw" aria-hidden="true"></i> <i class="fa fa-caret-down" aria-hidden="true"></i>
+        </a>
+    </li>
+{% endblock %}
+
+{% block side_bar_after_nav %}
+    {% if app.user and is_granted(sonata_admin.adminPool.getOption('role_admin')) %}
+        <ul class="sidebar-menu">
+            {% if cocorico_admin_translation %}
+                <li>
+                    <a href="{{ path('jms_translation_index') }}" target="_blank">
+                        <i class="fa fa-flag-o"></i>
+                        <span>{{ 'Translations'|trans({}, 'SonataAdminBundle') }}</span>
+                    </a>
+                </li>
+            {% endif %}
+            <li>
+                <a href="{{ path('cocorico_home') }}" target="_blank">
+                    <i class="fa fa-home"></i>
+                    <span>{{ 'Access site'|trans({}, 'SonataAdminBundle') }}</span>
+                </a>
+            </li>
+        </ul>
+    {% endif %}
+{% endblock %}

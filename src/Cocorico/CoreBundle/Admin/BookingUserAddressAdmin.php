@@ -5,6 +5,8 @@ namespace Cocorico\CoreBundle\Admin;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class BookingUserAddressAdmin extends AbstractAdmin
 {
@@ -23,7 +25,7 @@ class BookingUserAddressAdmin extends AbstractAdmin
         $formMapper
             ->add(
                 'address',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.address.address',
                     'required' => false,
@@ -47,7 +49,7 @@ class BookingUserAddressAdmin extends AbstractAdmin
             )
             ->add(
                 'country',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.address.country',
                     'required' => false,

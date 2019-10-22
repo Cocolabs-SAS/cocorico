@@ -16,6 +16,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\CollectionType;
 
 class ListingCharacteristicTypeAdmin extends AbstractAdmin
 {
@@ -51,7 +52,7 @@ class ListingCharacteristicTypeAdmin extends AbstractAdmin
             )
             ->add(
                 'listingCharacteristicValues',
-                'sonata_type_collection',
+                CollectionType::class,
                 array(
                     'by_reference' => false,
                     'label' => 'admin.listing_characteristic_type.values.label'

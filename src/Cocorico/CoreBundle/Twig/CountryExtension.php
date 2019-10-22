@@ -13,11 +13,12 @@ namespace Cocorico\CoreBundle\Twig;
 
 use Cocorico\CoreBundle\Utils\PHP;
 use Symfony\Component\Intl\Intl;
+use Twig\Extension\GlobalsInterface;
 
 /**
  * CountryExtension will render the name of the country
  */
-class CountryExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class CountryExtension extends \Twig_Extension implements GlobalsInterface
 {
 
 //    private $request;

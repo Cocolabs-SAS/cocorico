@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type;
 use Cocorico\CoreBundle\Entity\ListingListingCharacteristic;
 use Cocorico\CoreBundle\Repository\ListingCharacteristicValueRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -46,7 +47,7 @@ class ListingListingCharacteristicType extends AbstractType
 
                 $form->add(
                     'listingCharacteristicValue',
-                    'entity',
+                    EntityType::class,
                     array(
                         'query_builder' => function (ListingCharacteristicValueRepository $lcvr) use ($llc) {
                             $lct = $llc->getListingCharacteristic()->getListingCharacteristicType();

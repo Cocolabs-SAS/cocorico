@@ -13,8 +13,9 @@
 namespace Cocorico\TimeBundle\Twig;
 
 use Cocorico\TimeBundle\Utils\PHP;
+use Twig\Extension\GlobalsInterface;
 
-class TimeExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class TimeExtension extends \Twig_Extension implements GlobalsInterface
 {
 
     /**

@@ -18,6 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class ContactAdmin extends AbstractAdmin
 {
@@ -51,7 +52,7 @@ class ContactAdmin extends AbstractAdmin
             )
             ->add(
                 'email',
-                'email',
+                EmailType::class,
                 array(
                     'label' => 'admin.contact.email.label',
                 )
@@ -169,7 +170,7 @@ class ContactAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.contact.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_contact'
                 )
             )

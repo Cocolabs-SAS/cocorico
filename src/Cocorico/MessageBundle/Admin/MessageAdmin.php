@@ -15,6 +15,7 @@ use Cocorico\MessageBundle\Entity\Message;
 use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 
@@ -53,7 +54,7 @@ class MessageAdmin extends AbstractAdmin
         $formMapper
             ->add(
                 'sender',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $senderQuery,
                     'disabled' => true,

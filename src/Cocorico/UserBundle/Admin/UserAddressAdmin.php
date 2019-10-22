@@ -7,6 +7,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class UserAddressAdmin extends AbstractAdmin
 {
@@ -35,7 +37,7 @@ class UserAddressAdmin extends AbstractAdmin
             )
             ->add(
                 'address',
-                'textarea',
+                TextareaType::class,
                 array(
                     'label' => 'form.address.address',
                     'required' => false,
@@ -59,7 +61,7 @@ class UserAddressAdmin extends AbstractAdmin
             )
             ->add(
                 'country',
-                'country',
+                CountryType::class,
                 array(
                     'label' => 'form.address.country',
                     'required' => false,

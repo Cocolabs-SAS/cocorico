@@ -18,8 +18,17 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\CollectionType;
 use Sonata\UserBundle\Admin\Model\UserAdmin as SonataUserAdmin;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\LanguageType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserAdmin extends SonataUserAdmin
@@ -114,14 +123,14 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'plainPassword',
-                'text',
+                TextType::class,
                 array(
                     'required' => (!$subject || is_null($subject->getId())),
                 )
             )
             ->add(
                 'motherTongue',
-                'language',
+                LanguageType::class,
                 array(
                     'required' => true,
                     'disabled' => true
@@ -146,7 +155,7 @@ class UserAdmin extends SonataUserAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'description' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $descriptions,
                             'required' => true
                         ),
@@ -157,7 +166,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'birthday',
-                'birthday',
+                BirthdayType::class,
                 array(
                     'format' => 'dd - MMMM - yyyy',
                     'years' => range(date('Y') - 18, date('Y') - 80),
@@ -180,7 +189,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'timeZone',
-                'timezone',
+                TimezoneType::class,
                 array(
                     'label' => 'form.time_zone',
                     'required' => true,
@@ -192,7 +201,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'nationality',
-                'country',
+                CountryType::class,
                 array(
                     'disabled' => true,
                 )
@@ -245,7 +254,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'feeAsAsker',//Percent
-                'integer',
+                IntegerType::class,
                 array(
                     'attr' => array(
                         'min' => 0,
@@ -256,7 +265,7 @@ class UserAdmin extends SonataUserAdmin
             )
             ->add(
                 'feeAsOfferer', //Percent
-                'integer',
+                IntegerType::class,
                 array(
                     'attr' => array(
                         'min' => 0,
@@ -315,7 +324,7 @@ class UserAdmin extends SonataUserAdmin
             ->with('Address')
             ->add(
                 'addresses',
-                'sonata_type_collection',
+                CollectionType::class,
                 array(
                     // IMPORTANT!: Disable this field otherwise if child form has all its fields disabled
                     // then the child entities will be removed while saving
@@ -324,7 +333,7 @@ class UserAdmin extends SonataUserAdmin
                         'delete' => false,
                         'delete_options' => array(
                             // You may otherwise choose to put the field but hide it
-                            'type' => 'hidden',
+                            'type' => HiddenType::class,
                             // In that case, you need to fill in the options as well
                             'type_options' => array(
                                 'mapped' => false,
@@ -409,7 +418,7 @@ class UserAdmin extends SonataUserAdmin
                     'impersonating',
                     'string',
                     array(
-                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                        'template' => 'admin/impersonating.html.twig',
                     )
                 );
         }
@@ -422,7 +431,7 @@ class UserAdmin extends SonataUserAdmin
                     'actions' => array(
                         'edit' => array(),
                         'list_user_listings' => array(
-                            'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',
+                            'template' => 'admin/list_action_list_user_listings.html.twig',
                         ),
                     ),
                 )
@@ -440,8 +449,8 @@ class UserAdmin extends SonataUserAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getFullNameFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'hidden',
+                    'field_type' => TextType::class,
+                    'operator_type' => HiddenType::class,
                     'operator_options' => array(),
                 )
             )

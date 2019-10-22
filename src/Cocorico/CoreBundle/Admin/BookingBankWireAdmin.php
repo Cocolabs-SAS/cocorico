@@ -20,8 +20,12 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class BookingBankWireAdmin extends AbstractAdmin
 {
@@ -94,7 +98,7 @@ class BookingBankWireAdmin extends AbstractAdmin
             ->with('')
             ->add(
                 'user',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $offererQuery,
                     'disabled' => true,
@@ -182,7 +186,7 @@ class BookingBankWireAdmin extends AbstractAdmin
                 )
                 ->add(
                     'booking.discountVoucher',
-                    'integer',
+                    IntegerType::class,
                     array(
                         'disabled' => true,
                         'label' => 'admin.booking.discount_voucher.label',
@@ -293,7 +297,7 @@ class BookingBankWireAdmin extends AbstractAdmin
                 $formMapper
                     ->add(
                         'amountToWireDecimal',
-                        'text',
+                        TextType::class,
                         array(
                             'disabled' => true,
                             'label' => 'admin.booking.amount_to_wire.label',
@@ -337,7 +341,7 @@ class BookingBankWireAdmin extends AbstractAdmin
                 )
                 ->add(
                     'wireReference',
-                    'text',
+                    TextType::class,
                     array(
                         'disabled' => true,
                         'sonata_help' => 'Wire Reference',
@@ -413,7 +417,7 @@ class BookingBankWireAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
@@ -430,7 +434,7 @@ class BookingBankWireAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.booking_bank_wire.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_booking'
                 )
             )
@@ -446,7 +450,7 @@ class BookingBankWireAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.booking.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_booking'
                 )
             )

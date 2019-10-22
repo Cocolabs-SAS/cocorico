@@ -11,10 +11,12 @@
 
 namespace Cocorico\CoreBundle\Twig;
 
+use Twig\Extension\GlobalsInterface;
+
 /**
  * ExtraBundleExtension check if bundle exist
  */
-class ExtraBundleExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class ExtraBundleExtension extends \Twig_Extension implements GlobalsInterface
 {
     protected $bundles;
 

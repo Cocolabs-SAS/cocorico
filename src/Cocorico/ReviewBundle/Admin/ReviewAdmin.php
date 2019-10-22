@@ -18,7 +18,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ReviewAdmin extends AbstractAdmin
@@ -68,7 +70,7 @@ class ReviewAdmin extends AbstractAdmin
             ->with('admin.review.title')
             ->add(
                 'booking',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $bookingQuery,
                     'disabled' => true,
@@ -77,7 +79,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'reviewBy',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $reviewByQuery,
                     'label' => 'admin.review.reviewBy.label',
@@ -86,7 +88,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'reviewTo',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $reviewToQuery,
                     'label' => 'admin.review.reviewTo.label',
@@ -95,7 +97,7 @@ class ReviewAdmin extends AbstractAdmin
             )
             ->add(
                 'booking.listing',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $listingQuery,
                     'disabled' => true,
@@ -181,7 +183,7 @@ class ReviewAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null

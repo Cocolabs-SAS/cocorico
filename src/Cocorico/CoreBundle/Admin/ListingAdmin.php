@@ -22,9 +22,14 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
+use Sonata\AdminBundle\Form\Type\ModelType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\Form\Type\DatePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ListingAdmin extends AbstractAdmin
 {
@@ -133,15 +138,15 @@ class ListingAdmin extends AbstractAdmin
                     'required_locales' => $this->locales,
                     'fields' => array(
                         'title' => array(
-                            'field_type' => 'text',
+                            'field_type' => TextType::class,
                             'locale_options' => $titles,
                         ),
                         'description' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $descriptions,
                         ),
                         'rules' => array(
-                            'field_type' => 'textarea',
+                            'field_type' => TextareaType::class,
                             'locale_options' => $rules,
                             'required' => false,
                         ),
@@ -154,7 +159,7 @@ class ListingAdmin extends AbstractAdmin
             )
             ->add(
                 'user',
-                'sonata_type_model',
+                ModelType::class,
                 array(
                     'query' => $offererQuery,
                     'disabled' => true,
@@ -224,7 +229,7 @@ class ListingAdmin extends AbstractAdmin
             )
             ->add(
                 'location.completeAddress',
-                'text',
+                TextType::class,
                 array(
                     'disabled' => true,
                     'label' => 'admin.listing.location.label'
@@ -286,8 +291,8 @@ class ListingAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getFullNameFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'hidden',
+                    'field_type' => TextType::class,
+                    'operator_type' => HiddenType::class,
                     'operator_options' => array(),
                     'label' => 'admin.listing.offerer.label'
                 )
@@ -336,7 +341,7 @@ class ListingAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
@@ -359,7 +364,7 @@ class ListingAdmin extends AbstractAdmin
 
                         return true;
                     },
-                    'field_type' => 'sonata_type_date_picker',
+                    'field_type' => DatePickerType::class,
                     'field_options' => array('format' => 'dd/MM/yyyy'),
                 ),
                 null
@@ -369,8 +374,8 @@ class ListingAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getPriceMinFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'choice',
+                    'field_type' => TextType::class,
+                    'operator_type' => ChoiceType::class,
                     'operator_options' => array(
                         'choices' => array(
                             NumberType::TYPE_GREATER_EQUAL => '>=',
@@ -384,8 +389,8 @@ class ListingAdmin extends AbstractAdmin
                 'doctrine_orm_callback',
                 array(
                     'callback' => array($this, 'getPriceMaxFilter'),
-                    'field_type' => 'text',
-                    'operator_type' => 'choice',
+                    'field_type' => TextType::class,
+                    'operator_type' => ChoiceType::class,
                     'operator_options' => array(
                         'choices' => array(
                             NumberType::TYPE_LESS_EQUAL => '<='
@@ -461,7 +466,7 @@ class ListingAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.listing.status.label',
-                    'template' => 'CocoricoSonataAdminBundle::list_field_value_translated.html.twig',
+                    'template' => 'admin/list_field_value_translated.html.twig',
                     'data_trans' => 'cocorico_listing'
                 )
             )
@@ -513,7 +518,7 @@ class ListingAdmin extends AbstractAdmin
                     'impersonating',
                     'string',
                     array(
-                        'template' => 'CocoricoSonataAdminBundle::impersonating.html.twig',
+                        'template' => 'admin/impersonating.html.twig',
                     )
                 );
         }

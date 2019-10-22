@@ -23,6 +23,8 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -95,11 +97,11 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 'required_locales' => array($this->locale),
                 'fields' => array(
                     'title' => array(
-                        'field_type' => 'text',
+                        'field_type' => TextType::class,
                         'locale_options' => $titles,
                     ),
                     'description' => array(
-                        'field_type' => 'textarea',
+                        'field_type' => TextareaType::class,
                         'locale_options' => $descriptions,
                     ),
                     'rules' => array(

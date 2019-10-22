@@ -12,8 +12,9 @@
 
 namespace Cocorico\GeoBundle\Twig;
 
+use Twig\Extension\GlobalsInterface;
 
-class GeoExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class GeoExtension extends \Twig_Extension implements GlobalsInterface
 {
     protected $googlePlaceAPIKey;
     protected $ipInfoDbAPIKey;

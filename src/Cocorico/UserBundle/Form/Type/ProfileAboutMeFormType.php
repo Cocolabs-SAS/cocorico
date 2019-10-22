@@ -21,6 +21,7 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -79,7 +80,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                 'required_locales' => $this->locales,
                 'fields' => array(
                     'description' => array(
-                        'field_type' => 'textarea',
+                        'field_type' => TextareaType::class,
                         'locale_options' => $descriptions,
                     ),
                 ),
