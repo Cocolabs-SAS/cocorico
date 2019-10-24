@@ -269,33 +269,33 @@ class ListingSearchRequest implements TranslationContainerInterface
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
 
     /**
-     * @param mixed $page
+     * @param int $page
      */
-    public function setPage($page)
+    public function setPage(?int $page)
     {
         $this->page = $page;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getMaxPerPage()
+    public function getMaxPerPage(): int
     {
         return $this->maxPerPage;
     }
 
     /**
-     * @param mixed $maxPerPage
+     * @param int $maxPerPage
      */
-    public function setMaxPerPage($maxPerPage)
+    public function setMaxPerPage(?int $maxPerPage)
     {
         $this->maxPerPage = $maxPerPage;
     }

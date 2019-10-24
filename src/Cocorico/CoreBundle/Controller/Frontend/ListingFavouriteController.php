@@ -29,7 +29,7 @@ class ListingFavouriteController extends ListingSearchController
      */
     public function indexFavouriteAction(Request $request)
     {
-        $markers = array();
+        $markers = [];
         $listings = new \ArrayIterator();
         $nbListings = 0;
 
@@ -45,6 +45,7 @@ class ListingFavouriteController extends ListingSearchController
 
         $favourites = explode(',', $request->cookies->get('favourite'));
         if (count($favourites) > 0) {
+            $listingSearchRequest->setPage($request->query->get('page', 1));
             $results = $this->get("cocorico.listing_search.manager")->getListingsByIds(
                 $listingSearchRequest,
                 $favourites,
