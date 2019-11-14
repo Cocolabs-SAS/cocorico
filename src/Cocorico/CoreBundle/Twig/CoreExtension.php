@@ -16,11 +16,16 @@ use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Utils\PHP;
 use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
+use ReflectionClass;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Translation\TranslatorInterface;
+use Twig_Extension;
+use Twig_Extension_GlobalsInterface;
+use Twig_SimpleFilter;
+use Twig_SimpleFunction;
 
-class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
+class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInterface
 {
     protected $currencyExtension;
     protected $translator;
@@ -56,7 +61,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     protected $displayVat;
     protected $listingSearchMinResult;
     protected $listingDuplication;
-    protected $minStartDelay;
     protected $minStartTimeDelay;
     protected $addressDelivery;
 
@@ -126,7 +130,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
         $this->bookingAcceptationDelay = $parameters["cocorico_booking_acceptation_delay"];
         $this->bookingValidationMoment = $parameters["cocorico_booking_validated_moment"];
         $this->bookingValidationDelay = $parameters["cocorico_booking_validated_delay"];
-        $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];
         $this->minStartTimeDelay = $parameters["cocorico_booking_min_start_time_delay"];
 
         //VAT
@@ -145,11 +148,11 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
-            new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
-            new \Twig_SimpleFilter('ucwords', 'ucwords'),
-            new \Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
-            new \Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
+            new Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
+            new Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
+            new Twig_SimpleFilter('ucwords', 'ucwords'),
+            new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
+            new Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
         );
     }
 
@@ -265,15 +268,15 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'session_upload_progress_name', function () {
                 return ini_get("session.upload_progress.name");
             }
             ),
-            new \Twig_SimpleFunction('currencySymbol', array($this, 'currencySymbolFunction')),
-            new \Twig_SimpleFunction('cancellationPolicies', array($this, 'cancellationPoliciesFunction')),
-            new \Twig_SimpleFunction('vatInclusionText', array($this, 'vatInclusionText')),
-            new \Twig_SimpleFunction('staticProperty', array($this, 'staticProperty')),
+            new Twig_SimpleFunction('currencySymbol', array($this, 'currencySymbolFunction')),
+            new Twig_SimpleFunction('cancellationPolicies', array($this, 'cancellationPoliciesFunction')),
+            new Twig_SimpleFunction('vatInclusionText', array($this, 'vatInclusionText')),
+            new Twig_SimpleFunction('staticProperty', array($this, 'staticProperty')),
         );
     }
 
@@ -373,19 +376,19 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
      */
     public function getGlobals()
     {
-        $listing = new \ReflectionClass("Cocorico\CoreBundle\Entity\Listing");
+        $listing = new ReflectionClass("Cocorico\CoreBundle\Entity\Listing");
         $listingConstants = $listing->getConstants();
 
-        $listingAvailability = new \ReflectionClass("Cocorico\CoreBundle\Document\ListingAvailability");
+        $listingAvailability = new ReflectionClass("Cocorico\CoreBundle\Document\ListingAvailability");
         $listingAvailabilityConstants = $listingAvailability->getConstants();
 
-        $listingImage = new \ReflectionClass("Cocorico\CoreBundle\Entity\ListingImage");
+        $listingImage = new ReflectionClass("Cocorico\CoreBundle\Entity\ListingImage");
         $listingImageConstants = $listingImage->getConstants();
 
-        $userImage = new \ReflectionClass("Cocorico\UserBundle\Entity\UserImage");
+        $userImage = new ReflectionClass("Cocorico\UserBundle\Entity\UserImage");
         $userImageConstants = $userImage->getConstants();
 
-        $booking = new \ReflectionClass("Cocorico\CoreBundle\Entity\Booking");
+        $booking = new ReflectionClass("Cocorico\CoreBundle\Entity\Booking");
         $bookingConstants = $booking->getConstants();
 
 
@@ -402,10 +405,10 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             Booking::STATUS_PAYMENT_REFUSED => 'btn-fuzzy-brown'
         );
 
-        $bookingBankWire = new \ReflectionClass("Cocorico\CoreBundle\Entity\BookingBankWire");
+        $bookingBankWire = new ReflectionClass("Cocorico\CoreBundle\Entity\BookingBankWire");
         $bookingBankWireConstants = $bookingBankWire->getConstants();
 
-        $bookingPayinRefund = new \ReflectionClass("Cocorico\CoreBundle\Entity\BookingPayinRefund");
+        $bookingPayinRefund = new ReflectionClass("Cocorico\CoreBundle\Entity\BookingPayinRefund");
         $bookingPayinRefundConstants = $bookingPayinRefund->getConstants();
 
         return array(
@@ -448,7 +451,6 @@ class CoreExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
             'displayVat' => $this->displayVat,
             'listingSearchMinResult' => $this->listingSearchMinResult,
             'listingDuplication' => $this->listingDuplication,
-            'minStartDelay' => $this->minStartDelay,
             'minStartTimeDelay' => $this->minStartTimeDelay,
             'addressDelivery' => $this->addressDelivery
         );

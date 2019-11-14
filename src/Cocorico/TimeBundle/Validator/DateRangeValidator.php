@@ -12,6 +12,8 @@
 namespace Cocorico\TimeBundle\Validator;
 
 use Cocorico\TimeBundle\Model\DateRange;
+use DateInterval;
+use DateTime;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -38,7 +40,8 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
                 'allow_single_day' => true,
                 'end_day_included' => true,
                 'required' => true,
-                'min_start_delay' => null,//Number of days to add to the current date to consider start date as valid
+                'min_start_time_delay' => null,
+                //Number of minutes to add to the current date to consider start date as valid
                 'display_mode' => 'range',
                 'days_max' => 365
             )
@@ -48,7 +51,7 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
         $resolver->setAllowedValues('allow_single_day', array(true, false));
         $resolver->setAllowedValues('end_day_included', array(true, false));
         $resolver->setAllowedValues('required', array(true, false));
-        $resolver->setAllowedValues('min_start_delay', array_merge(array(null), range(0, 30)));
+        $resolver->setAllowedValues('min_start_time_delay', array_merge(array(null), range(0, 43200)));
         $resolver->setAllowedValues('display_mode', array('range', 'duration'));
     }
 
@@ -80,12 +83,12 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
             return;
         }
 
-        $now = new \DateTime();
+        $now = new DateTime();
         //Min start date
-        if ($this->options['min_start_delay'] !== null) {
-            $minStartDelay = $this->options['min_start_delay'];
-            if ($minStartDelay >= 0) {
-                $now->add(new \DateInterval('P' . $minStartDelay . 'D'));
+        if ($this->options['min_start_time_delay'] !== null) {
+            $minStartTimeDelay = $this->options['min_start_time_delay'];
+            if ($minStartTimeDelay >= 0) {
+                $now->add(new DateInterval('PT'.$minStartTimeDelay.'M'));
             }
 
             if ($dateRange->start) {
@@ -109,7 +112,7 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
         if ($this->options['days_max'] !== null) {
             if ($dateRange->start && $dateRange->end) {
                 $start = clone $dateRange->start;
-                $dateEndMax = $start->add(new \DateInterval('P' . $this->options['days_max'] . 'D'));
+                $dateEndMax = $start->add(new DateInterval('P'.$this->options['days_max'].'D'));
 
                 if ($dateRange->end > $dateEndMax) {
                     $form->addError(
@@ -148,7 +151,7 @@ class DateRangeValidator implements EventSubscriberInterface, TranslationContain
 
         //End date in past
         if ($dateRange->end) {
-            if (!$this->options['allow_end_in_past'] and ($dateRange->end < new \DateTime())) {
+            if (!$this->options['allow_end_in_past'] and ($dateRange->end < new DateTime())) {
                 $form->addError(new FormError('date_range.invalid.end_in_past'));
             }
         }

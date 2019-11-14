@@ -18,7 +18,10 @@ use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\ReviewBundle\Entity\Review;
 use Cocorico\TimeBundle\Model\DayTimeRange;
 use Cocorico\UserBundle\Entity\User;
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -133,7 +136,7 @@ class Booking extends BaseBooking
     /**
      * Set user
      *
-     * @param \Cocorico\UserBundle\Entity\User|null $user
+     * @param User|null $user
      * @return Booking
      */
     public function setUser($user)
@@ -146,7 +149,7 @@ class Booking extends BaseBooking
     /**
      * Get user
      *
-     * @return \Cocorico\UserBundle\Entity\User
+     * @return User
      */
     public function getUser()
     {
@@ -180,7 +183,7 @@ class Booking extends BaseBooking
     /**
      * Set listing
      *
-     * @param \Cocorico\CoreBundle\Entity\Listing $listing
+     * @param Listing $listing
      * @return Booking
      */
     public function setListing(Listing $listing)
@@ -193,7 +196,7 @@ class Booking extends BaseBooking
     /**
      * Get listing
      *
-     * @return \Cocorico\CoreBundle\Entity\Listing
+     * @return Listing
      */
     public function getListing()
     {
@@ -322,7 +325,7 @@ class Booking extends BaseBooking
             case self::STATUS_NEW:
                 $expirationDate = $this->getExpirationDate($expirationDelay, $acceptationDelay);
                 if ($expirationDate) {
-                    $now = new \DateTime('now');
+                    $now = new DateTime('now');
 
                     return round($expirationDate->getTimestamp() - $now->getTimestamp());
                 }
@@ -343,16 +346,16 @@ class Booking extends BaseBooking
      * @param int $bookingExpirationDelay  in minutes
      * @param int $bookingAcceptationDelay in minutes
      *
-     * @return \Datetime|bool (in UTC)
+     * @return Datetime|bool (in UTC)
      */
     public function getExpirationDate($bookingExpirationDelay, $bookingAcceptationDelay)
     {
         if ($this->getNewBookingAt()) {
             $expirationDate = clone $this->getNewBookingAt();
-            $expirationDate->add(new \DateInterval('PT' . $bookingExpirationDelay . 'M'));
+            $expirationDate->add(new DateInterval('PT'.$bookingExpirationDelay.'M'));
 
             $acceptationDate = clone $this->getStart();
-            $acceptationDate->sub(new \DateInterval('PT' . $bookingAcceptationDelay . 'M'));
+            $acceptationDate->sub(new DateInterval('PT'.$bookingAcceptationDelay.'M'));
 
             //Return minus date
             if ($expirationDate->format('Ymd H:i') < $acceptationDate->format('Ymd H:i')) {
@@ -375,19 +378,19 @@ class Booking extends BaseBooking
      * @param string $bookingValidationMoment ("start"|"end")
      * @param int    $bookingValidationDelay  in minutes
      *
-     * @return \Datetime|bool (in UTC)
+     * @return Datetime|bool (in UTC)
      */
     public function getValidationDate($bookingValidationMoment, $bookingValidationDelay)
     {
         $methodName = "get" . ucfirst($bookingValidationMoment);
-        /** @var \DateTime $validatedAt */
+        /** @var DateTime $validatedAt */
         $validatedAt = $this->$methodName();
         if ($validatedAt) {
             $validatedAtCloned = clone $validatedAt;
             if ($bookingValidationDelay >= 0) {
-                $validatedAtCloned->add(new \DateInterval('PT' . $bookingValidationDelay . 'M'));
+                $validatedAtCloned->add(new DateInterval('PT'.$bookingValidationDelay.'M'));
             } else {
-                $validatedAtCloned->sub(new \DateInterval('PT' . abs($bookingValidationDelay) . 'M'));
+                $validatedAtCloned->sub(new DateInterval('PT'.abs($bookingValidationDelay).'M'));
             }
 
             return $validatedAtCloned;
@@ -405,7 +408,7 @@ class Booking extends BaseBooking
     public function getTimeBeforeStart()
     {
         if ($this->getStart()) {
-            $now = new \DateTime('now');
+            $now = new DateTime('now');
 
             return $this->getStart()->getTimestamp() - $now->getTimestamp();
         }
@@ -420,42 +423,40 @@ class Booking extends BaseBooking
      */
     public function hasStarted()
     {
-        $now = new \DateTime();
+        $now = new DateTime();
 
         return ($this->getStart()->format('Ymd') <= $now->format('Ymd'));
     }
 
 
     /**
-     * Check if booking begin after the minimum start date according to $minStartTimeDelay or $minStartDelay
+     * Check if booking begin during or after the minimum start date time according to $minStartTimeDelay
      * old: hasCorrectStartTime
      *
-     * @param int  $minStartDelay     in days
-     * @param int  $minStartTimeDelay in minutes
-     * @param bool $timeUnitIsDay
-     *
+     * @param int $minStartTimeDelay in minutes
      * @return bool
      */
-    public function beginAfterMinStartDate($minStartDelay, $minStartTimeDelay, $timeUnitIsDay)
+    public function beginDuringOrAfterMinStartDate($minStartTimeDelay)
     {
-        $minStartTime = new \DateTime();
+        $minStartTime = new DateTime();
+        $minStartTime->add(new DateInterval('PT'.$minStartTimeDelay.'M'));
 
-        if ($timeUnitIsDay) {
-            $minStartTime->add(new \DateInterval('P' . $minStartDelay . 'D'));
-            $minStartTime->setTime(0, 0, 0);
+        return $this->getStart()->format('Ymd H:i') >= $minStartTime->format('Ymd H:i');
+    }
 
-            if ($this->getStart()->format('Ymd') < $minStartTime->format('Ymd')) {
-                return false;
-            }
-        } else {
-            $minStartTime->add(new \DateInterval('PT' . $minStartTimeDelay . 'M'));
 
-            if ($this->getStart()->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
-                return false;
-            }
-        }
+    /**
+     * Check if booking begin after the maximum acceptable date according to $acceptationDelay
+     *
+     * @param int $acceptationDelay in minutes
+     * @return bool
+     */
+    public function beginAfterMaxAcceptableDate($acceptationDelay)
+    {
+        $maxAcceptableDate = new DateTime();
+        $maxAcceptableDate->add(new DateInterval('PT'.$acceptationDelay.'M'));
 
-        return true;
+        return $this->getStart()->format('Ymd') > $maxAcceptableDate->format('Ymd');
     }
 
 
@@ -524,7 +525,7 @@ class Booking extends BaseBooking
     /**
      * Get BookingOptions
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return Collection
      */
     public function getOptions()
     {

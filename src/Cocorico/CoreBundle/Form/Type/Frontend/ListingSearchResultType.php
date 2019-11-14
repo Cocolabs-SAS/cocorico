@@ -22,6 +22,9 @@ use Cocorico\TimeBundle\Form\Type\DateRangeType;
 use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\TimeRange;
+use DateInterval;
+use DateTime;
+use DateTimeZone;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +35,8 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Callback;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class ListingSearchResultType extends AbstractType
 {
@@ -46,7 +51,7 @@ class ListingSearchResultType extends AbstractType
     protected $timesDisplayMode;
     protected $allowSingleDay;
     protected $endDayIncluded;
-    protected $minStartDelay;
+    protected $minStartTimeDelay;
 
     /**
      * @param EntityManager            $entityManager
@@ -73,7 +78,7 @@ class ListingSearchResultType extends AbstractType
         $this->timesDisplayMode = $parameters['cocorico_times_display_mode'];
         $this->allowSingleDay = $parameters['cocorico_booking_allow_single_day'];
         $this->endDayIncluded = $parameters['cocorico_booking_end_day_included'];
-        $this->minStartDelay = $parameters['cocorico_booking_min_start_delay'];
+        $this->minStartTimeDelay = $parameters['cocorico_booking_min_start_time_delay'];
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -128,7 +133,7 @@ class ListingSearchResultType extends AbstractType
                     'label' => false,
                     'block_name' => 'date_range',
                     'display_mode' => $this->daysDisplayMode,
-                    'min_start_delay' => $this->minStartDelay
+                    'min_start_time_delay' => $this->minStartTimeDelay,
                 )
             )
             ->add(
@@ -222,12 +227,6 @@ class ListingSearchResultType extends AbstractType
                     $timeRange = $form->get('time_range')->getData();
                     $searchRequest->setTimeRange($timeRange);
                 }
-
-                if (!$this->timeUnitIsDay) {
-                    /** @var TimeRange $timeRange */
-                    $timeRange = $form->get('time_range')->getData();
-                    $searchRequest->setTimeRange($timeRange);
-                }
                 $event->setData($searchRequest);
             }
         );
@@ -249,8 +248,45 @@ class ListingSearchResultType extends AbstractType
                 'csrf_protection' => false,
                 'data_class' => 'Cocorico\CoreBundle\Model\ListingSearchRequest',
                 'translation_domain' => 'cocorico_listing',
+                'constraints' => array(
+                    new Callback(array('callback' => array($this, 'checkDate'))),
+                ),
             )
         );
+    }
+
+    /**
+     * Check if search date is correct according to minStartTimeDelay
+     *
+     * @param ListingSearchRequest      $listingSearchRequest
+     * @param ExecutionContextInterface $context
+     */
+    public function checkDate($listingSearchRequest, ExecutionContextInterface $context)
+    {
+        $minStartTime = new DateTime();
+        $minStartTime->add(new DateInterval('PT'.$this->minStartTimeDelay.'M'));
+
+        $start = false;
+        if ($this->timeUnitIsDay) {
+            $dateRange = $listingSearchRequest->getDateRange();
+            if ($dateRange && $dateRange->getStart()) {
+                $start = $listingSearchRequest->getDateRange()->getStart();
+            }
+        } else {
+            $timeRange = $listingSearchRequest->getTimeRange();
+            if ($timeRange && $timeRange->getStart()) {
+                $start = $listingSearchRequest->getTimeRange()->getStart();
+            }
+        }
+
+        if ($start && $start->format('Ymd H:i') < $minStartTime->format('Ymd H:i')) {
+            $minStartTime->setTimezone(new DateTimeZone($this->request->getSession()->get('timezone')));
+            $context->buildViolation('time_range.invalid.min_start {{ min_start_time }}')
+                ->atPath('date_range')
+                ->setParameters(array('{{ min_start_time }}' => $minStartTime->format('d/m/Y H:i')))
+                ->setTranslationDomain('cocorico')
+                ->addViolation();
+        }
     }
 
     /**

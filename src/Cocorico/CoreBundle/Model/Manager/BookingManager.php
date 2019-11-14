@@ -25,13 +25,19 @@ use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
 use Cocorico\CoreBundle\Repository\BookingRepository;
 use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\CoreBundle\Repository\ListingDiscountRepository;
+use Cocorico\SMSBundle\Twig\TwigSmser;
 use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\TimeBundle\Model\TimeRange;
 use Cocorico\UserBundle\Entity\User;
+use DateInterval;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Exception;
+use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class BookingManager extends BaseManager
@@ -51,7 +57,6 @@ class BookingManager extends BaseManager
     protected $hoursAvailable;
     protected $expirationDelay;
     protected $acceptationDelay;
-    protected $minStartDelay;
     protected $minStartTimeDelay;
     protected $allowSingleDay;
     protected $defaultListingStatus;
@@ -62,20 +67,19 @@ class BookingManager extends BaseManager
     public $maxPerPage;
 
     /**
-     * @param EntityManager                           $em
-     * @param DocumentManager                         $dm
-     * @param ListingAvailabilityManager              $availabilityManager
-     * @param TwigSwiftMailer                         $mailer
-     * @param \Cocorico\SMSBundle\Twig\TwigSmser|null $smser
-     * @param EventDispatcherInterface                $dispatcher
-     * @param array                                   $parameters
+     * @param EntityManager              $em
+     * @param DocumentManager            $dm
+     * @param ListingAvailabilityManager $availabilityManager
+     * @param TwigSwiftMailer            $mailer
+     * @param TwigSmser|null             $smser
+     * @param EventDispatcherInterface   $dispatcher
+     * @param array                      $parameters
      *        float     $feeAsAsker
      *        float     $feeAsOfferer
      *        boolean   $endDayIncluded
      *        int       $timeUnit App time unit includeVat
      *        int       $timesMax Max times unit if time_unit includeVat
      *        array     $hoursAvailable
-     *        int       $minStartDelay
      *        int       $minStartTimeDelay
      *        int       $minPrice
      *        int       $maxPerPage
@@ -117,7 +121,6 @@ class BookingManager extends BaseManager
         }
         $this->expirationDelay = $parameters["cocorico_booking_expiration_delay"];
         $this->acceptationDelay = $parameters["cocorico_booking_acceptation_delay"];
-        $this->minStartDelay = $parameters["cocorico_booking_min_start_delay"];
         $this->minStartTimeDelay = $parameters["cocorico_booking_min_start_time_delay"];
         $this->minPrice = $parameters["cocorico_booking_price_min"];
 
@@ -180,16 +183,15 @@ class BookingManager extends BaseManager
         }
 
         //Days:
-        // Min start date is equal to today plus "minStartDelay" days plus "minStartTimeDelay" hours
-        $minStartDate = new \DateTime();
+        // Min start date is equal to today plus "minStartTimeDelay" hours
+        $minStartDate = new DateTime();
         //Add 1 hour to not manage minutes available
-        $intervalFormat = 'P' . $this->minStartDelay . 'DT' . ($this->minStartTimeDelay + 60) . 'M';
-        $minStartDate->add(new \DateInterval($intervalFormat));
+        $minStartDate->add(new DateInterval('PT'.($this->minStartTimeDelay + 60).'M'));
         $minStartDay = clone $minStartDate;
         $minStartDay->setTime(0, 0, 0);
 
-        $maxEndDate = new \DateTime();
-        $maxEndDate->add(new \DateInterval('P1M'));
+        $maxEndDate = new DateTime();
+        $maxEndDate->add(new DateInterval('P1M'));
 
         //Hours:
         //Min max hours depending on hours available parameters
@@ -219,7 +221,7 @@ class BookingManager extends BaseManager
 
         //We look for each days if some availabilities are defined
         $found = false;
-        for ($d = clone $minStartDay; $d <= $maxEndDate; $d->add(new \DateInterval('P1D'))) {
+        for ($d = clone $minStartDay; $d <= $maxEndDate; $d->add(new DateInterval('P1D'))) {
             $dayToFind = $d;
             $availability = isset($availabilities[$d->format('Ymd')]) ? $availabilities[$d->format('Ymd')] : false;
 
@@ -265,12 +267,12 @@ class BookingManager extends BaseManager
 
         if ($found) {
             //Set Booking Day
-            $dayToFind = new \DateTime($dayToFind->format('Y-m-d'));//Timezone UTC
+            $dayToFind = new DateTime($dayToFind->format('Y-m-d'));//Timezone UTC
 
             //Set Booking Date and Hours
             $start = clone $dayToFind;
             $start->setTime(0, 0, 0);
-            $start->add(new \DateInterval('PT' . $hourToFind . 'M'));
+            $start->add(new DateInterval('PT'.$hourToFind.'M'));
             //start date and start time are equals
             $booking->setStart($start);
             $booking->setStartTime($start);
@@ -278,18 +280,18 @@ class BookingManager extends BaseManager
             //End:
             $endDayToFind = clone $dayToFind;
             if ($this->allowSingleDay == false && $this->endDayIncluded == false) {
-                $endDayToFind->add(new \DateInterval('P1D'));//add one day
+                $endDayToFind->add(new DateInterval('P1D'));//add one day
             }
 
             //Time of end date is equal to start time plus one hour
             $end = clone $endDayToFind;
             $end->setTime(0, 0, 0);
-            $end->add(new \DateInterval('PT' . ($hourToFind + $this->timeUnit) . 'M'));
+            $end->add(new DateInterval('PT'.($hourToFind + $this->timeUnit).'M'));
             $booking->setEnd($end);
 
             //End date time is equal to start date time plus one hour
             $endTime = clone $start;
-            $endTime->add(new \DateInterval('PT' . ($this->timeUnit) . 'M'));
+            $endTime->add(new DateInterval('PT'.($this->timeUnit).'M'));
             $booking->setEndTime($endTime);
         }
 
@@ -313,15 +315,14 @@ class BookingManager extends BaseManager
         }
 
         //Days
-        $minStartDay = new \DateTime();
+        $minStartDay = new DateTime();
+        $minStartDay->add(new DateInterval('PT'.$this->minStartTimeDelay.'M'));
         $minStartDay->setTime(0, 0, 0);
-        $intervalFormat = 'P' . $this->minStartDelay . 'D';
-        $minStartDay->add(new \DateInterval($intervalFormat));
 
-        $maxEndDay = new \DateTime();
-        $maxEndDay->add(new \DateInterval('P1M'));
+        $maxEndDay = new DateTime();
+        $maxEndDay->add(new DateInterval('P1M'));
 
-        //Get all listing unavailabilities from "minStartDay" until "maxEndDate"
+        //Get all listing unavailabilities from "minStartTimeDelay" until "maxEndDate"
         //Each availabilities of each days are returned
         $availabilities = $this->availabilityManager->getAvailabilitiesStatus(
             $booking->getListing()->getId(),
@@ -335,7 +336,7 @@ class BookingManager extends BaseManager
         //Default day value
         $dayToFind = $minStartDay;
         $found = false;
-        for ($d = clone $minStartDay; $d <= $maxEndDay; $d->add(new \DateInterval('P1D'))) {
+        for ($d = clone $minStartDay; $d <= $maxEndDay; $d->add(new DateInterval('P1D'))) {
             $dayToFind = $d;
             $availability = isset($availabilities[$d->format('Ymd')]) ? $availabilities[$d->format('Ymd')] : false;
 
@@ -354,18 +355,37 @@ class BookingManager extends BaseManager
 
         if ($found) {
             //Set Booking Day
-            $dayToFind = new \DateTime($dayToFind->format('Y-m-d'));//Timezone is now default one (UTC)
+            $dayToFind = new DateTime($dayToFind->format('Y-m-d'));//Timezone is now default one (UTC)
             $booking->setStart($dayToFind);
             $booking->setEnd($dayToFind);
             if ($this->allowSingleDay == false && $this->endDayIncluded == false) {
                 $endDayToFind = clone $dayToFind;
-                $endDayToFind->add(new \DateInterval('P1D'));
+                $endDayToFind->add(new DateInterval('P1D'));
                 $booking->setEnd($endDayToFind);
             }
 
             //Set Booking Hour
-            $booking->setStartTime(new \DateTime('1970-01-01 00:00'));
-            $booking->setEndTime(new \DateTime('1970-01-01 00:00'));
+            $booking->setStartTime(new DateTime('1970-01-01 00:00'));
+            $booking->setEndTime(new DateTime('1970-01-01 00:00'));
+        }
+
+        if (!$booking->beginAfterMaxAcceptableDate($this->acceptationDelay)) {
+            //Set Booking Day
+            $maxAcceptableDay = new DateTime();
+            $maxAcceptableDay->add(new DateInterval('PT'.$this->acceptationDelay.'M'));
+            $maxAcceptableDay->add(new DateInterval('P1D'));
+            $maxAcceptableDay->setTime(0, 0, 0);
+            $booking->setStart($maxAcceptableDay);
+            $booking->setEnd($maxAcceptableDay);
+            if ($this->allowSingleDay == false && $this->endDayIncluded == false) {
+                $endMaxAcceptableDay = clone $maxAcceptableDay;
+                $endMaxAcceptableDay->add(new DateInterval('P1D'));
+                $booking->setEnd($endMaxAcceptableDay);
+            }
+
+            //Set Booking Hour
+            $booking->setStartTime(new DateTime('1970-01-01 00:00'));
+            $booking->setEndTime(new DateTime('1970-01-01 00:00'));
         }
 
         return $booking;
@@ -382,11 +402,13 @@ class BookingManager extends BaseManager
      *
      * @param Booking $booking
      *
-     * @return \stdClass
+     * @return stdClass
+     *
+     * @throws Exception
      */
     public function checkBookingAndSetAmounts(Booking $booking)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -415,13 +437,13 @@ class BookingManager extends BaseManager
      * //todo: Check factorization with DateRangeValidator->onPostBind
      * Check if booking dates are correct:
      *  Errors :
-     *      - date_range.invalid.min_start if start date is incorrect (start is greater than today plus minStartDelay days)
+     *      - date_range.invalid.min_start if start date is incorrect (start is greater than today plus minStartTimeDelay minutes)
      *      - date_range.invalid.max_end if end date is incorrect (More than one year later)
      *      - date_range.invalid.end_before_start if start is after end
      *      - time_range.invalid.end_before_start if start time is after end
      *      - time_range.invalid.single_time if start time = end time
      *      - time_range.invalid.duration if duration > to max times unit (maxTimes)
-     *      - time_range.invalid.min_start if start time is incorrect (start time is greater than today plus minStartTimeDelay hours)
+     *      - time_range.invalid.min_start if start time is incorrect (start time is greater than today plus minStartTimeDelay minutes)
      *
      * Errors are translated in DateRangeValidator and TimeRangeValidator
      *
@@ -433,18 +455,29 @@ class BookingManager extends BaseManager
     {
         $errors = array();
 
-        $minStart = new \DateTime();
-        if ($this->minStartDelay > 0) {
-            $minStart->add(new \DateInterval('P' . $this->minStartDelay . 'D'));
+        $minStart = new DateTime();
+        if ($this->minStartTimeDelay > 0) {
+            $minStart->add(new DateInterval('PT'.$this->minStartTimeDelay.'M'));
         }
 
         if ($booking->getStart()) {
-            $interval = $minStart->diff($booking->getStart())->format('%r%a');
-            if ($interval < 0) {
-                $errors[] = 'date_range.invalid.min_start';
+            if ($this->timeUnitIsDay) {
+                if (!$booking->beginAfterMaxAcceptableDate($this->acceptationDelay)) {
+                    $errors[] = 'date_range.invalid.acceptation';
+                } else {
+                    $interval = $minStart->diff($booking->getStart())->format('%r%a');
+                    if ($interval < 0) {
+                        $errors[] = 'date_range.invalid.min_start';
+                    }
+                }
+            } else {
+                $interval = $minStart->diff($booking->getStart())->format('%r%a');
+                if ($interval < 0) {
+                    $errors[] = 'date_range.invalid.min_start';
+                }
             }
 
-            $oneYearLater = $minStart->add(new \DateInterval('P1Y'));
+            $oneYearLater = $minStart->add(new DateInterval('P1Y'));
             if ($booking->getEnd() > $oneYearLater) {
                 $errors[] = 'date_range.invalid.max_end';
             }
@@ -472,18 +505,12 @@ class BookingManager extends BaseManager
                     if ($duration > $this->timesMax || !$duration) {
                         $errors[] = 'time_range.invalid.duration';
                     }
+                }
 
-                    if (!$booking->beginAfterMinStartDate(
-                        $this->minStartDelay,
-                        $this->minStartTimeDelay,
-                        $this->getTimeUnitIsDay()
-                    )
-                    ) {
-                        $errors[] = 'time_range.invalid.min_start';
-                    }
+                if (!$booking->beginDuringOrAfterMinStartDate($this->minStartTimeDelay)) {
+                    $errors[] = 'time_range.invalid.min_start';
                 }
             }
-
         }
 
         return $errors;
@@ -518,13 +545,13 @@ class BookingManager extends BaseManager
      *
      * @param Booking $booking
      *
-     * @return \stdClass
+     * @return stdClass
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function checkBookingAvailability(Booking $booking)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -566,11 +593,11 @@ class BookingManager extends BaseManager
     /**
      * @param Booking                               $booking
      * @param ListingAvailability[]|ArrayCollection $availabilities
-     * @return \stdClass
+     * @return stdClass
      */
     private function checkBookingAvailabilityInDayMode(Booking $booking, $availabilities)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -603,12 +630,12 @@ class BookingManager extends BaseManager
     /**
      * @param Booking                               $booking
      * @param ListingAvailability[]|ArrayCollection $availabilities
-     * @return \stdClass
-     * @throws \Exception
+     * @return stdClass
+     * @throws Exception
      */
     private function checkBookingAvailabilityInNoDayMode(Booking $booking, $availabilities)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -624,7 +651,7 @@ class BookingManager extends BaseManager
 //        echo count($availabilities) . '<br>';
         foreach ($availabilities as $availability) {
             if (!isset($availability["ts"])) {
-                throw new \Exception("Time unit seems to have been changed from day to hour(s).");
+                throw new Exception("Time unit seems to have been changed from day to hour(s).");
             }
 
             $times = array();
@@ -633,7 +660,7 @@ class BookingManager extends BaseManager
             }
 
             //Find time range for current day
-            $day = new \DateTime('@' . $availability["d"]->sec);
+            $day = new DateTime('@'.$availability["d"]->sec);
             /** @var TimeRange $timeRange */
             $timeRange = reset($daysTimeRanges[$day->format('Y-m-d')]->timeRanges);
 
@@ -672,7 +699,7 @@ class BookingManager extends BaseManager
     /**
      * @param Booking $booking
      *
-     * @return \stdClass
+     * @return stdClass
      */
     private function setBookingAmounts(Booking $booking)
     {
@@ -705,7 +732,7 @@ class BookingManager extends BaseManager
      *
      * @param Booking $booking
      *
-     * @return \Cocorico\CoreBundle\Entity\ListingDiscount|null
+     * @return ListingDiscount|null
      */
     private function getBookingDiscount(Booking $booking)
     {
@@ -740,11 +767,11 @@ class BookingManager extends BaseManager
      * @param Booking              $booking
      * @param ListingDiscount|null $discount
      *
-     * @return \stdClass
+     * @return stdClass
      */
     private function dispatchPreAmountSetting(Booking $booking, ListingDiscount $discount = null)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -752,7 +779,7 @@ class BookingManager extends BaseManager
             $event = new BookingAmountEvent($booking, $discount);
             $this->dispatcher->dispatch(BookingAmountEvents::BOOKING_PRE_AMOUNTS_SETTING, $event);
             $result->booking = $event->getBooking();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $result->errors[] = $e->getMessage();
         }
 
@@ -764,11 +791,11 @@ class BookingManager extends BaseManager
      *
      * @param Booking $booking
      *
-     * @return \stdClass
+     * @return stdClass
      */
     private function setBookingAmountsAndFees(Booking $booking)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -823,11 +850,11 @@ class BookingManager extends BaseManager
      * @param Booking              $booking
      * @param ListingDiscount|null $discount
      *
-     * @return  \stdClass
+     * @return  stdClass
      */
     private function dispatchPostAmountSetting(Booking $booking, ListingDiscount $discount = null)
     {
-        $result = new \stdClass();
+        $result = new stdClass();
         $result->errors = array();
         $result->booking = $booking;
 
@@ -842,7 +869,7 @@ class BookingManager extends BaseManager
             $event = new BookingAmountEvent($booking, $discount);
             $this->dispatcher->dispatch(BookingAmountEvents::BOOKING_POST_AMOUNTS_SETTING, $event);
             $result->booking = $event->getBooking();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $result->errors[] = $e->getMessage();
         }
 
@@ -937,7 +964,7 @@ class BookingManager extends BaseManager
      *
      * @return Booking|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findOneByAsker($id, $askerId, $locale, $status = array())
     {
@@ -960,7 +987,7 @@ class BookingManager extends BaseManager
         if (in_array($booking->getStatus(), Booking::$newableStatus)) {
             //New Booking confirmation
             $booking->setStatus(Booking::STATUS_NEW);
-            $booking->setNewBookingAt(new \DateTime());
+            $booking->setNewBookingAt(new DateTime());
 
             $booking->setTimeZoneAsker($booking->getUser()->getTimeZone());
             $booking->setTimeZoneOfferer($booking->getListing()->getUser()->getTimeZone());
@@ -1102,9 +1129,7 @@ class BookingManager extends BaseManager
     public function alertImminentBookings($imminentDelay)
     {
         $result = 0;
-        $bookingsImminentToAlert = $this->getRepository()->findBookingsImminentToAlert(
-            $imminentDelay
-        );
+        $bookingsImminentToAlert = $this->getRepository()->findBookingsImminentToAlert($imminentDelay);
         foreach ($bookingsImminentToAlert as $bookingImminentToAlert) {
             if ($this->alertImminent($bookingImminentToAlert)) {
                 $result++;
@@ -1188,12 +1213,7 @@ class BookingManager extends BaseManager
         );
         $isNotExpired = $isNotExpired && $isNotExpired > 0;
 
-        if ($statusIsOk && $isNotExpired) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return $statusIsOk && $isNotExpired;
     }
 
     /**
@@ -1217,7 +1237,7 @@ class BookingManager extends BaseManager
                 $booking = $event->getBooking();
 
                 $booking->setStatus(Booking::STATUS_PAYED);
-                $booking->setPayedBookingAt(new \DateTime());
+                $booking->setPayedBookingAt(new DateTime());
                 $booking = $this->save($booking);
 
                 $listing = $booking->getListing();
@@ -1250,7 +1270,7 @@ class BookingManager extends BaseManager
                 }
 
                 return $booking;
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
 //                throw new \Exception($e);
 
                 //In case of error while payment for example
@@ -1276,7 +1296,7 @@ class BookingManager extends BaseManager
         $canBeAcceptedOrRefused = $this->canBeAcceptedOrRefusedByOfferer($booking);
         if ($canBeAcceptedOrRefused) {
             $booking->setStatus(Booking::STATUS_REFUSED);
-            $booking->setRefusedBookingAt(new \DateTime());
+            $booking->setRefusedBookingAt(new DateTime());
             $booking = $this->save($booking);
 
             $this->mailer->sendBookingRefusedMessageToAsker($booking);
@@ -1421,7 +1441,7 @@ class BookingManager extends BaseManager
                 }
 
                 $booking->setStatus(Booking::STATUS_CANCELED_ASKER);
-                $booking->setCanceledAskerBookingAt(new \DateTime());
+                $booking->setCanceledAskerBookingAt(new DateTime());
                 $booking = $this->save($booking);
 
                 $this->mailer->sendBookingCanceledByAskerMessageToAsker($booking);

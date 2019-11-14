@@ -167,7 +167,7 @@ services:
                   cocorico_times_display_mode: "%cocorico.times_display_mode%"
                   cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
                   cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
-                  cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
+                  cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
         tags:
             - { name: form.type }
 
@@ -211,8 +211,8 @@ services:
             - parameters:
                   cocorico_booking_allow_single_day: "%cocorico.booking.allow_single_day%"
                   cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
-                  cocorico_booking_min_start_delay: "%cocorico.booking.min_start_delay%"
                   cocorico_booking_min_start_time_delay: "%cocorico.booking.min_start_time_delay%"
+                  cocorico_booking_acceptation_delay: "%cocorico.booking.acceptation_delay%"
                   cocorico_currency: "%cocorico.currency%"
                   cocorico_user_address_delivery: "%cocorico.user_address_delivery%"
         tags:

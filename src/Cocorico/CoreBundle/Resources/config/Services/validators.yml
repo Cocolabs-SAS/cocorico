@@ -12,13 +12,6 @@ services:
         tags:
             - { name: validator.constraint_validator, alias: listing }
 
-
-    cocorico.times_range_overlap_validator:
-        class: Cocorico\CoreBundle\Validator\Constraints\TimeRangesOverlapValidator
-        tags:
-            - { name: validator.constraint_validator, alias: time_ranges_overlap }
-
-
     cocorico.listing_availability_validator:
         class: Cocorico\CoreBundle\Validator\Constraints\ListingAvailabilityValidator
         arguments:
@@ -38,8 +31,8 @@ services:
         arguments:
             - "@cocorico.booking.manager"
             - "@session"
-            - "%cocorico.booking.min_start_delay%"
             - "%cocorico.booking.min_start_time_delay%"
+            - "%cocorico.booking.acceptation_delay%"
             - "%cocorico.currency%"
         tags:
             - { name: validator.constraint_validator, alias: booking }

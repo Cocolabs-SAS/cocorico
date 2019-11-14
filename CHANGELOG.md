@@ -12,8 +12,12 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Fix update "unread" message in dashboard
+- Fix multi timezone in day mode  
 
 ### Changed
+- Add acceptation delay constraint in day mode
+- Replace cocorico.booking.min_start_delay parameter by cocorico.booking.min_start_time_delay in day mode
 
 
 ## [0.15.0] - (2019-03-21)
