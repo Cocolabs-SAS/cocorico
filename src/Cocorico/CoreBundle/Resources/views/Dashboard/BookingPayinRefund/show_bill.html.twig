@@ -26,4 +26,5 @@
     {% set user_address = (user_address is empty) ? null : user_address[0] %}
     {% set bill_date_title = 'booking.bill.date.title'|trans %}
     {% set bill_date =  booking_payin_refund.getPayedAt ? booking_payin_refund.getPayedAt|localizeddate('short', 'none', 'fr', user_timezone) : '' %}
+    {% set isRefund = true %}
 {% endembed %}

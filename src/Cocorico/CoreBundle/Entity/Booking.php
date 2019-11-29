@@ -44,6 +44,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="alerted_imminent_idx", columns={"alerted_imminent"}),
  *    @ORM\Index(name="created_at_idx", columns={"createdAt"}),
  *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"}),
+ *    @ORM\Index(name="invoice_number_idx", columns={"invoice_number"}),
+ *    @ORM\Index(name="refund_invoice_number_idx", columns={"refund_invoice_number"})
  *  })
  *
  */

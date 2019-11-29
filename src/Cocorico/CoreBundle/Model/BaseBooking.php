@@ -18,7 +18,9 @@ use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\TimeBundle\Model\TimeRange;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use InvalidArgumentException;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -103,28 +105,28 @@ abstract class BaseBooking
     /**
      * @ORM\Column(name="start", type="datetime")
      * @Assert\NotBlank(message="assert.not_blank")
-     * @var \DateTime
+     * @var DateTime
      */
     protected $start;
 
     /**
      * @ORM\Column(name="end", type="datetime")
      * @Assert\NotBlank(message="assert.not_blank")
-     * @var \DateTime
+     * @var DateTime
      */
     protected $end;
 
     /**
      * @ORM\Column(name="start_time", type="datetime")
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $startTime;
 
     /**
      * @ORM\Column(name="end_time", type="datetime")
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $endTime;
 
@@ -188,21 +190,21 @@ abstract class BaseBooking
     /**
      * @ORM\Column(name="new_booking_at", type="datetime", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $newBookingAt;
 
     /**
      * @ORM\Column(name="payed_booking_at", type="datetime", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $payedBookingAt;
 
     /**
      * @ORM\Column(name="refused_booking_at", type="datetime", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $refusedBookingAt;
 
@@ -210,7 +212,7 @@ abstract class BaseBooking
     /**
      * @ORM\Column(name="canceled_asker_booking_at", type="datetime", nullable=true)
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $canceledAskerBookingAt;
 
@@ -228,6 +230,19 @@ abstract class BaseBooking
      */
     protected $alertedImminent = false;
 
+    /**
+     * @ORM\Column(name="invoice_number", type="string", length=25, nullable=true)
+     *
+     * @var string
+     */
+    protected $invoiceNumber;
+
+    /**
+     * @ORM\Column(name="refund_invoice_number", type="string", length=25, nullable=true)
+     *
+     * @var string
+     */
+    protected $refundInvoiceNumber;
 
     /**
      * Initial booking message
@@ -270,7 +285,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStart()
     {
@@ -278,7 +293,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $start
+     * @param DateTime $start
      */
     public function setStart($start)
     {
@@ -286,7 +301,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getEnd()
     {
@@ -294,7 +309,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $end
+     * @param DateTime $end
      */
     public function setEnd($end)
     {
@@ -302,7 +317,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getStartTime()
     {
@@ -310,7 +325,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $startTime
+     * @param DateTime $startTime
      */
     public function setStartTime($startTime)
     {
@@ -318,7 +333,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getEndTime()
     {
@@ -326,7 +341,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $endTime
+     * @param DateTime $endTime
      */
     public function setEndTime($endTime)
     {
@@ -395,7 +410,7 @@ abstract class BaseBooking
     public function setStatus($status)
     {
         if (!in_array($status, array_keys(self::$statusValues))) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Invalid value for booking.status : %s.', $status)
             );
         }
@@ -738,7 +753,7 @@ abstract class BaseBooking
     public function setCancellationPolicy($cancellationPolicy)
     {
         if (!in_array($cancellationPolicy, array_keys(Listing::$cancellationPolicyValues))) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 sprintf('Invalid value for booking.cancellationPolicy : %s.', $cancellationPolicy)
             );
         }
@@ -747,7 +762,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getNewBookingAt()
     {
@@ -755,7 +770,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $newBookingAt
+     * @param DateTime $newBookingAt
      */
     public function setNewBookingAt($newBookingAt)
     {
@@ -763,7 +778,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getPayedBookingAt()
     {
@@ -771,7 +786,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $payedBookingAt
+     * @param DateTime $payedBookingAt
      */
     public function setPayedBookingAt($payedBookingAt)
     {
@@ -779,7 +794,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getRefusedBookingAt()
     {
@@ -787,7 +802,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $refusedBookingAt
+     * @param DateTime $refusedBookingAt
      */
     public function setRefusedBookingAt($refusedBookingAt)
     {
@@ -795,7 +810,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCanceledAskerBookingAt()
     {
@@ -803,7 +818,7 @@ abstract class BaseBooking
     }
 
     /**
-     * @param \DateTime $canceledAskerBookingAt
+     * @param DateTime $canceledAskerBookingAt
      */
     public function setCanceledAskerBookingAt($canceledAskerBookingAt)
     {
@@ -915,13 +930,46 @@ abstract class BaseBooking
 
         echo '<br>Date: ';
         if ($this->getStart() && $this->getEnd()) {
-            echo $this->getStart()->format('Y-m-d H:i') . ' / ' . $this->getEnd()->format('Y-m-d H:i') . '<br>';
+            echo $this->getStart()->format('Y-m-d H:i').' / '.$this->getEnd()->format('Y-m-d H:i').'<br>';
         }
 
 
         echo 'Time: ';
         if ($this->getStartTime() && $this->getEndTime()) {
-            echo $this->getStartTime()->format('Y-m-d H:i') . ' / ' . $this->getEndTime()->format('Y-m-d H:i') . '<br>';
+            echo $this->getStartTime()->format('Y-m-d H:i').' / '.$this->getEndTime()->format('Y-m-d H:i').'<br>';
         }
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getInvoiceNumber()
+    {
+        return $this->invoiceNumber;
+    }
+
+    /**
+     * @param string $invoiceNumber
+     */
+    public function setInvoiceNumber($invoiceNumber)
+    {
+        $this->invoiceNumber = $invoiceNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefundInvoiceNumber()
+    {
+        return $this->refundInvoiceNumber;
+    }
+
+    /**
+     * @param string $refundInvoiceNumber
+     */
+    public function setRefundInvoiceNumber($refundInvoiceNumber)
+    {
+        $this->refundInvoiceNumber = $refundInvoiceNumber;
     }
 }

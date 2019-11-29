@@ -46,11 +46,37 @@ class BookingSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * Generate the invoice number
+     *
+     * @param BookingEvent $event
+     */
+    public function onBookingPay(BookingEvent $event)
+    {
+        $booking = $event->getBooking();
+        $this->bookingManager->generateInvoiceNumber($booking);
+        $event->setBooking($booking);
+    }
+
+    /**
+     * Generate the refund number
+     *
+     * @param BookingEvent $event
+     */
+    public function onBookingRefund(BookingEvent $event)
+    {
+        $booking = $event->getBooking();
+        $this->bookingManager->generateInvoiceNumber($booking, true);
+        $event->setBooking($booking);
+    }
+
 
     public static function getSubscribedEvents()
     {
         return array(
             BookingEvents::BOOKING_NEW_SUBMITTED => array('onBookingNewSubmitted', 0),
+            BookingEvents::BOOKING_PAY => array('onBookingPay', 0),
+            BookingEvents::BOOKING_REFUND => array('onBookingRefund', 3),
         );
     }
 

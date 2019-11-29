@@ -18,7 +18,9 @@ use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
 use Cocorico\CoreBundle\Repository\BookingPayinRefundRepository;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Exception;
 
 class BookingPayinRefundManager extends BaseManager
 {
@@ -80,7 +82,7 @@ class BookingPayinRefundManager extends BaseManager
      *
      * @return BookingBankWire|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
     public function findOneByAsker($id, $askerId, $status = array())
     {
@@ -101,7 +103,7 @@ class BookingPayinRefundManager extends BaseManager
      *      "refund_percent" => amount percentage to refund to asker
      *      "fee_to_collect_while_refund" => fees to collect while refunding asker
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function getFeeAndAmountToRefundToAsker(Booking $booking)
     {
@@ -111,11 +113,11 @@ class BookingPayinRefundManager extends BaseManager
             } elseif ($booking->getCancellationPolicy() == Listing::CANCELLATION_POLICY_STRICT) {
                 $rules = $this->cancellationPolicyRules["strict"];
             } else {
-                throw new \Exception("Invalid booking cancellation policy");
+                throw new Exception("Invalid booking cancellation policy");
             }
 
             //If time before checkin is less than the limit then the refund is minimum
-            if ($booking->getTimeBeforeStart($this->timeZone) < $rules["time_before_start"]) {
+            if ($booking->getTimeBeforeStart() < $rules["time_before_start"]) {
                 $refundPercentage = $rules["refund_min"];
             } else {
                 $refundPercentage = $rules["refund_max"];
@@ -149,7 +151,7 @@ class BookingPayinRefundManager extends BaseManager
                 "fee_to_collect_while_refund" => $feeToCollectWhileRefund
             );
         } else {
-            throw new \Exception("Invalid booking status");
+            throw new Exception("Invalid booking status");
         }
 
     }

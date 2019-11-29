@@ -35,7 +35,11 @@
                                         {{ 'booking.reciept.title.booking_id'|trans }}
                                     {% endif %}:
                                 </strong>
-                                {{ booking.id }}
+                                {% if isRefund is defined and isRefund is same as(true) %}
+                                    {{ booking.refundInvoiceNumber?: booking.id }}
+                                {% else %}
+                                    {{ booking.invoiceNumber?: booking.id }}
+                                {% endif %}
                             </p>
                         {% endblock %}
 

@@ -63,6 +63,7 @@ class BookingManager extends BaseManager
     protected $vatRate;
     protected $includeVat;
     protected $bundles;
+    protected $invoiceBegin;
     public $minPrice;
     public $maxPerPage;
 
@@ -129,6 +130,7 @@ class BookingManager extends BaseManager
         $this->vatRate = $parameters["cocorico_vat"];
         $this->includeVat = $parameters["cocorico_include_vat"];
         $this->bundles = $parameters["cocorico_bundles"];
+        $this->invoiceBegin = $parameters["cocorico_booking_invoice_begin"];
     }
 
     /**
@@ -208,16 +210,18 @@ class BookingManager extends BaseManager
         );
 
 //        echo "minStartDate: " . $minStartDate->format('Y-m-d H:i') . "<br>" . "minHour: " . $minHour . "<br>" . "maxHour: " . $maxHour . "<br>";
+//        echo "minStartDay: " . $minStartDay->format('Y-m-d H:i') . "<br>";
 //        print_r($availabilities);
 
         //Default day and hours values
         $dayToFind = $minStartDay;
-        $hourToFind = intval($minStartDate->format('H')) * 60;//in minutes
+        $hourToFind = (intval($minStartDate->format('H')) * 60);//in minutes
         if ($hourToFind < $minHour) {
             $hourToFind = $minHour;
         } elseif ($hourToFind > $maxHour) {
             $hourToFind = $maxHour;
         }
+//        echo "hourToFind: " . $hourToFind. "<br>";
 
         //We look for each days if some availabilities are defined
         $found = false;
@@ -230,6 +234,7 @@ class BookingManager extends BaseManager
                     if ($d != $minStartDay) {//If d is not "minStartDay" the hour to find is the min hour available else the hour is the default one
                         $hourToFind = $minHour;
                     }
+
                     $found = true;
                     break;
                 }
@@ -276,6 +281,7 @@ class BookingManager extends BaseManager
             //start date and start time are equals
             $booking->setStart($start);
             $booking->setStartTime($start);
+//            echo "start: " . $start->format('Y-m-d H:i') . "<br>";
 
             //End:
             $endDayToFind = clone $dayToFind;
@@ -1460,7 +1466,46 @@ class BookingManager extends BaseManager
     }
 
     /**
-     * @param  Booking $booking
+     * Generate Invoice number with the following format : YmdX with X incremental
+     *
+     * @param Booking $booking
+     * @param bool    $isRefund
+     *
+     * @return string
+     */
+    public function generateInvoiceNumber(Booking $booking, $isRefund = false)
+    {
+        if ($isRefund) {
+            $getMethod = "getRefundInvoiceNumber";
+            $setMethod = "setRefundInvoiceNumber";
+        } else {
+            $getMethod = "getInvoiceNumber";
+            $setMethod = "setInvoiceNumber";
+        }
+
+        if (!$booking->$getMethod()) {
+            $date = new DateTime();
+            $invoiceNumber = $date->format('Ymd');
+
+            $lastInvoiceNumber = $this->getRepository()->getLastInvoiceNumber();
+
+            if ($lastInvoiceNumber) {
+                $increment = (int)substr($lastInvoiceNumber, strlen($invoiceNumber));
+                $increment++;
+                $invoiceNumber .= $increment;
+            } else {
+                $invoiceNumber .= $this->invoiceBegin;
+            }
+            $booking->$setMethod($invoiceNumber);
+        } else {
+            $invoiceNumber = $booking->$getMethod();
+        }
+
+        return $invoiceNumber;
+    }
+
+    /**
+     * @param Booking $booking
      * @return Booking
      */
     public function save(Booking $booking)

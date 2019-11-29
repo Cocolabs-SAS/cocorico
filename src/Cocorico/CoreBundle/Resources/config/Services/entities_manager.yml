@@ -49,6 +49,7 @@ services:
                 cocorico_vat: "%cocorico.vat%"
                 cocorico_include_vat: "%cocorico.include_vat%"
                 cocorico_bundles: "%kernel.bundles%"
+                cocorico_booking_invoice_begin: "%cocorico.booking.invoice_begin%"
 
 
     cocorico.booking_bank_wire.manager:

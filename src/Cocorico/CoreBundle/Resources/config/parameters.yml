@@ -181,6 +181,9 @@ parameters:
     #If less than 0 the time is before the moment else time is after the moment
     cocorico.booking.validated_delay: ~ #0
 
+    #Invoice initial number
+    cocorico.booking.invoice_begin: 754128
+
     #Does the bank wire checking must be done really or simulated
     #Set to true in dev env to avoid to ask to mangopay to manually validate a bank wire
     #Set to false in prod env

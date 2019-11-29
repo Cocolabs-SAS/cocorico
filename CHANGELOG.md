@@ -18,7 +18,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Changed
 - Add acceptation delay constraint in day mode
 - Replace cocorico.booking.min_start_delay parameter by cocorico.booking.min_start_time_delay in day mode
-
+- Change invoice number generation method
 
 ## [0.15.0] - (2019-03-21)
 
