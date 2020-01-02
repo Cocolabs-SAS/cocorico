@@ -133,7 +133,6 @@ class ListingSearchResultType extends AbstractType
                     'label' => false,
                     'block_name' => 'date_range',
                     'display_mode' => $this->daysDisplayMode,
-                    'min_start_time_delay' => $this->minStartTimeDelay,
                 )
             )
             ->add(
