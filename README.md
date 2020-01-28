@@ -4,14 +4,14 @@
 
 # Cocorico
 
-[![Try the demo](https://img.shields.io/badge/try-demo-green.svg)](http://demo.cocorico.io)
+[![Try the demo](https://img.shields.io/badge/try-demo-green.svg)](https://www.cocorico.io/en/demo/)
 [![Build Status](https://secure.travis-ci.org/Cocolabs-SAS/cocorico.svg)](http://travis-ci.org/Cocolabs-SAS/cocorico)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Latest Stable Version](https://poser.pugx.org/cocorico/cocorico/v/stable.svg)](https://packagist.org/packages/cocorico/cocorico)
 
-Cocorico is an open source platform sponsored by [Cocolabs](http://www.cocolabs.io) to create collaborative consumption marketplaces.
+Cocorico is an open source platform sponsored by [Cocolabs](https://www.cocolabs.io/en/?utm_source=github-cocorico) to create collaborative consumption marketplaces.
 
-A demo is available at [http://demo.cocorico.io](http://demo.cocorico.io).
+A demo is available at [http://demo.cocorico.io](https://www.cocorico.io/en/demo/).
 
 ## Documentation
 
@@ -44,4 +44,4 @@ Cocorico is released under the [MIT license](LICENSE).
 
 ## About Us
 
-Cocorico is a creation of [Cocolabs](http://www.cocolabs.io) specialist of online services sales solutions.
+Cocorico is a creation of [Cocolabs](https://www.cocolabs.io/en/?utm_source=github-cocorico) specialist of online services sales solutions.
