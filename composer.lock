@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "25e71747c0c366e76b7eb3a1728f9f87",
+    "content-hash": "77ea523408ae9e084de6fa671587e5d5",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -4436,17 +4436,17 @@
         },
         {
             "name": "oneup/uploader-bundle",
-            "version": "1.9.1",
+            "version": "1.9.4",
             "target-dir": "Oneup/UploaderBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/1up-lab/OneupUploaderBundle.git",
-                "reference": "03231b8e00cee33658243ec2071a1576280e86f5"
+                "reference": "8a6dc57c35e12fbc341e52e401a1d286475ec445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/03231b8e00cee33658243ec2071a1576280e86f5",
-                "reference": "03231b8e00cee33658243ec2071a1576280e86f5",
+                "url": "https://api.github.com/repos/1up-lab/OneupUploaderBundle/zipball/8a6dc57c35e12fbc341e52e401a1d286475ec445",
+                "reference": "8a6dc57c35e12fbc341e52e401a1d286475ec445",
                 "shasum": ""
             },
             "require": {
@@ -4507,7 +4507,7 @@
                 "plupload",
                 "upload"
             ],
-            "time": "2017-11-23T09:12:03+00:00"
+            "time": "2020-02-04T12:08:35+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -5336,7 +5336,7 @@
                 "array_column",
                 "column"
             ],
-            "abandoned": true,
+            "abandoned": "it-for-free/array_column",
             "time": "2015-03-20T22:07:39+00:00"
         },
         {
@@ -5385,6 +5385,7 @@
                 }
             ],
             "description": "Allows installation of Components via Composer.",
+            "abandoned": "oomphinc/composer-installers-extender",
             "time": "2015-08-10T12:35:38+00:00"
         },
         {
