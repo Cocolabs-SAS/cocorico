@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "77ea523408ae9e084de6fa671587e5d5",
@@ -2354,7 +2354,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -6404,7 +6404,7 @@
             "support": {
                 "source": "https://github.com/Cocolabs-SAS/SonataUserBundle/tree/4.0.2"
             },
-            "time": "2018-06-28 23:52:57"
+            "time": "2018-06-28T23:52:57+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -7595,7 +7595,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -8359,7 +8359,7 @@
                 "framework",
                 "symfony"
             ],
-            "time": "2017-11-15T09:55:17+00:00"
+            "time": "2017-12-13T15:41:53+00:00"
         },
         {
             "name": "fabpot/goutte",
@@ -9936,20 +9936,21 @@
                 }
             ],
             "description": "This bundle generates code for you",
+            "abandoned": "symfony/maker-bundle",
             "time": "2017-12-07T15:36:41+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.4.2",
+            "version": "v3.4.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "074c2e205c849a5fb37b1c24ade03cc975ac8079"
+                "reference": "a43a2f6c465a2d99635fea0addbebddc3864ad97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/074c2e205c849a5fb37b1c24ade03cc975ac8079",
-                "reference": "074c2e205c849a5fb37b1c24ade03cc975ac8079",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/a43a2f6c465a2d99635fea0addbebddc3864ad97",
+                "reference": "a43a2f6c465a2d99635fea0addbebddc3864ad97",
                 "shasum": ""
             },
             "require": {
@@ -9959,7 +9960,6 @@
                 "phpunit/phpunit": "<4.8.35|<5.4.3,>=5.0"
             },
             "suggest": {
-                "ext-zip": "Zip support is required when using bin/simple-phpunit",
                 "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
             },
             "bin": [
@@ -9969,6 +9969,10 @@
             "extra": {
                 "branch-alias": {
                     "dev-master": "3.4-dev"
+                },
+                "thanks": {
+                    "name": "phpunit/phpunit",
+                    "url": "https://github.com/sebastianbergmann/phpunit"
                 }
             },
             "autoload": {
@@ -9998,7 +10002,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2017-12-14T19:40:10+00:00"
+            "time": "2019-04-16T09:03:16+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -10204,8 +10208,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sonata-project/user-bundle": 20,
-        "symfony/phpunit-bridge": 5
+        "sonata-project/user-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
