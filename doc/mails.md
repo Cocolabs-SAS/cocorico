@@ -11,7 +11,7 @@ Translation domain is `cocorico_mail`.
 With the **[CocoricoSwiftReaderBundle](https://github.com/Cocolabs-SAS/CocoricoSwiftReaderBundle)** 
 you can now consult emails send by the platform through a web interface.
 
-By default emails send are stored in `app/spool/default` folder.
+By default emails send are stored in `var/spool/default` folder.
 If the parameter `debug_redirects` is set to true the email send will also be displayed in the profiler.
 This works only for email not send through ajax.
 

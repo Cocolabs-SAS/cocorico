@@ -153,7 +153,7 @@ Copy and paste web/.htaccess.dist and rename it to web/.htaccess. (It's configur
 
 Before starting coding, make sure that your local system is properly configured for Cocorico.
 
-Execute the `symfony_requirements` script to make sure that your local system is properly configured for Cocorico:
+Execute this script to make sure that your local system is properly configured for Cocorico:
 
     php bin/symfony_requirements
 
@@ -202,5 +202,5 @@ Enjoy!
 
 Errors and exceptions are logged and rotated at the application level:
 
-    $ tail -f app/logs/dev-yyyy-mm-dd.log
-    $ tail -f app/logs/prod-yyyy-mm-dd.log
+    $ tail -f var/logs/dev-yyyy-mm-dd.log
+    $ tail -f var/logs/prod-yyyy-mm-dd.log

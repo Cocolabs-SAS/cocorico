@@ -32,7 +32,7 @@ Cocorico works also with Nginx.
             
 #### Create your virtual host: 
 
-See [dev virtual host sample](virtual-hosts.md)
+See [dev virtual host sample](doc/virtual-hosts.md)
 
 ### MongoDB
 
@@ -165,9 +165,9 @@ Copy and paste web/.htaccess.dist and rename it to web/.htaccess. (It's configur
 
 Before starting coding, make sure that your local system is properly configured for Cocorico.
 
-Execute the `check.php` script to make sure that your local system is properly configured for Cocorico:
+Execute this script to make sure that your local system is properly configured for Cocorico:
 
-    php app/check.php
+    php bin/symfony_requirements
 
 The script returns a status code of `0` if all mandatory requirements are met, `1` otherwise.
 
