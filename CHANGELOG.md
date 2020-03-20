@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+- Add default FB og:image
 
 ### Fixed
 - Fix update "unread" message in dashboard
