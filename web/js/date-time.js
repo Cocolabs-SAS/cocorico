@@ -212,6 +212,15 @@ function initDatePickerAjax(callbackSuccess, parentDatesElt) {
                 if (from.val() && to.val() && input.is(to) && !input.is(":focus")) {
                     submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
                 }
+            },
+            onClose: function () {
+                //Handle end date not manually selected in range mode
+                var input = $(this);
+                if (input.is(to) && to.attr('type') === 'text') {
+                    if (from.val() && to.val() && to.is(":focus")) {
+                        submitDatePickerAjaxForm(callbackSuccess, parentDatesElt);
+                    }
+                }
             }
         });
 
