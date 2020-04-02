@@ -12,6 +12,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type;
 
+use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\CountryType as BaseCountryType;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,7 +47,12 @@ class CountryFilteredType extends BaseCountryType
 
         $resolver->setDefaults(
             array(
-                'choices' => array_flip($countries),
+//                'choices' => array_flip($countries),
+                'choice_loader' => new CallbackChoiceLoader(
+                    function () use ($countries) {
+                        return array_flip($countries);
+                    }
+                ),
                 'preferred_choices' => $this->favoriteCountries,
                 'required' => true,
             )
