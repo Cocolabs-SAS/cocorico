@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="http://docs.cocorico.io/images/logo_cocorico.png" alt="Cocorico"/>
+    <img src="http://docs.cocorico.io/images/logo_cocorico_20.png" alt="Cocorico"/>
 </h1>
 
 # Cocorico
