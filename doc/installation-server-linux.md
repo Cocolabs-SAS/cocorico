@@ -1,5 +1,12 @@
 # Linux Installation 
 
+## Minimum hardware requirements
+- RAM: 2GB
+- Processor: ~2.0GHz
+- Disk Space: 4GB
+
+For example a AWS t3a.small instance is enough to run a Cocorico application. See https://aws.amazon.com/fr/ec2/instance-types/t3/.
+
 ## Apache 2 (or Nginx)
 
 Activate following modules
