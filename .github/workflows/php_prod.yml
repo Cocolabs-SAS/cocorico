@@ -1,0 +1,24 @@
+name: PHP Prod Deploy
+
+on:
+  push:
+    branches-ignore: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # See https://github.com/marketplace/actions/deploy-to-clever-cloud
+    - uses: actions/checkout@v2
+    - name: Local shallow copy
+      run: git fetch --prune --unshallow
+
+    # Deploy to clever cloud
+    - name: Deploy to Prod
+      uses: 47ng/actions-clever-cloud@v1
+      with:
+        timeout: 1800
+        appID: ${{ secrets.APP_STAGING }}
+      env:
+        CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+        CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
