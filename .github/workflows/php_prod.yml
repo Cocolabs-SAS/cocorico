@@ -63,7 +63,6 @@ jobs:
     - name: Deploy to Prod
       uses: 47ng/actions-clever-cloud@v1
       with:
-        timeout: 1800
         appID: ${{ secrets.APP_PROD }}
       env:
         CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
