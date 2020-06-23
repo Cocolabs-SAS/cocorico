@@ -2,9 +2,55 @@ name: PHP Prod Deploy
 
 on:
   push:
-    branches-ignore: [ master ]
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    services:
+     mysql:
+      image: mysql:5.7
+      env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mysql
+      ports:
+          - 3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Pre script
+      run: clevercloud/pre_build_hook.sh
+      env:
+        MYSQL_ADDON_HOST: 127.0.0.1
+        MYSQL_ADDON_PORT: ${{ job.services.mysql.ports[3306] }}
+        MYSQL_ADDON_DB: mysql
+        MYSQL_ADDON_USER: root
+        MYSQL_ADDON_PASSWORD: root
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        BASE_URL: 'http://localhost'
+        MONGODB_ADDON_DB: 'mongodb://localhost:27017'
+        MONGODB_ADDON_URI: 'cocorico'
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    - name: Install dependencies
+      if: steps.composer-cache.outputs.cache-hit != 'true'
+      run: composer install --prefer-dist --no-progress --no-suggest
+    
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +64,7 @@ jobs:
       uses: 47ng/actions-clever-cloud@v1
       with:
         timeout: 1800
-        appID: ${{ secrets.APP_STAGING }}
+        appID: ${{ secrets.APP_PROD }}
       env:
         CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
         CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
