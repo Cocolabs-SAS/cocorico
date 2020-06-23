@@ -74,7 +74,6 @@
     "php-http/guzzle6-adapter": "^1.1",
     "php-http/message": "^1.6",
     "ramsey/array_column": "~1.1",
-    "sensio/distribution-bundle": "^5.0",
     "sensio/framework-extra-bundle": "^5.1",
     "simplethings/entity-audit-bundle": "^1.0",
     "sonata-project/admin-bundle": "^3.28",
@@ -105,7 +104,8 @@
     "sensio/generator-bundle": "^3.1",
     "symfony/phpunit-bridge": "3.4.*@RC",
     "vipsoft/doctrine-data-fixtures-extension": "^3.3",
-    "wikimedia/composer-merge-plugin": "^1.4"
+    "wikimedia/composer-merge-plugin": "^1.4",
+    "sensio/distribution-bundle": "^5.0"
   },
   "scripts": {
     "symfony-scripts": [
@@ -126,7 +126,8 @@
   "config": {
     "bin-dir": "bin",
     "component-dir": "web/assets",
-    "sort-packages": true
+    "sort-packages": true,
+    "preferred-install": "dist"
   },
   "extra": {
     "symfony-app-dir": "app",
