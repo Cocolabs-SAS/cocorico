@@ -12,13 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     services:
      mysql:
-            image: mysql:5.7
-            env:
-                MYSQL_ALLOW_EMPTY_PASSWORD: yes
-                MYSQL_DATABASE: mysql
-            ports:
-                - 3306
-            options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      image: mysql:5.7
+      env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_USER: root
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: mysql
+      ports:
+          - 3306
+      options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
     - uses: actions/checkout@v2
@@ -26,16 +28,17 @@ jobs:
     - name: Pre script
       run: clevercloud/pre_build_hook.sh
       env:
-        MYSQL_ADDON_HOST: 'localhost'
-        MYSQL_ADDON_PORT: '3306'
-        MYSQL_ADDON_USER: 'root'
-        MYSQL_ADDON_PASSOWRD: ''
-        BASE_URL: ''
-        MONGODB_ADDON_DB: ''
-        MONGODB_ADDON_URI: ''
+        MYSQL_ADDON_HOST: 127.0.0.1
+        MYSQL_ADDON_PORT: ${{ job.services.mysql.ports[3306] }}
+        MYSQL_ADDON_DB: mysql
+        MYSQL_ADDON_USER: root
+        MYSQL_ADDON_PASSWORD: root
+        DB_PORT: ${{ job.services.mysql.ports[3306] }}
+        BASE_URL: 'http://localhost'
+        MONGODB_ADDON_DB: 'mongodb://localhost:27017'
+        MONGODB_ADDON_URI: 'cocorico'
     - name: Validate composer.json and composer.lock
       run: composer validate
-      
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2
@@ -44,11 +47,9 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
-        
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
