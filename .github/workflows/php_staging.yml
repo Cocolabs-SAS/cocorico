@@ -1,8 +1,8 @@
 name: PHP Staging Deploy
 
 on:
-  push:
-    branches-ignore: [ master ]
+  pull-request:
+    branches: [ master ]
 
 jobs:
   deploy:
