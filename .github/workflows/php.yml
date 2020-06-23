@@ -50,9 +50,20 @@ jobs:
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
+    
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # See https://github.com/marketplace/actions/deploy-to-clever-cloud
+    # Make shallow copy
+    - uses: actions/checkout@v2
+    - run: git fetch --prune --unshallow
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
-
-    # - name: Run test suite
-    #   run: composer run-script test
+    # Deploy to clever cloud
+    - uses: 47ng/actions-clever-cloud@v1
+    with:
+      timeout: 1800
+      appID: ${{ secrets.APP_PROD }}
+    env:
+      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
