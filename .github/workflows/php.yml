@@ -55,15 +55,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # See https://github.com/marketplace/actions/deploy-to-clever-cloud
-    # Make shallow copy
-    - uses: actions/checkout@v2
-    - run: git fetch --prune --unshallow
+    - name: Local shallow copy
+      uses: actions/checkout@v2
+      run: git fetch --prune --unshallow
 
     # Deploy to clever cloud
-    - uses: 47ng/actions-clever-cloud@v1
-    with:
-      timeout: 1800
-      appID: ${{ secrets.APP_PROD }}
-    env:
-      CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
-      CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+    - name: Deploy to Prod
+      uses: 47ng/actions-clever-cloud@v1
+      with:
+        timeout: 1800
+        appID: ${{ secrets.APP_PROD }}
+      env:
+        CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
+        CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
