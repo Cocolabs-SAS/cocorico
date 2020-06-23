@@ -14,7 +14,7 @@ jobs:
       run: git fetch --prune --unshallow
     # Deploy to clever cloud
     - name: Deploy to Staging
-      uses: 47ng/actions-clever-cloud@v1
+      uses: PieterjanMontens/actions-clever-cloud@master
       with:
         appID: ${{ secrets.APP_STAGING }}
       env:
