@@ -25,6 +25,14 @@ jobs:
 
     - name: Pre script
       run: clevercloud/pre_build_hook.sh
+      env:
+        MYSQL_ADDON_HOST: 'localhost'
+        MYSQL_ADDON_PORT: '3306'
+        MYSQL_ADDON_USER: 'root'
+        MYSQL_ADDON_PASSOWRD: ''
+        BASE_URL: ''
+        MONGODB_ADDON_DB: ''
+        MONGODB_ADDON_URI: ''
     - name: Validate composer.json and composer.lock
       run: composer validate
       
@@ -40,14 +48,6 @@ jobs:
     - name: Install dependencies
       if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer install --prefer-dist --no-progress --no-suggest
-      env:
-        MYSQL_ADDON_HOST: 'localhost'
-        MYSQL_ADDON_PORT: '3306'
-        MYSQL_ADDON_USER: 'root'
-        MYSQL_ADDON_PASSOWRD: ''
-        BASE_URL: ''
-        MONGODB_ADDON_DB: ''
-        MONGODB_ADDON_URI: ''
         
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
