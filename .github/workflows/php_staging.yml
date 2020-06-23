@@ -1,7 +1,7 @@
 name: PHP Staging Deploy
 
 on:
-  pull-request:
+  pull_request:
     branches: [ master ]
 
 jobs:
