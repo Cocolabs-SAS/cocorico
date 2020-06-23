@@ -2196,7 +2196,7 @@ fieldset[disabled] .btn {
 
 .btn-default {
     color: #ffffff;
-    background-color: #c6ccd2;
+    background-color: #007bff;
     border-color: transparent;
 }
 
@@ -2206,7 +2206,7 @@ fieldset[disabled] .btn {
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
     color: #ffffff;
-    background-color: #afb8c0;
+    background-color: #0069d9;
     border-color: rgba(0, 0, 0, 0);
 }
 
@@ -5884,7 +5884,8 @@ span.btn:focus {
 /* visual */
 .visual {
     margin: 0 0 50px;
-    background: url(../images/bg-section.png) no-repeat 50% 0 #58595b;
+    /*background: url(../images/bg-section.png) no-repeat 50% 0 #58595b; */
+    background: linear-gradient( 180deg, rgba(0,49,137,1) 0%, rgba(49,151,223,1) 32%, rgba(205,237,251,1) 70%, rgba(173,240,188,1) 100% )
 }
 
 .visual .title-holder {

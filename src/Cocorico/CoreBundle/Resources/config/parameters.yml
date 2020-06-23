@@ -1,48 +1,50 @@
 parameters:
     #### Environment independent parameters. Same values in dev, staging, prod environments  ####
     #Site general info
-    cocorico.site_name: Cocorico
-    cocorico.phone: +33(0) 1 43 79 86 30
-    cocorico.address: 67 rue de Provence, 75009
-    cocorico.short_description: 'Cocorico is collaborative consumption platform'
-    cocorico.contact_mail: contact@cocorico.io
+    cocorico.site_name: Place de marché inclusion.beta.gouv.fr
+    cocorico.phone: +33(0) 1 23 45 67 89
+    cocorico.address: 20 Avenue de Ségur, 75007 Paris
+    cocorico.short_description: "Plateforme de l'inclusion en expérimentation"
+    cocorico.contact_mail: contact@inclusion.beta.gouv.fr
     #To obfuscate see http://wbwip.com/wbw/emailencoder.html
-    cocorico.contact_mail_obfuscated: "&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#099;&#111;&#099;&#111;&#114;&#105;&#099;&#111;&#046;&#105;&#111;"
-    cocorico.from_email: no-reply@cocorico.io
-    cocorico.webmaster_email: webmaster@cocorico.io
+    cocorico.contact_mail_obfuscated: "&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#105;&#110;&#099;&#108;&#117;&#115;&#105;&#111;&#110;&#046;&#098;&#101;&#116;&#097;&#046;&#103;&#111;&#117;&#118;&#046;&#102;&#114;"
+    cocorico.from_email: no-reply@inclusion.beta.gouv.fr
+    cocorico.webmaster_email: contact@inclusion.beta.gouv.fr
     cocorico.vat_number: FR 12 123 456 789
-    cocorico.home_rss_feed: 'http://www.cocolabs.io/fr/feed/'
+    cocorico.home_rss_feed: 'None'
 
     #Languages
     #For knp translatable
-    locale: en
+    locale: fr
 
-    cocorico.locale: en
+    cocorico.locale: fr
     cocorico.locales:
-            - en
+            # - en
             - fr
-    cocorico.locales_string: en|fr
+    # cocorico.locales_string: en|fr
+    cocorico.locales_string: fr
     #Currencies
     cocorico.currency: EUR
     cocorico.currencies_for_lexik:
         - EUR
-        - USD
-        - GBP
-        - CHF
-        - CAD
-        - JPY
-        - RUB
-        - AUD
+    #     - USD
+    #     - GBP
+    #     - CHF
+    #     - CAD
+    #     - JPY
+    #     - RUB
+    #     - AUD
     cocorico.currencies:
         EUR: €
-        USD: $
-        GBP: £
-        CHF: CHF
-        CAD: $ CAD
-        JPY: ¥
-        RUB: руб
-        AUD: $ AUD
-    cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
+    #    USD: $
+    #    GBP: £
+    #    CHF: CHF
+    #    CAD: $ CAD
+    #    JPY: ¥
+    #    RUB: руб
+    #    AUD: $ AUD
+    cocorico.currencies_string: EUR
+    # cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
     cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
 
     #Does VAT is included in prices fixing

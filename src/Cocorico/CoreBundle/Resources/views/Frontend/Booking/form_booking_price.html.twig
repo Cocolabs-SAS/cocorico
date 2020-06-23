@@ -31,12 +31,14 @@
         {% endif %}
         {% set amount = amount | format_price(app.request.locale, 0) %}
 
+        <!--
         <strong class="price">
             {{ amount }}
             <sup>
                 <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
             </sup> *
         </strong>
+        -->
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
             {% include 'CocoricoDeliveryBundle:Frontend:Booking/_show_delivery.html.twig' with {
