@@ -55,8 +55,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # See https://github.com/marketplace/actions/deploy-to-clever-cloud
+    - uses: actions/checkout@v2
     - name: Local shallow copy
-      uses: actions/checkout@v2
       run: git fetch --prune --unshallow
 
     # Deploy to clever cloud
