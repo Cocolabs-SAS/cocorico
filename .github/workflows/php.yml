@@ -45,6 +45,9 @@ jobs:
         MYSQL_ADDON_PORT: '3306'
         MYSQL_ADDON_USER: 'root'
         MYSQL_ADDON_PASSOWRD: ''
+        BASE_URL: ''
+        MONGODB_ADDON_DB: ''
+        MONGODB_ADDON_URI: ''
         
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
