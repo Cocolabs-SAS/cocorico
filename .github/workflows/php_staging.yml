@@ -12,7 +12,6 @@ jobs:
     - uses: actions/checkout@v2
     - name: Local shallow copy
       run: git fetch --prune --unshallow
-
     # Deploy to clever cloud
     - name: Deploy to Staging
       uses: 47ng/actions-clever-cloud@v1
