@@ -7,6 +7,7 @@ on:
     branches: [ master ]
 
 
+services:
  mysql:
         image: mysql:5.7
         env:
@@ -24,6 +25,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Pre script
+      run: clevercloud/pre_build_hook.sh
     - name: Validate composer.json and composer.lock
       run: composer validate
       
