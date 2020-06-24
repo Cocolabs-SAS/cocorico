@@ -53,7 +53,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # See https://github.com/marketplace/actions/deploy-to-clever-cloud
-    - uses: actions/checkout@v2
+    # - uses: actions/checkout@v2
+    # Use fork that forces deploy even if commits conflict (clever cloud "feature/bug")
+    - uses: PieterjanMontens/actions-clever-cloud@master
     - name: Local shallow copy
       run: git fetch --prune --unshallow
 
