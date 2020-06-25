@@ -9,3 +9,10 @@ for key in $var_list; do
     sed -i -e 's|%'"$key"'%|'"${!key}"'|' ./app/config/parameters.yml
 done
 cat ./app/config/parameters.yml
+
+# Install persistent upload folder
+echo "Synchronising upload folder"
+rsync -r ./web/uploads/ ./web/uploads2/
+# Force link to new folder
+mv ./web/uploads{,.old}
+ln -fs `pwd`/web/uploads2 `pwd`/web/uploads
