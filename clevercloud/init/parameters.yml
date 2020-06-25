@@ -7,10 +7,10 @@ parameters:
     mongodb_server: '%MONGODB_ADDON_URI%'
     mongodb_database_name: '%MONGODB_ADDON_DB%'
     mailer_transport: smtp
-    mailer_host: localhost
-    mailer_user: null
-    mailer_password: null
-    mailer_port: null
+    mailer_host: '%SMTP_HOST%'
+    mailer_user: '%SMTP_USER%'
+    mailer_password: '%SMTP_PASSWORD%'
+    mailer_port: '%SMTP_PORT%'
     secret: d69958a4fff6ba8f0f4fc4fc2657366ccf9dd0f3
     use_assetic_controller: false
     cocorico.assets_base_urls: '%BASE_SCHEME%://%BASE_HOST%'
