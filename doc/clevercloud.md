@@ -1,6 +1,5 @@
 ### Clever cloud deployment log
 
-
 ## Installation steps
 ### Environment
 Create application, add mongodb and mysql addons

@@ -13,9 +13,11 @@ parameters:
     mailer_port: null
     secret: d69958a4fff6ba8f0f4fc4fc2657366ccf9dd0f3
     use_assetic_controller: false
-    cocorico.assets_base_urls: '%BASE_URL%'
-    router.request_context.host: localhost
-    router.request_context.scheme: http
+    cocorico.assets_base_urls: '%BASE_SCHEME%://%BASE_HOST%'
+    router.request_context.host: 'localhost'
+    router.request_context.scheme: 'http'
+#    router.request_context.host: '%BASE_HOST%'
+#    router.request_context.scheme: '%BASE_SCHEME%'
     router.request_context.base_url: ''
     cocorico.admin: admin
     cocorico.admin_translation: false
@@ -26,8 +28,8 @@ parameters:
     cocorico.image_driver: imagick
     cocorico.google_analytics: UA-64445856-1
     cocorico.google_tag_manager: false
-    cocorico_geo.google_place_api_key: null
-    cocorico_geo.google_place_server_api_key: null
+    cocorico_geo.google_place_api_key: '%GGL_KEY1%'
+    cocorico_geo.google_place_server_api_key: '%GGL_KEY2'
     cocorico_geo.ipinfodb_api_key: null
     cocorico.deploy.host: fake.cocorico.prod
     cocorico.deploy.dir: /fake/path

@@ -90,4 +90,7 @@ security:
         #Dashboard
         - { path: ^/(%cocorico.locales_string%)/(dashboard|tableau-de-bord)/, role: IS_AUTHENTICATED_FULLY }
 
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/.*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https, host: bitoubi-staging\.cleverapps\.io$ }
+        # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https, host: lemarche\.inclusion\.beta\.gouv\.fr$ }
+        # - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: http, host: localhost$ }
