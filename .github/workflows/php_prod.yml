@@ -55,13 +55,13 @@ jobs:
     # See https://github.com/marketplace/actions/deploy-to-clever-cloud
     # - uses: actions/checkout@v2
     # Use fork that forces deploy even if commits conflict (clever cloud "feature/bug")
-    - uses: PieterjanMontens/actions-clever-cloud@master
+    - uses: actions/checkout@v2
     - name: Local shallow copy
       run: git fetch --prune --unshallow
 
     # Deploy to clever cloud
     - name: Deploy to Prod
-      uses: 47ng/actions-clever-cloud@v1
+    - uses: PieterjanMontens/actions-clever-cloud@master
       with:
         appID: ${{ secrets.APP_PROD }}
       env:
