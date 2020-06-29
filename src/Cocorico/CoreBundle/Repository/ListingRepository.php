@@ -350,4 +350,7 @@ class ListingRepository extends EntityRepository
 
         return $queryBuilder->getQuery()->getResult();
     }
+
+    /* FIXME: Add tests for frequence and surface data
+    */
 }

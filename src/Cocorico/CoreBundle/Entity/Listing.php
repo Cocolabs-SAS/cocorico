@@ -35,6 +35,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="max_duration_idx", columns={"max_duration"}),
  *    @ORM\Index(name="average_rating_idx", columns={"average_rating"}),
  *    @ORM\Index(name="admin_notation_idx", columns={"admin_notation"}),
+ *    @ORM\Index(name="surface_type", columns={"surface_type"}),
+ *    @ORM\Index(name="surface_m2", columns={"surface_m2"}),
+ *    @ORM\Index(name="frequency_period", columns={"frequency_period"}),
+ *    @ORM\Index(name="frequency_hours", columns={"frequency_hours"}),
  *  })
  */
 class Listing extends BaseListing
