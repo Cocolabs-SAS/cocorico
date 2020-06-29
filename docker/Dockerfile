@@ -40,6 +40,7 @@ RUN apt-get install -y \
         php7.3-xml \
         php7.3-intl \
         php-dom \
+        php-imagick \
         php-mongodb \
         php-mysql
 

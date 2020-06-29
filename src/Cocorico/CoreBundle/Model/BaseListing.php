@@ -120,10 +120,10 @@ abstract class BaseListing
     protected $type;
 
     /**
-     * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=false)
+     * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=true)
      * @Assert\NotBlank(message="assert.not_blank")
      *
-     * @var integer
+     * @var integer|null
      */
     protected $price;
 
@@ -335,6 +335,9 @@ abstract class BaseListing
      */
     public function getPriceDecimal()
     {
+        if (!$this->price) {
+            return 0;
+        }
         return $this->price / 100;
     }
 

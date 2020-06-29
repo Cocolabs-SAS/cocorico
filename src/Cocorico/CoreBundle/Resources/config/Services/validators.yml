@@ -7,22 +7,22 @@ services:
             - "%cocorico.listing_img_max%"
             - "%cocorico.listing_img_min%"
             - "%cocorico.listing_category_min%"
-            - "%cocorico.listing_price_min%"
+            # - "%cocorico.listing_price_min%"
             - "%cocorico.listing_countries%"
         tags:
             - { name: validator.constraint_validator, alias: listing }
 
     cocorico.listing_availability_validator:
         class: Cocorico\CoreBundle\Validator\Constraints\ListingAvailabilityValidator
-        arguments:
-            - "%cocorico.listing_price_min%"
+        arguments: []
+            # - "%cocorico.listing_price_min%"
         tags:
             - { name: validator.constraint_validator, alias: listing_availability }
 
     cocorico.listing_availabilities_price_validator:
         class: Cocorico\CoreBundle\Validator\Constraints\ListingAvailabilitiesPriceValidator
-        arguments:
-            - "%cocorico.listing_price_min%"
+        arguments: [] 
+            # - "%cocorico.listing_price_min%"
         tags:
             - { name: validator.constraint_validator, alias: listing_availabilities_price }
 
