@@ -8,7 +8,7 @@
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_description = listing_translation.description|strip_private_info %}
 {% set listing_location = listing.location %}
-{% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+{% set price = 5 %}
 {% set listing_user = listing.user %}
 
 {%- block meta_title -%}
@@ -283,11 +283,6 @@
                                 ({{ 'listing.show.nb_comments'|transchoice(listing.commentCount) }})
                             </span>
                         </div>
-
-                        {#booking form#}
-                        {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
-                            'listing': listing
-                        })) }}
 
                         <section class="widget prices-conditions">
                             <h2>{{ 'listing.show.policy.title'|trans }}</h2>

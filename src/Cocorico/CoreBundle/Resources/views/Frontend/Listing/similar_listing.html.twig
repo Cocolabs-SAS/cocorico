@@ -8,7 +8,7 @@
         {%- for result in results.getIterator() -%}
             {% set listing = result[0] %}
             {% set listing_translation = listing.translations[app.request.locale] %}
-            {% set price = (listing.price / 100) | format_price(app.request.locale, 0) %}
+            {% set price = 5 %}
             {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
             <article class="post">
@@ -20,6 +20,7 @@
                              src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xsmall') }}">
 
                         <div class="listing-post head">
+                            {#
                             <div class="time-price">
                                 <strong class="price">
                                     {{ price }}
@@ -29,6 +30,7 @@
                                     /{{ (0)|add_time_unit_text|first }}
                                 </strong>
                             </div>
+                            #}
                         </div>
 
                         {% if listing.averageRating %}

@@ -78,13 +78,13 @@ class ListingValidator extends ConstraintValidator
         }
 
         //Price
-        if ($listing->getPrice() < $this->minPrice) {
-            $this->context->buildViolation($constraint::$messageMinPrice)
-                ->atPath('price')
-                ->setParameter('{{ min_price }}', $this->minPrice / 100)
-                ->setTranslationDomain('cocorico_listing')
-                ->addViolation();
-        }
+        // if ($listing->getPrice() < $this->minPrice) {
+        //     $this->context->buildViolation($constraint::$messageMinPrice)
+        //         ->atPath('price')
+        //         ->setParameter('{{ min_price }}', $this->minPrice / 100)
+        //         ->setTranslationDomain('cocorico_listing')
+        //         ->addViolation();
+        // }
 
         //Duration
         if ($listing->getMinDuration() && $listing->getMaxDuration() &&
