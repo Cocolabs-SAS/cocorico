@@ -111,7 +111,7 @@ class ListingFormHandler
     {
         //Files to upload
         $imagesUploaded = $this->request->request->get("listing");
-        //$imagesUploaded = $imagesUploaded["image"]["uploaded"];
+        $imagesUploaded = $imagesUploaded["image"]["uploaded"];
 
         if ($imagesUploaded) {
             $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));

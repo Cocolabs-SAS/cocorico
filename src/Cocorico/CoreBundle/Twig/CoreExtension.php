@@ -15,7 +15,7 @@ namespace Cocorico\CoreBundle\Twig;
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Utils\PHP;
-use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
+# use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
@@ -42,12 +42,12 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
     protected $allowSingleDay;
     protected $endDayIncluded;
     protected $listingDefaultStatus;
-    protected $listingPricePrecision;
+    # protected $listingPricePrecision;
     protected $currencies;
     protected $defaultCurrency;
     protected $currentCurrency;
-    protected $priceMin;
-    protected $priceMax;
+    # protected $priceMin;
+    # protected $priceMax;
     protected $feeAsOfferer;
     protected $feeAsAsker;
     protected $displayMarker;
@@ -55,7 +55,7 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
     protected $bookingAcceptationDelay;
     protected $bookingValidationMoment;
     protected $bookingValidationDelay;
-    protected $bookingPriceMin;
+    # protected $bookingPriceMin;
     protected $vatRate;
     protected $includeVat;
     protected $displayVat;
@@ -110,11 +110,11 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         //Status
         $this->listingDefaultStatus = $parameters["cocorico_listing_availability_status"];
 
-        //Prices
-        $this->listingPricePrecision = $parameters["cocorico_listing_price_precision"];
-        $this->priceMin = $parameters["cocorico_listing_price_min"];
-        $this->priceMax = $parameters["cocorico_listing_price_max"];
-        $this->bookingPriceMin = $parameters["cocorico_booking_price_min"];
+        # //Prices
+        # $this->listingPricePrecision = $parameters["cocorico_listing_price_precision"];
+        # $this->priceMin = $parameters["cocorico_listing_price_min"];
+        # $this->priceMax = $parameters["cocorico_listing_price_max"];
+        # $this->bookingPriceMin = $parameters["cocorico_booking_price_min"];
 
         //Map
         $this->displayMarker = $parameters["cocorico_listing_map_display_marker"];
@@ -151,7 +151,7 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
             new Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
             new Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new Twig_SimpleFilter('ucwords', 'ucwords'),
-            new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
+            # new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
             new Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
         );
     }
@@ -204,36 +204,36 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         }
     }
 
-    /**
-     * @param int    $price
-     * @param string $locale
-     * @param int    $precision
-     * @param bool   $convert
-     * @return string
-     */
-    public function formatPriceFilter($price, $locale, $precision = null, $convert = true)
-    {
-        if (is_null($precision)) {
-            $precision = $this->listingPricePrecision;
-        }
+    // /**
+    //  * @param int    $price
+    //  * @param string $locale
+    //  * @param int    $precision
+    //  * @param bool   $convert
+    //  * @return string
+    //  */
+    // public function formatPriceFilter($price, $locale, $precision = null, $convert = true)
+    // {
+    //     if (is_null($precision)) {
+    //         $precision = $this->listingPricePrecision;
+    //     }
 
-        $targetCurrency = $this->currentCurrency;
-        if (!$convert) {
-            $targetCurrency = $this->defaultCurrency;
-        }
+    //     $targetCurrency = $this->currentCurrency;
+    //     if (!$convert) {
+    //         $targetCurrency = $this->defaultCurrency;
+    //     }
 
-        $this->currencyExtension->getFormatter()->setLocale($locale);
-        if ($price > 0) {
-            $price = $this->currencyExtension->convert($price, $targetCurrency, !$precision);
-        } else {
-            $price = 0;
-        }
+    //     $this->currencyExtension->getFormatter()->setLocale($locale);
+    //     if ($price > 0) {
+    //         $price = $this->currencyExtension->convert($price, $targetCurrency, !$precision);
+    //     } else {
+    //         $price = 0;
+    //     }
 
-        $price = $this->currencyExtension->format($price, $targetCurrency, $precision);
+    //     $price = $this->currencyExtension->format($price, $targetCurrency, $precision);
 
 
-        return $price;
-    }
+    //     return $price;
+    // }
 
     /**
      * @param string $text
@@ -432,12 +432,12 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
             'allowSingleDay' => $this->allowSingleDay,
             'endDayIncluded' => $this->endDayIncluded,
             'listingDefaultStatus' => $this->listingDefaultStatus,
-            'listingPricePrecision' => $this->listingPricePrecision,
+            // 'listingPricePrecision' => $this->listingPricePrecision,
             'currencies' => $this->currencies,
             'defaultCurrency' => $this->defaultCurrency,
             'currentCurrency' => $this->currentCurrency,
-            'priceMin' => $this->priceMin,
-            'priceMax' => $this->priceMax,
+            // 'priceMin' => $this->priceMin,
+            // 'priceMax' => $this->priceMax,
             'feeAsOfferer' => $this->feeAsOfferer,
             'feeAsAsker' => $this->feeAsAsker,
             'displayMarker' => $this->displayMarker,
@@ -445,7 +445,7 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
             'bookingAcceptationDelay' => $this->bookingAcceptationDelay,
             'bookingValidationMoment' => $this->bookingValidationMoment,
             'bookingValidationDelay' => $this->bookingValidationDelay,
-            'bookingPriceMin' => $this->bookingPriceMin,
+            //'bookingPriceMin' => $this->bookingPriceMin,
             'vatRate' => $this->vatRate,
             'includeVat' => $this->includeVat,
             'displayVat' => $this->displayVat,

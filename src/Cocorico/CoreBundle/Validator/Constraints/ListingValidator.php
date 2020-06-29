@@ -32,13 +32,13 @@ class ListingValidator extends ConstraintValidator
      * @param               $minPrice
      * @param               $countries
      */
-    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $minPrice, $countries)
+    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $countries)
     {
         $this->emr = $emr;
         $this->maxImages = $maxImages;
         $this->minImages = $minImages;
         $this->minCategories = $minCategories;
-        $this->minPrice = $minPrice;
+        $this->minPrice = 5;
         $this->countries = $countries;
     }
 

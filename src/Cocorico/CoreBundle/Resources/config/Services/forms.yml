@@ -33,12 +33,12 @@ services:
         tags:
             - { name: form.type }
 
-    cocorico.form.type.listing_edit_price:
-        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType
-        arguments:
-            - "@event_dispatcher"
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.listing_edit_price:
+    #     class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType
+    #     arguments:
+    #         - "@event_dispatcher"
+    #     tags:
+    #         - { name: form.type }
 
     cocorico.form.type.listing_edit_images:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditImagesType
@@ -77,16 +77,16 @@ services:
         tags:
             - { name: form.type }
 
-    cocorico.form.type.listing_edit_availabilities_prices:
-        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType
-        parent: cocorico.form.type.listing_edit_availabilities
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.listing_edit_availabilities_prices:
+    #     class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesPricesType
+    #     parent: cocorico.form.type.listing_edit_availabilities
+    #     tags:
+    #         - { name: form.type }
 
-    cocorico.form.type.listing_edit_availability_price:
-        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityPriceType
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.listing_edit_availability_price:
+    #     class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilityPriceType
+    #     tags:
+    #         - { name: form.type }
 
     cocorico.form.type.listing_new_categories:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCategoriesType
@@ -122,22 +122,22 @@ services:
         tags:
             - { name: form.type }
 
-    cocorico.form.type.price:
-        class: Cocorico\CoreBundle\Form\Type\PriceType
-        arguments:
-            - "%cocorico.currency%"
-            - "%cocorico.listing_price_precision%"
-            - "@lexik_currency.converter"
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.price:
+    #     class: Cocorico\CoreBundle\Form\Type\PriceType
+    #     arguments:
+    #         - "%cocorico.currency%"
+    #         - "%cocorico.listing_price_precision%"
+    #         - "@lexik_currency.converter"
+    #     tags:
+    #         - { name: form.type }
 
-    cocorico.form.type.price_range:
-        class: Cocorico\CoreBundle\Form\Type\PriceRangeType
-        arguments:
-            - "@session"
-            - "%cocorico.currency%"
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.price_range:
+    #     class: Cocorico\CoreBundle\Form\Type\PriceRangeType
+    #     arguments:
+    #         - "@session"
+    #         - "%cocorico.currency%"
+    #     tags:
+    #         - { name: form.type }
 
     cocorico.form.type.entity_hidden:
         class: Cocorico\CoreBundle\Form\Type\EntityHiddenType
@@ -223,16 +223,16 @@ services:
         tags:
             - { name: form.type }
 
-    cocorico.form.type.booking_price:
-        class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
-        arguments:
-            - "%cocorico.booking.allow_single_day%"
-            - "%cocorico.booking.end_day_included%"
-            - "%cocorico.days_display_mode%"
-            - "%cocorico.times_display_mode%"
-            - "%cocorico.time_unit%"
-        tags:
-            - { name: form.type }
+    # cocorico.form.type.booking_price:
+    #     class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
+    #     arguments:
+    #         - "%cocorico.booking.allow_single_day%"
+    #         - "%cocorico.booking.end_day_included%"
+    #         - "%cocorico.days_display_mode%"
+    #         - "%cocorico.times_display_mode%"
+    #         - "%cocorico.time_unit%"
+    #     tags:
+    #         - { name: form.type }
 
     #Booking user address
     cocorico.form.type.booking_user_address:
