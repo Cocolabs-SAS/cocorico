@@ -3,6 +3,9 @@ Cette version de [cocorico](https://www.cocorico.io/) est adaptée pour les beso
 spécifiques de la place de marché de l'inclusion, le _chantier 4_ de la start-up d'état
 [itou](https://beta.gouv.fr/startups/itou.html).
 
+---
+
+
 <h1 align="center">
     <img src="http://docs.cocorico.io/images/logo_cocorico_20.png" alt="Cocorico"/>
 </h1>
