@@ -284,6 +284,12 @@
                             </span>
                         </div>
 
+                        {#booking form#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
+                            'listing': listing
+                        })) }}
+
+
                         <section class="widget prices-conditions">
                             <h2>{{ 'listing.show.policy.title'|trans }}</h2>
                             <ul>

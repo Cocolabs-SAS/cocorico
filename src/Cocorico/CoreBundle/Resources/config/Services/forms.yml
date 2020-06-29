@@ -223,16 +223,16 @@ services:
         tags:
             - { name: form.type }
 
-    # cocorico.form.type.booking_price:
-    #     class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
-    #     arguments:
-    #         - "%cocorico.booking.allow_single_day%"
-    #         - "%cocorico.booking.end_day_included%"
-    #         - "%cocorico.days_display_mode%"
-    #         - "%cocorico.times_display_mode%"
-    #         - "%cocorico.time_unit%"
-    #     tags:
-    #         - { name: form.type }
+    cocorico.form.type.booking_price:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
+        arguments:
+            - "%cocorico.booking.allow_single_day%"
+            - "%cocorico.booking.end_day_included%"
+            - "%cocorico.days_display_mode%"
+            - "%cocorico.times_display_mode%"
+            - "%cocorico.time_unit%"
+        tags:
+            - { name: form.type }
 
     #Booking user address
     cocorico.form.type.booking_user_address:
