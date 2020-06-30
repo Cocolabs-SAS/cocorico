@@ -1,0 +1,77 @@
+
+<section class="widget reservation ajax-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'id': 'quote-form', 'class': 'date-selection'}}) }}
+
+    {{ form_errors(form) }}
+
+    <fieldset>
+        <legend class="hidden">quote</legend>
+        <h4>Demander un devis</h4>
+
+        {{ form_widget(form) }}
+
+        <input type="submit" class="hidden" value="Envoyer">
+    </fieldset>
+
+    {{ form_end(form) }}
+
+    <div>
+        {#{% if form.vars['errors'] is empty %}#}
+        {% if form.vars.submitted and form.vars.valid %}
+            <a href="#" data-id="submit-quote"
+               class="btn btn-default">Envoyer</a>
+        {% else %}
+            <a disabled data-id="submit-quote" class="btn btn-default">Envoyer</a>
+        {% endif %}
+    </div>
+
+
+    <script>
+        $(function () {
+            var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
+
+            initDatePickerAjax(function () {
+                jcf.replaceAll("#booking-price-form");
+            });
+
+            var $form = $("#quote-form");
+
+            $form.submit(function () {
+                //Remove price and submit button
+                //Disable fields and add loading until form is rendered
+                $(this).find("input").attr("readonly", "readonly");
+                $(this).find("select option:not(:selected)").each(function () {
+                    $(this).attr('disabled', 'disabled');
+                });
+            });
+
+            $("a[data-id=submit-booking]").click(function (e) {
+                e.preventDefault();
+                var $errors = $form.find('div.errors');
+                //Submit form if no errors
+                if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
+                    if ($("#start-date").val() && $("#end-date").val()) {
+                        if (timeUnitIsDay) {
+                            $form.submit();
+                        } else {
+                            var $holderTimes = $form.find(".time-fields");
+                            var $startHour = $holderTimes.find("[id$=_start_hour]").first();
+                            var $endHour = $holderTimes.find("[id$=_start_minute]").first();
+                            var $startMinute = $holderTimes.find("[id$=_end_hour]").first();
+                            var $endMinute = $holderTimes.find("[id$=_end_minute]").first();
+
+                            if ($startHour.val() && $endHour.val() && $startMinute.val() && $endMinute.val()) {
+                                $form.submit();
+                            }
+                        }
+                    }
+                }
+            });
+
+        });
+    </script>
+</section>

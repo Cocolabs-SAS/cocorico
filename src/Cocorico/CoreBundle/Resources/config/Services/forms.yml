@@ -234,6 +234,11 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.quote:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\QuoteType
+        tags:
+            - { name: form.type }
+
     #Booking user address
     cocorico.form.type.booking_user_address:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingUserAddressFormType

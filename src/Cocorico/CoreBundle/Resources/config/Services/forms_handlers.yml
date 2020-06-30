@@ -39,6 +39,14 @@ services:
             - "@cocorico.listing_search_request"
             - "@cocorico.booking.manager"
 
+    cocorico.form.handler.quote:
+        class: Cocorico\CoreBundle\Form\Handler\Frontend\QuoteFormHandler
+        arguments:
+            - "@session"
+            - "@request_stack"
+            - "@cocorico.listing_search_request"
+            # - "@cocorico.booking.manager"
+
     #Listing Availability
     cocorico.form.handler.listing_availability.dashboard:
         abstract:  true
