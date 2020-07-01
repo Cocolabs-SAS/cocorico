@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file date="2018-01-20T00:19:00Z" source-language="en" target-language="fr" datatype="plaintext"
+          original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a
+                dot-delimitted string such as "form.label.firstname", then the developer has not provided a default
+                message.
+            </note>
+        </header>
+        <body>
+            <trans-unit id="dd72b497fa2331ddc4703f0325c7a908b28369ac" resname="listing.price_four">
+                <source>listing.price_four</source>
+                <target>0-3 ans</target>
+            </trans-unit>
+            <trans-unit id="13f1e1f3ae0691647335196c1993e1643e98f9a5" resname="listing.price_four.help">
+                <source>listing.price_four.help</source>
+                <target>listing.price_four.help</target>
+            </trans-unit>
+            <trans-unit id="15d6b95ff2ec78ee71ce3159fa7cda5a1009a8f6" resname="listing.price_one">
+                <source>listing.price_one</source>
+                <target>18 ans+</target>
+            </trans-unit>
+            <trans-unit id="6343f3b6f9b88827c70a46b5f8faf44b048fa1eb" resname="listing.price_one.help">
+                <source>listing.price_one.help</source>
+                <target>listing.price_one.help</target>
+            </trans-unit>
+            <trans-unit id="13dad3bfa615b0605168e17ff8d1abcc8cac08bd" resname="listing.price_three">
+                <source>listing.price_three</source>
+                <target>4-12 ans</target>
+            </trans-unit>
+            <trans-unit id="d0bd24dda747d39864b0ca205588d8e24fe868c5" resname="listing.price_three.help">
+                <source>listing.price_three.help</source>
+                <target>listing.price_three.help</target>
+            </trans-unit>
+            <trans-unit id="b5c2218c164df7e08fa08f89226045bfb1f92413" resname="listing.price_two">
+                <source>listing.price_two</source>
+                <target>13-18 ans</target>
+            </trans-unit>
+            <trans-unit id="fd3607b9c56a1ceb3e8b027780a38c8cc931df16" resname="listing.price_two.help">
+                <source>listing.price_two.help</source>
+                <target>listing.price_two.help</target>
+            </trans-unit>
+            <trans-unit id="447dc13870338b929260a9d1dadbb5b2bb3395a7" resname="listing_public.price.required">
+                <source>listing_public.price.required</source>
+                <target state="new">Au moins un prix doit être renseigné</target>
+            </trans-unit>
+            <trans-unit id="2097c33723b61c7e24d3d7d27840469989b61b49" resname="price">
+                <source>price</source>
+                <target>Prix</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

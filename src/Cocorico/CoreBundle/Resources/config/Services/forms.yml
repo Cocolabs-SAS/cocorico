@@ -4,8 +4,8 @@ services:
         class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewType
         arguments:
             - "@request_stack"
-            - "%cocorico.locales%"
             - "@event_dispatcher"
+            - "%cocorico.locales%"
         tags:
             - { name: form.type }
 
@@ -61,6 +61,7 @@ services:
     cocorico.form.type.listing_edit_availabilities:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditAvailabilitiesType
         arguments:
+            - "@event_dispatcher"
             - "%cocorico.time_unit%"
             - "%cocorico.days_max_edition%"
         tags:
@@ -226,6 +227,7 @@ services:
     cocorico.form.type.booking_price:
         class: Cocorico\CoreBundle\Form\Type\Frontend\BookingPriceType
         arguments:
+            - "@event_dispatcher"
             - "%cocorico.booking.allow_single_day%"
             - "%cocorico.booking.end_day_included%"
             - "%cocorico.days_display_mode%"

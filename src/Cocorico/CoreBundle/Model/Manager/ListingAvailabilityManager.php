@@ -178,7 +178,7 @@ class ListingAvailabilityManager
      * @param DateTime $day
      * @param array    $timeRanges
      * @param int      $status
-     * @param int      $price
+     * @param int       $price
      * @param int|null $defaultPrice
      * @param bool     $bookingCancellation
      *
@@ -453,9 +453,9 @@ class ListingAvailabilityManager
                 $prevEvent = $event;
 
                 //Get start and end in UTC
-                $startUTC = new DateTime($event['start'], new DateTimeZone($timezone));
+                $startUTC = new \DateTime($event['start'], new DateTimeZone($timezone));
                 $startUTC->setTimezone(new DateTimeZone('UTC'));
-                $endUTC = new DateTime($event['end'], new DateTimeZone($timezone));
+                $endUTC = new \DateTime($event['end'], new DateTimeZone($timezone));
                 $endUTC->setTimezone(new DateTimeZone('UTC'));
 
                 $result[] = array(
@@ -485,14 +485,14 @@ class ListingAvailabilityManager
      */
     private function asCalendarDayEvents($availability, $timezone)
     {
-        /** @var MongoDate $dayMD */
+        /** @var \MongoDate $dayMD */
         $dayMD = $availability['d'];
-        $day = new DateTime();
+        $day = new \DateTime();
         $day->setTimestamp($dayMD->sec);
         $dayAsString = $dayEndAsString = $day->format('Y-m-d');//by default day is the same for an event
 
         $nextDay = clone $day;//if end time is 00:00 the day will be the next one
-        $nextDay->add(new DateInterval('P1D'));
+        $nextDay->add(new \DateInterval('P1D'));
         $nextDayAsString = $nextDay->format('Y-m-d');
 
         //time ranges array in UTC
@@ -507,8 +507,8 @@ class ListingAvailabilityManager
                     $dayEndAsString = $nextDayAsString;
                 }
 
-                $startUTC = new DateTime($dayAsString.' '.$timeRange['start']);
-                $endUTC = new DateTime($dayEndAsString.' '.$timeRange['end']);
+                $startUTC = new \DateTime($dayAsString . ' ' . $timeRange['start']);
+                $endUTC = new \DateTime($dayEndAsString . ' ' . $timeRange['end']);
 
 //                echo $startUTC->format('Y-m-d H:i') . ' / ' . $endUTC->format('Y-m-d H:i') . '<br>';
 
@@ -548,8 +548,8 @@ class ListingAvailabilityManager
                 }
             }
         } else {
-            $start = new DateTime($dayAsString.' '.'00:00');
-            $end = new DateTime($dayAsString.' '.'23:59');
+            $start = new \DateTime($dayAsString . ' ' . '00:00');
+            $end = new \DateTime($dayAsString . ' ' . '23:59');
 
             $events[$start->format('Y-m-d')][] = array(
                 'id' => $availability['_id'] . '0000',
@@ -572,10 +572,10 @@ class ListingAvailabilityManager
      */
     public function duplicate($listingId, $duplicatedListingId, $daysMaxEdition)
     {
-        $start = new DateTime();
-        $start->sub(new DateInterval('P1D'));
-        $end = new DateTime();
-        $end = $end->add(new DateInterval('P'.$daysMaxEdition.'D'));
+        $start = new \DateTime();
+        $start->sub(new \DateInterval('P1D'));
+        $end = new \DateTime();
+        $end = $end->add(new \DateInterval('P' . $daysMaxEdition . 'D'));
 
         $availabilities = $this->getAvailabilitiesByListingAndDateRange($listingId, $start, $end);
         $newAvailabilities = array();

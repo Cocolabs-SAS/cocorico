@@ -79,7 +79,7 @@ class ListingAvailabilityPriceController extends Controller
             'CocoricoCoreBundle:Dashboard/Listing:edit_availabilities_prices.html.twig',
             array(
                 'listing' => $listing,
-                'form_prices' => $form->createView()
+                'form' => $form->createView()
             )
         );
 

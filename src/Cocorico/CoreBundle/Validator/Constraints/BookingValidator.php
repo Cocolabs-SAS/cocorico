@@ -232,8 +232,8 @@ class BookingValidator extends ConstraintValidator
     /**
      * Build violations
      *
-     * @param Context|ExecutionContextInterface $context
-     * @param array $violations
+     * @param Context|\Symfony\Component\Validator\Context\ExecutionContextInterface $context
+     * @param array                                                                  $violations
      */
     public static function buildViolations($context, $violations)
     {

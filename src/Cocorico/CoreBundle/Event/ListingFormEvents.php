@@ -51,4 +51,14 @@ class ListingFormEvents
      */
     const LISTING_NEW_FORM_BUILD = 'cocorico.listing_new.form.build';
 
+
+    /**
+     * The LISTING_AVAILABILITIES_FORM_BUILD event is thrown each time a listing availability edition form is build
+     *
+     * This event allows you to add form fields and validation on them.
+     *
+     * The event listener receives a \Cocorico\CoreBundle\Event\ListingFormBuilderEvent instance.
+     */
+    const LISTING_AVAILABILITIES_FORM_BUILD = 'cocorico.listing_edit.availabilities.form.build';
+
 }

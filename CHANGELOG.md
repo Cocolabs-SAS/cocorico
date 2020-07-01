@@ -10,16 +10,49 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## [Unreleased]
 
 ### Added
+
+### Fixed
+
+### Changed
+
+
+## [0.15.1] - (2020-07-07)
+
+### Added
 - Add default FB og:image
+- Add ListingSessionBundle compatibility
+- Add ListingPublicBundle compatibility
 
 ### Fixed
 - Fix update "unread" message in dashboard
 - Fix multi timezone in day mode  
+- Fix admin access front link
+- Fix Nesting level too deep error in user comparison in twig
 
 ### Changed
+- Update doc for SF 3.4
+- Update listing option bundle to v0.15.1
+- Update report bundle to v0.15.1
 - Add acceptation delay constraint in day mode
 - Replace cocorico.booking.min_start_delay parameter by cocorico.booking.min_start_time_delay in day mode
 - Change invoice number generation method
+- Handle end date not manually selected in range mode
+- Change form phone fields to TelType
+- Add condition to replace Translation extension
+- Update listing-alert-bundle to v0.15.1
+- Fork sonata user bundle
+- Replace app/console by bin/console in bin init scripts
+- Add NotFoundException to listings unreachable
+- Remove the comma for last link in edit dashboard page.
+- Add alert box when user delete his listing in edit listing page.
+- Move the description and title block on the right of the category block in deposit listing page.
+- Design changes for calendar title.
+- Remove in user profile page, language related last comma
+- Remove in home and search page category related last comma
+- Enhance error message displaying
+- Change comment count displaying
+- Add comment counts on HP listings
+- Add transchoice to nb comments
 
 ## [0.15.0] - (2019-03-21)
 
@@ -112,7 +145,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix listing availabilities checking in not day mode and with availabilities by default unavailable
 
 ### Changed
-
+- Disable JMS translation reference file adding
 
 ## [0.9.1] - (2019-01-15)
 
@@ -136,6 +169,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### Added
 
 ### Fixed
+- Set gc_probability to null
 
 ### Changed
 - Add BookingSubscriber for new booking

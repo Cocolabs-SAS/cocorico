@@ -223,6 +223,12 @@ class BookingManager extends BaseManager
         }
 //        echo "hourToFind: " . $hourToFind. "<br>";
 
+        //TimeUnit
+        $timeUnit = $this->timeUnit;
+        if ($this->listingSessionIsEnabled()) {//Time unit is equal to listing duration
+            $timeUnit = $booking->getListing()->getDurationInMinute();
+        }
+
         //We look for each days if some availabilities are defined
         $found = false;
         for ($d = clone $minStartDay; $d <= $maxEndDate; $d->add(new DateInterval('P1D'))) {
@@ -245,8 +251,8 @@ class BookingManager extends BaseManager
                 $minHourBis = ($d == $minStartDay ? intval($minStartDate->format('H')) * 60 : $minHour);
                 for ($m = $minHourBis; $m <= $maxHour; $m++) {
 //                    echo $m . ":" . $availability[$m] . "<br>";
-                    if ($nbMinutesAvailable == $this->timeUnit) {//Previous "timeUnit" minutes was available
-                        $hourToFind = $m - $this->timeUnit;//This is the minute in the day of the first hour available
+                    if ($nbMinutesAvailable == $timeUnit) {//Previous "timeUnit" minutes was available
+                        $hourToFind = $m - $timeUnit;//This is the minute in the day of the first hour available
 //                        echo "hour found:" . $hourToFind . "<br>";
                         if ($hourToFind >= $minHour && $hourToFind <= $maxHour) {//If the found hour is in the hours available range
 //                            echo "found" . "<br>";
@@ -292,12 +298,12 @@ class BookingManager extends BaseManager
             //Time of end date is equal to start time plus one hour
             $end = clone $endDayToFind;
             $end->setTime(0, 0, 0);
-            $end->add(new DateInterval('PT'.($hourToFind + $this->timeUnit).'M'));
+            $end->add(new DateInterval('PT' . ($hourToFind + $timeUnit) . 'M'));
             $booking->setEnd($end);
 
             //End date time is equal to start date time plus one hour
             $endTime = clone $start;
-            $endTime->add(new DateInterval('PT'.($this->timeUnit).'M'));
+            $endTime->add(new DateInterval('PT' . ($timeUnit) . 'M'));
             $booking->setEndTime($endTime);
         }
 
@@ -649,9 +655,15 @@ class BookingManager extends BaseManager
 
         $daysTimeRanges = $booking->getDateTimeRange()->getDaysTimeRanges(true);
 
-        $duration = $booking->getDuration($this->endDayIncluded, $this->timeUnit);
+        //If session is enabled then time unit is equal to listing session duration
+        $timeUnit = $this->timeUnit;
+        if ($this->listingSessionIsEnabled()) {
+            $timeUnit = $booking->getListing()->getDurationInMinute();
+        }
+
+        $duration = $booking->getDuration($this->endDayIncluded, $timeUnit);
         $price = $booking->getListing()->getPrice();
-        $amountByMinute = $price / $this->timeUnit;
+        $amountByMinute = $price / $timeUnit;
         $amount = $duration * $price;
 
 //        echo count($availabilities) . '<br>';
@@ -691,7 +703,7 @@ class BookingManager extends BaseManager
                 //If price reported to one minute is defined for this minute, it is added to amount
                 if (isset($times[$k])) {
                     $amount -= $amountByMinute;
-                    $amount += $times[$k]["p"] / $this->timeUnit;
+                    $amount += $times[$k]["p"] / $timeUnit;
                 }
             }
         }
@@ -1561,6 +1573,14 @@ class BookingManager extends BaseManager
     private function voucherIsEnabled()
     {
         return isset($this->bundles["CocoricoVoucherBundle"]);
+    }
+
+    /**
+     * @return bool
+     */
+    private function listingSessionIsEnabled()
+    {
+        return isset($this->bundles["CocoricoListingSessionBundle"]);
     }
 
     /**

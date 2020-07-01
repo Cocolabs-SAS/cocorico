@@ -160,23 +160,34 @@ class ListingSearchController extends Controller
         $liipCacheManager = $this->get('liip_imagine.cache.manager');
         $currencyExtension = $this->get('lexik_currency.currency_extension');
         $currencyExtension->getFormatter()->setLocale($locale);
+        $listingSession = array_key_exists('CocoricoListingSessionBundle', $this->getParameter('kernel.bundles'));
         $markers = $listingsIds = array();
 
         foreach ($results->getIterator() as $i => $result) {
             $listing = $result[0];
             $listingsIds[] = $listing['id'];
+            $isInCurrentPage = in_array($listing['id'], $resultsInPage);
 
+            //Image
             $imageName = count($listing['images']) ? $listing['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
-
             $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_medium', array());
 
+            //Price
             $price = $currencyExtension->convertAndFormat($listing['price'] / 100, $currentCurrency, false);
 
+            //Duration
+            $duration = null;
+            if ($listingSession && array_key_exists('duration', $listing)) {
+                /** @var \DateTime $duration */
+                $duration = $listing['duration'];
+                $duration = '(' . $duration->format('H\hi') . ')';
+            }
+
+            //Categories
             $categories = count($listing['listingListingCategories']) ?
                 $listing['listingListingCategories'][0]['category']['translations'][$locale]['name'] : '';
 
-            $isInCurrentPage = in_array($listing['id'], $resultsInPage);
-
+            //Ratings
             $rating1 = $rating2 = $rating3 = $rating4 = $rating5 = 'hidden';
             if ($listing['averageRating']) {
                 $rating1 = ($listing['averageRating'] >= 1) ? '' : 'inactive';
@@ -201,14 +212,14 @@ class ListingSearchController extends Controller
                 'rating4' => $rating4,
                 'rating5' => $rating5,
                 'price' => $price,
+                'duration' => $duration,
                 'certified' => $listing['certified'] ? 'certified' : 'hidden',
-                'url' => $url = $this->generateUrl(
+                'url' => $this->generateUrl(
                     'cocorico_listing_show',
                     array('slug' => $listing['translations'][$locale]['slug'])
                 ),
                 'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
                 'opacity' => $isInCurrentPage ? 1 : 0.4,
-
             );
         }
 

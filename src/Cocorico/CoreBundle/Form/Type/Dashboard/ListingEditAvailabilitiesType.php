@@ -11,10 +11,13 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
+use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
+use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\TimeBundle\Form\Type\DateRangeType;
 use Cocorico\TimeBundle\Form\Type\TimeRangeType;
 use Cocorico\TimeBundle\Form\Type\WeekDaysType;
 use Cocorico\TimeBundle\Validator\Constraints\TimeRangesOverlap;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,17 +26,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ListingEditAvailabilitiesType extends AbstractType
 {
-
+    protected $dispatcher;
     protected $timeUnit;
     protected $timeUnitIsDay;
     protected $daysMaxEdition;
 
     /**
-     * @param int $timeUnit
-     * @param int $daysMaxEdition
+     * @param EventDispatcherInterface $dispatcher
+     * @param int                      $timeUnit
+     * @param int                      $daysMaxEdition
      */
-    public function __construct($timeUnit, $daysMaxEdition)
+    public function __construct(EventDispatcherInterface $dispatcher, $timeUnit, $daysMaxEdition)
     {
+        $this->dispatcher = $dispatcher;
         $this->timeUnit = $timeUnit;
         $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
         $this->daysMaxEdition = $daysMaxEdition;
@@ -91,6 +96,11 @@ class ListingEditAvailabilitiesType extends AbstractType
             );
         }
 
+        //Dispatch LISTING_AVAILABILITIES_FORM_BUILD Event. Listeners can add fields and validation
+        $this->dispatcher->dispatch(
+            ListingFormEvents::LISTING_AVAILABILITIES_FORM_BUILD,
+            new ListingFormBuilderEvent($builder)
+        );
     }
 
     /**

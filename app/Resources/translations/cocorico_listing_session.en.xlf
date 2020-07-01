@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file date="2018-01-18T10:19:43Z" source-language="en" target-language="en" datatype="plaintext"
+          original="not.available">
+        <header>
+            <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+            <note>The source node in most cases contains the sample message as written by the developer. If it looks
+                like a
+                dot-delimitted string such as "form.label.firstname", then the developer has not provided a default
+                message.
+            </note>
+        </header>
+        <body>
+            <trans-unit id="39b5a7eef4b8a1d29c2616db61bd803bc1e8e5b3" resname="listing.duration">
+                <source>listing.duration</source>
+                <target>Duration</target>
+            </trans-unit>
+            <trans-unit id="5a44c928642e3a4648a60d8ab1ab6362eb1e810a" resname="listing.form.duration">
+                <source>listing.form.duration</source>
+                <target>Session duration</target>
+            </trans-unit>
+            <trans-unit id="06c59b9b463c217f2965f3a0db032e4377420f1a" resname="listing.show.duration">
+                <source>listing.show.duration</source>
+                <target>Session duration</target>
+            </trans-unit>
+            <trans-unit id="55c0b3aa3afa5a74762bf8425ed58dd86f6f14a6" resname="listing_session.duration.min {{ min }}">
+                <source>listing_session.duration.min {{ min }}</source>
+                <target state="new">THe minimum duration is {{ min }}</target>
+            </trans-unit>
+            <trans-unit id="f6837b3e73f08e9626617af82fd78015c5d763ad" resname="time_unit_session">
+                <source>time_unit_session</source>
+                <target xml:space="preserve">{-3} by session|{-1} hour(s)|{0} session|]0,1] %hour%h %minute%|]1,Inf]%hour%h%minute%
+        </target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

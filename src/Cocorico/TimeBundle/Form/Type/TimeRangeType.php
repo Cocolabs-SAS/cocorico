@@ -27,7 +27,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-//todo: Fix SF2.8 depreciated : use 'choices_as_values' => true and flip choices keys values
 class TimeRangeType extends AbstractType
 {
     protected $timezone;
@@ -62,6 +61,16 @@ class TimeRangeType extends AbstractType
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) use ($options) {
                 $form = $event->getForm();
+
+                $timesMax = $this->timesMax;
+                if (isset($options['times_max']) && $options['times_max']) {
+                    $timesMax = $options['times_max'];
+                }
+
+                $timeUnit = $this->timeUnit;
+                if (isset($options['time_unit']) && $options['time_unit']) {
+                    $timeUnit = $options['time_unit'];
+                }
 
                 $form
                     ->add(
@@ -115,37 +124,41 @@ class TimeRangeType extends AbstractType
                     ->add(
                         'start_picker',
                         TimeType::class,
-                        array(
-                            'mapped' => false,
-                            'widget' => 'single_text',
-                            /** @Ignore */
-                            'label' => false
+                        array_merge(
+                            array(
+                                'mapped' => false,
+                                'widget' => 'single_text',
+                                /** @Ignore */
+                                'label' => false
+                            ),
+                            $options['start_picker_options']
                         )
                     )
                     ->add(
                         'end_picker',
                         TimeType::class,
-                        array(
-                            'mapped' => false,
-                            'widget' => 'single_text',
-                            /** @Ignore */
-                            'label' => false
+                        array_merge(
+                            array(
+                                'mapped' => false,
+                                'widget' => 'single_text',
+                                /** @Ignore */
+                                'label' => false
+                            ),
+                            $options['end_picker_options']
                         )
                     );
 
 
                 //Times display mode: range or duration
                 if ($options['display_mode'] == "duration") {
-                    if ($this->timesMax > 1) {
-//                    if ($options['times_max'] > 1) { //Create times unit choice list limited to timesMax
+                    if ($timesMax > 1) {
                         $nbMinutes = null;
                         if (isset($options['start_options']['data']) && isset($options['end_options']['data'])) {
                             $timeRange = new TimeRange(
                                 $options['start_options']['data'],
                                 $options['end_options']['data']
                             );
-                            $nbMinutes = $timeRange->getDuration($this->timeUnit) * $this->timeUnit;
-//                            $nbMinutes = $timeRange->getDuration($options['time_unit']) * $options['time_unit'];
+                            $nbMinutes = $timeRange->getDuration($timeUnit) * $timeUnit;
                         }
 
                         /** @var DateRange $dateRange */
@@ -156,14 +169,8 @@ class TimeRangeType extends AbstractType
                                 array(
                                     //from one time unit to timesMax * timeUnit
                                     'choices' => array_combine(
-                                        range(1, $this->timesMax),
-                                        range($this->timeUnit, $this->timesMax * $this->timeUnit, $this->timeUnit)
-//                                        range(1, $options['times_max']),
-//                                        range(
-//                                            $options['time_unit'],
-//                                            $options['times_max'] * $options['time_unit'],
-//                                            $options['time_unit']
-//                                        )
+                                        range(1, $timesMax),
+                                        range($timeUnit, $timesMax * $timeUnit, $timeUnit)
                                     ),
                                     'data' => $nbMinutes,
                                     /** @Ignore */
@@ -179,8 +186,7 @@ class TimeRangeType extends AbstractType
                                 'nb_minutes',
                                 HiddenType::class,
                                 array(
-                                    'data' => $this->timeUnit,
-//                                    'data' => $options['time_unit']
+                                    'data' => $timeUnit,
                                 )
                             );
                     }
@@ -243,12 +249,14 @@ class TimeRangeType extends AbstractType
                 'data_class' => 'Cocorico\TimeBundle\Model\TimeRange',
                 'start_options' => array(),
                 'end_options' => array(),
+                'start_picker_options' => array(),
+                'end_picker_options' => array(),
                 'transformer' => null,
                 'validator' => null,
                 'translation_domain' => 'cocorico_listing',
                 'display_mode' => 'range',
-//                'time_unit' => $this->timeUnit,
-//                'times_max' => $this->timesMax,
+                'times_max' => null,
+                'time_unit' => null,
             )
         );
 

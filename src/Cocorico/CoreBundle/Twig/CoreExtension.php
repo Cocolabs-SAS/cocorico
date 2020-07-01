@@ -149,7 +149,6 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
     {
         return array(
             new Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
-            new Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new Twig_SimpleFilter('ucwords', 'ucwords'),
             new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
             new Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
@@ -166,43 +165,6 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         return str_repeat($input, $multiplier);
     }
 
-    /**
-     * Add unit time text to duration value
-     *
-     * @param int    $duration
-     * @param string $locale
-     * @return string
-     */
-    public function addTimeUnitTextFilter($duration, $locale = null)
-    {
-        if ($this->timeUnitIsDay) {
-            if ($this->timeUnitAllDay) {
-                return $this->translator->transChoice(
-                    'time_unit_day',
-                    $duration,
-                    array('%count%' => $duration),
-                    'cocorico',
-                    $locale
-                );
-            } else {
-                return $this->translator->transChoice(
-                    'time_unit_night',
-                    $duration,
-                    array('%count%' => $duration),
-                    'cocorico',
-                    $locale
-                );
-            }
-        } else {
-            return $this->translator->transChoice(
-                'time_unit_hour',
-                $duration,
-                array('%count%' => $duration),
-                'cocorico',
-                $locale
-            );
-        }
-    }
 
     /**
      * @param int    $price

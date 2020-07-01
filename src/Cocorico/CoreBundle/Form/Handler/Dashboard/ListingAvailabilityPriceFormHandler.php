@@ -22,7 +22,6 @@ use Symfony\Component\Form\Form;
 
 /**
  * Handle Listing Availability Price Form
- *
  */
 class ListingAvailabilityPriceFormHandler extends ListingAvailabilityFormHandler
 {

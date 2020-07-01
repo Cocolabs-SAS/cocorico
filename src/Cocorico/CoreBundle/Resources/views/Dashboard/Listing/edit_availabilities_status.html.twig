@@ -47,29 +47,10 @@
                         <div class="price-range">
                             <h3>{{ 'listing.edit.calendar.range.title'|trans }}</h3>
 
-                            <div class="field-row time">
-                                {{ form_errors(form) }}
-                                {{ form_errors(form.date_range) }}
-                                {{ form_label(form.date_range) }}
-                                {{ form_widget(form.date_range) }}
-                            </div>
-
-                            <h3>{{ 'listing.edit.calendar.choose_weekdays.title'|trans }}</h3>
-
-                            {{ form_errors(form.weekdays) }}
-                            {{ form_label(form.weekdays) }}
-                            {{ form_widget(form.weekdays) }}
-
-
-                            {% if ( not timeUnitIsDay ) %}
-                                <h4>{{ 'listing.edit.calendar.choose_times.title'|trans }}</h4>
-
-                                <div class="time-ranges collection-dib">
-                                    {{ form_errors(form.time_ranges) }}
-                                    {{ form_label(form.time_ranges) }}
-                                    {{ form_widget(form.time_ranges) }}
-                                </div>
-                            {% endif %}
+                            {% include 'CocoricoCoreBundle:Dashboard/Listing:_edit_availabilities.html.twig' ignore missing with {
+                                'listing': listing,
+                                'form': form
+                            } only %}
 
                             <div class="location">
                                 {{ form_errors(form.status) }}

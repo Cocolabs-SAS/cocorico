@@ -13,16 +13,27 @@
 namespace Cocorico\TimeBundle\Twig;
 
 use Cocorico\TimeBundle\Utils\PHP;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TimeExtension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface
 {
+    protected $translator;
+    protected $timeUnit;
+    protected $timeUnitAllDay;
+    protected $timeUnitIsDay;
 
     /**
      * TimeExtension constructor.
+     * @param TranslatorInterface $translator
+     * @param                     $timeUnit
+     * @param                     $timeUnitAllDay
      */
-    public function __construct()
+    public function __construct(TranslatorInterface $translator, $timeUnit, $timeUnitAllDay)
     {
-
+        $this->translator = $translator;
+        $this->timeUnit = $timeUnit;
+        $this->timeUnitAllDay = $timeUnitAllDay;
+        $this->timeUnitIsDay = ($timeUnit % 1440 == 0) ? true : false;
     }
 
     /**
@@ -33,9 +44,48 @@ class TimeExtension extends \Twig_Extension implements \Twig_Extension_GlobalsIn
     public function getFilters()
     {
         return array(
+            new \Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new \Twig_SimpleFilter('format_seconds', array($this, 'formatSecondsFilter')),
             new \Twig_SimpleFilter('timezone_name', array($this, 'timezoneName'))
         );
+    }
+
+    /**
+     * Add unit time text to duration value
+     *
+     * @param int    $duration
+     * @param string $locale
+     * @return string
+     */
+    public function addTimeUnitTextFilter($duration, $locale = null)
+    {
+        if ($this->timeUnitIsDay) {
+            if ($this->timeUnitAllDay) {
+                return $this->translator->transChoice(
+                    'time_unit_day',
+                    $duration,
+                    array('%count%' => $duration),
+                    'cocorico',
+                    $locale
+                );
+            } else {
+                return $this->translator->transChoice(
+                    'time_unit_night',
+                    $duration,
+                    array('%count%' => $duration),
+                    'cocorico',
+                    $locale
+                );
+            }
+        } else {
+            return $this->translator->transChoice(
+                'time_unit_hour',
+                $duration,
+                array('%count%' => $duration),
+                'cocorico',
+                $locale
+            );
+        }
     }
 
     /**

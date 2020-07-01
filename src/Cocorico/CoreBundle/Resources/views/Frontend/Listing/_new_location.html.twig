@@ -1,0 +1,116 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div class="row">
+    <div class="form-inquiry">
+        <div class="columns-holder">
+            <div class="column" id="listing-location">
+                <h2>{{ 'listing.new.address.title'|trans }}</h2>
+
+                <p class="error"></p>
+                {{ form_errors(form.location.coordinate) }}
+                {{ form_widget(form.location.coordinate) }}
+
+                <div class="field-row">
+                    {{ form_errors(form.location.country) }}
+                    <span class="label">{{ form_label(form.location.country) }}</span>
+
+                    <div class="select-holder">
+                        {{ form_widget(form.location.country, {
+                            'attr': {
+                                'class': "no-arrow"
+                            }
+                        }) }}
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="col location">
+                        {{ form_errors(form.location.city) }}
+                        <span class="label">{{ form_label(form.location.city) }}</span>
+
+                        <div class="field-holder">
+                            {{ form_widget(form.location.city, {
+                                'attr': {
+                                    'class': "form-control"
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                    <div class="col postel-code">
+                        {{ form_errors(form.location.zip) }}
+                        <span class="label">{{ form_label(form.location.zip) }}</span>
+
+                        <div class="field-holder">
+                            {{ form_widget(form.location.zip, {
+                                'attr': {
+                                    'class': "form-control"
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="col cell">
+                        {{ form_errors(form.location.street_number) }}
+                        <span class="label">
+                            {{ form_label(form.location.street_number) }}
+                            <button title="{{ 'listing.location.help'|trans }}"
+                                    data-placement="right"
+                                    data-toggle="tooltip" class="tooltip-button"
+                                    type="button"
+                                    data-original-title="{{ 'listing.location.help'|trans }}">
+                                                            ?
+                            </button>
+                        </span>
+
+                        <div class="field-holder">
+                            {{ form_widget(form.location.street_number, {
+                                'attr': {
+                                    'class': "form-control"
+                                }
+                            }) }}
+                        </div>
+                    </div>
+
+                    <div class="col street">
+                        {{ form_errors(form.location.route) }}
+                        <span class="label">{{ form_label(form.location.route) }}</span>
+
+                        <div class="field-holder">
+                            {{ form_widget(form.location.route, {
+                                'attr': {
+                                    'class': "form-control"
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                </div>
+
+                <p>
+                    <a class="validate-location" href="javascript:void(0)">
+                        {{ 'listing.location.validate'|trans }}
+                    </a>
+                </p>
+
+                <p>
+                    <label> {{ 'listing.location.address_found'|trans }}</label>
+                    <strong id="formatted-address">{{ 'listing.location.none'|trans }}</strong>
+                </p>
+
+                <div class="alert alert-info" role="alert">
+                    <i class="ico arrow"></i>
+
+                    <p>{{ 'listing.location.drag_message'|trans }}</p>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="alert alert-success" role="alert">
+                    <i class="ico"><i class="icon-location"></i></i>
+
+                    <p>{{ 'listing.location.private_message'|trans }}</p>
+                </div>
+                <div id="map-listing" class="map-box"></div>
+            </div>
+        </div>
+    </div>
+</div>

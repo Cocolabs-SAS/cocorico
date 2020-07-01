@@ -44,19 +44,16 @@
             } only %}
         {% endif %}
 
-        {#{% if form.vars['errors'] is empty %}#}
         {% if form.vars.submitted and form.vars.valid %}
-            <a href="#" data-id="submit-booking"
-               class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
+            <a href="#" data-id="submit-booking" class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
         {% else %}
             <a disabled data-id="submit-booking" class="btn btn-default">{{ 'listing.show.book.now.submit'|trans }}</a>
         {% endif %}
-        <span class="text">*{{ 'listing.show.excluding_booking_fees'|trans }}</span>
 
         {% set duration = booking.duration(endDayIncluded, timeUnit) %}
         {% if duration %}
             <em class="text">
-                {{ 'booking.duration:'|trans ~ " " ~ duration|add_time_unit_text }}
+                <strong>{{ 'booking.duration:'|trans ~ " " ~ duration|add_time_unit_text }}</strong>
             </em>
         {% endif %}
 
@@ -77,6 +74,8 @@
                 'listing_deposit': booking.listing.amountDepositDecimal
             } only %}
         {% endif %}
+
+        <em class="text small">*{{ 'listing.show.excluding_booking_fees'|trans }}</em>
     </div>
 
 

@@ -3,6 +3,7 @@ services:
     cocorico_time.twig.time_extension:
         class: Cocorico\TimeBundle\Twig\TimeExtension
         arguments:
+          - "@translator.default"
           - "%cocorico.time_unit%"
           - "%cocorico.time_unit_allday%"
         tags:

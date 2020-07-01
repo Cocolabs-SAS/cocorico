@@ -28,23 +28,23 @@
                     <div class="box">
                         <div class="box-holder">
                             <div class="head">
-                                <div class="time-price">
-                                    <strong class="price">{{ price }}</strong>
+                                    <div class="time-price">
+                                        <strong class="price">{{ price }}</strong>
 
-                                    <p>
-                                        {{ vatInclusionText(app.request.getLocale()) }}
-                                        / {{ (0)|add_time_unit_text }}
-                                    </p>
-                                </div>
+                                        <p>
+                                            {{ vatInclusionText(app.request.getLocale()) }}
+                                            / {{ (0)|add_time_unit_text }}
+                                        </p>
+                                    </div>
                             </div>
                             <div class="foot">
                                 <div class="area">
                                     <div class="rating-block">
-                                    <!-- rating -->
-                                    {% if listing.averageRating %}
-                                        {{ listing.averageRating | cocorico_star_rating }}
+                                        <!-- rating -->
+                                        {% if listing.averageRating %}
+                                            {{ listing.averageRating | cocorico_star_rating }}
                                             <span class="comment-counter">({{ listing.commentCount }})</span>
-                                    {% endif %}
+                                        {% endif %}
                                     </div>
                                     {% if  listing.certified %}
                                         <span class="certified">
@@ -71,13 +71,19 @@
                     <div class="textbox">
                         {% if bundleExist('CocoricoDeliveryBundle') and not app.request.xmlHttpRequest %}
                             {% include 'CocoricoDeliveryBundle:Frontend:Listing/_show_delivery.html.twig' with {
-                            'listing_delivery': listing.delivery
+                                'listing_delivery': listing.delivery
                             } only %}
                         {% endif %}
 
                         <h2>{{ listing_translation.title }}</h2>
 
                         <p>{{ listing_location.city }} </p>
+
+                        {% if bundleExist('CocoricoListingSessionBundle') and not app.request.xmlHttpRequest %}
+                            {% include 'CocoricoListingSessionBundle:Frontend:ListingResult/_show_duration.html.twig' with {
+                                'duration': listing.duration
+                            } only %}
+                        {% endif %}
 
                         {#<!--Debug:#}
                         {#accuracy : {{ listingTmp.accuracy|default(-1) }}<br/>#}

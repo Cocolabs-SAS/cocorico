@@ -45,7 +45,8 @@
                                                             <!-- rating -->
                                                             {% if listing.averageRating %}
                                                                 {{ listing.averageRating | cocorico_star_rating }}
-                                                                <span class="home-comment-counter">({{ listing.commentCount }})</span>
+                                                                <span class="home-comment-counter">({{ listing.commentCount }}
+                                                                    )</span>
                                                             {% endif %}
                                                             {% if  listing.certified %}
                                                                 <span class="certified">
@@ -75,6 +76,12 @@
 
                                                 <p>{{ listing_location.city }} </p>
                                             </div>
+
+                                            {% if bundleExist('CocoricoListingSessionBundle') and not app.request.xmlHttpRequest %}
+                                                {% include 'CocoricoListingSessionBundle:Frontend:ListingResult/_show_duration.html.twig' with {
+                                                    'duration': listing.duration
+                                                } only %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </a>

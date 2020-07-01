@@ -1,0 +1,45 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div class="row">
+    <div class="file-selection">
+
+        <h2>{{ 'listing.edit.various_information.title'|trans }}</h2>
+        <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
+
+        <div class="area">
+            <div class="uploader">
+                <div id="images-new">
+                    {{ form_errors(form.image.new) }}
+                    {{ form_widget(form.image.new) }}
+
+                    {{ form_errors(form.image.uploaded) }}
+                    {{ form_widget(form.image.uploaded ) }}
+                </div>
+            </div>
+
+            <div class="detail">
+                <p>{{ 'listing_edit.photos.details'|trans }}</p>
+            </div>
+
+            <div style="clear:both"></div>
+
+            <div id="drop-zone">
+                {{ 'listing.drop.files'|trans }}
+            </div>
+
+            <h2>{{ 'listing.images.to_upload.title'|trans }}</h2>
+            <ul id="files-to-upload" class="images-list"></ul>
+        </div>
+
+        <!-- files-list -->
+        <div class="files-list">
+            <ul class="images-list">
+                {% for image in listing.images %}
+                    <li>
+                        <img src="{{ image.getWebPath | imagine_filter('listing_xsmall') }}" alt=""/>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

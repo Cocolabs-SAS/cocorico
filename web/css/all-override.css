@@ -1,3 +1,7 @@
+.text-weight-normal {
+    font-weight: normal;
+}
+
 /*Favourite active class*/
 .listing-post .favourit {
     cursor: pointer;
@@ -462,6 +466,16 @@ li.time-fields {
     clear: both;
 }
 
+#booking-price-form .time-fields.display-range {
+    float: left;
+    width: 100%;
+}
+
+#booking-price-form .time-fields.display-range .col + .col {
+    float: right;
+    width: 46%;
+}
+
 #booking-price-form .time-fields .col .title {
     clear: both;
     margin-right: 10px;
@@ -469,6 +483,10 @@ li.time-fields {
 
 #booking-price-form .time-fields .col + .col .title {
     margin: 0 0 0 43px;
+}
+
+#booking-price-form .time-fields.display-range .col + .col .title {
+    margin: 0 0 0 20px;
 }
 
 #booking-price-form .time-fields label {
@@ -590,10 +608,33 @@ li.time-fields {
     float: right;
     margin: 8px 0 0 5px;
     font-size: 16px;
+    min-width: 60px;
 }
 
 .price-box .field-holder {
     max-width: 110px;
+}
+
+.price-box .timepicker-holder {
+    float: left;
+}
+
+.price-box .timepicker-holder .form-control {
+    float: left;
+    width: 110px;
+}
+
+.price-box .timepicker-holder .add-on {
+    position: absolute;
+}
+
+.price-box .timepicker-holder .icon-clock {
+    font-size: 22px;
+    color: #c6cdd2;
+    cursor: pointer;
+    width: 110px;
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
 }
 
 /* user edit_payment.html.twig */
@@ -773,6 +814,10 @@ li.time-fields {
 
 .form-area .form-block .title {
     width: 52px;
+}
+
+.price-range .agenda {
+    max-width: 240px;
 }
 
 /** edit_availabilities_status.html.twig **/
@@ -1158,6 +1203,13 @@ li.time-fields {
 }
 
 /*similar listing css*/
+section.widget.similar-ads h2 {
+    margin: 0 0 6px;
+}
+
+section.similar-ads p {
+    font-size: 12px;
+}
 section.similar-ads .listing-post {
     margin-bottom: 0;
 }
@@ -1325,6 +1377,10 @@ images css for making it 4:3
     font-size: 9px;
 }
 
+.listing-post p {
+    margin: 0 0 0;
+}
+
 .price-section .info.price {
     font-size: 16px;
     display: inline-block;
@@ -1448,11 +1504,11 @@ images css for making it 4:3
 .postarea .booking-detail .timezone {
     float: right;
 }
+
 .postarea .booking-detail ul {
     width: 68%;
     margin: 0;
 }
-
 
 .postarea .booking-detail ul li, .postarea .booking-detail ul li:last-child {
     text-align: left;

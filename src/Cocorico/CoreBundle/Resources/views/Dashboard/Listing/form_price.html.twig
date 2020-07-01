@@ -92,19 +92,19 @@
     <script>
         $(function () {
             $("#price-form-container").submitAjaxForm(
-                    function () {
-                        //Replace price with new one on calendar
-                        var $titleElt = $('.fc-title-default');
-                        var $price = $("#listing_price_price");
-                        var newPrice = $price.val();
-                        newPrice = convertCurrency(newPrice, defaultCurrency, currentCurrency);
-                        if ($titleElt.length) {
-                            $titleElt.html($titleElt.html().replace(/\d+(\.\d*)?|\.\d+/, newPrice));
-                        }
-                        jcf.replaceAll("#price-form-container");
-
-                        $("#listing_availabilities_prices_price_custom").val($price.val());
+                function () {
+                    //Replace price with new one on calendar
+                    var $titleElt = $('.fc-title-default');
+                    var $price = $("#listing_price_price");
+                    var newPrice = $price.val();
+                    newPrice = convertCurrency(newPrice, defaultCurrency, currentCurrency);
+                    if ($titleElt.length) {
+                        $titleElt.html($titleElt.html().replace(/\d+(\.\d*)?|\.\d+/, newPrice));
                     }
+                    jcf.replaceAll("#price-form-container");
+
+                    $("#listing_availabilities_prices_price_custom").val($price.val());
+                }
             );
             $("[data-toggle='tooltip']").tooltip();
         });

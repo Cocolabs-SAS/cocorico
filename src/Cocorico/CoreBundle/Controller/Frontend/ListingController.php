@@ -39,6 +39,8 @@ class ListingController extends Controller
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Symfony\Component\Form\Exception\RuntimeException
+     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
      */
     public function newAction(Request $request)
     {

@@ -1,0 +1,45 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div class="row">
+    <div class="block">
+        <h2>{{ 'listing.new.price.title'|trans }}</h2>
+
+        <div class="area">
+            <div class="price-box">
+                <div class="field-row">
+                    {{ form_errors(form.price) }}
+                    <span class="label">
+                        {{ 'listing.new.price.rent'|trans }}
+                        / {{ form_label(form.price, 0|add_time_unit_text|capitalize) }}
+                    </span>
+                    {{ form_widget(form.price, {
+                        'attr': {
+                            'class': 'numbers-only form-control',
+                            'help':  'listing.edit.price.help'|trans
+                        }
+                    }) }}
+                </div>
+
+                {% include 'CocoricoListingSessionBundle:Frontend:Listing/_form_duration.html.twig' ignore missing with { 'form': form } only %}
+
+                {% include 'CocoricoDeliveryBundle:Frontend:Listing/_form_delivery.html.twig' ignore missing with { 'form': form } only %}
+
+                {% include 'CocoricoCarrierBundle:Frontend:Listing/_form_carrier.html.twig' ignore missing with { 'form': form } only %}
+            </div>
+
+            <!-- simulator -->
+            <div class="currency-converter">
+                {% include '@CocoricoCore/Frontend/Common/_currency_converter.html.twig' with {'close' : true} only %}
+            </div>
+        </div>
+
+        <!-- alert -->
+        <div role="alert" class="alert alert-warning">
+            <i class="ico exclamation">!</i>
+
+            <p>
+                {{ 'listing.new.price_notice'| trans }}
+            </p>
+        </div>
+    </div>
+</div>

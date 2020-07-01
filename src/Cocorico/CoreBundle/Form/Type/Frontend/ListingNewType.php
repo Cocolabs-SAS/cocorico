@@ -18,6 +18,7 @@ use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\CoreBundle\Form\Type\PriceType;
+use Cocorico\UserBundle\Entity\User;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -41,24 +42,24 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public static $credentialError = 'user.form.credential.error';
 
     private $request;
+    protected $dispatcher;
     private $locale;
     private $locales;
-    protected $dispatcher;
 
     /**
      * @param RequestStack             $requestStack
-     * @param array                    $locales
      * @param EventDispatcherInterface $dispatcher
+     * @param array                    $locales
      */
     public function __construct(
         RequestStack $requestStack,
-        $locales,
-        EventDispatcherInterface $dispatcher
+        EventDispatcherInterface $dispatcher,
+        $locales
     ) {
         $this->request = $requestStack->getCurrentRequest();
+        $this->dispatcher = $dispatcher;
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
-        $this->dispatcher = $dispatcher;
     }
 
     /**
@@ -96,33 +97,32 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             );
         }
 
-        $builder->add(
-            'translations',
-            TranslationsType::class,
-            array(
-                'required_locales' => array($this->locale),
-                'fields' => array(
-                    'title' => array(
-                        'field_type' => 'text',
-                        'locale_options' => $titles,
-                    ),
-                    'description' => array(
-                        'field_type' => 'textarea',
-                        'locale_options' => $descriptions,
-                    ),
-                    'rules' => array(
-                        'display' => false,
-                    ),
-                    'slug' => array(
-                        'display' => false
-                    ),
-                ),
-                /** @Ignore */
-                'label' => false,
-            )
-        );
-
         $builder
+            ->add(
+                'translations',
+                TranslationsType::class,
+                array(
+                    'required_locales' => array($this->locale),
+                    'fields' => array(
+                        'title' => array(
+                            'field_type' => 'text',
+                            'locale_options' => $titles,
+                        ),
+                        'description' => array(
+                            'field_type' => 'textarea',
+                            'locale_options' => $descriptions,
+                        ),
+                        'rules' => array(
+                            'display' => false,
+                        ),
+                        'slug' => array(
+                            'display' => false
+                        ),
+                    ),
+                    /** @Ignore */
+                    'label' => false,
+                )
+            )
             ->add(
                 'price',
                 PriceType::class,
@@ -133,28 +133,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             ->add(
                 'image',
                 ImageType::class
-            );
-
-        //Default listing location
-        $listingLocation = null;
-        $user = $listing->getUser();
-        if ($user) {
-            if ($user->getListings()->count()) {
-                /** @var Listing $listing */
-                $listing = $user->getListings()->first();
-                $location = $listing->getLocation();
-
-                $listingLocation = new ListingLocation();
-                $listingLocation->setListing($listing);
-                $listingLocation->setCountry($location->getCountry());
-                $listingLocation->setCity($location->getCity());
-                $listingLocation->setZip($location->getZip());
-                $listingLocation->setRoute($location->getRoute());
-                $listingLocation->setStreetNumber($location->getStreetNumber());
-            }
-        }
-
-        $builder
+            )
             ->add(
                 'location',
                 ListingLocationType::class,
@@ -162,11 +141,9 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     'data_class' => 'Cocorico\CoreBundle\Entity\ListingLocation',
                     /** @Ignore */
                     'label' => false,
-                    'data' => $listingLocation,
+                    'data' => $this->getDefaultListingLocation($listing->getUser()),
                 )
-            );
-
-        $builder
+            )
             ->add(
                 'tac',
                 CheckboxType::class,
@@ -187,6 +164,30 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             ListingFormEvents::LISTING_NEW_FORM_BUILD,
             new ListingFormBuilderEvent($builder)
         );
+    }
+
+    /**
+     * @param User $user
+     * @return ListingLocation|null
+     */
+    private function getDefaultListingLocation(User $user)
+    {
+        $listingLocation = null;
+        if ($user && $user->getListings()->count()) {
+            /** @var Listing $listing */
+            $listing = $user->getListings()->first();
+            $location = $listing->getLocation();
+
+            $listingLocation = new ListingLocation();
+            $listingLocation->setListing($listing);
+            $listingLocation->setCountry($location->getCountry());
+            $listingLocation->setCity($location->getCity());
+            $listingLocation->setZip($location->getZip());
+            $listingLocation->setRoute($location->getRoute());
+            $listingLocation->setStreetNumber($location->getStreetNumber());
+        }
+
+        return $listingLocation;
     }
 
     /**

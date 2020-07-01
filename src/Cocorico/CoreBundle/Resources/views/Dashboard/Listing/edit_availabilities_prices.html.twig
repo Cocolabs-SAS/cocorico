@@ -63,42 +63,24 @@
                     </div>
 
                     <div class="form-block">
-                        {{ form_start(form_prices, {'attr': {'id': 'prices-form', 'class': 'form'}}) }}
+                        {{ form_start(form, {'attr': {'id': 'prices-form', 'class': 'form'}}) }}
 
                         <!-- price-range -->
                         <div class="price-range">
                             <h3>{{ 'listing.edit.price.range.title'|trans }}</h3>
 
-                            <div class="field-row time">
-                                {{ form_errors(form_prices) }}
-
-                                {{ form_errors(form_prices.date_range) }}
-                                {{ form_label(form_prices.date_range) }}
-                                {{ form_widget(form_prices.date_range) }}
-                            </div>
-
-                            <h3>{{ 'listing.edit.price.choose_weekdays.title'|trans }}</h3>
-
-                            {{ form_errors(form_prices.weekdays) }}
-                            {{ form_label(form_prices.weekdays) }}
-                            {{ form_widget(form_prices.weekdays) }}
-
-                            {% if not timeUnitIsDay %}
-                                <h4>{{ 'listing.edit.price.choose_times.title'|trans }}</h4>
-                                <div class="time-ranges">
-                                    {{ form_errors(form_prices.time_ranges) }}
-                                    {{ form_label(form_prices.time_ranges) }}
-                                    {{ form_widget(form_prices.time_ranges) }}
-                                </div>
-                            {% endif %}
+                            {% include 'CocoricoCoreBundle:Dashboard/Listing:_edit_availabilities.html.twig' ignore missing with {
+                                'listing': listing,
+                                'form': form
+                            } only %}
 
                             <div class="field-row agenda">
-                                {{ form_errors(form_prices.price_custom) }}
+                                {{ form_errors(form.price_custom) }}
                                 <span class="label">
-                                    {{ form_label(form_prices.price_custom) }}
+                                    {{ form_label(form.price_custom) }}
                                 </span>
 
-                                {{ form_widget(form_prices.price_custom, {
+                                {{ form_widget(form.price_custom, {
                                     'attr': {'class': 'form-control numbers-only' }
                                 }) }}
 
@@ -111,7 +93,7 @@
                             </div>
                         </div>
 
-                        {{ form_end(form_prices) }}
+                        {{ form_end(form) }}
                     </div>
 
 

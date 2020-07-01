@@ -3,7 +3,7 @@ parameters:
     #Site general info
     cocorico.site_name: Cocorico
     cocorico.phone: +33(0) 1 43 79 86 30
-    cocorico.address: 67 rue de Provence, 75009
+    cocorico.address: 67 rue de Provence, 75009, Paris
     cocorico.short_description: 'Cocorico is collaborative consumption platform'
     cocorico.contact_mail: contact@cocorico.io
     #To obfuscate see http://wbwip.com/wbw/emailencoder.html
@@ -11,7 +11,7 @@ parameters:
     cocorico.from_email: no-reply@cocorico.io
     cocorico.webmaster_email: webmaster@cocorico.io
     cocorico.vat_number: FR 12 123 456 789
-    cocorico.home_rss_feed: 'http://www.cocolabs.io/fr/feed/'
+    cocorico.home_rss_feed: 'https://www.cocolabs.io/fr/feed/'
 
     #Languages
     #For knp translatable

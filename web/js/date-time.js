@@ -68,48 +68,51 @@ function initDatepicker() {
 
 /**
  * Init timePicker fields.
+ * Sync corresponding hidden hour and minute fields with current time picker value
  *
- * @param parentTimesElt string
+ * @param  parentTimesElt string
+ * @param fields array
+ * @param duration array
  */
-function initTimePicker(parentTimesElt) {
+function initTimePicker(parentTimesElt, fields) {
     var timePickerCompatible = true;
     if (/Edge|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         timePickerCompatible = false;
     }
+    fields = typeof fields !== 'undefined' ? fields : ['start', 'end'];
 
     $(parentTimesElt).each(function () {
         var holder = $(this);
-        //Time Pickers
-        var pickers = ['start', 'end'];
-        pickers.forEach(function (picker) {
-            var $picker = holder.find("[id$=_" + picker + "_picker]").first();
 
-            if ($picker.length) {
-                if (!timePickerCompatible) $picker.attr('type', 'text');
-                $picker.prev('.add-on').find('.icon-clock').on('click', function () {
-                    $picker.focus();
+        fields.forEach(function (field) {
+            var $field = holder.find("[id$=_" + field + "_picker]").first();
+
+            if ($field.length) {
+                if (!timePickerCompatible) $field.attr('type', 'text');
+                $field.prev('.add-on').find('.icon-clock').on('click', function () {
+                    $field.focus();
                 });
-                $picker.next('.add-on').find('.icon-clock').on('click', function () {
-                    $picker.focus();
+                $field.next('.add-on').find('.icon-clock').on('click', function () {
+                    $field.focus();
                 });
-                var $hour = holder.find("[id$=_" + picker + "_hour]").first();
-                var $minute = holder.find("[id$=_" + picker + "_minute]").first();
+                var $hour = holder.find("[id$=_" + field + "_hour]").first();
+                var $minute = holder.find("[id$=_" + field + "_minute]").first();
 
                 var defaultTime = '';
                 if ($hour.val() !== '' && $minute.val() !== '') {
                     defaultTime = moment($hour.val() + ":" + $minute.val(), 'HH:mm');
                 }
 
-                $picker.datetimepicker({
+                $field.datetimepicker({
                     format: 'HH:mm',
                     stepping: 15,
                     defaultDate: defaultTime,
                     useCurrent: false,
                     enabledHours: hoursAvailable
-                    //,debug: true
+                    // ,debug: true
                 }).on('dp.hide', function (e) {
                     var date = e.date;
-                    if (date && $picker.val()) {
+                    if (date && $field.val()) {
                         $hour.val(date.format("H"));
                         $minute.val(date.format("m")).change();
                     } else {
@@ -121,7 +124,7 @@ function initTimePicker(parentTimesElt) {
                     //Lib vs 4.17.43 fix this above issue but create a new one with useCurrent :/
                     if (!$(this).data('DateTimePicker').date()) {
                         $(this).data('DateTimePicker').defaultDate(moment(hoursAvailable[0] + ":" + "0", 'HH:mm'));
-                        $picker.val('');
+                        $field.val('');
                     }
                 });
             }

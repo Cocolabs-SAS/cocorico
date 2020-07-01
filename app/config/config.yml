@@ -34,7 +34,7 @@ framework:
         handler_id:  ~
         name: _csess
         #on debian there is a /etc/cron.d/php5 doing the job
-        gc_probability: 0 #todo check in prod
+        gc_probability: null
     fragments:       ~
     http_method_override: true
 

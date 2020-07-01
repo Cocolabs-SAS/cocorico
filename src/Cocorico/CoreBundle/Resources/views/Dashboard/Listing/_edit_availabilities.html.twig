@@ -1,0 +1,35 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+<div class="field-row time">
+    {{ form_errors(form) }}
+
+    {{ form_errors(form.date_range) }}
+    {{ form_label(form.date_range) }}
+    {{ form_widget(form.date_range) }}
+</div>
+
+<h3>{{ 'listing.edit.price.choose_weekdays.title'|trans }}</h3>
+
+{{ form_errors(form.weekdays) }}
+{{ form_label(form.weekdays) }}
+{{ form_widget(form.weekdays) }}
+
+{% if bundleExist('CocoricoListingSessionBundle') %}
+    {%- include 'CocoricoListingSessionBundle:Dashboard:Listing/_show_duration.html.twig' with {
+        'form': form,
+        'duration': listing.duration,
+    } only %}
+{% endif %}
+
+{% if not timeUnitIsDay %}
+    <h3>
+        {{ 'listing.edit.price.choose_times.title'|trans }}
+        ({{ 'form.time_zone'|trans({}, 'cocorico_user') }} :
+        {{ app.session.get('timezone')|timezone_name }})
+    </h3>
+    <div class="time-ranges">
+        {{ form_errors(form.time_ranges) }}
+        {{ form_label(form.time_ranges) }}
+        {{ form_widget(form.time_ranges) }}
+    </div>
+{% endif %}
