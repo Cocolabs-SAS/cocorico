@@ -285,9 +285,11 @@
                         </div>
 
                         {#booking form#}
+                        {#
                         {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
                             'listing': listing
                         })) }}
+                        #}
 
                         {#quote form#}
                         {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
