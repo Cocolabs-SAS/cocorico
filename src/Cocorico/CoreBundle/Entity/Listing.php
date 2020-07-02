@@ -109,6 +109,12 @@ class Listing extends BaseListing
     private $bookings;
 
     /**
+     * @ORM\OneToMany(targetEntity="Quote", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "desc"})
+     */
+    private $quotes;
+
+    /**
      * @ORM\OneToMany(targetEntity="Cocorico\MessageBundle\Entity\Thread", mappedBy="listing", cascade={"remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"createdAt" = "desc"})
      */
@@ -450,6 +456,50 @@ class Listing extends BaseListing
     public function removeBooking(Booking $booking)
     {
         $this->bookings->removeElement($booking);
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\Collection|Quote[]
+     */
+    public function getQuotes()
+    {
+        return $this->quotes;
+    }
+
+    /**
+     * @param ArrayCollection|Quote[] $quotes
+     */
+    public function setQuotes(ArrayCollection $quotes)
+    {
+        foreach ($quotes as $quote) {
+            $quote->setListing($this);
+        }
+
+        $this->quotes = $quotes;
+    }
+
+    /**
+     * Add quote
+     *
+     * @param \Cocorico\CoreBundle\Entity\Quote $quote
+     *
+     * @return Listing
+     */
+    public function addQuote(Quote $quote)
+    {
+        $this->quotes[] = $quote;
+
+        return $this;
+    }
+
+    /**
+     * Remove quote
+     *
+     * @param \Cocorico\CoreBundle\Entity\Quote $quote
+     */
+    public function removeQuote(Quote $quote)
+    {
+        $this->quotes->removeElement($quote);
     }
 
     /**

@@ -417,6 +417,14 @@ class User extends BaseUser implements ParticipantInterface
     protected $languages;
 
     /**
+     * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\Quote", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"createdAt" = "desc"})
+     *
+     * @var Quote[]
+     */
+    protected $quotes;
+
+    /**
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Entity\Booking", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"createdAt" = "desc"})
      *
@@ -1278,6 +1286,80 @@ class User extends BaseUser implements ParticipantInterface
                 ) {
                     return true;
                 }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return ArrayCollection|Quote[]
+     */
+    public function getQuotes()
+    {
+        return $this->quotes;
+    }
+
+    /**
+     * @param ArrayCollection|Quote[] $quotes
+     */
+    public function setQuotes(ArrayCollection $quotes)
+    {
+        foreach ($quotes as $booking) {
+            $booking->setUser($this);
+        }
+
+        $this->quotes = $quotes;
+    }
+
+    /**
+     * Does the user has quote as asker
+     *
+     * @return ArrayCollection|Quote[]
+     */
+    public function getQuoteAsAsker()
+    {
+        return $this->getQuotes();
+    }
+
+    /**
+     * Does the user has quote as offerer
+     *
+     * @return ArrayCollection|Quote[]
+     */
+    public function getQuoteAsOfferer()
+    {
+        $quotes = new ArrayCollection();
+        $listings = $this->getListings();
+        if ($listings->count()) {
+            foreach ($listings as $listing) {
+                foreach ($listing->getQuotes() as $quote) {
+                    $quotes->add($quote);
+                }
+            }
+        }
+
+        return $quotes;
+    }
+
+    /**
+     * Does the user has booking in progress (some money operations still to be made (withdrawals, refund, ...))
+     *
+     * @return bool
+     */
+    public function hasQuotesInProgress()
+    {
+        $quoteAsAsker = $this->getQuoteAsAsker();
+        $quoteAsOfferer = $this->getQuoteAsOfferer();
+
+        /** @var Booking[] $quotes */
+        $quotes = new ArrayCollection(array_merge($quotesAsAsker->toArray(), $quotesAsOfferer->toArray()));
+
+        foreach ($quotes as $index => $quote) {
+            if ($quote->getStatus() == Quote::STATUS_NEW) {
+                return true;
+            } elseif ($booking->getStatus() == Booking::STATUS_CANCELED_ASKER) {
+                return true;
             }
         }
 

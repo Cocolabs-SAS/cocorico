@@ -59,7 +59,7 @@ class QuoteFormHandler
         /** @var ListingSearchRequest $searchRequest */
         $searchRequest = $this->session->get('listing_search_request', $this->listingSearchRequest);
         // $booking = $this->bookingManager->initBooking($listing, $user, $dateTimeRange);
-        $quote = $this->QuoteManager->initQuote($listing, $user);
+        $quote = $this->quoteManager->initQuote($listing, $user);
 
         return $quote;
     }

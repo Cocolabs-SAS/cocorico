@@ -265,6 +265,45 @@ class Quote {
     }
 
     /**
+     * Set status
+     *
+     * @param  integer $status
+     * @return BaseBooking
+     */
+    public function setStatus($status)
+    {
+        if (!in_array($status, array_keys(self::$statusValues))) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid value for booking.status : %s.', $status)
+            );
+        }
+
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Get Status Text
+     *
+     * @return string
+     */
+    public function getStatusText()
+    {
+        return self::$statusValues[$this->getStatus()];
+    }
+
+    /**
      * Add QuoteOption
      *
      * @param  QuoteOptionInterface $option

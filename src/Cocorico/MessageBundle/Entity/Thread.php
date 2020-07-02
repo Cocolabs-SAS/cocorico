@@ -12,6 +12,7 @@
 namespace Cocorico\MessageBundle\Entity;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Model\BaseBooking;
 use Doctrine\ORM\Mapping as ORM;
@@ -69,6 +70,12 @@ class Thread extends BaseThread
     protected $booking;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Cocorico\CoreBundle\Entity\Quote", inversedBy="thread")
+     * @ORM\JoinColumn(name="quote_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $quote;
+
+    /**
      * @return Listing
      */
     public function getListing()
@@ -102,6 +109,25 @@ class Thread extends BaseThread
     public function setBooking(BaseBooking $booking = null)
     {
         $this->booking = $booking;
+
+        return $this;
+    }
+
+    /**
+     * @return Quote
+     */
+    public function getQuote()
+    {
+        return $this->quote;
+    }
+
+    /**
+     * @param  BaseBooking $quote
+     * @return $this
+     */
+    public function setQuote(BaseQuote $quote = null)
+    {
+        $this->quote = $quote;
 
         return $this;
     }
