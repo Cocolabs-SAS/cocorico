@@ -18,9 +18,11 @@ use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\DateTimeRange;
 use Cocorico\TimeBundle\Model\TimeRange;
+use Cocorico\UserBundle\Entity\User;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

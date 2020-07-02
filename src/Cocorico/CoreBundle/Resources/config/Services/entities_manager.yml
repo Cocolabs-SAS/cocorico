@@ -22,6 +22,20 @@ services:
             - "%cocorico.dashboard_max_per_page%"
             - "@cocorico.mailer.twig_swift"
 
+    cocorico.quote.manager:
+        class: Cocorico\CoreBundle\Model\Manager\QuoteManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@doctrine.odm.mongodb.document_manager"
+            - "@cocorico.listing_availability.manager"
+            - "@cocorico.mailer.twig_swift"
+            - "@?cocorico_sms.smser.twig"
+            - "@event_dispatcher"
+            - parameters:
+                cocorico_dashboard_max_per_page: "%cocorico.dashboard_max_per_page%"
+                cocorico_listing_availability_status: "%cocorico.listing_availability_status%"
+                cocorico_bundles: "%kernel.bundles%"
+    
   #todo: Split it in multiple services
     cocorico.booking.manager:
         class: Cocorico\CoreBundle\Model\Manager\BookingManager

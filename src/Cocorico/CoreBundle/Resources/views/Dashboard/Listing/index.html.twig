@@ -19,7 +19,7 @@
                 <!-- post -->
                 {% for listing in listings.iterator %}
                     {% set translation = listing.translations[app.request.locale] %}
-                    {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+                    {# {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %} #}
                     {% set image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
                     <article class="listing-post col-sm-6 col-xs-12">
@@ -28,11 +28,12 @@
                                 <div class="post-info">
                                     <div class="img-holder">
                                         <img src="{{ asset((ListingImageConstants.IMAGE_FOLDER ~ image) | imagine_filter('listing_xlarge')) }}"
-                                             alt="{{ translation.title ~ " " ~ price }}"/>
+                                             alt="{{ translation.title }}"/>
                                     </div>
                                     <div class="box">
                                         <div class="box-holder">
                                             <div class="foot">
+                                                {#
                                                 <div class="time-price">
                                                     <strong class="price">
                                                         {{ price }}
@@ -48,6 +49,7 @@
                                                         {{ 0|add_time_unit_text }}
                                                     </p>
                                                 </div>
+                                                #}
                                                 <div class="area">
                                                     <h2>{{ translation.title }}</h2>
 

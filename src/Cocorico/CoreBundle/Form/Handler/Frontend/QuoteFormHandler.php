@@ -7,7 +7,7 @@ use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Model\DateRange;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
-# use Cocorico\CoreBundle\Model\Manager\BookingManager;
+use Cocorico\CoreBundle\Model\Manager\QuoteManager;
 use Cocorico\CoreBundle\Model\TimeRange;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -23,6 +23,7 @@ class QuoteFormHandler
     protected $session;
     protected $request;
     protected $listingSearchRequest;
+    protected $quoteManager;
 
     /**
      * Initialize the handler with the form and the request
@@ -35,11 +36,13 @@ class QuoteFormHandler
     public function __construct(
         Session $session,
         RequestStack $requestStack,
-        ListingSearchRequest $listingSearchRequest
+        ListingSearchRequest $listingSearchRequest,
+        QuoteManager $quoteManager
     ) {
         $this->session = $session;
         $this->request = $requestStack->getCurrentRequest();
         $this->listingSearchRequest = $listingSearchRequest;
+        $this->quoteManager = $quoteManager;
     }
 
 
@@ -56,8 +59,7 @@ class QuoteFormHandler
         /** @var ListingSearchRequest $searchRequest */
         $searchRequest = $this->session->get('listing_search_request', $this->listingSearchRequest);
         // $booking = $this->bookingManager->initBooking($listing, $user, $dateTimeRange);
-        $quote = new Quote();
-        $quote->setListing($listing);
+        $quote = $this->QuoteManager->initQuote($listing, $user);
 
         return $quote;
     }

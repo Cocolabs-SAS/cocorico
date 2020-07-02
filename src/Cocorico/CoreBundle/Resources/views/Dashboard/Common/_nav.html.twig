@@ -3,61 +3,73 @@
 {%- if app.session.get('profile') == 'offerer' -%}
     {%- set menuItems = {
     "messages": {
-    "link": path('cocorico_dashboard_message'),
-    "text": 'nav.dashboard.messages.link'|trans,
-    "ariaControls": "messaging",
-    "dataText": "Messagerie"
+        "link": path('cocorico_dashboard_message'),
+        "text": 'nav.dashboard.messages.link'|trans,
+        "ariaControls": "messaging",
+        "dataText": "Messagerie"
     },
     "bookings": {
-    "link": path('cocorico_dashboard_booking_offerer'),
-    "text": 'nav.dashboard.bookings.link'|trans,
-    "ariaControls": "reservations",
-    "dataText": "Mes reservations"
+        "link": path('cocorico_dashboard_booking_offerer'),
+        "text": 'nav.dashboard.bookings.link'|trans,
+        "ariaControls": "reservations",
+        "dataText": "Mes reservations"
+    },
+    "quotes" : {
+        "link": path('cocorico_dashboard_quote_offerer'),
+        "text": "Demandes de Devis",
+        "ariaControls": "devis",
+        "dataText": "Demandes de Devis"
     },
     "listings": {
-    "link": path('cocorico_dashboard_listing'),
-    "text": 'nav.dashboard.listings.link'|trans,
-    "ariaControls": "properties",
-    "dataText": "Mes annonces"
+        "link": path('cocorico_dashboard_listing'),
+        "text": 'nav.dashboard.listings.link'|trans,
+        "ariaControls": "properties",
+        "dataText": "Mes annonces"
     },
     "comments": {
-    "link": path('cocorico_dashboard_reviews_received'),
-    "text": 'nav.dashboard.comments.link'|trans,
-    "ariaControls": "comments",
-    "dataText": "Commentaires"
+        "link": path('cocorico_dashboard_reviews_received'),
+        "text": 'nav.dashboard.comments.link'|trans,
+        "ariaControls": "comments",
+        "dataText": "Commentaires"
     },
     "profile": {
-    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
-    "text": 'nav.dashboard.profile.link'|trans,
-    "ariaControls": "profile",
-    "dataText": "Mon profil"
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans,
+        "ariaControls": "profile",
+        "dataText": "Mon profil"
     }
     } -%}
 {%- else -%}
     {%- set menuItems = {
     "messages": {
-    "link": path('cocorico_dashboard_message'),
-    "text": 'nav.dashboard.messages.link'|trans,
-    "ariaControls": "messaging",
-    "dataText": "Messagerie"
+        "link": path('cocorico_dashboard_message'),
+        "text": 'nav.dashboard.messages.link'|trans,
+        "ariaControls": "messaging",
+        "dataText": "Messagerie"
     },
     "bookings": {
-    "link": path('cocorico_dashboard_booking_asker'),
-    "text": 'nav.dashboard.bookings.link'|trans,
-    "ariaControls": "reservations",
-    "dataText": "Mes reservations"
+        "link": path('cocorico_dashboard_booking_asker'),
+        "text": 'nav.dashboard.bookings.link'|trans,
+        "ariaControls": "reservations",
+        "dataText": "Mes reservations"
+    },
+    "quotes" : {
+        "link": path('cocorico_dashboard_quote_asker'),
+        "text": "Demandes de Devis",
+        "ariaControls": "devis",
+        "dataText": "Demandes de Devis"
     },
     "comments": {
-    "link": path('cocorico_dashboard_reviews_received'),
-    "text": 'nav.dashboard.comments.link'|trans,
-    "ariaControls": "comments",
-    "dataText": "Commentaires"
+        "link": path('cocorico_dashboard_reviews_received'),
+        "text": 'nav.dashboard.comments.link'|trans,
+        "ariaControls": "comments",
+        "dataText": "Commentaires"
     },
     "profile": {
-    "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
-    "text": 'nav.dashboard.profile.link'|trans,
-    "ariaControls": "profile",
-    "dataText": "Mon profil"
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans,
+        "ariaControls": "profile",
+        "dataText": "Mon profil"
     }
     } -%}
 {%- endif -%}

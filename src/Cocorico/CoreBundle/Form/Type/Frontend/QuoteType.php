@@ -36,8 +36,32 @@ class QuoteType extends AbstractType
     }
 
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        // Nothing yet
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Cocorico\CoreBundle\Entity\Quote',
+                'csrf_token_id' => 'quote',
+                'translation_domain' => 'cocorico_quote',
+                'constraints' => new Valid(),
+                'validation_groups' => array('new'),
+//                'error_bubbling' => false,//To prevent errors bubbling up to the parent form
+//                //To map errors of all unmapped properties (date_range) to a particular field (date_range)
+//                'error_mapping' => array(
+//                    '.' => 'date_range',
+//                ),
+            )
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'quote';
     }
 }

@@ -258,3 +258,8 @@ services:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\BookingStatusFilterType
         tags:
             - { name: form.type }
+
+    cocorico.form.quote.status_filter:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\QuoteStatusFilterType
+        tags:
+            - { name: form.type }
