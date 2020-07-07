@@ -151,7 +151,7 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
             new Twig_SimpleFilter('repeat', array($this, 'stringRepeatFilter')),
             new Twig_SimpleFilter('add_time_unit_text', array($this, 'addTimeUnitTextFilter')),
             new Twig_SimpleFilter('ucwords', 'ucwords'),
-            # new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
+            new Twig_SimpleFilter('format_price', array($this, 'formatPriceFilter')),
             new Twig_SimpleFilter('strip_private_info', array($this, 'stripPrivateInfoFilter')),
         );
     }

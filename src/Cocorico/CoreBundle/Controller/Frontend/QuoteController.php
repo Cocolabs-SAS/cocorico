@@ -99,7 +99,7 @@ class QuoteController extends Controller
         if ($request->isXmlHttpRequest()) {
             return
                 $this->render(
-                    '@CocoricoCore/Frontend/Booking/form_quote.html.twig',
+                    '@CocoricoCore/Frontend/Quote/form_quote.html.twig',
                     array(
                         'form' => $form->createView(),
                         'quote' => $quote
