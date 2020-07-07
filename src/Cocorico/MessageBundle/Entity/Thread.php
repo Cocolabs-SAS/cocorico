@@ -122,10 +122,10 @@ class Thread extends BaseThread
     }
 
     /**
-     * @param  BaseBooking $quote
+     * @param  Quote $quote
      * @return $this
      */
-    public function setQuote(BaseQuote $quote = null)
+    public function setQuote(Quote $quote = null)
     {
         $this->quote = $quote;
 

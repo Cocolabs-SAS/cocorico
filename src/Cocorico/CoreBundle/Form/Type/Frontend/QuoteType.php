@@ -39,9 +39,9 @@ class QuoteType extends AbstractType
                         'format' => 'dd/MM/yyyy',
                     )
                 ))
-            // ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
-            // ->add('surface_m2', NumberType::class)
-            // ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
+            ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
+            ->add('surface_m2', NumberType::class)
+            ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
             ->add('communication', TextareaType::class);
     }
 
