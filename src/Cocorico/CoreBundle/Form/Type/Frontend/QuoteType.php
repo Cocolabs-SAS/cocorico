@@ -30,15 +30,15 @@ class QuoteType extends AbstractType
 
         $builder
             ->add('budget', NumberType::class)
-            //->add('presta_start_date',
-            //    DateType::class,
-            //    array_merge(
-            //        array(
-            //            'property_path' => 'start',
-            //            'widget' => 'single_text',
-            //            'format' => 'dd/MM/yyyy',
-            //        )
-            //    ))
+            ->add('presta_start_date',
+                DateType::class,
+                array_merge(
+                    array(
+                        'property_path' => 'start',
+                        'widget' => 'single_text',
+                        'format' => 'dd/MM/yyyy',
+                    )
+                ))
             ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
             ->add('surface_m2', NumberType::class)
             ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
