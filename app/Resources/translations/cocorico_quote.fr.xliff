@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="525c5c62e18194cdbdd13836f49eee569d800c6e" resname="entity.quote.status.draft">
+        <source>entity.quote.status.draft</source>
+        <target>Brouillon</target>
+      </trans-unit>
+      <trans-unit id="6c634450de32ad6a1933611b0a3cf4fa3c6c9c9c" resname="entity.quote.status.sent">
+        <source>entity.quote.status.sent</source>
+        <target>Envoyé</target>
+      </trans-unit>
+      <trans-unit id="70a7f3bd1d169dccd8d5b45510df2a84579b8706" resname="entity.quote.status.discussion">
+        <source>entity.quote.status.discussion</source>
+        <target>En discussion</target>
+      </trans-unit>
+      <trans-unit id="9b1f849bcc25b7927e8ce1a6f6187f9728cacf98" resname="entity.quote.status.accepted">
+        <source>entity.quote.status.accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="d74cc93d25c59ed384492237a72c7f2cec73d700" resname="entity.quote.status.refused_asker">
+        <source>entity.quote.status.refused_asker</source>
+        <target>Refusé par demandeur</target>
+      </trans-unit>
+      <trans-unit id="8a11640f586558ecd5a25756f0391954d3d85e15" resname="entity.quote.status.refused_offerer">
+        <source>entity.quote.status.refused_offerer</source>
+        <target>Refusé par fournisseur</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

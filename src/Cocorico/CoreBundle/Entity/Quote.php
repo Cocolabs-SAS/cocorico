@@ -28,19 +28,28 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Quote {
     /* Status */
     const STATUS_DRAFT = 0;
-    const STATUS_NEW = 1;
-    const STATUS_OK = 2;
+    const STATUS_SENT = 1;
+    const STATUS_DISCUSSION = 2;
+    const STATUS_ACCEPTED = 3;
+    const STATUS_REFUSED_ASKER = 4;
+    const STATUS_REFUSED_OFFERER = 5;
 
     public static $statusValues = array (
         self::STATUS_DRAFT => 'entity.quote.status.draft',
-        self::STATUS_NEW => 'entity.quote.status.new',
-        self::STATUS_OK => 'entity.quote.status.ok'
+        self::STATUS_SENT => 'entity.quote.status.sent',
+        self::STATUS_DISCUSSION => 'entity.quote.status.discussion',
+        self::STATUS_ACCEPTED => 'entity.quote.status.accepted',
+        self::STATUS_REFUSED_ASKER => 'entity.quote.status.refused_asker',
+        self::STATUS_REFUSED_OFFERER => 'entity.quote.status.refused_offerer'
     );
 
     public static $visibleStatus = array (
         self::STATUS_DRAFT,
-        self::STATUS_NEW,
-        self::STATUS_OK
+        self::STATUS_SENT,
+        self::STATUS_DISCUSSION,
+        self::STATUS_ACCEPTED,
+        self::STATUS_REFUSED_ASKER,
+        self::STATUS_REFUSED_OFFERER
     );
 
     /**
