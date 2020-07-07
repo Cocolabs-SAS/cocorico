@@ -36,39 +36,27 @@
             var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
 
             initDatePickerAjax(function () {
-                jcf.replaceAll("#booking-price-form");
+                jcf.replaceAll("quote-form");
             });
 
             var $form = $("#quote-form");
 
             $form.submit(function () {
-                //Remove price and submit button
                 //Disable fields and add loading until form is rendered
                 $(this).find("input").attr("readonly", "readonly");
                 $(this).find("select option:not(:selected)").each(function () {
                     $(this).attr('disabled', 'disabled');
                 });
+                $(".add-info .loading, a[data-id=submit-booking]").remove();
             });
 
-            $("a[data-id=submit-booking]").click(function (e) {
+            $("a[data-id=submit-quote]").click(function (e) {
                 e.preventDefault();
                 var $errors = $form.find('div.errors');
                 //Submit form if no errors
                 if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
                     if ($("#start-date").val() && $("#end-date").val()) {
-                        if (timeUnitIsDay) {
-                            $form.submit();
-                        } else {
-                            var $holderTimes = $form.find(".time-fields");
-                            var $startHour = $holderTimes.find("[id$=_start_hour]").first();
-                            var $endHour = $holderTimes.find("[id$=_start_minute]").first();
-                            var $startMinute = $holderTimes.find("[id$=_end_hour]").first();
-                            var $endMinute = $holderTimes.find("[id$=_end_minute]").first();
-
-                            if ($startHour.val() && $endHour.val() && $startMinute.val() && $endMinute.val()) {
-                                $form.submit();
-                            }
-                        }
+                        $form.submit();
                     }
                 }
             });
