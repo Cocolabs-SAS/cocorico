@@ -29,7 +29,7 @@ class QuoteType extends AbstractType
         $quote = $builder->getData();
 
         $builder
-            //->add('budget_estimation', NumberType::class)
+            ->add('budget', NumberType::class)
             //->add('presta_start_date',
             //    DateType::class,
             //    array_merge(
