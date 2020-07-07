@@ -23,11 +23,11 @@
     <div>
         {#{% if form.vars['errors'] is empty %}#}
         {% if form.vars.submitted and form.vars.valid %}
-            <a href="#" data-id="submit-quote"
-               class="btn btn-default">Envoyer</a>
+            <i>tech: Erreur détectée</i>
         {% else %}
-            <a disabled data-id="submit-quote" class="btn btn-default">Envoyer</a>
+            <i>tech: Pas d'erreur</i>
         {% endif %}
+        <a href="#" data-id="submit-quote" class="btn btn-default">Envoyer</a>
     </div>
 
 
