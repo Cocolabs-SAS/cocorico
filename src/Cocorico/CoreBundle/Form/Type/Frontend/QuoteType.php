@@ -34,7 +34,7 @@ class QuoteType extends AbstractType
                 DateType::class,
                 array_merge(
                     array(
-                        'property_path' => 'start',
+                        'property_path' => 'prestaStartDate',
                         'widget' => 'single_text',
                         'format' => 'dd/MM/yyyy',
                     )
