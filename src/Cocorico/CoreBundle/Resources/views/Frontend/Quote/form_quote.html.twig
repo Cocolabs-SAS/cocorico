@@ -36,7 +36,7 @@
             var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
 
             initDatePickerAjax(function () {
-                jcf.replaceAll("quote-form");
+                jcf.replaceAll("#quote-form");
             });
 
             var $form = $("#quote-form");
@@ -55,9 +55,9 @@
                 var $errors = $form.find('div.errors');
                 //Submit form if no errors
                 if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
-                    if ($("#start-date").val() && $("#end-date").val()) {
-                        $form.submit();
-                    }
+                    //if ($("#start-date").val() && $("#end-date").val()) {
+                    $form.submit();
+                    //}
                 }
             });
 
