@@ -5,6 +5,7 @@ namespace Cocorico\CoreBundle\Form\Type\Frontend;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -28,10 +29,19 @@ class QuoteType extends AbstractType
         $quote = $builder->getData();
 
         $builder
-            ->add('frequency_hours', NumberType::class)
-            ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
-            ->add('surface_m2', NumberType::class)
-            ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
+            ->add('budget_estimation', NumberType::class)
+            ->add('presta_start_date',
+                DateType::class,
+                array_merge(
+                    array(
+                        'property_path' => 'start',
+                        'widget' => 'single_text',
+                        'format' => 'dd/MM/yyyy',
+                    )
+                ))
+            // ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
+            // ->add('surface_m2', NumberType::class)
+            // ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
             ->add('communication', TextareaType::class);
     }
 
