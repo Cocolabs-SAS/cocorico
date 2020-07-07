@@ -110,6 +110,20 @@ class Quote {
     private $communication;
 
     /**
+     * @ORM\Column(name="prestaStartDate", type="datetime")
+     *
+     * @var DateTime
+     */
+    private $prestaStartDate;
+
+    /**
+     * @ORM\Column(name="budget", type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    private $budget;
+
+    /**
      * @ORM\OneToOne(targetEntity="Cocorico\MessageBundle\Entity\Thread", mappedBy="quote", cascade={"remove"}, orphanRemoval=true)
      */
     private $thread;
@@ -413,7 +427,7 @@ class Quote {
     }
     public function setFrequencyHours($hours)
     {
-        // ok
+        return $this->frequency_hours = $hours;
     }
 
     public function getFrequencyPeriod()
@@ -422,7 +436,7 @@ class Quote {
     }
     public function setFrequencyPeriod($period)
     {
-        // ok
+        $this->frequency_period = $period;
     }
 
     public function getSurfaceM2()
@@ -431,7 +445,7 @@ class Quote {
     }
     public function setSurfaceM2($surface)
     {
-        // ok
+        $this->surface = $surface;
     }
 
     public function getSurfaceType()
@@ -440,15 +454,51 @@ class Quote {
     }
     public function setSurfaceType($type)
     {
-        // ok
+        $this->surface_type = $type;
     }
 
+    /**
+     * @return string $communication
+     */
     public function getCommunication()
     {
-        return $this->surface_type;
+        return $this->communication;
     }
-    public function setCommunication($type)
+    /**
+     * @param string $communication
+     */
+    public function setCommunication($communication)
     {
-        // ok
+        $this->communication = $communication;
+    }
+
+    /**
+     * @return integer $budget
+     */
+    public function getBudget()
+    {
+        return $this->budget;
+    }
+    /**
+     * @param integer $budget
+     */
+    public function setBudget($budget)
+    {
+        $this->budget = $budget;
+    }
+
+    /**
+     * @return datetime $prestaStartDate
+     */
+    public function getPrestaStartDate()
+    {
+        return $this->prestaStartDate;
+    }
+    /**
+     * @param datetime $prestaStartDate
+     */
+    public function setPrestaStartDate($prestaStartDate)
+    {
+        $this->prestaStartDate = $prestaStartDate;
     }
 }
