@@ -37,3 +37,10 @@ services:
             - "@event_dispatcher"
         tags:
             - { name: doctrine.event_subscriber }
+
+    cocorico.quote_user_address_entity_listener:
+        class: Cocorico\CoreBundle\Listener\QuoteUserAddressEntityListener
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: doctrine.event_subscriber }

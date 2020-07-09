@@ -1,0 +1,65 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set user_timezone = app.session.get('timezone', timeZone) %}
+
+{% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+{{ form_start(form, {'attr': {'id': 'quote-new'}}) }}
+
+
+{#{{ form_errors(form) }}#}
+{{ form_errors(form) }}
+
+{% if optionBundleEnabled %}
+    {% include 'CocoricoListingOptionBundle:Frontend:Quote/_form_options.html.twig' with {
+        'form': form,
+        'quote': quote
+    } only %}
+{% endif %}
+
+{#
+{% if addressDelivery %}
+    {% include 'CocoricoCoreBundle:Frontend:Quote/_form_user_address.html.twig' with {
+        'form' : form.userAddress
+    } only %}
+{% endif %}
+#}
+
+<div class="form-communication">
+    <fieldset>
+        <legend class="hidden">form-communication</legend>
+        <h2>{{ form_label(form.communication) }}</h2>
+
+        {{ form_errors(form.communication) }}
+        <div class="no-scroll">
+            {{ form_widget(form.communication,{
+                'attr': {
+                    'placeholder': 'quote.new.communication.placeholder'|trans
+                }
+            }) }}
+        </div>
+        <input type="submit" class="hidden" value="submit">
+    </fieldset>
+</div>
+
+<div class="btns-area">
+    {#
+    {{ form_errors(form.tac) }}
+    <div class="agreement">
+        {{ form_widget(form.tac) }}
+        <span class="label">
+            {{ form_label(form.tac, null, {'required': false} ) }}
+            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+               target="_blank">
+                {{ 'quote.new.tac.link'|trans }}
+            </a>*
+        </span>
+    </div>
+    #}
+
+    <input type="submit" value="{{ 'quote.new.validation.submit'|trans }}" class="btn btn-primary">
+</div>
+
+{{ form_end(form) }}

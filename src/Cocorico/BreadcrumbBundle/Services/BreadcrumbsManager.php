@@ -12,6 +12,7 @@
 namespace Cocorico\BreadcrumbBundle\Services;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\GeoBundle\Entity\Area;
@@ -310,6 +311,23 @@ class BreadcrumbsManager implements TranslationContainerInterface
     public function addBookingNewItems(Request $request, $booking)
     {
         $listing = $booking->getListing();
+        $this->addListingShowItems($request, $listing);
+
+        $this->breadcrumbs->offsetUnset($this->breadcrumbs->count() - 1);
+        $url = $this->router->generate('cocorico_listing_show', array('slug' => $listing->getSlug()));;
+        $this->breadcrumbs->addItem($listing->getTitle(), $url);
+        $this->breadcrumbs->addItem($this->translator->trans('Reservation', array(), 'cocorico_breadcrumbs'));
+    }
+
+    /**
+     * Add breadcrumbs to listing show action
+     *
+     * @param Request $request
+     * @param Quote $quote
+     */
+    public function addQuoteNewItems(Request $request, $quote)
+    {
+        $listing = $quote->getListing();
         $this->addListingShowItems($request, $listing);
 
         $this->breadcrumbs->offsetUnset($this->breadcrumbs->count() - 1);

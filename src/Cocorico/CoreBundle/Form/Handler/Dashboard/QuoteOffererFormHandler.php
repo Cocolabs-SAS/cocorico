@@ -29,7 +29,7 @@ class QuoteOffererFormHandler extends QuoteFormHandler
         /** @var Quote $quote */
         $quote = $form->getData();
         $message = $form->get("message")->getData();
-        $this->threadManager->addReplyThread($quote, $message, $quote->getListing()->getUser());
+        $this->threadManager->addReplyQuoteThread($quote, $message, $quote->getListing()->getUser());
         //Accept or refuse
         $type = $this->request->get('type');
 

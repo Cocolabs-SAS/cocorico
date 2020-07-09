@@ -6,11 +6,15 @@ use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\Frontend\QuoteType;
 
+use Cocorico\CoreBundle\Event\QuoteEvent;
+use Cocorico\CoreBundle\Event\QuoteEvents;
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -23,7 +27,7 @@ class QuoteController extends Controller
     /**
      * Creates a new Quote entity.
      *
-     * @Route("/{listing_id}/{start}/{end}/new",
+     * @Route("/{listing_id}/{prestaStartDate}/new",
      *      name="cocorico_quote_new",
      *      requirements={
      *          "listing_id" = "\d+"
@@ -41,8 +45,6 @@ class QuoteController extends Controller
      *
      * @param Request   $request
      * @param Listing   $listing
-     * @param string $communication
-     * @param integer $budget
      * @param \DateTime $prestaStartDate format yyyy-mm-dd-H:i
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -50,10 +52,10 @@ class QuoteController extends Controller
     public function newAction(
         Request $request,
         Listing $listing,
-        string $communication,
-        integer $budget,
-        \DateTime $prestaStartDate
+        \DateTime $prestaStartDate=Null
     ) {
+        $communication = (string)$request->query->get('communication');
+        $budget = (int)$request->query->get('budget');
         $quoteHandler = $this->get('cocorico.form.handler.quote_base');
         $quote = $quoteHandler->init($this->getUser(), $listing, $communication, $budget, $prestaStartDate);
         //Availability is validated through QuoteValidator and amounts are setted through Form Event PRE_SET_DATA
@@ -125,7 +127,7 @@ class QuoteController extends Controller
     {
         $form = $this->get('form.factory')->createNamed(
             '',
-            QuoteNewType::class,
+            QuoteType::class,
             $quote,
             array(
                 'method' => 'POST',
@@ -142,6 +144,66 @@ class QuoteController extends Controller
         );
 
         return $form;
+    }
+
+    /**
+     * Form message for specific bundles
+     *
+     * @param int $success
+     */
+    private function addFormMessagesToFlashBag($success)
+    {
+        $session = $this->get('session');
+        $translator = $this->get('translator');
+
+        if ($success === 2) {//Voucher code is valid
+            $session->getFlashBag()->add(
+                'success_voucher',
+                $translator->trans('quote.new.voucher.success', array(), 'cocorico_quote')
+            );
+        } elseif ($success === 3) {//Delivery is valid
+            $session->getFlashBag()->add(
+                'success',
+                $translator->trans('quote.new.delivery.success', array(), 'cocorico_quote')
+            );
+        } elseif ($success === 4) {//Options is valid
+            $session->getFlashBag()->add(
+                'success',
+                $translator->trans('quote.new.options.success', array(), 'cocorico_quote')
+            );
+        } elseif ($success < 0) {//Errors
+            $this->addFlashError($success);
+        }
+    }
+
+    /**
+     * @param $success
+     */
+    private function addFlashError($success)
+    {
+        $translator = $this->get('translator');
+        $errorMsg = $translator->trans('quote.new.unknown.error', array(), 'cocorico_quote'); //-4
+        $flashType = 'error';
+
+        if ($success == -1) {
+            $errorMsg = $translator->trans('quote.new.form.error', array(), 'cocorico_quote');
+        } elseif ($success == -2) {
+            $errorMsg = $translator->trans('quote.new.self_quote.error', array(), 'cocorico_quote');
+        } elseif ($success == -3) {
+            $errorMsg = $translator->trans('quote.new.voucher_code.error', array(), 'cocorico_quote');
+            $flashType = 'error_voucher';
+        } elseif ($success == -4) {
+            $errorMsg = $translator->trans('quote.new.voucher_amount.error', array(), 'cocorico_quote');
+            $flashType = 'error_voucher';
+        } elseif ($success == -5) {
+            $errorMsg = $translator->trans('quote.new.delivery_max.error', array(), 'cocorico_quote');
+            $flashType = 'error';
+        } elseif ($success == -6) {
+            $errorMsg = $translator->trans('quote.new.delivery.error', array(), 'cocorico_quote');
+            $flashType = 'error';
+        }
+
+        $this->get('session')->getFlashBag()->add($flashType, $errorMsg);
     }
 
 

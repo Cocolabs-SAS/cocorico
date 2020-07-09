@@ -28,14 +28,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Quote {
     /* Status */
     const STATUS_DRAFT = 0;
-    const STATUS_SENT = 1;
-    const STATUS_DISCUSSION = 2;
-    const STATUS_ACCEPTED = 3;
-    const STATUS_REFUSED_ASKER = 4;
-    const STATUS_REFUSED_OFFERER = 5;
+    const STATUS_NEW = 1;
+    const STATUS_SENT = 2;
+    const STATUS_DISCUSSION = 3;
+    const STATUS_ACCEPTED = 4;
+    const STATUS_REFUSED_ASKER = 5;
+    const STATUS_REFUSED_OFFERER = 6;
 
     public static $statusValues = array (
         self::STATUS_DRAFT => 'entity.quote.status.draft',
+        self::STATUS_NEW => 'entity.quote.status.new',
         self::STATUS_SENT => 'entity.quote.status.sent',
         self::STATUS_DISCUSSION => 'entity.quote.status.discussion',
         self::STATUS_ACCEPTED => 'entity.quote.status.accepted',
@@ -45,6 +47,7 @@ class Quote {
 
     public static $visibleStatus = array (
         self::STATUS_DRAFT,
+        self::STATUS_NEW,
         self::STATUS_SENT,
         self::STATUS_DISCUSSION,
         self::STATUS_ACCEPTED,
@@ -59,6 +62,7 @@ class Quote {
 
     //Status for which quote can be canceled by asker
     public static $cancelableStatus = array(
+        self::STATUS_NEW,
         self::STATUS_SENT,
         self::STATUS_DISCUSSION
     );
@@ -66,6 +70,7 @@ class Quote {
     //Status for which quote can be expired
     public static $expirableStatus = array(
         self::STATUS_DRAFT,
+        self::STATUS_NEW,
         self::STATUS_SENT
     );
 
@@ -198,14 +203,6 @@ class Quote {
      * @var string
      */
     protected $timeZoneOfferer = 'Europe/Paris';
-
-
-     /**
-     * @var datetime $createdAt
-     *
-     * @ORM\Column(type="datetime")
-     */
-    protected $createdAt;
 
     /**
      * @var datetime $updatedAt
@@ -411,7 +408,7 @@ class Quote {
      */
     public function __toString()
     {
-        return (string)$this->getId() . " (" . $this->getListing() . ":" . $this->getStart()->format('d-m-Y') . ")";
+        return (string)$this->getId() . " (" . $this->getListing() . ":" . $this->getPrestaStartDate()->format('d-m-Y') . ")";
     }
 
     /**
@@ -539,4 +536,22 @@ class Quote {
     {
         $this->prestaStartDate = $prestaStartDate;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param boolean $validated
+     */
+    public function setValidated($validated)
+    {
+        $this->validated = $validated;
+    }
+
+
 }

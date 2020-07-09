@@ -86,12 +86,14 @@
                 {{ 'quote.index.show'|trans }}
             </a>
 
+            {#
             {% set expiration = quote.getTimeBeforeExpiration(quoteExpirationDelay, quoteAcceptationDelay) %}
             {% if expiration > 0 %}
                 <strong class="expiry">
                     {{ 'quote.expire_in:'|trans }} {{ expiration|format_seconds }}
                 </strong>
             {% endif %}
+            #}
         </footer>
     </article>
 

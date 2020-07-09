@@ -1,0 +1,73 @@
+{% trans_default_domain 'cocorico_user' %}
+
+<div class="form-area">
+    <div class="form-message contact-info">
+        <fieldset>
+            <h2>{{ 'entity.user.type.delivery'|trans }}</h2>
+
+            {#{{ form_errors(form) }}#}
+            <div class="col-md-6">
+                <div class="field-row textarea">
+                    {{ form_errors(form.address) }}
+                    <span class="label">
+                        {{ form_label(form.address) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form.address, {
+                            'attr': {
+                                'class': "form-control"
+                            }
+                        }) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="field-row">
+                    {{ form_errors(form.city) }}
+                    <span class="label">
+                        {{ form_label(form.city) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form.city, {
+                            'attr': {
+                                'class': "form-control"
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    {{ form_errors(form.zip) }}
+                    <span class="label">
+                        {{ form_label(form.zip) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form.zip, {
+                            'attr': {
+                                'class': "form-control"
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    {{ form_errors(form.country) }}
+                    <span class="label">
+                        {{ form_label(form.country) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form.country, {
+                            'attr': {
+                                'class': "form-control no-arrow"
+                            }
+                        }) }}
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+</div>

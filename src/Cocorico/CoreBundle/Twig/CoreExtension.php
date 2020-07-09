@@ -13,6 +13,7 @@
 namespace Cocorico\CoreBundle\Twig;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Utils\PHP;
 # use Lexik\Bundle\CurrencyBundle\Twig\Extension\CurrencyExtension;
@@ -392,7 +393,16 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         $bookingConstants = $booking->getConstants();
 
 
+        $quote = new ReflectionClass("Cocorico\CoreBundle\Entity\Quote");
+        $quoteConstants = $quote->getConstants();
+
+
         //CSS class by status
+        $quoteStatusClass = array(
+            Quote::STATUS_DRAFT => 'btn-yellow',
+            Quote::STATUS_NEW => 'btn-yellow'
+        );
+
         $bookingStatusClass = array(
             Booking::STATUS_DRAFT => 'btn-yellow',
             Booking::STATUS_NEW => 'btn-yellow',
@@ -421,6 +431,8 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
             'BookingBankWireConstants' => $bookingBankWireConstants,
             'BookingPayinRefundConstants' => $bookingPayinRefundConstants,
             'bookingStatusClass' => $bookingStatusClass,
+            'QuoteConstants' => $quoteConstants,
+            'quoteStatusClass' => $quoteStatusClass,
             'timeUnit' => $this->timeUnit,
             'timeUnitIsDay' => $this->timeUnitIsDay,
             'timeZone' => $this->timeZone,

@@ -193,7 +193,7 @@ class QuoteManager extends BaseManager
             $quote->setTimeZoneAsker($quote->getUser()->getTimeZone());
             $quote->setTimeZoneOfferer($quote->getListing()->getUser()->getTimeZone());
 
-            // $quote = $this->save($quote);
+            $quote = $this->save($quote);
 
             // $this->mailer->sendQuoteRequestMessageToOfferer($quote);
             // $this->mailer->sendQuoteRequestMessageToAsker($quote);
@@ -218,16 +218,8 @@ class QuoteManager extends BaseManager
     public function canBeCanceledByAsker(Quote $quote)
     {
         $statusIsOk = in_array($quote->getStatus(), Quote::$cancelableStatus);
-        $hasStarted = $quote->hasStarted();
 
-        //todo: check if refund can be made with voucher amount
-        if ($this->voucherIsEnabled()) {
-            if ($quote->getAmountDiscountVoucher()) {
-                return false;
-            }
-        }
-
-        if ($statusIsOk && !$hasStarted && !$quote->isValidated()) {
+        if ($statusIsOk && !$quote->isValidated()) {
             return true;
         } else {
             return false;
@@ -247,8 +239,10 @@ class QuoteManager extends BaseManager
     public function canBeAcceptedOrRefusedByOfferer(Quote $quote)
     {
         //$refusableStatus is equal to $payableStatus
-        $statusIsOk = in_array($quote->getStatus(), Quote::$payableStatus);
+        $statusIsOk = in_array($quote->getStatus(), Quote::$cancelableStatus);
 
+        return $statusIsOk;
+        /*
         $isNotExpired = $quote->getTimeBeforeExpiration(
             $this->expirationDelay,
             $this->acceptationDelay
@@ -256,6 +250,7 @@ class QuoteManager extends BaseManager
         $isNotExpired = $isNotExpired && $isNotExpired > 0;
 
         return $statusIsOk && $isNotExpired;
+        */
     }
 
     /**
@@ -344,7 +339,7 @@ class QuoteManager extends BaseManager
      */
     public function save(Quote $quote)
     {
-        // $this->persistAndFlush($quote);
+        $this->persistAndFlush($quote);
 
         return $quote;
     }

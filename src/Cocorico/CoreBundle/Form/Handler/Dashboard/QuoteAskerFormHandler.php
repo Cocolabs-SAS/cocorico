@@ -37,7 +37,7 @@ class QuoteAskerFormHandler extends QuoteFormHandler
         /** @var Quote $quote */
         $quote = $form->getData();
         $message = $form->get("message")->getData();
-        $this->threadManager->addReplyThread($quote, $message, $quote->getUser());
+        $this->threadManager->addReplyQuoteThread($quote, $message, $quote->getUser());
         //Cancel
         $type = $this->request->get('type');
         if (in_array($quote->getStatus(), Quote::$cancelableStatus)) {

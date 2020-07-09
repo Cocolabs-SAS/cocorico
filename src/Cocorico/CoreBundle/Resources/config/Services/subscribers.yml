@@ -1,4 +1,13 @@
 services:
+    #Quote subscriber
+    cocorico.quote.subscriber:
+        class: Cocorico\CoreBundle\Event\QuoteSubscriber
+        arguments:
+            - "@cocorico.quote.manager"
+            - "@event_dispatcher"
+        tags:
+            - { name: kernel.event_subscriber}
+
     #Booking subscriber
     cocorico.booking.subscriber:
         class: Cocorico\CoreBundle\Event\BookingSubscriber

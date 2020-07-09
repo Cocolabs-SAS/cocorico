@@ -56,7 +56,7 @@ class QuoteBaseFormHandler
      * @param User|null $user
      * @param Listing   $listing
      * @param string $communication
-     * @param integer $budget
+     * @param intr $budget
      * @param \DateTime $prestaStartDate format yyyy-mm-dd-H:i
      *
      * @return Quote $quote
@@ -64,9 +64,9 @@ class QuoteBaseFormHandler
     public function init(
         $user,
         Listing $listing,
-        string $communication,
-        integer $budget,
-        \DateTime $prestaStartDate
+        string $communication = Null,
+        int $budget = Null,
+        \DateTime $prestaStartDate = Null
     ) {
         //Id of an eventual quote draft
         $quoteId = $this->request->query->get('id');

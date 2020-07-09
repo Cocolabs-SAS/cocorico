@@ -1,0 +1,75 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_quote' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set listing = quote.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+
+{%- block meta_title -%}
+    {{ 'quote.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ quote.prestaStartDate|localizeddate('short', 'none', 'fr') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'quote.new.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+
+    {% if display_errors is defined and not display_errors %}
+        <style>
+            .errors {
+                display: none;
+            }
+        </style>
+    {% endif %}
+{%- endblock -%}
+
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_quote' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
+
+        {% block main %}
+            <a href="{{ path('cocorico_listing_show', {'slug':listing_translation.slug} ) }}">
+                &lt; {{ 'quote.new.back'|trans }}
+            </a>
+            <!-- two-columns -->
+            <div class="twocolumns row alt">
+                <!-- contain the main content of the page -->
+                <div id="content" class="listing-area col-xs-12 col-md-9">
+                    <div class="content-holder">
+                        {% include 'CocoricoCoreBundle:Frontend:Quote/_form_new.html.twig' with {
+                            'quote' : quote,
+                            'form': form
+                        } only %}
+                    </div>
+                </div>
+
+                {% include 'CocoricoCoreBundle:Frontend:Quote/_side.html.twig' with {
+                    'quote' : quote
+                } only %}
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if optionBundleEnabled %}
+        {% include 'CocoricoListingOptionBundle:Frontend:Quote/js/_options_js.html.twig' only %}
+    {% endif %}
+{% endblock %}

@@ -12,6 +12,7 @@
 namespace Cocorico\MessageBundle\FormModel;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use FOS\MessageBundle\FormModel\AbstractMessage;
 use FOS\MessageBundle\Model\ParticipantInterface;
@@ -46,6 +47,13 @@ class NewThreadMessage extends AbstractMessage
      * @var Booking
      */
     protected $booking;
+
+    /**
+     * The thread quote
+     *
+     * @var Quote
+     */
+    protected $quote;
 
     /**
      * @return Listing
@@ -84,7 +92,24 @@ class NewThreadMessage extends AbstractMessage
 
         return $this;
     }
+    /**
+     * @return Quote
+     */
+    public function getQuote()
+    {
+        return $this->quote;
+    }
 
+    /**
+     * @param  Quote $quote
+     * @return $this
+     */
+    public function setQuote(Quote $quote = null)
+    {
+        $this->quote = $quote;
+
+        return $this;
+    }
     /**
      * @return string
      */
