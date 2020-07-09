@@ -52,6 +52,35 @@ class Quote {
         self::STATUS_REFUSED_OFFERER
     );
 
+    //Status for which quote can be created
+    public static $newableStatus = array (
+        self::STATUS_DRAFT
+    );
+
+    //Status for which quote can be canceled by asker
+    public static $cancelableStatus = array(
+        self::STATUS_SENT,
+        self::STATUS_DISCUSSION
+    );
+
+    //Status for which quote can be expired
+    public static $expirableStatus = array(
+        self::STATUS_DRAFT,
+        self::STATUS_SENT
+    );
+
+    //Status for which quote can be refused
+    public static $refusableStatus = array(
+        self::STATUS_SENT,
+        self::STATUS_DISCUSSION
+    );
+
+    //Status for which quote can be validated
+    public static $validatableStatus = array(
+        self::STATUS_SENT,
+        self::STATUS_DISCUSSION
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
