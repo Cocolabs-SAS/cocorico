@@ -45,7 +45,7 @@ class QuoteController extends Controller
     /**
      * Creates a form for Quote.
      *
-     * @param Booking $booking The entity
+     * @param Quote $quote The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
@@ -105,14 +105,15 @@ class QuoteController extends Controller
                         'quote' => $quote
                     )
                 );
-        } else {//Redirect to new Booking page if no ajax request
+        } else {//Redirect to new Quote page if no ajax request
             return $this->redirect(
                 $this->generateUrl(
                     'cocorico_quote_new',
                     array(
                         'listing_id' => $listing->getId(),
-                        'start' => $quote->getStart()->format('Y-m-d-H:i'),
-                        'end' => $quote->getEnd()->format('Y-m-d-H:i'),
+                        'communication' => $quote->getCommunication(),
+                        'budget' => $quote->getBudget(),
+                        'prestaStartDate' => is_null($quote->getPrestaStartDate()) ? '' : $quote->getPrestaStartDate()->format('Y-m-d-H:i'),
                     )
                 )
             );

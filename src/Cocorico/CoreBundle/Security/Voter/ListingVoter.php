@@ -20,11 +20,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class ListingVoter extends Voter
 {
     const BOOKING = 'booking';
+    const QUOTE = 'quote';
     const EDIT = 'edit';
     const VIEW = 'view';
 
     const ATTRIBUTES = [
         self::BOOKING,
+        self::QUOTE,
         self::VIEW,
         self::EDIT,
     ];
@@ -82,6 +84,25 @@ class ListingVoter extends Voter
             )
         );
     }
+
+    /**
+     * @param Listing $listing
+     * @param TokenInterface $token
+     *
+     * @return boolean
+     */
+    protected function voteOnQuote(Listing $listing, TokenInterface $token)
+    {
+        return (
+            $listing->getStatus() == Listing::STATUS_PUBLISHED
+            || (
+                $token->getUser() instanceof UserInterface &&
+                $token->getUser()->getId() === $listing->getUser()->getId() &&
+                $listing->getStatus() != Listing::STATUS_DELETED
+            )
+        );
+    }
+
 
     /**
      * @param Listing $listing
