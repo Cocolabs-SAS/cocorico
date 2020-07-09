@@ -55,14 +55,18 @@ class QuoteBaseFormHandler
      *
      * @param User|null $user
      * @param Listing   $listing
-     * @param \DateTime $start format yyyy-mm-dd
-     * @param \DateTime $end   format yyyy-mm-dd
+     * @param string $communication
+     * @param integer $budget
+     * @param \DateTime $prestaStartDate format yyyy-mm-dd-H:i
      *
      * @return Quote $quote
      */
     public function init(
         $user,
-        Listing $listing
+        Listing $listing,
+        string $communication,
+        integer $budget,
+        \DateTime $prestaStartDate
     ) {
         //Id of an eventual quote draft
         $quoteId = $this->request->query->get('id');
@@ -70,6 +74,9 @@ class QuoteBaseFormHandler
         if (!$quoteId) {
             //Deduct time range from date range
             $quote = $this->quoteManager->initQuote($listing, $user);
+            $quote->setBudget($budget);
+            $quote->setCommunication($communication);
+            $quote->setPrestaStartDate($prestaStartDate);
 
             $event = new QuoteEvent($quote);
             $this->dispatcher->dispatch(QuoteEvents::QUOTE_INIT, $event);

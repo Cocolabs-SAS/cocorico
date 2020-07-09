@@ -101,18 +101,8 @@ class QuoteNewType extends AbstractType implements TranslationContainerInterface
                 )
             );
 
-        if ($this->addressDelivery) {
-            $builder
-                ->add(
-                    'userAddress',
-                    QuoteUserAddressFormType::class,
-                    array(
-                        /** @Ignore */
-                        'label' => false,
-                        'required' => false,
-                    )
-                );
-        }
+        
+        
 
         //Dispatch QUOTE_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
         //Used for example by user bundle to manage login / registration, some payment provider bundle like mangopay, ..

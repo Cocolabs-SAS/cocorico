@@ -29,7 +29,13 @@ class QuoteType extends AbstractType
         $quote = $builder->getData();
 
         $builder
-            ->add('budget', NumberType::class)
+            ->add('budget',
+                  NumberType::class,
+                  array(
+                    'label' => 'quote.form.budget',
+                    'required' => 'false'
+                  ))
+                  //FIXME: ICI QUE JE SUIS
             ->add('prestaStartDate',
                 DateType::class,
                 array_merge(
