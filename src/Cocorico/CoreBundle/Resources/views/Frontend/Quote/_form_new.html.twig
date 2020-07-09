@@ -11,6 +11,37 @@
 
 {#{{ form_errors(form) }}#}
 {{ form_errors(form) }}
+<div class="price-area">
+    <ul class="list-inline quote_detail">
+        <li>
+            {{ form_errors(form.prestaStartDate) }}
+            {{ form_label(form.prestaStartDate, null, {'required': false}) }}
+            <time>
+                <i class="icon-calendar"></i>
+                {{ quote.prestaStartDate|localizeddate('short', 'none', 'fr', user_timezone) }}
+            </time>
+            {{ form_widget(form.prestaStartDate, {
+                'type': 'hidden'
+            }) }}
+        </li>
+        <li>
+            {{ form_errors(form.budget) }}
+            {{ form_label(form.budget, null, {'required': false}) }}
+            <i class="icon-info"></i>
+            {{ quote.budget}}
+            {{ form_widget(form.budget, {
+                'type': 'hidden'
+            }) }}
+        </li>
+        {#
+        <li>
+            {{ 'booking.duration:'|trans }} <strong>{{ booking_duration|add_time_unit_text }}</strong>
+        </li>
+        #}
+    </ul>
+</div>
+
+
 
 {% if optionBundleEnabled %}
     {% include 'CocoricoListingOptionBundle:Frontend:Quote/_form_options.html.twig' with {
@@ -27,7 +58,7 @@
 {% endif %}
 #}
 
-<div class="form-communication">
+<div class="form-message">
     <fieldset>
         <legend class="hidden">form-communication</legend>
         <h2>{{ form_label(form.communication) }}</h2>

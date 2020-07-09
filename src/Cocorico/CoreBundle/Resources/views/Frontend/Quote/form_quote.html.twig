@@ -13,14 +13,14 @@
         <legend class="hidden">quote</legend>
         <h4>Demander un devis</h4>
 
-        <div class="row datepicker-holder-ajax">
+        <div class="row">
             <div class="col-12">
                 {{ form_errors(form.prestaStartDate) }}
                 <strong class="title">
                     {{ form_label(form.prestaStartDate, null, {'required': true}) }}
                 </strong>
 
-                <div class="input-append date field-holder">
+                <div class="input-append date field-holder datepicker-holder-ajax">
                     <span class="add-on">
                         <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
                     </span>
@@ -119,7 +119,6 @@
                 //Submit form if no errors
                 if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
                     //if ($("#start-date").val() && $("#end-date").val()) {
-                    console.log($form);
                     $form.submit();
                     //}
                 }
