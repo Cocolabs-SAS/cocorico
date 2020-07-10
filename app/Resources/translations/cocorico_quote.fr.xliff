@@ -42,9 +42,57 @@
         <source>quote.form.budget</source>
         <target>Estimation du budget (optionnel)</target>
       </trans-unit>
-      <trans-unit id="" resname="quote.form.communication">
+      <trans-unit id="8793f2f986c04802cf143d0d9a8842a69ec8b4dc" resname="quote.form.communication">
         <source>quote.form.communication</source>
         <target>Message</target>
+      </trans-unit>
+      <trans-unit id="fa6db10042a0c7d76165cd32ed324640c7dc5a8e" resname="quote.new.provider.title">
+        <source>quote.new.provider.title</source>
+        <target>Détaillez votre demande dans le message</target>
+      </trans-unit>
+      <trans-unit id="a1ce7b99a5dc0e89be54525f814100070cdc5570" resname="quote.show.status.title">
+        <source>quote.show.status.title</source>
+        <target>Statut : </target>
+      </trans-unit>
+      <trans-unit id="c400dfe0e819f18c5451ca23221d85d0b3e38ae4" resname="entity.quote.status.new">
+        <source>entity.quote.status.new</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="3dce0f99e613d11a5126ad9a7c582bfd47d8eca6" resname="quote.index.show">
+        <source>quote.index.show</source>
+        <target>Ouvrir</target>
+      </trans-unit>
+      <trans-unit id="6c562ad9eb14a36aadf4ae496da8e310661f3f29" resname="quote.show.number.title">
+        <source>quote.show.number.title</source>
+        <target>N° de réservation</target>
+      </trans-unit>
+      <trans-unit id="116cbc05699c8af6e3e760d371a2f7f78a8a2cff" resname="quote.show.prestaStartDate">
+        <source>quote.show.prestaStartDate</source>
+        <target>Date de début de prestation</target>
+      </trans-unit>
+      <trans-unit id="306730aca92558413f22c6801b5e025aa92db303" resname="quote.show_asker.cancel">
+        <source>quote.show_asker.cancel</source>
+        <target>Annuler la demande</target>
+      </trans-unit>
+      <trans-unit id="88c810218967c65721f23b7f7d2b285c7f4911f9" resname="quote.show.save">
+        <source>quote.show.save</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="bb18b5ded2b6908cccd412661abc7dd8c5d172c7" resname="quote.show.textarea.placeholder">
+        <source>quote.show.textarea.placeholder</source>
+        <target>Rédigez votre message ici</target>
+      </trans-unit>
+      <trans-unit id="1bdedd6eb81d984294e821415b6c2f8f80387e5e" resname="quote.show_offerer.accept">
+        <source>quote.show_offerer.accept</source>
+        <target>Accepter la demande</target>
+      </trans-unit>
+      <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
+        <source>quote.show_offerer.refuse</source>
+        <target>Refuser la demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="term">
+        <source>term</source>
+        <target></target>
       </trans-unit>
     </body>
   </file>
