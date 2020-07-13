@@ -27,25 +27,12 @@ class QuoteEditType extends AbstractType implements TranslationContainerInterfac
         //$quote = $builder->getData();
         $builder
             ->add(
-                "tac",
-                "checkbox",
-                array(
-                    'label' => 'quote.form.tac',
-                    'mapped' => false,
-                    'constraints' => new IsTrue(
-                        array(
-                            "message" => self::$tacError
-                        )
-                    ),
-                )
-            )
-            ->add(
                 'message',
                TextareaType::class,
                 array(
                     'mapped' => false,
                     'label' => 'quote.form.message',
-                    'required' => true,
+                    'required' => false,
                     'constraints' => new NotBlank(),
                 )
             );

@@ -37,7 +37,7 @@ class QuoteOffererFormHandler extends QuoteFormHandler
 
         if ($canBeRefusedByOfferer) {
             if ($type == 'sent_quote') {
-                if ($this->quoteManager->pay($quote)) {
+                if ($this->quoteManager->sent_quote($quote)) {
                     $result = 1;
                 } else {
                     $result = -3;

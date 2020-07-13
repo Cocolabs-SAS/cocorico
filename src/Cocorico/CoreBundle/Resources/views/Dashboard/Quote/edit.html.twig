@@ -1,0 +1,148 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+{% set image_user = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+{% set listing = quote.listing %}
+{% set translation = listing.translations[app.request.locale] %}
+{% set image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+{% set title =  'quote.modal.accept.title'|trans %}
+{% set action_title =   'quote.modal.action.accept'|trans %}
+
+{% if type == 'refuse' %}
+    {% set title =  'quote.modal.refuse.title'|trans %}
+    {% set action_title =  'quote.modal.action.refuse'|trans %}
+{% elseif type == 'cancel' %}
+    {% set title =  'quote.modal.cancel.title'|trans %}
+    {% set action_title = 'quote.modal.action.cancel'|trans %}
+{% elseif type == 'sent_quote' %}
+    {% set title =  'quote.modal.cancel.title'|trans %}
+    {% set action_title = 'quote.modal.action.sent_quote'|trans %}
+{% endif %}
+
+<!-- Modal -->
+<div id="quote-form-container">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong class="title">{{ title }}</strong>
+    </div>
+
+    <div class="modal-body">
+        {% if app.request.isXmlHttpRequest %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
+        {% endif %}
+
+        <div class="info-holder">
+            <div class="img-holder">
+                <a href="{{ path('cocorico_listing_show', { 'slug': translation.slug }) }}">
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image) | imagine_filter('listing_medium') }}"
+                         alt="{{ translation.title }}">
+                </a>
+            </div>
+            <div class="info-block">
+                <strong class="sub-title">{{ translation.title }}</strong>
+
+                <div class="meta">
+                    <span class="applicant">
+                        <strong>
+                            <a href="{{ path('cocorico_user_profile_show', {'id' : other_user.id}) }}">
+                                {{ other_user.name }}
+                            </a>
+                        </strong>
+                    </span>
+                    {% if other_user_rating %}
+                        {{ other_user_rating| cocorico_star_rating }}
+                    {% endif %}
+                </div>
+
+                <ul class="list-inline quote-detail">
+                    <li>
+                        {{ 'quote.show.prestaStartDate:'|trans }}
+                        <time>
+                            {{ quote.prestaStartDate|localizeddate('short', 'none', 'fr', user_timezone) }}
+                        </time>
+                    </li>
+                </ul>
+
+                <strong class="quote-budget">
+                    {{ 'quote.budget:'|trans }}
+                    <span class="normal-text">
+                        {{ quote.budget }}€
+                    </span>
+                </strong>
+
+                {#
+                {{ 'listing.show.cancellation_policy:'|trans({}, 'cocorico_listing') }}
+                <strong data-id="quote-policy">{{ quote.cancellationPolicyText|trans({}, 'cocorico_listing') }}</strong>
+                <button data-html="true" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                        type="button" data-original-title="{{ cancellationPolicies() }}"> ?
+                </button>
+                #}
+            </div>
+        </div>
+
+        {% if quote_can_be_edited %}
+            {#{{ form_errors(form) }}#}
+            {{ form_start(form, {'attr': {'id': 'quote-edit-form', 'class': 'form-message'}}) }}
+
+            <fieldset>
+                <legend class="hidden">message form</legend>
+                <div class="no-scroll">
+                    {{ form_errors(form.message) }}
+                    {{ form_widget(form.message) }}
+                </div>
+                {#
+                <div class="agree">
+                    {{ form_errors(form.tac) }}
+                    {{ form_widget(form.tac) }}
+                    <span class="label">
+                        {{ form_label(form.tac, null, {'required': false} ) }}
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}" target="_blank">
+                            {{ 'quote.new.tac.link'|trans }}
+                        </a>*
+                    </span>
+                </div>
+                <input type="submit" class="hidden">
+                #}
+            </fieldset>
+            {{ form_end(form) }}
+
+            <div class="modal-footer">
+                <a id="quote-edit-return" href="#" class="btn btn-default">
+                    {{ 'quote.modal.action.return'|trans }}
+                </a>
+                <a id="quote-edit-submit" href="#" class="btn btn-default">
+                    {{ action_title }}
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $(function () {
+        jcf.replaceAll("#quote-form-container");
+
+        jQuery('[data-toggle="tooltip"]').tooltip({});
+
+        //Submit form
+        var $formContainer = $("#quote-form-container");
+        $formContainer.submitAjaxForm(function () {
+            jcf.replaceAll("#quote-form-container");
+        });
+
+        $("#quote-edit-submit").on("click", function (e) {
+            $(this).parent('.modal-footer').html('<img src="{{ asset('images/loading.gif') }}" />');
+            e.preventDefault();
+            $("#quote-edit-form").submit();
+            return false;
+        });
+
+        $("#quote-edit-return").on("click", function (e) {
+            e.preventDefault();
+            $("#modal").modal('hide');
+            return false;
+        });
+    });
+</script>

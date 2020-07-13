@@ -400,7 +400,12 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         //CSS class by status
         $quoteStatusClass = array(
             Quote::STATUS_DRAFT => 'btn-yellow',
-            Quote::STATUS_NEW => 'btn-yellow'
+            Quote::STATUS_NEW => 'btn-yellow',
+            Quote::STATUS_QUOTE => 'btn-polo-blue',
+            Quote::STATUS_ACCEPTED => 'btn-algae-green',
+            Quote::STATUS_CANCELED => 'btn-salmon',
+            Quote::STATUS_REFUSED_ASKER => 'btn-fuzzy-brown',
+            Quote::STATUS_REFUSED_OFFERER => 'btn-fuzzy-brown'
         );
 
         $bookingStatusClass = array(
