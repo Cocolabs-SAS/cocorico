@@ -9,6 +9,7 @@ use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use InvalidArgumentException;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
@@ -26,6 +27,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 
 class Quote {
+
+    use ORMBehaviors\Timestampable\Timestampable;
+
     /* Status */
     const STATUS_DRAFT = 0;
     const STATUS_NEW = 1;
