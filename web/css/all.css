@@ -2558,6 +2558,16 @@ input[type="button"].btn-block {
     background-color: #D82A2A;
 }
 
+.btn-refuse {
+    background-color: #fa3333;
+    color: #ffffff;
+}
+
+.btn-refuse:hover {
+    background-color: #D82A2A;
+}
+
+
 .caret {
     display: inline-block;
     width: 0;

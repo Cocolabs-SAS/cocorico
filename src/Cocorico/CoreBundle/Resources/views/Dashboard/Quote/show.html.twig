@@ -26,7 +26,10 @@
 
             {% include '@CocoricoCore/Dashboard/Quote/_quote_show_actions.html.twig' with {
                 'quote': quote,
+                'canBeAcceptedByAsker': canBeAcceptedByAsker|default(false),
+                'canBeRefusedByAsker': canBeRefusedByAsker|default(false),
                 'canBeCanceledByAsker': canBeCanceledByAsker|default(false),
+                'canBeRefusedByOfferer': canBeRefusedByOfferer|default(false),
                 'canBeAcceptedOrRefusedByOfferer': canBeAcceptedOrRefusedByOfferer|default(false),
             } only %}
 

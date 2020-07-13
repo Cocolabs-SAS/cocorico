@@ -219,13 +219,23 @@ class QuoteManager extends BaseManager
     {
         $statusIsOk = in_array($quote->getStatus(), Quote::$cancelableStatus);
 
-        if ($statusIsOk && !$quote->isValidated()) {
-            return true;
-        } else {
-            return false;
-        }
-
+        return $statusIsOk;
     }
+
+    /**
+     * Return whether a quote can be canceled by asker
+     *
+     * @param Quote $quote
+     *
+     * @return bool
+     */
+    public function canBeAcceptedByAsker(Quote $quote)
+    {
+        $statusIsOk = in_array($quote->getStatus(), Quote::$acceptableStatus);
+
+        return $statusIsOk;
+    }
+
 
     /**
      * Return whether a quote can be accepted or refused by offerer
@@ -251,6 +261,34 @@ class QuoteManager extends BaseManager
 
         return $statusIsOk && $isNotExpired;
         */
+    }
+    /**
+     * Return whether a quote can be refused by offerer
+     *
+     * @param Quote $quote
+     *
+     * @return bool
+     */
+    public function canBeRefusedByOfferer(Quote $quote)
+    {
+        //$refusableStatus is equal to $payableStatus
+        $statusIsOk = in_array($quote->getStatus(), Quote::$refusableOffererStatus);
+
+        return $statusIsOk;
+    }
+    /**
+     * Return whether a quote can be refused by asker
+     *
+     * @param Quote $quote
+     *
+     * @return bool
+     */
+    public function canBeRefusedByAsker(Quote $quote)
+    {
+        //$refusableStatus is equal to $payableStatus
+        $statusIsOk = in_array($quote->getStatus(), Quote::$refusableAskerStatus);
+
+        return $statusIsOk;
     }
 
     /**

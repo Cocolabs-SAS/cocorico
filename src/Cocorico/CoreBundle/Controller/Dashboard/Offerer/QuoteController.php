@@ -109,11 +109,15 @@ class QuoteController extends Controller
         $canBeAcceptedOrRefusedByOfferer = $this->get('cocorico.quote.manager')
             ->canBeAcceptedOrRefusedByOfferer($quote);
 
+        $canBeRefusedByOfferer = $this->get('cocorico.quote.manager')
+            ->canBeRefusedByOfferer($quote);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Quote:show.html.twig',
             array(
                 'quote' => $quote,
                 'canBeAcceptedOrRefusedByOfferer' => $canBeAcceptedOrRefusedByOfferer,
+                'canBeRefusedByOfferer' => $canBeRefusedByOfferer,
                 'form' => $form->createView(),
                 'other_user' => $quote->getUser(),
                 'other_user_rating' => $quote->getUser()->getAverageAskerRating(),

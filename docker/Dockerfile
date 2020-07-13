@@ -83,7 +83,7 @@ RUN composer install
 
 RUN clevercloud/post_build_hook.sh
 RUN wget https://get.symfony.com/cli/installer -O - | bash
-RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
+# RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
 # RUN service nginx restart && service php7.3-fpm start
 COPY ./docker/run.sh ./run
 RUN echo "Start Symfony server with:\n\
