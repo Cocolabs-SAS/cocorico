@@ -52,6 +52,17 @@ class QuoteAskerFormHandler extends QuoteFormHandler
             $result = -2;
         }
 
+        if ($this->quoteManager->canBeAcceptedByAsker($quote)) {
+            if ($type == 'accept') {
+                $this->quoteManager->accept($quote);
+            }
+        }
+        if ($this->quoteManager->canBeRefusedByAsker($quote)) {
+            if ($type == 'refuse') {
+                $this->quoteManager->refuse($quote, false);
+            }
+        }
+
         return $result;
     }
 }

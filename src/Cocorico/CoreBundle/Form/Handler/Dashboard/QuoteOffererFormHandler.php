@@ -33,9 +33,10 @@ class QuoteOffererFormHandler extends QuoteFormHandler
         //Accept or refuse
         $type = $this->request->get('type');
 
-        $canBeAcceptedOrRefused = $this->quoteManager->canBeAcceptedOrRefusedByOfferer($quote);
-        if ($canBeAcceptedOrRefused) {
-            if ($type == 'accept') {
+        $canBeRefusedByOfferer = $this->quoteManager->canBeRefusedByOfferer($quote);
+
+        if ($canBeRefusedByOfferer) {
+            if ($type == 'sent_quote') {
                 if ($this->quoteManager->pay($quote)) {
                     $result = 1;
                 } else {

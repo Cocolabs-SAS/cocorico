@@ -26,12 +26,10 @@
                class="btn btn-refuse" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.refuse'|trans }}
             </a>
-            {#
-            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'accept'}) }}"
-               class="btn btn-default" data-toggle="modal" data-target="#modal">
-                {{ 'quote.show_offerer.accept'|trans }}
+            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'sent_quote'}) }}"
+               class="btn btn-success" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_offerer.sent_quote'|trans }}
             </a>
-            #}
         {% endif %}
     {% endif %}
 </div>

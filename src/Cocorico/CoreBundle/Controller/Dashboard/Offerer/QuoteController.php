@@ -132,7 +132,7 @@ class QuoteController extends Controller
      *
      * @Route("/{id}/edit/{type}", name="cocorico_dashboard_quote_edit_offerer", requirements={
      *      "id" = "\d+",
-     *      "type" = "accept|refuse",
+     *      "type" = "accept|refuse|sent_quote",
      * })
      * @Method({"GET", "POST"})
      * @Security("is_granted('edit_as_offerer', quote)")

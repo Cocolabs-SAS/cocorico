@@ -195,6 +195,7 @@ class QuoteManager extends BaseManager
 
             $quote = $this->save($quote);
 
+            // TODO: Send mail to offerer
             // $this->mailer->sendQuoteRequestMessageToOfferer($quote);
             // $this->mailer->sendQuoteRequestMessageToAsker($quote);
 
@@ -292,6 +293,42 @@ class QuoteManager extends BaseManager
     }
 
     /**
+     * Asker accept quote :
+     *
+     * @param Quote $quote
+     *
+     * @return Quote|bool
+     */
+    public function accept(Quote $quote)
+    {
+        if ($this->canBeAcceptedByAsker($quote)) {
+            $quote->setStatus(Quote::STATUS_ACCEPTED);
+            $quote = $this->save($quote);
+            //TODO: Add mailer events for quote acceptation
+            return $quote;
+        }
+        return false;
+    }
+
+    /**
+     * Offerer sent quote :
+     *
+     * @param Quote $quote
+     *
+     * @return Quote|bool
+     */
+    public function sent_quote(Quote $quote)
+    {
+        if ($this->canBeRefusedByOfferer($quote)) {
+            $quote->setStatus(Quote::STATUS_QUOTE);
+            $quote = $this->save($quote);
+            //TODO: Add mailer events for quote sent
+            return $quote;
+        }
+        return false;
+    }
+
+    /**
      * Offerer refuse quote :
      *  Set quote status as refused
      *  Send mails
@@ -303,8 +340,22 @@ class QuoteManager extends BaseManager
      */
     public function refuse(Quote $quote, $refusedByOfferer = true)
     {
-        $canBeAcceptedOrRefused = $this->canBeAcceptedOrRefusedByOfferer($quote);
-        if ($canBeAcceptedOrRefused) {
+        $byOfferer = $this->canBeRefusedByOfferer($quote);
+        $byAsker = $this->canBeRefusedByAsker($quote);
+        if ($byOfferer or $byAsker) {
+            if ($byOfferer and $refusedByOfferer) {
+                $quote->setStatus(Quote::STATUS_REFUSED_OFFERER);
+                // TODO: send mail
+                }
+            else if ($byAsker and ! $refusedByOfferer) {
+                $quote->setStatus(Quote::STATUS_REFUSED_ASKER);
+                // TODO: send mail
+                }
+            $quote = $this->save($quote);
+            return $quote;
+        }
+        /*
+        if ($byOfferer or $byAsker) {
             $quote->setStatus(Quote::STATUS_REFUSED);
             $quote->setRefusedQuoteAt(new DateTime());
             $quote = $this->save($quote);
@@ -320,6 +371,7 @@ class QuoteManager extends BaseManager
 
             return $quote;
         }
+        */
 
         return false;
     }
@@ -352,7 +404,7 @@ class QuoteManager extends BaseManager
             }
 
             if ($cancelable) {
-                $quote->setStatus(Quote::STATUS_CANCELED_ASKER);
+                $quote->setStatus(Quote::STATUS_CANCELED);
                 $quote->setCanceledAskerQuoteAt(new DateTime());
                 $quote = $this->save($quote);
 
