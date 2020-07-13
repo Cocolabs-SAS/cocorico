@@ -44,23 +44,23 @@ class QuoteAskerFormHandler extends QuoteFormHandler
             if ($type == 'cancel') {
                 if ($this->quoteManager->cancel($quote)) {
                     $result = 1;
-                } else {
-                    $result = -3;
-                }
+                } 
+            }
+        } 
+
+        if ($this->quoteManager->canBeAcceptedByAsker($quote) or
+            $this->quoteManager->canBeRefusedByAsker($quote)) {
+            if ($type == 'accept') {
+                $this->quoteManager->accept($quote);
+                $result = 1;
+            }
+
+            if ($type == 'refuse') {
+                $this->quoteManager->refuse($quote, false);
+                $result = 1;
             }
         } else {
             $result = -2;
-        }
-
-        if ($this->quoteManager->canBeAcceptedByAsker($quote)) {
-            if ($type == 'accept') {
-                $this->quoteManager->accept($quote);
-            }
-        }
-        if ($this->quoteManager->canBeRefusedByAsker($quote)) {
-            if ($type == 'refuse') {
-                $this->quoteManager->refuse($quote, false);
-            }
         }
 
         return $result;

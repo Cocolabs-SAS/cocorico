@@ -52,11 +52,35 @@
       </trans-unit>
       <trans-unit id="a1ce7b99a5dc0e89be54525f814100070cdc5570" resname="quote.show.status.title">
         <source>quote.show.status.title</source>
-        <target>Statut : </target>
+        <target>État : </target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show.status.prestaStartDate">
+        <source>quote.show.status.prestaStartDate</source>
+        <target>Date de début de prestation</target>
       </trans-unit>
       <trans-unit id="c400dfe0e819f18c5451ca23221d85d0b3e38ae4" resname="entity.quote.status.new">
         <source>entity.quote.status.new</source>
         <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.quote">
+        <source>entity.quote.status.quote</source>
+        <target>Devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.accepted">
+        <source>entity.quote.status.accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.canceled">
+        <source>entity.quote.status.canceled</source>
+        <target>Annulé</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.refused_asker">
+        <source>entity.quote.status.refused_asker</source>
+        <target>Refusé</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.refused_offerer">
+        <source>entity.quote.status.refused_offerer</source>
+        <target>Refusé</target>
       </trans-unit>
       <trans-unit id="3dce0f99e613d11a5126ad9a7c582bfd47d8eca6" resname="quote.index.show">
         <source>quote.index.show</source>
@@ -84,11 +108,43 @@
       </trans-unit>
       <trans-unit id="1bdedd6eb81d984294e821415b6c2f8f80387e5e" resname="quote.show_offerer.accept">
         <source>quote.show_offerer.accept</source>
-        <target>Accepter la demande</target>
+        <target>Accepter</target>
       </trans-unit>
       <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
         <source>quote.show_offerer.refuse</source>
-        <target>Refuser la demande</target>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show_asker.refuse">
+        <source>quote.show_asker.refuse</source>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.refuse.title">
+        <source>quote.modal.refuse.title</source>
+        <target>Refuser le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.cancel.title">
+        <source>quote.modal.cancel.title</source>
+        <target>Annuler la demande de devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.budget">
+        <source>quote.budget</source>
+        <target>Budget estimé</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.return">
+        <source>quote.modal.action.return</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.cancel">
+        <source>quote.modal.action.cancel</source>
+        <target>Annuler la demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.edit.success">
+        <source>quote.edit.success</source>
+        <target>Changement effectué</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.accept">
+        <source>quote.modal.action.accept</source>
+        <target>Accepter le devis</target>
       </trans-unit>
       <trans-unit id="" resname="term">
         <source>term</source>

@@ -405,7 +405,7 @@ class QuoteManager extends BaseManager
 
             if ($cancelable) {
                 $quote->setStatus(Quote::STATUS_CANCELED);
-                $quote->setCanceledAskerQuoteAt(new DateTime());
+                $quote->setCanceledQuoteAt(new DateTime());
                 $quote = $this->save($quote);
 
                 // $this->mailer->sendQuoteCanceledByAskerMessageToAsker($quote);

@@ -42,7 +42,7 @@ class Quote {
     public static $statusValues = array (
         self::STATUS_DRAFT => 'entity.quote.status.draft',
         self::STATUS_NEW => 'entity.quote.status.new',
-        self::STATUS_QUOTE => 'entity.quote.status.devis',
+        self::STATUS_QUOTE => 'entity.quote.status.quote',
         self::STATUS_ACCEPTED => 'entity.quote.status.accepted',
         self::STATUS_CANCELED => 'entity.quote.status.canceled',
         self::STATUS_REFUSED_ASKER => 'entity.quote.status.refused_asker',
@@ -229,6 +229,28 @@ class Quote {
     {
         $this->options = new ArrayCollection();
     }
+
+    /**
+     * @ORM\Column(name="accepted_quote_at", type="datetime", nullable=true)
+     *
+     * @var DateTime
+     */
+    protected $acceptedQuoteAt;
+
+    /**
+     * @ORM\Column(name="refused_quote_at", type="datetime", nullable=true)
+     *
+     * @var DateTime
+     */
+    protected $refusedQuoteAt;
+
+
+    /**
+     * @ORM\Column(name="canceled_quote_at", type="datetime", nullable=true)
+     *
+     * @var DateTime
+     */
+    protected $canceledQuoteAt;
 
     /**
      * Get id
@@ -567,5 +589,73 @@ class Quote {
         $this->validated = $validated;
     }
 
+    /**
+     * @return DateTime
+     */
+    public function getAcceptedQuoteAt()
+    {
+        return $this->acceptedQuoteAt;
+    }
 
+    /**
+     * @param DateTime $acceptedQuoteAt
+     */
+    public function setAcceptedQuoteAt($acceptedQuoteAt)
+    {
+        $this->acceptedQuoteAt = $acceptedQuoteAt;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getRefusedQuoteAt()
+    {
+        return $this->refusedQuoteAt;
+    }
+
+    /**
+     * @param DateTime $refusedQuoteAt
+     */
+    public function setRefusedQuoteAt($refusedQuoteAt)
+    {
+        $this->refusedQuoteAt = $refusedQuoteAt;
+    }
+
+
+    /**
+     * @return DateTime
+     */
+    public function getCanceledQuoteAt()
+    {
+        return $this->canceledQuoteAt;
+    }
+
+    /**
+     * @param DateTime $canceledQuoteAt
+     */
+    public function setCanceledQuoteAt($canceledQuoteAt)
+    {
+        $this->canceledQuoteAt = $canceledQuoteAt;
+    }
+
+
+    public function log($prefix = '')
+    {
+        echo "<br>Booking";
+        if ($prefix) {
+            echo "<br>$prefix";
+        }
+
+        echo '<br>Date: ';
+        if ($this->getStart() && $this->getEnd()) {
+            echo $this->getStart()->format('Y-m-d H:i').' / '.$this->getEnd()->format('Y-m-d H:i').'<br>';
+        }
+
+
+        echo 'Time: ';
+        if ($this->getStartTime() && $this->getEndTime()) {
+            echo $this->getStartTime()->format('Y-m-d H:i').' / '.$this->getEndTime()->format('Y-m-d H:i').'<br>';
+        }
+    }
+ 
 }

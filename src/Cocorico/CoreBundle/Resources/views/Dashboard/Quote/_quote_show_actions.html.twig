@@ -14,7 +14,7 @@
             </a>
         {% endif %}
         {% if canBeAcceptedByAsker %}
-            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'accept'}) }}"
+            <a href="{{ path('cocorico_dashboard_quote_edit_asker', {'id': quote.id, 'type': 'accept'}) }}"
                class="btn btn-success" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.accept'|trans }}
             </a>

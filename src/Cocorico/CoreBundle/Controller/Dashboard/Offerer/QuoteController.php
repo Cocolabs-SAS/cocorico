@@ -185,7 +185,7 @@ class QuoteController extends Controller
             'CocoricoCoreBundle:Dashboard/Quote:edit.html.twig',
             array(
                 'quote' => $quote,
-                'quote_can_be_edited' => $canBeAcceptedOrRefusedByOfferer,
+                'quote_can_be_edited' => true,
                 'type' => $type,
                 'form' => $form->createView(),
                 'other_user' => $quote->getUser(),

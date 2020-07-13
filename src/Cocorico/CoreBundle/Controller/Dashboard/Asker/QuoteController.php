@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Cocorico package.
- *
- * (c) Cocolabs SAS <contact@cocolabs.io>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Cocorico\CoreBundle\Controller\Dashboard\Asker;
 
 use Cocorico\CoreBundle\Entity\Quote;
@@ -155,7 +146,6 @@ class QuoteController extends Controller
     public function editAction(Request $request, Quote $quote, $type)
     {
         $quoteHandler = $this->get('cocorico.form.handler.quote.asker.dashboard');
-        $quoteRefundManger = $this->get('cocorico.quote_payin_refund.manager');
         $form = $this->createEditForm($quote, $type);
 
         $success = $quoteHandler->process($form);
@@ -192,7 +182,7 @@ class QuoteController extends Controller
             'CocoricoCoreBundle:Dashboard/Quote:edit.html.twig',
             array(
                 'quote' => $quote,
-                'quote_can_be_edited' => $canBeCanceledByAsker,
+                'quote_can_be_edited' => true,
                 'type' => $type,
                 'form' => $form->createView(),
                 'other_user' => $quote->getListing()->getUser(),
