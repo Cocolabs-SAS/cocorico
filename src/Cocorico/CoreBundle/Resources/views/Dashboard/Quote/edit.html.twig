@@ -7,16 +7,20 @@
 
 {% set title =  'quote.modal.accept.title'|trans %}
 {% set action_title =   'quote.modal.action.accept'|trans %}
+{% set action_description =   'quote.modal.description.accept'|trans %}
 
 {% if type == 'refuse' %}
     {% set title =  'quote.modal.refuse.title'|trans %}
     {% set action_title =  'quote.modal.action.refuse'|trans %}
+    {% set action_description = 'quote.modal.description.refuse'|trans %}
 {% elseif type == 'cancel' %}
     {% set title =  'quote.modal.cancel.title'|trans %}
     {% set action_title = 'quote.modal.action.cancel'|trans %}
+    {% set action_description = 'quote.modal.description.cancel'|trans %}
 {% elseif type == 'sent_quote' %}
-    {% set title =  'quote.modal.cancel.title'|trans %}
+    {% set title =  'quote.modal.sent_quote.title'|trans %}
     {% set action_title = 'quote.modal.action.sent_quote'|trans %}
+    {% set action_description = 'quote.modal.description.sent_quote'|trans %}
 {% endif %}
 
 <!-- Modal -->
@@ -56,21 +60,21 @@
                     {% endif %}
                 </div>
 
-                <ul class="list-inline quote-detail">
+                <ul class="quote-detail">
                     <li>
-                        {{ 'quote.show.prestaStartDate :'|trans }}
-                        <time>
+                        {{ 'quote.show.presta_start_date'|trans }} :
+                        <strong>
                             {{ quote.prestaStartDate|localizeddate('short', 'none', 'fr', user_timezone) }}
-                        </time>
+                        </strong>
+                    </li>
+                    <li>
+                        {{ 'quote.budget'|trans }}:
+                        <strong>
+                            {{ quote.budget }}€
+                        </strong>
                     </li>
                 </ul>
 
-                <strong class="quote-budget">
-                    {{ 'quote.budget :'|trans }}
-                    <span class="normal-text">
-                        {{ quote.budget }}€
-                    </span>
-                </strong>
 
                 {#
                 {{ 'listing.show.cancellation_policy:'|trans({}, 'cocorico_listing') }}
@@ -82,11 +86,16 @@
             </div>
         </div>
 
+        <div class="modal-description">
+            {{ action_description }}
+        </div>
+
         {% if quote_can_be_edited %}
             {#{{ form_errors(form) }}#}
             {{ form_start(form, {'attr': {'id': 'quote-edit-form', 'class': 'form-message'}}) }}
 
             <fieldset>
+                <h4>{{'quote.modal.send_communication' | trans }}</h4>
                 <legend class="hidden">message form</legend>
                 <div class="no-scroll">
                     {{ form_errors(form.message) }}
@@ -109,7 +118,7 @@
             {{ form_end(form) }}
 
             <div class="modal-footer">
-                <a id="quote-edit-return" href="#" class="btn btn-default">
+                <a id="quote-edit-return" href="#" class="btn btn-primary">
                     {{ 'quote.modal.action.return'|trans }}
                 </a>
                 <a id="quote-edit-submit" href="#" class="btn btn-default">

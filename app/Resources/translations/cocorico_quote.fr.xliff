@@ -126,6 +126,10 @@
         <source>quote.modal.cancel.title</source>
         <target>Annuler la demande de devis</target>
       </trans-unit>
+      <trans-unit id="" resname="quote.modal.sent_quote.title">
+        <source>quote.modal.sent_quote.title</source>
+        <target>Accepter de soumettre un devis</target>
+      </trans-unit>
       <trans-unit id="" resname="quote.budget">
         <source>quote.budget</source>
         <target>Budget estimé</target>
@@ -137,6 +141,10 @@
       <trans-unit id="" resname="quote.modal.action.cancel">
         <source>quote.modal.action.cancel</source>
         <target>Annuler la demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.sent_quote">
+        <source>quote.modal.action.sent_quote</source>
+        <target>Accepter de soumettre un devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.edit.success">
         <source>quote.edit.success</source>
@@ -174,13 +182,44 @@
         <source>quote.new.self_quote.error</source>
         <target>Impossible de demander un devis à soi-même.</target>
       </trans-unit>
-      <trans-unit id="" resname="term">
-        <source>term</source>
-        <target></target>
+      <trans-unit id="" resname="quote.show_offerer.sent_quote">
+        <source>quote.show_offerer.sent_quote</source>
+        <target>Accepter de soumettre un devis</target>
       </trans-unit>
-      <trans-unit id="" resname="term">
-        <source>term</source>
-        <target></target>
+      <trans-unit id="" resname="quote.show.send_communication">
+        <source>quote.show.send_communication</source>
+        <target>Envoyer un message</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.send_communication">
+        <source>quote.modal.send_communication</source>
+        <target>Joindre un message</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.refuse">
+        <source>quote.modal.action.refuse</source>
+        <target>Ne pas soumettre de devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.accept.title">
+        <source>quote.modal.accept.title</source>
+        <target>Accepter le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.accept">
+        <source>quote.modal.description.accept</source>
+        <target>Vous êtes sur le point d'accepter le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.sent_quote">
+        <source>quote.modal.description.sent_quote</source>
+        <target>Une fois toutes les données nécessaires à la rédaction d'un devis,
+        "accepter de soumettre un devis" signale au demandeur que vous allez lui transmettre un devis.
+        </target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.refuse">
+        <source>quote.modal.description.refuse</source>
+        <target>Si les conditions ne vous permettent pas ou plus de transmettre un devis, vous pouvez le
+        signaler au demandeur.</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.cancel">
+        <source>quote.modal.description.cancel</source>
+        <target>Vous êtes encore en mesure d'annuler cette demande de devis.</target>
       </trans-unit>
       <trans-unit id="" resname="term">
         <source>term</source>

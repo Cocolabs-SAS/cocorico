@@ -43,6 +43,7 @@
         <!-- form-ad-detail (this is the message form) -->
         {{ form_start(form, {'attr': {'class': 'form-ad-detail'}}) }}
         <fieldset>
+            <h3>{{'quote.show.send_communication' | trans }}</h3>
             <legend class="hidden">form-ad-detail</legend>
             {{ form_errors(form) }}
             <div class="textarea-holder no-scroll">
@@ -54,7 +55,7 @@
                 }) }}
             </div>
             <div class="btn-block text-center">
-                <input type="submit" class="btn btn-default" value="{{ 'quote.show.save'|trans }}">
+                <input type="submit" class="btn btn-polo-blue" value="{{ 'quote.show.save'|trans }}">
             </div>
         </fieldset>
         {{ form_end(form) }}
