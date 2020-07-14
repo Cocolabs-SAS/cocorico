@@ -35,6 +35,7 @@
                     }) }}
                 </div>
             </div>
+            <br />
 
             <div class="col-12">
                 {{ form_errors(form.budget) }}
@@ -54,28 +55,12 @@
                             'title': 'budget'
                         }
                     }) }}
+
                 </div>
             </div>
 
-            <div class="col-12">
-                {{ form_errors(form.communication) }}
-                <strong class="title">
-                    {{ form_label(form.communication, null, {'required': true}) }}
-                </strong>
-                <div class="field-holder">
-                    <span class="add-on">
-                        <i data-date-icon="icon-mail-alt" data-time-icon="icon-time" class="icon-mail-alt"></i>
-                    </span>
-                    {{ form_widget(form.communication, {
-                        'id': 'communication',
-                        'type': 'textarea',
-                        'attr': {
-                            'class': 'form-control',
-                            'placeholder': '',
-                            'title': 'communication'
-                        }
-                    }) }}
-                </div>
+            <div>
+            {% do form.communication.setRendered() %}
             </div>
 
         <input type="submit" class="hidden" value="Envoyer">
@@ -88,9 +73,9 @@
         {% if form.vars.submitted and form.vars.valid %}
             <i>tech: Erreur détectée</i>
         {% else %}
-            <i>tech: Pas d'erreur</i>
+            <i></i>
         {% endif %}
-        <a href="#" data-id="submit-quote" class="btn btn-default">Envoyer</a>
+        <a href="#" data-id="submit-quote" class="btn btn-success">{{ 'quote.form.start'|trans }}</a>
     </div>
 
 

@@ -21,6 +21,9 @@ web_profiler:
 
 twig:
   cache: false
+  
+assetic:
+    use_controller: false
 
 monolog:
     handlers:

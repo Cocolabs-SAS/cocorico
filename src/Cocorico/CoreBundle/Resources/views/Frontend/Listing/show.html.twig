@@ -96,12 +96,6 @@
                                                 {{ 'listing.show.map'|trans }}
                                             </a>
                                         </li>
-                                        <li role="presentation">
-                                            <a href="#calendar" data-toggle="tab"
-                                               data-text="{{ 'listing.show.calendar'|trans }}">
-                                                {{ 'listing.show.calendar'|trans }}
-                                            </a>
-                                        </li>
                                     </ul>
                                     <a href="javascript:void(0)" id="favourite-{{ listing.id }}"
                                        class="link-favourit favourit">
@@ -177,12 +171,14 @@
                                                 {{ 'listing.show.description'|trans }}
                                             </a>
                                         </li>
+                                        {#
                                         <li>
                                             <a href="#conditions" data-toggle="tab"
                                                data-text="{{ 'listing.show.rules'|trans }}">
                                                 {{ 'listing.show.rules'|trans }}
                                             </a>
                                         </li>
+                                        #}
                                         <li>
                                             <a href="#features" data-toggle="tab"
                                                data-text="{{ 'listing.show.characteristics'|trans }}">
@@ -297,6 +293,7 @@
                         })) }}
 
 
+                        {#
                         <section class="widget prices-conditions">
                             <h2>{{ 'listing.show.policy.title'|trans }}</h2>
                             <ul>
@@ -347,6 +344,7 @@
                                 {% endif %}
                             </ul>
                         </section>
+                        #}
 
                         <!-- members-list -->
                         <section class="widget members-list">

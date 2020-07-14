@@ -16,10 +16,10 @@
         <li>
             {{ form_errors(form.prestaStartDate) }}
             {{ form_label(form.prestaStartDate, null, {'required': false}) }}
-            <time>
-                <i class="icon-calendar"></i>
+            <i class="icon icon-calendar"></i>
+            <strong>
                 {{ quote.prestaStartDate|localizeddate('short', 'none', 'fr', user_timezone) }}
-            </time>
+            </strong>
             {{ form_widget(form.prestaStartDate, {
                 'type': 'hidden'
             }) }}
@@ -27,8 +27,10 @@
         <li>
             {{ form_errors(form.budget) }}
             {{ form_label(form.budget, null, {'required': false}) }}
-            <i class="icon-info"></i>
-            {{ quote.budget}}
+            <i class="icon icon-info"></i>
+            <strong>
+            {{ quote.budget}} €
+            </strong>
             {{ form_widget(form.budget, {
                 'type': 'hidden'
             }) }}
@@ -62,6 +64,9 @@
     <fieldset>
         <legend class="hidden">form-communication</legend>
         <h2>{{ form_label(form.communication) }}</h2>
+        <div class="legend">
+            {{ 'quote.new.message.description'|trans }}
+        </div> 
 
         {{ form_errors(form.communication) }}
         <div class="no-scroll">
@@ -90,7 +95,7 @@
     </div>
     #}
 
-    <input type="submit" value="{{ 'quote.new.validation.submit'|trans }}" class="btn btn-primary">
+    <input type="submit" value="{{ 'quote.new.validation.submit'|trans }}" class="btn btn-default">
 </div>
 
 {{ form_end(form) }}
