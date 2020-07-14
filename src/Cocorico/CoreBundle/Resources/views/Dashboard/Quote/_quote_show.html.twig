@@ -31,25 +31,28 @@
 
                 <div class="meta pull-right">
                     <span class="quote-info">
-                        {{ 'quote.show.number.title'|trans }} :
-                        <strong>{{ quote.id }}</strong>
                     </span>
                 </div>
 
                 <div class="quote-detail">
-                    {% if not timeUnitIsDay %}
-                        <div class="timezone">
-                            <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
-                            {{ user_timezone|timezone_name }}
-                        </div>
-                    {% endif %}
-                    <ul class="list-inline" id="quote-asker-date">
+                    <ul class="" id="quote-asker-date">
                         <li>
-                            {{ 'quote.show.prestaStartDate:'|trans }}
-                            <time>
+                            {{ 'quote.show.presta_start_date'|trans }} :
+                            <strong>
                                 {{ quote.prestaStartDate|localizeddate('short', 'none', 'fr', user_timezone) }}
-                            </time>
+                            </strong>
                         </li>
+                        <li>
+                            {{ 'quote.budget'|trans }} :
+                            <strong>
+                                {{ quote.budget }} €
+                            </strong>
+                        </li>
+                        <li>
+                            {{ 'quote.show.number.title'|trans }} :
+                            <strong>{{ quote.id }}</strong>
+                        </li>
+                            
                     </ul>
                 </div>
             </header>

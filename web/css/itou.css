@@ -61,3 +61,50 @@ div.form-message {
     font-size: 18px;
     line-height: 21px;
 }
+
+.postarea .quote-detail {
+    margin: 0 0 4px;
+}
+
+.postarea .quote-detail:before,
+.postarea .quote-detail:after {
+    content: " ";
+    display: table;
+}
+
+.postarea .quote-detail:after {
+    clear: both;
+}
+
+.postarea .quote-detail:before,
+.postarea .quote-detail:after {
+    content: " ";
+    display: table;
+}
+
+.postarea .quote-detail:after {
+    clear: both;
+}
+
+.postarea .quote-detail ul {
+    float: left;
+    width: 80%;
+    margin: 2px 0 0;
+}
+
+.postarea .quote-detail ul li {
+    padding: 0;
+    color: #58595b;
+    font-weight: 400;
+}
+
+
+.postarea .quote-detail ul li time,
+.postarea .quote-detail ul li span {
+    margin: 0;
+    float: none;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
