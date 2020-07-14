@@ -115,6 +115,7 @@ class QuoteController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Quote:show.html.twig',
             array(
+                'party' => 'offerer',
                 'quote' => $quote,
                 'canBeAcceptedOrRefusedByOfferer' => $canBeAcceptedOrRefusedByOfferer,
                 'canBeRefusedByOfferer' => $canBeRefusedByOfferer,

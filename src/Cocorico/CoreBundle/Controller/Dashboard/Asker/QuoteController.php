@@ -113,6 +113,7 @@ class QuoteController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Quote:show.html.twig',
             array(
+                'party' => 'asker',
                 'quote' => $quote,
                 'canBeCanceledByAsker' => $canBeCanceledByAsker,
                 'canBeRefusedByAsker' => $canBeRefusedByAsker,

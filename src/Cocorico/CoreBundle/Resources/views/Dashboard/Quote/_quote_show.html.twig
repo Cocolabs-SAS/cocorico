@@ -4,6 +4,8 @@
 {% set listing = quote.listing %}
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+{% set other_user_address = other_user.getAddresses %}
+{% set other_user_address = (other_user_address is empty) ? null : other_user_address[0] %}
 
 
 <!-- post -->
@@ -63,11 +65,40 @@
                          alt="{{ other_user.name }}">
                 </div>
                 <div class="textbox">
-                    <span class="author-info">
-                        <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
-                            <strong>{{ other_user.name }}</strong>
-                        </a>
-                    </span>
+                    {% if party == 'offerer' %}
+                        <span class="author-info">
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
+                                Demandeur: <strong>{{ other_user.name }}</strong>
+                            </a>
+                            <ul>
+                                <li>email: <strong>{{other_user.email}}</strong></li>
+                                {% if other_user_address %}
+                                    <li>
+                                        <strong>{{other_user_address.address}}</strong>,
+                                        <strong>{{other_user_address.city}}</strong>,
+                                        <strong>{{other_user_address.zip}}</strong>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </span>
+                    {% else %}
+                        <span class="author-info">
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
+                                Fournisseur: <strong>{{ other_user.name }}</strong>
+                            </a>
+                            <ul>
+                                <li>email: <strong>{{other_user.email}}</strong></li>
+                                {% if other_user_address %}
+                                    <li>
+                                        <strong>{{other_user_address.address}}</strong>,
+                                        <strong>{{other_user_address.city}}</strong>,
+                                        <strong>{{other_user_address.zip}}</strong>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </span>
+                    {% endif %}
+
                     {% if other_user_rating %}
                         {{ other_user_rating | cocorico_star_rating }}
                     {% endif %}
