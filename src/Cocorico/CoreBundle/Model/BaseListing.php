@@ -50,6 +50,35 @@ abstract class BaseListing
         self::STATUS_TO_VALIDATE
     );
 
+    /* Frequency period */
+    const FREQUENCY_PERIOD_WEEK = 1;
+    const FREQUENCY_PERIOD_MONTH = 1;
+
+    public static $frequencyPeriodValues = array (
+        self::FREQUENCY_PERIOD_WEEK => 'entity.listing.frequency_period.week',
+        self::FREQUENCY_PERIOD_MONTH => 'entity.listing.frequency_period.month'
+    );
+
+    public static $visibleFrequencyPeriod = array(
+        self::FREQUENCY_PERIOD_WEEK,
+        self::FREQUENCY_PERIOD_MONTH
+    );
+
+
+    /* Surface types */
+    CONST SURFACE_TYPE_WOOD = 1;
+    CONST SURFACE_TYPE_CONCRETE = 2;
+
+    public static $surfaceTypeValues = array (
+        self::SURFACE_TYPE_WOOD => 'entity.listing.surface_type.wood',
+        self::SURFACE_TYPE_CONCRETE => 'entity.listing.surface_type.concrete'
+    );
+
+    public static $visibleSurfaceType = array(
+        self::SURFACE_TYPE_WOOD,
+        self::SURFACE_TYPE_CONCRETE
+    );
+
 
     /* Type */
     const TYPE_ONE = 1;
@@ -91,10 +120,10 @@ abstract class BaseListing
     protected $type;
 
     /**
-     * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=false)
+     * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=true)
      * @Assert\NotBlank(message="assert.not_blank")
      *
-     * @var integer
+     * @var integer|null
      */
     protected $price;
 
@@ -161,6 +190,35 @@ abstract class BaseListing
      * @var \DateTime
      */
     protected $availabilitiesUpdatedAt;
+
+   /**
+     * @ORM\Column(name="frequency_hours", type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $frequencyHours;
+
+    /**
+     * @ORM\Column(name="frequency_period", type="smallint", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $frequencyPeriod;
+
+    /**
+     * @ORM\Column(name="surface_m2", type="integer", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $surfaceM2;
+
+    /**
+     * @ORM\Column(name="surface_type", type="smallint", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $surfaceType;
+
 
     /**
      * Translation proxy
@@ -277,6 +335,9 @@ abstract class BaseListing
      */
     public function getPriceDecimal()
     {
+        if (!$this->price) {
+            return 0;
+        }
         return $this->price / 100;
     }
 
@@ -565,5 +626,178 @@ abstract class BaseListing
         $this->availabilitiesUpdatedAt = $availabilitiesUpdatedAt;
     }
 
+    /**
+     * Set frequencyHours.
+     *
+     * @param int|null $frequencyHours
+     *
+     * @return Test
+     */
+    public function setFrequencyHours($frequencyHours = null)
+    {
+        $this->frequencyHours = $frequencyHours;
+
+        return $this;
+    }
+
+    /**
+     * Get frequencyHours.
+     *
+     * @return int|null
+     */
+    public function getFrequencyHours()
+    {
+        return $this->frequencyHours;
+    }
+
+    /**
+     * Set frequencyPeriod.
+     *
+     * @param int|null $frequencyPeriod
+     *
+     * @return $this
+     */
+    public function setFrequencyPeriod($frequencyPeriod = null)
+    {
+        if (!in_array($frequencyPeriod, array_keys(self::$frequencyPeriodValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.frequencyPeriod : %s.', $frequencyPeriod)
+            );
+        }
+
+        $this->frequencyPeriod = $frequencyPeriod;
+
+        return $this;
+    }
+
+    /**
+     * Get frequencyPeriod.
+     *
+     * @return int|null
+     */
+    public function getFrequencyPeriod()
+    {
+        return $this->frequencyPeriod;
+    }
+
+    /**
+     * Get Frequency Period Text
+     *
+     * @return string
+     */
+    public function getFrequencyPeriodText()
+    {
+        return self::$frequencyPeriodValues[$this->getFrequencyPeriod()];
+    }
+
+    /**
+     * Return available frequency periods
+     *
+     * @param int $frequencyPeriod
+     *
+     * @return array
+     */
+    public static function getAvailableFrequencyPeriodValues($frequencyPeriod)
+    {
+        $availableFrequencyPeriod = array(self::FREQUENCY_PERIOD_WEEK, self::FREQUENCY_PERIOD_MONTH);
+
+
+        array_unshift($availableFrequencyPeriod, $frequencyPeriod);
+        $frequencyPeriod = array_intersect_key(
+            self::$frequencyPeriodValues,
+            array_flip($availableFrequencyPeriod)
+        );
+
+        return $frequencyPeriod;
+    }
+
+
+    /**
+     * Set surfaceM2.
+     *
+     * @param int|null $surfaceM2
+     *
+     * @return $this
+     */
+    public function setSurfaceM2($surfaceM2)
+    {
+        $this->surfaceM2 = $surfaceM2;
+
+        return $this;
+    }
+
+    /**
+     * Get surfaceM2.
+     *
+     * @return int|null
+     */
+    public function getSurfaceM2()
+    {
+        return $this->surfaceM2;
+    }
+
+    /**
+     * Set surfaceType.
+     *
+     * @param int|null $surfaceType
+     *
+     * @return $this
+     */
+    public function setSurfaceType($surfaceType = null)
+    {
+        if (!in_array($surfaceType, array_keys(self::$surfaceTypeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.surfaceType : %s.', $surfaceType)
+            );
+        }
+
+        $this->surfaceType = $surfaceType;
+
+        return $this;
+    }
+
+    /**
+     * Get surfaceType.
+     *
+     * @return int|null
+     */
+    public function getSurfaceType()
+    {
+        return $this->surfaceType;
+    }
+
+
+    /**
+     * Get SurfaceType Text
+     *
+     * @return string
+     */
+    public function getSurfaceTypeText()
+    {
+        return self::$surfaceTypeValues[$this->getSurfaceType()];
+    }
+
+    /**
+     * Return available surfacetype for current surfacetype
+     *
+     * @param int $surfacetype
+     *
+     * @return array
+     */
+    public static function getAvailableSurfaceTypeValues($surfaceType)
+    {
+        $availableSurfaceType = array(self::SURFACE_TYPE_WOOD, self::SURFACE_TYPE_CONCRETE);
+
+        //Prepend current surfaceType to visible surfaceType
+        array_unshift($availableSurfaceType, $surfaceType);
+
+        //Construct associative array with keys equals to surfaceType values and values to label of surfaceType
+        $surfaceType = array_intersect_key(
+            self::$surfaceTypeValues,
+            array_flip($availableSurfaceType)
+        );
+
+        return $surfaceType;
+    }
 
 }

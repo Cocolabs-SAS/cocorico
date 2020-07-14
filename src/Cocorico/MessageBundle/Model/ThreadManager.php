@@ -12,6 +12,7 @@
 namespace Cocorico\MessageBundle\Model;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\MessageBundle\Entity\Thread;
 use Cocorico\MessageBundle\MessageBuilder\NewThreadMessageBuilder;
 use Cocorico\MessageBundle\MessageBuilder\ReplyMessageBuilder;
@@ -204,6 +205,61 @@ class ThreadManager
             "reply_rate" => $replyRate,
             "reply_delay" => round($replyDelay),
         );
+    }
+
+    /**
+     * Creates a new listing thread for the quote request by an asker
+     * In one word: new listing request.
+     *
+     * @param ParticipantInterface $participant
+     * @param Quote              $quote
+     */
+    public function createNewQuoteListingThread(ParticipantInterface $participant, Quote $quote)
+    {
+        /** @var  ThreadInterface $thread */
+        $thread = $this->fosThreadManager->createThread();
+        /** @var MessageInterface $message */
+        $message = $this->fosMessageManager->createMessage();
+
+        $threadBuilder = new NewThreadMessageBuilder($message, $thread);
+        $listing = $quote->getListing();
+        $threadBuilder
+            ->addRecipient($listing->getUser())
+            ->setSender($participant)
+            ->setQuote($quote)
+            ->setListing($listing)
+            ->setSubject($listing->getTitle())
+            ->setBody($quote->getCommunication());
+
+        // send the message
+        $threadMessage = $threadBuilder->getMessage();
+        $this->fosThreadManager->saveThread($threadMessage->getThread(), false);
+        $this->fosMessageManager->saveMessage($threadMessage, false);
+
+        $threadMessage->getThread()->setIsDeleted(false);
+        $this->fosMessageManager->saveMessage($threadMessage);
+    }
+
+    /**
+     * replies to the existing quote request with refused or accepted status
+     * In one word: quote response.
+     *
+     * @param Quote              $quote
+     * @param string               $messageTxt
+     * @param ParticipantInterface $sender
+     */
+    public function addReplyQuoteThread(Quote $quote, $messageTxt, ParticipantInterface $sender)
+    {
+        /** @var MessageInterface $message */
+        $message = $this->fosMessageManager->createMessage();
+        $thread = $quote->getThread();
+        $replyBuilder = new ReplyMessageBuilder($message, $thread);
+        $replyBuilder
+            ->setSender($sender)
+            ->setBody($messageTxt);
+        // send the message
+        $threadMessage = $replyBuilder->getMessage();
+        $this->fosMessageManager->saveMessage($threadMessage, false);
     }
 
 

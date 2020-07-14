@@ -12,6 +12,7 @@
 namespace Cocorico\MessageBundle\MessageBuilder;
 
 use Cocorico\CoreBundle\Entity\Booking;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\CoreBundle\Entity\Listing;
 use Doctrine\Common\Collections\Collection;
 use FOS\MessageBundle\MessageBuilder\AbstractMessageBuilder;
@@ -51,6 +52,18 @@ class NewThreadMessageBuilder extends AbstractMessageBuilder
         return $this;
     }
 
+    /**
+     * The thread quote
+     *
+     * @param  Quote $quote
+     * @return NewThreadMessageBuilder (fluent interface)
+     */
+    public function setQuote(Quote $quote = null)
+    {
+        $this->thread->setQuote($quote);
+
+        return $this;
+    }
     /**
      * The thread subject
      *

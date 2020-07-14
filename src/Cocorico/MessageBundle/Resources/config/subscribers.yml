@@ -7,6 +7,13 @@ services:
         tags:
             - { name: kernel.event_subscriber}
 
+    cocorico_message.quote.subscriber:
+        class: Cocorico\MessageBundle\Event\QuoteSubscriber
+        arguments:
+            - "@cocorico_message.thread_manager"
+        tags:
+            - { name: kernel.event_subscriber}
+
     #Messages subscriber
     cocorico_message.message.subscriber:
         class: Cocorico\MessageBundle\Event\MessageSubscriber

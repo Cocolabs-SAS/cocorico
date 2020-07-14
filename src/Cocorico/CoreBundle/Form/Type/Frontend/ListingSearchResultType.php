@@ -134,15 +134,15 @@ class ListingSearchResultType extends AbstractType
                     'block_name' => 'date_range',
                     'display_mode' => $this->daysDisplayMode,
                 )
-            )
-            ->add(
-                'price_range',
-                PriceRangeType::class,
-                array(
-                    /** @Ignore */
-                    'label' => false
-                )
             );
+            // ->add(
+            //     'price_range',
+            //     PriceRangeType::class,
+            //     array(
+            //         /** @Ignore */
+            //         'label' => false
+            //     )
+            //);
 
         //CHARACTERISTICS
         $characteristics = $listingSearchRequest->getCharacteristics();

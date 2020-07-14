@@ -2558,6 +2558,16 @@ input[type="button"].btn-block {
     background-color: #D82A2A;
 }
 
+.btn-refuse {
+    background-color: #fa3333;
+    color: #ffffff;
+}
+
+.btn-refuse:hover {
+    background-color: #D82A2A;
+}
+
+
 .caret {
     display: inline-block;
     width: 0;
@@ -4081,8 +4091,8 @@ input[type="button"].btn-block {
 }
 
 .modal-backdrop.in {
-    opacity: 0.5;
-    filter: alpha(opacity=50);
+    opacity: 0.7;
+    filter: alpha(opacity=70);
 }
 
 .modal-header {
@@ -8779,6 +8789,46 @@ label {
     line-height: 34px;
 }
 
+/* quote detail */
+.quote_detail {
+    color: #58595b;
+    overflow: hidden;
+    margin: 0 0 26px;
+    border-radius: 5px;
+    background: #f7f6f6;
+    padding: 11px 33px 14px;
+    border: #eaebec solid 1px;
+}
+.quote_detail li {
+    float: left;
+    width: 50%;
+}
+
+.quote_detail li:nth-child(2) {
+    text-align: center;
+}
+
+.quote_detail li:last-child {
+    text-align: right;
+}
+
+.quote_detail .icon-calendar {
+    font-size: 24px;
+    margin: 0 1px 0 0;
+}
+
+.quote_detail time {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+}
+
+.quote_detail strong {
+    font-size: 18px;
+    line-height: 21px;
+}
+
+
 /* timing */
 .timing {
     color: #58595b;
@@ -13357,7 +13407,7 @@ h1.listing-title a {
 
 /* modal  */
 .modal-backdrop {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, .7);
 }
 
 .modal .modal-content {

@@ -117,11 +117,6 @@
     'booking' : booking
 } only %}
 
-{% if addressDelivery %}
-    {% include 'CocoricoCoreBundle:Frontend:Booking/_form_user_address.html.twig' with {
-        'form' : form.userAddress
-    } only %}
-{% endif %}
 
 <div class="form-message">
     <fieldset>

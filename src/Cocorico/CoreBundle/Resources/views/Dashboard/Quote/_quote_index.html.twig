@@ -1,0 +1,100 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+{% for quote in quotes.iterator %}
+
+    {% if app.user is same as(quote.user) %} {#asker#}
+        {% set other_user = quote.listing.user %}
+        {% set quote_show_route = 'cocorico_dashboard_quote_show_asker' %}
+        {% set other_user_rating = other_user.averageOffererRating %}
+        {% set user_timezone = quote.timeZoneAsker %}
+    {% elseif app.user is same as(quote.listing.user) %}{#offerer#}
+        {% set other_user = quote.user %}
+        {% set quote_show_route = 'cocorico_dashboard_quote_show_offerer' %}
+
+        {% set other_user_rating = other_user.averageAskerRating %}
+        {% set user_timezone = quote.timeZoneOfferer %}
+    {% endif %}
+
+    {% set user_image = other_user.images|length ? other_user.images[0].name : UserImageConstants.IMAGE_DEFAULT %}
+    {% set listing = quote.listing %}
+    {% set listing_translation = listing.translations[app.request.locale] %}
+    {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+
+
+    <!-- post -->
+    <article class="post">
+        <span class="hidden">{{ listing_translation.title }}</span>
+
+        <div class="post-area">
+            <div class="img-holder">
+                <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ listing_image) | imagine_filter('listing_xmedium') }}"
+                         alt="{{ listing_translation.title }}">
+                </a>
+            </div>
+            <div class="area">
+                <header class="head">
+                    <div class="area pull-left">
+                        <h2>
+                            <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                                {{ listing_translation.title }}
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="meta pull-right">
+                        <span class="quote-info">
+                            {{ 'quote.show.number.title'|trans }} :
+                            <strong>
+                                {{ quote.id }}
+                            </strong>
+                        </span>
+                    </div>
+                    <div class="quote-detail">
+                        {% if not timeUnitIsDay %}
+                            <div class="timezone">
+                                <strong>{{ 'form.time_zone'|trans({}, 'cocorico_user') }} :</strong>
+                                {{ user_timezone|timezone_name }}
+                            </div>
+                        {% endif %}
+                    </div>
+                </header>
+                <div class="post-content">
+                    <div class="author-img">
+                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ user_image) | imagine_filter('user_xsmall') }}"
+                             alt="{{ other_user.name }}">
+                    </div>
+                    <div class="textbox">
+                        <span class="author-info">
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}"><strong>{{ other_user.name }}</strong></a>
+                        </span>
+                        {% if other_user_rating %}
+                            {{ other_user_rating|cocorico_star_rating }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+
+            {% set status_class = quoteStatusClass[quote.status] %}
+            <span class="btn {{ status_class }}">
+                {{ 'quote.show.status.title'|trans }} {{ quote.statusText|trans }}
+            </span>
+
+
+            <a href="{{ path(quote_show_route, { 'id': quote.id}) }}" class="btn btn-default">
+                {{ 'quote.index.show'|trans }}
+            </a>
+
+            {#
+            {% set expiration = quote.getTimeBeforeExpiration(quoteExpirationDelay, quoteAcceptationDelay) %}
+            {% if expiration > 0 %}
+                <strong class="expiry">
+                    {{ 'quote.expire_in:'|trans }} {{ expiration|format_seconds }}
+                </strong>
+            {% endif %}
+            #}
+        </footer>
+    </article>
+
+{% endfor %}

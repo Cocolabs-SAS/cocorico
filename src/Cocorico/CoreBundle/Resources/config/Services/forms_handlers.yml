@@ -39,6 +39,38 @@ services:
             - "@cocorico.listing_search_request"
             - "@cocorico.booking.manager"
 
+
+    #Quote
+    cocorico.form.handler.quote_base:
+        class: Cocorico\CoreBundle\Form\Handler\Frontend\QuoteBaseFormHandler
+        arguments:
+            - "@request_stack"
+            - "@cocorico.quote.manager"
+            - "@event_dispatcher"
+
+    cocorico.form.handler.quote.dashboard:
+        abstract:  true
+        calls:
+            - [setRequest, ["@request_stack"]]
+            - [setQuoteManager, ["@cocorico.quote.manager"]]
+            - [setThreadManager, ["@cocorico_message.thread_manager"]]
+
+    cocorico.form.handler.quote.offerer.dashboard:
+        class: Cocorico\CoreBundle\Form\Handler\Dashboard\QuoteOffererFormHandler
+        parent: cocorico.form.handler.quote.dashboard
+
+    cocorico.form.handler.quote.asker.dashboard:
+        class: Cocorico\CoreBundle\Form\Handler\Dashboard\QuoteAskerFormHandler
+        parent: cocorico.form.handler.quote.dashboard
+
+    cocorico.form.handler.quote:
+        class: Cocorico\CoreBundle\Form\Handler\Frontend\QuoteFormHandler
+        arguments:
+            - "@session"
+            - "@request_stack"
+            - "@cocorico.listing_search_request"
+            - "@cocorico.quote.manager"
+
     #Listing Availability
     cocorico.form.handler.listing_availability.dashboard:
         abstract:  true

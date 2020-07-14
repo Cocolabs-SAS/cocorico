@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="525c5c62e18194cdbdd13836f49eee569d800c6e" resname="entity.quote.status.draft">
+        <source>entity.quote.status.draft</source>
+        <target>Brouillon</target>
+      </trans-unit>
+      <trans-unit id="6c634450de32ad6a1933611b0a3cf4fa3c6c9c9c" resname="entity.quote.status.sent">
+        <source>entity.quote.status.sent</source>
+        <target>Envoyé</target>
+      </trans-unit>
+      <trans-unit id="70a7f3bd1d169dccd8d5b45510df2a84579b8706" resname="entity.quote.status.discussion">
+        <source>entity.quote.status.discussion</source>
+        <target>En discussion</target>
+      </trans-unit>
+      <trans-unit id="9b1f849bcc25b7927e8ce1a6f6187f9728cacf98" resname="entity.quote.status.accepted">
+        <source>entity.quote.status.accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="d74cc93d25c59ed384492237a72c7f2cec73d700" resname="entity.quote.status.refused_asker">
+        <source>entity.quote.status.refused_asker</source>
+        <target>Refusé par demandeur</target>
+      </trans-unit>
+      <trans-unit id="8a11640f586558ecd5a25756f0391954d3d85e15" resname="entity.quote.status.refused_offerer">
+        <source>entity.quote.status.refused_offerer</source>
+        <target>Refusé par fournisseur</target>
+      </trans-unit>
+      <trans-unit id="7f75fb878ede240e054874834b88aafe2f921968" resname="admin.quote.status.label">
+        <source>admin.quote.status.label</source>
+        <target>État</target>
+      </trans-unit>
+      <trans-unit id="678654092cd38ec3428f44df4ca948c6e26cd1b2" resname="quote.form.presta_start_date">
+        <source>quote.form.presta_start_date</source>
+        <target>Date de début de prestation</target>
+      </trans-unit>
+      <trans-unit id="2637ef364737fb9f40b03905d2a5171d8318550d" resname="quote.form.budget">
+        <source>quote.form.budget</source>
+        <target>Estimation du budget (optionnel)</target>
+      </trans-unit>
+      <trans-unit id="8793f2f986c04802cf143d0d9a8842a69ec8b4dc" resname="quote.form.communication">
+        <source>quote.form.communication</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="fa6db10042a0c7d76165cd32ed324640c7dc5a8e" resname="quote.new.provider.title">
+        <source>quote.new.provider.title</source>
+        <target>Fournisseur de la prestation</target>
+      </trans-unit>
+      <trans-unit id="a1ce7b99a5dc0e89be54525f814100070cdc5570" resname="quote.show.status.title">
+        <source>quote.show.status.title</source>
+        <target>État : </target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show.status.prestaStartDate">
+        <source>quote.show.status.prestaStartDate</source>
+        <target>Date de début de prestation</target>
+      </trans-unit>
+      <trans-unit id="c400dfe0e819f18c5451ca23221d85d0b3e38ae4" resname="entity.quote.status.new">
+        <source>entity.quote.status.new</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.quote">
+        <source>entity.quote.status.quote</source>
+        <target>Devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.accepted">
+        <source>entity.quote.status.accepted</source>
+        <target>Accepté</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.canceled">
+        <source>entity.quote.status.canceled</source>
+        <target>Annulé</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.refused_asker">
+        <source>entity.quote.status.refused_asker</source>
+        <target>Refusé</target>
+      </trans-unit>
+      <trans-unit id="" resname="entity.quote.status.refused_offerer">
+        <source>entity.quote.status.refused_offerer</source>
+        <target>Refusé</target>
+      </trans-unit>
+      <trans-unit id="3dce0f99e613d11a5126ad9a7c582bfd47d8eca6" resname="quote.index.show">
+        <source>quote.index.show</source>
+        <target>Ouvrir</target>
+      </trans-unit>
+      <trans-unit id="6c562ad9eb14a36aadf4ae496da8e310661f3f29" resname="quote.show.number.title">
+        <source>quote.show.number.title</source>
+        <target>N° de demande</target>
+      </trans-unit>
+      <trans-unit id="116cbc05699c8af6e3e760d371a2f7f78a8a2cff" resname="quote.show.presta_start_date">
+        <source>quote.show.presta_start_date</source>
+        <target>Date de début de prestation</target>
+      </trans-unit>
+      <trans-unit id="306730aca92558413f22c6801b5e025aa92db303" resname="quote.show_asker.cancel">
+        <source>quote.show_asker.cancel</source>
+        <target>Annuler la demande</target>
+      </trans-unit>
+      <trans-unit id="88c810218967c65721f23b7f7d2b285c7f4911f9" resname="quote.show.save">
+        <source>quote.show.save</source>
+        <target>Envoyer</target>
+      </trans-unit>
+      <trans-unit id="bb18b5ded2b6908cccd412661abc7dd8c5d172c7" resname="quote.show.textarea.placeholder">
+        <source>quote.show.textarea.placeholder</source>
+        <target>Rédigez votre message ici</target>
+      </trans-unit>
+      <trans-unit id="1bdedd6eb81d984294e821415b6c2f8f80387e5e" resname="quote.show_offerer.accept">
+        <source>quote.show_offerer.accept</source>
+        <target>Accepter</target>
+      </trans-unit>
+      <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
+        <source>quote.show_offerer.refuse</source>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show_asker.refuse">
+        <source>quote.show_asker.refuse</source>
+        <target>Refuser</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.refuse.title">
+        <source>quote.modal.refuse.title</source>
+        <target>Refuser le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.cancel.title">
+        <source>quote.modal.cancel.title</source>
+        <target>Annuler la demande de devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.sent_quote.title">
+        <source>quote.modal.sent_quote.title</source>
+        <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.budget">
+        <source>quote.budget</source>
+        <target>Budget estimé</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.return">
+        <source>quote.modal.action.return</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.cancel">
+        <source>quote.modal.action.cancel</source>
+        <target>Annuler la demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.sent_quote">
+        <source>quote.modal.action.sent_quote</source>
+        <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.edit.success">
+        <source>quote.edit.success</source>
+        <target>Changement effectué</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.accept">
+        <source>quote.modal.action.accept</source>
+        <target>Accepter le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.validation.submit">
+        <source>quote.new.validation.submit</source>
+        <target>Soumettre la demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.back">
+        <source>quote.new.back</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.message.description">
+        <source>quote.new.message.description</source>
+        <target>Detaillez ci-dessous votre demande de devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.success">
+        <source>quote.new.success</source>
+        <target>Demande de devis envoyé</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.form.start">
+        <source>quote.form.start</source>
+        <target>Créer une demande</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.communication.placeholder">
+        <source>quote.new.communication.placeholder</source>
+        <target>Les détails de votre demande...</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.new.self_quote.error">
+        <source>quote.new.self_quote.error</source>
+        <target>Impossible de demander un devis à soi-même.</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show_offerer.sent_quote">
+        <source>quote.show_offerer.sent_quote</source>
+        <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show.send_communication">
+        <source>quote.show.send_communication</source>
+        <target>Envoyer un message</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.send_communication">
+        <source>quote.modal.send_communication</source>
+        <target>Joindre un message</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.refuse">
+        <source>quote.modal.action.refuse</source>
+        <target>Ne pas soumettre de devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.accept.title">
+        <source>quote.modal.accept.title</source>
+        <target>Accepter le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.accept">
+        <source>quote.modal.description.accept</source>
+        <target>Vous êtes sur le point d'accepter le devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.sent_quote">
+        <source>quote.modal.description.sent_quote</source>
+        <target>Une fois toutes les données nécessaires à la rédaction d'un devis,
+        "accepter de soumettre un devis" signale au demandeur que vous allez lui transmettre un devis.
+        </target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.refuse">
+        <source>quote.modal.description.refuse</source>
+        <target>Si les conditions ne vous permettent pas ou plus de transmettre un devis, vous pouvez le
+        signaler au demandeur.</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.cancel">
+        <source>quote.modal.description.cancel</source>
+        <target>Vous êtes encore en mesure d'annuler cette demande de devis.</target>
+      </trans-unit>
+      <trans-unit id="" resname="term">
+        <source>term</source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="" resname="term">
+        <source>term</source>
+        <target></target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

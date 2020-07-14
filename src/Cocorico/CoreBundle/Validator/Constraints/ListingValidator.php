@@ -32,13 +32,13 @@ class ListingValidator extends ConstraintValidator
      * @param               $minPrice
      * @param               $countries
      */
-    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $minPrice, $countries)
+    public function __construct(EntityManager $emr, $maxImages, $minImages, $minCategories, $countries)
     {
         $this->emr = $emr;
         $this->maxImages = $maxImages;
         $this->minImages = $minImages;
         $this->minCategories = $minCategories;
-        $this->minPrice = $minPrice;
+        $this->minPrice = 5;
         $this->countries = $countries;
     }
 
@@ -78,13 +78,13 @@ class ListingValidator extends ConstraintValidator
         }
 
         //Price
-        if ($listing->getPrice() < $this->minPrice) {
-            $this->context->buildViolation($constraint::$messageMinPrice)
-                ->atPath('price')
-                ->setParameter('{{ min_price }}', $this->minPrice / 100)
-                ->setTranslationDomain('cocorico_listing')
-                ->addViolation();
-        }
+        // if ($listing->getPrice() < $this->minPrice) {
+        //     $this->context->buildViolation($constraint::$messageMinPrice)
+        //         ->atPath('price')
+        //         ->setParameter('{{ min_price }}', $this->minPrice / 100)
+        //         ->setTranslationDomain('cocorico_listing')
+        //         ->addViolation();
+        // }
 
         //Duration
         if ($listing->getMinDuration() && $listing->getMaxDuration() &&

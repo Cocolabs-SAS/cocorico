@@ -28,7 +28,7 @@
     {% set listing_translation = listing.translations[app.request.locale] %}
     {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
 
-    {% set amount_total = amount_total | format_price(app.request.locale, 2) %}
+    {% set amount_total = 5 %}
 
     <!-- post -->
     <article class="post">

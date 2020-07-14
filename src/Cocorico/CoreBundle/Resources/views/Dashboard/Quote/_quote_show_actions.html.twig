@@ -1,0 +1,35 @@
+{% trans_default_domain 'cocorico_quote' %}
+<div class="btns-holder text-center">
+    {% if app.user is same as(quote.user) %}
+        {% if canBeCanceledByAsker %}
+            <a href="{{ path('cocorico_dashboard_quote_edit_asker', {'id': quote.id, 'type': 'cancel'}) }}"
+               class="btn btn-default" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_asker.cancel'|trans }}
+            </a>
+        {% endif %}
+        {% if canBeRefusedByAsker %}
+            <a href="{{ path('cocorico_dashboard_quote_edit_asker', {'id': quote.id, 'type': 'refuse'}) }}"
+               class="btn btn-warning" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_asker.refuse'|trans }}
+            </a>
+        {% endif %}
+        {% if canBeAcceptedByAsker %}
+            <a href="{{ path('cocorico_dashboard_quote_edit_asker', {'id': quote.id, 'type': 'accept'}) }}"
+               class="btn btn-success" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_offerer.accept'|trans }}
+            </a>
+        {% endif %}
+
+    {% elseif app.user is same as(quote.listing.user) %}
+        {% if canBeRefusedByOfferer %}
+            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'refuse'}) }}"
+               class="btn btn-refuse" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_offerer.refuse'|trans }}
+            </a>
+            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'sent_quote'}) }}"
+               class="btn btn-success" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_offerer.sent_quote'|trans }}
+            </a>
+        {% endif %}
+    {% endif %}
+</div>

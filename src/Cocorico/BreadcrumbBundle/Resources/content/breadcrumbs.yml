@@ -35,6 +35,24 @@ cocorico_dashboard_booking_payin_refund_asker:
         route: 'cocorico_dashboard_booking_payin_refund_asker'
     -   text: 'Payments refund'
 
+## Quote
+cocorico_dashboard_quote_offerer:
+    -   text: 'Quotes'
+        route: 'cocorico_dashboard_quote_offerer'
+
+cocorico_dashboard_quote_show_offerer:
+    -   text: 'Quotes'
+        route: 'cocorico_dashboard_quote_offerer'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Quote', 'entityMethod': 'getListing'}
+
+cocorico_dashboard_quote_asker:
+    -   text: 'Quotes'
+        route: 'cocorico_dashboard_quote_asker'
+
+cocorico_dashboard_quote_show_asker:
+    -   text: 'Quotes'
+        route: 'cocorico_dashboard_quote_asker'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Quote', 'entityMethod': 'getListing'}
 
 ##Listing
 cocorico_dashboard_listing:

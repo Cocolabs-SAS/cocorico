@@ -1,0 +1,114 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+<section class="widget reservation ajax-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    {{ form_start(form, {'attr': {'id': 'quote-form', 'class': 'date-selection'}}) }}
+
+    {{ form_errors(form) }}
+
+    <fieldset>
+        <legend class="hidden">quote</legend>
+        <h4>Demander un devis</h4>
+
+        <div class="row">
+            <div class="col-12">
+                {{ form_errors(form.prestaStartDate) }}
+                <strong class="title">
+                    {{ form_label(form.prestaStartDate, null, {'required': true}) }}
+                </strong>
+
+                <div class="input-append date field-holder datepicker-holder-ajax">
+                    <span class="add-on">
+                        <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                    </span>
+                    {{ form_widget(form.prestaStartDate, {
+                        'id': 'prestaStartDate',
+                        'type': 'text',
+                        'attr': {
+                            'class': 'form-control from',
+                            'placeholder': '/      /',
+                            'title': 'presta-start-date'
+                        }
+                    }) }}
+                </div>
+            </div>
+            <br />
+
+            <div class="col-12">
+                {{ form_errors(form.budget) }}
+                <strong class="title">
+                    {{ form_label(form.budget, null, {'required': false}) }}
+                </strong>
+                <div class="field-holder">
+                    <span class="add-on">
+                        <i data-date-icon="icon-info" data-time-icon="icon-time" class="icon-info"></i>
+                    </span>
+                    {{ form_widget(form.budget, {
+                        'id': 'budget',
+                        'type': 'text',
+                        'attr': {
+                            'class': 'form-control',
+                            'placeholder': '',
+                            'title': 'budget'
+                        }
+                    }) }}
+
+                </div>
+            </div>
+
+            <div>
+            {% do form.communication.setRendered() %}
+            </div>
+
+        <input type="submit" class="hidden" value="Envoyer">
+    </fieldset>
+
+    {{ form_end(form) }}
+
+    <div>
+        {#{% if form.vars['errors'] is empty %}#}
+        {% if form.vars.submitted and form.vars.valid %}
+            <i>tech: Erreur détectée</i>
+        {% else %}
+            <i></i>
+        {% endif %}
+        <a href="#" data-id="submit-quote" class="btn btn-success">{{ 'quote.form.start'|trans }}</a>
+    </div>
+
+
+    <script>
+        $(function () {
+            var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
+
+            initDatePickerAjax(function () {
+                jcf.replaceAll("#quote-form");
+            });
+
+            var $form = $("#quote-form");
+
+            $form.submit(function () {
+                //Disable fields and add loading until form is rendered
+                $(this).find("input").attr("readonly", "readonly");
+                $(this).find("select option:not(:selected)").each(function () {
+                    $(this).attr('disabled', 'disabled');
+                });
+                $(".add-info .loading, a[data-id=submit-booking]").remove();
+            });
+
+            $("a[data-id=submit-quote]").click(function (e) {
+                e.preventDefault();
+                var $errors = $form.find('div.errors');
+                //Submit form if no errors
+                if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
+                    //if ($("#start-date").val() && $("#end-date").val()) {
+                    $form.submit();
+                    //}
+                }
+            });
+
+        });
+    </script>
+</section>

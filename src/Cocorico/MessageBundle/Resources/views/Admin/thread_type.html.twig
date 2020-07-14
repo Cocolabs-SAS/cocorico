@@ -1,4 +1,4 @@
 {% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
 {% block field %}
-    {{ object.booking ? "Reservation Message" : "Message" }}
+    {{ object.booking ? "Reservation Message" : object.quote ? "Quote Message" : "Message" }}
 {% endblock %}

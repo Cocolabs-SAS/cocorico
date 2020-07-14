@@ -8,7 +8,7 @@
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_description = listing_translation.description|strip_private_info %}
 {% set listing_location = listing.location %}
-{% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+{% set price = 5 %}
 {% set listing_user = listing.user %}
 
 {%- block meta_title -%}
@@ -96,12 +96,6 @@
                                                 {{ 'listing.show.map'|trans }}
                                             </a>
                                         </li>
-                                        <li role="presentation">
-                                            <a href="#calendar" data-toggle="tab"
-                                               data-text="{{ 'listing.show.calendar'|trans }}">
-                                                {{ 'listing.show.calendar'|trans }}
-                                            </a>
-                                        </li>
                                     </ul>
                                     <a href="javascript:void(0)" id="favourite-{{ listing.id }}"
                                        class="link-favourit favourit">
@@ -177,12 +171,14 @@
                                                 {{ 'listing.show.description'|trans }}
                                             </a>
                                         </li>
+                                        {#
                                         <li>
                                             <a href="#conditions" data-toggle="tab"
                                                data-text="{{ 'listing.show.rules'|trans }}">
                                                 {{ 'listing.show.rules'|trans }}
                                             </a>
                                         </li>
+                                        #}
                                         <li>
                                             <a href="#features" data-toggle="tab"
                                                data-text="{{ 'listing.show.characteristics'|trans }}">
@@ -285,10 +281,19 @@
                         </div>
 
                         {#booking form#}
+                        {#
                         {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
                             'listing': listing
                         })) }}
+                        #}
 
+                        {#quote form#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
+                            'listing': listing
+                        })) }}
+
+
+                        {#
                         <section class="widget prices-conditions">
                             <h2>{{ 'listing.show.policy.title'|trans }}</h2>
                             <ul>
@@ -339,6 +344,7 @@
                                 {% endif %}
                             </ul>
                         </section>
+                        #}
 
                         <!-- members-list -->
                         <section class="widget members-list">

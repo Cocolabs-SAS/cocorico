@@ -209,6 +209,7 @@ parameters:
     #BookingOption: none or Cocorico\ListingOptionBundle\Entity\BookingOption (without quotes!)
     cocorico_listing_option.listing_option.entity_class: none
     cocorico_listing_option.booking_option.entity_class: none
+    cocorico_listing_option.quote_option.entity_class: none
 
     #ListingAlertBundle:
     #ListingAlert: none or Cocorico\ListingAlertBundle\Entity\ListingAlert

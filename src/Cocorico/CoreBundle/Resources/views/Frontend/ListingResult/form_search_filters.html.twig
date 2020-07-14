@@ -4,7 +4,7 @@
     <!-- range-area -->
     <div class="range-area">
         <!-- range-holder -->
-        {{ form_widget(form.price_range) }}
+        {# {{ form_widget(form.price_range) }} #}
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
             {% include '@CocoricoDelivery/Frontend/ListingResult/_form_delivery.html.twig' with {

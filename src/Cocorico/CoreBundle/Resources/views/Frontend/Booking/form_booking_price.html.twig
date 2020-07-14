@@ -24,21 +24,9 @@
     {{ form_end(form) }}
 
     <div class="add-info">
-        {% if includeVat %}
-            {% set amount = booking.amountDecimal %}
-        {% else %}
-            {% set amount = booking.amountExcludingVATDecimal(vatRate) %}
-        {% endif %}
-        {% set amount = amount | format_price(app.request.locale, 0) %}
 
-        <!--
-        <strong class="price">
-            {{ amount }}
-            <sup>
-                <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
-            </sup> *
-        </strong>
-        -->
+        {% set amount = 5 %}
+
 
         {% if bundleExist('CocoricoDeliveryBundle') %}
             {% include 'CocoricoDeliveryBundle:Frontend:Booking/_show_delivery.html.twig' with {

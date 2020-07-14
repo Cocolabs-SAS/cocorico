@@ -61,6 +61,22 @@ class ThreadAdmin extends AbstractAdmin
                 )
             )
             ->add(
+                'quoteText',
+                null,
+                array(
+                    'label' => 'admin.thread.type.label',
+                    'template' => 'CocoricoMessageBundle:Admin:thread_type.html.twig'
+                )
+            )
+            ->add(
+                'quote',
+                null,
+                array(
+                    'label' => 'admin.thread.quote.label',
+                    'associated_tostring' => 'getId'
+                )
+            )
+            ->add(
                 'listing',
                 null,
                 array(
@@ -123,6 +139,8 @@ class ThreadAdmin extends AbstractAdmin
                 $listing = $thread->getListing();
             } elseif ($thread->getBooking()) {
                 $listing = $thread->getBooking()->getListing();
+            } elseif ($thread->getQuote()) {
+                $listing = $thread->getQuote()->getListing();
             }
 
             if ($listing) {
@@ -202,6 +220,25 @@ class ThreadAdmin extends AbstractAdmin
                     'translation_domain' => 'SonataAdminBundle',
                 )
             )
+        ->add(
+                'quoteType',
+                'doctrine_orm_callback',
+                array(
+                    'callback' => array($this, 'getMessageTypeFilter'),
+                    'field_type' => 'choice',
+                    'label' => 'admin.thread.type.label'
+                ),
+                ChoiceType::class,
+                array(
+                    'choices' => array(
+                        'Quote Message' => 'quote',
+                        'Message' => 'message'
+                    ),
+                    'placeholder' => 'admin.thread.type.label',
+                    'translation_domain' => 'SonataAdminBundle',
+                )
+            )
+
             ->add(
                 'fromName',
                 'doctrine_orm_callback',
@@ -336,6 +373,7 @@ class ThreadAdmin extends AbstractAdmin
             'Id' => 'id',
             //'Type of message' => 'bookingText',
             'Id Reservation' => 'booking.id',
+            'Id Quote' => 'quote.id',
             'Listing title' => 'listing.title',
             'From' => 'createdBy.name',
             'To' => 'listing.user.name',

@@ -31,6 +31,15 @@ ENV SQL_HOST=$SQL_HOST\
     SYMFONY_ENV=dev 
 
 RUN apt-get update
+
+RUN apt-get install -y \
+        curl \
+        git \
+        default-mysql-client \ 
+        imagemagick \ 
+        unzip \
+        wget
+
 RUN apt-get install -y \
         php7.3 \
         php7.3-fpm \
@@ -40,16 +49,10 @@ RUN apt-get install -y \
         php7.3-xml \
         php7.3-intl \
         php-dom \
+        php-imagick \
         php-mongodb \
         php-mysql
 
-
-RUN apt-get install -y \
-        curl \
-        git \
-        default-mysql-client \ 
-        unzip \
-        wget
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN composer global require hirak/prestissimo 
@@ -74,12 +77,13 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml
 
+
 RUN composer install
 
 
 RUN clevercloud/post_build_hook.sh
 RUN wget https://get.symfony.com/cli/installer -O - | bash
-RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
+# RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
 # RUN service nginx restart && service php7.3-fpm start
 COPY ./docker/run.sh ./run
 RUN echo "Start Symfony server with:\n\

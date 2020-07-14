@@ -103,6 +103,7 @@ doctrine:
             #Don't put double quotes!
             Cocorico\CoreBundle\Model\ListingOptionInterface: "%cocorico_listing_option.listing_option.entity_class%"
             Cocorico\CoreBundle\Model\BookingOptionInterface: "%cocorico_listing_option.booking_option.entity_class%"
+            Cocorico\CoreBundle\Model\QuoteOptionInterface: "%cocorico_listing_option.quote_option.entity_class%"
             Cocorico\CoreBundle\Model\ListingCategoryFieldInterface: "%cocorico_listing_category_field.entity_class%"
             Cocorico\CoreBundle\Model\ListingCategoryFieldValueInterface: "%cocorico_listing_category_field_value.entity_class%"
             Cocorico\CoreBundle\Model\ListingCategoryListingCategoryFieldInterface: "%cocorico_listing_category_listing_category_field.entity_class%"

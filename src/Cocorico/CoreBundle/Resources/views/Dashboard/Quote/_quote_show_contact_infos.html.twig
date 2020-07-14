@@ -1,0 +1,36 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+{% if quote.status == QuoteConstants.STATUS_ACCEPTED %}
+    {% set listing = quote.listing %}
+    {% set listing_location = listing.location %}
+
+    <div class="location-holder">
+        <div class="contact-info">
+            <strong class="title">{{ 'quote.show.contact.title'|trans }}</strong>
+            <dl>
+                <dt>{{ other_user.firstName }} {{ other_user.lastName }}</dt>
+                <dd>&nbsp;</dd>
+                <dt>{{ 'quote.show.phone'|trans }}</dt>
+                <dd>
+                    <a href="tel:{{ other_user.phonePrefix }}{{ other_user.phone }}">
+                        {{ other_user.phonePrefix }} {{ other_user.phone }}&nbsp;
+                    </a>
+                </dd>
+                <dt>{{ 'quote.show.email'|trans }}</dt>
+                <dd>
+                    <a href="mailto:{{ other_user.email }}">{{ other_user.email }}</a>
+                </dd>
+            </dl>
+        </div>
+        <address>
+            <strong class="title">{{ 'quote.show.address.title'|trans }}</strong>
+            <span>{{ listing_location.streetNumber }} {{ listing_location.route }}</span>
+            <span>{{ listing_location.zip }}</span>
+            <span>
+                {{ listing_location.city }}<br>
+                {{ listing_location.country | country_name(app.request.locale) }}
+            </span>
+
+        </address>
+    </div>
+{% endif %}
