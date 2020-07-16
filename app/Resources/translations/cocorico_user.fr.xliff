@@ -126,6 +126,14 @@
         <source>entity.user.person_type.natural</source>
         <target state="new">Une personne</target>
       </trans-unit>
+      <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b3" resname="entity.user.person_type.classic">
+        <source>entity.user.person_type.classic</source>
+        <target state="new">Une entreprise</target>
+      </trans-unit>
+      <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b4" resname="entity.user.person_type.inclusive">
+        <source>entity.user.person_type.inclusive</source>
+        <target state="new">Une structure inclusive</target>
+      </trans-unit>
       <trans-unit id="2e33a41aa053169361b996e132dc6288a51f83f9" resname="entity.user.type.billing">
         <source>entity.user.type.billing</source>
         <target state="new">Adresse de facturation</target>

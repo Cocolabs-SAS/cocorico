@@ -44,9 +44,17 @@ class UserRequestListener
             }
         }
 
-        if ($cookies->has('userType') && $cookies->get('userType') == "offerer") {
+        // If user can be offerer, he can switch between roles
+        if ($user && method_exists($user, "canBeOfferer")) {
+            $session->set('canSwitch', $user->canBeOfferer());
+        } else {
+            $session->set('canSwitch', False);
+        }
+
+        if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user->canBeOfferer()) {
             $session->set('profile', 'offerer');
-        } elseif ($cookies->has('userType') && $cookies->get('userType') == "asker") {
+        // } elseif ($cookies->has('userType') && $cookies->get('userType') == "asker") {
+        } elseif ($cookies->has('userType') == "asker") {
             $session->set('profile', 'asker');
         }
     }

@@ -77,12 +77,30 @@ class User extends BaseUser implements ParticipantInterface
 
     const PERSON_TYPE_NATURAL = 1;
     const PERSON_TYPE_LEGAL = 2;
+    const PERSON_TYPE_CLASSIC = 3;
+    const PERSON_TYPE_INCLUSIVE = 4;
 
     public static $personTypeValues = array(
         self::PERSON_TYPE_NATURAL => 'entity.user.person_type.natural',
         self::PERSON_TYPE_LEGAL => 'entity.user.person_type.legal',
+        self::PERSON_TYPE_CLASSIC => 'entity.user.person_type.classic',
+        self::PERSON_TYPE_INCLUSIVE => 'entity.user.person_type.inclusive',
     );
 
+    public static $legalTypes = array(
+        # self::PERSON_TYPE_LEGAL,
+        self::PERSON_TYPE_CLASSIC,
+        self::PERSON_TYPE_INCLUSIVE
+    );
+
+    public static $enabledTypes = array(
+        self::PERSON_TYPE_CLASSIC => 'entity.user.person_type.classic',
+        self::PERSON_TYPE_INCLUSIVE => 'entity.user.person_type.inclusive',
+    );
+
+    public static $offererTypes = array (
+        self::PERSON_TYPE_INCLUSIVE
+    );
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -117,7 +135,7 @@ class User extends BaseUser implements ParticipantInterface
      *
      * @Assert\NotNull
      */
-    protected $personType = self::PERSON_TYPE_NATURAL;
+    protected $personType = self::PERSON_TYPE_CLASSIC;
 
     /**
      * @var string
@@ -1367,6 +1385,10 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Can can 
+    public function 
+
+    /**
      * @return ArrayCollection|Message[]
      */
     public function getMessages()
@@ -1821,7 +1843,7 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function validate(ExecutionContextInterface $context)
     {
-        if ($this->personType == self::PERSON_TYPE_LEGAL && empty($this->companyName)) {
+        if (in_array($this->personType, self::$legalTypes) && empty($this->companyName)) {
             $context->buildViolation('cocorico_user.company_name.blank')
                 ->atPath('companyName')
                 ->setTranslationDomain('validators')
@@ -1837,5 +1859,13 @@ class User extends BaseUser implements ParticipantInterface
     public function getImpersonating()
     {
         return $this;
+    }
+
+    /**
+     * Check if person can be offerer (and switch between asker and offerer profiles)
+     */
+    public function canBeOfferer()
+    {
+        return in_array($this->personType, self::$offererTypes);
     }
 }
