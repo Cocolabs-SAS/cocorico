@@ -135,6 +135,9 @@ parameters:
     #Listing search min result. Search is restarted in a largest zone if number of result is less than this limit.
     cocorico.listing_search_min_result: 0
 
+    #Listing homepage highest rank max cache age, in seconds
+    cocorico.listing_highestrank_cache_age: 30
+
     #Enable listing duplication
     cocorico.listing.duplication: true
 
