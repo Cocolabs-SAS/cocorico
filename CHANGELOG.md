@@ -6,6 +6,12 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
+## [0.17.0] - (2020-07-16)
+- Changelog en français
+- Correction de l'interface admin des caracteristiques
+- Profils "entreprise classique" et "structure inclusive" lors de l'inscription
+- Ajout option de configuration des profils qui peuvent être "acheteurs" ou "acheteurs/fournisseurs"
+
 ## [0.16.0] - (2020-06-20)
 - start of ITOU specific fork of Cocorico
 - Added frequency period, hours and surface m2 and type to database and translations
