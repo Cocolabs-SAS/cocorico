@@ -128,6 +128,14 @@ abstract class BaseListing
     protected $price;
 
     /**
+     * @ORM\Column(name="range", type="integer", nullable=true)
+     * @Assert\NotBlank(message="assert.not_blank")
+     *
+     * @var integer|null
+     */
+    protected $range;
+
+    /**
      *
      * @ORM\Column(name="certified", type="boolean", nullable=true)
      *
@@ -304,6 +312,28 @@ abstract class BaseListing
         return $status;
     }
 
+    /**
+     * Set range
+     *
+     * @param  integer $range
+     * @return $this
+     */
+    public function setRange($range)
+    {
+        $this->range = $range;
+
+        return $this;
+    }
+
+    /**
+     * Get range
+     *
+     * @return string
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
 
     /**
      * Set price

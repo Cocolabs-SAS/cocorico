@@ -100,6 +100,26 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="block">
+                                    <h2>{{ 'listing.new.range.title'|trans }}</h2>
+                                    <strong class="title">
+                                        {{ 'listing.new.range.description'|trans }}
+                                    </strong>
+                                    <div class="field-row">
+                                        {{ form_errors(form.range) }}
+                                        <span class="label">
+                                        {{ form_label(form.range) }}
+                                    </span>
+                                        {{ form_widget(form.range, {
+                                            'attr': {
+                                                'class': 'numbers-only form-control',
+                                                'help':  'listing.edit.range.help'|trans
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row" style="display:none">
                                 <div class="block">
                                     <h2>{{ 'listing.new.price.title'|trans }}</h2>
