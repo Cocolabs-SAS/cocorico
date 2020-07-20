@@ -87,13 +87,13 @@ class ListingSearchManager
         $queryBuilder = $this->getSearchByDateQueryBuilder($listingSearchRequest, $queryBuilder);
 
         //Prices
-        $priceRange = $listingSearchRequest->getPriceRange();
-        if ($priceRange->getMin() && $priceRange->getMax()) {
-            $queryBuilder
-                ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
-                ->setParameter('minPrice', $priceRange->getMin())
-                ->setParameter('maxPrice', $priceRange->getMax());
-        }
+        // $priceRange = $listingSearchRequest->getPriceRange();
+        // if ($priceRange->getMin() && $priceRange->getMax()) {
+        //     $queryBuilder
+        //         ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
+        //         ->setParameter('minPrice', $priceRange->getMin())
+        //         ->setParameter('maxPrice', $priceRange->getMax());
+        // }
 
         //Categories
         $categories = $listingSearchRequest->getCategories();
@@ -108,9 +108,9 @@ class ListingSearchManager
 
         //Order
         switch ($listingSearchRequest->getSortBy()) {
-            case 'price':
-                $queryBuilder->orderBy("l.price", "ASC");
-                break;
+            // case 'price':
+            //     $queryBuilder->orderBy("l.price", "ASC");
+            //     break;
             case 'distance':
                 $queryBuilder->orderBy("distance", "ASC");
                 break;

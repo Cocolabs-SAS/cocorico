@@ -8,6 +8,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 ### [0.18.0] - (EN COURS)
+- Ajout option de configuration pour durée de cache de la liste des annonces sur la homepage
 
 ### [0.17.0] - (2020-07-16)
 - Changelog en français - Changelog in french from now on
