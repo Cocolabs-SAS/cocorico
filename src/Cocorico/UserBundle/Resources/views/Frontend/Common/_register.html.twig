@@ -4,8 +4,11 @@
 
     {{ form_errors(form_registration) }}
 
-    <div class="tab-holder">
-        <div class="column">
+    <div class="tab-holder row">
+        <div class="col-sm-2"> </div>
+        <div class="col-sm-8">
+        <div class="col">
+            <br />
             <h3>{{ 'user.signup.title'|trans }}</h3>
 
             <div class="field-row validate-row">
@@ -247,7 +250,10 @@
                 </div>
             </div>
         </div>
+        </div>
+        <div class="col-sm-2"> </div>
 
+        {#
         <div class="column">
             <h3>{{ 'user.facebook.login.title'|trans }}</h3>
             <a href="#" onclick="fb_login();" class="btn-facebook">
@@ -257,6 +263,7 @@
 
             <div id="fb-root"></div>
         </div>
+        #}
     </div>
 </div>
 {{ form_rest(form_registration) }}

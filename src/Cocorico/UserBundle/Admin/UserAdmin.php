@@ -70,7 +70,7 @@ class UserAdmin extends SonataUserAdmin
                 'personType',
                 ChoiceType::class,
                 array(
-                    'empty_data' => User::PERSON_TYPE_NATURAL,
+                    'empty_data' => User::PERSON_TYPE_CLASSIC,
                     'required' => true,
                     'disabled' => true,
                     'multiple' => false,

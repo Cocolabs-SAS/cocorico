@@ -87,7 +87,7 @@ class ListingCharacteristicAdmin extends AbstractAdmin
             )
             ->add(
                 'listingCharacteristicType',
-                'sonata_type_model_list',
+                'sonata_type_model',
                 array(
                     'label' => 'admin.listing_characteristic.type.label',
                     'constraints' => array(new NotBlank())
@@ -95,7 +95,7 @@ class ListingCharacteristicAdmin extends AbstractAdmin
             )
             ->add(
                 'listingCharacteristicGroup',
-                'sonata_type_model_list',
+                'sonata_type_model',
                 array(
                     'label' => 'admin.listing_characteristic.group.label',
                     'constraints' => array(new NotBlank())

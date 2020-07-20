@@ -96,9 +96,11 @@
                         </ul>
 
                         {# New listing link #}
-                        <a href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9">
-                            {{ 'nav.listing.new.link'|trans }}
-                        </a>
+                        {% if app.session.get('canSwitch') %}
+                            <a href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9">
+                                {{ 'nav.listing.new.link'|trans }}
+                            </a>
+                        {% endif %}
                     </div>
                     <!-- /.navbar-collapse -->
                 </nav>
