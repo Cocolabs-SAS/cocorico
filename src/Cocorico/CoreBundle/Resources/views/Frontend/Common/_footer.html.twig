@@ -34,7 +34,7 @@
                         <ul class="list-unstyled pull-left">
                             <li class="title">{{ 'footer.about.title'|trans }}</li>
                             <li>
-                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.how_it_works.slug'|trans }) }}">
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
                                     {{ 'footer.how_it_works.link'|trans }}
                                 </a>
                             </li>
@@ -51,11 +51,13 @@
                         </ul>
                         <ul class="list-unstyled pull-left">
                             <li class="title">{{ 'footer.help.title'|trans }}</li>
+                            {#
                             <li>
                                 <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
                                     {{ 'footer.faq.link'|trans }}
                                 </a>
                             </li>
+                            #}
                             <li>
                                 <a href="{{ path('cocorico_contact_new') }}">
                                     {{ 'footer.contact_us.link'|trans }}
