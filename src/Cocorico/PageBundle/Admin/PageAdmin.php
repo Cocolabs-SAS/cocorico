@@ -19,6 +19,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Sonata\FormatterBundle\Form\Type\SimpleFormatterType;
 
 class PageAdmin extends AbstractAdmin
 {

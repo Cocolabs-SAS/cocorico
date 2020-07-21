@@ -1,5 +1,7 @@
 #!/bin/bash
 
+php bin/console ckeditor:install
+
 if [[ ! -f web/json/currencies.json ]]; then
     php bin/console cocorico:currency:update
 fi

@@ -1,4 +1,7 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
     sonata.admin.page:
         class: Cocorico\PageBundle\Admin\PageAdmin
         tags:
@@ -10,3 +13,27 @@ services:
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setLocales, ["%cocorico.locales%"]]
+
+    # twig.extra.markdown:
+    #   class: twig.extra.markdown.markdownExtension
+    #   tags:
+    #     - { name : twig.extension }
+    # twig.extension.markdown.runtime:
+    #     class: Cocorico\PageBundle\Twig\PageExtension
+    #     tags:
+    #         - { name: twig.extension } 
+    #Twig\Extra\Markdown\:
+    #  resource: '../../../../../vendor/twig/markdown-extra/src/*'
+    #     public: false
+    #     tags:
+    #         - { name: twig.extension }
+    # Twig\Extra\Markdown\MarkdownRuntime:
+    #     public: false
+    #     tags:
+    #         - { name: twig.runtime }
+    # twig.extension.markdown.runtime:
+    #     class: Twig\Extra\Markdown\MarkdownRuntime
+    #     arguments:
+    #         - "@twig.extra.markdown.defaultMarkdown"
+    #     tags:
+    #         - { name: twig.extension }

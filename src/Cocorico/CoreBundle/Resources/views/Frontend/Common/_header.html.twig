@@ -48,9 +48,16 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
+                            {#
                             <li>
                                 <a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}"
                                    tabindex="4">{{ 'nav.who_we_are.link'|trans }}
+                                </a>
+                            </li>
+                            #}
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}"
+                                    tabindex="4">{{ 'footer.the_team.link'|trans }}
                                 </a>
                             </li>
                             <li>
