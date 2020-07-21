@@ -1983,4 +1983,5 @@ class User extends BaseUser implements ParticipantInterface
      * @param bool $quote_promise
      */
     public function setQuotePromise($quote_promise) { $this->quote_promise = $quote_promise; }
+
 }
