@@ -294,6 +294,22 @@
         <source>{{ limit }}cocorico_user.password.short</source>
         <target>Votre mot de passe doit faire au moins {{ limit }} caractères</target>
       </trans-unit>
+      <trans-unit id="" resname="cocorico_user.siret.long">
+        <source>cocorico_user.siret.long</source>
+        <target>Votre SIRET est trop long pour être enregistré.</target>
+      </trans-unit>
+      <trans-unit id="" resname="cocorico_user.siret.short">
+        <source>cocorico_user.siret.short</source>
+        <target>Votre SIRET est trop court pour être enregistré.</target>
+      </trans-unit>
+      <trans-unit id="" resname="cocorico_user.naf.long">
+        <source>cocorico_user.naf.long</source>
+        <target>Votre NAF/APE est trop long pour être enregistré.</target>
+      </trans-unit>
+      <trans-unit id="" resname="cocorico_user.naf.short">
+        <source>cocorico_user.naf.short</source>
+        <target>Votre NAF/APE est trop court pour être enregistré.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
