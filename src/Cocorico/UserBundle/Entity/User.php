@@ -160,7 +160,7 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @var string
-     * @ORM\Column(name="naf", type="string", length=14, nullable=true)
+     * @ORM\Column(name="naf", type="string", length=5, nullable=true)
      *
      * @Assert\Length(
      *     min=5,
