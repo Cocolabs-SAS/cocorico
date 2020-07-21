@@ -20,20 +20,62 @@
 
             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' only %}
 
-            <div id="form-contact" class="form-contact validate-form">
-                <h1>{{ 'contact.new.form.title'|trans({},'cocorico_contact') }}</h1>
+            <div class="row">
+                <div id="form-contact" class="form-contact validate-form col-sm-6">
+                    <h1>{{ 'contact.new.form.title'|trans({},'cocorico_contact') }}</h1>
 
-                {{ form_start(form) }}
+                    {{ form_start(form) }}
 
-                {{ form_widget(form) }}
+                    {{ form_widget(form) }}
 
-                <div class="field-row">
-                    <button type="submit" class="btn btn-primary right">
-                        {{ 'contact.form.submit.button'|trans({},'cocorico_contact') }}
-                    </button>
+                    <div class="field-row">
+                        <button type="submit" class="btn btn-primary right">
+                            {{ 'contact.form.submit.button'|trans({},'cocorico_contact') }}
+                        </button>
+                    </div>
+
+                    {{ form_end(form) }}
                 </div>
 
-                {{ form_end(form) }}
+                <div class="col-sm-6" style="padding:1rem">
+                    <!-- contact-info -->
+                    <strong class="title">{{ 'contact.contact_us.title'|trans }}</strong>
+                    <ul class="list-unstyled">
+                        <li>
+                            <address><i class="icon-location"></i>{{ cocorico_address }}</address>
+                        </li>
+                        {#
+                        <li>
+                            <a href="tel:{{ cocorico_phone|replace({'(0)': '', ' ': ''}) }}">
+                                <i class="icon-phone"></i>{{ cocorico_phone }}
+                            </a>
+                        </li>
+                        #}
+                        <li>
+                            <a href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
+                                <i class="icon-mail-alt"></i>
+                                {{ cocorico_contact_mail_obfuscated|raw }}
+                            </a>
+                        </li>
+                    </ul>
+                    <div>
+
+lemarche.inclusion.beta.gouv.fr est une place de marché qui met en relation : 
+<ul>
+    <li>Une offre, celle des structures inclusives en France, c’est-à-dire des structures d’insertion par l’activité économique (SIAE) et du secteur du travail protégé et adapté (STPA).</li>
+    <li>Une demande, celle de structures réalisant des achats responsables dans un cadre professionnel (publiques, privées, associatives, de grande ou petite taille).</li>
+</ul>
+
+<b>Vous êtes ici sur une version beta de ce service.</b> Nous travaillons <b>pour l'instant</b> avec des fournisseurs inclusifs sur : 
+<ul>
+    <li>3 régions : le Grand Est, les Hauts-de-France et l’Île-de-France</li>
+    <li>1 filière : le nettoyage et la propreté</li>
+</lul>
+N’hésitez pas à nous faire part de vos besoins en dehors de ces champs, nous travaillerons avec vous pour trouver une solution. Petit à petit, l’offre va s’élargir !
+                    </div>
+
+                    
+                </div>
             </div>
 
         {% endblock %}

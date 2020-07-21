@@ -1,8 +1,10 @@
 #!/bin/bash
 
-if [[ ! -f web/json/currencies.json ]]; then
-    php bin/console cocorico:currency:update
-fi
+php bin/console ckeditor:install
+
+# if [[ ! -f web/json/currencies.json ]]; then
+#     php bin/console cocorico:currency:update
+# fi
 
 if [[ ! -d web/bundles ]]; then
     php bin/console assets:install --symlink

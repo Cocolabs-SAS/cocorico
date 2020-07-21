@@ -13,13 +13,23 @@
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
         {% block main %}
-            <div class="min-height">
-                {% if page %}
-                    <h1>{{ page.title }}</h1>
-                    <div>
-                        {{ page.description | raw }}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="min-height col-sm-8">
+                        {% if page %}
+                            <h1>{{ page.title }}</h1>
+                            <div>
+                                {# {% apply markdown_to_html %} #}
+                                {{ page.description | raw }}
+                                {# {% endapply %} #}
+                            </div>
+                        {% endif %}
                     </div>
-                {% endif %}
+                    <div class="col-sm-2"></div>
+                </div>
+                <br />
+                <br />
             </div>
         {% endblock %}
     {% endembed %}
