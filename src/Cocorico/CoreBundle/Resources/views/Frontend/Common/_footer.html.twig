@@ -14,11 +14,13 @@
                             <li>
                                 <address><i class="icon-location"></i>{{ cocorico_address }}</address>
                             </li>
+                            {#
                             <li>
                                 <a href="tel:{{ cocorico_phone|replace({'(0)': '', ' ': ''}) }}">
                                     <i class="icon-phone"></i>{{ cocorico_phone }}
                                 </a>
                             </li>
+                            #}
                             <li>
                                 <a href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
                                     <i class="icon-mail-alt"></i>

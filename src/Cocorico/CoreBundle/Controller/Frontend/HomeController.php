@@ -32,7 +32,7 @@ class HomeController extends Controller
     {
         $listings = $this->get("cocorico.listing_search.manager")->getHighestRanked(
             $this->get('cocorico.listing_search_request'),
-            6,
+            18,
             $request->getLocale()
         );
 
