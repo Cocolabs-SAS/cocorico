@@ -14,6 +14,30 @@
         <source>-</source>
         <target state="new">-</target>
       </trans-unit>
+      <trans-unit id="" resname="form.siret">
+        <source>form.siret</source>
+        <target>Numéro Siret ou Siren :</target>
+      </trans-unit>
+      <trans-unit id="" resname="form.naf">
+        <source>form.naf</source>
+        <target>Code NAF / APE :</target>
+      </trans-unit>
+      <trans-unit id="" resname="form.website">
+        <source>form.website</source>
+        <target>Site Internet :</target>
+      </trans-unit>
+      <trans-unit id="" resname="form.accept_rgpd">
+        <source>form.accept_rgpd</source>
+        <target>J'accepte les conditions d’utilisation du service :</target>
+      </trans-unit>
+      <trans-unit id="" resname="form.offers_for_pro_sector">
+        <source>form.offers_for_pro_sector</source>
+        <target>Tout ou partie des mes offres est destinée à des structures professionnelles</target>
+      </trans-unit>
+      <trans-unit id="" resname="form.quote_promise">
+        <source>form.quote_promise</source>
+        <target>Je m’engage à répondre aux demandes de devis qui me seront adressées (refuser une demande, solliciter des informations complémentaires ou soumettre un devis constituent des réponses)</target>
+      </trans-unit>
       <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
         <source>Asker</source>
         <target>Demandeur</target>
@@ -128,11 +152,11 @@
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b3" resname="entity.user.person_type.classic">
         <source>entity.user.person_type.classic</source>
-        <target state="new">Une entreprise</target>
+        <target state="new">classique qui souhaite réaliser un achat inclusif</target>
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b4" resname="entity.user.person_type.inclusive">
         <source>entity.user.person_type.inclusive</source>
-        <target state="new">Une structure inclusive</target>
+        <target state="new">inclusive qui souhaite proposer ses offres</target>
       </trans-unit>
       <trans-unit id="2e33a41aa053169361b996e132dc6288a51f83f9" resname="entity.user.type.billing">
         <source>entity.user.type.billing</source>
@@ -168,7 +192,7 @@
       </trans-unit>
       <trans-unit id="5067bcd438be5b76938f2179e7acb15ead3f9281" resname="form.company_name">
         <source>form.company_name</source>
-        <target state="new">Nom de l'entreprise : *</target>
+        <target state="new">Raison sociale (nom de la structure) :</target>
       </trans-unit>
       <trans-unit id="688577b0535ad8ca72e0c605e4b7eb69a8c90bcb" resname="form.contact.phone.help">
         <source>form.contact.phone.help</source>
@@ -220,7 +244,7 @@
       </trans-unit>
       <trans-unit id="39ca6a1fab7c9ecaf8ad225643ded59d1b06b842" resname="form.person_type">
         <source>form.person_type</source>
-        <target state="new">Vous êtes</target>
+        <target state="new">Type de structure :</target>
       </trans-unit>
       <trans-unit id="d3e5d85b8b1db5de05d522481c67cd3654d4b197" resname="form.time_zone">
         <source>form.time_zone</source>

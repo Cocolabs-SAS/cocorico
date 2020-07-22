@@ -21,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -63,7 +64,22 @@ class RegistrationFormType extends AbstractType
                 TextType::class,
                 array(
                     'label' => 'form.company_name',
-                    'required' => false,
+                    'required' => true,
+                )
+            )
+            ->add(
+                'siret',
+                TextType::class,
+                array(
+                    'label' => 'form.siret',
+                    'required' => true,
+                )
+            )
+            ->add(
+                'naf',
+                TextType::class,
+                array(
+                    'label' => 'form.naf',
                 )
             )
             ->add(
@@ -80,15 +96,15 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.first_name',
                 )
             )
-            ->add(
-                'phonePrefix',
-                TextType::class,
-                array(
-                    'label' => 'form.user.phone_prefix',
-                    'required' => false,
-                    'empty_data' => '+33',
-                )
-            )
+            # ->add(
+            #     'phonePrefix',
+            #     TextType::class,
+            #     array(
+            #         'label' => 'form.user.phone_prefix',
+            #         'required' => false,
+            #         'empty_data' => '+33',
+            #     )
+            # )
             ->add(
                 'phone',
                 TelType::class,
@@ -103,34 +119,62 @@ class RegistrationFormType extends AbstractType
                 array('label' => 'form.email')
             )
             ->add(
-                'birthday',
-                BirthdayType::class,
+                'website',
+                TextType::class,
                 array(
-                    'label' => 'form.user.birthday',
-                    'widget' => 'choice',
-                    'years' => range(date('Y') - 18, date('Y') - 100),
-                    'required' => true,
+                    'label' => 'form.website',
                 )
             )
             ->add(
-                'nationality',
-                CountryType::class,
+                'accept_rgpd',
+                CheckboxType::class,
                 array(
-                    'label' => 'form.user.nationality',
-                    'required' => true,
-                    'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
+                    'label' => 'form.accept_rgpd',
                 )
             )
             ->add(
-                'countryOfResidence',
-                CountryType::class,
+                'offers_for_pro_sector',
+                CheckboxType::class,
                 array(
-                    'label' => 'form.user.country_of_residence',
-                    'required' => true,
-                    'preferred_choices' => array('GB', 'FR', 'ES', 'DE', 'IT', 'CH', 'US', 'RU'),
-                    'data' => 'FR',
+                    'label' => 'form.offers_for_pro_sector',
                 )
             )
+            ->add(
+                'quote_promise',
+                CheckboxType::class,
+                array(
+                    'label' => 'form.quote_promise',
+                )
+            )
+            # ->add(
+            #     'birthday',
+            #     BirthdayType::class,
+            #     array(
+            #         'label' => 'form.user.birthday',
+            #         'widget' => 'choice',
+            #         'years' => range(date('Y') - 18, date('Y') - 100),
+            #         'required' => true,
+            #     )
+            # )
+            # ->add(
+            #     'nationality',
+            #     CountryType::class,
+            #     array(
+            #         'label' => 'form.user.nationality',
+            #         'required' => true,
+            #         'preferred_choices' => array("GB", "FR", "ES", "DE", "IT", "CH", "US", "RU"),
+            #     )
+            # )
+            # ->add(
+            #     'countryOfResidence',
+            #     CountryType::class,
+            #     array(
+            #         'label' => 'form.user.country_of_residence',
+            #         'required' => true,
+            #         'preferred_choices' => array('GB', 'FR', 'ES', 'DE', 'IT', 'CH', 'US', 'RU'),
+            #         'data' => 'FR',
+            #     )
+            # )
             ->add(
                 'plainPassword',
                 RepeatedType::class,
@@ -150,17 +194,17 @@ class RegistrationFormType extends AbstractType
                 )
             );
 
-        if (!$this->timeUnitIsDay) {
-            $builder
-                ->add(
-                    'timeZone',
-                    TimezoneType::class,
-                    array(
-                        'label' => 'form.time_zone',
-                        'required' => true,
-                    )
-                );
-        }
+        # if (!$this->timeUnitIsDay) {
+        #     $builder
+        #         ->add(
+        #             'timeZone',
+        #             TimezoneType::class,
+        #             array(
+        #                 'label' => 'form.time_zone',
+        #                 'required' => true,
+        #             )
+        #         );
+        # }
     }
 
     /**

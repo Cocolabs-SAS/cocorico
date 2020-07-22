@@ -145,6 +145,62 @@ class User extends BaseUser implements ParticipantInterface
     protected $companyName;
 
     /**
+     * @var string
+     * @ORM\Column(name="siret", type="string", length=14, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=9,
+     *     max="14",
+     *     minMessage="cocorico_user.siret.short",
+     *     maxMessage="cocorico_user.siret.long",
+     *     groups={"CocoricoRegistration", "CocoricoProfile", "CocoricoProfileBankAccount"}
+     * )
+     */
+    protected $siret;
+
+    /**
+     * @var string
+     * @ORM\Column(name="naf", type="string", length=5, nullable=true)
+     *
+     * @Assert\Length(
+     *     min=5,
+     *     max="5",
+     *     minMessage="cocorico_user.naf.short",
+     *     maxMessage="cocorico_user.naf.long",
+     *     groups={"CocoricoRegistration", "CocoricoProfile", "CocoricoProfileBankAccount"}
+     * )
+     */
+    protected $naf;
+
+    /**
+     * @var string
+     * @ORM\Column(name="website", type="string", nullable=true)
+     *
+     */
+    protected $website;
+
+    /**
+     * @ORM\Column(name="accept_rgpd", type="boolean", nullable=true)
+     *
+     * @var bool
+     */
+    protected $accept_rgpd = false;
+
+    /**
+     * @ORM\Column(name="offers_for_pro_sector", type="boolean", nullable=true)
+     *
+     * @var bool
+     */
+    protected $offers_for_pro_sector = false;
+
+    /**
+     * @ORM\Column(name="quote_promise", type="boolean", nullable=true)
+     *
+     * @var bool
+     */
+    protected $quote_promise = false;
+
+    /**
      * @ORM\Column(name="last_name", type="string", length=100)
      *
      * @Assert\NotBlank(message="cocorico_user.last_name.blank", groups={
@@ -195,11 +251,8 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="birthday", type="date")
+     * @ORM\Column(name="birthday", type="date", nullable=true)
      *
-     * @Assert\NotBlank(message="cocorico_user.birthday.blank", groups={
-     *  "CocoricoRegistration", "CocoricoProfileBankAccount"
-     * })
      */
     protected $birthday;
 
@@ -1868,4 +1921,67 @@ class User extends BaseUser implements ParticipantInterface
     {
         return in_array($this->personType, self::$offererTypes);
     }
+
+    /**
+     * @return string
+     */
+    public function getSiret() { return $this->siret; }
+
+    /**
+     * @param string $siret
+     */
+    public function setSiret($siret) { $this->siret = $siret; }
+
+    /**
+     * @return string
+     */
+    public function getNaf() { return $this->naf; }
+
+    /**
+     * @param string $naf
+     */
+    public function setNaf($naf) { $this->naf = $naf; }
+
+    /**
+     * @return string
+     */
+    public function getWebsite() { return $this->website; }
+
+    /**
+     * @param string $website
+     */
+    public function setWebsite($website) { $this->website = $website; }
+
+
+
+    /**
+     * @return bool
+     */
+    public function getAcceptRgpd() { return $this->accept_rgpd; }
+
+    /**
+     * @param bool $accept_rgpd
+     */
+    public function setAcceptRgpd($accept_rgpd) { $this->accept_rgpd = $accept_rgpd; }
+
+    /**
+     * @return bool
+     */
+    public function getOffersForProSector() { return $this->offers_for_pro_sector; }
+
+    /**
+     * @param bool $offers_for_pro_sector
+     */
+    public function setOffersForProSector($offers_for_pro_sector) { $this->offers_for_pro_sector = $offers_for_pro_sector; }
+
+    /**
+     * @return bool
+     */
+    public function getQuotePromise() { return $this->quote_promise; }
+
+    /**
+     * @param bool $quote_promise
+     */
+    public function setQuotePromise($quote_promise) { $this->quote_promise = $quote_promise; }
+
 }
