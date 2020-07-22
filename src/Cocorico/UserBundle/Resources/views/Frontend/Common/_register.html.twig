@@ -11,18 +11,32 @@
             <br />
             <h3>{{ 'user.signup.title'|trans }}</h3>
 
+            <fieldset>
+            <legend>Données Structure</legend>
+
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
-                <span class="label">
+                <span class="label" style="width:150px">
                     {{ form_label(form_registration.personType) }}
                 </span>
 
-                <div class="field-holder" data-id="person-type">
+                <div class="" data-id="person-type">
+                    <div>
+                    {{ form_widget(form_registration.personType.0) }} 
+                    {{ form_label(form_registration.personType.0) }} 
+                    </div>
+                    <div>
+                    {{ form_widget(form_registration.personType.1) }}
+                    {{ form_label(form_registration.personType.1) }}
+                    </div>
+                    
+                    {#
                     {{ form_widget(form_registration.personType, {
                         'attr': {
                             'class': "form-control form-control-radio required"
                         }
                     }) }}
+                    #}
                 </div>
             </div>
 
@@ -85,6 +99,32 @@
                     }) }}
                 </div>
             </div>
+
+            <div class="field-row validate-row">
+                <div class="error-container">{{ form_errors(form_registration.website) }}</div>
+                <span class="label">
+
+                    {{ form_label(form_registration.website, null, {
+                        'label_attr': {
+                            'data-label-legal': 'form.website.legal'|trans
+                        }
+                    }) }}
+                </span>
+
+                <div class="field-holder">
+                    {{ form_widget(form_registration.website, {
+                        'attr': {
+                            'class': 'form-control required',
+                            'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
+                            'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
+                        }
+                    }) }}
+                </div>
+            </div>
+            </fieldset>
+
+            <fieldset>
+            <legend>Données personne de contact</legend>
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
@@ -159,28 +199,11 @@
                     }) }}
                 </div>
             </div>
+            </fieldset>
 
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.website) }}</div>
-                <span class="label">
 
-                    {{ form_label(form_registration.website, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.website.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.website, {
-                        'attr': {
-                            'class': 'form-control required',
-                            'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
+            <fieldset>
+            <legend>Utilisation plateforme</legend>
 
             {# dont work when empty value #}
             <div class="field-row validate-row">
@@ -217,7 +240,7 @@
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
-                <span class="label">
+                <span class="label" style="width:350px">
                     {{ form_label(form_registration.accept_rgpd, null, {
                         'label_attr': {
                             'data-label-legal': 'form.accept_rgpd.legal'|trans
@@ -231,7 +254,7 @@
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                <span class="label">
+                <span class="label" style="width:350px">
                     {{ form_label(form_registration.offers_for_pro_sector, null, {
                         'label_attr': {
                             'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
@@ -245,7 +268,7 @@
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                <span class="label">
+                <span class="label" style="width:350px">
                     {{ form_label(form_registration.quote_promise, null, {
                         'label_attr': {
                             'data-label-legal': 'form.quote_promise.legal'|trans
@@ -256,6 +279,7 @@
                     {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
                 </div>
             </div>
+            </fieldset>
 
             {#
             <div class="field-row validate-row">

@@ -149,7 +149,7 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="siret", type="string", length=14, nullable=true)
      *
      * @Assert\Length(
-     *     min=14,
+     *     min=9,
      *     max="14",
      *     minMessage="cocorico_user.siret.short",
      *     maxMessage="cocorico_user.siret.long",

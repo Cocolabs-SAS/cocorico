@@ -64,7 +64,7 @@ class RegistrationFormType extends AbstractType
                 TextType::class,
                 array(
                     'label' => 'form.company_name',
-                    'required' => false,
+                    'required' => true,
                 )
             )
             ->add(
