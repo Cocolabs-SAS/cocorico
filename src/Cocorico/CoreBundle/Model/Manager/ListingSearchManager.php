@@ -308,7 +308,7 @@ class ListingSearchManager
         try {
             $query = $queryBuilder->getQuery();
             $query->setHydrationMode(Query::HYDRATE_ARRAY);
-            $query->useResultCache(true, 21600, 'getHighestRanked');
+            $query->useResultCache(true, 10, 'getHighestRanked');
 
             return new Paginator($query);//Important to manage limit
         } catch (NoResultException $e) {
