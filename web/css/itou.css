@@ -1,3 +1,48 @@
+#bloc-marque {
+    display:flex;
+}
+#bloc-marque img {
+    height:31px;
+    margin-top:6px;
+    margin-right:2rem;
+}
+#bloc-marque div {
+    font-size:.8em;
+    display:block;
+    color:#000;
+    float:left;
+}
+#bloc-marque  span {
+    float:left;
+    font-size:.8em;
+}
+
+.navbar .navbar-nav li a {
+    color:#007bff;
+    display:block;
+    padding:.5rem .3rem;
+    font-size:1.1em;
+}
+
+.navbar .navbar-nav li a:hover {
+    background-color:#e2f2ff;
+    color:#0056b3;
+}
+
+.navbar a#new_offer, .navbar a.c2action {
+    margin-top:5px;
+    background-color:#007bff;
+    border-color:#007bff;
+}
+.navbar a#new_offer:hover, .navbar a.c2action:hover {
+    background-color:#0069d9;
+    border-color:#0062cc;
+}
+
+.navbar #dashboard-dropdown {
+    min-width:16rem;
+}
+
 /* quote/_form_new */
 div.legend {
     font-weight:bold;
