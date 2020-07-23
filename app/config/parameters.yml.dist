@@ -1,4 +1,5 @@
 parameters:
+    sentry_dsn:        ~
     database_host:     127.0.0.1
     database_port:     ~
     database_name:     cocorico_dev
