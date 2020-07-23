@@ -333,6 +333,11 @@ parameters:
     #Google Tag Manager
     cocorico.google_tag_manager: ~
 
+    #Matomo analytics parmeters
+    cocorico.matomo_host: ~
+    cocorico.matomo_siteid: ~
+
+
     #Google Place API Key (To set on prod)
     cocorico_geo.google_place_api_key: ~
     cocorico_geo.google_place_server_api_key: ~

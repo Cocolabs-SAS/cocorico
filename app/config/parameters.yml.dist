@@ -52,6 +52,10 @@ parameters:
     #Google analytics code
     cocorico.google_analytics: UA-64445856-1
 
+    #Matomo analytics parmeters
+    cocorico.matomo_host: ~
+    cocorico.matomo_siteid: ~
+
     #Google Tag Manager
     cocorico.google_tag_manager: false
 

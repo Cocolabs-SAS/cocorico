@@ -26,7 +26,9 @@ parameters:
     cocorico.facebook.app_id: none
     cocorico.facebook.secret: none
     cocorico.image_driver: imagick
-    cocorico.google_analytics: UA-64445856-1
+    cocorico.matomo_host: '%MATOMO_HOST%'
+    cocorico.matomo_siteid: '%MATOMO_SITEID%'
+    cocorico.google_analytics: false
     cocorico.google_tag_manager: false
     cocorico_geo.google_place_api_key: '%GGL_KEY1%'
     cocorico_geo.google_place_server_api_key: '%GGL_KEY2%'
