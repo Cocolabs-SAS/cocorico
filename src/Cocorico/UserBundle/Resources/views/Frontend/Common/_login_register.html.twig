@@ -85,15 +85,48 @@
     $(function () {
         //User type (legal or natural)
         $('[data-id=person-type] input').each(function (k, personType) {
-            toggleCompanyName(personType);
-            toggleLabels(personType);
+            // toggleCompanyName(personType);
+            // toggleLabels(personType);
+            toggleFields(personType);
 
             $(personType).on('click', function () {
-                toggleCompanyName(this);
-                toggleLabels(this);
+                // toggleCompanyName(this);
+                // toggleLabels(this);
+                toggleFields(this);
             });
         });
 
+        /**
+         *
+         * Toggle input fields based on person type
+         */
+        function toggleFields(personType) {
+            if (!$(personType).is(':checked')) {
+                return;
+            }
+            console.log('Acting on', personType);
+ 
+            // See User entity for type/value relationships
+            const type_classic = 3;
+            const type_inclusive = 4;
+            let cursor = $(personType).val();
+
+            // Hide fields
+            if (cursor != type_classic) {
+                $('[data-id=only-classic]').hide();
+            }
+            else if (cursor != type_inclusive) {
+                $('[data-id=only-inclusive]').hide();
+            }
+
+            // show fields
+            if (cursor == type_classic) {
+                $('[data-id=only-classic]').show();
+            }
+            else if (cursor == type_inclusive) {
+                $('[data-id=only-inclusive]').show();
+            }           
+        }
 
         /**
          * Toggle user company field depending on type user
@@ -105,7 +138,7 @@
             }
 
             // Hard code person type switch, not nice !
-            if ($(personType).val() => 2) {//legal
+            if ($(personType).val() >= 2) {//legal
                 $('[data-id=company-name]').show();
                 $('[data-id=company-name] input').addClass('required');
             } else {//natural
