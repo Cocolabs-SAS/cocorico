@@ -1,5 +1,6 @@
 # This file is auto-generated during the composer install
 parameters:
+    sentry_dsn: null
     database_host: %SQL_HOST%
     database_port: %SQL_PORT%
     database_name: %SQL_NAME%
