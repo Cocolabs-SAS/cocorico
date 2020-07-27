@@ -9,6 +9,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### [0.18.0] - (EN COURS)
 - Ajout option de configuration pour durée de cache de la liste des annonces sur la homepage
+- Update footer et header
+- Formulaire inscription revu et corrigé
+- Ajout éditeur texte rich dans interface administration des pages
+- Intégration Matomo et Sentry pour monitoring et statistiques de visite
 
 ### [0.17.0] - (2020-07-16)
 - Changelog en français - Changelog in french from now on

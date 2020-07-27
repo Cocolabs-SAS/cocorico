@@ -1,3 +1,121 @@
+/******************
+ * HEADER STYLES
+ ******************/
+@media screen and (min-width: 767px) and (max-width: 992px) {
+    a.navbar-right {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+}
+
+#bloc-marque {
+    display:flex;
+}
+#bloc-marque img {
+    height:31px;
+    margin-top:6px;
+    margin-right:2rem;
+}
+#bloc-marque div {
+    font-size:.8em;
+    display:block;
+    color:#000;
+    float:left;
+}
+#bloc-marque  span {
+    float:left;
+    font-size:.8em;
+}
+
+.navbar .navbar-nav li a {
+    color:#007bff;
+    display:block;
+    padding:.5rem .3rem;
+    font-size:1.1em;
+}
+
+.navbar .navbar-nav li a:hover {
+    background-color:#e2f2ff;
+    color:#0056b3;
+}
+
+.navbar a#new_offer, .navbar a.c2action {
+    margin-top:5px;
+    background-color:#007bff;
+    border-color:#007bff;
+}
+.navbar a#new_offer:hover, .navbar a.c2action:hover {
+    background-color:#0069d9;
+    border-color:#0062cc;
+}
+
+.navbar #dashboard-dropdown {
+    min-width:16rem;
+}
+
+/******************
+ * FOOTER STYLES
+ ******************/
+
+.navarea #footer-list {
+    display:flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width:100%;
+}
+
+.navarea #footer-list li {
+    margin:0; padding:0;
+    flex: 0 1 auto;
+    display:block;
+    text-align:center;
+}
+
+.navarea #footer-list a {
+    margin:0; padding:0;
+    font-size:1.2em;
+    display:block;
+    text-align:center;
+    padding:3px 10px 3px;
+}
+
+
+.navarea #footer-list a:hover {
+    text-decoration:underline;
+}
+
+footer img.min_trav {
+    background-color:#fff;
+    width:100px;
+}
+
+#footer-title {
+    color:#fff;
+    text-align:left;
+    font-size:1.2em;
+    font-family:verdana;
+}
+
+#footer-title h5 {
+    color:#fff;
+    font-size:1.2em;
+    font-weight:300;
+}
+
+#footer-title h5 b {
+    font-weight:900;
+}
+
+@media screen and (max-width:576px) {
+    .navarea #footer-list { display: block; }
+    footer img.min_trav { width: 75px; }
+    #footer-title {text-align:center; font-size:.8em}
+
+/******************
+ * QUOTE STYLES
+ ******************/
 /* quote/_form_new */
 div.legend {
     font-weight:bold;

@@ -2,14 +2,14 @@ parameters:
     #### Environment independent parameters. Same values in dev, staging, prod environments  ####
     #Site general info
     cocorico.site_name: Place de marché inclusion.beta.gouv.fr
-    cocorico.phone: +33(0) 1 23 45 67 89
+    cocorico.phone: ''
     cocorico.address: 20 Avenue de Ségur, 75007 Paris
     cocorico.short_description: "Plateforme de l'inclusion en expérimentation"
-    cocorico.contact_mail: contact@inclusion.beta.gouv.fr
+    cocorico.contact_mail: lemarche@inclusion.beta.gouv.fr
     #To obfuscate see http://wbwip.com/wbw/emailencoder.html
-    cocorico.contact_mail_obfuscated: "&#099;&#111;&#110;&#116;&#097;&#099;&#116;&#064;&#105;&#110;&#099;&#108;&#117;&#115;&#105;&#111;&#110;&#046;&#098;&#101;&#116;&#097;&#046;&#103;&#111;&#117;&#118;&#046;&#102;&#114;"
+    cocorico.contact_mail_obfuscated: "&#108;&#101;&#109;&#097;&#114;&#099;&#104;&#101;&#064;&#105;&#110;&#099;&#108;&#117;&#115;&#105;&#111;&#110;&#046;&#098;&#101;&#116;&#097;&#046;&#103;&#111;&#117;&#118;&#046;&#102;&#114;"
     cocorico.from_email: no-reply@inclusion.beta.gouv.fr
-    cocorico.webmaster_email: contact@inclusion.beta.gouv.fr
+    cocorico.webmaster_email: lemarche@inclusion.beta.gouv.fr
     cocorico.vat_number: FR 12 123 456 789
     cocorico.home_rss_feed: 'None'
 
@@ -45,7 +45,7 @@ parameters:
     #    AUD: $ AUD
     cocorico.currencies_string: EUR
     # cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
-    cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
+    # cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
 
     #Does VAT is included in prices fixing
     cocorico.include_vat: true
@@ -335,6 +335,11 @@ parameters:
 
     #Google Tag Manager
     cocorico.google_tag_manager: ~
+
+    #Matomo analytics parmeters
+    cocorico.matomo_host: ~
+    cocorico.matomo_siteid: ~
+
 
     #Google Place API Key (To set on prod)
     cocorico_geo.google_place_api_key: ~
