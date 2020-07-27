@@ -1,3 +1,6 @@
+/******************
+ * HEADER STYLES
+ ******************/
 @media screen and (min-width: 767px) and (max-width: 992px) {
     a.navbar-right {
         position: absolute;
@@ -52,6 +55,10 @@
     min-width:16rem;
 }
 
+/******************
+ * FOOTER STYLES
+ ******************/
+
 .navarea #footer-list {
     display:flex;
     align-items: stretch;
@@ -74,17 +81,41 @@
     padding:3px 10px 3px;
 }
 
-@media screen and (max-width:576px) {
-    .navarea #footer-list {
-        display: block;
-    }
-
-}
 
 .navarea #footer-list a:hover {
     text-decoration:underline;
 }
 
+footer img.min_trav {
+    background-color:#fff;
+    width:100px;
+}
+
+#footer-title {
+    color:#fff;
+    text-align:left;
+    font-size:1.2em;
+    font-family:verdana;
+}
+
+#footer-title h5 {
+    color:#fff;
+    font-size:1.2em;
+    font-weight:300;
+}
+
+#footer-title h5 b {
+    font-weight:900;
+}
+
+@media screen and (max-width:576px) {
+    .navarea #footer-list { display: block; }
+    footer img.min_trav { width: 75px; }
+    #footer-title {text-align:center; font-size:.8em}
+
+/******************
+ * QUOTE STYLES
+ ******************/
 /* quote/_form_new */
 div.legend {
     font-weight:bold;
