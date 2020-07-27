@@ -8,19 +8,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <!-- contact-info -->
+                    {#
                     <div class="contact-info pull-right">
                         <strong class="title">{{ 'footer.contact_us.title'|trans }}</strong>
                         <ul class="list-unstyled">
                             <li>
                                 <address><i class="icon-location"></i>{{ cocorico_address }}</address>
                             </li>
-                            {#
-                            <li>
-                                <a href="tel:{{ cocorico_phone|replace({'(0)': '', ' ': ''}) }}">
-                                    <i class="icon-phone"></i>{{ cocorico_phone }}
-                                </a>
-                            </li>
-                            #}
                             <li>
                                 <a href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
                                     <i class="icon-mail-alt"></i>
@@ -29,10 +23,13 @@
                             </li>
                         </ul>
                     </div>
+                    #}
                     <!-- navarea -->
                     <nav class="navarea">
-                        <ul class="list-unstyled pull-left">
+                        <ul id="footer-list" class="list-unstyled footer_list">
+                            {#
                             <li class="title">{{ 'footer.about.title'|trans }}</li>
+                            #}
                             <li>
                                 <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
                                     {{ 'footer.how_it_works.link'|trans }}
@@ -48,19 +45,14 @@
                                     {{ 'footer.who_we_are.link'|trans }}
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="list-unstyled pull-left">
-                            <li class="title">{{ 'footer.help.title'|trans }}</li>
-                            {#
-                            <li>
-                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
-                                    {{ 'footer.faq.link'|trans }}
-                                </a>
-                            </li>
-                            #}
                             <li>
                                 <a href="{{ path('cocorico_contact_new') }}">
                                     {{ 'footer.contact_us.link'|trans }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">
+                                    {{ 'footer.legal_notices.link'|trans }}
                                 </a>
                             </li>
                         </ul>
@@ -77,6 +69,27 @@
 
     <!-- footer of the page -->
     <footer id="footer" class="container text-center">
+        <div class="row align-items-center">
+                        <div class="col-4 col-sm-2">
+                            <img src="/static/img/logo_ministere_du_travail.f633f83affc4.svg" class="w-sm-75 w-100 bg-white">
+                        </div>
+
+                        <div class="col-8 col-sm-5">
+                            <p class="h5">
+                                <span class="font-weight-bold">inclusion</span><span>.beta.gouv.fr</span>
+                            </p><p>
+                                <span class="d-block">
+                                    Plateforme de l'inclusion en expérimentation
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                <a href="https://github.com/betagouv/itou-cocorico/"
+                   class="by pull-right credit" target="_blank">
+                    {{ 'Github' }}
+                </a>
+        </div>
+        {#
         <div class="row">
             <div class="col-xs-12">
                 <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}"
@@ -95,5 +108,6 @@
                 </p>
             </div>
         </div>
+    #}
     </footer>
 </div>

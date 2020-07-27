@@ -52,6 +52,39 @@
     min-width:16rem;
 }
 
+.navarea #footer-list {
+    display:flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width:100%;
+}
+
+.navarea #footer-list li {
+    margin:0; padding:0;
+    flex: 0 1 auto;
+    display:block;
+    text-align:center;
+}
+
+.navarea #footer-list a {
+    margin:0; padding:0;
+    font-size:1.2em;
+    display:block;
+    text-align:center;
+    padding:3px 10px 3px;
+}
+
+@media screen and (max-width:576px) {
+    .navarea #footer-list {
+        display: block;
+    }
+
+}
+
+.navarea #footer-list a:hover {
+    text-decoration:underline;
+}
+
 /* quote/_form_new */
 div.legend {
     font-weight:bold;
