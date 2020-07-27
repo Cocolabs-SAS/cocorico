@@ -45,7 +45,7 @@ parameters:
     #    AUD: $ AUD
     cocorico.currencies_string: EUR
     # cocorico.currencies_string: EUR|USD|GBP|CHF|CAD|JPY|RUB|RUB|AUD
-    cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
+    # cocorico.currencies_json: "%kernel.root_dir%/../web/json/currencies.json"
 
     #Does VAT is included in prices fixing
     cocorico.include_vat: true

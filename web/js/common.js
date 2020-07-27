@@ -272,9 +272,9 @@ function setDefaultFavourites() {
  * Currencies
  */
 var currencies;
-$.getJSON("/json/currencies.json", function (data) {
-    currencies = data;
-});
+// $.getJSON("/json/currencies.json", function (data) {
+//     currencies = data;
+// });
 
 /**
  * Jquery currencies conversion management
