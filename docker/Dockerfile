@@ -86,6 +86,7 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash
 # RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
 # RUN service nginx restart && service php7.3-fpm start
 COPY ./docker/run.sh ./run
+COPY ./docker/run_css.sh ./run_css
 RUN echo "Start Symfony server with:\n\
 /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
 "

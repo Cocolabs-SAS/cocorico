@@ -4,11 +4,9 @@ use Cocorico\CoreBundle\Command\AlertExpiringBookingsCommand;
 use Cocorico\CoreBundle\Command\AlertImminentBookingsCommand;
 use Cocorico\CoreBundle\Command\AlertListingsCalendarUpdateCommand;
 use Cocorico\CoreBundle\Command\CheckBookingsBankWiresCommand;
-use Cocorico\CoreBundle\Command\CurrencyCommand;
 use Cocorico\CoreBundle\Command\ExpireBookingsCommand;
 use Cocorico\CoreBundle\Command\ValidateBookingsCommand;
 use Cocorico\ListingSearchBundle\Command\ComputeListingsNotationCommand;
-use Lexik\Bundle\CurrencyBundle\Command\ImportCurrencyCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
@@ -29,10 +27,6 @@ class CommandContext extends CommonContext
         $arguments = array();
 
         switch ($name) {
-            case "cocorico:currency:update":
-                $application->add(new CurrencyCommand());
-                $application->add(new ImportCurrencyCommand());
-                break;
             case "cocorico:bookings:expire":
                 $application->add(new ExpireBookingsCommand());
                 $arguments["--expiration-delay"] = 0;//cocorico.booking.expiration_delay

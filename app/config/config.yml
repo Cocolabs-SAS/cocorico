@@ -38,6 +38,9 @@ framework:
     fragments:       ~
     http_method_override: true
 
+# Sentry configurtion
+sentry:
+  dsn: "%sentry_dsn%"
 
 # Twig Configuration
 twig:

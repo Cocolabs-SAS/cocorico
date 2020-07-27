@@ -1,5 +1,13 @@
 {% trans_default_domain 'cocorico_user' %}
 
+{#
+NOTE:
+Fields that should be shown or hidden depending on personality type are identified
+with the "data-id" attribute. See _login_register.html.twig for the toggleFields function
+which acts on the person type choice.
+
+#}
+
 <div role="tabpanel" class="tab-pane{{ register_class }}" id="home">
 
     {{ form_errors(form_registration) }}
@@ -16,11 +24,11 @@
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
-                <span class="label" style="width:150px">
+                <span class="label">
                     {{ form_label(form_registration.personType) }}
                 </span>
 
-                <div class="" data-id="person-type">
+                <div class="" data-id="person-type" style="margin-left:240px">
                     <div>
                     {{ form_widget(form_registration.personType.0) }} 
                     {{ form_label(form_registration.personType.0) }} 
@@ -40,7 +48,7 @@
                 </div>
             </div>
 
-            <div class="field-row validate-row" data-id="company-name">
+            <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
                 <span class="label">
                     {{ form_label(form_registration.companyName) }}
@@ -100,7 +108,7 @@
                 </div>
             </div>
 
-            <div class="field-row validate-row">
+            <div class="field-row validate-row" data-id="only-inclusive">
                 <div class="error-container">{{ form_errors(form_registration.website) }}</div>
                 <span class="label">
 
@@ -252,7 +260,7 @@
                 </div>
             </div>
 
-            <div class="field-row validate-row">
+            <div class="field-row validate-row" data-id="only-inclusive">
                 <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
                 <span class="label" style="width:350px">
                     {{ form_label(form_registration.offers_for_pro_sector, null, {
@@ -266,7 +274,7 @@
                 </div>
             </div>
 
-            <div class="field-row validate-row">
+            <div class="field-row validate-row" data-id="only-inclusive">
                 <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
                 <span class="label" style="width:350px">
                     {{ form_label(form_registration.quote_promise, null, {
