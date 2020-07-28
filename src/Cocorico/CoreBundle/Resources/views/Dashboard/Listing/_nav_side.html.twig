@@ -19,6 +19,7 @@
                         {{ 'nav.listing.presentation.link'|trans }}
                     </a>
                 </li>
+                {#
                 <li role="presentation"
                     class="{{ nav_side_dashboard_current == "availabilities_prices" ? 'active' : '' }}">
                     <a href="{{ path('cocorico_dashboard_listing_edit_availabilities_prices', { 'listing_id': listing.id }) }}"
@@ -26,6 +27,8 @@
                         {{ 'nav.listing.price.link'|trans }}
                     </a>
                 </li>
+                #}
+                {#
                 <li role="presentation"
                     class="{{ nav_side_dashboard_current == "availabilities_status" ? 'active' : '' }}">
                     <a data-text="{{ 'nav.listing.calendar.link'|trans }}"
@@ -34,6 +37,7 @@
                         {{ 'nav.listing.calendar.link'|trans }}
                     </a>
                 </li>
+                #}
                 <li role="presentation" class="{{ nav_side_dashboard_current == "image" ? 'active' : '' }}">
                     <a data-text="{{ 'nav.listing.images.link'|trans }}"
                        aria-controls="presentation"

@@ -6,9 +6,27 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
-## [0.16.0] - (2020-06-20)
+## ITOU CHANGELOG
+### [0.18.0] - (2020-07-28)
+- Ajout option de configuration pour durée de cache de la liste des annonces sur la homepage
+- Update footer et header
+- Formulaire inscription revu et corrigé
+- Ajout éditeur texte rich dans interface administration des pages
+- Intégration Matomo et Sentry pour monitoring et statistiques de visite
+- Update dashboard des offres
+- Modification style et couleurs
+- Ajout du rayon d'action d'une offre
+
+### [0.17.0] - (2020-07-16)
+- Changelog en français - Changelog in french from now on
+- Correction de l'interface admin des caracteristiques
+- Profils "entreprise classique" et "structure inclusive" lors de l'inscription
+- Ajout option de configuration des profils 
+
+### [0.16.0] - (2020-06-20)
 - start of ITOU specific fork of Cocorico
 - Added frequency period, hours and surface m2 and type to database and translations
+- Added config and settings for docker and clever cloud deployment
 
 
 ## [Unreleased]

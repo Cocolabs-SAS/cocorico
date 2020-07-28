@@ -123,6 +123,7 @@ class RegistrationFormType extends AbstractType
                 TextType::class,
                 array(
                     'label' => 'form.website',
+                    'required' => false,
                 )
             )
             ->add(

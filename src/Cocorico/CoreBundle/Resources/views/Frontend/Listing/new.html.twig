@@ -100,6 +100,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row" style="display:none">
                                 <div class="block">
                                     <h2>{{ 'listing.new.price.title'|trans }}</h2>
@@ -259,6 +260,36 @@
                                                 <p>{{ 'listing.location.private_message'|trans }}</p>
                                             </div>
                                             <div id="map-listing" class="map-box"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="block column">
+                                    <h2>{{ 'listing.new.range.title'|trans }}</h2>
+                                    {{ 'listing.new.range.description'|trans }}
+                                    <br />
+                                    <br />
+                                    <div class="field-row">
+                                        {{ form_errors(form.range) }}
+                                        <div class="col cell">
+                                            <span class="label">
+                                                {{ form_label(form.range) }}
+                                                <button title="{{ 'listing.edit.range.help'|trans }}"
+                                                        data-placement="right"
+                                                        data-toggle="tooltip" class="tooltip-button"
+                                                        type="button"
+                                                        data-original-title="{{ 'listing.edit.range.help'|trans }}">
+                                                    ?
+                                                </button>
+                                            </span>
+                                            <div class="field-holder" style="width:8rem;display:inline-block">
+                                            {{ form_widget(form.range, {
+                                                'attr': {
+                                                    'class': 'numbers-only form-control',
+                                                }
+                                            }) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

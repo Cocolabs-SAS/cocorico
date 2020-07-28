@@ -18,6 +18,7 @@ use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\CoreBundle\Form\Type\PriceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -128,6 +129,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 PriceType::class,
                 array(
                     'label' => 'listing.form.price',
+                )
+            )
+            ->add(
+                'range',
+                NumberType::class,
+                array(
+                    'label' => 'listing.form.range',
+                    'required' => false,
                 )
             )
             ->add(

@@ -66,7 +66,8 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                         ),
                         'rules' => array(
                             'field_type' => 'textarea',
-                            'locale_options' => $rules
+                            'locale_options' => $rules,
+                            'required' => false,
                         ),
                         'slug' => array(
                             'display' => false

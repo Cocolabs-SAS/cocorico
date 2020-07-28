@@ -87,13 +87,13 @@ class ListingSearchManager
         $queryBuilder = $this->getSearchByDateQueryBuilder($listingSearchRequest, $queryBuilder);
 
         //Prices
-        $priceRange = $listingSearchRequest->getPriceRange();
-        if ($priceRange->getMin() && $priceRange->getMax()) {
-            $queryBuilder
-                ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
-                ->setParameter('minPrice', $priceRange->getMin())
-                ->setParameter('maxPrice', $priceRange->getMax());
-        }
+        // $priceRange = $listingSearchRequest->getPriceRange();
+        // if ($priceRange->getMin() && $priceRange->getMax()) {
+        //     $queryBuilder
+        //         ->andWhere('l.price BETWEEN :minPrice AND :maxPrice')
+        //         ->setParameter('minPrice', $priceRange->getMin())
+        //         ->setParameter('maxPrice', $priceRange->getMax());
+        // }
 
         //Categories
         $categories = $listingSearchRequest->getCategories();
@@ -108,9 +108,9 @@ class ListingSearchManager
 
         //Order
         switch ($listingSearchRequest->getSortBy()) {
-            case 'price':
-                $queryBuilder->orderBy("l.price", "ASC");
-                break;
+            // case 'price':
+            //     $queryBuilder->orderBy("l.price", "ASC");
+            //     break;
             case 'distance':
                 $queryBuilder->orderBy("distance", "ASC");
                 break;
@@ -295,9 +295,10 @@ class ListingSearchManager
      * @param ListingSearchRequest $listingSearchRequest
      * @param                      $limit
      * @param                      $locale
+     * @param                      $maxAge
      * @return Paginator
      */
-    public function getHighestRanked(ListingSearchRequest $listingSearchRequest, $limit, $locale)
+    public function getHighestRanked(ListingSearchRequest $listingSearchRequest, $limit, $locale, $maxAge=21600)
     {
         $queryBuilder = $this->getRepository()->getFindByHighestRankingQueryBuilder($limit, $locale);
 
@@ -308,7 +309,7 @@ class ListingSearchManager
         try {
             $query = $queryBuilder->getQuery();
             $query->setHydrationMode(Query::HYDRATE_ARRAY);
-            $query->useResultCache(true, 10, 'getHighestRanked');
+            $query->useResultCache(true, $maxAge, 'getHighestRanked');
 
             return new Paginator($query);//Important to manage limit
         } catch (NoResultException $e) {

@@ -103,38 +103,38 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                     'label' => false
                 )
             )
-            ->add(
-                'language',
-                LanguageType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'cocorico.language',
-                    'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
-                    'placeholder' => 'user.about.language.select',
-                    'required' => false
-                )
-            )
-            ->add(
-                'languages',
-                CollectionType::class,
-                array(
-                    'allow_delete' => true,
-                    'allow_add' => true,
-                    'by_reference' => false,
-                    'entry_type' => UserLanguageType::class,
-                    /** @Ignore */
-                    'label' => false
-                )
-            )
-            ->add(
-                'motherTongue',
-                LanguageType::class,
-                array(
-                    'label' => 'cocorico.motherTongue',
-                    'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
-                    'data' => $user->getMotherTongue() ? $user->getMotherTongue() : $this->locale
-                )
-            )
+            //->add(
+            //    'language',
+            //    LanguageType::class,
+            //    array(
+            //        'mapped' => false,
+            //        'label' => 'cocorico.language',
+            //        'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
+            //        'placeholder' => 'user.about.language.select',
+            //        'required' => false
+            //    )
+            //)
+            //->add(
+            //    'languages',
+            //    CollectionType::class,
+            //    array(
+            //        'allow_delete' => true,
+            //        'allow_add' => true,
+            //        'by_reference' => false,
+            //        'entry_type' => UserLanguageType::class,
+            //        /** @Ignore */
+            //        'label' => false
+            //    )
+            //)
+            //->add(
+            //    'motherTongue',
+            //    LanguageType::class,
+            //    array(
+            //        'label' => 'cocorico.motherTongue',
+            //        'preferred_choices' => array("en", "fr", "es", "de", "it", "ar", "zh", "ru"),
+            //        'data' => $user->getMotherTongue() ? $user->getMotherTongue() : $this->locale
+            //    )
+            //)
             ->add(
                 'fromLang',
                 LanguageFilteredType::class,
