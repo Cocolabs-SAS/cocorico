@@ -128,7 +128,7 @@ abstract class BaseListing
     protected $price;
 
     /**
-     * @ORM\Column(name="range", type="integer", nullable=true)
+     * @ORM\Column(name="`range`", type="integer", nullable=true)
      * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var integer|null

@@ -136,6 +136,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 NumberType::class,
                 array(
                     'label' => 'listing.form.range',
+                    'required' => false,
                 )
             )
             ->add(

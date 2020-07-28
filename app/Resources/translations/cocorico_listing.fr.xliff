@@ -392,11 +392,11 @@
       </trans-unit>
       <trans-unit id="0f91db9360163dba55746b7250c36878537b4ee1" resname="listing.form.rules.en">
         <source>listing.form.rules.en</source>
-        <target>Règles</target>
+        <target>Détails</target>
       </trans-unit>
       <trans-unit id="52a3257b85938310aafe31be5323ee616a5104ff" resname="listing.form.rules.fr">
         <source>listing.form.rules.fr</source>
-        <target>Règles</target>
+        <target>Détails</target>
       </trans-unit>
       <trans-unit id="561751c732b06ad90e12d5e96d7843412fa56fde" resname="listing.form.start">
         <source>listing.form.start</source>
@@ -667,7 +667,7 @@
       </trans-unit>
       <trans-unit id="edfb8ef84c3f95470bc8c1d320bbcbd712db8e77" resname="listing.show.rules">
         <source>listing.show.rules</source>
-        <target>Règles</target>
+        <target>Détails</target>
       </trans-unit>
       <trans-unit id="328589c0f1a692fe96a7b95acbd4c93415937e57" resname="listing.show.user.contact">
         <source>listing.show.user.contact</source>
@@ -819,7 +819,7 @@
       </trans-unit>
       <trans-unit id="6930818be85982bc6c1c187b20a1cfec22efe9f7" resname="listing_translations_en_rules_placeholder">
         <source>listing_translations_en_rules_placeholder</source>
-        <target>Rules</target>
+        <target>Détails</target>
       </trans-unit>
       <trans-unit id="a92283dc0df84ab5bfffaf9c0c169315aec8d6c3" resname="listing_translations_en_title_placeholder">
         <source>listing_translations_en_title_placeholder</source>
@@ -831,7 +831,7 @@
       </trans-unit>
       <trans-unit id="f6501b016c851bca7568bf728cf0489b7e7fab95" resname="listing_translations_fr_rules_placeholder">
         <source>listing_translations_fr_rules_placeholder</source>
-        <target>Règles</target>
+        <target>Détails</target>
       </trans-unit>
       <trans-unit id="4f86b172106066c161d2e337fec139e7d570b54b" resname="listing_translations_fr_title_placeholder">
         <source>listing_translations_fr_title_placeholder</source>
@@ -932,6 +932,22 @@
       <trans-unit id="00138e7c4eafea5fe8d98c772b1d0f9fdd7c13b4" resname="entity.listing.surface_type.concrete">
         <source>concrete</source>
         <target>beton</target>
+      </trans-unit>
+      <trans-unit id="" resname="listing.new.range.title">
+        <source>listing.new.range.title</source>
+        <target>Rayon d'action</target>
+      </trans-unit>
+      <trans-unit id="" resname="listing.edit.range.help">
+        <source>listing.edit.range.help</source>
+        <target>Cette donnée sera utilisée par le moteur de recherche pour déterminer les offres disponibles dans une certaine zone</target>
+      </trans-unit>
+      <trans-unit id="" resname="listing.form.range">
+        <source>listing.form.range</source>
+        <target>Rayon d'action (en kilomètres) :</target>
+      </trans-unit>
+      <trans-unit id="" resname="listing.new.range.description">
+        <source>listing.new.range.description</source>
+        <target>Zone géographique, autour de l'adresse saisie, à l'intérieur de laquelle votre offre est disponible.</target>
       </trans-unit>
     </body>
   </file>

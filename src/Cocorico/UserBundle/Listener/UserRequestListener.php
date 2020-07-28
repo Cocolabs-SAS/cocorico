@@ -51,7 +51,7 @@ class UserRequestListener
             $session->set('canSwitch', False);
         }
 
-        if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user->canBeOfferer()) {
+        if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user && method_exists($user, "canBeOfferer") && $user->canBeOfferer()) {
             $session->set('profile', 'offerer');
         // } elseif ($cookies->has('userType') && $cookies->get('userType') == "asker") {
         } elseif ($cookies->has('userType') == "asker") {

@@ -26,7 +26,10 @@
                     {# For html customizations see views\form\fields_translations.html.twig #}
                     {{ form_widget(form.translations) }}
 
+                    <!--
                     <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">
+                    -->
+                    <div class="row hidden" style="margin-top:15px;">
                         {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
                         <div align="center">
                             <div class="col-md-6 col-xs-12">
