@@ -18,7 +18,7 @@
                     items: {
                         visible: {
                             min: 1,
-                            max: 3
+                            max: 9
                         },
                         height: 'variable'
                     },
