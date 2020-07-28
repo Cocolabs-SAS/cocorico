@@ -8,6 +8,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 ### [0.19.0] - (courant)
+- Update style bouton catégories
 
 
 ### [0.18.0] - (2020-07-28)

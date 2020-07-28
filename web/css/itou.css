@@ -9,16 +9,15 @@
       padding: 0 .4em 0;
  }
 
+
 .listing-category .multiselect-container.dropdown-menu {
     border:#495057 1px solid;
     background-color:#f7f7f7;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.listing-category .multiselect-container.dropdown-menu {
     width:auto;
     max-width: 150%;
     min-width:100%;
+    padding: 0 4px 0;
 }
 
 .listing-category .multiselect-container.dropdown-menu > li > a  {
