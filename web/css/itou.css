@@ -108,10 +108,14 @@ footer img.min_trav {
     font-weight:900;
 }
 
+@media screen and (max-width:767px) {
+    #footer-title {text-align:center; font-size:.8em}
+}
+
 @media screen and (max-width:576px) {
     .navarea #footer-list { display: block; }
     footer img.min_trav { width: 75px; }
-    #footer-title {text-align:center; font-size:.8em}
+}
 
 /******************
  * QUOTE STYLES
