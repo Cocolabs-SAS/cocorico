@@ -7,12 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [0.18.0] - (EN COURS)
+### [0.18.0] - (2020-07-28)
 - Ajout option de configuration pour durée de cache de la liste des annonces sur la homepage
 - Update footer et header
 - Formulaire inscription revu et corrigé
 - Ajout éditeur texte rich dans interface administration des pages
 - Intégration Matomo et Sentry pour monitoring et statistiques de visite
+- Update dashboard des offres
+- Modification style et couleurs
+- Ajout du rayon d'action d'une offre
 
 ### [0.17.0] - (2020-07-16)
 - Changelog en français - Changelog in french from now on
