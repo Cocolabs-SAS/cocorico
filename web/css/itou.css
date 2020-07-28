@@ -1,4 +1,64 @@
 /******************
+ * HOME STYLES
+ ******************/
+ .listing-category button.btn.multiselect {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      padding: 0 .4em 0;
+ }
+
+.listing-category .multiselect-container.dropdown-menu {
+    border:#495057 1px solid;
+    background-color:#f7f7f7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.listing-category .multiselect-container.dropdown-menu {
+    width:auto;
+    max-width: 150%;
+    min-width:100%;
+}
+
+.listing-category .multiselect-container.dropdown-menu > li > a  {
+    white-space: normal;
+    width:100%;
+}
+
+.listing-category .multiselect-container.dropdown-menu > li > a:hover  {
+    background-color:#99cff2;
+}
+
+
+/******************
+ * HEADER STYLES
+ ******************/
+@media screen and (min-width: 767px) and (max-width: 992px) {
+    a.navbar-right {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+    }
+
+}
+
+#bloc-marque {
+    display:flex;
+}
+#bloc-marque img {
+    height:31px;
+    margin-top:6px;
+    margin-right:2rem;
+}
+#bloc-marque div {
+    font-size:.8em;
+    display:block;
+    color:#000;
+
+}
+
+/******************
  * HEADER STYLES
  ******************/
 @media screen and (min-width: 767px) and (max-width: 992px) {

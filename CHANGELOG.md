@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.19.0] - (courant)
+
+
 ### [0.18.0] - (2020-07-28)
 - Ajout option de configuration pour durée de cache de la liste des annonces sur la homepage
 - Update footer et header
