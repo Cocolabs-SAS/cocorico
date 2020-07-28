@@ -310,6 +310,14 @@
         <source>cocorico_user.naf.short</source>
         <target>Votre NAF/APE est trop court pour être enregistré.</target>
       </trans-unit>
+      <trans-unit id="" resname="cocorico_user.naf.blank">
+        <source>cocorico_user.naf.blank</source>
+        <target>Veuillez renseigner votre code NAF / APE</target>
+      </trans-unit>
+      <trans-unit id="" resname="cocorico_user.siret.blank">
+        <source>cocorico_user.siret.blank</source>
+        <target>Veuillez renseigner votre numéro SIRET (ou SIREN)</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
