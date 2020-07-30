@@ -92,7 +92,9 @@ class Quote {
 
     //Status for which quote can be refused by offerer
     public static $refusableOffererStatus = array(
-        self::STATUS_NEW
+        self::STATUS_NEW,
+        self::STATUS_QUOTE
+    );
     );
 
     //Status for which quote can be validated
