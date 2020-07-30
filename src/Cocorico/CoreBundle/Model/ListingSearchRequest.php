@@ -54,7 +54,7 @@ class ListingSearchRequest implements TranslationContainerInterface
 
     public static $sortByValues = array(
         'recommended' => 'listing.search.sort_by.recommended',
-        'price' => 'listing.search.sort_by.price',
+        // 'price' => 'listing.search.sort_by.price',
         'distance' => 'listing.search.sort_by.distance'
     );
 

@@ -95,7 +95,6 @@ class Quote {
         self::STATUS_NEW,
         self::STATUS_QUOTE
     );
-    );
 
     //Status for which quote can be validated
     public static $validatableStatus = array(

@@ -3,7 +3,7 @@
 {#search form fields without start ane end form#}
 <fieldset>
     <legend class="hidden">form-category</legend>
-    <div class="form-holder">
+    <div class="form-holder" style="display:flex; align-items:center; justify-content:center;">
         <div class="keyword clearable">
             {% if bundleExist('CocoricoElasticsearchBundle') %}
                 {% include '@CocoricoElasticsearch/_form_keywords.html.twig' %}
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="col time">
+        <div class="col time" style="display:none">
             {#In case of modification don't forget to add fields "start, end AND nb_days" #}
             {{ form_widget(form.date_range) }}
 
