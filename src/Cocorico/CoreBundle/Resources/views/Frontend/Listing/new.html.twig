@@ -266,14 +266,11 @@
                             </div>
                             <div class="row">
                                 <div class="block column">
-                                    <h2>{{ 'listing.new.range.title'|trans }}</h2>
-                                    {{ 'listing.new.range.description'|trans }}
-                                    <br />
-                                    <br />
-                                    <div class="field-row">
+                                    <h2>Autres données</h2>
+                                    <div class="row">
                                         {{ form_errors(form.range) }}
-                                        <div class="col cell">
-                                            <span class="label">
+                                        <div class="col-sm-3">
+                                            <span class="label" style="width:10rem">
                                                 {{ form_label(form.range) }}
                                                 <button title="{{ 'listing.edit.range.help'|trans }}"
                                                         data-placement="right"
@@ -283,6 +280,8 @@
                                                     ?
                                                 </button>
                                             </span>
+                                        </div>
+                                        <div class="col-sm-6">
                                             <div class="field-holder" style="width:8rem;display:inline-block">
                                             {{ form_widget(form.range, {
                                                 'attr': {
@@ -292,6 +291,29 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        {{ form_errors(form.url) }}
+                                        <div class="col-sm-3">
+                                            <span class="label" style="width:10rem">
+                                                {{ form_label(form.url) }} :
+                                                <button title="{{ 'listing.edit.url.help'|trans }}"
+                                                        data-placement="right"
+                                                        data-toggle="tooltip" class="tooltip-button"
+                                                        type="button"
+                                                        data-original-title="{{ 'listing.edit.url.help'|trans }}">
+                                                    ?
+                                                </button>
+                                            </span>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="field-holder" style="width:28rem;display:inline-block">
+                                            {{ form_widget(form.url, {
+                                                'attr': {
+                                                    'class': 'form-control',
+                                                }
+                                            }) }}
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>

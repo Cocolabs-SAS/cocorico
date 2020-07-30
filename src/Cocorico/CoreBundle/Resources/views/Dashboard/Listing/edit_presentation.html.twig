@@ -61,6 +61,27 @@
                     </div>
                 </div>
 
+                <div class="form-holder tab-pane">
+                    <h2>Autres données</h2>
+                    <div class="field-row">
+                        <div class="col-sm-4">
+                            <span class="label" style="max-width:100%">{{ form_label(form.range) }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.range, { 'attr': { 'class': 'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="col-sm-4">
+                            <span class="label">{{ form_label(form.url) }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.url, { 'attr': { 'class': 'form-control'}} ) }}
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="btn-block text-center">
                     <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
                 </div>

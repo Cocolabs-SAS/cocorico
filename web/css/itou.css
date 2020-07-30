@@ -30,32 +30,6 @@
 }
 
 
-/******************
- * HEADER STYLES
- ******************/
-@media screen and (min-width: 767px) and (max-width: 992px) {
-    a.navbar-right {
-        position: absolute;
-        top: 0px;
-        right: 0px;
-    }
-
-}
-
-#bloc-marque {
-    display:flex;
-}
-#bloc-marque img {
-    height:31px;
-    margin-top:6px;
-    margin-right:2rem;
-}
-#bloc-marque div {
-    font-size:.8em;
-    display:block;
-    color:#000;
-
-}
 
 /******************
  * HEADER STYLES
@@ -72,6 +46,7 @@
 #bloc-marque {
     display:flex;
 }
+
 #bloc-marque img {
     height:31px;
     margin-top:6px;
@@ -175,6 +150,11 @@ footer img.min_trav {
     .navarea #footer-list { display: block; }
     footer img.min_trav { width: 75px; }
 }
+
+/******************
+ * NEW LISTING STYLES
+ ******************/
+
 
 /******************
  * QUOTE STYLES

@@ -19,11 +19,12 @@ use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Cocorico\CoreBundle\Form\Type\PriceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -136,6 +137,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 NumberType::class,
                 array(
                     'label' => 'listing.form.range',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'url',
+                UrlType::class,
+                array(
+                    'label' => 'listing.form.url',
                     'required' => false,
                 )
             )

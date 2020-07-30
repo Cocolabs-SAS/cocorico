@@ -18,6 +18,8 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
 {
@@ -75,6 +77,22 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     ),
                     /** @Ignore */
                     'label' => false
+                )
+            )
+            ->add(
+                'range',
+                NumberType::class,
+                array(
+                    'label' => 'listing.form.range',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'url',
+                UrlType::class,
+                array(
+                    'label' => 'listing.form.url',
+                    'required' => false,
                 )
             )
             ->add(

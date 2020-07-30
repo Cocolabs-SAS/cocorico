@@ -278,6 +278,18 @@
                             </span>
                         </div>
 
+                        <section class="widget prices-conditions">
+                            <h2>À Savoir</h2>
+                            <dl>
+                                <dd>Site Web</dd>
+                                <dt>{{ listing.url }}</dt>
+                                <dd>Rayon d'action</dd>
+                                <dt>{{ listing.range }} Km</dt>
+                                <dd>Moyen de déplacement privilégié</dd>
+                                <dt>Transports publics</dt>
+                            </dl>
+                        </section>
+
                         {#booking form#}
                         {#
                         {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
