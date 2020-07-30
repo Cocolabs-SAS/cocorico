@@ -280,6 +280,7 @@
                                 </button>
                             </li>
 
+                            {#
                             <li>
                                 {% if user_listings|length %}
                                     {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
@@ -294,7 +295,6 @@
                                     </button>
                                 {% endif %}
                             </li>
-                            {#
                             <li>
                                 {{ 'user.profile.languages'|trans }}
                                 <strong class="list-comma">
