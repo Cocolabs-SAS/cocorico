@@ -421,6 +421,7 @@
                                             data-original-title="{{ 'listing.show.email_verified.help'|trans }}">?
                                     </button>
                                 </li>
+                                {#
                                 <li>
                                     {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
                                     {% if listing_user.idCardVerified %}
@@ -447,6 +448,21 @@
                                     <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
                                             type="button"
                                             data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
+                                    </button>
+                                </li>
+                                #}
+                                <li>
+                                    {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.nbQuotesOfferer %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "yes"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans }}">?
                                     </button>
                                 </li>
 

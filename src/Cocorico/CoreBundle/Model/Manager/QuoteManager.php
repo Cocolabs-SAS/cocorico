@@ -304,6 +304,19 @@ class QuoteManager extends BaseManager
         if ($this->canBeAcceptedByAsker($quote)) {
             $quote->setStatus(Quote::STATUS_ACCEPTED);
             $quote = $this->save($quote);
+
+            // Update offerer accepted quotes
+            $offerer = $quote->getListing()->getUser();
+            $offerer->setNbQuotesOfferer($offerer->getNbQuotesOfferer() + 1);
+            $this->em->persist($offerer);
+            $this->em->flush();
+
+            // Update asker accepted quotes
+            $asker = $quote->getUser();
+            $asker->setNbQuotesAsker($asker->getNbQuotesAsker() + 1);
+            $this->em->persist($asker);
+            $this->em->flush();
+
             //TODO: Add mailer events for quote acceptation
             return $quote;
         }

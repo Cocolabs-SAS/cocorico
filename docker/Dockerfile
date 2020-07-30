@@ -38,7 +38,8 @@ RUN apt-get install -y \
         default-mysql-client \ 
         imagemagick \ 
         unzip \
-        wget
+        wget \
+        screen
 
 RUN apt-get install -y \
         php7.3 \

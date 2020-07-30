@@ -66,6 +66,8 @@ class ListingCharacteristicType extends AbstractType
                         array(
                             'data' => $selected,
                             'required' => false,
+                            # 'multiple' => true,
+                            # 'expanded' => true,
                             /** @Ignore */
                             'label' => $listingCharacteristic->getName(),
                             'label_attr' => array(

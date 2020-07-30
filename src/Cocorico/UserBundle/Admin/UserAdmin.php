@@ -287,7 +287,7 @@ class UserAdmin extends SonataUserAdmin
                 )
             )
             ->add(
-                'nbBookingsOfferer',
+                'nbQuotesOfferer',
                 null,
                 array(
                     'required' => false,
@@ -295,7 +295,7 @@ class UserAdmin extends SonataUserAdmin
                 )
             )
             ->add(
-                'nbBookingsAsker',
+                'nbQuotesAsker',
                 null,
                 array(
                     'required' => false,
