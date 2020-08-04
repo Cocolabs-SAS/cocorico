@@ -1,12 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 ## INIT MONGO
-mongod --bind_ip 0.0.0.0 &&
+mongod --bind_ip 0.0.0.0 --fork --logpath /var/log/mongod.log
 
-
-if [[ ! -d /data/db ]]; then
-    php bin/console doctrine:mongodb:schema:create
-fi
 
 ## INIT MYSQL
 if [[ ! -d /run/mysqld ]]; then
@@ -15,15 +11,21 @@ fi
 
 if [[ ! -d /var/lib/mysql/cocorico ]]; then
     mysql_install_db --user=root --datadir=/var/lib/mysql
-    mysqld --user=root --bootstrap < /docker/database.sql
+    mysqld --user=root --bootstrap < ./docker/database.sql
 fi
 
-mysqld_safe --user=root --console &&
-while !(mysqladmin -ucocorico -pcocorico ping &> /dev/null); do
+chmod 777 -R /var/lib/mysql
+mysqld_safe --user=root
+while !(mysqladmin -ucocorico -pcocorico pin-v `pwd`:/cocorico -v `pwd`/tmp/mysql:/var/lib/mysql -v `pwd`/tmp/mongo:/data/dbg &> /dev/null); do
     sleep 1
+    echo "Waiting for MySQL to come up"
 done
 
 if [[ ! -f /var/lib/mysql/cocorico/db.opt ]]; then
     php bin/console doctrine:schema:update --force
     php bin/console doctrine:fixtures:load -n
+fi
+
+if [[ ! -d /data/db ]]; then
+    php bin/console doctrine:mongodb:schema:create
 fi

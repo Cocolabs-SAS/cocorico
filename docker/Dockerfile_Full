@@ -2,17 +2,20 @@
 # docker run --name cocorico -ti -p 9090:9090 -p 3306:3306 -p 9001:9001 -p 27017:27017  -v `pwd`:/cocorico -v `pwd`/tmp/mysql:/var/lib/mysql -v `pwd`/tmp/mongo:/data/db -e HOST_UID=$UID cocolabs/cocorico
 from debian:buster-slim
 
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/home/cocorico \
     HOME=/home/cocorico \
-    HOST_UID=1000
+    HOST_UID=1000 \
+    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
 ARG HOST_PORT=9090
 ARG GGL_KEY1=none
 ARG GGL_KEY2=none
 
 
-ENV SQL_HOST=localhost
+ENV SQL_HOST=localhost \
     SQL_PORT=3306 \
     SQL_NAME=cocorico \
     SQL_USER=cocorico \
@@ -25,6 +28,7 @@ ENV SQL_HOST=localhost
     APP_ENV=dev \
     SYMFONY_ENV=dev 
 
+
 RUN apt-get update
 
 RUN apt-get install -y \
@@ -34,10 +38,25 @@ RUN apt-get install -y \
         imagemagick \ 
         unzip \
         wget \
-        mongodb \
-        mysql \
-        mysql-client
+        gnupg \
+        systemd \
+        mariadb-server \
+        default-mysql-client
 
+# Install mongodb
+
+# RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add - && \
+#     echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
+#     apt-get update && \
+#     apt-get install -y \
+#         mongodb-org
+
+RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
+RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+RUN apt-get update
+RUN apt-get install -y mongodb-org
+
+ENTRYPOINT ["bash"]
 RUN apt-get install -y \
         php7.3 \
         php7.3-fpm \
@@ -75,21 +94,25 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml
 
+COPY ./docker/docker_full_init.sh ./init_services
+RUN ls
+VOLUME /data/db
 
-RUN composer install
+ENTRYPOINT ["bash"]
+# RUN composer install
 
-# Init database and other stuff
-RUN /docker/docker_full_init.sql
-
-RUN clevercloud/post_build_hook.sh
-RUN wget https://get.symfony.com/cli/installer -O - | bash
-
-# RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
-# RUN service nginx restart && service php7.3-fpm start
-COPY ./docker/run.sh ./run
-COPY ./docker/run_css.sh ./run_css
-RUN echo "Start Symfony server with:\n\
-/home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
-"
-CMD ["bash"]
+# # Init database and other stuff
+# RUN /docker/docker_full_init.sql
+# 
+# RUN clevercloud/post_build_hook.sh
+# RUN wget https://get.symfony.com/cli/installer -O - | bash
+# 
+# # RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
+# # RUN service nginx restart && service php7.3-fpm start
+# COPY ./docker/run.sh ./run
+# COPY ./docker/run_css.sh ./run_css
+# RUN echo "Start Symfony server with:\n\
+# /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
+# "
+# CMD ["bash"]
 # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]
