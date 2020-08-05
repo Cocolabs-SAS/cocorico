@@ -18,24 +18,36 @@ which acts on the person type choice.
         <div class="col">
             <br />
             <h3>{{ 'user.signup.title'|trans }}</h3>
+            <span>Veuillez vous munir de votre SIRET/SIREN et du code APE/NAF de votre structure</span>
+            <br />
 
             <fieldset>
-            <legend>Données Structure</legend>
+            <legend>Choix Type Structure</legend>
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
+                {#
                 <span class="label">
                     {{ form_label(form_registration.personType) }}
                 </span>
+                #}
 
-                <div class="" data-id="person-type" style="margin-left:240px">
+                <div class="struct_type_select" data-id="person-type" style="">
                     <div>
+                    Vous représentez une :
+                    </div>
+                    <div class="option">
+                    {{ form_widget(form_registration.personType.1) }}
+                    {{ form_label(form_registration.personType.1) }}
+                    </div>
+                    <div class="option">
                     {{ form_widget(form_registration.personType.0) }} 
                     {{ form_label(form_registration.personType.0) }} 
                     </div>
                     <div>
-                    {{ form_widget(form_registration.personType.1) }}
-                    {{ form_label(form_registration.personType.1) }}
+                    Une structure inclusive a la possibilité de créer et diffuser des offres
+                    de prestation. Une structure classique n'a pas cette possibilité.
+                    <b>Ce choix est définitif</b>.
                     </div>
                     
                     {#
@@ -47,6 +59,9 @@ which acts on the person type choice.
                     #}
                 </div>
             </div>
+            </fieldset>
+            <fieldset>
+            <legend>Données Structure</legend>
 
             <div class="field-row validate-row">
                 <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>

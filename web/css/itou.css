@@ -1,4 +1,27 @@
 /******************
+ * SUBSCRIPTION STYLES
+ ******************/
+ label {
+    font-size:1.2em;
+    }
+
+ div.struct_type_select label {
+    font-size:1.2em;
+    }
+
+ div.struct_type_select .option {
+    margin: 1rem 0;
+    }
+
+fieldset {
+    margin: 2rem 0;
+}
+
+body {
+    font-size:14px;
+}
+
+/******************
  * HOME STYLES
  ******************/
  .listing-category button.btn.multiselect {
@@ -150,6 +173,7 @@ footer img.min_trav {
     .navarea #footer-list { display: block; }
     footer img.min_trav { width: 75px; }
 }
+
 
 /******************
  * NEW LISTING STYLES

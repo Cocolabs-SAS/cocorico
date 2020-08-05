@@ -55,9 +55,10 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.person_type',
                     'choices' => array_flip(User::$enabledTypes),
                     'expanded' => true,
-                    'empty_data' => User::PERSON_TYPE_CLASSIC,
+                    'empty_data' => User::PERSON_TYPE_INCLUSIVE,
                     'required' => true,
-                )
+                    'data' => User::PERSON_TYPE_INCLUSIVE,
+                ),
             )
             ->add(
                 'companyName',
