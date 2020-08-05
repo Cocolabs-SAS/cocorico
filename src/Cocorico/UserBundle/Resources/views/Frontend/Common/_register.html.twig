@@ -72,7 +72,7 @@ which acts on the person type choice.
                 <div class="field-holder">
                     {{ form_widget(form_registration.companyName, {
                         'attr': {
-                            'class': 'form-control',
+                            'class': 'form-control required',
                             'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
                         }
                     }) }}
@@ -115,7 +115,7 @@ which acts on the person type choice.
                 <div class="field-holder">
                     {{ form_widget(form_registration.naf, {
                         'attr': {
-                            'class': 'form-control required',
+                            'class': 'form-control',
                             'data-parsley-required-message': 'cocorico_user.naf.blank'|trans({},'validators'),
                             'data-parsley-invalid-message': 'cocorico_user.naf.invalid'|trans({}, 'validators')
                         }
@@ -137,7 +137,7 @@ which acts on the person type choice.
                 <div class="field-holder">
                     {{ form_widget(form_registration.website, {
                         'attr': {
-                            'class': 'form-control required',
+                            'class': 'form-control',
                             'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
                             'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
                         }

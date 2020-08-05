@@ -13,9 +13,9 @@
     <fieldset>
         <legend class="hidden">form area</legend>
         <!-- alert -->
-        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
-        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
         {{ form_errors(form) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
         <!-- Tab panes -->
         <div class="tab-content">
             <!-- tab presentation -->
