@@ -27,6 +27,7 @@ parameters:
     cocorico.facebook.app_id: none
     cocorico.facebook.secret: none
     cocorico.image_driver: imagick
+    cocorico.hotjar_id: '%HOTJAR_ID%'
     cocorico.matomo_host: '%MATOMO_HOST%'
     cocorico.matomo_siteid: '%MATOMO_SITEID%'
     cocorico.google_analytics: false

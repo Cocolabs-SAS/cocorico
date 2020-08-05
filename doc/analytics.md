@@ -1,3 +1,8 @@
+## Config hotjar analytics
+To enable hotjar analytics, set following variables:
+
+* `cocorico.hotjar_id` : Hotjar ID
+
 ## Config matomo analytics
 To enable matomo analytics, set following variables:
 

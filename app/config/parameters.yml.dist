@@ -53,6 +53,9 @@ parameters:
     #Google analytics code
     cocorico.google_analytics: UA-64445856-1
 
+    #Hotjar analytics parmeters
+    cocorico.hotjar_id: ~
+
     #Matomo analytics parmeters
     cocorico.matomo_host: ~
     cocorico.matomo_siteid: ~

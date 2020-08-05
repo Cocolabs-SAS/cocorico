@@ -28,6 +28,7 @@ parameters:
     cocorico.image_driver: imagick
     cocorico.google_analytics: UA-64445856-1
     cocorico.google_tag_manager: false
+    cocorico.hotjar_id: false
     cocorico.matomo_host: false
     cocorico.matomo_siteid: false
     cocorico_geo.google_place_api_key: '%GGL_KEY1%'
