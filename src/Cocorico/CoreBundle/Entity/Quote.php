@@ -69,6 +69,7 @@ class Quote {
 
     //Status when contact info can be displayed
     public static $canShowContactInfo = array(
+        self::STATUS_PREQUOTE,
         self::STATUS_QUOTE,
         self::STATUS_ACCEPTED,
     );
