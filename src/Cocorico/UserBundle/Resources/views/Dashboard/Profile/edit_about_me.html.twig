@@ -14,9 +14,9 @@
     <fieldset>
         <legend class="hidden">legend</legend>
         <!-- alert -->
-        {% include '@CocoricoUser/Dashboard/Profile/_completion_notice.html.twig' only %}
-        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
         {{ form_errors(form) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {% include '@CocoricoUser/Dashboard/Profile/_completion_notice.html.twig' only %}
         <!-- Tab panes -->
         <div class="tab-content">
             <!-- tab about-me -->

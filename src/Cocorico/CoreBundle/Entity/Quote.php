@@ -38,10 +38,12 @@ class Quote {
     const STATUS_CANCELED = 5;
     const STATUS_REFUSED_ASKER = 6;
     const STATUS_REFUSED_OFFERER = 7;
+    const STATUS_PREQUOTE = 8;
 
     public static $statusValues = array (
         self::STATUS_DRAFT => 'entity.quote.status.draft',
         self::STATUS_NEW => 'entity.quote.status.new',
+        self::STATUS_PREQUOTE => 'entity.quote.status.prequote',
         self::STATUS_QUOTE => 'entity.quote.status.quote',
         self::STATUS_ACCEPTED => 'entity.quote.status.accepted',
         self::STATUS_CANCELED => 'entity.quote.status.canceled',
@@ -52,6 +54,7 @@ class Quote {
     public static $visibleStatus = array (
         self::STATUS_DRAFT,
         self::STATUS_NEW,
+        self::STATUS_PREQUOTE,
         self::STATUS_QUOTE,
         self::STATUS_ACCEPTED,
         self::STATUS_CANCELED,
@@ -62,6 +65,13 @@ class Quote {
     //Status for which quote can be created
     public static $newableStatus = array (
         self::STATUS_DRAFT
+    );
+
+    //Status when contact info can be displayed
+    public static $canShowContactInfo = array(
+        self::STATUS_PREQUOTE,
+        self::STATUS_QUOTE,
+        self::STATUS_ACCEPTED,
     );
 
     //Status for which quote can be canceled by asker
@@ -75,29 +85,33 @@ class Quote {
         self::STATUS_NEW,
     );
 
-    //Status for which quote can be refused
-    public static $refusableStatus = array(
-        self::STATUS_NEW
-    );
-
     //Status for which quote can be refused by asker
     public static $refusableAskerStatus = array(
-        self::STATUS_QUOTE
+        self::STATUS_PREQUOTE,
+        self::STATUS_QUOTE,
     );
 
-    //Status for which quote can be refused by asker
+    //Status for which quote can be accepted by asker
     public static $acceptableStatus = array(
         self::STATUS_QUOTE
     );
 
     //Status for which quote can be refused by offerer
     public static $refusableOffererStatus = array(
-        self::STATUS_NEW
+        self::STATUS_NEW,
+        self::STATUS_PREQUOTE,
+        self::STATUS_QUOTE
     );
 
     //Status for which quote can be validated
     public static $validatableStatus = array(
         self::STATUS_NEW
+    );
+
+    //Status for which contact details are hidden
+    public static $hideContactStatus = array(
+        self::STATUS_DRAFT,
+        self::STATUS_NEW,
     );
 
     /**

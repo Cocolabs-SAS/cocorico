@@ -6,11 +6,9 @@
   _paq.push(['trackPageView']);
   _paq.push(['enableLinkTracking']);
   (function() {
-    // var u="//stats.data.gouv.fr/";
     var u="{{ cocorico_matomo_host }}";
     _paq.push(['setTrackerUrl', u+'piwik.php']);
     _paq.push(['setSiteId', '{{ cocorico_matomo_siteid }}']);
-    // _paq.push(['setSiteId', '136']);
     var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
     g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
   })();

@@ -21,6 +21,10 @@
     {% set title =  'quote.modal.sent_quote.title'|trans %}
     {% set action_title = 'quote.modal.action.sent_quote'|trans %}
     {% set action_description = 'quote.modal.description.sent_quote'|trans %}
+{% elseif type == 'accept_prequote' %}
+    {% set title =  'quote.modal.accept_prequote.title'|trans %}
+    {% set action_title = 'quote.modal.action.accept_prequote'|trans %}
+    {% set action_description = 'quote.modal.description.accept_prequote'|trans %}
 {% endif %}
 
 <!-- Modal -->

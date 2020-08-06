@@ -136,6 +136,13 @@ abstract class BaseListing
     protected $range;
 
     /**
+     * @ORM\Column(name="`url`", type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    protected $url;
+
+    /**
      *
      * @ORM\Column(name="certified", type="boolean", nullable=true)
      *
@@ -328,12 +335,36 @@ abstract class BaseListing
     /**
      * Get range
      *
-     * @return string
+     * @return integer
      */
     public function getRange()
     {
         return $this->range;
     }
+
+    /**
+     * Set url
+     *
+     * @param  string $url
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
 
     /**
      * Set price

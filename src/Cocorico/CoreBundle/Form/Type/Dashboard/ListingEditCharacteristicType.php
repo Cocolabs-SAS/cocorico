@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -35,6 +36,9 @@ class ListingEditCharacteristicType extends ListingEditType
                 CollectionType::class,
                 array(
                     'entry_type' => ListingListingCharacteristicType::class,
+                    # 'entry_options' => [
+                    #     'multiple' => True
+                    # ],
                     /** @Ignore */
                     'label' => false
                 )

@@ -55,9 +55,10 @@ class RegistrationFormType extends AbstractType
                     'label' => 'form.person_type',
                     'choices' => array_flip(User::$enabledTypes),
                     'expanded' => true,
-                    'empty_data' => User::PERSON_TYPE_CLASSIC,
+                    'empty_data' => User::PERSON_TYPE_INCLUSIVE,
                     'required' => true,
-                )
+                    'data' => User::PERSON_TYPE_INCLUSIVE,
+                ),
             )
             ->add(
                 'companyName',
@@ -80,6 +81,7 @@ class RegistrationFormType extends AbstractType
                 TextType::class,
                 array(
                     'label' => 'form.naf',
+                    'required' => false,
                 )
             )
             ->add(
@@ -138,6 +140,7 @@ class RegistrationFormType extends AbstractType
                 CheckboxType::class,
                 array(
                     'label' => 'form.offers_for_pro_sector',
+                    'required' => false,
                 )
             )
             ->add(
@@ -145,6 +148,7 @@ class RegistrationFormType extends AbstractType
                 CheckboxType::class,
                 array(
                     'label' => 'form.quote_promise',
+                    'required' => false,
                 )
             )
             # ->add(

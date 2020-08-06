@@ -118,6 +118,7 @@ class QuoteController extends Controller
                 'canBeCanceledByAsker' => $canBeCanceledByAsker,
                 'canBeRefusedByAsker' => $canBeRefusedByAsker,
                 'canBeAcceptedByAsker' => $canBeAcceptedByAsker,
+                'canShowContactInfo' => $this->get('cocorico.quote.manager')->canShowContactInfo($quote),
                 'form' => $form->createView(),
                 'other_user' => $quote->getListing()->getUser(),
                 'other_user_rating' => $quote->getListing()->getUser()->getAverageOffererRating(),

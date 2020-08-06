@@ -31,35 +31,39 @@
                 'canBeRefusedByAsker': canBeRefusedByAsker|default(false),
                 'canBeCanceledByAsker': canBeCanceledByAsker|default(false),
                 'canBeRefusedByOfferer': canBeRefusedByOfferer|default(false),
+                'preQuoteCanBeAccepted': preQuoteCanBeAccepted|default(false),
                 'canBeAcceptedOrRefusedByOfferer': canBeAcceptedOrRefusedByOfferer|default(false),
             } only %}
 
             {% include '@CocoricoCore/Dashboard/Quote/_quote_show_contact_infos.html.twig' with {
                 'quote': quote,
-                'other_user': other_user
+                'other_user': other_user,
+                'canShowContactInfo': canShowContactInfo|default(false)
             } only %}
         </section>
 
 
-        <!-- form-ad-detail (this is the message form) -->
-        {{ form_start(form, {'attr': {'class': 'form-ad-detail'}}) }}
-        <fieldset>
-            <h3>{{'quote.show.send_communication' | trans }}</h3>
-            <legend class="hidden">form-ad-detail</legend>
-            {{ form_errors(form) }}
-            <div class="textarea-holder no-scroll">
-                {{ form_widget(form.body, {
-                    'attr': {
-                        'placeholder': 'quote.show.textarea.placeholder'|trans,
-                        'title': 'quote.show.textarea.placeholder'|trans,
-                    }
-                }) }}
-            </div>
-            <div class="btn-block text-center">
-                <input type="submit" class="btn btn-polo-blue" value="{{ 'quote.show.save'|trans }}">
-            </div>
-        </fieldset>
-        {{ form_end(form) }}
+        {% if canShowContactInfo %}
+            <!-- form-ad-detail (this is the message form) -->
+            {{ form_start(form, {'attr': {'class': 'form-ad-detail'}}) }}
+            <fieldset>
+                <h3>{{'quote.show.send_communication' | trans }}</h3>
+                <legend class="hidden">form-ad-detail</legend>
+                {{ form_errors(form) }}
+                <div class="textarea-holder no-scroll">
+                    {{ form_widget(form.body, {
+                        'attr': {
+                            'placeholder': 'quote.show.textarea.placeholder'|trans,
+                            'title': 'quote.show.textarea.placeholder'|trans,
+                        }
+                    }) }}
+                </div>
+                <div class="btn-block text-center">
+                    <input type="submit" class="btn btn-polo-blue" value="{{ 'quote.show.save'|trans }}">
+                </div>
+            </fieldset>
+            {{ form_end(form) }}
+        {% endif %}
 
         <!-- blog -->
         <div class="blog">

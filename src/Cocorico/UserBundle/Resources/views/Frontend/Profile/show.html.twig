@@ -7,6 +7,8 @@
 {% endif %}
 {% set user_address = user.getAddresses %}
 {% set user_address = (user_address is empty) ? null : user_address[0] %}
+{% set user_company = user.getCompanyName %}
+{% set user_company = (user_company is empty) ? null : user_company %}
 
 
 {%- block meta_title -%}
@@ -43,11 +45,21 @@
                 <!-- profile-detail -->
                 <section class="profile-detail">
                     <header class="head">
-                        <h1>{{ 'user.profile.h1'|trans }}</h1>
+                        <h4>{{ 'user.profile.h1'|trans }}</h4>
                         <address>
+                            {% if user_company %}
+                                <span class="locality">
+                                    <h1>{{ user.companyName }}</h1>
+                                    <br />
+                                </span>
+                                <span>
+                                    Personne de contact: {{ user.name }}
+                                <span>
+                            {% else %}
                                 <span class="locality">
                                     {{ user.name }}
                                 </span>
+                            {% endif %}
 
                             {% if user_address %}
                                 {{ user_address.zip }},
@@ -190,6 +202,7 @@
                                     ?
                                 </button>
                             </li>
+                            {#
                             <li>
                                 {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
                                 {% if user.idCardVerified %}
@@ -235,6 +248,39 @@
                                     ?
                                 </button>
                             </li>
+                            #}
+                             <li>
+                                {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
+                                {% if user.nbQuotesOfferer %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+                            <li>
+                                {{ 'form.user.nb_quotes_asker:'|trans({}, 'cocorico_user') }}
+                                {% if user.nbQuotesAsker %}
+                                    <i class="icon-ok"></i>
+                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
+                                {% else %}
+                                    <i class="icon-cancel"></i>
+                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
+                                {% endif %}
+                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                        type="button"
+                                        data-original-title="{{ 'listing.show.nb_quotes_asker.help'|trans({},'cocorico_listing') }}">
+                                    ?
+                                </button>
+                            </li>
+
+                            {#
                             <li>
                                 {% if user_listings|length %}
                                     {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
@@ -260,6 +306,7 @@
                                     {%- endfor %}
                                 </strong>
                             </li>
+                            #}
                         </ul>
                     </section>
                     {# listings #}

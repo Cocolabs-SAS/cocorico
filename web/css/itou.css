@@ -1,4 +1,60 @@
 /******************
+ * SUBSCRIPTION STYLES
+ ******************/
+ label {
+    font-size:1.2em;
+    }
+
+ div.struct_type_select label {
+    font-size:1.2em;
+    }
+
+ div.struct_type_select .option {
+    margin: 1rem 0;
+    }
+
+fieldset {
+    margin: 2rem 0;
+}
+
+body {
+    font-size:14px;
+}
+
+/******************
+ * HOME STYLES
+ ******************/
+ .listing-category button.btn.multiselect {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      padding: 0 .4em 0;
+ }
+
+
+.listing-category .multiselect-container.dropdown-menu {
+    border:#495057 1px solid;
+    background-color:#f7f7f7;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    width:auto;
+    max-width: 150%;
+    min-width:100%;
+    padding: 0 4px 0;
+}
+
+.listing-category .multiselect-container.dropdown-menu > li > a  {
+    white-space: normal;
+    width:100%;
+}
+
+.listing-category .multiselect-container.dropdown-menu > li > a:hover  {
+    background-color:#99cff2;
+}
+
+
+
+/******************
  * HEADER STYLES
  ******************/
 @media screen and (min-width: 767px) and (max-width: 992px) {
@@ -13,6 +69,7 @@
 #bloc-marque {
     display:flex;
 }
+
 #bloc-marque img {
     height:31px;
     margin-top:6px;
@@ -116,6 +173,12 @@ footer img.min_trav {
     .navarea #footer-list { display: block; }
     footer img.min_trav { width: 75px; }
 }
+
+
+/******************
+ * NEW LISTING STYLES
+ ******************/
+
 
 /******************
  * QUOTE STYLES

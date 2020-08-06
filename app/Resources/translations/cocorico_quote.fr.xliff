@@ -22,6 +22,10 @@
         <source>entity.quote.status.accepted</source>
         <target>Accepté</target>
       </trans-unit>
+      <trans-unit id="9b1f849bcc25b7927e8ce1a6f6187f9728cacf98" resname="entity.quote.status.prequote">
+        <source>entity.quote.status.prequote</source>
+        <target>Pré-devis</target>
+      </trans-unit>
       <trans-unit id="d74cc93d25c59ed384492237a72c7f2cec73d700" resname="entity.quote.status.refused_asker">
         <source>entity.quote.status.refused_asker</source>
         <target>Refusé par demandeur</target>
@@ -64,7 +68,7 @@
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.quote">
         <source>entity.quote.status.quote</source>
-        <target>Devis</target>
+        <target>Échange Devis</target>
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.accepted">
         <source>entity.quote.status.accepted</source>
@@ -76,11 +80,11 @@
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.refused_asker">
         <source>entity.quote.status.refused_asker</source>
-        <target>Refusé</target>
+        <target>Refusé (demandeur)</target>
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.refused_offerer">
         <source>entity.quote.status.refused_offerer</source>
-        <target>Refusé</target>
+        <target>Refusé (prestataire)</target>
       </trans-unit>
       <trans-unit id="3dce0f99e613d11a5126ad9a7c582bfd47d8eca6" resname="quote.index.show">
         <source>quote.index.show</source>
@@ -110,17 +114,21 @@
         <source>quote.show_offerer.accept</source>
         <target>Accepter</target>
       </trans-unit>
+      <trans-unit id="1bdedd6eb81d984294e821415b6c2f8f80387e5e" resname="quote.show_offerer.accept_prequote">
+        <source>quote.show_offerer.accept_prequote</source>
+        <target>Accepter d'entrer en contact avec le demandeur</target>
+      </trans-unit>
       <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
         <source>quote.show_offerer.refuse</source>
-        <target>Refuser</target>
+        <target>Mettre fin à la demande</target>
       </trans-unit>
       <trans-unit id="" resname="quote.show_asker.refuse">
         <source>quote.show_asker.refuse</source>
-        <target>Refuser</target>
+        <target>Mettre fin à la demande</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.refuse.title">
         <source>quote.modal.refuse.title</source>
-        <target>Refuser le devis</target>
+        <target>Mettre fin à la demande de devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.cancel.title">
         <source>quote.modal.cancel.title</source>
@@ -129,6 +137,10 @@
       <trans-unit id="" resname="quote.modal.sent_quote.title">
         <source>quote.modal.sent_quote.title</source>
         <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.accept_prequote.title">
+        <source>quote.modal.accept_prequote.title</source>
+        <target>Accepter de négocier un devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.budget">
         <source>quote.budget</source>
@@ -145,6 +157,10 @@
       <trans-unit id="" resname="quote.modal.action.sent_quote">
         <source>quote.modal.action.sent_quote</source>
         <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.accept_prequote">
+        <source>quote.modal.action.accept_prequote</source>
+        <target>Accepter de négocier un devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.edit.success">
         <source>quote.edit.success</source>
@@ -212,6 +228,10 @@
         "accepter de soumettre un devis" signale au demandeur que vous allez lui transmettre un devis.
         </target>
       </trans-unit>
+      <trans-unit id="" resname="quote.modal.description.accept_prequote">
+        <source>quote.modal.description.accept_prequote</source>
+        <target>Vous allez entrer en phase de discussion avec le demandeur</target>
+      </trans-unit>
       <trans-unit id="" resname="quote.modal.description.refuse">
         <source>quote.modal.description.refuse</source>
         <target>Si les conditions ne vous permettent pas ou plus de transmettre un devis, vous pouvez le
@@ -221,13 +241,21 @@
         <source>quote.modal.description.cancel</source>
         <target>Vous êtes encore en mesure d'annuler cette demande de devis.</target>
       </trans-unit>
-      <trans-unit id="" resname="term">
-        <source>term</source>
-        <target></target>
+      <trans-unit id="" resname="quote.show.contact.title">
+        <source>quote.show.contact.title</source>
+        <target>Coordonnées de votre contact</target>
       </trans-unit>
-      <trans-unit id="" resname="term">
-        <source>term</source>
-        <target></target>
+      <trans-unit id="" resname="quote.show.phone">
+        <source>quote.show.phone</source>
+        <target>téléphone</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show.email">
+        <source>quote.show.email</source>
+        <target>téléphone</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.show.address.title">
+        <source>quote.show.address.title</source>
+        <target>Adresse de votre contact</target>
       </trans-unit>
     </body>
   </file>

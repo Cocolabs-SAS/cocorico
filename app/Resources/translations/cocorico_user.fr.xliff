@@ -152,11 +152,11 @@
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b3" resname="entity.user.person_type.classic">
         <source>entity.user.person_type.classic</source>
-        <target state="new">classique qui souhaite réaliser un achat inclusif</target>
+        <target state="new">Structure classique qui souhaite réaliser un achat inclusif</target>
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b4" resname="entity.user.person_type.inclusive">
         <source>entity.user.person_type.inclusive</source>
-        <target state="new">inclusive qui souhaite proposer ses offres</target>
+        <target state="new">Structure inclusive qui souhaite proposer ses offres</target>
       </trans-unit>
       <trans-unit id="2e33a41aa053169361b996e132dc6288a51f83f9" resname="entity.user.type.billing">
         <source>entity.user.type.billing</source>
@@ -313,6 +313,14 @@
       <trans-unit id="35637b79ac1809dfca3542e924854084630ab47e" resname="form.user.nb_bookings_offerer:">
         <source>form.user.nb_bookings_offerer:</source>
         <target>A déjà été loueur :</target>
+      </trans-unit>
+      <trans-unit id="fac72ecee873d75e35c7969ee91109062cace1f8" resname="form.user.nb_quotes_asker:">
+        <source>form.user.nb_quotes_asker:</source>
+        <target>A déjà été accepté un devis :</target>
+      </trans-unit>
+      <trans-unit id="35697b79ac1809dfca3542e924854084630ab47e" resname="form.user.nb_quotes_offerer:">
+        <source>form.user.nb_quotes_offerer:</source>
+        <target>A déjà été émis un devis accepté :</target>
       </trans-unit>
       <trans-unit id="148005ed10f2b75bbdb99c10f5b4d409245a2bf0" resname="form.user.phone">
         <source>form.user.phone</source>
@@ -514,7 +522,7 @@
       </trans-unit>
       <trans-unit id="195e94dd9cc3f46f4ab609cea9bd81dc22c79c65" resname="user.profile.h1">
         <source>user.profile.h1</source>
-        <target>Bonjour et bienvenue sur ma page</target>
+        <target>Fiche présentation</target>
       </trans-unit>
       <trans-unit id="9e750f6979ebc1dbab4e2e37a1f3b8c1f9faa9c2" resname="user.profile.languages">
         <source>user.profile.languages</source>

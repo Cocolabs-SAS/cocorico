@@ -278,6 +278,24 @@
                             </span>
                         </div>
 
+                        <section class="widget prices-conditions">
+                            <h2>À Savoir</h2>
+                            <dl>
+                                {% if listing.url %}
+                                    <dd>Site Web</dd>
+                                    <dt>{{ listing.url }}</dt>
+                                {% endif %}
+                                {% if listing.range %}
+                                    <dd>Périmêtre d'intervention</dd>
+                                    <dt>{{ listing.range }} Km</dt>
+                                {% endif %}
+                                {#
+                                <dd>Moyen de déplacement privilégié</dd>
+                                <dt>Transports publics</dt>
+                                #}
+                            </dl>
+                        </section>
+
                         {#booking form#}
                         {#
                         {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
@@ -373,7 +391,7 @@
                             </div>
                             <h2>
                                 <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
-                                    {{ listing_user.name }}
+                                    {{ listing_user.companyName }}
                                 </a>
                             </h2>
 
@@ -421,6 +439,7 @@
                                             data-original-title="{{ 'listing.show.email_verified.help'|trans }}">?
                                     </button>
                                 </li>
+                                {#
                                 <li>
                                     {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
                                     {% if listing_user.idCardVerified %}
@@ -447,6 +466,21 @@
                                     <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
                                             type="button"
                                             data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
+                                    </button>
+                                </li>
+                                #}
+                                <li>
+                                    {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
+                                    {% if listing_user.nbQuotesOfferer %}
+                                        <i class="icon-ok"></i>
+                                        <strong>{{ "yes"|trans }}</strong>
+                                    {% else %}
+                                        <i class="icon-cancel"></i>
+                                        <strong>{{ "no"|trans }}</strong>
+                                    {% endif %}
+                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
+                                            type="button"
+                                            data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans }}">?
                                     </button>
                                 </li>
 

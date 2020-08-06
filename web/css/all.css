@@ -5145,6 +5145,11 @@ input[type="checkbox"] {
     background: #ff8e6c;
 }
 
+.btn.btn-purple {
+    color: #ffffff;
+    background: #ad03fc;
+}
+
 .btn.btn-flamingo {
     color: #ffffff;
     background: #f13f4a;
@@ -10252,7 +10257,7 @@ h1.listing-title a {
     float: right;
     width: 292px;
     position: relative;
-    margin: 6px -1px 0 0;
+    margin: -14px -1px 0 0;
 }
 
 .form-switchers .counter,
@@ -15119,6 +15124,7 @@ body > .jcf-select-drop.jcf-drop-flipped {
 @media screen and (max-width: 1024px) {
     .home-page .form-category .multiselect .btn-group, .home-page .form-category .multiselect .btn-default {
         width: 157px;
+        font-size:8pt;
     }
 
     .home-page .form-category .field-holder {

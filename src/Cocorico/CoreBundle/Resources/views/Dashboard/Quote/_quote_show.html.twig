@@ -70,6 +70,7 @@
                             <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
                                 Demandeur: <strong>{{ other_user.name }}</strong>
                             </a>
+                            {#
                             <ul>
                                 <li>email: <strong>{{other_user.email}}</strong></li>
                                 {% if other_user_address %}
@@ -80,12 +81,14 @@
                                     </li>
                                 {% endif %}
                             </ul>
+                            #}
                         </span>
                     {% else %}
                         <span class="author-info">
                             <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
                                 Fournisseur: <strong>{{ other_user.name }}</strong>
                             </a>
+                            {#
                             <ul>
                                 <li>email: <strong>{{other_user.email}}</strong></li>
                                 {% if other_user_address %}
@@ -96,6 +99,7 @@
                                     </li>
                                 {% endif %}
                             </ul>
+                            #}
                         </span>
                     {% endif %}
 

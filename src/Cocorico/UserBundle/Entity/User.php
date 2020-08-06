@@ -382,6 +382,20 @@ class User extends BaseUser implements ParticipantInterface
     protected $nbBookingsAsker;
 
     /**
+     * @ORM\Column(name="nb_quotes_offerer", type="smallint", nullable=true)
+     *
+     * @var int
+     */
+    protected $nbQuotesOfferer;
+
+    /**
+     * @ORM\Column(name="nb_quotes_asker", type="smallint", nullable=true)
+     *
+     * @var int
+     */
+    protected $nbQuotesAsker;
+
+    /**
      * @ORM\Column(name="fee_as_asker", type="smallint", nullable=true)
      *
      * @var int Percent
@@ -843,6 +857,47 @@ class User extends BaseUser implements ParticipantInterface
     {
         $this->nbBookingsAsker = $nbBookingsAsker;
     }
+
+    /**
+     * Set nbQuotesOfferer.
+     *
+     * @param int $nbQuotesOfferer
+     *
+     * @return User
+     */
+    public function setNbQuotesOfferer($nbQuotesOfferer)
+    {
+        $this->nbQuotesOfferer = $nbQuotesOfferer;
+
+        return $this;
+    }
+
+    /**
+     * Get nbQuotesOfferer.
+     *
+     * @return int
+     */
+    public function getNbQuotesOfferer()
+    {
+        return $this->nbQuotesOfferer;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbQuotesAsker()
+    {
+        return $this->nbQuotesAsker;
+    }
+
+    /**
+     * @param int $nbQuotesAsker
+     */
+    public function setNbQuotesAsker($nbQuotesAsker)
+    {
+        $this->nbQuotesAsker = $nbQuotesAsker;
+    }
+
 
     /**
      * @return int
