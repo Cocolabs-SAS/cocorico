@@ -401,6 +401,7 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         $quoteStatusClass = array(
             Quote::STATUS_DRAFT => 'btn-yellow',
             Quote::STATUS_NEW => 'btn-nomad',
+            Quote::STATUS_PREQUOTE => 'btn-flamingo',
             Quote::STATUS_QUOTE => 'btn-polo-blue',
             Quote::STATUS_ACCEPTED => 'btn-algae-green',
             Quote::STATUS_CANCELED => 'btn-salmon',

@@ -38,12 +38,12 @@ class Quote {
     const STATUS_CANCELED = 5;
     const STATUS_REFUSED_ASKER = 6;
     const STATUS_REFUSED_OFFERER = 7;
-    const STATUS_DISCUSSED = 8;
+    const STATUS_PREQUOTE = 8;
 
     public static $statusValues = array (
         self::STATUS_DRAFT => 'entity.quote.status.draft',
         self::STATUS_NEW => 'entity.quote.status.new',
-        self::STATUS_DISCUSSED => 'entity.quote.status.discussed',
+        self::STATUS_PREQUOTE => 'entity.quote.status.prequote',
         self::STATUS_QUOTE => 'entity.quote.status.quote',
         self::STATUS_ACCEPTED => 'entity.quote.status.accepted',
         self::STATUS_CANCELED => 'entity.quote.status.canceled',
@@ -54,7 +54,7 @@ class Quote {
     public static $visibleStatus = array (
         self::STATUS_DRAFT,
         self::STATUS_NEW,
-        self::STATUS_DISCUSSED,
+        self::STATUS_PREQUOTE,
         self::STATUS_QUOTE,
         self::STATUS_ACCEPTED,
         self::STATUS_CANCELED,
@@ -78,28 +78,22 @@ class Quote {
         self::STATUS_NEW,
     );
 
-    //Status for which quote can be refused
-    public static $refusableStatus = array(
-        self::STATUS_NEW,
-        self::STATUS_DISCUSSED,
-    );
-
     //Status for which quote can be refused by asker
     public static $refusableAskerStatus = array(
+        self::STATUS_NEW,
+        self::STATUS_PREQUOTE,
         self::STATUS_QUOTE,
-        self::STATUS_DISCUSSED
     );
 
-    //Status for which quote can be refused by asker
+    //Status for which quote can be accepted by asker
     public static $acceptableStatus = array(
-        self::STATUS_DISCUSSED,
         self::STATUS_QUOTE
     );
 
     //Status for which quote can be refused by offerer
     public static $refusableOffererStatus = array(
         self::STATUS_NEW,
-        self::STATUS_DISCUSSED,
+        self::STATUS_PREQUOTE,
         self::STATUS_QUOTE
     );
 

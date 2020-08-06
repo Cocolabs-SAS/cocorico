@@ -42,6 +42,12 @@ class QuoteOffererFormHandler extends QuoteFormHandler
                 } else {
                     $result = -3;
                 }
+            } elseif ($type == 'accept_prequote') {
+                if ($this->quoteManager-accept_prequote($quote)) {
+                    $result = 1;
+                } else {
+                    $result = -3;
+                }
             } elseif ($type == 'refuse') {
                 $this->quoteManager->refuse($quote);
                 $result = 1;

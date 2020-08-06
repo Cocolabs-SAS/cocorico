@@ -31,5 +31,10 @@
                 {{ 'quote.show_offerer.sent_quote'|trans }}
             </a>
         {% endif %}
+        {% if preQuoteCanBeAccepted %}
+            <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'accept_prequote'}) }}"
+               class="btn btn-success" data-toggle="modal" data-target="#modal">
+                {{ 'quote.show_offerer.accept_prequote'|trans }}
+        {% endif %}
     {% endif %}
 </div>

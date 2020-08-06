@@ -249,7 +249,6 @@ class QuoteManager extends BaseManager
      */
     public function canBeAcceptedOrRefusedByOfferer(Quote $quote)
     {
-        //$refusableStatus is equal to $payableStatus
         $statusIsOk = in_array($quote->getStatus(), Quote::$cancelableStatus);
 
         return $statusIsOk;
@@ -272,7 +271,6 @@ class QuoteManager extends BaseManager
      */
     public function canBeRefusedByOfferer(Quote $quote)
     {
-        //$refusableStatus is equal to $payableStatus
         $statusIsOk = in_array($quote->getStatus(), Quote::$refusableOffererStatus);
 
         return $statusIsOk;
@@ -286,10 +284,21 @@ class QuoteManager extends BaseManager
      */
     public function canBeRefusedByAsker(Quote $quote)
     {
-        //$refusableStatus is equal to $payableStatus
         $statusIsOk = in_array($quote->getStatus(), Quote::$refusableAskerStatus);
 
         return $statusIsOk;
+    }
+
+    /**
+     * Return whether a prequote demand can be accepted by offerer
+     *
+     * @param Quote $quote
+     *
+     * @return bool
+     */
+    public function preQuoteCanBeAccepted(Quote $quote)
+    {
+        return $quote->getStatus() == Quote::STATUS_NEW;
     }
 
     /**
@@ -318,6 +327,24 @@ class QuoteManager extends BaseManager
             $this->em->flush();
 
             //TODO: Add mailer events for quote acceptation
+            return $quote;
+        }
+        return false;
+    }
+
+    /**
+     * Offerer accepts prequote discussion\ :
+     *
+     * @param Quote $quote
+     *
+     * @return Quote|bool
+     */
+    public function accept_prequote(Quote $quote)
+    {
+        if ($this->canBeRefusedByOfferer($quote)) {
+            $quote->setStatus(Quote::STATUS_PREQUOTE);
+            $quote = $this->save($quote);
+            //TODO: Add mailer events for quote sent
             return $quote;
         }
         return false;

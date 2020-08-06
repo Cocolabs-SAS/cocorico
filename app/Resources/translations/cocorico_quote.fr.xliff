@@ -112,15 +112,15 @@
       </trans-unit>
       <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
         <source>quote.show_offerer.refuse</source>
-        <target>Refuser</target>
+        <target>Mettre fin à la demande</target>
       </trans-unit>
       <trans-unit id="" resname="quote.show_asker.refuse">
         <source>quote.show_asker.refuse</source>
-        <target>Refuser</target>
+        <target>Mettre fin à la demande</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.refuse.title">
         <source>quote.modal.refuse.title</source>
-        <target>Refuser le devis</target>
+        <target>Mettre fin à la demande de devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.cancel.title">
         <source>quote.modal.cancel.title</source>
@@ -129,6 +129,10 @@
       <trans-unit id="" resname="quote.modal.sent_quote.title">
         <source>quote.modal.sent_quote.title</source>
         <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.accept_prequote.title">
+        <source>quote.modal.accept_prequote.title</source>
+        <target>Accepter de négocier un devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.budget">
         <source>quote.budget</source>
@@ -145,6 +149,10 @@
       <trans-unit id="" resname="quote.modal.action.sent_quote">
         <source>quote.modal.action.sent_quote</source>
         <target>Accepter de soumettre un devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="quote.modal.action.accept_prequote">
+        <source>quote.modal.action.accept_prequote</source>
+        <target>Accepter de négocier un devis</target>
       </trans-unit>
       <trans-unit id="" resname="quote.edit.success">
         <source>quote.edit.success</source>

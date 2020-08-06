@@ -112,6 +112,9 @@ class QuoteController extends Controller
         $canBeRefusedByOfferer = $this->get('cocorico.quote.manager')
             ->canBeRefusedByOfferer($quote);
 
+        $preQuoteCanBeAccepted = $this->get('cocorico.quote.manager')
+            ->preQuoteCanBeAccepted($quote);
+
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Quote:show.html.twig',
             array(
@@ -119,6 +122,7 @@ class QuoteController extends Controller
                 'quote' => $quote,
                 'canBeAcceptedOrRefusedByOfferer' => $canBeAcceptedOrRefusedByOfferer,
                 'canBeRefusedByOfferer' => $canBeRefusedByOfferer,
+                'preQuoteCanBeAccepted' => $preQuoteCanBeAccepted,
                 'form' => $form->createView(),
                 'other_user' => $quote->getUser(),
                 'other_user_rating' => $quote->getUser()->getAverageAskerRating(),
@@ -133,7 +137,7 @@ class QuoteController extends Controller
      *
      * @Route("/{id}/edit/{type}", name="cocorico_dashboard_quote_edit_offerer", requirements={
      *      "id" = "\d+",
-     *      "type" = "accept|refuse|sent_quote",
+     *      "type" = "accept|refuse|sent_quote|accept_prequote",
      * })
      * @Method({"GET", "POST"})
      * @Security("is_granted('edit_as_offerer', quote)")
