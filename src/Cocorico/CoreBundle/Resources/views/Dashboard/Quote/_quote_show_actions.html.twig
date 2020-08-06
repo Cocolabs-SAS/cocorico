@@ -13,7 +13,7 @@
                 {{ 'quote.show_asker.refuse'|trans }}
             </a>
         {% endif %}
-        {% if canBeAcceptedByAsker %}
+        {% if quote.status == QuoteConstants.QUOTE %}
             <a href="{{ path('cocorico_dashboard_quote_edit_asker', {'id': quote.id, 'type': 'accept'}) }}"
                class="btn btn-success" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.accept'|trans }}
@@ -26,15 +26,18 @@
                class="btn btn-refuse" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.refuse'|trans }}
             </a>
+        {% endif %}
+        {% if quote.status == QuoteConstants.STATUS_PREQUOTE %}
             <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'sent_quote'}) }}"
                class="btn btn-success" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.sent_quote'|trans }}
             </a>
         {% endif %}
-        {% if preQuoteCanBeAccepted %}
+        {% if quote.status == QuoteConstants.STATUS_NEW %}
             <a href="{{ path('cocorico_dashboard_quote_edit_offerer', {'id': quote.id, 'type': 'accept_prequote'}) }}"
                class="btn btn-success" data-toggle="modal" data-target="#modal">
                 {{ 'quote.show_offerer.accept_prequote'|trans }}
+            </a>
         {% endif %}
     {% endif %}
 </div>
