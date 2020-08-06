@@ -281,12 +281,18 @@
                         <section class="widget prices-conditions">
                             <h2>À Savoir</h2>
                             <dl>
-                                <dd>Site Web</dd>
-                                <dt>{{ listing.url }}</dt>
-                                <dd>Rayon d'action</dd>
-                                <dt>{{ listing.range }} Km</dt>
+                                {% if listing.url %}
+                                    <dd>Site Web</dd>
+                                    <dt>{{ listing.url }}</dt>
+                                {% endif %}
+                                {% if listing.range %}
+                                    <dd>Périmêtre d'intervention</dd>
+                                    <dt>{{ listing.range }} Km</dt>
+                                {% endif %}
+                                {#
                                 <dd>Moyen de déplacement privilégié</dd>
                                 <dt>Transports publics</dt>
+                                #}
                             </dl>
                         </section>
 
