@@ -140,6 +140,7 @@ class RegistrationFormType extends AbstractType
                 CheckboxType::class,
                 array(
                     'label' => 'form.offers_for_pro_sector',
+                    'required' => false,
                 )
             )
             ->add(
@@ -147,6 +148,7 @@ class RegistrationFormType extends AbstractType
                 CheckboxType::class,
                 array(
                     'label' => 'form.quote_promise',
+                    'required' => false,
                 )
             )
             # ->add(

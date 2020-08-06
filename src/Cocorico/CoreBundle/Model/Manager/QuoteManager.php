@@ -300,6 +300,19 @@ class QuoteManager extends BaseManager
     {
         return $quote->getStatus() == Quote::STATUS_NEW;
     }
+    /**
+     * Return whether contact info can be shown
+     *
+     * @param Quote $quote
+     *
+     * @return bool
+     */
+    public function canShowContactInfo(Quote $quote)
+    {
+        $statusIsOk = in_array($quote->getStatus(), Quote::$canShowContactInfo);
+
+        return $statusIsOk;
+    }
 
     /**
      * Asker accept quote :

@@ -123,6 +123,7 @@ class QuoteController extends Controller
                 'canBeAcceptedOrRefusedByOfferer' => $canBeAcceptedOrRefusedByOfferer,
                 'canBeRefusedByOfferer' => $canBeRefusedByOfferer,
                 'preQuoteCanBeAccepted' => $preQuoteCanBeAccepted,
+                'canBeCanceledByAsker' => $canBeCanceledByAsker,
                 'form' => $form->createView(),
                 'other_user' => $quote->getUser(),
                 'other_user_rating' => $quote->getUser()->getAverageAskerRating(),

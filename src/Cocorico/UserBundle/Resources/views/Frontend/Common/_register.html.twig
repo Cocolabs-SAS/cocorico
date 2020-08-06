@@ -275,6 +275,7 @@ which acts on the person type choice.
                 </div>
             </div>
 
+            {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
             <div class="field-row validate-row" data-id="only-inclusive">
                 <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
                 <span class="label" style="width:350px">
@@ -282,10 +283,10 @@ which acts on the person type choice.
                         'label_attr': {
                             'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
                         }
-                    }) }}
+                    }) }} *
                 </span>
                 <div class="field-holder">
-                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
+                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
                 </div>
             </div>
 
@@ -296,10 +297,10 @@ which acts on the person type choice.
                         'label_attr': {
                             'data-label-legal': 'form.quote_promise.legal'|trans
                         }
-                    }) }}
+                    }) }} *
                 </span>
                 <div class="field-holder">
-                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
+                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
                 </div>
             </div>
             </fieldset>

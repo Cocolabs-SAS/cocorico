@@ -31,12 +31,14 @@
                 'canBeRefusedByAsker': canBeRefusedByAsker|default(false),
                 'canBeCanceledByAsker': canBeCanceledByAsker|default(false),
                 'canBeRefusedByOfferer': canBeRefusedByOfferer|default(false),
+                'preQuoteCanBeAccepted': preQuoteCanBeAccepted|default(false),
                 'canBeAcceptedOrRefusedByOfferer': canBeAcceptedOrRefusedByOfferer|default(false),
             } only %}
 
             {% include '@CocoricoCore/Dashboard/Quote/_quote_show_contact_infos.html.twig' with {
                 'quote': quote,
-                'other_user': other_user
+                'other_user': other_user,
+                'canShowContactInfo': canShowContactInfo|default(false)
             } only %}
         </section>
 

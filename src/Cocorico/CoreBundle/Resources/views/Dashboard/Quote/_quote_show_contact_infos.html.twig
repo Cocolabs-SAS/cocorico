@@ -1,6 +1,6 @@
 {% trans_default_domain 'cocorico_quote' %}
 
-{% if quote.status == QuoteConstants.STATUS_ACCEPTED %}
+{% if canShowContactInfo %}
     {% set listing = quote.listing %}
     {% set listing_location = listing.location %}
 

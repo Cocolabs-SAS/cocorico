@@ -67,6 +67,12 @@ class Quote {
         self::STATUS_DRAFT
     );
 
+    //Status when contact info can be displayed
+    public static $canShowContactInfo = array(
+        self::STATUS_QUOTE,
+        self::STATUS_ACCEPTED,
+    );
+
     //Status for which quote can be canceled by asker
     public static $cancelableStatus = array(
         self::STATUS_NEW,
@@ -80,7 +86,6 @@ class Quote {
 
     //Status for which quote can be refused by asker
     public static $refusableAskerStatus = array(
-        self::STATUS_NEW,
         self::STATUS_PREQUOTE,
         self::STATUS_QUOTE,
     );
