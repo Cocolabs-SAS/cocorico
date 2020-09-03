@@ -31,6 +31,8 @@ parameters:
     cocorico.hotjar_id: false
     cocorico.matomo_host: false
     cocorico.matomo_siteid: false
+    cocorico.itou_tracker_env: false
+    cocorico.itou_tracker_host: false
     cocorico_geo.google_place_api_key: '%GGL_KEY1%'
     cocorico_geo.google_place_server_api_key: '%GGL_KEY2%'
     cocorico_geo.ipinfodb_api_key: null
