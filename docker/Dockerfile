@@ -15,6 +15,7 @@ ARG MONGO_DB=cocorico
 ARG HOST_PORT=9090
 ARG GGL_KEY1=none
 ARG GGL_KEY2=none
+ARG ITOU_HOST=none
 
 
 ENV SQL_HOST=$SQL_HOST\
@@ -27,6 +28,7 @@ ENV SQL_HOST=$SQL_HOST\
     HOST_PORT=$HOST_PORT \
     GGL_KEY1=$GGL_KEY1 \
     GGL_KEY2=$GGL_KEY2 \
+    ITOU_HOST=$ITOU_HOST \
     APP_ENV=dev \
     SYMFONY_ENV=dev 
 
@@ -76,6 +78,8 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%HOST_PORT%|'"$HOST_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY1%|'"$GGL_KEY1"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%ITOU_HOST%|'"$ITOU_HOST"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%ITOU_ENV%|local_dev|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml
 
 
