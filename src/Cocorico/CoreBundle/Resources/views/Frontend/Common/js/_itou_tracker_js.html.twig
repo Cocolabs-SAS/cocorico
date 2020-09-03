@@ -7,14 +7,14 @@ var VERSION = 1;
 
 //export function track(page, action, meta={}) {
 function track(page, action, meta={}) {
-    meta.descriptor = 'demo';
     const body = computeRequestBody(page, action, meta);
     
     if (typeof window !== 'undefined'   ) {
         fetch('{{ cocorico_itou_tracker_host }}/track', {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
+            // 'Content-Type': 'application/json',
+            'Content-Type': 'text/plain',
           },
           body: JSON.stringify(body),
         });
@@ -90,6 +90,35 @@ function getUrlMeta() {
         return meta;
     }
 }
-</script>t
+
+
+// Tracker attach
+document.addEventListener('DOMContentLoaded', () => {
+    track(window.location.pathname, Steps.LOAD);
+}, false);
+
+document.addEventListener('click', async (event) => {
+    event = event || window.event;
+    var target = event.target || event.srcElement;
+
+    var steps = 3;
+    var meta = {}
+    while (target && steps > 0) {
+      if (target instanceof HTMLAnchorElement) {
+        meta = {'href': target.getAttribute('href')}
+      }
+      target = target.parentNode;
+      steps -= 1;
+    }
+
+    track(
+        window.location.pathname,
+        Steps.CLICK,
+        meta
+    );
+
+}, false);
+
+</script>
 <!-- End Tracker Code -->
 {% endif %}
