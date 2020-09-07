@@ -82,7 +82,7 @@ class TwigSwiftMailer implements MailerInterface
             'cocorico_site_name' => $this->parameters['site_name']
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $this->sendMessage($template, $context, $this->fromEmail, $_SERVER['NOTIFY_MAIL']);
     }
         
 
