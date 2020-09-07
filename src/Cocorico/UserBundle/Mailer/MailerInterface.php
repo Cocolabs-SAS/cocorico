@@ -30,6 +30,15 @@ interface MailerInterface
     public function sendAccountCreatedMessageToUser(UserInterface $user);
 
     /**
+     * Send an email to a notify successful registration
+     *
+     * @param UserInterface $user
+     *
+     * @return void
+     */
+    public function notifyAccountCreatedMessage(UserInterface $user);
+
+    /**
      * Send an email to a user to confirm his account creation
      *
      * @param UserInterface $user

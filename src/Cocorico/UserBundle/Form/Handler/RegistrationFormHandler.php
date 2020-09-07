@@ -24,6 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 class RegistrationFormHandler
 {
@@ -36,6 +37,7 @@ class RegistrationFormHandler
     protected $tokenGenerator;
     protected $loginManager;
     protected $dispatcher;
+    protected $tracker;
 
     /**
      * @param RequestStack             $requestStack
@@ -59,6 +61,8 @@ class RegistrationFormHandler
         $this->tokenGenerator = $tokenGenerator;
         $this->loginManager = $loginManager;
         $this->dispatcher = $dispatcher;
+        
+        $this->tracker = new Tracker("test", "test");
     }
 
     /**
@@ -120,6 +124,7 @@ class RegistrationFormHandler
             $this->userManager->updateUser($user);
             $this->loginManager->getLoginManager()->loginUser($this->loginManager->getFirewallName(), $user);
             $this->mailer->sendAccountCreatedMessageToUser($user);
+            $this->mailer->notifyAccountCreatedMessage($user);
         }
     }
 

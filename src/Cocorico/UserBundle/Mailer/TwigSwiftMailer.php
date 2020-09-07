@@ -73,6 +73,22 @@ class TwigSwiftMailer implements MailerInterface
     /**
      * @param UserInterface $user
      */
+    public function notifyAccountCreatedMessage(UserInterface $user)
+    {
+        $template = $this->parameters['templates']['notify_account_created'];
+
+        $context = array(
+            'user' => $user,
+            'cocorico_site_name' => $this->parameters['site_name']
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+    }
+        
+
+    /**
+     * @param UserInterface $user
+     */
     public function sendResettingEmailMessageToUser(UserInterface $user)
     {
         $template = $this->parameters['templates']['forgot_password_user'];

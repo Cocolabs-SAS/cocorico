@@ -11,6 +11,7 @@ imports:
     - { resource: "@CocoricoPageBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoConfigBundle/Resources/config/config.yml"}
     - { resource: "@CocoricoTimeBundle/Resources/config/config.yml"}
+    - { resource: "@CocoricoTrackerBundle/Resources/config/config.yml"}
 
 framework:
     #esi:             ~

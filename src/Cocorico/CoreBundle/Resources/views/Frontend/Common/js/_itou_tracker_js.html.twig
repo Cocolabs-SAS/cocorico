@@ -26,7 +26,9 @@ function track(page, action, meta={}) {
 const Steps = {
     LOAD: 'load',
     CLICK: 'click',
-    SCROLL: 'scroll'
+    SCROLL: 'scroll',
+    INSCRIPTION: 'inscription',
+    NEW_LISTING: 'new_listing',
 }
 
 
@@ -91,8 +93,24 @@ function getUrlMeta() {
     }
 }
 
+// Custom Events
+let NewUser = new Event('itouNewUser', {'bubbles': true});
 
 // Tracker attach
+document.addEventListener('itouNewUser', () => {
+    track(
+        window.location.pathname,
+        Steps.INSCRIPTION,
+        {
+            'structure': user_registration_companyName.value,
+            'inclusive': user_registration_personType_1.checked ? 'oui' : 'non',
+            'prenom': user_registration_firstName.value,
+            'nom': user_registration_lastName.value,
+            'email': user_registration_email.value,
+        }
+    );
+}, false);
+
 document.addEventListener('DOMContentLoaded', () => {
     track(window.location.pathname, Steps.LOAD);
 }, false);
