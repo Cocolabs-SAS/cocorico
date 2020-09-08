@@ -50,7 +50,7 @@ class Tracker
     $payload = json_encode($data);
 
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, $_SERVER['ITOU_HOST']+'/track');
+    curl_setopt($ch, CURLOPT_URL, $_SERVER['ITOU_HOST'] . '/track');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
     curl_setopt($ch, CURLOPT_POST, 1);
