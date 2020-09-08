@@ -126,7 +126,7 @@ class RegistrationFormHandler
             $user = $this->userManager->updateUser($user);
             $this->loginManager->getLoginManager()->loginUser($this->loginManager->getFirewallName(), $user);
             $this->mailer->sendAccountCreatedMessageToUser($user);
-            $this->mailer->notifyAccountCreatedMessage($user);
+            // $this->mailer->notifyAccountCreatedMessage($user);
         }
 
         $this->tracker->track('backend','inscription', array(   
