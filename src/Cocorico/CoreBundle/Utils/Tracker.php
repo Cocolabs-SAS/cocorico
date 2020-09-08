@@ -47,5 +47,17 @@ class Tracker
         'client_context' => array(),
         'server_context' => array(),
     );
+    $payload = json_encode($data);
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://app-e671a250-861f-47f2-991e-0f761ea1d857.cleverapps.io/track');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // On dev server only!
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    $result = curl_exec($ch);
     }
 }

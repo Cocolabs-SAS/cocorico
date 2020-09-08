@@ -9,10 +9,10 @@ parameters:
     mongodb_server: %MONGO_URL%
     mongodb_database_name: %MONGO_DB%
     mailer_transport: smtp
-    mailer_host: localhost
-    mailer_user: null
-    mailer_password: null
-    mailer_port: null
+    mailer_host: '%SMTP_HOST%'
+    mailer_user: '%SMTP_USER%'
+    mailer_password: '%SMTP_PASSWORD%'
+    mailer_port: '%SMTP_PORT%'
     secret: d69958a4fff6ba8f0f4fc4fc2657366ccf9dd0f3
     use_assetic_controller: false
     cocorico.assets_base_urls: 'http://localhost:%HOST_PORT%'

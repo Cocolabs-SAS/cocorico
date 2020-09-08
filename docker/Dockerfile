@@ -16,6 +16,10 @@ ARG HOST_PORT=9090
 ARG GGL_KEY1=none
 ARG GGL_KEY2=none
 ARG ITOU_HOST=none
+ARG SMTP_HOST=none
+ARG SMTP_PASSWORD=none
+ARG SMTP_PORT=none
+ARG SMTP_USER=none
 
 
 ENV SQL_HOST=$SQL_HOST\
@@ -30,6 +34,10 @@ ENV SQL_HOST=$SQL_HOST\
     GGL_KEY2=$GGL_KEY2 \
     ITOU_HOST=$ITOU_HOST \
     APP_ENV=dev \
+    SMTP_HOST=$SMTP_HOST \
+    SMTP_PASSWORD=$SMTP_PASSWORD \
+    SMTP_PORT=$SMTP_PORT \
+    SMTP_USER=$SMTP_USER \
     SYMFONY_ENV=dev 
 
 RUN apt-get update
@@ -78,6 +86,10 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%HOST_PORT%|'"$HOST_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY1%|'"$GGL_KEY1"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_HOST%|'"$SMTP_HOST"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_USER%|'"$SMTP_USER"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_PASSWORD%|'"$SMTP_PASSWORD"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_PORT%|'"$SMTP_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%ITOU_HOST%|'"$ITOU_HOST"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%ITOU_ENV%|local_dev|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml

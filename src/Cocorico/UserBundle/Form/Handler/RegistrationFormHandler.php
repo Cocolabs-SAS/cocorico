@@ -62,7 +62,7 @@ class RegistrationFormHandler
         $this->loginManager = $loginManager;
         $this->dispatcher = $dispatcher;
         
-        $this->tracker = new Tracker("test", "test");
+        $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
     }
 
     /**
@@ -110,6 +110,13 @@ class RegistrationFormHandler
         $event = new UserEvent($user);
         $this->dispatcher->dispatch(UserEvents::USER_REGISTER, $event);
         $user = $event->getUser();
+
+        $this->tracker->track('backend','inscription', array(   
+            'entreprise' => $user->getCompanyName(),
+            'id' => $user->getId(),
+            'prenom' => $user->getFirstName(),
+            'nom' => $user->getLastName(),
+        ));
 
         if ($confirmation) {
             $user->setEnabled(false);

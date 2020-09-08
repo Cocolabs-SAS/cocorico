@@ -3,7 +3,7 @@
 {% block subject -%}
     {% autoescape false %}
     BITOUBI Notif: {{ 'notify_account_created.email.subject'|trans({
-        '%company%': user.company,
+        '%company%': user.companyName,
         '%itou_env% : itou_env
     }, 'cocorico_mail', user_locale) }}
     {% endautoescape %}
@@ -12,8 +12,8 @@
 {% block message %}
     {{ 'notify_account_created.email.message'|trans({
         '%firstname%': user.firstName,
-        '%lastname%: user.lastname,
-        '%company%': user.company
+        '%lastname%: user.lastName,
+        '%company%': user.companyName
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
 
