@@ -2,19 +2,23 @@
 
 {% block subject -%}
     {% autoescape false %}
-    BITOUBI Notif: {{ 'account_created_user.email.subject'|trans({'%sitename%': cocorico_site_name}, 'cocorico_mail', user_locale) }}
+    BITOUBI Notif: {{ 'notify_account_created.email.subject'|trans({'%sitename%': cocorico_site_name}, 'cocorico_mail', user_locale) }}
     {% endautoescape %}
 {%- endblock %}
 
 {% block message %}
-    {{ 'account_created_user.email.message'|trans({
-        '%firstname%': user.firstName
+    {{ 'notify_account_created.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%lastname%: user.lastname,
+        '%company%': user.company
     }, 'cocorico_mail', user_locale) }}
 {% endblock %}
 
 {% block body_text %}
     {% autoescape false %}
     {{ message }}
+
+    https://lemarche.inclusion.beta.gouv.fr/admin/user/{{ user.id }}/edit
     {% endautoescape %}
 {% endblock %}
 
@@ -26,6 +30,7 @@
             {% autoescape false %}
             {{ message|raw|nl2br }}
             {% endautoescape %}
+            <a href="https://lemarche.inclusion.beta.gouv.fr/admin/user/{{ user.id }}/edit">Lien pour édition</a>
             {#Do not remove this comment. It is used for BDD testing #}
             <!--registration-->
         {% endblock %}
