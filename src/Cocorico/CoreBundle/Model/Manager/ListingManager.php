@@ -28,6 +28,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 class ListingManager extends BaseManager
 {
@@ -36,6 +37,7 @@ class ListingManager extends BaseManager
     protected $newListingIsPublished;
     public $maxPerPage;
     protected $mailer;
+    protected $tracker;
 
     /**
      * @param EntityManager   $em
@@ -56,6 +58,7 @@ class ListingManager extends BaseManager
         $this->newListingIsPublished = $newListingIsPublished;
         $this->maxPerPage = $maxPerPage;
         $this->mailer = $mailer;
+        $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
     }
 
     /**
@@ -65,11 +68,13 @@ class ListingManager extends BaseManager
     public function save(Listing $listing)
     {
         $listingPublished = false;
+        $listingIsNew = false;
         //Published by default
         if (!$listing->getId()) {
             if ($this->newListingIsPublished) {
                 $listing->setStatus(Listing::STATUS_PUBLISHED);
                 $listingPublished = true;
+                $listingIsNew = true;
             } else {
                 $listing->setStatus(Listing::STATUS_TO_VALIDATE);
             }
@@ -104,6 +109,12 @@ class ListingManager extends BaseManager
 
         if ($listingPublished) {
             $this->mailer->sendListingActivatedMessageToOfferer($listing);
+            $this->tracker->track('backend', 'listing_new', array(
+                'id' => $listing->getId(),
+                'structure' => $listing->getUser()->getCompanyName()
+            ));
+
+
         }
 
         return $listing;

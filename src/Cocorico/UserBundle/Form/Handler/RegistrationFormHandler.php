@@ -130,7 +130,8 @@ class RegistrationFormHandler
         }
 
         $this->tracker->track('backend','inscription', array(   
-            'entreprise' => $user->getCompanyName(),
+            'stucture' => $user->getCompanyName(),
+            'type' => $user->getPersonTypeText(),
             'id' => $user->getId(),
             'prenom' => $user->getFirstName(),
             'nom' => $user->getLastName(),
