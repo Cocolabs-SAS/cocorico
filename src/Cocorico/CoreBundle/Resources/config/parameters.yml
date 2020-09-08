@@ -339,10 +339,13 @@ parameters:
     #Hotjar analytics parmeters
     cocorico.hotjar_id: ~
 
-    #Matomo analytics parmeters
+    #Matomo analytics parameters
     cocorico.matomo_host: ~
     cocorico.matomo_siteid: ~
 
+    #Itou tracker parameters
+    cocorico.itou_tracker_env: ~
+    cocorico.itou_tracker_id: ~
 
     #Google Place API Key (To set on prod)
     cocorico_geo.google_place_api_key: ~

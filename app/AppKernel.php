@@ -60,6 +60,7 @@ class AppKernel extends Kernel
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
             new Cocorico\ConfigBundle\CocoricoConfigBundle(),
             new Cocorico\TimeBundle\CocoricoTimeBundle(),
+            new Cocorico\TrackerBundle\CocoricoTrackerBundle(),
 
         );
 

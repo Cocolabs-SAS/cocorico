@@ -24,6 +24,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Exception\RuntimeException;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 class RegistrationFormHandler
 {
@@ -36,6 +37,7 @@ class RegistrationFormHandler
     protected $tokenGenerator;
     protected $loginManager;
     protected $dispatcher;
+    protected $tracker;
 
     /**
      * @param RequestStack             $requestStack
@@ -59,6 +61,8 @@ class RegistrationFormHandler
         $this->tokenGenerator = $tokenGenerator;
         $this->loginManager = $loginManager;
         $this->dispatcher = $dispatcher;
+        
+        $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
     }
 
     /**
@@ -107,20 +111,32 @@ class RegistrationFormHandler
         $this->dispatcher->dispatch(UserEvents::USER_REGISTER, $event);
         $user = $event->getUser();
 
+
+
         if ($confirmation) {
             $user->setEnabled(false);
             if (null === $user->getConfirmationToken()) {
                 $user->setConfirmationToken($this->tokenGenerator->generateToken());
             }
 
-            $this->userManager->updateUser($user);
+            $user = $this->userManager->updateUser($user);
             $this->mailer->sendAccountCreationConfirmationMessageToUser($user);
         } else {
             $user->setEnabled(true);
-            $this->userManager->updateUser($user);
+            $user = $this->userManager->updateUser($user);
             $this->loginManager->getLoginManager()->loginUser($this->loginManager->getFirewallName(), $user);
             $this->mailer->sendAccountCreatedMessageToUser($user);
+            // $this->mailer->notifyAccountCreatedMessage($user);
         }
+
+        $this->tracker->track('backend','inscription', array(   
+            'stucture' => $user->getCompanyName(),
+            'type' => $user->getPersonTypeText(),
+            'id' => $user->getId(),
+            'prenom' => $user->getFirstName(),
+            'nom' => $user->getLastName(),
+        ));
+
     }
 
 }

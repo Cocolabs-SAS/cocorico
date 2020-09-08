@@ -1,0 +1,41 @@
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    BITOUBI Notif: {{ 'notify_account_created.email.subject'|trans({
+        '%company%': user.companyName,
+        '%itou_env% : itou_env
+    }, 'cocorico_mail', user_locale) }}
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    {{ 'notify_account_created.email.message'|trans({
+        '%firstname%': user.firstName,
+        '%lastname%: user.lastName,
+        '%company%': user.companyName
+    }, 'cocorico_mail', user_locale) }}
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+
+    https://lemarche.inclusion.beta.gouv.fr/admin/user/{{ user.id }}/edit
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            <a href="https://lemarche.inclusion.beta.gouv.fr/admin/user/{{ user.id }}/edit">Lien pour édition</a>
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--registration-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

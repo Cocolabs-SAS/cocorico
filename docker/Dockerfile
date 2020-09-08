@@ -15,6 +15,11 @@ ARG MONGO_DB=cocorico
 ARG HOST_PORT=9090
 ARG GGL_KEY1=none
 ARG GGL_KEY2=none
+ARG ITOU_HOST=none
+ARG SMTP_HOST=none
+ARG SMTP_PASSWORD=none
+ARG SMTP_PORT=none
+ARG SMTP_USER=none
 
 
 ENV SQL_HOST=$SQL_HOST\
@@ -27,7 +32,12 @@ ENV SQL_HOST=$SQL_HOST\
     HOST_PORT=$HOST_PORT \
     GGL_KEY1=$GGL_KEY1 \
     GGL_KEY2=$GGL_KEY2 \
+    ITOU_HOST=$ITOU_HOST \
     APP_ENV=dev \
+    SMTP_HOST=$SMTP_HOST \
+    SMTP_PASSWORD=$SMTP_PASSWORD \
+    SMTP_PORT=$SMTP_PORT \
+    SMTP_USER=$SMTP_USER \
     SYMFONY_ENV=dev 
 
 RUN apt-get update
@@ -76,20 +86,26 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%HOST_PORT%|'"$HOST_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY1%|'"$GGL_KEY1"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_HOST%|'"$SMTP_HOST"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_USER%|'"$SMTP_USER"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_PASSWORD%|'"$SMTP_PASSWORD"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%SMTP_PORT%|'"$SMTP_PORT"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%ITOU_HOST%|'"$ITOU_HOST"'|' /cocorico/app/config/parameters.yml \
+    && sed -i -e 's|%ITOU_ENV%|local_dev|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml
 
 
-CMD ["bash"]
-# RUN composer install
-# 
-# RUN clevercloud/post_build_hook.sh
-# RUN wget https://get.symfony.com/cli/installer -O - | bash
-# # RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
-# # RUN service nginx restart && service php7.3-fpm start
-# COPY ./docker/run.sh ./run
-# COPY ./docker/run_css.sh ./run_css
-# RUN echo "Start Symfony server with:\n\
-# /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
-# "
 # CMD ["bash"]
+ RUN composer install
+ 
+ RUN clevercloud/post_build_hook.sh
+ RUN wget https://get.symfony.com/cli/installer -O - | bash
+ # RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
+ # RUN service nginx restart && service php7.3-fpm start
+ COPY ./docker/run.sh ./run
+ COPY ./docker/run_css.sh ./run_css
+ RUN echo "Start Symfony server with:\n\
+ /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
+ "
+ CMD ["bash"]
 # # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]

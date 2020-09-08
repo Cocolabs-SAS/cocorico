@@ -30,6 +30,8 @@ parameters:
     cocorico.hotjar_id: '%HOTJAR_ID%'
     cocorico.matomo_host: '%MATOMO_HOST%'
     cocorico.matomo_siteid: '%MATOMO_SITEID%'
+    cocorico.itou_tracker_env: '%ITOU_ENV%'
+    cocorico.itou_tracker_host: '%ITOU_HOST%'
     cocorico.google_analytics: false
     cocorico.google_tag_manager: false
     cocorico_geo.google_place_api_key: '%GGL_KEY1%'

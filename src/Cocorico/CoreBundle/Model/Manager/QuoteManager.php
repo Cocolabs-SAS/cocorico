@@ -35,6 +35,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 class QuoteManager extends BaseManager
 {
@@ -47,6 +48,7 @@ class QuoteManager extends BaseManager
     protected $defaultListingStatus;
     protected $bundles;
     public $maxPerPage;
+    protected $tracker;
 
     /**
      * @param EntityManager              $em
@@ -93,6 +95,7 @@ class QuoteManager extends BaseManager
         $this->maxPerPage = $parameters["cocorico_dashboard_max_per_page"];
         $this->defaultListingStatus = $parameters["cocorico_listing_availability_status"];
         $this->bundles = $parameters["cocorico_bundles"];
+        $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
     }
 
     /**
@@ -202,6 +205,13 @@ class QuoteManager extends BaseManager
             if ($this->smser) {
                 $this->smser->sendQuoteRequestMessageToOfferer($quote);
             }
+
+            $this->tracker->track('backend', 'quote_new', array(
+                'id' => $quote->getId(),
+                'id_annonce' => $quote->getListing()->getId(),
+                'fournisseur' => $quote->getListing()->getUser()->getCompanyName(),
+                'demandeur' => $quote->getUser()->getCompanyName(),
+            ));
 
             return $quote;
         }
