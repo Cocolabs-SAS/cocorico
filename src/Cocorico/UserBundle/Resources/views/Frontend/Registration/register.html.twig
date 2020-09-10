@@ -6,6 +6,7 @@
         {% trans_default_domain 'cocorico_user' %}
 
         {% block main %}
+            {% include '@CocoricoUser/Frontend/Common/_modal.html.twig' %}
             <div class="col-xs-12">
                 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
                 <div id="form-registerlogin" class="form-signup validate-form">

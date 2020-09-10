@@ -1,0 +1,22 @@
+{% filter spaceless %}
+    <div id="deleteModal" class="modal show" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">La place de marché est actuellement ouverte dans 3 régions: Île de France, Haut de France et Grand Est.</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Pour continuer, indiquez si :</p>
+                    <ul>
+                        <li><label><input name="regio_select" type="radio" />Votre structure se trouve dans une de ces régions</label></li>
+                        <li><label><input name="regio_select" type="radio" />Votre structure ne se trouve pas dans ces régions mais vous souhaitez être informé de l'ouverture de la place marché dans votre région</label></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">je continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfilter %}
