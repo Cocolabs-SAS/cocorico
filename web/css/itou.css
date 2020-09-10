@@ -1,13 +1,19 @@
 /******************
  * SUBSCRIPTION STYLES
  ******************/
-#structure_modal {
-    font-size: 1em;
+#structure_modal, #structure_modal label {
+    font-size: 1.5rem;
+    line-height:2rem;
+    font-weight: bold;
 }
 
 
  #structure_modal ul {
     list-style-type:none;
+}
+
+ #structure_modal li {
+    margin: 1rem 0;
 }
 
  label {
