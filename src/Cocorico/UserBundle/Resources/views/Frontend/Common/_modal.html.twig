@@ -1,5 +1,12 @@
+<script type="text/javascript">
+  // Force display of modal on page load
+  window.addEventListener("load", function(event) {
+    $('#structure_modal').modal('show');
+  });
+</script>
+
 {% filter spaceless %}
-    <div id="deleteModal" class="modal show" role="dialog">
+    <div id="structure_modal" class="modal-force modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

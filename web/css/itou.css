@@ -1,6 +1,15 @@
 /******************
  * SUBSCRIPTION STYLES
  ******************/
+#structure_modal {
+    font-size: 1em;
+}
+
+
+ #structure_modal ul {
+    list-style-type:none;
+}
+
  label {
     font-size:1.2em;
     }
