@@ -1,4 +1,50 @@
 /******************
+ * BODY STYLES
+ ******************/
+.itou-info {
+    background-color:#ddf2f3;
+    padding:3rem 5rem;
+    font-size:1.8rem;
+    border-radius:7px;
+    display: flex;
+    flex-direction: row;
+}
+
+.itou-info p {
+    flex: 1 0;
+    }
+
+.itou-info h3 { padding:0; margin:0}
+.itou-info .shape { 
+    width: 55px;
+    height: 55px;
+    flex: none;
+    margin-left: -4rem;
+    margin-right: 1rem;
+}
+
+.itou-formtitle {
+    display:block;
+    text-align:center;
+}
+
+.itou-fieldgroup {
+    border:0;
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
+    padding: .3rem 2rem 0 2rem;
+}
+
+.itou-fieldgroup legend {
+    border:0;
+    margin-bottom:1rem;
+    font-family: roboto, sans-serif;
+    text-transform: uppercase;
+}
+
+
+/******************
  * SUBSCRIPTION STYLES
  ******************/
 #structure_modal, #structure_modal label {
