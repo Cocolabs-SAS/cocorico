@@ -8,6 +8,7 @@
     border-radius:7px;
     display: flex;
     flex-direction: row;
+    margin-bottom:1rem;
 }
 
 .itou-info p {
@@ -43,6 +44,9 @@
     text-transform: uppercase;
 }
 
+.itou-fieldgroup .label {
+    text-align:left !important;
+}
 
 /******************
  * SUBSCRIPTION STYLES

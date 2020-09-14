@@ -26,20 +26,17 @@ which acts on the person type choice.
             <br />
             <div class="row">
                 <div class="col-sm-7">
-
                     <h2 class="itou-formtitle">INSCRIPTION</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <fieldset>
                         <legend>Vous êtes</legend>
 
                         <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
-                            {#
-                            <span class="label">
-                                {{ form_label(form_registration.personType) }}
-                            </span>
-                            #}
-
                             <div class="struct_type_select" data-id="person-type" style="">
                                 <div class="option">
                                 <label>
@@ -53,19 +50,24 @@ which acts on the person type choice.
                                 {{ form_widget(form_registration.personType.0) }} 
                                 Une structure <strong>classique</strong>
                                 </label>
-                                {# { form_label(form_registration.personType.0) } #} 
                                 </div>
-                                {#
-                                {{ form_widget(form_registration.personType, {
-                                    'attr': {
-                                        'class': "form-control form-control-radio required"
-                                    }
-                                }) }}
-                                #}
                             </div>
                         </div>
                         </fieldset>
                     </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" alt="Indicateur information utile"/>
+                        <p>
+                        <strong>Une structure inclusive</strong> a la possibilité de proposer des prestations inclusives et d'en acheter.
+                        <strong>Une structure classique</strong> peut uniquement faire des achats inclusifs 
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <fieldset>
                         <legend>Les informations de votre structure</legend>
@@ -153,7 +155,18 @@ which acts on the person type choice.
                         </div>
                         </fieldset>
                     </div>
-
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Ces informations sont necéssaires pour la validation de votre inscription. Seules, les offres des structures validées seront publiées
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <fieldset>
                         <legend>Contact privilégié de la structure</legend>
@@ -233,8 +246,80 @@ which acts on the person type choice.
                         </div>
                         </fieldset>
                     </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Ces informations pourront être modifiées par la suite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>En m'inscrivant, je m'engage à</legend>
 
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
+                            <span class="label" style="width:350px">
+                                {{ form_label(form_registration.accept_rgpd, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.accept_rgpd.legal'|trans
+                                    }
+                                }) }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'form-control required' } }) }}
+                            </div>
+                        </div>
 
+                        {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
+                        <div class="field-row validate-row" data-id="only-inclusive">
+                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
+                            </div>
+                            <span class="label" style="width:auto">
+                                ce que les offres déposées sur la place de marché soit destinée à des structures professionnelles ( Association, secteur public ou privé)
+                                {# { form_label(form_registration.offers_for_pro_sector, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
+                                    }
+                                }) }#} *
+                            </span>
+                        </div>
+
+                        <div class="field-row validate-row" data-id="only-inclusive">
+                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
+                            <span class="label" style="width:350px">
+                                {{ form_label(form_registration.quote_promise, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.quote_promise.legal'|trans
+                                    }
+                                }) }} *
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
+                            </div>
+                        </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
+                        Et puis, plus on traite rapidement la demande, plus on a de chance de remporter le marché. <strong>Idéalement 48H</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <fieldset>
                         <legend>Création d'un mot de passe</legend>
@@ -272,55 +357,11 @@ which acts on the person type choice.
                             </div>
                         </div>
                     </div>
-                    <div class="itou-fieldgroup">
-                        <fieldset>
-                        <legend>En m'inscrivant, je m'engage à</legend>
-
-                        <div class="field-row validate-row">
-                            <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
-                            <span class="label" style="width:350px">
-                                {{ form_label(form_registration.accept_rgpd, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.accept_rgpd.legal'|trans
-                                    }
-                                }) }}
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'form-control required' } }) }}
-                            </div>
-                        </div>
-
-                        {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
-                        <div class="field-row validate-row" data-id="only-inclusive">
-                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                            <span class="label" style="width:auto">
-                                {{ form_label(form_registration.offers_for_pro_sector, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
-                                    }
-                                }) }} *
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
-                            </div>
-                        </div>
-
-                        <div class="field-row validate-row" data-id="only-inclusive">
-                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                            <span class="label" style="width:350px">
-                                {{ form_label(form_registration.quote_promise, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.quote_promise.legal'|trans
-                                    }
-                                }) }} *
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
-                            </div>
-                        </div>
-                        </fieldset>
-                    </div>
-
+                </div>
+                <div class="col-sm-5">
+                </div>
+            </div>
+            <!--
                     {#
                     <div class="field-row validate-row">
                         <div class="error-container">{{ form_errors(form_registration.phonePrefix) }}</div>
@@ -457,6 +498,7 @@ which acts on the person type choice.
                     </div>
                 </div>
             </div>
+            -->
         </div>
 
         {#
