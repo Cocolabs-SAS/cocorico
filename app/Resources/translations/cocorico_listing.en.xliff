@@ -167,14 +167,6 @@
         <source>listing.duplicate.success</source>
         <target>Listing duplicated successfully. You can now edit it and publish it.</target>
       </trans-unit>
-      <trans-unit id="20232449b77873ece396bc7639211a51ba310dd7" resname="listing.edit.calendar.choose_times.title">
-        <source>listing.edit.calendar.choose_times.title</source>
-        <target>Choose times</target>
-      </trans-unit>
-      <trans-unit id="ae04335034ebd144f4a6e71fe6dc8c53b7f2388b" resname="listing.edit.calendar.choose_weekdays.title">
-        <source>listing.edit.calendar.choose_weekdays.title</source>
-        <target>Choose weekdays</target>
-      </trans-unit>
       <trans-unit id="fead7956137d452b78011f93cedba983c9f3da4b" resname="listing.edit.calendar.day_click.info">
         <source>listing.edit.calendar.day_click.info</source>
         <target>You can click on a date to change its availability</target>
@@ -233,7 +225,7 @@
       </trans-unit>
       <trans-unit id="ebe9c24f88a0e40e2069e037cf43c6748475ca57" resname="listing.edit.completion_notice_profile_desc">
         <source>listing.edit.completion_notice_profile_desc</source>
-          <target><![CDATA[<a href="%profile%">Introduce yourself</a>]]></target>
+        <target><![CDATA[<a href="%profile%">Introduce yourself</a>]]></target>
       </trans-unit>
       <trans-unit id="15d1bbc5c27c9dbc99f110c4a826dfe9350a701e" resname="listing.edit.completion_notice_profile_photo">
         <source>listing.edit.completion_notice_profile_photo</source>
@@ -595,10 +587,6 @@
         <source>listing.show.characteristics</source>
         <target>Characteristics</target>
       </trans-unit>
-        <trans-unit id="49814edfe335fbfce2bc3582fbc6ecf400d23993" resname="listing.show.nb_comments">
-            <source>listing.show.nb_comments</source>
-          <target>{0} 0 comment|{1} 1 comment|]1, Inf] %count% comments</target>
-        </trans-unit>
       <trans-unit id="89814edfe335fbfce2cc3582fbc6ecf400d23995" resname="listing.show.comments">
         <source>listing.show.comments</source>
         <target>Comments</target>
@@ -646,6 +634,10 @@
       <trans-unit id="acffb69c919141c1a4fc0626c65ea7f32f7a23d4" resname="listing.show.nb_bookings_offerer.help">
         <source>listing.show.nb_bookings_offerer.help</source>
         <target>Display help while mouse hover</target>
+      </trans-unit>
+      <trans-unit id="8a805787a5562eab9db78b8d515d1865a74b9c85" resname="listing.show.nb_comments">
+        <source>listing.show.nb_comments</source>
+        <target>{0} 0 comment|{1} 1 comment|]1, Inf] %count% comments</target>
       </trans-unit>
       <trans-unit id="ec450c43b78fe468a9c80305e073e77a47cdf499" resname="listing.show.options">
         <source>listing.show.options</source>
