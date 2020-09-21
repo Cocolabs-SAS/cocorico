@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class BookingEditType extends AbstractType implements TranslationContainerInterface
 {
-    public static $tacError = 'listing.form.tac.error';
+    public static $tacError = 'booking.form.tac.error';
 
     /**
      * @param FormBuilderInterface $builder
