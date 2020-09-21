@@ -7,16 +7,26 @@
         {% block main %}
             {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
             <div id="form-registerlogin" class="col-xs-12 form-signup min-height">
-                <h1>{{ 'registration.confirmed.title'|trans }}</h1>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8" style="display:flex;align-items:center;">
+                            <img alt="OK" aria-hidden="true" src="/images/done.svg" style="padding-right:4rem"/>
+                            <h1>Votre inscription est prise en compte,<br/>votre profil sera visible dans 48H</h1>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
 
-                <p>{{ 'registration.confirmed'|trans({'%firstname%': user.firstname}) }}</p>
-                <br/>
-
-                {% if targetUrl %}
-                    <p>
-                        <a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a>
-                    </p>
-                {% endif %}
+                    <div class="row" style="margin-top:4rem">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-8 buttonrow" style="display:flex">
+                            <a class="btn btn-outline-primary" href="/fr">Retour à la page d'accueil</a>
+                            <div style="display:flex;align-items:center;font-size:1.2em">ou</div>
+                            <a class="btn btn-primary" href="/fr/annonce/creer">Publiez votre offre de prestation</a>
+                        </div>
+                        <div class="col-sm-2"></div>
+                    </div>
+                </div>
             </div>
         {% endblock %}
 

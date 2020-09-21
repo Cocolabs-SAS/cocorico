@@ -75,6 +75,35 @@
     flex: none;
 }
 
+/******************
+ * REGISTER CONFIRMATION STYLES
+ ******************/
+ #form-registerlogin .buttonrow {
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+ }
+
+#form-registerlogin .btn-outline-primary {
+    box-sizing: border-box;
+    border: 4px solid #0077FF;
+    border-radius: 5px;
+}
+
+#form-registerlogin .btn-outline-primary:hover { background-color: #007BFF; }
+
+
+#form-registerlogin .btn-primary {
+    box-sizing: border-box;
+    border: 4px solid #0077FF;
+    border-radius: 5px;
+    background-color: #007BFF;
+}
+
+#form-registerlogin .btn-primary:hover {
+    border-color:#0069d9;
+    background-color:#0069d9;
+}
 
 /******************
  * SUBSCRIPTION STYLES
