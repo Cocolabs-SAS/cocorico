@@ -12,13 +12,12 @@
 namespace Cocorico\ConfigBundle\DataFixtures\ORM;
 
 use Cocorico\ConfigBundle\Entity\Parameter;
-use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadParameterData extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class ParameterFixtures extends Fixture implements ContainerAwareInterface
 {
     /** @var  ContainerInterface container */
     private $container;
@@ -46,13 +45,4 @@ class LoadParameterData extends AbstractFixture implements OrderedFixtureInterfa
             $manager->flush();
         }
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOrder()
-    {
-        return 10;
-    }
-
 }

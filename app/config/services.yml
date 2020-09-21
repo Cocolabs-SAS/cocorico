@@ -16,6 +16,9 @@ services:
   Cocorico\CoreBundle\DataFixtures\ORM\:
     resource: '../../src/Cocorico/CoreBundle/DataFixtures/ORM/*'
 
+  Cocorico\ConfigBundle\DataFixtures\ORM\:
+    resource: '../../src/Cocorico/ConfigBundle/DataFixtures/ORM/*'
+
   # makes classes in src/AppBundle available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
   #    AppBundle\:
