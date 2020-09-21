@@ -356,8 +356,14 @@ class Booking extends BaseBooking
             $expirationDate = clone $this->getNewBookingAt();
             $expirationDate->add(new DateInterval('PT'.$bookingExpirationDelay.'M'));
 
+            if ($bookingExpirationDelay >= 0) {
+                $expirationDate->add(new DateInterval('PT' . $bookingExpirationDelay . 'M'));
+            } else {
+                $expirationDate->sub(new DateInterval('PT' . (-$bookingExpirationDelay) . 'M'));
+            }
+
             $acceptationDate = clone $this->getStart();
-            $acceptationDate->sub(new DateInterval('PT'.$bookingAcceptationDelay.'M'));
+            $acceptationDate->sub(new DateInterval('PT' . $bookingAcceptationDelay . 'M'));
 
             //Return minus date
             if ($expirationDate->format('Ymd H:i') < $acceptationDate->format('Ymd H:i')) {
