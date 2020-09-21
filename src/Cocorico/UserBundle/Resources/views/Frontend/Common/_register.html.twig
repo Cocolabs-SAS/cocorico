@@ -300,7 +300,7 @@ which acts on the person type choice.
                             </label>
                         </div>
 
-                        <div class="field-row validate-row itou-checkbox""display:block">
+                        <div class="field-row validate-row itou-checkbox">
                             <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
                             <label>
                                 <div class="field-holder">
@@ -380,7 +380,7 @@ which acts on the person type choice.
     window.addEventListener("load", (event) => {
         // Add listener on fist itou info click
         $('.itou-fieldgroup input').on('click', () => {
-            $('.itou-info-hidden').fadeIn();
+            $('.itou-info-hidden').css('display', 'flex');
             }
         );
     });
