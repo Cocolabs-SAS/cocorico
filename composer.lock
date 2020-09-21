@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "77ea523408ae9e084de6fa671587e5d5",
+    "content-hash": "cf8b1613bfd2600e4c437ed2a559442b",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -4602,6 +4602,7 @@
                 "javascript",
                 "minification"
             ],
+            "abandoned": true,
             "time": "2016-04-19T09:28:22+00:00"
         },
         {
@@ -5438,6 +5439,7 @@
                 "configuration",
                 "distribution"
             ],
+            "abandoned": true,
             "time": "2017-08-25T16:55:44+00:00"
         },
         {
@@ -5920,6 +5922,7 @@
             "keywords": [
                 "sonata"
             ],
+            "abandoned": true,
             "time": "2017-11-30T10:36:19+00:00"
         },
         {
@@ -6404,7 +6407,7 @@
             "support": {
                 "source": "https://github.com/Cocolabs-SAS/SonataUserBundle/tree/4.0.2"
             },
-            "time": "2018-06-28T23:52:57+00:00"
+            "time": "2018-06-28 23:52:57"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -7548,6 +7551,7 @@
                 "breadcrumbs",
                 "symfony"
             ],
+            "abandoned": "mhujer/breadcrumbs-bundle",
             "time": "2017-05-31T08:41:22+00:00"
         },
         {
@@ -10208,7 +10212,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sonata-project/user-bundle": 20
+        "sonata-project/user-bundle": 20,
+        "symfony/phpunit-bridge": 5
     },
     "prefer-stable": false,
     "prefer-lowest": false,
