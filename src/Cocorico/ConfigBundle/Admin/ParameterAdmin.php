@@ -29,7 +29,7 @@ class ParameterAdmin extends AbstractAdmin
     // setup the default sort column and order
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name'
+        '_sort_by' => 'name',
     );
 
     /** @inheritdoc */
@@ -44,7 +44,7 @@ class ParameterAdmin extends AbstractAdmin
                 'admin.parameter.title',
                 array(
                     'description' => 'admin.parameters.warning',
-                    'translation_domain' => 'SonataAdminBundle'
+                    'translation_domain' => 'SonataAdminBundle',
                 )
             )
             ->add(
@@ -52,7 +52,7 @@ class ParameterAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.parameter.name.label',
-                    'disabled' => true
+                    'disabled' => true,
                 )
             )
             ->add(
@@ -60,7 +60,7 @@ class ParameterAdmin extends AbstractAdmin
                 $parameter ? $parameter->getType() : null,
                 array(
                     'label' => 'admin.parameter.value.label',
-                    'required' => false
+                    'required' => false,
                 )
             )
             ->end();
@@ -99,7 +99,7 @@ class ParameterAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.parameter.value.label',
-                    'template' => 'CocoricoConfigBundle::list_parameter_value.html.twig'
+                    'template' => 'CocoricoConfigBundle::list_parameter_value.html.twig',
                 )
             );
 
@@ -110,7 +110,7 @@ class ParameterAdmin extends AbstractAdmin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                )
+                ),
             )
         );
     }
@@ -163,17 +163,21 @@ class ParameterAdmin extends AbstractAdmin
      */
     private function clearCache()
     {
-        $kernel = $this->getConfigurationPool()->getContainer()->get('kernel');
+        $container = $this->getConfigurationPool()->getContainer();
+        $kernel = $container->get('kernel');
+        $php = $container->getParameter('cocorico_config_php_cli_path');
 
         //Clear cache
-        $php = 'php';
         $rootDir = $kernel->getRootDir();
-        $command = $php . ' ' . $rootDir . '/console cache:clear --env=' . $kernel->getEnvironment();
+        $command = $php.' '.$rootDir.'/console cache:clear --env='.$kernel->getEnvironment();
 
         $process = new Process($command);
         try {
             $process->mustRun();
+            $content = $process->getOutput();
         } catch (ProcessFailedException $e) {
+            $content = $e->getMessage();
+
             return false;
         }
 
