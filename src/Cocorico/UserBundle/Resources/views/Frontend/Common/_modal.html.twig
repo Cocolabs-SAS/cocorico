@@ -2,6 +2,12 @@
   // Force display of modal on page load
   window.addEventListener("load", function(event) {
     $('#structure_modal').modal('show');
+    $('#modal_submit').on('click', () => {
+        let val = $("input[name='regio_select']:checked").val();
+        if (val == "typeform") {
+            window.location.href = "https://itou.typeform.com/to/ffLf4Zlg";
+        }
+    });
   });
 </script>
 
@@ -16,12 +22,12 @@
                 <div class="modal-body">
                     <p>Pour continuer, indiquez si :</p>
                     <ul>
-                        <li><label><input name="regio_select" type="radio" />Votre structure se trouve dans une de ces régions</label></li>
-                        <li><label><input name="regio_select" type="radio" />Votre structure ne se trouve pas dans ces régions mais vous souhaitez être informé de l'ouverture de la place marché dans votre région</label></li>
+                        <li><label><input name="regio_select" type="radio" value="continue" required/>Votre structure se trouve dans une de ces régions</label></li>
+                        <li><label><input name="regio_select" type="radio" value="typeform" required/>Votre structure ne se trouve pas dans ces régions mais vous souhaitez être informé de l'ouverture de la place marché dans votre région (vous serez réorienté vers un autre questionnaire)</label></li>
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">je continue</button>
+                    <button id="modal_submit" type="button" class="btn btn-default" data-dismiss="modal">je continue</button>
                 </div>
             </div>
         </div>

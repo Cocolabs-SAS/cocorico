@@ -23,6 +23,10 @@
     margin-left: -4rem;
     margin-right: 1rem;
 }
+ 
+#main .itou-info-hidden {
+    display: none; 
+}
 
 .itou-formtitle {
     display:block;
@@ -47,6 +51,30 @@
 .itou-fieldgroup .label {
     text-align:left !important;
 }
+
+.itou-checkbox > label {
+    display:flex;
+    justify-content: space-around;
+    flex-flow: row nowrap;
+}
+
+.itou-checkbox div.label {
+    width:100%;
+}
+
+#main .itou-checkbox label,
+#main .itou-checkbox .label {
+    margin: 0;
+    margin-top: -3px;
+    font-size:1.2em;
+}
+
+.itou-checkbox .field-holder {
+    width: 3rem;
+    overflow: visible;
+    flex: none;
+}
+
 
 /******************
  * SUBSCRIPTION STYLES

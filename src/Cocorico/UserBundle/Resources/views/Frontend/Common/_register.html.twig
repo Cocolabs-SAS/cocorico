@@ -39,14 +39,14 @@ which acts on the person type choice.
                             <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
                             <div class="struct_type_select" data-id="person-type" style="">
                                 <div class="option">
-                                <label>
+                                <label class="itou-info-show">
                                 {{ form_widget(form_registration.personType.1) }}
                                 Une structure <strong>inclusive</strong> (SIAE ou structure du secteur adapté protégé)
                                 </label>
                                 {# { form_label(form_registration.personType.1) } #}
                                 </div>
                                 <div class="option">
-                                <label>
+                                <label class="itou-info-show">
                                 {{ form_widget(form_registration.personType.0) }} 
                                 Une structure <strong>classique</strong>
                                 </label>
@@ -157,7 +157,7 @@ which acts on the person type choice.
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="itou-info">
+                    <div class="itou-info itou-info-hidden">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
                         Ces informations sont necéssaires pour la validation de votre inscription. Seules, les offres des structures validées seront publiées
@@ -248,7 +248,7 @@ which acts on the person type choice.
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="itou-info">
+                    <div class="itou-info itou-info-hidden">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
                         Ces informations pourront être modifiées par la suite.
@@ -262,54 +262,65 @@ which acts on the person type choice.
                         <fieldset>
                         <legend>En m'inscrivant, je m'engage à</legend>
 
-                        <div class="field-row validate-row">
-                            <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
-                            <span class="label" style="width:350px">
-                                {{ form_label(form_registration.accept_rgpd, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.accept_rgpd.legal'|trans
-                                    }
-                                }) }}
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'form-control required' } }) }}
-                            </div>
+                       <div class="field-row validate-row itou-checkbox" data-id="only-inclusive">
+                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
+                            <label class="">
+                                <div class="field-holder">
+                                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
+                                </div>
+                                <div class="label">
+                                    ce que les offres déposées sur la place de marché soit destinée à des structures professionnelles ( Association, secteur public ou privé)
+                                    {# { form_label(form_registration.offers_for_pro_sector, null, {
+                                        'label_attr': {
+                                            'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
+                                        }
+                                    }) }#} *
+                                </div>
+                            </label>
                         </div>
+
 
                         {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
-                        <div class="field-row validate-row" data-id="only-inclusive">
-                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
-                            </div>
-                            <span class="label" style="width:auto">
-                                ce que les offres déposées sur la place de marché soit destinée à des structures professionnelles ( Association, secteur public ou privé)
-                                {# { form_label(form_registration.offers_for_pro_sector, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
-                                    }
-                                }) }#} *
-                            </span>
+     
+
+                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive">
+                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
+                            <label>
+                                <div class="field-holder">
+                                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
+                                </div>
+                                <div class="label">
+                                    traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) 
+                                    {# { form_label(form_registration.quote_promise, null, {
+                                        'label_attr': {
+                                            'data-label-legal': 'form.quote_promise.legal'|trans
+                                        }
+                                    }) } #} *
+                                </div>
+                            </label>
                         </div>
 
-                        <div class="field-row validate-row" data-id="only-inclusive">
-                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                            <span class="label" style="width:350px">
-                                {{ form_label(form_registration.quote_promise, null, {
-                                    'label_attr': {
-                                        'data-label-legal': 'form.quote_promise.legal'|trans
-                                    }
-                                }) }} *
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
-                            </div>
+                        <div class="field-row validate-row itou-checkbox""display:block">
+                            <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
+                            <label>
+                                <div class="field-holder">
+                                    {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'form-control required' } }) }}
+                                </div>
+                                <div class="label">
+                                    accepter les conditions d'utilisation du service *
+                                    {#{ form_label(form_registration.accept_rgpd, null, {
+                                        'label_attr': {
+                                            'data-label-legal': 'form.accept_rgpd.legal'|trans
+                                        }
+                                    }) } #}
+                                </div>
+                            </label>
                         </div>
                         </fieldset>
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="itou-info">
+                    <div class="itou-info itou-info-hidden">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
                         Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
@@ -361,157 +372,16 @@ which acts on the person type choice.
                 <div class="col-sm-5">
                 </div>
             </div>
-            <!--
-                    {#
-                    <div class="field-row validate-row">
-                        <div class="error-container">{{ form_errors(form_registration.phonePrefix) }}</div>
-                        <span class="label" style="margin-top:0">{{ form_label(form_registration.phonePrefix) }}</span>
-
-                        <div class="field-holder code">
-                            {{ form_widget(form_registration.phonePrefix, {
-                                'attr': {
-                                    'class': "form-control"
-                                }
-                            }) }}
-                        </div>
-                    </div>
-                    <div class="field-row validate-row">
-                        <div class="error-container">{{ form_errors(form_registration.birthday) }}</div>
-                        <span class="label">
-                            {{ form_label(form_registration.birthday, null, {
-                                'label_attr': {
-                                    'data-label-legal': 'form.birthday.legal'|trans
-                                }
-                            }) }}
-                        </span>
-
-                        <div class="field-holder">
-                            <div class="field-day">
-                                {{ form_widget(form_registration.birthday.day, {
-                                    'attr': {
-                                        'class': "form-control required no-arrow"
-                                    }
-                                } ) }}
-                            </div>
-                            <div class="field-month">
-                                {{ form_widget(form_registration.birthday.month, {
-                                    'attr': {
-                                        'class': "form-control required no-arrow",
-                                    }
-                                } ) }}
-                            </div>
-                            <div class="field-year">
-                                {{ form_widget(form_registration.birthday.year, {
-                                    'attr': {
-                                        'class': "form-control required no-arrow"
-                                    }
-                                } ) }}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field-row validate-row">
-                        <div class="error-container">{{ form_errors(form_registration.nationality) }}</div>
-                        <span class="label">
-                            {{ form_label(form_registration.nationality, null, {
-                                'label_attr': {
-                                    'data-label-legal': 'form.nationality.legal'|trans
-                                }
-                            }) }}
-                        </span>
-
-                        <div class="field-holder">
-                            {{ form_widget(form_registration.nationality, {
-                                'attr': {
-                                    'class': "form-control required no-arrow"
-                                }
-                            }) }}
-                        </div>
-                    </div>
-
-                    <div class="field-row validate-row">
-                        <div class="error-container">{{ form_errors(form_registration.countryOfResidence) }}</div>
-                        <span class="label">
-                            {{ form_label(form_registration.countryOfResidence, null, {
-                                'label_attr': {
-                                    'data-label-legal': 'form.country_of_residence.legal'|trans
-                                }
-                            }) }}
-                        </span>
-
-                        <div class="field-holder">
-                            {{ form_widget(form_registration.countryOfResidence, {
-                                'attr': {
-                                    'class': "form-control required no-arrow",
-                                    'data-parsley-required-message': 'cocorico_user.countryOfResidence.blank'|trans({},'validators'),
-                                    'data-parsley-invalid-message': 'cocorico_user.countryOfResidence.invalid'|trans({}, 'validators')
-                                }
-                            }) }}
-                        </div>
-                    </div>
-
-                    {% if not timeUnitIsDay %}
-                        <div class="field-row validate-row">
-                            <div class="error-container">{{ form_errors(form_registration.timeZone) }}</div>
-                            <span class="label">{{ form_label(form_registration.timeZone) }}</span>
-
-                            <div class="field-holder">
-                                {{ form_widget(form_registration.timeZone, {
-                                    'attr': {'class': "form-control no-arrow"}
-                                }) }}
-                            </div>
-                        </div>
-                    {% endif %}
-
-                    #}
-                </div>
-                <div class="col-sm-5">
-                    <h2 class="itou-formtitle">&nbsp;</h2>
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        <strong>Une structure inclusive</strong> a la possibilité de proposer des prestations inclusives et d'en acheter.
-                        <strong>Une structure classique</strong> peut uniquement faire des achats inclusifs 
-                        </p>
-                    </div>
-                    <div class="itou-info-sep" style="height:10rem"> </div>
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Ces informations sont necéssaires pour la validation de votre inscription. Seules, les offres des structures validées seront publiées
-                        </p>
-                    </div>
-                    <div class="itou-info-sep" style="height:6rem"> </div>
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Ces informations pourront être modifiées par la suite.
-                        </p>
-                    </div>
-                    <div class="itou-info-sep" style="height:6rem"> </div>
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
-                        Et puis, plus on traite rapidement la demande, plus on a de chance de remporter le marché. <strong>Idéalement 48H</strong>.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            -->
         </div>
-
-        {#
-        <div class="column">
-            <h3>{{ 'user.facebook.login.title'|trans }}</h3>
-            <a href="#" onclick="fb_login();" class="btn-facebook">
-                <i class="icon-facebook"></i>
-                {{ 'user.facebook.login'|trans }}
-            </a>
-
-            <div id="fb-root"></div>
-        </div>
-        #}
     </div>
 </div>
 {{ form_rest(form_registration) }}
+<script>
+    window.addEventListener("load", (event) => {
+        // Add listener on fist itou info click
+        $('.itou-fieldgroup input').on('click', () => {
+            $('.itou-info-hidden').fadeIn();
+            }
+        );
+    });
+</script>
