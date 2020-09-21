@@ -374,7 +374,11 @@ SQLQUERY;
         $today = new DateTime('now');
 
         $dateExpired = new DateTime();
-        $dateExpired->sub(new DateInterval('PT'.$expirationDelay.'M'));
+        if ($expirationDelay >= 0) {
+            $dateExpired->sub(new DateInterval('PT' . $expirationDelay . 'M'));
+        } else {
+            $dateExpired->add(new DateInterval('PT' . (-$expirationDelay) . 'M'));
+        }
 
         $dateAcceptationExpired = new DateTime('now');
         $dateAcceptationExpired->add(new DateInterval('PT'.$acceptationDelay.'M'));

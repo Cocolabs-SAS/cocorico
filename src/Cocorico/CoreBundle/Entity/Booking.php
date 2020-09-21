@@ -345,25 +345,25 @@ class Booking extends BaseBooking
      * Get booking expiration date:
      *   Equal to the smallest date between (new booking date + expiration delay) and (booking start date + acceptation delay)
      *
-     * @param int $bookingExpirationDelay  in minutes
-     * @param int $bookingAcceptationDelay in minutes
+     * @param int $expirationDelay  in minutes
+     * @param int $acceptationDelay in minutes
      *
      * @return Datetime|bool (in UTC)
      */
-    public function getExpirationDate($bookingExpirationDelay, $bookingAcceptationDelay)
+    public function getExpirationDate($expirationDelay, $acceptationDelay)
     {
         if ($this->getNewBookingAt()) {
             $expirationDate = clone $this->getNewBookingAt();
-            $expirationDate->add(new DateInterval('PT'.$bookingExpirationDelay.'M'));
+            $expirationDate->add(new DateInterval('PT'.$expirationDelay.'M'));
 
-            if ($bookingExpirationDelay >= 0) {
-                $expirationDate->add(new DateInterval('PT' . $bookingExpirationDelay . 'M'));
+            if ($expirationDelay >= 0) {
+                $expirationDate->add(new DateInterval('PT' . $expirationDelay . 'M'));
             } else {
-                $expirationDate->sub(new DateInterval('PT' . (-$bookingExpirationDelay) . 'M'));
+                $expirationDate->sub(new DateInterval('PT' . (-$expirationDelay) . 'M'));
             }
 
             $acceptationDate = clone $this->getStart();
-            $acceptationDate->sub(new DateInterval('PT' . $bookingAcceptationDelay . 'M'));
+            $acceptationDate->sub(new DateInterval('PT' . $acceptationDelay . 'M'));
 
             //Return minus date
             if ($expirationDate->format('Ymd H:i') < $acceptationDate->format('Ymd H:i')) {
