@@ -157,12 +157,14 @@ which acts on the person type choice.
                     </div>
                 </div>
                 <div class="col-sm-5">
+                    <!--
                     <div class="itou-info itou-info-hidden">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
                         Ces informations sont necéssaires pour la validation de votre inscription. Seules, les offres des structures validées seront publiées
                         </p>
                     </div>
+                    -->
                 </div>
             </div>
             <div class="row">
@@ -315,9 +317,11 @@ which acts on the person type choice.
                     </div>
                 </div>
                 <div class="col-sm-5">
-                    <div class="itou-info itou-info-hidden">
+                    <div class="itou-info itou-info-hidden " data-id="only-inclusive">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
+                        Les structures inclusives s’engagent à vous répondre idéalement sous 48h.
+                        Assurez-vous d’une bonne réactivité pour un échange de qualité
                         Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
                         Et puis, plus on traite rapidement la demande, plus on a de chance de remporter le marché. <strong>Idéalement 48H</strong>.
                         </p>
@@ -371,12 +375,3 @@ which acts on the person type choice.
     </div>
 </div>
 {{ form_rest(form_registration) }}
-<script>
-    window.addEventListener("load", (event) => {
-        // Add listener on fist itou info click
-        $('.itou-fieldgroup input').on('click', () => {
-            $('.itou-info-hidden').css('display', 'flex');
-            }
-        );
-    });
-</script>
