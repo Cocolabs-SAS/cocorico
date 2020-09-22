@@ -115,7 +115,8 @@
                 $('[data-id=only-classic]').hide();
             }
             else if (cursor != type_inclusive) {
-                $('[data-id=only-inclusive]').hide();
+                $('[data-id^=only-inclusive]').hide();
+                $('[data-id^=only-inclusive] input').prop('required', false).removeClass('required');;
             }
 
             // show fields
@@ -123,7 +124,8 @@
                 $('[data-id=only-classic]').show();
             }
             else if (cursor == type_inclusive) {
-                $('[data-id=only-inclusive]').show();
+                $('[data-id^=only-inclusive]').show();
+                $('[data-id=only-inclusive-required] input').prop('required', true).addClass('required');
             }           
         }
 

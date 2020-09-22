@@ -16,7 +16,7 @@ which acts on the person type choice.
         <div class="col-sm-12">
             <br />
             <div class="itou-info">
-                <p>l'inscription ne prendra que quelques minutes, munissez-vous dès à présent des informations suivantes :
+                <p>L'inscription ne prendra que quelques minutes, munissez-vous dès à présent des informations suivantes :
                 <strong>
                     <br />- n° de SIRET ou  n° de SIREN
                     <br />- code APE ou code NAF
@@ -60,7 +60,7 @@ which acts on the person type choice.
                     <div class="itou-info">
                         <img class="shape" src="/images/info_shape.png" alt="Indicateur information utile"/>
                         <p>
-                        <strong>Une structure inclusive</strong> a la possibilité de proposer des prestations inclusives et d'en acheter.
+                        <strong>Une structure inclusive</strong> a la possibilité de proposer des prestations inclusives.
                         <strong>Une structure classique</strong> peut uniquement faire des achats inclusifs 
                         </p>
                     </div>
@@ -169,7 +169,7 @@ which acts on the person type choice.
                 <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <fieldset>
-                        <legend>Contact privilégié de la structure</legend>
+                        <legend>Contact commercial de la structure</legend>
 
                         <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
@@ -262,14 +262,14 @@ which acts on the person type choice.
                         <fieldset>
                         <legend>En m'inscrivant, je m'engage à</legend>
 
-                       <div class="field-row validate-row itou-checkbox" data-id="only-inclusive">
+                       <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
                             <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
                             <label class="">
                                 <div class="field-holder">
-                                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
+                                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
                                 </div>
                                 <div class="label">
-                                    ce que les offres déposées sur la place de marché soit destinée à des structures professionnelles ( Association, secteur public ou privé)
+                                    Ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)
                                     {# { form_label(form_registration.offers_for_pro_sector, null, {
                                         'label_attr': {
                                             'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
@@ -283,11 +283,11 @@ which acts on the person type choice.
                         {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
      
 
-                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive">
+                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
                             <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
                             <label>
                                 <div class="field-holder">
-                                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
+                                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
                                 </div>
                                 <div class="label">
                                     traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) 

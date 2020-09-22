@@ -21,8 +21,10 @@
                         <div class="col-sm-2"></div>
                         <div class="col-sm-8 buttonrow" style="display:flex">
                             <a class="btn btn-outline-primary" href="/fr">Retour à la page d'accueil</a>
-                            <div style="display:flex;align-items:center;font-size:1.2em">ou</div>
-                            <a class="btn btn-primary" href="/fr/annonce/creer">Publiez votre offre de prestation</a>
+                            {% if app.session.get('canSwitch') %}
+                                <div style="display:flex;align-items:center;font-size:1.2em">ou</div>
+                                <a class="btn btn-primary" href="/fr/annonce/creer">Publiez votre offre de prestation</a>
+                            {% endif %}
                         </div>
                         <div class="col-sm-2"></div>
                     </div>
