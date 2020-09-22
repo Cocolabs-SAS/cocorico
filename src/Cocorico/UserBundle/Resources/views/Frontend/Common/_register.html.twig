@@ -13,417 +13,365 @@ which acts on the person type choice.
     {{ form_errors(form_registration) }}
 
     <div class="tab-holder row">
-        <div class="col-sm-2"> </div>
-        <div class="col-sm-8">
-        <div class="col">
+        <div class="col-sm-12">
             <br />
-            <h3>{{ 'user.signup.title'|trans }}</h3>
-            <span>Veuillez vous munir de votre SIRET/SIREN et du code APE/NAF de votre structure</span>
+            <div class="itou-info">
+                <p>L'inscription ne prendra que quelques minutes, munissez-vous dès à présent des informations suivantes :
+                <strong>
+                    <br />- n° de SIRET ou  n° de SIREN
+                    <br />- code APE ou code NAF
+                </strong>
+                </p>
+            </div>
             <br />
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2 class="itou-formtitle">INSCRIPTION</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>Vous êtes</legend>
 
-            <fieldset>
-            <legend>Choix Type Structure</legend>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
-                {#
-                <span class="label">
-                    {{ form_label(form_registration.personType) }}
-                </span>
-                #}
-
-                <div class="struct_type_select" data-id="person-type" style="">
-                    <div>
-                    Vous représentez une :
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.personType) }}</div>
+                            <div class="struct_type_select" data-id="person-type" style="">
+                                <div class="option">
+                                <label class="itou-info-show">
+                                {{ form_widget(form_registration.personType.1) }}
+                                Une structure <strong>inclusive</strong> (SIAE ou structure du secteur adapté protégé)
+                                </label>
+                                {# { form_label(form_registration.personType.1) } #}
+                                </div>
+                                <div class="option">
+                                <label class="itou-info-show">
+                                {{ form_widget(form_registration.personType.0) }} 
+                                Une structure <strong>classique</strong>
+                                </label>
+                                </div>
+                            </div>
+                        </div>
+                        </fieldset>
                     </div>
-                    <div class="option">
-                    {{ form_widget(form_registration.personType.1) }}
-                    {{ form_label(form_registration.personType.1) }}
-                    </div>
-                    <div class="option">
-                    {{ form_widget(form_registration.personType.0) }} 
-                    {{ form_label(form_registration.personType.0) }} 
-                    </div>
-                    <div>
-                    Une structure inclusive a la possibilité de créer et diffuser des offres
-                    de prestation. Une structure classique n'a pas cette possibilité.
-                    <b>Ce choix est définitif</b>.
-                    </div>
-                    
-                    {#
-                    {{ form_widget(form_registration.personType, {
-                        'attr': {
-                            'class': "form-control form-control-radio required"
-                        }
-                    }) }}
-                    #}
                 </div>
-            </div>
-            </fieldset>
-            <fieldset>
-            <legend>Données Structure</legend>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
-                <span class="label">
-                    {{ form_label(form_registration.companyName) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.companyName, {
-                        'attr': {
-                            'class': 'form-control required',
-                            'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.siret) }}</div>
-                <span class="label">
-
-                    {{ form_label(form_registration.siret, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.siret.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.siret, {
-                        'attr': {
-                            'class': 'form-control required',
-                            'data-parsley-required-message': 'cocorico_user.siret.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.siret.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.naf) }}</div>
-                <span class="label">
-
-                    {{ form_label(form_registration.naf, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.naf.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.naf, {
-                        'attr': {
-                            'class': 'form-control',
-                            'data-parsley-required-message': 'cocorico_user.naf.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.naf.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row" data-id="only-inclusive">
-                <div class="error-container">{{ form_errors(form_registration.website) }}</div>
-                <span class="label">
-
-                    {{ form_label(form_registration.website, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.website.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.website, {
-                        'attr': {
-                            'class': 'form-control',
-                            'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-            </fieldset>
-
-            <fieldset>
-            <legend>Données personne de contact</legend>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
-                <span class="label">
-
-                    {{ form_label(form_registration.lastName, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.last_name.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.lastName, {
-                        'attr': {
-                            'class': 'form-control required',
-                            'data-parsley-required-message': 'cocorico_user.last_name.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.last_name.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.firstName) }}</div>
-                <span class="label">
-                    {{ form_label(form_registration.firstName, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.first_name.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.firstName, {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-required-message': 'cocorico_user.first_name.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.first_name.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-           <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.phone) }}</div>
-                <span class="label">{{ form_label(form_registration.phone) }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.phone, {
-                        'attr': {
-                            'class': "form-control",
-                            'data-parsley-type': 'digits',
-                            'data-parsley-type-message': 'cocorico_user.phone.invalid'|trans({},'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.email) }}</div>
-                <span class="label">{{ form_label(form_registration.email) }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.email, {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-required-message': 'cocorico_user.email.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.email.invalid'|trans({}, 'validators'),
-                            'data-parsley-type-message': 'cocorico_user.email.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-            </fieldset>
-
-
-            <fieldset>
-            <legend>Utilisation plateforme</legend>
-
-            {# dont work when empty value #}
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.plainPassword.first) }}</div>
-                <span class="label">{{ form_label(form_registration.plainPassword.first) }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.plainPassword.first, {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-required-message': 'cocorico_user.plainPassword.first.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.plainPassword.second) }}</div>
-                <span class="label">{{ form_label(form_registration.plainPassword.second) }}</span>
-
-                <div class="field-holder">
-                    {{ form_widget(form_registration.plainPassword.second , {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-equalto': "#"~ form_registration.plainPassword.first.vars.id,
-                            'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
-                            'data-parsley-required-message': 'cocorico_user.plainPassword.second.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.plainPassword.second.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
-                <span class="label" style="width:350px">
-                    {{ form_label(form_registration.accept_rgpd, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.accept_rgpd.legal'|trans
-                        }
-                    }) }}
-                </span>
-                <div class="field-holder">
-                    {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'form-control required' } }) }}
-                </div>
-            </div>
-
-            {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
-            <div class="field-row validate-row" data-id="only-inclusive">
-                <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                <span class="label" style="width:350px">
-                    {{ form_label(form_registration.offers_for_pro_sector, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
-                        }
-                    }) }} *
-                </span>
-                <div class="field-holder">
-                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control' } }) }}
-                </div>
-            </div>
-
-            <div class="field-row validate-row" data-id="only-inclusive">
-                <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                <span class="label" style="width:350px">
-                    {{ form_label(form_registration.quote_promise, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.quote_promise.legal'|trans
-                        }
-                    }) }} *
-                </span>
-                <div class="field-holder">
-                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control' } }) }}
-                </div>
-            </div>
-            </fieldset>
-
-            {#
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.phonePrefix) }}</div>
-                <span class="label" style="margin-top:0">{{ form_label(form_registration.phonePrefix) }}</span>
-
-                <div class="field-holder code">
-                    {{ form_widget(form_registration.phonePrefix, {
-                        'attr': {
-                            'class': "form-control"
-                        }
-                    }) }}
-                </div>
-            </div>
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.birthday) }}</div>
-                <span class="label">
-                    {{ form_label(form_registration.birthday, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.birthday.legal'|trans
-                        }
-                    }) }}
-                </span>
-
-                <div class="field-holder">
-                    <div class="field-day">
-                        {{ form_widget(form_registration.birthday.day, {
-                            'attr': {
-                                'class': "form-control required no-arrow"
-                            }
-                        } ) }}
-                    </div>
-                    <div class="field-month">
-                        {{ form_widget(form_registration.birthday.month, {
-                            'attr': {
-                                'class': "form-control required no-arrow",
-                            }
-                        } ) }}
-                    </div>
-                    <div class="field-year">
-                        {{ form_widget(form_registration.birthday.year, {
-                            'attr': {
-                                'class': "form-control required no-arrow"
-                            }
-                        } ) }}
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" alt="Indicateur information utile"/>
+                        <p>
+                        <strong>Une structure inclusive</strong> a la possibilité de proposer des prestations inclusives.
+                        <strong>Une structure classique</strong> peut uniquement faire des achats inclusifs 
+                        </p>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>Les informations de votre structure</legend>
 
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.nationality) }}</div>
-                <span class="label">
-                    {{ form_label(form_registration.nationality, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.nationality.legal'|trans
-                        }
-                    }) }}
-                </span>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
+                            <span class="label">
+                                {{ form_label(form_registration.companyName) }}
+                            </span>
 
-                <div class="field-holder">
-                    {{ form_widget(form_registration.nationality, {
-                        'attr': {
-                            'class': "form-control required no-arrow"
-                        }
-                    }) }}
-                </div>
-            </div>
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.companyName, {
+                                    'attr': {
+                                        'class': 'form-control required',
+                                        'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
 
-            <div class="field-row validate-row">
-                <div class="error-container">{{ form_errors(form_registration.countryOfResidence) }}</div>
-                <span class="label">
-                    {{ form_label(form_registration.countryOfResidence, null, {
-                        'label_attr': {
-                            'data-label-legal': 'form.country_of_residence.legal'|trans
-                        }
-                    }) }}
-                </span>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.siret) }}</div>
+                            <span class="label">
 
-                <div class="field-holder">
-                    {{ form_widget(form_registration.countryOfResidence, {
-                        'attr': {
-                            'class': "form-control required no-arrow",
-                            'data-parsley-required-message': 'cocorico_user.countryOfResidence.blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'cocorico_user.countryOfResidence.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
-                </div>
-            </div>
+                                {{ form_label(form_registration.siret, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.siret.legal'|trans
+                                    }
+                                }) }}
+                            </span>
 
-            {% if not timeUnitIsDay %}
-                <div class="field-row validate-row">
-                    <div class="error-container">{{ form_errors(form_registration.timeZone) }}</div>
-                    <span class="label">{{ form_label(form_registration.timeZone) }}</span>
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.siret, {
+                                    'attr': {
+                                        'class': 'form-control required',
+                                        'data-parsley-required-message': 'cocorico_user.siret.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.siret.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
 
-                    <div class="field-holder">
-                        {{ form_widget(form_registration.timeZone, {
-                            'attr': {'class': "form-control no-arrow"}
-                        }) }}
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.naf) }}</div>
+                            <span class="label">
+
+                                {{ form_label(form_registration.naf, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.naf.legal'|trans
+                                    }
+                                }) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.naf, {
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'data-parsley-required-message': 'cocorico_user.naf.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.naf.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row" data-id="only-inclusive">
+                            <div class="error-container">{{ form_errors(form_registration.website) }}</div>
+                            <span class="label">
+
+                                {{ form_label(form_registration.website, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.website.legal'|trans
+                                    }
+                                }) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.website, {
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                        </fieldset>
                     </div>
                 </div>
-            {% endif %}
+                <div class="col-sm-5">
+                    <!--
+                    <div class="itou-info itou-info-hidden">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Ces informations sont necéssaires pour la validation de votre inscription. Seules, les offres des structures validées seront publiées
+                        </p>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>Contact commercial de la structure</legend>
 
-            #}
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
+                            <span class="label">
 
- 
+                                {{ form_label(form_registration.lastName, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.last_name.legal'|trans
+                                    }
+                                }) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.lastName, {
+                                    'attr': {
+                                        'class': 'form-control required',
+                                        'data-parsley-required-message': 'cocorico_user.last_name.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.last_name.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.firstName) }}</div>
+                            <span class="label">
+                                {{ form_label(form_registration.firstName, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.first_name.legal'|trans
+                                    }
+                                }) }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.firstName, {
+                                    'attr': {
+                                        'class': "form-control required",
+                                        'data-parsley-required-message': 'cocorico_user.first_name.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.first_name.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.phone) }}</div>
+                            <span class="label">{{ form_label(form_registration.phone) }}</span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.phone, {
+                                    'attr': {
+                                        'class': "form-control",
+                                        'data-parsley-type': 'digits',
+                                        'data-parsley-type-message': 'cocorico_user.phone.invalid'|trans({},'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.email) }}</div>
+                            <span class="label">{{ form_label(form_registration.email) }}</span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.email, {
+                                    'attr': {
+                                        'class': "form-control required",
+                                        'data-parsley-required-message': 'cocorico_user.email.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.email.invalid'|trans({}, 'validators'),
+                                        'data-parsley-type-message': 'cocorico_user.email.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info itou-info-hidden">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Ces informations pourront être modifiées par la suite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>En m'inscrivant, je m'engage à</legend>
+
+                       <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
+                            <label class="">
+                                <div class="field-holder" onclick="$('#lbl3').trigger('click');">
+                                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
+                                </div>
+                                <div id="lbl3" class="label">
+                                    Ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)
+                                    {# { form_label(form_registration.offers_for_pro_sector, null, {
+                                        'label_attr': {
+                                            'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
+                                        }
+                                    }) }#} *
+                                </div>
+                            </label>
+                        </div>
+
+
+                        {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
+     
+
+                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
+                            <label>
+                                <div class="field-holder" onclick="$('#lbl2').trigger('click');">
+                                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
+                                </div>
+                                <div id="lbl2" class="label">
+                                    traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) 
+                                    {# { form_label(form_registration.quote_promise, null, {
+                                        'label_attr': {
+                                            'data-label-legal': 'form.quote_promise.legal'|trans
+                                        }
+                                    }) } #} *
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="field-row validate-row itou-checkbox">
+                            <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
+                            <label>
+                                <div class="field-holder" onclick="$('#lbl1').trigger('click');">
+                                    {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'required' } }) }}
+                                </div>
+                                <div id="lbl1" class="label">
+                                    accepter les conditions d'utilisation du service *
+                                </div>
+                            </label>
+                        </div>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info itou-info-hidden " data-id="only-inclusive">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Les structures inclusives s’engagent à vous répondre idéalement sous 48h.
+                        Assurez-vous d’une bonne réactivité pour un échange de qualité
+                        Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
+                        Et puis, plus on traite rapidement la demande, plus on a de chance de remporter le marché. <strong>Idéalement 48H</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <fieldset>
+                        <legend>Création d'un mot de passe</legend>
+
+                        {# dont work when empty value #}
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.plainPassword.first) }}</div>
+                            <span class="label">{{ form_label(form_registration.plainPassword.first) }}</span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.plainPassword.first, {
+                                    'attr': {
+                                        'class': "form-control required",
+                                        'data-parsley-required-message': 'cocorico_user.plainPassword.first.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form_registration.plainPassword.second) }}</div>
+                            <span class="label">{{ form_label(form_registration.plainPassword.second) }}</span>
+
+                            <div class="field-holder">
+                                {{ form_widget(form_registration.plainPassword.second , {
+                                    'attr': {
+                                        'class': "form-control required",
+                                        'data-parsley-equalto': "#"~ form_registration.plainPassword.first.vars.id,
+                                        'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
+                                        'data-parsley-required-message': 'cocorico_user.plainPassword.second.blank'|trans({},'validators'),
+                                        'data-parsley-invalid-message': 'cocorico_user.plainPassword.second.invalid'|trans({}, 'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="col-sm-2"> </div>
-
-        {#
-        <div class="column">
-            <h3>{{ 'user.facebook.login.title'|trans }}</h3>
-            <a href="#" onclick="fb_login();" class="btn-facebook">
-                <i class="icon-facebook"></i>
-                {{ 'user.facebook.login'|trans }}
-            </a>
-
-            <div id="fb-root"></div>
-        </div>
-        #}
     </div>
 </div>
 {{ form_rest(form_registration) }}

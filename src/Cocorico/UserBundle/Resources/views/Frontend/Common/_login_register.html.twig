@@ -82,18 +82,27 @@
 #}
 
 <script>
+    var INFO_HIDDEN = false;
+    var CURRENT_PERSON = false;
     $(function () {
         //User type (legal or natural)
         $('[data-id=person-type] input').each(function (k, personType) {
             // toggleCompanyName(personType);
             // toggleLabels(personType);
             toggleFields(personType);
+            $('.itou-info-hidden').css('display', 'none');
 
             $(personType).on('click', function () {
                 // toggleCompanyName(this);
                 // toggleLabels(this);
                 toggleFields(this);
             });
+        });
+
+        $('.itou-fieldgroup input').on('click', () => {
+            if (INFO_HIDDEN) { return; }
+            INFO_HIDDEN = true;
+            toggleFieldsDisplay(CURRENT_PERSON);
         });
 
         /**
@@ -104,19 +113,24 @@
             if (!$(personType).is(':checked')) {
                 return;
             }
-            console.log('Acting on', personType);
+            let cursor = $(personType).val();
+            CURRENT_PERSON = cursor;
+            toggleFieldsDisplay(cursor);
+        }
+
+        function toggleFieldsDisplay(cursor) {
  
             // See User entity for type/value relationships
             const type_classic = 3;
             const type_inclusive = 4;
-            let cursor = $(personType).val();
 
             // Hide fields
             if (cursor != type_classic) {
                 $('[data-id=only-classic]').hide();
             }
             else if (cursor != type_inclusive) {
-                $('[data-id=only-inclusive]').hide();
+                $('[data-id^=only-inclusive]').hide();
+                $('[data-id^=only-inclusive] input').prop('required', false).removeClass('required');;
             }
 
             // show fields
@@ -124,8 +138,14 @@
                 $('[data-id=only-classic]').show();
             }
             else if (cursor == type_inclusive) {
-                $('[data-id=only-inclusive]').show();
+                $('[data-id^=only-inclusive]').show();
+                $('[data-id=only-inclusive-required] input').prop('required', true).addClass('required');
             }           
+
+            if (!INFO_HIDDEN) {
+                $('.itou-info-hidden').css('display', 'none');
+            }
+
         }
 
         /**

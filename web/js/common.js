@@ -13,6 +13,7 @@ $(window).load(function () {
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
+    // $('.modal-force').modal('show');
 });
 
 $(function () {
