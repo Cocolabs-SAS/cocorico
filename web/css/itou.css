@@ -415,3 +415,30 @@ div.form-message {
 }
 
 
+section.quote-quick-form {
+    border-radius: 7px;
+    background-color: #FFFFFF;
+    border-top:5px solid #e54b28;
+    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.1);
+    margin:0;
+    padding:0;
+    text-align:left;
+}
+
+.quote-quick-form h3 {
+    margin:0;
+    padding:0;
+    color:#e54b28;
+    font-size:2em;
+    text-align:center;
+}
+
+.quote-quick-form label {
+    text-align:left;
+    font-size:1em;
+}
+
+.quote-quick-form  fieldset {
+    width: 100%;
+    padding: 2rem;
+}

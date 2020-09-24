@@ -1,6 +1,6 @@
 {% trans_default_domain 'cocorico_quote' %}
 
-<section class="widget reservation ajax-container">
+<section class="widget reservation ajax-container quote-quick-form">
     {% if app.request.isXmlHttpRequest %}
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
     {% endif %}
@@ -11,15 +11,14 @@
 
     <fieldset>
         <legend class="hidden">quote</legend>
-        <h4>Demander un devis</h4>
+        <h3>Demandez un devis</h3>
 
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style="margin:2rem 0 ;">
                 {{ form_errors(form.prestaStartDate) }}
-                <strong class="title">
-                    {{ form_label(form.prestaStartDate, null, {'required': true}) }}
-                </strong>
-
+                {{ form_label(form.prestaStartDate, null, {'required': true}) }}
+            </div>
+            <div class="col-12" style="margin:2rem 0 ;">
                 <div class="input-append date field-holder datepicker-holder-ajax">
                     <span class="add-on">
                         <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
@@ -35,13 +34,11 @@
                     }) }}
                 </div>
             </div>
-            <br />
-
             <div class="col-12">
                 {{ form_errors(form.budget) }}
-                <strong class="title">
-                    {{ form_label(form.budget, null, {'required': false}) }}
-                </strong>
+                {{ form_label(form.budget, null, {'required': false}) }}
+            </div>
+            <div class="col-12">
                 <div class="field-holder">
                     <span class="add-on">
                         <i data-date-icon="icon-info" data-time-icon="icon-time" class="icon-info"></i>
