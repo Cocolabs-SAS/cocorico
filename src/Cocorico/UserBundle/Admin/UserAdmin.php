@@ -50,9 +50,16 @@ class UserAdmin extends SonataUserAdmin
         $subject = $this->getSubject();
 
         $formMapper
-            ->with('Profile-1')
+            ->with('Info Structure')
             ->add(
                 'enabled',
+                null,
+                array(
+                    'required' => false,
+                )
+            )
+            ->add(
+                'idCardVerified',
                 null,
                 array(
                     'required' => false,
@@ -72,7 +79,7 @@ class UserAdmin extends SonataUserAdmin
                 array(
                     'empty_data' => User::PERSON_TYPE_CLASSIC,
                     'required' => true,
-                    'disabled' => true,
+                    'disabled' => false,
                     'multiple' => false,
                     'expanded' => true,
                     'choices' => array_flip(User::$personTypeValues),
@@ -119,14 +126,14 @@ class UserAdmin extends SonataUserAdmin
                     'required' => (!$subject || is_null($subject->getId())),
                 )
             )
-            ->add(
-                'motherTongue',
-                'language',
-                array(
-                    'required' => true,
-                    'disabled' => true
-                )
-            )
+            // ->add(
+            //     'motherTongue',
+            //     'language',
+            //     array(
+            //         'required' => true,
+            //         'disabled' => true
+            //     )
+            // )
             ->end();
 
         //Translations fields
@@ -137,7 +144,7 @@ class UserAdmin extends SonataUserAdmin
                 'constraints' => array(new NotBlank())
             );
         }
-        $formMapper->with('Profile-2')
+        $formMapper->with('Info Contact')
             ->add(
                 'translations',
                 TranslationsType::class,
@@ -148,22 +155,23 @@ class UserAdmin extends SonataUserAdmin
                         'description' => array(
                             'field_type' => 'textarea',
                             'locale_options' => $descriptions,
-                            'required' => true
+                            'required' => true,
+                            'empty_data' => 'Description',
                         ),
                     ),
                     /** @Ignore */
                     'label' => false,
                 )
             )
-            ->add(
-                'birthday',
-                'birthday',
-                array(
-                    'format' => 'dd - MMMM - yyyy',
-                    'years' => range(date('Y') - 18, date('Y') - 80),
-                    'disabled' => true,
-                )
-            )
+            // ->add(
+            //     'birthday',
+            //     'birthday',
+            //     array(
+            //         'format' => 'dd - MMMM - yyyy',
+            //         'years' => range(date('Y') - 18, date('Y') - 80),
+            //         'disabled' => true,
+            //     )
+            // )
             ->add(
                 'phonePrefix',
                 null,
@@ -178,93 +186,93 @@ class UserAdmin extends SonataUserAdmin
                     'required' => false,
                 )
             )
-            ->add(
-                'timeZone',
-                'timezone',
-                array(
-                    'label' => 'form.time_zone',
-                    'required' => true,
-                    'disabled' => true
-                ),
-                array(
-                    'translation_domain' => 'cocorico_user',
-                )
-            )
-            ->add(
-                'nationality',
-                'country',
-                array(
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'profession',
-                null,
-                array(
-                    'required' => false,
-                )
-            )
-            ->add(
-                'iban',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'bic',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'bankOwnerName',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'bankOwnerAddress',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'annualIncome',
-                null,
-                array(
-                    'required' => false,
-                )
-            )
-            ->add(
-                'feeAsAsker',//Percent
-                'integer',
-                array(
-                    'attr' => array(
-                        'min' => 0,
-                        'max' => 100,
-                    ),
-                    'required' => false,
-                )
-            )
-            ->add(
-                'feeAsOfferer', //Percent
-                'integer',
-                array(
-                    'attr' => array(
-                        'min' => 0,
-                        'max' => 100,
-                    ),
-                    'required' => false,
-                )
-            )
+            // ->add(
+            //     'timeZone',
+            //     'timezone',
+            //     array(
+            //         'label' => 'form.time_zone',
+            //         'required' => true,
+            //         'disabled' => true
+            //     ),
+            //     array(
+            //         'translation_domain' => 'cocorico_user',
+            //     )
+            // )
+            // ->add(
+            //     'nationality',
+            //     'country',
+            //     array(
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'profession',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //     )
+            // )
+            // ->add(
+            //     'iban',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'bic',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'bankOwnerName',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'bankOwnerAddress',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'annualIncome',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //     )
+            // )
+            // ->add(
+            //     'feeAsAsker',//Percent
+            //     'integer',
+            //     array(
+            //         'attr' => array(
+            //             'min' => 0,
+            //             'max' => 100,
+            //         ),
+            //         'required' => false,
+            //     )
+            // )
+            // ->add(
+            //     'feeAsOfferer', //Percent
+            //     'integer',
+            //     array(
+            //         'attr' => array(
+            //             'min' => 0,
+            //             'max' => 100,
+            //         ),
+            //         'required' => false,
+            //     )
+            // )
             ->add(
                 'phoneVerified',
                 null,
@@ -279,29 +287,22 @@ class UserAdmin extends SonataUserAdmin
                     'required' => false,
                 )
             )
-            ->add(
-                'idCardVerified',
-                null,
-                array(
-                    'required' => false,
-                )
-            )
-            ->add(
-                'nbQuotesOfferer',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'nbQuotesAsker',
-                null,
-                array(
-                    'required' => false,
-                    'disabled' => true,
-                )
-            )
+            // ->add(
+            //     'nbQuotesOfferer',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
+            // ->add(
+            //     'nbQuotesAsker',
+            //     null,
+            //     array(
+            //         'required' => false,
+            //         'disabled' => true,
+            //     )
+            // )
             ->add(
                 'createdAt',
                 null,
@@ -344,34 +345,34 @@ class UserAdmin extends SonataUserAdmin
             ->end();
 
 
-        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
-            $formMapper->with('Mangopay')
-                ->add(
-                    'mangopayId',
-                    null,
-                    array(
-                        'disabled' => true,
-                        'required' => false,
-                    )
-                )
-                ->add(
-                    'mangopayWalletId',
-                    null,
-                    array(
-                        'disabled' => true,
-                        'required' => false,
-                    )
-                )
-                ->add(
-                    'mangopayBankAccountId',
-                    null,
-                    array(
-                        'disabled' => true,
-                        'required' => false,
-                    )
-                )
-                ->end();
-        }
+        // if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
+        //     $formMapper->with('Mangopay')
+        //         ->add(
+        //             'mangopayId',
+        //             null,
+        //             array(
+        //                 'disabled' => true,
+        //                 'required' => false,
+        //             )
+        //         )
+        //         ->add(
+        //             'mangopayWalletId',
+        //             null,
+        //             array(
+        //                 'disabled' => true,
+        //                 'required' => false,
+        //             )
+        //         )
+        //         ->add(
+        //             'mangopayBankAccountId',
+        //             null,
+        //             array(
+        //                 'disabled' => true,
+        //                 'required' => false,
+        //             )
+        //         )
+        //         ->end();
+        // }
     }
 
 
@@ -385,21 +386,23 @@ class UserAdmin extends SonataUserAdmin
                 array()
             );
 
-        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
-            $listMapper->add(
-                'mangopayId',
-                null,
-                array()
-            );
-        }
+        // if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
+        //     $listMapper->add(
+        //         'mangopayId',
+        //         null,
+        //         array()
+        //     );
+        // }
 
         $listMapper
             ->addIdentifier('fullname')
 //            ->add('email')
             ->add('enabled', null, array('editable' => true))
+            ->add('idCardVerified', null, array('editable' => true))
+            ->add('personType', 'choice', array('choices' => array(1=> 'personne', 2 => 'entreprise', 3 => 'classique', 4 => 'inclusive'), 'editable' => true))
 //            ->add('locked', null, array('editable' => true))
-            ->add('feeAsAsker', null, array('editable' => true))
-            ->add('feeAsOfferer', null, array('editable' => true))
+            // ->add('feeAsAsker', null, array('editable' => true))
+            // ->add('feeAsOfferer', null, array('editable' => true))
             ->add('listings', null, array('associated_property' => 'getTitle'))
             ->add('createdAt', null, array());
 
@@ -507,13 +510,13 @@ class UserAdmin extends SonataUserAdmin
             'Created At' => 'createdAt',
         );
 
-        if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
-            $mangopayFields = array(
-                'Mangopay Id' => 'mangopayId',
-            );
+        // if (array_key_exists('CocoricoMangoPayBundle', $this->bundles)) {
+        //     $mangopayFields = array(
+        //         'Mangopay Id' => 'mangopayId',
+        //     );
 
-            $fields = array_merge($fields, $mangopayFields);
-        }
+        //     $fields = array_merge($fields, $mangopayFields);
+        // }
 
         return $fields;
     }
