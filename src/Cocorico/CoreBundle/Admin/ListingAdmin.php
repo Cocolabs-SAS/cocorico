@@ -183,45 +183,45 @@ class ListingAdmin extends AbstractAdmin
 
                     'label' => 'admin.listing.images.label'
                 )
-            )
-            ->add(
-                'price',
-                PriceType::class,
-                array(
-                    'disabled' => true,
-                    'label' => 'admin.listing.price.label',
-                    'include_vat' => $this->includeVat
-                )
             );
+            // ->add(
+            //     'price',
+            //     PriceType::class,
+            //     array(
+            //         'disabled' => true,
+            //         'label' => 'admin.listing.price.label',
+            //         'include_vat' => $this->includeVat
+            //     )
+            // );
 
-        if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
-            $formMapper
-                ->add(
-                    'amountDeposit',
-                    PriceType::class,
-                    array(
-                        'disabled' => true,
-                        'label' => 'listing_edit.form.deposit',
-                        'required' => false,
-                    ),
-                    array(
-                        'translation_domain' => 'cocorico_listing_deposit',
-                    )
-                );
-        }
+        // if (array_key_exists("CocoricoListingDepositBundle", $this->bundles)) {
+        //     $formMapper
+        //         ->add(
+        //             'amountDeposit',
+        //             PriceType::class,
+        //             array(
+        //                 'disabled' => true,
+        //                 'label' => 'listing_edit.form.deposit',
+        //                 'required' => false,
+        //             ),
+        //             array(
+        //                 'translation_domain' => 'cocorico_listing_deposit',
+        //             )
+        //         );
+        // }
 
         $formMapper
-            ->add(
-                'cancellationPolicy',
-                ChoiceType::class,
-                array(
-                    'choices' => array_flip(Listing::$cancellationPolicyValues),
-                    'placeholder' => 'admin.listing.cancellation_policy.label',
-                    'disabled' => true,
-                    'label' => 'admin.listing.cancellation_policy.label',
-                    'translation_domain' => 'cocorico_listing',
-                )
-            )
+            //->add(
+            //    'cancellationPolicy',
+            //    ChoiceType::class,
+            //    array(
+            //        'choices' => array_flip(Listing::$cancellationPolicyValues),
+            //        'placeholder' => 'admin.listing.cancellation_policy.label',
+            //        'disabled' => true,
+            //        'label' => 'admin.listing.cancellation_policy.label',
+            //        'translation_domain' => 'cocorico_listing',
+            //    )
+            //)
             ->add(
                 'location.completeAddress',
                 'text',
@@ -465,38 +465,23 @@ class ListingAdmin extends AbstractAdmin
                     'data_trans' => 'cocorico_listing'
                 )
             )
-            ->add(
-                'user',
-                null,
-                array('label' => 'admin.listing.user.label')
-            )
-            ->add(
-                'user.email',
-                null,
-                array('label' => 'admin.listing.user_email.label')
-            )
-            ->add(
-                'user.phone',
-                null,
-                array('label' => 'admin.listing.user_phone.label')
-            )
-            ->add(
-                'title',
-                null,
-                array('label' => 'admin.listing.title.label')
-            )
-            ->add(
-                'priceDecimal',
-                null,
-                array(
-                    'label' => 'admin.listing.price.label', //Price (€)',
-                )
-            )
-            ->add(
-                'averageRating',
-                null,
-                array('label' => 'admin.listing.average_rating.label')
-            );
+            ->add( 'certified', null, array())
+            ->add( 'user', null, array('label' => 'admin.listing.user.label'))
+            ->add( 'user.email', null, array('label' => 'admin.listing.user_email.label'))
+            ->add( 'user.phone', null, array('label' => 'admin.listing.user_phone.label'))
+            ->add( 'title', null, array('label' => 'admin.listing.title.label'));
+            // ->add(
+            //     'priceDecimal',
+            //     null,
+            //     array(
+            //         'label' => 'admin.listing.price.label', //Price (€)',
+            //     )
+            // )
+            // ->add(
+            //     'averageRating',
+            //     null,
+            //     array('label' => 'admin.listing.average_rating.label')
+            // );
 
         $listMapper
             ->add(
