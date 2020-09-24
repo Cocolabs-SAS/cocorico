@@ -7,7 +7,6 @@ with the "data-id" attribute. See _login_register.html.twig for the toggleFields
 which acts on the person type choice.
 
 #}
-
 <div role="tabpanel" class="tab-pane{{ register_class }}" id="home">
 
     {{ form_errors(form_registration) }}
@@ -266,19 +265,17 @@ which acts on the person type choice.
 
                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
                             <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                            <label class="">
-                                <div class="field-holder" onclick="$('#lbl3').trigger('click');">
+                                {# <div class="field-holder" onclick="console.log('poulet'); $('#lbl3').trigger('click');"> #}
+                            <div class="label-container">
+                                <div class="field-holder" >
                                     {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
                                 </div>
-                                <div id="lbl3" class="label">
-                                    Ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)
-                                    {# { form_label(form_registration.offers_for_pro_sector, null, {
-                                        'label_attr': {
-                                            'data-label-legal': 'form.offers_for_pro_sector.legal'|trans
-                                        }
-                                    }) }#} *
+                                <div class="label">
+                                    {{ form_label(form_registration.offers_for_pro_sector,
+                                        'ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)'
+                                    ) }} *
                                 </div>
-                            </label>
+                            </div>
                         </div>
 
 
@@ -287,31 +284,35 @@ which acts on the person type choice.
 
                         <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
                             <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                            <label>
+                            <div class="label-container">
                                 <div class="field-holder" onclick="$('#lbl2').trigger('click');">
                                     {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
                                 </div>
-                                <div id="lbl2" class="label">
-                                    traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) 
+                                <div class="label">
+                                    {{ form_label(form_registration.quote_promise,
+                                        'traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) '
+                                    ) }}
                                     {# { form_label(form_registration.quote_promise, null, {
                                         'label_attr': {
                                             'data-label-legal': 'form.quote_promise.legal'|trans
                                         }
                                     }) } #} *
                                 </div>
-                            </label>
+                            </div>
                         </div>
 
                         <div class="field-row validate-row itou-checkbox">
                             <div class="error-container">{{ form_errors(form_registration.accept_rgpd) }}</div>
-                            <label>
+                            <div class="label-container">
                                 <div class="field-holder" onclick="$('#lbl1').trigger('click');">
                                     {{ form_widget(form_registration.accept_rgpd, { 'attr': { 'class': 'required' } }) }}
                                 </div>
                                 <div id="lbl1" class="label">
-                                    accepter les conditions d'utilisation du service *
+                                    {{ form_label(form_registration.accept_rgpd,
+                                        'accepter les conditions d\'utilisation du service'
+                                    ) }}
                                 </div>
-                            </label>
+                            </div>
                         </div>
                         </fieldset>
                     </div>
