@@ -52,7 +52,7 @@
     text-align:left !important;
 }
 
-.itou-checkbox > label {
+.itou-checkbox > .label-container {
     display:flex;
     justify-content: space-around;
     flex-flow: row nowrap;
@@ -62,7 +62,7 @@
     width:100%;
 }
 
-#main .itou-checkbox label,
+#main .itou-checkbox .label-container,
 #main .itou-checkbox .label {
     margin: 0;
     margin-top: -3px;
