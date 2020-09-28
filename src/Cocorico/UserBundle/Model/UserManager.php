@@ -205,7 +205,7 @@ class UserManager extends BaseUserManager implements UserManagerInterface
             $fbUser = $facebookRepository->findOneByFacebookId($responseArray['id']);
 
             // if the fbUser does not exist with the id, check email if user exist with email
-            if (!$fbUser) {
+            if (!$fbUser && isset($responseArray['email'])) {
                 $user = $this->getRepository()->findOneByEmail($responseArray['email']);
                 // check if the user exists with the email id provided by facebook
                 if (!$user) {
