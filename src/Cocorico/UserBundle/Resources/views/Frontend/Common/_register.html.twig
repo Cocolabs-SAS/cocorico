@@ -246,6 +246,29 @@
                     }) }}
                 </div>
             </div>
+
+            <div class="agreement field-row validate-row">
+                <div class="error-container">{{ form_errors(form_registration.tac) }}</div>
+
+                <div class="field-holder">
+                    <span class="label"></span>
+                    <div class="pull-left">
+                        {{ form_widget(form_registration.tac, {
+                            'attr': {
+                                'class': "form-control required",
+                                'data-parsley-required-message': 'cocorico_user.tac.error'|trans({},'cocorico'),
+                            }
+                        }) }}
+                    </div>
+                    <span class="pull-left">
+                        {{ form_label(form_registration.tac, null, {'required': false} ) }}
+                        <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans({}, 'cocorico_listing') }) }}"
+                           target="_blank">
+                            {{ 'listing.new.tac.link'|trans({}, 'cocorico_listing') }}
+                        </a>*
+                    </span>
+                </div>
+            </div>
         </div>
 
         <div class="column">

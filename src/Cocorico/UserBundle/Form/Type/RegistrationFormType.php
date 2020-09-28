@@ -12,8 +12,11 @@
 namespace Cocorico\UserBundle\Form\Type;
 
 use Cocorico\UserBundle\Entity\User;
+use JMS\TranslationBundle\Model\Message;
+use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,12 +26,14 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 /**
  * Class RegistrationFormType.
  */
-class RegistrationFormType extends AbstractType
+class RegistrationFormType extends AbstractType implements TranslationContainerInterface
 {
+    public static $tacError = 'cocorico_user.tac.error';
     protected $timeUnitIsDay;
 
     /**
@@ -148,6 +153,20 @@ class RegistrationFormType extends AbstractType
                     'invalid_message' => 'fos_user.password.mismatch',
                     'required' => true,
                 )
+            )
+            ->add(
+                'tac',
+                CheckboxType::class,
+                array(
+                    'label' => 'listing.form.tac',
+                    'mapped' => false,
+                    'constraints' => new IsTrue(
+                        array(
+                            'message' => self::$tacError,
+                        )
+                    ),
+                    'translation_domain' => 'cocorico_listing',
+                )
             );
 
         if (!$this->timeUnitIsDay) {
@@ -185,5 +204,18 @@ class RegistrationFormType extends AbstractType
     public function getBlockPrefix()
     {
         return 'user_registration';
+    }
+
+    /**
+     * JMS Translation messages.
+     *
+     * @return array
+     */
+    public static function getTranslationMessages()
+    {
+        $messages = array();
+        $messages[] = new Message(self::$tacError, 'cocorico');
+
+        return $messages;
     }
 }
