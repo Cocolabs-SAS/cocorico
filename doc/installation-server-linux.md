@@ -54,6 +54,7 @@ Activate following extensions:
     - opcache
     - apcu
     - zip
+    - sockets
     
 Add the following lines to php.ini:
 
