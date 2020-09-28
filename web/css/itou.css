@@ -300,7 +300,48 @@ footer img.min_trav {
 /******************
  * NEW LISTING STYLES
  ******************/
+#breadcrumbs a {
+    text-decoration: none;
+    color:#655;
+}
 
+.listing-container h1 {
+    color: #000;
+}
+
+.listing-container h2 {
+    color:#655;
+    font-size:1em;
+}
+
+
+#main .nav-tabs > li.active > a,
+#main .nav-tabs > li.active > a:hover,
+#main .nav-tabs > li.active > a:focus {
+    background-color: #fff;
+    border:0;
+}
+
+#main .nav-tabs > li > a {
+    background-color: #d8d8d8;
+    color:#000;
+    font-weight:bold;
+}
+
+#main .tab-content {
+    border: 0;
+}
+
+#main .gallery-slider .slide {
+    border: 0;
+}
+    
+
+.listing-presentation {
+    color:#000;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
 
 /******************
  * QUOTE STYLES

@@ -50,9 +50,13 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+            <div id="breadcrumbs">
+                <a href="#">< Retour</a>
+            </div>
+
+            {#{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
                 request: app.request
-            })) }}
+            })) }#}
         {% endblock %}
 
         {% block main %}
@@ -65,16 +69,25 @@
                     <div class="content-holder">
                         <!-- listing-container -->
                         <div class="listing-container">
-                            <h1>
-                                {{ listing_translation.title }}
+                            <!-- Presentation Block ITOU -->
+                            <div class="listing-presentation">
+                                <h1>
+                                    {{ listing_translation.title }}
 
-                                {%- if app.user is not null and app.user is same as(listing_user) and is_granted("IS_AUTHENTICATED_FULLY") %}
-                                    <a class="btn btn-default"
-                                       href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
-                                        {{ 'listing.edit.edit'|trans }}
-                                    </a>
-                                {% endif %}
-                            </h1>
+                                    {%- if app.user is not null and app.user is same as(listing_user) and is_granted("IS_AUTHENTICATED_FULLY") %}
+                                        <a class="btn btn-default"
+                                           href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
+                                            {{ 'listing.edit.edit'|trans }}
+                                        </a>
+                                    {% endif %}
+                                </h1>
+                                <div>
+                                    <p>{{ listing_description|nl2br }}</p>
+                                </div>
+                            </div>
+
+
+
                             <!-- tabs -->
                             <div role="tabpanel">
                                 <!-- Nav tabs -->
@@ -97,11 +110,13 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    {# FIXME: deactivated favorite stuff
                                     <a href="javascript:void(0)" id="favourite-{{ listing.id }}"
                                        class="link-favourit favourit">
                                         {{ 'listing.show.favorites.add'|trans }}
                                         <i class="icon-heart"></i>
                                     </a>
+                                    #}
                                 </nav>
 
                                 <!-- Tab panes -->
@@ -157,105 +172,20 @@
                                 </div>
                             </div>
 
-                            <div role="tabpanel">
-                                <!-- Nav tabs -->
-                                <nav class="tabset-holder">
-                                    <a href="#" class="opener">
-                                        <span class="hidden">opener</span>
-                                        <i class="icon-down-open-mini"></i>
-                                    </a>
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li class="active">
-                                            <a href="#description" data-toggle="tab"
-                                               data-text="{{ 'listing.show.description'|trans }}">
-                                                {{ 'listing.show.description'|trans }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#conditions" data-toggle="tab"
-                                               data-text="{{ 'listing.show.rules'|trans }}">
-                                                {{ 'listing.show.rules'|trans }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#features" data-toggle="tab"
-                                               data-text="{{ 'listing.show.characteristics'|trans }}">
-                                                {{ 'listing.show.characteristics'|trans }}
-                                            </a>
-                                        </li>
-                                        {% if categoryFieldBundleEnabled %}
-                                            <li>
-                                                <a href="#categories-fields" data-toggle="tab"
-                                                   data-text="{{ 'listing.show.categories'|trans }}">
-                                                    {{ 'listing.show.categories'|trans }}
-                                                </a>
-                                            </li>
-                                        {% endif %}
+                            <div class="listing-presentation">
+                                <h2>Détail de la prestation</h2>
+                                    <p>{{ listing_translation.rules|strip_private_info|nl2br }}</p>
 
-                                        {% if optionBundleEnabled %}
-                                            <li>
-                                                <a href="#options" data-toggle="tab"
-                                                   data-text="{{ 'listing.show.options'|trans }}">
-                                                    {{ 'listing.show.options'|trans }}
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                        <li>
-                                            <a href="#comments" data-toggle="tab"
-                                               data-text="{{ 'listing.show.comments'|trans }}">
-                                                {{ 'listing.show.comments'|trans }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <!-- description -->
-                                    <div role="tabpanel" class="tab-pane active" id="description">
-                                        <p>{{ listing_description|nl2br }}</p>
-                                    </div>
-                                    <!-- conditions -->
-                                    <div role="tabpanel" class="tab-pane" id="conditions">
-                                        <p>{{ listing_translation.rules|strip_private_info|nl2br }}</p>
-                                    </div>
-                                    <!-- features -->
-                                    <div role="tabpanel" class="tab-pane" id="features">
-                                        {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
-                                    </div>
                                     {% if categoryFieldBundleEnabled %}
                                         <!-- Categories fields -->
-                                        <div role="tabpanel" class="tab-pane" id="categories-fields">
-                                            {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
-                                        </div>
+                                        {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
                                     {% endif %}
 
                                     {% if optionBundleEnabled %}
-                                        <!-- options -->
-                                        <div role="tabpanel" class="tab-pane" id="options">
-                                            {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
-                                        </div>
+                                        {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
                                     {% endif %}
+                                <h2>Références Client</h2>
 
-                                    <!-- comments -->
-                                    <div role="tabpanel" class="tab-pane" id="comments">
-                                        {% if reviews|length > 0 %}
-                                            <div class="blog">
-                                                <div class="head">
-                                                    <h2>{{ 'listing.comments.header'|trans }}</h2>
-                                                    <!-- rating -->
-                                                    {% if listing.averageRating %}
-                                                        {{ listing.averageRating | cocorico_star_rating }}
-                                                    {% endif %}
-                                                </div>
-                                                <div class="posts-holder">
-                                                    <!-- post -->
-                                                    {% include 'CocoricoCoreBundle:Frontend/Listing:_rating_reviews.html.twig' with {'reviews': reviews} only %}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -265,8 +195,8 @@
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
                         <div class="sub-head">
+                            {# FIXME: deactivated
                             <!-- social-networks -->
-                            {#{{ socialButtons({'title': translation.title}) }}#}
                             {% include 'CocoricoCoreBundle:Frontend/SocialButton:all.html.twig' with {'title': listing_translation.title} only %}
 
                             <!-- rating -->
@@ -276,6 +206,7 @@
                             <span class="counter">
                                 ({{ 'listing.show.nb_comments'|transchoice(listing.commentCount) }})
                             </span>
+                            #}
                         </div>
 
                         <section class="widget prices-conditions">
@@ -296,12 +227,6 @@
                             </dl>
                         </section>
 
-                        {#booking form#}
-                        {#
-                        {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
-                            'listing': listing
-                        })) }}
-                        #}
 
                         {#quote form#}
                         {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
