@@ -8,5 +8,6 @@ PHP_CMD="php"
 "$PHP_CMD" composer.phar install --prefer-dist -vvv
 "$PHP_CMD" bin/console doctrine:schema:update --force "$@"
 "$PHP_CMD" bin/console cache:clear "$@"
+"$PHP_CMD" bin/console ckeditor:install --clear=drop
 "$PHP_CMD" bin/console assets:install --symlink web "$@"
 "$PHP_CMD" bin/console assetic:dump "$@"
