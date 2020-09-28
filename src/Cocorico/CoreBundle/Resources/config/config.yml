@@ -75,9 +75,6 @@ doctrine:
         auto_generate_proxy_classes: "%kernel.debug%"
         entity_managers:
             default:
-#                metadata_cache_driver: apc
-#                result_cache_driver: apc
-#                query_cache_driver: apc
                 auto_mapping: true
                 mappings:
                     gedmo_tree:
