@@ -13,7 +13,11 @@ namespace Cocorico\CoreBundle\Model;
 
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\Validator\Constraints as Assert;
+use BitMask\BitMask;
+use BitMask\BitMaskInterface;
 
 /**
  * Listing
@@ -91,6 +95,11 @@ abstract class BaseListing
         self::TYPE_THREE => 'entity.listing.type.three'
     );
 
+    /* Schedule */
+    const SCHEDULE_BUSINESS_HOURS = 1 << 0;
+    const SCHEDULE_BEFORE_OPENING = 1 << 1;
+    const SCHEDULE_AFTER_CLOSING = 1 << 2;
+
     /* Cancellation policy */
     const CANCELLATION_POLICY_FLEXIBLE = 1;
     const CANCELLATION_POLICY_STRICT = 2;
@@ -104,6 +113,13 @@ abstract class BaseListing
         self::CANCELLATION_POLICY_FLEXIBLE => 'entity.listing.cancellation_policy_desc.flexible',
         self::CANCELLATION_POLICY_STRICT => 'entity.listing.cancellation_policy_desc.strict',
     );
+
+    /**
+    * bitmask roles
+    * @ORM\Column(name="schedules", type="bitmask", nullable=true)
+    * @var \Doctrine\DBAL\Types\Type\bitmask
+    */
+    protected $schedules = BitMaskType::class;
 
     /**
      * @ORM\Column(name="status", type="smallint", nullable=false)
@@ -836,6 +852,61 @@ abstract class BaseListing
     public function getSurfaceTypeText()
     {
         return self::$surfaceTypeValues[$this->getSurfaceType()];
+    }
+
+    /**
+     * Get Schedules
+     *
+     * @return bitmask|null
+     */
+    public function getSchedules() : BitMaskInterface
+    {
+        if (is_null($this->schedules))
+            return new Bitmask();
+
+        return $this->schedules;
+    }
+
+    /**
+     * Set Schedules
+     *
+     * @return self
+     */
+    public function setSchedules(BitMaskInterface $schedules) : self
+    {
+        $this->schedules = $schedules;
+
+        return $this;
+    }
+
+    /**
+     * Check schedule business hours
+     *
+     * @return bool
+     */
+    public function isScheduleBusinessHours() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
+    }
+
+    /**
+     * Check schedule before opening
+     *
+     * @return bool
+     */
+    public function isScheduleBeforeOpening() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BEFORE_OPENING);
+    }
+
+    /**
+     * Check schedule after closing
+     *
+     * @return bool
+     */
+    public function isScheduleAfterClosing() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_AFTER_CLOSING);
     }
 
     /**
