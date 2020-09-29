@@ -27,7 +27,7 @@ class QuoteController extends Controller
     /**
      * Creates a new Quote entity.
      *
-     * @Route("/{listing_id}/{prestaStartDate}/new",
+     * @Route("/{listing_id}/new",
      *      name="cocorico_quote_new",
      *      requirements={
      *          "listing_id" = "\d+"
@@ -38,26 +38,23 @@ class QuoteController extends Controller
      * @Security("is_granted('quote', listing) and not has_role('ROLE_ADMIN') and has_role('ROLE_USER')")
      *
      * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"}, converter="doctrine.orm")
-     * @ParamConverter("prestaStartDate", options={"format": "Y-m-d-H:i"}, converter="datetime")
      *
      *
      * @Method({"GET", "POST"})
      *
      * @param Request   $request
      * @param Listing   $listing
-     * @param \DateTime $prestaStartDate format yyyy-mm-dd-H:i
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function newAction(
         Request $request,
-        Listing $listing,
-        \DateTime $prestaStartDate=Null
+        Listing $listing
     ) {
         $communication = (string)$request->query->get('communication');
         $budget = (int)$request->query->get('budget');
         $quoteHandler = $this->get('cocorico.form.handler.quote_base');
-        $quote = $quoteHandler->init($this->getUser(), $listing, $communication, $budget, $prestaStartDate);
+        $quote = $quoteHandler->init($this->getUser(), $listing);
         //Availability is validated through QuoteValidator and amounts are setted through Form Event PRE_SET_DATA
         $form = $this->createCreateForm($quote);
 
@@ -135,9 +132,7 @@ class QuoteController extends Controller
                     'cocorico_quote_new',
                     array(
                         'listing_id' => $quote->getListing()->getId(),
-                        'communication' => $quote->getCommunication(),
                         'budget' => $quote->getBudget(),
-                        'prestaStartDate' => is_null($quote->getPrestaStartDate()) ? '' : $quote->getPrestaStartDate()->format('Y-m-d-H:i'),
                     )
                 ),
             )
@@ -299,9 +294,7 @@ class QuoteController extends Controller
                     'cocorico_quote_new',
                     array(
                         'listing_id' => $listing->getId(),
-                        'communication' => $quote->getCommunication(),
                         'budget' => $quote->getBudget(),
-                        'prestaStartDate' => is_null($quote->getPrestaStartDate()) ? '' : $quote->getPrestaStartDate()->format('Y-m-d-H:i'),
                     )
                 )
             );
