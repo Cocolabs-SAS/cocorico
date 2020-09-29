@@ -343,6 +343,19 @@ footer img.min_trav {
     margin-bottom:2rem;
 }
 
+.info-pratiques {
+  border-radius: 7px;
+  background-color: #FFFFFF;
+  box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.1);
+  border:0;
+}
+
+.info-pratiques h2 {
+    font-size:1.1em;
+    font-weight:bold;
+    text-align:center;
+}
+
 /******************
  * QUOTE STYLES
  ******************/
