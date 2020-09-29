@@ -209,17 +209,58 @@
                             #}
                         </div>
 
+                        {#quote form#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
+                            'listing': listing
+                        })) }}
+
+                        <!-- gallery-small -->
+                        <div id="user_contact" class="gallery-small slideshow">
+                            <div class="slideset">
+
+                                {% if listing_user.images|length %}
+                                    {% for image in listing_user.images %}
+                                        <div class="slide">
+                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
+                                                 alt="{{ listing_user.name }}"/>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="slide">
+                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
+                                             alt="{{ listing_user.name }}"/>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a href="#" class="btn-prev">previous
+                                <span></span>
+                            </a>
+                            <a href="#" class="btn-next">next
+                                <span></span>
+                            </a>
+                        </div>
+
                         <section class="widget info-pratiques">
                             <h2>informations pratiques</h2>
-                            <dl>
-                                {% if listing.url %}
+                            <dl id="info-perimetre">
+                                    <dd>Périmètre d'intervention</dd>
+                                    {% if listing.range %}
+                                        <dt>{{ listing.range }}</dt>
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
+                            </dl>
+                            <dl id="info-horaire">
+                                    <dd>Horaires des interventions</dd>
+                                    <dt>Non Précisé</dt>
+                            </dl>
+                            <dl id="info-site">
                                     <dd>Site Web</dd>
-                                    <dt>{{ listing.url }}</dt>
-                                {% endif %}
-                                {% if listing.range %}
-                                    <dd>Périmêtre d'intervention</dd>
-                                    <dt>{{ listing.range }} Km</dt>
-                                {% endif %}
+                                    {% if listing.url %}
+                                        <dt>{{ listing.url }}</dt>
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
                                 {#
                                 <dd>Moyen de déplacement privilégié</dd>
                                 <dt>Transports publics</dt>
@@ -228,194 +269,11 @@
                         </section>
 
 
-                        {#quote form#}
-                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
-                            'listing': listing
-                        })) }}
-
-
                         {#
-                        <section class="widget prices-conditions">
-                            <h2>{{ 'listing.show.policy.title'|trans }}</h2>
-                            <ul>
-                                <li>
-                                    {{ 'listing.show.cancellation_policy:'|trans() }}
-                                    <strong>{{ listing.cancellationPolicyText|trans }}</strong>
-                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            data-html="true" type="button"
-                                            data-original-title="{{ cancellationPolicies() }}"> ?
-                                    </button>
-                                </li>
-
-                                {% if listing.minDuration %}
-                                    <li>
-                                        {{ 'listing.show.min_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.minDuration ~ " " ~ (-1)|add_time_unit_text }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
-
-                                {% if listing.maxDuration %}
-                                    <li>
-                                        {{ 'listing.show.max_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.maxDuration ? listing.maxDuration ~ " " ~ (-1)|add_time_unit_text : "none"|trans }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
-
-                                {% if listing.discounts.count %}
-                                    {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
-                                    {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
-                                    <li>
-                                        {{ 'listing.show.discounts:'|trans() }}
-                                        <ul>
-                                            {% for discount in listing.discounts %}
-                                                <li>
-                                                    <strong>{{ discount.discount }}% </strong>
-                                                    {{ 'listing_edit.form.from_quantity'|trans(quantityText) }}
-                                                    <strong>{{ discount.fromQuantity }} </strong>
-                                                    {{ 'listing_edit.form.from_quantity.bought'|trans(quantitiesText) }}
-
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </section>
-                        #}
-
-                        <!-- members-list -->
-                        <section class="widget members-list">
-                            <!-- gallery-small -->
-                            <div id="user_contact" class="gallery-small slideshow">
-                                <div class="slideset">
-
-                                    {% if listing_user.images|length %}
-                                        {% for image in listing_user.images %}
-                                            <div class="slide">
-                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
-                                                     alt="{{ listing_user.name }}"/>
-                                            </div>
-                                        {% endfor %}
-                                    {% else %}
-                                        <div class="slide">
-                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
-                                                 alt="{{ listing_user.name }}"/>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                <a href="#" class="btn-prev">previous
-                                    <span></span>
-                                </a>
-                                <a href="#" class="btn-next">next
-                                    <span></span>
-                                </a>
-                            </div>
-                            <h2>
-                                <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
-                                    {{ listing_user.companyName }}
-                                </a>
-                            </h2>
-
-                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
-                                   class="contact-opener btn btn-default no-margin" data-toggle="modal"
-                                   data-target="#modal">
-                                    {{ 'thread.new.contact_me'|trans({}, 'cocorico_message') }}
-                                </a>
-                            {%- else -%}
-                                <a class="contact-opener btn btn-default no-margin"
-                                   href=" {{ path('cocorico_user_login') }}">
-                                    {{ 'listing.show.user.contact'|trans }}
-                                </a>
-                            {%- endif -%}
-
-                            <ul class="info-list">
-                                <li>
-                                    {% if listing_user.phoneVerified %}
-                                        <i class="icon-ok"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.phone_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-
-                                <li>
-                                    {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.emailVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.email_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-                                {#
-                                <li>
-                                    {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.idCardVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.id_card_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-                                <li>
-                                    {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.nbBookingsOfferer %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
-                                    </button>
-                                </li>
-                                #}
-                                <li>
-                                    {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.nbQuotesOfferer %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans }}">?
-                                    </button>
-                                </li>
-
-                            </ul>
-                        </section>
-
-                        {# similar results#}
                         {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:similarListing',
                         { 'id': listing.id }
                         )) }}
+                        #}
 
                     </div>
                 </aside>

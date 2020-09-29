@@ -10,6 +10,7 @@
     {{ form_errors(form) }}
 
     <fieldset>
+        {#
         <legend class="hidden">quote</legend>
         <h3>Demandez un devis</h3>
 
@@ -59,7 +60,8 @@
             <div>
             {% do form.communication.setRendered() %}
             </div>
-
+        #}
+        {{ form_widget(form.budget, {'type': 'hidden'}) }}
         <input type="submit" class="hidden" value="Envoyer">
     </fieldset>
 
@@ -72,7 +74,7 @@
         {% else %}
             <i></i>
         {% endif %}
-        <a href="#" data-id="submit-quote" class="btn btn-success">{{ 'quote.form.start'|trans }}</a>
+        <a href="#" data-id="submit-quote" class="btn btn-quote">DEMANDER UN DEVIS</a>
     </div>
 
 

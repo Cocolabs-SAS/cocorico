@@ -34,27 +34,27 @@ class QuoteType extends AbstractType
                 array(
                     'label' => 'quote.form.budget',
                     'required' => 'false'
-                ))
-            ->add('prestaStartDate',
-                DateType::class,
-                array_merge(
-                    array(
-                    'label' => 'quote.form.presta_start_date',
-                    'property_path' => 'prestaStartDate',
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
-                    )
-                ))
+                ));
+            # ->add('prestaStartDate',
+            #     DateType::class,
+            #     array_merge(
+            #         array(
+            #         'label' => 'quote.form.presta_start_date',
+            #         'property_path' => 'prestaStartDate',
+            #         'widget' => 'single_text',
+            #         'format' => 'dd/MM/yyyy',
+            #         )
+            #     ))
             # ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
             # ->add('surface_m2', NumberType::class)
             # ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
-            ->add('communication',
-                TextareaType::class,
-                array_merge(
-                    array(
-                    'label' => 'quote.form.communication'
-                    )
-                ));
+            # ->add('communication',
+            #     TextareaType::class,
+            #     array_merge(
+            #         array(
+            #         'label' => 'quote.form.communication'
+            #         )
+            #     ));
     }
 
 

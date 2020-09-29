@@ -470,29 +470,35 @@ div.form-message {
 
 
 section.quote-quick-form {
-    border-radius: 7px;
-    background-color: #FFFFFF;
-    border-top:5px solid #e54b28;
-    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.1);
     margin:0;
     padding:0;
-    text-align:left;
+    border:0;
 }
 
-.quote-quick-form h3 {
-    margin:0;
-    padding:0;
-    color:#e54b28;
-    font-size:2em;
-    text-align:center;
+.btn-quote {
+    color:#fff;
+    font-weight:bold;
+    background-color: #e54b28;
+    width:100%;
+    margin:2rem 0;
 }
 
-.quote-quick-form label {
-    text-align:left;
-    font-size:1em;
+.info-pratiques dl dd{
+    color:#999;
+    font-weight:bold;
 }
 
-.quote-quick-form  fieldset {
-    width: 100%;
-    padding: 2rem;
+.info-pratiques dl {
+    border-bottom: 1px solid #ccc;
+    padding-bottom:2rem;
+    background-size:24px;
+    background-repeat: no-repeat;
+    padding-left:28px;
 }
+.info-pratiques dl:last-child {
+    border:0;
+}
+
+#info-perimetre { background-image: url('/images/shape_perimeter.png'); }
+#info-horaire { background-image: url('/images/shape_horaire.png'); }
+#info-site { background-image: url('/images/shape_site.png'); }
