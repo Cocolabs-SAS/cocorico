@@ -860,8 +860,6 @@ abstract class BaseListing
      */
     public function getSchedules()
     {
-        // if (is_null($this->schedules))
-        //     return new Bitmask();
         if (is_string($this->schedules) and $this->schedules == '')
             {
             return new Bitmask();
@@ -871,21 +869,12 @@ abstract class BaseListing
     }
 
     /**
-     * Set Schedules
+     * Force convert schedule data type to int
      *
-     * @return self
-            return new Bitmask();
-
-        return $this->schedules;
-    }
-
-    /**
-     * Set Schedules
-     *
-     * @return self
-            return new Bitmask();
-
-        return $this->schedules;
+     */
+    public function schedulesToInt() 
+    {
+        $this->schedules = $this->schedules->get();
     }
 
     /**
@@ -898,10 +887,6 @@ abstract class BaseListing
         $this->schedules = $schedules;
 
         return $this;
-    }
-    public function forceSchedules($val)
-    {
-        $this->schedules = $val;
     }
 
     /**
@@ -932,11 +917,6 @@ abstract class BaseListing
     public function isScheduleBusinessHours() : bool
     {
         return $this->schedules->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
-    }
-
-    public function schedulesToInt() 
-    {
-        $this->schedules = $this->schedules->get();
     }
 
     /**
