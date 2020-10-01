@@ -88,6 +88,10 @@ class ListingManager extends BaseManager
             }
         }
         $listing->mergeNewTranslations();
+
+        ## FIXME: THIS IS A HACK, LEAVE IT !
+        $listing->schedulesToInt();
+
         $this->persistAndFlush($listing);
 
         /** @var ListingTranslation $translation */
@@ -116,7 +120,6 @@ class ListingManager extends BaseManager
 
 
         }
-
         return $listing;
     }
 

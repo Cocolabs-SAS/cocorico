@@ -862,7 +862,7 @@ abstract class BaseListing
     {
         // if (is_null($this->schedules))
         //     return new Bitmask();
-        if (is_string($this->schedules))
+        if (is_string($this->schedules) and $this->schedules == '')
             {
             return new Bitmask();
             }
@@ -899,6 +899,10 @@ abstract class BaseListing
 
         return $this;
     }
+    public function forceSchedules($val)
+    {
+        $this->schedules = $val;
+    }
 
     /**
      * Enable Single Schedule
@@ -907,9 +911,8 @@ abstract class BaseListing
      */
     public function enableSchedule($schedule) : self
     {
-        $schedules = $this->getSchedules();
-        $schedules->setBit($schedule);
-        return $this->setSchedules($schedules);
+        $this->schedules->setBit($schedule);
+        return $this;
     }
     /**
      * Disable Single Schedule
@@ -918,10 +921,7 @@ abstract class BaseListing
      */
     public function disableSchedule($schedule) : self
     {
-        $schedules = $this->getSchedules();
-        $schedules->unsetBit($schedule);
-        $this->setSchedules($schedules);
-
+        $this->schedules->unsetBit($schedule);
         return $this;
     }
     /**
@@ -931,7 +931,12 @@ abstract class BaseListing
      */
     public function isScheduleBusinessHours() : bool
     {
-        return $this->getSchedules()->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
+        return $this->schedules->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
+    }
+
+    public function schedulesToInt() 
+    {
+        $this->schedules = $this->schedules->get();
     }
 
     /**
@@ -941,7 +946,7 @@ abstract class BaseListing
      */
     public function isScheduleBeforeOpening() : bool
     {
-        return $this->getSchedules()->isSetBit(static::SCHEDULE_BEFORE_OPENING);
+        return $this->schedules->isSetBit(static::SCHEDULE_BEFORE_OPENING);
     }
 
     /**
@@ -951,7 +956,7 @@ abstract class BaseListing
      */
     public function isScheduleAfterClosing() : bool
     {
-        return $this->getSchedules()->isSetBit(static::SCHEDULE_AFTER_CLOSING);
+        return $this->schedules->isSetBit(static::SCHEDULE_AFTER_CLOSING);
     }
 
     /**

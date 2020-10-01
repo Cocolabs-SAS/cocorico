@@ -1,10 +1,6 @@
 {% trans_default_domain 'cocorico' %}
 
     {%- set offererItems = {
-    "messages": {
-        "link": path('cocorico_dashboard_message'),
-        "text": 'nav.dashboard.messages.link'|trans
-    },
     "quotes": {
         "link": path('cocorico_dashboard_quote_offerer'),
         "text": 'Demandes Devis'
@@ -12,10 +8,6 @@
     "listings": {
         "link": path('cocorico_dashboard_listing'),
         "text": 'nav.dashboard.listings.link'|trans
-    },
-    "comments": {
-        "link": path('cocorico_dashboard_reviews_received'),
-        "text": 'nav.dashboard.comments.link'|trans
     },
     "profile": {
         "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
@@ -28,17 +20,9 @@
     } -%}
 
     {%- set askerItems = {
-    "messages": {
-        "link": path('cocorico_dashboard_message'),
-        "text": 'nav.dashboard.messages.link'|trans
-    },
     "quotes": {
         "link": path('cocorico_dashboard_quote_asker'),
         "text": 'Demandes Devis'
-    },
-    "comments": {
-        "link": path('cocorico_dashboard_reviews_received'),
-        "text": 'nav.dashboard.comments.link'|trans
     },
     "profile": {
         "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
