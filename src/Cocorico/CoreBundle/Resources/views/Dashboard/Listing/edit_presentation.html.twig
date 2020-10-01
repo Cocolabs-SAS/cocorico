@@ -79,7 +79,29 @@
                             {{ form_widget(form.url, { 'attr': { 'class': 'form-control'}} ) }}
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="label" style="width:10rem">
+                                Plages horaires de la prestation :
+                            </span>
+                        </div>
+                        <div class="col-sm-6">
+                            <ul style="list-style-type:none">
+                                <li>
+                                {{ form_widget(form.schedule_business_hours) }}
+                                {{ form_label(form.schedule_business_hours) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.schedule_before_opening) }}
+                                {{ form_label(form.schedule_before_opening) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.schedule_after_closing) }}
+                                {{ form_label(form.schedule_after_closing) }}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="btn-block text-center">
