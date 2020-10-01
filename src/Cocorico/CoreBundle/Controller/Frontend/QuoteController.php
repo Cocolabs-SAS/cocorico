@@ -51,6 +51,7 @@ class QuoteController extends Controller
         Request $request,
         Listing $listing
     ) {
+        dump("Quote Controller: NewAction");
         $communication = (string)$request->query->get('communication');
         $budget = (int)$request->query->get('budget');
         $quoteHandler = $this->get('cocorico.form.handler.quote_base');
@@ -122,6 +123,7 @@ class QuoteController extends Controller
      */
     private function createCreateForm(Quote $quote)
     {
+        dump("Quote Controller: CreateCreateForm");
         $form = $this->get('form.factory')->createNamed(
             '',
             QuoteType::class,
@@ -133,6 +135,8 @@ class QuoteController extends Controller
                     array(
                         'listing_id' => $quote->getListing()->getId(),
                         'budget' => $quote->getBudget(),
+                        'prestaStartDate' => '',
+                        'communication' => '',
                     )
                 ),
             )
@@ -272,6 +276,7 @@ class QuoteController extends Controller
      */
     public function getQuoteAction(Request $request, Listing $listing)
     {
+        dump("Quote Controller: getQuoteAction");
         $quoteHandler = $this->get('cocorico.form.handler.quote');
         $quote = $quoteHandler->init($this->getUser(), $listing);
 
@@ -295,6 +300,8 @@ class QuoteController extends Controller
                     array(
                         'listing_id' => $listing->getId(),
                         'budget' => $quote->getBudget(),
+                        'communication' => $quote->getCommunication(),
+                        'prestaStartDate' => is_null($quote->getPrestaStartDate()) ? '' : $quote->getPrestaStartDate()->format('Y-m-d-H:i'),
                     )
                 )
             );
