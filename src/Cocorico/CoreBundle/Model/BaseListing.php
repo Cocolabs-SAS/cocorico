@@ -119,7 +119,8 @@ abstract class BaseListing
     * @ORM\Column(name="schedules", type="bitmask", nullable=true)
     * @var \Doctrine\DBAL\Types\Type\bitmask
     */
-    protected $schedules = BitMaskType::class;
+    // protected $schedules = BitMaskType::class;
+    protected $schedules;
 
     /**
      * @ORM\Column(name="status", type="smallint", nullable=false)
@@ -888,9 +889,7 @@ abstract class BaseListing
     {
         $schedules = $this->getSchedules();
         $schedules->setBit($schedule);
-        $this->setSchedules($schedules);
-
-        return $this;
+        return $this->setSchedules($schedules);
     }
     /**
      * Disable Single Schedule

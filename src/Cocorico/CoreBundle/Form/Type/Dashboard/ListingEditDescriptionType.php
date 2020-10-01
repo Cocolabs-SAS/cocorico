@@ -100,21 +100,24 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 'schedule_before_opening',
                 CheckBoxType::class,
                 array(
-                    'label' => 'Avant ouverture'
+                    'label' => 'Avant ouverture',
+                    'required' => true,
                 )
             )
             ->add(
                 'schedule_business_hours',
                 CheckBoxType::class,
                 array(
-                    'label' => 'Heures de bureau'
+                    'label' => 'Heures de bureau',
+                    'required' => true,
                 )
             )
             ->add(
                 'schedule_after_closing',
                 CheckBoxType::class,
                 array(
-                    'label' => 'Après fermeture'
+                    'label' => 'Après fermeture',
+                    'required' => true,
                 )
             )
             ->add(
