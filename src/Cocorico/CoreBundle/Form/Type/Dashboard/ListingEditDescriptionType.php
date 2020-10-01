@@ -101,7 +101,6 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Avant ouverture',
-                    'required' => true,
                 )
             )
             ->add(
@@ -109,7 +108,6 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Heures de bureau',
-                    'required' => true,
                 )
             )
             ->add(
@@ -117,7 +115,6 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Après fermeture',
-                    'required' => true,
                 )
             )
             ->add(

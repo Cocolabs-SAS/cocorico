@@ -96,12 +96,6 @@ class ListingFormHandler
     {
         /** @var Listing $listing */
         $listing = $form->getData();
-        if ($form->get("schedule_business_hours").getData()) {
-            print("coucou");
-        } else {
-            print("Nenni !");
-        }
-        die;
         $this->listingManager->save($listing);
 
         return true;

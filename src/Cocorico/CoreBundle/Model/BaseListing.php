@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use BitMask\BitMask;
 use BitMask\BitMaskInterface;
 
+
 /**
  * Listing
  *
@@ -115,12 +116,10 @@ abstract class BaseListing
     );
 
     /**
-    * bitmask roles
     * @ORM\Column(name="schedules", type="bitmask", nullable=true)
     * @var \Doctrine\DBAL\Types\Type\bitmask
     */
-    // protected $schedules = BitMaskType::class;
-    protected $schedules;
+    protected $schedules = BitMaskType::class;
 
     /**
      * @ORM\Column(name="status", type="smallint", nullable=false)
@@ -367,6 +366,8 @@ abstract class BaseListing
      */
     public function setUrl($url)
     {
+        dump("Set url:");
+        dump($url);
         $this->url = $url;
 
         return $this;
@@ -858,11 +859,30 @@ abstract class BaseListing
     /**
      * Get Schedules
      *
-     * @return bitmask|null
      */
-    public function getSchedules() : BitMaskInterface
+    public function getSchedules()
     {
-        if (is_null($this->schedules) or is_string($this->schedules))
+        // if (is_null($this->schedules))
+        //     dump("Get New Bitmask");
+        //     return new Bitmask();
+
+        dump("get schedules:", $this->schedules);
+        return $this->schedules;
+    }
+
+    /**
+     * Set Schedules
+     *
+     * @return self
+            return new Bitmask();
+
+        return $this->schedules;
+    }
+
+    /**
+     * Set Schedules
+     *
+     * @return self
             return new Bitmask();
 
         return $this->schedules;
@@ -875,6 +895,7 @@ abstract class BaseListing
      */
     public function setSchedules(BitMaskInterface $schedules) : self
     {
+        dump("A set schedules", $schedules);
         $this->schedules = $schedules;
 
         return $this;
@@ -889,6 +910,7 @@ abstract class BaseListing
     {
         $schedules = $this->getSchedules();
         $schedules->setBit($schedule);
+        dump($schedules);
         return $this->setSchedules($schedules);
     }
     /**
@@ -943,11 +965,15 @@ abstract class BaseListing
      */
     public function setScheduleBusinessHours($set) : self
     {
+        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_BUSINESS_HOURS)
             : $this->disableSchedule(self::SCHEDULE_BUSINESS_HOURS);
     }
-    public function getScheduleBusinessHours() : bool { return $this->isScheduleBusinessHours(); }
+    public function getScheduleBusinessHours() : bool {
+        dump("A get");
+        return $this->isScheduleBusinessHours();
+    }
 
     /**
      * Check schedule Before Opening
@@ -958,11 +984,15 @@ abstract class BaseListing
      */
     public function setScheduleBeforeOpening($set) : self
     {
+        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_BEFORE_OPENING)
             : $this->disableSchedule(self::SCHEDULE_BEFORE_OPENING);
     }
-    public function getScheduleBeforeOpening() : bool { return $this->isScheduleBeforeOpening(); }
+    public function getScheduleBeforeOpening() : bool {
+        dump("A get");
+        return $this->isScheduleBeforeOpening();
+    }
 
     /**
      * Check schedule Before Opening
@@ -973,11 +1003,15 @@ abstract class BaseListing
      */
     public function setScheduleAfterClosing($set) : self
     {
+        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_AFTER_CLOSING)
             : $this->disableSchedule(self::SCHEDULE_AFTER_CLOSING);
     }
-    public function getScheduleAfterClosing() : bool { return $this->isScheduleAfterClosing(); }
+    public function getScheduleAfterClosing() : bool {
+        dump("A get");
+        return $this->isScheduleAfterClosing();
+    }
 
     /**
      * Return available surfacetype for current surfacetype

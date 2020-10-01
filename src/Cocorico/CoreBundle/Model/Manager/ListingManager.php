@@ -88,6 +88,7 @@ class ListingManager extends BaseManager
             }
         }
         $listing->mergeNewTranslations();
+        dump("### A SAVE !!", $listing->getSchedules());
         $this->persistAndFlush($listing);
 
         /** @var ListingTranslation $translation */
