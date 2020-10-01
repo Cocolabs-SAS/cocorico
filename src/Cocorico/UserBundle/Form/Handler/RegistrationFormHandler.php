@@ -135,6 +135,7 @@ class RegistrationFormHandler
             'id' => $user->getId(),
             'prenom' => $user->getFirstName(),
             'nom' => $user->getLastName(),
+            'email' => $user->getEmail(),
         ));
 
     }
