@@ -865,6 +865,10 @@ abstract class BaseListing
         // if (is_null($this->schedules))
         //     dump("Get New Bitmask");
         //     return new Bitmask();
+        if (is_string($this->schedules))
+            {
+            return new Bitmask();
+            }
 
         dump("get schedules:", $this->schedules);
         return $this->schedules;
@@ -895,8 +899,9 @@ abstract class BaseListing
      */
     public function setSchedules(BitMaskInterface $schedules) : self
     {
-        dump("A set schedules", $schedules);
         $this->schedules = $schedules;
+        dump("A set schedules", $schedules);
+        dump("Result of set: ", $this->schedules);
 
         return $this;
     }
@@ -965,13 +970,11 @@ abstract class BaseListing
      */
     public function setScheduleBusinessHours($set) : self
     {
-        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_BUSINESS_HOURS)
             : $this->disableSchedule(self::SCHEDULE_BUSINESS_HOURS);
     }
     public function getScheduleBusinessHours() : bool {
-        dump("A get");
         return $this->isScheduleBusinessHours();
     }
 
@@ -984,13 +987,11 @@ abstract class BaseListing
      */
     public function setScheduleBeforeOpening($set) : self
     {
-        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_BEFORE_OPENING)
             : $this->disableSchedule(self::SCHEDULE_BEFORE_OPENING);
     }
     public function getScheduleBeforeOpening() : bool {
-        dump("A get");
         return $this->isScheduleBeforeOpening();
     }
 
@@ -1003,13 +1004,11 @@ abstract class BaseListing
      */
     public function setScheduleAfterClosing($set) : self
     {
-        dump("A set");
         return $set
             ? $this->enableSchedule(self::SCHEDULE_AFTER_CLOSING)
             : $this->disableSchedule(self::SCHEDULE_AFTER_CLOSING);
     }
     public function getScheduleAfterClosing() : bool {
-        dump("A get");
         return $this->isScheduleAfterClosing();
     }
 
