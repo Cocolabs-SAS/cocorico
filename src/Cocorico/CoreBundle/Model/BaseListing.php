@@ -366,8 +366,6 @@ abstract class BaseListing
      */
     public function setUrl($url)
     {
-        dump("Set url:");
-        dump($url);
         $this->url = $url;
 
         return $this;
@@ -863,14 +861,12 @@ abstract class BaseListing
     public function getSchedules()
     {
         // if (is_null($this->schedules))
-        //     dump("Get New Bitmask");
         //     return new Bitmask();
         if (is_string($this->schedules))
             {
             return new Bitmask();
             }
 
-        dump("get schedules:", $this->schedules);
         return $this->schedules;
     }
 
@@ -900,8 +896,6 @@ abstract class BaseListing
     public function setSchedules(BitMaskInterface $schedules) : self
     {
         $this->schedules = $schedules;
-        dump("A set schedules", $schedules);
-        dump("Result of set: ", $this->schedules);
 
         return $this;
     }
@@ -915,7 +909,6 @@ abstract class BaseListing
     {
         $schedules = $this->getSchedules();
         $schedules->setBit($schedule);
-        dump($schedules);
         return $this->setSchedules($schedules);
     }
     /**
