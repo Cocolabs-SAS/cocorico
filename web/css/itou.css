@@ -330,6 +330,9 @@ footer img.min_trav {
 
 #main .tab-content {
     border: 0;
+    padding-top:0;
+    padding-left:0;
+    padding-right:0;
 }
 
 #main .gallery-slider .slide {
@@ -459,7 +462,6 @@ div.form-message {
     font-weight: 400;
 }
 
-
 .postarea .quote-detail ul li time,
 .postarea .quote-detail ul li span {
     margin: 0;
@@ -468,10 +470,10 @@ div.form-message {
     font-weight: 400;
 }
 
-
 section.quote-quick-form {
     margin:0;
-    padding:0;
+    padding-left:21px;
+    padding-right:12px;
     border:0;
 }
 
