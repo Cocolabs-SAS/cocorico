@@ -338,8 +338,9 @@ footer img.min_trav {
     padding-right:0;
 }
 
-#main .gallery-slider .slide {
+#main .listing-area #photos .gallery-slider .slide {
     border: 0;
+    height:350px;
 }
     
 
@@ -347,6 +348,7 @@ footer img.min_trav {
     color:#000;
     margin-top:2rem;
     margin-bottom:2rem;
+    margin-bottom:50px;
 }
 
 .info-pratiques {
@@ -360,6 +362,19 @@ footer img.min_trav {
     font-size:1.1em;
     font-weight:bold;
     text-align:center;
+    margin-bottom:25px;
+}
+
+.listing-area .features-area h3 {
+    font-size: 1.2em;
+    color:#655;
+}
+
+.listing-area .features-area ul {
+    margin:0;
+    padding:0;
+    margin-right:4rem;
+    color:#000;
 }
 
 /******************
@@ -515,6 +530,10 @@ section.quote-quick-form fieldset {
     background-color: #e54b28;
     width:100%;
     margin:2rem 0;
+}
+
+.btn-quote:hover {
+    background-color:#aa381e;
 }
 
 .info-pratiques dl dd{
