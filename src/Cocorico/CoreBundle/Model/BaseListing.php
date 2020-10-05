@@ -860,7 +860,7 @@ abstract class BaseListing
      */
     public function getSchedules()
     {
-        if (is_string($this->schedules) and $this->schedules == '')
+        if (is_string($this->schedules))
             {
             return new Bitmask();
             }
@@ -896,7 +896,10 @@ abstract class BaseListing
      */
     public function enableSchedule($schedule) : self
     {
-        $this->schedules->setBit($schedule);
+
+        $sc = $this->getSchedules();
+        $sc->setBit($schedule);
+        $this->schedules = $sc;
         return $this;
     }
     /**
@@ -906,7 +909,9 @@ abstract class BaseListing
      */
     public function disableSchedule($schedule) : self
     {
-        $this->schedules->unsetBit($schedule);
+        $sc = $this->getSchedules();
+        $sc->unsetBit($schedule);
+        $this->schedules = $sc;
         return $this;
     }
     /**
@@ -916,17 +921,17 @@ abstract class BaseListing
      */
     public function isScheduleBusinessHours() : bool
     {
-        return $this->schedules->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
     }
 
-    /**
+    /*
      * Check schedule before opening
      *
      * @return bool
      */
     public function isScheduleBeforeOpening() : bool
     {
-        return $this->schedules->isSetBit(static::SCHEDULE_BEFORE_OPENING);
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BEFORE_OPENING);
     }
 
     /**
@@ -936,7 +941,7 @@ abstract class BaseListing
      */
     public function isScheduleAfterClosing() : bool
     {
-        return $this->schedules->isSetBit(static::SCHEDULE_AFTER_CLOSING);
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_AFTER_CLOSING);
     }
 
     /**
