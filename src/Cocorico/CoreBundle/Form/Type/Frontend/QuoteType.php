@@ -39,6 +39,7 @@ class QuoteType extends AbstractType
                 DateType::class,
                 array_merge(
                     array(
+                    'required' => 'false',
                     'label' => 'quote.form.presta_start_date',
                     'property_path' => 'prestaStartDate',
                     'widget' => 'single_text',
@@ -52,6 +53,7 @@ class QuoteType extends AbstractType
                 TextareaType::class,
                 array_merge(
                     array(
+                    'required' => 'false',
                     'label' => 'quote.form.communication'
                     )
                 ));

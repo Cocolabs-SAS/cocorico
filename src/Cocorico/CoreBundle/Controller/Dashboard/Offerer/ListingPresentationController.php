@@ -47,6 +47,8 @@ class ListingPresentationController extends Controller
         $editForm = $this->createEditPresentationForm($listing);
         $editForm->handleRequest($request);
 
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->get("cocorico.listing.manager")->save($listing);
 

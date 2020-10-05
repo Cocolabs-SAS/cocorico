@@ -746,6 +746,10 @@ class User extends BaseUser implements ParticipantInterface
         return $this;
     }
 
+    public function getEmail() {
+        return $this->email;
+    }
+
     /**
      * Set phoneVerified.
      *

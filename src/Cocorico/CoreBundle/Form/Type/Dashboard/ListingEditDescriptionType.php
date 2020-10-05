@@ -20,6 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
 {
@@ -93,6 +94,27 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 array(
                     'label' => 'listing.form.url',
                     'required' => false,
+                )
+            )
+            ->add(
+                'schedule_before_opening',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Avant ouverture',
+                )
+            )
+            ->add(
+                'schedule_business_hours',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Heures de bureau',
+                )
+            )
+            ->add(
+                'schedule_after_closing',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Après fermeture',
                 )
             )
             ->add(

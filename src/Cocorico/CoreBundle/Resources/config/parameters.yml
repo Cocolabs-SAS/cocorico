@@ -103,7 +103,7 @@ parameters:
     cocorico.review_max_per_page: 10
 
     #Is new listing published by default (0 or 1)
-    cocorico.listing_new_is_published: 1
+    cocorico.listing_new_is_published: 0
 
     #Countries : for France and UK: - FR\n- GB. For all countries set it to []
     cocorico.listing_countries: []

@@ -44,6 +44,7 @@ class ListingController extends Controller
     {
         $formHandler = $this->get('cocorico.form.handler.listing');
 
+
         $listing = $formHandler->init();
         $form = $this->createCreateForm($listing);
         $success = $formHandler->process($form);

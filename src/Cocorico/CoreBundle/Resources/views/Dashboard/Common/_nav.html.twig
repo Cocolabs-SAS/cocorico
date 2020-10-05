@@ -2,12 +2,6 @@
 
 {%- if app.session.get('profile') == 'offerer' -%}
     {%- set menuItems = {
-    "messages": {
-        "link": path('cocorico_dashboard_message'),
-        "text": 'nav.dashboard.messages.link'|trans,
-        "ariaControls": "messaging",
-        "dataText": "Messagerie"
-    },
     "quotes" : {
         "link": path('cocorico_dashboard_quote_offerer'),
         "text": "Demandes de Devis",
@@ -20,12 +14,6 @@
         "ariaControls": "properties",
         "dataText": "Mes annonces"
     },
-    "comments": {
-        "link": path('cocorico_dashboard_reviews_received'),
-        "text": 'nav.dashboard.comments.link'|trans,
-        "ariaControls": "comments",
-        "dataText": "Commentaires"
-    },
     "profile": {
         "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
         "text": 'nav.dashboard.profile.link'|trans,
@@ -35,23 +23,11 @@
     } -%}
 {%- else -%}
     {%- set menuItems = {
-    "messages": {
-        "link": path('cocorico_dashboard_message'),
-        "text": 'nav.dashboard.messages.link'|trans,
-        "ariaControls": "messaging",
-        "dataText": "Messagerie"
-    },
     "quotes" : {
         "link": path('cocorico_dashboard_quote_asker'),
         "text": "Demandes de Devis",
         "ariaControls": "devis",
         "dataText": "Demandes de Devis"
-    },
-    "comments": {
-        "link": path('cocorico_dashboard_reviews_received'),
-        "text": 'nav.dashboard.comments.link'|trans,
-        "ariaControls": "comments",
-        "dataText": "Commentaires"
     },
     "profile": {
         "link": path('cocorico_user_dashboard_profile_edit_about_me') ,

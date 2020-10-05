@@ -149,6 +149,27 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 )
             )
             ->add(
+                'schedule_before_opening',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Avant ouverture'
+                )
+            )
+            ->add(
+                'schedule_business_hours',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Heures de bureau'
+                )
+            )
+            ->add(
+                'schedule_after_closing',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Après fermeture'
+                )
+            )
+            ->add(
                 'image',
                 ImageType::class
             );

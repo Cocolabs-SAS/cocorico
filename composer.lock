@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "56f71bae8fc664b7d76d0f9093e8c4b4",
+    "content-hash": "16b6e79cf29b8bbb1717636c4ac0b883",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -9362,6 +9362,7 @@
                 "breadcrumbs",
                 "symfony"
             ],
+            "abandoned": "mhujer/breadcrumbs-bundle",
             "time": "2019-10-18T12:03:08+00:00"
         },
         {
@@ -9519,6 +9520,114 @@
                 "geocoding"
             ],
             "time": "2020-01-08T11:12:27+00:00"
+        },
+        {
+            "name": "yaroslavche/bitmask",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yaroslavche/BitMask.git",
+                "reference": "42c331425867f879854f4a3b09e157ccf0159311"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yaroslavche/BitMask/zipball/42c331425867f879854f4a3b09e157ccf0159311",
+                "reference": "42c331425867f879854f4a3b09e157ccf0159311",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "infection/infection": "^0.13.1",
+                "phpbench/phpbench": "^0.16.9",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.1",
+                "roave/backward-compatibility-check": "^3.0",
+                "squizlabs/php_codesniffer": "^3.4",
+                "thecodingmachine/phpstan-strict-rules": "^0.11.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BitMask\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yaroslavche",
+                    "email": "yaroslav429@gmail.com"
+                }
+            ],
+            "description": "BitMask, IndexedBitMask, AssociativeBitMask",
+            "keywords": [
+                "PHP7",
+                "binary",
+                "bit",
+                "bitmask",
+                "bitwise",
+                "php"
+            ],
+            "time": "2020-03-19T16:43:09+00:00"
+        },
+        {
+            "name": "yaroslavche/bitmasktype",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yaroslavche/BitMaskType.git",
+                "reference": "5964fcf37973d44457765269008e15833a848931"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yaroslavche/BitMaskType/zipball/5964fcf37973d44457765269008e15833a848931",
+                "reference": "5964fcf37973d44457765269008e15833a848931",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "^2.9",
+                "php": "^7.2",
+                "yaroslavche/bitmask": "^0.1.1"
+            },
+            "require-dev": {
+                "infection/infection": "^0.13.1",
+                "phpstan/phpstan": "^0.11.8",
+                "phpunit/phpunit": "^8.1",
+                "roave/backward-compatibility-check": "^3.0",
+                "squizlabs/php_codesniffer": "^3.4",
+                "thecodingmachine/phpstan-strict-rules": "^0.11.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BitMask\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "yaroslavche",
+                    "email": "yaroslav429@gmail.com"
+                }
+            ],
+            "description": "BitMaskType",
+            "keywords": [
+                "PHP7",
+                "binary",
+                "bit",
+                "bitmask",
+                "bitwise",
+                "doctrine",
+                "php"
+            ],
+            "time": "2019-06-06T08:19:01+00:00"
         },
         {
             "name": "zendframework/zend-code",

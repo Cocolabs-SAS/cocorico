@@ -50,13 +50,17 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
-            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+            <div id="breadcrumbs">
+                <a href="/fr/">&lt; Retour</a>
+            </div>
+
+            {#{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
                 request: app.request
-            })) }}
+            })) }#}
         {% endblock %}
 
         {% block main %}
-            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
+            {# {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }} #}
 
             <!-- two-columns -->
             <div class="twocolumns row alt">
@@ -65,16 +69,25 @@
                     <div class="content-holder">
                         <!-- listing-container -->
                         <div class="listing-container">
-                            <h1>
-                                {{ listing_translation.title }}
+                            <!-- Presentation Block ITOU -->
+                            <div class="listing-presentation">
+                                <h1>
+                                    {{ listing_translation.title }}
 
-                                {%- if app.user is not null and app.user is same as(listing_user) and is_granted("IS_AUTHENTICATED_FULLY") %}
-                                    <a class="btn btn-default"
-                                       href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
-                                        {{ 'listing.edit.edit'|trans }}
-                                    </a>
-                                {% endif %}
-                            </h1>
+                                    {%- if app.user is not null and app.user is same as(listing_user) and is_granted("IS_AUTHENTICATED_FULLY") %}
+                                        <a class="btn btn-default"
+                                           href="{{ path('cocorico_dashboard_listing_edit_presentation', { 'id': listing.id }) }}">
+                                            {{ 'listing.edit.edit'|trans }}
+                                        </a>
+                                    {% endif %}
+                                </h1>
+                                <div>
+                                    <p>{{ listing_description|nl2br }}</p>
+                                </div>
+                            </div>
+
+
+
                             <!-- tabs -->
                             <div role="tabpanel">
                                 <!-- Nav tabs -->
@@ -97,11 +110,13 @@
                                             </a>
                                         </li>
                                     </ul>
+                                    {# FIXME: deactivated favorite stuff
                                     <a href="javascript:void(0)" id="favourite-{{ listing.id }}"
                                        class="link-favourit favourit">
                                         {{ 'listing.show.favorites.add'|trans }}
                                         <i class="icon-heart"></i>
                                     </a>
+                                    #}
                                 </nav>
 
                                 <!-- Tab panes -->
@@ -157,105 +172,22 @@
                                 </div>
                             </div>
 
-                            <div role="tabpanel">
-                                <!-- Nav tabs -->
-                                <nav class="tabset-holder">
-                                    <a href="#" class="opener">
-                                        <span class="hidden">opener</span>
-                                        <i class="icon-down-open-mini"></i>
-                                    </a>
-                                    <ul class="nav nav-tabs" role="tablist">
-                                        <li class="active">
-                                            <a href="#description" data-toggle="tab"
-                                               data-text="{{ 'listing.show.description'|trans }}">
-                                                {{ 'listing.show.description'|trans }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#conditions" data-toggle="tab"
-                                               data-text="{{ 'listing.show.rules'|trans }}">
-                                                {{ 'listing.show.rules'|trans }}
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#features" data-toggle="tab"
-                                               data-text="{{ 'listing.show.characteristics'|trans }}">
-                                                {{ 'listing.show.characteristics'|trans }}
-                                            </a>
-                                        </li>
-                                        {% if categoryFieldBundleEnabled %}
-                                            <li>
-                                                <a href="#categories-fields" data-toggle="tab"
-                                                   data-text="{{ 'listing.show.categories'|trans }}">
-                                                    {{ 'listing.show.categories'|trans }}
-                                                </a>
-                                            </li>
-                                        {% endif %}
+                            <div class="listing-presentation">
+                                <h2>Détail de la prestation</h2>
+                                    <p>{{ listing_translation.rules|strip_private_info|nl2br }}</p>
 
-                                        {% if optionBundleEnabled %}
-                                            <li>
-                                                <a href="#options" data-toggle="tab"
-                                                   data-text="{{ 'listing.show.options'|trans }}">
-                                                    {{ 'listing.show.options'|trans }}
-                                                </a>
-                                            </li>
-                                        {% endif %}
-                                        <li>
-                                            <a href="#comments" data-toggle="tab"
-                                               data-text="{{ 'listing.show.comments'|trans }}">
-                                                {{ 'listing.show.comments'|trans }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-
-                                <!-- Tab panes -->
-                                <div class="tab-content">
-                                    <!-- description -->
-                                    <div role="tabpanel" class="tab-pane active" id="description">
-                                        <p>{{ listing_description|nl2br }}</p>
-                                    </div>
-                                    <!-- conditions -->
-                                    <div role="tabpanel" class="tab-pane" id="conditions">
-                                        <p>{{ listing_translation.rules|strip_private_info|nl2br }}</p>
-                                    </div>
-                                    <!-- features -->
-                                    <div role="tabpanel" class="tab-pane" id="features">
-                                        {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
-                                    </div>
                                     {% if categoryFieldBundleEnabled %}
                                         <!-- Categories fields -->
-                                        <div role="tabpanel" class="tab-pane" id="categories-fields">
-                                            {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
-                                        </div>
+                                        {% include 'CocoricoListingCategoryFieldBundle:Frontend:Listing/_listing_show_categories_fields.html.twig' with {'categories_fields': listing.getCategoriesFieldsValuesOrderedByGroup } only %}
                                     {% endif %}
 
                                     {% if optionBundleEnabled %}
-                                        <!-- options -->
-                                        <div role="tabpanel" class="tab-pane" id="options">
-                                            {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
-                                        </div>
+                                        {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
                                     {% endif %}
+                                <h2>Références Client</h2>
 
-                                    <!-- comments -->
-                                    <div role="tabpanel" class="tab-pane" id="comments">
-                                        {% if reviews|length > 0 %}
-                                            <div class="blog">
-                                                <div class="head">
-                                                    <h2>{{ 'listing.comments.header'|trans }}</h2>
-                                                    <!-- rating -->
-                                                    {% if listing.averageRating %}
-                                                        {{ listing.averageRating | cocorico_star_rating }}
-                                                    {% endif %}
-                                                </div>
-                                                <div class="posts-holder">
-                                                    <!-- post -->
-                                                    {% include 'CocoricoCoreBundle:Frontend/Listing:_rating_reviews.html.twig' with {'reviews': reviews} only %}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    </div>
-                                </div>
+                                <h2>Caractéristiques</h2>
+                                    {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
                             </div>
                         </div>
                     </div>
@@ -264,31 +196,75 @@
                 <!-- contain sidebar of the page -->
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
-                        <div class="sub-head">
-                            <!-- social-networks -->
-                            {#{{ socialButtons({'title': translation.title}) }}#}
-                            {% include 'CocoricoCoreBundle:Frontend/SocialButton:all.html.twig' with {'title': listing_translation.title} only %}
+                        {#quote form#}
+                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
+                            'listing': listing
+                        })) }}
 
-                            <!-- rating -->
-                            {% if listing.averageRating %}
-                                {{ listing.averageRating | cocorico_star_rating }}
-                            {% endif %}
-                            <span class="counter">
-                                ({{ 'listing.show.nb_comments'|transchoice(listing.commentCount) }})
-                            </span>
+                        <!-- gallery-small -->
+                        <div id="user_contact" class="gallery-small slideshow">
+                            <div class="slideset">
+
+                                {% if listing_user.images|length %}
+                                    {% for image in listing_user.images %}
+                                        <div class="slide">
+                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
+                                                 alt="{{ listing_user.name }}"/>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <div class="slide">
+                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
+                                             alt="{{ listing_user.name }}"/>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <a href="#" class="btn-prev">previous
+                                <span></span>
+                            </a>
+                            <a href="#" class="btn-next">next
+                                <span></span>
+                            </a>
+                        <h2>
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
+                                {{ listing_user.companyName }}
+                            </a>
+                        </h2>
                         </div>
 
-                        <section class="widget prices-conditions">
-                            <h2>À Savoir</h2>
-                            <dl>
-                                {% if listing.url %}
+                        <section class="widget info-pratiques">
+                            <h2>informations pratiques</h2>
+                            <dl id="info-perimetre">
+                                    <dd>Périmètre d'intervention</dd>
+                                    {% if listing.range %}
+                                        <dt>{{ listing.range }} km</dt>
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
+                            </dl>
+                            <dl id="info-horaire">
+                                    <dd>Horaires des interventions</dd>
+                                    {% if listing.hasSchedule %}
+                                        {% if listing.isScheduleBeforeOpening %}
+                                        <dt>Avant ouverture</dt>
+                                        {% endif %}
+                                        {% if listing.isScheduleBusinessHours %}
+                                        <dt>Heures de bureau</dt>
+                                        {% endif %}
+                                        {% if listing.isScheduleAfterClosing %}
+                                        <dt>Après fermeture</dt>
+                                        {% endif %}
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
+                            </dl>
+                            <dl id="info-site">
                                     <dd>Site Web</dd>
-                                    <dt>{{ listing.url }}</dt>
-                                {% endif %}
-                                {% if listing.range %}
-                                    <dd>Périmêtre d'intervention</dd>
-                                    <dt>{{ listing.range }} Km</dt>
-                                {% endif %}
+                                    {% if listing.url %}
+                                        <dt><a href="{{ listing.url }}" rel="ugc nofollow">{{ listing.url }}</a></dt>
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
                                 {#
                                 <dd>Moyen de déplacement privilégié</dd>
                                 <dt>Transports publics</dt>
@@ -296,201 +272,12 @@
                             </dl>
                         </section>
 
-                        {#booking form#}
-                        {#
-                        {{ render(controller('CocoricoCoreBundle:Frontend/BookingPrice:bookingPriceForm', {
-                            'listing': listing
-                        })) }}
-                        #}
-
-                        {#quote form#}
-                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
-                            'listing': listing
-                        })) }}
-
 
                         {#
-                        <section class="widget prices-conditions">
-                            <h2>{{ 'listing.show.policy.title'|trans }}</h2>
-                            <ul>
-                                <li>
-                                    {{ 'listing.show.cancellation_policy:'|trans() }}
-                                    <strong>{{ listing.cancellationPolicyText|trans }}</strong>
-                                    <button data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            data-html="true" type="button"
-                                            data-original-title="{{ cancellationPolicies() }}"> ?
-                                    </button>
-                                </li>
-
-                                {% if listing.minDuration %}
-                                    <li>
-                                        {{ 'listing.show.min_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.minDuration ~ " " ~ (-1)|add_time_unit_text }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
-
-                                {% if listing.maxDuration %}
-                                    <li>
-                                        {{ 'listing.show.max_duration:'|trans() }}
-                                        <strong>
-                                            {{ listing.maxDuration ? listing.maxDuration ~ " " ~ (-1)|add_time_unit_text : "none"|trans }}
-                                        </strong>
-                                    </li>
-                                {% endif %}
-
-                                {% if listing.discounts.count %}
-                                    {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
-                                    {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
-                                    <li>
-                                        {{ 'listing.show.discounts:'|trans() }}
-                                        <ul>
-                                            {% for discount in listing.discounts %}
-                                                <li>
-                                                    <strong>{{ discount.discount }}% </strong>
-                                                    {{ 'listing_edit.form.from_quantity'|trans(quantityText) }}
-                                                    <strong>{{ discount.fromQuantity }} </strong>
-                                                    {{ 'listing_edit.form.from_quantity.bought'|trans(quantitiesText) }}
-
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </section>
-                        #}
-
-                        <!-- members-list -->
-                        <section class="widget members-list">
-                            <!-- gallery-small -->
-                            <div id="user_contact" class="gallery-small slideshow">
-                                <div class="slideset">
-
-                                    {% if listing_user.images|length %}
-                                        {% for image in listing_user.images %}
-                                            <div class="slide">
-                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_contact') }}"
-                                                     alt="{{ listing_user.name }}"/>
-                                            </div>
-                                        {% endfor %}
-                                    {% else %}
-                                        <div class="slide">
-                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_contact') }}"
-                                                 alt="{{ listing_user.name }}"/>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                                <a href="#" class="btn-prev">previous
-                                    <span></span>
-                                </a>
-                                <a href="#" class="btn-next">next
-                                    <span></span>
-                                </a>
-                            </div>
-                            <h2>
-                                <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
-                                    {{ listing_user.companyName }}
-                                </a>
-                            </h2>
-
-                            {%- if is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                <a href="{{ path('cocorico_dashboard_message_new', {'slug': listing.slug}) }}"
-                                   class="contact-opener btn btn-default no-margin" data-toggle="modal"
-                                   data-target="#modal">
-                                    {{ 'thread.new.contact_me'|trans({}, 'cocorico_message') }}
-                                </a>
-                            {%- else -%}
-                                <a class="contact-opener btn btn-default no-margin"
-                                   href=" {{ path('cocorico_user_login') }}">
-                                    {{ 'listing.show.user.contact'|trans }}
-                                </a>
-                            {%- endif -%}
-
-                            <ul class="info-list">
-                                <li>
-                                    {% if listing_user.phoneVerified %}
-                                        <i class="icon-ok"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.phone_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-
-                                <li>
-                                    {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.emailVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.email_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-                                {#
-                                <li>
-                                    {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.idCardVerified %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "verified"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no_verified"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.id_card_verified.help'|trans }}">?
-                                    </button>
-                                </li>
-                                <li>
-                                    {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.nbBookingsOfferer %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans }}">?
-                                    </button>
-                                </li>
-                                #}
-                                <li>
-                                    {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
-                                    {% if listing_user.nbQuotesOfferer %}
-                                        <i class="icon-ok"></i>
-                                        <strong>{{ "yes"|trans }}</strong>
-                                    {% else %}
-                                        <i class="icon-cancel"></i>
-                                        <strong>{{ "no"|trans }}</strong>
-                                    {% endif %}
-                                    <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans }}">?
-                                    </button>
-                                </li>
-
-                            </ul>
-                        </section>
-
-                        {# similar results#}
                         {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:similarListing',
                         { 'id': listing.id }
                         )) }}
+                        #}
 
                     </div>
                 </aside>

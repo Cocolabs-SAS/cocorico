@@ -300,7 +300,67 @@ footer img.min_trav {
 /******************
  * NEW LISTING STYLES
  ******************/
+#breadcrumbs a {
+    text-decoration: none;
+    color:#655;
+}
 
+.listing-container h1 {
+    color: #000;
+}
+
+.listing-container h2 {
+    color:#655;
+    font-size:1em;
+}
+
+
+#main .nav-tabs > li.active > a,
+#main .nav-tabs > li.active > a:hover,
+#main .nav-tabs > li.active > a:focus {
+    background-color: #fff;
+    border:0;
+}
+
+#main .nav-tabs > li > a {
+    background-color: #d8d8d8;
+    color:#000;
+    font-weight:bold;
+}
+
+#main .tab-content {
+    border: 0;
+}
+
+.listing-area .tab-content {
+    padding-top:0;
+    padding-left:0;
+    padding-right:0;
+}
+
+#main .gallery-slider .slide {
+    border: 0;
+}
+    
+
+.listing-presentation {
+    color:#000;
+    margin-top:2rem;
+    margin-bottom:2rem;
+}
+
+.info-pratiques {
+  border-radius: 7px;
+  background-color: #FFFFFF;
+  box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.1);
+  border:0;
+}
+
+.info-pratiques h2 {
+    font-size:1.1em;
+    font-weight:bold;
+    text-align:center;
+}
 
 /******************
  * QUOTE STYLES
@@ -405,7 +465,6 @@ div.form-message {
     font-weight: 400;
 }
 
-
 .postarea .quote-detail ul li time,
 .postarea .quote-detail ul li span {
     margin: 0;
@@ -414,4 +473,66 @@ div.form-message {
     font-weight: 400;
 }
 
+section.quote-quick-form {
+    margin:0;
+    padding-left:21px;
+    padding-right:12px;
+    border:0;
+    padding-top:0;
+}
 
+section.quote-quick-form fieldset {
+    margin:0;
+}
+
+#main .gallery-small {
+    background-color:transparent;
+    border:0;
+}
+
+#main #user_contact.gallery-small .slideset,
+#main #user_contact.gallery-small .slideset .slide {
+    width:100%;
+}
+
+#user_contact h2 a {
+    color: #495057;
+    text-decoration:none;
+    text-align:center;
+    font-size: .8em;
+    display:block;
+}
+
+#user_contact h2 a:hover {
+    text-decoration:underline;
+    color:#000;
+}
+
+
+.btn-quote {
+    color:#fff;
+    font-weight:bold;
+    background-color: #e54b28;
+    width:100%;
+    margin:2rem 0;
+}
+
+.info-pratiques dl dd{
+    color:#999;
+    font-weight:bold;
+}
+
+.info-pratiques dl {
+    border-bottom: 1px solid #ccc;
+    padding-bottom:2rem;
+    background-size:24px;
+    background-repeat: no-repeat;
+    padding-left:28px;
+}
+.info-pratiques dl:last-child {
+    border:0;
+}
+
+#info-perimetre { background-image: url('/images/shape_perimeter.png'); }
+#info-horaire { background-image: url('/images/shape_horaire.png'); }
+#info-site { background-image: url('/images/shape_site.png'); }

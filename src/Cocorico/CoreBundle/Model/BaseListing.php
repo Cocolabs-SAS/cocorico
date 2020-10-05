@@ -13,7 +13,12 @@ namespace Cocorico\CoreBundle\Model;
 
 use Cocorico\CoreBundle\Validator\Constraints as CocoricoAssert;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\Type;
+use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Symfony\Component\Validator\Constraints as Assert;
+use BitMask\BitMask;
+use BitMask\BitMaskInterface;
+
 
 /**
  * Listing
@@ -91,6 +96,11 @@ abstract class BaseListing
         self::TYPE_THREE => 'entity.listing.type.three'
     );
 
+    /* Schedule */
+    const SCHEDULE_BUSINESS_HOURS = 1 << 0;
+    const SCHEDULE_BEFORE_OPENING = 1 << 1;
+    const SCHEDULE_AFTER_CLOSING = 1 << 2;
+
     /* Cancellation policy */
     const CANCELLATION_POLICY_FLEXIBLE = 1;
     const CANCELLATION_POLICY_STRICT = 2;
@@ -104,6 +114,12 @@ abstract class BaseListing
         self::CANCELLATION_POLICY_FLEXIBLE => 'entity.listing.cancellation_policy_desc.flexible',
         self::CANCELLATION_POLICY_STRICT => 'entity.listing.cancellation_policy_desc.strict',
     );
+
+    /**
+    * @ORM\Column(name="schedules", type="bitmask", nullable=true)
+    * @var \Doctrine\DBAL\Types\Type\bitmask
+    */
+    protected $schedules = BitMaskType::class;
 
     /**
      * @ORM\Column(name="status", type="smallint", nullable=false)
@@ -836,6 +852,153 @@ abstract class BaseListing
     public function getSurfaceTypeText()
     {
         return self::$surfaceTypeValues[$this->getSurfaceType()];
+    }
+
+    /**
+     * Get Schedules
+     *
+     */
+    public function getSchedules()
+    {
+        if (is_string($this->schedules))
+            {
+            return new Bitmask();
+            }
+
+        return $this->schedules;
+    }
+
+    /**
+     * Force convert schedule data type to int
+     *
+     */
+    public function schedulesToInt() 
+    {
+        $this->schedules = $this->schedules->get();
+    }
+
+    /**
+     * Set Schedules
+     *
+     * @return self
+     */
+    public function setSchedules(BitMaskInterface $schedules) : self
+    {
+        $this->schedules = $schedules;
+
+        return $this;
+    }
+
+    /**
+     * Enable Single Schedule
+     *
+     * @return self
+     */
+    public function enableSchedule($schedule) : self
+    {
+
+        $sc = $this->getSchedules();
+        $sc->setBit($schedule);
+        $this->schedules = $sc;
+        return $this;
+    }
+    /**
+     * Disable Single Schedule
+     *
+     * @return self
+     */
+    public function disableSchedule($schedule) : self
+    {
+        $sc = $this->getSchedules();
+        $sc->unsetBit($schedule);
+        $this->schedules = $sc;
+        return $this;
+    }
+    public function hasSchedule() : bool
+    {
+        return $this->isScheduleBusinessHours()
+            || $this->isScheduleBeforeOpening()
+            || $this->isScheduleAfterClosing();
+    }
+    /**
+     * Check schedule business hours
+     *
+     * @return bool
+     */
+    public function isScheduleBusinessHours() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BUSINESS_HOURS);
+    }
+
+    /*
+     * Check schedule before opening
+     *
+     * @return bool
+     */
+    public function isScheduleBeforeOpening() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_BEFORE_OPENING);
+    }
+
+    /**
+     * Check schedule after closing
+     *
+     * @return bool
+     */
+    public function isScheduleAfterClosing() : bool
+    {
+        return $this->getSchedules()->isSetBit(static::SCHEDULE_AFTER_CLOSING);
+    }
+
+    /**
+     * Check schedule business hours
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setScheduleBusinessHours($set) : self
+    {
+        return $set
+            ? $this->enableSchedule(self::SCHEDULE_BUSINESS_HOURS)
+            : $this->disableSchedule(self::SCHEDULE_BUSINESS_HOURS);
+    }
+    public function getScheduleBusinessHours() : bool {
+        return $this->isScheduleBusinessHours();
+    }
+
+    /**
+     * Check schedule Before Opening
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setScheduleBeforeOpening($set) : self
+    {
+        return $set
+            ? $this->enableSchedule(self::SCHEDULE_BEFORE_OPENING)
+            : $this->disableSchedule(self::SCHEDULE_BEFORE_OPENING);
+    }
+    public function getScheduleBeforeOpening() : bool {
+        return $this->isScheduleBeforeOpening();
+    }
+
+    /**
+     * Check schedule Before Opening
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setScheduleAfterClosing($set) : self
+    {
+        return $set
+            ? $this->enableSchedule(self::SCHEDULE_AFTER_CLOSING)
+            : $this->disableSchedule(self::SCHEDULE_AFTER_CLOSING);
+    }
+    public function getScheduleAfterClosing() : bool {
+        return $this->isScheduleAfterClosing();
     }
 
     /**
