@@ -245,19 +245,31 @@
                             <dl id="info-perimetre">
                                     <dd>Périmètre d'intervention</dd>
                                     {% if listing.range %}
-                                        <dt>{{ listing.range }}</dt>
+                                        <dt>{{ listing.range }} km</dt>
                                     {% else %}
                                         <dt>Non Précisé</dt>
                                     {% endif %}
                             </dl>
                             <dl id="info-horaire">
                                     <dd>Horaires des interventions</dd>
-                                    <dt>Non Précisé</dt>
+                                    {% if listing.hasSchedule %}
+                                        {% if listing.isScheduleBeforeOpening %}
+                                        <dt>Avant ouverture</dt>
+                                        {% endif %}
+                                        {% if listing.isScheduleBusinessHours %}
+                                        <dt>Heures de bureau</dt>
+                                        {% endif %}
+                                        {% if listing.isScheduleAfterClosing %}
+                                        <dt>Après fermeture</dt>
+                                        {% endif %}
+                                    {% else %}
+                                        <dt>Non Précisé</dt>
+                                    {% endif %}
                             </dl>
                             <dl id="info-site">
                                     <dd>Site Web</dd>
                                     {% if listing.url %}
-                                        <dt>{{ listing.url }}</dt>
+                                        <dt><a href="{{ listing.url }}" rel="ugc nofollow">{{ listing.url }}</a></dt>
                                     {% else %}
                                         <dt>Non Précisé</dt>
                                     {% endif %}

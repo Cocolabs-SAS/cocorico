@@ -914,6 +914,12 @@ abstract class BaseListing
         $this->schedules = $sc;
         return $this;
     }
+    public function hasSchedule() : bool
+    {
+        return $this->isScheduleBusinessHours()
+            || $this->isScheduleBeforeOpening()
+            || $this->isScheduleAfterClosing();
+    }
     /**
      * Check schedule business hours
      *
