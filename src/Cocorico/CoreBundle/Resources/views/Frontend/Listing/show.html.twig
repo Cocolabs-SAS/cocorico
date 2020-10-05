@@ -186,6 +186,8 @@
                                     {% endif %}
                                 <h2>Références Client</h2>
 
+                                <h2>Caractéristiques</h2>
+                                    {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
                             </div>
                         </div>
                     </div>
@@ -194,21 +196,6 @@
                 <!-- contain sidebar of the page -->
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
-                        <div class="sub-head">
-                            {# FIXME: deactivated
-                            <!-- social-networks -->
-                            {% include 'CocoricoCoreBundle:Frontend/SocialButton:all.html.twig' with {'title': listing_translation.title} only %}
-
-                            <!-- rating -->
-                            {% if listing.averageRating %}
-                                {{ listing.averageRating | cocorico_star_rating }}
-                            {% endif %}
-                            <span class="counter">
-                                ({{ 'listing.show.nb_comments'|transchoice(listing.commentCount) }})
-                            </span>
-                            #}
-                        </div>
-
                         {#quote form#}
                         {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
                             'listing': listing
@@ -238,6 +225,11 @@
                             <a href="#" class="btn-next">next
                                 <span></span>
                             </a>
+                        <h2>
+                            <a href="{{ path('cocorico_user_profile_show', { 'id': listing_user.id }) }}">
+                                {{ listing_user.companyName }}
+                            </a>
+                        </h2>
                         </div>
 
                         <section class="widget info-pratiques">

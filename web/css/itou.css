@@ -478,7 +478,36 @@ section.quote-quick-form {
     padding-left:21px;
     padding-right:12px;
     border:0;
+    padding-top:0;
 }
+
+section.quote-quick-form fieldset {
+    margin:0;
+}
+
+#main .gallery-small {
+    background-color:transparent;
+    border:0;
+}
+
+#main #user_contact.gallery-small .slideset,
+#main #user_contact.gallery-small .slideset .slide {
+    width:100%;
+}
+
+#user_contact h2 a {
+    color: #495057;
+    text-decoration:none;
+    text-align:center;
+    font-size: .8em;
+    display:block;
+}
+
+#user_contact h2 a:hover {
+    text-decoration:underline;
+    color:#000;
+}
+
 
 .btn-quote {
     color:#fff;
