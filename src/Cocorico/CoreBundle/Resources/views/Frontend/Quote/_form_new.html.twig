@@ -12,48 +12,61 @@
 <div class="form-message">
     <fieldset>
         <legend class="hidden">form-communication</legend>
-         <div>
-             {{ form_errors(form.prestaStartDate) }}
-             <strong class="title">
-                 {{ form_label(form.prestaStartDate, null, {'required': true}) }}
-             </strong>
-             <div class="input-append date field-holder datepicker-holder-ajax">
-                 <span class="add-on">
-                     <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
-                 </span>
-                 {{ form_widget(form.prestaStartDate, {
-                     'id': 'prestaStartDate',
-                     'type': 'text',
-                     'attr': {
-                         'class': 'form-control from',
-                         'placeholder': '   /      /',
-                         'title': 'presta-start-date'
-                     }
-                 }) }}
-             </div>
-        </div>
-        <div class="col-12">
+        <div class="container">
+            <div class="row" style="margin-bottom:1rem;">
+                 {{ form_errors(form.prestaStartDate) }}
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
+                <div class="col-sm-4">
+                     <strong class="title">
+                         {{ form_label(form.prestaStartDate, null, {'required': true}) }}
+                     </strong>
+                     <span class="add-on">
+                         <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                     </span>
+                </div>
+                <div class="col-sm-4">
+                     <div class="input-append date field-holder datepicker-holder-ajax">
+                         {{ form_widget(form.prestaStartDate, {
+                             'id': 'prestaStartDate',
+                             'type': 'text',
+                             'attr': {
+                                 'class': 'form-control from',
+                                 'placeholder': '   /      /',
+                                 'title': 'presta-start-date'
+                             }
+                         }) }}
+                     </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
                 {{ form_errors(form.budget) }}
-                <strong class="title">
-                    {{ form_label(form.budget, null, {'required': false}) }}
-                </strong>
-                <div class="field-holder">
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
+                <div class="col-sm-4">
+                    <strong class="title">
+                        {{ form_label(form.budget, null, {'required': false}) }}
+                    </strong>
                     <span class="add-on">
                         <i data-date-icon="icon-info" data-time-icon="icon-time" class="icon-info"></i>
                     </span>
-                    {{ form_widget(form.budget, {
-                        'id': 'budget',
-                        'type': 'text',
-                        'attr': {
-                            'class': 'form-control',
-                            'placeholder': '',
-                            'title': 'budget'
-                        }
-                    }) }}
-
                 </div>
+                <div class="col-sm-4">
+                    <div class="field-holder">
+                        {{ form_widget(form.budget, {
+                            'id': 'budget',
+                            'type': 'text',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': '',
+                                'title': 'budget'
+                            }
+                        }) }}
+
+                    </div>
+                </div>
+            </div>
         </div>
-        <h2>{{ form_label(form.communication) }}</h2>
         <div class="legend">
             {{ 'quote.new.message.description'|trans }}
         </div> 
