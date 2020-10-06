@@ -110,7 +110,7 @@
                         </ul>
 
                         {# New listing link #}
-                        {% if app.session.get('canSwitch') %}
+                        {% if app.session.get('canPublish') %}
                             <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9">
                                 {{ 'nav.listing.new.link'|trans }}
                             </a>

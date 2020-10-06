@@ -196,9 +196,11 @@
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
                         {#quote form#}
-                        {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
-                            'listing': listing
-                        })) }}
+                        {% if app.session.get('canAskForQuote') %}
+                            {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
+                                'listing': listing
+                            })) }}
+                        {% endif %}
 
                         <!-- gallery-small -->
                         <div id="user_contact" class="gallery-small slideshow">

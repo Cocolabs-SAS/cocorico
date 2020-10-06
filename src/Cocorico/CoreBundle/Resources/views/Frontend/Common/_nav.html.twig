@@ -54,6 +54,7 @@
                 {% endif %}
             </ul>
         </li>
+        {% if app.session.get('canAskForQuote') %}
         <li class="dropdown open display-tab" data-id="asker">
             <ul class="dropdown-menu">
                 {% for name, menu in askerItems %}
@@ -75,26 +76,29 @@
                 {% endif %}
             </ul>
         </li>
-        <li class="dropdown display-tab" data-id="offerer">
-            <ul class="dropdown-menu">
-                {% for name, menu in offererItems %}
-                    <li>
-                        <a id="offerer{{ menu.text }}" href="{{ menu.link }}">
-                            {{ menu.text }}
-                            {% if name == 'messages' %}
-                                <span id="offererMsg"></span>
-                            {% endif %}
-                        </a>
-                    </li>
-                {% endfor %}
-                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                    <li>
-                        <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
-                            {{ 'exit_impersonation'|trans }}
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </li>
+        {% endif %}
+        {% if app.session.get('canPublish') %}
+            <li class="dropdown open display-tab" data-id="offerer">
+                <ul class="dropdown-menu">
+                    {% for name, menu in offererItems %}
+                        <li>
+                            <a id="offerer{{ menu.text }}" href="{{ menu.link }}">
+                                {{ menu.text }}
+                                {% if name == 'messages' %}
+                                    <span id="offererMsg"></span>
+                                {% endif %}
+                            </a>
+                        </li>
+                    {% endfor %}
+                    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <li>
+                            <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
+                                {{ 'exit_impersonation'|trans }}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </li>
+        {% endif %}
     </ul>
 {%- endif -%}
