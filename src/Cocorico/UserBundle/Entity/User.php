@@ -101,6 +101,10 @@ class User extends BaseUser implements ParticipantInterface
     public static $offererTypes = array (
         self::PERSON_TYPE_INCLUSIVE
     );
+
+    public static $askerTypes = array (
+        self::PERSON_TYPE_CLASSIC
+    );
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -1979,6 +1983,22 @@ class User extends BaseUser implements ParticipantInterface
     public function canBeOfferer()
     {
         return in_array($this->personType, self::$offererTypes);
+    }
+
+    /**
+     * Check if person can publish a listing, "sell"
+     */
+    public function canPublish()
+    {
+        return in_array($this->personType, self::$offererTypes);
+    }
+
+    /**
+     * Check if person can ask for a quote, "buy"
+     */
+    public function canAskForQuote()
+    {
+        return in_array($this->personType, self::$askerTypes);
     }
 
     /**

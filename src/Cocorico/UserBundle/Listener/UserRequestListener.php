@@ -46,10 +46,18 @@ class UserRequestListener
 
         // If user can be offerer, he can switch between roles
         if ($user && method_exists($user, "canBeOfferer")) {
-            $session->set('canSwitch', $user->canBeOfferer());
+            #$session->set('canSwitch', $user->canBeOfferer());
+            $session->set('canSwitch', False);
+            $session->set('canPublish', $user->canPublish());
+            $session->set('canAskForQuote', $user->canAskForQuote());
         } else {
             $session->set('canSwitch', False);
+            $session->set('canPublish', False);
+            $session->set('canAskForQuote', True);
         }
+
+
+
 
         if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user && method_exists($user, "canBeOfferer") && $user->canBeOfferer()) {
             $session->set('profile', 'offerer');
