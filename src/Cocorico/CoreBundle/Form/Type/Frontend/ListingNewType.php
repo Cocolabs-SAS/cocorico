@@ -126,13 +126,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
         $builder
             ->add(
-                'price',
-                PriceType::class,
-                array(
-                    'label' => 'listing.form.price',
-                )
-            )
-            ->add(
                 'range',
                 NumberType::class,
                 array(
