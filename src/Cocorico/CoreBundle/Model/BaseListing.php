@@ -84,6 +84,15 @@ abstract class BaseListing
         self::SURFACE_TYPE_CONCRETE
     );
 
+    /* Prestation type */
+    CONST PRESTA_SERVICE = 1;
+    CONST PRESTA_INTERIM = 2;
+
+    public static $prestaTypeValues = array (
+        self::PRESTA_SERVICE => 'entity.listing.presta_service',
+        self::PRESTA_INTERIM => 'entity.listing.presta_interim'
+    );
+
 
     /* Type */
     const TYPE_ONE = 1;
@@ -249,6 +258,14 @@ abstract class BaseListing
      * @var int|null
      */
     protected $surfaceType;
+
+
+    /**
+     * @ORM\Column(name="prestation_type", type="smallint", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $prestaType;
 
 
     /**
@@ -852,6 +869,47 @@ abstract class BaseListing
     public function getSurfaceTypeText()
     {
         return self::$surfaceTypeValues[$this->getSurfaceType()];
+    }
+
+    /**
+     * Set prestaType.
+     *
+     * @param int|null $prestaType
+     *
+     * @return $this
+     */
+    public function setPrestaType($prestaType = null)
+    {
+        if (!in_array($prestaType, array_keys(self::$prestaTypeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.prestaType : %s.', $prestaType)
+            );
+        }
+
+        $this->prestaType = $prestaType;
+
+        return $this;
+    }
+
+    /**
+     * Get prestaType.
+     *
+     * @return int|null
+     */
+    public function getPrestaType()
+    {
+        return $this->prestaType;
+    }
+
+
+    /**
+     * Get PrestaType Text
+     *
+     * @return string
+     */
+    public function getPrestaTypeText()
+    {
+        return self::$prestaTypeValues[$this->getPrestaType()];
     }
 
     /**
