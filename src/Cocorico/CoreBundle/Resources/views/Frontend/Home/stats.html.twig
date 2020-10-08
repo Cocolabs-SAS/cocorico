@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block main %}
+            <div>
+                <!-- statsarea -->
+                <iframe
+                    src="https://stats.inclusion.beta.gouv.fr/public/dashboard/bf1a3042-dd6f-4192-9864-e1eb792c8c05"
+                    frameborder="0"
+                    width="1200"
+                    height="1200"
+                    allowtransparency>
+                </iframe>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock %}
