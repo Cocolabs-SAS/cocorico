@@ -339,55 +339,38 @@
                     </div>
                 </div>
             </div>
-
-            <!-- legacy form -->
-            <div class="holder">
-                <div class="row">
-                    <div class="block column">
-                        <h2>Autres données</h2>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <span class="label" style="width:10rem">
-                                    Plages horaires de la prestation :
-                                </span>
-                            </div>
-                            <div class="col-sm-6">
-
-                            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2>Caractéristiques spécifiques</h2>
+                    <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
+                            <legend>Norme filière nettoyage</legend>
                         </div>
-                        <div class="row">
-                            {{ form_errors(form.range) }}
-                            <div class="col-sm-3">
-                                <span class="label" style="width:10rem">
-                                    {{ form_label(form.range) }}
-                                    <button title="{{ 'listing.edit.range.help'|trans }}"
-                                            data-placement="right"
-                                            data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.edit.range.help'|trans }}">
-                                        ?
-                                    </button>
-                                </span>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
+                            <legend>Ajoutez une ou plusieurs références clients</legend>
                         </div>
-                        <div class="row">
-                            {{ form_errors(form.url) }}
-                            <div class="col-sm-3">
-                                <span class="label" style="width:10rem">
-                                    {{ form_label(form.url) }} :
-                                    <button title="{{ 'listing.edit.url.help'|trans }}"
-                                            data-placement="right"
-                                            data-toggle="tooltip" class="tooltip-button"
-                                            type="button"
-                                            data-original-title="{{ 'listing.edit.url.help'|trans }}">
-                                        ?
-                                    </button>
-                                </span>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="field-holder" style="width:28rem;display:inline-block">
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Avoir des références clients permet de donner confiance à vos futurs acheteurs.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -434,19 +417,6 @@
         'map_elt': '#map-listing',
         'marker_draggable': true
     } only %}
-
-
-    <script>
-        $(function () {
-            {#Currency conversion#}
-            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
-
-            //Disable submit button on click
-            $("[type=submit]").click(function (e) {
-                $(this).prop('disabled', true);
-            });
-        });
-    </script>
 
     {#Translations#}
     {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
