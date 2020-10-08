@@ -69,29 +69,49 @@
                             <legend>Type de prestation</legend>
                                 <div class="option">
                                     <label>
-                                    {{ form_widget(form.presta_type.0, {
-                                        'attr': {
-                                            'class': 'form-control required'
-                                        }})
-                                    }}
+                                    {{ form_widget(form.presta_type.0, { 'attr': { 'class': 'form-control required' }}) }}
                                     Prestation de service
                                     </label>
                                 </div>
                                 <div class="option">
                                     <label>
-                                    {{ form_widget(form.presta_type.1, {
-                                        'attr': {
-                                            'class': 'form-control required'
-                                        }})
-                                    }}
+                                    {{ form_widget(form.presta_type.1, { 'attr': { 'class': 'form-control required' }}) }}
                                     Mise à disposition du personnel / Interim
                                     </label>
                                 </div>
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Le titre de l’offre est la première information que les acheteurs verront. Il faut être clair et concis !
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
                         <div class="itou-subfieldgroup">
                             <legend>Catégorie de l'offre de prestation</legend>
                                 {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
                         </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Choissez une seule catégorie, et faites une faite une offre par catégorie. Si vos offres se ressemblent vous pourrez les dupliquer par la suite.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
                         <div class="itou-subfieldgroup">
                             <legend>Présentation de l'offre de prestation (max 250 caractères)</legend>
                                 {{ form_widget(form.translations.fr.description, {
@@ -107,7 +127,8 @@
                     <div class="itou-info">
                         <img class="shape" src="/images/info_shape.png" />
                         <p>
-                        Le titre de l’offre est la première information que les acheteurs verront. Il faut être clair et concis !
+                        Présentez brievement votre offre de prestation. 
+                        N’hésitez pas à mettre en avant votre expertise et vos atouts, c’est la deuxième chose que l’acheteur verra. 
                         </p>
                     </div>
                 </div>
@@ -154,32 +175,12 @@
                     </div>
                 </div>
             </div>
-
-            <!-- legacy form -->
-            <div class="holder">
-
-
-                <div class="row">
-                    <div class="file-selection">
-
-                        <!-- files-list -->
-                        <div class="files-list">
-                            <ul class="images-list">
-                                {% for image in listing.images %}
-                                    <li>
-                                        <img src="{{ image.getWebPath | imagine_filter('listing_xsmall') }}"
-                                             alt=""/>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-inquiry">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>ADRESSE</h2>
+                    <div class="itou-fieldgroup form-inquiry">
                         <div class="columns-holder">
                             <div class="column" id="listing-location">
-                                <h2>{{ 'listing.new.address.title'|trans }}</h2>
 
                                 <p class="error"></p>
                                 {{ form_errors(form.location.coordinate) }}
@@ -287,9 +288,60 @@
                                 </div>
                                 <div id="map-listing" class="map-box"></div>
                             </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
+                            <legend>Perimètre d'intervention</legend>
+                                {{ form_widget(form.range, {
+                                    'attr': {
+                                        'class': 'numbers-only form-control',
+                                    }
+                                }) }}
+                        </div>
+                        <div class="itou-subfieldgroup">
+                            <legend>Site web ou page dédiée à la prestation</legend>
+                            {{ form_widget(form.url, {
+                                'attr': {
+                                    'class': 'form-control',
+                                }
+                            }) }}
+                        </div>
+                        <div class="itou-subfieldgroup">
+                            <legend>Horaires des interventions</legend>
+                            <ul style="list-style-type:none">
+                                <li>
+                                {{ form_widget(form.schedule_business_hours) }}
+                                {{ form_label(form.schedule_business_hours) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.schedule_before_opening) }}
+                                {{ form_label(form.schedule_before_opening) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.schedule_after_closing) }}
+                                {{ form_label(form.schedule_after_closing) }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Ces informations figureront en face de l'introduction, elles peuvent faire la différence par rapport à d'autres fournisseurs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- legacy form -->
+            <div class="holder">
                 <div class="row">
                     <div class="block column">
                         <h2>Autres données</h2>
@@ -300,20 +352,7 @@
                                 </span>
                             </div>
                             <div class="col-sm-6">
-                                <ul style="list-style-type:none">
-                                    <li>
-                                    {{ form_widget(form.schedule_business_hours) }}
-                                    {{ form_label(form.schedule_business_hours) }}
-                                    </li>
-                                    <li>
-                                    {{ form_widget(form.schedule_before_opening) }}
-                                    {{ form_label(form.schedule_before_opening) }}
-                                    </li>
-                                    <li>
-                                    {{ form_widget(form.schedule_after_closing) }}
-                                    {{ form_label(form.schedule_after_closing) }}
-                                    </li>
-                                </ul>
+
                             </div>
                         </div>
                         <div class="row">
@@ -329,15 +368,6 @@
                                         ?
                                     </button>
                                 </span>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="field-holder" style="width:8rem;display:inline-block">
-                                {{ form_widget(form.range, {
-                                    'attr': {
-                                        'class': 'numbers-only form-control',
-                                    }
-                                }) }}
-                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -356,11 +386,6 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="field-holder" style="width:28rem;display:inline-block">
-                                {{ form_widget(form.url, {
-                                    'attr': {
-                                        'class': 'form-control',
-                                    }
-                                }) }}
                                 </div>
                             </div>
                     </div>
