@@ -34,6 +34,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Valid;
 
+
 /**
  * Class ListingNewType
  * Categories are created trough ajax in ListingNewCategoriesType.
@@ -225,8 +226,8 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 )
             );
 
-        //Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
-        //Used for example to add fields to new listing form
+        // Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
+        // Used for example to add fields to new listing form
         $this->dispatcher->dispatch(
             ListingFormEvents::LISTING_NEW_FORM_BUILD,
             new ListingFormBuilderEvent($builder)
@@ -240,6 +241,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     {
         $resolver->setDefaults(
             array(
+                'allow_extra_fields' => true,
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_new',
                 'translation_domain' => 'cocorico_listing',

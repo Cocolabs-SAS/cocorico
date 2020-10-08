@@ -341,24 +341,6 @@
             </div>
             <div class="row">
                 <div class="col-sm-7">
-                    <h2>Caractéristiques spécifiques</h2>
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Norme filière nettoyage</legend>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
                     <div class="itou-fieldgroup">
                         <div class="itou-subfieldgroup">
                             <legend>Ajoutez une ou plusieurs références clients</legend>
@@ -374,9 +356,9 @@
                     </div>
                 </div>
             </div>
+            <!-- End of listing form -->
         </fieldset>
     </div>
-
     <div class="btns-area new-listing">
         {{ form_errors(form.tac) }}
         <div class="agreement">
@@ -398,9 +380,45 @@
             <input id="listing-new-save" type="submit" class="btn btn-primary"
                    value="{{ 'listing.new.save'|trans }}">
         </div>
-
     </div>
     {{ form_end(form) }}
+    <div class="listing-section container">
+        <fieldset>
+            <!-- start of characteristic form -->
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2>Caractéristiques spécifiques</h2>
+                    <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
+                            <legend>Norme filière nettoyage</legend>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of characteristic form -->
+        </fieldset>
+    </div>
+
+    <div class="btns-area new-listing">
+        <div id="progress" class="progress">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+
+        <div class="text-center">
+            <input id="listing-new-save" type="submit" class="btn btn-primary"
+                   value="{{ 'listing.new.save'|trans }}">
+        </div>
+
+    </div>
+    {{ form_end(editForm) }}
 </div>
 
 {% endblock %}

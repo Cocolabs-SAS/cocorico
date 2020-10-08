@@ -40,6 +40,7 @@ class ListingListingCharacteristicType extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
+                dump("$$$$$$$$$$$$$$$$$");
                 $form = $event->getForm();
                 /** @var ListingListingCharacteristic $llc */
                 $llc = $event->getData();
@@ -49,18 +50,25 @@ class ListingListingCharacteristicType extends AbstractType
                     'entity',
                     array(
                         'query_builder' => function (ListingCharacteristicValueRepository $lcvr) use ($llc) {
+                            dump(1);
                             $lct = $llc->getListingCharacteristic()->getListingCharacteristicType();
 
+                            dump(2);
                             return $lcvr->getFindAllTranslatedQueryBuilder(
                                 $lct,
                                 $this->locale
                             );
                         },
-                        'placeholder' => 'listing.form.characteristic.choose',
-                        'choice_label' => 'translations[' . $this->locale . '].name',
+                        'placeholder' => 'poulet',
+                        'choice_label' => 'translations[en].name',
+                        //'choice_label' => function($choice, $key, $value) {
+                        //    dump($choice, $key);
+                        //    return 'un_truc';
+                        //},
                         'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicValue',
                     )
                 );
+                dump(5);
             }
         );
     }

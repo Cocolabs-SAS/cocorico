@@ -9,6 +9,15 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.listing_new_characteristic:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCharacteristicType
+        arguments:
+            - "@request_stack"
+            - "%cocorico.locales%"
+            - "@cocorico.listing.manager"
+        tags:
+            - { name: form.type }
+
     ##Listing edition
     cocorico.form.type.listing_edit:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditType
