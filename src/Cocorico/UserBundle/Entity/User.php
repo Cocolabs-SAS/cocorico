@@ -103,7 +103,9 @@ class User extends BaseUser implements ParticipantInterface
     );
 
     public static $askerTypes = array (
-        self::PERSON_TYPE_CLASSIC
+        self::PERSON_TYPE_CLASSIC,
+        self::PERSON_TYPE_LEGAL,
+        self::PERSON_TYPE_NATURAL
     );
     /**
      * @ORM\Id

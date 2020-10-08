@@ -38,7 +38,7 @@
     <ul class="dropdown-menu display-sub-tabs newstyle" role="menu">
         <li class="tab-list">
             <ul class="nav menu-sub-tabs" role="tablist">
-                {% if app.session.get('canSwitch') %}
+                {% if app.session.get('canSwitch')%}
                     <li class="active firstTab">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"
                            data-id="asker">{{ 'nav.asker.link' | trans }}
@@ -54,7 +54,7 @@
                 {% endif %}
             </ul>
         </li>
-        {% if app.session.get('canAskForQuote') %}
+        {% if app.session.get('canAskForQuote') or is_granted('ROLE_SONATA_ADMIN') %}
         <li class="dropdown open display-tab" data-id="asker">
             <ul class="dropdown-menu">
                 {% for name, menu in askerItems %}
@@ -77,7 +77,7 @@
             </ul>
         </li>
         {% endif %}
-        {% if app.session.get('canPublish') %}
+        {% if app.session.get('canPublish')%}
             <li class="dropdown open display-tab" data-id="offerer">
                 <ul class="dropdown-menu">
                     {% for name, menu in offererItems %}

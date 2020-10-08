@@ -20,7 +20,7 @@
                     <!-- tabs -->
                     <div role="tabpanel">
                         <!-- form-switchers -->
-                        {% if app.session.get('canSwitch') %}
+                        {% if app.session.get('canSwitch')%}
                             {{ render(controller("CocoricoUserBundle:Dashboard/Profile:profileSwitch")) }}
                         {% endif %}
                         {% block nav_dashboard -%}
