@@ -38,7 +38,9 @@
     border-radius: 7px;
     background-color: #FFFFFF;
     box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
-    padding: .3rem 2rem 0 2rem;
+    padding: .3rem 2rem 1rem 2rem;
+    margin-bottom:3rem;
+    color: #495057;
 }
 
 .itou-fieldgroup legend {
@@ -50,6 +52,10 @@
 
 .itou-fieldgroup .label {
     text-align:left !important;
+}
+
+.itou-subfieldgroup {
+    margin-bottom:4rem;
 }
 
 .itou-checkbox > .label-container {

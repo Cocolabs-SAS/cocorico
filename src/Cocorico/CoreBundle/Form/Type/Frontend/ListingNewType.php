@@ -21,6 +21,7 @@ use Cocorico\CoreBundle\Form\Type\PriceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -139,6 +140,17 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 array(
                     'label' => 'listing.form.url',
                     'required' => false,
+                )
+            )
+            ->add(
+                'presta_type',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$prestaTypeValues),
+                    'label' => 'Type prestation',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => true,
+                    'required' => true
                 )
             )
             ->add(

@@ -54,6 +54,7 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
                             <legend>TITRE DE L'OFFRE</legend>
                             <div class="field-holder">
                                 {{ dump(form.translations) }}
@@ -63,15 +64,43 @@
                                     }})
                                 }}
                             </div>
+                        </div>
+                        <div class="itou-subfieldgroup">
                             <legend>Type de prestation</legend>
+                                <div class="option">
+                                    <label>
+                                    {{ form_widget(form.presta_type.0, {
+                                        'attr': {
+                                            'class': 'form-control required'
+                                        }})
+                                    }}
+                                    Prestation de service
+                                    </label>
+                                </div>
+                                <div class="option">
+                                    <label>
+                                    {{ form_widget(form.presta_type.1, {
+                                        'attr': {
+                                            'class': 'form-control required'
+                                        }})
+                                    }}
+                                    Mise à disposition du personnel / Interim
+                                    </label>
+                                </div>
+                        </div>
+                        <div class="itou-subfieldgroup">
                             <legend>Catégorie de l'offre de prestation</legend>
                                 {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
+                        </div>
+                        <div class="itou-subfieldgroup">
                             <legend>Présentation de l'offre de prestation (max 250 caractères)</legend>
                                 {{ form_widget(form.translations.fr.description, {
                                     'attr': {
-                                        'class': 'form-control required'
+                                        'class': 'form-control required',
+                                        'rows': 10
                                     }})
                                 }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -86,30 +115,42 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="itou-fieldgroup">
-                        <legend>Ajouter des photos de la prestation</legend>
-                        <div class="area">
-                            <div class="uploader">
-                                <div id="images-new">
-                                    {{ form_errors(form.image.new) }}
-                                    {{ form_widget(form.image.new) }}
-
-                                    {{ form_errors(form.image.uploaded) }}
-                                    {{ form_widget(form.image.uploaded ) }}
+                        <div class="itou-subfieldgroup">
+                            <legend>Ajouter des photos de la prestation</legend>
+                            <div class="area">
+                                <div class="uploader">
+                                    <div id="images-new">
+                                        {{ form_errors(form.image.new) }}
+                                        {{ form_widget(form.image.new) }}
+    
+                                        {{ form_errors(form.image.uploaded) }}
+                                        {{ form_widget(form.image.uploaded ) }}
+                                    </div>
                                 </div>
+                                {#
+                                <div class="detail">
+                                    <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                                </div>
+                                <div style="clear:both"></div>
+                                <div id="drop-zone">
+                                    {{ 'listing.drop.files'|trans }}
+                                </div>
+                                <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                                #}
+                                <ul id="files-to-upload" class="images-list"></ul>
                             </div>
-                            {#
-                            <div class="detail">
-                                <p>{{ 'listing_edit.photos.details'|trans }}</p>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div id="drop-zone">
-                                {{ 'listing.drop.files'|trans }}
-                            </div>
-                            <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
-                            #}
-                            <ul id="files-to-upload" class="images-list"></ul>
                         </div>
-
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                            Mettez celles qui se rapportent à l’offre de prestation proposée : <br/>
+                            - lieux d’interventions, <br/>
+                            - réalisations (avant/ après), <br/>
+                            - personnels en action.
+                        </p>
                     </div>
                 </div>
             </div>
