@@ -25,7 +25,7 @@
                 <div class="file-selection">
 
                     <h2>Références Client</h2>
-                    <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
+                    <strong class="sub-heading">Chargez ici les logos de vos références client</strong>
 
                     <div class="area">
                         <div class="uploader">
@@ -37,17 +37,13 @@
                                 {{ form_widget(form.clientImage.uploaded ) }}
                             </div>
                         </div>
-                        <div class="detail">
-                            <p>{{ 'listing_edit.photos.details'|trans }}</p>
-                        </div>
-
                         <div id="drop-zone">
                             {{ 'listing.drop.files'|trans }}
                         </div>
                         <div id="progress" class="progress">
                             <div class="progress-bar progress-bar-success"></div>
                         </div>
-                        <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                        <h3>Vos références client</h3>
                         <ul id="files-to-upload" class="images-list"></ul>
                     </div>
 
