@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Model\Manager;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Entity\ListingCategory;
 use Cocorico\CoreBundle\Entity\ListingImage;
+use Cocorico\CoreBundle\Entity\ListingClientImage;
 use Cocorico\CoreBundle\Entity\ListingListingCategory;
 use Cocorico\CoreBundle\Entity\ListingListingCharacteristic;
 use Cocorico\CoreBundle\Entity\ListingTranslation;
@@ -207,7 +208,7 @@ class ListingManager extends BaseManager
             $nbImages = $listing->getClientImages()->count();
 
             foreach ($clientImages as $i => $image) {
-                $listingImage = new ListingImage();
+                $listingImage = new ListingClientImage();
                 $listingImage->setListing($listing);
                 $listingImage->setName($image);
                 $listingImage->setPosition($nbImages + $i + 1);
