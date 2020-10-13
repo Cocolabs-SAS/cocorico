@@ -5,6 +5,7 @@ services:
         arguments:
             - "@request_stack"
             - "%cocorico.locales%"
+            - "@cocorico.listing.manager"
             - "@event_dispatcher"
         tags:
             - { name: form.type }

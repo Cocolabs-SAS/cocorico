@@ -17,7 +17,7 @@ use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
-use Cocorico\CoreBundle\Form\Type\PriceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -33,6 +33,10 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Cocorico\CoreBundle\Model\Manager\ListingManager;
+use Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType;
 
 
 /**
@@ -48,6 +52,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     private $locale;
     private $locales;
     protected $dispatcher;
+    protected $lem;
 
     /**
      * @param RequestStack             $requestStack
@@ -57,12 +62,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public function __construct(
         RequestStack $requestStack,
         $locales,
+        ListingManager $lem,
         EventDispatcherInterface $dispatcher
     ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
         $this->dispatcher = $dispatcher;
+        $this->lem = $lem;
     }
 
     /**
@@ -225,6 +232,38 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                     ),
                 )
             );
+
+        $builder
+            //->add('listingListingCharacteristicsOrderedByGroup',
+            //    ListingCharacteristicType::class,
+            //    array (
+            //        'mapped' => false
+            //    )
+            //);
+            ->add(
+                'listingListingCharacteristicsOrderedByGroup',
+                CollectionType::class,
+                array(
+                    'entry_type' => ListingListingCharacteristicType::class,
+                    # 'entry_options' => [
+                    #     'multiple' => True
+                    # ],
+                    /** @Ignore */
+                    'label' => false
+                )
+            );
+
+        //Add new ListingCharacteristics eventually not already attached to listing
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
+                /** @var Listing $listing */
+                $listing = $event->getData();
+                $listing = $this->lem->refreshListingListingCharacteristics($listing);
+                $event->setData($listing);
+            }
+        );
+
 
         // Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
         // Used for example to add fields to new listing form
