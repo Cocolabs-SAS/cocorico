@@ -50,18 +50,14 @@ class ListingListingCharacteristicType extends AbstractType
                     array(
                         'query_builder' => function (ListingCharacteristicValueRepository $lcvr) use ($llc) {
                             $lct = $llc->getListingCharacteristic()->getListingCharacteristicType();
-
-                            return $lcvr->getFindAllTranslatedQueryBuilder(
+                            $out = $lcvr->getFindAllTranslatedQueryBuilder(
                                 $lct,
                                 $this->locale
                             );
+                            return $out;
                         },
                         'placeholder' => 'poulet',
-                        'choice_label' => 'translations[en].name',
-                        //'choice_label' => function($choice, $key, $value) {
-                        //    dump($choice, $key);
-                        //    return 'un_truc';
-                        //},
+                        'choice_label' => 'translations[' . $this->locale . '].name',
                         'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicValue',
                     )
                 );

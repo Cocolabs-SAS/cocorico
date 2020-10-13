@@ -29,7 +29,8 @@ class ListingCharacteristicValueRepository extends EntityRepository
             ->andWhere('lcv.listingCharacteristicType = :lcr')
             ->andWhere('lcvt.locale = :locale')
             ->setParameter('lcr', $listingCharacteristicType)
-            ->setParameter('locale', $locale);
+            //->setParameter('locale', $locale);
+            ->setParameter('locale', 'fr');
 
 
 //        $queryBuilder->getQuery()->useQueryCache(true);

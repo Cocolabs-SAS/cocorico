@@ -146,7 +146,6 @@ abstract class BaseListing
 
     /**
      * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=true)
-     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var integer|null
      */
