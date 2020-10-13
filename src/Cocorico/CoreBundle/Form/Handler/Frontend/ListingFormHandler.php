@@ -64,6 +64,7 @@ class ListingFormHandler
         $listing->setUser($this->user);
         $listing = $this->addImages($listing);
         $listing = $this->addCategories($listing);
+        $listing->setCurrentLocale('fr');
 
         return $listing;
     }

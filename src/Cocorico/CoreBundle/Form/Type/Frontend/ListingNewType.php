@@ -260,7 +260,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 /** @var Listing $listing */
                 $listing = $event->getData();
                 ### FIXME: Hack, missing locale gives lots of errors later on
-                $listing->setCurrentLocale($this->locale);
 
                 $listing = $this->lem->refreshListingListingCharacteristics($listing);
                 $event->setData($listing);
