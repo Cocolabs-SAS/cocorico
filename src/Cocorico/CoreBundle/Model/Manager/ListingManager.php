@@ -192,6 +192,42 @@ class ListingManager extends BaseManager
 
         return $listing;
     }
+    /**
+     * @param  Listing $listing
+     * @param  array   $clientImages
+     * @param bool     $persist
+     * @return Listing
+     * @throws AccessDeniedException
+     */
+    public function addClientImages(Listing $listing, array $clientImages, $persist = false)
+    {
+        //@todo : see why user is anonymous and not authenticated
+        if (true || $listing && $listing->getUser() == $this->securityTokenStorage->getToken()->getUser()) {
+            //Start new positions value
+            $nbImages = $listing->getClientImages()->count();
+
+            foreach ($clientImages as $i => $image) {
+                $listingImage = new ListingImage();
+                $listingImage->setListing($listing);
+                $listingImage->setName($image);
+                $listingImage->setPosition($nbImages + $i + 1);
+                $listing->addClientImage($listingImage);
+            }
+
+            if ($persist) {
+                $this->em->persist($listing);
+                $this->em->flush();
+                $this->em->refresh($listing);
+            }
+
+        } else {
+            throw new AccessDeniedException();
+        }
+
+        return $listing;
+    }
+
+
 
     /**
      * Create categories and field values while listing deposit.

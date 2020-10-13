@@ -63,6 +63,7 @@ class ListingFormHandler
         $listing = new Listing();
         $listing->setUser($this->user);
         $listing = $this->addImages($listing);
+        $listing = $this->addClientImages($listing);
         $listing = $this->addCategories($listing);
         $listing->setCurrentLocale('fr');
 
@@ -117,6 +118,28 @@ class ListingFormHandler
         if ($imagesUploaded) {
             $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));
             $listing = $this->listingManager->addImages(
+                $listing,
+                $imagesUploadedArray
+            );
+        }
+
+        return $listing;
+    }
+
+    /**
+     * @param  Listing $listing
+     * @throws AccessDeniedException
+     * @return Listing
+     */
+    private function addClientImages(Listing $listing)
+    {
+        //Files to upload
+        $imagesUploaded = $this->request->request->get("listing");
+        $imagesUploaded = $imagesUploaded["clientImage"]["uploaded"];
+
+        if ($imagesUploaded) {
+            $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));
+            $listing = $this->listingManager->addClientImages(
                 $listing,
                 $imagesUploadedArray
             );

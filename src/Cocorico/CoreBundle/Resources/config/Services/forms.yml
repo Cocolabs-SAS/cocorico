@@ -56,6 +56,12 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.listing_edit_client_images:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditClientImagesType
+        parent: cocorico.form.type.listing_edit
+        tags:
+            - { name: form.type }
+
     cocorico.form.type.listing_edit_location:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditLocationType
         parent: cocorico.form.type.listing_edit

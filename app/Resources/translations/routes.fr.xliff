@@ -126,6 +126,10 @@
         <source>/dashboard/listing/{id}/edit_images</source>
         <target>/tableau-de-bord/annonce/{id}/editer-images</target>
       </trans-unit>
+      <trans-unit id="17df96860189b09c1bfa9958bf057651f9c45027" resname="cocorico_dashboard_listing_edit_client_images">
+        <source>/dashboard/listing/{id}/edit_client_images</source>
+        <target>/tableau-de-bord/annonce/{id}/editer-client-images</target>
+      </trans-unit>
       <trans-unit id="efd024f32b7dbbc957e1dec4d6735ec04227cb12" resname="cocorico_dashboard_listing_edit_location">
         <source>/dashboard/listing/{id}/edit_location</source>
         <target state="new">/tableau-de-bord/annonce/{id}/editer-adresse</target>
@@ -217,6 +221,10 @@
       <trans-unit id="01cb8a3d37bc28ce8dc09c8da3480d57df437d9f" resname="cocorico_listing_image_delete">
         <source>/listing_image/{id}/delete</source>
         <target>/annonce-image/{id}/supprimer</target>
+      </trans-unit>
+      <trans-unit id="01cb8a3d38bc28ce8dc09c8da3480d57df437d9f" resname="cocorico_listing_client_image_delete">
+        <source>/listing_client-image/{id}/delete</source>
+        <target>/annonce-client-image/{id}/supprimer</target>
       </trans-unit>
       <trans-unit id="8ece2c88a49506e23bca2cccb11361ef9085b426" resname="cocorico_listing_new">
         <source>/listing/new</source>

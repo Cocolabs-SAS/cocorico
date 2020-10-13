@@ -1,0 +1,84 @@
+{% extends 'CocoricoCoreBundle:Dashboard/Listing:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_listing' %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'client_image' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
+
+    <fieldset>
+        <legend class="hidden">form area</legend>
+        <!-- alert -->
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Listing:completionNotice', {'listing': listing})) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {{ form_errors(form) }}
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- tab pics -->
+            <div role="tabpanel" class="tab-pane active" id="pics">
+                <!-- files-selection-design -->
+                <div class="file-selection">
+
+                    <h2>Références Client</h2>
+                    <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
+
+                    <div class="area">
+                        <div class="uploader">
+                            <div id="clientImages-new">
+                                {{ form_errors(form.clientImage.new) }}
+                                {{ form_widget(form.clientImage.new ) }}
+
+                                {{ form_errors(form.clientImage.uploaded) }}
+                                {{ form_widget(form.clientImage.uploaded ) }}
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                        </div>
+
+                        <div id="drop-zone">
+                            {{ 'listing.drop.files'|trans }}
+                        </div>
+                        <div id="progress" class="progress">
+                            <div class="progress-bar progress-bar-success"></div>
+                        </div>
+                        <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                        <ul id="files-to-upload" class="images-list"></ul>
+                    </div>
+
+
+                    <!-- files-list -->
+                    <div class="files-list">
+                        {{ form_errors(form.clientImages) }}
+                        {{ form_widget(form.clientImages ) }}
+                    </div>
+                </div>
+                <div class="btn-block text-center">
+                    <button type="submit" class="btn btn-default">{{ 'listing.save'|trans }}</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    {{ form_end(form) }}
+{%- endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Files upload#}
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_js.html.twig' with {
+    'upload_elt': '#listing_clientImage_new',
+    'upload_images': '#listing_clientImage_uploaded',
+    'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=" ~ listing.id,
+    'upload_max': listing_img_max,
+    } only %}
+
+{% endblock %}

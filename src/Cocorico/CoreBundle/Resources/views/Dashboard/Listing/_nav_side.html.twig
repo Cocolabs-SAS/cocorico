@@ -45,6 +45,13 @@
                         {{ 'nav.listing.images.link'|trans }}
                     </a>
                 </li>
+                <li role="presentation" class="{{ nav_side_dashboard_current == "client_image" ? 'active' : '' }}">
+                    <a data-text="{{ 'nav.listing.client_images.link'|trans }}"
+                       aria-controls="presentation"
+                       href="{{ path('cocorico_dashboard_listing_edit_client_images', { 'id': listing.id }) }}">
+                        Références Client
+                    </a>
+                </li>
                 <li role="presentation" class="{{ nav_side_dashboard_current == "characteristic" ? 'active' : '' }}">
                     <a data-text="{{ 'nav.listing.characteristic.link'|trans }}"
                        aria-controls="presentation"

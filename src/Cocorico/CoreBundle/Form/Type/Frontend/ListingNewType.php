@@ -185,6 +185,10 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             ->add(
                 'image',
                 ImageType::class
+            )
+            ->add(
+                'clientImage',
+                ImageType::class
             );
 
         //Default listing location

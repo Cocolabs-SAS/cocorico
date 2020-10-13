@@ -399,6 +399,30 @@
                     <div class="itou-fieldgroup">
                         <div class="itou-subfieldgroup">
                             <legend>Ajoutez une ou plusieurs références clients</legend>
+                            <div class="area">
+                                <div class="uploader">
+                                    <div id="client-images-new">
+                                        {{ form_errors(form.clientImage.new) }}
+                                        {{ form_widget(form.clientImage.new) }}
+    
+                                        {{ form_errors(form.clientImage.uploaded) }}
+                                        {{ form_widget(form.clientImage.uploaded ) }}
+                                    </div>
+                                </div>
+                                {#
+                                <div class="detail">
+                                    <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                                </div>
+                                <div style="clear:both"></div>
+                                <div id="drop-zone">
+                                    {{ 'listing.drop.files'|trans }}
+                                </div>
+                                <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                                #}
+                                {#
+                                <ul id="files-to-upload" class="images-list"></ul>
+                                #}
+                            </div>
                         </div>
                     </div>
                 </div>

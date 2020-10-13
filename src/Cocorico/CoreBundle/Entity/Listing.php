@@ -669,6 +669,10 @@ class Listing extends BaseListing
                 ($strict && count($this->getImages()) >= $minImages) ||
                 (!$strict && count($this->getImages()) > $minImages)
             ) ? 1 : 0,
+            "clientImage" => (
+                ($strict && count($this->getClientImages()) >= 0) ||
+                (!$strict && count($this->getClientImages()) > 0)
+            ) ? 1 : 0,
             "characteristic" => $characteristic,
         );
     }
@@ -705,6 +709,13 @@ class Listing extends BaseListing
             $this->images = new ArrayCollection();
             foreach ($images as $image) {
                 $this->addImage(clone $image);
+            }
+
+            //ClientImages
+            $clientImages = $this->getClientImages();
+            $this->clientImages = new ArrayCollection();
+            foreach ($clientImages as $image) {
+                $this->addClientImage(clone $image);
             }
 
             //Location
