@@ -40,7 +40,6 @@ class ListingListingCharacteristicType extends AbstractType
         $builder->addEventListener(
             FormEvents::PRE_SET_DATA,
             function (FormEvent $event) {
-                dump("$$$$$$$$$$$$$$$$$");
                 $form = $event->getForm();
                 /** @var ListingListingCharacteristic $llc */
                 $llc = $event->getData();
@@ -50,10 +49,8 @@ class ListingListingCharacteristicType extends AbstractType
                     'entity',
                     array(
                         'query_builder' => function (ListingCharacteristicValueRepository $lcvr) use ($llc) {
-                            dump(1);
                             $lct = $llc->getListingCharacteristic()->getListingCharacteristicType();
 
-                            dump(2);
                             return $lcvr->getFindAllTranslatedQueryBuilder(
                                 $lct,
                                 $this->locale
@@ -68,7 +65,6 @@ class ListingListingCharacteristicType extends AbstractType
                         'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicValue',
                     )
                 );
-                dump(5);
             }
         );
     }

@@ -339,6 +339,62 @@
                     </div>
                 </div>
             </div>
+            <!-- start of characteristic form -->
+            <div class="row">
+                <div class="col-sm-7">
+                    <h2>Caractéristiques spécifiques</h2>
+                    <div class="itou-fieldgroup">
+                        <div class="itou-subfieldgroup">
+                            <legend>Norme filière nettoyage</legend>
+                        </div>
+                        <!-- features-area -->
+                        <div id="characteristics" class="form-block features-area">
+                            {{ form_errors(form.listingListingCharacteristicsOrderedByGroup) }}
+                            {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
+                            <!--@formatter:off-->
+                            {% for listingListingCharacteristic in form.listingListingCharacteristicsOrderedByGroup %}
+                                {% set listingCharacteristic = listingListingCharacteristic.vars.value.listingCharacteristic %}
+                                {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
+                                {#{{ dump(listingCharacteristic) }}#}
+                                {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
+                                    {% if previousListingCharacteristicGroup %}
+                                        {{ '</ul>' }}
+                                    {% endif %}
+                                    {{ '<ul class="col-md-4 list-unstyled features-list-new same-height-left same-height-right">' }}
+                                        <li><h3>{{ listingCharacteristicGroup }}</h3></li>
+                                {% endif %}
+                                        <li>
+                                            <label class="label">
+                                                {{ listingCharacteristic.getName() }}
+                                            </label>
+                                            {% if listingCharacteristic.getDescription()|length %}
+                                                <button title="" data-original-title="{{ listingCharacteristic.getDescription() }}" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button">?</button>
+                                            {% endif %}
+                                            <div class="field-holder">
+                                                {{ form_widget(listingListingCharacteristic.listingCharacteristicValue, {
+                                                    'attr': {
+                                                        'class': "no-arrow"
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </li>
+                                        {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
+                            {% endfor %}
+                            <!--@formatter:on-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="itou-info">
+                        <img class="shape" src="/images/info_shape.png" />
+                        <p>
+                        Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!-- End of characteristic form -->
+
             <div class="row">
                 <div class="col-sm-7">
                     <div class="itou-fieldgroup">
@@ -382,6 +438,7 @@
         </div>
     </div>
     {{ form_end(form) }}
+    {#
     <div class="listing-section container">
         <fieldset>
             <!-- start of characteristic form -->
@@ -419,6 +476,7 @@
 
     </div>
     {{ form_end(editForm) }}
+    #}
 </div>
 
 {% endblock %}

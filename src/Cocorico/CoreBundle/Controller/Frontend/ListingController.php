@@ -52,17 +52,17 @@ class ListingController extends Controller
         $success = $formHandler->process($form);
 
 
-        $editForm = $this->createEditCharacteristicForm($listing);
-        $editForm->handleRequest($request);
+        # $editForm = $this->createEditCharacteristicForm($listing);
+        # $editForm->handleRequest($request);
 
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $this->get("cocorico.listing.manager")->save($listing);
+        # if ($editForm->isSubmitted() && $editForm->isValid()) {
+        #     $this->get("cocorico.listing.manager")->save($listing);
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                $translator->trans('listing.edit.success', array(), 'cocorico_listing')
-            );
-        }
+        #     $this->get('session')->getFlashBag()->add(
+        #         'success',
+        #         $translator->trans('listing.edit.success', array(), 'cocorico_listing')
+        #     );
+        # }
 
         if ($success) {
             $url = $this->generateUrl(
@@ -83,7 +83,7 @@ class ListingController extends Controller
             array(
                 'listing' => $listing,
                 'form' => $form->createView(),
-                'editForm' => $editForm->createView(),
+                # 'editForm' => $editForm->createView(),
             )
         );
     }
