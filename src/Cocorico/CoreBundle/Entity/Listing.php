@@ -90,6 +90,14 @@ class Listing extends BaseListing
     private $images;
 
     /**
+     * For Asserts @see \Cocorico\CoreBundle\Validator\Constraints\ListingValidator
+     *
+     * @ORM\OneToMany(targetEntity="ListingClientImage", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "asc"})
+     */
+    private $clientImages;
+
+    /**
      * @ORM\OneToMany(targetEntity="ListingListingCharacteristic", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true) //, fetch="EAGER"
      *
      */
@@ -131,6 +139,7 @@ class Listing extends BaseListing
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->clientImages = new ArrayCollection();
         $this->listingListingCharacteristics = new ArrayCollection();
         $this->listingListingCategories = new ArrayCollection();
         $this->discounts = new ArrayCollection();
@@ -340,6 +349,41 @@ class Listing extends BaseListing
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add client images
+     *
+     * @param  \Cocorico\CoreBundle\Entity\ListingClientImage $image
+     * @return Listing
+     */
+    public function addClientImage(ListingClientImage $image)
+    {
+        $image->setListing($this); //Because the owning side of this relation is listing image
+        $this->clientImages[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove client images
+     *
+     * @param \Cocorico\CoreBundle\Entity\ListingClientImage $image
+     */
+    public function removeClientImage(ListingClientImage $image)
+    {
+        $this->clientImages->removeElement($image);
+        $image->setListing(null);
+    }
+
+    /**
+     * Get client images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClientImages()
+    {
+        return $this->clientImages;
     }
 
     /**
