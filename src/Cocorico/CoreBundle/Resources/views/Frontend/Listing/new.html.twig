@@ -522,10 +522,11 @@
     {#Files upload#}
     {% include '@CocoricoCore/Frontend/Common/js/_upload_multi_js.html.twig' with {
         'upload_el1': '#listing_image_new',
-        'upload_images': '#listing_image_uploaded',
+        'upload_images1': '#listing_image_uploaded',
         'upload_list1': '#files-to-upload',
         'upload_el2': '#listing_clientImage_new',
         'upload_list2': '#client-files-to-upload',
+        'upload_images2': '#listing_clientImage_uploaded',
         'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
         'upload_max': listing_img_max - listing.images.count,
     } only %}

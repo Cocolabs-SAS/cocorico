@@ -931,7 +931,12 @@ abstract class BaseListing
      */
     public function schedulesToInt() 
     {
-        $this->schedules = $this->schedules->get();
+        if (is_string($this->schedules)) 
+        {
+            $this->schedules = 0;
+        } else {
+            $this->schedules = $this->schedules->get();
+        }
     }
 
     /**
