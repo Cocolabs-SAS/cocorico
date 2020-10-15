@@ -56,7 +56,7 @@ class ListingListingCharacteristicType extends AbstractType
                             );
                             return $out;
                         },
-                        'placeholder' => 'poulet',
+                        'placeholder' => 'listing.form.characteristic.choose',
                         'choice_label' => 'translations[' . $this->locale . '].name',
                         'class' => 'Cocorico\CoreBundle\Entity\ListingCharacteristicValue',
                     )
