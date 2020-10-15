@@ -35,401 +35,407 @@
     <div class="listing-section container">
         <fieldset>
             <!-- alert -->
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="head">
-                        <h2 class="itou-formtitle">Présentez votre offre</h2>
-                    </div>
-                    <br />
-                    <div class="itou-info">
-                        <p>Faites connaitre l’étendue de votre savoir faire en présentant aux acheteurs plusieurs offres de prestation avec leurs spécificités .</p>
-                    </div>
+            <div class="part_1">
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="head">
+                            <h2 class="itou-formtitle">Présentez votre offre</h2>
+                        </div>
+                        <br />
+                        <div class="itou-info">
+                            <p>Faites connaitre l’étendue de votre savoir faire en présentant aux acheteurs plusieurs offres de prestation avec leurs spécificités .</p>
+                        </div>
 
-                {{ form_errors(form) }}
+                    {{ form_errors(form) }}
 
-                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>TITRE DE L'OFFRE</legend>
-                            <div class="field-holder">
-                                {{ form_widget(form.translations.fr.title, {
-                                    'attr': {
-                                        'class': 'form-control required'
-                                    }})
-                                }}
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>TITRE DE L'OFFRE</legend>
+                                <div class="field-holder">
+                                    {{ form_widget(form.translations.fr.title, {
+                                        'attr': {
+                                            'class': 'form-control required'
+                                        }})
+                                    }}
+                                </div>
+                            </div>
+                            <div class="itou-subfieldgroup">
+                                <legend>Type de prestation</legend>
+                                    <div class="option">
+                                        <label>
+                                        {{ form_widget(form.presta_type.0, { 'attr': { 'class': 'form-control required' }}) }}
+                                        Prestation de service
+                                        </label>
+                                    </div>
+                                    <div class="option">
+                                        <label>
+                                        {{ form_widget(form.presta_type.1, { 'attr': { 'class': 'form-control required' }}) }}
+                                        Mise à disposition du personnel / Interim
+                                        </label>
+                                    </div>
                             </div>
                         </div>
-                        <div class="itou-subfieldgroup">
-                            <legend>Type de prestation</legend>
-                                <div class="option">
-                                    <label>
-                                    {{ form_widget(form.presta_type.0, { 'attr': { 'class': 'form-control required' }}) }}
-                                    Prestation de service
-                                    </label>
-                                </div>
-                                <div class="option">
-                                    <label>
-                                    {{ form_widget(form.presta_type.1, { 'attr': { 'class': 'form-control required' }}) }}
-                                    Mise à disposition du personnel / Interim
-                                    </label>
-                                </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Le titre de l’offre est la première information que les acheteurs verront. Il faut être clair et concis !
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Le titre de l’offre est la première information que les acheteurs verront. Il faut être clair et concis !
-                        </p>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Catégorie de l'offre de prestation</legend>
+                                    {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Catégorie de l'offre de prestation</legend>
-                                {{ render(controller('CocoricoCoreBundle:Frontend/ListingCategories:categoriesForm', {'listing': listing})) }}
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Choissez une seule catégorie, et faites une faite une offre par catégorie. Si vos offres se ressemblent vous pourrez les dupliquer par la suite.
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Choissez une seule catégorie, et faites une faite une offre par catégorie. Si vos offres se ressemblent vous pourrez les dupliquer par la suite.
-                        </p>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Présentation de l'offre de prestation (max 250 caractères)</legend>
+                                    {{ form_widget(form.translations.fr.description, {
+                                        'attr': {
+                                            'class': 'form-control required',
+                                            'rows': 10
+                                        }})
+                                    }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Présentation de l'offre de prestation (max 250 caractères)</legend>
-                                {{ form_widget(form.translations.fr.description, {
-                                    'attr': {
-                                        'class': 'form-control required',
-                                        'rows': 10
-                                    }})
-                                }}
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Présentez brievement votre offre de prestation. 
+                            N’hésitez pas à mettre en avant votre expertise et vos atouts, c’est la deuxième chose que l’acheteur verra. 
+                            </p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Présentez brievement votre offre de prestation. 
-                        N’hésitez pas à mettre en avant votre expertise et vos atouts, c’est la deuxième chose que l’acheteur verra. 
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Ajouter des photos de la prestation</legend>
-                            <div class="area">
-                                <div class="uploader">
-                                    <div id="images-new">
-                                        {{ form_errors(form.image.new) }}
-                                        {{ form_widget(form.image.new) }}
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Ajouter des photos de la prestation</legend>
+                                <div class="area">
+                                    <div class="uploader">
+                                        <div id="images-new">
+                                            {{ form_errors(form.image.new) }}
+                                            {{ form_widget(form.image.new) }}
     
-                                        {{ form_errors(form.image.uploaded) }}
-                                        {{ form_widget(form.image.uploaded ) }}
+                                            {{ form_errors(form.image.uploaded) }}
+                                            {{ form_widget(form.image.uploaded ) }}
+                                        </div>
                                     </div>
+                                    {#
+                                    <div class="detail">
+                                        <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <div id="drop-zone">
+                                        {{ 'listing.drop.files'|trans }}
+                                    </div>
+                                    <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                                    #}
+                                    <ul id="files-to-upload" class="upload-list images-list"></ul>
                                 </div>
-                                {#
-                                <div class="detail">
-                                    <p>{{ 'listing_edit.photos.details'|trans }}</p>
-                                </div>
-                                <div style="clear:both"></div>
-                                <div id="drop-zone">
-                                    {{ 'listing.drop.files'|trans }}
-                                </div>
-                                <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
-                                #}
-                                <ul id="files-to-upload" class="upload-list images-list"></ul>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                            Mettez celles qui se rapportent à l’offre de prestation proposée : <br/>
-                            - lieux d’interventions, <br/>
-                            - réalisations (avant/ après), <br/>
-                            - personnels en action.
-                        </p>
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                                Mettez celles qui se rapportent à l’offre de prestation proposée : <br/>
+                                - lieux d’interventions, <br/>
+                                - réalisations (avant/ après), <br/>
+                                - personnels en action.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2>ADRESSE</h2>
-                    <div class="itou-fieldgroup form-inquiry">
-                        <div class="columns-holder">
-                            <div class="column" id="listing-location">
+            <div class="part_2">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h2>ADRESSE</h2>
+                        <div class="itou-fieldgroup form-inquiry">
+                            <div class="columns-holder">
+                                <div class="column" id="listing-location">
 
-                                <p class="error"></p>
-                                {{ form_errors(form.location.coordinate) }}
-                                {{ form_widget(form.location.coordinate) }}
+                                    <p class="error"></p>
+                                    {{ form_errors(form.location.coordinate) }}
+                                    {{ form_widget(form.location.coordinate) }}
 
-                                <div class="field-row">
-                                    {{ form_errors(form.location.country) }}
-                                    <span class="label">{{ form_label(form.location.country) }}</span>
+                                    <div class="field-row">
+                                        {{ form_errors(form.location.country) }}
+                                        <span class="label">{{ form_label(form.location.country) }}</span>
 
-                                    <div class="select-holder">
-                                        {{ form_widget(form.location.country, {
-                                            'attr': {
-                                                'class': "no-arrow"
-                                            }
-                                        }) }}
-                                    </div>
-                                </div>
-                                <div class="field-row">
-                                    <div class="col location">
-                                        {{ form_errors(form.location.city) }}
-                                        <span class="label">{{ form_label(form.location.city) }}</span>
-
-                                        <div class="field-holder">
-                                            {{ form_widget(form.location.city, {
+                                        <div class="select-holder">
+                                            {{ form_widget(form.location.country, {
                                                 'attr': {
-                                                    'class': "form-control"
+                                                    'class': "no-arrow"
                                                 }
                                             }) }}
                                         </div>
                                     </div>
-                                    <div class="col postel-code">
-                                        {{ form_errors(form.location.zip) }}
-                                        <span class="label">{{ form_label(form.location.zip) }}</span>
+                                    <div class="field-row">
+                                        <div class="col location">
+                                            {{ form_errors(form.location.city) }}
+                                            <span class="label">{{ form_label(form.location.city) }}</span>
 
-                                        <div class="field-holder">
-                                            {{ form_widget(form.location.zip, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field-row">
-                                    <div class="col cell">
-                                        {{ form_errors(form.location.street_number) }}
-                                        <span class="label">
-                                        {{ form_label(form.location.street_number) }}
-                                        <button title="{{ 'listing.location.help'|trans }}"
-                                                data-placement="right"
-                                                data-toggle="tooltip" class="tooltip-button"
-                                                type="button"
-                                                data-original-title="{{ 'listing.location.help'|trans }}">
-                                            ?
-                                        </button>
-                                    </span>
-
-
-                                        <div class="field-holder">
-                                            {{ form_widget(form.location.street_number, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
-
-                                    <div class="col street">
-                                        {{ form_errors(form.location.route) }}
-                                        <span class="label">{{ form_label(form.location.route) }}</span>
-
-                                        <div class="field-holder">
-                                            {{ form_widget(form.location.route, {
-                                                'attr': {
-                                                    'class': "form-control"
-                                                }
-                                            }) }}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <p>
-                                    <a class="validate-location" href="javascript:void(0)">
-                                        {{ 'listing.location.validate'|trans }}
-                                    </a>
-                                </p>
-
-                                <p>
-                                    <label> {{ 'listing.location.address_found'|trans }}</label>
-                                    <strong id="formatted-address">{{ 'listing.location.none'|trans }}</strong>
-                                </p>
-
-                                <div class="alert alert-info" role="alert">
-                                    <i class="ico arrow"></i>
-
-                                    <p>{{ 'listing.location.drag_message'|trans }}</p>
-                                </div>
-                            </div>
-
-                            <div class="column">
-                                <div class="alert alert-success" role="alert">
-                                    <i class="ico"><i class="icon-location"></i></i>
-
-                                    <p>{{ 'listing.location.private_message'|trans }}</p>
-                                </div>
-                                <div id="map-listing" class="map-box"></div>
-                            </div>
-                       </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Perimètre d'intervention</legend>
-                                {{ form_widget(form.range, {
-                                    'attr': {
-                                        'class': 'numbers-only form-control',
-                                    }
-                                }) }}
-                        </div>
-                        <div class="itou-subfieldgroup">
-                            <legend>Site web ou page dédiée à la prestation</legend>
-                            {{ form_widget(form.url, {
-                                'attr': {
-                                    'class': 'form-control',
-                                }
-                            }) }}
-                        </div>
-                        <div class="itou-subfieldgroup">
-                            <legend>Horaires des interventions</legend>
-                            <ul style="list-style-type:none">
-                                <li>
-                                {{ form_widget(form.schedule_business_hours) }}
-                                {{ form_label(form.schedule_business_hours) }}
-                                </li>
-                                <li>
-                                {{ form_widget(form.schedule_before_opening) }}
-                                {{ form_label(form.schedule_before_opening) }}
-                                </li>
-                                <li>
-                                {{ form_widget(form.schedule_after_closing) }}
-                                {{ form_label(form.schedule_after_closing) }}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Ces informations figureront en face de l'introduction, elles peuvent faire la différence par rapport à d'autres fournisseurs.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- start of characteristic form -->
-            <div class="row">
-                <div class="col-sm-7">
-                    <h2>Caractéristiques spécifiques</h2>
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Norme filière nettoyage</legend>
-                        </div>
-                        <!-- features-area -->
-                        <div id="characteristics" class="form-block features-area">
-                            {{ form_errors(form.listingListingCharacteristicsOrderedByGroup) }}
-                            {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
-                            <!--@formatter:off-->
-                            {% for listingListingCharacteristic in form.listingListingCharacteristicsOrderedByGroup %}
-                                {% set listingCharacteristic = listingListingCharacteristic.vars.value.listingCharacteristic %}
-                                {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
-                                {#{{ dump(listingCharacteristic) }}#}
-                                {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
-                                    {% if previousListingCharacteristicGroup %}
-                                        {{ '</ul>' }}
-                                    {% endif %}
-                                    {{ '<ul class="col-md-4 list-unstyled features-list-new same-height-left same-height-right">' }}
-                                        <li><h3>{{ listingCharacteristicGroup }}</h3></li>
-                                {% endif %}
-                                        <li>
-                                            <label class="label">
-                                                {{ listingCharacteristic.getName() }}
-                                            </label>
-                                            {% if listingCharacteristic.getDescription()|length %}
-                                                <button title="" data-original-title="{{ listingCharacteristic.getDescription() }}" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button">?</button>
-                                            {% endif %}
                                             <div class="field-holder">
-                                                {{ form_widget(listingListingCharacteristic.listingCharacteristicValue, {
+                                                {{ form_widget(form.location.city, {
                                                     'attr': {
-                                                        'class': "no-arrow"
+                                                        'class': "form-control"
                                                     }
                                                 }) }}
                                             </div>
-                                        </li>
-                                        {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
-                            {% endfor %}
-                            <!--@formatter:on-->
+                                        </div>
+                                        <div class="col postel-code">
+                                            {{ form_errors(form.location.zip) }}
+                                            <span class="label">{{ form_label(form.location.zip) }}</span>
+
+                                            <div class="field-holder">
+                                                {{ form_widget(form.location.zip, {
+                                                    'attr': {
+                                                        'class': "form-control"
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="field-row">
+                                        <div class="col cell">
+                                            {{ form_errors(form.location.street_number) }}
+                                            <span class="label">
+                                            {{ form_label(form.location.street_number) }}
+                                            <button title="{{ 'listing.location.help'|trans }}"
+                                                    data-placement="right"
+                                                    data-toggle="tooltip" class="tooltip-button"
+                                                    type="button"
+                                                    data-original-title="{{ 'listing.location.help'|trans }}">
+                                                ?
+                                            </button>
+                                        </span>
+
+
+                                            <div class="field-holder">
+                                                {{ form_widget(form.location.street_number, {
+                                                    'attr': {
+                                                        'class': "form-control"
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </div>
+
+                                        <div class="col street">
+                                            {{ form_errors(form.location.route) }}
+                                            <span class="label">{{ form_label(form.location.route) }}</span>
+
+                                            <div class="field-holder">
+                                                {{ form_widget(form.location.route, {
+                                                    'attr': {
+                                                        'class': "form-control"
+                                                    }
+                                                }) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        <a class="validate-location" href="javascript:void(0)">
+                                            {{ 'listing.location.validate'|trans }}
+                                        </a>
+                                    </p>
+
+                                    <p>
+                                        <label> {{ 'listing.location.address_found'|trans }}</label>
+                                        <strong id="formatted-address">{{ 'listing.location.none'|trans }}</strong>
+                                    </p>
+
+                                    <div class="alert alert-info" role="alert">
+                                        <i class="ico arrow"></i>
+
+                                        <p>{{ 'listing.location.drag_message'|trans }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="column">
+                                    <div class="alert alert-success" role="alert">
+                                        <i class="ico"><i class="icon-location"></i></i>
+
+                                        <p>{{ 'listing.location.private_message'|trans }}</p>
+                                    </div>
+                                    <div id="map-listing" class="map-box"></div>
+                                </div>
+                           </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!-- End of characteristic form -->
-
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <div class="itou-subfieldgroup">
-                            <legend>Ajoutez une ou plusieurs références clients</legend>
-                            <div class="area">
-                                <div class="uploader">
-                                    <div id="client-images-new">
-                                        {{ form_errors(form.clientImage.new) }}
-                                        {{ form_widget(form.clientImage.new) }}
-    
-                                        {{ form_errors(form.clientImage.uploaded) }}
-                                        {{ form_widget(form.clientImage.uploaded ) }}
-                                    </div>
-                                </div>
-                                {#
-                                <div class="detail">
-                                    <p>{{ 'listing_edit.photos.details'|trans }}</p>
-                                </div>
-                                <div style="clear:both"></div>
-                                <div id="drop-zone">
-                                    {{ 'listing.drop.files'|trans }}
-                                </div>
-                                <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
-                                #}
-                                <ul id="client-files-to-upload" class="upload-list images-list"></ul>
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Perimètre d'intervention</legend>
+                                    {{ form_widget(form.range, {
+                                        'attr': {
+                                            'class': 'numbers-only form-control',
+                                        }
+                                    }) }}
+                            </div>
+                            <div class="itou-subfieldgroup">
+                                <legend>Site web ou page dédiée à la prestation</legend>
+                                {{ form_widget(form.url, {
+                                    'attr': {
+                                        'class': 'form-control',
+                                    }
+                                }) }}
+                            </div>
+                            <div class="itou-subfieldgroup">
+                                <legend>Horaires des interventions</legend>
+                                <ul style="list-style-type:none">
+                                    <li>
+                                    {{ form_widget(form.schedule_business_hours) }}
+                                    {{ form_label(form.schedule_business_hours) }}
+                                    </li>
+                                    <li>
+                                    {{ form_widget(form.schedule_before_opening) }}
+                                    {{ form_label(form.schedule_before_opening) }}
+                                    </li>
+                                    <li>
+                                    {{ form_widget(form.schedule_after_closing) }}
+                                    {{ form_label(form.schedule_after_closing) }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Ces informations figureront en face de l'introduction, elles peuvent faire la différence par rapport à d'autres fournisseurs.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Avoir des références clients permet de donner confiance à vos futurs acheteurs.
-                        </p>
+            </div>
+            <div class="part_3">
+                <!-- start of characteristic form -->
+                <div class="row">
+                    <div class="col-sm-7">
+                        <h2>Caractéristiques spécifiques</h2>
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Norme filière nettoyage</legend>
+                            </div>
+                            <!-- features-area -->
+                            <div id="characteristics" class="form-block features-area">
+                                {{ form_errors(form.listingListingCharacteristicsOrderedByGroup) }}
+                                {% set listingCharacteristicGroup, previousListingCharacteristicGroup = "", "" %}
+                                <!--@formatter:off-->
+                                {% for listingListingCharacteristic in form.listingListingCharacteristicsOrderedByGroup %}
+                                    {% set listingCharacteristic = listingListingCharacteristic.vars.value.listingCharacteristic %}
+                                    {% set listingCharacteristicGroup =  listingCharacteristic.listingCharacteristicGroup.getName() %}
+                                    {#{{ dump(listingCharacteristic) }}#}
+                                    {% if listingCharacteristicGroup != previousListingCharacteristicGroup %}
+                                        {% if previousListingCharacteristicGroup %}
+                                            {{ '</ul>' }}
+                                        {% endif %}
+                                        {{ '<ul class="col-md-4 list-unstyled features-list-new same-height-left same-height-right">' }}
+                                            <li><h3>{{ listingCharacteristicGroup }}</h3></li>
+                                    {% endif %}
+                                            <li>
+                                                <label class="label">
+                                                    {{ listingCharacteristic.getName() }}
+                                                </label>
+                                                {% if listingCharacteristic.getDescription()|length %}
+                                                    <button title="" data-original-title="{{ listingCharacteristic.getDescription() }}" data-placement="right" data-toggle="tooltip" class="tooltip-button" type="button">?</button>
+                                                {% endif %}
+                                                <div class="field-holder">
+                                                    {{ form_widget(listingListingCharacteristic.listingCharacteristicValue, {
+                                                        'attr': {
+                                                            'class': "no-arrow"
+                                                        }
+                                                    }) }}
+                                                </div>
+                                            </li>
+                                            {% set previousListingCharacteristicGroup =  listingCharacteristicGroup %}
+                                {% endfor %}
+                                <!--@formatter:on-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Partagez avec les acheteurs toutes les éléments qui donneront envie de vous contacter.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of characteristic form -->
+
+                <div class="row">
+                    <div class="col-sm-7">
+                        <div class="itou-fieldgroup">
+                            <div class="itou-subfieldgroup">
+                                <legend>Ajoutez une ou plusieurs références clients</legend>
+                                <div class="area">
+                                    <div class="uploader">
+                                        <div id="client-images-new">
+                                            {{ form_errors(form.clientImage.new) }}
+                                            {{ form_widget(form.clientImage.new) }}
+    
+                                            {{ form_errors(form.clientImage.uploaded) }}
+                                            {{ form_widget(form.clientImage.uploaded ) }}
+                                        </div>
+                                    </div>
+                                    {#
+                                    <div class="detail">
+                                        <p>{{ 'listing_edit.photos.details'|trans }}</p>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <div id="drop-zone">
+                                        {{ 'listing.drop.files'|trans }}
+                                    </div>
+                                    <h3>{{ 'listing.images.to_upload.title'|trans }}</h3>
+                                    #}
+                                    <ul id="client-files-to-upload" class="upload-list images-list"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            <p>
+                            Avoir des références clients permet de donner confiance à vos futurs acheteurs.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -437,25 +443,31 @@
         </fieldset>
     </div>
     <div class="btns-area new-listing">
-        {{ form_errors(form.tac) }}
-        <div class="agreement">
-            {{ form_widget(form.tac) }}
-            <span class="label">
-                {{ form_label(form.tac, null, {'required': false} ) }}
-                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
-                   target="_blank">
-                    {{ 'listing.new.tac.link'|trans }}
-                </a>*
-            </span>
-        </div>
+        <div class="part_3">
+            {{ form_errors(form.tac) }}
+            <div class="agreement">
+                {{ form_widget(form.tac) }}
+                <span class="label">
+                    {{ form_label(form.tac, null, {'required': false} ) }}
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
+                       target="_blank">
+                        {{ 'listing.new.tac.link'|trans }}
+                    </a>*
+                </span>
+            </div>
 
-        <div id="progress" class="progress">
-            <div class="progress-bar progress-bar-success"></div>
+            <div id="progress" class="progress">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
         </div>
-
-        <div class="text-center">
-            <input id="listing-new-save" type="submit" class="btn btn-primary"
-                   value="{{ 'listing.new.save'|trans }}">
+        <div id="buttons_nav">
+            <div class="btn-block text-center">
+                <button id="but_prev" class="btn btn-secondary" style="width:20rem;margin-right:20rem;">Précédent</button>
+                <button id="but_next" class="btn btn-default" style="width:20rem">Suivant</button>
+                <input id="listing-new-save" type="submit" class="btn btn-default"
+                       style="width:20rem"
+                       value="{{ 'listing.new.save'|trans }}">
+            </div>
         </div>
     </div>
     {{ form_end(form) }}
@@ -530,5 +542,74 @@
         'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
         'upload_max': listing_img_max - listing.images.count,
     } only %}
+
+    <script>
+        const pager = {
+            current: 0,
+            order: ['.part_1', '.part_2', '.part_3'],
+            but_prev : '#but_prev',
+            but_next : '#but_next',
+            but_subt : '#listing-new-save',
+            init: function() {
+                $(this.but_prev).click((e) => pager.prev(e));
+                $(this.but_next).click((e) => {pager.next(e);});
+                for (const part of this.order) {
+                    $(part).css('display','none');
+                }
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            next: function(e) {
+                e.preventDefault();
+
+                if (this.current + 1 >= this.order.length) {
+                    // console.log('End of parts');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current += 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            prev: function(e) {
+                e.preventDefault();
+
+                if (this.current <= 0) {
+                    // console.log('Already at beginning');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current -= 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            check: function() {
+                if (this.current == 0) {
+                    $(this.but_prev).hide();
+                } else {
+                    $(this.but_prev).show();
+                }
+
+                if (this.current + 1 >= this.order.length) {
+                    $(this.but_next).hide();
+                    $(this.but_subt).show();
+                } else {
+                    $(this.but_next).show();
+                    $(this.but_subt).hide();
+                }
+            }
+
+        };
+
+
+            
+        $(document).ready(() => {
+            pager.init();
+            $("#buttons_submit").hide();
+        });
+    </script>
+
 
 {% endblock %}
