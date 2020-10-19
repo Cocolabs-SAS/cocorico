@@ -143,6 +143,17 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 )
             )
             ->add(
+                'polRange',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$polRangeValues),
+                    'label' => 'Périmêtre intervention',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => true,
+                    'required' => true
+                )
+            )
+            ->add(
                 'url',
                 UrlType::class,
                 array(

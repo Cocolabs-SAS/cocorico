@@ -124,6 +124,20 @@ abstract class BaseListing
         self::CANCELLATION_POLICY_STRICT => 'entity.listing.cancellation_policy_desc.strict',
     );
 
+    /* Political ranges */
+    const PR_OTHER = 0;
+    const PR_DEPARTEMENT = 1;
+    const PR_REGION = 2;
+    const PR_FRANCE = 3;
+
+    public static $polRangeValues = array (
+        self::PR_OTHER => 'entity.listing.polrange.other',
+        self::PR_DEPARTEMENT => 'entity.listing.polrange.departement',
+        self::PR_REGION => 'entity.listing.polrange.region',
+        self::PR_FRANCE => 'entity.listing.polrange.france',
+    );
+
+
     /**
     * @ORM\Column(name="schedules", type="bitmask", nullable=true)
     * @var \Doctrine\DBAL\Types\Type\bitmask
@@ -153,11 +167,17 @@ abstract class BaseListing
 
     /**
      * @ORM\Column(name="`range`", type="integer", nullable=true)
-     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var integer|null
      */
     protected $range;
+
+    /**
+     * @ORM\Column(name="`pol_range`", type="integer", nullable=true)
+     *
+     * @var integer|null
+     */
+    protected $polRange;
 
     /**
      * @ORM\Column(name="`url`", type="string", nullable=true)
@@ -372,6 +392,45 @@ abstract class BaseListing
     public function getRange()
     {
         return $this->range;
+    }
+
+    /**
+     * Set political range
+     *
+     * @param  integer $polRange
+     * @return $this
+     */
+    public function setPolRange($polRange)
+    {
+        if (!in_array($polRange, array_keys(self::$polRangeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.prestaType : %s.', $polRange)
+            );
+        }
+        $this->polRange = $polRange;
+
+        return $this;
+    }
+
+    /**
+     * Get political range
+     *
+     * @return integer
+     */
+    public function getPolRange()
+    {
+        return $this->polRange;
+    }
+
+
+    /**
+     * Get Political range Text
+     *
+     * @return string
+     */
+    public function getPolRangeText()
+    {
+        return self::$polRangeValues[$this->getPolRange()];
     }
 
     /**

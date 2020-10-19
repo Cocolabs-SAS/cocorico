@@ -43,7 +43,7 @@
                         </div>
                         <br />
                         <div class="itou-info">
-                            <p>Faites connaitre l’étendue de votre savoir faire en présentant aux acheteurs plusieurs offres de prestation avec leurs spécificités .</p>
+                            <p>Faites connaître l’étendue de votre savoir faire en présentant aux acheteurs plusieurs offres de prestation avec leurs spécificités .</p>
                         </div>
 
                     {{ form_errors(form) }}
@@ -60,7 +60,8 @@
                                 <div class="field-holder">
                                     {{ form_widget(form.translations.fr.title, {
                                         'attr': {
-                                            'class': 'form-control required'
+                                            'class': 'form-control required',
+                                            'placeholder': '',
                                         }})
                                     }}
                                 </div>
@@ -117,7 +118,8 @@
                                     {{ form_widget(form.translations.fr.description, {
                                         'attr': {
                                             'class': 'form-control required',
-                                            'rows': 10
+                                            'rows': 10,
+                                            'placeholder': '...',
                                         }})
                                     }}
                             </div>
@@ -299,12 +301,53 @@
                         <div class="itou-fieldgroup">
                             <div class="itou-subfieldgroup">
                                 <legend>Perimètre d'intervention</legend>
-                                    {{ form_widget(form.range, {
-                                        'attr': {
-                                            'class': 'numbers-only form-control',
-                                        }
-                                    }) }}
+                                    <ul id="pol_range_form">
+                                        <li>
+                                            <input 
+                                                type="radio"
+                                                id="{{ form.polRange[1].vars.id }}"
+                                                name="{{ form.polRange[1].vars.full_name }}"
+                                                value="{{ form.polRange[1].vars.value }}"
+                                            /> {{ form_label(form.polRange[1]) }}
+                                        </li>
+                                        <li>
+                                            <input 
+                                                type="radio"
+                                                id="{{ form.polRange[2].vars.id }}"
+                                                name="{{ form.polRange[2].vars.full_name }}"
+                                                value="{{ form.polRange[2].vars.value }}"
+                                            /> {{ form_label(form.polRange[2]) }}
+                                        </li>
+                                        <li>
+                                            <input 
+                                                type="radio"
+                                                id="{{ form.polRange[3].vars.id }}"
+                                                name="{{ form.polRange[3].vars.full_name }}"
+                                                value="{{ form.polRange[3].vars.value }}"
+                                            /> {{ form_label(form.polRange[3]) }}
+                                        </li>
+                                        <li>
+
+                                            <label>
+                                            <input 
+                                                type="radio"
+                                                id="{{ form.polRange[0].vars.id }}"
+                                                name="{{ form.polRange[0].vars.full_name }}"
+                                                value="{{ form.polRange[0].vars.value }}"
+                                            /> 
+                                                {{ form_widget(form.range, {
+                                                    'attr': {
+                                                        'class': 'numbers-only form-control',
+                                                        'style': 'width:40%;display:inline',
+                                                        'placeholder': 'distance en kilomètres',
+                                                        'onclick': '$("#listing_polRange_0").trigger("click");'
+                                                    }
+                                                }) }}
+                                            </label>
+                                        </li>
+                                    </ul>
                             </div>
+                            {% do form.polRange.setRendered %}
                             <div class="itou-subfieldgroup">
                                 <legend>Site web ou page dédiée à la prestation</legend>
                                 {{ form_widget(form.url, {
@@ -364,8 +407,8 @@
                                         {% if previousListingCharacteristicGroup %}
                                             {{ '</ul>' }}
                                         {% endif %}
-                                        {{ '<ul class="col-md-4 list-unstyled features-list-new same-height-left same-height-right">' }}
-                                            <li><h3>{{ listingCharacteristicGroup }}</h3></li>
+                                        {{ '<ul class="col-md-12 list-unstyled features-list-new same-height-left same-height-right">' }}
+                                            <li><h2>{{ listingCharacteristicGroup }}</h2></li>
                                     {% endif %}
                                             <li>
                                                 <label class="label">

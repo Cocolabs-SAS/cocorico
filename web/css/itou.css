@@ -396,6 +396,23 @@ footer img.min_trav {
     color:#000;
 }
     
+#pol_range_form {
+    margin:0;
+    padding:0;
+}
+
+#pol_range_form li {
+    list-style-type: none;
+}
+
+.listing-section #characteristics label.label {
+    font-size: 1em;
+}
+
+.listing-section #characteristics li .field-holder{
+    margin-top:1rem;
+    margin-bottom:2rem;
+}
 
 /******************
  * QUOTE STYLES
