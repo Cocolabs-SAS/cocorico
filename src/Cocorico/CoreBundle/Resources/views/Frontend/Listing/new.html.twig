@@ -58,6 +58,7 @@
                             <div class="itou-subfieldgroup">
                                 <legend>TITRE DE L'OFFRE</legend>
                                 <div class="field-holder">
+                                    {{ form_errors(form.translations.fr.title) }}
                                     {{ form_widget(form.translations.fr.title, {
                                         'attr': {
                                             'class': 'form-control required',
@@ -115,6 +116,7 @@
                         <div class="itou-fieldgroup">
                             <div class="itou-subfieldgroup">
                                 <legend>Présentation de l'offre de prestation (max 250 caractères)</legend>
+                                    {{ form_errors(form.translations.fr.description) }}
                                     {{ form_widget(form.translations.fr.description, {
                                         'attr': {
                                             'class': 'form-control required',
@@ -308,7 +310,7 @@
                                                 id="{{ form.polRange[1].vars.id }}"
                                                 name="{{ form.polRange[1].vars.full_name }}"
                                                 value="{{ form.polRange[1].vars.value }}"
-                                            /> {{ form_label(form.polRange[1]) }}
+                                            /> {{ form_label(form.polRange[1], null, {'required': false}) }}
                                         </li>
                                         <li>
                                             <input 
@@ -316,7 +318,7 @@
                                                 id="{{ form.polRange[2].vars.id }}"
                                                 name="{{ form.polRange[2].vars.full_name }}"
                                                 value="{{ form.polRange[2].vars.value }}"
-                                            /> {{ form_label(form.polRange[2]) }}
+                                            /> {{ form_label(form.polRange[2], null, {'required': false}) }}
                                         </li>
                                         <li>
                                             <input 
@@ -324,7 +326,7 @@
                                                 id="{{ form.polRange[3].vars.id }}"
                                                 name="{{ form.polRange[3].vars.full_name }}"
                                                 value="{{ form.polRange[3].vars.value }}"
-                                            /> {{ form_label(form.polRange[3]) }}
+                                            /> {{ form_label(form.polRange[3], null, {'required': false}) }}
                                         </li>
                                         <li>
 
@@ -361,15 +363,15 @@
                                 <ul style="list-style-type:none">
                                     <li>
                                     {{ form_widget(form.schedule_business_hours) }}
-                                    {{ form_label(form.schedule_business_hours) }}
+                                    {{ form_label(form.schedule_business_hours, null, {'required': false}) }}
                                     </li>
                                     <li>
                                     {{ form_widget(form.schedule_before_opening) }}
-                                    {{ form_label(form.schedule_before_opening) }}
+                                    {{ form_label(form.schedule_before_opening, null, {'required': false}) }}
                                     </li>
                                     <li>
                                     {{ form_widget(form.schedule_after_closing) }}
-                                    {{ form_label(form.schedule_after_closing) }}
+                                    {{ form_label(form.schedule_after_closing, null, {'required': false}) }}
                                     </li>
                                 </ul>
                             </div>

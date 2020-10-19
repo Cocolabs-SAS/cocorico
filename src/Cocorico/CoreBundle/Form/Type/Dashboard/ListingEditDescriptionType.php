@@ -98,7 +98,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     'label' => 'Périmêtre intervention',
                     'translation_domain' => 'cocorico_listing',
                     'expanded' => false,
-                    'required' => true
+                    'required' => false
                 )
             )
             ->add(
@@ -109,7 +109,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     'label' => 'Type prestation',
                     'translation_domain' => 'cocorico_listing',
                     'expanded' => false,
-                    'required' => true
+                    'required' => false
                 )
             )
             ->add(
@@ -125,6 +125,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Avant ouverture',
+                    'required' => false,
                 )
             )
             ->add(
@@ -132,6 +133,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Heures de bureau',
+                    'required' => false,
                 )
             )
             ->add(
@@ -139,6 +141,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Après fermeture',
+                    'required' => false,
                 )
             )
             ->add(
