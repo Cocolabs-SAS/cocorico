@@ -76,6 +76,7 @@
                     </header>
                     <!-- blog -->
                     <div class="blog">
+                        {#
                         <div class="head">
                             <strong class="comments-counter">
                                 {{ 'user.comments.count.label'|trans }}
@@ -94,6 +95,7 @@
                                 {{ rating | cocorico_star_rating }}
                             {% endif %}
                         </div>
+                        #}
                         <div class="posts-holder">
                             {% for review in user.reviewsTo %}
                                 <!-- post -->
@@ -248,7 +250,6 @@
                                     ?
                                 </button>
                             </li>
-                            #}
                              <li>
                                 {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
                                 {% if user.nbQuotesOfferer %}
@@ -279,6 +280,7 @@
                                     ?
                                 </button>
                             </li>
+                            #}
 
                             {#
                             <li>
@@ -331,10 +333,10 @@
                                                         <div class="box-holder">
                                                             <div class="head">
                                                                 <!-- rating -->
+                                                                {#
                                                                 {% if listing.averageRating %}
                                                                     {{ listing.averageRating | cocorico_star_rating }}
                                                                 {% endif %}
-                                                                {#
                                                                 <div class="time-price">
                                                                     {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
 
