@@ -508,7 +508,9 @@ class ListingAdmin extends AbstractAdmin
             'actions',
             array(
                 'actions' => array(
-                    //'show' => array(),
+                    'view' => [
+                        'template' => 'CocoricoSonataAdminBundle::list_action_list_listing_view.html.twig',
+                    ],
                     'edit' => array(),
                 )
             )
