@@ -113,7 +113,8 @@ class ListingManager extends BaseManager
         $this->em->refresh($listing);
 
         if ($listingPublished) {
-            $this->mailer->sendListingActivatedMessageToOfferer($listing);
+            // XXX: Deactivated on team request
+            // $this->mailer->sendListingActivatedMessageToOfferer($listing);
             $this->tracker->track('backend', 'listing_new', array(
                 'id' => $listing->getId(),
                 'structure' => $listing->getUser()->getCompanyName()
