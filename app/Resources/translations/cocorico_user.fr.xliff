@@ -150,6 +150,10 @@
         <source>entity.user.person_type.natural</source>
         <target state="new">Une personne</target>
       </trans-unit>
+      <trans-unit id="a02b17bf58469b780ac6c838666fc3ad853ba3b2" resname="entity.user.person_type.admin">
+        <source>entity.user.person_type.admin</source>
+        <target state="new">Administrateur.trice</target>
+      </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b3" resname="entity.user.person_type.classic">
         <source>entity.user.person_type.classic</source>
         <target state="new">Structure classique qui souhaite réaliser un achat inclusif</target>

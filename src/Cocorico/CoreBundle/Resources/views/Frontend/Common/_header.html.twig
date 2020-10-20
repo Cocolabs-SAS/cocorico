@@ -27,6 +27,12 @@
     </div>
     #}
 
+    {% if app.environment == 'dev' %}
+        <div style="background-color:blue;color:#fff;text-align:center;width:100%;font-size:10pt;font-weight:bold;">DEV</div>
+    {% endif %}
+    {% if app.session.get('isAdmin') %}
+        <div style="background-color:red;color:#fff;text-align:center;width:100%;font-size:10pt;font-weight:bold;">ADMIN MODE</div>
+    {% endif %}
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
