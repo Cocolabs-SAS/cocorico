@@ -24,9 +24,35 @@
 
                 <!-- form-holder -->
                 <div class="form-holder columns-holder alt">
-                    <h2>{{ 'user.about.title'|trans }}</h2>
-                    <!-- about-info -->
+                    <h2>Données Utilisateur</h2>
                     <div class="about-info">
+                        <div class="column">
+                            <div class="field-row">
+                                {{ form_errors(form.firstName) }}
+                                <span class="label">{{ form_label(form.firstName) }}</span>
+                                <div class="field-holder">{{ form_widget(form.firstName) }}</div>
+                            </div>
+                            <div class="field-row">
+                                {{ form_errors(form.lastName) }}
+                                <span class="label">{{ form_label(form.lastName) }}</span>
+                                <div class="field-holder">{{ form_widget(form.lastName) }}</div>
+                            </div>
+                            <div class="field-row">
+                                {{ form_errors(form.companyName) }}
+                                <span class="label">{{ form_label(form.companyName) }}</span>
+                                <div class="field-holder">{{ form_widget(form.companyName) }}</div>
+                            </div>
+                            <div class="field-row">
+                                {{ form_errors(form.siret) }}
+                                <span class="label">{{ form_label(form.siret) }}</span>
+                                <div class="field-holder">{{ form_widget(form.siret) }}</div>
+                            </div>
+                            <div class="field-row">
+                                {{ form_errors(form.website) }}
+                                <span class="label">{{ form_label(form.website) }}</span>
+                                <div class="field-holder">{{ form_widget(form.website) }}</div>
+                            </div>
+                        </div>
                         <div id="images-new" class="column">
                             {{ form_errors(form.image.new) }}
                             <div class="image-upload-holder">
@@ -57,8 +83,11 @@
                                 {{ form_widget(form.images ) }}
                             </div>
                         </div>
+                    </div>
 
-                        <div class="column">
+                    <br />
+                    <div class="about-info">
+                        <div class="row">
                             {#
                             <h3>{{ 'profile.languages.title'|trans }}</h3>
 

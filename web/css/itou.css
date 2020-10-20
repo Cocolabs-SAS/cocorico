@@ -596,3 +596,14 @@ section.quote-quick-form fieldset {
 #info-perimetre { background-image: url('/images/shape_perimeter.png'); }
 #info-horaire { background-image: url('/images/shape_horaire.png'); }
 #info-site { background-image: url('/images/shape_site.png'); }
+
+/******************
+ * ADMIN STYLES
+ ******************/
+.form-area .about-info .label {
+    padding:0;
+    margin: 7px 11px 0 0 !important;
+    width:50%;
+    max-width: none;
+    min-width:inherit;
+}

@@ -47,6 +47,8 @@ class UserRequestListener
         // If user can be offerer, he can switch between roles
         if ($user && method_exists($user, "isAdmin")) {
             $session->set('isAdmin', $user->isAdmin());
+        } else {
+            $session->set('isAdmin', false);
         }
         if ($user && method_exists($user, "canBeOfferer")) {
             #$session->set('canSwitch', $user->canBeOfferer());

@@ -20,6 +20,7 @@ use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -70,6 +71,45 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                 )
             );
         }
+        $builder->add(
+                'firstName',
+                TextType::class,
+                array(
+                    'label' => 'form.first_name',
+                )
+            )
+            ->add(
+                'lastName',
+                TextType::class,
+                array(
+                    'label' => 'form.last_name',
+                )
+            )
+            ->add(
+                'companyName',
+                TextType::class,
+                array(
+                    'label' => 'form.company_name',
+                    'required' => true,
+                )
+            )
+            ->add(
+                'siret',
+                TextType::class,
+                array(
+                    'label' => 'form.siret',
+                    'required' => true,
+                )
+            )
+            ->add(
+                'website',
+                TextType::class,
+                array(
+                    'label' => 'form.website',
+                    'required' => false,
+                )
+            );
+
 
         $builder->add(
             'translations',
