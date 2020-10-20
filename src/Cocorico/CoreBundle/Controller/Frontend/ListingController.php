@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\Frontend\ListingNewType;
+use Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCharacteristicType;
+#use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditCharacteristicType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -49,6 +51,19 @@ class ListingController extends Controller
         $form = $this->createCreateForm($listing);
         $success = $formHandler->process($form);
 
+
+        # $editForm = $this->createEditCharacteristicForm($listing);
+        # $editForm->handleRequest($request);
+
+        # if ($editForm->isSubmitted() && $editForm->isValid()) {
+        #     $this->get("cocorico.listing.manager")->save($listing);
+
+        #     $this->get('session')->getFlashBag()->add(
+        #         'success',
+        #         $translator->trans('listing.edit.success', array(), 'cocorico_listing')
+        #     );
+        # }
+
         if ($success) {
             $url = $this->generateUrl(
                 'cocorico_dashboard_listing_edit_presentation',
@@ -68,6 +83,7 @@ class ListingController extends Controller
             array(
                 'listing' => $listing,
                 'form' => $form->createView(),
+                # 'editForm' => $editForm->createView(),
             )
         );
     }
@@ -92,6 +108,37 @@ class ListingController extends Controller
         );
 
         return $form;
+    }
+
+    /**
+     * Creates a form to edit a Listing entity.
+     *
+     * @param Listing $listing The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditCharacteristicForm(Listing $listing)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'listingChar',
+            ListingNewCharacteristicType::class,
+            $listing,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl('cocorico_listing_new'),
+            )
+        );
+        return $form;
+        // return $this->createForm(
+        //     #ListingEditCharacteristicType::class,
+        //     ListingNewCharacteristicType::class,
+        //     $listing,
+        //     array(
+        //         'method' => 'POST',
+        //         'action' => $this->generateUrl('cocorico_listing_new'),
+        //     )
+        // );
+
     }
 
     /**

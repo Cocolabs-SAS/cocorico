@@ -17,10 +17,11 @@ use Cocorico\CoreBundle\Entity\ListingLocation;
 use Cocorico\CoreBundle\Event\ListingFormBuilderEvent;
 use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
-use Cocorico\CoreBundle\Form\Type\PriceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -32,6 +33,11 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Cocorico\CoreBundle\Model\Manager\ListingManager;
+use Cocorico\CoreBundle\Form\Type\ListingListingCharacteristicType;
+
 
 /**
  * Class ListingNewType
@@ -46,6 +52,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     private $locale;
     private $locales;
     protected $dispatcher;
+    protected $lem;
 
     /**
      * @param RequestStack             $requestStack
@@ -55,12 +62,14 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     public function __construct(
         RequestStack $requestStack,
         $locales,
+        ListingManager $lem,
         EventDispatcherInterface $dispatcher
     ) {
         $this->request = $requestStack->getCurrentRequest();
         $this->locale = $this->request->getLocale();
         $this->locales = $locales;
         $this->dispatcher = $dispatcher;
+        $this->lem = $lem;
     }
 
     /**
@@ -126,13 +135,6 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
 
         $builder
             ->add(
-                'price',
-                PriceType::class,
-                array(
-                    'label' => 'listing.form.price',
-                )
-            )
-            ->add(
                 'range',
                 NumberType::class,
                 array(
@@ -141,11 +143,33 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 )
             )
             ->add(
+                'polRange',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$polRangeValues),
+                    'label' => 'Périmêtre intervention',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => true,
+                    'required' => true
+                )
+            )
+            ->add(
                 'url',
                 UrlType::class,
                 array(
                     'label' => 'listing.form.url',
                     'required' => false,
+                )
+            )
+            ->add(
+                'presta_type',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$prestaTypeValues),
+                    'label' => 'Type prestation',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => true,
+                    'required' => true
                 )
             )
             ->add(
@@ -171,6 +195,10 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
             )
             ->add(
                 'image',
+                ImageType::class
+            )
+            ->add(
+                'clientImage',
                 ImageType::class
             );
 
@@ -220,8 +248,42 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
                 )
             );
 
-        //Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
-        //Used for example to add fields to new listing form
+        $builder
+            //->add('listingListingCharacteristicsOrderedByGroup',
+            //    ListingCharacteristicType::class,
+            //    array (
+            //        'mapped' => false
+            //    )
+            //);
+            ->add(
+                'listingListingCharacteristicsOrderedByGroup',
+                CollectionType::class,
+                array(
+                    'entry_type' => ListingListingCharacteristicType::class,
+                    # 'entry_options' => [
+                    #     'multiple' => True
+                    # ],
+                    /** @Ignore */
+                    'label' => false
+                )
+            );
+
+        //Add new ListingCharacteristics eventually not already attached to listing
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) {
+                /** @var Listing $listing */
+                $listing = $event->getData();
+                ### FIXME: Hack, missing locale gives lots of errors later on
+
+                $listing = $this->lem->refreshListingListingCharacteristics($listing);
+                $event->setData($listing);
+            }
+        );
+
+
+        // Dispatch LISTING_NEW_FORM_BUILD Event. Listener listening this event can add fields and validation
+        // Used for example to add fields to new listing form
         $this->dispatcher->dispatch(
             ListingFormEvents::LISTING_NEW_FORM_BUILD,
             new ListingFormBuilderEvent($builder)
@@ -235,6 +297,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
     {
         $resolver->setDefaults(
             array(
+                'allow_extra_fields' => true,
                 'data_class' => 'Cocorico\CoreBundle\Entity\Listing',
                 'csrf_token_id' => 'listing_new',
                 'translation_domain' => 'cocorico_listing',

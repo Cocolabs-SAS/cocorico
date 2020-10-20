@@ -90,6 +90,14 @@ class Listing extends BaseListing
     private $images;
 
     /**
+     * For Asserts @see \Cocorico\CoreBundle\Validator\Constraints\ListingValidator
+     *
+     * @ORM\OneToMany(targetEntity="ListingClientImage", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "asc"})
+     */
+    private $clientImages;
+
+    /**
      * @ORM\OneToMany(targetEntity="ListingListingCharacteristic", mappedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true) //, fetch="EAGER"
      *
      */
@@ -131,6 +139,7 @@ class Listing extends BaseListing
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->clientImages = new ArrayCollection();
         $this->listingListingCharacteristics = new ArrayCollection();
         $this->listingListingCategories = new ArrayCollection();
         $this->discounts = new ArrayCollection();
@@ -340,6 +349,41 @@ class Listing extends BaseListing
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Add client images
+     *
+     * @param  \Cocorico\CoreBundle\Entity\ListingClientImage $image
+     * @return Listing
+     */
+    public function addClientImage(ListingClientImage $image)
+    {
+        $image->setListing($this); //Because the owning side of this relation is listing image
+        $this->clientImages[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove client images
+     *
+     * @param \Cocorico\CoreBundle\Entity\ListingClientImage $image
+     */
+    public function removeClientImage(ListingClientImage $image)
+    {
+        $this->clientImages->removeElement($image);
+        $image->setListing(null);
+    }
+
+    /**
+     * Get client images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClientImages()
+    {
+        return $this->clientImages;
     }
 
     /**
@@ -625,6 +669,10 @@ class Listing extends BaseListing
                 ($strict && count($this->getImages()) >= $minImages) ||
                 (!$strict && count($this->getImages()) > $minImages)
             ) ? 1 : 0,
+            "clientImage" => (
+                ($strict && count($this->getClientImages()) >= 0) ||
+                (!$strict && count($this->getClientImages()) > 0)
+            ) ? 1 : 0,
             "characteristic" => $characteristic,
         );
     }
@@ -661,6 +709,13 @@ class Listing extends BaseListing
             $this->images = new ArrayCollection();
             foreach ($images as $image) {
                 $this->addImage(clone $image);
+            }
+
+            //ClientImages
+            $clientImages = $this->getClientImages();
+            $this->clientImages = new ArrayCollection();
+            foreach ($clientImages as $image) {
+                $this->addClientImage(clone $image);
             }
 
             //Location

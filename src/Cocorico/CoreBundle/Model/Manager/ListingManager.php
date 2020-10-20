@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Model\Manager;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Entity\ListingCategory;
 use Cocorico\CoreBundle\Entity\ListingImage;
+use Cocorico\CoreBundle\Entity\ListingClientImage;
 use Cocorico\CoreBundle\Entity\ListingListingCategory;
 use Cocorico\CoreBundle\Entity\ListingListingCharacteristic;
 use Cocorico\CoreBundle\Entity\ListingTranslation;
@@ -112,7 +113,8 @@ class ListingManager extends BaseManager
         $this->em->refresh($listing);
 
         if ($listingPublished) {
-            $this->mailer->sendListingActivatedMessageToOfferer($listing);
+            // XXX: Deactivated on team request
+            // $this->mailer->sendListingActivatedMessageToOfferer($listing);
             $this->tracker->track('backend', 'listing_new', array(
                 'id' => $listing->getId(),
                 'structure' => $listing->getUser()->getCompanyName()
@@ -192,6 +194,42 @@ class ListingManager extends BaseManager
 
         return $listing;
     }
+    /**
+     * @param  Listing $listing
+     * @param  array   $clientImages
+     * @param bool     $persist
+     * @return Listing
+     * @throws AccessDeniedException
+     */
+    public function addClientImages(Listing $listing, array $clientImages, $persist = false)
+    {
+        //@todo : see why user is anonymous and not authenticated
+        if (true || $listing && $listing->getUser() == $this->securityTokenStorage->getToken()->getUser()) {
+            //Start new positions value
+            $nbImages = $listing->getClientImages()->count();
+
+            foreach ($clientImages as $i => $image) {
+                $listingImage = new ListingClientImage();
+                $listingImage->setListing($listing);
+                $listingImage->setName($image);
+                $listingImage->setPosition($nbImages + $i + 1);
+                $listing->addClientImage($listingImage);
+            }
+
+            if ($persist) {
+                $this->em->persist($listing);
+                $this->em->flush();
+                $this->em->refresh($listing);
+            }
+
+        } else {
+            throw new AccessDeniedException();
+        }
+
+        return $listing;
+    }
+
+
 
     /**
      * Create categories and field values while listing deposit.

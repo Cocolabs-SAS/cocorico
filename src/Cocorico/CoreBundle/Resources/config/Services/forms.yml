@@ -5,7 +5,17 @@ services:
         arguments:
             - "@request_stack"
             - "%cocorico.locales%"
+            - "@cocorico.listing.manager"
             - "@event_dispatcher"
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.listing_new_characteristic:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\ListingNewCharacteristicType
+        arguments:
+            - "@request_stack"
+            - "%cocorico.locales%"
+            - "@cocorico.listing.manager"
         tags:
             - { name: form.type }
 
@@ -42,6 +52,12 @@ services:
 
     cocorico.form.type.listing_edit_images:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditImagesType
+        parent: cocorico.form.type.listing_edit
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.listing_edit_client_images:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditClientImagesType
         parent: cocorico.form.type.listing_edit
         tags:
             - { name: form.type }

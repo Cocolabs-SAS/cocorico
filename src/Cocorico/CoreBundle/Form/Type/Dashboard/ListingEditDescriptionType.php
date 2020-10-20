@@ -15,12 +15,14 @@ use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Cocorico\CoreBundle\Form\Type\LanguageFilteredType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
+use Cocorico\CoreBundle\Entity\Listing;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class ListingEditDescriptionType extends ListingEditType implements TranslationContainerInterface
 {
@@ -89,6 +91,28 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 )
             )
             ->add(
+                'polRange',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$polRangeValues),
+                    'label' => 'Périmêtre intervention',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => false,
+                    'required' => false
+                )
+            )
+            ->add(
+                'presta_type',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$prestaTypeValues),
+                    'label' => 'Type prestation',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => false,
+                    'required' => false
+                )
+            )
+            ->add(
                 'url',
                 UrlType::class,
                 array(
@@ -101,6 +125,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Avant ouverture',
+                    'required' => false,
                 )
             )
             ->add(
@@ -108,6 +133,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Heures de bureau',
+                    'required' => false,
                 )
             )
             ->add(
@@ -115,6 +141,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 CheckBoxType::class,
                 array(
                     'label' => 'Après fermeture',
+                    'required' => false,
                 )
             )
             ->add(

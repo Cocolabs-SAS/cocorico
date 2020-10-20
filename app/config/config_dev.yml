@@ -1,3 +1,5 @@
+debug:
+  dump_destination: php://stderr
 imports:
     - { resource: config.yml }
     - { resource: "@CocoricoCoreBundle/Resources/config/config_dev.yml"}

@@ -92,7 +92,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => false,
-                    'disabled' => true,
+                    'disabled' => false,
                 )
             )
             ->add(
@@ -100,7 +100,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true,
+                    'disabled' => false,
                 )
             )
             ->add(
@@ -108,7 +108,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true,
+                    'disabled' => false,
                 )
             )
             ->add(
@@ -116,7 +116,7 @@ class UserAdmin extends SonataUserAdmin
                 null,
                 array(
                     'required' => true,
-                    'disabled' => true,
+                    'disabled' => false,
                 )
             )
             ->add(
@@ -424,6 +424,9 @@ class UserAdmin extends SonataUserAdmin
                 'actions',
                 array(
                     'actions' => array(
+                        'view' => [
+                            'template' => 'CocoricoSonataAdminBundle::list_action_list_user_view.html.twig',
+                        ],
                         'edit' => array(),
                         'list_user_listings' => array(
                             'template' => 'CocoricoSonataAdminBundle::list_action_list_user_listings.html.twig',

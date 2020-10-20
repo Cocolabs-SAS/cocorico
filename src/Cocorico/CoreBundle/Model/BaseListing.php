@@ -84,6 +84,15 @@ abstract class BaseListing
         self::SURFACE_TYPE_CONCRETE
     );
 
+    /* Prestation type */
+    CONST PRESTA_SERVICE = 1;
+    CONST PRESTA_INTERIM = 2;
+
+    public static $prestaTypeValues = array (
+        self::PRESTA_SERVICE => 'entity.listing.presta_service',
+        self::PRESTA_INTERIM => 'entity.listing.presta_interim'
+    );
+
 
     /* Type */
     const TYPE_ONE = 1;
@@ -115,6 +124,20 @@ abstract class BaseListing
         self::CANCELLATION_POLICY_STRICT => 'entity.listing.cancellation_policy_desc.strict',
     );
 
+    /* Political ranges */
+    const PR_OTHER = 0;
+    const PR_DEPARTEMENT = 1;
+    const PR_REGION = 2;
+    const PR_FRANCE = 3;
+
+    public static $polRangeValues = array (
+        self::PR_OTHER => 'entity.listing.polrange.other',
+        self::PR_DEPARTEMENT => 'entity.listing.polrange.departement',
+        self::PR_REGION => 'entity.listing.polrange.region',
+        self::PR_FRANCE => 'entity.listing.polrange.france',
+    );
+
+
     /**
     * @ORM\Column(name="schedules", type="bitmask", nullable=true)
     * @var \Doctrine\DBAL\Types\Type\bitmask
@@ -137,7 +160,6 @@ abstract class BaseListing
 
     /**
      * @ORM\Column(name="price", type="decimal", precision=8, scale=0, nullable=true)
-     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var integer|null
      */
@@ -145,11 +167,17 @@ abstract class BaseListing
 
     /**
      * @ORM\Column(name="`range`", type="integer", nullable=true)
-     * @Assert\NotBlank(message="assert.not_blank")
      *
      * @var integer|null
      */
     protected $range;
+
+    /**
+     * @ORM\Column(name="`pol_range`", type="integer", nullable=true)
+     *
+     * @var integer|null
+     */
+    protected $polRange;
 
     /**
      * @ORM\Column(name="`url`", type="string", nullable=true)
@@ -249,6 +277,14 @@ abstract class BaseListing
      * @var int|null
      */
     protected $surfaceType;
+
+
+    /**
+     * @ORM\Column(name="prestation_type", type="smallint", nullable=true)
+     *
+     * @var int|null
+     */
+    protected $prestaType;
 
 
     /**
@@ -356,6 +392,45 @@ abstract class BaseListing
     public function getRange()
     {
         return $this->range;
+    }
+
+    /**
+     * Set political range
+     *
+     * @param  integer $polRange
+     * @return $this
+     */
+    public function setPolRange($polRange)
+    {
+        if (!in_array($polRange, array_keys(self::$polRangeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.prestaType : %s.', $polRange)
+            );
+        }
+        $this->polRange = $polRange;
+
+        return $this;
+    }
+
+    /**
+     * Get political range
+     *
+     * @return integer
+     */
+    public function getPolRange()
+    {
+        return $this->polRange;
+    }
+
+
+    /**
+     * Get Political range Text
+     *
+     * @return string
+     */
+    public function getPolRangeText()
+    {
+        return self::$polRangeValues[$this->getPolRange()];
     }
 
     /**
@@ -855,6 +930,47 @@ abstract class BaseListing
     }
 
     /**
+     * Set prestaType.
+     *
+     * @param int|null $prestaType
+     *
+     * @return $this
+     */
+    public function setPrestaType($prestaType = null)
+    {
+        if (!in_array($prestaType, array_keys(self::$prestaTypeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.prestaType : %s.', $prestaType)
+            );
+        }
+
+        $this->prestaType = $prestaType;
+
+        return $this;
+    }
+
+    /**
+     * Get prestaType.
+     *
+     * @return int|null
+     */
+    public function getPrestaType()
+    {
+        return $this->prestaType;
+    }
+
+
+    /**
+     * Get PrestaType Text
+     *
+     * @return string
+     */
+    public function getPrestaTypeText()
+    {
+        return self::$prestaTypeValues[$this->getPrestaType()];
+    }
+
+    /**
      * Get Schedules
      *
      */
@@ -874,7 +990,12 @@ abstract class BaseListing
      */
     public function schedulesToInt() 
     {
-        $this->schedules = $this->schedules->get();
+        if (is_string($this->schedules)) 
+        {
+            $this->schedules = 0;
+        } else {
+            $this->schedules = $this->schedules->get();
+        }
     }
 
     /**

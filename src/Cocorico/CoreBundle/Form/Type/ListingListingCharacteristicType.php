@@ -50,11 +50,11 @@ class ListingListingCharacteristicType extends AbstractType
                     array(
                         'query_builder' => function (ListingCharacteristicValueRepository $lcvr) use ($llc) {
                             $lct = $llc->getListingCharacteristic()->getListingCharacteristicType();
-
-                            return $lcvr->getFindAllTranslatedQueryBuilder(
+                            $out = $lcvr->getFindAllTranslatedQueryBuilder(
                                 $lct,
                                 $this->locale
                             );
+                            return $out;
                         },
                         'placeholder' => 'listing.form.characteristic.choose',
                         'choice_label' => 'translations[' . $this->locale . '].name',

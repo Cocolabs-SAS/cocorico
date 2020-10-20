@@ -1,0 +1,10 @@
+{% set listing_translation = object.translations[app.request.locale] %}
+{% if admin.isGranted('EDIT', object) and admin.hasRoute('edit') %}
+    {% set url = path('cocorico_listing_show', { 'slug': listing_translation.slug }) %}
+
+    <a href="{{ url }}" target="_blank" class="btn btn-sm btn-default edit_link"
+       title="Afficher">
+        <i class="glyphicon glyphicon-list"> </i>
+        Afficher
+    </a>
+{% endif %}

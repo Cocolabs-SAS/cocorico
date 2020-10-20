@@ -65,6 +65,22 @@
                     <h2>Autres données</h2>
                     <div class="field-row">
                         <div class="col-sm-4">
+                            {{ form_label(form.presta_type)}}
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.presta_type, { 'attr': { 'class': 'form-control required' }}) }}
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="col-sm-4">
+                            <span class="label" style="max-width:100%">{{ form_label(form.polRange) }}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            {{ form_widget(form.polRange, { 'attr': { 'class': 'form-control'}} ) }}
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="col-sm-4">
                             <span class="label" style="max-width:100%">{{ form_label(form.range) }}</span>
                         </div>
                         <div class="col-sm-4">

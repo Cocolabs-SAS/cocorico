@@ -66,8 +66,9 @@ class RegistrationController extends Controller
             } else {
                 // Forcing forward to user confirmed screen
                 // $url = $request->get('redirect_to') ? $request->get('redirect_to') :
-                //     $this->get('router')->generate('cocorico_user_register_confirmed');
-                $url = $this->get('router')->generate('cocorico_user_register_confirmed');
+                // $this->get('router')->generate('cocorico_user_register_confirmed');
+                //$url = $this->get('router')->generate('cocorico_user_register_confirmed');
+                $url = $this->get('router')->generate('cocorico_user_dashboard_profile_edit_about_me');
             }
 
             return new RedirectResponse($url);
