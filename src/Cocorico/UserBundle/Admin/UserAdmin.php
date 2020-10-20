@@ -398,7 +398,7 @@ class UserAdmin extends SonataUserAdmin
             ->addIdentifier('fullname')
 //            ->add('email')
             ->add('companyName', null, array('editable' => true))
-            ->add('personType', 'choice', array('choices' => array(1=> 'personne', 2 => 'entreprise', 3 => 'classique', 4 => 'inclusive'), 'editable' => true))
+            ->add('personType', 'choice', array('choices' => array(1=> 'personne', 2 => 'entreprise', 3 => 'classique', 4 => 'inclusive', 5 => 'admin'), 'editable' => true))
             ->add('enabled', null, array('editable' => true))
             ->add('idCardVerified', null, array('editable' => true))
 //            ->add('locked', null, array('editable' => true))

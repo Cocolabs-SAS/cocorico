@@ -128,6 +128,7 @@ class ListingVoter extends Voter
     {
         return (
             $listing->getStatus() == Listing::STATUS_PUBLISHED
+            || $token->getUser()->isAdmin()
             || (
                 $token->getUser() instanceof UserInterface &&
                 $token->getUser()->getId() === $listing->getUser()->getId() &&

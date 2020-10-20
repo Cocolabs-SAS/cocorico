@@ -79,12 +79,14 @@ class User extends BaseUser implements ParticipantInterface
     const PERSON_TYPE_LEGAL = 2;
     const PERSON_TYPE_CLASSIC = 3;
     const PERSON_TYPE_INCLUSIVE = 4;
+    const PERSON_TYPE_ADMIN = 5;
 
     public static $personTypeValues = array(
         self::PERSON_TYPE_NATURAL => 'entity.user.person_type.natural',
         self::PERSON_TYPE_LEGAL => 'entity.user.person_type.legal',
         self::PERSON_TYPE_CLASSIC => 'entity.user.person_type.classic',
         self::PERSON_TYPE_INCLUSIVE => 'entity.user.person_type.inclusive',
+        self::PERSON_TYPE_ADMIN => 'entity.user.person_type.admin',
     );
 
     public static $legalTypes = array(
@@ -99,12 +101,14 @@ class User extends BaseUser implements ParticipantInterface
     );
 
     public static $offererTypes = array (
-        self::PERSON_TYPE_INCLUSIVE
+        self::PERSON_TYPE_INCLUSIVE,
+        self::PERSON_TYPE_ADMIN
     );
 
     public static $askerTypes = array (
         self::PERSON_TYPE_CLASSIC,
         self::PERSON_TYPE_LEGAL,
+        self::PERSON_TYPE_ADMIN,
         self::PERSON_TYPE_NATURAL
     );
     /**
@@ -656,6 +660,16 @@ class User extends BaseUser implements ParticipantInterface
     public function getPersonTypeText()
     {
         return self::$personTypeValues[$this->getPersonType()];
+    }
+
+    /**
+     * Check if person is admin type
+     *
+     * @return string
+     */
+    public function isAdmin()
+    {
+        return $this->personType == self::PERSON_TYPE_ADMIN;
     }
 
     /**
