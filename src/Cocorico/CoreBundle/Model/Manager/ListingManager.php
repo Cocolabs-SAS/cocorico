@@ -84,7 +84,6 @@ class ListingManager extends BaseManager
             $uow = $this->em->getUnitOfWork();
             $uow->computeChangeSets();
             $changeSet = $uow->getEntityChangeSet($listing);
-            dump($changeSet);
             if (array_key_exists('status', $changeSet) && $listing->getStatus() == Listing::STATUS_PUBLISHED) {
                 $listingPublished = true;
             }
@@ -117,10 +116,6 @@ class ListingManager extends BaseManager
 
         $this->em->flush();
         $this->em->refresh($listing);
-
-        dump("After refresh");
-        dump($listing->getPolRange());
-        dump(gettype($listing->getPolRange()));
 
         if ($listingPublished) {
             // XXX: Deactivated on team request
