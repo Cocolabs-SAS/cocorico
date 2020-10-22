@@ -155,16 +155,20 @@ class ListingSearchManager
             ->setParameter('lat', $searchLocation->getLat())
             ->setParameter('lng', $searchLocation->getLng());
 
-        $viewport = $searchLocation->getBound();
         $queryBuilder
-            ->where('co.lat < :neLat')
-            ->andWhere('co.lat > :swLat')
-            ->andWhere('co.lng < :neLng')
-            ->andWhere('co.lng > :swLng')
-            ->setParameter('neLat', $viewport["ne"]["lat"])
-            ->setParameter('swLat', $viewport["sw"]["lat"])
-            ->setParameter('neLng', $viewport["ne"]["lng"])
-            ->setParameter('swLng', $viewport["sw"]["lng"]);
+            //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+            ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+
+        //$viewport = $searchLocation->getBound();
+        //$queryBuilder
+        //    ->where('co.lat < :neLat')
+        //    ->andWhere('co.lat > :swLat')
+        //    ->andWhere('co.lng < :neLng')
+        //    ->andWhere('co.lng > :swLng')
+        //    ->setParameter('neLat', $viewport["ne"]["lat"])
+        //    ->setParameter('swLat', $viewport["sw"]["lat"])
+        //    ->setParameter('neLng', $viewport["ne"]["lng"])
+        //    ->setParameter('swLng', $viewport["sw"]["lng"]);
 
         return $queryBuilder;
     }

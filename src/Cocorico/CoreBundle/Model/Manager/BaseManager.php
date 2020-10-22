@@ -16,7 +16,15 @@ abstract class BaseManager
 
     protected function persistAndFlush($entity)
     {
-        $this->em->persist($entity);
-        $this->em->flush();
+        try {
+            $this->em->getConnection()->beginTransaction();
+            $this->em->persist($entity);
+            $this->em->flush();
+            $this->em->getConnection()->commit();
+        } catch (Exception $e) {
+            $this->em->getConnection()->rollBack();
+            throw $e;
+        }
+            
     }
 }

@@ -105,7 +105,10 @@
       <trans-unit id="135229c7beadb48dd31d1567028d035586fb41f3" resname="Bookings">
         <source>Bookings</source>
         <target>Réservations</target>
-      </trans-unit>
+       <trans-unit id="135230c7beadb48dd31d1567028d035586fb41f3" resname="Quotes">
+        <source>Quotes</source>
+        <target>Devis</target>
+      </trans-unit>     </trans-unit>
       <trans-unit id="a3c686e711e4720f99b4562bb3dbaae7ab658cf2" resname="Category">
         <source>Category</source>
         <target state="new">Catégories</target>
@@ -1252,6 +1255,30 @@
       <trans-unit id="bd1084ecb02deca4f6d8547ce67ac97add09f26c" resname="title_batch_confirmation">
         <source>title_batch_confirmation</source>
         <target state="new">title_batch_confirmation</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.asker.label">
+        <source>admin.booking.asker.label</source>
+        <target>Demandeur</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.listing_id.label">
+        <source>admin.booking.asker.label</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.status.label">
+        <source>admin.booking.asker.label</source>
+        <target>État</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.validated.label">
+        <source>admin.booking.asker.label</source>
+        <target>Validé</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.offerer.label">
+        <source>admin.booking.asker.label</source>
+        <target>Fournisseur</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.quote.title">
+        <source>admin.booking.asker.label</source>
+        <target>Devis</target>
       </trans-unit>
     </body>
   </file>

@@ -90,10 +90,15 @@ class ListingManager extends BaseManager
         }
         $listing->mergeNewTranslations();
 
-        ## FIXME: THIS IS A HACK, LEAVE IT !
-        $listing->schedulesToInt();
 
         $this->persistAndFlush($listing);
+
+        // This is a hack, leave it !
+        $listing->schedulesToInt();
+        $this->persistAndFlush($listing);
+
+        if ($listing->getId()) {
+        }
 
         /** @var ListingTranslation $translation */
         foreach ($listing->getTranslations() as $translation) {
