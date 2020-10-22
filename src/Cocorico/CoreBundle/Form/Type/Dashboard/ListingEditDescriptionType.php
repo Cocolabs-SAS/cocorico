@@ -20,6 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -80,11 +81,32 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     ),
                     /** @Ignore */
                     'label' => false
+                ))
+            ->add(
+                'fromLang',
+                LanguageFilteredType::class,
+                array(
+                    'mapped' => false,
+                    'label' => 'cocorico.from',
+                    'data' => $this->locale,
+                    'translation_domain' => 'cocorico_user'
                 )
             )
             ->add(
+                'toLang',
+                LanguageFilteredType::class,
+                array(
+                    'mapped' => false,
+                    'label' => 'cocorico.to',
+                    'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
+                    'translation_domain' => 'cocorico_user'
+                )
+            );
+
+        $builder
+            ->add(
                 'range',
-                NumberType::class,
+                IntegerType::class,
                 array(
                     'label' => 'listing.form.range',
                     'required' => false,
@@ -143,26 +165,6 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                     'label' => 'Après fermeture',
                     'required' => false,
                 )
-            )
-            ->add(
-                'fromLang',
-                LanguageFilteredType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'cocorico.from',
-                    'data' => $this->locale,
-                    'translation_domain' => 'cocorico_user'
-                )
-            )
-            ->add(
-                'toLang',
-                LanguageFilteredType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'cocorico.to',
-                    'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
-                    'translation_domain' => 'cocorico_user'
-                )
             );
 
         //Status field already added
@@ -176,6 +178,12 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
     public function configureOptions(OptionsResolver $resolver)
     {
         parent::configureOptions($resolver);
+        $resolver->setDefaults(
+            array(
+                'allow_extra_fields' => true,
+            )
+        );
+
     }
 
     /**

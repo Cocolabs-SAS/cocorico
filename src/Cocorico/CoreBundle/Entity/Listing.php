@@ -42,11 +42,13 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    @ORM\Index(name="frequency_period", columns={"frequency_period"}),
  *    @ORM\Index(name="frequency_hours", columns={"frequency_hours"}),
  *  })
+ *
  */
 class Listing extends BaseListing
 {
     use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Translatable\Translatable;
+
 
     /**
      * @ORM\Id
@@ -686,22 +688,6 @@ class Listing extends BaseListing
     public function getSlug()
     {
         return (string)$this->translate()->getSlug();
-    }
-
-    public function prepare()
-    {
-        $this->schedulesToInt();
-        var_dump($this->url);
-        $this->url = "test";
-        var_dump($this->url);
-        var_dump(get_object_vars($this));
-        die();
-        $this->polRange = strval($this->polRange);
-        dump($this->polRange);
-        $this->polRange = intval($this->polRange);
-        dump($this->polRange);
-        dump(gettype($this->polRange));
-        $this->range = intval($this->range);
     }
 
     public function __toString()

@@ -91,18 +91,21 @@ class ListingManager extends BaseManager
         }
         $listing->mergeNewTranslations();
 
-        dump("saving listing");
-        $listing->prepare();
 
         $this->persistAndFlush($listing);
-        $this->em->flush();
+
+        // This is a hack, leave it !
+        $listing->schedulesToInt();
+        $this->persistAndFlush($listing);
+
+        if ($listing->getId()) {
+        }
 
         /** @var ListingTranslation $translation */
         foreach ($listing->getTranslations() as $translation) {
             $translation->generateSlug();
             $this->em->persist($translation);
         }
-        $this->em->flush();
 
         /** @var ListingOptionInterface $option */
         if ($listing->getOptions()) {
@@ -111,7 +114,6 @@ class ListingManager extends BaseManager
                 $this->persistAndFlush($option);
             }
         }
-        $this->em->flush();
 
         $this->em->flush();
         $this->em->refresh($listing);
