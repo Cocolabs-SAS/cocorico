@@ -166,21 +166,21 @@ abstract class BaseListing
     protected $price;
 
     /**
-     * @ORM\Column(name="`range`", type="integer", nullable=true)
+     * @ORM\Column(name="geo_range", type="integer", nullable=true)
      *
      * @var integer|null
      */
     protected $range;
 
     /**
-     * @ORM\Column(name="`pol_range`", type="integer", nullable=true)
+     * @ORM\Column(name="pol_range", type="integer", nullable=true)
      *
      * @var integer|null
      */
     protected $polRange;
 
     /**
-     * @ORM\Column(name="`url`", type="string", nullable=true)
+     * @ORM\Column(name="url", type="string", nullable=true)
      *
      * @var string|null
      */

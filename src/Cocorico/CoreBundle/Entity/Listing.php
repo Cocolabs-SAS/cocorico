@@ -29,7 +29,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="listing",indexes={
  *    @ORM\Index(name="created_at_l_idx", columns={"createdAt"}),
  *    @ORM\Index(name="status_l_idx", columns={"status"}),
- *    @ORM\Index(name="range_idx", columns={"range"}),
+ *    @ORM\Index(name="range_idx", columns={"geo_range"}),
+ *    @ORM\Index(name="polrange_idx", columns={"pol_range"}),
  *    @ORM\Index(name="price_idx", columns={"price"}),
  *    @ORM\Index(name="type_idx", columns={"type"}),
  *    @ORM\Index(name="min_duration_idx", columns={"min_duration"}),
@@ -685,6 +686,18 @@ class Listing extends BaseListing
     public function getSlug()
     {
         return (string)$this->translate()->getSlug();
+    }
+
+    public function prepare()
+    {
+        dump($this->polRange);
+        $this->polRange = strval($this->polRange);
+        dump($this->polRange);
+        $this->polRange = intval($this->polRange);
+        dump($this->polRange);
+        dump(gettype($this->polRange));
+        $this->range = intval($this->range);
+        $this->schedulesToInt();
     }
 
     public function __toString()

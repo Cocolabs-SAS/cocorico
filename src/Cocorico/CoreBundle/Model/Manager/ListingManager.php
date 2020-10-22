@@ -84,22 +84,25 @@ class ListingManager extends BaseManager
             $uow = $this->em->getUnitOfWork();
             $uow->computeChangeSets();
             $changeSet = $uow->getEntityChangeSet($listing);
+            dump($changeSet);
             if (array_key_exists('status', $changeSet) && $listing->getStatus() == Listing::STATUS_PUBLISHED) {
                 $listingPublished = true;
             }
         }
         $listing->mergeNewTranslations();
 
-        ## FIXME: THIS IS A HACK, LEAVE IT !
-        $listing->schedulesToInt();
+        dump("saving listing");
+        $listing->prepare();
 
         $this->persistAndFlush($listing);
+        $this->em->flush();
 
         /** @var ListingTranslation $translation */
         foreach ($listing->getTranslations() as $translation) {
             $translation->generateSlug();
             $this->em->persist($translation);
         }
+        $this->em->flush();
 
         /** @var ListingOptionInterface $option */
         if ($listing->getOptions()) {
@@ -108,9 +111,14 @@ class ListingManager extends BaseManager
                 $this->persistAndFlush($option);
             }
         }
+        $this->em->flush();
 
         $this->em->flush();
         $this->em->refresh($listing);
+
+        dump("After refresh");
+        dump($listing->getPolRange());
+        dump(gettype($listing->getPolRange()));
 
         if ($listingPublished) {
             // XXX: Deactivated on team request
