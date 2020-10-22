@@ -690,14 +690,18 @@ class Listing extends BaseListing
 
     public function prepare()
     {
-        dump($this->polRange);
+        $this->schedulesToInt();
+        var_dump($this->url);
+        $this->url = "test";
+        var_dump($this->url);
+        var_dump(get_object_vars($this));
+        die();
         $this->polRange = strval($this->polRange);
         dump($this->polRange);
         $this->polRange = intval($this->polRange);
         dump($this->polRange);
         dump(gettype($this->polRange));
         $this->range = intval($this->range);
-        $this->schedulesToInt();
     }
 
     public function __toString()
