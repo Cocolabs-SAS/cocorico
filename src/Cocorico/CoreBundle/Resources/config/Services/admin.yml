@@ -13,21 +13,35 @@ services:
             - [ setIncludeVat, ["%cocorico.include_vat%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
-    sonata.admin.booking:
-        class: Cocorico\CoreBundle\Admin\BookingAdmin
+    # sonata.admin.booking:
+    #     class: Cocorico\CoreBundle\Admin\BookingAdmin
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bookings" }
+    #     arguments:
+    #         - ~
+    #         - Cocorico\CoreBundle\Entity\Booking
+    #         - ~
+    #     calls:
+    #         - [ setTranslationDomain, [SonataAdminBundle]]
+    #         - [ setLocales, ["%cocorico.locales%"]]
+    #         - [ setTimeUnit, ["%cocorico.time_unit%"]]
+    #         - [ setBookingExpirationDelay, ["%cocorico.booking.expiration_delay%"]]
+    #         - [ setBookingAcceptationDelay, ["%cocorico.booking.acceptation_delay%"]]
+    #         - [ setIncludeVat, ["%cocorico.include_vat%"]]
+    #         - [ setBundlesEnabled, ["%kernel.bundles%"]]
+    #         - [ setTimezone, ["%cocorico.time_zone%"]]
+
+    sonata.admin.quote:
+        class: Cocorico\CoreBundle\Admin\QuoteAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bookings" }
+            - { name: sonata.admin, manager_type: orm, group: "Quotes", label: "Quotes" }
         arguments:
             - ~
-            - Cocorico\CoreBundle\Entity\Booking
+            - Cocorico\CoreBundle\Entity\Quote
             - ~
         calls:
             - [ setTranslationDomain, [SonataAdminBundle]]
             - [ setLocales, ["%cocorico.locales%"]]
-            - [ setTimeUnit, ["%cocorico.time_unit%"]]
-            - [ setBookingExpirationDelay, ["%cocorico.booking.expiration_delay%"]]
-            - [ setBookingAcceptationDelay, ["%cocorico.booking.acceptation_delay%"]]
-            - [ setIncludeVat, ["%cocorico.include_vat%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
             - [ setTimezone, ["%cocorico.time_zone%"]]
 
