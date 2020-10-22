@@ -51,6 +51,8 @@ class ListingSearchRequest implements TranslationContainerInterface
     protected $categoriesFields;
     protected $delivery;
     protected $keywords;
+    protected $geoRange;
+    protected $polRange;
 
     public static $sortByValues = array(
         'recommended' => 'listing.search.sort_by.recommended',

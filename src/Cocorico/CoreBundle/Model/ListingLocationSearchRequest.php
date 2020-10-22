@@ -262,6 +262,20 @@ class ListingLocationSearchRequest
      */
     public function getBound($viewport = null)
     {
+        // France Range
+        /*
+        return [
+            'sw' => [
+                'lat' => 41.199,
+                'lng' => -4.132
+            ],
+            'ne' => [
+                'lat' => 51.361,
+                'lng' => 10.424
+            ]
+        ];
+        */
+
         $viewport = $viewport ? $viewport : $this->getViewport();
         if (!$viewport) {
             return null;
@@ -292,7 +306,7 @@ class ListingLocationSearchRequest
             }
         }
 
-        return null;
+        // return null;
     }
 
     /**

@@ -19,6 +19,7 @@ use Cocorico\CoreBundle\Event\ListingFormEvents;
 use Cocorico\CoreBundle\Form\Type\ImageType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -136,7 +137,7 @@ class ListingNewType extends AbstractType implements TranslationContainerInterfa
         $builder
             ->add(
                 'range',
-                NumberType::class,
+                IntegerType::class,
                 array(
                     'label' => 'listing.form.range',
                     'required' => false,
