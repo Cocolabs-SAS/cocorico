@@ -7,11 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### En Cours
+### [0.20.2] - (2020-10-26)
 - Révision Changelog
 - Application nouveau nom : "Le marché de l'inclusion"
 
-### [0.20.1] - (2020-10-26)
+### [0.20.1] - (2020-10-23)
 - formulaire typeform récolte besoin acheteurs
 - Application du périmètre d'intervention
 - Correction bug dashboard utilisateur
