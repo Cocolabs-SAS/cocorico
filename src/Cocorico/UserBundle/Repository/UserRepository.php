@@ -102,4 +102,4 @@ class UserRepository extends EntityRepository
             return null;
         }
     }
-uper_
+}
