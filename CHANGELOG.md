@@ -7,8 +7,43 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [0.19.0] - (courant)
-- Update style bouton catégories
+### En Cours
+- Révision Changelog
+
+### [0.20.1] - (2020-10-26)
+- formulaire typeform récolte besoin acheteurs
+- Application du périmètre d'intervention
+- Correction bug dashboard utilisateur
+- Nouveau panneau administration des devis
+
+### [0.20.0] - (2020-10-20)
+- Nouvelle maquette formulaire prestation
+- Nouveau champs prestation: type, caractéristiques, référence client
+- Refactor de champs existants
+- Fix bug cocorico localisation manquante nouvelle prestation
+- Ajout fonctions panneau admin (utilisateurs et annonces)
+- Mail automatique annonce bloqué
+- Nouveau type d'utilisateur : Administrateur
+- Nouveaux champs dans le dashboard utilisateur
+
+### [0.19.1] - (2020-10-08)
+- Nouvelle maquette fiche prestation
+- Correctif CSS
+- Retrait possibilité profil hybride (fournisseur / acheteur)
+- Favicon
+- Page Stats
+- Meilleure gestion profil par l'utilisateur
+
+
+### [0.19.0] - (2020-09-28)
+- Nouvelles maquette formulaire inscription
+- Correctif interface admin (utilisateurs et annonces)
+- Correctif Chrome pour checkbox formulaire
+- Nouvelles colonnes et données dans l'interface admin
+
+### [0.18.1] - (2020-09-3)
+- Mise à jour bouton catégories
+- Integration Tracker JS
 
 
 ### [0.18.0] - (2020-07-28)
