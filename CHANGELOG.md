@@ -9,6 +9,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### En Cours
 - Révision Changelog
+- Application nouveau nom : "Le marché de l'inclusion"
 
 ### [0.20.1] - (2020-10-26)
 - formulaire typeform récolte besoin acheteurs
