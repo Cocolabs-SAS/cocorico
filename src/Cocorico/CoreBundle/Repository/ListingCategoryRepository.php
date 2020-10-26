@@ -47,7 +47,7 @@ class ListingCategoryRepository extends NestedTreeRepository
         $qb = $this->getNodesHierarchyTranslatedQueryBuilder($locale);
 
         $query = $qb->getQuery();
-        $query->useResultCache(true, 43200, 'findCategories');
+        $query->useResultCache(true, 15, 'findCategories');
 
         return $query->execute();
     }
@@ -65,7 +65,7 @@ class ListingCategoryRepository extends NestedTreeRepository
 
 
         $query = $qb->getQuery();
-        $query->useResultCache(true, 43200, 'findCategoriesByIds');
+        $query->useResultCache(true, 15, 'findCategoriesByIds');
 
         return $query->execute();
     }

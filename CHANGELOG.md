@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [0.20.2] - (2020-10-26)
 - Révision Changelog
 - Application nouveau nom : "Le marché de l'inclusion"
+- Correction bug expiration mémoire cache
 
 ### [0.20.1] - (2020-10-23)
 - formulaire typeform récolte besoin acheteurs

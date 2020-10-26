@@ -60,7 +60,7 @@ class MessageRepository extends EntityRepository
                 ->setParameter('user', $participant);
 
             $query = $builder->getQuery();
-            $query->useResultCache(true, 3600, 'getNbUnreadMessageType' . $participant->getId());
+            $query->useResultCache(true, 15, 'getNbUnreadMessageType' . $participant->getId());
             $result = $query->getResult();
 
         } else {
@@ -68,7 +68,7 @@ class MessageRepository extends EntityRepository
             $builder->select($builder->expr()->count('mm.id'));
 
             $query = $builder->getQuery();
-            $query->useResultCache(true, 3600, 'getNbUnreadMessage' . $participant->getId());
+            $query->useResultCache(true, 15, 'getNbUnreadMessage' . $participant->getId());
 
             $result = $query->getSingleScalarResult();
         }
