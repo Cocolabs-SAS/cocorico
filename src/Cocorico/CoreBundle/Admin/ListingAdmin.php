@@ -23,6 +23,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\Extension\Core\Type\CheckBoxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
@@ -182,6 +185,69 @@ class ListingAdmin extends AbstractAdmin
                     'allow_delete' => false,
 
                     'label' => 'admin.listing.images.label'
+                )
+            );
+
+            $formMapper->add(
+                'range',
+                IntegerType::class,
+                array(
+                    'label' => 'Périmètre d\'intervention (distance)',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'polRange',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$polRangeValues),
+                    'label' => 'Périmètre intervention (zone)',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => false,
+                    'required' => false
+                )
+            )
+            ->add(
+                'presta_type',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Listing::$prestaTypeValues),
+                    'label' => 'Type prestation',
+                    'translation_domain' => 'cocorico_listing',
+                    'expanded' => false,
+                    'required' => false
+                )
+            )
+            ->add(
+                'url',
+                UrlType::class,
+                array(
+                    'label' => 'Site Web',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'schedule_before_opening',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Avant ouverture',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'schedule_business_hours',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Heures de bureau',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'schedule_after_closing',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Après fermeture',
+                    'required' => false,
                 )
             );
             // ->add(

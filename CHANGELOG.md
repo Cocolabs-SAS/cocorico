@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.20.3] - ()
+- Nouveau champs de contrôle dans panneau administrateur (annonces)
+
 ### [0.20.2] - (2020-10-26)
 - Révision Changelog
 - Application nouveau nom : "Le marché de l'inclusion"
