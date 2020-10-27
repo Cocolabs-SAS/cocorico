@@ -368,6 +368,13 @@ class QuoteManager extends BaseManager
             $quote->setStatus(Quote::STATUS_PREQUOTE);
             $quote = $this->save($quote);
             //TODO: Add mailer events for quote sent
+
+            $this->tracker->track('backend', 'metric_userlink', array(
+                'id' => $quote->getId(),
+                'id_annonce' => $quote->getListing()->getId(),
+                'fournisseur' => $quote->getListing()->getUser()->getCompanyName(),
+                'demandeur' => $quote->getUser()->getCompanyName(),
+            ));
             return $quote;
         }
         return false;

@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Nouveau champs de contrôle dans panneau administrateur (annonces)
 - Visualisation sur la carte du périmètre d'action d'une prestation
 - Update fiche prestation : références clients, type de prestation
+- Suivi et notification mise en relation via tracker
 
 ### [0.20.2] - (2020-10-26)
 - Révision Changelog
