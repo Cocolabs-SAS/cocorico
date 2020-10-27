@@ -7,6 +7,7 @@
 
 {% set listing_translation = listing.translations[app.request.locale] %}
 {% set listing_description = listing_translation.description|strip_private_info %}
+{% set listing_prestaType = listing.getPrestaTypeText|trans %}
 {% set listing_location = listing.location %}
 {% set listing_user = listing.user %}
 
@@ -83,12 +84,19 @@
                                 <div>
                                     <p>{{ listing_description|nl2br }}</p>
                                 </div>
+                                <div>
+                                    <ul class="info-annonce">
+                                        <li id="info-presta-type"><h5>Type de prestation</h5>
+                                            <b>{{ listing_prestaType }}</b>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
 
 
 
                             <!-- tabs -->
-                            <div role="tabpanel">
+                            <div role="tabpanel" style="margin-left:-19px;">
                                 <!-- Nav tabs -->
                                 <nav class="tabset-holder">
                                     <a href="#" class="opener">
@@ -183,8 +191,15 @@
                                     {% if optionBundleEnabled %}
                                         {% include 'CocoricoListingOptionBundle:Frontend:Listing/_listing_show_options.html.twig' with {'listing': listing} only %}
                                     {% endif %}
-                                <h2>Références Client</h2>
-
+                                {% if listing.clientImages %}
+                                    <h2>Références Client</h2>
+                                        {% for image in listing.clientImages %}
+                                            <!-- slide -->
+                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
+                                                 alt="{{ listing_translation.title}}" class="client-ref"/>
+                                        {% endfor %}
+                                {% endif %}
+                                    <h2>Caractéristiques</h2>
                                 {% include '@CocoricoCore/Frontend/Listing/_listing_show_characteristics.html.twig' with {'characterisitics': listing.getListingListingCharacteristicsOrderedByGroup } only %}
                             </div>
                         </div>

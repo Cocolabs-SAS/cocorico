@@ -323,6 +323,8 @@ footer img.min_trav {
 .listing-container h2 {
     color:#655;
     font-size:1em;
+    font-weight:500;
+    margin-top:4rem;
 }
 
 
@@ -417,6 +419,56 @@ footer img.min_trav {
 
 .listing-section .jcf-list {
     padding-bottom:10rem;
+}
+
+.info-pratiques dl dd{
+    color:#999;
+    font-weight:bold;
+}
+
+.info-pratiques dl {
+    border-bottom: 1px solid #ccc;
+    padding-bottom:2rem;
+    background-size:24px;
+    background-repeat: no-repeat;
+    padding-left:28px;
+}
+.info-pratiques dl:last-child {
+    border:0;
+}
+
+#info-perimetre { background-image: url('/images/shape_perimeter.png'); }
+#info-horaire { background-image: url('/images/shape_horaire.png'); }
+#info-site { background-image: url('/images/shape_site.png'); }
+
+ul.info-annonce {
+    list-style-type:none;
+    margin:4rem 0 4rem;
+    padding:0;
+}
+
+ul.info-annonce h5 {
+    color:#655;
+    font-size:1.2em;
+    font-weight:300;
+    line-height:1em;
+}
+
+ul.info-annonce b {
+    font-weight:bold;
+    color:#000;
+}
+
+ul.info-annonce li {
+    background-size:25px;
+    background-repeat: no-repeat;
+    padding-left:30px;
+}
+
+#info-presta-type { background-image: url('/images/shape_prestatype.png'); }
+
+img.client-ref {
+    padding:0 1rem 0 0;
 }
 
 /******************
@@ -578,25 +630,6 @@ section.quote-quick-form fieldset {
     background-color:#aa381e;
 }
 
-.info-pratiques dl dd{
-    color:#999;
-    font-weight:bold;
-}
-
-.info-pratiques dl {
-    border-bottom: 1px solid #ccc;
-    padding-bottom:2rem;
-    background-size:24px;
-    background-repeat: no-repeat;
-    padding-left:28px;
-}
-.info-pratiques dl:last-child {
-    border:0;
-}
-
-#info-perimetre { background-image: url('/images/shape_perimeter.png'); }
-#info-horaire { background-image: url('/images/shape_horaire.png'); }
-#info-site { background-image: url('/images/shape_site.png'); }
 
 /******************
  * ADMIN STYLES
