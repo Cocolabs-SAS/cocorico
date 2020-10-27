@@ -9,6 +9,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### [0.20.3] - ()
 - Nouveau champs de contrôle dans panneau administrateur (annonces)
+- Visualisation sur la carte du périmètre d'action d'une prestation
+- Update fiche prestation : références clients, type de prestation
 
 ### [0.20.2] - (2020-10-26)
 - Révision Changelog
