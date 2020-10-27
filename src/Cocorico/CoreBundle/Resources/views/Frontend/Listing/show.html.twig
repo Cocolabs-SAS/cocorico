@@ -353,8 +353,9 @@
                 strokeWeight: 2,
                 fillColor: '#0000EE',
                 fillOpacity: 0.1,
-                radius: 200
+                radius: {{ listing_km_range }} * 1000
             });
+            map.setZoom({{ listing_zoom }});
             {% endif %}
 
             // Set default favourites in the listing
