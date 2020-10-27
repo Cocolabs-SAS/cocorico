@@ -422,7 +422,7 @@ class ListingController extends Controller
                 'listing_image' => $listingCompletion["image"],
                 'listing_characteristics' => $listingCompletion["characteristic"],
                 'profile_photo' => $userCompletion["image"],
-                'profile_desc' => $userCompletion["description"]
+                'profile_desc' => $userCompletion["description"],
             )
         );
     }

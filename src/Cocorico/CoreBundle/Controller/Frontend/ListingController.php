@@ -167,11 +167,32 @@ class ListingController extends Controller
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         $breadcrumbs->addListingShowItems($request, $listing);
 
+        switch ($listing->getPolRange())
+            {
+            case 3 :
+                $listing_km_range = 500;
+                $listing_zoom = 6;
+                break;
+            case 2 :
+                $listing_km_range = 200;
+                $listing_zoom = 7;
+                break;
+            case 1 :
+                $listing_km_range = 50;
+                $listing_zoom = 8;
+                break;
+            default:
+                $listing_km_range = $listing->getRange();
+                $listing_zoom = 11;
+            }
+
         return $this->render(
             'CocoricoCoreBundle:Frontend/Listing:show.html.twig',
             array(
                 'listing' => $listing,
                 'reviews' => $reviews,
+                'listing_km_range' => $listing_km_range,
+                'listing_zoom' => $listing_zoom,
             )
         );
     }

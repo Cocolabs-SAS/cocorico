@@ -117,7 +117,7 @@ class ListingEditDescriptionType extends ListingEditType implements TranslationC
                 ChoiceType::class,
                 array(
                     'choices' => array_flip(Listing::$polRangeValues),
-                    'label' => 'Périmêtre intervention',
+                    'label' => 'Périmètre intervention',
                     'translation_domain' => 'cocorico_listing',
                     'expanded' => false,
                     'required' => false
