@@ -967,7 +967,9 @@ abstract class BaseListing
      */
     public function getPrestaTypeText()
     {
-        return self::$prestaTypeValues[$this->getPrestaType()];
+        return array_key_exists($this->getPrestaType(), self::$prestaTypeValues) 
+            ? self::$prestaTypeValues[$this->getPrestaType()]
+            : array_values(self::$prestaTypeValues)[0];
     }
 
     /**

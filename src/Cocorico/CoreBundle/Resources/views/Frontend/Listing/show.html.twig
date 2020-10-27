@@ -86,9 +86,11 @@
                                 </div>
                                 <div>
                                     <ul class="info-annonce">
+                                        {% if listing.prestaType %}
                                         <li id="info-presta-type"><h5>Type de prestation</h5>
                                             <b>{{ listing_prestaType }}</b>
                                         </li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
