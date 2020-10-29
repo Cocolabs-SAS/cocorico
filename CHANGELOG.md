@@ -7,13 +7,17 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.21.0] - (2020-10-29)
+- Duplication des annonces : annonce dupliquée "a valider"
+- Retrait de la dépendance MongoDB
+- Update dépendences, utilisation de composer2 
+
 ### [0.20.4] - (2020-10-29)
 - Indication géographique et périmètre améliorés dans la fiche de prestation
 - Meilleure calibration des distances par défaut (fix recherche)
 - Désactivation drag & drop
 - Les illustrations ne sont plus obligatoires lors de la création d'une annonce
 - Nouveau type de prestation "Fabrication et commercialisation"
-- Duplication des annonces : annonce dupliquée "a valider"
 
 ### [0.20.3] - (2020-10-27)
 - Nouveau champs de contrôle dans panneau administrateur (annonces)
