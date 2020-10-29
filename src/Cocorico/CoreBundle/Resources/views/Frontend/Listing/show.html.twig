@@ -247,6 +247,10 @@
                                 {{ listing_user.companyName }}
                             </a>
                         </h2>
+                        <div class="listing-location">
+                            {{ listing_location.zip }} 
+                            {{ listing_location.city }}
+                        </div>
                         </div>
 
                         <section class="widget info-pratiques">
@@ -254,7 +258,13 @@
                             <dl id="info-perimetre">
                                     <dd>Périmètre d'intervention</dd>
                                     {% if listing.polRange  != 0 %}
+                                        {% if listing.polRange  == 1 %}
+                                        <dt>{{ listing_location.coordinate.department.getName() }} (département)</dt>
+                                        {% elseif listing.polRange  == 2 %}
+                                        <dt>{{ listing_location.coordinate.area.getName() }} (région)</dt>
+                                        {% else %}
                                         <dt>{{ listing.getPolRangeText()|trans }}</dt>
+                                        {% endif %}
                                     {% else %} 
                                         {% if listing.range %}
                                             <dt>{{ listing.range }} km</dt>
