@@ -249,7 +249,7 @@ parameters:
 
     #Images
     #Max/Min images by user
-    cocorico.user_img_min: 1
+    cocorico.user_img_min: 0
     cocorico.user_img_max: 6
     cocorico.user_img_max_upload_size: 12 #MB
 
@@ -267,7 +267,7 @@ parameters:
 
     #Listing
     #Max/Min images by listing
-    cocorico.listing_img_min: 1
+    cocorico.listing_img_min: 0
     cocorico.listing_img_max: 24
     cocorico.listing_img_max_upload_size: 12 #MB
 
