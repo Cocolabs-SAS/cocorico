@@ -47,11 +47,11 @@ class ListingDuplicateController extends Controller
 
         if ($duplicatedListing->getId()) {
             //Duplicate availabilities
-            $this->get("cocorico.listing_availability.manager")->duplicate(
-                $listing->getId(),
-                $duplicatedListing->getId(),
-                $this->getParameter('cocorico.days_max_edition')
-            );
+            // $this->get("cocorico.listing_availability.manager")->duplicate(
+            //     $listing->getId(),
+            //     $duplicatedListing->getId(),
+            //     $this->getParameter('cocorico.days_max_edition')
+            // );
 
             $url = $this->generateUrl(
                 'cocorico_dashboard_listing_edit_presentation',

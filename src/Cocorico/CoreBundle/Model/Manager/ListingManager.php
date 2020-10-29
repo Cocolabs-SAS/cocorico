@@ -354,9 +354,10 @@ class ListingManager extends BaseManager
     public function duplicate(Listing $listing)
     {
         $listingCloned = clone $listing;
-        if (!$this->newListingIsPublished) {
-            $listing->setStatus(Listing::STATUS_TO_VALIDATE);
-        }
+        // if (!$this->newListingIsPublished) {
+        //     $listing->setStatus(Listing::STATUS_TO_VALIDATE);
+        // }
+        $listingCloned->setStatus(Listing::STATUS_TO_VALIDATE);
 
         //Translations
         $listingCloned->mergeNewTranslations();
