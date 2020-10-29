@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Meilleure calibration des distances par défaut
 - Désactivation drag & drop
 - Les illustrations ne sont plus obligatoire lors de la création d'une annonce
+- Nouveau type de prestation "Fabrication et commercialisation"
 
 ### [0.20.3] - (2020-10-27)
 - Nouveau champs de contrôle dans panneau administrateur (annonces)
