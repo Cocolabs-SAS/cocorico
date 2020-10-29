@@ -108,9 +108,6 @@ class ListingSearchManager
 
         //Order
         switch ($listingSearchRequest->getSortBy()) {
-            // case 'price':
-            //     $queryBuilder->orderBy("l.price", "ASC");
-            //     break;
             case 'distance':
                 $queryBuilder->orderBy("distance", "ASC");
                 break;

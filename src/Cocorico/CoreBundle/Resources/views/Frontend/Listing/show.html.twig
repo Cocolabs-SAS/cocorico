@@ -253,10 +253,14 @@
                             <h2>informations pratiques</h2>
                             <dl id="info-perimetre">
                                     <dd>Périmètre d'intervention</dd>
-                                    {% if listing.range %}
-                                        <dt>{{ listing.range }} km</dt>
-                                    {% else %}
-                                        <dt>Non Précisé</dt>
+                                    {% if listing.polRange  != 0 %}
+                                        <dt>{{ listing.getPolRangeText()|trans }}</dt>
+                                    {% else %} 
+                                        {% if listing.range %}
+                                            <dt>{{ listing.range }} km</dt>
+                                        {% else %}
+                                            <dt>Non Précisé</dt>
+                                        {% endif %}
                                     {% endif %}
                             </dl>
                             <dl id="info-horaire">
