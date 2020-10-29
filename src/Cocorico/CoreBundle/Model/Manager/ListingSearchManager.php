@@ -108,9 +108,6 @@ class ListingSearchManager
 
         //Order
         switch ($listingSearchRequest->getSortBy()) {
-            // case 'price':
-            //     $queryBuilder->orderBy("l.price", "ASC");
-            //     break;
             case 'distance':
                 $queryBuilder->orderBy("distance", "ASC");
                 break;
@@ -157,7 +154,13 @@ class ListingSearchManager
 
         $queryBuilder
             //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
-            ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+            ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (
+                case
+                    when l.polRange = 1 then 125
+                    when l.polRange = 2 then 450
+                    when l.polRange = 3 then 3000
+                    else l.range 
+                end)');
 
         //$viewport = $searchLocation->getBound();
         //$queryBuilder

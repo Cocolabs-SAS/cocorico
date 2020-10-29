@@ -87,10 +87,12 @@ abstract class BaseListing
     /* Prestation type */
     CONST PRESTA_SERVICE = 1;
     CONST PRESTA_INTERIM = 2;
+    CONST PRESTA_COMMERCIAL = 3;
 
     public static $prestaTypeValues = array (
         self::PRESTA_SERVICE => 'entity.listing.presta_service',
-        self::PRESTA_INTERIM => 'entity.listing.presta_interim'
+        self::PRESTA_INTERIM => 'entity.listing.presta_interim',
+        self::PRESTA_COMMERCIAL => 'entity.listing.presta_commercial',
     );
 
 
