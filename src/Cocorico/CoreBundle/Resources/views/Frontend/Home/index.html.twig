@@ -32,18 +32,12 @@
                         {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
                     </div>
                 </div>
-                <div class="row" style="display:flex;justify-content:center;margin:0 0 4rem;background-color:#EB551C;width:100%">
-                    <div style="color:#000;font-size:1.2em;padding:2rem;color:#fff;font-weight:bold;">
-                        <span style="line-height:1.4em">Vous avez un besoin de services/d 'achats mais ne trouvez pas encore de réponse sur le site ? Dites le nous et nous vous aiderons !</span>
-                        <a class="btn btn-primary" href="https://itou.typeform.com/to/nxG0HlYx">Soumettre votre demande</a>
-                    </div>
-                </div>
             </div>
         {% endblock %}
         {% block main %}
 
             <!-- infoarea -->
-            <div class="infoarea container">
+            <div id="borat" class="infoarea container">
                 <div class="row">
                     <!-- info-box -->
                     <div class="col-xs-12 col-sm-6 col-md-4 info-box">
@@ -88,6 +82,13 @@
                             </p>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row" style="display:flex;justify-content:center;margin:0 0 4rem;background-color:#F2F9FF;width:100%">
+                <div style="color:#000;font-size:1.2em;padding:2rem;color:#000;font-weight:bold;">
+                    <span style="line-height:1.4em">Vous n’avez pas trouvé la prestation que vous cherchez ? Vous avez un besoin spécifique ? </span>
+                    <a class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx">Contactez-nous</a>
                 </div>
             </div>
 

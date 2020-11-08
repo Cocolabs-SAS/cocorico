@@ -317,6 +317,69 @@ footer img.min_trav {
 }
 
 /******************
+ * HOME STYLES
+ ******************/
+ .visual {
+    background:none;
+}
+
+.visual .title-holder {
+    height:150px;
+    padding-top:100px;
+}
+
+.visual h1 {
+    color: #000;
+    font-size:2.5em;
+    line-height:1.4em;
+}
+
+.home-page .form-category {
+    background-color: transparent;
+    border: transparent;
+}
+
+.home-page .form-category .col {
+    margin:0;
+}
+
+.home-page .form-category .area .col .title {
+    text-align: left;
+    width: 100%;
+    font-weight:bold;
+    color:#000;
+}
+
+.home-page .form-category .area .col .multiselect {
+    display: block;
+    width: 100%;
+    border: 1px solid #979797;
+    background-color: #fff;
+    color: #979797;
+}
+
+.home-page .form-category .area .col .field-holder {
+    display: block;
+    width: 100%;
+    border: 1px solid #979797;
+    background-color: #fff;
+    color: #979797;
+}
+
+#borat {
+    /*
+    background-image:url('/images/curves.svg');
+    background-repeat:no-repeat;
+    */
+    display:none !important;
+}
+
+.home-page .visual .container .btn {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+
+/******************
  * NEW LISTING STYLES
  ******************/
 #breadcrumbs a {
