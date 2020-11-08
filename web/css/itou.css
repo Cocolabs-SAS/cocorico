@@ -367,11 +367,16 @@ footer img.min_trav {
 }
 
 #borat {
-    /*
-    background-image:url('/images/curves.svg');
-    background-repeat:no-repeat;
-    */
-    display:none !important;
+    height:400px;
+    background-image:url('/images/itou_curves.svg');
+    background-size: 1289px 400px;
+}
+
+#borat .info-box {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 2rem;
+    margin: 2rem;
 }
 
 .home-page .visual .container .btn {
