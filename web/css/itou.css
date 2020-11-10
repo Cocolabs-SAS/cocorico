@@ -320,7 +320,7 @@ footer img.min_trav {
  * HOME STYLES
  ******************/
  .container {
-    width: 1400px;
+    max-width: 1400px;
 }
 
  .visual {
@@ -370,11 +370,6 @@ footer img.min_trav {
     color: #979797;
 }
 
-#borat {
-    height:400px;
-    background-image:url('/images/itou_curves.jpg');
-    background-size: 1400px 400px;
-}
 
 #borat .info-box {
     border-radius: 10px;
@@ -385,13 +380,6 @@ footer img.min_trav {
     color:#000;
 }
 
-#borat .info-box:first-child {
-    margin-left:4rem;
-}
-#borat .info-box:last-child {
-    margin-right:4rem;
-}
-
 #borat h3 {
     color: #fff;
     margin-left:3rem;
@@ -399,9 +387,36 @@ footer img.min_trav {
     margin-bottom:3rem;
 }
 
-#borat .container {
-  display: flex;
-  justify-content: space-around;
+@media screen and (min-width: 1100px) {
+    #borat {
+        height:400px;
+        background-image:url('/images/itou_curves.jpg');
+        background-size: 1400px 400px;
+    }
+
+    #borat .container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    #borat .info-box:first-child {
+        margin-left:4rem;
+    }
+    #borat .info-box:last-child {
+        margin-right:4rem;
+    }
+
+
+}
+@media screen and (max-width: 1099px) {
+    #borat {
+        height:auto;
+        background-image:url('/images/itou_curves.jpg');
+    }
+
+    #borat .container {
+      width:100%;
+    }
 }
 
 .home-page .visual .container .btn {
@@ -440,12 +455,6 @@ footer img.min_trav {
     color:#000;
 }
 /* info banner */
-#info_banner {
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:5rem;
-}
-
 #info_banner .textbox {
     padding-right:4rem;
 }
@@ -463,13 +472,49 @@ footer img.min_trav {
     padding-bottom:2rem;
 }
 
-#info_banner p   {
-    border-top: 3px #007bff solid;
-    padding-top: 2rem;
-    font-size:1.4em;
-    line-height:1.8em;
-    color:#000;
-    width:60%;
+
+
+@media screen and (min-width: 1100px) {
+    #info_banner img {
+        height:419px;
+    }
+    #info_banner {
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:5rem;
+    }
+    #info_banner p   {
+        border-top: 3px #007bff solid;
+        padding-top: 2rem;
+        font-size:1.4em;
+        line-height:1.8em;
+        color:#000;
+        width:60%;
+    }
+}
+@media screen and (max-width: 1099px) {
+    #info_banner {
+        width:100%;
+        height:auto;
+    }
+
+    #info_banner img {
+        margin-top:3rem;
+        margin-bottom:3rem;
+        display:block;
+        width:80%;
+        height:auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #info_banner p   {
+        border-top: 3px #007bff solid;
+        padding-top: 2rem;
+        font-size:1.4em;
+        line-height:1.8em;
+        color:#000;
+        width:100%;
+    }
 }
 
 
@@ -480,7 +525,7 @@ footer img.min_trav {
     background-image: url('/images/step_arrow.png');
     background-repeat:no-repeat;
     background-position-y: center;
-    background-position-x: -200px;
+    background-position-x: -66px;
     margin-bottom:4rem;
 }
 
@@ -494,7 +539,6 @@ footer img.min_trav {
 
 #step_banner .info-box {
     padding: 3rem;
-    margin: 2rem;
     font-size:1.1em;
     display: flex;
     color:#000;
