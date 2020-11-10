@@ -319,6 +319,10 @@ footer img.min_trav {
 /******************
  * HOME STYLES
  ******************/
+ .container {
+    width: 1400px;
+}
+
  .visual {
     background:none;
 }
@@ -368,22 +372,153 @@ footer img.min_trav {
 
 #borat {
     height:400px;
-    background-image:url('/images/itou_curves.svg');
-    background-size: 1289px 400px;
+    background-image:url('/images/itou_curves.jpg');
+    background-size: 1400px 400px;
 }
 
 #borat .info-box {
     border-radius: 10px;
     background-color: #fff;
-    padding: 2rem;
+    padding: 3rem;
     margin: 2rem;
+    font-size:1.1em;
+    color:#000;
+}
+
+#borat .info-box:first-child {
+    margin-left:4rem;
+}
+#borat .info-box:last-child {
+    margin-right:4rem;
+}
+
+#borat h3 {
+    color: #fff;
+    margin-left:3rem;
+    margin-top:4rem;
+    margin-bottom:3rem;
+}
+
+#borat .container {
+  display: flex;
+  justify-content: space-around;
 }
 
 .home-page .visual .container .btn {
     border-radius: 0 3px 3px 0 !important;
 }
 
+.home-page .infoarea .icon {
+    height:45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+/* Help banner */
+
+#help_banner {
+    display:flex;
+    justify-content:center;
+    margin:0 0 4rem;
+     background-color:#F2F9FF;
+    width:100%;
+    color:#000;
+    font-size:1.2em;
+    padding:2rem;
+    font-weight:bold;
+}
+
+#help_banner a {
+    vertical-align:middle;
+}
+
+.high-rank-title {
+    text-align:left;
+    text-transform: None;
+    font-weight:400;
+    color:#000;
+}
+/* info banner */
+#info_banner {
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:5rem;
+}
+
+#info_banner .textbox {
+    padding-right:4rem;
+}
+
+#info_banner .textbox > div{
+    color:#007bff;
+    font-size:1.2em;
+    text-transform:uppercase;
+}
+
+#info_banner h3 {
+    color:#000;
+    font-size:1.8em;
+    font-weight:400;
+    padding-bottom:2rem;
+}
+
+#info_banner p   {
+    border-top: 3px #007bff solid;
+    padding-top: 2rem;
+    font-size:1.4em;
+    line-height:1.8em;
+    color:#000;
+    width:60%;
+}
+
+
+/* Steps banner */
+#step_banner {
+    background-color: #fdefeb;
+    background-color:#fff;
+    background-image: url('/images/step_arrow.png');
+    background-repeat:no-repeat;
+    background-position-y: center;
+    background-position-x: -200px;
+}
+
+#step_banner h3 {
+    color: #000;
+    margin-left:3rem;
+    margin-top:4rem;
+    margin-bottom:3rem;
+    font-weight:400;
+}
+
+#step_banner .info-box {
+    padding: 3rem;
+    margin: 2rem;
+    font-size:1.1em;
+    display: flex;
+    color:#000;
+}
+
+#step_banner .info-box .step-num {
+  flex: 0 0 60px;
+  height: 60px;
+  width: 60px;
+  border-radius: 14px;
+  background-color: #FFF;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 4px 6px 0 rgba(0,0,0,0.05);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.6em;
+  font-size:2.4em;
+  color: #007BFF;
+  font-weight:bold;
+}
+
+#step_banner .info-box .textbox {
+    margin-left:3rem;
+    font-weight:bold;
+    font-size:1.2em;
+}
 /******************
  * NEW LISTING STYLES
  ******************/
