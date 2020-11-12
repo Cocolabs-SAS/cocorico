@@ -704,6 +704,26 @@ footer img.min_trav {
     font-size:1.2em;
 }
 
+/* Listing offers */
+.post-content h2 {
+    font-size:1em;
+    font-weight:400;
+}
+
+.listing-post .title{
+    background: rgba(100, 100, 100, 0.85);
+}
+
+.listing-post .post-content {
+    padding-top:9px;
+    padding-bottom:9px;
+    max-height:80px;
+}
+
+.listing-post .frame {
+    box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2)
+}
+
 /******************
  * NEW LISTING STYLES
  ******************/

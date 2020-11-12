@@ -64,7 +64,22 @@
                                             <div class="textbox">
                                                 <h2>{{ listing_translation.title }}</h2>
 
-                                                <p>{{ listing_location.city }} </p>
+                                                <p> Intervient sur :
+                                                    {% if listing.polRange  != 0 %}
+                                                        {% if listing.polRange  == 1 %}
+                                                        {{ listing_location.coordinate.department.getName() }} (département)
+                                                        {% elseif listing.polRange  == 2 %}
+                                                        {{ listing_location.coordinate.area.getName() }} (région)
+                                                        {% else %}
+                                                        {{ listing.getPolRangeText()|trans }}
+                                                        {% endif %}
+                                                    {% else %} 
+                                                        {% if listing.range %}
+                                                            {{ listing.range }} km autour de {{ listing_location.city }}
+                                                        {% else %}
+                                                            Non Précisé
+                                                        {% endif %}
+                                                    {% endif %}
                                             </div>
                                         </div>
                                     </div>
