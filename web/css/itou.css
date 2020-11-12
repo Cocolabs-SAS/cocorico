@@ -325,6 +325,7 @@ footer img.min_trav {
 
  .visual {
     background:none;
+    margin-bottom:1.2rem;
 }
 
 .visual .title-holder {
@@ -332,10 +333,18 @@ footer img.min_trav {
     padding-top:100px;
 }
 
-.visual h1 {
+.home-page h1 {
     color: #000;
-    font-size:2.5em;
+    font-size:3.047em;
     line-height:1.4em;
+}
+
+.home-page h2 {
+    font-size:2em;
+}
+
+.home-page h3 {
+    font-size:1.57em;
 }
 
 .home-page .form-category {
@@ -345,6 +354,29 @@ footer img.min_trav {
 
 .home-page .form-category .col {
     margin:0;
+    padding:0;
+}
+
+.home-page .form-category .col .form-control,
+.home-page .form-category .col .btn-group {
+    max-width:none;
+    width:350px;
+    height:40px;
+    max-height:40px;
+    border: 1px solid #979797;
+    text-align:left;
+    padding-bottom:3px;
+    margin:0;
+    border-radius:0 !important;
+}
+
+.home-page .form-category .col .btn-group {
+    border-radius:4px 0 0 4px !important;
+}
+
+.home-page .form-category .col .form-control {
+    padding-top:1px;
+    margin-left:-5px;
 }
 
 .home-page .form-category .area .col .title {
@@ -352,22 +384,35 @@ footer img.min_trav {
     width: 100%;
     font-weight:bold;
     color:#000;
+    margin:0;
+    padding:0;
+}
+
+.home-page .itou-info {
+    padding:1rem 3rem 1rem 5rem;
+    text-align:left;
 }
 
 .home-page .form-category .area .col .multiselect {
     display: block;
     width: 100%;
-    border: 1px solid #979797;
-    background-color: #fff;
+    text-align:left;
+    max-width:100%;
+    background-color: transparent;
     color: #979797;
 }
 
 .home-page .form-category .area .col .field-holder {
     display: block;
     width: 100%;
-    border: 1px solid #979797;
     background-color: #fff;
     color: #979797;
+}
+
+.home-page #home-submit {
+    border-radius:0;
+    height:40px;
+    margin-left:-4px;
 }
 
 
