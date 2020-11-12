@@ -41,9 +41,15 @@
                             }
                         } ) }}
                         {{ form_rest(form.location) }}
+                        <span class="icon-tf2-location-1"></span>
                     </div>
                 </div>
-                <input id="home-submit" type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
+                <button id="home-submit" type="submit" class="btn btn-default">
+                        {{ 'listing.search'|trans }}
+                        <span style="font-family:fontello2;">
+                        &#128269;
+                        </span>
+                </button>
             </div>
         </div>
     </div>

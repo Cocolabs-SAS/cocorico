@@ -1,3 +1,79 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'fontello2';
+  src: url('/fonts/fontello2.eot?33456996');
+  src: url('/fonts/fontello2.eot?33456996#iefix') format('embedded-opentype'),
+       url('/fonts/fontello2.woff2?33456996') format('woff2'),
+       url('/fonts/fontello2.woff?33456996') format('woff'),
+       url('/fonts/fontello2.ttf?33456996') format('truetype'),
+       url('/fonts/fontello2.svg?33456996#fontello2') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello2';
+    src: url('../font/fontello2.svg?33456996#fontello2') format('svg');
+  }
+}
+*/
+ 
+[class^="icon-f2"]:before, [class*=" icon-f2"]:before {
+  font-family: "fontello2";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-f2-th:before { content: '\268f'; } /* '⚏' */
+.icon-f2-down:before { content: '\e008'; } /* '' */
+.icon-f2-down-small:before { content: '\e009'; } /* '' */
+.icon-f2-left:before { content: '\e00d'; } /* '' */
+.icon-f2-left-small:before { content: '\e00e'; } /* '' */
+.icon-f2-right:before { content: '\e01a'; } /* '' */
+.icon-f2-right-small:before { content: '\e01b'; } /* '' */
+.icon-f2-up:before { content: '\e020'; } /* '' */
+.icon-f2-up-small:before { content: '\e021'; } /* '' */
+.icon-f2-location-1:before { content: '\e724'; } /* '' */
+.icon-f2-article:before { content: '\e734'; } /* '' */
+.icon-f2-location:before { content: '\e803'; } /* '' */
+.icon-f2-map-signs:before { content: '\f277'; } /* '' */
+.icon-f2-wpforms:before { content: '\f298'; } /* '' */
+.icon-f2-newspaper:before { content: '📰'; } /* '\1f4f0' */
+.icon-f2-search:before { content: '🔍'; } /* '\1f50d' */
+
 /******************
  * BODY STYLES
  ******************/
