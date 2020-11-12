@@ -419,15 +419,16 @@ footer img.min_trav {
 #borat .info-box {
     border-radius: 10px;
     background-color: #fff;
-    padding: 3rem;
+    padding: 4rem 2rem;
     margin: 2rem;
     font-size:1.1em;
     color:#000;
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
 }
 
 #borat h3 {
     color: #fff;
-    margin-left:3rem;
+    margin-left:5rem;
     margin-top:4rem;
     margin-bottom:3rem;
 }
@@ -514,10 +515,21 @@ footer img.min_trav {
     color:#000;
     font-size:1.8em;
     font-weight:400;
-    padding-bottom:2rem;
+    width:90%
 }
 
+#info_banner h3 span {
+    border-bottom: 3px #007bff solid;
+    padding-bottom:1.5rem;
+}
 
+#info_banner .btn-outline-primary {
+    box-sizing: border-box;
+    border: 1px solid #0077FF;
+    border-radius: 5px;
+}
+
+#info_banner .btn-outline-primary:hover { background-color: #007BFF; }
 
 @media screen and (min-width: 1100px) {
     #info_banner img {
@@ -529,12 +541,11 @@ footer img.min_trav {
         margin-bottom:5rem;
     }
     #info_banner p   {
-        border-top: 3px #007bff solid;
         padding-top: 2rem;
         font-size:1.4em;
         line-height:1.8em;
         color:#000;
-        width:60%;
+        width:90%;
     }
 }
 @media screen and (max-width: 1099px) {
@@ -606,9 +617,9 @@ footer img.min_trav {
 
 #step_banner .info-box .textbox {
     margin-left:3rem;
-    font-weight:bold;
     font-size:1.2em;
 }
+
 /******************
  * NEW LISTING STYLES
  ******************/
