@@ -67,11 +67,11 @@
                                                 <p> Intervient sur :
                                                     {% if listing.polRange  != 0 %}
                                                         {% if listing.polRange  == 1 %}
-                                                        {{ listing_location.coordinate.department.getName() }} (département)
+                                                        {{ listing_location.city }} (département)
                                                         {% elseif listing.polRange  == 2 %}
-                                                        {{ listing_location.coordinate.area.getName() }} (région)
+                                                        {{ listing_location.city }} (région)
                                                         {% else %}
-                                                        {{ listing.getPolRangeText()|trans }}
+                                                        {{ listing_location.city }} (France entière)
                                                         {% endif %}
                                                     {% else %} 
                                                         {% if listing.range %}
