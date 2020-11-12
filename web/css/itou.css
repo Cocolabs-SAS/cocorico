@@ -6,8 +6,7 @@
   src: url('/fonts/fontello2.eot?33456996#iefix') format('embedded-opentype'),
        url('/fonts/fontello2.woff2?33456996') format('woff2'),
        url('/fonts/fontello2.woff?33456996') format('woff'),
-       url('/fonts/fontello2.ttf?33456996') format('truetype'),
-       url('/fonts/fontello2.svg?33456996#fontello2') format('svg');
+       url('/fonts/fontello2.ttf?33456996') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -448,11 +447,19 @@ footer img.min_trav {
 
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
+    background-image:url('/images/home_search_1.png');
+    background-size: 30px 30px;
+    background-position: right;
+    background-repeat:no-repeat;
 }
 
-.home-page .form-category .col .form-control {
+.home-page #location {
     padding-top:1px;
     margin-left:-5px;
+    background-image:url('/images/home_search_2.png');
+    background-size: 30px 30px;
+    background-position: right;
+    background-repeat:no-repeat;
 }
 
 .home-page .form-category .area .col .title {
@@ -489,6 +496,7 @@ footer img.min_trav {
     border-radius:0;
     height:40px;
     margin-left:-4px;
+    width:179px;
 }
 
 
