@@ -602,10 +602,6 @@ footer img.min_trav {
     width:90%
 }
 
-#info_banner h3 span {
-    border-bottom: 3px #007bff solid;
-    padding-bottom:1.5rem;
-}
 
 #info_banner .btn-outline-primary {
     box-sizing: border-box;
@@ -631,8 +627,16 @@ footer img.min_trav {
         color:#000;
         width:90%;
     }
+    #info_banner h3 span {
+        border-bottom: 3px #007bff solid;
+        padding-bottom:1.5rem;
+    }
 }
 @media screen and (max-width: 1099px) {
+    #info_banner h3  {
+        border-bottom: 3px #007bff solid;
+        padding-bottom:1.5rem;
+    }
     #info_banner {
         width:100%;
         height:auto;
@@ -648,7 +652,6 @@ footer img.min_trav {
         margin-right: auto;
     }
     #info_banner p   {
-        border-top: 3px #007bff solid;
         padding-top: 2rem;
         font-size:1.4em;
         line-height:1.8em;
