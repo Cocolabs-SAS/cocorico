@@ -409,9 +409,11 @@ footer img.min_trav {
 }
 
 .home-page h1 {
+    line-height:1.4em;
+    max-width:none;
     color: #000;
     font-size:3.047em;
-    line-height:1.4em;
+    width:800px;
 }
 
 .home-page h2 {
