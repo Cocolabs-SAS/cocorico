@@ -1,3 +1,78 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'fontello2';
+  src: url('/fonts/fontello2.eot?33456996');
+  src: url('/fonts/fontello2.eot?33456996#iefix') format('embedded-opentype'),
+       url('/fonts/fontello2.woff2?33456996') format('woff2'),
+       url('/fonts/fontello2.woff?33456996') format('woff'),
+       url('/fonts/fontello2.ttf?33456996') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello2';
+    src: url('../font/fontello2.svg?33456996#fontello2') format('svg');
+  }
+}
+*/
+ 
+[class^="icon-f2"]:before, [class*=" icon-f2"]:before {
+  font-family: "fontello2";
+  font-style: normal;
+  font-weight: normal;
+  speak: never;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-f2-th:before { content: '\268f'; } /* '⚏' */
+.icon-f2-down:before { content: '\e008'; } /* '' */
+.icon-f2-down-small:before { content: '\e009'; } /* '' */
+.icon-f2-left:before { content: '\e00d'; } /* '' */
+.icon-f2-left-small:before { content: '\e00e'; } /* '' */
+.icon-f2-right:before { content: '\e01a'; } /* '' */
+.icon-f2-right-small:before { content: '\e01b'; } /* '' */
+.icon-f2-up:before { content: '\e020'; } /* '' */
+.icon-f2-up-small:before { content: '\e021'; } /* '' */
+.icon-f2-location-1:before { content: '\e724'; } /* '' */
+.icon-f2-article:before { content: '\e734'; } /* '' */
+.icon-f2-location:before { content: '\e803'; } /* '' */
+.icon-f2-map-signs:before { content: '\f277'; } /* '' */
+.icon-f2-wpforms:before { content: '\f298'; } /* '' */
+.icon-f2-newspaper:before { content: '📰'; } /* '\1f4f0' */
+.icon-f2-search:before { content: '🔍'; } /* '\1f50d' */
+
 /******************
  * BODY STYLES
  ******************/
@@ -314,6 +389,344 @@ footer img.min_trav {
     font-size:1.2em;
     color:#4a4a4a;
     text-align:center;
+}
+
+/******************
+ * HOME STYLES
+ ******************/
+ .container {
+    max-width: 1400px;
+}
+
+ .visual {
+    background:none;
+    margin-bottom:1.2rem;
+}
+
+.visual .title-holder {
+    height:150px;
+    padding-top:100px;
+}
+
+.home-page h1 {
+    line-height:1.4em;
+    max-width:none;
+    color: #000;
+    font-size:3.047em;
+    width:800px;
+}
+
+.home-page h2 {
+    font-size:2em;
+}
+
+.home-page h3 {
+    font-size:1.57em;
+}
+
+.home-page .form-category {
+    background-color: transparent;
+    border: transparent;
+}
+
+.home-page .form-category .col {
+    margin:0;
+    padding:0;
+}
+
+.home-page .form-category .col .form-control,
+.home-page .form-category .col .btn-group {
+    max-width:none;
+    width:350px;
+    height:40px;
+    max-height:40px;
+    border: 1px solid #979797;
+    text-align:left;
+    padding-bottom:3px;
+    margin:0;
+    border-radius:0 !important;
+}
+
+.home-page .form-category .col .btn-group {
+    border-radius:4px 0 0 4px !important;
+    background-image:url('/images/home_search_1.png');
+    background-size: 30px 30px;
+    background-position: right;
+    background-repeat:no-repeat;
+}
+
+.home-page #location {
+    padding-top:1px;
+    margin-left:-5px;
+    background-image:url('/images/home_search_2.png');
+    background-size: 30px 30px;
+    background-position: right;
+    background-repeat:no-repeat;
+}
+
+.home-page .form-category .area .col .title {
+    text-align: left;
+    width: 100%;
+    font-weight:bold;
+    color:#000;
+    margin:0;
+    padding:0;
+}
+
+.home-page .itou-info {
+    padding:1rem 3rem 1rem 5rem;
+    text-align:left;
+}
+
+.home-page .form-category .area .col .multiselect {
+    display: block;
+    width: 100%;
+    text-align:left;
+    max-width:100%;
+    background-color: transparent;
+    color: #979797;
+}
+
+.home-page .form-category .area .col .field-holder {
+    display: block;
+    width: 100%;
+    background-color: #fff;
+    color: #979797;
+}
+
+.home-page #home-submit {
+    border-radius:0;
+    height:40px;
+    margin-left:-4px;
+    width:179px;
+}
+
+
+#borat .info-box {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 4rem 2rem;
+    margin: 2rem;
+    font-size:1.1em;
+    color:#000;
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
+}
+
+#borat h3 {
+    color: #fff;
+    margin-left:5rem;
+    margin-top:4rem;
+    margin-bottom:3rem;
+}
+
+@media screen and (min-width: 1100px) {
+    #borat {
+        height:400px;
+        background-image:url('/images/itou_curves.jpg');
+        background-size: 1400px 400px;
+    }
+
+    #borat .container {
+      display: flex;
+      justify-content: space-around;
+    }
+
+    #borat .info-box:first-child {
+        margin-left:4rem;
+    }
+    #borat .info-box:last-child {
+        margin-right:4rem;
+    }
+
+
+}
+@media screen and (max-width: 1099px) {
+    #borat {
+        height:auto;
+        background-image:url('/images/itou_curves.jpg');
+    }
+
+    #borat .container {
+      width:100%;
+    }
+}
+
+.home-page .visual .container .btn {
+    border-radius: 0 3px 3px 0 !important;
+}
+
+.home-page .infoarea .icon {
+    height:45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Help banner */
+
+#help_banner {
+    display:flex;
+    justify-content:center;
+    margin:0 0 4rem;
+     background-color:#F2F9FF;
+    width:100%;
+    color:#000;
+    font-size:1.2em;
+    padding:2rem;
+    font-weight:bold;
+}
+
+#help_banner a {
+    vertical-align:middle;
+}
+
+.high-rank-title {
+    text-align:left;
+    text-transform: None;
+    font-weight:400;
+    color:#000;
+}
+/* info banner */
+#info_banner .textbox {
+    padding-right:4rem;
+}
+
+#info_banner .textbox > div{
+    color:#007bff;
+    font-size:1.2em;
+    text-transform:uppercase;
+}
+
+#info_banner h3 {
+    color:#000;
+    font-size:1.8em;
+    font-weight:400;
+    width:90%
+}
+
+
+#info_banner .btn-outline-primary {
+    box-sizing: border-box;
+    border: 1px solid #0077FF;
+    border-radius: 5px;
+}
+
+#info_banner .btn-outline-primary:hover { background-color: #007BFF; }
+
+@media screen and (min-width: 1100px) {
+    #info_banner img {
+        height:419px;
+    }
+    #info_banner {
+        display:flex;
+        justify-content:space-between;
+        margin-bottom:5rem;
+    }
+    #info_banner p   {
+        padding-top: 2rem;
+        font-size:1.4em;
+        line-height:1.8em;
+        color:#000;
+        width:90%;
+    }
+    #info_banner h3 span {
+        border-bottom: 3px #007bff solid;
+        padding-bottom:1.5rem;
+    }
+}
+@media screen and (max-width: 1099px) {
+    #info_banner h3  {
+        border-bottom: 3px #007bff solid;
+        padding-bottom:1.5rem;
+    }
+    #info_banner {
+        width:100%;
+        height:auto;
+    }
+
+    #info_banner img {
+        margin-top:3rem;
+        margin-bottom:3rem;
+        display:block;
+        width:80%;
+        height:auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #info_banner p   {
+        padding-top: 2rem;
+        font-size:1.4em;
+        line-height:1.8em;
+        color:#000;
+        width:100%;
+    }
+}
+
+
+/* Steps banner */
+#step_banner {
+    background-color: #fdefeb;
+    background-color:#fff;
+    background-image: url('/images/step_arrow.png');
+    background-repeat:no-repeat;
+    background-position-y: center;
+    background-position-x: -66px;
+    margin-bottom:4rem;
+}
+
+#step_banner h3 {
+    color: #000;
+    margin-left:3rem;
+    margin-top:4rem;
+    margin-bottom:3rem;
+    font-weight:400;
+}
+
+#step_banner .info-box {
+    padding: 3rem;
+    font-size:1.1em;
+    display: flex;
+    color:#000;
+}
+
+#step_banner .info-box .step-num {
+  flex: 0 0 60px;
+  height: 60px;
+  width: 60px;
+  border-radius: 14px;
+  background-color: #FFF;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 4px 6px 0 rgba(0,0,0,0.05);
+  text-align: center;
+  vertical-align: middle;
+  line-height: 1.6em;
+  font-size:2.4em;
+  color: #007BFF;
+  font-weight:bold;
+}
+
+#step_banner .info-box .textbox {
+    margin-left:3rem;
+    font-size:1.2em;
+}
+
+/* Listing offers */
+.post-content h2 {
+    font-size:1em;
+    font-weight:400;
+}
+
+.listing-post .title{
+    background: rgba(100, 100, 100, 0.85);
+}
+
+.listing-post .post-content {
+    padding-top:9px;
+    padding-bottom:9px;
+    max-height:80px;
+}
+
+.listing-post .frame {
+    box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2)
 }
 
 /******************

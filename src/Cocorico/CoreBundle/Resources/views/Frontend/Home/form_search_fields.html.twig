@@ -13,21 +13,23 @@
         <div class="col-xs-12">
             <div class="area">
                 <div class="col">
-                    <strong class="title">
-                        {{ form_label(form.categories) }}
-                    </strong>
+                    <div class="title">
+                        Cherchez
+                    </div>
 
                     <div class="multiselect listing-category">
                         {{ form_widget(form.categories) }}
                     </div>
                 </div>
-
                 <div class="col">
-                    <strong class="title">
+                    <div class="title">
+                        {#
                         {{ form_label(form.location.address, null, {
                             'required': false
                         }) }}
-                    </strong>
+                        #}
+                        Lieu d'intervention
+                    </div>
 
                     <div class="field-holder">
                         {{ form_errors(form.location.address) }}
@@ -41,7 +43,24 @@
                         {{ form_rest(form.location) }}
                     </div>
                 </div>
-                <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
+                <button id="home-submit" type="submit" class="btn btn-default">
+                        {{ 'listing.search'|trans }}
+                        <span style="font-family:fontello2;">
+                        &#128269;
+                        </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top:1.5rem;">
+        <div class="col-xs-12">
+            <div class="area">
+                <div class="itou-info">
+                    <img class="shape" src="/images/info_shape.png">
+                    <p>
+                        Notre service est actuellement ouvert sur les régions Hauts-de-France, l’Île-de-France et Grand Est.
+                    </p>
+                </div>
             </div>
         </div>
     </div>

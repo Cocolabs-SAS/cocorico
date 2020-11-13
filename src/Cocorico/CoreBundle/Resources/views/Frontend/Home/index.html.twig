@@ -32,59 +32,131 @@
                         {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
                     </div>
                 </div>
-                <div class="row" style="display:flex;justify-content:center;margin:0 0 4rem;background-color:#EB551C;width:100%">
-                    <div style="color:#000;font-size:1.2em;padding:2rem;color:#fff;font-weight:bold;">
-                        <span style="line-height:1.4em">Vous avez un besoin de services/d 'achats mais ne trouvez pas encore de réponse sur le site ? Dites le nous et nous vous aiderons !</span>
-                        <a class="btn btn-primary" href="https://itou.typeform.com/to/nxG0HlYx">Soumettre votre demande</a>
-                    </div>
-                </div>
             </div>
         {% endblock %}
         {% block main %}
 
             <!-- infoarea -->
-            <div class="infoarea container">
+            <div id="borat" class="infoarea container">
                 <div class="row">
                     <!-- info-box -->
-                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
-                        <img src="{{ asset('images/icon1.png') }}" alt="icon description" class="pull-left icon">
+                    <h3>Pourquoi acheter <strong>inclusif ?</strong></h3>
+                <div class="container">
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/home_icon_1.png') }}" alt="icon description" class="icon">
+                        <br />
 
                         <div class="textbox">
-                            <h2>
-                                <a href="/fr/annonce/favorite">{{ 'home.subinfo.title1'|trans|raw }}</a>
-                            </h2>
-
                             <p>
-                                {{ 'home.subinfo.desc1'|trans|raw }}
+                                Palliez efficacement vos besoins de main-d’oeuvre, métiers en tension, saisonnalité,  et vos besoins de services.
                             </p>
                         </div>
                     </div>
                     <!-- info-box -->
-                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
-                        <img src="{{ asset('images/icon2.png') }}" alt="icon description" class="pull-left icon">
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/home_icon_2.png') }}" alt="icon description" class="icon">
+                        <br />
 
                         <div class="textbox">
-                            <h2>
-                                <a href="/fr/inscription">{{ 'home.subinfo.title2'|trans|raw }}</a>
-                            </h2>
-
                             <p>
-                                {{ 'home.subinfo.desc2'|trans|raw }}
+                                Participez à la dynamique économique et sociale de votre territoire avec des partenaires de proximité
                             </p>
                         </div>
                     </div>
-                    <div class="clearfix visible-sm"></div>
                     <!-- info-box -->
-                    <div class="col-xs-12 col-sm-6 col-md-4 info-box">
-                        <img src="{{ asset('images/icon3.png') }}" alt="icon description" class="pull-left icon">
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/home_icon_3.png') }}" alt="icon description" class="icon">
+                        <br />
 
                         <div class="textbox">
-                            <h2>
-                                <a href="/fr/contact/creer">{{ 'home.subinfo.title3'|trans|raw }}</a>
-                            </h2>
-
                             <p>
-                                {{ 'home.subinfo.desc3'|trans|raw }}
+                                Renforcez votre politique d’achats responsables et valorisez votre image d’entreprise.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- info-box -->
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/home_icon_4.png') }}" alt="icon description" class="icon">
+                        <br />
+
+                        <div class="textbox">
+                            <p>
+                                Augmentez  vos chances d’obtenir des marchés publics  par votre capacité à réaliser les clauses sociales
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <div id="help_banner" class="row" style="">
+                <div style="margin:0 2rem;">
+                    <img src="{{ asset('images/home_help_icon.png') }}" style="height:84px;" alt="icon description" class="icon">
+                </div>
+                <div>
+                    <span style="line-height:1.4em;font-size:1.4em">Vous n’avez pas trouvé la prestation que vous cherchez ?<br />Vous avez un besoin spécifique ? </span>
+                </div>
+                <div style="margin:0 2rem;">
+                    <a class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx" style="margin-top:18px;">
+                        Contactez-nous
+                        <span style="font-family:fontello2;">
+                        &#57371;
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <div id="info_banner" class="row" style="">
+                <div class="container">
+                    <div class="textbox col-xs-12 col-md-6">
+                        <div>S'INFORMER</div>
+                        <h3><span>Être acteur de <strong>l'inclusion dans l'emploi</strong></span></h3>
+                        <p>
+                            Être acteur d’une société juste aujourd’hui c’est possible en orientant votre politique d’achat vers des partenaires locaux. Ces structures participent aux développement economique et social de votre territoire en travaillant avec des personnes 
+                        </p>
+                        <a class="btn btn-outline-primary" href="/fr/page/cest-quoi-linclusion" style="margin-top:18px;">
+                            Découvrir 'inclusion dans l'emploi
+                            <span style="font-family:fontello2;">
+                            &#57371;
+                            </span>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-6"v>
+                        <img src="{{ asset('images/info_banner_illustration.jpg') }}" style="" alt="Photo de deux personnes qui travaillent ensemble">
+                    </div>
+                </div>
+            </div>
+
+            <div id="step_banner" class="row" style="">
+                <h3>Comment <strong>ça marche ?</strong></h3>
+                <div class="container">
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            1
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Cherchez une ou plusieurs offres de prestations parmis les prestataires présents sur la plateforme.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            2
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Faites une demande devis en fonction de vos besoins et de votre budget.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            3
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Le prestataire traite votre demande le plus rapidement possible et peut vous contacter en direct pour plus d’informations.
                             </p>
                         </div>
                     </div>

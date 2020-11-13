@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.22.0] - (2020-11-13)
+- Nouvelle page d'accueil
+
 ### [0.21.0] - (2020-10-29)
 - Duplication des annonces : annonce dupliquée "a valider"
 - Retrait de la dépendance MongoDB

@@ -1,6 +1,6 @@
 <section class="listing-area col-md-12 tips-section">
     <div class="listing-holder row">
-        <h2 class="high-rank-title">{{ 'home.high.rank.section.header'|trans({}, 'cocorico_listing') }}</h2>
+        <h2 class="high-rank-title">Nos nouvelles <strong>offres de prestations</strong></h2>
         <!-- post -->
         <div class="slider-secondary">
             <div class="slider-clip">
@@ -64,7 +64,22 @@
                                             <div class="textbox">
                                                 <h2>{{ listing_translation.title }}</h2>
 
-                                                <p>{{ listing_location.city }} </p>
+                                                <p> Intervient sur :
+                                                    {% if listing.polRange  != 0 %}
+                                                        {% if listing.polRange  == 1 %}
+                                                        {{ listing_location.city }} (département)
+                                                        {% elseif listing.polRange  == 2 %}
+                                                        {{ listing_location.city }} (région)
+                                                        {% else %}
+                                                        {{ listing_location.city }} (France entière)
+                                                        {% endif %}
+                                                    {% else %} 
+                                                        {% if listing.range %}
+                                                            {{ listing.range }} km autour de {{ listing_location.city }}
+                                                        {% else %}
+                                                            Non Précisé
+                                                        {% endif %}
+                                                    {% endif %}
                                             </div>
                                         </div>
                                     </div>
