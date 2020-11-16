@@ -567,9 +567,8 @@ footer img.min_trav {
 #help_banner {
     display:flex;
     justify-content:center;
-    margin:0 0 4rem;
-     background-color:#F2F9FF;
-    width:100%;
+    margin:0 1rem 4rem 0;
+    background-color:#F2F9FF;
     color:#000;
     font-size:1.2em;
     padding:2rem;
@@ -722,11 +721,16 @@ footer img.min_trav {
 .listing-post .post-content {
     padding-top:9px;
     padding-bottom:9px;
-    max-height:80px;
+    height:9rem;
 }
 
 .listing-post .frame {
     box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2)
+}
+
+.tips-section .caroufredsel_wrapper,
+.tips-section .caroufredsel_wrapper .slides {
+    height: 400px !important;
 }
 
 /******************
