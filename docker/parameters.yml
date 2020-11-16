@@ -17,7 +17,7 @@ parameters:
     use_assetic_controller: false
     cocorico.assets_base_urls: 'http://localhost:%HOST_PORT%'
     router.request_context.host: localhost
-    router.request_context.scheme: http
+    router.request_context.scheme: https
     router.request_context.base_url: ''
     cocorico.admin: admin
     cocorico.admin_translation: false

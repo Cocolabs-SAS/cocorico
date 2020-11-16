@@ -16,7 +16,7 @@ parameters:
     use_assetic_controller: false
     cocorico.assets_base_urls: '%BASE_SCHEME%://%BASE_HOST%'
     router.request_context.host: 'localhost'
-    router.request_context.scheme: 'http'
+    router.request_context.scheme: 'https'
 #    router.request_context.host: '%BASE_HOST%'
 #    router.request_context.scheme: '%BASE_SCHEME%'
     router.request_context.base_url: ''
