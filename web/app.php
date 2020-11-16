@@ -16,7 +16,8 @@ $request = Request::createFromGlobals();
 
 Request::setTrustedProxies(
     // the IP address (or range) of your proxy
-    ['10.0.0.0/8'],
+    //['192.0.0.1', '10.0.0.0/8'],
+    ['127.0.0.1', 'REMOTE_ADDR'],
 
     // trust *all* "X-Forwarded-*" headers
     Request::HEADER_X_FORWARDED_ALL
