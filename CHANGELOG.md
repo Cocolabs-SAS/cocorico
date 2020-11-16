@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.22.1] - (2020-11-16)
+- Fix chargement des assets not sécurisé
+- Wording CTA devis
+
 ### [0.22.0] - (2020-11-13)
 - Nouvelle page d'accueil
 
