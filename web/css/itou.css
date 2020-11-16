@@ -447,6 +447,28 @@ footer img.min_trav {
     border-radius:0 !important;
 }
 
+.testme {
+    width:292px;
+    height:40px;
+    border:1px solid #ccc;
+}
+
+
+.listing-category .multiselect-container.dropdown-menu {
+    width:70rem;
+    max-width:none;
+    min-width:none;
+    /*
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    */
+}
+ 
+.multiselect-container > li.multiselect-group label {
+    color:#000;
+}
+
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
     background-image:url('/images/home_search_1.png');
@@ -456,7 +478,7 @@ footer img.min_trav {
 }
 
 .home-page #location {
-    padding-top:1px;
+    padding-top:0px;
     margin-left:-5px;
     background-image:url('/images/home_search_2.png');
     background-size: 30px 30px;
@@ -732,6 +754,7 @@ footer img.min_trav {
 .tips-section .caroufredsel_wrapper .slides {
     height: 400px !important;
 }
+
 
 /******************
  * NEW LISTING STYLES
