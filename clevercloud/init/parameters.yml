@@ -14,9 +14,10 @@ parameters:
     mailer_port: '%SMTP_PORT%'
     secret: d69958a4fff6ba8f0f4fc4fc2657366ccf9dd0f3
     use_assetic_controller: false
-    cocorico.assets_base_urls: '%BASE_SCHEME%://%BASE_HOST%'
+    cocorico.assets_base_urls:
+      - '%BASE_SCHEME%://%BASE_HOST%'
     router.request_context.host: 'localhost'
-    router.request_context.scheme: 'http'
+    router.request_context.scheme: 'https'
 #    router.request_context.host: '%BASE_HOST%'
 #    router.request_context.scheme: '%BASE_SCHEME%'
     router.request_context.base_url: ''

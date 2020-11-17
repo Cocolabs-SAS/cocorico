@@ -38,12 +38,14 @@
                                                                 {{ listing.averageRating | cocorico_star_rating }}
                                                                 <span class="home-comment-counter">({{ listing.commentCount }})</span>
                                                             {% endif %}
+                                                            {#
                                                             {% if  listing.certified %}
                                                                 <span class="certified">
                                                                     <i class="icon-ok"></i>
                                                                     {{ 'listing.search.result.certified'|trans({}, 'cocorico_listing') }}
                                                                 </span>
                                                             {% endif %}
+                                                            #}
                                                         </div>
                                                         <strong class="title list-comma">
                                                             {% for listingListingCategory in listing.listingListingCategories %}
