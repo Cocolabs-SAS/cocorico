@@ -236,20 +236,38 @@ class QuoteController extends Controller
      */
     private function createQuoteForm(Quote $quote)
     {
-        $form = $this->get('form.factory')->createNamed(
-            '',
-            QuoteType::class,
-            $quote,
-            array(
-                'method' => 'POST',
-                'action' => $this->generateUrl(
-                    'cocorico_quote',
-                     array(
-                         'listing_id' => $quote->getListing()->getId()
-                     )
+
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $form = $this->get('form.factory')->createNamed(
+                '',
+                QuoteType::class,
+                $quote,
+                array(
+                    'method' => 'POST',
+                    'action' => $this->generateUrl(
+                        'cocorico_quote',
+                         array(
+                             'listing_id' => $quote->getListing()->getId()
+                         )
+                    )
                 )
-            )
-        );
+            );
+        } else {
+            $form = $this->get('form.factory')->createNamed(
+                '',
+                QuoteType::class,
+                $quote,
+                array(
+                    'method' => 'POST',
+                    'action' => $this->generateUrl(
+                        'cocorico_quote_flash',
+                         array(
+                             'listing_id' => $quote->getListing()->getId()
+                         )
+                    )
+                )
+            );
+        }
 
         return $form;
     }
@@ -274,6 +292,9 @@ class QuoteController extends Controller
      */
     public function getQuoteAction(Request $request, Listing $listing)
     {
+        # Redirections :
+        # - if not granted, go somewhere else
+        # - boufly ba bou
         $quoteHandler = $this->get('cocorico.form.handler.quote');
         $quote = $quoteHandler->init($this->getUser(), $listing);
 
@@ -304,4 +325,121 @@ class QuoteController extends Controller
             );
         }
     }
+    /**
+     * Creates a new Flash Quote entity.
+     *
+     * @Route("/{listing_id}/flash",
+     *      name="cocorico_quote_flash",
+     *      requirements={
+     *          "listing_id" = "\d+"
+     *      },
+     * )
+     *
+     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"}, converter="doctrine.orm")
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @param Request   $request
+     * @param Listing   $listing
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function flashAction(
+        Request $request,
+        Listing $listing
+    ) {
+        // $communication = (string)$request->query->get('communication');
+        // $budget = (int)$request->query->get('budget');
+        // $quoteHandler = $this->get('cocorico.form.handler.quote_base');
+        $quote = $quoteHandler->init($this->getUser(), $listing);
+        //Availability is validated through QuoteValidator and amounts are setted through Form Event PRE_SET_DATA
+        $form = $this->createFlashForm($quote);
+
+        $success = $quoteHandler->process($form);
+        if ($success === 1) {//Success
+             $event = new QuoteEvent($quote);
+
+            try {
+                return "ok";
+                //$this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
+                //$response = $event->getResponse();
+
+                //if ($response === null) {//No response means we can create new quote
+                //    if ($quote) {
+                //        //New Quote confirmation
+                //        $this->get('session')->getFlashBag()->add(
+                //            'success',
+                //            $this->get('translator')->trans('quote.new.success', array(), 'cocorico_quote')
+                //        );
+
+                //        $response = new RedirectResponse(
+                //            $this->generateUrl(
+                //                'cocorico_dashboard_quote_show_asker',
+                //                array('id' => $quote->getId())
+                //            )
+                //        );
+                //    } else {
+                //        throw new \Exception('quote.new.form.error');
+                //    }
+                //}
+
+                //return $response;
+            } catch (\Exception $e) {
+                //Errors message are created in event subscribers
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    /** @Ignore */
+                    $this->get('translator')->trans($e->getMessage(), array(), 'cocorico_quote')
+                );
+            }
+        } else {
+            $this->addFormMessagesToFlashBag($success);
+        }
+
+        //Breadcrumbs
+        $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
+        $breadcrumbs->addQuoteNewItems($request, $quote);
+
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Quote:new.html.twig',
+            array(
+                'quote' => $quote,
+                'form' => $form->createView(),
+                //Used to hide errors fields message when a secondary submission (Voucher, Delivery, ...) is done successfully
+                'display_errors' => ($success < 2)
+            )
+        );
+    }
+
+    /**
+     * Creates a flash form to create a Quote entity.
+     *
+     * @param Quote $quote The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createFlashForm(Quote $quote)
+    {
+        /* FIXME: Fix fields, and all that */
+        $form = $this->get('form.factory')->createNamed(
+            '',
+            QuoteFlashType::class,
+            $quote,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_quote_flash',
+                    array(
+                        'listing_id' => $quote->getListing()->getId(),
+                        'budget' => '',
+                        'prestaStartDate' => '',
+                        'communication' => '',
+                    )
+                ),
+            )
+        );
+
+        return $form;
+    }
+
 }
