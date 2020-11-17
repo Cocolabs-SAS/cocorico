@@ -6,8 +6,50 @@
 
 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 
-{{ form_start(form, {'attr': {'id': 'quote-new'}}) }}
+<div class="row">
+    <div class="col-sm-12">
+        {{ form_start(formQuote, {'attr': {'id': 'quoteForm'}}) }}
+        <div class="row">
+            <div class="col-sm-7">
+                {{ form_errors(formQuote) }}
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        {{ form_end(formQuote) }}
 
+
+        {{ form_start(formUser, {'attr': {'id': 'userForm'}}) }}
+        <div class="row">
+            <div class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        <input type="submit" value="Envoyer" class="btn btn-default">
+        {{ form_end(formUser) }}
+    </div>
+</div>
+<script>
+    $(function () {
+        var formQ = $("#quoteForm");
+        var formU = $("#userForm");
+        // Hack form submission to copy fields from one form in the other
+        formU.submit(function() {
+            $(this).find(':input[acopy]').remove();
+            formQ.find(':input').clone().hide().attr('acopy','y').appendTo(this);
+            return true;
+        });
+    });
+</script>
+{#
 {{ form_errors(form) }}
 <div class="form-message">
     <fieldset>
@@ -85,29 +127,8 @@
 </div>
 
 <div class="btns-area">
-    {#
-    {{ form_errors(form.tac) }}
-    <div class="agreement">
-        {{ form_widget(form.tac) }}
-        <span class="label">
-            {{ form_label(form.tac, null, {'required': false} ) }}
-            <a href="{{ path('cocorico_page_show', { 'slug': 'nav.tac.slug'|trans }) }}"
-               target="_blank">
-                {{ 'quote.new.tac.link'|trans }}
-            </a>*
-        </span>
-    </div>
-    #}
-
     <input type="submit" value="{{ 'quote.new.validation.submit'|trans }}" class="btn btn-default">
 </div>
 
 {{ form_end(form) }}
-
-    <script>
-        $(function () {
-            initDatePickerAjax(function () {
-                jcf.replaceAll("#quote-form");
-            });
-        });
-    </script>
+#}

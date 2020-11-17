@@ -171,6 +171,7 @@ class Quote {
      * @var int|null
      */
     private $surface_type;
+
     /**
      * Initial quote communication
      *
@@ -181,7 +182,7 @@ class Quote {
     private $communication;
 
     /**
-     * @ORM\Column(name="prestaStartDate", type="datetime")
+     * @ORM\Column(name="prestaStartDate", type="datetime", nullable=true)
      *
      * @var DateTime
      */

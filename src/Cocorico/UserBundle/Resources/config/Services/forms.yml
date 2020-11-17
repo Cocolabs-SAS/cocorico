@@ -12,6 +12,13 @@ services:
         tags:
             - { name: form.type, alias: user_registration }
 
+    cocorico_user.form.type.flash.register:
+        class: Cocorico\UserBundle\Form\Type\FlashFormType
+        arguments:
+            - "%cocorico.time_unit%"
+        tags:
+            - { name: form.type, alias: user_flash_registration }
+
     cocorico_user.form.type.user_address:
         class: Cocorico\UserBundle\Form\Type\UserAddressFormType
         tags:

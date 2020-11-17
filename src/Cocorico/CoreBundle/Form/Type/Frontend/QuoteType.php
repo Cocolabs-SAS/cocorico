@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -30,22 +31,28 @@ class QuoteType extends AbstractType
 
         $builder
             ->add('budget',
-                NumberType::class,
+                HiddenType::class,
                 array(
-                    'label' => 'quote.form.budget',
-                    'required' => 'false'
+                    'data' => 0
                 ))
+                // array(
+                //     'label' => 'quote.form.budget',
+                //     'required' => 'false'
+                // ))
             ->add('prestaStartDate',
-                DateType::class,
-                array_merge(
-                    array(
-                    'required' => 'false',
-                    'label' => 'quote.form.presta_start_date',
-                    'property_path' => 'prestaStartDate',
-                    'widget' => 'single_text',
-                    'format' => 'dd/MM/yyyy',
-                    )
+                HiddenType::class,
+                array(
+                    'data' => null
                 ))
+                // array_merge(
+                //     array(
+                //     'required' => 'false',
+                //     'label' => 'quote.form.presta_start_date',
+                //     'property_path' => 'prestaStartDate',
+                //     'widget' => 'single_text',
+                //     'format' => 'dd/MM/yyyy',
+                //     )
+                // ))
             # ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
             # ->add('surface_m2', NumberType::class)
             # ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
@@ -67,6 +74,7 @@ class QuoteType extends AbstractType
     {
         $resolver->setDefaults(
             array(
+                'allow_extra_fields' => true,
                 'data_class' => 'Cocorico\CoreBundle\Entity\Quote',
                 'csrf_token_id' => 'quote',
                 'translation_domain' => 'cocorico_quote',

@@ -4,7 +4,7 @@ namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\StringType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-class QuoteType extends AbstractType
+class QuoteFlashType extends AbstractType
 {
     public function __construct()
     {
@@ -31,31 +31,31 @@ class QuoteType extends AbstractType
 
         $builder
             ->add('reason',
-                StringType::class,
+                TextType::class,
                 array(
                     'label' => 'quote.form.reason',
                     'required' => 'false'
                 ))
             ->add('addres',
-                StringType::class,
+                TextType::class,
                 array(
                     'label' => 'quote.form.addres',
                     'required' => 'false'
                 ))
             ->add('postalcode',
-                StringType::class,
+                TextType::class,
                 array(
                     'label' => 'quote.form.addres',
                     'required' => 'false'
                 ))
             ->add('contact_person',
-                StringType::class,
+                TextType::class,
                 array(
                     'label' => 'quote.form.addres',
                     'required' => 'false'
                 ))
             ->add('phonenumber',
-                StringType::class,
+                TextType::class,
                 array(
                     'label' => 'quote.form.addres',
                     'required' => 'false'
