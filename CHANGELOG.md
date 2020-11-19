@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.22.2] - (2020-11-19)
+- Formulaire devis "FLASH": demande de devis et inscription en même temps
+
 ### [0.22.1] - (2020-11-16)
 - Fix chargement des assets not sécurisé
 - Wording CTA devis
