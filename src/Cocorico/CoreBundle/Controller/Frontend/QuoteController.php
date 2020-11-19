@@ -431,4 +431,30 @@ class QuoteController extends Controller
         return $form;
     }
 
+    /**
+     * Tell the user his quote is now confirmed.
+     *
+     * @Route("/{listing_id}/quote_confirmed", name="cocorico_quote_confirmed", requirements={"listing_id" = "\d+"})
+     *
+     * @ParamConverter("listing", class="CocoricoCoreBundle:Listing", options={"id" = "listing_id"}, converter="doctrine.orm")
+     *
+     * @Method({"GET"})
+     *
+     * @param Request  $request
+     * @param  Listing $listing
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @throws AccessDeniedException
+     */
+    public function confirmedAction(Request $request, Listing $listing)
+    {
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Quote:confirm.html.twig',
+            array(
+                'listing' => $listing,
+            )
+        );
+    }
+
+
 }

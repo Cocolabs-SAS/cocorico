@@ -102,11 +102,9 @@
                     {{ form_start(formUser, {'attr': {'id': 'userForm', class: 'quoteform'}}) }}
                     <div class="row">
                         <div class="col-sm-7">
-                            <div class="head">
-                                <h2 class="itou-formtitle">Contact et coordonnées de votre entreprise</h2>
-                            </div>
                             <div class="itou-fieldgroup">
                             <fieldset>
+                                <legend>Contact et coordonnées de votre entreprise</legend>
                                 <div class="field-row validate-row">
                                     <div class="error-container">{{ form_errors(formUser.companyName) }}</div>
                                     <span class="label">
@@ -241,9 +239,9 @@
                     <div id="buttons_nav">
                         <div class="btn-block text-center">
                             <input type="submit" value="Envoyer ma demande de contact" class="btn btn-default">
-                            {{ form_end(formUser) }}
                         </div>
                     </div>
+                    {{ form_end(formUser) }}
                     <br />
                     <br />
                 </div>

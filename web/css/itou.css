@@ -74,6 +74,32 @@
 .icon-f2-search:before { content: '🔍'; } /* '\1f50d' */
 
 /******************
+ * CONFIRM STYLES
+ ******************/
+.form-confirm {
+    height:400px;
+    background-image:url('/images/itou_curves.jpg');
+    background-size: 1400px 400px;
+}
+
+.form-confirm h1 {
+    font-size:1.6em;
+    font-weight:400;
+}
+
+.form-confirm .container {
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 4rem;
+    background-color:#fff;
+    border-radius:7px;
+    margin-left:15%;
+    margin-top: 4rem;
+}
+
+
+/******************
  * BODY STYLES
  ******************/
 .itou-info {
@@ -116,8 +142,12 @@
     padding: .3rem 2rem 1rem 2rem;
     margin-bottom:2rem;
     padding-top:3rem;
-    padding-bottom:3rem;
+    padding-bottom:4rem;
     color: #495057;
+}
+
+.itou-fieldgroup .field-row {
+    padding:1rem 0;
 }
 
 .itou-fieldgroup legend {
@@ -181,19 +211,19 @@
 /******************
  * REGISTER CONFIRMATION STYLES
  ******************/
- #form-registerlogin .buttonrow {
+ .buttonrow {
     display:flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
  }
 
-#form-registerlogin .btn-outline-primary {
+.btn-outline-primary {
     box-sizing: border-box;
-    border: 4px solid #0077FF;
+    border: 2px solid #0077FF;
     border-radius: 5px;
 }
 
-#form-registerlogin .btn-outline-primary:hover { background-color: #007BFF; }
+.btn-outline-primary:hover { background-color: #007BFF; }
 
 
 #form-registerlogin .btn-primary {

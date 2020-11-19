@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% set listing_translation = listing.translations[app.request.locale] %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block main %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            <div id="form-confirmquote" class="col-xs-12 form-confirm min-height justify-content-center" style="margin:10rem 0 30rem;">
+                <div class="container col-sm-8">
+                    <div class="row ">
+                        <div class="" style="display:flex;align-items:center;">
+                            <img alt="OK" aria-hidden="true" src="/images/done.svg" style="padding-right:4rem"/>
+                            <h1>Votre demande de contact a été envoyé avec succès.</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="" style="display:flex;align-items:center;">
+                            <img alt="OK" aria-hidden="true" src="/images/done.svg" style="padding-right:4rem"/>
+                            <h1>Vous allez recevoir une copie de votre demande<br/>de contat et une confirmation d'inscription.</h1>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:4rem">
+                        <div class="buttonrow" style="display:flex">
+                            <a  class="btn btn-outline-primary" href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}">
+                                Retour à l'annonce
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
