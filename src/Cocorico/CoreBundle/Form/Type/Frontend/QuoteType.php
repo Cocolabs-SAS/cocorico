@@ -2,6 +2,7 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
+use Cocorico\CoreBundle\Entity\Quote;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -56,11 +57,22 @@ class QuoteType extends AbstractType
             # ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
             # ->add('surface_m2', NumberType::class)
             # ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
+            ->add('preferredContact',
+                ChoiceType::class,
+                array(
+                    'label' => 'quote.form.preferredContact',
+                    'required' => 'true',
+                    'expanded' => 'true',
+                    'empty_data' => Quote::PREFCONTACT_PHONE,
+                    'data' => Quote::PREFCONTACT_PHONE,
+                    'choices' => array_flip(Quote::$preferredContactTypes),
+                ),
+            )
             ->add('communication',
                 TextareaType::class,
                 array_merge(
                     array(
-                    'required' => 'false',
+                    'required' => 'true',
                     'label' => 'quote.form.communication'
                     )
                 ));

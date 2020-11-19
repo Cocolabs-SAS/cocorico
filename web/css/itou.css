@@ -116,22 +116,39 @@
     padding: .3rem 2rem 1rem 2rem;
     margin-bottom:2rem;
     padding-top:3rem;
+    padding-bottom:3rem;
     color: #495057;
 }
 
 .itou-fieldgroup legend {
     border:0;
     margin-bottom:1rem;
+    padding-top:1rem;
     font-family: roboto, sans-serif;
     text-transform: uppercase;
 }
 
 .itou-fieldgroup .label {
     text-align:left !important;
+    text-transform:uppercase;
 }
 
 .itou-subfieldgroup {
     margin-bottom:4rem;
+}
+
+.quoteForm .label {
+    float:left;
+    width: 224px;
+    margin: 7px 10px 0 0 ;
+}
+
+.quoteForm .itou-checkbox .label {
+    width:100%;
+}
+
+.quoteForm .field-holder{
+    overflow:hidden;
 }
 
 .itou-checkbox > .label-container {

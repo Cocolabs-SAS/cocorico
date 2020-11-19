@@ -29,6 +29,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Quote {
 
     use ORMBehaviors\Timestampable\Timestampable;
+    /* preferredContact */
+    const PREFCONTACT_PHONE = 0;
+    const PREFCONTACT_MAIL = 1;
+
+    public static $preferredContactValues = array (
+        self::PREFCONTACT_PHONE => 'entity.quote.preferredContact.phone',
+        self::PREFCONTACT_MAIL => 'entity.quote.preferredContact.mail',
+    );
+
+    public static $preferredContactTypes = array (
+        self::PREFCONTACT_PHONE,
+        self::PREFCONTACT_MAIL,
+    );
 
     /* Status */
     const STATUS_DRAFT = 0;
@@ -180,6 +193,17 @@ class Quote {
      * @var string
      */
     private $communication;
+
+
+    /**
+     * Preferred Contact Way
+     *
+     * @ORM\Column(name="preferred_contact", type="smallint", nullable=true)
+     *
+     * @var integer|null
+     */
+    private $preferredContact;
+
 
     /**
      * @ORM\Column(name="prestaStartDate", type="datetime", nullable=true)
@@ -402,6 +426,46 @@ class Quote {
     {
         return self::$statusValues[$this->getStatus()];
     }
+
+    /**
+     * Set preferredContact
+     *
+     * @param  integer $preferredContact
+     * @return BaseBooking
+     */
+    public function setPreferredContact($preferredContact)
+    {
+        if (!in_array($preferredContact, array_keys(self::$preferredContactValues))) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid value for booking.preferredContact : %s.', $preferredContact)
+            );
+        }
+
+        $this->preferredContact = $preferredContact;
+
+        return $this;
+    }
+
+    /**
+     * Get preferredContact
+     *
+     * @return integer
+     */
+    public function getPreferredContact()
+    {
+        return $this->preferredContact;
+    }
+
+    /**
+     * Get PreferredContact Text
+     *
+     * @return string
+     */
+    public function getPreferredContactText()
+    {
+        return self::$preferredContactValues[$this->getPreferredContact()];
+    }
+
 
     /**
      * Add QuoteOption

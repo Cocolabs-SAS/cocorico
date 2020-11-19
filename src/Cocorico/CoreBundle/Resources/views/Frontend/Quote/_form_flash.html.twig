@@ -11,7 +11,40 @@
         {{ form_start(formQuote, {'attr': {'id': 'quoteForm'}}) }}
         <div class="row">
             <div class="col-sm-7">
+                <div class="head">
+                    <h2 class="itou-formtitle">Détails de votre demande</h2>
+                </div>
+                <div class="itou-info">
+                    <img class="shape" src="/images/info_shape.png" />
+                    <p>Communiquez au préalable quelques informations ou détails qui permettront à votre interlocuteur de préparer des éléments nécessaires à un échange pertinent.</p>
+                </div>
                 {{ form_errors(formQuote) }}
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="itou-fieldgroup">
+                    <div class="field-row validate-row">
+                        {{ form_errors(formQuote.communication) }}
+                        <span class="label">{{ form_label(formQuote.communication) }}</span>
+                        <div class="no-scroll">
+                            {{ form_widget(formQuote.communication,{
+                                'attr': {
+                                    'placeholder': 'quote.new.communication.placeholder'|trans
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                    <div class="field-row validate-row">
+                        {{ form_errors(formQuote.preferredContact) }}
+                        <span class="label">{{ form_label(formQuote.preferredContact) }}</span>
+                        <div class="no-scroll">
+                            {{ form_widget(formQuote.preferredContact) }}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-sm-5">
             </div>
@@ -22,6 +55,9 @@
         {{ form_start(formUser, {'attr': {'id': 'userForm'}}) }}
         <div class="row">
             <div class="col-sm-7">
+                <div class="head">
+                    <h2 class="itou-formtitle">Contact et coordonnées de votre entreprise</h2>
+                </div>
             </div>
             <div class="col-sm-5">
             </div>
