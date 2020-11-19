@@ -66,7 +66,7 @@ class FlashFormType extends AbstractType
                 'lastName',
                 HiddenType::class,
                 array(
-                    'data' => '.'
+                    'data' => '--------'
                 ),
             )
             # ->add(

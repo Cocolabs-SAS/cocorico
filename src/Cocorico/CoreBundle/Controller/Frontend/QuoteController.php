@@ -77,8 +77,8 @@ class QuoteController extends Controller
 
                         $response = new RedirectResponse(
                             $this->generateUrl(
-                                'cocorico_dashboard_quote_show_asker',
-                                array('id' => $quote->getId())
+                                'cocorico_quote_confirmed',
+                                array('listing_id' => $quote->getListing()->getId())
                             )
                         );
                     } else {
@@ -392,8 +392,13 @@ class QuoteController extends Controller
             }
 
             // url should be confirmation window
-            $url = $this->get('router')->generate('cocorico_user_dashboard_profile_edit_about_me');
-            return new RedirectResponse($url);
+            $response = new RedirectResponse(
+                $this->generateUrl(
+                    'cocorico_quote_confirmed',
+                    array('listing_id' => $quote->getListing()->getId())
+                )
+            );
+            return $response;
         }
 
         //Breadcrumbs
