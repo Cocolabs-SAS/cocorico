@@ -104,12 +104,13 @@
  ******************/
 .itou-info {
     background-color:#ddf2f3;
-    padding:3rem 5rem;
-    font-size:1.8rem;
+    padding:1.4rem 5rem;
+    font-size:1.7rem;
     border-radius:7px;
     display: flex;
     flex-direction: row;
     margin-bottom:1rem;
+    margin-top: 4rem;
 }
 
 .itou-info p {
@@ -141,8 +142,10 @@
     box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
     padding: .3rem 2rem 1rem 2rem;
     margin-bottom:2rem;
+    /*
     padding-top:3rem;
     padding-bottom:4rem;
+    */
     color: #495057;
 }
 

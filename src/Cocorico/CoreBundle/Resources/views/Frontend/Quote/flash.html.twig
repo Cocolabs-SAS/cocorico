@@ -60,7 +60,7 @@
                                 {{ form_errors(formQuote) }}
                                 <div class="itou-fieldgroup">
                                     <div class="field-row validate-row">
-                                        <legend>Détails du besoin</legend>
+                                        <legend>Détails du besoin *</legend>
                                         {{ form_errors(formQuote.communication) }}
                                         <div class="no-scroll">
                                             {{ form_widget(formQuote.communication,{
@@ -72,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="field-row validate-row">
-                                        <legend>Vous souhaitez être recontacté par</legend>
+                                        <legend>Vous souhaitez être recontacté par *</legend>
                                         {{ form_errors(formQuote.preferredContact) }}
                                         <div class="option">
                                             <label>
@@ -254,7 +254,8 @@
                     <br />
                     <div id="buttons_nav">
                         <div class="btn-block text-center">
-                            <input type="submit" value="Envoyer ma demande de contact" class="btn btn-default">
+                            <input type="submit" value="Envoyer ma demande de contact" class="btn btn-quote">
+                            <div style="padding-top:1rem">* : champs obligatoires</div>
                         </div>
                     </div>
                     {{ form_end(formUser) }}
