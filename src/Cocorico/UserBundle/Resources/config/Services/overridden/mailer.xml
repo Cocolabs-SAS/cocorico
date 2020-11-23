@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="cocorico_user.notify_account_created.email.template">CocoricoUserBundle:Mails/User:notify_account_created.txt.twig</parameter>
         <parameter key="cocorico_user.account_created_user.email.template">CocoricoUserBundle:Mails/User:account_created_user.txt.twig</parameter>
+        <parameter key="cocorico_user.flash_account_created_user.email.template">CocoricoUserBundle:Mails/User:flash_account_created_user.txt.twig</parameter>
         <parameter key="cocorico_user.forgot_password_user.email.template">CocoricoUserBundle:Mails/User:forgot_password_user.txt.twig</parameter>
         <parameter key="cocorico_user.account_creation_confirmation_user.email.template">CocoricoUserBundle:Mails/User:account_creation_confirmation_user.txt.twig</parameter>
     </parameters>
@@ -22,6 +23,7 @@
                 <argument key="templates" type="collection">
                     <argument key="notify_account_created">%cocorico_user.notify_account_created.email.template%</argument>
                     <argument key="account_created_user">%cocorico_user.account_created_user.email.template%</argument>
+                    <argument key="flash_account_created_user">%cocorico_user.flash_account_created_user.email.template%</argument>
                     <argument key="forgot_password_user">%cocorico_user.forgot_password_user.email.template%</argument>
                     <argument key="account_creation_confirmation_user">%cocorico_user.account_creation_confirmation_user.email.template%</argument>
                 </argument>

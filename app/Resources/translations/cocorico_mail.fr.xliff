@@ -17,6 +17,21 @@
         <source>account_created_user.email.subject</source>
         <target>Votre compte sur %sitename% a été créé</target>
       </trans-unit>
+
+      <trans-unit id="8250a2a3044490a05da33c749d5af47750ce06fa" resname="flash_account_created_user.email.message">
+        <source>flash_account_created_user.email.message</source>
+        <target xml:space="preserve">Bienvenue %firstname% !
+
+                    Nous avons transmis votre demande. Pour mieux le suivre, nous vous avons également crée un compte.
+
+                    Nous sommes heureux de vous compter parmi nous!
+                </target>
+      </trans-unit>
+      <trans-unit id="2147122da71224905cdb61c5102009842ff146ca" resname="flash_account_created_user.email.subject">
+        <source>flash_account_created_user.email.subject</source>
+        <target>Demande transmise sur %sitename%</target>
+      </trans-unit>
+
       <trans-unit id="f250a2a3044490a05da33c749d5af47750ce06fa" resname="notify_account_created.email.message">
         <source>notify_account_created.email.message</source>
         <target xml:space="preserve">Creation d'un compte pour:
