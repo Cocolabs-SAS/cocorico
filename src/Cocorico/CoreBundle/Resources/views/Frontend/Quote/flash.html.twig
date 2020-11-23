@@ -122,6 +122,22 @@
                                 </div>
 
                                 <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.companyAddrString) }}</div>
+                                    <span class="label">
+                                        {{ form_label(formUser.companyAddrString, 'Adresse de l\'entreprise') }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.companyAddrString, {
+                                            'attr': {
+                                                'class': 'form-control required',
+                                                'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row">
                                     <div class="error-container">{{ form_errors(formUser.firstName) }}</div>
                                     <span class="label">
                                         {{ form_label(formUser.firstName, 'personne à contacter', {

@@ -56,6 +56,14 @@ class FlashFormType extends AbstractType
                 )
             )
             ->add(
+                'companyAddrString',
+                TextType::class,
+                array(
+                    'label' => 'form.company_addr_string',
+                    'required' => true,
+                )
+            )
+            ->add(
                 'firstName',
                 TextType::class,
                 array(
