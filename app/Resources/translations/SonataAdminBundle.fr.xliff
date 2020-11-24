@@ -535,7 +535,7 @@
       </trans-unit>
       <trans-unit id="ae8d498986042136aada4e6ed26d30c2be361d76" resname="admin.booking.amount.label">
         <source>admin.booking.amount.label</source>
-        <target>Montant payé par le demandeur</target>
+        <target>Montant payé par l'acheteur</target>
       </trans-unit>
       <trans-unit id="9e0cb1d472a43eb362b59049c5694a4b65df0019" resname="admin.booking.amount_discount_voucher.label">
         <source>admin.booking.amount_discount_voucher.label</source>
@@ -547,7 +547,7 @@
       </trans-unit>
       <trans-unit id="5d9b71bf09a586a70c76ae3ea38df1a8afe4b42f" resname="admin.booking.amount_fee_as_asker.label">
         <source>admin.booking.amount_fee_as_asker.label</source>
-        <target>Commission demandeur</target>
+        <target>Commission acheteur</target>
       </trans-unit>
       <trans-unit id="b3e163c276d139d8334fddd5789eb45402aa9f22" resname="admin.booking.amount_fee_as_offerer.label">
         <source>admin.booking.amount_fee_as_offerer.label</source>
@@ -567,7 +567,7 @@
       </trans-unit>
       <trans-unit id="f98ee00840356c9f0587386b2f139146cbfd35d0" resname="admin.booking.amount_to_pay_by_asker.label">
         <source>admin.booking.amount_to_pay_by_asker.label</source>
-        <target>Montant à payer / payé par le demandeur</target>
+        <target>Montant à payer / payé par l'acheteur</target>
       </trans-unit>
       <trans-unit id="9f0db41b03a7382942b9997e849402994e0582d6" resname="admin.booking.amount_to_pay_to_offerer.label">
         <source>admin.booking.amount_to_pay_to_offerer.label</source>
@@ -579,11 +579,11 @@
       </trans-unit>
       <trans-unit id="0a340257a9f992669bd699cd1ba75f8336286884" resname="admin.booking.asker.label">
         <source>admin.booking.asker.label</source>
-        <target>Demandeur</target>
+        <target>Acheteur</target>
       </trans-unit>
       <trans-unit id="aa6f071724745deceb7a6aa19fd81018e76f9454" resname="admin.booking.canceled_asker_booking_at.label">
         <source>admin.booking.canceled_asker_booking_at.label</source>
-        <target>Annulé par le demandeur le</target>
+        <target>Annulé par l'acheteur le</target>
       </trans-unit>
       <trans-unit id="44c07db2db3b82f328048d3c3c80b0762fdc541a" resname="admin.booking.code_voucher.label">
         <source>admin.booking.code_voucher.label</source>
@@ -687,7 +687,7 @@
       </trans-unit>
       <trans-unit id="3fc2057bca15d6bbbe3a3825c09662429e9fb1f3" resname="admin.booking.timezone_asker.label">
         <source>admin.booking.timezone_asker.label</source>
-        <target state="new">Fuseau demandeur</target>
+        <target state="new">Fuseau acheteur</target>
       </trans-unit>
       <trans-unit id="212ce6077f70e2c3f065d50f0123c020dc224aff" resname="admin.booking.timezone_offerer.label">
         <source>admin.booking.timezone_offerer.label</source>
@@ -1258,7 +1258,7 @@
       </trans-unit>
       <trans-unit id="" resname="admin.quote.asker.label">
         <source>admin.booking.asker.label</source>
-        <target>Demandeur</target>
+        <target>Acheteur</target>
       </trans-unit>
       <trans-unit id="" resname="admin.quote.listing_id.label">
         <source>admin.booking.asker.label</source>
