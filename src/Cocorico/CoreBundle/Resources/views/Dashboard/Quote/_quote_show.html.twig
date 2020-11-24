@@ -38,6 +38,7 @@
 
                 <div class="quote-detail">
                     <ul class="" id="quote-asker-date">
+                        {#
                         <li>
                             {{ 'quote.show.presta_start_date'|trans }} :
                             <strong>
@@ -50,6 +51,7 @@
                                 {{ quote.budget }} €
                             </strong>
                         </li>
+                        #}
                         <li>
                             {{ 'quote.show.number.title'|trans }} :
                             <strong>{{ quote.id }}</strong>
@@ -68,7 +70,7 @@
                     {% if party == 'offerer' %}
                         <span class="author-info">
                             <a href="{{ path('cocorico_user_profile_show', { 'id': other_user.id }) }}">
-                                Demandeur: <strong>{{ other_user.name }}</strong>
+                                Acheteur: <strong>{{ other_user.name }}</strong>
                             </a>
                             {#
                             <ul>

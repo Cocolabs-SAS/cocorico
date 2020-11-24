@@ -24,7 +24,6 @@
                 <!-- files-selection-design -->
                 <div class="file-selection">
 
-                    <h2>{{ 'listing.edit.image.title'|trans }}</h2>
                     <strong class="sub-heading">{{ 'listing_edit.photos.title'|trans({'%max_images%': listing_img_max}) }}</strong>
 
                     <div class="area">
@@ -37,9 +36,11 @@
                                 {{ form_widget(form.image.uploaded ) }}
                             </div>
                         </div>
+                        {#
                         <div class="detail">
                             <p>{{ 'listing_edit.photos.details'|trans }}</p>
                         </div>
+                        #}
 
                         {#
                         <div id="drop-zone">
