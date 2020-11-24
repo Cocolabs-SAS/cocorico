@@ -80,7 +80,7 @@
                                         {{ form_widget(form.presta_type.1, { 'attr': { 'class': 'form-control required' }}) }}
                                         Mise à disposition du personnel / Interim
                                         </label>
-                                    !!Z
+                                    </div>
                                     <div class="option">
                                         <label>
                                         {{ form_widget(form.presta_type.2, { 'attr': { 'class': 'form-control required' }}) }}
@@ -637,6 +637,7 @@
                 this.check();
             },
             check: function() {
+                window.scrollTo(0, 0);
                 if (this.current == 0) {
                     $(this.but_prev).hide();
                 } else {
