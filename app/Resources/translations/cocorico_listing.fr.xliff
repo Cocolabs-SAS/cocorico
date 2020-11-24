@@ -44,15 +44,15 @@
       </trans-unit>
       <trans-unit id="da9160f098524d39a66a31d78d8f7e5e0b191d62" resname="entity.listing.cancellation_policy_desc.flexible">
         <source>entity.listing.cancellation_policy_desc.flexible</source>
-        <target><![CDATA[> Si le demandeur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
+        <target><![CDATA[> Si l'acheteur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
 
-> Si le demandeur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
+> Si l'acheteur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
       </trans-unit>
       <trans-unit id="c19128b495e42fbc146b81d485b78c5679d7a9a3" resname="entity.listing.cancellation_policy_desc.strict">
         <source>entity.listing.cancellation_policy_desc.strict</source>
-        <target><![CDATA[> Si le demandeur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
+        <target><![CDATA[> Si l'acheteur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
 
-> Si le demandeur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
+> Si l'acheteur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
       </trans-unit>
       <trans-unit id="86141469556c626c446c319fc332725e9871e30d" resname="entity.listing.status.deleted">
         <source>entity.listing.status.deleted</source>
@@ -388,7 +388,7 @@
       </trans-unit>
       <trans-unit id="d228745b4bddf8a47335848c08d03f778db2285f" resname="listing.form.description.fr">
         <source>listing.form.description.fr</source>
-        <target>Introduction :</target>
+        <target>Présentation de l'offre :</target>
       </trans-unit>
       <trans-unit id="f62cf70f1a648617bfc581e10dfc62a55de0e609" resname="listing.form.end">
         <source>listing.form.end</source>
@@ -440,7 +440,7 @@
       </trans-unit>
       <trans-unit id="b32775cc4444951b78d8abe0d68e1cb394515443" resname="listing.form.title">
         <source>listing.form.title</source>
-        <target>Titre</target>
+        <target>Titre de l'offre</target>
       </trans-unit>
       <trans-unit id="f5a1d75832a0774860eecbfda2d4d2362f2d4775" resname="listing.form.title.en">
         <source>listing.form.title.en</source>
@@ -448,7 +448,7 @@
       </trans-unit>
       <trans-unit id="63e3c8d1ca087d25ff3b27811d8b443c8087ab59" resname="listing.form.title.fr">
         <source>listing.form.title.fr</source>
-        <target>Titre</target>
+        <target>Titre de l'offre</target>
       </trans-unit>
       <trans-unit id="961c32cb515ab9b31b79e094a1e95a948f631010" resname="listing.images.cancel.link">
         <source>listing.images.cancel.link</source>

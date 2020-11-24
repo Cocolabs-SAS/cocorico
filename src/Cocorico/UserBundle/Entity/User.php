@@ -156,6 +156,13 @@ class User extends BaseUser implements ParticipantInterface
 
     /**
      * @var string
+     *
+     * @ORM\Column(name="company_addr_string", type="string", length=255, nullable=true)
+     */
+    protected $companyAddrString;
+
+    /**
+     * @var string
      * @ORM\Column(name="siret", type="string", length=14, nullable=true)
      *
      * @Assert\Length(
@@ -695,6 +702,31 @@ class User extends BaseUser implements ParticipantInterface
 
         return $this;
     }
+
+    /**
+     * Get companyAddrString.
+     *
+     * @return string
+     */
+    public function getCompanyAddrString()
+    {
+        return $this->companyAddrString;
+    }
+
+    /**
+     * Set companyAddrString.
+     *
+     * @param string $companyAddrString
+     *
+     * @return User
+     */
+    public function setCompanyAddrString($companyAddrString)
+    {
+        $this->companyAddrString = $companyAddrString;
+
+        return $this;
+    }
+
 
     /**
      * Set lastName.

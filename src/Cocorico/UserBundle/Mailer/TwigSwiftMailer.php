@@ -73,6 +73,21 @@ class TwigSwiftMailer implements MailerInterface
     /**
      * @param UserInterface $user
      */
+    public function sendFlashAccountCreatedMessageToUser(UserInterface $user)
+    {
+        $template = $this->parameters['templates']['flash_account_created_user'];
+
+        $context = array(
+            'user' => $user,
+            'cocorico_site_name' => $this->parameters['site_name']
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+    }
+
+    /**
+     * @param UserInterface $user
+     */
     public function notifyAccountCreatedMessage(UserInterface $user)
     {
         $template = $this->parameters['templates']['notify_account_created'];

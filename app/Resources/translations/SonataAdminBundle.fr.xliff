@@ -535,7 +535,7 @@
       </trans-unit>
       <trans-unit id="ae8d498986042136aada4e6ed26d30c2be361d76" resname="admin.booking.amount.label">
         <source>admin.booking.amount.label</source>
-        <target>Montant payé par le demandeur</target>
+        <target>Montant payé par l'acheteur</target>
       </trans-unit>
       <trans-unit id="9e0cb1d472a43eb362b59049c5694a4b65df0019" resname="admin.booking.amount_discount_voucher.label">
         <source>admin.booking.amount_discount_voucher.label</source>
@@ -547,11 +547,11 @@
       </trans-unit>
       <trans-unit id="5d9b71bf09a586a70c76ae3ea38df1a8afe4b42f" resname="admin.booking.amount_fee_as_asker.label">
         <source>admin.booking.amount_fee_as_asker.label</source>
-        <target>Commission demandeur</target>
+        <target>Commission acheteur</target>
       </trans-unit>
       <trans-unit id="b3e163c276d139d8334fddd5789eb45402aa9f22" resname="admin.booking.amount_fee_as_offerer.label">
         <source>admin.booking.amount_fee_as_offerer.label</source>
-        <target>Commission offreur</target>
+        <target>Commission prestataire</target>
       </trans-unit>
       <trans-unit id="90049ba00652c96262c1f87f11b0d20c55481b0a" resname="admin.booking.amount_max.label">
         <source>admin.booking.amount_max.label</source>
@@ -567,23 +567,23 @@
       </trans-unit>
       <trans-unit id="f98ee00840356c9f0587386b2f139146cbfd35d0" resname="admin.booking.amount_to_pay_by_asker.label">
         <source>admin.booking.amount_to_pay_by_asker.label</source>
-        <target>Montant à payer / payé par le demandeur</target>
+        <target>Montant à payer / payé par l'acheteur</target>
       </trans-unit>
       <trans-unit id="9f0db41b03a7382942b9997e849402994e0582d6" resname="admin.booking.amount_to_pay_to_offerer.label">
         <source>admin.booking.amount_to_pay_to_offerer.label</source>
-        <target>Montant hors annulation à payer / payé à l'offreur</target>
+        <target>Montant hors annulation à payer / payé au prestataire</target>
       </trans-unit>
       <trans-unit id="1001012d30fa7d6d981c87383152d89df69b0459" resname="admin.booking.amount_to_wire.label">
         <source>admin.booking.amount_to_wire.label</source>
-        <target>Montant à virer à l'offreur</target>
+        <target>Montant à virer au prestataire</target>
       </trans-unit>
       <trans-unit id="0a340257a9f992669bd699cd1ba75f8336286884" resname="admin.booking.asker.label">
         <source>admin.booking.asker.label</source>
-        <target>Demandeur</target>
+        <target>Acheteur</target>
       </trans-unit>
       <trans-unit id="aa6f071724745deceb7a6aa19fd81018e76f9454" resname="admin.booking.canceled_asker_booking_at.label">
         <source>admin.booking.canceled_asker_booking_at.label</source>
-        <target>Annulé par le demandeur le</target>
+        <target>Annulé par l'acheteur le</target>
       </trans-unit>
       <trans-unit id="44c07db2db3b82f328048d3c3c80b0762fdc541a" resname="admin.booking.code_voucher.label">
         <source>admin.booking.code_voucher.label</source>
@@ -659,7 +659,7 @@
       </trans-unit>
       <trans-unit id="e36325fb46d5d03c3b96c5ea34baed28365840a7" resname="admin.booking.offerer.label">
         <source>admin.booking.offerer.label</source>
-        <target>Offreur</target>
+        <target>Prestataire</target>
       </trans-unit>
       <trans-unit id="70ddaad583d336caa66a08a43ce0b1a66430f22e" resname="admin.booking.payed_booking_at.label">
         <source>admin.booking.payed_booking_at.label</source>
@@ -671,7 +671,7 @@
       </trans-unit>
       <trans-unit id="48a037466406f874d744757a8e5c45e05cb597d8" resname="admin.booking.remaining_amount_to_pay_to_offerer.label">
         <source>admin.booking.remaining_amount_to_pay_to_offerer.label</source>
-        <target>Montant restant à payer à l'offreur</target>
+        <target>Montant restant à payer au prestataire</target>
       </trans-unit>
       <trans-unit id="4831a617cb1e8153ff54396d192e4c3bc7523ff0" resname="admin.booking.start.label">
         <source>admin.booking.start.label</source>
@@ -687,11 +687,11 @@
       </trans-unit>
       <trans-unit id="3fc2057bca15d6bbbe3a3825c09662429e9fb1f3" resname="admin.booking.timezone_asker.label">
         <source>admin.booking.timezone_asker.label</source>
-        <target state="new">Fuseau demandeur</target>
+        <target state="new">Fuseau acheteur</target>
       </trans-unit>
       <trans-unit id="212ce6077f70e2c3f065d50f0123c020dc224aff" resname="admin.booking.timezone_offerer.label">
         <source>admin.booking.timezone_offerer.label</source>
-        <target state="new">Fuseau offreur</target>
+        <target state="new">Fuseau prestataire</target>
       </trans-unit>
       <trans-unit id="3defa35a3f2970c9205a46cb5be7c1ad70480d9d" resname="admin.booking.title">
         <source>admin.booking.title</source>
@@ -715,7 +715,7 @@
       </trans-unit>
       <trans-unit id="c5754749cd26ac41c9b75eeaf6d745346b571091" resname="admin.booking_bank_wire.amount_excl_discount_voucher.label">
         <source>admin.booking_bank_wire.amount_excl_discount_voucher.label</source>
-        <target>Montant total hors réduction promotionnelle à payer à l'offreur</target>
+        <target>Montant total hors réduction promotionnelle à payer au prestataire</target>
       </trans-unit>
       <trans-unit id="95bb4116c0679152a6b3f653de417088a4a1d3a9" resname="admin.booking_bank_wire.booking.label">
         <source>admin.booking_bank_wire.booking.label</source>
@@ -876,7 +876,7 @@
       </trans-unit>
       <trans-unit id="96bc9ef12f9d3d7eef97b3510264c92b9c707d9f" resname="admin.listing.offerer.label">
         <source>admin.listing.offerer.label</source>
-        <target>Offreur</target>
+        <target>Prestataire</target>
       </trans-unit>
       <trans-unit id="4f4e4c62dda7d9caa6cb75d78636b8c1483fcde8" resname="admin.listing.price.label">
         <source>admin.listing.price.label</source>
@@ -908,7 +908,7 @@
       </trans-unit>
       <trans-unit id="d9ffac21d864a1a1412d85e28f2aeea909b32564" resname="admin.listing.user.label">
         <source>admin.listing.user.label</source>
-        <target>Offreur</target>
+        <target>Prestataire</target>
       </trans-unit>
       <trans-unit id="20bbb32c0561e993a306249ad494f9594e7be149" resname="admin.listing.user_email.label">
         <source>admin.listing.user_email.label</source>
@@ -1258,7 +1258,7 @@
       </trans-unit>
       <trans-unit id="" resname="admin.quote.asker.label">
         <source>admin.booking.asker.label</source>
-        <target>Demandeur</target>
+        <target>Acheteur</target>
       </trans-unit>
       <trans-unit id="" resname="admin.quote.listing_id.label">
         <source>admin.booking.asker.label</source>

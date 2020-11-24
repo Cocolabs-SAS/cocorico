@@ -1,0 +1,170 @@
+{% trans_default_domain 'cocorico_quote' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set user_timezone = app.session.get('timezone', timeZone) %}
+
+{% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+<div class="row">
+    <div class="col-sm-12">
+        {{ form_start(formQuote, {'attr': {'id': 'quoteForm'}}) }}
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="head">
+                    <h2 class="itou-formtitle">Détails de votre demande</h2>
+                </div>
+                <div class="itou-info">
+                    <img class="shape" src="/images/info_shape.png" />
+                    <p>Communiquez au préalable quelques informations ou détails qui permettront à votre interlocuteur de préparer des éléments nécessaires à un échange pertinent.</p>
+                </div>
+                {{ form_errors(formQuote) }}
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="itou-fieldgroup">
+                    <div class="field-row validate-row">
+                        {{ form_errors(formQuote.communication) }}
+                        <span class="label">{{ form_label(formQuote.communication) }}</span>
+                        <div class="no-scroll">
+                            {{ form_widget(formQuote.communication,{
+                                'attr': {
+                                    'placeholder': 'quote.new.communication.placeholder'|trans
+                                }
+                            }) }}
+                        </div>
+                    </div>
+                    <div class="field-row validate-row">
+                        {{ form_errors(formQuote.preferredContact) }}
+                        <span class="label">{{ form_label(formQuote.preferredContact) }}</span>
+                        <div class="no-scroll">
+                            {{ form_widget(formQuote.preferredContact) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        {{ form_end(formQuote) }}
+
+
+        {{ form_start(formUser, {'attr': {'id': 'userForm'}}) }}
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="head">
+                    <h2 class="itou-formtitle">Contact et coordonnées de votre entreprise</h2>
+                </div>
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-7">
+            </div>
+            <div class="col-sm-5">
+            </div>
+        </div>
+        <input type="submit" value="Envoyer" class="btn btn-default">
+        {{ form_end(formUser) }}
+    </div>
+</div>
+<script>
+    $(function () {
+        var formQ = $("#quoteForm");
+        var formU = $("#userForm");
+        // Hack form submission to copy fields from one form in the other
+        formU.submit(function() {
+            $(this).find(':input[acopy]').remove();
+            formQ.find(':input').clone().hide().attr('acopy','y').appendTo(this);
+            return true;
+        });
+    });
+</script>
+{#
+{{ form_errors(form) }}
+<div class="form-message">
+    <fieldset>
+        <legend class="hidden">form-communication</legend>
+        <div class="container">
+            <div class="row" style="margin-bottom:1rem;">
+                 {{ form_errors(form.prestaStartDate) }}
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
+                <h1>It's the flash form !</h1>
+                <div class="col-sm-4">
+                     <strong class="title">
+                         {{ form_label(form.prestaStartDate, null, {'required': true}) }}
+                     </strong>
+                     <span class="add-on">
+                         <i data-date-icon="icon-calendar" data-time-icon="icon-time" class="icon-calendar"></i>
+                     </span>
+                </div>
+                <div class="col-sm-4">
+                     <div class="input-append date field-holder datepicker-holder-ajax">
+                         {{ form_widget(form.prestaStartDate, {
+                             'id': 'prestaStartDate',
+                             'type': 'text',
+                             'attr': {
+                                 'class': 'form-control from',
+                                 'placeholder': '   /      /',
+                                 'title': 'presta-start-date'
+                             }
+                         }) }}
+                     </div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
+                {{ form_errors(form.budget) }}
+            </div>
+            <div class="row" style="margin-bottom:1rem;">
+                <div class="col-sm-4">
+                    <strong class="title">
+                        {{ form_label(form.budget, null, {'required': false}) }}
+                    </strong>
+                    <span class="add-on">
+                        <i data-date-icon="icon-info" data-time-icon="icon-time" class="icon-info"></i>
+                    </span>
+                </div>
+                <div class="col-sm-4">
+                    <div class="field-holder">
+                        {{ form_widget(form.budget, {
+                            'id': 'budget',
+                            'type': 'text',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': '',
+                                'title': 'budget'
+                            }
+                        }) }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="legend">
+            Détaillez ci-dessous votre demande de contact
+        </div> 
+
+        {{ form_errors(form.communication) }}
+        <div class="no-scroll">
+            {{ form_widget(form.communication,{
+                'attr': {
+                    'placeholder': 'quote.new.communication.placeholder'|trans
+                }
+            }) }}
+        </div>
+        <input type="submit" class="hidden" value="submit">
+    </fieldset>
+</div>
+
+<div class="btns-area">
+    <input type="submit" value="{{ 'quote.new.validation.submit'|trans }}" class="btn btn-default">
+</div>
+
+{{ form_end(form) }}
+#}

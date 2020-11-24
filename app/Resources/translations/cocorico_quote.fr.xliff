@@ -28,7 +28,7 @@
       </trans-unit>
       <trans-unit id="d74cc93d25c59ed384492237a72c7f2cec73d700" resname="entity.quote.status.refused_asker">
         <source>entity.quote.status.refused_asker</source>
-        <target>Refusé par demandeur</target>
+        <target>Refusé par acheteur</target>
       </trans-unit>
       <trans-unit id="8a11640f586558ecd5a25756f0391954d3d85e15" resname="entity.quote.status.refused_offerer">
         <source>entity.quote.status.refused_offerer</source>
@@ -80,7 +80,7 @@
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.refused_asker">
         <source>entity.quote.status.refused_asker</source>
-        <target>Refusé (demandeur)</target>
+        <target>Refusé (acheteur)</target>
       </trans-unit>
       <trans-unit id="" resname="entity.quote.status.refused_offerer">
         <source>entity.quote.status.refused_offerer</source>
@@ -116,7 +116,7 @@
       </trans-unit>
       <trans-unit id="1bdedd6eb81d984294e821415b6c2f8f80387e5e" resname="quote.show_offerer.accept_prequote">
         <source>quote.show_offerer.accept_prequote</source>
-        <target>Accepter d'entrer en contact avec le demandeur</target>
+        <target>Accepter d'entrer en contact avec l'acheteur</target>
       </trans-unit>
       <trans-unit id="dc1282ffdefa08ff826614bc32483b116681cbe0" resname="quote.show_offerer.refuse">
         <source>quote.show_offerer.refuse</source>
@@ -128,11 +128,11 @@
       </trans-unit>
       <trans-unit id="" resname="quote.modal.refuse.title">
         <source>quote.modal.refuse.title</source>
-        <target>Mettre fin à la demande de devis</target>
+        <target>Mettre fin à la demande de contact</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.cancel.title">
         <source>quote.modal.cancel.title</source>
-        <target>Annuler la demande de devis</target>
+        <target>Annuler la demande de contact</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.sent_quote.title">
         <source>quote.modal.sent_quote.title</source>
@@ -180,7 +180,7 @@
       </trans-unit>
       <trans-unit id="" resname="quote.new.message.description">
         <source>quote.new.message.description</source>
-        <target>Detaillez ci-dessous votre demande de devis</target>
+        <target>Detaillez ci-dessous votre demande de contact</target>
       </trans-unit>
       <trans-unit id="" resname="quote.new.success">
         <source>quote.new.success</source>
@@ -225,21 +225,21 @@
       <trans-unit id="" resname="quote.modal.description.sent_quote">
         <source>quote.modal.description.sent_quote</source>
         <target>Une fois toutes les données nécessaires à la rédaction d'un devis,
-        "accepter de soumettre un devis" signale au demandeur que vous allez lui transmettre un devis.
+        "accepter de soumettre un devis" signale au acheteur que vous allez lui transmettre un devis.
         </target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.description.accept_prequote">
         <source>quote.modal.description.accept_prequote</source>
-        <target>Vous allez entrer en phase de discussion avec le demandeur</target>
+        <target>Vous allez entrer en phase de discussion avec l'acheteur</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.description.refuse">
         <source>quote.modal.description.refuse</source>
         <target>Si les conditions ne vous permettent pas ou plus de transmettre un devis, vous pouvez le
-        signaler au demandeur.</target>
+        signaler au acheteur.</target>
       </trans-unit>
       <trans-unit id="" resname="quote.modal.description.cancel">
         <source>quote.modal.description.cancel</source>
-        <target>Vous êtes encore en mesure d'annuler cette demande de devis.</target>
+        <target>Vous êtes encore en mesure d'annuler cette demande de contact.</target>
       </trans-unit>
       <trans-unit id="" resname="quote.show.contact.title">
         <source>quote.show.contact.title</source>

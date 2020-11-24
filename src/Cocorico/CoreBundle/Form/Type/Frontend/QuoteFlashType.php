@@ -2,12 +2,11 @@
 
 namespace Cocorico\CoreBundle\Form\Type\Frontend;
 
-use Cocorico\CoreBundle\Entity\Quote;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -15,7 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
-class QuoteType extends AbstractType
+class QuoteFlashType extends AbstractType
 {
     public function __construct()
     {
@@ -31,48 +30,44 @@ class QuoteType extends AbstractType
         $quote = $builder->getData();
 
         $builder
-            ->add('budget',
-                HiddenType::class,
+            ->add('reason',
+                TextType::class,
                 array(
-                    'data' => 0
+                    'label' => 'quote.form.reason',
+                    'required' => 'false'
                 ))
-                // array(
-                //     'label' => 'quote.form.budget',
-                //     'required' => 'false'
-                // ))
-            ->add('prestaStartDate',
-                HiddenType::class,
+            ->add('addres',
+                TextType::class,
                 array(
-                    'data' => null
+                    'label' => 'quote.form.addres',
+                    'required' => 'false'
                 ))
-                // array_merge(
-                //     array(
-                //     'required' => 'false',
-                //     'label' => 'quote.form.presta_start_date',
-                //     'property_path' => 'prestaStartDate',
-                //     'widget' => 'single_text',
-                //     'format' => 'dd/MM/yyyy',
-                //     )
-                // ))
+            ->add('postalcode',
+                TextType::class,
+                array(
+                    'label' => 'quote.form.addres',
+                    'required' => 'false'
+                ))
+            ->add('contact_person',
+                TextType::class,
+                array(
+                    'label' => 'quote.form.addres',
+                    'required' => 'false'
+                ))
+            ->add('phonenumber',
+                TextType::class,
+                array(
+                    'label' => 'quote.form.addres',
+                    'required' => 'false'
+                ))
             # ->add('frequency_period', ChoiceType::class, ['choices' => ['month', 'week']])
             # ->add('surface_m2', NumberType::class)
             # ->add('surface_type', ChoiceType::class, ['choices' => ['wood', 'concrete']])
-            ->add('preferredContact',
-                ChoiceType::class,
-                array(
-                    'label' => 'quote.form.preferredContact',
-                    'required' => 'true',
-                    'expanded' => 'true',
-                    'empty_data' => Quote::PREFCONTACT_PHONE,
-                    'data' => Quote::PREFCONTACT_PHONE,
-                    'choices' => array_flip(Quote::$preferredContactTypes),
-                ),
-            )
-            ->add('communication',
+            ->add('details',
                 TextareaType::class,
                 array_merge(
                     array(
-                    'required' => 'true',
+                    'required' => 'false',
                     'label' => 'quote.form.communication'
                     )
                 ));
@@ -86,7 +81,6 @@ class QuoteType extends AbstractType
     {
         $resolver->setDefaults(
             array(
-                'allow_extra_fields' => true,
                 'data_class' => 'Cocorico\CoreBundle\Entity\Quote',
                 'csrf_token_id' => 'quote',
                 'translation_domain' => 'cocorico_quote',

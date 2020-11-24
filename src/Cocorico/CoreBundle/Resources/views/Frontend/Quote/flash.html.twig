@@ -1,0 +1,317 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_quote' %}
+
+{% set optionBundleEnabled = bundleExist('CocoricoListingOptionBundle') %}
+
+{% set listing = quote.listing %}
+{% set listing_translation = listing.translations[app.request.locale] %}
+{% set listing_location = listing.location %}
+
+{%- block meta_title -%}
+    {{ 'quote.new.meta_title'|trans({}, 'cocorico_meta') ~ " " ~ listing_translation.title ~ ", " ~ listing_location.city ~ " - " ~ quote.prestaStartDate|localizeddate('short', 'none', 'fr') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'quote.new.meta_desc'|trans({}, 'cocorico_meta') ~ ' ' ~ listing_translation.description|truncate(200, true) }}
+{%- endblock -%}
+
+{%- block stylesheets -%}
+    {{ parent() }}
+
+    {% if display_errors is defined and not display_errors %}
+        <style>
+            .errors {
+                display: none;
+            }
+        </style>
+    {% endif %}
+{%- endblock -%}
+
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_quote' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
+
+        {% block main %}
+            <a href="{{ path('cocorico_listing_show', {'slug':listing_translation.slug} ) }}">
+                &lt; {{ 'quote.new.back'|trans }}
+            </a>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_start(formQuote, {'attr': {'id': 'quoteForm', 'class': 'quoteform'}}) }}
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="head">
+                                <h2 class="itou-formtitle">Détails de votre demande</h2>
+                                <div class="itou-info" style="margin-top:4rem">
+                                    <img class="shape" src="/images/info_shape.png" />
+                                    <p>Communiquez au préalable quelques informations ou détails qui permettront à votre interlocuteur de préparer des éléments nécessaires à un échange pertinent.</p>
+                                </div>
+                                {{ form_errors(formQuote) }}
+                                <div class="itou-fieldgroup">
+                                    <div class="field-row validate-row">
+                                        <legend>Détails du besoin *</legend>
+                                        {{ form_errors(formQuote.communication) }}
+                                        <div class="no-scroll">
+                                            {{ form_widget(formQuote.communication,{
+                                                'attr': {
+                                                    'placeholder': 'quote.new.communication.placeholder'|trans,
+                                                    'rows': '10'
+                                                }
+                                            }) }}
+                                        </div>
+                                    </div>
+                                    <div class="field-row validate-row">
+                                        <legend>Vous souhaitez être recontacté par *</legend>
+                                        {{ form_errors(formQuote.preferredContact) }}
+                                        <div class="option">
+                                            <label>
+                                            {{ form_widget(formQuote.preferredContact.0, { 'attr': { 'class': 'form-control required' }}) }}
+                                            par téléphone
+                                            </label>
+                                        </div>
+                                        <div class="option">
+                                            <label>
+                                            {{ form_widget(formQuote.preferredContact.1, { 'attr': { 'class': 'form-control required' }}) }}
+                                            par messagerie
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            {% include 'CocoricoCoreBundle:Frontend:Quote/_side.html.twig' with {
+                                'quote' : quote
+                            } only %}
+                        </div>
+                    </div>
+                    {{ form_end(formQuote) }}
+            
+            
+                    {{ form_start(formUser, {'attr': {'id': 'userForm', class: 'quoteform'}}) }}
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="itou-fieldgroup">
+                            <fieldset>
+                                <legend>Contact et coordonnées de votre entreprise</legend>
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.companyName) }}</div>
+                                    <span class="label">
+                                        {{ form_label(formUser.companyName, 'Raison sociale') }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.companyName, {
+                                            'attr': {
+                                                'class': 'form-control required',
+                                                'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.companyAddrString) }}</div>
+                                    <span class="label">
+                                        {{ form_label(formUser.companyAddrString, 'Adresse de l\'entreprise') }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.companyAddrString, {
+                                            'attr': {
+                                                'class': 'form-control required',
+                                                'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.firstName) }}</div>
+                                    <span class="label">
+                                        {{ form_label(formUser.firstName, 'personne à contacter', {
+                                            'label_attr': {
+                                                'data-label-legal': 'form.first_name.legal'|trans
+                                            }
+                                        }) }}
+                                    </span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.firstName, {
+                                            'attr': {
+                                                'class': "form-control required",
+                                                'data-parsley-required-message': 'cocorico_user.first_name.blank'|trans({},'validators'),
+                                                'data-parsley-invalid-message': 'cocorico_user.first_name.invalid'|trans({}, 'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.phone) }}</div>
+                                    <span class="label">{{ form_label(formUser.phone, 'Numéro de téléphone') }}</span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.phone, {
+                                            'attr': {
+                                                'class': "form-control",
+                                                'data-parsley-type': 'digits',
+                                                'data-parsley-type-message': 'cocorico_user.phone.invalid'|trans({},'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.email) }}</div>
+                                    <span class="label">{{ form_label(formUser.email, 'E-mail de contact') }}</span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.email, {
+                                            'attr': {
+                                                'class': "form-control required",
+                                                'data-parsley-required-message': 'cocorico_user.email.blank'|trans({},'validators'),
+                                                'data-parsley-invalid-message': 'cocorico_user.email.invalid'|trans({}, 'validators'),
+                                                'data-parsley-type-message': 'cocorico_user.email.invalid'|trans({}, 'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+                            </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="itou-fieldgroup">
+                                <fieldset>
+                                <legend>Création d'un mot de passe</legend>
+
+                                {# dont work when empty value #}
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.plainPassword.first) }}</div>
+                                    <span class="label">{{ form_label(formUser.plainPassword.first) }}</span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.plainPassword.first, {
+                                            'attr': {
+                                                'class': "form-control required",
+                                                'data-parsley-required-message': 'cocorico_user.plainPassword.first.blank'|trans({},'validators'),
+                                                'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row">
+                                    <div class="error-container">{{ form_errors(formUser.plainPassword.second) }}</div>
+                                    <span class="label">{{ form_label(formUser.plainPassword.second) }}</span>
+
+                                    <div class="field-holder">
+                                        {{ form_widget(formUser.plainPassword.second , {
+                                            'attr': {
+                                                'class': "form-control required",
+                                                'data-parsley-equalto': "#"~ formUser.plainPassword.first.vars.id,
+                                                'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
+                                                'data-parsley-required-message': 'cocorico_user.plainPassword.second.blank'|trans({},'validators'),
+                                                'data-parsley-invalid-message': 'cocorico_user.plainPassword.second.invalid'|trans({}, 'validators')
+                                            }
+                                        }) }}
+                                    </div>
+                                </div>
+
+                                <div class="field-row validate-row itou-checkbox" style="margin-top:2rem">
+                                    <div class="error-container">{{ form_errors(formUser.accept_rgpd) }}</div>
+                                    <div class="label-container">
+                                        <div class="field-holder" onclick="$('#lbl1').trigger('click');">
+                                            {{ form_widget(formUser.accept_rgpd, { 'attr': { 'class': 'required' } }) }}
+                                        </div>
+                                        <div id="lbl1" class="label">
+                                            {{ form_label(formUser.accept_rgpd,
+                                                'accepter les conditions d\'utilisation du service'
+                                            ) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                        </div>
+                    </div>
+                    <br />
+                    <div id="buttons_nav">
+                        <div class="btn-block text-center">
+                            <input type="submit" value="Envoyer ma demande de contact" class="btn btn-quote" style="width:auto;">
+                            <div style="padding-top:1rem">* : champs obligatoires</div>
+                        </div>
+                    </div>
+                    {{ form_end(formUser) }}
+                    <br />
+                    <br />
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    var formQ = $("#quoteForm");
+                    var formU = $("#userForm");
+                    // Hack form submission to copy fields from one form in the other
+                    formU.submit(function() {
+                        $(this).find(':input[acopy]').remove();
+                        formQ.find(':input').clone().hide().attr('acopy','y').appendTo(this);
+                        return true;
+                    });
+                });
+            </script>
+        {% endblock %}
+
+
+    {% endembed %}
+{% endblock layout %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if optionBundleEnabled %}
+        {% include 'CocoricoListingOptionBundle:Frontend:Quote/js/_options_js.html.twig' only %}
+    {% endif %}
+{% endblock %}
+
+
+
+
+{#
+<!-- two-columns -->
+<div class="twocolumns row alt">
+    <!-- contain the main content of the page -->
+    <div id="content" class="listing-area col-xs-12 col-md-9">
+        <div class="content-holder">
+            {% include 'CocoricoCoreBundle:Frontend:Quote/_form_flash.html.twig' with {
+                'quote' : quote,
+                'formUser': formUser,
+                'formQuote': formQuote
+            } only %}
+        </div>
+    </div>
+
+    {% include 'CocoricoCoreBundle:Frontend:Quote/_side.html.twig' with {
+        'quote' : quote
+    } only %}
+</div>
+#}
+
+

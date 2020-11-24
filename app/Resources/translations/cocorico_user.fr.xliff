@@ -40,7 +40,7 @@
       </trans-unit>
       <trans-unit id="4281c52d617278a34a14cf5faf9c6fb11df197a6" resname="Asker">
         <source>Asker</source>
-        <target>Demandeur</target>
+        <target>Acheteur</target>
       </trans-unit>
       <trans-unit id="7434fa918f1cff45a2f9455ad4b6d3de9edd5560" resname="BIC">
         <source>BIC</source>
@@ -80,7 +80,7 @@
       </trans-unit>
       <trans-unit id="b6efbc728e20a592f93cc71db4d9e5cfe7f9e414" resname="Offerer">
         <source>Offerer</source>
-        <target>Offreur</target>
+        <target>Prestataire</target>
       </trans-unit>
       <trans-unit id="3deb7456519697ecf4eefc455516c969a3681bae" resname="Type">
         <source>Type</source>
@@ -156,7 +156,7 @@
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b3" resname="entity.user.person_type.classic">
         <source>entity.user.person_type.classic</source>
-        <target state="new">Structure classique qui souhaite réaliser un achat inclusif</target>
+        <target state="new">Un acheteur qui souhaite réaliser un achat inclusif</target>
       </trans-unit>
       <trans-unit id="a02b17ba58469b780ac6c838666fc3ad853ba3b4" resname="entity.user.person_type.inclusive">
         <source>entity.user.person_type.inclusive</source>
@@ -197,6 +197,10 @@
       <trans-unit id="5067bcd438be5b76938f2179e7acb15ead3f9281" resname="form.company_name">
         <source>form.company_name</source>
         <target state="new">Raison sociale (nom de la structure) :</target>
+      </trans-unit>
+      <trans-unit id="5067bcd438be5b76938f2184e7acb15ead3f9281" resname="form.company_addr_string">
+        <source>form.company_addr_string</source>
+        <target state="new">Adresse de l'entreprise</target>
       </trans-unit>
       <trans-unit id="688577b0535ad8ca72e0c605e4b7eb69a8c90bcb" resname="form.contact.phone.help">
         <source>form.contact.phone.help</source>

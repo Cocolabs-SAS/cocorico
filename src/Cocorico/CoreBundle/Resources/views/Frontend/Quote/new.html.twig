@@ -28,6 +28,103 @@
     {% endif %}
 {%- endblock -%}
 
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+        {% trans_default_domain 'cocorico_quote' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
+
+        {% block main %}
+            <a href="{{ path('cocorico_listing_show', {'slug':listing_translation.slug} ) }}">
+                &lt; {{ 'quote.new.back'|trans }}
+            </a>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form_start(form, {'attr': {'id': 'quoteForm', 'class': 'quoteform'}}) }}
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="head">
+                                <h2 class="itou-formtitle">Détails de votre demande</h2>
+                                <div class="itou-info">
+                                    <img class="shape" src="/images/info_shape.png" />
+                                    <p>Communiquez au préalable quelques informations ou détails qui permettront à votre interlocuteur de préparer des éléments nécessaires à un échange pertinent.</p>
+                                </div>
+                                {{ form_errors(form) }}
+                                <div class="itou-fieldgroup">
+                                    <div class="field-row validate-row">
+                                        <legend>Détails du besoin</legend>
+                                        {{ form_errors(form.communication) }}
+                                        <div class="no-scroll">
+                                            {{ form_widget(form.communication,{
+                                                'attr': {
+                                                    'placeholder': 'quote.new.communication.placeholder'|trans,
+                                                    'rows': '10'
+                                                }
+                                            }) }}
+                                        </div>
+                                    </div>
+                                    <div class="field-row validate-row">
+                                        <legend>Vous souhaitez être recontacté par</legend>
+                                        {{ form_errors(form.preferredContact) }}
+                                        <div class="option">
+                                            <label>
+                                            {{ form_widget(form.preferredContact.0, { 'attr': { 'class': 'form-control required' }}) }}
+                                            par téléphone
+                                            </label>
+                                        </div>
+                                        <div class="option">
+                                            <label>
+                                            {{ form_widget(form.preferredContact.1, { 'attr': { 'class': 'form-control required' }}) }}
+                                            par messagerie
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            {% include 'CocoricoCoreBundle:Frontend:Quote/_side.html.twig' with {
+                                'quote' : quote
+                            } only %}
+                        </div>
+                    </div>
+                    <div id="buttons_nav">
+                        <div class="btn-block text-center">
+                            <input type="submit" value="Envoyer ma demande de contact" class="btn btn-default">
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                    <br />
+                    <br />
+                    <br />
+                </div>
+            </div>
+        {% endblock %}
+
+
+    {% endembed %}
+{% endblock layout %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% if optionBundleEnabled %}
+        {% include 'CocoricoListingOptionBundle:Frontend:Quote/js/_options_js.html.twig' only %}
+    {% endif %}
+{% endblock %}
+
+
+
+{#
 
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
@@ -73,3 +170,4 @@
         {% include 'CocoricoListingOptionBundle:Frontend:Quote/js/_options_js.html.twig' only %}
     {% endif %}
 {% endblock %}
+#}
