@@ -151,8 +151,8 @@ class QuoteBaseFormHandler
      */
     public function notifyRegularQuote(Quote $quote)
     {
-        $this->QuoteManager->notifyQuote('ask-demand');
-        $this->QuoteManager->notifyQuote('off-notif');
+        $this->quoteManager->notifyQuote('ask-demand');
+        $this->quoteManager->notifyQuote('off-notif');
 
     }
 
@@ -164,8 +164,8 @@ class QuoteBaseFormHandler
      */
     public function notifyFlashQuote(Quote $quote)
     {
-        $this->QuoteManager->notifyQuote($quote, 'ask-flash-demand');
-        $this->QuoteManager->notifyQuote($quote, 'off-notif');
+        $this->quoteManager->notifyQuote($quote, 'ask-flash-demand');
+        $this->quoteManager->notifyQuote($quote, 'off-notif');
     }
 
     /**
