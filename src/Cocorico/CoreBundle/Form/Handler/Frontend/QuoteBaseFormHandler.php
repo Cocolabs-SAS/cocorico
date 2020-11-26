@@ -144,6 +144,31 @@ class QuoteBaseFormHandler
     }
 
     /**
+     * notify regular quote
+     *
+     * @param Listing       $listing
+     * @return void
+     */
+    public function notifyRegularQuote(Quote $quote)
+    {
+        $this->QuoteManager->notifyQuote('ask-demand');
+        $this->QuoteManager->notifyQuote('off-notif');
+
+    }
+
+    /**
+     * notif flash quote
+     *
+     * @param Listing       $listing
+     * @return void
+     */
+    public function notifyFlashQuote(Quote $quote)
+    {
+        $this->QuoteManager->notifyQuote($quote, 'ask-flash-demand');
+        $this->QuoteManager->notifyQuote($quote, 'off-notif');
+    }
+
+    /**
      * @param Form $form
      *
      * @return int equal to :

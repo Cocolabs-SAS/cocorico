@@ -117,6 +117,35 @@ class QuoteManager extends BaseManager
     }
 
     /**
+     * notify regular quote
+     *
+     * @param Listing       $listing
+     * @param String        $stype
+     * @return void
+     */
+    public function notifyQuote(Quote $quote, string $type)
+    {
+    switch($type) {
+        case "ask-flash-demand":
+            $this->mailer->sendNewFlashQuoteToAsker($quote);
+            break;
+        case "ask-demand":
+            $this->mailer->sendNewQuoteToAsker($quote);
+            break;
+        case "off-notif":
+            $this->mailer->sendNewQuoteToOfferer($quote);
+            break;
+        case "ask-msg":
+            $this->mailer->sendQuoteMessageToOfferer($quote);
+            break;
+        case "off-msg":
+            $this->mailer->sendQuoteMessageToAsker($quote);
+            break;
+        }
+    }
+
+
+    /**
      * @param int    $askerId
      * @param string $locale
      * @param int    $page

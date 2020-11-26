@@ -63,7 +63,7 @@ class QuoteController extends Controller
         $success = $quoteHandler->process($form);
         if ($success === 1) {//Success
             $event = new QuoteEvent($quote);
-
+            $quoteHandler->notifyRegularQuote($quote);
             try {
                 $this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
                 $response = $event->getResponse();
@@ -369,6 +369,7 @@ class QuoteController extends Controller
             $successQuote = $quoteHandler->process($formQuote);
             if ($successQuote) {
                 $event = new QuoteEvent($requote);
+                $quoteHandler->notifyFlashQuote($quote);
                 try {
                     $this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
                     $response = $event->getResponse();

@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.23.1] - (2020-11-26)
+- Ajout notification mail sur inscription / demande contact flash
+- Ajout notification sur message demande contact
+
 ### [0.23.0] - (2020-11-24)
 - Formulaire devis "FLASH": demande de devis et inscription en même temps
 - Page confirmation envoi de devis

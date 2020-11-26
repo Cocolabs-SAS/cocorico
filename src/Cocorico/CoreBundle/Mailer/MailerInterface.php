@@ -26,6 +26,41 @@ interface MailerInterface
     public function sendListingActivatedMessageToOfferer(Listing $listing);
 
     /**
+     * email is sent to flash subscriber
+     * @param Quote $quote
+     * @return void
+     */
+    public function sendNewFlashQuoteToAsker(Quote $quote);
+
+    /**
+     * email is sent to notify asker of his new quote demand
+     * @param Quote $quote
+     * @return void
+     */
+    public function sendNewQuoteToAsker(Quote $quote);
+
+    /**
+     * email is sent to notify offerer of new quote demand
+     * @param Quote $quote
+     * @return void
+     */
+    public function sendNewQuoteToOfferer(Quote $quote);
+
+    /**
+     * email is sent to offerer when he receives a message in a quote procedure
+     * @param Quote $quote
+     * @return void
+     */
+    public function sendQuoteMessageToOfferer(Quote $quote);
+
+    /**
+     * email is sent to asker when he receives a message in a quote procedure
+     * @param Quote $quote
+     * @return void
+     */
+    public function sendQuoteMessageToAsker(Quote $quote);
+
+    /**
      * Send an email to offerer to confirm the new booking request
      *
      * @param Booking $booking

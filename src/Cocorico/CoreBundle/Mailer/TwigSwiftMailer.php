@@ -177,6 +177,40 @@ class TwigSwiftMailer implements MailerInterface
         $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewFlashQuoteToAsker(Quote $quote)
+    {
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewQuoteToAsker(Quote $quote)
+    {
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewQuoteToOfferer(Quote $quote)
+    {
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendQuoteMessageToOfferer(Quote $quote)
+    {
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendQuoteMessageToAsker(Quote $quote)
+    {
+    }
 
     /**
      * @param Booking $booking
