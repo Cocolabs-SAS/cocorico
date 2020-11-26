@@ -1,1 +1,35 @@
 {# Offerer new quote notif #}
+{% trans_default_domain 'cocorico_mail' %}
+
+{% block subject -%}
+    {% autoescape false %}
+    {{ cocorico_site_name }} Nouvelle demande de contact
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    Bonjour {{user.firstName }}
+
+    Une annonce à reçu une demande de contact,
+    vous pouvez vous rendre sur le Marché de l'Inclusion pour en prendre connaissance.
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--registration-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

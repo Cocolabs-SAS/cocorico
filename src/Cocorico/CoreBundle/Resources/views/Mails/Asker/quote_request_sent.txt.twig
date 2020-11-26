@@ -1,2 +1,34 @@
 {# Asker Regular Quote sent #}
+{% trans_default_domain 'cocorico_mail' %}
 
+{% block subject -%}
+    {% autoescape false %}
+    {{ cocorico_site_name }} Demande de contact
+    {% endautoescape %}
+{%- endblock %}
+
+{% block message %}
+    Bonjour {{user.firstName }}
+
+    Votre demande de contact a bien été transmise, merci pour votre confiance.
+{% endblock %}
+
+{% block body_text %}
+    {% autoescape false %}
+    {{ message }}
+    {% endautoescape %}
+{% endblock %}
+
+{% block body_html %}
+    {% embed "@CocoricoCore/Mails/layout.html.twig" %}
+        {% trans_default_domain 'cocorico_mail' %}
+
+        {% block content %}
+            {% autoescape false %}
+            {{ message|raw|nl2br }}
+            {% endautoescape %}
+            {#Do not remove this comment. It is used for BDD testing #}
+            <!--registration-->
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

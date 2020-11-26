@@ -1,16 +1,19 @@
 {# Quote Message Offerer #}
 {% trans_default_domain 'cocorico_mail' %}
 
+{% trans_default_domain 'cocorico_mail' %}
+
 {% block subject -%}
     {% autoescape false %}
-    {{ 'flash_account_created_user.email.subject'|trans({'%sitename%': cocorico_site_name}, 'cocorico_mail', user_locale) }}
+    {{ cocorico_site_name }} Nouveau message
     {% endautoescape %}
 {%- endblock %}
 
 {% block message %}
-    {{ 'flash_account_created_user.email.message'|trans({
-        '%firstname%': user.firstName
-    }, 'cocorico_mail', user_locale) }}
+    Bonjour {{user.firstName }}
+
+    Vous avez reçu un nouveau message concernant une demande de contact sur une de vos annonces,
+    vous pouvez vous rendre sur le Marché de l'Inclusion pour en prendre connaissance.
 {% endblock %}
 
 {% block body_text %}

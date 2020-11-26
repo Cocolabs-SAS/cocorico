@@ -135,10 +135,10 @@ class QuoteManager extends BaseManager
         case "off-notif":
             $this->mailer->sendNewQuoteToOfferer($quote);
             break;
-        case "ask-msg":
+        case "off-msg":
             $this->mailer->sendQuoteMessageToOfferer($quote);
             break;
-        case "off-msg":
+        case "ask-msg":
             $this->mailer->sendQuoteMessageToAsker($quote);
             break;
         }

@@ -4,14 +4,14 @@
 
 {% block subject -%}
     {% autoescape false %}
-    {{ 'flash_account_created_user.email.subject'|trans({'%sitename%': cocorico_site_name}, 'cocorico_mail', user_locale) }}
+    {{ cocorico_site_name }} Demande de contact 
     {% endautoescape %}
 {%- endblock %}
 
 {% block message %}
-    {{ 'flash_account_created_user.email.message'|trans({
-        '%firstname%': user.firstName
-    }, 'cocorico_mail', user_locale) }}
+    Bonjour {{user.firstName }}
+
+    Votre demande de contact a bien été transmise, merci pour votre confiance.
 {% endblock %}
 
 {% block body_text %}
