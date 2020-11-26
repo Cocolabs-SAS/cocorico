@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Mailer;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -182,6 +183,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewFlashQuoteToAsker(Quote $quote)
     {
+        $user = $quote->getUser();
+        $template = $this->templates['flash_quote_submitted'];
+
+        $context = array(
+            'user' => $user,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
     /**
@@ -189,6 +198,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewQuoteToAsker(Quote $quote)
     {
+        $user = $quote->getUser();
+        $template = $this->templates['quote_request_sent'];
+
+        $context = array(
+            'user' => $user,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
     /**
@@ -196,6 +213,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewQuoteToOfferer(Quote $quote)
     {
+        $user = $quote->getUser();
+        $template = $this->templates['quote_request_received'];
+
+        $context = array(
+            'user' => $user,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
     /**
@@ -203,6 +228,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendQuoteMessageToOfferer(Quote $quote)
     {
+        $user = $quote->getUser();
+        $template = $this->templates['quote_message_off'];
+
+        $context = array(
+            'user' => $user,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
     /**
@@ -210,6 +243,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendQuoteMessageToAsker(Quote $quote)
     {
+        $user = $quote->getUser();
+        $template = $this->templates['quote_message_ask'];
+
+        $context = array(
+            'user' => $user,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
     /**
