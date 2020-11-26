@@ -151,8 +151,8 @@ class QuoteBaseFormHandler
      */
     public function notifyRegularQuote(Quote $quote)
     {
-        $this->quoteManager->notifyQuote('ask-demand');
-        $this->quoteManager->notifyQuote('off-notif');
+        $this->quoteManager->notifyQuote($quote, 'ask-demand');
+        $this->quoteManager->notifyQuote($quote, 'off-notif');
 
     }
 
