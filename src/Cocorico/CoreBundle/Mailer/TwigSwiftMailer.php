@@ -271,6 +271,7 @@ class TwigSwiftMailer implements MailerInterface
         $context = array(
             'user' => $offerer,
             'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
@@ -296,6 +297,7 @@ class TwigSwiftMailer implements MailerInterface
         $context = array(
             'user' => $asker,
             'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
