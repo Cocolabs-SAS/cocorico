@@ -379,9 +379,7 @@ class QuoteController extends Controller
                             'success',
                             $this->get('translator')->trans('quote.new.success', array(), 'cocorico_quote')
                         );
-                    dump('################ New quote created');
                     } else {
-                        dump('################ New quote Failed');
                         throw new \Exception('quote.new.form.error');
                     }
                 } catch (\Exception $e) {
