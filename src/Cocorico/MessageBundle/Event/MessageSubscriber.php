@@ -35,7 +35,7 @@ class MessageSubscriber implements EventSubscriberInterface
         $recipient = $event->getRecipient();
         $sender = $event->getSender();
 
-        $this->mailer->sendNewThreadMessageToUser($thread->getId(), $recipient, $sender);
+        // $this->mailer->sendNewThreadMessageToUser($thread->getId(), $recipient, $sender);
     }
 
 

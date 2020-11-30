@@ -63,13 +63,14 @@ class QuoteController extends Controller
         $success = $quoteHandler->process($form);
         if ($success === 1) {//Success
             $event = new QuoteEvent($quote);
-
             try {
                 $this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
                 $response = $event->getResponse();
                 if ($response === null) {//No response means we can create new quote
                     if ($quote) {
                         //New Quote confirmation
+                        $quoteHandler->notifyRegularQuote($quote);
+
                         $this->get('session')->getFlashBag()->add(
                             'success',
                             $this->get('translator')->trans('quote.new.success', array(), 'cocorico_quote')
@@ -373,13 +374,12 @@ class QuoteController extends Controller
                     $this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
                     $response = $event->getResponse();
                     if ($response === null) {//No response means we can create new quote
+                        $quoteHandler->notifyFlashQuote($requote);
                         $this->get('session')->getFlashBag()->add(
                             'success',
                             $this->get('translator')->trans('quote.new.success', array(), 'cocorico_quote')
                         );
-                    dump('################ New quote created');
                     } else {
-                        dump('################ New quote Failed');
                         throw new \Exception('quote.new.form.error');
                     }
                 } catch (\Exception $e) {

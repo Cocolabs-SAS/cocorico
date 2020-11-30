@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Mailer;
 
 use Cocorico\CoreBundle\Entity\Booking;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Entity\Quote;
 use Cocorico\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -177,6 +178,133 @@ class TwigSwiftMailer implements MailerInterface
         $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
     }
 
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewFlashQuoteToAsker(Quote $quote)
+    {
+        $asker = $quote->getUser();
+        $template = $this->templates['flash_quote_submitted'];
+
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_asker',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $context = array(
+            'user' => $asker,
+            'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewQuoteToAsker(Quote $quote)
+    {
+        $asker = $quote->getUser();
+        $template = $this->templates['quote_request_sent'];
+
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_asker',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $context = array(
+            'user' => $asker,
+            'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendNewQuoteToOfferer(Quote $quote)
+    {
+        $listing = $quote->getListing();
+        $offerer = $listing->getUser();
+        $template = $this->templates['quote_request_received'];
+
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $context = array(
+            'user' => $offerer,
+            'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendQuoteMessageToOfferer(Quote $quote)
+    {
+        $listing = $quote->getListing();
+        $offerer = $listing->getUser();
+        $template = $this->templates['quote_message_off'];
+
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+        $context = array(
+            'user' => $offerer,
+            'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
+    }
+
+    /**
+     * @param Quote $quote
+     */
+    public function sendQuoteMessageToAsker(Quote $quote)
+    {
+        $asker = $quote->getUser();
+        $template = $this->templates['quote_message_ask'];
+
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+
+        $context = array(
+            'user' => $asker,
+            'link' => $quoteShowUrl,
+            'id' => $quote->getId(),
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
+    }
 
     /**
      * @param Booking $booking

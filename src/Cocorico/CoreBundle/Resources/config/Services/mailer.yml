@@ -19,6 +19,11 @@ parameters:
     cocorico.payment_error_asker.email.template: "CocoricoCoreBundle:Mails/Asker:payment_error_asker.txt.twig"
     cocorico.reminder_to_rate_offerer_asker.email.template: "CocoricoCoreBundle:Mails/Asker:reminder_to_rate_offerer_asker.txt.twig"
     cocorico.admin_message.email.template: "CocoricoCoreBundle:Mails:admin_message.txt.twig"
+    cocorico.flash_quote_submitted.email.template: "CocoricoCoreBundle:Mails/Asker:flash_quote_submitted.txt.twig"
+    cocorico.quote_request_sent.email.template: "CocoricoCoreBundle:Mails/Asker:quote_request_sent.txt.twig"
+    cocorico.quote_request_received.email.template: "CocoricoCoreBundle:Mails/Offerer:quote_request_received.txt.twig"
+    cocorico.quote_message_off.email.template: "CocoricoCoreBundle:Mails/Offerer:quote_message.txt.twig"
+    cocorico.quote_message_ask.email.template: "CocoricoCoreBundle:Mails/Asker:quote_message.txt.twig"
 
 services:
     cocorico.mailer.twig_swift:
@@ -57,3 +62,8 @@ services:
                 update_your_calendar_offerer: "%cocorico.update_your_calendar_offerer.email.template%"
                 payment_error_asker: "%cocorico.payment_error_asker.email.template%"
                 admin_message: "%cocorico.admin_message.email.template%"
+                flash_quote_submitted: "%cocorico.flash_quote_submitted.email.template%"
+                quote_request_sent: "%cocorico.quote_request_sent.email.template%"
+                quote_request_received: "%cocorico.quote_request_received.email.template%"
+                quote_message_off: "%cocorico.quote_message_off.email.template%"
+                quote_message_ask: "%cocorico.quote_message_ask.email.template%"

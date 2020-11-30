@@ -90,6 +90,7 @@ class QuoteController extends Controller
         $request->request->set($form->getName(), $paramArr);
 
         $formHandler = $this->get('fos_message.reply_form.handler');
+        $quoteManager = $this->get('cocorico.quote.manager');
 
         if ($message = $formHandler->process($form)) {
 
@@ -98,6 +99,8 @@ class QuoteController extends Controller
 
             $messageEvent = new MessageEvent($thread, $recipient, $this->getUser());
             $this->get('event_dispatcher')->dispatch(MessageEvents::MESSAGE_POST_SEND, $messageEvent);
+
+            $quoteManager->notifyQuote($quote, 'off-msg');
 
             return $this->redirectToRoute(
                 'cocorico_dashboard_quote_show_asker',
