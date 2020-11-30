@@ -8,12 +8,11 @@
 {%- endblock %}
 
 {% block message %}
-    Bonjour {{user.firstName }}
+Bonjour {{user.firstName }}
 
-    Votre demande de contact a bien été transmise, merci pour votre confiance.
+Votre demande de contact a bien été transmise, merci pour votre confiance.
+Vous pouvez suivre son évolution ici : <a href="{{ link }}">{{ link }}</a>
 
-    ID: {{ id }}
-    Vous pouvez suivre son évolution ici : {{ link }}
 {% endblock %}
 
 {% block body_text %}

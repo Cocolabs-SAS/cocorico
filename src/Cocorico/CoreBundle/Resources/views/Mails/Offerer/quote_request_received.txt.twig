@@ -8,15 +8,13 @@
 {%- endblock %}
 
 {% block message %}
-    Bonjour {{user.firstName }}
+Bonjour {{user.firstName }}
 
-    Une annonce à reçu une demande de contact,
-    vous pouvez vous rendre sur le Marché de l'Inclusion pour en prendre connaissance,
-    ou la consulter directement par le lien suivant :
+Une annonce à reçu une demande d’information
+vous pouvez la consulter directement par le lien suivant :
+<a href="{{ link }}">{{ link }}</a>
 
-    ID: {{ id }}
-    {{ link }}
-
+Ou vous rendre sur le <a href="https://lemarche.inclusion.beta.gouv.fr">Marché de l'inclusion</a>.
 {% endblock %}
 
 {% block body_text %}
