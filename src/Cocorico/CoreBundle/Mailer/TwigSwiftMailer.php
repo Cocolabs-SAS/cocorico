@@ -186,8 +186,17 @@ class TwigSwiftMailer implements MailerInterface
         $asker = $quote->getUser();
         $template = $this->templates['flash_quote_submitted'];
 
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_asker',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
         $context = array(
             'user' => $asker,
+            'link' => $quoteShowUrl,
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
@@ -205,7 +214,6 @@ class TwigSwiftMailer implements MailerInterface
             'cocorico_dashboard_quote_show_asker',
             array(
                 'id' => $quote->getId(),
-                '_locale' => $userLocale
             ),
             UrlGeneratorInterface::ABSOLUTE_URL
         );
@@ -231,7 +239,6 @@ class TwigSwiftMailer implements MailerInterface
             'cocorico_dashboard_quote_show_offerer',
             array(
                 'id' => $quote->getId(),
-                '_locale' => $userLocale
             ),
             UrlGeneratorInterface::ABSOLUTE_URL
         );
@@ -253,8 +260,17 @@ class TwigSwiftMailer implements MailerInterface
         $offerer = $listing->getUser();
         $template = $this->templates['quote_message_off'];
 
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
         $context = array(
             'user' => $offerer,
+            'link' => $quoteShowUrl,
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
@@ -268,8 +284,18 @@ class TwigSwiftMailer implements MailerInterface
         $asker = $quote->getUser();
         $template = $this->templates['quote_message_ask'];
 
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
+
+
         $context = array(
             'user' => $asker,
+            'link' => $quoteShowUrl,
         );
 
         $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
