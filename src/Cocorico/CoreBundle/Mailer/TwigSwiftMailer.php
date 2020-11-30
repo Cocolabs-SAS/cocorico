@@ -183,14 +183,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewFlashQuoteToAsker(Quote $quote)
     {
-        $user = $quote->getUser();
+        $asker = $quote->getUser();
         $template = $this->templates['flash_quote_submitted'];
 
         $context = array(
-            'user' => $user,
+            'user' => $asker,
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
     }
 
     /**
@@ -198,14 +198,24 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewQuoteToAsker(Quote $quote)
     {
-        $user = $quote->getUser();
+        $asker = $quote->getUser();
         $template = $this->templates['quote_request_sent'];
 
-        $context = array(
-            'user' => $user,
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_asker',
+            array(
+                'id' => $quote->getId(),
+                '_locale' => $userLocale
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $context = array(
+            'user' => $asker,
+            'link' => $quoteShowUrl,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
     }
 
     /**
@@ -213,14 +223,25 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendNewQuoteToOfferer(Quote $quote)
     {
-        $user = $quote->getUser();
+        $listing = $quote->getListing();
+        $offerer = $listing->getUser();
         $template = $this->templates['quote_request_received'];
 
-        $context = array(
-            'user' => $user,
+        $quoteShowUrl = $this->router->generate(
+            'cocorico_dashboard_quote_show_offerer',
+            array(
+                'id' => $quote->getId(),
+                '_locale' => $userLocale
+            ),
+            UrlGeneratorInterface::ABSOLUTE_URL
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $context = array(
+            'user' => $offerer,
+            'link' => $quoteShowUrl,
+        );
+
+        $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
     }
 
     /**
@@ -228,14 +249,15 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendQuoteMessageToOfferer(Quote $quote)
     {
-        $user = $quote->getUser();
+        $listing = $quote->getListing();
+        $offerer = $listing->getUser();
         $template = $this->templates['quote_message_off'];
 
         $context = array(
-            'user' => $user,
+            'user' => $offerer,
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $this->sendMessage($template, $context, $this->fromEmail, $offerer->getEmail());
     }
 
     /**
@@ -243,14 +265,14 @@ class TwigSwiftMailer implements MailerInterface
      */
     public function sendQuoteMessageToAsker(Quote $quote)
     {
-        $user = $quote->getUser();
+        $asker = $quote->getUser();
         $template = $this->templates['quote_message_ask'];
 
         $context = array(
-            'user' => $user,
+            'user' => $asker,
         );
 
-        $this->sendMessage($template, $context, $this->fromEmail, $user->getEmail());
+        $this->sendMessage($template, $context, $this->fromEmail, $asker->getEmail());
     }
 
     /**
