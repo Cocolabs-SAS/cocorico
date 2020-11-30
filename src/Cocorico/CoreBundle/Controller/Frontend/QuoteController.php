@@ -370,11 +370,11 @@ class QuoteController extends Controller
             $successQuote = $quoteHandler->process($formQuote);
             if ($successQuote) {
                 $event = new QuoteEvent($requote);
-                $quoteHandler->notifyFlashQuote($quote);
                 try {
                     $this->get('event_dispatcher')->dispatch(QuoteEvents::QUOTE_NEW_SUBMITTED, $event);
                     $response = $event->getResponse();
                     if ($response === null) {//No response means we can create new quote
+                        $quoteHandler->notifyFlashQuote($requote);
                         $this->get('session')->getFlashBag()->add(
                             'success',
                             $this->get('translator')->trans('quote.new.success', array(), 'cocorico_quote')
