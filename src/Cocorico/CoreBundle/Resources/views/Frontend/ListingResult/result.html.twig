@@ -65,6 +65,7 @@
             {{ form_end(form) }}
             {#end search form with filters#}
 
+            {%- if not listings is empty -%}
             <h1 data-id="result-title">
                 <span data-id="title">{{ seo_title }}</span>
                 <small data-id="nb-result">
@@ -81,13 +82,7 @@
                     <div data-id="listing-alert-dialog"></div>
                 {% endif %}
             </h1>
-            {#TO NOT DELETE#}
-            <div data-id="seo-desc">
-                {{ seo_desc|raw }}
-            </div>
-
             <!-- two-columns -->
-            {%- if not listings is empty -%}
                 <div class="twocolumns row">
                     <!-- postarea -->
                     <section class="listing-area col-xs-12 col-sm-8">
@@ -149,6 +144,12 @@
                     </div>
                 </div>
             {%- endif -%}
+            {#TO NOT DELETE#}
+            <div data-id="seo-desc">
+                {{ seo_desc|raw }}
+            </div>
+
+
         {% endblock %}
 
         {% block modal %}
