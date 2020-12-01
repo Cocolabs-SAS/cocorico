@@ -69,15 +69,24 @@
                              alt="{{ listing_user.firstName }}"/>
                     </div>
                     <div class="textbox">
-                        {% if bundleExist('CocoricoDeliveryBundle') and not app.request.xmlHttpRequest %}
-                            {% include 'CocoricoDeliveryBundle:Frontend:Listing/_show_delivery.html.twig' with {
-                            'listing_delivery': listing.delivery
-                            } only %}
-                        {% endif %}
-
                         <h2>{{ listing_translation.title }}</h2>
 
-                        <p>{{ listing_location.city }} </p>
+                        <p> Intervient sur :
+                            {% if listing.polRange  != 0 %}
+                                {% if listing.polRange  == 1 %}
+                                {{ listing_location.city }} (département)
+                                {% elseif listing.polRange  == 2 %}
+                                {{ listing_location.city }} (région)
+                                {% else %}
+                                {{ listing_location.city }} (France entière)
+                                {% endif %}
+                            {% else %} 
+                                {% if listing.range %}
+                                    {{ listing.range }} km autour de {{ listing_location.city }}
+                                {% else %}
+                                    Non Précisé
+                                {% endif %}
+                            {% endif %}
 
                         {#<!--Debug:#}
                         {#accuracy : {{ listingTmp.accuracy|default(-1) }}<br/>#}
