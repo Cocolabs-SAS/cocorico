@@ -96,6 +96,16 @@
     border-radius:7px;
     margin-left:15%;
     margin-top: 4rem;
+    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
+}
+
+.form-confirm .no-results {
+    text-align: center;
+}
+
+.form-confirm .no-results  {
+    font-size:1.4em;
+    color:#000;
 }
 
 

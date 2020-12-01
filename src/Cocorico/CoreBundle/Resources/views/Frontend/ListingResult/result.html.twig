@@ -87,42 +87,68 @@
             </div>
 
             <!-- two-columns -->
-            <div class="twocolumns row">
-                <!-- maparea -->
-                <div class="maparea col-xs-12 col-sm-4">
-                    <div class="maparea">
-                        <div class="checkbox search-on-drag-cb-wrapper">
-                            <input type="checkbox" name="search-on-drag" id="search-on-drag">
-                            <label class="form-label" for="search-on-drag">
-                                {{ 'search-on-map-drag'|trans }}
-                            </label>
-                        </div>
-                        <div class="map-holder">
-                            <div id="map-canvas"></div>
-                            {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
-                            'markers': markers,
+            {%- if not listings is empty -%}
+                <div class="twocolumns row">
+                    <!-- postarea -->
+                    <section class="listing-area col-xs-12 col-sm-8">
+                        <div class="listing-holder row">
+                            {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
+                            'listings': listings,
+                            'nb_listings': nb_listings
                             } only %}
+                        </div>
+                        {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                        'pagination': pagination
+                        } only %}
+
+                    </section>
+
+                    <!-- maparea -->
+                    <div class="maparea col-xs-12 col-sm-4">
+                        <div class="maparea">
+                            <div class="checkbox search-on-drag-cb-wrapper">
+                                <input type="checkbox" name="search-on-drag" id="search-on-drag">
+                                <label class="form-label" for="search-on-drag">
+                                    {{ 'search-on-map-drag'|trans }}
+                                </label>
+                            </div>
+                            <div class="map-holder">
+                                <div id="map-canvas"></div>
+                                {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
+                                'markers': markers,
+                                } only %}
+                            </div>
                         </div>
                     </div>
                 </div>
+                {#TO NOT DELETE#}
+                <div data-id="seo-desc-moved"></div>
+            {%- else -%}
+                <div class="col-xs-12 form-confirm min-height justify-content-center" style="margin:10rem 0 30rem;">
+                    <div class="container col-sm-8 no-results">
+                        <div style="text-align:center">
+                            <img src="{{ asset('images/home_help_icon_white.png') }}" style="height:64px;margin-bottom:1rem;" alt="icon description" class="icon">
+                        </div>
+                        <div class="row ">
+                            <div class="" style="">
+                                <p>Malheureusement, nous n'avons pas encore de prestataires correspondant à votre recherche sur La place de marché de l'inclusion.</p>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="" style="">
+                                <b>Faites nous part de votre besoin et nous vous recontacterons rapidement</b>
+                            </div>
+                        </div>
 
-                <!-- postarea -->
-                <section class="listing-area col-xs-12 col-sm-8">
-                    <div class="listing-holder row">
-                        {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
-                        'listings': listings,
-                        'nb_listings': nb_listings
-                        } only %}
+
+                        <div class="row" style="margin-top:4rem">
+                            <div class="buttonrow" style="display:flex">
+                                <a class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx">Déposez votre demande</a>
+                            </div>
+                        </div>
                     </div>
-                    {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
-                    'pagination': pagination
-                    } only %}
-
-                </section>
-            </div>
-
-            {#TO NOT DELETE#}
-            <div data-id="seo-desc-moved"></div>
+                </div>
+            {%- endif -%}
         {% endblock %}
 
         {% block modal %}
@@ -173,12 +199,13 @@
             refreshMapFunc('{{location.viewport }}', '{{ location.lat }}', '{{ location.lng }}');
 
             //Set listings markers on load
-            //Set listings markers on load through data-markers attribute
-            setMarkersFunc($("span#data-markers").data("markers"));
-
-            // Set default favourites in the listing
-            setDefaultFavourites();
-
+            {%- if not listings is empty -%}
+                //Set listings markers on load through data-markers attribute
+                setMarkersFunc($("span#data-markers").data("markers"));
+                // Set default favourites in the listing
+                setDefaultFavourites();
+            {% endif %}
+ 
             // Categories
             initMultiSelect(
                     '#categories',
@@ -186,30 +213,30 @@
                     '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',
                     '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
             );
-
+ 
             $(".datepicker").datepicker({
                 dateFormat: "dd/mm/yy"
             });
-
+ 
             //Listing alert (See form_search.html.twig, common.js)
             var $dialog = $("div[data-id=listing-alert-dialog]").initDialogForm(400);
-
+ 
             $("a[data-id=listing-alert]").on('click', function (e) {
                 e.preventDefault();
                 $dialog.openDialog($(this).attr("href"), "");
                 return false;
             });
-
-            //Move seo desc to bottom
-            $("[data-id=seo-desc]").appendTo("[data-id=seo-desc-moved]");
-
-            //Select change submit the form
-//            $("select[id^='characteristics_'], select#sort_by").change(function (e) {
-//                $(this).closest('form').submit();
-//            });
-//            $(".ui-slider").on("slidestop", function (event, ui) {
-//                $(this).closest('form').submit();
-//            });
+ 
+         //Move seo desc to bottom
+         $("[data-id=seo-desc]").appendTo("[data-id=seo-desc-moved]");
+ 
+         //Select change submit the form
+           $("select[id^='characteristics_'], select#sort_by").change(function (e) {
+               $(this).closest('form').submit();
+           });
+           $(".ui-slider").on("slidestop", function (event, ui) {
+               $(this).closest('form').submit();
+           });
 
         });
     </script>
