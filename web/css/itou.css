@@ -495,20 +495,20 @@ footer img.min_trav {
     font-size:1.57em;
 }
 
-#itou-results-form .form-category,
+#itou-results-form,
 .home-page .form-category {
     background-color: transparent;
     border: transparent;
 }
 
-#itou-results-form .form-category .col,
+#itou-results-form  .col,
 .home-page .form-category .col {
     margin:0;
     padding:0;
 }
 
-#itou-results-form .form-category .col .form-control,
-#itou-results-form .form-category .col .btn-group,
+#itou-results-form .col .form-control,
+#itou-results-form .col .btn-group,
 .home-page .form-category .col .form-control,
 .home-page .form-category .col .btn-group {
     max-width:none;
@@ -544,7 +544,7 @@ footer img.min_trav {
     color:#000;
 }
 
-#itou-results .form-category .col .btn-group,
+#itou-results-form .col .btn-group,
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
     background-image:url('/images/home_search_1.png');
@@ -562,7 +562,7 @@ footer img.min_trav {
     background-repeat:no-repeat;
 }
 
-#itou-results .form-category .area .col .title,
+#itou-results-form .area .col .title,
 .home-page .form-category .area .col .title {
     text-align: left;
     width: 100%;
@@ -577,17 +577,17 @@ footer img.min_trav {
     text-align:left;
 }
 
-#itou-results .form-category .area .col .multiselect,
+#itou-results-form .area .col .multiselect,
 .home-page .form-category .area .col .multiselect {
     display: block;
     width: 100%;
     text-align:left;
     max-width:100%;
-    background-color: transparent;
+    background-color: #fff;
     color: #979797;
 }
 
-#itou-results .form-category .area .col .field-holder,
+#itou-results-form .area .col .field-holder,
 .home-page .form-category .area .col .field-holder {
     display: block;
     width: 100%;

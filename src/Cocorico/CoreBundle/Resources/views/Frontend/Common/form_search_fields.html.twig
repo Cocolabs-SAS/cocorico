@@ -1,6 +1,7 @@
 {% trans_default_domain 'cocorico_listing' %}
 
 {#search form fields without start ane end form#}
+{# This is the search form in the result page #}
 <fieldset>
     <legend class="hidden">form-category</legend>
     <div class="form-holder" style="display:flex; align-items:center; justify-content:center;">
@@ -11,7 +12,7 @@
         </div>
 
 
-        <div class="row" style="line-height:18px;font-size:14px">
+        <div style="line-height:18px;font-size:14px">
             <div class="col-xs-12">
                 <div class="area">
                     <div class="col">
@@ -33,7 +34,7 @@
                             Lieu d'intervention
                         </div>
 
-                        <div class="field-holder">
+                        <div class="field-holder" style="margin-left:-5px">
                             {{ form_errors(form.location.address) }}
                             {{ form_widget(form.location.address, {
                                 'id': 'location',
