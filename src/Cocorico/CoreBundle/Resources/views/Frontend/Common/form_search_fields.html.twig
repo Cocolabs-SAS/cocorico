@@ -9,37 +9,51 @@
                 {% include '@CocoricoElasticsearch/_form_keywords.html.twig' %}
             {% endif %}
         </div>
-        <div class="col categories">
-            <strong class="title">
-                {{ form_label(form.categories) }}
-            </strong>
 
-            <div class="multiselect listing-category">
-                {{ form_widget(form.categories) }}
+
+        <div class="row" style="line-height:18px;font-size:14px">
+            <div class="col-xs-12">
+                <div class="area">
+                    <div class="col">
+                        <div class="title">
+                            Cherchez
+                        </div>
+
+                        <div class="multiselect listing-category">
+                            {{ form_widget(form.categories) }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="title">
+                            {#
+                            {{ form_label(form.location.address, null, {
+                                'required': false
+                            }) }}
+                            #}
+                            Lieu d'intervention
+                        </div>
+
+                        <div class="field-holder">
+                            {{ form_errors(form.location.address) }}
+                            {{ form_widget(form.location.address, {
+                                'id': 'location',
+                                'attr': {
+                                    'class': 'form-control',
+                                    'placeholder': 'listing.search.form.address.placeholder'|trans
+                                }
+                            } ) }}
+                            {{ form_rest(form.location) }}
+                        </div>
+                    </div>
+                    <button id="home-submit" type="submit" class="btn btn-default">
+                            {{ 'listing.search'|trans }}
+                            <span style="font-family:fontello2;">
+                            &#128269;
+                            </span>
+                    </button>
+                </div>
             </div>
         </div>
-
-
-        <div class="col location">
-            <strong class="title">
-                {{ form_label(form.location.address, null, {
-                    'required': false
-                }) }}
-            </strong>
-
-            <div class="field-holder">
-                {{ form_errors(form.location.address) }}
-                {{ form_widget(form.location.address, {
-                    'id': 'location',
-                    'attr': {
-                        'class': 'form-control',
-                        'placeholder': 'listing.search.form.address.placeholder'|trans
-                    }
-                } ) }}
-                {{ form_rest(form.location) }}
-            </div>
-        </div>
-
         <div class="col time" style="display:none">
             {#In case of modification don't forget to add fields "start, end AND nb_days" #}
             {{ form_widget(form.date_range) }}
@@ -66,7 +80,5 @@
                 {{ form_widget(form.time_range) }}
             {% endif %}
         </div>
-
-        <input type="submit" value="{{ 'listing.search'|trans }}" class="btn btn-default">
     </div>
 </fieldset>

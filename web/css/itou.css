@@ -484,7 +484,7 @@ footer img.min_trav {
     max-width:none;
     color: #000;
     font-size:3.047em;
-    width:800px;
+    max-width:800px;
 }
 
 .home-page h2 {
@@ -495,16 +495,20 @@ footer img.min_trav {
     font-size:1.57em;
 }
 
+#itou-results-form .form-category,
 .home-page .form-category {
     background-color: transparent;
     border: transparent;
 }
 
+#itou-results-form .form-category .col,
 .home-page .form-category .col {
     margin:0;
     padding:0;
 }
 
+#itou-results-form .form-category .col .form-control,
+#itou-results-form .form-category .col .btn-group,
 .home-page .form-category .col .form-control,
 .home-page .form-category .col .btn-group {
     max-width:none;
@@ -540,6 +544,7 @@ footer img.min_trav {
     color:#000;
 }
 
+#itou-results .form-category .col .btn-group,
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
     background-image:url('/images/home_search_1.png');
@@ -557,6 +562,7 @@ footer img.min_trav {
     background-repeat:no-repeat;
 }
 
+#itou-results .form-category .area .col .title,
 .home-page .form-category .area .col .title {
     text-align: left;
     width: 100%;
@@ -571,6 +577,7 @@ footer img.min_trav {
     text-align:left;
 }
 
+#itou-results .form-category .area .col .multiselect,
 .home-page .form-category .area .col .multiselect {
     display: block;
     width: 100%;
@@ -580,6 +587,7 @@ footer img.min_trav {
     color: #979797;
 }
 
+#itou-results .form-category .area .col .field-holder,
 .home-page .form-category .area .col .field-holder {
     display: block;
     width: 100%;
@@ -587,7 +595,7 @@ footer img.min_trav {
     color: #979797;
 }
 
-.home-page #home-submit {
+#home-submit {
     border-radius:0;
     height:40px;
     margin-left:-4px;
