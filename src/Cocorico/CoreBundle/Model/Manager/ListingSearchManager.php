@@ -152,15 +152,17 @@ class ListingSearchManager
             ->setParameter('lat', $searchLocation->getLat())
             ->setParameter('lng', $searchLocation->getLng());
 
-        $queryBuilder
-            //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
-            ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (
-                case
-                    when l.polRange = 1 then 125
-                    when l.polRange = 2 then 450
-                    when l.polRange = 3 then 3000
-                    else l.range 
-                end)');
+        if (! is_null($listingSearchRequest->getLocation()->getRoute())) {
+            $queryBuilder
+                //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+                ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (
+                    case
+                        when l.polRange = 1 then 125
+                        when l.polRange = 2 then 450
+                        when l.polRange = 3 then 3000
+                        else l.range 
+                    end)');
+        }
 
         //$viewport = $searchLocation->getBound();
         //$queryBuilder

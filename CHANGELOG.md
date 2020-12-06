@@ -9,6 +9,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### [0.23.1] - (2020-12-01)
 - Indication format d'image
+- Style formulaire de recherche
+- Recherche par "zone" géo si adresse pas précise
 
 ### [0.23.1] - (2020-11-30)
 - Ajout notification mail sur inscription / demande contact flash
