@@ -4,7 +4,7 @@
 {# This is the search form in the result page #}
 <fieldset>
     <legend class="hidden">form-category</legend>
-    <div class="form-holder" style="display:flex; align-items:center; justify-content:center;">
+    <div class="form-holder" style="display:flex;">
         <div class="keyword clearable">
             {% if bundleExist('CocoricoElasticsearchBundle') %}
                 {% include '@CocoricoElasticsearch/_form_keywords.html.twig' %}
@@ -55,9 +55,8 @@
                 </div>
             </div>
         </div>
-        <div class="col time" style="display:none">
+        <div class="col time" style="display:none;position:absolute;left:-4000rem">
             {#In case of modification don't forget to add fields "start, end AND nb_days" #}
-            {{ form_widget(form.date_range) }}
 
             {% if timeUnitFlexibility and form.flexibility is defined %}
                 <div class="col flexibility">
@@ -76,10 +75,13 @@
                     </div>
                 </div>
             {% endif %}
+            <div style="display:none">
+                {{ form_widget(form.date_range) }}
 
-            {% if not timeUnitIsDay %}
-                {{ form_widget(form.time_range) }}
-            {% endif %}
+                {% if not timeUnitIsDay %}
+                    {{ form_widget(form.time_range) }}
+                {% endif %}
+            </div>
         </div>
     </div>
 </fieldset>

@@ -544,6 +544,19 @@ footer img.min_trav {
     color:#000;
 }
 
+#itou-results-form {
+    background-color:#F2F8FF;
+}
+
+#itou-results-form .selection-holder {
+    float:none;
+}
+
+#itou-results-form #search-container li.field-row .select-holder {
+    padding-left:0;
+    padding-right:10px;
+}
+
 #itou-results-form .col .btn-group,
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
@@ -551,6 +564,19 @@ footer img.min_trav {
     background-size: 30px 30px;
     background-position: right;
     background-repeat:no-repeat;
+}
+
+#itou-results-form .jcf-select {
+    border:1px solid #979797;
+    border-radius:4px;
+}
+
+#itou-results-form .jcf-select-opener {
+    border:0;
+}
+
+#itou-results-form #search-container .selection-holder {
+    width:100%;
 }
 
 .home-page #location {
@@ -562,7 +588,7 @@ footer img.min_trav {
     background-repeat:no-repeat;
 }
 
-#itou-results-form .area .col .title,
+#itou-results-form .title,
 .home-page .form-category .area .col .title {
     text-align: left;
     width: 100%;

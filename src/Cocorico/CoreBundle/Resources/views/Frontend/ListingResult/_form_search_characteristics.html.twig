@@ -1,6 +1,9 @@
 {% trans_default_domain 'cocorico_listing' %}
 
 <div id="characteristics" class="select-holder">
+    <div class="title">
+    Affinez la liste de résultats par
+    </div>
     {{ form_errors(characteristics) }}
     {% set listing_characteristic_group, previous_listing_characteristic_group = "", "" %}
     <!--@formatter:off-->
