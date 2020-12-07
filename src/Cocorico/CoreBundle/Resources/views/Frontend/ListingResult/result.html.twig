@@ -30,10 +30,12 @@
     {{ parent() }}
 
     <style>
+        /*
         #map-canvas {
             width: {{ listing_search_map_w }}px;
             height: {{ listing_search_map_h }}px;
         }
+        */
     </style>
 {% endblock %}
 
@@ -87,7 +89,7 @@
             <!-- two-columns -->
                 <div class="twocolumns row">
                     <!-- postarea -->
-                    <section class="listing-area col-xs-12 col-sm-8">
+                    <section class="listing-area col-xs-12 col-md-8">
                         <div class="listing-holder row">
                             {% include '@CocoricoCore/Frontend/ListingResult/_result_listings.html.twig'  with {
                             'listings': listings,
@@ -101,7 +103,7 @@
                     </section>
 
                     <!-- maparea -->
-                    <div class="maparea col-xs-12 col-sm-4">
+                    <div class="maparea col-xs-12 col-md-4">
                         <div class="maparea">
                             <div class="checkbox search-on-drag-cb-wrapper">
                                 <input type="checkbox" name="search-on-drag" id="search-on-drag">

@@ -465,6 +465,11 @@ footer img.min_trav {
 /******************
  * HOME STYLES
  ******************/
+
+ #map-canvas {
+    width:100%;
+    height:100%;
+ }
  .container {
     max-width: 1400px;
 }
@@ -596,6 +601,7 @@ footer img.min_trav {
     color:#000;
     margin:0;
     padding:0;
+    padding-bottom:5px;
 }
 
 .home-page .itou-info {
@@ -605,20 +611,26 @@ footer img.min_trav {
 
 #itou-results-form .area .col .multiselect,
 .home-page .form-category .area .col .multiselect {
-    display: block;
-    width: 100%;
-    text-align:left;
-    max-width:100%;
     background-color: #fff;
     color: #979797;
 }
 
+.home-page .form-category .area .col .multiselect {
+    display: block;
+    width: 100%;
+    text-align:left;
+    max-width:100%;
+}
+
 #itou-results-form .area .col .field-holder,
+.home-page .form-category .area .col .field-holder {
+    background-color: #fff;
+    color: #979797;
+}
+
 .home-page .form-category .area .col .field-holder {
     display: block;
     width: 100%;
-    background-color: #fff;
-    color: #979797;
 }
 
 #home-submit {
@@ -676,6 +688,40 @@ footer img.min_trav {
     #borat .container {
       width:100%;
     }
+
+}
+
+@media screen and (min-width: 1230px) {
+    #itou-results-form .area .col .multiselect {
+        display: block;
+        width: 100%;
+        text-align:left;
+        max-width:100%;
+    }
+
+    #itou-results-form .area .col .field-holder {
+        display: block;
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 1229px) {
+    #itou-results-form .area .col .multiselect {
+        display:inline;
+        width:none;
+    }
+
+    #itou-results-form .area .col .field-holder {
+        display:inline;
+        width:none;
+    }
+
+    #home-submit {
+        display:block;
+        margin-top:2rem;
+    }
+
 }
 
 .home-page .visual .container .btn {
