@@ -307,7 +307,7 @@ body {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      max-width: 200px;
+      width:80%;
       padding: 0 .4em 0;
  }
 
@@ -324,7 +324,7 @@ body {
 
 .listing-category .multiselect-container.dropdown-menu > li > a  {
     white-space: normal;
-    width:100%;
+    width:80%;
 }
 
 .listing-category .multiselect-container.dropdown-menu > li > a:hover  {
@@ -512,6 +512,10 @@ footer img.min_trav {
     padding:0;
 }
 
+#itou-results-form .col .btn-group {
+    background-color:#fff;
+}
+
 #itou-results-form .col .form-control,
 #itou-results-form .col .btn-group,
 .home-page .form-category .col .form-control,
@@ -584,7 +588,7 @@ footer img.min_trav {
     width:100%;
 }
 
-.home-page #location {
+#location {
     padding-top:0px;
     margin-left:-5px;
     background-image:url('/images/home_search_2.png');
@@ -617,9 +621,8 @@ footer img.min_trav {
 
 .home-page .form-category .area .col .multiselect {
     display: block;
-    width: 100%;
+    width: 80%;
     text-align:left;
-    max-width:100%;
 }
 
 #itou-results-form .area .col .field-holder,
@@ -633,6 +636,7 @@ footer img.min_trav {
     width: 100%;
 }
 
+#search-submit,
 #home-submit {
     border-radius:0;
     height:40px;
@@ -694,7 +698,7 @@ footer img.min_trav {
 @media screen and (min-width: 1230px) {
     #itou-results-form .area .col .multiselect {
         display: block;
-        width: 100%;
+        width: 80%;
         text-align:left;
         max-width:100%;
     }
@@ -717,9 +721,14 @@ footer img.min_trav {
         width:none;
     }
 
-    #home-submit {
+    #search-submit {
         display:block;
         margin-top:2rem;
+    }
+
+    .home-page .form-category .area .col .title,
+    #itou-results-form .title {
+        padding-top:1rem;
     }
 
 }
@@ -1005,6 +1014,19 @@ footer img.min_trav {
 
 #pol_range_form li {
     list-style-type: none;
+}
+
+#characteristics {
+    width: 100% !important;
+}
+
+#characteristics ul {
+    display:flex;
+    flex-wrap: wrap;
+}
+
+#characteristics li {
+    min-width:15em;
 }
 
 .listing-section #characteristics label.label {
