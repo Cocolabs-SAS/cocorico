@@ -147,6 +147,16 @@ class ListingSearchManager
     {
         $searchLocation = $listingSearchRequest->getLocation();
         //Select distance
+        // dump($searchLocation->getRoute());
+        // dump($searchLocation->getArea());
+        // dump($searchLocation->getCity());
+        // dump($searchLocation->getDepartment());
+        // dump($searchLocation->getCountry());
+
+        if (! $searchLocation->checkPerimeter()) {
+            $queryBuilder->where('1=2');
+        }
+
         $queryBuilder
             ->addSelect('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) AS distance')
             ->setParameter('lat', $searchLocation->getLat())
@@ -162,18 +172,18 @@ class ListingSearchManager
                         when l.polRange = 3 then 3000
                         else l.range 
                     end)');
+        } else {
+            $viewport = $searchLocation->getBound();
+            $queryBuilder
+                ->where('co.lat < :neLat')
+                ->andWhere('co.lat > :swLat')
+                ->andWhere('co.lng < :neLng')
+                ->andWhere('co.lng > :swLng')
+                ->setParameter('neLat', $viewport["ne"]["lat"])
+                ->setParameter('swLat', $viewport["sw"]["lat"])
+                ->setParameter('neLng', $viewport["ne"]["lng"])
+                ->setParameter('swLng', $viewport["sw"]["lng"]);
         }
-
-        //$viewport = $searchLocation->getBound();
-        //$queryBuilder
-        //    ->where('co.lat < :neLat')
-        //    ->andWhere('co.lat > :swLat')
-        //    ->andWhere('co.lng < :neLng')
-        //    ->andWhere('co.lng > :swLng')
-        //    ->setParameter('neLat', $viewport["ne"]["lat"])
-        //    ->setParameter('swLat', $viewport["sw"]["lat"])
-        //    ->setParameter('neLng', $viewport["ne"]["lng"])
-        //    ->setParameter('swLng', $viewport["sw"]["lng"]);
 
         return $queryBuilder;
     }

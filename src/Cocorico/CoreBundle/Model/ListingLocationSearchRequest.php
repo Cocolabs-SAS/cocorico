@@ -36,6 +36,21 @@ class ListingLocationSearchRequest
     protected $addressType;
     protected $locale;
 
+    public static $limitCountries = array(
+        "FR",   // Metropole
+        "GF",   // Guyanne
+        "GP",   // Guadeloupe
+        "MQ",   // Martinique
+        "RE",   // Réunion
+        "YT",   // Mayotte
+        "PM",   // Saint-Pierre-et-Miquelon    
+        "BL",   // Saint-Barthélemy
+        "WF",   // Wallis-et-Futuna
+        "PF",   // Polynésie Française
+        "NC",   // Nouvelle Calédonie
+        "TF",   // Terres australes et antarctiques françaises
+    );
+
     /**
      * @param string $locale
      */
@@ -58,6 +73,11 @@ class ListingLocationSearchRequest
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    public function checkPerimeter()
+    {
+        return in_array($this->getCountry(), self::$limitCountries);
     }
 
     /**
