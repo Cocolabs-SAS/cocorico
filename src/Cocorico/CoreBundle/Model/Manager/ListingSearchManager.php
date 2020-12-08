@@ -154,6 +154,7 @@ class ListingSearchManager
         // dump($searchLocation->getCountry());
 
         if (! $searchLocation->checkPerimeter()) {
+            // Block any results from showing of we're outsite of France
             $queryBuilder->where('1=2');
         }
 
@@ -162,7 +163,7 @@ class ListingSearchManager
             ->setParameter('lat', $searchLocation->getLat())
             ->setParameter('lng', $searchLocation->getLng());
 
-        if (! is_null($listingSearchRequest->getLocation()->getRoute())) {
+        if (! is_null($listingSearchRequest->getLocation()->getCity())) {
             $queryBuilder
                 //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
                 ->where('GEO_DISTANCE(co.lat = :lat, co.lng = :lng) < (
