@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.24.1] - (2020-12-xx)
+- Header mis à jour
+- Ajout font Marianne
+- Icônes SVG Ajoutés
+
 ### [0.24.0] - (2020-12-08)
 - Responsivité améliore
 - Formulaire de recherche nouvelles maquettes (résultat et absence de résultat)
