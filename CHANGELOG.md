@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.24.2] - (2020-12-X)
+- Ajout accès liste SIAE
+
 ### [0.24.1] - (2020-12-14)
 - Header mis à jour (bloc marque)
 - Ajout font Marianne
