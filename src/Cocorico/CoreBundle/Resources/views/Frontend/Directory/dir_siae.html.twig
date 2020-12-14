@@ -85,6 +85,28 @@
                 </button>
                 {{ form_end(form) }}
             </div>
+            <div id="list">
+                <table>
+                    <tr>
+                        {% for column in columns %}
+                            <th>{{ column }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for row in list %}
+                        <tr>
+                            {% for key, value in row %}
+                                <td>{{ value }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+                <button id="csv_get" class="btn btn-default">
+                    Télécharger la liste
+                    <span style="font-family:fontello2;">
+                    &#128269;
+                    </span>
+                </button>
+            </div>
 
         {% endblock %}
 

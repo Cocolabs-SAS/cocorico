@@ -28,6 +28,7 @@ class CompanyListController extends Controller
         $sort = new DirectorySort();
         $form = $this->sortCompaniesForm($sort);
         $form->handleRequest($request);
+        $siae = new SIAE();
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
@@ -36,7 +37,8 @@ class CompanyListController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
-            'list' => new SIAE()
+            'list' => $siae->get(),
+            'columns' => $siae->columns(),
         ]);
     }
 

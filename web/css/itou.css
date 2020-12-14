@@ -1277,6 +1277,40 @@ section.quote-quick-form fieldset {
     background-color:#aa381e;
 }
 
+/******************
+ * DIRECTORY STYLES
+ ******************/
+#list {
+    background-color:#f2f8ff;
+    display:flex;
+    flex-direction: column;
+}
+
+#list table {
+    width:100%;
+    background-color:#f2f8ff;
+    border-spacing:3px 14px;
+}
+
+#list th {
+    text-align:center;
+}
+
+#list td {
+    background-color:#fff;
+    padding:.8rem 1rem;
+}
+
+#list tr {
+    margin-bottom:1rem;
+}
+
+#csv_get {
+    margin-top:3rem;
+    margin-bottom:3rem;
+    margin-left:auto;
+    margin-right:auto;
+}
 
 /******************
  * ADMIN STYLES
