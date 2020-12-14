@@ -18,6 +18,72 @@
         {% block main %}
             <div>
                 <h1>Liste SIAE</h1>
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="title">
+                            Secteur d'activité
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.sector, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'xxx'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="title">
+                            Lieu d'intervention
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.postalCode, {
+                            'id': 'postal',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'code postal'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="title">
+                            Type de structure
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.structureType, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'AI, ACI, ETTI'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="title">
+                            Type de prestation
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.prestaType, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Prestation, mise à disposition du personnel'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                </div>
+                <button id="filter-submit" type="submit" class="btn btn-default">
+                    Filtrer
+                    <span style="font-family:fontello2;">
+                    &#128269;
+                    </span>
+                </button>
+                {{ form_end(form) }}
             </div>
 
         {% endblock %}
