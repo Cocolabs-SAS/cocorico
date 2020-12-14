@@ -7,6 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.24.0] - (2020-12-08)
+- Responsivité améliore
+- Formulaire de recherche nouvelles maquettes (résultat et absence de résultat)
+- Recherche géo zone ou périmêtre
+- Retrait indication horaires (formulaire et annonce)
+
+### [0.23.1] - (2020-12-01)
+- Indication format d'image
+- Recherche par "zone" géo si adresse pas précise
+
 ### [0.23.1] - (2020-11-30)
 - Ajout notification mail sur inscription / demande contact flash
 - Ajout notification sur message demande contact
