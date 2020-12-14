@@ -2,6 +2,7 @@
 
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
+use Cocorico\CoreBundle\Utils\SIAE;
 use Cocorico\CoreBundle\Entity\DirectorySort;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -35,6 +36,7 @@ class CompanyListController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
+            'list' => new SIAE()
         ]);
     }
 
