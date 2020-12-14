@@ -10,6 +10,16 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+    font-family: 'marianne';
+    src: url('/fonts/marianne-bold-webfont.woff#iefix');
+    src: url('/fonts/marianne-bold-webfont.woff#iefix') format('woff'),
+         url('/fonts/marianne-bold-webfont.woff2') format('woff2'),
+         url('/fonts/Marianne-Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -326,24 +336,29 @@ body {
 
 }
 
+#header {
+    padding-bottom:3px;
+    box-shadow:0px 6px 16px #eee ;
+    border-bottom:0;
+}
+
 #bloc-marque {
-    display:flex;
+    display:table;
 }
 
 #bloc-marque img {
-    height:31px;
-    margin-top:6px;
+    height:80px;
     margin-right:2rem;
 }
 #bloc-marque div {
-    font-size:.8em;
-    display:block;
-    color:#000;
-    float:left;
+    display:table-cell;
+    height:80px;
+    vertical-align:middle;
+    color:#383838;
 }
-#bloc-marque  span {
-    float:left;
-    font-size:.8em;
+
+.navbar-default .navbar-collapse {
+    margin-top:18px;
 }
 
 .navbar .navbar-nav li a {
@@ -370,6 +385,18 @@ body {
 
 .navbar #dashboard-dropdown {
     min-width:16rem;
+}
+
+.navbar-brand {
+    font-family: 'marianne';
+    text-decoration:none
+}
+.navbar-brand .title {
+    font-family: 'marianne';
+    font-weight: normal;
+    font-style: normal;
+    padding-left:7rem;
+    font-size:.9em;
 }
 
 /******************
