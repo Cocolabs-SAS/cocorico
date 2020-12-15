@@ -16,11 +16,10 @@
         {% trans_default_domain 'cocorico_home' %}
 
         {% block main %}
-            <div>
-                <h1>Liste SIAE</h1>
+            <div id="dir_form">
                 {{ form_start(form) }}
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="title">
                             Secteur d'activité
                         </div>
@@ -34,7 +33,7 @@
                         )}}
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="title">
                             Lieu d'intervention
                         </div>
@@ -48,7 +47,7 @@
                         )}}
                         </div>
                     </div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-2">
                         <div class="title">
                             Type de structure
                         </div>
@@ -76,36 +75,51 @@
                         )}}
                         </div>
                     </div>
+                    <button id="filter-submit" type="submit" class="btn btn-default">
+                        Filtrer
+                        <span style="font-family:fontello2;">
+                        &#128269;
+                        </span>
+                    </button>
                 </div>
-                <button id="filter-submit" type="submit" class="btn btn-default">
-                    Filtrer
-                    <span style="font-family:fontello2;">
-                    &#128269;
-                    </span>
-                </button>
                 {{ form_end(form) }}
             </div>
-            <div id="list">
+            <div id="dir_list">
+                <div class="meta">{{ entries.count }} structures</div>
                 <table>
                     <tr>
-                        {% for column in columns %}
-                            <th>{{ column }}</th>
-                        {% endfor %}
+                        <th>Raison sociale</th>
+                        <th>Siret</th>
+                        <th>Structure</th>
+                        <th>Site web</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Lieu</th>
                     </tr>
-                    {% for row in list %}
+                    {% for entry in entries.iterator %}
                         <tr>
-                            {% for key, value in row %}
-                                <td>{{ value }}</td>
-                            {% endfor %}
+                            <td>{{ entry.name }}</td>
+                            <td>{{ entry.siret }}</td>
+                            <td>{{ entry.kind }}</td>
+                            <td>{{ entry.website }}</td>
+                            <td>{{ entry.email }}</td>
+                            <td>{{ entry.phone }}</td>
+                            <td>{{ entry.postCode }}</td>
                         </tr>
                     {% endfor %}
                 </table>
-                <button id="csv_get" class="btn btn-default">
+                {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                'pagination': pagination
+                } only %}
+                <a 
+                    id="csv_get"
+                    class="btn btn-default"
+                    href="{{ path(csv_route, csv_params) }}" >
                     Télécharger la liste
                     <span style="font-family:fontello2;">
                     &#128269;
                     </span>
-                </button>
+                </a>
             </div>
 
         {% endblock %}

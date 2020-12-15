@@ -59,7 +59,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *    @ORM\Index(name="created_at_u_idx", columns={"createdAt"}),
  *    @ORM\Index(name="slug_u_idx", columns={"slug"}),
  *    @ORM\Index(name="enabled_idx", columns={"enabled"}),
- *    @ORM\Index(name="email_idx", columns={"email"})
+ *    @ORM\Index(name="email_idx", columns={"email"}),
+ *    @ORM\Index(name="siret_idx", columns={"siret"}),
  *  })
  */
 class User extends BaseUser implements ParticipantInterface

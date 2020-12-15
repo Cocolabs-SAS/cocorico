@@ -363,6 +363,10 @@
         <source>/admin/resetting/send-email</source>
         <target state="new">/admin/resetting/send-email</target>
       </trans-unit>
+      <trans-unit id="55fe072ea5bf731d83f152650750c01b27434416" resname="cocorico_itou_siae_directory">
+          <source>/directory/siae/{page}</source>
+          <target>/directory/siae/{page}</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

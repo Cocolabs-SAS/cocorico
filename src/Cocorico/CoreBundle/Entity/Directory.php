@@ -1,46 +1,17 @@
 <?php
-
-// /**
-//  * Directory
-//  * 
-
-// class Directory {
-// 
-//     use ORMBehaviors\Timestampable\Timestampable;
-// 
-//     /**
-//      * @ORM\Id
-//      * @ORM\Column(name="id", type="integer", nullable=false)
-//      * @ORM\GeneratedValue(strategy="CUSTOM")
-//      * @ORM\CustomIdGenerator(class="Cocorico\CoreBundle\Model\CustomIdGenerator")
-//      * @var integer
-//      */
-//     private $id;
-// 
-//     private $name;
-//     private $siret;
-// 
-// 
-//     /**
-//      * Get id
-//      *
-//      * @return integer
-//      */
-//     public function getId()
-//     {
-//         return $this->id;
-//     }
-// 
-// }
-
 namespace Cocorico\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use InvalidArgumentException;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Directory
  * @ORM\Entity(repositoryClass="Cocorico\CoreBundle\Repository\DirectoryRepository")
  *
- * @ORM\Table(name="quote",indexes={
- *    @ORM\Index(name="status_idx", columns={"status"}),
+ * @ORM\Table(name="directory",indexes={
+ *    @ORM\Index(name="siret_idx", columns={"siret"}),
  *    @ORM\Index(name="created_at_idx", columns={"createdAt"}),
  *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"})
  *  })
@@ -74,7 +45,7 @@ class Directory
 
     /**
      * @var string|null
-     * @ORM\Column(name="email", type="string", nullable=false)
+     * @ORM\Column(name="email", type="string", nullable=true)
      */
     private $email;
 
