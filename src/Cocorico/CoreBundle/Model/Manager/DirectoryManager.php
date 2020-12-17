@@ -67,35 +67,34 @@ class DirectoryManager extends BaseManager
     private function applyParams($qB, $params)
     {
         // Filter on type
-        if (in_array('type', $params) and $params['type'] != false) {
+        if ($params['type'] != false) {
             $value = $params['type'];
             $kindName = Directory::$kindValues[$value];
             $qB->andWhere('d.kind = :type')
                ->setParameter('type', $kindName);
         }
 
-        // Filter on sector
-        if (in_array('sector', $params) and $params['sector'] != false) {
-            $sector = $params['sector'];
-            $sectorName = Directory::$sectorValues[$sector];
-            $qB->andWhere('d.sector like :sector')
-               ->setParameter('sector', '%'.$sectorName.'%');
-        }
-
         // Filter on postal code
-        if (in_array('postalCode', $params) and $params['postalCode'] != false) {
+        if ($params['postalCode'] != false) {
             $value = $params['postalCode'];
             $qB->andWhere('d.postCode like :pcode')
                ->setParameter('pcode', addcslashes($value, '%_').'%');
         }
 
         // Filter on prestation type
-        if (in_array('prestaType', $params) and $params['prestaType'] != false) {
+        if ($params['prestaType'] != false) {
             $value = $params['prestaType'];
             $prestaName = Directory::$prestaTypeValues[$value];
             $qB->andWhere('d.prestaType = :prestatype')
                ->setParameter('prestatype', $prestaName);
-        
+        }
+
+        // Filter on sector
+        if ($params['sector'] != false) {
+            $sector = $params['sector'];
+            $sectorName = Directory::$sectorValues[$sector];
+            $qB->andWhere('d.sector like :sector')
+               ->setParameter('sector', '%'.$sectorName.'%');
         }
         return $qB;
     }
