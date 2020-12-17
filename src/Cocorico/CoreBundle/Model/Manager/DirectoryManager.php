@@ -45,29 +45,59 @@ class DirectoryManager extends BaseManager
         return new Paginator($query);
     }
 
-    public function findByForm($page, $type=False)
+    public function findByForm($page, $params=[])
     {
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
-        if ($type) {
-            $qB
-                ->where('d.kind = :type')
-                ->setParameter('type', $type);
-        }
+
+        $qB = $this->applyParams($qB, $params);
+
         $query = $qB->getQuery();
         return new Paginator($query);
     }
 
-    public function listByForm($type=False)
+    public function listByForm($params=[])
     {
-        $qB = $this->getRepository()->getAll()->setMaxResults(10);
-        if ($type) {
-            $qB
-                ->where('d.kind = :type')
-                ->setParameter('type', $type);
-        }
+        $qB = $this->getRepository()->getAll();
+        $qB = $this->applyParams($qB, $params);
         $query = $qB->getQuery();
         return $query->getResult(Query::HYDRATE_ARRAY);
+    }
+
+    private function applyParams($qB, $params)
+    {
+        // Filter on type
+        if (in_array('type', $params) and $params['type'] != false) {
+            $value = $params['type'];
+            $kindName = Directory::$kindValues[$value];
+            $qB->andWhere('d.kind = :type')
+               ->setParameter('type', $kindName);
+        }
+
+        // Filter on sector
+        if (in_array('sector', $params) and $params['sector'] != false) {
+            $sector = $params['sector'];
+            $sectorName = Directory::$sectorValues[$sector];
+            $qB->andWhere('d.sector like :sector')
+               ->setParameter('sector', '%'.$sectorName.'%');
+        }
+
+        // Filter on postal code
+        if (in_array('postalCode', $params) and $params['postalCode'] != false) {
+            $value = $params['postalCode'];
+            $qB->andWhere('d.postCode like :pcode')
+               ->setParameter('pcode', addcslashes($value, '%_').'%');
+        }
+
+        // Filter on prestation type
+        if (in_array('prestaType', $params) and $params['prestaType'] != false) {
+            $value = $params['prestaType'];
+            $prestaName = Directory::$prestaTypeValues[$value];
+            $qB->andWhere('d.prestaType = :prestatype')
+               ->setParameter('prestatype', $value);
+        
+        }
+        return $qB;
     }
 
     public function listColumns()

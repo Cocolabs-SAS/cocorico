@@ -17,10 +17,31 @@ class DirectoryFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sector', TextType::class)
+            ->add('sector', 
+                ChoiceType::class,
+                array(
+                    'expanded' => false,
+                    'empty_data' => '',
+                    'choices' => array_flip(Directory::$sectorValues),
+                )
+            )
             ->add('postalCode', TextType::class)
-            ->add('structureType', TextType::class)
-            ->add('prestaType', TextType::class);
+            ->add('structureType',
+                ChoiceType::class,
+                array(
+                    'expanded' => false,
+                    'empty_data' => '',
+                    'choices' => array_flip(Directory::$kindValues),
+                )
+            )
+            ->add('prestaType',
+                ChoiceType::class,
+                array(
+                    'expanded' => false,
+                    'empty_data' => '',
+                    'choices' => array_flip(Directory::$prestaTypeValues),
+                )
+            );
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
             // ->add(
             //     'status',

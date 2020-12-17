@@ -21,6 +21,54 @@ class Directory
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
+    const SECTOR_CHOICE = 'Choisir...';
+    const SECTOR_RESTAURATION = 'Restauration';
+    const SECTOR_CLEANING = 'Nettoyage, Propreté';
+    const SECTOR_IT = 'Informatique';
+    const SECTOR_INT = 'Prestation intellectuelle';
+    const SECTOR_REPAIR = 'Dépannage, Réparation';
+    const SECTOR_INDUSTRY = 'Sous-traitance industrielle';
+    const SECTOR_TEXTILE = 'Textiles';
+    const SECTOR_DECO = 'Ameublement, décoration';
+    const SECTOR_LOGISTICS = 'Logistique, livraisons';
+    const SECTOR_MISC = 'Other';
+
+    public static $sectorValues = array(
+        self::SECTOR_CHOICE,
+        self::SECTOR_RESTAURATION,
+        self::SECTOR_CLEANING,
+        self::SECTOR_IT,
+        self::SECTOR_INT,
+        self::SECTOR_REPAIR,
+        self::SECTOR_INDUSTRY,
+        self::SECTOR_TEXTILE,
+        self::SECTOR_DECO,
+        self::SECTOR_LOGISTICS,
+        self::SECTOR_MISC,
+    );
+
+    const PRESTA_CHOICE = 'Choisir...';
+    const PRESTA_DISP = 'Mise à disposition';
+    const PRESTA_PREST = 'Prestation et/ou vente de biens';
+    public static $prestaTypeValues = array(
+        self::PRESTA_CHOICE,
+        self::PRESTA_DISP,
+        self::PRESTA_PREST,
+    );
+
+    const STRUCT_CHOICE = 'Choisir...';
+    const STRUCT_EI = 'EI';
+    const STRUCT_ETTI = 'ETTI';
+    const STRUCT_ACI = 'ACI';
+    const STRUCT_AI = 'AI';
+    public static $kindValues = array(
+        self::STRUCT_CHOICE,
+        self::STRUCT_EI,
+        self::STRUCT_ETTI,
+        self::STRUCT_ACI,
+        self::STRUCT_AI,
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)

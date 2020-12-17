@@ -42,7 +42,13 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            $entries = $directoryManager->findByForm($page, $sort['structureType']);
+            $params = [
+                'type' => $sort['structureType'],
+                'sector' => $sort['sector'],
+                'postalCode' => $sort['postalCode'],
+                'prestaType' => $sort['prestaType'],
+            ];
+            $entries = $directoryManager->findByForm($page, $params);
         } else {
             $entries = $directoryManager->listSome($page);
         }
@@ -81,7 +87,13 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            $entries = $directoryManager->listByForm($sort['structureType']);
+            $params = [
+                'type' => $sort['structureType'],
+                'sector' => $sort['sector'],
+                'postalCode' => $sort['postalCode'],
+                'prestaType' => $sort['prestaType'],
+            ];
+            $entries = $directoryManager->listByForm($params);
         } else {
             $entries = $directoryManager->listbyForm();
         }
