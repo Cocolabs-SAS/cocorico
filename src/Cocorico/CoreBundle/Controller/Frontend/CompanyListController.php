@@ -87,6 +87,7 @@ class CompanyListController extends Controller
         }
 
         $fp = fopen('php://temp', 'w');
+        fputcsv($fp, $directoryManager->listColumns());
         foreach ($entries as $fields) {
             fputcsv($fp, $fields);
         }

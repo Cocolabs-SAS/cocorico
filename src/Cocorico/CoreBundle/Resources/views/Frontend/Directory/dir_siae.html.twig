@@ -85,24 +85,36 @@
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
-                <div class="meta">{{ entries.count }} structures</div>
+                <div class="meta">Liste résultats : {{ entries.count }} structures</div>
                 <table>
                     <tr>
                         <th>Raison sociale</th>
                         <th>Siret</th>
                         <th>Structure</th>
+                        <th>Type de prestation</th>
                         <th>Site web</th>
-                        <th>Email</th>
                         <th>Téléphone</th>
-                        <th>Lieu</th>
+                        <th>Code postal</th>
                     </tr>
                     {% for entry in entries.iterator %}
                         <tr>
                             <td>{{ entry.name }}</td>
                             <td>{{ entry.siret }}</td>
                             <td>{{ entry.kind }}</td>
-                            <td>{{ entry.website }}</td>
-                            <td>{{ entry.email }}</td>
+                            <td>
+                            {% if entry.kind == "ETTI" or entry.kind == "AI" %}
+                                Mise à disposition
+                            {% else %}
+                                Prestation et/ou vente de biens
+                            {% endif %}
+                            </td>
+                            <td>
+                            {% if entry.website %}
+                                <a href="{{ entry.website }}" target="_blank" rel="external">
+                                    {{ entry.website }}
+                                </a>
+                            {% endif %}
+                            </td>
                             <td>{{ entry.phone }}</td>
                             <td>{{ entry.postCode }}</td>
                         </tr>
