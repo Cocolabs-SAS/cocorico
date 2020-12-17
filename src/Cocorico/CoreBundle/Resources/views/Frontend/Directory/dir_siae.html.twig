@@ -92,6 +92,7 @@
                         <th>Siret</th>
                         <th>Structure</th>
                         <th>Type de prestation</th>
+                        <th>Secteur(s)</th>
                         <th>Site web</th>
                         <th>Téléphone</th>
                         <th>Code postal</th>
@@ -101,13 +102,8 @@
                             <td>{{ entry.name }}</td>
                             <td>{{ entry.siret }}</td>
                             <td>{{ entry.kind }}</td>
-                            <td>
-                            {% if entry.kind == "ETTI" or entry.kind == "AI" %}
-                                Mise à disposition
-                            {% else %}
-                                Prestation et/ou vente de biens
-                            {% endif %}
-                            </td>
+                            <td>{{ entry.prestaType}} </td>
+                            <td>{{ entry.sector}} </td>
                             <td>
                             {% if entry.website %}
                                 <a href="{{ entry.website }}" target="_blank" rel="external">
