@@ -58,7 +58,7 @@ class DirectoryManager extends BaseManager
 
     public function listByForm($params=[])
     {
-        $qB = $this->getRepository()->getAll()->setMaxResults(10);
+        $qB = $this->getRepository()->getAll();
         $qB = $this->applyParams($qB, $params);
         $query = $qB->getQuery();
         return $query->getResult(Query::HYDRATE_ARRAY);
