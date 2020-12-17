@@ -88,7 +88,7 @@
                 <div class="meta">Liste résultats : {{ entries.count }} structures</div>
                 <table>
                     <tr>
-                        <th>Raison sociale</th>
+                        <th>Nom</th>
                         <th>Siret</th>
                         <th>Structure</th>
                         <th>Type de prestation</th>
@@ -99,7 +99,12 @@
                     </tr>
                     {% for entry in entries.iterator %}
                         <tr>
-                            <td>{{ entry.name }}</td>
+                            <td>
+                            {% if entry.brand %}
+                                {{ entry.brand }}
+                            {% else %}
+                                {{ entry.name }}
+                            {% endif %}</td>
                             <td>{{ entry.siret }}</td>
                             <td>{{ entry.kind }}</td>
                             <td>{{ entry.prestaType}} </td>
