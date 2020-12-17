@@ -1324,6 +1324,7 @@ section.quote-quick-form fieldset {
     margin-bottom:3px;
 }
 
+#dir_form .jcf-select,
 #dir_form input.form-control {
     height: 4rem;
     border: 1px solid #979797;
@@ -1336,7 +1337,7 @@ section.quote-quick-form fieldset {
 }
 
 #dir_form #filter-submit {
-    margin-top:20px;
+    margin-top:22px;
     height: 4rem;
 }
 

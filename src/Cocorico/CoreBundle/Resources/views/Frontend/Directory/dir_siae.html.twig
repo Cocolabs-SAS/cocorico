@@ -35,20 +35,6 @@
                     </div>
                     <div class="col-sm-2">
                         <div class="title">
-                            Lieu d'intervention
-                        </div>
-                        <div class="field-holder">
-                        {{form_widget(form.postalCode, {
-                            'id': 'postal',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'code postal'
-                            }}
-                        )}}
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="title">
                             Type de structure
                         </div>
                         <div class="field-holder">
@@ -71,6 +57,20 @@
                             'attr': {
                                 'class': 'form-control',
                                 'placeholder': 'Prestation, mise à disposition du personnel'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="title">
+                            Code postal
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.postalCode, {
+                            'id': 'postal',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'code postal'
                             }}
                         )}}
                         </div>

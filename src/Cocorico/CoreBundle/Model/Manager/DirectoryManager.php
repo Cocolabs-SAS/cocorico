@@ -94,7 +94,7 @@ class DirectoryManager extends BaseManager
             $value = $params['prestaType'];
             $prestaName = Directory::$prestaTypeValues[$value];
             $qB->andWhere('d.prestaType = :prestatype')
-               ->setParameter('prestatype', $value);
+               ->setParameter('prestatype', $prestaName);
         
         }
         return $qB;
