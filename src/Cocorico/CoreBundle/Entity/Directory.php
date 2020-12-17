@@ -69,6 +69,17 @@ class Directory
         self::STRUCT_AI,
     );
 
+    public static $exportColumns = array(
+        'name' => 'Raison sociale',
+        'siret' => 'Siret',
+        'kind' => 'Structure',
+        'email' => 'E-mail',
+        'phone' => 'Téléphone',
+        'website' => 'Site web',
+        'city' => 'Ville',
+        'postCode' => 'Code postal',
+    );
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)

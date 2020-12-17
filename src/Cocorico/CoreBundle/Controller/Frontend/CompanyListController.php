@@ -4,6 +4,7 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Utils\SIAE;
 use Cocorico\CoreBundle\Entity\DirectorySort;
+use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Frontend\DirectoryFilterType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -99,9 +100,13 @@ class CompanyListController extends Controller
         }
 
         $fp = fopen('php://temp', 'w');
-        fputcsv($fp, $directoryManager->listColumns());
+        fputcsv($fp, array_values(Directory::$exportColumns));
         foreach ($entries as $fields) {
-            fputcsv($fp, $fields);
+            $el = [];
+            foreach (Directory::$exportColumns as $key => $value) {
+                $el[$value] = $fields[$key];
+            }
+            fputcsv($fp, $el);
         }
 
         rewind($fp);

@@ -25,7 +25,8 @@ class DirectoryRepository extends EntityRepository
         $qB = $this->getFindQueryBuilder();
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
-           ->orderBy('d.name', 'asc');
+           ->orderBy('d.name', 'asc')
+           ->where('d.isActive = true');
 
         return $qB;
     }
@@ -33,7 +34,8 @@ class DirectoryRepository extends EntityRepository
     public function getAll()
     {
         $qB = $this->getFindQueryBuilder();
-        $qB->orderBy('d.name', 'asc');
+        $qB->orderBy('d.name', 'asc')
+           ->where('d.isActive = true');
 
         return $qB;
     }
