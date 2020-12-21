@@ -99,7 +99,8 @@
                         <th>Type de prestation</th>
                         <th>Secteur(s)</th>
                         <th>Site web</th>
-                        <th>Téléphone</th>
+                        <th>Ville</th>
+                        <th>Département</th>
                         <th>Code postal</th>
                     </tr>
                     {% for entry in entries.iterator %}
@@ -121,7 +122,8 @@
                                 </a>
                             {% endif %}
                             </td>
-                            <td>{{ entry.phone }}</td>
+                            <td>{{ entry.city }}</td>
+                            <td>{{ entry.department }}</td>
                             <td>{{ entry.postCode }}</td>
                         </tr>
                     {% endfor %}

@@ -77,6 +77,7 @@ class Directory
         'phone' => 'Téléphone',
         'website' => 'Site web',
         'city' => 'Ville',
+        'department' => 'Département',
         'postCode' => 'Code postal',
     );
 
