@@ -21,7 +21,7 @@
                 data: {from: from, to: to, textData: textData},
                 success: function (translateData) {
                     var result = $.parseJSON(translateData);
-                    if (result.textData[0] == '') {
+                    if (!result.textData.length || result.textData[0] == '') {
                         $("#error").show();
                         $("#success").hide();
                     }
