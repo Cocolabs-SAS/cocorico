@@ -370,6 +370,14 @@
         <source>/admin/resetting/send-email</source>
         <target state="new">/admin/resetting/send-email</target>
       </trans-unit>
+      <trans-unit id="55fe072ea5bf731d83f152650750c01b27434416" resname="cocorico_itou_siae_directory">
+          <source>/directory/siae/{page}</source>
+          <target>/repertoire/siae/{page}</target>
+      </trans-unit>
+      <trans-unit id="57fe072ea5bf731d83f152650750c01b27434416" resname="cocorico_itou_siae_directory_csv">
+          <source>/directory/siae/export/csv</source>
+          <target>/repertoire/siae/export/csv</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

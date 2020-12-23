@@ -1277,6 +1277,83 @@ section.quote-quick-form fieldset {
     background-color:#aa381e;
 }
 
+/******************
+ * DIRECTORY STYLES
+ ******************/
+#dir_list {
+    background-color:#f2f8ff;
+    display:flex;
+    flex-direction: column;
+    margin-top:3rem;
+    padding:1rem 2rem 3rem;
+}
+
+#dir_list table {
+    width:100%;
+    background-color:#f2f8ff;
+    border-spacing:3px 14px;
+}
+
+#dir_list th {
+    text-align:center;
+}
+
+#dir_list td {
+    background-color:#fff;
+    padding:.8rem 1rem;
+}
+
+#dir_list tr {
+    margin-bottom:1rem;
+}
+
+#csv_get {
+    margin-top:3rem;
+    margin-bottom:3rem;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#dir_form {
+    margin-bottom:2rem;
+    margin-top:6rem;
+}
+
+#dir_form .title {
+    font-weight:bold;
+    margin-bottom:3px;
+}
+
+
+#dir_form .jcf-select,
+#dir_form input.form-control {
+    height: 4rem;
+    border: 1px solid #979797;
+    border-radius: 3px 5px 5px 3px;
+    background-color: #FFFFFF;
+}
+
+#dir_form ::placeholder {
+    color: #A8A7A7;
+}
+
+#dir_form .reset,
+#dir_form #filter-submit {
+    margin-top:22px;
+    height: 4rem;
+}
+
+#dir_list .meta {
+    font-weight:bold;
+    padding: 1rem 0 3rem 1rem;
+}
+
+#dirlink {
+    background-color:#F2F8FF;
+    margin-left:0px;
+    margin-right:0px;
+}
+
 
 /******************
  * ADMIN STYLES

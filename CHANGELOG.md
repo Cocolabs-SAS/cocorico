@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [0.25.0] - (2020-12-16)
+- Ajout module "répertoire" pour afficher des listes de choses
+- Export CSV, accès limité, formulaire de recherche, pagination, ...
+- Ajout répertoire SIAE (et base de données interne)
+
 ### [0.24.1] - (2020-12-14)
 - Header mis à jour (bloc marque)
 - Ajout font Marianne

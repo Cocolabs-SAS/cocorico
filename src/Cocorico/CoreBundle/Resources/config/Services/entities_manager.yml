@@ -35,6 +35,14 @@ services:
                 cocorico_dashboard_max_per_page: "%cocorico.dashboard_max_per_page%"
                 cocorico_listing_availability_status: "%cocorico.listing_availability_status%"
                 cocorico_bundles: "%kernel.bundles%"
+ 
+    cocorico.directory.manager:
+        class: Cocorico\CoreBundle\Model\Manager\DirectoryManager
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+            - parameters:
+                directory_max_per_page: "10"
     
   #todo: Split it in multiple services
     cocorico.booking.manager:

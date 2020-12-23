@@ -1,0 +1,148 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block main %}
+            <div id="dir_form">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="title">
+                            Secteur d'activité
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.sector, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'xxx'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="title">
+                            Type de structure
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.structureType, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'AI, ACI, ETTI'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="title">
+                            Type de prestation
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.prestaType, {
+                            'id': 'sector',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Prestation, mise à disposition du personnel'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="title">
+                            Code postal
+                        </div>
+                        <div class="field-holder">
+                        {{form_widget(form.postalCode, {
+                            'id': 'postal',
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'code postal'
+                            }}
+                        )}}
+                        </div>
+                    </div>
+                    <button id="filter-submit" type="submit" class="btn btn-default">
+                        Filtrer
+                        <span style="font-family:fontello2;">
+                        &#128269;
+                        </span>
+                    </button>
+                    <a 
+                        class="btn btn-outline-primary reset"
+                        href="/fr/repertoire/siae" >
+                        Réinitialiser
+                    </a>
+                </div>
+                {{ form_end(form) }}
+            </div>
+            <div id="dir_list">
+                <div class="meta">Liste résultats : {{ entries.count }} structures</div>
+                <table>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Siret</th>
+                        <th>Structure</th>
+                        <th>Type de prestation</th>
+                        <th>Secteur(s)</th>
+                        <th>Site web</th>
+                        <th>Ville</th>
+                        <th>Département</th>
+                        <th>Code postal</th>
+                    </tr>
+                    {% for entry in entries.iterator %}
+                        <tr>
+                            <td>
+                            {% if entry.brand %}
+                                {{ entry.brand }}
+                            {% else %}
+                                {{ entry.name }}
+                            {% endif %}</td>
+                            <td>{{ entry.siret }}</td>
+                            <td>{{ entry.kind }}</td>
+                            <td>{{ entry.prestaType}} </td>
+                            <td>{{ entry.sector}} </td>
+                            <td>
+                            {% if entry.website %}
+                                <a href="{{ entry.website }}" target="_blank" rel="external">
+                                    {{ entry.website }}
+                                </a>
+                            {% endif %}
+                            </td>
+                            <td>{{ entry.city }}</td>
+                            <td>{{ entry.department }}</td>
+                            <td>{{ entry.postCode }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                'pagination': pagination
+                } only %}
+                <a 
+                    id="csv_get"
+                    class="btn btn-default"
+                    href="{{ path(csv_route, csv_params) }}" >
+                    Télécharger la liste
+                    <span style="font-family:fontello2;">
+                    &#128269;
+                    </span>
+                </a>
+            </div>
+
+        {% endblock %}
+
+    {% endembed %}
+{% endblock %}
