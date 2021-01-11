@@ -19,45 +19,41 @@ Encore
      */
     .addEntry('common', [
             './web/js/vendor/moment.js',
-            // 'web/js/vendor/json2.js',
-            // 'web/js/vendor/jquery.cookie.js',
-            // 'web/js/vendor/jquery.touch-punch.js',
-            // 'web/js/vendor/hammer.js',
-            // 'web/js/vendor/bootstrap-multiselect.js',
-            // 'web/js/vendor/bootstrap-datetimepicker.js',
-            // 'web/js/vendor/parsley.min.js',
-            // 'web/js/vendor/jquery.unslider.js',
-            // 'web/js/vendor/jquery.caroufredsel.min.js',
-            // 'web/js/vendor/jquery.clearsearch.js',
-            // 'web/js/jquery.main.js',
-            // 'web/js/jquery.main-override.js',
-            // 'web/js/common.js',
-            // 'web/js/date-time.js',
-            // 'web/js/vendor/cookie-consent.js',
-            // 'web/js/vendor/ie.js',
-            // 'web/css/all.css',
-            // 'web/css/vendor/bootstrap-datetimepicker.css',
-            // 'web/css/vendor/bootstrap-multiselect.css',
-            // 'web/css/vendor/unslider.css',
-            // 'web/css/vendor/cookie-consent.css',
-            // 'web/css/all-override.css',
-            // 'web/css/itou.css',
+            './web/js/vendor/json2.js',
+            './web/js/vendor/jquery.cookie.js',
+            './web/js/vendor/jquery.touch-punch.js',
+            './web/js/vendor/hammer.js',
+            './web/js/vendor/bootstrap-multiselect.js',
+            './web/js/vendor/bootstrap-datetimepicker.js',
+            './web/js/vendor/parsley.min.js',
+            './web/js/vendor/jquery.unslider.js',
+            './web/js/vendor/jquery.caroufredsel.min.js',
+            './web/js/vendor/jquery.clearsearch.js',
+            './web/js/jquery.main.js',
+            './web/js/jquery.main-override.js',
+            './web/js/common.js',
+            './web/js/date-time.js',
+            './web/js/vendor/cookie-consent.js',
+            './web/js/vendor/ie.js',
+            //'./web/css/all.css',
+            './web/css/vendor/bootstrap-datetimepicker.css',
+            './web/css/vendor/bootstrap-multiselect.css',
+            './web/css/vendor/unslider.css',
+            './web/css/vendor/cookie-consent.css',
+            //'./web/css/all-override.css',
+            //'./web/css/itou.css',
+            './web/css/final_import.scss',
     ])
-    // .addEntry('app', [
-    //     './app/Resources/assets/vendor/bootstrap-typeahead.min',
-    //     './app/Resources/assets/vendor/jquery.i18n.min.js',
-    //     './app/Resources/assets/js/application.js',
-    //     './app/Resources/assets/js/dateLocales.js',
-    //     './app/Resources/assets/js/default.js',
-    //     './app/Resources/assets/js/eventdata.js',
-    //     './app/Resources/assets/js/events.js',
-    //     './app/Resources/assets/js/programs.js',
-    //     './app/Resources/assets/css/_mixins.scss',
-    //     './app/Resources/assets/css/application.scss',
-    //     './app/Resources/assets/css/default.scss',
-    //     './app/Resources/assets/css/events.scss',
-    //     './app/Resources/assets/css/programs.scss',
-    // ])
+
+    .copyFiles([
+        {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/plugins', to: 'ckeditor/plugins/[path][name].[ext]'},
+        {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
+    ])
+
+    .autoProvidejQuery()
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -86,4 +82,8 @@ Encore
     .enableVersioning(Encore.isProduction())
 ;
 
-module.exports = Encore.getWebpackConfig();
+config = Encore.getWebpackConfig();
+config.output.library = 'common';
+config.output.libraryTarget = 'umd';
+
+module.exports = config;

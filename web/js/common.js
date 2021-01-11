@@ -1,4 +1,6 @@
 var DEBUG = true;
+common = {};
+common.application = {};
 
 function console_log() {
     if (DEBUG) {
@@ -519,7 +521,7 @@ $('body').on('hidden.bs.modal', '.modal', function () {
  *
  * @param loginUrl
  */
-function handleUnauthorisedAjaxAccess(loginUrl) {
+common.application.handleUnauthorisedAjaxAccess = function (loginUrl) {
     $(document).ajaxError(function (event, xhr) {
         if (403 === xhr.status) {
             location.href = loginUrl;
@@ -594,3 +596,5 @@ function toggleCompanyNameInput(input) {
 
     });
 })(jQuery);
+
+export default common;

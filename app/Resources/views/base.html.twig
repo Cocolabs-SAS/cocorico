@@ -195,7 +195,7 @@
                 getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
             }
             //Handle Ajax Unauthorised access
-            handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
+            common.application.handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
         });
     </script>
 {% endblock %}

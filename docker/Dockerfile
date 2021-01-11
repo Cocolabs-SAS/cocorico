@@ -109,5 +109,6 @@ COPY ./docker/run_css.sh ./run_css
 RUN echo "Start Symfony server with:\n\
 /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
 "
-CMD ["bash"]
+#CMD ["bash"]
+CMD ["screen", "-c", "docker/screen"]
 # # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]

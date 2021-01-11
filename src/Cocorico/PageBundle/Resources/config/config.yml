@@ -1,4 +1,6 @@
 fos_ck_editor:
+    base_path: "assets/ckeditor"
+    js_path:   "assets/ckeditor/ckeditor.js"
     default_config: default
     configs:
         default:

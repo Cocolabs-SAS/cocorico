@@ -9,6 +9,7 @@
 - Switched route bundle (from sensio to symfony)
 - Removed Ascetic, installed wepback (encore, with sass)
 - Refactored some vendor JS modules to work with webpack
+- Replaced FOS/ckeditor with nodeJS module (https://symfony.com/doc/current/bundles/FOSCKEditorBundle/installation.html)
 
 # Package replacements / removal
 - Removed mongo packages
