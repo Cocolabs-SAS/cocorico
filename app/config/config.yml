@@ -87,17 +87,6 @@ doctrine:
 #        naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
 
-doctrine_mongodb:
-    connections:
-        default:
-            server: "%mongodb_server%"
-            options: {}
-    default_database: "%mongodb_database_name%"
-    document_managers:
-        default:
-            auto_mapping: true
-
-
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"

@@ -23,7 +23,6 @@ use Cocorico\CoreBundle\Event\BookingPayinRefundEvent;
 use Cocorico\CoreBundle\Event\BookingValidateEvent;
 use Cocorico\CoreBundle\Mailer\TwigSwiftMailer;
 use Cocorico\CoreBundle\Repository\BookingRepository;
-use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\CoreBundle\Repository\ListingDiscountRepository;
 use Cocorico\SMSBundle\Twig\TwigSmser;
 use Cocorico\TimeBundle\Model\DateTimeRange;
@@ -32,7 +31,6 @@ use Cocorico\UserBundle\Entity\User;
 use DateInterval;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -69,8 +67,6 @@ class BookingManager extends BaseManager
 
     /**
      * @param EntityManager              $em
-     * @param DocumentManager            $dm
-     * @param ListingAvailabilityManager $availabilityManager
      * @param TwigSwiftMailer            $mailer
      * @param TwigSmser|null             $smser
      * @param EventDispatcherInterface   $dispatcher
@@ -92,8 +88,6 @@ class BookingManager extends BaseManager
      */
     public function __construct(
         EntityManager $em,
-        DocumentManager $dm,
-        ListingAvailabilityManager $availabilityManager,
         TwigSwiftMailer $mailer,
         $smser,
         EventDispatcherInterface $dispatcher,
@@ -1578,7 +1572,7 @@ class BookingManager extends BaseManager
      */
     protected function getAvailabilityRepository()
     {
-        return $this->dm->getRepository('CocoricoCoreBundle:ListingAvailability');
+        return false;
     }
 
     /**

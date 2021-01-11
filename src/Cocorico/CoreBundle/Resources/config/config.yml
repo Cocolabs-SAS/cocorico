@@ -119,12 +119,6 @@ doctrine:
             json: Sonata\Doctrine\Types\JsonType
 
 
-doctrine_mongodb:
-    document_managers:
-        default:
-            auto_mapping: true
-
-
 jms_i18n_routing:
     default_locale: "%cocorico.locale%"
     locales: "%cocorico.locales%"

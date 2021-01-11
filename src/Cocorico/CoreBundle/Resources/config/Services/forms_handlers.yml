@@ -71,19 +71,3 @@ services:
             - "@cocorico.listing_search_request"
             - "@cocorico.quote.manager"
 
-    #Listing Availability
-    cocorico.form.handler.listing_availability.dashboard:
-        abstract:  true
-        calls:
-            - [setRequest, ["@request_stack"]]
-            - [setListingAvailabilityManager, ["@cocorico.listing_availability.manager"]]
-            - [setEntityManager, ["@doctrine.orm.entity_manager"]]
-
-    cocorico.form.handler.listing_availability.price.dashboard:
-        class: Cocorico\CoreBundle\Form\Handler\Dashboard\ListingAvailabilityPriceFormHandler
-        parent: cocorico.form.handler.listing_availability.dashboard
-
-    cocorico.form.handler.listing_availability.status.dashboard:
-        class: Cocorico\CoreBundle\Form\Handler\Dashboard\ListingAvailabilityStatusFormHandler
-        parent: cocorico.form.handler.listing_availability.dashboard
-

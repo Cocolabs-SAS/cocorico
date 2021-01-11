@@ -2,11 +2,6 @@ framework:
      session:
         gc_probability: 1
 
-doctrine_mongodb:
-    document_managers:
-        default:
-            logging: true
-
 deploy:
     prod:
         rsync-options: '-azC --force --delete --progress -h --checksum'
