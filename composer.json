@@ -71,7 +71,6 @@
     "patchwork/jsqueeze": "^2.0",
     "php-http/guzzle6-adapter": "^1.1",
     "php-http/message": "^1.6",
-    "ramsey/array_column": "~1.1",
     "sensio/framework-extra-bundle": "^5.1",
     "sentry/sentry-symfony": "^3.5",
     "simplethings/entity-audit-bundle": "^1.0",
@@ -102,10 +101,10 @@
     "fzaninotto/faker": "^1.7",
     "hpatoio/deploy-bundle": "^1.5",
     "phpunit/phpunit": "^6.4",
-    "sensio/generator-bundle": "^3.1",
+    "sensio/distribution-bundle": "^5.0",
+    "symfony/maker-bundle": "^1.27",
     "symfony/phpunit-bridge": "3.4.*@RC",
-    "vipsoft/doctrine-data-fixtures-extension": "^3.3",
-    "sensio/distribution-bundle": "^5.0"
+    "vipsoft/doctrine-data-fixtures-extension": "^3.3"
   },
   "scripts": {
     "symfony-scripts": [
