@@ -6,8 +6,8 @@ twig:
         user_img_max: "%cocorico.user_img_max%"
         user_img_max_upload_size: "%cocorico.user_img_max_upload_size%"       
 
-assetic:
-    bundles: ["CocoricoUserBundle"]
+        # assetic:
+        #     bundles: ["CocoricoUserBundle"]
 
 fos_user:
     db_driver: orm

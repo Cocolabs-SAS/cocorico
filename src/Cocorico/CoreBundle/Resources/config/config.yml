@@ -72,8 +72,8 @@ twig:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 
-assetic:
-    bundles: ["CocoricoCoreBundle"]
+              # assetic:
+              #     bundles: ["CocoricoCoreBundle"]
 
 doctrine:
     orm:
