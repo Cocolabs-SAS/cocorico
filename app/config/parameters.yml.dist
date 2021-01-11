@@ -6,10 +6,6 @@ parameters:
     database_user:     cocorico_dev
     database_password: cocorico_dev
 
-    #MongoDB
-    mongodb_server: mongodb://localhost:27017
-    mongodb_database_name: cocorico_dev
-
     mailer_transport:  smtp
     mailer_host:       127.0.0.1
     mailer_user:       ~

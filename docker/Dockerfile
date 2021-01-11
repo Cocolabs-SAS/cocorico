@@ -10,8 +10,6 @@ ARG SQL_PORT=3306
 ARG SQL_NAME=cocorico
 ARG SQL_USER=cocorico
 ARG SQL_PASS=cocorico
-ARG MONGO_URL='mongodb://localhost:27017'
-ARG MONGO_DB=cocorico
 ARG HOST_PORT=9090
 ARG GGL_KEY1=none
 ARG GGL_KEY2=none
@@ -27,8 +25,6 @@ ENV SQL_HOST=$SQL_HOST\
     SQL_NAME=$SQL_NAME \
     SQL_USER=$SQL_USER \
     SQL_PASS=$SQL_PASS \
-    MONGO_URL=$MONGO_URL \
-    MONGO_DB=$MONGO_DB \
     HOST_PORT=$HOST_PORT \
     GGL_KEY1=$GGL_KEY1 \
     GGL_KEY2=$GGL_KEY2 \
@@ -39,6 +35,8 @@ ENV SQL_HOST=$SQL_HOST\
     SMTP_PORT=$SMTP_PORT \
     SMTP_USER=$SMTP_USER \
     SYMFONY_ENV=dev 
+
+
 
 RUN apt-get update
 
@@ -51,7 +49,12 @@ RUN apt-get install -y \
         wget \
         screen
 
+# Add Yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
 RUN apt-get install -y \
+        yarn \
         php7.3 \
         php7.3-fpm \
         php7.3-curl \
@@ -61,7 +64,6 @@ RUN apt-get install -y \
         php7.3-intl \
         php-dom \
         php-imagick \
-        php-mongodb \
         php-mysql
 
 
@@ -81,8 +83,6 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%SQL_NAME%|'"$SQL_NAME"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%SQL_USER%|'"$SQL_USER"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%SQL_PASS%|'"$SQL_PASS"'|' /cocorico/app/config/parameters.yml \
-    && sed -i -e 's|%MONGO_URL%|'"$MONGO_URL"'|' /cocorico/app/config/parameters.yml \
-    && sed -i -e 's|%MONGO_DB%|'"$MONGO_DB"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%HOST_PORT%|'"$HOST_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY1%|'"$GGL_KEY1"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \
@@ -95,17 +95,17 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && cat /cocorico/app/config/parameters.yml
 
 
-# CMD ["bash"]
-RUN composer install
-
-RUN clevercloud/post_build_hook.sh
-RUN wget https://get.symfony.com/cli/installer -O - | bash
-# RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
-# RUN service nginx restart && service php7.3-fpm start
-COPY ./docker/run.sh ./run
-COPY ./docker/run_css.sh ./run_css
-RUN echo "Start Symfony server with:\n\
-/home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
-"
 CMD ["bash"]
-# # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]
+# RUN composer install
+# 
+ RUN clevercloud/post_build_hook.sh
+# RUN wget https://get.symfony.com/cli/installer -O - | bash
+# # RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
+# # RUN service nginx restart && service php7.3-fpm start
+# COPY ./docker/run.sh ./run
+# COPY ./docker/run_css.sh ./run_css
+# RUN echo "Start Symfony server with:\n\
+# /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
+# "
+# CMD ["bash"]
+# # # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]

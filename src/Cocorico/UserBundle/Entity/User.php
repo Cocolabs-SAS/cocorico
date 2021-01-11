@@ -27,14 +27,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\MessageBundle\Model\ParticipantInterface;
-use FOS\UserBundle\Model\User as BaseUser;
+# use FOS\UserBundle\Model\User as BaseUser;
 use InvalidArgumentException;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-//use Sonata\UserBundle\Entity\BaseUser;
+use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * User.
@@ -65,7 +65,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class User extends BaseUser implements ParticipantInterface
 {
-    use ORMBehaviors\Timestampable\Timestampable;
+    # use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Sluggable\Sluggable;
 
@@ -190,12 +190,12 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $naf;
 
-    /**
-     * @var string
-     * @ORM\Column(name="website", type="string", nullable=true)
-     *
-     */
-    protected $website;
+    # /**
+    #  * @var string
+    #  * @OLD_ORM\Column(name="website", type="string", nullable=true)
+    #  *
+    #  */
+    # protected $website;
 
     /**
      * @ORM\Column(name="accept_rgpd", type="boolean", nullable=true)
@@ -262,9 +262,9 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=16, nullable=true)
+     * @OLD_ORM\Column(name="phone", type="string", length=16, nullable=true)
      */
-    protected $phone;
+    # protected $phone;
 
     /**
      * @var DateTime
