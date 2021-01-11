@@ -219,10 +219,11 @@
 
     function L(a) {
         var b = null;
-        if (!Jb[a] && Lb) try {
-            b = vb.locale(), require("./locale/" + a), vb.locale(b)
-        } catch (c) {
-        }
+        // FIXME: import locale
+        //if (!Jb[a] && Lb) try {
+        //    b = vb.locale(), require("./locale/" + a), vb.locale(b)
+        //} catch (c) {
+        //}
         return Jb[a]
     }
 

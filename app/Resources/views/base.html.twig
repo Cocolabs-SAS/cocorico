@@ -37,6 +37,7 @@
     <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#d61022">
     <meta name="theme-color" content="#ffffff">
 
+    {#
     {% block stylesheets %}
         {% stylesheets
             'css/all.css'
@@ -51,6 +52,8 @@
             <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all">
         {% endstylesheets %}
     {% endblock %}
+    #}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('assets/common.css') }}">
 
     {# Safely using .ready() before including jQuery #}
     <script>
@@ -156,6 +159,7 @@
         $.fn.modal || document.write('<script src="{{ asset('js/vendor/bootstrap.min.js') }}"><\/script>');
     </script>
 
+    {#
     {% javascripts
         'js/vendor/moment.js'
         'js/vendor/json2.js'
@@ -177,6 +181,12 @@
         filter="?jsqueeze" output='js/compiled/all.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    #}
+
+    <!-- WebPack runtime and assets -->
+    <script type="text/javascript" src="{{ asset('assets/runtime.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/common.js') }}"></script>
+    <!-- end of WebPack -->
 
     <script type="text/javascript">
         $(function () {
