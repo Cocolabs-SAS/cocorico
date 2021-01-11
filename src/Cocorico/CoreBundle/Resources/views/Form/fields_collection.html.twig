@@ -5,7 +5,7 @@
 
 {#Common Collection widget item#}
 {% macro collectionItem(child_form, allow_delete) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <li>
             {% set fieldNum = 1 %}
             {% for field in child_form %}
@@ -29,7 +29,7 @@
 
         </li>
 
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 
@@ -39,7 +39,7 @@
 {% block collection_widget %}
     {% import _self as self %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
             {% set data_prototype =  self.collectionItem(form.vars.prototype, allow_delete) %}
@@ -61,7 +61,7 @@
                 </div>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock collection_widget %}
 
 
@@ -72,7 +72,7 @@
     {% set quantityText = {'%quantity_text%': 0|add_time_unit_text} %}
     {% set quantitiesText = {'%quantity_text%': (-1)|add_time_unit_text} %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         <ul class="discount-list list-inline js-removed-row">
             {% set fieldNum = 1 %}
             {% for field in child_form %}
@@ -131,7 +131,7 @@
                 </li>
             {% endif %}
         </ul>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 
@@ -165,7 +165,7 @@
     Images collection
 #}
 {% macro imagesCollectionItem(child_form, allow_delete) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="img-thumbnail">
 
             {% if allow_delete|default(null) is not null %}
@@ -190,7 +190,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 
@@ -200,7 +200,7 @@
 {% block _listing_images_widget %}
     {% import _self as self %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
             {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
@@ -222,13 +222,13 @@
                 </div>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {% block _listing_clientImages_widget %}
     {% import _self as self %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
             {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
@@ -250,7 +250,7 @@
                 </div>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 
@@ -261,7 +261,7 @@
 {% block _user_images_widget %}
     {% import _self as self %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
             {% set data_prototype =  self.profileImagesCollectionItem(form.vars.prototype, allow_delete) %}
@@ -283,5 +283,5 @@
                 </div>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

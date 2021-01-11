@@ -5,7 +5,7 @@
 {# Labels #}
 {#@formatter:off#}
 {% block form_label %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
@@ -41,14 +41,14 @@
 
             {{ '</label>' }}
         {%- endif -%}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 {#@formatter:on#}
 
 
 {# Form Error #}
 {% block form_errors %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if errors|length > 0 %}
             {% set existing_errors = [] %}
 
@@ -75,24 +75,24 @@
                 </div>
             {% endif %}
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_errors %}
 
 
 {# Form Row #}
 {% block form_row %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="form-row">
             {{ form_errors(form) }}
             {{ form_label(form) }}
             {{ form_widget(form) }}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_row %}
 
 {# Help message #}
 {% block form_widget_simple -%}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ parent() }}
 
         {% set help_text="" %}
@@ -107,11 +107,11 @@
                     type="button" data-original-title="{{ help_text|trans }}">?
             </button>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock %}
 
 {% block choice_widget -%}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ parent() }}
 
         {% if help is defined %}
@@ -125,11 +125,11 @@
         {% elseif  attr.help_plain is defined %}
             <span class="ending">{{ attr.help_plain|trans }}</span>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {%- endblock %}
 
 {% block file_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {%- set type = type|default('text') -%}
         <input type="{{ type }}" {{ block('widget_attributes') }}
                data-jcf='{"buttonText": "{{ 'listing.file.button.text'|trans }}", "placeholderText": "{{ 'listing.file.placeholder.text'|trans }}"}'/>
@@ -139,7 +139,7 @@
             <img src="{{ image_url| imagine_filter(imagine_filter|default('listing_xsmall')) }}"/>
         {% endif %}
 
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 {#

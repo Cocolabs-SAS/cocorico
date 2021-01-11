@@ -3,7 +3,7 @@
 {% trans_default_domain 'cocorico' %}
 
 {% macro timeRangesCollectionItem(child_form, allow_delete) %}
-    {% spaceless %}
+    {% apply spaceless %}
         <li class="timepicker-holder time-fields">
             {{ form_errors(child_form) }}
             {% set fieldNum = 1 %}
@@ -61,7 +61,7 @@
             {% endif %}
         </li>
 
-    {% endspaceless %}
+    {% endapply %}
 {% endmacro %}
 
 {#
@@ -70,7 +70,7 @@
 {% block _time_ranges_widget %}
     {% import _self as self %}
 
-    {% spaceless %}
+    {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
             {% set data_prototype =  self.timeRangesCollectionItem(form.vars.prototype, allow_delete) %}
@@ -92,7 +92,7 @@
                 </div>
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 
 

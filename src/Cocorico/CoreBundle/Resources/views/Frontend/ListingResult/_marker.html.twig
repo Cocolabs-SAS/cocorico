@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     {% trans_default_domain 'cocorico_listing' %}
     {% autoescape 'html' %}
         {#
@@ -99,7 +99,7 @@
     </div>
 
     {% endautoescape %}
-{% endspaceless %}
+{% endapply %}
 
 {# Data Markers used to displayed markers on map#}
 <span id="data-markers"

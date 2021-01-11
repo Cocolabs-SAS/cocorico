@@ -1,5 +1,5 @@
 {% block star_rating_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if expanded %}
             <div class="hide-radio" {{ block('widget_container_attributes') }}>
                 {% for child in form %}
@@ -12,5 +12,5 @@
             {# Let the choice widget render the select tag #}
             {{ block('choice_widget') }}
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock star_rating_widget %}
