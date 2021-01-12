@@ -19,10 +19,7 @@ Encore
      */
     .addEntry('common', [
             './web/js/vendors.js',
-            //'./web/js/vendor/moment.js',
             './web/js/vendor/json2.js',
-            //'./web/js/vendor/jquery.cookie.js',
-            //'./web/js/vendor/jquery.touch-punch.js',
             './web/js/vendor/hammer.js',
             './web/js/vendor/bootstrap-multiselect.js',
             './web/js/vendor/bootstrap-datetimepicker.js',
@@ -36,7 +33,6 @@ Encore
             './web/js/common.js',
             './web/js/date-time.js',
             './web/js/vendor/cookie-consent.js',
-            //'./web/js/vendor/ie.js',
 
             './web/css/vendor/bootstrap-datetimepicker.css',
             './web/css/vendor/bootstrap-multiselect.css',

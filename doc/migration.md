@@ -17,6 +17,8 @@
 - Updated Bootstrap, node provided (4.5.3 instead of 3.2.0)
 - Updated cookies module, exposed by webpack
 - Jquery and Jquery-ui fully provided by webpack
+- Updated bootstrap extensions (multiselect and datetimepicker)
+- Refactored failing imports
 
 # Package replacements / removal
 - Removed mongo packages

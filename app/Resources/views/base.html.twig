@@ -38,21 +38,7 @@
     <meta name="theme-color" content="#ffffff">
 
     {% block stylesheets %}
-        {#
-        {% stylesheets
-            'css/all.css'
-            'css/vendor/bootstrap-datetimepicker.css'
-            'css/vendor/bootstrap-multiselect.css'
-            'css/vendor/unslider.css'
-            'css/vendor/cookie-consent.css'
-            'css/all-override.css'
-            'css/itou.css'
-
-            filter='cssrewrite, ?minifycsscompressor' output='css/compiled/all.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" type="text/css" media="all">
-        {% endstylesheets %}
         {{ encore_entry_link_tags('common') }}
-        #}
     {% endblock %}
     <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('assets/common.css') }}">
 
@@ -131,20 +117,6 @@
     </script>
 
 
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- Deprecated
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/i18n/jquery-ui-i18n.min.js"></script>
-
-    <script type="text/javascript">
-        var jqEnabled = window.jQuery && typeof window.jQuery("html") !== 'undefined';
-        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery.min.js') }}"><\/script>');
-        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery-ui.min.js') }}"><\/script>');
-        jqEnabled || document.write('<script src="{{ asset('js/vendor/jquery-ui-i18n.min.js') }}"><\/script>');
-    </script>
-    -->
-
     {#Safely using .ready() before including jQuery #}
     <!--
     <script>
@@ -158,14 +130,6 @@
         })(jQuery, document)
     </script>
     -->
-    {#
-    <!-- deprecated -->
-    <script type="text/javascript"
-            src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-        $.fn.modal || document.write('<script src="{{ asset('js/vendor/bootstrap.min.js') }}"><\/script>');
-    </script>
-    #}
 
     </body>
 
@@ -176,7 +140,6 @@
                 getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
             }
             //Handle Ajax Unauthorised access
-            // FIXME
             common.application.handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
         });
     </script>
