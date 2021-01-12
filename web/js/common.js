@@ -1,9 +1,5 @@
-const $ = require('jquery');
-require('bootstrap');
-
 var DEBUG = true;
-var Cookies = require('js-cookie');
-window.Cookies = Cookies;
+
 
 function console_log() {
     if (DEBUG) {

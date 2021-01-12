@@ -1,7 +1,7 @@
 /**
  * All date and time managements on client side
  */
-
+import "jquery-ui/ui/widgets/datepicker"
 
 /**
  * datepicker init

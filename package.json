@@ -2,9 +2,7 @@
   "devDependencies": {
     "@symfony/webpack-encore": "^0.33.0",
     "bootstrap": "^4.5.3",
-    "bootstrap-datetimepicker": "^0.0.7",
-    "bootstrap-multiselect": "^0.9.15",
-    "jquery": "^3.5.1",
+    "jquery": "3.5.1",
     "js-cookie": "^2.2.1",
     "knockout": "^3.5.1",
     "popper.js": "^1.16.1",
@@ -18,6 +16,10 @@
     "eslint": "^7.17.0",
     "eslint-webpack-plugin": "^2.4.1",
     "jcf": "^1.2.3",
+    "jquery-ui-touch-punch": "^0.2.3",
     "moment": "^2.29.1"
+  },
+  "resolutions": {
+    "jquery": "3.5.1"
   }
 }

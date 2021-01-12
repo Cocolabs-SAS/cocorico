@@ -1,9 +1,4 @@
 // Expose webpack components to browser environment
-require('webpack-jquery-ui');
-var jcf = require('jcf');
-window.jcf = jcf;
-window.$ = window.jQuery = jQuery;
-
 // page init
 jQuery(function () {
     initPopups();

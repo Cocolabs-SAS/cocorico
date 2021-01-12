@@ -18,28 +18,31 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('common', [
-            './web/js/vendor/moment.js',
+            './web/js/vendors.js',
+            //'./web/js/vendor/moment.js',
             './web/js/vendor/json2.js',
             //'./web/js/vendor/jquery.cookie.js',
-            './web/js/vendor/jquery.touch-punch.js',
+            //'./web/js/vendor/jquery.touch-punch.js',
             './web/js/vendor/hammer.js',
-            //'./web/js/vendor/bootstrap-multiselect.js',
-            //'./web/js/vendor/bootstrap-datetimepicker.js',
+            './web/js/vendor/bootstrap-multiselect.js',
+            './web/js/vendor/bootstrap-datetimepicker.js',
             './web/js/vendor/parsley.min.js',
             './web/js/vendor/jquery.unslider.js',
             './web/js/vendor/jquery.caroufredsel.min.js',
             './web/js/vendor/jquery.clearsearch.js',
+
             './web/js/jquery.main.js',
             './web/js/jquery.main-override.js',
             './web/js/common.js',
             './web/js/date-time.js',
             './web/js/vendor/cookie-consent.js',
             //'./web/js/vendor/ie.js',
-            //'./web/css/all.css',
-            //'./web/css/vendor/bootstrap-datetimepicker.css',
-            //'./web/css/vendor/bootstrap-multiselect.css',
+
+            './web/css/vendor/bootstrap-datetimepicker.css',
+            './web/css/vendor/bootstrap-multiselect.css',
             './web/css/vendor/unslider.css',
             './web/css/vendor/cookie-consent.css',
+            //'./web/css/all.css',
             //'./web/css/all-override.css',
             //'./web/css/itou.css',
             './web/css/final_import.scss',
@@ -59,6 +62,10 @@ Encore
 	$: 'jquery',
 	jQuery: 'jquery',
 	'window.jQuery': 'jquery',
+	'root.jQuery': 'jquery',
+	// $: 'webpack-jquery-ui',
+	// jQuery: 'webpack-jquery-ui',
+	// 'window.jQuery': 'webpack-jquery-ui',
 	// 'Cookies': 'js-cookie',
 	// jcf: 'jcf',
     })
@@ -96,5 +103,6 @@ config = Encore.getWebpackConfig();
 config.output.library = 'test';
 config.output.libraryTarget = 'window';
 config.output.libraryExport = 'default';
+// console.log(config);
 
 module.exports = config;
