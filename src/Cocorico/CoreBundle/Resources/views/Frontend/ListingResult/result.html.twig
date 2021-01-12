@@ -208,11 +208,11 @@
                 //Set listings markers on load through data-markers attribute
                 setMarkersFunc($("span#data-markers").data("markers"));
                 // Set default favourites in the listing
-                setDefaultFavourites();
+                common.application.setDefaultFavourites();
             {% endif %}
  
             // Categories
-            initMultiSelect(
+            common.application.initMultiSelect(
                     '#categories',
                     '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
                     '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',

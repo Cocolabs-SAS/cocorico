@@ -211,9 +211,9 @@
         $(function () {
 
             // Set default favourites in the listing
-            setDefaultFavourites();
+            common.application.setDefaultFavourites();
 
-            initMultiSelect(
+            common.application.initMultiSelect(
                     '#categories',
                     '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
                     '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',

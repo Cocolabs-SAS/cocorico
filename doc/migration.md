@@ -15,6 +15,8 @@
 - Updated Jquery to latest, node provided (1.11 to 3.5)
 - Used updated JCF, node provided (1.2.3 instead of 1.1.0)
 - Updated Bootstrap, node provided (4.5.3 instead of 3.2.0)
+- Updated cookies module, exposed by webpack
+- Jquery and Jquery-ui fully provided by webpack
 
 # Package replacements / removal
 - Removed mongo packages

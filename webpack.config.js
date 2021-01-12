@@ -20,7 +20,7 @@ Encore
     .addEntry('common', [
             './web/js/vendor/moment.js',
             './web/js/vendor/json2.js',
-            './web/js/vendor/jquery.cookie.js',
+            //'./web/js/vendor/jquery.cookie.js',
             './web/js/vendor/jquery.touch-punch.js',
             './web/js/vendor/hammer.js',
             //'./web/js/vendor/bootstrap-multiselect.js',
@@ -59,6 +59,7 @@ Encore
 	$: 'jquery',
 	jQuery: 'jquery',
 	'window.jQuery': 'jquery',
+	// 'Cookies': 'js-cookie',
 	// jcf: 'jcf',
     })
 

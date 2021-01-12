@@ -1487,6 +1487,18 @@ boolbase@^1.0.0, boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
+bootstrap-datetimepicker@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/bootstrap-datetimepicker/-/bootstrap-datetimepicker-0.0.7.tgz#a98312648894b81915531b057ff742835843f971"
+  integrity sha1-qYMSZIiUuBkVUxsFf/dCg1hD+XE=
+
+bootstrap-multiselect@^0.9.15:
+  version "0.9.15"
+  resolved "https://registry.yarnpkg.com/bootstrap-multiselect/-/bootstrap-multiselect-0.9.15.tgz#671db3bbe8d65d4caadc77ad12e10d65bf9eff71"
+  integrity sha512-UwF32a0QR82xkEEGpuNrn57Bu0b/7DfCuoiOaziSHfQKFj5arR6c7+MYLs5RiIf3zl4XZ+YnY7ZBi6/EN3vEZA==
+  dependencies:
+    jquery "~2.1.3"
+
 bootstrap@^4.5.3:
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.5.3.tgz#c6a72b355aaf323920be800246a6e4ef30997fe6"
@@ -4022,10 +4034,20 @@ jquery-ui@^1.12.1:
   resolved "https://registry.yarnpkg.com/jquery-ui/-/jquery-ui-1.12.1.tgz#bcb4045c8dd0539c134bc1488cdd3e768a7a9e51"
   integrity sha1-vLQEXI3QU5wTS8FIjN0+dop6nlE=
 
-jquery@^3.3.1:
+jquery@^3.3.1, jquery@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.1.tgz#d7b4d08e1bfdb86ad2f1a3d039ea17304717abb5"
   integrity sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
+
+jquery@~2.1.3:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-2.1.4.tgz#228bde698a0c61431dc2630a6a154f15890d2317"
+  integrity sha1-IoveaYoMYUMdwmMKahVPFYkNIxc=
+
+js-cookie@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.1.tgz#69e106dc5d5806894562902aa5baec3744e9b2b8"
+  integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
 js-tokens@^3.0.2:
   version "3.0.2"
@@ -4134,6 +4156,11 @@ klona@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/klona/-/klona-2.0.4.tgz#7bb1e3affb0cb8624547ef7e8f6708ea2e39dfc0"
   integrity sha512-ZRbnvdg/NxqzC7L9Uyqzf4psi1OM4Cuc+sJAkQPjO6XkQIJTNbfK2Rsmbw8fx1p2mkZdp2FZYo2+LwXYY/uwIA==
+
+knockout@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/knockout/-/knockout-3.5.1.tgz#62c81e81843bea2008fd23c575edd9ca978e75cf"
+  integrity sha512-wRJ9I4az0QcsH7A4v4l0enUpkS++MBx0BnL/68KaLzJg7x1qmbjSlwEoCNol7KTYZ+pmtI7Eh2J0Nu6/2Z5J/Q==
 
 last-call-webpack-plugin@^3.0.0:
   version "3.0.0"
@@ -4966,6 +4993,11 @@ pkg-up@^3.1.0:
   integrity sha512-nDywThFk1i4BQK4twPQ6TA4RT8bDY96yeuCVBWL3ePARCiEKDRSrNGbFIgUJpLp+XeIR65v8ra7WuJOFUBtkMA==
   dependencies:
     find-up "^3.0.0"
+
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
 
 portfinder@^1.0.26:
   version "1.0.28"
