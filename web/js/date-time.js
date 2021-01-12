@@ -7,7 +7,9 @@
  * datepicker init
  * Same than initDatePickerAjax in common.js without ajax mode
  */
-function initDatepicker() {
+window.common.datetime = {};
+window.common.datetime.initDatepicker = function() {
+// function initDatepicker() {
     var today = new Date();
 
     jQuery.datepicker.setDefaults($.datepicker.regional[$("html").attr("lang")]);//abe++

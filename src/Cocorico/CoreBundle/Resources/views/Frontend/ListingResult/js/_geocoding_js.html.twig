@@ -77,9 +77,9 @@
         }
 
         //Center modal dialog box
-        $('.modal').on('show.bs.modal', centerModal);
+        $('.modal').on('show.bs.modal', common.application.centerModal);
         $(window).on("resize", function () {
-            $('.modal:visible').each(centerModal);
+            $('.modal:visible').each(common.application.centerModal);
         });
     });
 </script>

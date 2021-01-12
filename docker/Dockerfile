@@ -49,6 +49,7 @@ RUN apt-get install -y \
         apt-transport-https \
         unzip \
         wget \
+        vim-tiny \
         screen
 
 # Add Yarn

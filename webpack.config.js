@@ -23,8 +23,8 @@ Encore
             './web/js/vendor/jquery.cookie.js',
             './web/js/vendor/jquery.touch-punch.js',
             './web/js/vendor/hammer.js',
-            './web/js/vendor/bootstrap-multiselect.js',
-            './web/js/vendor/bootstrap-datetimepicker.js',
+            //'./web/js/vendor/bootstrap-multiselect.js',
+            //'./web/js/vendor/bootstrap-datetimepicker.js',
             './web/js/vendor/parsley.min.js',
             './web/js/vendor/jquery.unslider.js',
             './web/js/vendor/jquery.caroufredsel.min.js',
@@ -34,10 +34,10 @@ Encore
             './web/js/common.js',
             './web/js/date-time.js',
             './web/js/vendor/cookie-consent.js',
-            './web/js/vendor/ie.js',
+            //'./web/js/vendor/ie.js',
             //'./web/css/all.css',
-            './web/css/vendor/bootstrap-datetimepicker.css',
-            './web/css/vendor/bootstrap-multiselect.css',
+            //'./web/css/vendor/bootstrap-datetimepicker.css',
+            //'./web/css/vendor/bootstrap-multiselect.css',
             './web/css/vendor/unslider.css',
             './web/css/vendor/cookie-consent.css',
             //'./web/css/all-override.css',
@@ -53,7 +53,14 @@ Encore
         {from: './node_modules/ckeditor/skins', to: 'ckeditor/skins/[path][name].[ext]'}
     ])
 
-    .autoProvidejQuery()
+
+    // Preload legacy functionnality
+    .autoProvideVariables({
+	$: 'jquery',
+	jQuery: 'jquery',
+	'window.jQuery': 'jquery',
+	// jcf: 'jcf',
+    })
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -76,6 +83,7 @@ Encore
     .enableVersioning(Encore.isProduction())
 
     // Other options.
+    //.enableEslintLoader()
     .enableSassLoader()
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
@@ -83,7 +91,9 @@ Encore
 ;
 
 config = Encore.getWebpackConfig();
-config.output.library = 'common';
-config.output.libraryTarget = 'umd';
+
+config.output.library = 'test';
+config.output.libraryTarget = 'window';
+config.output.libraryExport = 'default';
 
 module.exports = config;

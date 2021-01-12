@@ -7,7 +7,6 @@
     $(function () {
         window.addEventListener("load", function () {
             if (window.cookieconsent !== undefined) {
-                console.log('Attached cookieconsent')
                 window.cookieconsent.initialise({
                     "palette": {
                         "popup": {
@@ -26,8 +25,6 @@
                         "link": "{{ "cookie_consent_link"|trans|escape("js") }}"
                     }
                 })
-        } else {
-            console.log('Failed to attach cookieconsent')
         }
         });
     });

@@ -45,6 +45,9 @@ framework:
 sentry:
   dsn: "%sentry_dsn%"
 
+webpack_encore:
+  output_path: "%kernel.project_dir%/web/assets"
+
 # Twig Configuration
 twig:
     debug:            "%kernel.debug%"

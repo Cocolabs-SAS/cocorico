@@ -1,7 +1,4 @@
 var DEBUG = true;
-common = {};
-common.application = {};
-
 function console_log() {
     if (DEBUG) {
         if (console) {
@@ -10,7 +7,7 @@ function console_log() {
     }
 }
 
-$(window).load(function () {
+$(window).on('load', function () {
     //Disable html5 validation
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
@@ -254,24 +251,6 @@ function cleanHash() {
 }
 
 /**
- * setFavourite class function
- */
-function setDefaultFavourites() {
-    var cookieList = $.fn.cookieList("favourite");
-    $.each(cookieList.items(), function (index, value) {
-        var $favorite = $('#favourite-' + value);
-        if (!$favorite.hasClass('active')) {
-            $favorite.addClass('active');
-        }
-    });
-    if (cookieList.items().length > 0) {
-        $('#fav-count').html("(" + cookieList.items().length + ")");
-    } else {
-        $('#fav-count').html(" ");
-    }
-}
-
-/**
  * Currencies
  */
 var currencies;
@@ -440,18 +419,6 @@ function getNbUnReadMessages(url) {
     });
 }
 
-/**
- * centerModal centers the modal box when window resized
- * @return void
- */
-function centerModal() {
-    $(this).css('display', 'block');
-    var $dialog = $(this).find(".modal-dialog");
-    var offset = ($(window).height() - $dialog.height()) / 2;
-    // Center modal vertically in window
-    $dialog.css("margin-top", offset);
-}
-
 
 $.fn.extend({
     /**
@@ -515,19 +482,6 @@ $('body').on('hidden.bs.modal', '.modal', function () {
     $(this).removeData('bs.modal');
     $(this).find(".modal-content").html('');
 });
-
-/**
- * Handle Unauthorised Ajax Access
- *
- * @param loginUrl
- */
-common.application.handleUnauthorisedAjaxAccess = function (loginUrl) {
-    $(document).ajaxError(function (event, xhr) {
-        if (403 === xhr.status) {
-            location.href = loginUrl;
-        }
-    });
-}
 
 
 // plugin for the cookies add/remove
@@ -597,4 +551,55 @@ function toggleCompanyNameInput(input) {
     });
 })(jQuery);
 
-export default common;
+//////////////////////////////////////////// EXPORTED FUNCTIONS
+///////////////////////////////////////////////////////////////
+var common = {};
+common.application = {};
+
+/**
+ * Handle Unauthorised Ajax Access
+ *
+ * @param loginUrl
+ */
+common.application.handleUnauthorisedAjaxAccess = function (loginUrl) {
+    $(document).ajaxError(function (event, xhr) {
+        if (403 === xhr.status) {
+            location.href = loginUrl;
+        }
+    });
+};
+
+/**
+ * centerModal centers the modal box when window resized
+ * @return void
+ */
+common.application.centerModal = function() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+}
+
+/**
+ * setFavourite class function
+ */
+common.application.setDefaultFavourites = function() {
+    var cookieList = $.fn.cookieList("favourite");
+    $.each(cookieList.items(), function (index, value) {
+        var $favorite = $('#favourite-' + value);
+        if (!$favorite.hasClass('active')) {
+            $favorite.addClass('active');
+        }
+    });
+    if (cookieList.items().length > 0) {
+        $('#fav-count').html("(" + cookieList.items().length + ")");
+    } else {
+        $('#fav-count').html(" ");
+    }
+}
+
+
+
+// Dirty hack, but needed for outsite use of functions
+window.common = common;

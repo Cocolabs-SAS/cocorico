@@ -1,13 +1,17 @@
 {
   "devDependencies": {
     "@symfony/webpack-encore": "^0.33.0",
+    "bootstrap": "^4.5.3",
     "sass": "^1.32.2",
     "sass-loader": "^10.0.0",
+    "webpack-jquery-ui": "^2.0.1",
     "webpack-notifier": "^1.6.0"
   },
   "dependencies": {
     "ckeditor": "^4.0.0",
-    "jquery": "1.11.2",
+    "eslint": "^7.17.0",
+    "eslint-webpack-plugin": "^2.4.1",
+    "jcf": "^1.2.3",
     "moment": "^2.29.1"
   }
 }

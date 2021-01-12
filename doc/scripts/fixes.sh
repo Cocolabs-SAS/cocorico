@@ -10,6 +10,8 @@ updates=(
     's/{% spaceless %}/{% apply spaceless %}/g'
     's/{% endspaceless %}/{% endapply %}/g'
     's/Sensio\\Bundle\\FrameworkExtraBundle\\Configuration\\Route/Symfony\\Component\\Routing\\Annotation\\Route/g'
+    's/setDefaultFavourites(/common.application.setDefaultFavourites(/g'
+    's/initMultiSelect(/common.application.initMultiSelect(/g'
 )
 
 

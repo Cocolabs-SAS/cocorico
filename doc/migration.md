@@ -11,6 +11,11 @@
 - Refactored some vendor JS modules to work with webpack
 - Replaced FOS/ckeditor with nodeJS module (https://symfony.com/doc/current/bundles/FOSCKEditorBundle/installation.html)
 
+## 12/01/21
+- Updated Jquery to latest, node provided (1.11 to 3.5)
+- Used updated JCF, node provided (1.2.3 instead of 1.1.0)
+- Updated Bootstrap, node provided (4.5.3 instead of 3.2.0)
+
 # Package replacements / removal
 - Removed mongo packages
 - Removing ramsey/array_column | ramsey/array_column is abandoned, you should avoid using it. Use it-for-free/array_column
