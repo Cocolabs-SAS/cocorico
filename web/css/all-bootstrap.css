@@ -4065,6 +4065,7 @@ input[type="button"].btn-block {
     transition: transform 0.3s ease-out;
 }
 
+.modal.show .modal-dialog,
 .modal.in .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
@@ -4104,6 +4105,7 @@ input[type="button"].btn-block {
     filter: alpha(opacity=0);
 }
 
+.modal-backdrop.show,
 .modal-backdrop.in {
     opacity: 0.7;
     filter: alpha(opacity=70);

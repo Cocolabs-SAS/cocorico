@@ -16,14 +16,13 @@ $('#modal')
         }
 });
 
-
 $(window).on('load', function () {
     //Disable html5 validation
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
-    // $('.modal-force').modal('show');
-    $('#modal').modal('hide');
+    // $('#modal').modal('hide');
+    $('.modal-force').modal('show');
 });
 
 $(function () {
