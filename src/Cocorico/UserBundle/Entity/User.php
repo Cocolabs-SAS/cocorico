@@ -192,10 +192,10 @@ class User extends BaseUser implements ParticipantInterface
 
     # /**
     #  * @var string
-    #  * @OLD_ORM\Column(name="website", type="string", nullable=true)
+    #  * @ORM\Column(name="website", type="string", nullable=true)
     #  *
     #  */
-    # protected $website;
+    protected $website;
 
     /**
      * @ORM\Column(name="accept_rgpd", type="boolean", nullable=true)
@@ -262,9 +262,9 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @OLD_ORM\Column(name="phone", type="string", length=16, nullable=true)
+     * @ORM\Column(name="phone", type="string", length=16, nullable=true)
      */
-    # protected $phone;
+    protected $phone;
 
     /**
      * @var DateTime

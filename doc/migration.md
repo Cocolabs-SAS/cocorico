@@ -17,8 +17,15 @@
 - Updated Bootstrap, node provided (4.5.3 instead of 3.2.0)
 - Updated cookies module, exposed by webpack
 - Jquery and Jquery-ui fully provided by webpack
+
+## 13/01/21
 - Updated bootstrap extensions (multiselect and datetimepicker)
 - Refactored failing imports
+
+## 14/01/21
+- Fixing bootstrap multiselect behaviours after update
+- Fixing entity/db mapping
+- Providing JQFileUpload with node (separate webpack)
 
 # Package replacements / removal
 - Removed mongo packages
