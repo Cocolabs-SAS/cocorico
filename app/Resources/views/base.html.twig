@@ -137,7 +137,7 @@
         $(function () {
             if (isAuthenticated) {
                 //Unread messages
-                getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
+                common.application.getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
             }
             //Handle Ajax Unauthorised access
             common.application.handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
