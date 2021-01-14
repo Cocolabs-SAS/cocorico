@@ -1,6 +1,5 @@
 var DEBUG = true;
 
-
 function console_log() {
     if (DEBUG) {
         if (console) {
@@ -107,7 +106,6 @@ $(function () {
     // Facebook unwanted has characters
     cleanHash();
 
-    fixIEMobile10();
     // Clearable input types
     $('input.clearable, .clearable input[type=text]').clearSearch({
         callback: function () {
@@ -130,22 +128,6 @@ function handleButtonClick() {
         }
     });
 }
-
-/**
- * Fix IE mobile
- */
-function fixIEMobile10() {
-    if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-        var msViewportStyle = document.createElement('style');
-        msViewportStyle.appendChild(
-            document.createTextNode(
-                '@-ms-viewport{width:auto!important}'
-            )
-        );
-        document.querySelector('head').appendChild(msViewportStyle)
-    }
-}
-
 
 /**
  * Facebook unwanted has characters
@@ -181,7 +163,7 @@ var currencies;
  * @param currency_two_elt Currency of the second amount
  */
 function currencyConversionHandler(amount_one_elt, amount_two_elt, currency_two_elt) {
-
+    console.log('DEPRECATED CALL TO currencyConversionHandler');
     $(amount_two_elt).attr("data-currency", $(currency_two_elt).val());
     $(currency_two_elt).change(function () {
         $(amount_two_elt).attr("data-currency", $(this).val());
@@ -224,6 +206,7 @@ function currencyConversionHandler(amount_one_elt, amount_two_elt, currency_two_
  */
 function convertCurrency(amount, from, to) {
     //console.log(amount, from, to);
+    console.log('DEPRECATED CALL TO convertCurrency');
     if (!to || !from || !amount) {
         return '';
     }
@@ -516,6 +499,7 @@ common.application.getNbUnReadMessages = function(url) {
         }
     });
 }
+
 
 /**
  * Init Multi Select Box
