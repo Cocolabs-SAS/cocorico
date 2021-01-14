@@ -14,6 +14,8 @@ require('jcf/js/jcf.number');
 require('jcf/js/jcf.textarea');
 
 require('bootstrap');
+require('bootstrap/js/dist/modal');
+require('bootstrap/js/dist/tooltip');
 
 const Cookies = require('js-cookie');
 

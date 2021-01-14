@@ -8,12 +8,22 @@ function console_log() {
     }
 }
 
+// Itou migration : fix bootstrap v4 breaking remote modal URL loading
+$('#modal')
+    .on('show.bs.modal', function (e) {
+        if (e.relatedTarget !== undefined) {
+            window.jQuery(this).find('.modal-content').load(e.relatedTarget.href);
+        }
+});
+
+
 $(window).on('load', function () {
     //Disable html5 validation
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
     // $('.modal-force').modal('show');
+    $('#modal').modal('hide');
 });
 
 $(function () {

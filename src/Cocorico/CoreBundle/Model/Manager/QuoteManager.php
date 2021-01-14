@@ -76,8 +76,6 @@ class QuoteManager extends BaseManager
         $parameters
     ) {
         $this->em = $em;
-        $this->dm = $dm;
-        $this->availabilityManager = $availabilityManager;
         $this->mailer = $mailer;
         $this->smser = $smser;
         $this->dispatcher = $dispatcher;

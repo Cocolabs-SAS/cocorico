@@ -26,6 +26,7 @@
 - Fixing bootstrap multiselect behaviours after update
 - Fixing entity/db mapping
 - Providing JQFileUpload with node (separate webpack)
+- Fixed updated deferred Jquery functions
 
 # Package replacements / removal
 - Removed mongo packages
