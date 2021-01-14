@@ -313,6 +313,10 @@ body {
 /******************
  * HOME STYLES
  ******************/
+.multiselect .btn-group.show {
+    display:inline-block !important;
+}
+
  .listing-category button.btn.multiselect {
       white-space: nowrap;
       overflow: hidden;
