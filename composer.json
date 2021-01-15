@@ -37,12 +37,6 @@
       "vendor/symfony/symfony/src/Symfony/Component/VarDumper/Resources/functions/dump.php"
     ]
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/Cocolabs-SAS/SonataUserBundle"
-    }
-  ],
   "require": {
     "php": "^7.1",
     "a2lix/translation-form-bundle": "^2.1",
@@ -79,7 +73,7 @@
     "sonata-project/doctrine-orm-admin-bundle": "^3.1",
     "sonata-project/easy-extends-bundle": "^2.2",
     "sonata-project/intl-bundle": "^2.4",
-    "sonata-project/user-bundle": "^4.0",
+    "sonata-project/user-bundle": "4.x@dev",
     "stof/doctrine-extensions-bundle": "^1.2",
     "symfony/monolog-bundle": "^3.1",
     "symfony/swiftmailer-bundle": "^3.1",

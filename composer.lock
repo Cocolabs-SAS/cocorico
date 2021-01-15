@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "920a4be04b8568db7b685cfee6f13568",
+    "content-hash": "420f21da66ab7bd62b75df5fea6e928c",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -7507,16 +7507,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "4.3.0",
+            "version": "4.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Cocolabs-SAS/SonataUserBundle.git",
-                "reference": "a0f5f0daa58b35eae593cfa2a9a040de85a7eae7"
+                "url": "https://github.com/sonata-project/SonataUserBundle.git",
+                "reference": "6f67594a79c121a41277b7a32393abd179dbcb89"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Cocolabs-SAS/SonataUserBundle/zipball/a0f5f0daa58b35eae593cfa2a9a040de85a7eae7",
-                "reference": "a0f5f0daa58b35eae593cfa2a9a040de85a7eae7",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/6f67594a79c121a41277b7a32393abd179dbcb89",
+                "reference": "6f67594a79c121a41277b7a32393abd179dbcb89",
                 "shasum": ""
             },
             "require": {
@@ -7538,11 +7538,12 @@
                 "symfony/options-resolver": "^2.8 || ^3.2 || ^4.0",
                 "symfony/security-acl": "^2.8 || ^3.0",
                 "symfony/security-core": "^2.8 || ^3.2 || ^4.0",
-                "symfony/translation": "^2.8 || ^3.2 || ^4.0"
+                "symfony/translation": "^2.8 || ^3.2 || ^4.0",
+                "twig/twig": "^2.9"
             },
             "conflict": {
                 "friendsofsymfony/rest-bundle": "<2.1 || >=3.0",
-                "jms/serializer": "<0.13 || >=2.0",
+                "jms/serializer": "<1.3 || >=4.0",
                 "nelmio/api-doc-bundle": "<2.4",
                 "sonata-project/block-bundle": "<3.11",
                 "sonata-project/doctrine-orm-admin-bundle": "<3.0",
@@ -7552,14 +7553,14 @@
             "require-dev": {
                 "doctrine/orm": "^2.0",
                 "friendsofsymfony/rest-bundle": "^2.1",
-                "jms/serializer-bundle": "^1.0 || ^2.0",
+                "jms/serializer-bundle": "^1.0 || ^2.0 || ^3.0",
                 "matthiasnoback/symfony-config-test": "^4.0",
                 "matthiasnoback/symfony-dependency-injection-test": "^3.0",
                 "nelmio/api-doc-bundle": "^2.4",
                 "sonata-project/block-bundle": "^3.11",
                 "sonata-project/google-authenticator": "^1.0 || ^2.0",
                 "sonata-project/seo-bundle": "^2.0",
-                "symfony/phpunit-bridge": "^4.1"
+                "symfony/phpunit-bridge": "^4.3"
             },
             "suggest": {
                 "friendsofsymfony/rest-bundle": "For using the public API methods.",
@@ -7580,11 +7581,7 @@
                     "Sonata\\UserBundle\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Sonata\\UserBundle\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -7607,9 +7604,10 @@
                 "user"
             ],
             "support": {
-                "source": "https://github.com/Cocolabs-SAS/SonataUserBundle/tree/4.3.0"
+                "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/4.5.1"
             },
-            "time": "2019-01-30T22:27:28+00:00"
+            "time": "2019-10-21T06:59:16+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -7682,16 +7680,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.4",
+            "version": "v6.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e"
+                "reference": "698a6a9f54d7eb321274de3ad19863802c879fb7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e",
-                "reference": "56f0ab23f54c4ccbb0d5dcc67ff8552e0c98d59e",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/698a6a9f54d7eb321274de3ad19863802c879fb7",
+                "reference": "698a6a9f54d7eb321274de3ad19863802c879fb7",
                 "shasum": ""
             },
             "require": {
@@ -7741,7 +7739,7 @@
             ],
             "support": {
                 "issues": "https://github.com/swiftmailer/swiftmailer/issues",
-                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.4"
+                "source": "https://github.com/swiftmailer/swiftmailer/tree/v6.2.5"
             },
             "funding": [
                 {
@@ -7753,7 +7751,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-12-08T18:02:06+00:00"
+            "time": "2021-01-12T09:35:59+00:00"
         },
         {
             "name": "symfony/http-client",
@@ -9030,16 +9028,16 @@
         },
         {
             "name": "symfony/security-acl",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-acl.git",
-                "reference": "6113f4c17648b0d3cc41e4bb78ee0aed3c88166b"
+                "reference": "2c1b1b68d8ff410f925697bc689ec6340b3e5d2b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-acl/zipball/6113f4c17648b0d3cc41e4bb78ee0aed3c88166b",
-                "reference": "6113f4c17648b0d3cc41e4bb78ee0aed3c88166b",
+                "url": "https://api.github.com/repos/symfony/security-acl/zipball/2c1b1b68d8ff410f925697bc689ec6340b3e5d2b",
+                "reference": "2c1b1b68d8ff410f925697bc689ec6340b3e5d2b",
                 "shasum": ""
             },
             "require": {
@@ -9056,7 +9054,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-main": "3.0-dev"
                 }
             },
             "autoload": {
@@ -9085,7 +9083,7 @@
             "homepage": "https://symfony.com",
             "support": {
                 "issues": "https://github.com/symfony/security-acl/issues",
-                "source": "https://github.com/symfony/security-acl/tree/v3.1.0"
+                "source": "https://github.com/symfony/security-acl/tree/v3.1.1"
             },
             "funding": [
                 {
@@ -9101,7 +9099,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-08-07T07:02:56+00:00"
+            "time": "2021-01-12T09:10:27+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -12673,6 +12671,7 @@
                 "issues": "https://github.com/sensiolabs/security-checker/issues",
                 "source": "https://github.com/sensiolabs/security-checker/tree/master"
             },
+            "abandoned": "https://github.com/fabpot/local-php-security-checker",
             "time": "2019-11-01T13:20:14+00:00"
         },
         {
@@ -12744,16 +12743,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "1.27.0",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "a47408fa6e39034a5abe324a46f4e6733266267a"
+                "reference": "6f4d27a68c92179c124f5331a27e32d197c9bd59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/a47408fa6e39034a5abe324a46f4e6733266267a",
-                "reference": "a47408fa6e39034a5abe324a46f4e6733266267a",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/6f4d27a68c92179c124f5331a27e32d197c9bd59",
+                "reference": "6f4d27a68c92179c124f5331a27e32d197c9bd59",
                 "shasum": ""
             },
             "require": {
@@ -12812,7 +12811,7 @@
             ],
             "support": {
                 "issues": "https://github.com/symfony/maker-bundle/issues",
-                "source": "https://github.com/symfony/maker-bundle/tree/1.27.0"
+                "source": "https://github.com/symfony/maker-bundle/tree/v1.28.0"
             },
             "funding": [
                 {
@@ -12828,7 +12827,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-08T18:14:10+00:00"
+            "time": "2021-01-15T18:19:20+00:00"
         },
         {
             "name": "symfony/mime",
@@ -13171,4 +13170,4 @@
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"
-er
+}
