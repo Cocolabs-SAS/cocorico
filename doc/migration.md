@@ -28,6 +28,9 @@
 - Providing JQFileUpload with node (separate webpack)
 - Fixed updated deferred Jquery functions
 
+## 15/01/21
+- Fix broken depencey, lockfile, solved by deleting github source repo override for sonataUserBundle in composer.json
+
 # Package replacements / removal
 - Removed mongo packages
 - Removing ramsey/array_column | ramsey/array_column is abandoned, you should avoid using it. Use it-for-free/array_column

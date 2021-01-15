@@ -71,7 +71,7 @@
 
 
     <script>
-        $(function () {
+        window.addEventListener('load', function () {
             var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
 
             initDatePickerAjax(function () {
@@ -114,6 +114,6 @@
                 }
             });
 
-        });
+        }, false);
     </script>
 </section>
