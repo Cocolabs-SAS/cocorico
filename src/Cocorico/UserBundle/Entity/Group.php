@@ -13,7 +13,7 @@ namespace Cocorico\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-# use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
+// use Sonata\UserBundle\Entity\BaseGroup as BaseGroup;
 
 /**
  * @ORM\Entity

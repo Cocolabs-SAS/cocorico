@@ -34,7 +34,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-# use Sonata\UserBundle\Entity\BaseUser;
+// use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * User.
@@ -65,7 +65,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  */
 class User extends BaseUser implements ParticipantInterface
 {
-    # use ORMBehaviors\Timestampable\Timestampable;
+    use ORMBehaviors\Timestampable\Timestampable;
     use ORMBehaviors\Translatable\Translatable;
     use ORMBehaviors\Sluggable\Sluggable;
 
@@ -190,11 +190,11 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $naf;
 
-    # /**
-    #  * @var string
-    #  * @ORM\Column(name="website", type="string", nullable=true)
-    #  *
-    #  */
+    /**
+     * @var string
+     * @ORM\Column(name="website", type="string", nullable=true)
+     *
+     */
     protected $website;
 
     /**
