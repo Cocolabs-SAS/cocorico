@@ -4,7 +4,6 @@ services:
         class: Cocorico\CoreBundle\Model\Manager\ListingSearchManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@doctrine.odm.mongodb.document_manager"
             - "@event_dispatcher"
             - parameters:
                 cocorico_booking_end_day_included: "%cocorico.booking.end_day_included%"
@@ -26,8 +25,6 @@ services:
         class: Cocorico\CoreBundle\Model\Manager\QuoteManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@doctrine.odm.mongodb.document_manager"
-            - "@cocorico.listing_availability.manager"
             - "@cocorico.mailer.twig_swift"
             - "@?cocorico_sms.smser.twig"
             - "@event_dispatcher"
@@ -49,8 +46,6 @@ services:
         class: Cocorico\CoreBundle\Model\Manager\BookingManager
         arguments:
             - "@doctrine.orm.entity_manager"
-            - "@doctrine.odm.mongodb.document_manager"
-            - "@cocorico.listing_availability.manager"
             - "@cocorico.mailer.twig_swift"
             - "@?cocorico_sms.smser.twig"
             - "@event_dispatcher"
@@ -102,18 +97,18 @@ services:
         public: true
 
     #Documents Manager
-    cocorico.listing_availability.manager:
-        class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager
-        arguments:
-          - "@doctrine.odm.mongodb.document_manager"
-          - "@cocorico.listing_availability_time.manager"
-          - "%cocorico.time_unit%"
-          - "%cocorico.listing_availability_status%"
-          - "%cocorico.booking.end_day_included%"
+    #  cocorico.listing_availability.manager:
+    #      class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityManager
+    #      arguments:
+    #        - "@doctrine.odm.mongodb.document_manager"
+    #        - "@cocorico.listing_availability_time.manager"
+    #        - "%cocorico.time_unit%"
+    #        - "%cocorico.listing_availability_status%"
+    #        - "%cocorico.booking.end_day_included%"
 
-    cocorico.listing_availability_time.manager:
-      class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityTimeManager
-      arguments:
-        - "@doctrine.odm.mongodb.document_manager"
-        - "%cocorico.time_unit%"
-        - "%cocorico.listing_availability_status%"
+    #  cocorico.listing_availability_time.manager:
+    #    class: Cocorico\CoreBundle\Model\Manager\ListingAvailabilityTimeManager
+    #    arguments:
+    #      - "@doctrine.odm.mongodb.document_manager"
+    #      - "%cocorico.time_unit%"
+    #      - "%cocorico.listing_availability_status%"

@@ -4,7 +4,7 @@
 
 {# Form Row #}
 {% block form_row %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="field-row">
             <span class="label">
                 {{ form_label(form) }}
@@ -15,14 +15,14 @@
                 {{ form_errors(form) }}
             </div>
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_row %}
 
 
 {# Labels #}
 {#@formatter:off#}
 {% block form_label %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if label is not same as(false) %}
             {% if not compound %}
                 {% set label_attr = label_attr|merge({'for': id}) %}
@@ -44,14 +44,14 @@
             {% autoescape false %}{{ label|trans({}, translation_domain) }}{% endautoescape %} {{ label_required }}
             </label>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}
 {#@formatter:on#}
 
 
 {# Form Error #}
 {% block form_errors %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if errors|length > 0 %}
             <div class="errors">
                 {% for error in errors %}
@@ -72,5 +72,5 @@
                 </div>
             {% endif %}
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock form_errors %}

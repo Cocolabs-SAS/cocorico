@@ -1,4 +1,4 @@
-$(window).load(function () {
+$(window).on('load', function () {
     var $toggleFilter = $('#toggle-filter');
 
     var $baFilter = $('.sonata-ba-filter');

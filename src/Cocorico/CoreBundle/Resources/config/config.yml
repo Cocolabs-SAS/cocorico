@@ -11,7 +11,6 @@ imports:
 framework:
      assets:
         base_urls: '%cocorico.assets_base_urls%'
-        version: 'v5'
      session:
         gc_probability: 0
 
@@ -72,8 +71,8 @@ twig:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 
-assetic:
-    bundles: ["CocoricoCoreBundle"]
+              # assetic:
+              #     bundles: ["CocoricoCoreBundle"]
 
 doctrine:
     orm:
@@ -117,12 +116,6 @@ doctrine:
     dbal:
         types:
             json: Sonata\Doctrine\Types\JsonType
-
-
-doctrine_mongodb:
-    document_managers:
-        default:
-            auto_mapping: true
 
 
 jms_i18n_routing:

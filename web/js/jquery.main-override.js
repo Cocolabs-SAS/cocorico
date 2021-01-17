@@ -5,7 +5,7 @@
 
     $doc.ready(function () {
 
-        $win.load(function () {
+        $win.on('load', function () {
             var $sliderSecond = $('.slider-secondary');
             if (!$sliderSecond.length) {
                 return;

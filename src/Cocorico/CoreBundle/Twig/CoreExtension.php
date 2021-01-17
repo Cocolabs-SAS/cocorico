@@ -21,12 +21,12 @@ use ReflectionClass;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Translation\TranslatorInterface;
-use Twig_Extension;
-use Twig_Extension_GlobalsInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\Extension\GlobalsInterface;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
-class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInterface
+class CoreExtension extends AbstractExtension implements GlobalsInterface
 {
     protected $currencyExtension;
     protected $translator;
@@ -380,9 +380,6 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         $listing = new ReflectionClass("Cocorico\CoreBundle\Entity\Listing");
         $listingConstants = $listing->getConstants();
 
-        $listingAvailability = new ReflectionClass("Cocorico\CoreBundle\Document\ListingAvailability");
-        $listingAvailabilityConstants = $listingAvailability->getConstants();
-
         $listingImage = new ReflectionClass("Cocorico\CoreBundle\Entity\ListingImage");
         $listingImageConstants = $listingImage->getConstants();
 
@@ -433,7 +430,6 @@ class CoreExtension extends Twig_Extension implements Twig_Extension_GlobalsInte
         return array(
             'locales' => $this->locales,
             'ListingConstants' => $listingConstants,
-            'ListingAvailabilityConstants' => $listingAvailabilityConstants,
             'ListingImageConstants' => $listingImageConstants,
             'ListingClientImageConstants' => $listingClientImageConstants,
             'UserImageConstants' => $userImageConstants,

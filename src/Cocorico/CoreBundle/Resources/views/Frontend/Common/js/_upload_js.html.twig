@@ -1,18 +1,8 @@
 {#Jquery files uploads and sortable management#}
 
-{% javascripts
-'js/vendor/jqfileupload/tmpl.min.js'
-'js/vendor/jqfileupload/load-image.all.min.js'
-'js/vendor/jqfileupload/canvas-to-blob.min.js'
-'js/vendor/jqfileupload/jquery.iframe-transport.js'
-'js/vendor/jqfileupload/jquery.fileupload.js'
-'js/vendor/jqfileupload/jquery.fileupload-process.js'
-'js/vendor/jqfileupload/jquery.fileupload-image.js'
-'js/vendor/jqfileupload/jquery.fileupload-validate.js'
-
-filter="?jsqueeze" output='js/compiled/upload.js' %}
-<script src="{{ asset_url }}"></script>
-{% endjavascripts %}
+{% block javascripts %}
+    {{ encore_entry_script_tags('upload') }}
+{% endblock %}
 
 <script>
     $(function () {
@@ -68,12 +58,12 @@ filter="?jsqueeze" output='js/compiled/upload.js' %}
                         var jqXHR = $("{{ upload_elt }}").fileupload('send', {
                             files: filesToUpload[$(this).attr("data-id")],
                             filePosition: index
-                        }).success(function (result, textStatus, jqXHR) {
+                        }).done(function (result, textStatus, jqXHR) {
                             //Populate in the right order the images to upload for new entity
                             orderedUploadedFiles[this.filePosition] = result.files[0].name;
-                        }).error(function (jqXHR, textStatus, errorThrown) {
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
                             //  console.log("error");
-                        }).complete(function (result, textStatus, jqXHR) {
+                        }).always(function (result, textStatus, jqXHR) {
                             nbFilesUploaded++;
                             //Submit form if all images are uploaded
                             if (nbFilesUploaded == nbFilesToUpload) {

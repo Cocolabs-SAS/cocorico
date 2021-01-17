@@ -6,8 +6,6 @@ parameters:
     database_name: %SQL_NAME%
     database_user: %SQL_USER%
     database_password: %SQL_PASS%
-    mongodb_server: %MONGO_URL%
-    mongodb_database_name: %MONGO_DB%
     mailer_transport: smtp
     mailer_host: '%SMTP_HOST%'
     mailer_user: '%SMTP_USER%'
@@ -15,8 +13,8 @@ parameters:
     mailer_port: '%SMTP_PORT%'
     secret: d69958a4fff6ba8f0f4fc4fc2657366ccf9dd0f3
     use_assetic_controller: false
-    cocorico.assets_base_urls: 'http://localhost:%HOST_PORT%'
-    router.request_context.host: localhost
+    cocorico.assets_base_urls: 'http://127.0.0.1:%HOST_PORT%'
+    router.request_context.host: '127.0.0.1'
     router.request_context.scheme: https
     router.request_context.base_url: ''
     cocorico.admin: admin

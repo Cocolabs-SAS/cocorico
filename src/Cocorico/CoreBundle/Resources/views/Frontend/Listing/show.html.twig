@@ -31,7 +31,8 @@
 
 {% block stylesheets %}
     {{ parent() }}
-
+    {{ encore_entry_link_tags('calendar') }}
+    {#
     {% stylesheets
     'css/vendor/fullcalendar.min.css'
     'css/fullcalendar-override.css'
@@ -39,6 +40,7 @@
     filter='cssrewrite, ?minifycsscompressor' output='css/compiled/fullcalendar.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
+    #}
 {% endblock %}
 
 
@@ -172,11 +174,13 @@
                                         </div>
                                     </div>
 
+                                    {#
                                     <div role="tabpanel" class="tab-pane" id="calendar">
                                         <div class="date-slider alt">
                                             {% include '@CocoricoCore/Dashboard/Listing/_calendar.html.twig' with {'edit_mode': false} only %}
                                         </div>
                                     </div>
+                                    #}
 
                                 </div>
                             </div>
@@ -329,6 +333,8 @@
     {{ parent() }}
 
     {#Calendar #}
+    {{ encore_entry_script_tags('calendar') }}
+    {#
     {% javascripts
     'js/vendor/fullcalendar/fullcalendar.min.js'
     'js/vendor/fullcalendar/lang-all.js'
@@ -336,13 +342,16 @@
     filter="jsqueeze" output='js/compiled/calendar.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
+    #}
 
+    {#
     {% include '@CocoricoCore/Frontend/Listing/js/_calendar_js.html.twig' with {
     'calendar_elt': '#fc-calendar',
     'listing_id': listing.id,
     'edit_mode': false,
     'edit_type': false
     } only %}
+    #}
 
 
     {#Map and Geocoding#}
@@ -375,10 +384,10 @@
             {% endif %}
 
             // Set default favourites in the listing
-            setDefaultFavourites();
+            common.application.setDefaultFavourites();
 
             // Categories
-            initMultiSelect(
+            common.application.initMultiSelect(
                     '#categories',
                     '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
                     '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',

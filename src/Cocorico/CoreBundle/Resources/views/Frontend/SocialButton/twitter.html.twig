@@ -2,9 +2,9 @@
     {% set url = app.request.uri %}
 {% endif %}
 
-{% spaceless %}
+{% apply spaceless %}
     <a href="http://twitter.com/intent/tweet?{{ {'status': url }|url_encode }}">
         <i class="icon-twitter"></i>
         <span class="hidden">twitter</span>
     </a>
-{% endspaceless %}
+{% endapply %}

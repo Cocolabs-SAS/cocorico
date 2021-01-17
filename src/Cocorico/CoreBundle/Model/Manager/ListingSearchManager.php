@@ -11,17 +11,14 @@
 
 namespace Cocorico\CoreBundle\Model\Manager;
 
-use Cocorico\CoreBundle\Document\ListingAvailability;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Event\ListingSearchEvent;
 use Cocorico\CoreBundle\Event\ListingSearchEvents;
 use Cocorico\CoreBundle\Model\ListingSearchRequest;
 use Cocorico\CoreBundle\Model\PriceRange;
-use Cocorico\CoreBundle\Repository\ListingAvailabilityRepository;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Cocorico\TimeBundle\Model\DateRange;
 use Cocorico\TimeBundle\Model\DateTimeRange;
-use Doctrine\ODM\MongoDB\DocumentManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
@@ -31,7 +28,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ListingSearchManager
 {
     protected $em;
-    protected $dm;
     protected $dispatcher;
     protected $endDayIncluded;
     protected $timeUnit;
@@ -41,18 +37,15 @@ class ListingSearchManager
 
     /**
      * @param EntityManager            $em
-     * @param DocumentManager          $dm
      * @param EventDispatcherInterface $dispatcher
      * @param array                    $parameters
      */
     public function __construct(
         EntityManager $em,
-        DocumentManager $dm,
         EventDispatcherInterface $dispatcher,
         array $parameters
     ) {
         $this->em = $em;
-        $this->dm = $dm;
         $this->dispatcher = $dispatcher;
 
         $parameters = $parameters["parameters"];
@@ -197,69 +190,6 @@ class ListingSearchManager
     private function getSearchByDateQueryBuilder(ListingSearchRequest $listingSearchRequest, $queryBuilder)
     {
         //Dates availabilities (from MongoDB)
-        $dateTimeRange = $listingSearchRequest->getDateTimeRange();
-        $dateRange = $dateTimeRange->getDateRange();
-        if ($dateRange && $dateRange->getStart() && $dateRange->getEnd()) {
-            if ($this->listingDefaultStatus == ListingAvailability::STATUS_AVAILABLE) {
-                //Get listings unavailable for searched dates
-                $listingsUnavailable = $this->getListingsAvailability(
-                    $dateTimeRange,
-                    $listingSearchRequest->getFlexibility(),
-                    null,
-                    array(ListingAvailability::STATUS_UNAVAILABLE, ListingAvailability::STATUS_BOOKED)
-                );
-//                print_r($listingsUnavailable);
-
-                if (count($listingsUnavailable)) {
-                    $queryBuilder
-                        ->andWhere('l.id NOT IN (:listingsUnavailable)')
-                        ->setParameter('listingsUnavailable', array_keys($listingsUnavailable));
-                }
-
-            } else {//By default listing are unavailable
-                //Get listings available for searched dates
-                $listingsAvailable = $this->getListingsAvailability(
-                    $dateTimeRange,
-                    $listingSearchRequest->getFlexibility(),
-                    null,
-                    array(ListingAvailability::STATUS_AVAILABLE)
-                );
-
-                if (count($listingsAvailable)) {
-                    $queryBuilder
-                        ->andWhere('l.id IN (:listingsAvailable)')
-                        ->setParameter('listingsAvailable', array_keys($listingsAvailable));
-                } else {
-                    $queryBuilder
-                        ->andWhere('l.id IN (:listingsAvailable)')
-                        ->setParameter('listingsAvailable', array(0));
-                }
-            }
-
-            //Min/Max durations
-            $duration = false;
-            if ($this->timeUnitIsDay) {
-                $duration = $dateRange->getDuration($this->endDayIncluded);
-            } else {
-                $timeRange = $dateTimeRange->getFirstTimeRange();
-                if ($timeRange && $timeRange->getStart() && $timeRange->getEnd()) {
-                    if ($timeRange->getStart()->format('H:i') !== $timeRange->getEnd()->format('H:i')
-                        && ($timeRange->getStart()->format('H:i') != '00:00')
-                    ) {
-                        $duration = $timeRange->getDuration($this->timeUnit);
-                    }
-                }
-            }
-
-            if ($duration !== false) {
-                $queryBuilder
-                    ->andWhere(
-                        "(l.minDuration IS NULL OR  l.minDuration <= :duration ) AND (l.maxDuration IS NULL OR l.maxDuration >= :duration)"
-                    )
-                    ->setParameter('duration', $duration);
-            }
-        }
-
         return $queryBuilder;
     }
 
@@ -370,50 +300,50 @@ class ListingSearchManager
         $newEnd->sub(new \DateInterval('P' . $daysFlexibility . 'D'));
         $dateTimeRange->setDateRange(new DateRange($newStart, $newEnd));
 
-        /** @var ListingAvailabilityRepository $listingAvailabilityRepository */
-        $listingAvailabilityRepository = $this->dm->getRepository("CocoricoCoreBundle:ListingAvailability");
+        # /** @var ListingAvailabilityRepository $listingAvailabilityRepository */
+        # $listingAvailabilityRepository = $this->dm->getRepository("CocoricoCoreBundle:ListingAvailability");
         $listings = array();
         $nbDateRanges = 0;
 
         //Verify if there are listings (un)available for all range dates defined by flexibility days
-        for ($i = 0; $i <= $daysFlexibility * 2; $i++) {
-            //Only for date range greater than or equal to today
-            if ($newStart->format('Ymd') >= $now) {
-                $nbDateRanges++;
-                $listingsTmp = $listingAvailabilityRepository->findAvailabilities(
-                    $dateTimeRange,
-                    $status,
-                    $priceRange,
-                    $this->timeUnitIsDay
-                );
+        # for ($i = 0; $i <= $daysFlexibility * 2; $i++) {
+        #     //Only for date range greater than or equal to today
+        #     if ($newStart->format('Ymd') >= $now) {
+        #         $nbDateRanges++;
+        #         $listingsTmp = $listingAvailabilityRepository->findAvailabilities(
+        #             $dateTimeRange,
+        #             $status,
+        #             $priceRange,
+        #             $this->timeUnitIsDay
+        #         );
 
-//                echo "<br />" . $newStart->format('Y-m-d') . "/" . $newEnd->format('Y-m-d') . ":";
-//                print_r($listingsTmp);
+//      #           echo "<br />" . $newStart->format('Y-m-d') . "/" . $newEnd->format('Y-m-d') . ":";
+//      #           print_r($listingsTmp);
 
-                /**
-                 * All listings are (un)available for this date:
-                 *
-                 * If listing availability status searched is "unavailable" and default listings availability is "available" then
-                 *  No listings unavailable for this date means all listing are available for this date
-                 *  This condition is enough to return empty array meaning all listing are available for at least one date range
-                 * Else if status searched is "available" and default listings availability is "unavailable" then
-                 *  No listing available for this date and the search continue for next dates range
-                 */
-                if (!count($listingsTmp)) {
-                    if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
-                        $listings = array();
-                        break;
-                    }
-                } else {//Merge all (un)available listings.
-                    $listings = array_merge($listings, $listingsTmp);
-                }
-            }
+        #         /**
+        #          * All listings are (un)available for this date:
+        #          *
+        #          * If listing availability status searched is "unavailable" and default listings availability is "available" then
+        #          *  No listings unavailable for this date means all listing are available for this date
+        #          *  This condition is enough to return empty array meaning all listing are available for at least one date range
+        #          * Else if status searched is "available" and default listings availability is "unavailable" then
+        #          *  No listing available for this date and the search continue for next dates range
+        #          */
+        #         if (!count($listingsTmp)) {
+        #             if (in_array(ListingAvailability::STATUS_UNAVAILABLE, $status)) {
+        #                 $listings = array();
+        #                 break;
+        #             }
+        #         } else {//Merge all (un)available listings.
+        #             $listings = array_merge($listings, $listingsTmp);
+        #         }
+        #     }
 
-            //Next date range
-            $dateTimeRange->setDateRange(
-                new DateRange($newStart->add(new \DateInterval('P1D')), $newEnd->add(new \DateInterval('P1D')))
-            );
-        }
+        #     //Next date range
+        #     $dateTimeRange->setDateRange(
+        #         new DateRange($newStart->add(new \DateInterval('P1D')), $newEnd->add(new \DateInterval('P1D')))
+        #     );
+        # }
 
         //Count number of unavailability by listing
         $listings = array_count_values($listings);

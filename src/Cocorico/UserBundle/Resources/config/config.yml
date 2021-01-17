@@ -6,8 +6,8 @@ twig:
         user_img_max: "%cocorico.user_img_max%"
         user_img_max_upload_size: "%cocorico.user_img_max_upload_size%"       
 
-assetic:
-    bundles: ["CocoricoUserBundle"]
+        # assetic:
+        #     bundles: ["CocoricoUserBundle"]
 
 fos_user:
     db_driver: orm
@@ -69,9 +69,9 @@ doctrine:
         entity_managers:
             default:
                 mappings:
-#                    CocoricoUserBundle: ~
-#                    SonataUserBundle: ~
-#                    FOSUserBundle: ~
+                    # CocoricoUserBundle: ~
+                    # SonataUserBundle: ~
+                    # FOSUserBundle: ~
         resolve_target_entities:
             #Don't put double quotes!
             Cocorico\UserBundle\Model\ListingAlertInterface: "%cocorico_listing_alert.entity_class%"

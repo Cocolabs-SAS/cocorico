@@ -1,13 +1,15 @@
 /**
  * All date and time managements on client side
  */
-
+import "jquery-ui/ui/widgets/datepicker"
 
 /**
  * datepicker init
  * Same than initDatePickerAjax in common.js without ajax mode
  */
-function initDatepicker() {
+window.common.datetime = {};
+window.common.datetime.initDatepicker = function() {
+// function initDatepicker() {
     var today = new Date();
 
     jQuery.datepicker.setDefaults($.datepicker.regional[$("html").attr("lang")]);//abe++

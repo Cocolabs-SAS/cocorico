@@ -34,7 +34,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-//use Sonata\UserBundle\Entity\BaseUser;
+// use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * User.

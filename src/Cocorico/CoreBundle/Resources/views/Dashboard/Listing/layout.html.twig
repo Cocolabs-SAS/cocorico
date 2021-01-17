@@ -40,11 +40,4 @@
 
 {% block javascripts %}
     {{ parent() }}
-
-    {#Currency conversion#}
-    <script>
-        $(function () {
-            currencyConversionHandler('#convert_amount_one', '#convert_amount_two', '#convert_currency_two');
-        });
-    </script>
 {% endblock %}

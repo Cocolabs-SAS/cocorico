@@ -8,12 +8,21 @@ function console_log() {
     }
 }
 
-$(window).load(function () {
+// Itou migration : fix bootstrap v4 breaking remote modal URL loading
+$('#modal')
+    .on('show.bs.modal', function (e) {
+        if (e.relatedTarget !== undefined) {
+            window.jQuery(this).find('.modal-content').load(e.relatedTarget.href);
+        }
+});
+
+$(window).on('load', function () {
     //Disable html5 validation
     $("form").each(function () {
         $(this).attr('novalidate', 'novalidate');
     });
-    // $('.modal-force').modal('show');
+    // $('#modal').modal('hide');
+    $('.modal-force').modal('show');
 });
 
 $(function () {
@@ -106,7 +115,6 @@ $(function () {
     // Facebook unwanted has characters
     cleanHash();
 
-    fixIEMobile10();
     // Clearable input types
     $('input.clearable, .clearable input[type=text]').clearSearch({
         callback: function () {
@@ -131,109 +139,6 @@ function handleButtonClick() {
 }
 
 /**
- * Fix IE mobile
- */
-function fixIEMobile10() {
-    if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
-        var msViewportStyle = document.createElement('style');
-        msViewportStyle.appendChild(
-            document.createTextNode(
-                '@-ms-viewport{width:auto!important}'
-            )
-        );
-        document.querySelector('head').appendChild(msViewportStyle)
-    }
-}
-
-/**
- * Init Multi Select Box
- * See fields.html > listing_category_widget_options_tree for indentation management
- *
- * @param elt
- * @param allSelectedText
- * @param width
- */
-function initMultiSelect(elt, allSelectedText, noneSelectedText, numSelectedText, width) {
-    jcf.destroy(elt);
-    jcf.refresh(elt);
-
-    width = typeof width !== 'undefined' ? width : '180px';
-
-    //Replace 160 by 'nbsp'
-    $(elt).find('option').each(function (index) {
-        $(this).html($(this).text().replace(/&#160;&#160;&#160;/g, "&nbsp;&nbsp;&nbsp;"));
-    });
-
-    $(elt).multiselect({
-        //buttonWidth: width,
-        allSelectedText: allSelectedText,
-        nonSelectedText: noneSelectedText,
-        nSelectedText: numSelectedText,
-        numberDisplayed: 1,
-        enableClickableOptGroups: true,
-        enableFiltering: true,
-        enableCaseInsensitiveFiltering: true,
-        buttonText: function (options, select) {
-            //Replace nbsp by ''
-            if (options.length === 0) {
-                return this.nonSelectedText;
-            }
-            else if (this.allSelectedText
-                && options.length === $('option', $(select)).length
-                && $('option', $(select)).length !== 1
-                && this.multiple) {
-
-                if (this.selectAllNumber) {
-                    return this.allSelectedText + ' (' + options.length + ')';
-                }
-                else {
-                    return this.allSelectedText;
-                }
-            }
-            else if (options.length > this.numberDisplayed) {
-                return options.length + ' ' + this.nSelectedText;
-            }
-            else {
-                var selected = '';
-                var delimiter = this.delimiterText;
-
-                options.each(function () {
-                    var label = ($(this).attr('label') !== undefined) ?
-                        $(this).attr('label').replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '') :
-                        $(this).html().replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '');
-
-                    selected += label + delimiter;
-                });
-
-                return selected.substr(0, selected.length - 2);
-            }
-        },
-        buttonTitle: function (options, select) {
-            if (options.length === 0) {
-                return this.nonSelectedText;
-            }
-            else {
-                var selected = '';
-                var delimiter = this.delimiterText;
-
-                options.each(function () {
-                    var label = ($(this).attr('label') !== undefined) ?
-                        $(this).attr('label').replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '') :
-                        $(this).html().replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '');
-                    selected += $.trim(label) + delimiter;
-                });
-                return selected.substr(0, selected.length - 2);
-            }
-        }
-    });
-
-    $(elt).next().find('.multiselect-group label').each(function (index) {
-        $(this).html($(this).text().replace(/&#160;&#160;&#160;/g, "&nbsp;&nbsp;&nbsp;"));
-    });
-}
-
-
-/**
  * Facebook unwanted has characters
  */
 function cleanHash() {
@@ -248,24 +153,6 @@ function cleanHash() {
             // Well, you're on an old browser, we can get rid of the _=_ but not the #.
             window.location.hash = '';
         }
-    }
-}
-
-/**
- * setFavourite class function
- */
-function setDefaultFavourites() {
-    var cookieList = $.fn.cookieList("favourite");
-    $.each(cookieList.items(), function (index, value) {
-        var $favorite = $('#favourite-' + value);
-        if (!$favorite.hasClass('active')) {
-            $favorite.addClass('active');
-        }
-    });
-    if (cookieList.items().length > 0) {
-        $('#fav-count').html("(" + cookieList.items().length + ")");
-    } else {
-        $('#fav-count').html(" ");
     }
 }
 
@@ -285,7 +172,7 @@ var currencies;
  * @param currency_two_elt Currency of the second amount
  */
 function currencyConversionHandler(amount_one_elt, amount_two_elt, currency_two_elt) {
-
+    console.log('DEPRECATED CALL TO currencyConversionHandler');
     $(amount_two_elt).attr("data-currency", $(currency_two_elt).val());
     $(currency_two_elt).change(function () {
         $(amount_two_elt).attr("data-currency", $(this).val());
@@ -328,6 +215,7 @@ function currencyConversionHandler(amount_one_elt, amount_two_elt, currency_two_
  */
 function convertCurrency(amount, from, to) {
     //console.log(amount, from, to);
+    console.log('DEPRECATED CALL TO convertCurrency');
     if (!to || !from || !amount) {
         return '';
     }
@@ -415,40 +303,7 @@ $('input[name="profileSwitch[profile]"]').on("change", function () {
 });
 
 
-/**
- * Get Nb unread messages
- */
-function getNbUnReadMessages(url) {
-    $.ajax({
-        type: 'GET',
-        url: url,
-        success: function (result) {
-            if (result.total > 0) {
-                $('#nb-unread-msg').html(" (" + result.total + ")");
-            }
-            if (result.asker > 0) {
-                $('#askerMsg').html(" (" + result.asker + ")");
-                $('#nb-unread-asker').html(" (" + result.asker + ")");
-            }
-            if (result.offerer > 0) {
-                $('#offererMsg').html(" (" + result.offerer + ")");
-                $('#nb-unread-offerer').html(" (" + result.offerer + ")");
-            }
-        }
-    });
-}
 
-/**
- * centerModal centers the modal box when window resized
- * @return void
- */
-function centerModal() {
-    $(this).css('display', 'block');
-    var $dialog = $(this).find(".modal-dialog");
-    var offset = ($(window).height() - $dialog.height()) / 2;
-    // Center modal vertically in window
-    $dialog.css("margin-top", offset);
-}
 
 
 $.fn.extend({
@@ -513,19 +368,6 @@ $('body').on('hidden.bs.modal', '.modal', function () {
     $(this).removeData('bs.modal');
     $(this).find(".modal-content").html('');
 });
-
-/**
- * Handle Unauthorised Ajax Access
- *
- * @param loginUrl
- */
-function handleUnauthorisedAjaxAccess(loginUrl) {
-    $(document).ajaxError(function (event, xhr) {
-        if (403 === xhr.status) {
-            location.href = loginUrl;
-        }
-    });
-}
 
 
 // plugin for the cookies add/remove
@@ -594,3 +436,168 @@ function toggleCompanyNameInput(input) {
 
     });
 })(jQuery);
+
+//////////////////////////////////////////// EXPORTED FUNCTIONS
+///////////////////////////////////////////////////////////////
+var common = {};
+common.application = {};
+
+/**
+ * Handle Unauthorised Ajax Access
+ *
+ * @param loginUrl
+ */
+common.application.handleUnauthorisedAjaxAccess = function (loginUrl) {
+    $(document).ajaxError(function (event, xhr) {
+        if (403 === xhr.status) {
+            location.href = loginUrl;
+        }
+    });
+};
+
+/**
+ * centerModal centers the modal box when window resized
+ * @return void
+ */
+common.application.centerModal = function() {
+    $(this).css('display', 'block');
+    var $dialog = $(this).find(".modal-dialog");
+    var offset = ($(window).height() - $dialog.height()) / 2;
+    // Center modal vertically in window
+    $dialog.css("margin-top", offset);
+};
+
+/**
+ * setFavourite class function
+ */
+common.application.setDefaultFavourites = function() {
+    var cookieList = $.fn.cookieList("favourite");
+    $.each(cookieList.items(), function (index, value) {
+        var $favorite = $('#favourite-' + value);
+        if (!$favorite.hasClass('active')) {
+            $favorite.addClass('active');
+        }
+    });
+    if (cookieList.items().length > 0) {
+        $('#fav-count').html("(" + cookieList.items().length + ")");
+    } else {
+        $('#fav-count').html(" ");
+    }
+};
+
+
+/**
+ * Get Nb unread messages
+ */
+common.application.getNbUnReadMessages = function(url) {
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (result) {
+            if (result.total > 0) {
+                $('#nb-unread-msg').html(" (" + result.total + ")");
+            }
+            if (result.asker > 0) {
+                $('#askerMsg').html(" (" + result.asker + ")");
+                $('#nb-unread-asker').html(" (" + result.asker + ")");
+            }
+            if (result.offerer > 0) {
+                $('#offererMsg').html(" (" + result.offerer + ")");
+                $('#nb-unread-offerer').html(" (" + result.offerer + ")");
+            }
+        }
+    });
+}
+
+
+/**
+ * Init Multi Select Box
+ * See fields.html > listing_category_widget_options_tree for indentation management
+ *
+ * @param elt
+ * @param allSelectedText
+ * @param width
+ */
+common.application.initMultiSelect = function(elt, allSelectedText, noneSelectedText, numSelectedText, width) {
+    jcf.destroy(elt);
+    jcf.refresh(elt);
+
+    width = typeof width !== 'undefined' ? width : '180px';
+
+    //Replace 160 by 'nbsp'
+    $(elt).find('option').each(function (index) {
+        $(this).html($(this).text().replace(/&#160;&#160;&#160;/g, "&nbsp;&nbsp;&nbsp;"));
+    });
+
+    $(elt).multiselect({
+        //buttonWidth: width,
+        allSelectedText: allSelectedText,
+        nonSelectedText: noneSelectedText,
+        nSelectedText: numSelectedText,
+        numberDisplayed: 1,
+        enableClickableOptGroups: true,
+        enableFiltering: true,
+        enableCaseInsensitiveFiltering: true,
+        buttonText: function (options, select) {
+            //Replace nbsp by ''
+            if (options.length === 0) {
+                return this.nonSelectedText;
+            }
+            else if (this.allSelectedText
+                && options.length === $('option', $(select)).length
+                && $('option', $(select)).length !== 1
+                && this.multiple) {
+
+                if (this.selectAllNumber) {
+                    return this.allSelectedText + ' (' + options.length + ')';
+                }
+                else {
+                    return this.allSelectedText;
+                }
+            }
+            else if (options.length > this.numberDisplayed) {
+                return options.length + ' ' + this.nSelectedText;
+            }
+            else {
+                var selected = '';
+                var delimiter = this.delimiterText;
+
+                options.each(function () {
+                    var label = ($(this).attr('label') !== undefined) ?
+                        $(this).attr('label').replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '') :
+                        $(this).html().replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '');
+
+                    selected += label + delimiter;
+                });
+
+                return selected.substr(0, selected.length - 2);
+            }
+        },
+        buttonTitle: function (options, select) {
+            if (options.length === 0) {
+                return this.nonSelectedText;
+            }
+            else {
+                var selected = '';
+                var delimiter = this.delimiterText;
+
+                options.each(function () {
+                    var label = ($(this).attr('label') !== undefined) ?
+                        $(this).attr('label').replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '') :
+                        $(this).html().replace(/&nbsp;&nbsp;&nbsp;/g, '').replace(' - ', '');
+                    selected += $.trim(label) + delimiter;
+                });
+                return selected.substr(0, selected.length - 2);
+            }
+        }
+    });
+
+    $(elt).next().find('.multiselect-group label').each(function (index) {
+        $(this).html($(this).text().replace(/&#160;&#160;&#160;/g, "&nbsp;&nbsp;&nbsp;"));
+    });
+};
+
+
+
+// Dirty hack, but needed for outsite use of functions
+window.common = common;

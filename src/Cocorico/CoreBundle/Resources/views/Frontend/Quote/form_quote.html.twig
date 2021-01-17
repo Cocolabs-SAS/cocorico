@@ -34,7 +34,8 @@
 
 
     <script>
-        $(function () {
+        window.addEventListener('load',
+        function () {
             var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
             var $form = $("#quote-form");
 
@@ -51,13 +52,10 @@
                 e.preventDefault();
                 var $errors = $form.find('div.errors');
                 //Submit form if no errors
-                if (!$errors.length || ($errors.length && !$errors.is(":visible"))) {
-                    //if ($("#start-date").val() && $("#end-date").val()) {
-                    $form.submit();
-                    //}
+                $form.submit();
                 }
-            });
+            );
 
-        });
+        }, false);
     </script>
 </section>
