@@ -39,7 +39,7 @@
  
   display: inline-block;
   text-decoration: inherit;
-  width: 1em;
+  width: .875rem;
   margin-right: .2em;
   text-align: center;
   /* opacity: .8; */
@@ -49,7 +49,7 @@
   text-transform: none;
  
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
+  line-height: .875rem;
  
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
@@ -93,7 +93,7 @@
 }
 
 .form-confirm h1 {
-    font-size:1.6em;
+    font-size:1.6rem;
     font-weight:400;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .form-confirm .no-results  {
-    font-size:1.4em;
+    font-size:1.4rem;
     color:#000;
 }
 
@@ -125,7 +125,6 @@
 .itou-info {
     background-color:#ddf2f3;
     padding:1.4rem 5rem;
-    font-size:1.7rem;
     border-radius:7px;
     display: flex;
     flex-direction: row;
@@ -220,7 +219,7 @@
 #main .itou-checkbox .label {
     margin: 0;
     margin-top: -3px;
-    font-size:1em;
+    font-size:1rem;
 }
 
 .itou-checkbox .field-holder {
@@ -291,11 +290,11 @@
 }
 
  label {
-    font-size:1.2em;
+    font-size:1rem;
     }
 
  div.struct_type_select label {
-    font-size:1.2em;
+    font-size:1rem;
     }
 
  div.struct_type_select .option {
@@ -304,10 +303,6 @@
 
 fieldset {
     margin: 2rem 0;
-}
-
-body {
-    font-size:14px;
 }
 
 /******************
@@ -388,7 +383,7 @@ body {
     color:#007bff;
     display:block;
     padding:.5rem .3rem;
-    font-size:1.1em;
+    font-size:1.1rem;
 }
 
 .navbar .navbar-nav li a:hover {
@@ -419,7 +414,7 @@ body {
     font-weight: normal;
     font-style: normal;
     padding-left:4rem;
-    font-size:.9em;
+    font-size:.9rem;
 }
 
 /******************
@@ -442,7 +437,7 @@ body {
 
 .navarea #footer-list a {
     margin:0; padding:0;
-    font-size:1.2em;
+    font-size:1rem;
     display:block;
     text-align:center;
     padding:3px 10px 3px;
@@ -461,13 +456,13 @@ footer img.min_trav {
 #footer-title {
     color:#fff;
     text-align:left;
-    font-size:1.2em;
+    font-size:1rem;
     font-family:verdana;
 }
 
 #footer-title h5 {
     color:#fff;
-    font-size:1.2em;
+    font-size:1rem;
     font-weight:300;
 }
 
@@ -476,7 +471,7 @@ footer img.min_trav {
 }
 
 @media screen and (max-width:767px) {
-    #footer-title {text-align:center; font-size:.8em}
+    #footer-title {text-align:center; font-size:.8rem}
 }
 
 @media screen and (max-width:576px) {
@@ -488,7 +483,7 @@ footer img.min_trav {
  * LISTING STYLES
  ******************/
  .listing-location {
-    font-size:1.2em;
+    font-size:1rem;
     color:#4a4a4a;
     text-align:center;
 }
@@ -507,7 +502,7 @@ footer img.min_trav {
 
  .visual {
     background:none;
-    margin-bottom:1.2rem;
+    margin-bottom:1rem;
 }
 
 .visual .title-holder {
@@ -519,16 +514,16 @@ footer img.min_trav {
     line-height:1.4em;
     max-width:none;
     color: #000;
-    font-size:3.047em;
+    font-size:2.5rem;
     max-width:800px;
 }
 
 .home-page h2 {
-    font-size:2em;
+    font-size:2rem;
 }
 
 .home-page h3 {
-    font-size:1.57em;
+    font-size:1.5rem;
 }
 
 #itou-results-form,
@@ -679,18 +674,18 @@ footer img.min_trav {
 #borat .info-box {
     border-radius: 10px;
     background-color: #fff;
-    padding: 2rem 2rem;
-    margin: 2rem;
-    font-size:1.1em;
+    padding: 1rem 1rem;
+    margin: 1rem;
+    font-size:1rem;
     color:#000;
     box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
 }
 
 #borat h3 {
     color: #fff;
-    margin-left:5rem;
-    margin-top:2rem;
-    margin-bottom:3rem;
+    margin-left:3rem;
+    margin-top:1rem;
+    margin-bottom:2rem;
 }
 
 @media screen and (min-width: 1100px) {
@@ -782,7 +777,7 @@ footer img.min_trav {
     margin:0 0rem 4rem 0;
     background-color:#F2F9FF;
     color:#000;
-    font-size:1.2em;
+    font-size:1rem;
     padding:2rem;
     font-weight:bold;
 }
@@ -804,13 +799,12 @@ footer img.min_trav {
 
 #info_banner .textbox > div{
     color:#007bff;
-    font-size:1.2em;
+    font-size:1rem;
     text-transform:uppercase;
 }
 
 #info_banner h3 {
     color:#000;
-    font-size:1.8em;
     font-weight:400;
     width:90%
 }
@@ -835,7 +829,7 @@ footer img.min_trav {
     }
     #info_banner p   {
         padding-top: 2rem;
-        font-size:1.4em;
+        font-size:1.4rem;
         line-height:1.8em;
         color:#000;
         width:90%;
@@ -866,7 +860,7 @@ footer img.min_trav {
     }
     #info_banner p   {
         padding-top: 2rem;
-        font-size:1.4em;
+        font-size:1.4rem;
         line-height:1.8em;
         color:#000;
         width:100%;
@@ -895,7 +889,7 @@ footer img.min_trav {
 
 #step_banner .info-box {
     padding: 3rem;
-    font-size:1.1em;
+    font-size:1.1rem;
     display: flex;
     color:#000;
 }
@@ -910,19 +904,19 @@ footer img.min_trav {
   text-align: center;
   vertical-align: middle;
   line-height: 1.6em;
-  font-size:2.4em;
+  font-size:2.4rem;
   color: #007BFF;
   font-weight:bold;
 }
 
 #step_banner .info-box .textbox {
     margin-left:3rem;
-    font-size:1.2em;
+    font-size:1rem;
 }
 
 /* Listing offers */
 .post-content h2 {
-    font-size:1em;
+    font-size:.875rem;
     font-weight:400;
 }
 
@@ -960,7 +954,7 @@ footer img.min_trav {
 
 .listing-container h2 {
     color:#655;
-    font-size:1em;
+    font-size:.875rem;
     font-weight:500;
     margin-top:4rem;
 }
@@ -1010,14 +1004,14 @@ footer img.min_trav {
 }
 
 .info-pratiques h2 {
-    font-size:1.1em;
+    font-size:1..875rem;
     font-weight:bold;
     text-align:center;
     margin-bottom:25px;
 }
 
 .listing-area .features-area h3 {
-    font-size:1em;
+    font-size:.875rem;
     color:#655;
     text-align:left;
     margin-bottom:25px;
@@ -1060,7 +1054,7 @@ footer img.min_trav {
 }
 
 .listing-section #characteristics label.label {
-    font-size: 1em;
+    font-size: .875rem;
 }
 
 .listing-section #characteristics li .field-holder{
@@ -1100,9 +1094,9 @@ ul.info-annonce {
 
 ul.info-annonce h5 {
     color:#655;
-    font-size:1.2em;
+    font-size:1rem;
     font-weight:300;
-    line-height:1em;
+    line-height:.875rem;
 }
 
 ul.info-annonce b {
@@ -1229,7 +1223,7 @@ div.form-message {
 .postarea .quote-detail ul li span {
     margin: 0;
     float: none;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 400;
 }
 
@@ -1368,7 +1362,7 @@ section.quote-quick-form fieldset {
 }
 
 #dirlink p {
-    font-size:1.6rem;
+    font-size:1.2rem;
 }
 
 #dirlink .container {
