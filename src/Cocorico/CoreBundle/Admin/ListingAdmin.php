@@ -23,6 +23,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\Filter\NumberType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckBoxType;
@@ -242,6 +243,14 @@ class ListingAdmin extends AbstractAdmin
                     'required' => false,
                 )
             )
+            //->add(
+            //    'test',
+            //    ButtonType::class,
+            //    array(
+            //        'label' => 'Heures de bureau',
+            //        'required' => false,
+            //    )
+            //)
             ->add(
                 'schedule_after_closing',
                 CheckBoxType::class,
@@ -312,6 +321,7 @@ class ListingAdmin extends AbstractAdmin
                     'label' => 'admin.listing.updated_at.label'
                 )
             )
+
 //            ->end()
 //            ->with('Characteristics')
 //            ->add(

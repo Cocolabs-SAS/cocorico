@@ -7,9 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [1.1] - (2021-01-X)
+### [1.1] - (2021-01-19)
 - Retrait infobulle périmêtre
 - Nouveaux icônes SVG
+- Nouveau graphique de fond
+- Corrections CSS
 
 ### [1] - (2021-01-17)
 - Migration entamée, voir `docs/migration.md` pour plus de détails

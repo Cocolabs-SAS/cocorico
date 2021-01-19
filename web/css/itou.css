@@ -340,6 +340,9 @@ fieldset {
     background-color:#99cff2;
 }
 
+.multiselect-selected-text {
+    text-transform: initial;
+}
 
 
 /******************
@@ -596,7 +599,7 @@ footer img.min_trav {
 .home-page .form-category .col .btn-group {
     border-radius:4px 0 0 4px !important;
     background-image:url('/svg/group.svg');
-    background-size: 25px 25px;
+    background-size: 25px 20px;
     background-position: right;
     background-repeat:no-repeat;
 }
@@ -618,7 +621,7 @@ footer img.min_trav {
     padding-top:0px;
     margin-left:-5px;
     background-image:url('/svg/room.svg');
-    background-size: 25px 25px;
+    background-size: 25px 20px;
     background-position: right;
     background-repeat:no-repeat;
 }
@@ -691,7 +694,8 @@ footer img.min_trav {
 @media screen and (min-width: 1100px) {
     #borat {
         height:400px;
-        background-image:url('/svg/couleurs.svg');
+        /*background-image:url('/svg/couleurs.svg');*/
+        background-image:url('/images/itou_curves2.png');
     }
 
     #borat .container {
@@ -711,7 +715,7 @@ footer img.min_trav {
 @media screen and (max-width: 1099px) {
     #borat {
         height:auto;
-        background-image:url('/images/itou_curves.jpg');
+        background-image:url('/images/itou_curves2.png');
     }
 
     #borat .container {
@@ -1350,12 +1354,13 @@ section.quote-quick-form fieldset {
 #dirlink {
     background-color:#EAF3FC;
     padding-top:1rem;
-    margin-left:10%;
+    margin-left:6.5%;
     margin-bottom:3rem;
-    padding-right:1rem;
-    padding-bottom:1rem;
-    width:80%;
+    padding:2rem;
+    width:87%;
     color:#000;
+    line-height:2.2rem;
+    border-radius:8px;
 }
 
 #dirlink h3 {
