@@ -36,16 +36,27 @@
 }
 
 html {
-    font-size: 62.5%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.428571429;
     color: #3f3f3f;
     background-color: #ffffff;
+
+    @media screen and (min-width:576px){
+        font-size:16px;
+    }
+
+    @media screen and (min-width:992px){
+        font-size:18px;
+    }
+
+    @media screen and (min-width:1200px){
+        font-size:20px;
+    }
 }
 
 input,
@@ -229,32 +240,32 @@ h6 .small,
 
 h1,
 .h1 {
-    font-size: 36px;
+    font-size: 2.25rem;
 }
 
 h2,
 .h2 {
-    font-size: 30px;
+    font-size: 1.87rem;
 }
 
 h3,
 .h3 {
-    font-size: 24px;
+    font-size: 1.5rem;
 }
 
 h4,
 .h4 {
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 h5,
 .h5 {
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 h6,
 .h6 {
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 p {
@@ -263,14 +274,14 @@ p {
 
 .lead {
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 200;
     line-height: 1.4;
 }
 
 @media (min-width: 768px) {
     .lead {
-        font-size: 21px;
+        font-size: 1.3rem;
     }
 }
 
@@ -468,7 +479,7 @@ abbr[data-original-title] {
 blockquote {
     padding: 10px 20px;
     margin: 0 0 20px;
-    font-size: 17.5px;
+    font-size: 1.1rem;
     border-left: 5px solid #eeeeee;
 }
 
@@ -560,7 +571,7 @@ pre {
     display: block;
     padding: 9.5px;
     margin: 0 0 10px;
-    font-size: 13px;
+    font-size: .8rem;
     line-height: 1.428571429;
     word-break: break-all;
     word-wrap: break-word;
@@ -1740,7 +1751,7 @@ legend {
     width: 100%;
     padding: 0;
     margin-bottom: 20px;
-    font-size: 21px;
+    font-size: 1.3rem;
     line-height: inherit;
     color: #333333;
     border: 0;
@@ -1792,7 +1803,7 @@ input[type="checkbox"]:focus {
 output {
     display: block;
     padding-top: 7px;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.428571429;
     color: #495057;
 }
@@ -1802,7 +1813,7 @@ output {
     width: 100%;
     height: 36px;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.428571429;
     color: #495057;
     background-color: #ffffff;
@@ -1922,7 +1933,7 @@ fieldset[disabled] .checkbox-inline {
 .input-sm {
     height: 30px;
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.5;
     border-radius: 3px;
 }
@@ -1940,7 +1951,7 @@ select[multiple].input-sm {
 .input-lg {
     height: 46px;
     padding: 10px 16px;
-    font-size: 18px;
+    font-size: 1.2rem;
     line-height: 1.33;
     border-radius: 6px;
 }
@@ -2166,7 +2177,7 @@ select[multiple].input-lg {
     border: 1px solid transparent;
     white-space: nowrap;
     padding: 6px 12px;
-    font-size: 14px;
+    font-size: 0.875rem;
     line-height: 1.428571429;
     border-radius: 4px;
     -webkit-user-select: none;
@@ -2525,7 +2536,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-lg,
 .btn-group-lg > .btn {
     padding: 10px 16px;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 1.33;
     border-radius: 6px;
 }
@@ -2533,7 +2544,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-sm,
 .btn-group-sm > .btn {
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.5;
     border-radius: 3px;
 }
@@ -2541,7 +2552,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-xs,
 .btn-group-xs > .btn {
     padding: 1px 5px;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.5;
     border-radius: 3px;
 }
@@ -2612,7 +2623,7 @@ input[type="button"].btn-block {
     padding: 5px 0;
     margin: 2px 0 0;
     list-style: none;
-    font-size: 14px;
+    font-size: 0.875rem;
     background-color: #ffffff;
     border: 1px solid #cccccc;
     border: 1px solid rgba(0, 0, 0, 0.15);
@@ -2696,7 +2707,7 @@ input[type="button"].btn-block {
 .dropdown-header {
     display: block;
     padding: 3px 20px;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.428571429;
     color: #999999;
 }
@@ -3296,7 +3307,7 @@ input[type="button"].btn-block {
 .navbar-brand {
     float: left;
     padding: 12.5px 10px;
-    font-size: 18px;
+    font-size: 1.125rem;
     line-height: 20px;
     height: 45px;
 }
@@ -3841,7 +3852,7 @@ input[type="button"].btn-block {
 .pagination-lg > li > a,
 .pagination-lg > li > span {
     padding: 10px 16px;
-    font-size: 18px;
+    font-size: 1.125rem;
 }
 
 .pagination-lg > li:first-child > a,
@@ -3859,7 +3870,7 @@ input[type="button"].btn-block {
 .pagination-sm > li > a,
 .pagination-sm > li > span {
     padding: 5px 10px;
-    font-size: 12px;
+    font-size: 0.75rem;
 }
 
 .pagination-sm > li:first-child > a,
@@ -4178,7 +4189,7 @@ input[type="button"].btn-block {
     z-index: 1030;
     display: block;
     visibility: visible;
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 1.4;
     opacity: 0;
     filter: alpha(opacity=0);
@@ -4351,7 +4362,7 @@ input[type="button"].btn-block {
     width: 15%;
     opacity: 0.5;
     filter: alpha(opacity=50);
-    font-size: 20px;
+    font-size: 1.25rem;
     color: #ffffff;
     text-align: center;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
@@ -4477,7 +4488,7 @@ input[type="button"].btn-block {
         height: 30px;
         margin-top: -15px;
         margin-left: -15px;
-        font-size: 30px;
+        font-size: 1.875rem;
     }
 
     .carousel-caption {
