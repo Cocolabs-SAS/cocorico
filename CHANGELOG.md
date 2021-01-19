@@ -7,6 +7,16 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.1] - (2021-01-X)
+- Retrait infobulle périmêtre
+
+### [1] - (2021-01-17)
+- Migration entamée, voir `docs/migration.md` pour plus de détails
+- Webpack, suppression de fonctionnalité inutilisée, mise à jour d'une série de composants
+- Plus de modale sur le périmêtre lors de l'inscription
+- Correction alignement texte
+
+### [0.25.0] - (2020-12-16)
 ### [0.25.0] - (2020-12-16)
 - Ajout module "répertoire" pour afficher des listes de choses
 - Export CSV, accès limité, formulaire de recherche, pagination, ...

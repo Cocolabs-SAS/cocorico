@@ -679,7 +679,7 @@ footer img.min_trav {
 #borat .info-box {
     border-radius: 10px;
     background-color: #fff;
-    padding: 4rem 2rem;
+    padding: 2rem 2rem;
     margin: 2rem;
     font-size:1.1em;
     color:#000;
@@ -689,7 +689,7 @@ footer img.min_trav {
 #borat h3 {
     color: #fff;
     margin-left:5rem;
-    margin-top:4rem;
+    margin-top:2rem;
     margin-bottom:3rem;
 }
 
@@ -768,7 +768,7 @@ footer img.min_trav {
 }
 
 .home-page .infoarea .icon {
-    height:45px;
+    height:90px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -1353,9 +1353,26 @@ section.quote-quick-form fieldset {
 }
 
 #dirlink {
-    background-color:#F2F8FF;
-    margin-left:0px;
-    margin-right:0px;
+    background-color:#EAF3FC;
+    padding-top:1rem;
+    margin-left:10%;
+    margin-bottom:3rem;
+    padding-right:1rem;
+    width:80%;
+    color:#000;
+}
+
+#dirlink h3 {
+    color:#000;
+    margin-top:0;
+}
+
+#dirlink p {
+    font-size:1.6rem;
+}
+
+#dirlink .container {
+    width:100%;
 }
 
 
