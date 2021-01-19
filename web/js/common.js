@@ -531,6 +531,7 @@ common.application.initMultiSelect = function(elt, allSelectedText, noneSelected
 
     $(elt).multiselect({
         //buttonWidth: width,
+        maxHeight:400,
         allSelectedText: allSelectedText,
         nonSelectedText: noneSelectedText,
         nSelectedText: numSelectedText,
