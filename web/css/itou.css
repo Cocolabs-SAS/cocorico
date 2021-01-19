@@ -795,11 +795,12 @@ footer img.min_trav {
 /* info banner */
 #info_banner .textbox {
     padding-right:4rem;
+    font-size:.875rem;
 }
 
 #info_banner .textbox > div{
     color:#007bff;
-    font-size:1.2rem;
+    font-size:.875rem;
     text-transform:uppercase;
 }
 
@@ -829,7 +830,7 @@ footer img.min_trav {
     }
     #info_banner p   {
         padding-top: 2rem;
-        font-size:1.4rem;
+        font-size:1.1rem;
         line-height:1.8em;
         color:#000;
         width:90%;
@@ -911,7 +912,7 @@ footer img.min_trav {
 
 #step_banner .info-box .textbox {
     margin-left:3rem;
-    font-size:1rem;
+    font-size:1.2rem;
 }
 
 /* Listing offers */

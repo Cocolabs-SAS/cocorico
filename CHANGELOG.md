@@ -9,6 +9,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### [1.1] - (2021-01-X)
 - Retrait infobulle périmêtre
+- Nouveaux icônes SVG
 
 ### [1] - (2021-01-17)
 - Migration entamée, voir `docs/migration.md` pour plus de détails
