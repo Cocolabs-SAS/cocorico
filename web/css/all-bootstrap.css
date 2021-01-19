@@ -36,16 +36,27 @@
 }
 
 html {
-    font-size: 1rem;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 body {
     font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 1rem;
+    font-size: 16px;
     line-height: 1.428571429;
     color: #3f3f3f;
     background-color: #ffffff;
+
+    @media screen and (min-width:576px){
+        font-size:16px;
+    }
+
+    @media screen and (min-width:992px){
+        font-size:18px;
+    }
+
+    @media screen and (min-width:1200px){
+        font-size:20px;
+    }
 }
 
 input,
