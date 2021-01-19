@@ -17,7 +17,7 @@
                         Cherchez
                     </div>
 
-                    <div class="multiselect listing-category">
+                    <div class="multiselect listing-category" style="margin-top:0px">
                         {{ form_widget(form.categories) }}
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                         Lieu d'intervention
                     </div>
 
-                    <div class="field-holder">
+                    <div class="field-holder" style="margin-top:1px">
                         {{ form_errors(form.location.address) }}
                         {{ form_widget(form.location.address, {
                             'id': 'location',
