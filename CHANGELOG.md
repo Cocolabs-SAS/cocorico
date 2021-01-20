@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.2] - (2021-01-20)
+- Fix formulaire nouvelle annonce
+- Corrections CSS diverses
+
 ### [1.1] - (2021-01-19)
 - Retrait infobulle périmêtre
 - Nouveaux icônes SVG
