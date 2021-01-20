@@ -28,6 +28,7 @@
         {% set category = choice.data %}
         {% set indent = '&#160;&#160;&#160;'|repeat(category.getLvl) %}
 
+        {% autoescape false %}
         {%- if not category.isLeaf -%}
             <optgroup label="{{ indent  ~ category.getName() }}">
                 {% set options = choice %}
@@ -38,6 +39,7 @@
                 {{ indent  ~ choice.label }}
             </option>
         {%- endif -%}
+        {% endautoescape %}
     {% endfor %}
 {%- endblock listing_category_widget_options_tree %}
 
