@@ -269,7 +269,3 @@ sonata_admin:
 sonata_doctrine_orm_admin:
     audit:
         force: false
-
-simple_things_entity_audit:
-    audited_entities:
-        - CocoricoConfigBundle\Entity\Parameter
