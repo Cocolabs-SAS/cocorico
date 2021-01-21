@@ -143,7 +143,7 @@ a2lix_translation_form:
     locales: "%cocorico.locales%"
     default_locale: "%cocorico.locale%"
     required_locales: "%cocorico.locales%"
-    manager_registry: doctrine
+    # manager_registry: doctrine
     templating: "CocoricoCoreBundle:Form:fields_translations.html.twig"
 
 stof_doctrine_extensions:
@@ -157,7 +157,10 @@ oneup_uploader:
         listing_images:
             max_size: 10000000
             frontend: blueimp
-            allowed_mimetypes: ["image/gif", "image/jpg", "image/jpeg", "image/png"]
+            allowed_mimetypes: 
+                image/jpeg: ['jpg', 'jpeg', 'jpe']
+                image/png: ['png']
+                image/gif: ['gif']
             enable_progress: true
             namer: cocorico.namer.image_namer
             storage:
