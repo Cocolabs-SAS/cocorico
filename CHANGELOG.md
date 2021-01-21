@@ -7,6 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.3] - (2021-01-21)
+- Fix nom de fichier SIAE
+- Mise à jour intégrale des dependances
+- Fix bug JS Interface admin
+- Retrait e code inutilisé, déprécié
+- Corrections Dépréciations diverses
+
 ### [1.2] - (2021-01-20)
 - Fix formulaire nouvelle annonce
 - Corrections CSS diverses

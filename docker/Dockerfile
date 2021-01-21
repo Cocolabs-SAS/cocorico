@@ -99,7 +99,7 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && cat /cocorico/app/config/parameters.yml
 
 
-# CMD ["bash"]
+#CMD ["bash"]
 RUN composer install && yarn install
 RUN clevercloud/post_build_hook.sh
 RUN wget https://get.symfony.com/cli/installer -O - | bash
@@ -110,5 +110,6 @@ COPY ./docker/run_css.sh ./run_css
 RUN echo "Start Symfony server with:\n\
 /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
 "
+#CMD ["bash"]
 CMD ["screen", "-c", "docker/screen"]
 # CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]

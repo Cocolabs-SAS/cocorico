@@ -84,8 +84,11 @@ oneup_uploader:
         user_images:
             max_size: 8000000
             frontend: blueimp
-            allowed_mimetypes: ["image/gif", "image/jpeg", "image/png"]
             enable_progress: true
+            allowed_mimetypes: 
+                image/jpeg: ['jpg', 'jpeg', 'jpe']
+                image/png: ['png']
+                image/gif: ['gif']
             namer: cocorico.namer.image_namer
             storage:
                 directory: "%kernel.root_dir%/../web/uploads/users/images/"

@@ -389,7 +389,9 @@ class ListingAdmin extends AbstractAdmin
                 array(),
                 ChoiceType::class,
                 array(
-                    'choices' => array_flip(Listing::$statusValues),
+                    // Array_map is a hack : doctrine_orm_string expects a string, so
+                    // we stringify the array indexes
+                    'choices' => array_map('strval', array_flip(Listing::$statusValues)),
                     'translation_domain' => 'cocorico_listing',
                     'label' => 'admin.listing.status.label',
                 )

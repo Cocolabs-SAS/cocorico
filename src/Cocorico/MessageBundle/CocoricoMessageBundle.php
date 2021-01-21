@@ -20,9 +20,4 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class CocoricoMessageBundle extends Bundle
 {
 
-    public function getParent()
-    {
-        return 'FOSMessageBundle';
-    }
-
 }

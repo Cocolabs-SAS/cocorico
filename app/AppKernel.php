@@ -1,6 +1,5 @@
 <?php
 
-use Cocorico\ConfigBundle\DependencyInjection\Compiler\ContainerBuilder;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpKernel\Kernel;
@@ -20,6 +19,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
+	    new Http\HttplugBundle\HttplugBundle(),
             new JMS\I18nRoutingBundle\JMSI18nRoutingBundle(),
             new JMS\TranslationBundle\JMSTranslationBundle(),
             new JMS\AopBundle\JMSAopBundle(),
@@ -58,7 +58,7 @@ class AppKernel extends Kernel
             new Cocorico\MessageBundle\CocoricoMessageBundle(),
             new Cocorico\ContactBundle\CocoricoContactBundle(),
             new Cocorico\ReviewBundle\CocoricoReviewBundle(),
-            new Cocorico\ConfigBundle\CocoricoConfigBundle(),
+            //new Cocorico\ConfigBundle\CocoricoConfigBundle(),
             new Cocorico\TimeBundle\CocoricoTimeBundle(),
             new Cocorico\TrackerBundle\CocoricoTrackerBundle(),
 
@@ -67,7 +67,6 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Hpatoio\DeployBundle\DeployBundle();
 
             if ('dev' === $this->getEnvironment()) {
@@ -97,20 +96,8 @@ class AppKernel extends Kernel
     /** @inheritdoc */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(
-            function (ContainerBuilder $container) {
-                $container->setParameter('container.autowiring.strict_mode', true);
-                $container->setParameter('container.dumper.inline_class_loader', true);
-                $container->addObjectResource($this);
-            }
-        );
         $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
 
-    }
-
-    protected function getContainerBuilder()
-    {
-        return new ContainerBuilder(new ParameterBag($this->getKernelParameters()));
     }
 
 }

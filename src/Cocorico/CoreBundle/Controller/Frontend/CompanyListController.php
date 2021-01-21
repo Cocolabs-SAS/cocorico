@@ -114,7 +114,7 @@ class CompanyListController extends Controller
         fclose($fp);
 
         $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="testing.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
 
         return $response;
     }
