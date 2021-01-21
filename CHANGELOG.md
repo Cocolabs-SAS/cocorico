@@ -11,6 +11,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix nom de fichier SIAE
 - Mise à jour intégrale des dependances
 - Fix bug JS Interface admin
+- Retrait e code inutilisé, déprécié
+- Corrections Dépréciations diverses
 
 ### [1.2] - (2021-01-20)
 - Fix formulaire nouvelle annonce

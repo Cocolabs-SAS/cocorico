@@ -115,7 +115,7 @@ doctrine:
 
     dbal:
         types:
-            json: Sonata\Doctrine\Types\JsonType
+            json: Doctrine\DBAL\Types\JsonType
 
 
 jms_i18n_routing:
