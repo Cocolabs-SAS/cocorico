@@ -453,6 +453,7 @@ class UserAdmin extends SonataUserAdmin
                 )
             )
 //            ->add('locked')
+            ->add('companyName')
             ->add('email')
             ->add('groups');
     }
