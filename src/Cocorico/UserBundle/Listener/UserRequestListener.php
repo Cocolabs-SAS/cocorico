@@ -63,9 +63,10 @@ class UserRequestListener
         }
 
         // Tracking data
-        $session->set('userId', $user->getId());
-        $session->set('userType', $user->getPersonType());
-
+        if ($user && method_exists($user, "getId")) {
+            $session->set('userId', $user->getId());
+            $session->set('userType', $user->getPersonType());
+        }
         $session_id = $session->get('uuid', Uuid::uuid4()->toString());
         $session->set('uuid', $session_id);
 
