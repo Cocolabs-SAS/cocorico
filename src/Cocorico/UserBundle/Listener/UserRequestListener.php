@@ -61,7 +61,9 @@ class UserRequestListener
             $session->set('canAskForQuote', True);
         }
 
-
+        // Tracking data
+        $session->set('userId', $user->getId());
+        $session->set('userType', $user->getPersonType());
 
 
         if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user && method_exists($user, "canBeOfferer") && $user->canBeOfferer()) {

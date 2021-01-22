@@ -81,6 +81,7 @@ class User extends BaseUser implements ParticipantInterface
     const PERSON_TYPE_CLASSIC = 3;
     const PERSON_TYPE_INCLUSIVE = 4;
     const PERSON_TYPE_ADMIN = 5;
+    const PERSON_TYPE_PARTNER = 6;
 
     public static $personTypeValues = array(
         self::PERSON_TYPE_NATURAL => 'entity.user.person_type.natural',
@@ -88,17 +89,20 @@ class User extends BaseUser implements ParticipantInterface
         self::PERSON_TYPE_CLASSIC => 'entity.user.person_type.classic',
         self::PERSON_TYPE_INCLUSIVE => 'entity.user.person_type.inclusive',
         self::PERSON_TYPE_ADMIN => 'entity.user.person_type.admin',
+        self::PERSON_TYPE_PARTNER => 'entity.user.person_type.partner',
     );
 
     public static $legalTypes = array(
         # self::PERSON_TYPE_LEGAL,
         self::PERSON_TYPE_CLASSIC,
-        self::PERSON_TYPE_INCLUSIVE
+        self::PERSON_TYPE_INCLUSIVE,
+        self::PERSON_TYPE_PARTNER
     );
 
     public static $enabledTypes = array(
         self::PERSON_TYPE_CLASSIC => 'entity.user.person_type.classic',
         self::PERSON_TYPE_INCLUSIVE => 'entity.user.person_type.inclusive',
+        self::PERSON_TYPE_PARTNER => 'entity.user.person_type.partner',
     );
 
     public static $offererTypes = array (
@@ -110,6 +114,7 @@ class User extends BaseUser implements ParticipantInterface
         self::PERSON_TYPE_CLASSIC,
         self::PERSON_TYPE_LEGAL,
         self::PERSON_TYPE_ADMIN,
+        self::PERSON_TYPE_PARTNER,
         self::PERSON_TYPE_NATURAL
     );
     /**

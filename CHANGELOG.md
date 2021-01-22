@@ -14,6 +14,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Retrait e code inutilisé, déprécié
 - Corrections Dépréciations diverses
 
+### [1.3] - (2021-01-21)
+- Ajout nouveau type utilisateur "partenaire"
+- Amélioration tracking operations liste
+
 ### [1.2] - (2021-01-20)
 - Fix formulaire nouvelle annonce
 - Corrections CSS diverses

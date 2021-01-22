@@ -119,14 +119,18 @@ document.addEventListener('click', async (event) => {
     event = event || window.event;
     var target = event.target || event.srcElement;
 
-    var steps = 3;
+    var loops = 3;
     var meta = {}
-    while (target && steps > 0) {
+    while (target && loops > 0) {
       if (target instanceof HTMLAnchorElement) {
-        meta = {'href': target.getAttribute('href')}
+        meta = {
+            'href': target.getAttribute('href'),
+            'id' : target.ig,
+            'class': target.className
+        }
       }
       target = target.parentNode;
-      steps -= 1;
+      loops -= 1;
     }
 
     track(
