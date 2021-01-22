@@ -37,7 +37,7 @@ class Tracker
     {
     if ($session) {
         $meta['is_admin'] = $session->get('isAdmin');
-        $meta['type'] = $session->get('userType');
+        $meta['user_type'] = $session->get('userType');
         $meta['user_id'] = $session->get('userId');
         $session_id = $session->getId();
     } else {

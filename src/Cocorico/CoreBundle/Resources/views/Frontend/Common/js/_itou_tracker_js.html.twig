@@ -36,6 +36,8 @@ function computeRequestBody(page, action, metaIn) {
     const timeNow = new Date();
     // Optionnaly add meta data (in key/value pairs) from url query stirng
     const meta = Object.assign(metaIn, getUrlMeta());
+    meta['is_admin'] = window.isAdmin;
+    meta['user_type'] = window.uType;
 
     return {
         _v:VERSION,
@@ -62,16 +64,19 @@ function uuidv4() {
   }
 }
 
-//export function getSessionId() {
+// export function getSessionId() {
 function getSessionId() {
-    if (SESSION_ID === "")
+    if (SESSION_ID === "") {
         if (typeof document !== `undefined`) {
-            SESSION_ID = (new URL(document.location)).searchParams.get('sid') || uuidv4();
+            SESSION_ID = (new URL(document.location)).searchParams.get('sid') || false;
         }
-        else {
+
+        if (!SESSION_ID && window.sessId !== undefined) {
+            SESSION_ID = window.sessId;
+        } else {
             SESSION_ID = uuidv4();
         }
-        uuidv4();
+    }
     return SESSION_ID;
 }
 
@@ -121,6 +126,7 @@ document.addEventListener('click', async (event) => {
 
     var loops = 3;
     var meta = {}
+    console.log('poulet');
     while (target && loops > 0) {
       if (target instanceof HTMLAnchorElement) {
         meta = {
