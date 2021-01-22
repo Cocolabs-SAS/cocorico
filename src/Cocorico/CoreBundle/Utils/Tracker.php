@@ -39,7 +39,7 @@ class Tracker
         $meta['is_admin'] = $session->get('isAdmin');
         $meta['user_type'] = $session->get('userType');
         $meta['user_id'] = $session->get('userId');
-        $session_id = $session->getId();
+        $session_id = $session->get('uuid');
     } else {
         $session_id = 'ffffffff-1111-2222-3333-444444444444';
     }

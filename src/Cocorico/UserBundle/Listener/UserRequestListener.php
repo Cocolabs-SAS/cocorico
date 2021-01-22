@@ -14,6 +14,7 @@ namespace Cocorico\UserBundle\Listener;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Ramsey\Uuid\Uuid;
 
 class UserRequestListener
 {
@@ -65,6 +66,8 @@ class UserRequestListener
         $session->set('userId', $user->getId());
         $session->set('userType', $user->getPersonType());
 
+        $session_id = $session->get('uuid', Uuid::uuid4()->toString());
+        $session->set('uuid', $session_id);
 
         if ($cookies->has('userType') && $cookies->get('userType') == "offerer" && $user && method_exists($user, "canBeOfferer") && $user->canBeOfferer()) {
             $session->set('profile', 'offerer');
