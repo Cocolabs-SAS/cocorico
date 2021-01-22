@@ -56,7 +56,6 @@ class Tracker
         'client_context' => array(),
         'server_context' => array(),
     );
-    dump($data);
     $payload = json_encode($data);
 
     $ch = curl_init();
