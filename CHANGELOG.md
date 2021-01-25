@@ -7,11 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.4] - (2021-01-25)
+- Tracking session et utilisateur amélioré
+- Tracking côté back plus étendu (plus robuste, plus fiable)
+
 ### [1.3] - (2021-01-21)
 - Fix nom de fichier SIAE
 - Mise à jour intégrale des dependances
 - Fix bug JS Interface admin
-- Retrait e code inutilisé, déprécié
+- Retrait code inutilisé, déprécié
 - Corrections Dépréciations diverses
 
 ### [1.3] - (2021-01-21)

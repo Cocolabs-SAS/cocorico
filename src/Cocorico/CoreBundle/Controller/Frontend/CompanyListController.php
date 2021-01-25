@@ -38,6 +38,7 @@ class CompanyListController extends Controller
     public function listAction(Request $request, $page)
     {
         $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+        $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
 
@@ -52,10 +53,10 @@ class CompanyListController extends Controller
                 'prestaType' => $sort['prestaType'],
             ];
             $entries = $directoryManager->findByForm($page, $params);
-            $tracker->track('backend', 'directory_siae_search', $params, $request->getSession());
+            $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
         } else {
             $entries = $directoryManager->listSome($page);
-            $tracker->track('backend', 'directory_siae_list', array(), $request->getSession());
+            $tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
@@ -99,7 +100,7 @@ class CompanyListController extends Controller
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
             ];
-            $tracker->track('backend', 'directory_siae_csv', $params, $request->getSession());
+            $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
             $entries = $directoryManager->listByForm($params);
         } else {
