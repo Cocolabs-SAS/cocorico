@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 /**
  * Directory controller
@@ -36,6 +37,8 @@ class CompanyListController extends Controller
      */
     public function listAction(Request $request, $page)
     {
+        $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+        $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
 
@@ -50,8 +53,10 @@ class CompanyListController extends Controller
                 'prestaType' => $sort['prestaType'],
             ];
             $entries = $directoryManager->findByForm($page, $params);
+            $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
         } else {
             $entries = $directoryManager->listSome($page);
+            $tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
@@ -81,6 +86,7 @@ class CompanyListController extends Controller
      */
     public function listCsv(Request $request)
     {
+        $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
 
@@ -94,6 +100,8 @@ class CompanyListController extends Controller
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
             ];
+            $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
+
             $entries = $directoryManager->listByForm($params);
         } else {
             $entries = $directoryManager->listbyForm();

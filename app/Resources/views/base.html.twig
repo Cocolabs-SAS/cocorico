@@ -114,6 +114,9 @@
         var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
         var isAuthenticated = {{ app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") ? 'true' : 'false' }};
         var hoursAvailable = {{ timeHoursAvailable|json_encode|raw }};
+        var sessId = '{{ app.session.get('uuid') }}';
+        var isAdmin = {{ app.session.get('isAdmin') ? 'true' : 'false'}};
+        var uType = '{{ app.session.get('userType') }}';
     </script>
 
 

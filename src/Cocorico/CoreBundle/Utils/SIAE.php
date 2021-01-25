@@ -17,7 +17,6 @@ class SIAE
         fclose($handle);
 
         $this->list = $list;
-        dump($this->columns);
         //$this->list = array_map('str_getcsv', file($csv_file));
     }
 

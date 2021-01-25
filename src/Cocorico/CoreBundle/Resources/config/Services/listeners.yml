@@ -4,6 +4,11 @@ parameters:
 
 services:
     #Listeners
+    cocorico.itou_tracking_request_listener:
+        class: Cocorico\CoreBundle\Listener\ItouTrackingRequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: -200 }
+
     cocorico.listing_image_upload_listener:
         class: Cocorico\CoreBundle\Listener\ListingImageUploadListener
         arguments:
