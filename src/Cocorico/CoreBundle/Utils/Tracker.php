@@ -72,8 +72,14 @@ class Tracker
     if(!curl_errno($ch))
     {
         $info = curl_getinfo($ch);
-        print("curl error:");
+        print("<pre>");
+        print("\ncurl error:");
         var_dump($info);
+        print("\nresponse error:");
+        var_dump($payload);
+        print("\nrequest error:");
+        var_dump($result);
+        print("</pre>");
     }
     }
 }
