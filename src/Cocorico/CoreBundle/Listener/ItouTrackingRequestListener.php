@@ -24,8 +24,6 @@ class ItouTrackingRequestListener
         $request = $event->getRequest();
         $session = $request->getSession();
 
-        $payload = [
-        ];
 
         $uri = $request->getPathInfo();
         if (strpos($uri,'media/cache')) {
@@ -33,6 +31,20 @@ class ItouTrackingRequestListener
             return;
         }
 
-        $this->tracker->track($request->getPathInfo(), 'load', $payload, $session);
+        $payload = [
+        ];
+
+        $client_context = [
+            'referer' => $request->headers->get('referer'),
+            'user_agent' => $request->headers->get('User-Agent'),
+        ];
+
+        $this->tracker->track(
+            $request->getPathInfo(),
+            'load',
+            $payload,
+            $session,
+            $client_context,
+    );
     }
 }
