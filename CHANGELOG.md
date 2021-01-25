@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Tracking session et utilisateur amélioré (listener symfony)
 - Tracking côté back plus étendu (plus robuste, plus fiable)
 - Suivi d'actions spécifiques liés à la liste SIAE
+- Context client plus détaille (referer, user-agent)
 
 ### [1.3] - (2021-01-21)
 - Fix nom de fichier SIAE
