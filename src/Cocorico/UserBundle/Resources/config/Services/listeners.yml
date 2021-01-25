@@ -6,7 +6,7 @@ services:
             - "@security.token_storage"
             - "%cocorico.time_zone%"
         tags:
-            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10 }
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 0 }
 
     cocorico_user.user_entity_listener:
         class: Cocorico\UserBundle\Listener\UserEntityListener
