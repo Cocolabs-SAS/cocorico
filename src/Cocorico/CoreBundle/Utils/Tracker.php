@@ -33,7 +33,7 @@ class Tracker
      * @param array|null $meta
      * @return string|null
      */
-    public function track($page, $action, $meta=array(), $session=False)
+    public function track($page, $action, $meta=array(), $session=False, $client_context=array())
     {
     if ($session) {
         $meta['is_admin'] = $session->get('isAdmin');
@@ -53,7 +53,7 @@ class Tracker
         'page' => $page,
         'action' => $action,
         'meta' => json_encode(array_merge(array('source' => 'symfony'), $meta)),
-        'client_context' => array(),
+        'client_context' => $client_context,
         'server_context' => array(),
     );
     $payload = json_encode($data);
