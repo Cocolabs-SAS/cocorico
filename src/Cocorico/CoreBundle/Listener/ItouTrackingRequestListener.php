@@ -27,6 +27,12 @@ class ItouTrackingRequestListener
         $payload = [
         ];
 
+        $uri = $request->getPathInfo();
+        if (strpos($uri,'media/cache')) {
+            // Skip if only reading cached media assets
+            return;
+        }
+
         $this->tracker->track($request->getPathInfo(), 'load', $payload, $session);
     }
 }
