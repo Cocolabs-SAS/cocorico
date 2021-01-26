@@ -6,11 +6,11 @@ var SESSION_ID = "";
 var VERSION = 1;
 
 //export function track(page, action, meta={}) {
-function track(page, action, meta={}) {
+async function track(page, action, meta={}) {
     const body = computeRequestBody(page, action, meta);
     
     if (typeof window !== 'undefined'   ) {
-        fetch('{{ cocorico_itou_tracker_host }}/track', {
+        await fetch('{{ cocorico_itou_tracker_host }}/track', {
           method: 'POST',
           headers: {
             // 'Content-Type': 'application/json',
@@ -138,12 +138,11 @@ document.addEventListener('click', async (event) => {
       loops -= 1;
     }
 
-    track(
+    await track(
         window.location.pathname,
         Steps.CLICK,
         meta
     );
-
 }, false);
 
 </script>
