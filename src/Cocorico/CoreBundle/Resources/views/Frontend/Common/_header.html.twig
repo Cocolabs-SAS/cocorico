@@ -82,7 +82,7 @@
                             {%- endif -%}
                             #}
                             <li>
-                                <a href="{{ path('cocorico_listing_favourite') }}"
+                                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}"
                                    tabindex="5">{{ 'nav.favorites.link'|trans }}
                                     <span id="fav-count"></span>
                                 </a>
@@ -102,7 +102,7 @@
                                 </li>
                             {%- else -%}
                                 <li>
-                                    <a href="{{ path('cocorico_user_login') }}" tabindex="7">
+                                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7">
                                         {{ 'nav.login.link'|trans }}
                                     </a>
                                 </li>
@@ -125,7 +125,7 @@
                             </a>
                         {% endif %}
                         {%- if app.user is null -%}
-                            <a href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary navbar-right c2action" >
+                            <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary navbar-right c2action" >
                                 {{ 'nav.register.link'|trans }}
                             </a>
                         {% endif %}
