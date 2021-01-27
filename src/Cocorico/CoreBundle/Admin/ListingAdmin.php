@@ -545,6 +545,7 @@ class ListingAdmin extends AbstractAdmin
             )
             ->add( 'certified', null, array())
             ->add( 'user', null, array('label' => 'admin.listing.user.label'))
+            ->add( 'user.idCardVerified', null, array('label' => 'admin.listing.user_verified.label'))
             ->add( 'user.email', null, array('label' => 'admin.listing.user_email.label'))
             ->add( 'user.phone', null, array('label' => 'admin.listing.user_phone.label'))
             ->add( 'title', null, array('label' => 'admin.listing.title.label'));
