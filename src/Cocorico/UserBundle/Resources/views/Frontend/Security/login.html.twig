@@ -20,13 +20,16 @@
                         } only %}
 
 
-                        <div class="btn-block text-center">
-                            <button type="submit" class="btn btn-default">Valider</button>
+                        <div id="registerbutton" class="btn-block">
+                            <button type="submit" class="btn btn-default">
+                                Valider
+                                <i class="icon-right-small" style="float:right"></i>
+                            </button>
                         </div>
                     </form>
                     <div id="form-registerlink">
                         <div>Vous n'avez pas de compte ?</div>
-                        <a href="#">Créér un compte</a>
+                        <a href="{{ path('cocorico_user_register') }}">Créér un compte</a>
                     </div>
                 </div>
 
