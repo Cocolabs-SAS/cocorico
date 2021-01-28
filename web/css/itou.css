@@ -1,62 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-  font-family: 'fontello2';
-  src: url('/fonts/fontello2.eot?33456996');
-  src: url('/fonts/fontello2.eot?33456996#iefix') format('embedded-opentype'),
-       url('/fonts/fontello2.woff2?33456996') format('woff2'),
-       url('/fonts/fontello2.woff?33456996') format('woff'),
-       url('/fonts/fontello2.ttf?33456996') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-    font-family: 'marianne';
-    src: url('/fonts/marianne-bold-webfont.woff#iefix');
-    src: url('/fonts/marianne-bold-webfont.woff#iefix') format('woff'),
-         url('/fonts/marianne-bold-webfont.woff2') format('woff2'),
-         url('/fonts/Marianne-Bold.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'roboto';
-    src: url('/fonts/Roboto-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'roboto';
-    src: url('/fonts/Roboto-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'roboto';
-    src: url('/fonts/Roboto-Thin.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'roboto';
-    src: url('/fonts/Roboto-Light.woff') format('woff');
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'roboto';
-    src: url('/fonts/Roboto-Black.woff') format('woff');
-    font-weight: 900;
-    font-style: normal;
-}
-
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -317,7 +260,24 @@ body {
 #form-registerlogin .sub-form {
     box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
     padding:2rem;
+    color:#000;
+    font-size:1rem;
+    border-radius:7px;
 }
+
+#profile h1 {
+    font-size:1.375rem;
+    text-align:center;
+    text-transform:uppercase;
+    color:#000;
+}
+
+#profile h3 {
+    font-size:1rem;
+    text-transform:uppercase;
+    color:#000;
+}
+
 
 #profile .label{
     display:block;
