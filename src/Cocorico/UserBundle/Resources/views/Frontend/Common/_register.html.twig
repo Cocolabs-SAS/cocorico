@@ -13,7 +13,11 @@ which acts on the person type choice.
     <div id="login-errors-wrapper">
         {{ form_errors(form_registration) }}
     </div>
-
+    <div class="sub-form3">
+        L'inscription est nécessaire pour mesurer la satisfaction, l'utilité de
+        notre service. Cela nous permettra égalemetn de le faire évoluer en
+        fonction de vos besoins.
+    </div>
     <div>
         <div class="col">
             <h3><i class="icon-user-circle-o" style="color:#006adc;"></i> Vous êtes</h3>
@@ -196,8 +200,45 @@ which acts on the person type choice.
                             </div> 
                             <div id="lbl1" class="label">
                                 {{ form_label(form_registration.accept_survey,
-                                    'j\'accepte de répondre à une enquête deux fois par an afin de permettre de mesurer la progression des achats inclusifs en France' 
+                                    'J\'accepte de répondre à une enquête deux fois par an afin de permettre de mesurer la progression des achats inclusifs en France' 
                                 ) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                        <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
+                            {# <div class="field-holder" onclick="console.log('poulet'); $('#lbl3').trigger('click');"> #}
+                        <div class="label-container">
+                            <div class="field-holder" >
+                                {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
+                            </div>
+                            <div class="label">
+                                {{ form_label(form_registration.offers_for_pro_sector,
+                                    'ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)'
+                                ) }} *
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
+
+
+                    <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                        <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
+                        <div class="label-container">
+                            <div class="field-holder" onclick="$('#lbl2').trigger('click');">
+                                {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
+                            </div>
+                            <div class="label">
+                                {{ form_label(form_registration.quote_promise,
+                                    'traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) '
+                                ) }}
+                                {# { form_label(form_registration.quote_promise, null, {
+                                    'label_attr': {
+                                        'data-label-legal': 'form.quote_promise.legal'|trans
+                                    }
+                                }) } #} *
                             </div>
                         </div>
                     </div>
@@ -205,6 +246,7 @@ which acts on the person type choice.
         </div>
     </div>
 
+    {#
     <div class="tab-holder row">
         <div class="col-sm-12">
             <br />
@@ -276,81 +318,8 @@ which acts on the person type choice.
                         </fieldset>
                     </div>
                 </div>
-                <div class="col-sm-5">
-                    <div class="itou-info itou-info-hidden">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Ces informations pourront être modifiées par la suite.
-                        </p>
-                    </div>
-                </div>
             </div>
-            <div class="row">
-                <div class="col-sm-7">
-                    <div class="itou-fieldgroup">
-                        <fieldset>
-                        <legend>En m'inscrivant, je m'engage à</legend>
-
-                       <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
-                            <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
-                                {# <div class="field-holder" onclick="console.log('poulet'); $('#lbl3').trigger('click');"> #}
-                            <div class="label-container">
-                                <div class="field-holder" >
-                                    {{ form_widget(form_registration.offers_for_pro_sector, { 'attr': { 'class': 'form-control required' } }) }}
-                                </div>
-                                <div class="label">
-                                    {{ form_label(form_registration.offers_for_pro_sector,
-                                        'ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)'
-                                    ) }} *
-                                </div>
-                            </div>
-                        </div>
-
-
-                        {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
-
-
-                        <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
-                            <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
-                            <div class="label-container">
-                                <div class="field-holder" onclick="$('#lbl2').trigger('click');">
-                                    {{ form_widget(form_registration.quote_promise, { 'attr': { 'class': 'form-control required' } }) }}
-                                </div>
-                                <div class="label">
-                                    {{ form_label(form_registration.quote_promise,
-                                        'traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) '
-                                    ) }}
-                                    {# { form_label(form_registration.quote_promise, null, {
-                                        'label_attr': {
-                                            'data-label-legal': 'form.quote_promise.legal'|trans
-                                        }
-                                    }) } #} *
-                                </div>
-                            </div>
-                        </div>
-
-
-                        </fieldset>
-                    </div>
-                </div>
-                <div class="col-sm-5">
-                    <div class="itou-info itou-info-hidden " data-id="only-inclusive">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Assurez-vous d’une bonne réactivité pour un échange de qualité
-                        Nous souhaitons offrir un service de qualité et permettre aux structures inclusives d’être valorisées.<br />
-                        Et puis, plus on traite rapidement la demande, plus on a de chance de remporter le marché. <strong>Idéalement 48H</strong>.
-                        </p>
-                    </div>
-                    <div class="itou-info itou-info-hidden " data-id="only-classic">
-                        <img class="shape" src="/images/info_shape.png" />
-                        <p>
-                        Les structures inclusives s’engagent à vous répondre idéalement sous 48h.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+    #}
 </div>
 {{ form_rest(form_registration) }}

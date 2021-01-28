@@ -13,17 +13,24 @@
 
             <div id="form-registerlogin" class="form-signup validate-form">
                 <div class="col-sm-6">
-                    <form class="form" action="{{ path('cocorico_user_register') }}" method="POST" autocomplete="off">
+                    <form class="form-signup" action="{{ path('cocorico_user_register') }}" method="POST" autocomplete="off">
 
                         {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
                         'form_registration': form,
                         'form_login': false
                         } only %}
 
-                        <div class="btn-block text-center">
-                            <button type="submit" class="btn btn-default">{{ 'registration.submit'|trans }}</button>
+                        <div id="registerbutton" class="btn-block">
+                            <button type="submit" class="btn btn-default">
+                                Valider
+                                <i class="icon-right-small" style="float:right"></i>
+                            </button>
                         </div>
                     </form>
+                    <div id="form-registerlink">
+                        <div>Vous avez déjà un compte ?</div>
+                        <a href="{{ path('cocorico_user_login') }}">Se connecter</a>
+                    </div>
                 </div>
             </div>
         {% endblock %}
