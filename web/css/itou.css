@@ -265,25 +265,25 @@ body {
     border-radius:7px;
 }
 
-#profile h1 {
+.login_register h1 {
     font-size:1.375rem;
     text-align:center;
     text-transform:uppercase;
     color:#000;
     font-weight:500;
-    margin-bottom:3rem;
 }
 
-#profile h3 {
+.login_register h3 {
     font-size:1rem;
     text-transform:uppercase;
     color:#000;
     font-weight:700;
     margin-bottom:1rem;
+    margin-top:3rem;
 }
 
 
-#profile .label{
+.login_register .label{
     display:block;
     float:none;
     text-align:left;
@@ -340,17 +340,17 @@ body {
     margin: 1rem 0;
 }
 
- label {
+label {
     font-size:1rem;
-    }
+}
 
- div.struct_type_select label {
-    font-size:1rem;
-    }
+div.struct_type_select label {
+   font-size:1rem;
+}
 
- div.struct_type_select .option {
-    margin: 1rem 0;
-    }
+div.struct_type_select .option {
+   margin: 1rem 0;
+}
 
 fieldset {
     margin: 2rem 0;

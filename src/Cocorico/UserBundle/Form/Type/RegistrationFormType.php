@@ -144,6 +144,14 @@ class RegistrationFormType extends AbstractType
                 )
             )
             ->add(
+                'accept_survey',
+                CheckboxType::class,
+                array(
+                    'label' => 'form.accept_survey',
+                    'required' => false,
+                )
+            )
+            ->add(
                 'quote_promise',
                 CheckboxType::class,
                 array(

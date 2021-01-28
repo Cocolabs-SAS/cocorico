@@ -9,11 +9,10 @@
             {#
             {% include '@CocoricoUser/Frontend/Common/_modal.html.twig' %}
             #}
-            <div class="col-xs-12">
-                {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
-                <div id="form-registerlogin" class="form-signup validate-form">
-                    <h1>{{ 'listing.new.signup.title'|trans({},'cocorico_listing') }}</h1>
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 
+            <div id="form-registerlogin" class="form-signup validate-form">
+                <div class="col-sm-6">
                     <form class="form" action="{{ path('cocorico_user_register') }}" method="POST" autocomplete="off">
 
                         {% include '@CocoricoUser/Frontend/Common/_login_register.html.twig' with {
