@@ -20,6 +20,43 @@
     font-weight: normal;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/Roboto-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/Roboto-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/Roboto-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('/fonts/Roboto-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -83,6 +120,9 @@
 .icon-f2-newspaper:before { content: '📰'; } /* '\1f4f0' */
 .icon-f2-search:before { content: '🔍'; } /* '\1f50d' */
 
+body {
+    font-family:'roboto';
+}
 /******************
  * CONFIRM STYLES
  ******************/
@@ -272,6 +312,18 @@
     width:100%;
     display:flex;
     justify-content:center;
+}
+
+#form-registerlogin .sub-form {
+    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
+    padding:2rem;
+}
+
+#profile .label{
+    display:block;
+    float:none;
+    text-align:left;
+    padding-bottom:.2rem;
 }
 
 /******************

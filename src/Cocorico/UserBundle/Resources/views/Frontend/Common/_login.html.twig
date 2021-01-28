@@ -12,32 +12,34 @@
 
             {{ form_errors(form_login._username) }}
 
-            <div class="field-row">
-                <span class="label">{{ form_label(form_login._username) }}</span>
+            <div class="sub-form">
+                <div class="field-row">
+                    <div class="label">{{ form_label(form_login._username) }}</div>
 
-                <div class="field-holder">
-                    {{ form_widget(form_login._username, {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
+                    <div class="field-holder">
+                        {{ form_widget(form_login._username, {
+                            'attr': {
+                                'class': "form-control required",
+                                'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
+                                'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
+                            }
+                        }) }}
+                    </div>
                 </div>
-            </div>
 
-            {{ form_errors(form_login._password) }}
-            <div class="field-row">
-                <span class="label">{{ form_label(form_login._password) }}</span>
+                {{ form_errors(form_login._password) }}
+                <div class="field-row">
+                    <div class="label">{{ form_label(form_login._password) }}</div>
 
-                <div class="field-holder">
-                    {{ form_widget(form_login._password, {
-                        'attr': {
-                            'class': "form-control required",
-                            'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
-                            'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
-                        }
-                    }) }}
+                    <div class="field-holder">
+                        {{ form_widget(form_login._password, {
+                            'attr': {
+                                'class': "form-control required",
+                                'data-parsley-required-message': 'assert.not_blank'|trans({},'validators'),
+                                'data-parsley-invalid-message': 'assert.invalid'|trans({}, 'validators')
+                            }
+                        }) }}
+                    </div>
                 </div>
             </div>
 
