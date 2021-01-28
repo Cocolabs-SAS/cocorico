@@ -19,19 +19,13 @@
                         'form_login': form
                         } only %}
 
-                        <div>
-                            <a href="{{ path('cocorico_user_resetting_request') }}">
-                                {{ 'user.password_forgotten'|trans }}
-                            </a>
-                        </div>
 
                         <div class="btn-block text-center">
                             <button type="submit" class="btn btn-default">Valider</button>
                         </div>
                     </form>
-                    <hr />
-                    <div>
-                        <h4>Vous n'avez pas de compte ?</h4>
+                    <div id="form-registerlink">
+                        <div>Vous n'avez pas de compte ?</div>
                         <a href="#">Créér un compte</a>
                     </div>
                 </div>

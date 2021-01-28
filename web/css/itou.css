@@ -270,12 +270,14 @@ body {
     text-align:center;
     text-transform:uppercase;
     color:#000;
+    font-weight:500;
 }
 
 #profile h3 {
     font-size:1rem;
     text-transform:uppercase;
     color:#000;
+    font-weight:700;
 }
 
 
@@ -284,6 +286,19 @@ body {
     float:none;
     text-align:left;
     padding-bottom:.2rem;
+}
+
+#form-registerlink {
+    border-top:1px solid #979797;
+    padding-top:.5rem;
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+}
+
+#form-registerlink a{
+    text-decoration:none;
+    font-weight:900;
 }
 
 /******************

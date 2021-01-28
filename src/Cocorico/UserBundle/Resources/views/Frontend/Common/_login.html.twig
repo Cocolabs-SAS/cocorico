@@ -1,14 +1,14 @@
 {% trans_default_domain 'cocorico_user' %}
 
 <div id="profile">
-    <h1>Connexion</h1>
+    <h1><i class="icon-user-circle-o blue"></i> Connexion</h1>
     <div id="login-errors-wrapper">
         {{ form_errors(form_login) }}
     </div>
 
     <div class="">
         <div class="col">
-            <h3>Se connecter à votre compte</h3>
+            <h3><i class="icon-user-circle-o" style="color:#006adc;"></i> Se connecter à votre compte</h3>
 
             {{ form_errors(form_login._username) }}
 
@@ -40,6 +40,12 @@
                             }
                         }) }}
                     </div>
+                </div>
+
+                <div>
+                    <a href="{{ path('cocorico_user_resetting_request') }}">
+                        {{ 'user.password_forgotten'|trans }}
+                    </a>
                 </div>
             </div>
 
