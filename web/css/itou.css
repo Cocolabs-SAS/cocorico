@@ -263,6 +263,18 @@
 }
 
 /******************
+ * LOGIN STYLES
+ ******************/
+#main .form-signup {
+    border:0;
+}
+#form-registerlogin {
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+/******************
  * RESULT STYLES
  ******************/
 #itou-results-form .form-holder,

@@ -12,69 +12,31 @@
     {% set register_class= " active" %}
 {% endif %}
 
-<div role="tabpanel">
-    <!-- Nav tabs -->
-    <nav class="tabset-holder">
-        <a href="#" class="opener">
-            <span class="hidden">opener</span>
-            <i class="icon-down-open-mini"></i>
-        </a>
 
-        <ul id="login-register-tabs" class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="{{ register_class }}">
-                {% if form_login and form_registration %}
-                    <a id="register-tab" href="#home" aria-controls="home" role="tab" data-toggle="tab"
-                       data-text="{{ 'user.signup'|trans }}">
-                        {{ 'user.signup'|trans }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('cocorico_user_register') }}">
-                        {{ 'user.signup'|trans }}
-                    </a>
-                {% endif %}
-            </li>
-            <li role="presentation" class="{{ login_class }}">
-                {% if form_login and form_registration %}
-                    <a id="login-tab" href="#profile" aria-controls="profile" role="tab" data-toggle="tab"
-                       data-text="{{ 'user.signin'|trans }}">
-                        {{ 'user.signin'|trans }}
-                    </a>
-                {% else %}
-                    <a href="{{ path('cocorico_user_login') }}">
-                        {{ 'user.signin'|trans }}
-                    </a>
-                {% endif %}
-            </li>
-        </ul>
-    </nav>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        {#Registration Form#}
-        {% if form_registration %}
-            {% include '@CocoricoUser/Frontend/Common/_register.html.twig'  with {
-            'form_registration' : form_registration,
-            'register_class' : register_class
-            } only %}
-        {% endif %}
+{#Registration Form#}
+{% if form_registration %}
+    {% include '@CocoricoUser/Frontend/Common/_register.html.twig'  with {
+    'form_registration' : form_registration,
+    'register_class' : register_class
+    } only %}
+{% endif %}
 
-        {#Login Form#}
-        {% if form_login %}
-            {% include '@CocoricoUser/Frontend/Common/_login.html.twig'  with {
-            'form_login' : form_login,
-            'login_class' : login_class
-            } only %}
-        {% endif %}
+{#Login Form#}
+{% if form_login %}
+    {% include '@CocoricoUser/Frontend/Common/_login.html.twig'  with {
+    'form_login' : form_login,
+    'login_class' : login_class
+    } only %}
+{% endif %}
 
-        {#Redirect after login on referer except for some routes #}
-        {% set targetUrl =  app.session.get('_security.main.target_path')|default('') %}
-        {% if targetUrl %}
-            <input type="hidden" name="redirect_to" value="{{ targetUrl }}"/>
-        {% elseif app.request.uri != app.request.headers.get('referer') and app.request.get('_route') not in ['cocorico_listing_availabilities'] %}
-            <input type="hidden" name="redirect_to" value="{{ app.request.headers.get('referer') }}"/>
-        {% endif %}
-    </div>
-</div>
+{#Redirect after login on referer except for some routes #}
+{% set targetUrl =  app.session.get('_security.main.target_path')|default('') %}
+{% if targetUrl %}
+    <input type="hidden" name="redirect_to" value="{{ targetUrl }}"/>
+{% elseif app.request.uri != app.request.headers.get('referer') and app.request.get('_route') not in ['cocorico_listing_availabilities'] %}
+    <input type="hidden" name="redirect_to" value="{{ app.request.headers.get('referer') }}"/>
+{% endif %}
 
 {#Facebook #}
 {#
