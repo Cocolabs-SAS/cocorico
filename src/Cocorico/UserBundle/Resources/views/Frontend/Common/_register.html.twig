@@ -45,10 +45,54 @@ which acts on the person type choice.
             <h3><i class="icon-building" style="color:#006adc;"></i>
                 Contact et coordonnées de votre entreprise</h3>
             <div class="sub-form">
+                <div class="field-row validate-row">
+                    <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
+                    <span class="label">
+
+                        {{ form_label(form_registration.lastName, 'Votre nom', {
+                            'label_attr': {
+                                'data-label-legal': 'form.last_name.legal'|trans
+                            }
+                        }) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form_registration.lastName, {
+                            'attr': {
+                                'class': 'form-control required',
+                                'data-parsley-required-message': 'cocorico_user.last_name.blank'|trans({},'validators'),
+                                'data-parsley-invalid-message': 'cocorico_user.last_name.invalid'|trans({}, 'validators')
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="field-row validate-row">
+                    <div class="error-container">{{ form_errors(form_registration.firstName) }}</div>
+                    <span class="label">
+                        {{ form_label(form_registration.firstName, 'Votre prénom', {
+                            'label_attr': {
+                                'data-label-legal': 'form.first_name.legal'|trans
+                            }
+                        }) }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form_registration.firstName, {
+                            'attr': {
+                                'class': "form-control required",
+                                'data-parsley-required-message': 'cocorico_user.first_name.blank'|trans({},'validators'),
+                                'data-parsley-invalid-message': 'cocorico_user.first_name.invalid'|trans({}, 'validators')
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+
                  <div class="field-row validate-row">
                     <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
                     <span class="label">
-                        {{ form_label(form_registration.companyName) }}
+                        {{ form_label(form_registration.companyName, 'Raison sociale') }}
                     </span>
 
                     <div class="field-holder">
@@ -61,7 +105,7 @@ which acts on the person type choice.
                     </div>
                 </div>
 
-                <div class="field-row validate-row">
+                <div class="field-row validate-row" data-only="inclusive classic">
                     <div class="error-container">{{ form_errors(form_registration.siret) }}</div>
                     <span class="label">
 
@@ -83,7 +127,7 @@ which acts on the person type choice.
                     </div>
                 </div>
 
-                <div class="field-row validate-row">
+                <div class="field-row validate-row" data-only="inclusive classic">
                     <div class="error-container">{{ form_errors(form_registration.naf) }}</div>
                     <span class="label">
 
@@ -105,7 +149,22 @@ which acts on the person type choice.
                     </div>
                 </div>
 
-                <div class="field-row validate-row" data-id="only-inclusive">
+                <div class="field-row validate-row" data-only="inclusive classic">
+                    <div class="error-container">{{ form_errors(form_registration.phone) }}</div>
+                    <span class="label">{{ form_label(form_registration.phone) }}</span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form_registration.phone, {
+                            'attr': {
+                                'class': "form-control",
+                                'data-parsley-type': 'digits',
+                                'data-parsley-type-message': 'cocorico_user.phone.invalid'|trans({},'validators')
+                            }
+                        }) }}
+                    </div>
+                </div>
+
+                <div class="field-row validate-row" data-only="inclusive">
                     <div class="error-container">{{ form_errors(form_registration.website) }}</div>
                     <span class="label">
 
@@ -205,7 +264,7 @@ which acts on the person type choice.
                             </div>
                         </div>
                     </div>
-                    <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                    <div class="field-row validate-row itou-checkbox" data-only="inclusive-required">
                         <div class="error-container">{{ form_errors(form_registration.offers_for_pro_sector) }}</div>
                             {# <div class="field-holder" onclick="console.log('poulet'); $('#lbl3').trigger('click');"> #}
                         <div class="label-container">
@@ -214,7 +273,7 @@ which acts on the person type choice.
                             </div>
                             <div class="label">
                                 {{ form_label(form_registration.offers_for_pro_sector,
-                                    'ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)'
+                                    'Je m\'engage à ce que les offres déposées sur la Place de marché soient destinées à des structures professionnelles (association, secteur privé ou public)'
                                 ) }} *
                             </div>
                         </div>
@@ -224,7 +283,7 @@ which acts on the person type choice.
                     {# FIXME:  both fields should be required (for now asterisk is hard coded) but that breaks the "classic" subscription stuff #}
 
 
-                    <div class="field-row validate-row itou-checkbox" data-id="only-inclusive-required">
+                    <div class="field-row validate-row itou-checkbox" data-only="inclusive-required">
                         <div class="error-container">{{ form_errors(form_registration.quote_promise) }}</div>
                         <div class="label-container">
                             <div class="field-holder" onclick="$('#lbl2').trigger('click');">
@@ -232,7 +291,7 @@ which acts on the person type choice.
                             </div>
                             <div class="label">
                                 {{ form_label(form_registration.quote_promise,
-                                    'traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) '
+                                    'Je m\'engage à traiter les demandes de devis qui me seront adressées (soumettre un devis, solliciter des informations complémentaires ou  refuser une demande constituent des réponses ) '
                                 ) }}
                                 {# { form_label(form_registration.quote_promise, null, {
                                     'label_attr': {
