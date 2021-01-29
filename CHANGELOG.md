@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Utilisation de police Roboto (auto-hébergé)
 - Refactor écran d'inscription / connexion
 - Nouveau parcours inscription partenaire
+- Fix panneau administrateur
 
 ### [1.4] - (2021-01-25)
 - Tracking session et utilisateur amélioré (listener symfony)
