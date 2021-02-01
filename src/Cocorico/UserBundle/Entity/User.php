@@ -674,6 +674,21 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
+     * Is personType.
+     *
+     * @param int $personType
+     *
+     * @return bool
+     */
+    public function isPersonType($personType)
+    {
+        if (!$this->personType) {
+            return False;
+        }
+        return $this->personType == $personType;
+    }
+
+    /**
      * Get personType Text.
      *
      * @return string
@@ -2123,7 +2138,7 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @param bool $accept_survey
      */
-    public function seAcceptSurvey($accept_survey) { $this->accept_survey = $accept_survey; }
+    public function setAcceptSurvey($accept_survey) { $this->accept_survey = $accept_survey; }
 
 
     /**
