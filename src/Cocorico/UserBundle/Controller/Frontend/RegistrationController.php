@@ -64,11 +64,10 @@ class RegistrationController extends Controller
                 $this->get('session')->set('cocorico_user_send_confirmation_email/email', $user->getEmail());
                 $url = $this->get('router')->generate('cocorico_user_registration_check_email');
             } else {
-                // Forcing forward to user confirmed screen
-                // $url = $request->get('redirect_to') ? $request->get('redirect_to') :
-                // $this->get('router')->generate('cocorico_user_register_confirmed');
+                $url = $request->get('redirect_to') ? $request->get('redirect_to') :
+                    $this->get('router')->generate('cocorico_user_dashboard_profile_edit_about_me');
                 //$url = $this->get('router')->generate('cocorico_user_register_confirmed');
-                $url = $this->get('router')->generate('cocorico_user_dashboard_profile_edit_about_me');
+                //$url = $this->get('router')->generate('cocorico_user_dashboard_profile_edit_about_me');
             }
 
             return new RedirectResponse($url);
