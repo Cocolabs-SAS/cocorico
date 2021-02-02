@@ -60,6 +60,7 @@ RUN apt-get install -y \
         php7.3-mbstring \
         php7.3-xml \
         php7.3-intl \
+        php7.3-gd \
         php-dom \
         php-imagick \
         php-mysql
