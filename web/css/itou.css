@@ -1389,14 +1389,14 @@ section.quote-quick-form fieldset {
     margin-top:6rem;
 }
 
-#dir_form .title {
+.dir_form .title {
     font-weight:bold;
     margin-bottom:3px;
 }
 
 
-#dir_form .jcf-select,
-#dir_form input.form-control {
+.dir_form .jcf-select,
+.dir_form input.form-control {
     height: 2.5rem;
     border: 1px solid #979797;
     border-radius: 3px 5px 5px 3px;
@@ -1407,9 +1407,10 @@ section.quote-quick-form fieldset {
     color: #A8A7A7;
 }
 
-#dir_form .reset,
-#dir_form #filter-submit {
-    margin-top:22px;
+.dir_form .reset,
+.dir_form .btn,
+.dir_form #filter-submit {
+    margin-top:1.625rem;
     height: 2.5rem;
 }
 
@@ -1442,6 +1443,7 @@ section.quote-quick-form fieldset {
 #dirlink .container {
     width:100%;
 }
+
 
 
 /******************

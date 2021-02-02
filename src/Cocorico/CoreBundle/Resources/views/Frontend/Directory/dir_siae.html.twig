@@ -16,7 +16,7 @@
         {% trans_default_domain 'cocorico_home' %}
 
         {% block main %}
-            <div id="dir_form">
+            <div id="dir_form" class="dir_form">
                 {{ form_start(form) }}
                 <div class="row">
                     <div class="col-sm-2">
@@ -131,7 +131,7 @@
                 'pagination': pagination
                 } only %}
                 {{ form_start(dlform) }}
-                <div id="csv_form">
+                <div id="csv_form" class="dir_form">
                     {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.postalCode, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
@@ -144,15 +144,21 @@
                     #}
                     <div class="row">
                         <div class="col-sm-4">
-                            {{form_label(dlform.format, "Format")}}
-                            {{form_widget(dlform.format,{
-                                'id': 'format'
-                            })}}
+                            <div class="title">
+                                Format
+                            </div>
+                            <div class="field-holder">
+                                {{form_widget(dlform.format,{
+                                    'id': 'format'
+                                })}}
+                            </div>
                         </div>
-                        <button id="csv-submit" type="submit" class="btn btn-default">
-                            Télécharger la liste
-                            <i class="icon-down"></i>
-                        </button>
+                        <div>
+                            <button id="csv-submit" type="submit" class="btn btn-default">
+                                Télécharger la liste
+                                <i class="icon-down"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 {#
