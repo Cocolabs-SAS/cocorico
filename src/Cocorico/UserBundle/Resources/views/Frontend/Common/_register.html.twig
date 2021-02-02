@@ -251,7 +251,7 @@ which acts on the person type choice.
                             </div>
                         </div>
                     </div>
-                    <div class="field-row validate-row itou-checkbox">
+                    <div class="field-row validate-row itou-checkbox" data-only="classic-required partner-required">
                         <div class="error-container">{{ form_errors(form_registration.accept_survey) }}</div>
                         <div class="label-container"> 
                             <div class="field-holder" onclick="$('#lbl1').trigger('click');">
@@ -260,7 +260,7 @@ which acts on the person type choice.
                             <div id="lbl1" class="label">
                                 {{ form_label(form_registration.accept_survey,
                                     'J\'accepte de répondre à une enquête deux fois par an afin de permettre de mesurer la progression des achats inclusifs en France' 
-                                ) }}
+                                ) }} *
                             </div>
                         </div>
                     </div>
