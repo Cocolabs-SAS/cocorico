@@ -109,7 +109,7 @@ which acts on the person type choice.
                     <div class="error-container">{{ form_errors(form_registration.siret) }}</div>
                     <span class="label">
 
-                        {{ form_label(form_registration.siret, null, {
+                        {{ form_label(form_registration.siret, 'Siret', {
                             'label_attr': {
                                 'data-label-legal': 'form.siret.legal'|trans
                             }
@@ -131,7 +131,7 @@ which acts on the person type choice.
                     <div class="error-container">{{ form_errors(form_registration.naf) }}</div>
                     <span class="label">
 
-                        {{ form_label(form_registration.naf, null, {
+                        {{ form_label(form_registration.naf, "Code NAF / APE", {
                             'label_attr': {
                                 'data-label-legal': 'form.naf.legal'|trans
                             }
@@ -151,7 +151,7 @@ which acts on the person type choice.
 
                 <div class="field-row validate-row" data-only="inclusive classic">
                     <div class="error-container">{{ form_errors(form_registration.phone) }}</div>
-                    <span class="label">{{ form_label(form_registration.phone) }}</span>
+                    <span class="label">{{ form_label(form_registration.phone, "Téléphone") }}</span>
 
                     <div class="field-holder">
                         {{ form_widget(form_registration.phone, {
@@ -168,7 +168,7 @@ which acts on the person type choice.
                     <div class="error-container">{{ form_errors(form_registration.website) }}</div>
                     <span class="label">
 
-                        {{ form_label(form_registration.website, null, {
+                        {{ form_label(form_registration.website, "Site Internet", {
                             'label_attr': {
                                 'data-label-legal': 'form.website.legal'|trans
                             }
@@ -192,7 +192,7 @@ which acts on the person type choice.
                 <div class="sub-form">
                     <div class="field-row validate-row">
                         <div class="error-container">{{ form_errors(form_registration.email) }}</div>
-                        <span class="label">Votre adresse email</span>
+                        <span class="label">{{ form_label(form_registration.email, "Votre adresse email") }}</span>
 
                         <div class="field-holder">
                             {{ form_widget(form_registration.email, {
@@ -207,7 +207,7 @@ which acts on the person type choice.
                     </div>
                     <div class="field-row validate-row">
                         <div class="error-container">{{ form_errors(form_registration.plainPassword.first) }}</div>
-                        <span class="label">{{ form_label(form_registration.plainPassword.first) }}</span>
+                        <span class="label">{{ form_label(form_registration.plainPassword.first, "Mot de passe") }}</span>
 
                         <div class="field-holder">
                             {{ form_widget(form_registration.plainPassword.first, {
@@ -222,7 +222,7 @@ which acts on the person type choice.
 
                     <div class="field-row validate-row">
                         <div class="error-container">{{ form_errors(form_registration.plainPassword.second) }}</div>
-                        <span class="label">{{ form_label(form_registration.plainPassword.second) }}</span>
+                        <span class="label">{{ form_label(form_registration.plainPassword.second, "Vérification") }}</span>
 
                         <div class="field-holder">
                             {{ form_widget(form_registration.plainPassword.second , {
