@@ -113,7 +113,6 @@ class CompanyListController extends Controller
                 'format' => $form['format']->getData(),
             ];
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
-            dump($params);
 
             $entries = $directoryManager->listByForm($params);
         } else {
@@ -136,10 +135,8 @@ class CompanyListController extends Controller
 
 
         // Respond according to preferred format
-        dump($format);
         switch($format) {
             case 'xlsx':
-                dump("XLSX SELECTED");
                 $tmpf = tempnam("/tmp", "SIAE_XLSX");
                 $spreadsheet = new Spreadsheet();
                 $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
@@ -159,7 +156,6 @@ class CompanyListController extends Controller
                 unset($tmpf);
                 break;
             case 'ods':
-                dump("ODS SELECTED");
                 $tmpf = tempnam("/tmp", "SIAE_ODS");
                 $spreadsheet = new Spreadsheet();
                 $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
@@ -180,7 +176,6 @@ class CompanyListController extends Controller
                 break;
             case 'csv':
             default:
-                dump("CSV SELECTED");
                 $response = new Response(file_get_contents($tmp_csv));
                 $response->headers->set('Content-Type', 'text/csv');
                 $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
