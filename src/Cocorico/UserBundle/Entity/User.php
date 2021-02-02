@@ -216,6 +216,14 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $offers_for_pro_sector = false;
 
+
+    /**
+     * @ORM\Column(name="accept_survey", type="boolean", nullable=true)
+     *
+     * @var bool
+     */
+    protected $accept_survey = false;
+
     /**
      * @ORM\Column(name="quote_promise", type="boolean", nullable=true)
      *
@@ -663,6 +671,21 @@ class User extends BaseUser implements ParticipantInterface
         }
 
         return $this->personType;
+    }
+
+    /**
+     * Is personType.
+     *
+     * @param int $personType
+     *
+     * @return bool
+     */
+    public function isPersonType($personType)
+    {
+        if (!$this->personType) {
+            return False;
+        }
+        return $this->personType == $personType;
     }
 
     /**
@@ -2106,6 +2129,17 @@ class User extends BaseUser implements ParticipantInterface
      * @param bool $offers_for_pro_sector
      */
     public function setOffersForProSector($offers_for_pro_sector) { $this->offers_for_pro_sector = $offers_for_pro_sector; }
+
+    /**
+     * @return bool
+     */
+    public function getAcceptSurvey() { return $this->accept_survey; }
+
+    /**
+     * @param bool $accept_survey
+     */
+    public function setAcceptSurvey($accept_survey) { $this->accept_survey = $accept_survey; }
+
 
     /**
      * @return bool

@@ -1,25 +1,5 @@
 @charset "UTF-8";
 
-@font-face {
-  font-family: 'fontello2';
-  src: url('/fonts/fontello2.eot?33456996');
-  src: url('/fonts/fontello2.eot?33456996#iefix') format('embedded-opentype'),
-       url('/fonts/fontello2.woff2?33456996') format('woff2'),
-       url('/fonts/fontello2.woff?33456996') format('woff'),
-       url('/fonts/fontello2.ttf?33456996') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-    font-family: 'marianne';
-    src: url('/fonts/marianne-bold-webfont.woff#iefix');
-    src: url('/fonts/marianne-bold-webfont.woff#iefix') format('woff'),
-         url('/fonts/marianne-bold-webfont.woff2') format('woff2'),
-         url('/fonts/Marianne-Bold.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-}
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
@@ -83,6 +63,9 @@
 .icon-f2-newspaper:before { content: '📰'; } /* '\1f4f0' */
 .icon-f2-search:before { content: '🔍'; } /* '\1f50d' */
 
+body {
+    font-family:'roboto';
+}
 /******************
  * CONFIRM STYLES
  ******************/
@@ -263,6 +246,85 @@
 }
 
 /******************
+ * LOGIN STYLES
+ ******************/
+#main .form-signup {
+    border:0;
+}
+#form-registerlogin {
+    width:100%;
+    display:flex;
+    justify-content:center;
+}
+
+#form-registerlogin .sub-form {
+    box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
+    padding:2rem;
+    color:#000;
+    font-size:1rem;
+    border-radius:7px;
+}
+
+#form-registerlogin .sub-form2 {
+    padding:2rem;
+    color:#000;
+    font-size:1.125rem;
+}
+
+#form-registerlogin .sub-form3 {
+    color:#000;
+    font-size:1.125rem;
+}
+
+.login_register h1 {
+    font-size:1.375rem;
+    text-align:center;
+    text-transform:uppercase;
+    color:#000;
+    font-weight:500;
+}
+
+.login_register h3 {
+    font-size:1rem;
+    text-transform:uppercase;
+    color:#000;
+    font-weight:700;
+    margin-bottom:1rem;
+    margin-top:3rem;
+}
+
+
+.login_register .label{
+    display:block;
+    float:none;
+    text-align:left;
+    padding-bottom:.2rem;
+}
+
+#form-registerlink {
+    border-top:1px solid #979797;
+    padding-top:.5rem;
+    text-align:center;
+    font-size:16px;
+    font-weight:700;
+}
+
+#form-registerlink a{
+    text-decoration:none;
+    font-weight:900;
+}
+
+#registerbutton {
+    margin-top:2rem;
+    display:flex;
+    justify-content:center;
+}
+
+#registerbutton button {
+    padding-right:.2rem !important;
+}
+
+/******************
  * RESULT STYLES
  ******************/
 #itou-results-form .form-holder,
@@ -289,17 +351,17 @@
     margin: 1rem 0;
 }
 
- label {
+label {
     font-size:1rem;
-    }
+}
 
- div.struct_type_select label {
-    font-size:1rem;
-    }
+div.struct_type_select label {
+   font-size:1rem;
+}
 
- div.struct_type_select .option {
-    margin: 1rem 0;
-    }
+div.struct_type_select .option {
+   margin: 1rem 0;
+}
 
 fieldset {
     margin: 2rem 0;

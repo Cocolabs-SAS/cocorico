@@ -69,18 +69,18 @@ class Tracker
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0); // On dev server only!
     curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
     $result = curl_exec($ch);
-    if(curl_errno($ch)) {
-        $info = curl_getinfo($ch);
-        print("<pre>");
-        print("\nCurl Errno:");
-        var_dump(curl_errno($ch));
-        print("\ncurl error:");
-        var_dump($info);
-        print("\nresponse error:");
-        var_dump($payload);
-        print("\nrequest error:");
-        var_dump($result);
-        print("</pre>");
-    }
+    //if(curl_errno($ch)) {
+    //    $info = curl_getinfo($ch);
+    //    print("<pre>");
+    //    print("\nCurl Errno:");
+    //    var_dump(curl_errno($ch));
+    //    print("\ncurl error:");
+    //    var_dump($info);
+    //    print("\nresponse error:");
+    //    var_dump($payload);
+    //    print("\nrequest error:");
+    //    var_dump($result);
+    //    print("</pre>");
+    //}
     }
 }

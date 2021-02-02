@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.5] - (2021-01-28)
+- Utilisation de police Roboto (auto-hébergé)
+- Refactor écran d'inscription / connexion
+- Nouveau parcours inscription partenaire
+- Fix panneau administrateur
+
 ### [1.4] - (2021-01-25)
 - Tracking session et utilisateur amélioré (listener symfony)
 - Tracking côté back plus étendu (plus robuste, plus fiable)
