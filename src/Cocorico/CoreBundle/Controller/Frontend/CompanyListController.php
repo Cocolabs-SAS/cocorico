@@ -16,6 +16,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cocorico\CoreBundle\Utils\Tracker;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Ods;
 
 /**
  * Directory controller
@@ -110,13 +113,17 @@ class CompanyListController extends Controller
                 'format' => $form['format']->getData(),
             ];
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
+            dump($params);
 
             $entries = $directoryManager->listByForm($params);
         } else {
             $entries = $directoryManager->listbyForm();
         }
+        $format = $form['format']->getData();
 
-        $fp = fopen('php://temp', 'w');
+        // Write to csv
+        $tmp_csv = tempnam("/tmp", "SIAE_CSV");
+        $fp = fopen($tmp_csv, 'w');
         fputcsv($fp, array_values(Directory::$exportColumns));
         foreach ($entries as $fields) {
             $el = [];
@@ -125,14 +132,61 @@ class CompanyListController extends Controller
             }
             fputcsv($fp, $el);
         }
-
-        rewind($fp);
-        $response = new Response(stream_get_contents($fp));
         fclose($fp);
 
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
 
+        // Respond according to preferred format
+        dump($format);
+        switch($format) {
+            case 'xlsx':
+                dump("XLSX SELECTED");
+                $tmpf = tempnam("/tmp", "SIAE_XLSX");
+                $spreadsheet = new Spreadsheet();
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                $reader->setDelimiter(',');
+                $reader->setEnclosure('"');
+                $reader->setSheetIndex(0);
+                $spreadsheet = $reader->load($tmp_csv);
+                $writer = new Xlsx($spreadsheet);
+                $writer->save($tmpf);
+                $spreadsheet->disconnectWorksheets();
+
+                $response = new Response(file_get_contents($tmpf));
+                $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.xlsx"');
+
+                unset($spreadsheet);
+                unset($tmpf);
+                break;
+            case 'ods':
+                dump("ODS SELECTED");
+                $tmpf = tempnam("/tmp", "SIAE_ODS");
+                $spreadsheet = new Spreadsheet();
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                $reader->setDelimiter(',');
+                $reader->setEnclosure('"');
+                $reader->setSheetIndex(0);
+                $spreadsheet = $reader->load($tmp_csv);
+                $writer = new Ods($spreadsheet);
+                $writer->save($tmpf);
+                $spreadsheet->disconnectWorksheets();
+
+                $response = new Response(file_get_contents($tmpf));
+                $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.ods"');
+
+                unset($spreadsheet);
+                unset($tmpf);
+                break;
+            case 'csv':
+            default:
+                dump("CSV SELECTED");
+                $response = new Response(file_get_contents($tmp_csv));
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
+                break;
+        }
+        unlink($tmp_csv);
         return $response;
     }
 
