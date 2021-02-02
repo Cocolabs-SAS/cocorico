@@ -168,7 +168,7 @@ class CompanyListController extends Controller
                 $spreadsheet->disconnectWorksheets();
 
                 $response = new Response(file_get_contents($tmpf));
-                $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                $response->headers->set('Content-Type', 'application/vnd.oasis.opendocument.spreadsheet');
                 $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.ods"');
 
                 unset($spreadsheet);
