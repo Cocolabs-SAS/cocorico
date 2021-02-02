@@ -41,6 +41,7 @@ class CompanyListController extends Controller
         $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
+        $dlform = $this->csvCompaniesForm();
 
         $directoryManager = $this->get('cocorico.directory.manager');
 
@@ -54,6 +55,11 @@ class CompanyListController extends Controller
             ];
             $entries = $directoryManager->findByForm($page, $params);
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
+
+            // Set download form data
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType'] as $key) {
+                $dlform->get($key)->setData($sort[$key]);
+            }
         } else {
             $entries = $directoryManager->listSome($page);
             $tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
@@ -61,6 +67,7 @@ class CompanyListController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
+            'dlform' => $dlform->createView(),
             'entries' => $entries,
             'pagination' => array(
                 'page'  => $page,
@@ -69,8 +76,8 @@ class CompanyListController extends Controller
                 'route_params' => $request->query->all()
             ),
             'columns' => $directoryManager->listColumns(),
-            'csv_route' => 'cocorico_itou_siae_directory_csv',
-            'csv_params' => $request->query->all(),
+            // 'csv_route' => 'cocorico_itou_siae_directory_csv',
+            // 'csv_params' => $request->query->all(),
         ]);
     }
 
@@ -87,7 +94,8 @@ class CompanyListController extends Controller
     public function listCsv(Request $request)
     {
         $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
-        $form = $this->sortCompaniesForm();
+        $tracker_payload = ['dir' => 'siae'];
+        $form = $this->csvCompaniesForm();
         $form->handleRequest($request);
 
         $directoryManager = $this->get('cocorico.directory.manager');
@@ -99,6 +107,7 @@ class CompanyListController extends Controller
                 'sector' => $sort['sector'],
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
+                'format' => $form['format']->getData(),
             ];
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
@@ -136,6 +145,32 @@ class CompanyListController extends Controller
             array(
                 'action' => $this->generateUrl(
                     'cocorico_itou_siae_directory',
+                    array('page' => 1)
+                ),
+                'method' => 'GET',
+            )
+        );
+
+        //$form = $this->createFormBuilder($sort)
+        //    ->add('sector', TextType::class)
+        //    ->add('postalCode', TextType::class)
+        //    ->add('structureType', TextType::class)
+        //    ->add('prestaType', TextType::class)
+        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
+        //    ->getForm();
+
+        return $form;
+    }
+
+    private function csvCompaniesForm()
+    {
+        $form = $this->get('form.factory')->createNamed(
+            '',
+            DirectoryFilterType::class,
+            null,
+            array(
+                'action' => $this->generateUrl(
+                    'cocorico_itou_siae_directory_csv',
                     array('page' => 1)
                 ),
                 'method' => 'GET',

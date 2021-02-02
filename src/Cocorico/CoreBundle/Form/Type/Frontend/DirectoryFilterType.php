@@ -17,6 +17,19 @@ class DirectoryFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('format',
+                ChoiceType::class,
+                array(
+                    'mapped' => false,
+                    'expanded' => false,
+                    'empty_data' => '',
+                    'choices' => [
+                        'CSV' => 'csv',
+                        'Excel' => 'xlsx',
+                        'Open Office' => 'ods',
+                    ],
+                )
+            )
             ->add('sector', 
                 ChoiceType::class,
                 array(
