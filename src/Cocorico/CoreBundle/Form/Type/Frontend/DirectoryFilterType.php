@@ -22,10 +22,10 @@ class DirectoryFilterType extends AbstractType
                 array(
                     'mapped' => false,
                     'expanded' => false,
-                    'empty_data' => '',
+                    'empty_data' => 'xlsx',
                     'choices' => [
-                        'CSV' => 'csv',
                         'Excel' => 'xlsx',
+                        'CSV' => 'csv',
                         'Open Office' => 'ods',
                     ],
                 )
