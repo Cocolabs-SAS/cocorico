@@ -39,6 +39,14 @@ class DirectoryFilterType extends AbstractType
                 )
             )
             ->add('postalCode', TextType::class)
+            ->add('region',
+                ChoiceType::class,
+                array(
+                    'expanded' => false,
+                    'empty_data' => '',
+                    'choices' => array_flip(Directory::$regions),
+                )
+            )
             ->add('structureType',
                 ChoiceType::class,
                 array(
