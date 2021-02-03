@@ -25,8 +25,8 @@ class DirectoryFilterType extends AbstractType
                     'empty_data' => 'xlsx',
                     'choices' => [
                         'Excel' => 'xlsx',
-                        'CSV' => 'csv',
                         'Open Office' => 'ods',
+                        'CSV' => 'csv',
                     ],
                 )
             )
