@@ -16,6 +16,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cocorico\CoreBundle\Utils\Tracker;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Writer\Ods;
 
 /**
  * Directory controller
@@ -41,6 +44,7 @@ class CompanyListController extends Controller
         $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
+        $dlform = $this->csvCompaniesForm();
 
         $directoryManager = $this->get('cocorico.directory.manager');
 
@@ -54,6 +58,11 @@ class CompanyListController extends Controller
             ];
             $entries = $directoryManager->findByForm($page, $params);
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
+
+            // Set download form data
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType'] as $key) {
+                $dlform->get($key)->setData($sort[$key]);
+            }
         } else {
             $entries = $directoryManager->listSome($page);
             $tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
@@ -61,6 +70,7 @@ class CompanyListController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
+            'dlform' => $dlform->createView(),
             'entries' => $entries,
             'pagination' => array(
                 'page'  => $page,
@@ -69,8 +79,8 @@ class CompanyListController extends Controller
                 'route_params' => $request->query->all()
             ),
             'columns' => $directoryManager->listColumns(),
-            'csv_route' => 'cocorico_itou_siae_directory_csv',
-            'csv_params' => $request->query->all(),
+            // 'csv_route' => 'cocorico_itou_siae_directory_csv',
+            // 'csv_params' => $request->query->all(),
         ]);
     }
 
@@ -87,7 +97,8 @@ class CompanyListController extends Controller
     public function listCsv(Request $request)
     {
         $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
-        $form = $this->sortCompaniesForm();
+        $tracker_payload = ['dir' => 'siae'];
+        $form = $this->csvCompaniesForm();
         $form->handleRequest($request);
 
         $directoryManager = $this->get('cocorico.directory.manager');
@@ -99,6 +110,7 @@ class CompanyListController extends Controller
                 'sector' => $sort['sector'],
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
+                'format' => $form['format']->getData(),
             ];
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
@@ -106,8 +118,11 @@ class CompanyListController extends Controller
         } else {
             $entries = $directoryManager->listbyForm();
         }
+        $format = $form['format']->getData();
 
-        $fp = fopen('php://temp', 'w');
+        // Write to csv
+        $tmp_csv = tempnam("/tmp", "SIAE_CSV");
+        $fp = fopen($tmp_csv, 'w');
         fputcsv($fp, array_values(Directory::$exportColumns));
         foreach ($entries as $fields) {
             $el = [];
@@ -116,14 +131,57 @@ class CompanyListController extends Controller
             }
             fputcsv($fp, $el);
         }
-
-        rewind($fp);
-        $response = new Response(stream_get_contents($fp));
         fclose($fp);
 
-        $response->headers->set('Content-Type', 'text/csv');
-        $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
 
+        // Respond according to preferred format
+        switch($format) {
+            case 'xlsx':
+                $tmpf = tempnam("/tmp", "SIAE_XLSX");
+                $spreadsheet = new Spreadsheet();
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                $reader->setDelimiter(',');
+                $reader->setEnclosure('"');
+                $reader->setSheetIndex(0);
+                $spreadsheet = $reader->load($tmp_csv);
+                $writer = new Xlsx($spreadsheet);
+                $writer->save($tmpf);
+                $spreadsheet->disconnectWorksheets();
+
+                $response = new Response(file_get_contents($tmpf));
+                $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.xlsx"');
+
+                unset($spreadsheet);
+                unset($tmpf);
+                break;
+            case 'ods':
+                $tmpf = tempnam("/tmp", "SIAE_ODS");
+                $spreadsheet = new Spreadsheet();
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Csv();
+                $reader->setDelimiter(',');
+                $reader->setEnclosure('"');
+                $reader->setSheetIndex(0);
+                $spreadsheet = $reader->load($tmp_csv);
+                $writer = new Ods($spreadsheet);
+                $writer->save($tmpf);
+                $spreadsheet->disconnectWorksheets();
+
+                $response = new Response(file_get_contents($tmpf));
+                $response->headers->set('Content-Type', 'application/vnd.oasis.opendocument.spreadsheet');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.ods"');
+
+                unset($spreadsheet);
+                unset($tmpf);
+                break;
+            case 'csv':
+            default:
+                $response = new Response(file_get_contents($tmp_csv));
+                $response->headers->set('Content-Type', 'text/csv');
+                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
+                break;
+        }
+        unlink($tmp_csv);
         return $response;
     }
 
@@ -136,6 +194,32 @@ class CompanyListController extends Controller
             array(
                 'action' => $this->generateUrl(
                     'cocorico_itou_siae_directory',
+                    array('page' => 1)
+                ),
+                'method' => 'GET',
+            )
+        );
+
+        //$form = $this->createFormBuilder($sort)
+        //    ->add('sector', TextType::class)
+        //    ->add('postalCode', TextType::class)
+        //    ->add('structureType', TextType::class)
+        //    ->add('prestaType', TextType::class)
+        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
+        //    ->getForm();
+
+        return $form;
+    }
+
+    private function csvCompaniesForm()
+    {
+        $form = $this->get('form.factory')->createNamed(
+            '',
+            DirectoryFilterType::class,
+            null,
+            array(
+                'action' => $this->generateUrl(
+                    'cocorico_itou_siae_directory_csv',
                     array('page' => 1)
                 ),
                 'method' => 'GET',

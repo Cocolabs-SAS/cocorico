@@ -78,6 +78,7 @@ class Directory
         'website' => 'Site web',
         'city' => 'Ville',
         'department' => 'Département',
+        'region' => 'Région',
         'postCode' => 'Code postal',
     );
 
