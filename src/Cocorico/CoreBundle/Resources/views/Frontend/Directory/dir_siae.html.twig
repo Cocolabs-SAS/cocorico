@@ -121,10 +121,10 @@
                             <th>Type de prestation</th>
                             <th>Secteur(s)</th>
                             <th>Site web</th>
+                            <th>Code postal</th>
                             <th>Ville</th>
                             <th>Département</th>
                             <th>Région</th>
-                            <th>Code postal</th>
                         </tr>
                         {% for entry in entries.iterator %}
                             <tr>
@@ -145,10 +145,10 @@
                                     </a>
                                 {% endif %}
                                 </td>
+                                <td>{{ entry.postCode }}</td>
                                 <td>{{ entry.city }}</td>
                                 <td>{{ entry.department }}</td>
                                 <td>{{ entry.region }}</td>
-                                <td>{{ entry.postCode }}</td>
                             </tr>
                         {% endfor %}
                     </table>
