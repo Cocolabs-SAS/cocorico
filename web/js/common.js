@@ -274,9 +274,8 @@ $.fn.addFormToCollection = function (collection, item, callbackSuccess) {
  */
 $.fn.submitAjaxForm = function (callbackSuccess) {
     var $container = this;
-    $container.find("form").submit(function (e) {
+    var fun = function (e) {
         e.preventDefault();
-
         $.ajax({
             type: $(this).attr('method'),
             url: $(this).attr('action'),
@@ -286,12 +285,15 @@ $.fn.submitAjaxForm = function (callbackSuccess) {
             },
             success: function (response, status, xhr) {
                 $container.replaceWith(response);
+                // $container.find("form").submit((e) => f(e, f));
                 callbackSuccess();
             }
         });
 
         return false;
-    });
+    };
+
+    $container.find("form").submit(fun);
 };
 
  /**

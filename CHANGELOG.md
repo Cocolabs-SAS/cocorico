@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Ajout Dépendance PhpSpreadsheet
 - Choix format de téléchargement liste SIAE
 - Fix formulaire inscription
+- Recherche SIAE par région
 
 ### [1.5] - (2021-01-28)
 - Utilisation de police Roboto (auto-hébergé)

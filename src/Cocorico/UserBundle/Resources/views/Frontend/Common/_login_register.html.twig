@@ -44,7 +44,6 @@
 #}
 
 <script>
-    console.log('OK');
     var INFO_HIDDEN = false;
     var CURRENT_PERSON = false;
     document.addEventListener("DOMContentLoaded", function(){
@@ -73,7 +72,6 @@
          function toggleFieldsDisplay(cursor) {
  
              // See User entity for type/value relationships
-             console.log(cursor);
              const type_classic = '3';
              const type_inclusive = '4';
              const type_partner = '6';
@@ -93,7 +91,6 @@
                      key = 'partner';
                      break;
              }
-             console.log('key:', key);
 
              $('[data-only~="' + key + '"]').show();
              $('[data-only~="' + key + '-required"]').show().prop('required', true).addClass('required');
