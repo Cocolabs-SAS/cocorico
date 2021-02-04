@@ -19,165 +19,214 @@
             <div id="dir_form" class="dir_form">
                 {{ form_start(form) }}
                 <div class="row">
-                    <div class="col-sm-2">
-                        <div class="title">
-                            Secteur d'activité
+                    <div class="col-sm-10">
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="title">
+                                    Secteur d'activité
+                                </div>
+                                <div class="field-holder">
+                                {{form_widget(form.sector, {
+                                    'id': 'sector',
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'xxx'
+                                    }}
+                                )}}
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="title">
+                                    Type de structure
+                                </div>
+                                <div class="field-holder">
+                                {{form_widget(form.structureType, {
+                                    'id': 'sector',
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'AI, ACI, ETTI'
+                                    }}
+                                )}}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="title">
+                                    Type de prestation
+                                </div>
+                                <div class="field-holder">
+                                {{form_widget(form.prestaType, {
+                                    'id': 'sector',
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'Prestation, mise à disposition du personnel'
+                                    }}
+                                )}}
+                                </div>
+                            </div>
                         </div>
-                        <div class="field-holder">
-                        {{form_widget(form.sector, {
-                            'id': 'sector',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'xxx'
-                            }}
-                        )}}
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <div class="title">
+                                    Région
+                                </div>
+                                <div class="field-holder">
+                                {{form_widget(form.region, {
+                                    'id': 'region',
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'région'
+                                    }}
+                                )}}
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="title">
+                                    Code postal
+                                </div>
+                                <div class="field-holder">
+                                {{form_widget(form.postalCode, {
+                                    'id': 'postal',
+                                    'attr': {
+                                        'class': 'form-control',
+                                        'placeholder': 'code postal'
+                                    }}
+                                )}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <div class="title">
-                            Type de structure
-                        </div>
-                        <div class="field-holder">
-                        {{form_widget(form.structureType, {
-                            'id': 'sector',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'AI, ACI, ETTI'
-                            }}
-                        )}}
-                        </div>
+                        <button id="filter-submit" type="submit" class="btn btn-default">
+                            Filtrer
+                            <i class="icon-search"></i>
+                        </button>
+                        <a 
+                            class="btn btn-outline-primary reset"
+                            href="/fr/repertoire/siae" >
+                            Réinitialiser
+                        </a>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="title">
-                            Type de prestation
-                        </div>
-                        <div class="field-holder">
-                        {{form_widget(form.prestaType, {
-                            'id': 'sector',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'Prestation, mise à disposition du personnel'
-                            }}
-                        )}}
-                        </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <div class="title">
-                            Code postal
-                        </div>
-                        <div class="field-holder">
-                        {{form_widget(form.postalCode, {
-                            'id': 'postal',
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'code postal'
-                            }}
-                        )}}
-                        </div>
-                    </div>
-                    <button id="filter-submit" type="submit" class="btn btn-default">
-                        Filtrer
-                        <i class="icon-search"></i>
-                    </button>
-                    <a 
-                        class="btn btn-outline-primary reset"
-                        href="/fr/repertoire/siae" >
-                        Réinitialiser
-                    </a>
                 </div>
                 {% do form.format.setRendered() %}
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
                 <div class="meta">Liste résultats : {{ entries.count }} structures</div>
-                <table>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Siret</th>
-                        <th>Structure</th>
-                        <th>Type de prestation</th>
-                        <th>Secteur(s)</th>
-                        <th>Site web</th>
-                        <th>Ville</th>
-                        <th>Département</th>
-                        {# <th>Région</th> #}
-                        <th>Code postal</th>
-                    </tr>
-                    {% for entry in entries.iterator %}
+                {%- if not entries is empty -%}
+                    <table>
                         <tr>
-                            <td>
-                            {% if entry.brand %}
-                                {{ entry.brand }}
-                            {% else %}
-                                {{ entry.name }}
-                            {% endif %}</td>
-                            <td>{{ entry.siret }}</td>
-                            <td>{{ entry.kind }}</td>
-                            <td>{{ entry.prestaType}} </td>
-                            <td>{{ entry.sector}} </td>
-                            <td>
-                            {% if entry.website %}
-                                <a href="{{ entry.website }}" target="_blank" rel="external">
-                                    {{ entry.website }}
-                                </a>
-                            {% endif %}
-                            </td>
-                            <td>{{ entry.city }}</td>
-                            <td>{{ entry.department }}</td>
-                            {# <td>{{ entry.region }}</td> #}
-                            <td>{{ entry.postCode }}</td>
+                            <th>Nom</th>
+                            {# <th>Siret</th> #}
+                            <th>Structure</th>
+                            <th>Type de prestation</th>
+                            <th>Secteur(s)</th>
+                            <th>Site web</th>
+                            <th>Code postal</th>
+                            <th>Ville</th>
+                            <th>Département</th>
+                            <th>Région</th>
                         </tr>
-                    {% endfor %}
-                </table>
-                {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
-                'pagination': pagination
-                } only %}
-                {{ form_start(dlform) }}
-                <div id="csv_form" class="dir_form">
-                    {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
-                    {{ form_widget(dlform.postalCode, {'attr': {'style': 'display:none'}}) }}
-                    {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
-                    {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
-                    {#
-                    {% do dlform.sector.setRendered() %}
-                    {% do dlform.postalCode.setRendered() %}
-                    {% do dlform.prestaType.setRendered() %}
-                    {% do dlform.structureType.setRendered() %}
-                    #}
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <div class="title">
-                                Format
+                        {% for entry in entries.iterator %}
+                            <tr>
+                                <td>
+                                {% if entry.brand %}
+                                    {{ entry.brand }}
+                                {% else %}
+                                    {{ entry.name }}
+                                {% endif %}</td>
+                                {# <td>{{ entry.siret }}</td> #}
+                                <td>{{ entry.kind }}</td>
+                                <td>{{ entry.prestaType}} </td>
+                                <td>{{ entry.sector}} </td>
+                                <td>
+                                {% if entry.website %}
+                                    <a href="{{ entry.website }}" target="_blank" rel="external">
+                                        {{ entry.website }}
+                                    </a>
+                                {% endif %}
+                                </td>
+                                <td>{{ entry.postCode }}</td>
+                                <td>{{ entry.city }}</td>
+                                <td>{{ entry.department }}</td>
+                                <td>{{ entry.region }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+                    'pagination': pagination
+                    } only %}
+                    {{ form_start(dlform) }}
+                    <div id="csv_form" class="dir_form">
+                        {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.postalCode, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.region, {'attr': {'style': 'display:none'}}) }}
+                        {#
+                        {% do dlform.sector.setRendered() %}
+                        {% do dlform.postalCode.setRendered() %}
+                        {% do dlform.prestaType.setRendered() %}
+                        {% do dlform.structureType.setRendered() %}
+                        #}
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="title">
+                                    Format
+                                </div>
+                                <div class="field-holder">
+                                    {{form_widget(dlform.format,{
+                                        'id': 'format'
+                                    })}}
+                                </div>
                             </div>
-                            <div class="field-holder">
-                                {{form_widget(dlform.format,{
-                                    'id': 'format'
-                                })}}
+                            <div class="col-sm-4">
+                                <button id="csv-submit" type="submit" class="btn btn-default">
+                                    Télécharger la liste
+                                    <i class="icon-down"></i>
+                                </button>
                             </div>
-                        </div>
-                        <div>
-                            <button id="csv-submit" type="submit" class="btn btn-default">
-                                Télécharger la liste
-                                <i class="icon-down"></i>
-                            </button>
                         </div>
                     </div>
-                </div>
-                {#
-                <a 
-                    id="csv_get"
-                    class="btn btn-default"
-                    href="{{ path(csv_route, csv_params) }}" >
-                    Télécharger la liste
-                    <span style="font-family:fontello2;">
-                    &#128269;
-                    </span>
-                </a>
-                #}
-                {{ form_end(dlform) }}
+                    {#
+                    <a 
+                        id="csv_get"
+                        class="btn btn-default"
+                        href="{{ path(csv_route, csv_params) }}" >
+                        Télécharger la liste
+                        <span style="font-family:fontello2;">
+                        &#128269;
+                        </span>
+                    </a>
+                    #}
+                    {{ form_end(dlform) }}
+    
+                {%- else -%}
+                    <div class="col-xs-12 form-confirm min-height justify-content-center" style="margin:-21px 0 30rem;">
+                        <div class="container col-sm-8 no-results">
+                            <div style="text-align:center">
+                                <img src="{{ asset('images/home_help_icon_white.png') }}" style="height:64px;margin-bottom:1rem;" alt="icon description" class="icon">
+                            </div>
+                            <div class="row ">
+                                <div class="" style="">
+                                    <p>Malheureusement, nous n'avons pas encore de prestataires correspondant à votre recherche sur La place de marché de l'inclusion.</p>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="" style="">
+                                    <b>Faites nous part de votre besoin et nous vous recontacterons rapidement</b>
+                                </div>
+                            </div>
+
+
+                            <div class="row" style="margin-top:4rem">
+                                <div class="buttonrow" style="display:flex">
+                                    <a class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx">Déposez votre demande</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {%- endif -%}
             </div>
-
         {% endblock %}
-
     {% endembed %}
 {% endblock %}

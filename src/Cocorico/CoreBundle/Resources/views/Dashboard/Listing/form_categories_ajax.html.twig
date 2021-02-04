@@ -31,17 +31,23 @@
     {{ form_end(form) }}
 
     <script>
-        $(function () {
+        //$(function () {
+        document.addEventListener("DOMContentLoaded", function(){
             var categoryFieldBundle = {{ bundleExist('CocoricoListingCategoryFieldBundle') ? 'true' : 'false' }};
-            var $formContainer = $("#category-form-container");
-            $formContainer.submitAjaxForm(function () {
-                jcf.replaceAll("#category-form-container");
-            });
+            const fun = (f) => {
+                const $formContainer = $("#category-form-container");
+                $formContainer.submitAjaxForm(function () {
+                    jcf.replaceAll("#category-form-container");
+                    f(f);
+                });
+            }
+            fun(fun);
 
             if (categoryFieldBundle) {
                 var changeIsDisabled = false;
                 //Edition
                 $("#listing_categories_listingListingCategories").on('change', function (e) {
+                    alert('okspodk');
                     if (!changeIsDisabled) {
                         changeIsDisabled = true;
 
@@ -59,6 +65,7 @@
                 $("[data-id='submit-category']").on('click', function (e) {
                     e.preventDefault();
                     $(this).closest('form').submit();
+                    return false;
                 });
             }
         });

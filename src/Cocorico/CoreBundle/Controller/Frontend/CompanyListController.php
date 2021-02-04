@@ -55,12 +55,13 @@ class CompanyListController extends Controller
                 'sector' => $sort['sector'],
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
+                'region' => $sort['region'],
             ];
             $entries = $directoryManager->findByForm($page, $params);
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'sector', 'postalCode', 'prestaType'] as $key) {
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'region'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
         } else {
@@ -110,6 +111,7 @@ class CompanyListController extends Controller
                 'sector' => $sort['sector'],
                 'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
+                'region' => $sort['region'],
                 'format' => $form['format']->getData(),
             ];
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());

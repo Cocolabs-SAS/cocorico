@@ -7,10 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [1.6] - (2021-02-XX)
+### [1.6] - (2021-02-04)
 - Ajout Dépendance PhpSpreadsheet
 - Choix format de téléchargement liste SIAE
 - Fix formulaire inscription
+- Recherche SIAE par région
+- Fix dasbhoard catégories
+- Formulare dépôt besoin si pas de résultats liste SIAE
 
 ### [1.5] - (2021-01-28)
 - Utilisation de police Roboto (auto-hébergé)

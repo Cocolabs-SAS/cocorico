@@ -96,6 +96,14 @@ class DirectoryManager extends BaseManager
             $qB->andWhere('d.sector like :sector')
                ->setParameter('sector', '%'.$sectorName.'%');
         }
+
+        // Filter on sector
+        if ($params['region'] != false) {
+            $region = $params['region'];
+            $regionName = Directory::$regions[$region];
+            $qB->andWhere('d.region = :region')
+               ->setParameter('region', $regionName);
+        }
         return $qB;
     }
 
