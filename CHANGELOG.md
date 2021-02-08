@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.6.1] - (2021-02-xx)
+- Fix Recherche Geo
+- Fix responsivite menu déroulant
+
 ### [1.6] - (2021-02-04)
 - Ajout Dépendance PhpSpreadsheet
 - Choix format de téléchargement liste SIAE
