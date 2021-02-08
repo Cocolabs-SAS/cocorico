@@ -1,0 +1,83 @@
+{#
+ Javascript geocoding for listing search with place auto completion
+#}
+{% trans_default_domain 'cocorico_geo' %}
+
+{% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
+'map_elt': map_elt,
+'auto_complete_elt': auto_complete_elt,
+'default_lat': default_lat|default,
+'default_lng': default_lng|default,
+'default_zoom': default_zoom|default,
+'display_marker': display_marker is not defined ? true : display_marker
+} only %}
+
+<script>
+    $(function () {
+        var $searchForm = $("{{ auto_complete_elt }}").closest("form");
+
+        /*************************************************************************************
+         * handleFormSubmission
+         */
+        handleFormSubmission();
+        function handleFormSubmission() {
+            $searchForm.submit(function (e) {
+                e.preventDefault();
+                $.when(
+                        geocodeFunc($("{{ auto_complete_elt }}").val())
+                ).then(
+                        geocodeSuccess, geocodeError
+                );
+            });
+        }
+
+        function geocodeSuccess(result) {
+            fillAddressFields(result);
+            $searchForm.unbind('submit').submit();
+        }
+
+        function geocodeError(result) {
+            // TRIGGER MODAL
+            var modal = $('#modal');
+            modal.find('.modal-body .title').html('{{ 'cocorico.search.invalidate.address' | trans({}, 'cocorico') }}');
+            modal.modal('show');
+        }
+
+
+        function fillAddressFields(result) {
+            var resultLocale = result[locale];
+            var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
+            var $zip = $searchForm.find("#zip");
+            console.log(resultLocale);
+            console.log(result);
+
+            if (extendSearch) {
+                //Google zip inconsistency: P
+                //Resolve zip code changing between geocoding requests while extending search.
+                var zip = $zip.val();
+                if (zip && resultLocale.postal_code) {
+                    //Zip has changed
+                    if (zip.substring(0, 2) != resultLocale.postal_code.substring(0, 2)) {
+                        $zip.val(zip.substring(0, 2));//We change zip code to the old value
+                        return;
+                    }
+                }
+            }
+
+            $searchForm.find("#lat").val(result.lat);
+            $searchForm.find("#lng").val(result.lng);
+            $searchForm.find("#ssType").val(result.types);
+            $searchForm.find("#country").val(resultLocale.country_short);
+            $searchForm.find("#area").val(resultLocale.administrative_area_level_1);
+            $searchForm.find("#department").val(resultLocale.administrative_area_level_2);
+            $searchForm.find("#city").val(resultLocale.locality);
+            $zip.val(resultLocale.postal_code);
+        }
+
+        //Center modal dialog box
+        $('.modal').on('show.bs.modal', common.application.centerModal);
+        $(window).on("resize", function () {
+            $('.modal:visible').each(common.application.centerModal);
+        });
+    });
+</script>

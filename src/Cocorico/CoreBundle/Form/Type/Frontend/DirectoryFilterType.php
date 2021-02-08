@@ -7,6 +7,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 
 class DirectoryFilterType extends AbstractType
 {
@@ -76,6 +78,23 @@ class DirectoryFilterType extends AbstractType
             //         'translation_domain' => 'cocorico_quote',
             //     )
             // );
+        //
+        $builder
+            ->add(
+                'address',
+                SearchType::class,
+                array(
+                    'label' => 'listing.search.form.address'
+                )
+            )
+            ->add('lat', HiddenType::class)
+            ->add('lng', HiddenType::class)
+            ->add('country', HiddenType::class)
+            ->add('area', HiddenType::class)
+            ->add('department', HiddenType::class)
+            ->add('city', HiddenType::class)
+            ->add('zip', HiddenType::class)
+            ->add('addressType', HiddenType::class);
     }
 
     /**

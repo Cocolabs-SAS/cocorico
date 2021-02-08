@@ -50,12 +50,33 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
+            dump($sort);
+            //  Data preview:
+            //  array:14 [
+            //    "sector" => 0
+            //    "postalCode" => null
+            //    "region" => 0
+            //    "structureType" => 0
+            //    "prestaType" => 0
+            //    "address" => "69190 Saint-Fons, France"
+            //    "lat" => "45.711126"
+            //    "lng" => "4.8473834"
+            //    "country" => "FR"
+            //    "area" => "Auvergne-Rhône-Alpes"
+            //    "department" => "Rhône"
+            //    "city" => "Saint-Fons"
+            //    "zip" => "69190"
+            //    "addressType" => null
+            //  ]
+
+            $region_idx = array_search($sort['area'], Directory::$regions); 
+            $region_idx = $region_idx ? $region_idx : 0;
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
-                'postalCode' => $sort['postalCode'],
+                'postalCode' => $sort['zip'],
                 'prestaType' => $sort['prestaType'],
-                'region' => $sort['region'],
+                'region' => $region_idx,
             ];
             $entries = $directoryManager->findByForm($page, $params);
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
