@@ -11,6 +11,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix Recherche Geo
 - Fix responsivite menu déroulant
 - Single search input for siae area selection
+- Fix department and Paris/Lyon/Marseille edge cases
+- Fix missing sector for export
 
 ### [1.6] - (2021-02-04)
 - Ajout Dépendance PhpSpreadsheet
