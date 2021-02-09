@@ -145,8 +145,8 @@ class CompanyListController extends Controller
             default:
                 break;
         }
-        dump($data);
-        dump($params);
+        //dump($data);
+        //dump($params);
         return $params;
     }
 
