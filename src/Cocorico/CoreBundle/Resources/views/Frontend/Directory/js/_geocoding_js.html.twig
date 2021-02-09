@@ -63,7 +63,6 @@
                 return fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${result.lng}&lat=${result.lat}`)
                     .then(resp => resp.json())
                     .then(resData => {
-                        console.log(resData);
                         if (resData.features.length > 0) {
                             const pcode = resData.features[0].properties.postcode;
                             $zip.val(pcode);

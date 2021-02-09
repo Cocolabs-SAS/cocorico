@@ -135,7 +135,6 @@
                 geocoder.geocode(geocodeParams, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var result = results[0];
-//                        console_log(result);
                         //Refresh Map
                         if (typeof refreshMap !== 'undefined' && refreshMap == true) {
                             var geometry = result.geometry;

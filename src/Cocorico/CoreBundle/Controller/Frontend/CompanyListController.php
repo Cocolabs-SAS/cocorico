@@ -50,12 +50,11 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            dump($sort);
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
                 'prestaType' => $sort['prestaType'],
-                'postalCode' => 0,
+                'postalCode' => null,
                 'region' => null,
             ];
             $params = $this->fixParams($sort, $params);
@@ -63,7 +62,7 @@ class CompanyListController extends Controller
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area'] as $key) {
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
         } else {
@@ -135,11 +134,12 @@ class CompanyListController extends Controller
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
-                'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
-                'region' => $sort['region'],
+                'postalCode' => null,
+                'region' => null,
                 'format' => $form['format']->getData(),
             ];
+            $params = $this->fixParams($sort, $params);
             $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
             $entries = $directoryManager->listByForm($params);
