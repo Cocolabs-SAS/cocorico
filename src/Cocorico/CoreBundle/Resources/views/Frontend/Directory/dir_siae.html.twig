@@ -81,36 +81,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-5">
-                                <div class="title">
-                                    Région
-                                </div>
-                                <div class="field-holder">
-                                {{form_widget(form.region, {
-                                    'id': 'region',
-                                    'attr': {
-                                        'class': 'form-control',
-                                        'placeholder': 'région'
-                                    }}
-                                )}}
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="title">
-                                    Code postal
-                                </div>
-                                <div class="field-holder">
-                                {{form_widget(form.postalCode, {
-                                    'id': 'postal',
-                                    'attr': {
-                                        'class': 'form-control',
-                                        'placeholder': 'code postal'
-                                    }}
-                                )}}
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <div class="col-sm-2">
                         <button id="filter-submit" type="submit" class="btn btn-default">
@@ -175,12 +145,10 @@
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
                         {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
-                        {{ form_widget(dlform.postalCode, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
-                        {{ form_widget(dlform.region, {'attr': {'style': 'display:none'}}) }}
+                        {% do dlform.address.setRendered() %}
                         {#
-                        {% do dlform.sector.setRendered() %}
                         {% do dlform.postalCode.setRendered() %}
                         {% do dlform.prestaType.setRendered() %}
                         {% do dlform.structureType.setRendered() %}

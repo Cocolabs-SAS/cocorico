@@ -32,8 +32,10 @@
         }
 
         function geocodeSuccess(result) {
-            fillAddressFields(result);
-            $searchForm.unbind('submit').submit();
+            fillAddressFields(result)
+                .then(() => {
+                    $searchForm.unbind('submit').submit();
+                });
         }
 
         function geocodeError(result) {
@@ -47,23 +49,7 @@
         function fillAddressFields(result) {
             var resultLocale = result[locale];
             var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
-            var $zip = $searchForm.find("#zip");
-            console.log(resultLocale);
-            console.log(result);
-
-            if (extendSearch) {
-                //Google zip inconsistency: P
-                //Resolve zip code changing between geocoding requests while extending search.
-                var zip = $zip.val();
-                if (zip && resultLocale.postal_code) {
-                    //Zip has changed
-                    if (zip.substring(0, 2) != resultLocale.postal_code.substring(0, 2)) {
-                        $zip.val(zip.substring(0, 2));//We change zip code to the old value
-                        return;
-                    }
-                }
-            }
-
+            var $zip = $searchForm.find("#postalCode");
             $searchForm.find("#lat").val(result.lat);
             $searchForm.find("#lng").val(result.lng);
             $searchForm.find("#ssType").val(result.types);
@@ -72,6 +58,22 @@
             $searchForm.find("#department").val(resultLocale.administrative_area_level_2);
             $searchForm.find("#city").val(resultLocale.locality);
             $zip.val(resultLocale.postal_code);
+
+            if (resultLocale.postal_code === undefined) {
+                return fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${result.lng}&lat=${result.lat}`)
+                    .then(resp => resp.json())
+                    .then(resData => {
+                        console.log(resData);
+                        if (resData.features.length > 0) {
+                            const pcode = resData.features[0].properties.postcode;
+                            $zip.val(pcode);
+                        }
+                });
+            } else {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            }
         }
 
         //Center modal dialog box

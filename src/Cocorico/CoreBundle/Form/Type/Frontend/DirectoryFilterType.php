@@ -40,15 +40,14 @@ class DirectoryFilterType extends AbstractType
                     'choices' => array_flip(Directory::$sectorValues),
                 )
             )
-            ->add('postalCode', TextType::class)
-            ->add('region',
-                ChoiceType::class,
-                array(
-                    'expanded' => false,
-                    'empty_data' => '',
-                    'choices' => array_flip(Directory::$regions),
-                )
-            )
+            //->add('region',
+            //    ChoiceType::class,
+            //    array(
+            //        'expanded' => false,
+            //        'empty_data' => '',
+            //        'choices' => array_flip(Directory::$regions),
+            //    )
+            //)
             ->add('structureType',
                 ChoiceType::class,
                 array(
@@ -93,7 +92,7 @@ class DirectoryFilterType extends AbstractType
             ->add('area', HiddenType::class)
             ->add('department', HiddenType::class)
             ->add('city', HiddenType::class)
-            ->add('zip', HiddenType::class)
+            ->add('postalCode', HiddenType::class)
             ->add('addressType', HiddenType::class);
     }
 
