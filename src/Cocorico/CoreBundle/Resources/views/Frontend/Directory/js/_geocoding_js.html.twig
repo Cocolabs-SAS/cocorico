@@ -23,6 +23,14 @@
         function handleFormSubmission() {
             $searchForm.submit(function (e) {
                 e.preventDefault();
+                if ($("{{ auto_complete_elt }}").val() == '') {
+                    $searchForm.find("#area").val('');
+                    $searchForm.find("#department").val('');
+                    $searchForm.find("#city").val('');
+                    $searchForm.find("#zip").val('');
+                    $searchForm.find("#postalCode").val('');
+                    $searchForm.unbind('submit').submit();
+                }
                 $.when(
                         geocodeFunc($("{{ auto_complete_elt }}").val())
                 ).then(
@@ -49,7 +57,7 @@
         function fillAddressFields(result) {
             var resultLocale = result[locale];
             var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
-            var $zip = $searchForm.find("#postalCode");
+            var $zip = $searchForm.find("#zip");
             $searchForm.find("#lat").val(result.lat);
             $searchForm.find("#lng").val(result.lng);
             $searchForm.find("#ssType").val(result.types);
@@ -57,6 +65,7 @@
             $searchForm.find("#area").val(resultLocale.administrative_area_level_1);
             $searchForm.find("#department").val(resultLocale.administrative_area_level_2);
             $searchForm.find("#city").val(resultLocale.locality);
+            $searchForm.find("#postalCode").val('');
             $zip.val(resultLocale.postal_code);
 
             if (resultLocale.postal_code === undefined) {
@@ -65,7 +74,7 @@
                     .then(resData => {
                         if (resData.features.length > 0) {
                             const pcode = resData.features[0].properties.postcode;
-                            $zip.val(pcode);
+                            $searchForm.find("#postalCode").val(pcode);
                         }
                 });
             } else {

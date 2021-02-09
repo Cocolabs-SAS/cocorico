@@ -62,7 +62,7 @@ class CompanyListController extends Controller
             $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department'] as $key) {
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
         } else {
@@ -88,13 +88,17 @@ class CompanyListController extends Controller
 
     private function fixParams($data, $params)
     {
-        $isCity = $data['city'] != null;
-        $isDep = $data['department'] != null;
+        $isZip = $data['zip'] != null;
+        $isCity = $data['city'] != null && $data['postalCode'] != null;
+        $isDep = $data['department'] != null && $data['postalCode'] != null;
         $isReg = $data['area'] != null;
 
         switch(true) {
+            case $isZip:
+                $params['postalCode'] = $data['zip'];
+                break;
             case $isCity:
-                $params['postalCode'] = $data['postalCode'];
+                $params['postalCode'] = substr($data['postalCode'], 0, 4);
                 break;
             case $isDep:
                 $params['postalCode'] = substr($data['postalCode'], 0, 2);
