@@ -18,8 +18,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
+use Symfony\Component\Filesystem\Filesystem;
 
 class ParameterAdmin extends AbstractAdmin
 {
@@ -29,7 +28,7 @@ class ParameterAdmin extends AbstractAdmin
     // setup the default sort column and order
     protected $datagridValues = array(
         '_sort_order' => 'ASC',
-        '_sort_by' => 'name',
+        '_sort_by' => 'name'
     );
 
     /** @inheritdoc */
@@ -38,13 +37,12 @@ class ParameterAdmin extends AbstractAdmin
         /** @var Parameter $parameter */
         $parameter = $this->getSubject();
 
-
         $formMapper
             ->with(
                 'admin.parameter.title',
                 array(
                     'description' => 'admin.parameters.warning',
-                    'translation_domain' => 'SonataAdminBundle',
+                    'translation_domain' => 'SonataAdminBundle'
                 )
             )
             ->add(
@@ -52,7 +50,7 @@ class ParameterAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.parameter.name.label',
-                    'disabled' => true,
+                    'disabled' => true
                 )
             )
             ->add(
@@ -60,7 +58,7 @@ class ParameterAdmin extends AbstractAdmin
                 $parameter ? $parameter->getType() : null,
                 array(
                     'label' => 'admin.parameter.value.label',
-                    'required' => false,
+                    'required' => false
                 )
             )
             ->end();
@@ -99,7 +97,7 @@ class ParameterAdmin extends AbstractAdmin
                 null,
                 array(
                     'label' => 'admin.parameter.value.label',
-                    'template' => 'CocoricoConfigBundle::list_parameter_value.html.twig',
+                    'template' => 'CocoricoConfigBundle::list_parameter_value.html.twig'
                 )
             );
 
@@ -110,7 +108,7 @@ class ParameterAdmin extends AbstractAdmin
                 'actions' => array(
                     'show' => array(),
                     'edit' => array(),
-                ),
+                )
             )
         );
     }
@@ -165,18 +163,29 @@ class ParameterAdmin extends AbstractAdmin
     {
         $container = $this->getConfigurationPool()->getContainer();
         $kernel = $container->get('kernel');
-        $php = $container->getParameter('cocorico_config_php_cli_path');
+        $cacheDir = $container->getParameter('kernel.cache_dir');
 
-        //Clear cache
-        $rootDir = $kernel->getRootDir();
-        $command = $php.' '.$rootDir.'/console cache:clear --env='.$kernel->getEnvironment();
+        $file = '';
+        switch ($kernel->getEnvironment()) {
+            case 'dev':
+                $file = 'appDevDebugProjectContainer.php';
+                break;
+            case 'staging':
+                $file = 'appStagingDebugProjectContainer.php';
+                break;
+            case 'prod':
+                $file = 'appProdProjectContainer.php';
+                break;
+        }
 
-        $process = new Process($command);
         try {
-            $process->mustRun();
-            $content = $process->getOutput();
-        } catch (ProcessFailedException $e) {
-            $content = $e->getMessage();
+            if ($file) {
+                $fs = new Filesystem();
+                $fs->remove($cacheDir . DIRECTORY_SEPARATOR . $file);
+                $fs->remove($cacheDir . DIRECTORY_SEPARATOR . 'translations');
+            }
+        } catch (\Exception $e) {
+//            $content = $e->getMessage();
 
             return false;
         }
