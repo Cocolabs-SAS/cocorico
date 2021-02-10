@@ -1,0 +1,93 @@
+{#
+ Javascript geocoding for listing search with place auto completion
+#}
+{% trans_default_domain 'cocorico_geo' %}
+
+{% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
+'map_elt': map_elt,
+'auto_complete_elt': auto_complete_elt,
+'default_lat': default_lat|default,
+'default_lng': default_lng|default,
+'default_zoom': default_zoom|default,
+'display_marker': display_marker is not defined ? true : display_marker
+} only %}
+
+<script>
+    $(function () {
+        var $searchForm = $("{{ auto_complete_elt }}").closest("form");
+
+        /*************************************************************************************
+         * handleFormSubmission
+         */
+        handleFormSubmission();
+        function handleFormSubmission() {
+            $searchForm.submit(function (e) {
+                e.preventDefault();
+                if ($("{{ auto_complete_elt }}").val() == '') {
+                    $searchForm.find("#area").val('');
+                    $searchForm.find("#department").val('');
+                    $searchForm.find("#city").val('');
+                    $searchForm.find("#zip").val('');
+                    $searchForm.find("#postalCode").val('');
+                    $searchForm.unbind('submit').submit();
+                }
+                $.when(
+                        geocodeFunc($("{{ auto_complete_elt }}").val())
+                ).then(
+                        geocodeSuccess, geocodeError
+                );
+            });
+        }
+
+        function geocodeSuccess(result) {
+            fillAddressFields(result)
+                .then(() => {
+                    $searchForm.unbind('submit').submit();
+                });
+        }
+
+        function geocodeError(result) {
+            // TRIGGER MODAL
+            var modal = $('#modal');
+            modal.find('.modal-body .title').html('{{ 'cocorico.search.invalidate.address' | trans({}, 'cocorico') }}');
+            modal.modal('show');
+        }
+
+
+        function fillAddressFields(result) {
+            var resultLocale = result[locale];
+            var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
+            var $zip = $searchForm.find("#zip");
+            $searchForm.find("#lat").val(result.lat);
+            $searchForm.find("#lng").val(result.lng);
+            $searchForm.find("#ssType").val(result.types);
+            $searchForm.find("#country").val(resultLocale.country_short);
+            $searchForm.find("#area").val(resultLocale.administrative_area_level_1);
+            $searchForm.find("#department").val(resultLocale.administrative_area_level_2);
+            $searchForm.find("#city").val(resultLocale.locality);
+            $searchForm.find("#postalCode").val('');
+            $zip.val(resultLocale.postal_code);
+
+            if (resultLocale.postal_code === undefined) {
+                return fetch(`https://api-adresse.data.gouv.fr/reverse/?lon=${result.lng}&lat=${result.lat}`)
+                    .then(resp => resp.json())
+                    .then(resData => {
+                        if (resData.features.length > 0) {
+                            const pcode = resData.features[0].properties.postcode;
+                            $searchForm.find("#postalCode").val(pcode);
+                        }
+                });
+            } else {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            }
+        }
+
+        //Center modal dialog box
+        $('.modal').on('show.bs.modal', common.application.centerModal);
+        $(window).on("resize", function () {
+            $('.modal:visible').each(common.application.centerModal);
+        });
+    });
+</script>

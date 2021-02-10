@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cocorico\CoreBundle\Utils\Tracker;
+use Cocorico\CoreBundle\Utils\Deps;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -27,6 +28,18 @@ use PhpOffice\PhpSpreadsheet\Writer\Ods;
  */
 class CompanyListController extends Controller
 {
+    private $tracker;
+    private $deps;
+
+    private function fix()
+    {
+        // FIXME: Find a symfonian way to do this
+        if ($this->tracker === null) {
+            $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+            $this->deps = new Deps();
+        }
+    }
+
     /**
      * List companies in Database
      *
@@ -40,7 +53,7 @@ class CompanyListController extends Controller
      */
     public function listAction(Request $request, $page)
     {
-        $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+        $this->fix();
         $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
@@ -53,20 +66,21 @@ class CompanyListController extends Controller
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
-                'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
-                'region' => $sort['region'],
+                'postalCode' => null,
+                'region' => null,
             ];
+            $params = $this->fixParams($sort, $params);
             $entries = $directoryManager->findByForm($page, $params);
-            $tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
+            $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'region'] as $key) {
+            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
         } else {
             $entries = $directoryManager->listSome($page);
-            $tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
+            $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
@@ -85,6 +99,57 @@ class CompanyListController extends Controller
         ]);
     }
 
+    private function fixParams($data, $params)
+    {
+        $isZip = $data['zip'] != null;
+        $isCity = $data['city'] != null && $data['postalCode'] != null;
+        $isDep = $data['department'] != null;
+        $isReg = $data['area'] != null;
+
+        switch(true) {
+            case $isZip:
+                $params['postalCode'] = $data['zip'];
+                break;
+            case $isCity:
+                $needle = intval($data['postalCode']);
+                switch (true) {
+                    // Lyon
+                    case $needle >= 69001 and $needle <= 69009:
+                        $params['postalCode'] = '6900';
+                        break;
+                    // Marseille
+                    case $needle >= 13001 and $needle <= 13016:
+                        $params['postalCode'] = '130';
+                        break;
+                    // Marseille
+                    case $needle >= 75000 and $needle <= 75680:
+                        $params['postalCode'] = '75';
+                        break;
+                    default:
+                        $params['postalCode'] = substr($data['postalCode'], 0, 4);
+                }
+                break;
+            case $isDep:
+                $depNum = $this->deps->byName($data['department']);
+                if ($depNum) {
+                    $params['postalCode'] = $depNum;
+                } else {
+                    $params['postalCode'] = substr($data['postalCode'], 0, 2);
+                }
+                break;
+            case $isReg:
+                $region_idx = array_search($data['area'], Directory::$regions); 
+                $region_idx = $region_idx ? $region_idx : 0;
+                $params['region'] = $region_idx;
+                break;
+            default:
+                break;
+        }
+        //dump($data);
+        //dump($params);
+        return $params;
+    }
+
     /**
      * List companies in Database
      *
@@ -97,7 +162,7 @@ class CompanyListController extends Controller
      */
     public function listCsv(Request $request)
     {
-        $tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+        $this->fix();
         $tracker_payload = ['dir' => 'siae'];
         $form = $this->csvCompaniesForm();
         $form->handleRequest($request);
@@ -109,12 +174,13 @@ class CompanyListController extends Controller
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
-                'postalCode' => $sort['postalCode'],
                 'prestaType' => $sort['prestaType'],
-                'region' => $sort['region'],
+                'postalCode' => null,
+                'region' => null,
                 'format' => $form['format']->getData(),
             ];
-            $tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
+            $params = $this->fixParams($sort, $params);
+            $this->tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
             $entries = $directoryManager->listByForm($params);
         } else {

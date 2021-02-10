@@ -73,6 +73,7 @@ class Directory
         'name' => 'Raison sociale',
         'siret' => 'Siret',
         'kind' => 'Structure',
+        'sector' => 'Secteur',
         'email' => 'E-mail',
         'phone' => 'Téléphone',
         'website' => 'Site web',

@@ -135,7 +135,6 @@
                 geocoder.geocode(geocodeParams, function (results, status) {
                     if (status == google.maps.GeocoderStatus.OK) {
                         var result = results[0];
-//                        console_log(result);
                         //Refresh Map
                         if (typeof refreshMap !== 'undefined' && refreshMap == true) {
                             var geometry = result.geometry;
@@ -219,10 +218,30 @@
             }
             var data = {}, geometry = result.geometry, viewport = geometry.viewport, bounds = geometry.bounds;
 
+            var level = {
+                'country' : false,
+                'region': false,
+                'departement': false,
+                'city': false
+            };
+
+            var name2level = [
+                ['country', 'country'],
+                ['administrative_area_level_1', 'region'],
+                ['administrative_area_level_2', 'departement'],
+                ['locality', 'city'],
+            ]
+
             data[locale] = {};
             {# Create a simplified version of the address components. @see also GoogleMapsProvider #}
             $.each(result.address_components, function (index, object) {
                 //var name = object.types[0];
+                $.each(name2level, (idx, it) => {
+                    if (it[0] == object.types[0]) {
+                        level[it[1]] = true;
+                    }
+                });
+                if ($.inArray('country', object.types));
                 $.each(object.types, function (index, name) {
                     data[locale][name] = object.long_name;
                     data[locale][name + "_short"] = object.short_name;
@@ -237,7 +256,8 @@
                 bounds: bounds,
                 location: geometry.location,
                 lat: geometry.location.lat(),
-                lng: geometry.location.lng()
+                lng: geometry.location.lng(),
+                levels : level,
             });
 
             return data;
