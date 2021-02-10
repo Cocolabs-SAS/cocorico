@@ -42,6 +42,7 @@ class DirectoryManager extends BaseManager
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
         $query = $qB->getQuery();
+        dump($query->getSql());
         return new Paginator($query);
     }
 
@@ -53,6 +54,7 @@ class DirectoryManager extends BaseManager
         $qB = $this->applyParams($qB, $params);
 
         $query = $qB->getQuery();
+        dump($query->getSql());
         return new Paginator($query);
     }
 
@@ -61,6 +63,7 @@ class DirectoryManager extends BaseManager
         $qB = $this->getRepository()->getAll();
         $qB = $this->applyParams($qB, $params);
         $query = $qB->getQuery();
+        dump($query->getSql());
         return $query->getResult(Query::HYDRATE_ARRAY);
     }
 

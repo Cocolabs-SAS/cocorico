@@ -71,6 +71,7 @@ class CompanyListController extends Controller
                 'region' => null,
             ];
             $params = $this->fixParams($sort, $params);
+            dump($params);
             $entries = $directoryManager->findByForm($page, $params);
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
