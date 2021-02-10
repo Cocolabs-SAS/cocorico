@@ -22,6 +22,7 @@ class Directory
     use ORMBehaviors\Timestampable\Timestampable;
 
     public static $sectorValues = [
+    'Choisir...',
     'Agro-Alimentaire',
     'Bâtiments et Travaux publics',
     'Entretien du linge',
