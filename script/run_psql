@@ -1,4 +1,2 @@
 #!/bin/bash
-cat $1 | psql \
-    $POSTGRESQL_ADDON_DIRECT_URI \
-    -t -A -F"|" -f - > /tmp/output.csv
+cat $1 | psql $POSTGRESQL_ADDON_DIRECT_URI -f - > /tmp/output.csv

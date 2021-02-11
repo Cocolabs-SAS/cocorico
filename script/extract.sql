@@ -1,3 +1,4 @@
+COPY(
 SELECT u.id,
        u.last_name,
        u.first_name,
@@ -25,3 +26,4 @@ FROM siaes_siae AS siae
 LEFT OUTER JOIN siaes_siaeconvention AS convention ON convention.id = siae.convention_id
 LEFT OUTER JOIN siaes_siaemembership AS membership ON membership.siae_id = siae.id
 LEFT OUTER JOIN users_user AS u ON membership.user_id = u.id
+) TO STDOUT WITH CSV DELIMITER '|' HEADER
