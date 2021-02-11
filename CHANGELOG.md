@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [1.7] - (2021-02-xx)
 - All SIAE structure types included
 - Updated categories
+- Added scripts, cron file
 
 ### [1.6.1] - (2021-02-05)
 - Fix Recherche Geo

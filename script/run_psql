@@ -1,5 +1,5 @@
 #!/bin/bash
-FNAME=tr -dc A-Za-z0-9 </dev/urandom | head -c 13 ; echo ''
+FNAME=`tr -dc A-Za-z0-9 </dev/urandom | head -c 13 ; echo ''`
 cat $1 | psql $POSTGRESQL_ADDON_DIRECT_URI -f - > /tmp/${FNAME}.csv
 cp /tmp/${FNAME}.csv ../web/${FNAME}.csv
 echo "Exported data to /tmp/${FNAME}.csv"
