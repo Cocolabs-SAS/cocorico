@@ -7,7 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [1.6.1] - (2021-02-xx)
+### [1.7] - (2021-02-xx)
+- All SIAE structure types included
+- Updated categories
+- Added scripts, cron file
+
+### [1.6.1] - (2021-02-05)
 - Fix Recherche Geo
 - Fix responsivite menu déroulant
 - Single search input for siae area selection

@@ -21,6 +21,39 @@ class Directory
 {
     use ORMBehaviors\Timestampable\Timestampable;
 
+    public static $sectorValues = [
+    'Choisir...',
+    'Agro-Alimentaire',
+    'Bâtiments et Travaux publics',
+    'Entretien du linge',
+    'Collecte & Traitement des déchets',
+    'Communication, Marketing',
+    'Assistance générale et administrative',
+    'Restauration',
+    'Hygiène et Propreté',
+    'Prestations informatiques',
+    'Prestations intellectuelles',
+    'Réparations & Dépannages',
+    'Sous-traitance industrielle',
+    'Textiles',
+    'Ameublement, déco, textile & Artisanat',
+    'Déménagements, Livraisons & Transports',
+    'Création et entretien des espaces verts',
+    'Entretien et maintenance de l\'espace urbain',
+    'Mailing, archivage, secrétariat',
+    'Médiation urbaine',
+    'Ventes de livres et ouvrages',
+    'Location de Véhicules & Vélos',
+    'Recyclage, économie circulaire',
+    'Agro-alimentaire - Autre',
+    'Pêche/Pisciculture',
+    'Transport de personnes',
+    'Services à la personne',
+    'Restauration de livres',
+    'Autre'
+    ];
+
+    /*
     const SECTOR_CHOICE = 'Choisir...';
     const SECTOR_RESTAURATION = 'Restauration';
     const SECTOR_CLEANING = 'Nettoyage, Propreté';
@@ -32,6 +65,7 @@ class Directory
     const SECTOR_DECO = 'Ameublement, décoration';
     const SECTOR_LOGISTICS = 'Logistique, livraisons';
     const SECTOR_MISC = 'Other';
+
 
     public static $sectorValues = array(
         self::SECTOR_CHOICE,
@@ -46,6 +80,7 @@ class Directory
         self::SECTOR_LOGISTICS,
         self::SECTOR_MISC,
     );
+    */
 
     const PRESTA_CHOICE = 'Choisir...';
     const PRESTA_DISP = 'Mise à disposition';
@@ -58,15 +93,23 @@ class Directory
 
     const STRUCT_CHOICE = 'Choisir...';
     const STRUCT_EI = 'EI';
+    const STRUCT_EA = 'EA';
     const STRUCT_ETTI = 'ETTI';
-    const STRUCT_ACI = 'ACI';
+    const STRUCT_EITI = 'EITI';
+    const STRUCT_EATT = 'EATT';
     const STRUCT_AI = 'AI';
+    const STRUCT_ACI = 'ACI';
+    const STRUCT_GEIQ = 'GEIQ';
     public static $kindValues = array(
         self::STRUCT_CHOICE,
         self::STRUCT_EI,
+        self::STRUCT_EA,
         self::STRUCT_ETTI,
+        self::STRUCT_EITI,
+        self::STRUCT_EATT,
         self::STRUCT_ACI,
         self::STRUCT_AI,
+        self::STRUCT_GEIQ,
     );
 
     public static $exportColumns = array(
