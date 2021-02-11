@@ -1,9 +1,10 @@
 COPY(
-SELECT u.id,
+SELECT u.id as user_id,
        u.last_name,
        u.first_name,
        u.phone,
        u.email,
+       siae.id as id,
        siae.siret,
        siae.naf,
        siae.kind,

@@ -147,6 +147,14 @@ class CompanyListController extends Controller
         }
         //dump($data);
         //dump($params);
+
+        // Special Rules
+        if ($data['zip'] == '84800') {
+            // Google maps mistakes Fontaine-de-vaucluse for Vaucluse (84)
+            // or Vaucluse (Doubs)
+            $params['postalCode'] = '84';
+        }
+
         return $params;
     }
 

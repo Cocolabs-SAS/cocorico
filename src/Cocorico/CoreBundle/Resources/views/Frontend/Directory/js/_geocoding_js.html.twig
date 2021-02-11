@@ -55,6 +55,7 @@
 
 
         function fillAddressFields(result) {
+            //console.log(result);
             var resultLocale = result[locale];
             var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
             var $zip = $searchForm.find("#zip");
@@ -73,6 +74,7 @@
                     .then(resp => resp.json())
                     .then(resData => {
                         if (resData.features.length > 0) {
+                            //console.log(resData);
                             const pcode = resData.features[0].properties.postcode;
                             $searchForm.find("#postalCode").val(pcode);
                         }
