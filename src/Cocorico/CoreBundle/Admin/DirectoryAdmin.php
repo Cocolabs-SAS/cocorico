@@ -168,6 +168,13 @@ class DirectoryAdmin extends AbstractAdmin
                 )
             )
             ->add(
+                'c4Id',
+                null,
+                array(
+                    'label' => 'C4 Identifier',
+                )
+            )
+            ->add(
                 'name',
                 null,
                 array(
@@ -208,6 +215,9 @@ class DirectoryAdmin extends AbstractAdmin
             'actions',
             array(
                 'actions' => array(
+                    'view' => [
+                        'template' => 'CocoricoSonataAdminBundle::directory_action_list_user_view.html.twig',
+                    ],
                     'edit' => array(),
                 )
             )

@@ -160,14 +160,6 @@ class Directory
      */
     private $id;
 
-    // TODO: Files to add, with getters and accessors
-    // private $c1_id;
-    // private $c4_id;
-    // private $last_update;
-    // private $delisted;
-    // private $origin;
-    // private $source;
-    
     /**
      * @ORM\Column(name="c1_id", type="integer", nullable=true)
      * @var integer|null
