@@ -45,6 +45,20 @@ services:
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
             - [ setTimezone, ["%cocorico.time_zone%"]]
 
+    sonata.admin.directory:
+        class: Cocorico\CoreBundle\Admin\DirectoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Directory", label: "Directory" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\Directory
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setTimezone, ["%cocorico.time_zone%"]]
+
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin
         tags:
