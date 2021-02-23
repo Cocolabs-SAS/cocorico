@@ -160,6 +160,49 @@ class Directory
      */
     private $id;
 
+    // TODO: Files to add, with getters and accessors
+    // private $c1_id;
+    // private $c4_id;
+    // private $last_update;
+    // private $delisted;
+    // private $origin;
+    // private $source;
+    
+    /**
+     * @ORM\Column(name="c1_id", type="integer", nullable=true)
+     * @var integer|null
+     * C1 Identifier (for synchronisation)
+     */
+    private $c1Id;
+
+    /**
+     * @ORM\Column(name="c4_id", type="integer", nullable=true)
+     * @var integer|null
+     * C4 Identifier (for synchronisation)
+     */
+    private $c4Id;
+
+    /**
+     * @ORM\Column(name="is_delisted", type="boolean", nullable=true)
+     * @var bool
+     * Delisted indicator (if not active on C1)
+     */
+    private $isDelisted;
+
+    /**
+     * @ORM\Column(name="c1_source", type="string", nullable=true)
+     * @var string|null
+     * C1 Source field
+     */
+    private $c1Source;
+
+    /**
+     * @ORM\Column(name="last_sync_date", type="datetime", nullable=true)
+     * @var datetime|null
+     * Last c1 sync time
+     */
+    private $lastSyncDate;
+
     /**
      * @ORM\Column(name="name", type="string", nullable=false)
      * @var string
@@ -680,5 +723,125 @@ class Directory
     {
         return $this->brand;
     }
+
+
+    /**
+     * Set c1Id.
+     *
+     * @param int|null $c1Id
+     *
+     * @return Directory
+     */
+    public function setC1Id($c1Id = null)
+    {
+        $this->c1Id = $c1Id;
+
+        return $this;
+    }
+
+    /**
+     * Get c1Id.
+     *
+     * @return int|null
+     */
+    public function getC1Id()
+    {
+        return $this->c1Id;
+    }
+
+    /**
+     * Set c4Id.
+     *
+     * @param int|null $c4Id
+     *
+     * @return Directory
+     */
+    public function setC4Id($c4Id = null)
+    {
+        $this->c4Id = $c4Id;
+
+        return $this;
+    }
+
+    /**
+     * Get c4Id.
+     *
+     * @return int|null
+     */
+    public function getC4Id()
+    {
+        return $this->c4Id;
+    }
+
+    /**
+     * Set isDelisted.
+     *
+     * @param bool|null $isDelisted
+     *
+     * @return Directory
+     */
+    public function setIsDelisted($isDelisted = null)
+    {
+        $this->isDelisted = $isDelisted;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelisted.
+     *
+     * @return bool|null
+     */
+    public function getIsDelisted()
+    {
+        return $this->isDelisted;
+    }
+
+    /**
+     * Set c1Source.
+     *
+     * @param string|null $c1Source
+     *
+     * @return Directory
+     */
+    public function setC1Source($c1Source = null)
+    {
+        $this->c1Source = $c1Source;
+
+        return $this;
+    }
+
+    /**
+     * Get c1Source.
+     *
+     * @return string|null
+     */
+    public function getC1Source()
+    {
+        return $this->c1Source;
+    }
+
+    /**
+     * Set lastSyncDate.
+     *
+     * @param \DateTime|null $lastSyncDate
+     *
+     * @return Directory
+     */
+    public function setLastSyncDate($lastSyncDate = null)
+    {
+        $this->lastSyncDate = $lastSyncDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastSyncDate.
+     *
+     * @return \DateTime|null
+     */
+    public function getLastSyncDate()
+    {
+        return $this->lastSyncDate;
+    }
 }
-?>
