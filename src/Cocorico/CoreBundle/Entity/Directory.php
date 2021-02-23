@@ -282,7 +282,7 @@ class Directory
     private $prestaType;
 
     /**
-     * @ORM\Column(name="sector", type="string", nullable=true)
+     * @ORM\Column(name="sector", type="text", nullable=true)
      * @var string|null
      */
     private $sector;
