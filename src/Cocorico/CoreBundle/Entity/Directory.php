@@ -153,10 +153,8 @@ class Directory
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Cocorico\CoreBundle\Model\CustomIdGenerator")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
-     * @var int
      */
     private $id;
 
