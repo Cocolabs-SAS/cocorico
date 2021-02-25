@@ -200,6 +200,12 @@ class Directory
     private $name;
 
     /**
+     * @ORM\Column(name="nature", type="string", nullable=true)
+     * @var string|null
+     */
+    private $nature;
+
+    /**
      * @ORM\Column(name="siret", type="string", length=14, nullable=true)
      * @var string
      */
