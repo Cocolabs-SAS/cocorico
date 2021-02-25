@@ -115,8 +115,7 @@
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
-                <div class="meta">{{ entries.count }} structures identifiées
-                    {% if withAntenna %} et leurs antennes {% endif %}
+                <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} identifiées
                 </div>
                 {%- if not entries is empty -%}
                     <table>
