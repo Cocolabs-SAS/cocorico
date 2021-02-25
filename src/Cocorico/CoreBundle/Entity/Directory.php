@@ -291,7 +291,7 @@ class Directory
     private $naf;
 
     /**
-     * @ORM\Column(name="is_active", type="string", nullable=true)
+     * @ORM\Column(name="is_active", type="boolean", nullable=true)
      * @var bool
      */
     private $isActive;
