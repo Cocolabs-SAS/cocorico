@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - New admin screen for SIAE directory
 - New columns for better synchronizing between C1, SIAE List and C4 data
 - WIP Sync operation
+- Adding filter on structure type (with column) on SIAE list
 
 ### [1.7] - (2021-02-12)
 - All SIAE structure types included
