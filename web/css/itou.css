@@ -1396,6 +1396,14 @@ section.quote-quick-form fieldset {
     margin-bottom:3px;
 }
 
+#dir_form .label-container {
+    padding-top:1rem;
+}
+
+#dir_form .label-container div  {
+    display: inline-block;
+}
+
 
 .dir_form .jcf-select,
 .dir_form input.form-control {

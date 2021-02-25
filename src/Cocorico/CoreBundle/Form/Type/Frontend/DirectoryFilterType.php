@@ -5,6 +5,7 @@ use Cocorico\CoreBundle\Entity\Directory;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -62,6 +63,14 @@ class DirectoryFilterType extends AbstractType
                     'expanded' => false,
                     'empty_data' => '',
                     'choices' => array_flip(Directory::$prestaTypeValues),
+                )
+            )
+            ->add('withAntenna',
+                CheckboxType::class,
+                array(
+                    'label' => 'Inclure les antennes',
+                    'required'=> false,
+                    'data' => true,
                 )
             );
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])

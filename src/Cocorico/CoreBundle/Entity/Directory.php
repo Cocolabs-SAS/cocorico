@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="directory",indexes={
  *    @ORM\Index(name="siret_idx", columns={"siret"}),
+ *    @ORM\Index(name="nature_idx", columns={"nature"}),
  *    @ORM\Index(name="created_at_idx", columns={"createdAt"}),
  *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"})
  *  })
@@ -290,7 +291,7 @@ class Directory
     private $naf;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean", nullable=true)
+     * @ORM\Column(name="is_active", type="string", nullable=true)
      * @var bool
      */
     private $isActive;
@@ -839,5 +840,29 @@ class Directory
     public function getLastSyncDate()
     {
         return $this->lastSyncDate;
+    }
+
+    /**
+     * Set nature.
+     *
+     * @param string|null $nature
+     *
+     * @return Directory
+     */
+    public function setNature($nature = null)
+    {
+        $this->nature = $nature;
+
+        return $this;
+    }
+
+    /**
+     * Get nature.
+     *
+     * @return string|null
+     */
+    public function getNature()
+    {
+        return $this->nature;
     }
 }

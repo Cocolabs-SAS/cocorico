@@ -26,7 +26,7 @@ class DirectoryRepository extends EntityRepository
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
            ->orderBy('d.name', 'asc')
-           ->where('d.isActive = true')
+           ->where('d.nature != \'n/a\'')
            ->where('d.isDelisted = false');
 
         return $qB;
@@ -36,7 +36,7 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->getFindQueryBuilder();
         $qB->orderBy('d.name', 'asc')
-           ->where('d.isActive = true')
+           ->where('d.nature != \'n/a\'')
            ->where('d.isDelisted = false');
 
         return $qB;

@@ -104,6 +104,13 @@ class DirectoryManager extends BaseManager
             $qB->andWhere('d.region = :region')
                ->setParameter('region', $regionName);
         }
+
+        // Include antennas
+        if ($params['withAntenna'] == false) {
+            $qB->andWhere('d.nature = :nature')
+               ->setParameter('nature', 'siege');
+        }
+
         return $qB;
     }
 
