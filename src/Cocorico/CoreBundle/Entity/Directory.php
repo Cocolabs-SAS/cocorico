@@ -243,7 +243,7 @@ class Directory
     private $postCode;
 
     /**
-     * @ORM\Column(name="department", type="integer", nullable=true)
+     * @ORM\Column(name="department", type="string", nullable=true)
      * @var string|null
      */
     private $department;
