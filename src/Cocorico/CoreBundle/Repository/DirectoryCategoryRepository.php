@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repository;
+namespace Cocorico\CoreBundle\Repository;
 
-use App\Entity\DirectoryCategory;
+use Cocorico\CoreBundle\Entity\DirectoryCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
