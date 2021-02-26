@@ -70,7 +70,6 @@ class DirectoryFilterType extends AbstractType
                 array(
                     'label' => 'Inclure les antennes',
                     'required'=> false,
-                    'data' => true,
                 )
             );
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])

@@ -1404,6 +1404,8 @@ section.quote-quick-form fieldset {
     display: inline-block;
 }
 
+#csv_form .jcf-checkbox { display:none }
+
 
 .dir_form .jcf-select,
 .dir_form input.form-control {

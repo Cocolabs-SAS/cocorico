@@ -155,7 +155,6 @@
                     } only %}
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
-                        {% do dlform.withAntenna.setRendered() %}
                         {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
