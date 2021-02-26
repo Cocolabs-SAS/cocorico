@@ -572,4 +572,60 @@ class Booking extends BaseBooking
     {
         return (string)$this->getId() . " (" . $this->getListing() . ":" . $this->getStart()->format('d-m-Y') . ")";
     }
+
+    /**
+     * Get validated.
+     *
+     * @return bool
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * Get alertedExpiring.
+     *
+     * @return bool
+     */
+    public function getAlertedExpiring()
+    {
+        return $this->alertedExpiring;
+    }
+
+    /**
+     * Get alertedImminent.
+     *
+     * @return bool
+     */
+    public function getAlertedImminent()
+    {
+        return $this->alertedImminent;
+    }
+
+    /**
+     * Add review.
+     *
+     * @param \Cocorico\ReviewBundle\Entity\Review $review
+     *
+     * @return Booking
+     */
+    public function addReview(\Cocorico\ReviewBundle\Entity\Review $review)
+    {
+        $this->reviews[] = $review;
+
+        return $this;
+    }
+
+    /**
+     * Remove review.
+     *
+     * @param \Cocorico\ReviewBundle\Entity\Review $review
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeReview(\Cocorico\ReviewBundle\Entity\Review $review)
+    {
+        return $this->reviews->removeElement($review);
+    }
 }

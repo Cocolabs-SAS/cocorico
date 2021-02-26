@@ -116,7 +116,8 @@ class Directory
     public static $exportColumns = array(
         'name' => 'Raison sociale',
         'siret' => 'Siret',
-        'kind' => 'Structure',
+        'nature' => 'Structure',
+        'kind' => 'Type',
         'sector' => 'Secteur',
         'email' => 'E-mail',
         'phone' => 'Téléphone',
