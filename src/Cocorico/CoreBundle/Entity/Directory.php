@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="directory",indexes={
  *    @ORM\Index(name="siret_idx", columns={"siret"}),
+ *    @ORM\Index(name="nature_idx", columns={"nature"}),
  *    @ORM\Index(name="created_at_idx", columns={"createdAt"}),
  *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"})
  *  })
@@ -115,7 +116,8 @@ class Directory
     public static $exportColumns = array(
         'name' => 'Raison sociale',
         'siret' => 'Siret',
-        'kind' => 'Structure',
+        'nature' => 'Structure',
+        'kind' => 'Type',
         'sector' => 'Secteur',
         'email' => 'E-mail',
         'phone' => 'Téléphone',
@@ -153,18 +155,57 @@ class Directory
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\GeneratedValue(strategy="CUSTOM")
-     * @ORM\CustomIdGenerator(class="Cocorico\CoreBundle\Model\CustomIdGenerator")
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @var integer
-     * @var int
      */
     private $id;
+
+    /**
+     * @ORM\Column(name="c1_id", type="integer", nullable=true)
+     * @var integer|null
+     * C1 Identifier (for synchronisation)
+     */
+    private $c1Id;
+
+    /**
+     * @ORM\Column(name="c4_id", type="integer", nullable=true)
+     * @var integer|null
+     * C4 Identifier (for synchronisation)
+     */
+    private $c4Id;
+
+    /**
+     * @ORM\Column(name="is_delisted", type="boolean", nullable=true)
+     * @var bool
+     * Delisted indicator (if not active on C1)
+     */
+    private $isDelisted;
+
+    /**
+     * @ORM\Column(name="c1_source", type="string", nullable=true)
+     * @var string|null
+     * C1 Source field
+     */
+    private $c1Source;
+
+    /**
+     * @ORM\Column(name="last_sync_date", type="datetime", nullable=true)
+     * @var datetime|null
+     * Last c1 sync time
+     */
+    private $lastSyncDate;
 
     /**
      * @ORM\Column(name="name", type="string", nullable=false)
      * @var string
      */
     private $name;
+
+    /**
+     * @ORM\Column(name="nature", type="string", nullable=true)
+     * @var string|null
+     */
+    private $nature;
 
     /**
      * @ORM\Column(name="siret", type="string", length=14, nullable=true)
@@ -203,7 +244,7 @@ class Directory
     private $postCode;
 
     /**
-     * @ORM\Column(name="department", type="integer", nullable=true)
+     * @ORM\Column(name="department", type="string", nullable=true)
      * @var string|null
      */
     private $department;
@@ -239,7 +280,7 @@ class Directory
     private $prestaType;
 
     /**
-     * @ORM\Column(name="sector", type="string", nullable=true)
+     * @ORM\Column(name="sector", type="text", nullable=true)
      * @var string|null
      */
     private $sector;
@@ -680,5 +721,149 @@ class Directory
     {
         return $this->brand;
     }
+
+
+    /**
+     * Set c1Id.
+     *
+     * @param int|null $c1Id
+     *
+     * @return Directory
+     */
+    public function setC1Id($c1Id = null)
+    {
+        $this->c1Id = $c1Id;
+
+        return $this;
+    }
+
+    /**
+     * Get c1Id.
+     *
+     * @return int|null
+     */
+    public function getC1Id()
+    {
+        return $this->c1Id;
+    }
+
+    /**
+     * Set c4Id.
+     *
+     * @param int|null $c4Id
+     *
+     * @return Directory
+     */
+    public function setC4Id($c4Id = null)
+    {
+        $this->c4Id = $c4Id;
+
+        return $this;
+    }
+
+    /**
+     * Get c4Id.
+     *
+     * @return int|null
+     */
+    public function getC4Id()
+    {
+        return $this->c4Id;
+    }
+
+    /**
+     * Set isDelisted.
+     *
+     * @param bool|null $isDelisted
+     *
+     * @return Directory
+     */
+    public function setIsDelisted($isDelisted = null)
+    {
+        $this->isDelisted = $isDelisted;
+
+        return $this;
+    }
+
+    /**
+     * Get isDelisted.
+     *
+     * @return bool|null
+     */
+    public function getIsDelisted()
+    {
+        return $this->isDelisted;
+    }
+
+    /**
+     * Set c1Source.
+     *
+     * @param string|null $c1Source
+     *
+     * @return Directory
+     */
+    public function setC1Source($c1Source = null)
+    {
+        $this->c1Source = $c1Source;
+
+        return $this;
+    }
+
+    /**
+     * Get c1Source.
+     *
+     * @return string|null
+     */
+    public function getC1Source()
+    {
+        return $this->c1Source;
+    }
+
+    /**
+     * Set lastSyncDate.
+     *
+     * @param \DateTime|null $lastSyncDate
+     *
+     * @return Directory
+     */
+    public function setLastSyncDate($lastSyncDate = null)
+    {
+        $this->lastSyncDate = $lastSyncDate;
+
+        return $this;
+    }
+
+    /**
+     * Get lastSyncDate.
+     *
+     * @return \DateTime|null
+     */
+    public function getLastSyncDate()
+    {
+        return $this->lastSyncDate;
+    }
+
+    /**
+     * Set nature.
+     *
+     * @param string|null $nature
+     *
+     * @return Directory
+     */
+    public function setNature($nature = null)
+    {
+        $this->nature = $nature;
+
+        return $this;
+    }
+
+    /**
+     * Get nature.
+     *
+     * @return string|null
+     */
+    public function getNature()
+    {
+        return $this->nature;
+    }
 }
-?>

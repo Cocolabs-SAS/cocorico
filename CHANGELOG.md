@@ -7,7 +7,13 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [1.7] - (2021-02-xx)
+### [1.8] - (2021-02-xx)
+- New admin screen for SIAE directory
+- New columns for better synchronizing between C1, SIAE List and C4 data
+- WIP Sync operation
+- Adding filter on structure type (with column) on SIAE list
+
+### [1.7] - (2021-02-12)
 - All SIAE structure types included
 - Updated categories
 - Added scripts, cron file

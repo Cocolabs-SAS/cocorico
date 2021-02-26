@@ -737,4 +737,14 @@ class Quote {
         }
     }
  
+
+    /**
+     * Get validated.
+     *
+     * @return bool
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
 }

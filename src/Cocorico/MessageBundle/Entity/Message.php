@@ -62,4 +62,40 @@ class Message extends BaseMessage
     {
         return $this->createdAt = $createdAt;
     }
+
+    /**
+     * Add metadata.
+     *
+     * @param \Cocorico\MessageBundle\Entity\MessageMetadata $metadata
+     *
+     * @return Message
+     */
+    public function addMetadatum(\Cocorico\MessageBundle\Entity\MessageMetadata $metadata)
+    {
+        $this->metadata[] = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * Remove metadata.
+     *
+     * @param \Cocorico\MessageBundle\Entity\MessageMetadata $metadata
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeMetadatum(\Cocorico\MessageBundle\Entity\MessageMetadata $metadata)
+    {
+        return $this->metadata->removeElement($metadata);
+    }
+
+    /**
+     * Get metadata.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMetadata()
+    {
+        return $this->metadata;
+    }
 }

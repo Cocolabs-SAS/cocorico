@@ -81,6 +81,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="label-container">
+                                    <div class="field-holder">
+                                    {{form_widget(form.withAntenna, {
+                                        'id': 'withAntenna',
+                                        'attr': {
+                                            'class': 'form-control',
+                                        }}
+                                    )}}
+                                    </div>
+                                    <div class="title">
+                                        {{ form_label(form.withAntenna, 'Inclure les antennes')}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-sm-2">
                         <button id="filter-submit" type="submit" class="btn btn-default">
@@ -98,43 +115,37 @@
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
-                <div class="meta">Liste résultats : {{ entries.count }} structures</div>
+                <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} identifiées
+                </div>
                 {%- if not entries is empty -%}
                     <table>
                         <tr>
                             <th>Nom</th>
                             {# <th>Siret</th> #}
                             <th>Structure</th>
+                            <th>Type</th>
                             <th>Type de prestation</th>
                             <th>Secteur(s)</th>
-                            <th>Site web</th>
-                            <th>Code postal</th>
                             <th>Ville</th>
-                            <th>Département</th>
                             <th>Région</th>
                         </tr>
                         {% for entry in entries.iterator %}
                             <tr>
                                 <td>
-                                {% if entry.brand %}
-                                    {{ entry.brand }}
-                                {% else %}
-                                    {{ entry.name }}
-                                {% endif %}</td>
+                                {% if entry.website %} <a href="{{ entry.website }}" target="_blank" rel="external"> {% endif %}
+                                    {% if entry.brand %}
+                                        {{ entry.brand }}
+                                    {% else %}
+                                        {{ entry.name }}
+                                    {% endif %}
+                                {% if entry.website %} </a> {% endif %}
+                                </td>
                                 {# <td>{{ entry.siret }}</td> #}
+                                <td>{{ entry.nature }}</td>
                                 <td>{{ entry.kind }}</td>
                                 <td>{{ entry.prestaType}} </td>
                                 <td>{{ entry.sector}} </td>
-                                <td>
-                                {% if entry.website %}
-                                    <a href="{{ entry.website }}" target="_blank" rel="external">
-                                        {{ entry.website }}
-                                    </a>
-                                {% endif %}
-                                </td>
-                                <td>{{ entry.postCode }}</td>
-                                <td>{{ entry.city }}</td>
-                                <td>{{ entry.department }}</td>
+                                <td>{{ entry.postCode }} {{ entry.city }}</td>
                                 <td>{{ entry.region }}</td>
                             </tr>
                         {% endfor %}
@@ -145,6 +156,7 @@
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
                         {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
                         {% do dlform.address.setRendered() %}

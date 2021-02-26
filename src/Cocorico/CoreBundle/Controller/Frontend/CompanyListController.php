@@ -60,6 +60,7 @@ class CompanyListController extends Controller
         $dlform = $this->csvCompaniesForm();
 
         $directoryManager = $this->get('cocorico.directory.manager');
+        $withAntenna = true;
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
@@ -67,15 +68,17 @@ class CompanyListController extends Controller
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
                 'prestaType' => $sort['prestaType'],
+                'withAntenna' => $sort['withAntenna'],
                 'postalCode' => null,
                 'region' => null,
             ];
+            $withAntenna = $sort['withAntenna'];
             $params = $this->fixParams($sort, $params);
             $entries = $directoryManager->findByForm($page, $params);
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
+            foreach (['structureType', 'withAntenna', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
         } else {
@@ -94,6 +97,7 @@ class CompanyListController extends Controller
                 'route_params' => $request->query->all()
             ),
             'columns' => $directoryManager->listColumns(),
+            'withAntenna' => $withAntenna,
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
             // 'csv_params' => $request->query->all(),
         ]);
@@ -183,6 +187,7 @@ class CompanyListController extends Controller
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
                 'prestaType' => $sort['prestaType'],
+                'withAntenna' => $sort['withAntenna'],
                 'postalCode' => null,
                 'region' => null,
                 'format' => $form['format']->getData(),
