@@ -186,7 +186,7 @@ class Directory
      * @var bool
      * 
      */
-    private $siretIsValid
+    private $siretIsValid;
 
     /**
      * @ORM\Column(name="c1_source", type="string", nullable=true)
@@ -872,5 +872,29 @@ class Directory
     public function getNature()
     {
         return $this->nature;
+    }
+
+    /**
+     * Set siretIsValid.
+     *
+     * @param bool|null $siretIsValid
+     *
+     * @return Directory
+     */
+    public function setSiretIsValid($siretIsValid = null)
+    {
+        $this->siretIsValid = $siretIsValid;
+
+        return $this;
+    }
+
+    /**
+     * Get siretIsValid.
+     *
+     * @return bool|null
+     */
+    public function getSiretIsValid()
+    {
+        return $this->siretIsValid;
     }
 }
