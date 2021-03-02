@@ -65,7 +65,7 @@ class DirectoryManager extends BaseManager
         $qB = $this->getRepository()->getAll();
         $qB = $this->applyParams($qB, $params);
         $query = $qB->getQuery();
-        return $query->getResult(Query::HYDRATE_ARRAY);
+        return $query->getResult();
     }
 
     private function applyParams($qB, $params)

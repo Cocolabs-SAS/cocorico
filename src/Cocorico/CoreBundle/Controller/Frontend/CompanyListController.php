@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -205,10 +206,11 @@ class CompanyListController extends Controller
         $tmp_csv = tempnam("/tmp", "SIAE_CSV");
         $fp = fopen($tmp_csv, 'w');
         fputcsv($fp, array_values(Directory::$exportColumns));
+        $accessor = PropertyAccess::createPropertyAccessor();
         foreach ($entries as $fields) {
             $el = [];
             foreach (Directory::$exportColumns as $key => $value) {
-                $el[$value] = $fields[$key];
+                $el[$value] = $accessor->getValue($fields, $key);
             }
             fputcsv($fp, $el);
         }
@@ -216,6 +218,8 @@ class CompanyListController extends Controller
 
 
         // Respond according to preferred format
+        $date = strftime("%Y%b%d");
+        $fname = "liste_prestataires_$date";
         switch($format) {
             case 'xlsx':
                 $tmpf = tempnam("/tmp", "SIAE_XLSX");
@@ -231,7 +235,7 @@ class CompanyListController extends Controller
 
                 $response = new Response(file_get_contents($tmpf));
                 $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.xlsx"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.xlsx"');
 
                 unset($spreadsheet);
                 unset($tmpf);
@@ -250,7 +254,7 @@ class CompanyListController extends Controller
 
                 $response = new Response(file_get_contents($tmpf));
                 $response->headers->set('Content-Type', 'application/vnd.oasis.opendocument.spreadsheet');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.ods"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.ods"');
 
                 unset($spreadsheet);
                 unset($tmpf);
@@ -259,7 +263,7 @@ class CompanyListController extends Controller
             default:
                 $response = new Response(file_get_contents($tmp_csv));
                 $response->headers->set('Content-Type', 'text/csv');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.csv"');
                 break;
         }
         unlink($tmp_csv);

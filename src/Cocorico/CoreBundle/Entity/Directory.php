@@ -115,7 +115,8 @@ class Directory
 
     public static $exportColumns = array(
         'name' => 'Raison sociale',
-        'siret' => 'Siret',
+        # 'siret' => 'Siret',
+        'siren' => 'Siren',
         'nature' => 'Structure',
         'kind' => 'Type',
         'sector' => 'Secteur',
@@ -180,6 +181,13 @@ class Directory
      * Delisted indicator (if not active on C1)
      */
     private $isDelisted;
+
+    /**
+     * @ORM\Column(name="siret_is_valid", type="boolean", nullable=true)
+     * @var bool
+     * Whether siret is valid or not
+     */
+    private $siretIsValid;
 
     /**
      * @ORM\Column(name="c1_source", type="string", nullable=true)
@@ -361,6 +369,20 @@ class Directory
     {
         return $this->siret;
     }
+
+    /**
+     * Get siren.
+     *
+     * @return string
+     */
+    public function getSiren()
+    {
+        if ($this->siret) {
+            return substr($this->siret,0, 9);
+        }
+        return '';
+    }
+
 
     /**
      * Set email.
@@ -865,5 +887,29 @@ class Directory
     public function getNature()
     {
         return $this->nature;
+    }
+
+    /**
+     * Set siretIsValid.
+     *
+     * @param bool|null $siretIsValid
+     *
+     * @return Directory
+     */
+    public function setSiretIsValid($siretIsValid = null)
+    {
+        $this->siretIsValid = $siretIsValid;
+
+        return $this;
+    }
+
+    /**
+     * Get siretIsValid.
+     *
+     * @return bool|null
+     */
+    public function getSiretIsValid()
+    {
+        return $this->siretIsValid;
     }
 }
