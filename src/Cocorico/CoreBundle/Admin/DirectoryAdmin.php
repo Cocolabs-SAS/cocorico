@@ -203,6 +203,13 @@ class DirectoryAdmin extends AbstractAdmin
                 )
             )
             ->add(
+                'siret_is_valid',
+                null,
+                array(
+                    'label' => 'siret valide',
+                )
+            )
+            ->add(
                 'isDelisted',
                 null,
                 array(
