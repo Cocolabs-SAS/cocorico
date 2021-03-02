@@ -215,12 +215,6 @@
                 <!-- contain sidebar of the page -->
                 <aside id="sidebar" class="col-xs-12 col-md-3">
                     <div class="holder">
-                        {#quote form#}
-                        {% if app.session.get('canAskForQuote') %}
-                            {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
-                                'listing': listing
-                            })) }}
-                        {% endif %}
 
                         <!-- gallery-small -->
                         <div id="user_contact" class="gallery-small slideshow">
@@ -256,6 +250,14 @@
                             {{ listing_location.city }}
                         </div>
                         </div>
+
+                        {#quote form#}
+                        {% if app.session.get('canAskForQuote') %}
+                            {{ render(controller('CocoricoCoreBundle:Frontend/Quote:quoteForm', {
+                                'listing': listing
+                            })) }}
+                        {% endif %}
+
 
                         <section class="widget info-pratiques">
                             <h2>informations pratiques</h2>
