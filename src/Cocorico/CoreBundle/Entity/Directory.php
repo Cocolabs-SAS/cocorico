@@ -115,7 +115,8 @@ class Directory
 
     public static $exportColumns = array(
         'name' => 'Raison sociale',
-        'siret' => 'Siret',
+        # 'siret' => 'Siret',
+        'siren' => 'Siren',
         'nature' => 'Structure',
         'kind' => 'Type',
         'sector' => 'Secteur',
@@ -368,6 +369,20 @@ class Directory
     {
         return $this->siret;
     }
+
+    /**
+     * Get siren.
+     *
+     * @return string
+     */
+    public function getSiren()
+    {
+        if ($this->siret) {
+            return substr($this->siret,0, 9);
+        }
+        return '';
+    }
+
 
     /**
      * Set email.

@@ -121,7 +121,7 @@
                     <table>
                         <tr>
                             <th>Nom</th>
-                            {# <th>Siret</th> #}
+                            <th>Siren</th>
                             <th>Structure</th>
                             <th>Type</th>
                             <th>Type de prestation</th>
@@ -140,7 +140,10 @@
                                     {% endif %}
                                 {% if entry.website %} </a> {% endif %}
                                 </td>
-                                {# <td>{{ entry.siret }}</td> #}
+                                {# 
+                                <td>{{ entry.siret|slice(0,9) }}</td>
+                                #}
+                                <td>{{ entry.getSiren() }}</td>
                                 <td>{{ entry.nature }}</td>
                                 <td>{{ entry.kind }}</td>
                                 <td>{{ entry.prestaType}} </td>

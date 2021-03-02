@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [1.9] - (2021-03-XX)
+- Ajout donnéé validité de SIRET
+- Fix page statistiques
+- Corrections liste siae (date, siren, ... )
+
 ### [1.8] - (2021-02-27)
 - Écran d'administration des SIAE
 - Synchronisation SIAE C1 / C4
