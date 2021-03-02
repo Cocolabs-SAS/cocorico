@@ -229,9 +229,11 @@ class CompanyListController extends Controller
                 $writer->save($tmpf);
                 $spreadsheet->disconnectWorksheets();
 
+                $date = strftime("%Y%b%d");
+                $fname = "liste_prestataires_$date";
                 $response = new Response(file_get_contents($tmpf));
                 $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.xlsx"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.xlsx"');
 
                 unset($spreadsheet);
                 unset($tmpf);
@@ -250,7 +252,7 @@ class CompanyListController extends Controller
 
                 $response = new Response(file_get_contents($tmpf));
                 $response->headers->set('Content-Type', 'application/vnd.oasis.opendocument.spreadsheet');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.ods"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.ods"');
 
                 unset($spreadsheet);
                 unset($tmpf);
@@ -259,7 +261,7 @@ class CompanyListController extends Controller
             default:
                 $response = new Response(file_get_contents($tmp_csv));
                 $response->headers->set('Content-Type', 'text/csv');
-                $response->headers->set('Content-Disposition', 'attachment; filename="liste_prestataires.csv"');
+                $response->headers->set('Content-Disposition', 'attachment; filename="'.$fname.'.csv"');
                 break;
         }
         unlink($tmp_csv);

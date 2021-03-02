@@ -184,7 +184,7 @@ class Directory
     /**
      * @ORM\Column(name="siret_is_valid", type="boolean", nullable=true)
      * @var bool
-     * 
+     * Whether siret is valid or not
      */
     private $siretIsValid;
 
