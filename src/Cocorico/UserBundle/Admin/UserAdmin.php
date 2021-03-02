@@ -454,6 +454,8 @@ class UserAdmin extends SonataUserAdmin
             )
 //            ->add('locked')
             ->add('companyName')
+            ->add('idCardVerified')
+            ->add('enabled')
             ->add('email')
             ->add('groups');
     }
