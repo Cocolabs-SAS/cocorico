@@ -182,6 +182,13 @@ class Directory
     private $isDelisted;
 
     /**
+     * @ORM\Column(name="siret_is_valid", type="boolean", nullable=true)
+     * @var bool
+     * 
+     */
+    private $siretIsValid
+
+    /**
      * @ORM\Column(name="c1_source", type="string", nullable=true)
      * @var string|null
      * C1 Source field
