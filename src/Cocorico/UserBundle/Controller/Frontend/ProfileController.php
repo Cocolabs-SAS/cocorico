@@ -13,6 +13,7 @@ namespace Cocorico\UserBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\UserBundle\Entity\User;
+use Cocorico\UserBundle\Entity\Directory;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -56,6 +57,10 @@ class ProfileController extends Controller
             array(Listing::STATUS_PUBLISHED)
         );
 
+        $C1Company = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Directory')->findByUser(
+            $user->getId()
+        );
+
         //Breadcrumbs
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         $breadcrumbs->addProfileShowItems($request, $user);
@@ -64,7 +69,8 @@ class ProfileController extends Controller
             'CocoricoUserBundle:Frontend/Profile:show.html.twig',
             array(
                 'user' => $user,
-                'user_listings' => $userListings
+                'user_listings' => $userListings,
+                'company' => $C1Company,
             )
         );
     }

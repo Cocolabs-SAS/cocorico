@@ -34,39 +34,60 @@
 
         {% block main %}
 
+            {#
             {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
+            #}
             {# close previous .row #}
             {{ '</div>' }}
 
             <!-- two-columns -->
             {{ '<div class="twocolumns row">' }}
             <!-- contain the main content of the page -->
-            <div id="content" class="listing-area col-xs-12 col-sm-8 col-md-9 pull-right">
+            <div id="content" class="listing-area col-xs-12 col-sm-8 col-md-9">
                 <!-- profile-detail -->
                 <section class="profile-detail">
-                    <header class="head">
-                        <h4>{{ 'user.profile.h1'|trans }}</h4>
-                        <address>
-                            {% if user_company %}
-                                <span class="locality">
-                                    <h1>{{ user.companyName }}</h1>
-                                    <br />
-                                </span>
-                                <span>
-                                    Personne de contact: {{ user.name }}
-                                <span>
-                            {% else %}
-                                <span class="locality">
-                                    {{ user.name }}
-                                </span>
-                            {% endif %}
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!-- gallery-small -->
+                            <div id="user_profile" class="gallery-small slideshow">
+                                <div class="slideset">
+                                    {% if user_images|length %}
+                                        {% for image in user_images %}
+                                            <div class="slide">
+                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                                                     alt="{{ user.name }}"/>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <div class="slide">
+                                            <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                                 alt="{{ user.name }}"/>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <a href="#" class="btn-prev">previous</a>
+                                <a href="#" class="btn-next">next</a>
+                            </div>
+                            <address>
+                                <h4>
+                                    {% if user_company %}
+                                        {{ user.companyName }}
+                                    {% else %}
+                                        {{ user.name }}
+                                    {% endif %}
+                                </h4>
 
-                            {% if user_address %}
-                                {{ user_address.zip }},
-                                {{ user_address.city }},
-                                {{ user_address.country | country_name(app.request.locale) }}
-                            {% endif %}
-                        </address>
+                                {% if user_address %}
+                                    {{ user_address.zip }}
+                                    {{ user_address.city }},
+                                    {{ user_address.country | country_name(app.request.locale) }}
+                                {% endif %}
+                            </address>
+                        </div>
+                        <div class="col-sm-9">
+                        </div>
+                    </div>
+                    <header class="head">
 
                         {% if user_description %}
                             <blockquote>
@@ -142,26 +163,6 @@
             </div>
             <aside id="sidebar" class="col-xs-12 col-sm-4 col-md-3">
                 <div class="holder">
-                    <!-- gallery-small -->
-                    <div id="user_profile" class="gallery-small slideshow">
-                        <div class="slideset">
-                            {% if user_images|length %}
-                                {% for image in user_images %}
-                                    <div class="slide">
-                                        <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                             alt="{{ user.name }}"/>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                <div class="slide">
-                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
-                                         alt="{{ user.name }}"/>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <a href="#" class="btn-prev">previous</a>
-                        <a href="#" class="btn-next">next</a>
-                    </div>
                     <!-- widget members-list -->
                     <section class="widget members-list">
                         <h1>

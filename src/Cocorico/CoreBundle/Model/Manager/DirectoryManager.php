@@ -60,6 +60,18 @@ class DirectoryManager extends BaseManager
         return new Paginator($query);
     }
 
+    public function findByUserId($c4Id)
+    {
+        $qB = $this->getRepository()->getFindByC4Id($C4Id);
+        $query = $qB->getQuery();
+        $resp =  $query->getResult();
+        if ($resp){
+            return $resp[0];
+        } else {
+            return False;
+        }
+    }
+
     public function listByForm($params=[])
     {
         $qB = $this->getRepository()->getAll();
