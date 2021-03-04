@@ -21,8 +21,6 @@ class DirectoryRepository extends EntityRepository
     public function findByUser($userId)
     {
         $resp = $this->getFindByC4Id($userId)->getQuery()->getResult();
-        dump($userId);
-        dump($resp);
         return count($resp) > 0 ? $resp[0] : false;
     }
 

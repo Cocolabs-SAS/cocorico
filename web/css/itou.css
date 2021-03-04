@@ -554,6 +554,49 @@ footer img.min_trav {
 }
 
 /******************
+ * PROFILE STYLES
+ ******************/
+.profile-detail {
+    margin:0;
+    padding-right:1rem;
+}
+
+.shadow {
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
+}
+
+.deflist {
+}
+
+.deflist dd{
+    padding-left:3rem;
+}
+
+.deflist dt {
+}
+
+aside.profile {
+    background-color:#FEEDEE;
+}
+
+.profile_capsule {
+    margin:2rem 1rem;
+    background-color:#fff;
+    padding:0 1rem 2rem;
+    border-bottom:5px solid #FE5455;
+    border-radius:4px;
+}
+
+.profile_capsule h3 {
+    margin:2rem 1rem;
+    color:#000;
+    padding-bottom:.4rem;
+    padding-top:.6rem;
+    border-bottom: 1px solid #999;
+}
+
+
+/******************
  * HOME STYLES
  ******************/
 

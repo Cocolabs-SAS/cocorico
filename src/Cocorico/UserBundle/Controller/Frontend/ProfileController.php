@@ -57,6 +57,9 @@ class ProfileController extends Controller
             array(Listing::STATUS_PUBLISHED)
         );
 
+        $listingsData = $this->getListingsData($userListings);
+        dump($listingsData);
+
         $C1Company = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Directory')->findByUser(
             $user->getId()
         );
@@ -71,7 +74,32 @@ class ProfileController extends Controller
                 'user' => $user,
                 'user_listings' => $userListings,
                 'company' => $C1Company,
+                'listings_data' => $listingsData,
             )
         );
+    }
+
+    private Function getListingsData($listings)
+    {
+        $data = [
+            'prestaTypes' => [],
+            'clientImages' => [],
+            'website' => False,
+        ];
+        foreach ($listings as $l) {
+            if (! in_array($l->getPrestaTypeText(), $data['prestaTypes'])) {
+                $data['prestaTypes'][] = $l->getPrestaTypeText();
+            }
+            foreach ($l->getClientImages() as $img)
+            {
+                $data['clientImages'][] = $img; 
+            }
+            // if ($l->getWebsite())
+            // {
+            //     $data['website'] = $l->getWebsite();
+            // }
+        }
+        return $data;
+    
     }
 }

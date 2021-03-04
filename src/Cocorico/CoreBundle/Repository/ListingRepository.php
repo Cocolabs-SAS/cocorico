@@ -178,7 +178,6 @@ class ListingRepository extends EntityRepository
         return $this->getFindByOwnerQuery($ownerId, $locale, $status)->getQuery()->getResult();
     }
 
-
     /**
      * @param $title
      * @param $locale
