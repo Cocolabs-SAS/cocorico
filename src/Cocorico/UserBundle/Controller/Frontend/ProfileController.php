@@ -58,7 +58,6 @@ class ProfileController extends Controller
         );
 
         $listingsData = $this->getListingsData($userListings);
-        dump($listingsData);
 
         $C1Company = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Directory')->findByUser(
             $user->getId()

@@ -595,6 +595,17 @@ aside.profile {
     border-bottom: 1px solid #999;
 }
 
+.map_capsule {
+    margin:2rem 1rem;
+    border-radius:4px;
+}
+
+.map_capsule .map-holder{
+    height:225px;
+    width:100%;
+    top:10px;
+}
+
 
 /******************
  * HOME STYLES

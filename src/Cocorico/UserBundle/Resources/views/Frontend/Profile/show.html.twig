@@ -244,7 +244,10 @@
                         <dd>{{ user.name }}</dd>
                     </dl>
                 </div>
-                <div class="profile_capsule">
+                <div class="map_capsule">
+                    <div class="map-holder">
+                        <div id="map-company" class="map-canvas"></div>
+                    </div>
                 </div>
                 <hr>
                 <div class="holder">
@@ -416,10 +419,16 @@
 {% block javascripts %}
     {{ parent() }}
 
-    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
-        'map_elt': '',
-        'auto_complete_elt': '#location'
-    } only %}
+    {% if company %}
+        {% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
+        'map_elt': '#map-company',
+        'marker_draggable': false,
+        'default_lat': company.latitude,
+        'default_lng': company.longitude,
+        'default_zoom': '10',
+        'display_marker': false
+        } only %}
+    {% endif %}
 
     <script>
         $(function () {
@@ -431,7 +440,23 @@
                 '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
             );
         });
+
+        $(function () {
+            //Map
+            var circle = new google.maps.Circle({
+                map: map,
+                center: latlng,
+                strokeColor: '#0000EE',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#0000EE',
+                fillOpacity: 0.1,
+                radius:  1000
+            });
+        });
+
     </script>
+
 {% endblock %}
 
 {% block markup_jsonld %}
