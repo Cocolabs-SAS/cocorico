@@ -95,8 +95,19 @@ class ProfileController extends Controller
                 $data['clientImages'][] = $img; 
             }
             $rng = $l->getPolRange();
-            if ($rng) {
-                $data['polRange'] = $rng;
+            switch($rng) {
+                case 1:
+                    $data['polRange'] = 'Département';
+                    break;
+                case 2:
+                    $data['polRange'] = 'Région';
+                    break;
+                case 3:
+                    $data['polRange'] = 'France entière';
+                    break;
+                case 0:
+                default:
+                    $data['polRange'] = 'Variable';
             }
             // if ($l->getWebsite())
             // {

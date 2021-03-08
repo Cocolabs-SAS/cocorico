@@ -115,12 +115,12 @@
                     </div>
 
                     <!-- Second Row, Company Details -->
-                    <div class="row">
-                        <div class="col-sm-6 m-sm-2 shadow">
+                    <div class="row mb-3">
+                        <div class="col-sm-6 pull-right shadow">
                             <h4>Secteurs d'activité</h4>
                         </div>
 
-                        <div class="col-sm-6 shadow">
+                        <div class="col-sm-5  shadow pull-left">
                             <h4>Éléments différenciants<br />
                             (matériels, services particuliers, …)
                             </h4>
@@ -128,7 +128,7 @@
                     </div>
 
                     <!-- Third Row, Description -->
-                    <div class="row">
+                    <div class="row" style="margin-top:1rem">
                         <div class="col-sm-12 shadow">
                             <h3>Description de l'activité commerciale</h3>
                             <blockquote>
@@ -233,7 +233,7 @@
                 </div>
                 <div class="profile_capsule">
                     <h3>Contact entreprise</h3>
-                    <dl>
+                    <dl class='deflist'>
                         <dt>Site Web</dt>
                         <dd>{{ user.website }}</dd>
                         <dt>Adresse email de contact</dt>
@@ -247,172 +247,27 @@
                 <div class="map_capsule">
                     <div class="map-holder">
                         <div id="map-company" class="map-canvas"></div>
-                        {% if user_address %}
-                            {{ user_address.address }}<br/>
-                            {{ user_address.zip }}
-                            {{ user_address.city }}
+                    </div>
+                    <div class="map_details">
+                        <dl class='deflist'>
+                        {% if company %}
+                            <dt>Adresse</dt>
+                            <dd>{{ company.postCode }}
+                            {{ company.city }}</dd>
+                            <dd>{{ company.region }}</dd>
+                            <br />
+                        {% elseif user_address %}
+                            <dt>Adresse</dt>
+                            <dd>{{ user_address.zip }}</dd>
+                            <dd>{{ user_address.city }}</dd>
                             <br />
                         {% endif %}
-                        {{ listings_data.polRange }}
+                            <dt>Périmètre d'intervention</dt>
+                            <dd>{{ listings_data.polRange }}</dd>
+                        </dl>
                     </div>
                 </div>
                 <hr>
-                <div class="holder">
-                    <!-- widget members-list -->
-                    <section class="widget members-list">
-                        <h1>
-                            {{ 'user.profile.subscribe-date.title'|trans }}
-                            <time datetime="{{ user.createdAt|date("Y-m-d") }}">
-                                {{ user.createdAt|localizeddate('short', 'none', 'fr') }}
-                            </time>
-                        </h1>
-                        <!-- info-list -->
-                        <ul class="info-list">
-                            <li>
-                                {% if user.phoneVerified %}
-                                    <i class="icon-ok"></i>
-                                    {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    {{ 'form.user.phone:'|trans({}, 'cocorico_user') }}
-                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.phone_verified.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-
-                            <li>
-                                {{ 'form.user.username:'|trans({}, 'cocorico_user') }}
-                                {% if user.emailVerified %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.email_verified.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                            {#
-                            <li>
-                                {{ 'form.user.id_card:'|trans({}, 'cocorico_user') }}
-                                {% if user.idCardVerified %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "verified"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no_verified"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.id_card_verified.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                            <li>
-                                {{ 'form.user.nb_bookings_offerer:'|trans({}, 'cocorico_user') }}
-                                {% if user.nbBookingsOfferer %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.nb_bookings_offerer.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                            <li>
-                                {{ 'form.user.nb_bookings_asker:'|trans({}, 'cocorico_user') }}
-                                {% if user.nbBookingsAsker %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.nb_bookings_asker.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                             <li>
-                                {{ 'form.user.nb_quotes_offerer:'|trans({}, 'cocorico_user') }}
-                                {% if user.nbQuotesOfferer %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.nb_quotes_offerer.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                            <li>
-                                {{ 'form.user.nb_quotes_asker:'|trans({}, 'cocorico_user') }}
-                                {% if user.nbQuotesAsker %}
-                                    <i class="icon-ok"></i>
-                                    <strong>{{ "yes"|trans({},'cocorico_listing') }}</strong>
-                                {% else %}
-                                    <i class="icon-cancel"></i>
-                                    <strong>{{ "no"|trans({},'cocorico_listing') }}</strong>
-                                {% endif %}
-                                <button title="" data-placement="right" data-toggle="tooltip" class="tooltip-button"
-                                        type="button"
-                                        data-original-title="{{ 'listing.show.nb_quotes_asker.help'|trans({},'cocorico_listing') }}">
-                                    ?
-                                </button>
-                            </li>
-                            #}
-
-                            {#
-                            <li>
-                                {% if user_listings|length %}
-                                    {{ 'listing.show.cancellation_policy:'|trans({},'cocorico_listing') }}
-                                    <strong>{{ user_listings.0.cancellationPolicyText|trans({},'cocorico_listing') }}</strong>
-
-                                    <button title="{{ cancellationPolicies()|e }}" data-placement="right"
-                                            data-toggle="tooltip" data-html="true"
-                                            class="tooltip-button"
-                                            type="button"
-                                            data-original-title="">
-                                        ?
-                                    </button>
-                                {% endif %}
-                            </li>
-                            <li>
-                                {{ 'user.profile.languages'|trans }}
-                                <strong class="list-comma">
-                                    {%- if user.motherTongue %}
-                                        <span>{{ user.motherTongue|language_name(app.request.locale) }}</span>
-                                    {% endif -%}
-                                    {% for language in user.languages -%}
-                                        <span>{{ language.code|language_name(app.request.locale) }}</span>
-                                    {%- endfor %}
-                                </strong>
-                            </li>
-                            #}
-                        </ul>
-                    </section>
-                    {# listings #}
-                    <section class="widget property-list">
-                        <h1>{{ 'user.profile.my-listing'|trans }}</h1>
-
-                    </section>
-                </div>
             </aside>
             {#</div>#}
         {% endblock %}

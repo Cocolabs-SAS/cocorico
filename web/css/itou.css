@@ -577,6 +577,7 @@ footer img.min_trav {
 
 aside.profile {
     background-color:#FEEDEE;
+    height:100%;
 }
 
 .profile_capsule {
@@ -595,15 +596,44 @@ aside.profile {
     border-bottom: 1px solid #999;
 }
 
+.map_capsule .deflist,
+.profile_capsule .deflist {
+    padding: 0 0 0 .5rem;
+}
+
 .map_capsule {
     margin:2rem 1rem;
     border-radius:4px;
+}
+
+
+.map_details {
+    background-color:#fff;
+    border-radius: 0 4px 4px 0;
+    padding:2rem 1rem 2rem;
 }
 
 .map_capsule .map-holder{
     height:225px;
     width:100%;
     top:10px;
+    border-radius:4px;
+}
+
+.profile-detail .listing-holder .listing-box {
+    width:380px;
+}
+
+.profile-detail .listing-holder {
+    display: flex !important;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+}
+
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
 }
 
 
