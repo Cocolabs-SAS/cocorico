@@ -84,6 +84,7 @@ class ProfileController extends Controller
             'prestaTypes' => [],
             'clientImages' => [],
             'website' => False,
+            'polRange' => False,
         ];
         foreach ($listings as $l) {
             if (! in_array($l->getPrestaTypeText(), $data['prestaTypes'])) {
@@ -92,6 +93,10 @@ class ProfileController extends Controller
             foreach ($l->getClientImages() as $img)
             {
                 $data['clientImages'][] = $img; 
+            }
+            $rng = $l->getPolRange();
+            if ($rng) {
+                $data['polRange'] = $rng;
             }
             // if ($l->getWebsite())
             // {

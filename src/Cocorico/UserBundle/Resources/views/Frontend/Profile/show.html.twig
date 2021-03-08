@@ -247,6 +247,14 @@
                 <div class="map_capsule">
                     <div class="map-holder">
                         <div id="map-company" class="map-canvas"></div>
+                        {{ dump(user_address) }}
+                        {% if user_address %}
+                            {{ user_address.address }}<br/>
+                            {{ user_address.zip }}
+                            {{ user_address.city }}
+                            <br />
+                        {% endif %}
+                        {{ listings_data.polRange }}
                     </div>
                 </div>
                 <hr>
