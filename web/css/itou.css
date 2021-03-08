@@ -630,10 +630,20 @@ aside.profile {
     justify-content:space-evenly;
 }
 
+.profile-detail .row {
+    margin-bottom:1rem;
+}
+
 .equal {
   display: flex;
   display: -webkit-flex;
   flex-wrap: wrap;
+}
+
+#user_profile.gallery-small .slideset,
+#user_profile.gallery-small .slideset .slide {
+    width:150px;
+    height:100px;
 }
 
 

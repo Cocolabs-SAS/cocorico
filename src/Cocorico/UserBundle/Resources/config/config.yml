@@ -120,7 +120,7 @@ liip_imagine:
             quality: 100
             filters:
                 auto_rotate: ~
-                thumbnail: { size: ["%cocorico.user_img_profile_w%", "%cocorico.user_img_profile_h%"], mode: inset, cache_type: public, cache_expires: 1 months }
+                thumbnail: { size: [150,100], mode: inset, cache_type: public, cache_expires: 1 months }
 
 hwi_oauth:
     connect:
