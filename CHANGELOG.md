@@ -8,8 +8,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 ### [2.0] - (2021-03-XX)
-- Update user profile screen
-
+- Mise à jour écran vendeurs
+- Corrections responsivité (module obsolète supprimé, corrections bootstrap)
 
 ### [1.9] - (2021-03-02)
 - Ajout filtres administration utilisateur
