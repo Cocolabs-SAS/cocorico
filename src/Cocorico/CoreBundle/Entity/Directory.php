@@ -312,14 +312,14 @@ class Directory
     private $brand;
 
     /**
-     * @ORM\Column(name="ig_employees", type="int", nullable=true)
-     * @var int|null
+     * @ORM\Column(name="ig_employees", type="integer", nullable=true)
+     * @var integer|null
      */
     private $Employees;
 
     /**
-     * @ORM\Column(name="ig_ca", type="int", nullable=true)
-     * @var int|null
+     * @ORM\Column(name="ig_ca", type="integer", nullable=true)
+     * @var integer|null
      */
     private $chiffreAffaire;
     /**
@@ -933,11 +933,11 @@ class Directory
     /**
      * Set employees.
      *
-     * @param \int|null $employees
+     * @param int|null $employees
      *
      * @return Directory
      */
-    public function setEmployees(\int $employees = null)
+    public function setEmployees($employees = null)
     {
         $this->Employees = $employees;
 
@@ -947,7 +947,7 @@ class Directory
     /**
      * Get employees.
      *
-     * @return \int|null
+     * @return int|null
      */
     public function getEmployees()
     {
@@ -957,11 +957,11 @@ class Directory
     /**
      * Set chiffreAffaire.
      *
-     * @param \int|null $chiffreAffaire
+     * @param int|null $chiffreAffaire
      *
      * @return Directory
      */
-    public function setChiffreAffaire(\int $chiffreAffaire = null)
+    public function setChiffreAffaire($chiffreAffaire = null)
     {
         $this->chiffreAffaire = $chiffreAffaire;
 
@@ -971,7 +971,7 @@ class Directory
     /**
      * Get chiffreAffaire.
      *
-     * @return \int|null
+     * @return int|null
      */
     public function getChiffreAffaire()
     {
