@@ -79,7 +79,7 @@
                                 </h4>
 
                                 {% if company %}
-                                    {{ company.nature }}
+                                    {{ company.nature == 'siege' ? "Siège" : "Antenne" }}
                                 {% endif %}
                             </address>
                         </div>
