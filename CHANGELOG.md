@@ -7,8 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [2.0] - (2021-03-XX)
-- Mise à jour écran vendeurs
+### [2.0] - (2021-03-08)
+- Mise à jour page vendeurs
+- Préparation intégration données externes
 - Corrections responsivité (module obsolète supprimé, corrections bootstrap)
 
 ### [1.9] - (2021-03-02)
