@@ -250,7 +250,12 @@
                     <h3>Contact entreprise</h3>
                     <dl class='deflist'>
                         <dt>Site Web</dt>
-                        <dd>{{ user.website }}</dd>
+                        {% if user.website %}
+                            <dd><a id="user_website" href="{{user.webiste}}" rel="nofollow" target="blank">{{ user.website }}</a></dd>
+                        {% endif %}
+                        {% if company %}
+                            <dd><a id="company_website" href="{{company.website}}" rel="nofollow" target="blank">{{ company.website }}</a></dd>
+                        {% endif %}
                         <dt>Adresse email de contact</dt>
                         <dd>{{ user.email }}</dd>
                         <dt>N de téléphone</dt>
