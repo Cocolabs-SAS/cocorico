@@ -315,7 +315,7 @@ class Directory
      * @ORM\Column(name="ig_employees", type="integer", nullable=true)
      * @var integer|null
      */
-    private $Employees;
+    private $employees;
 
     /**
      * @ORM\Column(name="ig_ca", type="integer", nullable=true)
@@ -326,7 +326,7 @@ class Directory
      * @ORM\Column(name="ig_date_constitution", type="datetime", nullable=true)
      * @var datetime|null
      */
-    private $DateConstitution;
+    private $dateConstitution;
 
 
     /**
@@ -939,7 +939,7 @@ class Directory
      */
     public function setEmployees($employees = null)
     {
-        $this->Employees = $employees;
+        $this->employees = $employees;
 
         return $this;
     }
@@ -951,7 +951,7 @@ class Directory
      */
     public function getEmployees()
     {
-        return $this->Employees;
+        return $this->employees;
     }
 
     /**
@@ -987,7 +987,7 @@ class Directory
      */
     public function setDateConstitution($dateConstitution = null)
     {
-        $this->DateConstitution = $dateConstitution;
+        $this->dateConstitution = $dateConstitution;
 
         return $this;
     }
@@ -999,6 +999,6 @@ class Directory
      */
     public function getDateConstitution()
     {
-        return $this->DateConstitution;
+        return $this->dateConstitution;
     }
 }

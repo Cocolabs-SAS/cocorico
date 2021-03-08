@@ -235,6 +235,16 @@
             <aside id="sidebar" class="profile col-xs-12 col-sm-4">
                 <div class="profile_capsule">
                     <h3>Données en libre accès</h3>
+                    <dl class='deflist'>
+                        <dt>Nombre de salariés</dt>
+                        <dd>{{ not company.employees ? "non disponible" : company.employees }}</dd>
+                        <dt>CA de la structure</dt>
+                        <dd>{{ not company.chiffreAffaire ? "non disponible" : company.chiffreAffaire }}</dd>
+                        <dt>Date de création de la structure</dt>
+                        <dd>{{ not company.dateConstitution ? "non disponible" : company.dateConstitution }}</dd>
+                        <dd>{{ company.dateConstitution }}</dd>
+                    </dl>
+                    <small>Source: <a href="https://www.infogreffe.fr" rel="nofollow" target="_blank">infogreffe</a></small>
                 </div>
                 <div class="profile_capsule">
                     <h3>Contact entreprise</h3>
