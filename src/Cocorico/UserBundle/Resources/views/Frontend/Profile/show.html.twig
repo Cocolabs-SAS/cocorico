@@ -116,11 +116,16 @@
 
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
-                        <div class="col-sm-6 pull-right shadow">
+                        <div class="col-sm-6 pull-left shadow">
                             <h4>Secteurs d'activité</h4>
+                            <ul class="active_sectors">
+                                {% for cat in listings_data.categories %}
+                                    <li>{{ cat }}</li>
+                                {% endfor %}
+                            </ul>
                         </div>
 
-                        <div class="col-sm-5  shadow pull-left">
+                        <div class="col-sm-5  shadow pull-right">
                             <h4>Éléments différenciants<br />
                             (matériels, services particuliers, …)
                             </h4>

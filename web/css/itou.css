@@ -559,6 +559,12 @@ footer img.min_trav {
 .profile-detail {
     margin:0;
     padding-right:1rem;
+    color:#000;
+}
+
+.profile-detail h3,
+.profile-detail h4 {
+    color:#000;
 }
 
 .shadow {
@@ -579,6 +585,7 @@ aside.profile {
     background-color:#FEEDEE;
     height:100%;
 }
+
 
 .profile_capsule {
     margin:2rem 1rem;
@@ -634,6 +641,10 @@ aside.profile {
     margin-bottom:1rem;
 }
 
+.profile-detail .row > div {
+    min-height:7rem;
+}
+
 .equal {
   display: flex;
   display: -webkit-flex;
@@ -644,6 +655,15 @@ aside.profile {
 #user_profile.gallery-small .slideset .slide {
     width:150px;
     height:100px;
+}
+
+.active_sectors {
+    list-style-type: none;
+}
+
+.active_sectors > li:before {
+    content: "- ";
+    text-indent:-5rem;
 }
 
 

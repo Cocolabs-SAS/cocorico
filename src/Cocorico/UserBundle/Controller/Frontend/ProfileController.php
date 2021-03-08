@@ -83,9 +83,11 @@ class ProfileController extends Controller
         $data = [
             'prestaTypes' => [],
             'clientImages' => [],
+            'categories' => [],
             'website' => False,
             'polRange' => False,
         ];
+        $catids = [];
         foreach ($listings as $l) {
             if (! in_array($l->getPrestaTypeText(), $data['prestaTypes'])) {
                 $data['prestaTypes'][] = $l->getPrestaTypeText();
@@ -94,6 +96,15 @@ class ProfileController extends Controller
             {
                 $data['clientImages'][] = $img; 
             }
+            foreach ($l->getListingListingCategories() as $list_cat)
+            {
+                $cat = $list_cat->getCategory(); 
+                if (! in_array($cat->getId(), $catids)) {
+                    $data['categories'][] = $cat->getName();
+                    $catids[] = $cat->getId();
+                }
+            }
+
             $rng = $l->getPolRange();
             switch($rng) {
                 case 1:
