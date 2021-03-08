@@ -311,6 +311,23 @@ class Directory
      */
     private $brand;
 
+    /**
+     * @ORM\Column(name="ig_employees", type="integer", nullable=true)
+     * @var integer|null
+     */
+    private $employees;
+
+    /**
+     * @ORM\Column(name="ig_ca", type="integer", nullable=true)
+     * @var integer|null
+     */
+    private $chiffreAffaire;
+    /**
+     * @ORM\Column(name="ig_date_constitution", type="datetime", nullable=true)
+     * @var datetime|null
+     */
+    private $dateConstitution;
+
 
     /**
      * Get id.
@@ -911,5 +928,77 @@ class Directory
     public function getSiretIsValid()
     {
         return $this->siretIsValid;
+    }
+
+    /**
+     * Set employees.
+     *
+     * @param int|null $employees
+     *
+     * @return Directory
+     */
+    public function setEmployees($employees = null)
+    {
+        $this->employees = $employees;
+
+        return $this;
+    }
+
+    /**
+     * Get employees.
+     *
+     * @return int|null
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
+    }
+
+    /**
+     * Set chiffreAffaire.
+     *
+     * @param int|null $chiffreAffaire
+     *
+     * @return Directory
+     */
+    public function setChiffreAffaire($chiffreAffaire = null)
+    {
+        $this->chiffreAffaire = $chiffreAffaire;
+
+        return $this;
+    }
+
+    /**
+     * Get chiffreAffaire.
+     *
+     * @return int|null
+     */
+    public function getChiffreAffaire()
+    {
+        return $this->chiffreAffaire;
+    }
+
+    /**
+     * Set dateConstitution.
+     *
+     * @param \DateTime|null $dateConstitution
+     *
+     * @return Directory
+     */
+    public function setDateConstitution($dateConstitution = null)
+    {
+        $this->dateConstitution = $dateConstitution;
+
+        return $this;
+    }
+
+    /**
+     * Get dateConstitution.
+     *
+     * @return \DateTime|null
+     */
+    public function getDateConstitution()
+    {
+        return $this->dateConstitution;
     }
 }

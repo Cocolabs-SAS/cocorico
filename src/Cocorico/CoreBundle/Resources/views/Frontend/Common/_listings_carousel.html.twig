@@ -1,0 +1,64 @@
+<div class="listing-holder">
+    {% if listings|length %}
+        {% for listing in listings %}
+            {% set listing_translation = listing.translations[app.request.locale] %}
+            <!-- listing-post -->
+            <article class="listing-post small">
+                <a href="{{ path('cocorico_listing_show', {'slug' : listing_translation.slug}) }}"
+                   class="listing-box">
+                    <div class="frame">
+                        <div class="post-info">
+                            <div class="img-holder">
+                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~  listing.images[0].name) | imagine_filter('listing_medium') }}"
+                                     alt="listing image"/>
+                            </div>
+                            <div class="box">
+                                <div class="box-holder">
+                                    <div class="head">
+                                        <!-- rating -->
+                                        {#
+                                        {% if listing.averageRating %}
+                                            {{ listing.averageRating | cocorico_star_rating }}
+                                        {% endif %}
+                                        <div class="time-price">
+                                            {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %}
+
+                                            <strong class="price">
+                                                {{ price }}
+                                            </strong>
+
+                                            <p>
+                                                <small>{{ vatInclusionText(app.request.getLocale()) }}</small>
+                                                / {{ (0)|add_time_unit_text }}
+                                            </p>
+                                        </div>
+                                        #}
+                                    </div>
+                                    <div class="foot">
+                                        <strong class="title">
+                                            {% for listingListingCategory in listing.listingListingCategories %}
+                                                {{ listingListingCategory.category.name }},
+                                            {% endfor %}
+                                        </strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="post-content">
+                            <div class="textbox">
+                                <h2>{{ listing_translation.title }}</h2>
+                                {% if  listing.certified %}
+                                    <span class="certified">
+                                            <i class="icon-ok"></i>
+                                            {{ 'listing.edit.index.certified'|trans({},'cocorico_listing') }}
+                                        </span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+        {% endfor %}
+    {% endif %}
+</div>

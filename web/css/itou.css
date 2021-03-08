@@ -421,9 +421,17 @@ fieldset {
 
 #header {
     padding-bottom:3px;
-    box-shadow:0px 6px 16px #eee ;
+    box-shadow:0px -13px 21px #000 ;
     border-bottom:0;
+    z-index:10;
+    position:relative;
 }
+
+#main {
+    z-index:9;
+    position:relative;
+}
+
 
 #bloc-marque {
     display:table;
@@ -552,6 +560,133 @@ footer img.min_trav {
     color:#4a4a4a;
     text-align:center;
 }
+
+/******************
+ * PROFILE STYLES
+ ******************/
+.profile-detail {
+    margin:0;
+    padding-right:1rem;
+    color:#000;
+}
+
+.profile-detail h3,
+.profile-detail h4 {
+    color:#000;
+}
+
+.shadow {
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 4px 4px 20px 0 rgba(0,0,0,0.05);
+}
+
+.deflist {
+}
+
+.deflist dd{
+    padding-left:3rem;
+}
+
+.deflist dt {
+}
+
+aside.profile {
+    background-color:#FEEDEE;
+    height:100%;
+    position:relative;
+}
+
+@media screen and (min-width:767px) {
+    aside.profile {
+        margin-top:-5rem;
+        padding-top:3rem;
+    }
+}
+
+.profile_capsule {
+    margin:2rem 1rem;
+    background-color:#fff;
+    padding:0 1rem 2rem;
+    border-bottom:5px solid #FE5455;
+    border-radius:4px;
+}
+
+.profile_capsule h3 {
+    margin:2rem 1rem;
+    color:#000;
+    padding-bottom:.4rem;
+    padding-top:.6rem;
+    border-bottom: 1px solid #999;
+}
+
+.map_capsule .deflist,
+.profile_capsule .deflist {
+    padding: 0 0 0 .5rem;
+}
+
+.map_capsule {
+    margin:2rem 1rem;
+    border-radius:4px;
+}
+
+.user_description {
+    color:#000;
+    padding:1rem;
+    font-size:1.2rem;
+}
+
+
+.map_details {
+    background-color:#fff;
+    border-radius: 0 4px 4px 0;
+    padding:2rem 1rem 2rem;
+}
+
+.map_capsule .map-holder{
+    height:225px;
+    width:100%;
+    top:10px;
+    border-radius:4px;
+}
+
+.profile-detail .listing-holder .listing-box {
+    width:380px;
+}
+
+.profile-detail .listing-holder {
+    display: flex !important;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+}
+
+.profile-detail .row {
+    margin-bottom:1rem;
+}
+
+.profile-detail .row > div {
+    min-height:7rem;
+}
+
+.equal {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+}
+
+#user_profile.gallery-small .slideset,
+#user_profile.gallery-small .slideset .slide {
+    width:150px;
+    height:100px;
+}
+
+.active_sectors {
+    list-style-type: none;
+}
+
+.active_sectors > li:before {
+    content: "- ";
+    text-indent:-5rem;
+}
+
 
 /******************
  * HOME STYLES
@@ -840,8 +975,6 @@ footer img.min_trav {
 /* Help banner */
 
 #help_banner {
-    display:flex;
-    justify-content:center;
     margin:0 0rem 4rem 0;
     background-color:#F2F9FF;
     color:#000;

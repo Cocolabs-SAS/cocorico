@@ -1,6 +1,6 @@
 // const jQuery = require('jquery');
 require('jquery-ui');
-require('jquery-ui-touch-punch');
+// require('jquery-ui-touch-punch');
 
 // Do not include full JCF lib, some parts are not relevant
 const jcf = require('jcf/js/jcf');

@@ -13,6 +13,7 @@ namespace Cocorico\UserBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\UserBundle\Entity\User;
+use Cocorico\UserBundle\Entity\Directory;
 use FOS\UserBundle\Model\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -56,6 +57,12 @@ class ProfileController extends Controller
             array(Listing::STATUS_PUBLISHED)
         );
 
+        $listingsData = $this->getListingsData($userListings);
+
+        $C1Company = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Directory')->findByUser(
+            $user->getId()
+        );
+
         //Breadcrumbs
         $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         $breadcrumbs->addProfileShowItems($request, $user);
@@ -64,8 +71,61 @@ class ProfileController extends Controller
             'CocoricoUserBundle:Frontend/Profile:show.html.twig',
             array(
                 'user' => $user,
-                'user_listings' => $userListings
+                'user_listings' => $userListings,
+                'company' => $C1Company,
+                'listings_data' => $listingsData,
             )
         );
+    }
+
+    private Function getListingsData($listings)
+    {
+        $data = [
+            'prestaTypes' => [],
+            'clientImages' => [],
+            'categories' => [],
+            'website' => False,
+            'polRange' => False,
+        ];
+        $catids = [];
+        foreach ($listings as $l) {
+            if (! in_array($l->getPrestaTypeText(), $data['prestaTypes'])) {
+                $data['prestaTypes'][] = $l->getPrestaTypeText();
+            }
+            foreach ($l->getClientImages() as $img)
+            {
+                $data['clientImages'][] = $img; 
+            }
+            foreach ($l->getListingListingCategories() as $list_cat)
+            {
+                $cat = $list_cat->getCategory(); 
+                if (! in_array($cat->getId(), $catids)) {
+                    $data['categories'][] = $cat->getName();
+                    $catids[] = $cat->getId();
+                }
+            }
+
+            $rng = $l->getPolRange();
+            switch($rng) {
+                case 1:
+                    $data['polRange'] = 'Département';
+                    break;
+                case 2:
+                    $data['polRange'] = 'Région';
+                    break;
+                case 3:
+                    $data['polRange'] = 'France entière';
+                    break;
+                case 0:
+                default:
+                    $data['polRange'] = 'Variable';
+            }
+            // if ($l->getWebsite())
+            // {
+            //     $data['website'] = $l->getWebsite();
+            // }
+        }
+        return $data;
+    
     }
 }

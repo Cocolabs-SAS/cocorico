@@ -14,6 +14,16 @@ use Doctrine\ORM\QueryBuilder;
  */
 class DirectoryRepository extends EntityRepository
 {
+
+    /**
+     * @param $userId
+     */
+    public function findByUser($userId)
+    {
+        $resp = $this->getFindByC4Id($userId)->getQuery()->getResult();
+        return count($resp) > 0 ? $resp[0] : false;
+    }
+
     public function getFindQueryBuilder()
     {
         $qB = $this->createQueryBuilder('d');
@@ -38,6 +48,15 @@ class DirectoryRepository extends EntityRepository
         $qB->orderBy('d.name', 'asc')
            ->where('d.nature != \'n/a\'')
            ->where('d.isDelisted = false');
+
+        return $qB;
+    }
+
+    public function getFindByC4Id($C4Id)
+    {
+        $qB = $this->getFindQueryBuilder();
+        $qB->where('d.c4Id = :c4Id')
+           ->setParameter('c4Id', $C4Id);
 
         return $qB;
     }
