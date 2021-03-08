@@ -421,9 +421,17 @@ fieldset {
 
 #header {
     padding-bottom:3px;
-    box-shadow:0px 6px 16px #eee ;
+    box-shadow:0px -13px 21px #000 ;
     border-bottom:0;
+    z-index:10;
+    position:relative;
 }
+
+#main {
+    z-index:9;
+    position:relative;
+}
+
 
 #bloc-marque {
     display:table;
@@ -568,7 +576,7 @@ footer img.min_trav {
 }
 
 .shadow {
-    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
+    box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 4px 4px 20px 0 rgba(0,0,0,0.05);
 }
 
 .deflist {
@@ -584,8 +592,15 @@ footer img.min_trav {
 aside.profile {
     background-color:#FEEDEE;
     height:100%;
+    position:relative;
 }
 
+@media screen and (min-width:767px) {
+    aside.profile {
+        margin-top:-5rem;
+        padding-top:3rem;
+    }
+}
 
 .profile_capsule {
     margin:2rem 1rem;
