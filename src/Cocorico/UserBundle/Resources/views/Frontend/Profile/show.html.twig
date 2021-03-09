@@ -1,5 +1,6 @@
 {% extends '::base.html.twig' %}
 
+{% set user_timezone = app.user.timezone %}
 {% set user_images = user.images %}
 {% set user_description = "" %}
 {% if  user.translations[app.request.locale] is defined %}
@@ -241,9 +242,10 @@
                             <dd>{{ not company.employees ? "non disponible" : company.employees }}</dd>
                             <dt>CA de la structure</dt>
                             <dd>{{ not company.chiffreAffaire ? "non disponible" : company.chiffreAffaire }}</dd>
-                            <dt>Date de création de la structure</dt>
-                            <dd>{{ not company.dateConstitution ? "non disponible" : company.dateConstitution }}</dd>
-                            <dd>{{ company.dateConstitution }}</dd>
+                            {% if company.dateConstitution %}
+                                <dt>Date de création de la structure</dt>
+                                <dd>{{ company.dateConstitution | localizeddate('short', 'none', 'fr', user_timezone) }}</dd>
+                            {% endif %}
                         </dl>
                         <small>Source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">entreprise.api.gouv.fr</a></small>
                     </div>
