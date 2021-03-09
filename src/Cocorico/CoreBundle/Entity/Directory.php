@@ -312,8 +312,8 @@ class Directory
     private $brand;
 
     /**
-     * @ORM\Column(name="ig_employees", type="integer", nullable=true)
-     * @var integer|null
+     * @ORM\Column(name="ig_employees", type="string", nullable=true)
+     * @var string|null
      */
     private $employees;
 
