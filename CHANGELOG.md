@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [2.1] - (2021-03-XX)
 - Siret si valide, sinon rien
 - Corrections Base de données
+- Wording antenne / siege
 
 ### [2.0] - (2021-03-08)
 - Mise à jour page vendeurs

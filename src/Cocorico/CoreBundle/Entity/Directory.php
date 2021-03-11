@@ -113,11 +113,16 @@ class Directory
         self::STRUCT_GEIQ,
     );
 
+    const natureValues = array(
+        'siege' => 'Conventionné avec la Direccte',
+        'antenne' => 'Rattaché à un autre conventionnement'
+    );
+
     public static $exportColumns = array(
         'name' => 'Raison sociale',
         # 'siret' => 'Siret',
-        'siren' => 'Siren',
-        'nature' => 'Structure',
+        'validSiret' => 'Siret',
+        'natureText' => 'Structure',
         'kind' => 'Type',
         'sector' => 'Secteur',
         'email' => 'E-mail',
@@ -918,6 +923,16 @@ class Directory
     public function getNature()
     {
         return $this->nature;
+    }
+    
+    /**
+     * Get natureText.
+     *
+     * @return string|null
+     */
+    public function getNatureText()
+    {
+        return self::natureValues[$this->nature];
     }
 
     /**
