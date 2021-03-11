@@ -264,13 +264,13 @@ class Directory
     private $region;
 
     /**
-     * @ORM\Column(name="longitude", type="decimal", nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", scale=6, nullable=true)
      * @var string|null
      */
     private $longitude;
 
     /**
-     * @ORM\Column(name="latitude", type="decimal", nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", scale=6, nullable=true)
      * @var string|null
      */
     private $latitude;
@@ -399,6 +399,20 @@ class Directory
         }
         return '';
     }
+
+    /**
+     * Get Valid Siret.
+     *
+     * @return string
+     */
+    public function getValidSiret()
+    {
+        if ($this->siret and $this->siretIsValid) {
+            return $this->siret;
+        }
+        return '';
+    }
+
 
 
     /**
@@ -1001,4 +1015,5 @@ class Directory
     {
         return $this->dateConstitution;
     }
+
 }

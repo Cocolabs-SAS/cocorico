@@ -80,7 +80,7 @@
                                 </h4>
 
                                 {% if company %}
-                                    {{ company.nature == 'siege' ? "Établissement conventionné" : "Établissement conventionné" }}
+                                    {{ company.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
                                 {% endif %}
                             </address>
                         </div>
@@ -91,7 +91,7 @@
                                     <dl class="deflist">
                                         <dt>Siret</dt>
                                         <dd>
-                                            {% if company %}
+                                            {% if company and company.siret_is_valid %}
                                                 {{ company.siret }}
                                             {% else %}
                                                 {{ user.siret }}

@@ -7,6 +7,10 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [2.1] - (2021-03-XX)
+- Siret si valide, sinon rien
+- Corrections Base de données
+
 ### [2.0] - (2021-03-08)
 - Mise à jour page vendeurs
 - Préparation intégration données externes
