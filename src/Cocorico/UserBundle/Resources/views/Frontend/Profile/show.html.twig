@@ -240,8 +240,10 @@
                         <dl class='deflist'>
                             <dt>Nombre de salariés</dt>
                             <dd>{{ not company.employees ? "non disponible" : company.employees }}</dd>
+                            {#
                             <dt>CA de la structure</dt>
                             <dd>{{ not company.chiffreAffaire ? "non disponible" : company.chiffreAffaire }}</dd>
+                            #}
                             {% if company.dateConstitution %}
                                 <dt>Date de création de la structure</dt>
                                 <dd>{{ company.dateConstitution | localizeddate('short', 'none', 'fr', user_timezone) }}</dd>
