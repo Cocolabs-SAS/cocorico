@@ -113,11 +113,16 @@ class Directory
         self::STRUCT_GEIQ,
     );
 
+    const natureValues = array(
+        'siege' => 'Conventionné avec la Direccte',
+        'antenne' => 'Rattaché à un autre conventionnement'
+    );
+
     public static $exportColumns = array(
         'name' => 'Raison sociale',
         # 'siret' => 'Siret',
-        'siren' => 'Siren',
-        'nature' => 'Structure',
+        'validSiret' => 'Siret',
+        'natureText' => 'Établissement',
         'kind' => 'Type',
         'sector' => 'Secteur',
         'email' => 'E-mail',
@@ -264,13 +269,13 @@ class Directory
     private $region;
 
     /**
-     * @ORM\Column(name="longitude", type="decimal", nullable=true)
+     * @ORM\Column(name="longitude", type="decimal", scale=6, nullable=true)
      * @var string|null
      */
     private $longitude;
 
     /**
-     * @ORM\Column(name="latitude", type="decimal", nullable=true)
+     * @ORM\Column(name="latitude", type="decimal", scale=6, nullable=true)
      * @var string|null
      */
     private $latitude;
@@ -399,6 +404,20 @@ class Directory
         }
         return '';
     }
+
+    /**
+     * Get Valid Siret.
+     *
+     * @return string
+     */
+    public function getValidSiret()
+    {
+        if ($this->siret and $this->siretIsValid) {
+            return $this->siret;
+        }
+        return '';
+    }
+
 
 
     /**
@@ -905,6 +924,16 @@ class Directory
     {
         return $this->nature;
     }
+    
+    /**
+     * Get natureText.
+     *
+     * @return string|null
+     */
+    public function getNatureText()
+    {
+        return self::natureValues[$this->nature];
+    }
 
     /**
      * Set siretIsValid.
@@ -1001,4 +1030,5 @@ class Directory
     {
         return $this->dateConstitution;
     }
+
 }
