@@ -122,7 +122,7 @@ class Directory
         'name' => 'Raison sociale',
         # 'siret' => 'Siret',
         'validSiret' => 'Siret',
-        'natureText' => 'Structure',
+        'natureText' => 'Établissement',
         'kind' => 'Type',
         'sector' => 'Secteur',
         'email' => 'E-mail',
