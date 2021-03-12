@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [2.1] - (2021-03-XX)
+### [2.1] - (2021-03-12)
 - Siret si valide, sinon rien
 - Corrections Base de données
 - Wording antenne / siege
