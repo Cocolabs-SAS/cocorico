@@ -41,7 +41,6 @@ class ListingListingCategoriesToListingCategoriesTransformer implements DataTran
      */
     public function transform($listingListingCategories)
     {
-        dump($listingListingCategories);
         if (!is_null($listingListingCategories)) {
             $results = [];
 
