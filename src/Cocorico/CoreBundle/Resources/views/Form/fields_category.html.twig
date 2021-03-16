@@ -29,7 +29,7 @@
                 {% set cl_l2 = 'l' ~ category.getId() %}
             {% endif %}
             {% set cl_id = 'l' ~ category.getId() %}
-            <li class='multisel' id="{{ cl_id }}">
+            <li class='multisel' id="{{ cl_id }}" t_data-selected="0">
                 <h{{category.getLvl + 1}}>{{ category.getName() }}</h{{category.getLvl + 1}}>
             </li>
         {%- else -%}
@@ -38,7 +38,7 @@
                     <input {{ block('widget_attributes') }} type="checkbox"
                         class="jcf-ignore" value="{{ choice.value}}"{% if choice is
                     selectedchoice(value) %} selected="selected"{% endif %}
-                    style="visibility:visible;opacity:1;"/>
+                    style="visibility:visible;opacity:1;" />
                     {{choice.label}}
                 </label>
             </li>
@@ -55,11 +55,11 @@
         document.addEventListener("DOMContentLoaded", function() {
             $('.multisel').on('click', (e) => {
                 const cl = '.' + $(e.currentTarget).attr('id');
-                console.log('Coucou !');
-                console.log(cl);
+                const value = $(e.currentTarget).attr('data-selected') == "0" ?
+                    true : false;
+                $(e.currentTarget).attr('data-selected', value ? "1" : "0" );
                 $(cl).find(':checkbox').map((i, el) => {
-                    console.log(`Jambon! ${i} ${el}`);
-                    el.checked = !el.checked;
+                    el.checked = value;
                 });
             });
         });
