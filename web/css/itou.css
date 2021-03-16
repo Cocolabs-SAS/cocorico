@@ -1601,3 +1601,12 @@ section.quote-quick-form fieldset {
     max-width: none;
     min-width:inherit;
 }
+
+
+/******************
+ * Multiselect Styles
+ ******************/
+
+div.c4_multiselect li {
+    list-style-type:None;
+}
