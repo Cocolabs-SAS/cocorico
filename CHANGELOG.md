@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [2.2] - (2021-03-17)
+- Fix wording "Raison sociale"
+- Remplacement wording "catégorie" par "secteur d'activité"
+- Refactor selection "secteur d'activité"
+- Fix home page header
+
 ### [2.1] - (2021-03-12)
 - Siret si valide, sinon rien
 - Corrections Base de données

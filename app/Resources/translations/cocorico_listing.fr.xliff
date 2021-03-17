@@ -224,11 +224,11 @@
       </trans-unit>
       <trans-unit id="162d093e09d2f1a013d89e6b396fdeda059eff19" resname="listing.edit.categories.sub_title">
         <source>listing.edit.categories.sub_title</source>
-        <target state="new">Sélectionner une ou plusieurs catégories</target>
+        <target state="new">Sélectionner un ou plusieurs secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="de8101c74afaa94af7f71e138806d1ab50586d59" resname="listing.edit.categories.title">
         <source>listing.edit.categories.title</source>
-        <target state="new">Catégories</target>
+        <target state="new">Secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="2794ffe7c731458884325179895cbea762a11636" resname="listing.edit.characteristic.sub_title">
         <source>listing.edit.characteristic.sub_title</source>
@@ -496,7 +496,7 @@
       </trans-unit>
       <trans-unit id="72b732682cffac50b7b04c2703af21318d03a7b5" resname="listing.new.categories.title">
         <source>listing.new.categories.title</source>
-        <target>Choisissez une catégorie pour votre offre</target>
+        <target>Choisissez un ou plusieurs secteurs d'activité pour votre offre</target>
       </trans-unit>
       <trans-unit id="10c64b246aa5847e69aa2e4d0b57c39bb7bad697" resname="listing.new.price.rent">
         <source>listing.new.price.rent</source>
@@ -615,11 +615,11 @@
       </trans-unit>
       <trans-unit id="f5c75b851ea7ef9715252505d5032f652fdaf38b" resname="listing.show.categories">
         <source>listing.show.categories</source>
-        <target state="new">Catégories</target>
+        <target state="new">Secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="listing.show.categories:">
         <source>listing.show.categories:</source>
-        <target>Catégories</target>
+        <target>Secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="listing.show.characteristics">
         <source>listing.show.characteristics</source>
@@ -731,7 +731,7 @@
       </trans-unit>
       <trans-unit id="5ecf4e31f55710533951a1068244c8b7e3dd4c86" resname="listing_categories.min {{ min_categories }}">
         <source>listing_categories.min {{ min_categories }}</source>
-        <target>Vous devez sélectionner au moins {{ min_categories }} catégorie(s)</target>
+        <target>Vous devez sélectionner au moins {{ min_categories }} secteur(s) d'activité</target>
       </trans-unit>
       <trans-unit id="cda9f4e18c8aeaee6f4a5c40bc4ce50fbbf9aac0" resname="listing_discount.discount.max {{ max_discount }}">
         <source>listing_discount.discount.max {{ max_discount }}</source>
@@ -807,11 +807,11 @@
       </trans-unit>
       <trans-unit id="793890ef1a5e2a969f867ff69e3a84f5cf01751b" resname="listing_search.form.categories">
         <source>listing_search.form.categories</source>
-        <target>Catégories</target>
+        <target>Secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="f0321085b5fdb1cbb8a670c7431d3cb69cc86878" resname="listing_search.form.categories.empty_value">
         <source>listing_search.form.categories.empty_value</source>
-        <target>Choisissez une catégorie</target>
+        <target>Choisissez un secteur d'activité</target>
       </trans-unit>
       <trans-unit id="08d3c10ef83330fff09ab0febe661ada75d6133e" resname="listing_search.form.end">
         <source>listing_search.form.end</source>
@@ -871,7 +871,7 @@
       </trans-unit>
       <trans-unit id="d529fbd59b804564c3cd52cdb93f8623857d58ac" resname="nav.listing.categories.link">
         <source>nav.listing.categories.link</source>
-        <target state="new">Catégories</target>
+        <target state="new">Secteurs d'activité</target>
       </trans-unit>
       <trans-unit id="5a53382996a5e6ba6163c57a5aa93b0513889803" resname="nav.listing.characteristic.link">
         <source>nav.listing.characteristic.link</source>
