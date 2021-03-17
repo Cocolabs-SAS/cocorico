@@ -1647,8 +1647,9 @@ div.c4_multiselect li {
     padding:0;
     border-left:5px solid #fff;
     padding-left:3px;
+    margin:8px 0 4px;
 }
-.multisel h1 { font-size: 1.5rem; }
+.multisel h1 { font-size: 1.5rem; margin-top:12px;}
 .multisel h2 { font-size: 1.3rem; }
 .multisel h1:hover,
 .multisel h2:hover {
