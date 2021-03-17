@@ -58,7 +58,6 @@
                 const value = $(e.currentTarget).attr('data-selected') == "0" ?
                     true : false;
                 $(e.currentTarget).attr('data-selected', value ? "1" : "0" );
-                console.log(value);
                 $(cl).find(':checkbox').map((i, el) => {
                     el.checked = value;
                 });
