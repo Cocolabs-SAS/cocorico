@@ -1610,3 +1610,19 @@ section.quote-quick-form fieldset {
 div.c4_multiselect li {
     list-style-type:None;
 }
+
+.multisel h1,
+.multisel h2 {
+    cursor: pointer;
+    margin:0;
+    padding:0;
+    border-left:5px solid #fff;
+    padding-left:3px;
+    margin:1rem 0 .2rem;
+}
+.multisel h1 { font-size: 1.5rem; }
+.multisel h2 { font-size: 1.3rem; }
+.multisel h1:hover,
+.multisel h2:hover {
+    border-color:#000;
+}

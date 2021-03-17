@@ -29,15 +29,15 @@
                 {% set cl_l2 = 'l' ~ category.getId() %}
             {% endif %}
             {% set cl_id = 'l' ~ category.getId() %}
-            <li class='multisel' id="{{ cl_id }}" t_data-selected="0">
+            <li class='multisel' id="{{ cl_id }}" data-selected="0">
                 <h{{category.getLvl + 1}}>{{ category.getName() }}</h{{category.getLvl + 1}}>
             </li>
         {%- else -%}
             <li class="{{cl_l1}} {{cl_l2}}">
                 <label>
-                    <input {{ block('widget_attributes') }} type="checkbox"
+                    <input name="listing_categories[listingListingCategories][]" type="checkbox"
                         class="jcf-ignore" value="{{ choice.value}}"{% if choice is
-                    selectedchoice(value) %} selected="selected"{% endif %}
+                    selectedchoice(value) %} checked="true"{% endif %}
                     style="visibility:visible;opacity:1;" />
                     {{choice.label}}
                 </label>
@@ -58,6 +58,7 @@
                 const value = $(e.currentTarget).attr('data-selected') == "0" ?
                     true : false;
                 $(e.currentTarget).attr('data-selected', value ? "1" : "0" );
+                console.log(value);
                 $(cl).find(':checkbox').map((i, el) => {
                     el.checked = value;
                 });
@@ -67,8 +68,7 @@
 {%- endblock  %}
 {# Categories tree  widget #}
 
-{#
-{% block _listing_categories_listingListingCategories_widget_select -%}
+{% block _listing_categories_listingListingCategories_widget_deact -%}
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
@@ -107,7 +107,6 @@
         {% endautoescape %}
     {% endfor %}
 {%- endblock listing_category_widget_options_tree %}
-#}
 
 
 {% block _listing_categories_widget %}
