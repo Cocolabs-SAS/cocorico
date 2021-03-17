@@ -1564,32 +1564,61 @@ section.quote-quick-form fieldset {
     padding: 1rem 0 3rem 1rem;
 }
 
-#dirlink {
-    background-color:#EAF3FC;
-    padding-top:1rem;
-    margin-left:6.5%;
-    margin-bottom:3rem;
-    padding:2rem;
-    width:87%;
-    color:#000;
-    line-height:2.2rem;
-    border-radius:8px;
-}
 
-#dirlink h3 {
+.headlink h3 {
     color:#000;
     margin-top:0;
 }
 
-#dirlink p {
-    font-size:1.2rem;
+.headlink p {
+    font-size:1.4rem;
 }
 
-#dirlink .container {
+#dirlink {
+    background-color:#EAF3FC;
+}
+
+#formlink {
+    background-color:#fff;;
+    border: 3px solid #fe5455;
+}
+
+.headlink a {
+    position:absolute;
+    bottom:1rem;
+    margin-left:9%;
+    width:70%;
+}
+
+.headlink {
+    margin: 3rem 0 2rem;
+    padding: .8rem 2rem 5rem;
+    color:#000;
+    line-height:2.2rem;
+    border-radius:8px;
+    position:relative;
+    width:45%;
+}
+
+#formlink img {
+    margin-top:20px;
+    margin-bottom:28px;
+}
+
+#c4_temp_head {
+    display:flex;
+    justify-content:space-around;
     width:100%;
 }
 
-
+@media screen and (max-width:576px) {
+    #c4_temp_head {
+        flex-flow: column wrap;
+    }
+    .headlink {
+        width:100%;
+    }
+}
 
 /******************
  * ADMIN STYLES
@@ -1618,7 +1647,6 @@ div.c4_multiselect li {
     padding:0;
     border-left:5px solid #fff;
     padding-left:3px;
-    margin:1rem 0 .2rem;
 }
 .multisel h1 { font-size: 1.5rem; }
 .multisel h2 { font-size: 1.3rem; }

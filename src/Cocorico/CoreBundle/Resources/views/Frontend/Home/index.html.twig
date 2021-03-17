@@ -16,7 +16,7 @@
         {% trans_default_domain 'cocorico_home' %}
 
         {% block sub_header %}
-            {#<!-- visual -->#}
+        {#
             <div class="visual text-center">
                 <div class="container">
                     <div class="row">
@@ -29,34 +29,39 @@
                                 </div>
                             </div>
                         </div>
-                        {#
                         {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
-                        #}
                     </div>
                 </div>
             </div>
+        #}
         {% endblock %}
         {% block main %}
 
             <!-- infoarea -->
-            <div id="dirlink" class="row">
-                <div class="container">
-                    <div class="textbox col-xs-12 col-md-6">
-                        <img src="{{ asset('images/oeil-ouvert.svg') }}" alt="icon description" class="icon hidden-xs" style="width:90px";>
-                        <h3><span>Télécharger la liste des prestataires inclusifs</span></h3>
-                        <p>
-                            1. Identifiez vos prestataires référencés<br />
-                            2. Vérifiez la mise à jour des entreprises conventionnées par l’état<br />
-                            3. Découvrez et sélectionnez des prestataires sur tout le territoire
-                        </p>
-                        <a id="h_sl" class="btn btn-default" href="/fr/repertoire/siae" style="margin-top:18px;">
-                            Obtenez la liste
-                            <i class="icon-right-small"></i>
-                        </a>
-                    </div>
-                    <div class="hidden-xs col-md-6" style="overflow:hidden">
-                        <img src="{{ asset('images/info_sourcing.png') }}" style="width:445px;margin:1rem" alt="Exemple de liste de structures SIAE">
-                    </div>
+            <div id="c4_temp_head" style="">
+                <div id="formlink" class="headlink">
+                            <img src="{{ asset('svg/enveloppe.svg') }}" alt="icon description" class="icon hidden-xs" style="width:90px";>
+                            <h3><span>Vous avez un besoin de sourcing ?</span></h3>
+                            <p>
+                            Déposez votre demande et nous vous recontacterons avec une liste de prestataires
+                            </p>
+                            <a id="h_sl" class="btn btn-outline-primary" href="https://itou.typeform.com/to/nxG0HlYx" target="_blank" style="margin-top:18px;">
+                                Faire une demande
+                                <i class="icon-right-small"></i>
+                            </a>
+                </div>
+                <div id="dirlink" class="headlink">
+                            <img src="{{ asset('images/oeil-ouvert.svg') }}" alt="icon description" class="icon hidden-xs" style="width:90px";>
+                            <h3><span>Consultez et Téléchargez la liste de toutes les SIAE et EA de France</span></h3>
+                            <p>
+                                1. Identifiez vos prestataires référencés<br />
+                                2. Vérifiez la mise à jour des agréments<br />
+                                3. Découvrez et sélectionnez des prestataires sur tout le territoire
+                            </p>
+                            <a id="h_sl" class="btn btn-default" href="/fr/repertoire/siae" style="margin-top:18px;">
+                                Obtenez la liste
+                                <i class="icon-right-small"></i>
+                            </a>
                 </div>
             </div>
             <div id="borat" class="infoarea container">

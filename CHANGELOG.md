@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Fix wording "Raison sociale"
 - Remplacement wording "catégorie" par "secteur d'activité"
 - Refactor selection "secteur d'activité"
+- Fix home page header
 
 ### [2.1] - (2021-03-12)
 - Siret si valide, sinon rien
