@@ -496,7 +496,7 @@
       </trans-unit>
       <trans-unit id="72b732682cffac50b7b04c2703af21318d03a7b5" resname="listing.new.categories.title">
         <source>listing.new.categories.title</source>
-        <target>Choisissez une catégorie pour votre offre</target>
+        <target>Choisissez un ou plusieurs secteurs d'activité pour votre offre</target>
       </trans-unit>
       <trans-unit id="10c64b246aa5847e69aa2e4d0b57c39bb7bad697" resname="listing.new.price.rent">
         <source>listing.new.price.rent</source>
@@ -731,7 +731,7 @@
       </trans-unit>
       <trans-unit id="5ecf4e31f55710533951a1068244c8b7e3dd4c86" resname="listing_categories.min {{ min_categories }}">
         <source>listing_categories.min {{ min_categories }}</source>
-        <target>Vous devez sélectionner au moins {{ min_categories }} catégorie(s)</target>
+        <target>Vous devez sélectionner au moins {{ min_categories }} secteur(s) d'activité</target>
       </trans-unit>
       <trans-unit id="cda9f4e18c8aeaee6f4a5c40bc4ce50fbbf9aac0" resname="listing_discount.discount.max {{ max_discount }}">
         <source>listing_discount.discount.max {{ max_discount }}</source>
@@ -811,7 +811,7 @@
       </trans-unit>
       <trans-unit id="f0321085b5fdb1cbb8a670c7431d3cb69cc86878" resname="listing_search.form.categories.empty_value">
         <source>listing_search.form.categories.empty_value</source>
-        <target>Choisissez une catégorie</target>
+        <target>Choisissez un secteur d'activité</target>
       </trans-unit>
       <trans-unit id="08d3c10ef83330fff09ab0febe661ada75d6133e" resname="listing_search.form.end">
         <source>listing_search.form.end</source>
