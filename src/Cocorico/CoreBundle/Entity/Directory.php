@@ -333,6 +333,17 @@ class Directory
      */
     private $dateConstitution;
 
+    /**
+     * @var string|null
+     * @ORM\Column(name="admin_email", type="string", nullable=true)
+     */
+    private $adminEmail;
+
+    /**
+     * @var string|null
+     * @ORM\Column(name="admin_name", type="string", nullable=true)
+     */
+    private $adminName;
 
     /**
      * Get id.
@@ -1031,4 +1042,52 @@ class Directory
         return $this->dateConstitution;
     }
 
+
+    /**
+     * Set adminEmail.
+     *
+     * @param string|null $adminEmail
+     *
+     * @return Directory
+     */
+    public function setAdminEmail($adminEmail = null)
+    {
+        $this->adminEmail = $adminEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get adminEmail.
+     *
+     * @return string|null
+     */
+    public function getAdminEmail()
+    {
+        return $this->adminEmail;
+    }
+
+    /**
+     * Set adminName.
+     *
+     * @param string|null $adminName
+     *
+     * @return Directory
+     */
+    public function setAdminName($adminName = null)
+    {
+        $this->adminName = $adminName;
+
+        return $this;
+    }
+
+    /**
+     * Get adminName.
+     *
+     * @return string|null
+     */
+    public function getAdminName()
+    {
+        return $this->adminName;
+    }
 }
