@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Remplacement wording "catégorie" par "secteur d'activité"
 - Refactor selection "secteur d'activité"
 - Fix home page header
+- Fix page favoris
 
 ### [2.1] - (2021-03-12)
 - Siret si valide, sinon rien
