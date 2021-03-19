@@ -1,0 +1,2 @@
+#!/bin/bash
+php bin/console doctrine:generate:entities Cocorico\CoreBundle:Directory
