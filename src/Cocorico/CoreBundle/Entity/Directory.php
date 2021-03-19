@@ -346,6 +346,22 @@ class Directory
     private $adminName;
 
     /**
+     * @ORM\OneToMany(targetEntity="DirectoryListingCategory", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)//, fetch="EAGER"
+     *
+     */
+    private $directoryListingCategories;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Cocorico\UserBundle\Entity\User", inversedBy="structures", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @var Users
+     */
+    private $users;
+
+
+    /**
      * Get id.
      *
      * @return int
@@ -1089,5 +1105,91 @@ class Directory
     public function getAdminName()
     {
         return $this->adminName;
+    }
+
+    /**
+     * Add category
+     *
+     * @param  \Cocorico\CoreBundle\Entity\DirectoryListingCategory $directoryListingCategory
+     * @return Directory
+     */
+    public function addDirectoryListingCategory(DirectoryListingCategory $directoryListingCategory)
+    {
+        $directoryListingCategory->setListing($this);
+        $this->directoryListingCategories[] = $directoryListingCategory;
+
+        return $this;
+    }
+
+
+    /**
+     * Remove category
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryListingCategory $directoryListingCategory
+     */
+    public function removeDirectoryListingCategory(DirectoryListingCategory $directoryListingCategory)
+    {
+//        foreach ($listingListingCategory->getValues() as $value) {
+//            $listingListingCategory->removeValue($value);
+//        }
+
+        $this->directoryListingCategories->removeElement($directoryListingCategory);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection|DirectoryListingCategory[]
+     */
+    public function getDirectoryListingCategories()
+    {
+        return $this->directoryListingCategories;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->directoryListingCategories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add user
+     *
+     * @param \Cocorico\UserBundle\Entity\User $user
+     *
+     * @return Directory
+     */
+    public function addUser(\Cocorico\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+        // $user->addStructure($this); // It's the user
+
+        return $this;
+    }
+
+    /**
+     * Remove user.
+     *
+     * @param \Cocorico\UserBundle\Entity\User $user
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeUser(\Cocorico\UserBundle\Entity\User $user)
+    {
+        return $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
