@@ -19,17 +19,25 @@
                 <!-- post -->
                 {% for structure in structures.iterator %}
                     <article class="structure-post col-sm-6 col-xs-12">
-                        <dl>
-                            <dt>Nom(s) :</dt>
-                            <dd>{{ structure.name}} </dd>
-                            <dd>{{ structure.brand}} </dd>
-                            <dt>Siret :</dt>
-                            <dd>{{ structure.siret}} </dd>
-                            <dt>Nature :</dt>
-                            <dd>{{ structure.nature}} </dd>
-                            <dt>Type :</dt>
-                            <dd>{{ structure.kind}} </dd>
-                        </dl>
+                        <a href="javascript:void(0)" class="listing-box">
+                            <div class="box">
+                                <dl>
+                                    <dt>Nom(s) :</dt>
+                                    <dd>{{ structure.name}} </dd>
+                                    <dd>{{ structure.brand}} </dd>
+                                    <dt>Siret :</dt>
+                                    <dd>{{ structure.siret}} </dd>
+                                    <dt>Nature :</dt>
+                                    <dd>{{ structure.nature}} </dd>
+                                    <dt>Type :</dt>
+                                    <dd>{{ structure.kind}} </dd>
+                                </dl>
+                            </div>
+                        </a>
+
+                        {{
+                        render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:statusIndexForm',
+                        {'structure': structure})) }}
                     </article>
                 {% endfor %}
             </div>
