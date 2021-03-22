@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.0] - (2021-03-XX)
+- Ajout contrôle des secteurs d'activité aux structures du répertoire
+- Migration vers une centralité du marché sur les structures
+- Gros réfactor
+
 ### [2.2] - (2021-03-18)
 - Fix wording "Raison sociale"
 - Remplacement wording "catégorie" par "secteur d'activité"
