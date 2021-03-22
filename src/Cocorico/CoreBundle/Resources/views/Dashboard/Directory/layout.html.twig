@@ -4,7 +4,7 @@
 
 
 {% block nav_dashboard -%}
-    {% set nav_dashboard_current = 'listings' %}
+    {% set nav_dashboard_current = 'directorys' %}
     {{ parent() }}
 {%- endblock %}
 
@@ -14,22 +14,23 @@
         <div role="tabpanel">
 
             {% block nav_side_dashboard -%}
-                {% if listing is defined %}
-                    <div class="listing-title-block">
-                        <h1 class="listing-title">
-                            {{ listing.title }}
+                {% if structure is defined %}
+                    <div class="directory-title-block">
+                        <h1 class="directory-title">
+                            {{ structure.name }}
 
                             <a target="_blank" class="btn btn-default"
-                               href="{{ path('cocorico_listing_show', {'slug':listing.translations[app.request.locale].slug} ) }}">
-                                {{ 'nav.listing.show.link'|trans }}
+                               href="{{ path('cocorico_directory_show',
+                               { 'id':structure.id } ) }}">
+                                Voir Fiche
                             </a>
                         </h1>
                     </div>
                 {% endif %}
 
-                {% include '@CocoricoCore/Dashboard/Listing/_nav_side.html.twig' with {
+                {% include '@CocoricoCore/Dashboard/Directory/_nav_side.html.twig' with {
                 'nav_side_dashboard_current': nav_side_dashboard_current,
-                'listing': listing,
+                'structure': structure,
                 } only %}
             {%- endblock %}
 

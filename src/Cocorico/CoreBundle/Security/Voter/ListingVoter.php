@@ -44,7 +44,7 @@ class ListingVoter extends Voter
         }
 
         if (!$subject instanceof Listing) {
-            throw new NotFoundHttpException();
+            return false;
         }
 
         return true;

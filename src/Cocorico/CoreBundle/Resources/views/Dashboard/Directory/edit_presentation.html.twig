@@ -8,16 +8,19 @@
  {%- endblock %}
 
 {% block content_dashboard -%}
-
     {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
     <fieldset>
         <legend class="hidden">form area</legend>
         <!-- alert -->
         {{ form_errors(form) }}
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+    {# FIXME: Build the completition notice
         {{
         render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice',
         {'structure': structure})) }}
+
+    #}
         <!-- Tab panes -->
         <div class="tab-content">
             <!-- tab presentation -->
@@ -28,15 +31,18 @@
                     <!--
                     <div class="row {% if locales|length == 1 %}hidden{% endif %}" style="margin-top:15px;">
                     -->
-                    <div class="row hidden" style="margin-top:15px;">
+                    <div class="row" style="margin-top:15px;">
                         {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
                         <pre>En construction</pre>
+                        <div class="field-row">
+                            <div class="col-sm-4">
+                                {{ form_label(form.brand)}}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form_widget(form.brand, { 'attr': { 'class': 'form-control required' }}) }}
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="form-holder tab-pane">
-                    <h2>Autres données</h2>
-                    <pre>En construction</pre>
                 </div>
 
                 <div class="btn-block text-center">

@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Listing Dashboard controller.
+ * Directory controller.
  *
  * @Route("/directory")
  */
@@ -34,7 +34,7 @@ class DirectoryController extends Controller
 {
 
     /**
-     * Finds and displays a Listing entity.
+     * Finds and displays a Directory entity.
      *
      * @Route("/{id}/show", name="cocorico_directory_show")
      * @Method("GET")
