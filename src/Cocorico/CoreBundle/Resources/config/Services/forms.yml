@@ -123,6 +123,24 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.directory_edit:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.directory_edit_categories:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.directory_edit_categories_ajax:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesAjaxType
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type }
+
+
     cocorico.form.type.country_filtered:
         class: Cocorico\CoreBundle\Form\Type\CountryFilteredType
         arguments:

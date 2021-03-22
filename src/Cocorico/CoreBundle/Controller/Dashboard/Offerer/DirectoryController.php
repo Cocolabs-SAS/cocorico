@@ -13,6 +13,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -276,6 +277,29 @@ class DirectoryController extends Controller
                 'form' => $form->createView()
             )
         );
+    }
+
+    /**
+     * @param Listing $listing
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createCategoriesForm(Directory $structure)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory_categories',
+            DirectoryEditCategoriesType::class,
+            $structure,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_categories',
+                    array('id' => $structure->getId())
+                ),
+            )
+        );
+
+        return $form;
     }
 
 

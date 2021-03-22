@@ -1,0 +1,47 @@
+{% trans_default_domain 'cocorico_directory' %}
+
+<div id="category-form-container">
+    {% if app.request.isXmlHttpRequest %}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    {% endif %}
+
+    <h3>{{ 'directory.edit.categories.sub_title'|trans }}</h3>
+
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="selection-area directory-categories">
+        {{ form_errors(form.directoryListingCategories) }}
+        {{ form_widget(form.directoryListingCategories) }}
+    </div>
+
+    <div class="btn-block text-center">
+        <button data-id="submit-category" type="submit" class="btn btn-default btn-primary">
+            <span>{{ 'directory.save'|trans }}</span>
+        </button>
+    </div>
+
+    {{ form_end(form) }}
+
+    <script>
+         document.addEventListener("DOMContentLoaded", function(){
+             const fun = (f) => {
+                 const $formContainer = $("#category-form-container");
+                 $formContainer.submitAjaxForm(function () {
+                     jcf.replaceAll("#category-form-container");
+                     f(f);
+                 });
+             };
+
+             fun(fun);
+             $("[data-id='submit-category']").on('click', function (e) {
+                 e.preventDefault();
+                 $(this).closest('form').submit();
+                 return false;
+             });
+         });
+    </script>
+</div>
+
+
+

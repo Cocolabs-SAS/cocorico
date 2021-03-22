@@ -160,6 +160,32 @@ class DirectoryManager extends BaseManager
     }
 
 
+    /**
+     * @param  Directory $directory
+     * @return Directory
+     */
+    public function save(Directory $directory)
+    {
+        $this->persistAndFlush($directory);
+
+        // This is a hack, leave it !
+
+        /** @var DirectoryOptionInterface $option */
+        // if ($directory->getOptions()) {
+        //     foreach ($directory->getOptions() as $option) {
+        //         $option->mergeNewTranslations();
+        //         $this->persistAndFlush($option);
+        //     }
+        // }
+
+        $this->em->flush();
+        $this->em->refresh($directory);
+
+        return $directory;
+    }
+
+
+
 
 }
 ?>

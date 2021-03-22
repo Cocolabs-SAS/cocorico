@@ -1115,7 +1115,7 @@ class Directory
      */
     public function addDirectoryListingCategory(DirectoryListingCategory $directoryListingCategory)
     {
-        $directoryListingCategory->setListing($this);
+        $directoryListingCategory->setDirectory($this);
         $this->directoryListingCategories[] = $directoryListingCategory;
 
         return $this;
