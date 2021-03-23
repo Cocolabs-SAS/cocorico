@@ -54,6 +54,7 @@ class DirectoryController extends Controller
             'CocoricoCoreBundle:Frontend/Directory:show.html.twig',
             array(
                 'structure' => $structure,
+                'user' => null,
             )
         );
     }

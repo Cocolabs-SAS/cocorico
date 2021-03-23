@@ -91,7 +91,8 @@
                                     <dl class="deflist">
                                         <dt>Siret</dt>
                                         <dd>
-                                            {% if company and company.siret_is_valid %}
+                                            {% if company and
+                                            company.siretIsValid %}
                                                 {{ company.siret }}
                                             {% else %}
                                                 {{ user.siret }}
