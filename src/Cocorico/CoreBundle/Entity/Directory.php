@@ -1195,6 +1195,6 @@ class Directory
 
     public function hasUser($user)
     {
-        return $this->user->contains($user);
+        return $this->users->contains($user);
     }
 }
