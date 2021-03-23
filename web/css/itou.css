@@ -1574,6 +1574,16 @@ section.quote-quick-form fieldset {
     font-size:1.4rem;
 }
 
+.headlink a,
+.headlink a:active,
+.headlink a:focus {
+    color:#0069D9 !important; 
+}
+
+.headlink a:hover {
+    color:#fff !important; 
+}
+
 #dirlink {
     background-color:#EAF3FC;
 }
