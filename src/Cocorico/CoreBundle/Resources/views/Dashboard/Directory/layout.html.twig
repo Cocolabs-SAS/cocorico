@@ -1,0 +1,45 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico' %}
+
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'directorys' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <div role="tabpanel" class="tab-pane active clearfix" id="properties">
+        <div role="tabpanel">
+
+            {% block nav_side_dashboard -%}
+                {% if structure is defined %}
+                    <div class="directory-title-block">
+                        <h1 class="listing-title">
+                            Structure:
+                            {{ structure.name }}
+
+                            <a target="_blank" class="btn btn-default"
+                               href="{{ path('cocorico_directory_show',
+                               { 'id':structure.id } ) }}">
+                                Voir Fiche
+                            </a>
+                        </h1>
+                    </div>
+                {% endif %}
+
+                {% include '@CocoricoCore/Dashboard/Directory/_nav_side.html.twig' with {
+                'nav_side_dashboard_current': nav_side_dashboard_current,
+                'structure': structure,
+                } only %}
+            {%- endblock %}
+
+            {% block content_dashboard %}{%- endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

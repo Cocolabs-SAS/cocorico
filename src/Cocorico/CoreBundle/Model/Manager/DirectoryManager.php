@@ -72,6 +72,21 @@ class DirectoryManager extends BaseManager
         }
     }
 
+    public function findByOwner($User, $page)
+    {
+        $qB = $this->getRepository()->getFindByUser($User);
+
+        //Pagination
+        $qB->setFirstResult(($page - 1) * $this->maxPerPage)
+           ->setMaxResults($this->maxPerPage);
+
+        //Query
+        $query = $qB->getQuery();
+
+        return new Paginator($query);
+    }
+
+
     public function listByForm($params=[])
     {
         $qB = $this->getRepository()->getAll();
@@ -143,6 +158,32 @@ class DirectoryManager extends BaseManager
     {
         return $this->em->getRepository('CocoricoCoreBundle:Directory');
     }
+
+
+    /**
+     * @param  Directory $directory
+     * @return Directory
+     */
+    public function save(Directory $directory)
+    {
+        $this->persistAndFlush($directory);
+
+        // This is a hack, leave it !
+
+        /** @var DirectoryOptionInterface $option */
+        // if ($directory->getOptions()) {
+        //     foreach ($directory->getOptions() as $option) {
+        //         $option->mergeNewTranslations();
+        //         $this->persistAndFlush($option);
+        //     }
+        // }
+
+        $this->em->flush();
+        $this->em->refresh($directory);
+
+        return $directory;
+    }
+
 
 
 

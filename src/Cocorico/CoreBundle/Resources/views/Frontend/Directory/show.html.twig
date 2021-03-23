@@ -1,0 +1,270 @@
+{% extends '::base.html.twig' %}
+
+{#
+<h1>Page Structure</h1>
+<h2>{{ structure.name }}</h2>
+<h2>{{ structure.brand }}</h2>
+<p>{{ structure.siret }}</p>
+<pre>En Construction</pre>
+#}
+
+{% if user %}
+    {% set user_images = user.images %}
+{%endif %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_user' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
+
+        {% block main %}
+
+            {#
+            {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchForm')) }}
+            #}
+            {# close previous .row #}
+            {{ '</div>' }}
+
+            <!-- two-columns -->
+            {{ '<div class="twocolumns row">' }}
+            <!-- contain the main content of the page -->
+            <div id="content" class="listing-area col-xs-12 col-sm-8">
+                <!-- profile-detail -->
+                <section class="profile-detail">
+                    <!-- First Row, company details -->
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <!-- gallery-small -->
+                            {% if user %}
+                            <div id="user_profile" class="gallery-small slideshow">
+                                <div class="slideset">
+                                        {% if user_images|length %}
+                                            {% for image in user_images %}
+                                                <div class="slide">
+                                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                                                         alt="{{ user.name }}"/>
+                                                </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <div class="slide">
+                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                                     alt="{{ user.name }}"/>
+                                            </div>
+                                        {% endif %}
+                                </div>
+                                <a href="#" class="btn-prev">previous</a>
+                                <a href="#" class="btn-next">next</a>
+                            </div>
+                            {% endif %}
+                            <address>
+                                <h4>
+                                    {{ structure.brand }}
+                                </h4>
+                                {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
+                            </address>
+                        </div>
+                        <div class="col-sm-9 shadow">
+                            <h3>Informations entreprise</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <dl class="deflist">
+                                        <dt>Siret</dt>
+                                        <dd>
+                                        {% if structure.siretIsValid %}
+                                            {{ structure.siret }}
+                                        {% endif %}
+                                        </dd>
+                                        <dt>Type de structure</dt>
+                                        <dd>{{ structure.kind }}</dd>
+                                    </dl>
+                                </div>
+                                <div class="col-sm-6">
+                                    <dl class="deflist">
+                                        <dt>Type(s) de prestation</dt>
+                                        {#
+                                        {% for ptype in listings_data.prestaTypes %}
+                                            <dd>{{ ptype | trans({}, 'cocorico_listing') }}</dd>
+                                        {% endfor %}
+                                        #}
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Second Row, Company Details -->
+                    <div class="row mb-3">
+                        <div class="col-sm-6 pull-left shadow">
+                            <h4>Secteurs d'activité</h4>
+                            <ul class="active_sectors">
+                                {% for cat in structure.directoryListingCategories %}
+                                    <li>{{ cat.getCategory().getName() }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                        <div class="col-sm-5  shadow pull-right">
+                            <h4>Éléments différenciants<br />
+                            (matériels, services particuliers, …)
+                            </h4>
+                        </div>
+                    </div>
+
+                    <!-- Third Row, Description -->
+                    {% if user %}
+                    <div class="row">
+                        <div class="col-sm-12 shadow">
+                            <h3>Description de l'activité commerciale</h3>
+                            <div class="user_description">
+                            {% if user_description %}
+                                {{ user_description | nl2br }}
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fourth Row, Listings -->
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <h3>Détail des prestations / Liste des prestations</h3>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
+                            'listings': user_listings
+                            } only %}
+                        </div>
+                    </div>
+
+                    <!-- Fourth Row, References -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Références clients</h3>
+                            {% for image in listings_data.clientImages %}
+                                <!-- slide -->
+                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
+                                      class="client-ref"/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                </section>
+            </div>
+            <aside id="sidebar" class="profile col-xs-12 col-sm-4">
+                <div class="profile_capsule">
+                    <h3>Données en libre accès</h3>
+                    <dl class='deflist'>
+                        <dt>Nombre de salariés</dt>
+                        <dd>{{ not structure.employees ? "non disponible" :
+                        structure.employees }}</dd>
+                        {#
+                        <dt>CA de la structure</dt>
+                        <dd>{{ not structure.chiffreAffaire ? "non disponible"
+                        : structure.chiffreAffaire }}</dd>
+                        #}
+                        {% if structure.dateConstitution %}
+                            <dt>Date de création de la structure</dt>
+                            <dd>{{ structure.dateConstitution | localizeddate('short', 'none', 'fr', user_timezone) }}</dd>
+                        {% endif %}
+                    </dl>
+                    <small>Source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">entreprise.api.gouv.fr</a></small>
+                </div>
+                <div class="profile_capsule">
+                    <h3>Contact entreprise</h3>
+                    <dl class='deflist'>
+                        <dt>Site Web</dt>
+                        <dd><a id="company_website"
+                            href="{{structure.website}}" rel="nofollow" target="blank">{{ structure.website }}</a></dd>
+                        {% if user %}
+                            <dt>Adresse email de contact</dt>
+                            <dd>{{ user.email }}</dd>
+                            <dt>N de téléphone</dt>
+                            <dd>{{ user.phone }}</dd>
+                            <dt>Personne à contacter</dt>
+                            <dd>{{ user.name }}</dd>
+                        {% endif %}
+                    </dl>
+                </div>
+                <div class="map_capsule">
+                    <div class="map-holder">
+                        <div id="map-company" class="map-canvas"></div>
+                    </div>
+                    <div class="map_details">
+                        <dl class='deflist'>
+                            <dt>Adresse</dt>
+                            <dd>{{ structure.postCode }}
+                            {{ structure.city }}</dd>
+                            <dd>{{ structure.region }}</dd>
+                            <br />
+                        </dl>
+                    </div>
+                </div>
+            </aside>
+            {#</div>#}
+        {% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% include '@CocoricoGeo/Common/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-company',
+    'marker_draggable': false,
+    'default_lat': structure.latitude,
+    'default_lng': structure.longitude,
+    'default_zoom': '10',
+    'display_marker': false
+    } only %}
+
+    <script>
+        $(function () {
+            // Categories
+            common.application.initMultiSelect(
+                '#categories',
+                '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
+                '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',
+                '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
+            );
+        });
+
+        $(function () {
+            //Map
+            var circle = new google.maps.Circle({
+                map: map,
+                center: latlng,
+                strokeColor: '#0000EE',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#0000EE',
+                fillOpacity: 0.1,
+                radius:  1000
+            });
+        });
+
+    </script>
+
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {#
+    {% include 'CocoricoSeoBundle:Frontend:Profile/_show_markup.jsonld.twig' ignore missing with {
+        'user': user,
+        'user_listings': user_listings,
+        'user_description': user_description,
+        'user_address': user_address
+    } only %}
+    #}
+{% endblock %}
+

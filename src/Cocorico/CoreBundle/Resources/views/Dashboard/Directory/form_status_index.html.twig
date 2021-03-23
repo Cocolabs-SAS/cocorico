@@ -1,0 +1,17 @@
+{% trans_default_domain 'cocorico_directory' %}
+<div id="status-form-container-{{ structure.id }}">
+    <ul class="info-btns list-inline text-center">
+        <li>
+            <a href="{{ path('cocorico_dashboard_directory_edit_presentation', { 'id': structure.id }) }}"
+               class="btn btn-primary">
+                {{ 'directory.edit.edit'|trans }}
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('cocorico_directory_show', { 'id': structure.id }) }}"
+               class="btn btn-primary">
+                {{ 'directory.edit.show'|trans }}
+            </a>
+        </li>
+    </ul>
+</div>

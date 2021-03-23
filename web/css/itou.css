@@ -420,6 +420,7 @@ fieldset {
 }
 
 #header {
+    background-color:#fff;
     padding-bottom:3px;
     box-shadow:0px -13px 21px #000 ;
     border-bottom:0;
@@ -1574,13 +1575,13 @@ section.quote-quick-form fieldset {
     font-size:1.4rem;
 }
 
-.headlink a,
-.headlink a:active,
-.headlink a:focus {
+#formlink a,
+#formlink a:active,
+#formlink a:focus {
     color:#0069D9 !important; 
 }
 
-.headlink a:hover {
+#formlink a:hover {
     color:#fff !important; 
 }
 
@@ -1639,6 +1640,20 @@ section.quote-quick-form fieldset {
     width:50%;
     max-width: none;
     min-width:inherit;
+}
+
+.structure-post {
+    border:1px solid #ccc;
+}
+
+.structure-post h3 {
+    font-size:1.2rem;
+    text-align:center;
+
+}
+
+.structure-post dd {
+    text-align:right;
 }
 
 

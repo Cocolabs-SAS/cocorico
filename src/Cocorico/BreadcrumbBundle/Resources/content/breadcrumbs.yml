@@ -54,6 +54,23 @@ cocorico_dashboard_quote_show_asker:
         route: 'cocorico_dashboard_quote_asker'
     -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Quote', 'entityMethod': 'getListing'}
 
+##Directory
+cocorico_dashboard_directory:
+    -   text: 'Structures'
+        route: 'cocorico_dashboard_directory'
+
+cocorico_dashboard_directory_edit_presentation:
+    -   text: 'Structures'
+        route: 'cocorico_dashboard_directory'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Directory', 'entityMethod': 'getName'}
+    -   text: 'Présentation'
+
+cocorico_dashboard_directory_edit_categories:
+    -   text: 'Structures'
+        route: 'cocorico_dashboard_directory'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Directory', 'entityMethod': 'getName'}
+    -   text: "Secteurs d'Activité"
+
 ##Listing
 cocorico_dashboard_listing:
     -   text: 'Listing'

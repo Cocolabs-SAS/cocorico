@@ -507,6 +507,15 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $listings;
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"createdAt" = "desc"})
+     *
+     * @var Structures[]
+     */
+    private $structures;
+
     /**
      * @ORM\OneToMany(targetEntity="Cocorico\UserBundle\Entity\UserAddress", mappedBy="user", cascade={"persist", "remove"})
      * @ORM\OrderBy({"type" = "asc"})
@@ -2332,5 +2341,42 @@ class User extends BaseUser implements ParticipantInterface
     public function removeBookingPayinRefund(\Cocorico\CoreBundle\Entity\BookingPayinRefund $bookingPayinRefund)
     {
         return $this->bookingPayinRefunds->removeElement($bookingPayinRefund);
+    }
+
+    /**
+     * Add structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return User
+     */
+    public function addStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        $this->structures[] = $structure;
+        $structure->addUser($this); // Directory owns
+
+        return $this;
+    }
+
+    /**
+     * Remove structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        return $this->structures->removeElement($structure);
+    }
+
+    /**
+     * Get structures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStructures()
+    {
+        return $this->structures;
     }
 }

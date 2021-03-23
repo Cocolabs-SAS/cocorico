@@ -20,6 +20,7 @@ class DirectoryRepository extends EntityRepository
      */
     public function findByUser($userId)
     {
+        // FIXME: Is this even used ?
         $resp = $this->getFindByC4Id($userId)->getQuery()->getResult();
         return count($resp) > 0 ? $resp[0] : false;
     }
@@ -57,6 +58,18 @@ class DirectoryRepository extends EntityRepository
         $qB = $this->getFindQueryBuilder();
         $qB->where('d.c4Id = :c4Id')
            ->setParameter('c4Id', $C4Id);
+
+        return $qB;
+    }
+
+
+    public function getFindByUser($user)
+    {
+        $qB = $this->getFindQueryBuilder();
+        // FIXME: Do some real filtering here, please !
+        $qB->leftJoin('d.users', 'u')
+           ->where("u = :user")
+           ->setParameter("user", $user);
 
         return $qB;
     }

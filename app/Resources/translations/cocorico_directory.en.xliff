@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:jms="urn:jms:translation" version="1.2">
+  <file source-language="en" target-language="fr" datatype="plaintext" original="not.available">
+    <header>
+      <tool tool-id="JMSTranslationBundle" tool-name="JMSTranslationBundle" tool-version="1.1.0-DEV"/>
+      <note>The source node in most cases contains the sample message as written by the developer. If it looks like a dot-delimitted string such as "form.label.firstname", then the developer has not provided a default message.</note>
+    </header>
+    <body>
+      <trans-unit id="da39a3ee5e4b4b0d3255bfef95601890afd80709" resname="">
+        <source></source>
+        <target></target>
+      </trans-unit>
+      <trans-unit id="85b9440b9a481e9ef8450c609753af0fb75c28de" resname="admin.directory.cancellation_policy.label">
+        <source>admin.directory.cancellation_policy.label</source>
+        <target>Politique d'annulation</target>
+      </trans-unit>
+      <trans-unit id="70f4bab980aaea77501b06db4a44795d111c90ba" resname="admin.directory.status.label">
+        <source>admin.directory.status.label</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="0d612c12d2ac33622bf3e0351b6f5e4f73829fa8" resname="auto">
+        <source>auto</source>
+        <target>auto</target>
+      </trans-unit>
+      <trans-unit id="ccc43ccbdcfdca4d48fd5309c511321b500c4f44" resname="booking.simulator.amount.help">
+        <source>booking.simulator.amount.help</source>
+        <target>booking.simulator.amount.help</target>
+      </trans-unit>
+      <trans-unit id="d04312144cfa558658c1b402b1f2b022d40c8de4" resname="cocorico.en">
+        <source>cocorico.en</source>
+        <target>anglais</target>
+      </trans-unit>
+      <trans-unit id="2fb2ddb9f57ab2b55ab72abf22e14396095c042d" resname="cocorico.fr">
+        <source>cocorico.fr</source>
+        <target>français</target>
+      </trans-unit>
+      <trans-unit id="b5bc050f765ad969a0347e56957630ec45dec432" resname="entity.directory.cancellation_policy.flexible">
+        <source>entity.directory.cancellation_policy.flexible</source>
+        <target>Flexible</target>
+      </trans-unit>
+      <trans-unit id="4be62a158d72fda330ee9ad4e24aeaba6f2dcefc" resname="entity.directory.cancellation_policy.strict">
+        <source>entity.directory.cancellation_policy.strict</source>
+        <target>Stricte</target>
+      </trans-unit>
+      <trans-unit id="da9160f098524d36a66a31d78d8f7e5e0b191d62" resname="entity.directory.cancellation_policy_desc.flexible">
+        <source>entity.directory.cancellation_policy_desc.flexible</source>
+        <target><![CDATA[> Si l'acheteur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
+
+> Si l'acheteur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
+      </trans-unit>
+      <trans-unit id="c19128b495e42fbc143b81d485b78c5679d7a9a3" resname="entity.directory.cancellation_policy_desc.strict">
+        <source>entity.directory.cancellation_policy_desc.strict</source>
+        <target><![CDATA[> Si l'acheteur annule jusqu'à X jours avant le début de la réservation, il touche X% de ce qu'il a payé
+
+> Si l'acheteur annule moins de X jours avant le début de la réservation, il touche X% de ce qu'il a payé]]></target>
+      </trans-unit>
+      <trans-unit id="86141469556c626c446c319fc332725e9871e30d" resname="entity.directory.status.deleted">
+        <source>entity.directory.status.deleted</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="a63f8ae54b464c70007db9a046f850723fa04b9e" resname="entity.directory.status.invalidated">
+        <source>entity.directory.status.invalidated</source>
+        <target>Invalidé</target>
+      </trans-unit>
+      <trans-unit id="54f6991f2d26f56c9a90bfe6d0d396c1b1b8945e" resname="entity.directory.status.new">
+        <source>entity.directory.status.new</source>
+        <target>Nouveau</target>
+      </trans-unit>
+      <trans-unit id="9be91469d02a12824c2a7d545fcb7bcd18aadf88" resname="entity.directory.status.published">
+        <source>entity.directory.status.published</source>
+        <target>Publié</target>
+      </trans-unit>
+      <trans-unit id="0c0f119745bec4421d5ba50c7a36be0f147c4869" resname="entity.directory.status.suspended">
+        <source>entity.directory.status.suspended</source>
+        <target>Caché</target>
+      </trans-unit>
+      <trans-unit id="29cbc9c1313ebb2a4b29b8853989366999fdfe4c" resname="entity.directory.status.to_validate">
+        <source>entity.directory.status.to_validate</source>
+        <target>A valider</target>
+      </trans-unit>
+      <trans-unit id="cda951a5ef0c72428fce6ac96ef0143bd03b2ab3" resname="entity.directory.type.one">
+        <source>entity.directory.type.one</source>
+        <target>Type 1</target>
+      </trans-unit>
+      <trans-unit id="b6d2d528a891ddf2ec35867bcd9e14640e560144" resname="entity.directory.type.three">
+        <source>entity.directory.type.three</source>
+        <target>Type 3</target>
+      </trans-unit>
+      <trans-unit id="e743c66b6bfb745b0e9cf3b276db09e283e16dca" resname="entity.directory.type.two">
+        <source>entity.directory.type.two</source>
+        <target>Type 2</target>
+      </trans-unit>
+      <trans-unit id="e743c65b6bfb745b0e9cf3b276db09e283e16dca" resname="entity.directory.presta_service">
+        <source>entity.directory.presta_service</source>
+        <target>Prestation de service</target>
+      </trans-unit>
+      <trans-unit id="e743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.presta_interim">
+        <source>entity.directory.presta_interim</source>
+        <target>Mise à disposition du personnel / Interim</target>
+      </trans-unit>
+      <trans-unit id="e743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.presta_commercial">
+        <source>entity.directory.presta_commercial</source>
+        <target>Fabrication et commercialisation de biens</target>
+      </trans-unit>
+      <trans-unit id="a743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.polrange.other">
+        <source>entity.directory.polrange.other</source>
+        <target>Distance en kilomètre</target>
+      </trans-unit>
+      <trans-unit id="b743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.polrange.departement">
+        <source>entity.directory.polrange.departement</source>
+        <target>Département</target>
+      </trans-unit>
+      <trans-unit id="c743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.polrange.region">
+        <source>entity.directory.polrange.region</source>
+        <target>Région</target>
+      </trans-unit>
+      <trans-unit id="c743c65b6bfb745b0e9cf3b276db09e283e17dca" resname="entity.directory.polrange.france">
+        <source>entity.directory.polrange.france</source>
+        <target>France entière</target>
+      </trans-unit>
+      <trans-unit id="f4c20a2055d3928af0f67db6a649501562b93870" resname="entity.directory_availability.status.available">
+        <source>entity.directory_availability.status.available</source>
+        <target>Disponible</target>
+      </trans-unit>
+      <trans-unit id="d9c221784e352306c00d2022326110bf075921e5" resname="entity.directory_availability.status.booked">
+        <source>entity.directory_availability.status.booked</source>
+        <target>Réservé</target>
+      </trans-unit>
+      <trans-unit id="f6802a262317b911b0ed9a2da53c86575c509a27" resname="entity.directory_availability.status.unavailable">
+        <source>entity.directory_availability.status.unavailable</source>
+        <target>Indisponible</target>
+      </trans-unit>
+      <trans-unit id="11f9578d05e6f7bb58a3cdd00107e9f4e3882671" resname="error">
+        <source>error</source>
+        <target>erreur</target>
+      </trans-unit>
+      <trans-unit id="1cb7e62bfe757aa67c3da37cd0176741ab8e164d" resname="home.high.rank.section.header">
+        <source>home.high.rank.section.header</source>
+        <target>NOS NOUVELLES OFFRES DE PRESTATIONS INCLUSIVES</target>
+      </trans-unit>
+      <trans-unit id="7686201ef254f400070d9fb294e5743fede8e338" resname="directory.availability.edit.success">
+        <source>directory.availability.edit.success</source>
+        <target>Enregistré</target>
+      </trans-unit>
+      <trans-unit id="553e5a5a5aa38bbac244a267aba6e126b859282b" resname="directory.availability.new.success">
+        <source>directory.availability.new.success</source>
+        <target>Enregistré</target>
+      </trans-unit>
+      <trans-unit id="d4cf5113ef86cf3511f74f61b5fdea479eb2553f" resname="directory.availability.save">
+        <source>directory.availability.save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="9e18e9ba9211c54bf615f689654216fbe447f194" resname="directory.calendar.available">
+        <source>directory.calendar.available</source>
+        <target>Disponible</target>
+      </trans-unit>
+      <trans-unit id="d77e81a705abedc479cd37c1d184b8e04b5cb09f" resname="directory.calendar.prices_help">
+        <source>directory.calendar.prices_help</source>
+        <target>Les prix sont exprimés par</target>
+      </trans-unit>
+      <trans-unit id="72a2232cb2b5a72c70b125490a4cfc4b325392cd" resname="directory.calendar.unavailable">
+        <source>directory.calendar.unavailable</source>
+        <target>Indisponible</target>
+      </trans-unit>
+      <trans-unit id="e861c12b3f2e309696d719e911fe260ca72737d1" resname="directory.cancellation_policy.help">
+        <source>directory.cancellation_policy.help</source>
+        <target>Politiques d'annulation</target>
+      </trans-unit>
+      <trans-unit id="057c7d9bab55cfec93c2f668f2ca90424f6b57f7" resname="directory.comments.header">
+        <source>directory.comments.header</source>
+        <target>Derniers commentaires</target>
+      </trans-unit>
+      <trans-unit id="89a665745f28f00d3b72f22e28568dd80863987e" resname="directory.confirm.delete">
+        <source>directory.confirm.delete</source>
+        <target>Êtes vous sûr de vouloir supprimer cette offre?</target>
+      </trans-unit>
+      <trans-unit id="86733a4d4174c84ea735907bc82df043fe1c968d" resname="directory.currency_convert.title">
+        <source>directory.currency_convert.title</source>
+        <target>Convertisseur de devises</target>
+      </trans-unit>
+      <trans-unit id="25223238b38ced1fe02f1c0260bce8c63a6eccd3" resname="directory.description.title">
+        <source>directory.description.title</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="1ce3ef0da02d34c985bff16c4fe2a82eefadd304" resname="directory.drop.files">
+        <source>directory.drop.files</source>
+        <target>Glissez vos images ici</target>
+      </trans-unit>
+      <trans-unit id="57d816fbddcbd4752fba830c73204f3863d0646e" resname="directory.duplicate.error">
+        <source>directory.duplicate.error</source>
+        <target>Une erreur est survenue lors de la duplication</target>
+      </trans-unit>
+      <trans-unit id="617e72d9c9a3f3ebf757c28a1d1c320c2b2c5f0c" resname="directory.duplicate.success">
+        <source>directory.duplicate.success</source>
+        <target>Offre dupliquée avec succès. Vous pouvez maintenant la modifier et la publier.</target>
+      </trans-unit>
+      <trans-unit id="20232449b77873ece396bc7639211a51ba310dd7" resname="directory.edit.calendar.choose_times.title">
+        <source>directory.edit.calendar.choose_times.title</source>
+        <target>Choisissez vos horaires</target>
+      </trans-unit>
+      <trans-unit id="ae04335034ebd144f4a6e71fe6dc8c53b7f2388b" resname="directory.edit.calendar.choose_weekdays.title">
+        <source>directory.edit.calendar.choose_weekdays.title</source>
+        <target>Jours de la semaine</target>
+      </trans-unit>
+      <trans-unit id="fead7956137d452b78011f93cedba983c9f3da4b" resname="directory.edit.calendar.day_click.info">
+        <source>directory.edit.calendar.day_click.info</source>
+        <target>Cliquez sur une date pour modifier sa disponibilité</target>
+      </trans-unit>
+      <trans-unit id="f285c27e582870db6036336b8a1a657f97abef5f" resname="directory.edit.calendar.help">
+        <source>directory.edit.calendar.help</source>
+        <target>Gérez vos disponibilités</target>
+      </trans-unit>
+      <trans-unit id="41d3e737567226a92e73d2c8f1f2bee5026a5dbb" resname="directory.edit.calendar.range.title">
+        <source>directory.edit.calendar.range.title</source>
+        <target>Disponibilités par plage</target>
+      </trans-unit>
+      <trans-unit id="b2157e1c2c3b35c2323d4f9383395221d145a428" resname="directory.edit.calendar.show.title">
+        <source>directory.edit.calendar.show.title</source>
+        <target>Calendrier des disponibilités</target>
+      </trans-unit>
+      <trans-unit id="e6be5663b608d3b6bc33089bd9c0acd8ea530559" resname="directory.edit.calendar.title">
+        <source>directory.edit.calendar.title</source>
+        <target>Calendrier</target>
+      </trans-unit>
+      <trans-unit id="162d093e09d2f1a013d89e6b396fdeda059eff19" resname="directory.edit.categories.sub_title">
+        <source>directory.edit.categories.sub_title</source>
+        <target state="new">Sélectionner un ou plusieurs secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="de8101c74afaa94af7f71e138806d1ab50586d59" resname="directory.edit.categories.title">
+        <source>directory.edit.categories.title</source>
+        <target state="new">Secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="2794ffe7c731458884325179895cbea762a11636" resname="directory.edit.characteristic.sub_title">
+        <source>directory.edit.characteristic.sub_title</source>
+        <target>Sélectionner vos caractéristiques</target>
+      </trans-unit>
+      <trans-unit id="06c697ca69e4d64c902061809056dfa19cf10d8c" resname="directory.edit.characteristic.title">
+        <source>directory.edit.characteristic.title</source>
+        <target>Caractéristiques</target>
+      </trans-unit>
+      <trans-unit id="d2ed0e6bf5c1b92d14ab680e03dbacad129c51ba" resname="directory.edit.completion_notice">
+        <source>directory.edit.completion_notice</source>
+        <target>Améliorez votre offre en renseignant ces informations :</target>
+      </trans-unit>
+      <trans-unit id="b7409dbdf0659f371d1633e937b3ab1efb3db57c" resname="directory.edit.completion_notice_characteristics">
+        <source>directory.edit.completion_notice_characteristics</source>
+        <target><![CDATA[<a href="%directory_edit_characteristic%">Renseignez vos caractéristiques</a>]]></target>
+      </trans-unit>
+      <trans-unit id="e3b573431e529abf45ebd78af0cf3b48b50aaa1d" resname="directory.edit.completion_notice_desc">
+        <source>directory.edit.completion_notice_desc</source>
+        <target><![CDATA[<a href="%directory_edit_presentation%">Renseignez votre description</a>]]></target>
+      </trans-unit>
+      <trans-unit id="d2985173167ff4478eaa99e089173bad7f852420" resname="directory.edit.completion_notice_imgage">
+        <source>directory.edit.completion_notice_imgage</source>
+        <target><![CDATA[<a href="%directory_edit_image%">Ajoutez au moins 3 photos</a>]]></target>
+      </trans-unit>
+      <trans-unit id="08586efbefe3e07f30f785c759bfabebdeee4325" resname="directory.edit.completion_notice_price">
+        <source>directory.edit.completion_notice_price</source>
+        <target><![CDATA[<a href="%directory_edit_price%">Renseignez vos prix</a>]]></target>
+      </trans-unit>
+      <trans-unit id="ebe9c24f88a0e40e2069e037cf43c6748475ca57" resname="directory.edit.completion_notice_profile_desc">
+        <source>directory.edit.completion_notice_profile_desc</source>
+          <target><![CDATA[<a href="%profile%">Présentez-vous</a>]]></target>
+      </trans-unit>
+      <trans-unit id="15d1bbc5c27c9dbc99f110c4a826dfe9350a701e" resname="directory.edit.completion_notice_profile_photo">
+        <source>directory.edit.completion_notice_profile_photo</source>
+        <target><![CDATA[<a href="%profile%">Ajoutez une photo de profil</a>]]></target>
+      </trans-unit>
+      <trans-unit id="673cd66258f1018b96661ad426e3c1de00baad1c" resname="directory.edit.completion_notice_title">
+        <source>directory.edit.completion_notice_title</source>
+        <target><![CDATA[<a href="%directory_edit_presentation%">Renseignez le titre de votre offre</a>]]></target>
+      </trans-unit>
+      <trans-unit id="485da2407741b15d7c6f27d864eb61ebad955d51" resname="directory.edit.discount.title">
+        <source>directory.edit.discount.title</source>
+        <target>Réductions</target>
+      </trans-unit>
+      <trans-unit id="ea208681b37ea11611f7f779c59dd530d4c2c265" resname="directory.edit.duplicate">
+        <source>directory.edit.duplicate</source>
+        <target>Dupliquer</target>
+      </trans-unit>
+      <trans-unit id="854ea5360827a7e0694ce055950d512588ecff23" resname="directory.edit.duplicate.modal.message">
+        <source>directory.edit.duplicate.modal.message</source>
+        <target>Duplication en cours : Vous allez être redirigé dans quelques instants sur la nouvelle offre dupliquée.</target>
+      </trans-unit>
+      <trans-unit id="a1fadd29db927c5d194d258be32fb9ef830677db" resname="directory.edit.edit">
+        <source>directory.edit.edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="947447a47864044b83dbfa66d75051c40da52ed9" resname="directory.edit.image.title">
+        <source>directory.edit.image.title</source>
+        <target>Photos</target>
+      </trans-unit>
+      <trans-unit id="fe972c610fe8e5ade6286312f68c6d17544c168f" resname="directory.edit.index.certified">
+        <source>directory.edit.index.certified</source>
+        <target>Offre de prestation certifiée</target>
+      </trans-unit>
+      <trans-unit id="c75b4ce0fe7a516c4d8346a86942da24eeaee7ef" resname="directory.edit.location.title">
+        <source>directory.edit.location.title</source>
+        <target state="new">Adresse</target>
+      </trans-unit>
+      <trans-unit id="646b42ecb84e81022f999bf28eaa9369b44eaca1" resname="directory.edit.options.title">
+        <source>directory.edit.options.title</source>
+        <target>Gestion des options de votre offre</target>
+      </trans-unit>
+      <trans-unit id="d976ad74e1adbd7ccaf23c0cef3b6ce3b088ce98" resname="directory.edit.policy.title">
+        <source>directory.edit.policy.title</source>
+        <target>Politique de réservation et d'annulation</target>
+      </trans-unit>
+      <trans-unit id="95463bdf30bf84edaa50d763ddc9aeca65a0b7d2" resname="directory.edit.presentation.title">
+        <source>directory.edit.presentation.title</source>
+        <target>Présentation</target>
+      </trans-unit>
+      <trans-unit id="46a1de37336014d8f90160340a054c528c47e55c" resname="directory.edit.price.calendar.day_click.info">
+        <source>directory.edit.price.calendar.day_click.info</source>
+        <target>Vous pouvez cliquer sur une date pour modifier son prix.</target>
+      </trans-unit>
+      <trans-unit id="f32b8e73229cf9aa24db9ddab747c98594ae763b" resname="directory.edit.price.calendar.show.title">
+        <source>directory.edit.price.calendar.show.title</source>
+        <target>Calendrier des prix</target>
+      </trans-unit>
+      <trans-unit id="043225b403bfc7cf84e9fcaa75c5ad42ffb2ace0" resname="directory.edit.price.choose_times.title">
+        <source>directory.edit.price.choose_times.title</source>
+        <target>Choisissez vos horaires</target>
+      </trans-unit>
+      <trans-unit id="109f29495c61d977b6aa62f816a82d80d2f73f5f" resname="directory.edit.price.choose_weekdays.title">
+        <source>directory.edit.price.choose_weekdays.title</source>
+        <target>Jours de la semaine</target>
+      </trans-unit>
+      <trans-unit id="d6bfdec6bacedf752d6b0b8d615fc18ff394bcd7" resname="directory.edit.price.default.title">
+        <source>directory.edit.price.default.title</source>
+        <target>Prix par défaut</target>
+      </trans-unit>
+      <trans-unit id="7a1d5c94a5ef5e71b74393712635e451f5031df5" resname="directory.edit.price.help">
+        <source>directory.edit.price.help</source>
+        <target>Ceci est votre prix par défaut.</target>
+      </trans-unit>
+      <trans-unit id="1b5a8ab3a8ba981de8c48e9ba6b250125aa32b90" resname="directory.edit.price.range.title">
+        <source>directory.edit.price.range.title</source>
+        <target>Prix par plage</target>
+      </trans-unit>
+      <trans-unit id="68ec1a49888802380a72848c5538bef07d9dbfc2" resname="directory.edit.price.simulator.title">
+        <source>directory.edit.price.simulator.title</source>
+        <target>Simulateur de prix</target>
+      </trans-unit>
+      <trans-unit id="a98b5fc57bb5882c441968efb0a954c491b95dbb" resname="directory.edit.price.title">
+        <source>directory.edit.price.title</source>
+        <target><![CDATA[Prix & politique]]></target>
+      </trans-unit>
+      <trans-unit id="851f8354523b54bf279b612e30aba8bf128e6b35" resname="directory.edit.show">
+        <source>directory.edit.show</source>
+        <target>Afficher</target>
+      </trans-unit>
+      <trans-unit id="50188a0ffc6931424baa91cf8905f518f2dcb99e" resname="directory.edit.success">
+        <source>directory.edit.success</source>
+        <target>Mise à jour effectuée</target>
+      </trans-unit>
+      <trans-unit id="ee82168e95bcb352171622ab1b2e7b4b1bc2f398" resname="directory.edit.various_information.title">
+        <source>directory.edit.various_information.title</source>
+        <target>Information diverses</target>
+      </trans-unit>
+      <trans-unit id="2abe53493f2d54535cf17e971dc59d15a5a2be3b" resname="directory.edit_discount.success">
+        <source>directory.edit_discount.success</source>
+        <target>Enregistré</target>
+      </trans-unit>
+      <trans-unit id="ad3c51ecd23caf13a406aae0f4916388ea27adef" resname="directory.edit_price.success">
+        <source>directory.edit_price.success</source>
+        <target>Enregistré</target>
+      </trans-unit>
+      <trans-unit id="535c2b434f4cf50250a7e5ce6554c4a5c292e7a6" resname="directory.edit_status.success">
+        <source>directory.edit_status.success</source>
+        <target>Statut mis à jour</target>
+      </trans-unit>
+      <trans-unit id="8a218b17dd024c613755aadcddf2bb1003ac6c35" resname="directory.filter">
+        <source>directory.filter</source>
+        <target state="new">Filtrer</target>
+      </trans-unit>
+      <trans-unit id="a96c4feeeb9fa528c736f5ee149d0a1f24234ff1" resname="directory.form.characteristic.choose">
+        <source>directory.form.characteristic.choose</source>
+        <target>Sélectionner</target>
+      </trans-unit>
+      <trans-unit id="41740b0667eb3ff6abff8e5eb95a3de58777f1fc" resname="directory.form.description">
+        <source>directory.form.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="d7e1af8193ba70fb63302eac37fbbf57b7887e19" resname="directory.form.description.en">
+        <source>directory.form.description.en</source>
+        <target>Introduction :</target>
+      </trans-unit>
+      <trans-unit id="d228745b4bddf8a47335848c08d03f778db2285f" resname="directory.form.description.fr">
+        <source>directory.form.description.fr</source>
+        <target>Présentation de l'offre :</target>
+      </trans-unit>
+      <trans-unit id="f62cf70f1a648617bfc581e10dfc62a55de0e609" resname="directory.form.end">
+        <source>directory.form.end</source>
+        <target>Fin</target>
+      </trans-unit>
+      <trans-unit id="92611c855391697cd7b1edb3c13cd7452acceb18" resname="directory.form.location.city">
+        <source>directory.form.location.city</source>
+        <target>Ville</target>
+      </trans-unit>
+      <trans-unit id="d7e73102d8eeb48fa16f69fb65ecf4678c217681" resname="directory.form.location.country">
+        <source>directory.form.location.country</source>
+        <target>Pays</target>
+      </trans-unit>
+      <trans-unit id="fcd16e23d8d246f6620d6a406dc27e2c89fbbbba" resname="directory.form.location.route">
+        <source>directory.form.location.route</source>
+        <target>Adresse</target>
+      </trans-unit>
+      <trans-unit id="e76583a31fd130b75a65cbbfdf4a68855f48bf09" resname="directory.form.location.street_number">
+        <source>directory.form.location.street_number</source>
+        <target>Numéro</target>
+      </trans-unit>
+      <trans-unit id="83fd628a1c4b2dc19a33fdf3310ff970356d3a46" resname="directory.form.location.zip">
+        <source>directory.form.location.zip</source>
+        <target>Code Postal</target>
+      </trans-unit>
+      <trans-unit id="0db128b0ec8ab06117fa0f4e27debe03057dcaf6" resname="directory.form.price">
+        <source>directory.form.price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="0f91db9360163dba55746b7250c36878537b4ee1" resname="directory.form.rules.en">
+        <source>directory.form.rules.en</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="52a3257b85938310aafe31be5323ee616a5104ff" resname="directory.form.rules.fr">
+        <source>directory.form.rules.fr</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="561751c732b06ad90e12d5e96d7843412fa56fde" resname="directory.form.start">
+        <source>directory.form.start</source>
+        <target>Début</target>
+      </trans-unit>
+      <trans-unit id="a0338f3f09ecc21f491a4ea1ed5004f9b40f1a88" resname="directory.form.status">
+        <source>directory.form.status</source>
+        <target>Statut</target>
+      </trans-unit>
+      <trans-unit id="68af81ad015bd138bbb52a137e8a782c7136b7d3" resname="directory.form.tac">
+        <source>directory.form.tac</source>
+        <target>J'accepte</target>
+      </trans-unit>
+      <trans-unit id="b32775cc4444951b78d8abe0d68e1cb394515443" resname="directory.form.title">
+        <source>directory.form.title</source>
+        <target>Titre de l'offre</target>
+      </trans-unit>
+      <trans-unit id="f5a1d75832a0774860eecbfda2d4d2362f2d4775" resname="directory.form.title.en">
+        <source>directory.form.title.en</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="63e3c8d1ca087d25ff3b27811d8b443c8087ab59" resname="directory.form.title.fr">
+        <source>directory.form.title.fr</source>
+        <target>Titre de l'offre</target>
+      </trans-unit>
+      <trans-unit id="961c32cb515ab9b31b79e094a1e95a948f631010" resname="directory.images.cancel.link">
+        <source>directory.images.cancel.link</source>
+        <target>Annuler</target>
+      </trans-unit>
+      <trans-unit id="1b9a8b5cdc2cd042da366c84f4822d2fea7135d6" resname="directory.images.to_upload.title">
+        <source>directory.images.to_upload.title</source>
+        <target>Vos images</target>
+      </trans-unit>
+      <trans-unit id="aac609f0882f7a9d1a9380c0a71a287b36f60c02" resname="directory.index.title">
+        <source>directory.index.title</source>
+        <target>Mes offres</target>
+      </trans-unit>
+      <trans-unit id="c1a5788f52b0e02947fa1b8c2c9a2d65b256f6bd" resname="directory.location.address_found">
+        <source>directory.location.address_found</source>
+        <target>Adresse qui sera enregistrée :</target>
+      </trans-unit>
+      <trans-unit id="e098776bc2b93ce4d38c8b72e044a5cd6d2e58bc" resname="directory.location.drag_message">
+        <source>directory.location.drag_message</source>
+        <target>Si le pointeur n'est pas précis sur la carte, vous pouvez le déplacer directement.</target>
+      </trans-unit>
+      <trans-unit id="2d4c746a395b8487b029d9e747289898947c6216" resname="directory.location.help">
+        <source>directory.location.help</source>
+        <target>Ex: 12Bis, 12Ter, 12, ...</target>
+      </trans-unit>
+      <trans-unit id="327b1c4301569c35ced92438b22c4e4dca42b0dd" resname="directory.location.none">
+        <source>directory.location.none</source>
+        <target>(aucune)</target>
+      </trans-unit>
+      <trans-unit id="36828233d750b8f4e5317f5aff28d1cbf07f9512" resname="directory.location.private_message">
+        <source>directory.location.private_message</source>
+        <target>L'adresse exacte ne sera pas publiquement visible. Une zone approximative sera montrée.</target>
+      </trans-unit>
+      <trans-unit id="e7de3fdff3d52c70949ad77812a61129139d01eb" resname="directory.location.title">
+        <source>directory.location.title</source>
+        <target>Saisissez l'adresse de l'offre</target>
+      </trans-unit>
+      <trans-unit id="9353f38b69e641a50c61bed7f2c8bc93dc9c3a76" resname="directory.location.validate">
+        <source>directory.location.validate</source>
+        <target>Valider cette adresse</target>
+      </trans-unit>
+      <trans-unit id="8fa76a7978cae2530ff2c22d810fd827e3446e66" resname="directory.new.address.title">
+        <source>directory.new.address.title</source>
+        <target>Saisissez l'adresse :</target>
+      </trans-unit>
+      <trans-unit id="72b732682cffac50b7b04c2703af21318d03a7b5" resname="directory.new.categories.title">
+        <source>directory.new.categories.title</source>
+        <target>Choisissez un ou plusieurs secteurs d'activité pour votre offre</target>
+      </trans-unit>
+      <trans-unit id="10c64b246aa5847e69aa2e4d0b57c39bb7bad697" resname="directory.new.price.rent">
+        <source>directory.new.price.rent</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="7cdb4945f2b3c3fc503e0aeb41361ed246766c28" resname="directory.new.price.title">
+        <source>directory.new.price.title</source>
+        <target>Quel va être votre prix de location ?</target>
+      </trans-unit>
+      <trans-unit id="b6e9646890212403f9b182fd5d81b1e375b003a8" resname="directory.new.price_notice">
+        <source>directory.new.price_notice</source>
+        <target>Vous aurez la possibilité d'entrer des prix par période dans votre espace utilisateur.</target>
+      </trans-unit>
+      <trans-unit id="d51330e2f2746000508926561dc532bd4bc77a3a" resname="directory.new.publish.notice">
+        <source>directory.new.publish.notice</source>
+        <target xml:space="preserve">Vous aurez la possibilité de préciser d'autres informations sur votre offre dans votre espace
+              utilisateur.
+          </target>
+      </trans-unit>
+      <trans-unit id="f9b32384b68743661c0683cfa182d4db14a5eabc" resname="directory.new.save">
+        <source>directory.new.save</source>
+        <target>Publier mon offre</target>
+      </trans-unit>
+      <trans-unit id="a81c08ca39057623265fcf541e0aab54c70ec3de" resname="directory.new.signup.title">
+        <source>directory.new.signup.title</source>
+        <target>Créer un compte ou s'identifier</target>
+      </trans-unit>
+      <trans-unit id="7a72e3c35099a160f80cee3d727b77233cf29318" resname="directory.new.success">
+        <source>directory.new.success</source>
+        <target>Votre offre a été créée avec succès</target>
+      </trans-unit>
+      <trans-unit id="91f0ae365b42ca15297e24469531596860d6e62c" resname="directory.new.tac.link">
+        <source>directory.new.tac.link</source>
+        <target>les conditions générales</target>
+      </trans-unit>
+      <trans-unit id="099bd9fd3eb8ecdfa47a2bf51cd486c5094cfae0" resname="directory.new.title">
+        <source>directory.new.title</source>
+        <target xml:space="preserve">Publier votre offre de prestation
+          </target>
+      </trans-unit>
+      <trans-unit id="a385c95efe54f5b3d6707f5106282c2ae14fc04f" resname="directory.price_save">
+        <source>directory.price_save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="e1c395f58d46acbfe87d57f646fb95210160751b" resname="directory.price_simulator.cash_in">
+        <source>directory.price_simulator.cash_in</source>
+        <target>Vous encaisserez</target>
+      </trans-unit>
+      <trans-unit id="4068a1c3c76dc94f369e53e42fc18bb5e3ea51e8" resname="directory.price_simulator.fee">
+        <source>directory.price_simulator.fee</source>
+        <target>Frais de service</target>
+      </trans-unit>
+      <trans-unit id="7c020a0b11c62f4725259b4795995bc1e1e090ea" resname="directory.price_simulator.fee.help">
+        <source>directory.price_simulator.fee.help</source>
+        <target>directory.price_simulator.fee.help</target>
+      </trans-unit>
+      <trans-unit id="19e0ac6564350cc95dac17c3abde0669e0a4e448" resname="directory.price_simulator.help">
+        <source>directory.price_simulator.help</source>
+        <target>Booking amount help while mouse hover 3</target>
+      </trans-unit>
+      <trans-unit id="b6da107330f9826fd55158c97436c400a516d276" resname="directory.save">
+        <source>directory.save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="eefe2802a4c35e0e9b5fa459640bb4d844e341b4" resname="directory.search">
+        <source>directory.search</source>
+        <target>Rechercher</target>
+      </trans-unit>
+      <trans-unit id="58f840195ab292f3d59edf4f9d631460d68c4bad" resname="directory.search.form.address">
+        <source>directory.search.form.address</source>
+        <target>Lieu</target>
+      </trans-unit>
+      <trans-unit id="dd0c240c88943ec6104935bb0944af89bfa6cc06" resname="directory.search.form.address.placeholder">
+        <source>directory.search.form.address.placeholder</source>
+        <target>Ville, département, région</target>
+      </trans-unit>
+      <trans-unit id="4b400b39c198d9f694b9cd1c1441ab56de2b2b61" resname="directory.search.result.alert.link">
+        <source>directory.search.result.alert.link</source>
+        <target>Alerte</target>
+      </trans-unit>
+      <trans-unit id="18863f581e62255f702deeadfebbc2b0244b8897" resname="directory.search.result.certified">
+        <source>directory.search.result.certified</source>
+        <target>Offre certifiée</target>
+      </trans-unit>
+      <trans-unit id="f95d3cebd6aa233ad275dbe4a8b453b5ef7ef1a8" resname="directory.search.result.no_results">
+        <source>directory.search.result.no_results</source>
+        <target state="new">Aucun résultat trouvé. Veuillez modifier vos critères de recherche.</target>
+      </trans-unit>
+      <trans-unit id="e0c7225719f33b2cab0a2b344bd1f92c1963ad00" resname="directory.search.result.results">
+        <source>directory.search.result.results</source>
+        <target>%nb_results% résultat(s)</target>
+      </trans-unit>
+      <trans-unit id="811628da617a8da9696d216392c3eaab3c1c0c9f" resname="directory.search.result.title">
+        <source>directory.search.result.title</source>
+        <target>Résultats pour %directory_search_request%</target>
+      </trans-unit>
+      <trans-unit id="c608f34ee352fa1f395dc889b5cb82cfd61ea27c" resname="directory.search.sort_by.distance">
+        <source>directory.search.sort_by.distance</source>
+        <target>Distance</target>
+      </trans-unit>
+      <trans-unit id="733f6fd7a68345542eb8eb992ba7a60a9877bad5" resname="directory.search.sort_by.price">
+        <source>directory.search.sort_by.price</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="bae57127bd45da76037f2470edb20456d23ce38d" resname="directory.search.sort_by.recommended">
+        <source>directory.search.sort_by.recommended</source>
+        <target>Recommandé</target>
+      </trans-unit>
+      <trans-unit id="7967e0c9de2753e165f0ac3f71f97504a2156d73" resname="directory.show.calendar">
+        <source>directory.show.calendar</source>
+        <target>Calendrier</target>
+      </trans-unit>
+      <trans-unit id="50bdda2cc153c4d642eefabaa13e25344b9fb55c" resname="directory.show.cancellation_policy:">
+        <source>directory.show.cancellation_policy:</source>
+        <target>Politique d'annulation :</target>
+      </trans-unit>
+      <trans-unit id="f5c75b851ea7ef9715252505d5032f652fdaf38b" resname="directory.show.categories">
+        <source>directory.show.categories</source>
+        <target state="new">Secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="0ae4b06ef673f71c7347ad8689eca40f8a56dd79" resname="directory.show.categories:">
+        <source>directory.show.categories:</source>
+        <target>Secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="0a197cf0dd3b9370c948ecb4c6ae6a99f28460f3" resname="directory.show.characteristics">
+        <source>directory.show.characteristics</source>
+        <target>Caractéristiques</target>
+      </trans-unit>
+      <trans-unit id="49814edfe335fbfce2bc3582fbc6ecf400d23993" resname="directory.show.nb_comments">
+        <source>directory.show.nb_comments</source>
+        <target>{0} 0 commentaire|{1} 1 commentaire|]1, Inf] %count% commentaires</target>
+      </trans-unit>
+      <trans-unit id="89814edfe335fbfce2cc3582fbc6ecf400d23995" resname="directory.show.comments">
+        <source>directory.show.comments</source>
+        <target>Commentaires</target>
+      </trans-unit>
+      <trans-unit id="6ccb7ab4251c8fe7d27af0820204dcc806023e09" resname="directory.show.description">
+        <source>directory.show.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="d15ba75f6a96d18ca4810e34bf66017e3dbd5784" resname="directory.show.discounts:">
+        <source>directory.show.discounts:</source>
+        <target>Réductions :</target>
+      </trans-unit>
+      <trans-unit id="5c526d69de94e2e558c93ddf197db754625c80c6" resname="directory.show.email_verified.help">
+        <source>directory.show.email_verified.help</source>
+        <target>L'adresse mail de cet utilisateur a été vérifié.</target>
+      </trans-unit>
+      <trans-unit id="a4e63be737bc06d46818e37203b501d474dde89d" resname="directory.show.favorites.add">
+        <source>directory.show.favorites.add</source>
+        <target>Ajouter aux favoris</target>
+      </trans-unit>
+      <trans-unit id="dbd06cac737dbcb255e8ceb4a5554081ee17db82" resname="directory.show.id_card_verified.help">
+        <source>directory.show.id_card_verified.help</source>
+        <target>Cet utilisateur a transmis sa CNI.</target>
+      </trans-unit>
+      <trans-unit id="49ff4bce3e52dd086b802ffa369d62b7e99d537b" resname="directory.show.location:">
+        <source>directory.show.location:</source>
+        <target>Lieu :</target>
+      </trans-unit>
+      <trans-unit id="368a7d80b53cf610605714c046875ad7fd4d19b6" resname="directory.show.map">
+        <source>directory.show.map</source>
+        <target>Carte</target>
+      </trans-unit>
+      <trans-unit id="1144951758a718382c5c55de1f294cea1cf9efc6" resname="directory.show.max_duration:">
+        <source>directory.show.max_duration:</source>
+        <target>Durée maximum :</target>
+      </trans-unit>
+      <trans-unit id="b28dc20af3a8d02e4a0818f6decb8b4aea3ad536" resname="directory.show.min_duration:">
+        <source>directory.show.min_duration:</source>
+        <target>Durée mininum :</target>
+      </trans-unit>
+      <trans-unit id="3c16a0f6ad566fe2fa301ccf12e36c317c4b297a" resname="directory.show.nb_bookings_asker.help">
+        <source>directory.show.nb_bookings_asker.help</source>
+        <target>Cet utilisateur a déjà effectué une réservation.</target>
+      </trans-unit>
+      <trans-unit id="acffb69c919141c1a4fc0626c65ea7f32f7a23d4" resname="directory.show.nb_bookings_offerer.help">
+        <source>directory.show.nb_bookings_offerer.help</source>
+        <target>Au moins une offre de cet utilisateur a déja été reservée.</target>
+      </trans-unit>
+      <trans-unit id="ec450c43b78fe468a9c80305e073e77a47cdf499" resname="directory.show.options">
+        <source>directory.show.options</source>
+        <target>Options</target>
+      </trans-unit>
+      <trans-unit id="300a1d105416cb289c45d0e92275878b6afe617e" resname="directory.show.phone_verified.help">
+        <source>directory.show.phone_verified.help</source>
+        <target>Le numéro de téléphone de cet utilisateur a été vérifié.</target>
+      </trans-unit>
+      <trans-unit id="17cb36f8f2e1f02eea4e5ff7248a692036d135f9" resname="directory.show.photos.title">
+        <source>directory.show.photos.title</source>
+        <target>Images</target>
+      </trans-unit>
+      <trans-unit id="c6c355b248d9a40842f3ae0d3519be3eaa790bf8" resname="directory.show.policy.title">
+        <source>directory.show.policy.title</source>
+        <target>Politique de réservation</target>
+      </trans-unit>
+      <trans-unit id="edfb8ef84c3f95470bc8c1d320bbcbd712db8e77" resname="directory.show.rules">
+        <source>directory.show.rules</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="328589c0f1a692fe96a7b95acbd4c93415937e57" resname="directory.show.user.contact">
+        <source>directory.show.user.contact</source>
+        <target>Me contacter</target>
+      </trans-unit>
+      <trans-unit id="999c9cec7915935365c0cb0e95b6619670186934" resname="directory.similaries.back_to_search">
+        <source>directory.similaries.back_to_search</source>
+        <target>Retour aux résultats de recherche</target>
+      </trans-unit>
+      <trans-unit id="27c516911f8c09a18e194d2a0b11a76ae822f2e0" resname="directory.similaries.heading">
+        <source>directory.similaries.heading</source>
+        <target>Offres de prestation similaires</target>
+      </trans-unit>
+      <trans-unit id="7a08055de6d615b3adb7b056c01426462fcdb042" resname="directory.status_save">
+        <source>directory.status_save</source>
+        <target>Enregistrer</target>
+      </trans-unit>
+      <trans-unit id="1922ba0ee05e9f83903fa86926e5872b30d44e61" resname="directory.translate.button">
+        <source>directory.translate.button</source>
+        <target>Traduire</target>
+      </trans-unit>
+      <trans-unit id="85f021657fd9185d839033269965aa42c299342a" resname="directory.translate.error">
+        <source>directory.translate.error</source>
+        <target>Une erreur est survenue pendant la traduction</target>
+      </trans-unit>
+      <trans-unit id="76587d94e817c42bd896cdce110ada62b0250acf" resname="directory.translate.success">
+        <source>directory.translate.success</source>
+        <target>Traduction effectuée avec succès</target>
+      </trans-unit>
+      <trans-unit id="62510a72090b89ab73a05038f1f6a0acf58b2cad" resname="directory.type.title">
+        <source>directory.type.title</source>
+        <target state="new">directory.type.title</target>
+      </trans-unit>
+      <trans-unit id="5ecf4e31f55710533951a1068244c8b7e3dd4c86" resname="directory_categories.min {{ min_categories }}">
+        <source>directory_categories.min {{ min_categories }}</source>
+        <target>Vous devez sélectionner au moins {{ min_categories }} secteur(s) d'activité</target>
+      </trans-unit>
+      <trans-unit id="cda9f4e18c8aeaee6f4a5c40bc4ce50fbbf9aac0" resname="directory_discount.discount.max {{ max_discount }}">
+        <source>directory_discount.discount.max {{ max_discount }}</source>
+        <target>Réduction maximum : {{ max_discount }}</target>
+      </trans-unit>
+      <trans-unit id="538c2ebfb7674dc88cad28d1bf8781784fa8a6e6" resname="directory_discount.discount.min {{ min_discount }}">
+        <source>directory_discount.discount.min {{ min_discount }}</source>
+        <target>Réduction minimum : {{ min_discount }}</target>
+      </trans-unit>
+      <trans-unit id="12d03c7881be7801d0b91849e46681a9f542e691" resname="directory_duration.overlap">
+        <source>directory_duration.overlap</source>
+        <target>La durée maximum doit être supérieur à la durée minimum</target>
+      </trans-unit>
+      <trans-unit id="dc67ba70167c19d6c2ed7c6ac4c5073f8edb163b" resname="directory_edit.form.cancellation_policy">
+        <source>directory_edit.form.cancellation_policy</source>
+        <target>Politique d'annulation</target>
+      </trans-unit>
+      <trans-unit id="77e7ad4c8d7320d94a50537dc4890a029d7610fa" resname="directory_edit.form.choose">
+        <source>directory_edit.form.choose</source>
+        <target>Sélectionner</target>
+      </trans-unit>
+      <trans-unit id="71268d3b0247713a7bb9c011643b7ce8d7c6301b" resname="directory_edit.form.discount">
+        <source>directory_edit.form.discount</source>
+        <target>Appliquer une réduction de</target>
+      </trans-unit>
+      <trans-unit id="2a7ed32782de3c0e94705a7559100ba56834e117" resname="directory_edit.form.from_quantity">
+        <source>directory_edit.form.from_quantity</source>
+        <target>sur le prix par %quantity_text%, à partir de</target>
+      </trans-unit>
+      <trans-unit id="f8f32c1d94fa3fde6587937808b7f381e8d393c4" resname="directory_edit.form.from_quantity.bought">
+        <source>directory_edit.form.from_quantity.bought</source>
+        <target>%quantity_text% commandée(s)</target>
+      </trans-unit>
+      <trans-unit id="840e18571bfc4e9f516fd60527195d3b2a1f9836" resname="directory_edit.form.max_duration">
+        <source>directory_edit.form.max_duration</source>
+        <target>Durée maximum</target>
+      </trans-unit>
+      <trans-unit id="9eba7a7b0aab7398d15554585fe718a35bdc5b72" resname="directory_edit.form.min_duration">
+        <source>directory_edit.form.min_duration</source>
+        <target>Durée minimum</target>
+      </trans-unit>
+      <trans-unit id="93f49fe2a272a47cb9d809e1bf14f7292726a1f7" resname="directory_edit.form.price">
+        <source>directory_edit.form.price</source>
+        <target>Prix par</target>
+      </trans-unit>
+      <trans-unit id="1f71650beb1fd27a36387a72e9deb4c453abbc9a" resname="directory_edit.form.price_custom">
+        <source>directory_edit.form.price_custom</source>
+        <target>Prix</target>
+      </trans-unit>
+      <trans-unit id="0ab3360a2497c03376593515334265911957706b" resname="directory_edit.photos.details">
+        <source>directory_edit.photos.details</source>
+        <target>Glisser déposer les photos que vous souhaitez dans l'ordre. La 1ère photo est votre photo de couverture.</target>
+      </trans-unit>
+      <trans-unit id="acbb7a84aec1e38715d027f14b6768741ce29ab0" resname="directory_edit.photos.title">
+        <source>directory_edit.photos.title</source>
+        <target>Gérer vos photos</target>
+      </trans-unit>
+      <trans-unit id="ef951d4e27ee99dade81571f3b0dd6489e40e8f5" resname="directory_images.max {{ max_images }}">
+        <source>directory_images.max {{ max_images }}</source>
+        <target>Vous ne pouvez pas avoir plus de {{ max_images }} images</target>
+      </trans-unit>
+      <trans-unit id="e32c09ff7243c9a2992b72b74188e37d83dd7d19" resname="directory_images.min {{ min_images }}">
+        <source>directory_images.min {{ min_images }}</source>
+        <target>Vous ne pouvez pas avoir moins de {{ min_images }} images</target>
+      </trans-unit>
+      <trans-unit id="c5bf2dc43402f181405558d3cac52645041f475c" resname="directory_location_country.invalid">
+        <source>directory_location_country.invalid</source>
+        <target>Pays invalide</target>
+      </trans-unit>
+      <trans-unit id="9afa0d417148b9d4c74a5657724593e4c5578d4f" resname="directory_price.min {{ min_price }}">
+        <source>directory_price.min {{ min_price }}</source>
+        <target>Le prix doit être supérieur ou égale à {{ min_price }}€</target>
+      </trans-unit>
+      <trans-unit id="793890ef1a5e2a969f867ff69e3a84f5cf01751b" resname="directory_search.form.categories">
+        <source>directory_search.form.categories</source>
+        <target>Secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="f0321085b5fdb1cbb8a670c7431d3cb69cc86878" resname="directory_search.form.categories.empty_value">
+        <source>directory_search.form.categories.empty_value</source>
+        <target>Choisissez un secteur d'activité</target>
+      </trans-unit>
+      <trans-unit id="08d3c10ef83330fff09ab0febe661ada75d6133e" resname="directory_search.form.end">
+        <source>directory_search.form.end</source>
+        <target>Fin</target>
+      </trans-unit>
+      <trans-unit id="db302e427440ffbbdcabd856e13975a07d4fe837" resname="directory_search.form.end_time">
+        <source>directory_search.form.end_time</source>
+        <target>A</target>
+      </trans-unit>
+      <trans-unit id="b644314a459aa4e290ba05380a316d8be5e712e9" resname="directory_search.form.flexibility">
+        <source>directory_search.form.flexibility</source>
+        <target>Flexibilité</target>
+      </trans-unit>
+      <trans-unit id="5792a5686f229ac793f59b6e5ac0e5fe2f3a2a4f" resname="directory_search.form.flexibility_day">
+        <source>directory_search.form.flexibility_day</source>
+        <target>jour(s)</target>
+      </trans-unit>
+      <trans-unit id="118dfbd26735a9d9eac9e76aec5cdf8621019cc2" resname="directory_search.form.sort_by.empty_value">
+        <source>directory_search.form.sort_by.empty_value</source>
+        <target>Trier par</target>
+      </trans-unit>
+      <trans-unit id="6536bbf97e221f5a8e0f83aa57e2873b46538a44" resname="directory_search.form.start">
+        <source>directory_search.form.start</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="a15967324920a8f13597638e765f30bcafdd6557" resname="directory_search.form.start_time">
+        <source>directory_search.form.start_time</source>
+        <target>De</target>
+      </trans-unit>
+      <trans-unit id="a42ab2a8af3a5f5dc38c55abbe3326ac97ad3637" resname="directory_translations_en_description_placeholder">
+        <source>directory_translations_en_description_placeholder</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="6930818be85982bc6c1c187b20a1cfec22efe9f7" resname="directory_translations_en_rules_placeholder">
+        <source>directory_translations_en_rules_placeholder</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="a92283dc0df84ab5bfffaf9c0c169315aec8d6c3" resname="directory_translations_en_title_placeholder">
+        <source>directory_translations_en_title_placeholder</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="c0d61502d06e55c07b2570a7ca39dc56a77ba482" resname="directory_translations_fr_description_placeholder">
+        <source>directory_translations_fr_description_placeholder</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="f6501b016c851bca7568bf728cf0489b7e7fab95" resname="directory_translations_fr_rules_placeholder">
+        <source>directory_translations_fr_rules_placeholder</source>
+        <target>Détails</target>
+      </trans-unit>
+      <trans-unit id="4f86b172106066c161d2e337fec139e7d570b54b" resname="directory_translations_fr_title_placeholder">
+        <source>directory_translations_fr_title_placeholder</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="f593afaeaa50ead82d20d07374c6331541e3195e" resname="nav.directory.calendar.link">
+        <source>nav.directory.calendar.link</source>
+        <target>Calendrier</target>
+      </trans-unit>
+      <trans-unit id="d529fbd59b804564c3cd52cdb93f8623857d58ac" resname="nav.directory.categories.link">
+        <source>nav.directory.categories.link</source>
+        <target state="new">Secteurs d'activité</target>
+      </trans-unit>
+      <trans-unit id="5a53382996a5e6ba6163c57a5aa93b0513889803" resname="nav.directory.characteristic.link">
+        <source>nav.directory.characteristic.link</source>
+        <target>Caractéristiques</target>
+      </trans-unit>
+      <trans-unit id="1fb7e962c5b1b85811a4116e8d4a22e5c6ad341e" resname="nav.directory.images.link">
+        <source>nav.directory.images.link</source>
+        <target>Photos</target>
+      </trans-unit>
+      <trans-unit id="6b7e582b7d96545e4b34ce2efa309297b4661542" resname="nav.directory.location.link">
+        <source>nav.directory.location.link</source>
+        <target state="new">Adresse</target>
+      </trans-unit>
+      <trans-unit id="63936a5bbe1a225849dcd3622b8de5bdf9de6d31" resname="nav.directory.presentation.link">
+        <source>nav.directory.presentation.link</source>
+        <target>Présentation</target>
+      </trans-unit>
+      <trans-unit id="9efbfb5b23e272f9b3338c862f496f28127da949" resname="nav.directory.price.link">
+        <source>nav.directory.price.link</source>
+        <target><![CDATA[Prix & Conditions]]></target>
+      </trans-unit>
+      <trans-unit id="c7a4298347ed905bf82c406276876396d2b49a12" resname="nav.tac.slug">
+        <source>nav.tac.slug</source>
+        <target>conditions-generales-d-utilisation</target>
+      </trans-unit>
+      <trans-unit id="fd1286353570c5703799ba76999323b7c7447b06" resname="no">
+        <source>no</source>
+        <target>non</target>
+      </trans-unit>
+      <trans-unit id="64826d1aab5cee61ad356fad98dd327db02da61e" resname="no_verified">
+        <source>no_verified</source>
+        <target>Non-vérifié</target>
+      </trans-unit>
+      <trans-unit id="71f8e7976e4cbc4561c9d62fb283e7f788202acb" resname="none">
+        <source>none</source>
+        <target>Aucun(e)</target>
+      </trans-unit>
+      <trans-unit id="deaa330c72d94793c121327de0423c1dce952689" resname="search-on-map-drag">
+        <source>search-on-map-drag</source>
+        <target>Rechercher quand je déplace la carte</target>
+      </trans-unit>
+      <trans-unit id="53a5687cb26dc41f2ab4033e97e13adefd3740d6" resname="success">
+        <source>success</source>
+        <target>success</target>
+      </trans-unit>
+      <trans-unit id="60dafa6d967ed8605e96d3b806aa9fb5f63b6172" resname="time_range.end">
+        <source>time_range.end</source>
+        <target>Heure de fin</target>
+      </trans-unit>
+      <trans-unit id="50eb95c072e0187fbf8b1e684eece48fd4867088" resname="time_range.start">
+        <source>time_range.start</source>
+        <target>Heure de début</target>
+      </trans-unit>
+      <trans-unit id="11ae32270b0770b4d753dd9e62d262f26ab2086b" resname="time_ranges.max {{ limit }}">
+        <source>time_ranges.max {{ limit }}</source>
+        <target>Vous ne pouvez pas ajouter plus de {{ limit }} plage(s) horaire(s)</target>
+      </trans-unit>
+      <trans-unit id="153da8e1965e2a08a0725a19818c5c6ab3b93fbc" resname="time_ranges.min {{ limit }}">
+        <source>time_ranges.min {{ limit }}</source>
+        <target>Vous devez ajouter au moins {{ limit }} plage(s) horaire(s)</target>
+      </trans-unit>
+      <trans-unit id="e136453317e18e2178a362d734beabb14670fadd" resname="time_ranges.overlap">
+        <source>time_ranges.overlap</source>
+        <target>Des plages se chevauchent</target>
+      </trans-unit>
+      <trans-unit id="ec734b651574683f36974c7f12847fbbe084dbe2" resname="verified">
+        <source>verified</source>
+        <target>vérifié</target>
+      </trans-unit>
+      <trans-unit id="fb360f9c09ac8c5edb2f18be5de4e80ea4c430d0" resname="yes">
+        <source>yes</source>
+        <target>oui</target>
+      </trans-unit>
+      <trans-unit id="9317fc1cd57c2bb82decba442be368fb1aea871f" resname="entity.directory.frequency_period.week">
+        <source>week</source>
+        <target>semaine</target>
+      </trans-unit>
+      <trans-unit id="da82fc8f43e1e5a33d785819570325b64239db0d" resname="entity.directory.frequency_period.month">
+        <source>month</source>
+        <target>mois</target>
+      </trans-unit>
+      <trans-unit id="e5fab7ae4c12d5cdd87da223370e5c989fef06d3" resname="entity.directory.surface_type.wood">
+        <source>wood</source>
+        <target>bois</target>
+      </trans-unit>
+      <trans-unit id="00138e7c4eafea5fe8d98c772b1d0f9fdd7c13b4" resname="entity.directory.surface_type.concrete">
+        <source>concrete</source>
+        <target>beton</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.new.range.title">
+        <source>directory.new.range.title</source>
+        <target>Périmètre d'intervention</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.edit.range.help">
+        <source>directory.edit.range.help</source>
+        <target>Cette donnée sera utilisée par le moteur de recherche pour déterminer les offres disponibles dans une certaine zone</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.form.range">
+        <source>directory.form.range</source>
+        <target>Périmètre d'intervention (en kilomètres) :</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.new.range.description">
+        <source>directory.new.range.description</source>
+        <target>Zone géographique, autour de l'adresse saisie, à l'intérieur de laquelle votre offre est disponible.</target>
+      </trans-unit>
+
+      <trans-unit id="" resname="directory.new.url.title">
+        <source>directory.new.url.title</source>
+        <target>Site web</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.edit.url.help">
+        <source>directory.edit.url.help</source>
+        <target>Site web lié à l'annonce</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.form.url">
+        <source>directory.form.url</source>
+        <target>Site web</target>
+      </trans-unit>
+      <trans-unit id="" resname="directory.new.url.description">
+        <source>directory.new.url.description</source>
+        <target>Site internet lié à l'annonce</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

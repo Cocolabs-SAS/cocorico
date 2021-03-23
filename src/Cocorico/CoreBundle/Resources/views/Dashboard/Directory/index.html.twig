@@ -1,0 +1,74 @@
+{% extends '@CocoricoCore/Dashboard/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block nav_dashboard -%}
+    {% set nav_dashboard_current = 'structures' %}
+    {{ parent() }}
+{%- endblock %}
+
+
+{% block main_dashboard %}
+    <!-- alert -->
+    {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+    <!-- maparea -->
+    <div role="tabpanel" class="tab-pane active" id="properties">
+        <div class="directory-area">
+            <div class="directory-holder row">
+                <h1 class="hidden">{{ 'directory.index.title'|trans }}</h1>
+                <!-- post -->
+                {% for structure in structures.iterator %}
+                    <article class="structure-post col-sm-4 col-xs-12">
+                            <div class="box">
+                            <h3>{{ structure.name}} </h3>
+                            <dl>
+                                <dt>Enseigne :</dt>
+                                <dd>{{ structure.brand}} </dd>
+                                <dt>Siret :</dt>
+                                <dd>{{ structure.siret}} </dd>
+                                <dt>Nature :</dt>
+                                <dd>{{ structure.nature}} </dd>
+                                <dt>Type :</dt>
+                                <dd>{{ structure.kind}} </dd>
+                            </dl>
+                            </div>
+
+                        {{
+                        render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:statusIndexForm',
+                        {'structure': structure})) }}
+                    </article>
+                {% endfor %}
+            </div>
+
+            {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
+            'pagination': pagination
+            } only %}
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block modal %}
+    {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% set modalMessage = 'listing.edit.duplicate.modal.message'|trans %}
+
+    <script>
+        $(function () {
+            //Disable duplicate button when click on it
+            $("[data-id=duplicate]").on('click', function (e) {
+                var modal = $("#modal");
+                modal.find('.modal-body .title').html('{{ modalMessage }}');
+                modal.find('.close').remove();
+                modal.find('.modal-footer').html('<img src="{{ asset('images/loading.gif') }}" />');
+                modal.modal('show');
+//                e.preventDefault();
+            });
+        });
+    </script>
+{% endblock %}
