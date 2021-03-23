@@ -1193,14 +1193,8 @@ class Directory
         return $this->users;
     }
 
-    public function hasUser($checkUser)
+    public function hasUser($user)
     {
-        foreach($this->users as $user)
-        {
-            if ($checkUser->getId() == $user->getId()) {
-                return true;
-            }
-        }
-        return false;
+        return $this->user->contains($user);
     }
 }

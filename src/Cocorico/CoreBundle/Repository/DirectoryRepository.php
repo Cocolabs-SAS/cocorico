@@ -67,8 +67,10 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->getFindQueryBuilder();
         // FIXME: Do some real filtering here, please !
-        $qB->where(":user MEMBER OF users")
-            ->setParameter("user", $user);
+        $qB->leftJoin('d.users', 'u')
+           ->where("u = :user")
+           ->setParameter("user", $user);
+
         return $qB;
     }
 
