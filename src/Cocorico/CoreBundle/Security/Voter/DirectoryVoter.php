@@ -64,8 +64,8 @@ class DirectoryVoter extends Voter
      */
     protected function voteOnAdopt(Directory $directory, TokenInterface $token)
     {
-        // FIXME
-        return true;
+        // Can only adopt if user is null
+        return $directory->getUser() == null
         // return (
         //     $token->getUser()->getId() === $directory->getUser()->getId()
         //     && $directory->getListing()->getStatus() == Listing::STATUS_PUBLISHED
