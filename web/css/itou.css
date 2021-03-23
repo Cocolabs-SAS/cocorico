@@ -1642,6 +1642,20 @@ section.quote-quick-form fieldset {
     min-width:inherit;
 }
 
+.structure-post {
+    border:1px solid #ccc;
+}
+
+.structure-post h3 {
+    font-size:1.2rem;
+    text-align:center;
+
+}
+
+.structure-post dd {
+    text-align:right;
+}
+
 
 /******************
  * Multiselect Styles
