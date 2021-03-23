@@ -63,12 +63,12 @@ class DirectoryRepository extends EntityRepository
     }
 
 
-    public function getFindByUserId($UserId)
+    public function getFindByUser($user)
     {
         $qB = $this->getFindQueryBuilder();
         // FIXME: Do some real filtering here, please !
-        $qB->setMaxResults(10);
-
+        $qB->where(":user MEMBER OF users")
+            ->setParameter("user", $user);
         return $qB;
     }
 

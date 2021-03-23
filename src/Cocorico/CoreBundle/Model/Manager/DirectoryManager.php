@@ -72,9 +72,9 @@ class DirectoryManager extends BaseManager
         }
     }
 
-    public function findByOwner($UserId, $page)
+    public function findByOwner($User, $page)
     {
-        $qB = $this->getRepository()->getFindByUserId($UserId);
+        $qB = $this->getRepository()->getFindByUser($User);
 
         //Pagination
         $qB->setFirstResult(($page - 1) * $this->maxPerPage)

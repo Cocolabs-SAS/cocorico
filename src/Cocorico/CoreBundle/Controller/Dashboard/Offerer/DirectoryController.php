@@ -79,7 +79,7 @@ class DirectoryController extends Controller
     {
         $structureManager = $this->get('cocorico.directory.manager');
         $structures = $structureManager->findByOwner(
-            $this->getUser()->getId(),
+            $this->getUser(),
             $page
         );
 
