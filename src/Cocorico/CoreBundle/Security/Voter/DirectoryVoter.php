@@ -64,8 +64,9 @@ class DirectoryVoter extends Voter
      */
     protected function voteOnAdopt(Directory $directory, TokenInterface $token)
     {
-        // Can only adopt if user is null
-        return $directory->getUser() == null
+        // Can only adopt if user is null.
+        return $directory->getUser() == null;
+
         // return (
         //     $token->getUser()->getId() === $directory->getUser()->getId()
         //     && $directory->getListing()->getStatus() == Listing::STATUS_PUBLISHED
@@ -81,8 +82,7 @@ class DirectoryVoter extends Voter
      */
     protected function voteOnEdit(Directory $directory, TokenInterface $token)
     {
-        // FIXME
-        return true;
+        return $directory->hasUser($token->getUser());
         // return ($token->getUser()->getId() === $directory->getUser()->getId());
     }
 
@@ -95,7 +95,9 @@ class DirectoryVoter extends Voter
     protected function voteOnView(Directory $directory, TokenInterface $token)
     {
         // FIXME
-        return true;
+        // Why ? Everyone can view for the time being
+        // return true;
+        return $directory->hasUser($token->getUser());
         // return ($token->getUser()->getId() === $directory->getUser()->getId());
     }
 
