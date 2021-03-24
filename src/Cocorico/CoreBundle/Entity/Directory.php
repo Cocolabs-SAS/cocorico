@@ -118,6 +118,19 @@ class Directory
         'antenne' => 'Rattaché à un autre conventionnement'
     );
 
+    /* Political ranges */
+    const PR_OTHER = 0;
+    const PR_DEPARTEMENT = 1;
+    const PR_REGION = 2;
+    const PR_FRANCE = 3;
+
+    public static $polRangeValues = array (
+        self::PR_OTHER => 'entity.listing.polrange.other',
+        self::PR_DEPARTEMENT => 'entity.listing.polrange.departement',
+        self::PR_REGION => 'entity.listing.polrange.region',
+        self::PR_FRANCE => 'entity.listing.polrange.france',
+    );
+
     public static $exportColumns = array(
         'name' => 'Raison sociale',
         # 'siret' => 'Siret',
@@ -360,6 +373,28 @@ class Directory
      */
     private $users;
 
+    /**
+     * @ORM\Column(name="geo_range", type="integer", nullable=true)
+     *
+     * @var integer|null
+     */
+    private $range;
+
+    /**
+     * @ORM\Column(name="pol_range", type="integer", nullable=true)
+     *
+     * @var integer|null
+     */
+    private $polRange;
+
+    /**
+     *
+     * @ORM\OneToMany(targetEntity="DirectoryImage", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "asc"})
+     *
+     * @var DirectoryImage[]
+     */
+    protected $images;
 
     /**
      * Get id.
@@ -1154,6 +1189,8 @@ class Directory
     {
         $this->directoryListingCategories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->clientImages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -1197,4 +1234,141 @@ class Directory
     {
         return $this->users->contains($user);
     }
+
+    /**
+     * Set range
+     *
+     * @param  integer $range
+     * @return $this
+     */
+    public function setRange($range)
+    {
+        $this->range = $range;
+
+        return $this;
+    }
+
+    /**
+     * Get range
+     *
+     * @return integer
+     */
+    public function getRange()
+    {
+        return $this->range;
+    }
+
+    /**
+     * Set political range
+     *
+     * @param  integer $polRange
+     * @return $this
+     */
+    public function setPolRange($polRange)
+    {
+        if (!in_array($polRange, array_keys(self::$polRangeValues))) {
+            throw new \InvalidArgumentException(
+                sprintf('Invalid value for listing.prestaType : %s.', $polRange)
+            );
+        }
+        $this->polRange = $polRange;
+
+        return $this;
+    }
+
+    /**
+     * Get political range
+     *
+     * @return integer
+     */
+    public function getPolRange()
+    {
+        return $this->polRange;
+    }
+
+
+    /**
+     * Get Political range Text
+     *
+     * @return string
+     */
+    public function getPolRangeText()
+    {
+        return self::$polRangeValues[$this->getPolRange()];
+    }
+
+
+    /**
+     * Add images.
+     *
+     * @param DirectoryImage $image
+     *
+     * @return $this
+     */
+    public function addImage(DirectoryImage $image)
+    {
+        $image->setDirectory($this); //Because the owning side of this relation is user image
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove images.
+     *
+     * @param DirectoryImage $image
+     */
+    public function removeImage(DirectoryImage $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images.
+     *
+     * @return ArrayCollection
+     */
+    public function getImages()
+    {
+        return $this->images;
+    }
+
+
+    /**
+     * Add client images
+     *
+     * @param  \Cocorico\CoreBundle\Entity\DirectoryClientImage $image
+     * @return Directory
+     */
+    public function addClientImage(DirectoryClientImage $image)
+    {
+        $image->setDirectory($this); //Because the owning side of this relation is image
+        $this->clientImages[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove client images
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryClientImage $image
+     */
+    public function removeClientImage(DirectoryClientImage $image)
+    {
+        $this->clientImages->removeElement($image);
+        $image->setDirectory(null);
+    }
+
+    /**
+     * Get client images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClientImages()
+    {
+        return $this->clientImages;
+    }
+
+
+
 }

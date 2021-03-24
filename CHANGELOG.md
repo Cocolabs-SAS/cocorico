@@ -7,6 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.1] - (2021-03-xx)
+- Migration références client vers db structure
+- Migration images (logo) vers db structure
+- Ajout donnée périmêtre d'action structure
+
 ### [3.0] - (2021-03-23)
 - Ajout contrôle des secteurs d'activité aux structures du répertoire
 - Migration vers une centralité du marché sur les structures
