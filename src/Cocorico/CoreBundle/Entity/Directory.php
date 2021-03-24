@@ -125,10 +125,10 @@ class Directory
     const PR_FRANCE = 3;
 
     public static $polRangeValues = array (
-        self::PR_OTHER => 'entity.listing.polrange.other',
-        self::PR_DEPARTEMENT => 'entity.listing.polrange.departement',
-        self::PR_REGION => 'entity.listing.polrange.region',
-        self::PR_FRANCE => 'entity.listing.polrange.france',
+        self::PR_OTHER => 'entity.directory.polrange.other',
+        self::PR_DEPARTEMENT => 'entity.directory.polrange.departement',
+        self::PR_REGION => 'entity.directory.polrange.region',
+        self::PR_FRANCE => 'entity.directory.polrange.france',
     );
 
     public static $exportColumns = array(

@@ -15,7 +15,7 @@
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
 
-        {% trans_default_domain 'cocorico_user' %}
+        {% trans_default_domain 'cocorico_directory' %}
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
@@ -201,6 +201,10 @@
                             {{ structure.city }}</dd>
                             <dd>{{ structure.region }}</dd>
                             <br />
+                            {% if structure.polRange %}
+                                <dt>Périmètre d'intervention</dt>
+                                <dd>{{ structure.polRangeText | trans}}</dt>
+                            {% endif %}
                         </dl>
                     </div>
                 </div>
