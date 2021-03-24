@@ -119,39 +119,39 @@
 
                     <!-- Third Row, Description -->
                     {% if user %}
-                    <div class="row">
-                        <div class="col-sm-12 shadow">
-                            <h3>Description de l'activité commerciale</h3>
-                            <div class="user_description">
-                            {% if user_description %}
-                                {{ user_description | nl2br }}
-                            {% endif %}
+                        <div class="row">
+                            <div class="col-sm-12 shadow">
+                                <h3>Description de l'activité commerciale</h3>
+                                <div class="user_description">
+                                {% if user_description %}
+                                    {{ user_description | nl2br }}
+                                {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Fourth Row, Listings -->
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <h3>Détail des prestations / Liste des prestations</h3>
-                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
-                            'listings': user_listings
-                            } only %}
+                        <!-- Fourth Row, Listings -->
+                        <div class="row ">
+                            <div class="col-sm-12">
+                                <h3>Détail des prestations / Liste des prestations</h3>
+                                {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
+                                'listings': user_listings
+                                } only %}
+                            </div>
                         </div>
-                    </div>
 
+                    {% endif %}
                     <!-- Fourth Row, References -->
                     <div class="row">
                         <div class="col-sm-12">
                             <h3>Références clients</h3>
-                            {% for image in listings_data.clientImages %}
+                            {% for image in structure.clientImages %}
                                 <!-- slide -->
                                 <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
                                       class="client-ref"/>
                             {% endfor %}
                         </div>
                     </div>
-                    {% endif %}
 
                 </section>
             </div>

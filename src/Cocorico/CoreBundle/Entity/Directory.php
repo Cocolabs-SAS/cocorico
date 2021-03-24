@@ -397,6 +397,15 @@ class Directory
     protected $images;
 
     /**
+     *
+     * @ORM\OneToMany(targetEntity="DirectoryClientImage", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "asc"})
+     */
+    protected $clientImages;
+
+
+
+    /**
      * Get id.
      *
      * @return int
