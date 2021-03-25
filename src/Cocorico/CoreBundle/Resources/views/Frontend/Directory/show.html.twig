@@ -12,10 +12,12 @@
     {% set user_images = user.images %}
 {%endif %}
 
+{% set structure_images = structure.images %}
+
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
 
-        {% trans_default_domain 'cocorico_user' %}
+        {% trans_default_domain 'cocorico_directory' %}
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
@@ -42,27 +44,25 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <!-- gallery-small -->
-                            {% if user %}
                             <div id="user_profile" class="gallery-small slideshow">
                                 <div class="slideset">
-                                        {% if user_images|length %}
-                                            {% for image in user_images %}
+                                        {% if structure_images|length %}
+                                            {% for image in structure_images %}
                                                 <div class="slide">
                                                     <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                                         alt="{{ user.name }}"/>
+                                                         alt="{{ structure.name }}"/>
                                                 </div>
                                             {% endfor %}
                                         {% else %}
                                             <div class="slide">
                                                 <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
-                                                     alt="{{ user.name }}"/>
+                                                     alt="{{ structure.name }}"/>
                                             </div>
                                         {% endif %}
                                 </div>
                                 <a href="#" class="btn-prev">previous</a>
                                 <a href="#" class="btn-next">next</a>
                             </div>
-                            {% endif %}
                             <address>
                                 <h4>
                                     {{ structure.brand }}
@@ -119,39 +119,40 @@
 
                     <!-- Third Row, Description -->
                     {% if user %}
-                    <div class="row">
-                        <div class="col-sm-12 shadow">
-                            <h3>Description de l'activité commerciale</h3>
-                            <div class="user_description">
-                            {% if user_description %}
-                                {{ user_description | nl2br }}
-                            {% endif %}
+                        <div class="row">
+                            <div class="col-sm-12 shadow">
+                                <h3>Description de l'activité commerciale</h3>
+                                <div class="user_description">
+                                {% if user_description %}
+                                    {{ user_description | nl2br }}
+                                {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Fourth Row, Listings -->
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <h3>Détail des prestations / Liste des prestations</h3>
-                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
-                            'listings': user_listings
-                            } only %}
-                        </div>
-                    </div>
+                    {% endif %}
 
                     <!-- Fourth Row, References -->
                     <div class="row">
                         <div class="col-sm-12">
                             <h3>Références clients</h3>
-                            {% for image in listings_data.clientImages %}
+                            {% for image in structure.clientImages %}
                                 <!-- slide -->
                                 <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
                                       class="client-ref"/>
                             {% endfor %}
                         </div>
                     </div>
-                    {% endif %}
+
+                    <!-- Fifth Row, Listings -->
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <h3>Détail des prestations / Liste des prestations</h3>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
+                            'listings': listings
+                            } only %}
+                        </div>
+                    </div>
+
 
                 </section>
             </div>
@@ -201,6 +202,10 @@
                             {{ structure.city }}</dd>
                             <dd>{{ structure.region }}</dd>
                             <br />
+                            {% if structure.polRange %}
+                                <dt>Périmètre d'intervention</dt>
+                                <dd>{{ structure.polRangeText | trans}}</dt>
+                            {% endif %}
                         </dl>
                     </div>
                 </div>
