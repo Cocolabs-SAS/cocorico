@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Directory;
+use Cocorico\CoreBundle\Entity\Listing;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditStatusType;
@@ -32,7 +33,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DirectoryController extends Controller
 {
-
     /**
      * Finds and displays a Directory entity.
      *
@@ -50,14 +50,30 @@ class DirectoryController extends Controller
         // $breadcrumbs = $this->get('cocorico.breadcrumbs_manager');
         // $breadcrumbs->addListingShowItems($request, $listing);
 
+        $listings = $this->getListings($structure, $request);
         return $this->render(
             'CocoricoCoreBundle:Frontend/Directory:show.html.twig',
             array(
                 'structure' => $structure,
+                'listings' => $listings,
                 'user' => null,
             )
         );
     }
 
-
+    private function getListings($structure, $request)
+    {
+        $listings = [];
+        foreach($structure->getUsers() as $user)
+        {
+            $userListings = $this->get('doctrine')->getManager()->getRepository('CocoricoCoreBundle:Listing')->findByOwner(
+                $user->getId(),
+                $request->getLocale(),
+                array(Listing::STATUS_PUBLISHED)
+            );
+            $listings = array_merge($listings, $userListings);
+        
+        }
+        return $listings;
+    }
 }

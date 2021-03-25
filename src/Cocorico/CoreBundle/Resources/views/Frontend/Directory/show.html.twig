@@ -129,18 +129,8 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Fourth Row, Listings -->
-                        <div class="row ">
-                            <div class="col-sm-12">
-                                <h3>Détail des prestations / Liste des prestations</h3>
-                                {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
-                                'listings': user_listings
-                                } only %}
-                            </div>
-                        </div>
-
                     {% endif %}
+
                     <!-- Fourth Row, References -->
                     <div class="row">
                         <div class="col-sm-12">
@@ -152,6 +142,17 @@
                             {% endfor %}
                         </div>
                     </div>
+
+                    <!-- Fifth Row, Listings -->
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <h3>Détail des prestations / Liste des prestations</h3>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
+                            'listings': listings
+                            } only %}
+                        </div>
+                    </div>
+
 
                 </section>
             </div>
