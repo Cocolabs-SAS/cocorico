@@ -205,6 +205,9 @@
                             {% if structure.polRange %}
                                 <dt>Périmètre d'intervention</dt>
                                 <dd>{{ structure.polRangeText | trans}}</dt>
+                            {% elseif structure.geoRange %}
+                                <dt>Périmètre d'intervention</dt>
+                                <dd>{{ structure.geoRange}} Km</dt>
                             {% endif %}
                         </dl>
                     </div>
