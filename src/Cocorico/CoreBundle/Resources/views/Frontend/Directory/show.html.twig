@@ -12,6 +12,8 @@
     {% set user_images = user.images %}
 {%endif %}
 
+{% set structure_images = structure.images %}
+
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
 
@@ -42,27 +44,25 @@
                     <div class="row">
                         <div class="col-sm-3">
                             <!-- gallery-small -->
-                            {% if user %}
                             <div id="user_profile" class="gallery-small slideshow">
                                 <div class="slideset">
-                                        {% if user_images|length %}
-                                            {% for image in user_images %}
+                                        {% if structure_images|length %}
+                                            {% for image in structure_images %}
                                                 <div class="slide">
                                                     <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                                         alt="{{ user.name }}"/>
+                                                         alt="{{ structure.name }}"/>
                                                 </div>
                                             {% endfor %}
                                         {% else %}
                                             <div class="slide">
                                                 <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
-                                                     alt="{{ user.name }}"/>
+                                                     alt="{{ structure.name }}"/>
                                             </div>
                                         {% endif %}
                                 </div>
                                 <a href="#" class="btn-prev">previous</a>
                                 <a href="#" class="btn-next">next</a>
                             </div>
-                            {% endif %}
                             <address>
                                 <h4>
                                     {{ structure.brand }}
