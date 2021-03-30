@@ -21,6 +21,7 @@ use Cocorico\CoreBundle\Utils\Deps;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
+use Cocorico\CoreBundle\Model\DirectorySearchRequest;
 
 /**
  * Directory controller
@@ -58,7 +59,11 @@ class CompanyListController extends Controller
         $tracker_payload = ['dir' => 'siae'];
         $form = $this->sortCompaniesForm();
         $form->handleRequest($request);
-        $dlform = $this->csvCompaniesForm();
+
+        /** @var ListingSearchRequest $listingSearchRequest */
+        $directorySearchRequest = $this->get('cocorico.directory_search_request');
+
+        $dlform = $this->csvCompaniesForm($directorySearchRequest);
 
         $directoryManager = $this->get('cocorico.directory.manager');
         $withAntenna = true;
@@ -177,7 +182,10 @@ class CompanyListController extends Controller
     {
         $this->fix();
         $tracker_payload = ['dir' => 'siae'];
-        $form = $this->csvCompaniesForm();
+
+        /** @var ListingSearchRequest $listingSearchRequest */
+        $directorySearchRequest = $this->get('cocorico.directory_search_request');
+        $form = $this->csvCompaniesForm($directorySearchRequest);
         $form->handleRequest($request);
 
         $directoryManager = $this->get('cocorico.directory.manager');
@@ -296,12 +304,12 @@ class CompanyListController extends Controller
         return $form;
     }
 
-    private function csvCompaniesForm()
+    private function csvCompaniesForm(DirectorySearchRequest $directorySearchRequest)
     {
         $form = $this->get('form.factory')->createNamed(
             '',
             DirectoryFilterType::class,
-            null,
+            $directorySearchRequest,
             array(
                 'action' => $this->generateUrl(
                     'cocorico_itou_siae_directory_csv',

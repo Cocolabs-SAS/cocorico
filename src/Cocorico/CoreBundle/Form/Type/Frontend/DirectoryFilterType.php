@@ -10,15 +10,54 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Cocorico\CoreBundle\Form\Type\ListingCategoryType;
+use Cocorico\CoreBundle\Model\DirectorySearchRequest;
+use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class DirectoryFilterType extends AbstractType
 {
+     /**
+     * @param EntityManager            $entityManager
+     * @param RequestStack             $requestStack
+     * @param EventDispatcherInterface $dispatcher
+     * @param array                    $parameters
+     */
+    public function __construct(
+        EntityManager $entityManager,
+        RequestStack $requestStack,
+        EventDispatcherInterface $dispatcher,
+        $parameters
+    ) {
+        $this->entityManager = $entityManager;
+        $this->request = $requestStack->getCurrentRequest();
+        $this->dispatcher = $dispatcher;
+
+        $parameters = $parameters["parameters"];
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var DirectorySearchRequest $directorySearchRequest */
+        $directorySearchRequest = $builder->getData();
+
+        //CATEGORIES
+        /** @var ListingCategoryRepository $categoryRepository */
+        $categoryRepository = $this->entityManager->getRepository("CocoricoCoreBundle:ListingCategory");
+        $categories = $categoryRepository->findCategoriesByIds(
+            //FIXME: Make this work
+            // $directorySearchRequest->getCategories(),
+            [],
+            'fr'
+        );
+
+
         $builder
             ->add('format',
                 ChoiceType::class,
@@ -33,12 +72,24 @@ class DirectoryFilterType extends AbstractType
                     ],
                 )
             )
-            ->add('sector', 
-                ChoiceType::class,
+            // ->add('sector', 
+            //     ChoiceType::class,
+            //     array(
+            //         'expanded' => false,
+            //         'empty_data' => '',
+            //         'choices' => array_flip(Directory::$sectorValues),
+            //     )
+            // )
+            ->add(
+                'categories',
+                ListingCategoryType::class,
                 array(
-                    'expanded' => false,
-                    'empty_data' => '',
-                    'choices' => array_flip(Directory::$sectorValues),
+                    'label' => 'listing_search.form.categories',
+                    'mapped' => false,
+                    'data' => $categories,
+                    'block_name' => 'listing_categories',
+                    'multiple' => true,
+                    'placeholder' => 'listing_search.form.categories.empty_value',
                 )
             )
             //->add('region',
