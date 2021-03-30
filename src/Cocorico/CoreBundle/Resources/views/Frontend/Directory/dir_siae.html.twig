@@ -26,7 +26,7 @@
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                {{form_widget(form.sector, {
+                                {{form_widget(form.categories, {
                                     'id': 'sector',
                                     'attr': {
                                         'class': 'form-control',
@@ -163,7 +163,7 @@
                     } only %}
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
-                        {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.categories, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}

@@ -194,7 +194,95 @@ class DirectorySearchRequest
     }
 
 
+    public function getLat()
+    {
+        return $this->lat;
+    }
 
+    public function setLat($lat)
+    {
+        return $this->lat = $lat;
+    }
+
+    public function getLng()
+    {
+        return $this->lng;
+    }
+
+    public function setLng($lng)
+    {
+        return $this->lng = $lng;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry($country)
+    {
+        return $this->country = $country;
+    }
+
+    public function getArea()
+    {
+        return $this->area;
+    }
+
+    public function setArea($area)
+    {
+        return $this->area = $area;
+    }
+
+    public function getDepartment()
+    {
+        return $this->department;
+    }
+
+    public function setDepartment($department)
+    {
+        return $this->department = $department;
+    }
+
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    public function setCity($city)
+    {
+        return $this->city = $city;
+    }
+
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode($postalCode)
+    {
+        return $this->postalCode = $postalCode;
+    }
+
+    public function getZip()
+    {
+        return $this->zip;
+    }
+
+    public function setZip($zip)
+    {
+        return $this->zip = $zip;
+    }
+
+    public function getAddressType()
+    {
+        return $this->addressType;
+    }
+
+    public function setAddressType($addressType)
+    {
+        return $this->addressType = $addressType;
+    }
 
     /**
      * Remove some Object properties while serialisation
