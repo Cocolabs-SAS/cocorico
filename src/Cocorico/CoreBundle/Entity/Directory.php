@@ -137,7 +137,7 @@ class Directory
         'validSiret' => 'Siret',
         'natureText' => 'Établissement',
         'kind' => 'Type',
-        'sector' => 'Secteur',
+        'sectorString' => 'Secteur',
         'email' => 'E-mail',
         'phone' => 'Téléphone',
         'website' => 'Site web',
@@ -474,6 +474,23 @@ class Directory
             return substr($this->siret,0, 9);
         }
         return '';
+    }
+
+    /**
+     * Get Sector String
+     *
+     * @return string
+     */
+    public function getSectorString()
+    {
+        $out = [];
+        $cats = $this->getDirectoryListingCategories(); 
+
+        foreach ($cats as $cat) {
+            $out[] = $cat->getCategory()->getName();
+        }
+
+        return implode(', ', $out);
     }
 
     /**

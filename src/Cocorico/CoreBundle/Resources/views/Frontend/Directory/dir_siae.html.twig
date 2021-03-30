@@ -144,12 +144,15 @@
                                 <td>{{ entry.getNatureText() }}</td>
                                 <td>{{ entry.kind }}</td>
                                 <td>{{ entry.prestaType}} </td>
+                                <td>{{ entry.getSectorString()}} </td>
                                 {# <td>{{ entry.sector}} </td> #}
+                                {#
                                 <td>
                                 {% for cat in entry.directoryListingCategories %}
                                     {{ cat.getCategory().getName() }} &nbsp;
                                 {% endfor %}
                                 </td>
+                                #}
                                 <td>{{ entry.postCode }} {{ entry.city }}</td>
                                 <td>{{ entry.region }}</td>
                             </tr>
