@@ -251,13 +251,15 @@ body {
 #main .form-signup {
     border:0;
 }
-#form-registerlogin {
+#form-registerlogin,
+.login-like {
     width:100%;
     display:flex;
     justify-content:center;
 }
 
-#form-registerlogin .sub-form {
+#form-registerlogin .sub-form,
+.login-like .sub-form {
     box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
     padding:2rem;
     color:#000;
@@ -265,13 +267,15 @@ body {
     border-radius:7px;
 }
 
-#form-registerlogin .sub-form2 {
+#form-registerlogin .sub-form2,
+.login-like .sub-form2 {
     padding:2rem;
     color:#000;
     font-size:1.125rem;
 }
 
-#form-registerlogin .sub-form3 {
+#form-registerlogin .sub-form3,
+.login-like .sub-form3 {
     color:#000;
     font-size:1.125rem;
 }
@@ -1679,4 +1683,43 @@ div.c4_multiselect li {
 .multisel h1:hover,
 .multisel h2:hover {
     border-color:#000;
+}
+
+
+
+
+/******************
+ * Directory Select Forms
+ ******************/
+
+.structure_select a {
+    font-size:.8rem;
+    width:8rem;
+}
+
+
+.structure_select {
+    display:flex;
+    flex-flow:column nowrap;
+    align-items:center;
+    margin-bottom:2rem;
+    padding-bottom:2rem;
+    border-bottom:1px solid #ccc;
+}
+
+.structure_select:last-child {
+    margin-bottom:0;
+    padding-bottom:0;
+    border-bottom-width:0;
+}
+.structure_select th,
+.structure_select td {
+    vertical-align:top;
+    text-overflow: ellipsis;
+    padding:.5rem .3rem;
+}
+
+.login-like .multisel h1 {
+    font-size:1.2rem;
+    margin-top:1rem;
 }

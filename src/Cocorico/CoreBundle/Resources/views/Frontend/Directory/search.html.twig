@@ -1,0 +1,211 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{%- block meta_title -%}
+    {{ 'directory.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'directory.new.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block main %}
+<div class="col-xs-12">
+
+    {{ form_start(cform, {'attr': {'class': 'form'}}) }}
+    <div id="form-registerlogin" class="form-signup validate-form">
+        <div class="col-sm-6">
+        <div id="home" class="login_register">
+            <h1><i class="icon-clipboard"></i>Votre structure</h1>
+
+            <div id="login-errors-wrapper">
+                {{ form_errors(cform) }}
+            </div>
+            <div class="sub-form3">
+                Recherchez la structure à laquelle vous êtes attaché
+                (Si il y en a plusieurs, vous aurez la possibilité de spécifier d'autres structures
+                par la suite)
+            </div>
+            <div>
+                <div class="col">
+                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Recherche</h3>
+                    <div class="sub-form">
+
+                         <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(cform.siret) }}</div>
+                            <span class="label">
+                                {{ form_label(cform.siret, 'Siret ou Siren de votre structure') }}
+                            </span>
+
+                            <div class="field-holder">
+                                {{ form_widget(cform.siret, {
+                                    'attr': {
+                                        'class': 'form-control required',
+                                        'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                                    }
+                                }) }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns-area new-directory">
+            <div id="buttons_nav">
+                <div class="btn-block text-center">
+                    <input id="directory-new-save" type="submit" class="btn btn-default"
+                           style="width:15rem"
+                           value="Recherche">
+                </div>
+            </div>
+        </div>
+
+            {% if results %}
+            <div>
+                <div class="col">
+                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Résultats</h3>
+                    <div class="legend">Sélectionnez votre structure</div>
+                    <div class="sub-form">
+                        {% for structure in results %}
+                            <div class="structure_select">
+                                <table>
+                                    <tr><th>Raison sociale</th><td>{{ structure.name | capitalize }}</td></tr>
+                                    <tr><th>Enseigne</th><td>{{ structure.brand | capitalize }}</td></tr>
+                                    <tr><th>Siret</th><td>{{ structure.siret }}</td></tr>
+                                </table>
+                                {% if structure.hasUsers %}
+                                    <p class="text-muted">Cette structure est gérée par un autre utilisateur</p>
+                                    <button disabled class="btn btn-danger">Sélectionner</button>
+                                {% else %}
+                                    <a href="{{ path('cocorico_directory_adopt', {'id': structure.id}) }}" class="btn btn-outline-primary">Sélectionner</a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+    {{ form_end(cform) }}
+</div>
+
+{% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
+        'map_elt': '#map-listing',
+        'marker_draggable': true
+    } only %}
+
+    {#Translations#}
+    {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
+
+
+    {#Files upload#}
+    {#
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_multi_js.html.twig' with {
+        'upload_el1': '#listing_image_new',
+        'upload_images1': '#listing_image_uploaded',
+        'upload_list1': '#files-to-upload',
+        'upload_el2': '#listing_clientImage_new',
+        'upload_list2': '#client-files-to-upload',
+        'upload_images2': '#listing_clientImage_uploaded',
+        'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
+        'upload_max': listing_img_max - listing.images.count,
+    } only %}
+    #}
+
+    <script>
+        const pager = {
+            current: 0,
+            order: ['.part_1', '.part_2', '.part_3'],
+            but_prev : '#but_prev',
+            but_next : '#but_next',
+            but_subt : '#listing-new-save',
+            init: function() {
+                $(this.but_prev).click((e) => pager.prev(e));
+                $(this.but_next).click((e) => {pager.next(e);});
+                for (const part of this.order) {
+                    $(part).css('display','none');
+                }
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            next: function(e) {
+                e.preventDefault();
+
+                if (this.current + 1 >= this.order.length) {
+                    // console.log('End of parts');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current += 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            prev: function(e) {
+                e.preventDefault();
+
+                if (this.current <= 0) {
+                    // console.log('Already at beginning');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current -= 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            check: function() {
+                window.scrollTo(0, 0);
+                if (this.current == 0) {
+                    $(this.but_prev).hide();
+                } else {
+                    $(this.but_prev).show();
+                }
+
+                if (this.current + 1 >= this.order.length) {
+                    $(this.but_next).hide();
+                    $(this.but_subt).show();
+                } else {
+                    $(this.but_next).show();
+                    $(this.but_subt).hide();
+                }
+            }
+
+        };
+
+
+            
+        $(document).ready(() => {
+            pager.init();
+            $("#buttons_submit").hide();
+        });
+    </script>
+
+
+{% endblock %}

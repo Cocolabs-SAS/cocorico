@@ -123,6 +123,22 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.directory_new:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryType
+        arguments:
+            - "@request_stack"
+            - "@cocorico.directory.manager"
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.directory_new_categories:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryCategoriesType
+        arguments:
+            - "@event_dispatcher"
+        tags:
+            - { name: form.type }
+
     cocorico.form.type.directory_edit:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType
         tags:

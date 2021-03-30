@@ -13,6 +13,9 @@ namespace Cocorico\CoreBundle\Controller\Frontend;
 
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Entity\Listing;
+use Cocorico\CoreBundle\Model\DirectoryCheckRequest;
+use Cocorico\CoreBundle\Form\Type\Frontend\DirectoryCheckType;
+use Cocorico\CoreBundle\Form\Type\Frontend\DirectoryType;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditDurationType;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditPriceType;
 # use Cocorico\CoreBundle\Form\Type\Dashboard\ListingEditStatusType;
@@ -33,6 +36,142 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DirectoryController extends Controller
 {
+
+    /**
+     * Search a directory entity to adopt
+     *
+     * @Route("/adopt/search", name="cocorico_directory_adopt_search")
+     *
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @param Request   $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function searchAction( Request $request) {
+        $formHandler = $this->get('cocorico.form.handler.directory');
+        $directoryCheckRequest = $this->get('cocorico.directory_check_request');
+
+
+        $checkForm = $this->createCheckForm($directoryCheckRequest);
+        $checkForm->handleRequest($request);
+        $results = [];
+        if ($checkForm->isSubmitted()) {
+            $directoryCheckRequest = $checkForm->getData();
+            $results = $this->get("cocorico.directory.manager")->findBySiretn(
+                $directoryCheckRequest->getSiret()
+            );
+        }
+    
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Directory:search.html.twig',
+            array(
+                'directoryCheckRequest' => $directoryCheckRequest,
+                'cform' => $checkForm->createView(),
+                'results' => $results,
+                # 'editForm' => $editForm->createView(),
+            )
+        );
+    
+    }
+
+    /**
+     * Creates a form to check for a directory structure
+     *
+     * @param Directory $directory The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createCheckForm(DirectoryCheckRequest $CRequest)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory',
+            DirectoryCheckType::class,
+            $CRequest,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl('cocorico_directory_adopt_search'),
+            )
+        );
+
+        return $form;
+    }
+
+    /**
+     * Adopt a directory entity.
+     *
+     * @Route("/adopt/{id}", name="cocorico_directory_adopt")
+     *
+     * @Security("has_role('ROLE_ADMIN') or has_role('ROLE_USER')")
+     *
+     * @Method({"GET", "POST"})
+     *
+     * @param Request   $request
+     * @param Directory $directory
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function adoptAction( Request $request, Directory $directory) {
+        $formHandler = $this->get('cocorico.form.handler.directory');
+        $form = $this->createDirectoryForm($directory);
+        $directory = $formHandler->init($directory);
+        $success = $formHandler->process($form);
+
+        if ($success) {
+            $url = $this->generateUrl('cocorico_directory_show', ['id' => $directory->getId()]);
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Structure attachéé avec succes'
+            );
+
+            return $this->redirect($url);
+        }
+
+        // if ($checkForm->isSubmitted()) {
+        //     $directoryCheckRequest = $checkForm->getData();
+        //     $results = $this->get("cocorico.directory.manager")->findBySiretn(
+        //         $directoryCheckRequest->getSiret()
+        //     );
+        // }
+        //$success = $formHandler->process($form);
+    
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Directory:adopt.html.twig',
+            array(
+                'directory' => $directory,
+                'form' => $form->createView(),
+                # 'editForm' => $editForm->createView(),
+            )
+        );
+    }
+
+
+    /**
+     * Creates a form for a directory structure
+     *
+     * @param Directory $directory The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDirectoryForm(Directory $directory)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory',
+            DirectoryType::class,
+            $directory,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl('cocorico_directory_adopt', ['id' => $directory->getId()]),
+            )
+        );
+
+        return $form;
+    }
+
+
     /**
      * Finds and displays a Directory entity.
      *

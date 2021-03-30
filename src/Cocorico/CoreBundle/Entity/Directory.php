@@ -1244,6 +1244,11 @@ class Directory
         return $this->users->contains($user);
     }
 
+    public function hasUsers()
+    {
+        return count($this->users);
+    }
+
     /**
      * Set range
      *
