@@ -88,67 +88,6 @@ which acts on the person type choice.
                     </div>
                 </div>
 
-
-                 <div class="field-row validate-row">
-                    <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
-                    <span class="label">
-                        {{ form_label(form_registration.companyName, 'Nom de votre structure') }}
-                    </span>
-
-                    <div class="field-holder">
-                        {{ form_widget(form_registration.companyName, {
-                            'attr': {
-                                'class': 'form-control required',
-                                'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
-                            }
-                        }) }}
-                    </div>
-                </div>
-
-                <div class="field-row validate-row" data-only="inclusive">
-                    <div class="error-container">{{ form_errors(form_registration.siret) }}</div>
-                    <span class="label">
-
-                        {{ form_label(form_registration.siret, 'Siret', {
-                            'label_attr': {
-                                'data-label-legal': 'form.siret.legal'|trans
-                            }
-                        }) }}
-                    </span>
-
-                    <div class="field-holder">
-                        {{ form_widget(form_registration.siret, {
-                            'attr': {
-                                'class': 'form-control required',
-                                'data-parsley-required-message': 'cocorico_user.siret.blank'|trans({},'validators'),
-                                'data-parsley-invalid-message': 'cocorico_user.siret.invalid'|trans({}, 'validators')
-                            }
-                        }) }}
-                    </div>
-                </div>
-
-                <div class="field-row validate-row" data-only="inclusive">
-                    <div class="error-container">{{ form_errors(form_registration.naf) }}</div>
-                    <span class="label">
-
-                        {{ form_label(form_registration.naf, "Code NAF / APE", {
-                            'label_attr': {
-                                'data-label-legal': 'form.naf.legal'|trans
-                            }
-                        }) }}
-                    </span>
-
-                    <div class="field-holder">
-                        {{ form_widget(form_registration.naf, {
-                            'attr': {
-                                'class': 'form-control',
-                                'data-parsley-required-message': 'cocorico_user.naf.blank'|trans({},'validators'),
-                                'data-parsley-invalid-message': 'cocorico_user.naf.invalid'|trans({}, 'validators')
-                            }
-                        }) }}
-                    </div>
-                </div>
-
                 <div class="field-row validate-row" data-only="inclusive classic">
                     <div class="error-container">{{ form_errors(form_registration.phone) }}</div>
                     <span class="label">{{ form_label(form_registration.phone, "Téléphone") }}</span>
@@ -159,27 +98,6 @@ which acts on the person type choice.
                                 'class': "form-control",
                                 'data-parsley-type': 'digits',
                                 'data-parsley-type-message': 'cocorico_user.phone.invalid'|trans({},'validators')
-                            }
-                        }) }}
-                    </div>
-                </div>
-
-                <div class="field-row validate-row" data-only="inclusive">
-                    <div class="error-container">{{ form_errors(form_registration.website) }}</div>
-                    <span class="label">
-                        {{ form_label(form_registration.website, "Site Internet", {
-                            'label_attr': {
-                                'data-label-legal': 'form.website.legal'|trans
-                            }
-                        }) }}
-                    </span>
-
-                    <div class="field-holder">
-                        {{ form_widget(form_registration.website, {
-                            'attr': {
-                                'class': 'form-control',
-                                'data-parsley-required-message': 'cocorico_user.website.blank'|trans({},'validators'),
-                                'data-parsley-invalid-message': 'cocorico_user.website.invalid'|trans({}, 'validators')
                             }
                         }) }}
                     </div>

@@ -61,30 +61,6 @@ class RegistrationFormType extends AbstractType
                 ),
             )
             ->add(
-                'companyName',
-                TextType::class,
-                array(
-                    'label' => 'form.company_name',
-                    'required' => true,
-                )
-            )
-            ->add(
-                'siret',
-                TextType::class,
-                array(
-                    'label' => 'form.siret',
-                    'required' => true,
-                )
-            )
-            ->add(
-                'naf',
-                TextType::class,
-                array(
-                    'label' => 'form.naf',
-                    'required' => false,
-                )
-            )
-            ->add(
                 'lastName',
                 TextType::class,
                 array(
@@ -119,14 +95,6 @@ class RegistrationFormType extends AbstractType
                 'email',
                 EmailType::class,
                 array('label' => 'form.email')
-            )
-            ->add(
-                'website',
-                TextType::class,
-                array(
-                    'label' => 'form.website',
-                    'required' => false,
-                )
             )
             ->add(
                 'accept_rgpd',
