@@ -147,7 +147,6 @@ class DirectoryFormHandler
     public function addCategories(Directory $directory)
     {
         $categories = $this->request->request->get("directory_categories");
-        dump($categories);
 
         $directoryCategories = isset($categories["directoryListingCategories"]) ? $categories["directoryListingCategories"] : array();
         $directoryCategoriesValues = isset($categories["categoriesFieldsSearchableValuesOrderedByGroup"]) ? $categories["categoriesFieldsSearchableValuesOrderedByGroup"] : array();
