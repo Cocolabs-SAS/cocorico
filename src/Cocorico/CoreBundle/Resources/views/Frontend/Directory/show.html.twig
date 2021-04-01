@@ -65,7 +65,11 @@
                             </div>
                             <address>
                                 <h4>
-                                    {{ structure.brand }}
+                                    {% if structure.brand %}
+                                        {{ structure.brand }}
+                                    {% else %}
+                                        {{ structure.name }}
+                                    {% endif %}
                                 </h4>
                                 {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
                             </address>
@@ -118,20 +122,19 @@
                     </div>
 
                     <!-- Third Row, Description -->
-                    {% if user %}
+                    {% if structure.description %}
                         <div class="row">
                             <div class="col-sm-12 shadow">
                                 <h3>Description de l'activité commerciale</h3>
                                 <div class="user_description">
-                                {% if user_description %}
-                                    {{ user_description | nl2br }}
-                                {% endif %}
+                                    {{ structure.description | nl2br }}
                                 </div>
                             </div>
                         </div>
                     {% endif %}
 
                     <!-- Fourth Row, References -->
+                    {% if structure.clientImages is not empty %}
                     <div class="row">
                         <div class="col-sm-12">
                             <h3>Références clients</h3>
@@ -142,7 +145,9 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
 
+                    {% if listings %}
                     <!-- Fifth Row, Listings -->
                     <div class="row ">
                         <div class="col-sm-12">
@@ -152,6 +157,7 @@
                             } only %}
                         </div>
                     </div>
+                    {% endif %}
 
 
                 </section>

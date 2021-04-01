@@ -403,6 +403,13 @@ class Directory
      */
     protected $clientImages;
 
+    /**
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     *
+     * @var string
+     */
+    private $description;
+
 
 
     /**
@@ -1383,6 +1390,27 @@ class Directory
         return $this->clientImages;
     }
 
+    /**
+     * Set description
+     *
+     * @param  string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
 }

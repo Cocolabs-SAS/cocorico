@@ -112,6 +112,17 @@
                     <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Données à compléter</h3>
                     <div class="sub-form">
                         <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.description) }}</div>
+                            <span class="label">
+                                {{ form_label(form.description, 'Description') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.description, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(form.website) }}</div>
                             <span class="label">
                                 {{ form_label(form.website, 'Site internet') }}

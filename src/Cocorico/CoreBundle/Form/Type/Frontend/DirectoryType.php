@@ -22,6 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use JMS\TranslationBundle\Model\Message;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -93,6 +94,14 @@ class DirectoryType extends AbstractType
                 TextType::class,
                 array(
                     'disabled' => 'disabled',
+                )
+            )
+            ->add(
+                'description',
+                TextareaType::class,
+                array(
+                    'required' => false,
+                    'attr' => ['rows'=> 6]
                 )
             )
             ->add(
