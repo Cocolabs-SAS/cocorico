@@ -7,7 +7,7 @@
 <p>{{ structure.siret }}</p>
 <pre>En Construction</pre>
 #}
-
+{% set user = structure.getFirstUser() %}
 {% if user %}
     {% set user_images = user.images %}
 {%endif %}
@@ -64,14 +64,17 @@
                                 <a href="#" class="btn-next">next</a>
                             </div>
                             <address>
-                                <h4>
-                                    {{ structure.brand }}
-                                </h4>
                                 {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
                             </address>
                         </div>
                         <div class="col-sm-9 shadow">
-                            <h3>Informations entreprise</h3>
+                            <h3>
+                                    {% if structure.brand %}
+                                        {{ structure.brand }}
+                                    {% else %}
+                                        {{ structure.name }}
+                                    {% endif %}
+                            </h3>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <dl class="deflist">
@@ -86,14 +89,12 @@
                                     </dl>
                                 </div>
                                 <div class="col-sm-6">
-                                    <dl class="deflist">
-                                        <dt>Type(s) de prestation</dt>
-                                        {#
-                                        {% for ptype in listings_data.prestaTypes %}
-                                            <dd>{{ ptype | trans({}, 'cocorico_listing') }}</dd>
+                                    <h4>Secteurs d'activité</h4>
+                                    <ul class="active_sectors">
+                                        {% for cat in structure.directoryListingCategories %}
+                                            <li>{{ cat.getCategory().getName() }}</li>
                                         {% endfor %}
-                                        #}
-                                    </dl>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -101,13 +102,11 @@
 
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
+                        {#
                         <div class="col-sm-6 pull-left shadow">
-                            <h4>Secteurs d'activité</h4>
-                            <ul class="active_sectors">
-                                {% for cat in structure.directoryListingCategories %}
-                                    <li>{{ cat.getCategory().getName() }}</li>
-                                {% endfor %}
-                            </ul>
+                            <dl class="deflist">
+                                <dt>Type(s) de prestation</dt>
+                            </dl>
                         </div>
 
                         <div class="col-sm-5  shadow pull-right">
@@ -115,23 +114,23 @@
                             (matériels, services particuliers, …)
                             </h4>
                         </div>
+                        #}
                     </div>
 
                     <!-- Third Row, Description -->
-                    {% if user %}
+                    {% if structure.description %}
                         <div class="row">
                             <div class="col-sm-12 shadow">
                                 <h3>Description de l'activité commerciale</h3>
                                 <div class="user_description">
-                                {% if user_description %}
-                                    {{ user_description | nl2br }}
-                                {% endif %}
+                                    {{ structure.description | nl2br }}
                                 </div>
                             </div>
                         </div>
                     {% endif %}
 
                     <!-- Fourth Row, References -->
+                    {% if structure.clientImages is not empty %}
                     <div class="row">
                         <div class="col-sm-12">
                             <h3>Références clients</h3>
@@ -142,7 +141,9 @@
                             {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
 
+                    {% if listings %}
                     <!-- Fifth Row, Listings -->
                     <div class="row ">
                         <div class="col-sm-12">
@@ -152,6 +153,7 @@
                             } only %}
                         </div>
                     </div>
+                    {% endif %}
 
 
                 </section>
@@ -184,10 +186,12 @@
                         {% if user %}
                             <dt>Adresse email de contact</dt>
                             <dd>{{ user.email }}</dd>
-                            <dt>N de téléphone</dt>
-                            <dd>{{ user.phone }}</dd>
+                            {% if user.phone %}
+                                <dt>N de téléphone</dt>
+                                <dd>{{ user.phone }}</dd>
+                            {% endif %}
                             <dt>Personne à contacter</dt>
-                            <dd>{{ user.name }}</dd>
+                            <dd>{{ user.namebis }}</dd>
                         {% endif %}
                     </dl>
                 </div>

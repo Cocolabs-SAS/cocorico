@@ -7,6 +7,15 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.3] - (2021-04-01)
+- Nouveau champs structure
+
+### [3.2] - (2021-03-30)
+- Fonctionnalité adoption de structure
+- Formulaire adoption de structure
+- Formulaire spécification de structure
+- Modification du parcours inscription pour orienter vers l'adoption de structure
+
 ### [3.1] - (2021-03-25)
 - Migration références client vers db structure
 - Migration images (logo) vers db structure

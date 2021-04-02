@@ -62,6 +62,27 @@ class DirectoryRepository extends EntityRepository
         return $qB;
     }
 
+    public function getFindBySiret($Siret)
+    {
+        $qB = $this->getFindQueryBuilder();
+        $qB->where('d.siret = :siret')
+           ->setParameter('siret', $siret);
+
+        return $qB;
+    }
+
+    public function getFindBySiretSiren($Siretn)
+    {
+        $qB = $this->getFindQueryBuilder();
+        $qB->where('d.siret = :siret')
+           ->orWhere('d.siret like :siren')
+           ->setParameter('siret', $Siretn)
+           ->setParameter('siren', $Siretn.'%');
+
+        return $qB;
+    }
+
+
 
     public function getFindByUser($user)
     {

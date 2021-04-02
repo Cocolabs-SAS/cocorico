@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -44,6 +45,15 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 array(
                     'label' => 'directory.form.brand',
                     'required' => false,
+                )
+            )
+            ->add(
+                'description',
+                TextareaType::class,
+                array(
+                    'label' => 'directory.form.description',
+                    'required' => false,
+                    'attr' => ['rows'=> 10]
                 )
             );
     }

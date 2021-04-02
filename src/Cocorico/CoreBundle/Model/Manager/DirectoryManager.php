@@ -5,6 +5,9 @@ namespace Cocorico\CoreBundle\Model\Manager;
 
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Repository\DirectoryRepository;
+use Cocorico\CoreBundle\Entity\DirectoryListingCategory;
+use Cocorico\CoreBundle\Entity\DirectoryImage;
+use Cocorico\CoreBundle\Entity\DirectoryClientImage;
 use DateInterval;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -69,6 +72,18 @@ class DirectoryManager extends BaseManager
             return $resp[0];
         } else {
             return False;
+        }
+    }
+
+    public function findBySiretn($siretn)
+    {
+        $qB = $this->getRepository()->getFindBySiretSiren($siretn);
+        $query = $qB->getQuery();
+        $resp =  $query->getResult();
+        if ($resp){
+            return $resp;
+        } else {
+            return [];
         }
     }
 
@@ -183,6 +198,104 @@ class DirectoryManager extends BaseManager
 
         return $directory;
     }
+
+    /**
+     * Create categories and field values while directory adopted.
+     *
+     * @param  Directory $directory
+     * @param  array   $categories Id(s) of ListingCategory(s) selected
+     * @param  array   $values     Value(s) of ListingCategoryFieldValue(s) of the ListingCategory(s) selected
+     *
+     * @return Directory
+     */
+    public function addCategories(Directory $directory, array $categories, array $values)
+    {
+        foreach ($categories as $i => $category) {
+            $listingCategory = $this->em->getRepository('CocoricoCoreBundle:ListingCategory')->findOneById(
+                $category
+            );
+
+            //Create the corresponding ListingListingCategory
+            $directoryListingCategory = new DirectoryListingCategory();
+            $directoryListingCategory->setDirectory($directory);
+            $directoryListingCategory->setCategory($listingCategory);
+
+            $directory->addDirectoryListingCategory($directoryListingCategory);
+        }
+
+        return $directory;
+    }
+
+
+    /**
+     * @param  Directory $directory
+     * @param  array   $images
+     * @param bool     $persist
+     * @return Directory
+     * @throws AccessDeniedException
+     */
+    public function addImages(Directory $directory, array $images, $persist = false)
+    {
+        //@todo : see why user is anonymous and not authenticated
+        if (true || $directory && $directory->getUser() == $this->securityTokenStorage->getToken()->getUser()) {
+            //Start new positions value
+            $nbImages = $directory->getImages()->count();
+
+            foreach ($images as $i => $image) {
+                $directoryImage = new DirectoryImage();
+                $directoryImage->setDirectory($directory);
+                $directoryImage->setName($image);
+                $directoryImage->setPosition($nbImages + $i + 1);
+                $directory->addImage($directoryImage);
+            }
+
+            if ($persist) {
+                $this->em->persist($directory);
+                $this->em->flush();
+                $this->em->refresh($directory);
+            }
+
+        } else {
+            throw new AccessDeniedException();
+        }
+
+        return $directory;
+    }
+    /**
+     * @param  Directory $directory
+     * @param  array   $clientImages
+     * @param bool     $persist
+     * @return Directory
+     * @throws AccessDeniedException
+     */
+    public function addClientImages(Directory $directory, array $clientImages, $persist = false)
+    {
+        //@todo : see why user is anonymous and not authenticated
+        if (true || $directory && $directory->getUser() == $this->securityTokenStorage->getToken()->getUser()) {
+            //Start new positions value
+            $nbImages = $directory->getClientImages()->count();
+
+            foreach ($clientImages as $i => $image) {
+                $directoryImage = new DirectoryClientImage();
+                $directoryImage->setDirectory($directory);
+                $directoryImage->setName($image);
+                $directoryImage->setPosition($nbImages + $i + 1);
+                $directory->addClientImage($directoryImage);
+            }
+
+            if ($persist) {
+                $this->em->persist($directory);
+                $this->em->flush();
+                $this->em->refresh($directory);
+            }
+
+        } else {
+            throw new AccessDeniedException();
+        }
+
+        return $directory;
+    }
+
 
 
 
