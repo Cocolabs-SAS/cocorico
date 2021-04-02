@@ -212,8 +212,8 @@
                             <legend>Références client</legend>
                             <div class="itou-info">
                                 <img class="shape" src="/images/info_shape.png" />
-                                Les références clients sont des éléments essentiels les acheteurs.
-                                Donnez leur confiance en complétant cette rubrique.
+                                Les références clients sont des éléments essentiels aux acheteurs.
+                                Complétez cette rubrique accroît vos chances d’être contacté.
                             </div>
                             <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
                             <div class="area">
@@ -237,11 +237,13 @@
                         <div class="sub-form3">
                             Sélectionnez vos 3 secteurs d'activité principaux
                         </div>
+                        {#
                         <div class="itou-info">
                             <img class="shape" src="/images/info_shape.png" />
                             Les acheteurs peuvent se sentir perdu, si vous présentez trop de
                             secteurs d’activité différents.
                         </div>
+                        #}
 
                         {{ render(controller('CocoricoCoreBundle:Frontend/DirectoryCategories:categoriesForm', {'directory': directory})) }}
                     </div>

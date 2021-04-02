@@ -64,18 +64,17 @@
                                 <a href="#" class="btn-next">next</a>
                             </div>
                             <address>
-                                <h4>
+                                {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
+                            </address>
+                        </div>
+                        <div class="col-sm-9 shadow">
+                            <h3>
                                     {% if structure.brand %}
                                         {{ structure.brand }}
                                     {% else %}
                                         {{ structure.name }}
                                     {% endif %}
-                                </h4>
-                                {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
-                            </address>
-                        </div>
-                        <div class="col-sm-9 shadow">
-                            <h3>Informations entreprise</h3>
+                            </h3>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <dl class="deflist">
