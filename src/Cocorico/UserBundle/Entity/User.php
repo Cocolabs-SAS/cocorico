@@ -822,6 +822,11 @@ class User extends BaseUser implements ParticipantInterface
         return $this->firstName . ' ' . ucfirst(substr($this->lastName, 0, 1) . '.');
     }
 
+    public function getNameBis()
+    {
+        return ucfirst(substr($this->firstName, 0, 1) . '.'). ' ' . ucfirst($this->lastName);
+    }
+
     /**
      * @param string $email
      *

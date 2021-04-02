@@ -58,11 +58,13 @@ class DirectoryController extends Controller
         $checkForm = $this->createCheckForm($directoryCheckRequest);
         $checkForm->handleRequest($request);
         $results = [];
+        $searched = false;
         if ($checkForm->isSubmitted()) {
             $directoryCheckRequest = $checkForm->getData();
             $results = $this->get("cocorico.directory.manager")->findBySiretn(
                 $directoryCheckRequest->getSiret()
             );
+            $searched = true;
         }
     
         return $this->render(
@@ -71,6 +73,7 @@ class DirectoryController extends Controller
                 'directoryCheckRequest' => $directoryCheckRequest,
                 'cform' => $checkForm->createView(),
                 'results' => $results,
+                'searched' => $searched,
                 # 'editForm' => $editForm->createView(),
             )
         );

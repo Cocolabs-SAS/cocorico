@@ -40,14 +40,15 @@
             </div>
             <div>
                 <div class="col">
-                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Recherche</h3>
+                    <h3><i class="icon-search" style="color:#006adc;"></i>Recherche</h3>
                     <div class="sub-form">
 
                          <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(cform.siret) }}</div>
                             <span class="label">
-                                {{ form_label(cform.siret, 'Siret ou Siren de votre structure') }}
+                                {{ form_label(cform.siret, 'Entrez le numéro SIRET ou SIREN de votre structure') }}
                             </span>
+
 
                             <div class="field-holder">
                                 {{ form_widget(cform.siret, {
@@ -58,7 +59,6 @@
                                 }) }}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -77,9 +77,13 @@
             {% if results %}
             <div>
                 <div class="col">
-                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Résultats</h3>
                     <div class="legend">Sélectionnez votre structure</div>
                     <div class="sub-form">
+                        <div class='sub-legend'>
+                            Si vous vous occupez de plusieurs structures, vous aurez la possibilité
+                            d'ajouter les autres structures par la suite.
+                        </div>
+                        <hr />
                         {% for structure in results %}
                             <div class="structure_select">
                                 <table>
@@ -88,8 +92,8 @@
                                     <tr><th>Siret</th><td>{{ structure.siret }}</td></tr>
                                 </table>
                                 {% if structure.hasUsers %}
-                                    <p class="text-muted">Cette structure est gérée par un autre utilisateur</p>
-                                    <button disabled class="btn btn-danger">Sélectionner</button>
+                                    <p class="text-muted">Cette structure est déjà enregistrée sur le marché, par 
+                                    l'utilisateur {{ structure.getFirstUser().getNameBis() }}.</p>
                                 {% else %}
                                     <a href="{{ path('cocorico_directory_adopt', {'id': structure.id}) }}" class="btn btn-outline-primary">Sélectionner</a>
                                 {% endif %}
@@ -98,8 +102,17 @@
                     </div>
                 </div>
             </div>
+            {% elseif searched %}
+            <div class="sub-form2">
+                <p>
+                Cette structure ne nous est pas connue, et n'apparaît pas dans notre base de donnéés.
+                </p>
+                <p>
+                S'il s'agit d'une structure inclusive, et qu'elle devrait s'y retrouver,
+                n'hésitez pas à nous <a href="{{ path('cocorico_contact_new') }}">contacter</a>.
+                </p>
+            </div>
             {% endif %}
-
         </div>
     </div>
     {{ form_end(cform) }}

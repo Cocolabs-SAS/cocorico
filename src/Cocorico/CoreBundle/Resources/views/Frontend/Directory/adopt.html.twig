@@ -39,7 +39,7 @@
             </div>
             <div>
                 <div class="col">
-                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Données Fixes</h3>
+                    <h3><i class="icon-clipboard" style="color:#006adc;"></i>Données Fixes</h3>
                     <div class="sub-form">
                         <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(form.siret) }}</div>
@@ -111,17 +111,24 @@
                     </div>
                     <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Données à compléter</h3>
                     <div class="sub-form">
+
                         <div class="field-row validate-row">
-                            <div class="error-container">{{ form_errors(form.description) }}</div>
-                            <span class="label">
-                                {{ form_label(form.description, 'Description') }}
-                            </span>
-                            <div class="field-holder">
-                                {{ form_widget(form.description, {
-                                    'attr': { 'class': 'form-control'}
-                                }) }}
+                            <legend>Logo de la structure</legend>
+                            <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
+                            <div class="area">
+                                <div class="uploader">
+                                    <div id="images-new">
+                                        {{ form_errors(form.image.new) }}
+                                        {{ form_widget(form.image.new) }}
+
+                                        {{ form_errors(form.image.uploaded) }}
+                                        {{ form_widget(form.image.uploaded ) }}
+                                    </div>
+                                </div>
+                                <ul id="files-to-upload" class="upload-list images-list"></ul>
                             </div>
                         </div>
+
                         <div class="field-row validate-row">
                             <div class="error-container">{{ form_errors(form.website) }}</div>
                             <span class="label">
@@ -133,6 +140,23 @@
                                 }) }}
                             </div>
                         </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.description) }}</div>
+                            <span class="label">
+                                {{ form_label(form.description, 'Description') }}
+                            </span>
+                            <div class="itou-info">
+                                Présentez votre activité commerciale et mettez en avant
+                                votre activité principale et vos savoir-faire. 
+                            </div>
+                            <div class="field-holder">
+                                {{ form_widget(form.description, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
                         <div class="field-row validate-row">
                             <label>Perimètre d'intervention</label>
                             <ul id="pol_range_form">
@@ -182,24 +206,13 @@
                             </ul>
                             {% do form.polRange.setRendered %}
                         </div>
-                        <div class="field-row validate-row">
-                            <legend>Logo structure</legend>
-                            <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
-                            <div class="area">
-                                <div class="uploader">
-                                    <div id="images-new">
-                                        {{ form_errors(form.image.new) }}
-                                        {{ form_widget(form.image.new) }}
 
-                                        {{ form_errors(form.image.uploaded) }}
-                                        {{ form_widget(form.image.uploaded ) }}
-                                    </div>
-                                </div>
-                                <ul id="files-to-upload" class="upload-list images-list"></ul>
-                            </div>
-                        </div>
                         <div class="field-row validate-row">
                             <legend>Références client</legend>
+                            <div class="itou-info">
+                                Les références clients sont des éléments essentiels les acheteurs.
+                                Donnez leur confiance en complétant cette rubrique.
+                            </div>
                             <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
                             <div class="area">
                                 <div class="uploader">
@@ -219,7 +232,14 @@
 
                     <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Secteur(s) d'activité</h3>
                     <div class="sub-form">
-                        <div class="text-muted">Choississez un ou plusieurs secteurs d'activité</div>
+                        <div class="sub-form3">
+                            Sélectionnez vos 3 secteurs d'activité principaux
+                        </div>
+                        <div class="itou-info">
+                            Les acheteurs peuvent se sentir perdu, si vous présentez trop de
+                            secteurs d’activités différents.
+                        </div>
+
                         {{ render(controller('CocoricoCoreBundle:Frontend/DirectoryCategories:categoriesForm', {'directory': directory})) }}
                     </div>
                 </div>

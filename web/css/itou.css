@@ -280,6 +280,11 @@ body {
     font-size:1.125rem;
 }
 
+#form-registerlogin .label,
+.login-like .label {
+    width:90%
+}
+
 .login_register h1 {
     font-size:1.375rem;
     text-align:center;
@@ -1721,5 +1726,9 @@ div.c4_multiselect li {
 
 .login-like .multisel h1 {
     font-size:1.2rem;
-    margin-top:1rem;
+    margin-top:2rem;
+    text-align:left;
+}
+.login-like li label {
+    line-height:1.8rem;
 }

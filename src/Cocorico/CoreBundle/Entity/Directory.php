@@ -1246,6 +1246,11 @@ class Directory
         return $this->users;
     }
 
+    public function getFirstUser()
+    {
+        return $this->users[0];
+    }
+
     public function hasUser($user)
     {
         return $this->users->contains($user);
