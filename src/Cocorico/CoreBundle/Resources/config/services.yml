@@ -28,6 +28,12 @@ services:
             - "%cocorico.listing_search_max_per_page%"
         public: true
 
+    cocorico.directory_check_request:
+        class: Cocorico\CoreBundle\Model\DirectoryCheckRequest
+        arguments:
+            - "@request_stack"
+        public: true
+
     #Namers
     cocorico.namer.image_namer:
         class:  Cocorico\CoreBundle\Namer\ImageNamer

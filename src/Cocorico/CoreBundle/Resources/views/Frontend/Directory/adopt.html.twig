@@ -1,0 +1,369 @@
+{% extends '::base.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{%- block meta_title -%}
+    {{ 'directory.new.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'directory.new.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block main %}
+<div class="col-xs-12">
+
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+    <div id="form-adoptstructure" class="form-signup login-like validate-form">
+        <div class="col-sm-6">
+        <div id="home" class="login_register">
+            <h1><i class="icon-clipboard"></i>Votre structure</h1>
+
+            <div id="login-errors-wrapper">
+                {{ form_errors(form) }}
+            </div>
+            <div class="sub-form3">
+                Vérifiez si ces donnéés correspondent bien à votre structure,
+                et complétez éventuellement les données manquantes.
+            </div>
+            <div>
+                <div class="col">
+                    <h3><i class="icon-clipboard" style="color:#006adc;"></i>Données Fixes</h3>
+                    <div class="sub-form">
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.siret) }}</div>
+                            <span class="label">
+                                {{ form_label(form.siret, 'Siret') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.siret, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.name) }}</div>
+                            <span class="label">
+                                {{ form_label(form.name, 'Raison sociale') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.name, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.brand) }}</div>
+                            <span class="label">
+                                {{ form_label(form.brand, 'Enseigne') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.brand, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.kind) }}</div>
+                            <span class="label">
+                                {{ form_label(form.kind, 'Type') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.kind, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.postCode) }}</div>
+                            <span class="label">
+                                {{ form_label(form.postCode, 'Code Postal') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.postCode, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.region) }}</div>
+                            <span class="label">
+                                {{ form_label(form.region, 'Region') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.region, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Données à compléter</h3>
+                    <div class="sub-form">
+
+                        <div class="field-row validate-row">
+                            <legend>Logo de la structure</legend>
+                            <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
+                            <div class="area">
+                                <div class="uploader">
+                                    <div id="images-new">
+                                        {{ form_errors(form.image.new) }}
+                                        {{ form_widget(form.image.new) }}
+
+                                        {{ form_errors(form.image.uploaded) }}
+                                        {{ form_widget(form.image.uploaded ) }}
+                                    </div>
+                                </div>
+                                <ul id="files-to-upload" class="upload-list images-list"></ul>
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.website) }}</div>
+                            <span class="label">
+                                {{ form_label(form.website, 'Site internet') }}
+                            </span>
+                            <div class="field-holder">
+                                {{ form_widget(form.website, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <div class="error-container">{{ form_errors(form.description) }}</div>
+                            <span class="label">
+                                {{ form_label(form.description, 'Description de l\'activité commerciale') }}
+                            </span>
+                            <div class="itou-info">
+                                <img class="shape" src="/images/info_shape.png" />
+                                Présentez votre activité commerciale et mettez en avant
+                                vos activités commerciales.
+                            </div>
+                            <div class="field-holder">
+                                {{ form_widget(form.description, {
+                                    'attr': { 'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <label>Perimètre d'intervention</label>
+                            <ul id="pol_range_form">
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[1].vars.id }}"
+                                        name="{{ form.polRange[1].vars.full_name }}"
+                                        value="{{ form.polRange[1].vars.value }}"
+                                    /> {{ form_label(form.polRange[1], null, {'required': false}) }}
+                                </li>
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[2].vars.id }}"
+                                        name="{{ form.polRange[2].vars.full_name }}"
+                                        value="{{ form.polRange[2].vars.value }}"
+                                    /> {{ form_label(form.polRange[2], null, {'required': false}) }}
+                                </li>
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[3].vars.id }}"
+                                        name="{{ form.polRange[3].vars.full_name }}"
+                                        value="{{ form.polRange[3].vars.value }}"
+                                    /> {{ form_label(form.polRange[3], null, {'required': false}) }}
+                                </li>
+                                <li>
+
+                                    <label>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[0].vars.id }}"
+                                        name="{{ form.polRange[0].vars.full_name }}"
+                                        value="{{ form.polRange[0].vars.value }}"
+                                    /> 
+                                        {{ form_widget(form.range, {
+                                            'attr': {
+                                                'class': 'numbers-only form-control',
+                                                'style': 'display:inline',
+                                                'placeholder': 'distance en kilomètres',
+                                                'onclick': '$("#listing_polRange_0").trigger("click");'
+                                            }
+                                        }) }}
+                                    </label>
+                                </li>
+                            </ul>
+                            {% do form.polRange.setRendered %}
+                        </div>
+
+                        <div class="field-row validate-row">
+                            <legend>Références client</legend>
+                            <div class="itou-info">
+                                <img class="shape" src="/images/info_shape.png" />
+                                Les références clients sont des éléments essentiels aux acheteurs.
+                                Complétez cette rubrique accroît vos chances d’être contacté.
+                            </div>
+                            <div style="margin-bottom:1rem">Formats acceptés : JPG/JPEG, PNG</div>
+                            <div class="area">
+                                <div class="uploader">
+                                    <div id="client-images-new">
+                                        {{ form_errors(form.clientImage.new) }}
+                                        {{ form_widget(form.clientImage.new) }}
+
+                                        {{ form_errors(form.clientImage.uploaded) }}
+                                        {{ form_widget(form.clientImage.uploaded ) }}
+                                    </div>
+                                </div>
+                                <ul id="client-files-to-upload" class="upload-list images-list"></ul>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Secteur(s) d'activité</h3>
+                    <div class="sub-form">
+                        <div class="sub-form3">
+                            Sélectionnez vos 3 secteurs d'activité principaux
+                        </div>
+                        {#
+                        <div class="itou-info">
+                            <img class="shape" src="/images/info_shape.png" />
+                            Les acheteurs peuvent se sentir perdu, si vous présentez trop de
+                            secteurs d’activité différents.
+                        </div>
+                        #}
+
+                        {{ render(controller('CocoricoCoreBundle:Frontend/DirectoryCategories:categoriesForm', {'directory': directory})) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btns-area new-directory">
+            <div id="buttons_nav">
+                <div class="btn-block text-center">
+                    <input id="directory-new-save" type="submit" class="btn btn-default"
+                           style="width:15rem"
+                           value="Soumettre">
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+{% endblock %}
+
+    {% endembed %}
+{% endblock layout %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/Listing/js/_geocoding_js.html.twig' with {
+        'map_elt': '#map-listing',
+        'marker_draggable': true
+    } only %}
+
+    {#Translations#}
+    {% include '@CocoricoCore/Frontend/Listing/js/_translator_js.html.twig' only %}
+
+
+    {#Files upload#}
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_multi_js.html.twig' with {
+        'upload_el1': '#directory_image_new',
+        'upload_images1': '#directory_image_uploaded',
+        'upload_list1': '#files-to-upload',
+        'upload_el2': '#directory_clientImage_new',
+        'upload_list2': '#client-files-to-upload',
+        'upload_images2': '#directory_clientImage_uploaded',
+        'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=0" ,
+        'upload_max': 5,
+    } only %}
+
+    <script>
+        const pager = {
+            current: 0,
+            order: ['.part_1', '.part_2', '.part_3'],
+            but_prev : '#but_prev',
+            but_next : '#but_next',
+            but_subt : '#listing-new-save',
+            init: function() {
+                $(this.but_prev).click((e) => pager.prev(e));
+                $(this.but_next).click((e) => {pager.next(e);});
+                for (const part of this.order) {
+                    $(part).css('display','none');
+                }
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            next: function(e) {
+                e.preventDefault();
+
+                if (this.current + 1 >= this.order.length) {
+                    // console.log('End of parts');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current += 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            prev: function(e) {
+                e.preventDefault();
+
+                if (this.current <= 0) {
+                    // console.log('Already at beginning');
+                    return
+                }
+
+                $(this.order[this.current]).css('display','none');
+                this.current -= 1;
+                $(this.order[this.current]).show();
+                this.check();
+            },
+            check: function() {
+                window.scrollTo(0, 0);
+                if (this.current == 0) {
+                    $(this.but_prev).hide();
+                } else {
+                    $(this.but_prev).show();
+                }
+
+                if (this.current + 1 >= this.order.length) {
+                    $(this.but_next).hide();
+                    $(this.but_subt).show();
+                } else {
+                    $(this.but_next).show();
+                    $(this.but_subt).hide();
+                }
+            }
+
+        };
+
+
+            
+        $(document).ready(() => {
+            pager.init();
+            $("#buttons_submit").hide();
+        });
+    </script>
+
+
+{% endblock %}

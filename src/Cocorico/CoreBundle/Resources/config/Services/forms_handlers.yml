@@ -8,6 +8,15 @@ services:
         - "@request_stack"
         - "@cocorico.listing.manager"
 
+    #Directory
+    cocorico.form.handler.directory:
+        class: Cocorico\CoreBundle\Form\Handler\Frontend\DirectoryFormHandler
+        arguments:
+        - "@security.token_storage"
+        - "@security.authorization_checker"
+        - "@request_stack"
+        - "@cocorico.directory.manager"
+
     #Booking
     cocorico.form.handler.booking:
         class: Cocorico\CoreBundle\Form\Handler\Frontend\BookingFormHandler

@@ -403,6 +403,13 @@ class Directory
      */
     protected $clientImages;
 
+    /**
+     * @ORM\Column(name="description", type="text", length=65535, nullable=false)
+     *
+     * @var string
+     */
+    private $description;
+
 
 
     /**
@@ -1256,9 +1263,19 @@ class Directory
         return $this->users;
     }
 
+    public function getFirstUser()
+    {
+        return $this->users[0];
+    }
+
     public function hasUser($user)
     {
         return $this->users->contains($user);
+    }
+
+    public function hasUsers()
+    {
+        return count($this->users);
     }
 
     /**
@@ -1395,6 +1412,27 @@ class Directory
         return $this->clientImages;
     }
 
+    /**
+     * Set description
+     *
+     * @param  string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
 
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
 }

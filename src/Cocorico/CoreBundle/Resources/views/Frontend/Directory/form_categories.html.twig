@@ -1,0 +1,22 @@
+{% trans_default_domain 'cocorico_directory' %}
+
+<div id="category-form-container">
+    <div id="category-form" class="new">
+        {% if app.request.isXmlHttpRequest %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+        {% endif %}
+
+        {#
+        <h2>{{ 'directory.new.categories.title'|trans }}</h2>
+        #}
+
+        {{ form_errors(form) }}
+
+        <div class="selection-area directory-categories">
+            {{ form_errors(form.directoryListingCategories) }}
+            {{ form_widget(form.directoryListingCategories) }}
+        </div>
+
+        {{ form_rest(form) }}
+    </div>
+</div>
