@@ -34,6 +34,7 @@ class DirectorySearchRequest
     protected $country;
     protected $area;
     protected $department;
+    protected $region;
     protected $city;
     protected $postalCode;
     protected $zip;
@@ -84,8 +85,11 @@ class DirectorySearchRequest
         }
 
         $postalCode = $this->request->query->get("postalCode");
+        $zip = $this->request->query->get("zip");
         if ($postalCode) {
             $this->postalCode = $postalCode;
+        } else if ($zip) {
+            $this->postalCode = $zip;
         }
 
         $region = $this->request->query->get("region");
@@ -303,6 +307,16 @@ class DirectorySearchRequest
     public function setDepartment($department)
     {
         return $this->department = $department;
+    }
+
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    public function setRegion($region)
+    {
+        return $this->region = $region;
     }
 
     public function getCity()

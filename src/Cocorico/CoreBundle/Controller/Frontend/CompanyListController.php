@@ -93,6 +93,7 @@ class CompanyListController extends Controller
             }
             // Hack
             $dlform->get('serialSectors')->setData(implode('|', $sectors));
+            $dlform->get('postalCode')->setData($params['postalCode']);
 
         } else {
             $entries = $directoryManager->listSome($page);
@@ -205,8 +206,8 @@ class CompanyListController extends Controller
                 'sector' => $sort->getSectors(),
                 'prestaType' => $sort->getPrestaType(),
                 'withAntenna' => $sort->getWithAntenna(),
-                'postalCode' => null,
-                'region' => null,
+                'postalCode' => $sort->getPostalCode(),
+                'region' => $sort->getRegion(),
                 'format' => $sort->getFormat(),
             ];
             // $params = $this->fixParams($sort, $params);
