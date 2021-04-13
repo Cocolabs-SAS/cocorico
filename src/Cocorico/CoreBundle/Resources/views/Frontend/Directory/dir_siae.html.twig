@@ -26,13 +26,15 @@
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                {{form_widget(form.categories, {
-                                    'id': 'sector',
-                                    'attr': {
-                                        'class': 'form-control',
-                                        'placeholder': 'xxx'
-                                    }}
-                                )}}
+                                    <div class="multiselect listing-category" style="margin-top:0px">
+                                    {{form_widget(form.categories, {
+                                        'id': 'sector',
+                                        'attr': {
+                                            'class': 'form-control jcf-ignore',
+                                            'placeholder': 'xxx'
+                                        }}
+                                    )}}
+                                    </div>
                                 </div>
                             </div>
 
@@ -245,6 +247,8 @@
     'map_elt': '',
     'auto_complete_elt': '#address'
     } only %}
+
+
 {% endblock %}
 
 

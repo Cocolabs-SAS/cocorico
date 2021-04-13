@@ -106,6 +106,7 @@ function initSelectLanguage() {
 
 // initialize custom form elements
 function initCustomForms() {
+    console.log("Custom Forms");
     jcf.setOptions('Select', {
         wrapNative: false,
         wrapNativeOnMobile: false

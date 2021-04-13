@@ -1552,6 +1552,24 @@ section.quote-quick-form fieldset {
     display: inline-block;
 }
 
+#dir_form .btn-group {
+    width:100%;
+}
+
+#dir_form button.multiselect {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background-color: #fff;
+    color: #979797;
+    border: 1px solid #979797;
+    margin:0;
+}
+
+#dir_form ul.multiselect-container a {
+    text-decoration:none;
+}
+
 #csv_form .jcf-checkbox { display:none }
 
 

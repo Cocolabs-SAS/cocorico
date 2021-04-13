@@ -9,7 +9,8 @@ and available widgets.
 {#
 ################# Old widget for Listings
 #}
-{% block _listing_categories_listingListingCategories_widget -%}
+{% block _listing_categories_listingListingCategories_widget_new -%}
+    <h1>(listing) Poulet 6! </h1>
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
@@ -21,6 +22,7 @@ and available widgets.
 {%- endblock %}
 
 {% block listing_category_widget_options -%}
+    <h1>(listing) Poulet 7! </h1>
     <ul>
     {% set cl_l1 = '' %}
     {% set cl_l2 = '' %}
@@ -62,6 +64,12 @@ and available widgets.
 #}
 
 {% block _directory_categories_directoryListingCategories_widget -%}
+    {#
+        This widget (and sub-widgets) are used
+        to display category selection in the directory
+        adoption form and directory management
+        dashboard
+    #}
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
@@ -129,12 +137,15 @@ and available widgets.
 {%- endblock  %}
 {# Categories tree  widget #}
 
-{% block _listing_categories_listingListingCategories_widget_deact -%}
+{#
+    Obsolete stuff, de
+#}
+{% block _listing_categories_listingListingCategories_widget_old -%}
     {% if required and empty_value is none and not empty_value_in_choices and not multiple -%}
         {% set required = false %}
     {%- endif -%}
     <select {{ block('widget_attributes') }}{% if multiple %}
-        multiple="multiple"{% endif %} class="jcf-ignore">
+        multiple="multiple"{% endif %}>
         {% if placeholder is not none -%}
             <option value=""{% if required and value is empty %} selected="selected"{% endif %}>{{ empty_value|trans({}, translation_domain) }}</option>
         {%- endif %}
@@ -148,6 +159,7 @@ and available widgets.
         {% set options = choices -%}
         {{- block('listing_category_widget_options_tree') -}}
     </select>
+    {{- block('listing_category_widget_multiselect_js') -}}
 {%- endblock %}
 
 {% block listing_category_widget_options_tree -%}
@@ -170,9 +182,28 @@ and available widgets.
 {%- endblock listing_category_widget_options_tree %}
 
 
+{%- block listing_category_widget_multiselect_js %}
+    <script>
+        // Categories
+        document.addEventListener("DOMContentLoaded", function() {
+            // Set default favourites in the listing
+            common.application.setDefaultFavourites();
+
+            common.application.initMultiSelect(
+                    '#sector',
+                    'Tous',
+                    'Aucun',
+                    'Sélectionnés'
+            );
+            console.log('Destroying bad jcf');
+            $('.multiselect input').addClass('jcf-ignore');
+        });
+    </script>
+{%- endblock  %}
+
 {% block _listing_categories_widget %}
     {#
     {{ block('_listing_categories_listingListingCategories_widget_select') }}
     #}
-    {{ block('_listing_categories_listingListingCategories_widget') }}
+    {{ block('_listing_categories_listingListingCategories_widget_old') }}
 {% endblock %}
