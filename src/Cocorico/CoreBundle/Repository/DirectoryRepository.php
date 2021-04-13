@@ -28,6 +28,10 @@ class DirectoryRepository extends EntityRepository
     public function getFindQueryBuilder()
     {
         $qB = $this->createQueryBuilder('d');
+        $qB->addSelect("partial dlcat.{id, directory, category}")
+            ->leftJoin('d.directoryListingCategories', 'dlcat')
+            ->leftJoin('dlcat.category', 'ca');
+
         return $qB;
     }
 

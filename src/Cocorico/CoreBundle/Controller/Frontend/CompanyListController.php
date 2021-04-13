@@ -70,6 +70,10 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
+            // Hack, see model ListingSearchRequest for more
+            $sectors = $request->query->get('sector');
+            $sort['sector'] = $sectors;
+
             $params = [
                 'type' => $sort['structureType'],
                 'sector' => $sort['sector'],
@@ -84,9 +88,12 @@ class CompanyListController extends Controller
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'withAntenna', 'sector', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
+            foreach (['structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
+            // Hack
+            $dlform->get('serialSectors')->setData(implode('|', $sectors));
+
         } else {
             $entries = $directoryManager->listSome($page);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
@@ -186,6 +193,7 @@ class CompanyListController extends Controller
         /** @var ListingSearchRequest $listingSearchRequest */
         $directorySearchRequest = $this->get('cocorico.directory_search_request');
         $form = $this->csvCompaniesForm($directorySearchRequest);
+
         $form->handleRequest($request);
 
         $directoryManager = $this->get('cocorico.directory.manager');
@@ -193,15 +201,15 @@ class CompanyListController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
             $params = [
-                'type' => $sort['structureType'],
-                'sector' => $sort['sector'],
-                'prestaType' => $sort['prestaType'],
-                'withAntenna' => $sort['withAntenna'],
+                'type' => $sort->getStructureType(),
+                'sector' => $sort->getSectors(),
+                'prestaType' => $sort->getPrestaType(),
+                'withAntenna' => $sort->getWithAntenna(),
                 'postalCode' => null,
                 'region' => null,
-                'format' => $form['format']->getData(),
+                'format' => $sort->getFormat(),
             ];
-            $params = $this->fixParams($sort, $params);
+            // $params = $this->fixParams($sort, $params);
             $this->tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
 
             $entries = $directoryManager->listByForm($params);

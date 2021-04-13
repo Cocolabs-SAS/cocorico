@@ -243,7 +243,6 @@ function convertCurrency(amount, from, to) {
  * @param callbackSuccess
  */
 $.fn.addFormToCollection = function (collection, item, callbackSuccess) {
-    console.log('JCF Adding form to collection');
     var $container = this;
     var $addLink = $container.find("a.add");
     var $collectionHolder = $container.find(collection);
@@ -255,7 +254,6 @@ $.fn.addFormToCollection = function (collection, item, callbackSuccess) {
     });
 
     function addForm($collectionHolder) {
-        console.log('JCF Adding form to collection - bis');
         var prototype = $collectionHolder.parent('div').not(".errors").data('prototype');
         var index = $collectionHolder.data('index');
 
@@ -523,7 +521,6 @@ common.application.getNbUnReadMessages = function(url) {
  * @param width
  */
 common.application.initMultiSelect = function(elt, allSelectedText, noneSelectedText, numSelectedText, width) {
-    console.log('Init Multiselect on ', elt);
     jcf.destroy(elt);
     jcf.refresh(elt);
 

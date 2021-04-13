@@ -136,11 +136,10 @@ class DirectoryManager extends BaseManager
         }
 
         // Filter on sector
-        if ($params['sector'] != false) {
-            $sector = $params['sector'];
-            $sectorName = Directory::$sectorValues[$sector];
-            $qB->andWhere('d.sector like :sector')
-               ->setParameter('sector', '%'.$sectorName.'%');
+        if ($params['sector'] != false && count($params['sector'])) {
+            $sectors = $params['sector'];
+            $qB->andWhere('dlcat.category IN (:sectors)')
+               ->setParameter('sectors', $sectors);
         }
 
         // Filter on sector

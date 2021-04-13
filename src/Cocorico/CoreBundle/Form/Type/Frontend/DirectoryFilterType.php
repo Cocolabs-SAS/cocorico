@@ -81,7 +81,7 @@ class DirectoryFilterType extends AbstractType
             //     )
             // )
             ->add(
-                'categories',
+                'sector',
                 ListingCategoryType::class,
                 array(
                     'label' => 'listing_search.form.categories',
@@ -153,7 +153,8 @@ class DirectoryFilterType extends AbstractType
             ->add('city', HiddenType::class)
             ->add('postalCode', HiddenType::class)
             ->add('zip', HiddenType::class)
-            ->add('addressType', HiddenType::class);
+            ->add('addressType', HiddenType::class)
+            ->add('serialSectors', HiddenType::class);
     }
 
     /**
@@ -164,6 +165,7 @@ class DirectoryFilterType extends AbstractType
         parent::configureOptions($resolver);
         $resolver->setDefaults(
             array(
+                'allow_extra_fields' => true,
                 'csrf_protection' => false,
                 'translation_domain' => 'cocorico_quote',
             )

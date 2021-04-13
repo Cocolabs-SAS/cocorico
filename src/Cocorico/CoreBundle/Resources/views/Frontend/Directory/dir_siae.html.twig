@@ -27,10 +27,11 @@
                                 </div>
                                 <div class="field-holder">
                                     <div class="multiselect listing-category" style="margin-top:0px">
-                                    {{form_widget(form.categories, {
+                                    {{form_widget(form.sector, {
                                         'id': 'sector',
                                         'attr': {
                                             'class': 'form-control jcf-ignore',
+                                            'name': 'sector',
                                             'placeholder': 'xxx'
                                         }}
                                     )}}
@@ -165,7 +166,7 @@
                     } only %}
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
-                        {{ form_widget(dlform.categories, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
                         {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}

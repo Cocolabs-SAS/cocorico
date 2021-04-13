@@ -22,7 +22,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class DirectorySearchRequest
 {
-    protected $categories;
+    protected $sectors;
+    protected $serialSectors;
     protected $format;
     protected $structureType;
     protected $prestaType;
@@ -57,18 +58,44 @@ class DirectorySearchRequest
         $this->page = 1;
 
 
-        //Categories
-        $this->categories = array();
-        $categories = $this->request->query->get("categories");
-        if (is_array($categories)) {
-            $this->categories = $categories;
+        //Sectors (old categories)
+        $this->sectors = array();
+        $sectors = $this->request->query->get("sector");
+        $serialSectors = $this->request->query->get("serialSectors");
+        if (is_array($sectors)) {
+            $this->sectors = $sectors;
+        } else if ($serialSectors) {
+            $this->sectors = explode('|', $serialSectors);
         }
 
-        //Categories fields
-        $this->categoriesFields = array();
-        $categoriesFields = $this->request->query->get("categories_fields");
-        if (is_array($categoriesFields)) {
-            $this->categoriesFields = $categoriesFields;
+        $format = $this->request->query->get("format");
+        if ($format) {
+            $this->format = $format;
+        }
+
+        $prestaType = $this->request->query->get("prestaType");
+        if ($prestaType) {
+            $this->prestaType = $prestaType;
+        }
+
+        $withAntenna = $this->request->query->get("withAntenna");
+        if ($withAntenna) {
+            $this->withAntenna = $withAntenna == "1";
+        }
+
+        $postalCode = $this->request->query->get("postalCode");
+        if ($postalCode) {
+            $this->postalCode = $postalCode;
+        }
+
+        $region = $this->request->query->get("region");
+        if ($region) {
+            $this->region = $region;
+        }
+
+        $type = $this->request->query->get("type");
+        if ($type) {
+            $this->type = $type;
         }
 
     }
@@ -76,17 +103,33 @@ class DirectorySearchRequest
     /**
      * @return mixed
      */
-    public function getCategories()
+    public function getSectors()
     {
-        return $this->categories;
+        return $this->sectors;
     }
 
     /**
-     * @param mixed $categories
+     * @param mixed $sectors
      */
-    public function setCategories($categories)
+    public function setSectors($sectors)
     {
-        $this->categories = $categories;
+        $this->sectors = $sectors;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSerialSectors()
+    {
+        return $this->serialSectors;
+    }
+
+    /**
+     * @param mixed $serialSectors
+     */
+    public function setSerialSectors($serialSectors)
+    {
+        $this->serialSectors = $serialSectors;
     }
 
     /**
@@ -120,6 +163,24 @@ class DirectorySearchRequest
     {
         $this->page = $page;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getFormat()
+    {
+        return $this->format;
+    }
+
+    /**
+     * @param mixed $format
+     */
+    public function setFormat($format)
+    {
+        $this->format = $format;
+    }
+
+
 
     /**
      * @return mixed
