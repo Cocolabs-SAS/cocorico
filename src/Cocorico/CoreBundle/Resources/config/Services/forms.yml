@@ -123,6 +123,16 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.directory_search:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryFilterType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+            - "@event_dispatcher"
+            - parameters:
+        tags:
+            - { name: form.type }
+
     cocorico.form.type.directory_new:
         class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryType
         arguments:

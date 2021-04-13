@@ -7,6 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.4] - (2021-04-12)
+- Merge branches formulaires et liste siae
+- Refactor formulaire recherche SIAE (entité symfony)
+- Recherche par champ secteur d'activité utilise les données enrichies C4
+- Nouveau logo du marché implémenté
+
 ### [3.3] - (2021-04-01)
 - Nouveau champs structure
 

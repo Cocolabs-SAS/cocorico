@@ -26,13 +26,16 @@
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                {{form_widget(form.sector, {
-                                    'id': 'sector',
-                                    'attr': {
-                                        'class': 'form-control',
-                                        'placeholder': 'xxx'
-                                    }}
-                                )}}
+                                    <div class="multiselect listing-category" style="margin-top:0px">
+                                    {{form_widget(form.sector, {
+                                        'id': 'sector',
+                                        'attr': {
+                                            'class': 'form-control jcf-ignore',
+                                            'name': 'sector',
+                                            'placeholder': 'xxx'
+                                        }}
+                                    )}}
+                                    </div>
                                 </div>
                             </div>
 
@@ -144,7 +147,15 @@
                                 <td>{{ entry.getNatureText() }}</td>
                                 <td>{{ entry.kind }}</td>
                                 <td>{{ entry.prestaType}} </td>
-                                <td>{{ entry.sector}} </td>
+                                <td>{{ entry.getSectorString()}} </td>
+                                {# <td>{{ entry.sector}} </td> #}
+                                {#
+                                <td>
+                                {% for cat in entry.directoryListingCategories %}
+                                    {{ cat.getCategory().getName() }} &nbsp;
+                                {% endfor %}
+                                </td>
+                                #}
                                 <td>{{ entry.postCode }} {{ entry.city }}</td>
                                 <td>{{ entry.region }}</td>
                             </tr>
@@ -155,7 +166,7 @@
                     } only %}
                     {{ form_start(dlform) }}
                     <div id="csv_form" class="dir_form">
-                        {{ form_widget(dlform.sector, {'attr': {'style': 'display:none'}}) }}
+                        {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
                         {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
@@ -237,6 +248,8 @@
     'map_elt': '',
     'auto_complete_elt': '#address'
     } only %}
+
+
 {% endblock %}
 
 
