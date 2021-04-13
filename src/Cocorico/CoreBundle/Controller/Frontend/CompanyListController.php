@@ -94,6 +94,7 @@ class CompanyListController extends Controller
             // Hack
             $dlform->get('serialSectors')->setData(implode('|', $sectors));
             $dlform->get('postalCode')->setData($params['postalCode']);
+            $dlform->get('region')->setData($params['region']);
 
         } else {
             $entries = $directoryManager->listSome($page);

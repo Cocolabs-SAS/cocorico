@@ -151,6 +151,7 @@ class DirectoryFilterType extends AbstractType
             ->add('area', HiddenType::class)
             ->add('department', HiddenType::class)
             ->add('city', HiddenType::class)
+            ->add('region', HiddenType::class)
             ->add('postalCode', HiddenType::class)
             ->add('zip', HiddenType::class)
             ->add('addressType', HiddenType::class)
