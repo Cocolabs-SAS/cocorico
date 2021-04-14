@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.5] - (2021-04-14)
+- Fix DB : champ source des données importées
+
 ### [3.4] - (2021-04-12)
 - Merge branches formulaires et liste siae
 - Refactor formulaire recherche SIAE (entité symfony)
