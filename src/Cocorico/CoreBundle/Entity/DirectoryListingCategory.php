@@ -48,6 +48,13 @@ class DirectoryListingCategory
     private $category;
 
     /**
+     * @var string
+     * @ORM\Column(name="source", type="string", nullable=true)
+     */
+    private $source = 'C4';
+
+
+    /**
      * @ORM\OneToMany(targetEntity="Cocorico\CoreBundle\Model\ListingCategoryFieldValueInterface", mappedBy="directoryListingCategory", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $values;
@@ -66,6 +73,28 @@ class DirectoryListingCategory
     public function getId()
     {
         return $this->id;
+    }
+    /**
+     * Set source
+     *
+     * @param  string $source
+     * @return $this
+     */
+    public function setSource($source)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source
+     *
+     * @return string
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 
 
