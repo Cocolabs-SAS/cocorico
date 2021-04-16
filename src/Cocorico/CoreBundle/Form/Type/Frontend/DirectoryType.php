@@ -152,6 +152,28 @@ class DirectoryType extends AbstractType
                     'required' => false,
                 )
             )
+            // Presta Type Fields
+            ->add(
+                'prestaType_prest',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Prestation de service'
+                )
+            )
+            ->add(
+                'prestaType_disp',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Mise à disposition du personnel / Interim'
+                )
+            )
+            ->add(
+                'prestaType_build',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Fabrication et commercialisation de biens'
+                )
+            )
             # ->add(
             #     'presta_type',
             #     ChoiceType::class,

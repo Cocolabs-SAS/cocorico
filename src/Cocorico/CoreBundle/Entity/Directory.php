@@ -5,6 +5,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use InvalidArgumentException;
 use Symfony\Component\Validator\Constraints as Assert;
+use BitMask\BitMask;
+use BitMask\BitMaskInterface;
 
 /**
  * Directory
@@ -83,14 +85,19 @@ class Directory
     );
     */
 
-    const PRESTA_CHOICE = 'Choisir...';
-    const PRESTA_DISP = 'Mise à disposition';
-    const PRESTA_PREST = 'Prestation et/ou vente de biens';
+    # const PRESTA_CHOICE = 'Choisir...';
+    # const PRESTA_DISP = 'Mise à disposition';
+    # const PRESTA_PREST = 'Prestation et/ou vente de biens';
     public static $prestaTypeValues = array(
-        self::PRESTA_CHOICE,
-        self::PRESTA_DISP,
-        self::PRESTA_PREST,
+        'N/A',
+        'N/A',
+        'N/A',
     );
+
+    const PRESTA_CHOICE = 1 << 0;
+    const PRESTA_DISP = 1 << 1;
+    const PRESTA_PREST = 1 << 2;
+    const PRESTA_BUILD = 1 << 3;
 
     const STRUCT_CHOICE = 'Choisir...';
     const STRUCT_EI = 'EI';
@@ -300,10 +307,10 @@ class Directory
     private $phone;
 
     /**
-     * @ORM\Column(name="presta_type", type="string", nullable=true)
-     * @var string|null
-     */
-    private $prestaType;
+    * @ORM\Column(name="presta_type", type="bitmask", nullable=true)
+    * @var \Doctrine\DBAL\Types\Type\bitmask
+    */
+    private $prestaType = BitMaskType::class;
 
     /**
      * @ORM\Column(name="sector", type="text", nullable=true)
@@ -753,30 +760,6 @@ class Directory
     public function getPhone()
     {
         return $this->phone;
-    }
-
-    /**
-     * Set prestaType.
-     *
-     * @param string|null $prestaType
-     *
-     * @return Directory
-     */
-    public function setPrestaType($prestaType = null)
-    {
-        $this->prestaType = $prestaType;
-
-        return $this;
-    }
-
-    /**
-     * Get prestaType.
-     *
-     * @return string|null
-     */
-    public function getPrestaType()
-    {
-        return $this->prestaType;
     }
 
     /**
@@ -1434,5 +1417,186 @@ class Directory
     {
         return $this->description;
     }
+
+
+    /*
+     * Presta Type Logic (bitmask type)
+     */
+
+    public function getPrestaType()
+    {
+        if (is_string($this->prestaType))
+            {
+            return new Bitmask();
+            }
+
+        return $this->prestaType;
+    }
+
+    /**
+     * Force convert prestaType data type to int
+     *
+     */
+    public function prestaTypeToInt() 
+    {
+        if (is_string($this->prestaType)) 
+        {
+            $this->prestaType = 0;
+        } else {
+            $this->prestaType = $this->prestaType->get();
+        }
+    }
+
+    /**
+     * Set PrestaType
+     *
+     * @return self
+     */
+    public function setPrestaType(BitMaskInterface $prestaType) : self
+    {
+        $this->prestaType = $prestaType;
+
+        return $this;
+    }
+
+    /**
+     * Enable Single PrestaType
+     *
+     * @return self
+     */
+    public function enablePrestaType($prestaType) : self
+    {
+
+        $pt = $this->getPrestaType();
+        $pt->setBit($prestaType);
+        $this->prestaType = $pt;
+        return $this;
+    }
+    /**
+     * Disable Single PrestaType
+     *
+     * @return self
+     */
+    public function disablePrestaType($prestaType) : self
+    {
+        $pt = $this->getPrestaType();
+        $pt->unsetBit($prestaType);
+        $this->prestaType = $pt;
+        return $this;
+    }
+    public function hasPrestaType() : bool
+    {
+        return $this->isPrestaTypeChoice()
+            || $this->isPrestaDisp()
+            || $this->isPrestaPrest();
+    }
+    /**
+     * Check prestaType choice
+     *
+     * @return bool
+     */
+    public function isPrestaTypeChoice() : bool
+    {
+        return $this->getPrestaType()->isSetBit(static::PRESTA_CHOICE);
+    }
+
+    /*
+     * Check prestaType disposition
+     *
+     * @return bool
+     */
+    public function isPrestaTypeDisp() : bool
+    {
+        return $this->getPrestaType()->isSetBit(static::PRESTA_DISP);
+    }
+
+    /**
+     * Check prestaType prestation
+     *
+     * @return bool
+     */
+    public function isPrestaTypePrest() : bool
+    {
+        return $this->getPrestaType()->isSetBit(static::PRESTA_PREST);
+    }
+
+    /**
+     * Check prestaType build
+     *
+     * @return bool
+     */
+    public function isPrestaTypeBuild() : bool
+    {
+        return $this->getPrestaType()->isSetBit(static::PRESTA_BUILD);
+    }
+
+    /**
+     * Set prestaType choice
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setPrestaTypeChoice($set) : self
+    {
+        return $set
+            ? $this->enablePrestaType(self::PRESTA_CHOICE)
+            : $this->disablePrestaType(self::PRESTA_CHOICE);
+    }
+    public function getPrestaTypeChoice() : bool {
+        return $this->isPrestaTypeChoice();
+    }
+
+    /**
+     * Check prestaType Disposition
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setPrestaTypeDisp($set) : self
+    {
+        return $set
+            ? $this->enablePrestaType(self::PRESTA_DISP)
+            : $this->disablePrestaType(self::PRESTA_DISP);
+    }
+    public function getPrestaTypeDisp() : bool {
+        return $this->isPrestaTypeDisp();
+    }
+
+    /**
+     * Check prestaType Prestation
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setPrestaTypePrest($set) : self
+    {
+        return $set
+            ? $this->enablePrestaType(self::PRESTA_PREST)
+            : $this->disablePrestaType(self::PRESTA_PREST);
+    }
+    public function getPrestaTypePrest() : bool {
+        return $this->isPrestaTypePrest();
+    }
+    /**
+     * Check prestaType Build
+     *
+     * @param bool $set
+     *
+     * @return self
+     */
+    public function setPrestaTypeBuild($set) : self
+    {
+        return $set
+            ? $this->enablePrestaType(self::PRESTA_BUILD)
+            : $this->disablePrestaType(self::PRESTA_BUILD);
+    }
+    public function getPrestaTypeBuild() : bool {
+        return $this->isPrestaTypeBuild();
+    }
+
+
 
 }
