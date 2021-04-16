@@ -1487,8 +1487,8 @@ class Directory
     public function hasPrestaType() : bool
     {
         return $this->isPrestaTypeChoice()
-            || $this->isPrestaDisp()
-            || $this->isPrestaPrest();
+            || $this->isPrestaTypeDisp()
+            || $this->isPrestaTypePrest();
     }
     /**
      * Check prestaType choice

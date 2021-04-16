@@ -50,6 +50,21 @@
                                 {{ form_widget(form.description, { 'attr': { 'class': 'form-control required' }}) }}
                             </div>
                         </div>
+                        <div class="field-row">
+                            <div class="col-sm-4">
+                                Type(s) de prestation(s)
+                            </div>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.prestaType_disp, { 'attr': { 'class': 'form-control required' }}) }}
+                                {{ form_label(form.prestaType_disp)}}
+                                <br />
+                                {{ form_widget(form.prestaType_prest, { 'attr': { 'class': 'form-control required' }}) }}
+                                {{ form_label(form.prestaType_prest)}}
+                                <br />
+                                {{ form_widget(form.prestaType_build, { 'attr': { 'class': 'form-control required' }}) }}
+                                {{ form_label(form.prestaType_build)}}
+                            </div>
+                        </div>
                     </div>
                 </div>
 

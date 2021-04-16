@@ -180,6 +180,7 @@ class DirectoryManager extends BaseManager
      */
     public function save(Directory $directory)
     {
+        $directory->prestaTypeToInt();
         $this->persistAndFlush($directory);
 
         // This is a hack, leave it !
