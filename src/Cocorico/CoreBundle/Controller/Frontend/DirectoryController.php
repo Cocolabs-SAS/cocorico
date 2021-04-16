@@ -39,14 +39,12 @@ class DirectoryController extends Controller
 {
 
     private $tracker;
-    private $deps;
 
     private function fix()
     {
         // FIXME: Find a symfonian way to do this
         if ($this->tracker === null) {
             $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
-            $this->deps = new Deps();
         }
     }
     /**
@@ -63,6 +61,7 @@ class DirectoryController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function searchAction( Request $request) {
+        $this->fix();
         $formHandler = $this->get('cocorico.form.handler.directory');
         $directoryCheckRequest = $this->get('cocorico.directory_check_request');
 
@@ -130,6 +129,7 @@ class DirectoryController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function adoptAction( Request $request, Directory $directory) {
+        $this->fix();
         $formHandler = $this->get('cocorico.form.handler.directory');
         $form = $this->createDirectoryForm($directory);
         $directory = $formHandler->init($directory);
