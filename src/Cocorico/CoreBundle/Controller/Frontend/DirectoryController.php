@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 /**
  * Directory controller.
@@ -37,6 +38,17 @@ use Symfony\Component\HttpFoundation\Response;
 class DirectoryController extends Controller
 {
 
+    private $tracker;
+    private $deps;
+
+    private function fix()
+    {
+        // FIXME: Find a symfonian way to do this
+        if ($this->tracker === null) {
+            $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+            $this->deps = new Deps();
+        }
+    }
     /**
      * Search a directory entity to adopt
      *
@@ -65,6 +77,7 @@ class DirectoryController extends Controller
                 $directoryCheckRequest->getSiret()
             );
             $searched = true;
+            $this->tracker->track('backend', 'adopt_search', ['q' => $directoryCheckRequest->getSiret()], $request->getSession());
         }
     
         return $this->render(
@@ -130,6 +143,7 @@ class DirectoryController extends Controller
                 'Structure attachéé avec succes'
             );
 
+            $this->tracker->track('backend', 'adopt', ['dir' => $directory->getId()], $request->getSession());
             return $this->redirect($url);
         }
 

@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.6] - (2021-04-16)
+- Tracking opérations d'adoption de structures
+
 ### [3.5] - (2021-04-14)
 - Fix DB : champ source des données importées
 
