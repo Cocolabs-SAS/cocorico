@@ -84,6 +84,14 @@ class RegistrationFormType extends AbstractType
             #     )
             # )
             ->add(
+                'companyName',
+                TextType::class,
+                array(
+                    'label' => 'form.company_name',
+                    'required' => true,
+                )
+            )
+            ->add(
                 'phone',
                 TelType::class,
                 array(

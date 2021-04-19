@@ -108,6 +108,7 @@ class DirectoryFilterType extends AbstractType
                     'choices' => array_flip(Directory::$kindValues),
                 )
             )
+            // FIXME: Fix presta type search field
             ->add('prestaType',
                 ChoiceType::class,
                 array(

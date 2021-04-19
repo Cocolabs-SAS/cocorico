@@ -102,12 +102,23 @@
 
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
-                        {#
+                        {% if structure.hasPrestaType %}
                         <div class="col-sm-6 pull-left shadow">
-                            <dl class="deflist">
-                                <dt>Type(s) de prestation</dt>
+                            <h4>Type(s) de prestation(s)</h4>
+                            <ul class="active_sectors">
+                                {% if structure.isPrestaTypePrest %}
+                                <li>Prestation de service</li>
+                                {% endif %}
+                                {% if structure.isPrestaTypeDisp %}
+                                <li>Mise à disposition du personnel / Interim</li>
+                                {% endif %}
+                                {% if structure.isPrestaTypeBuild %}
+                                <li>Fabrication et commercialisation de biens</li>
+                                {% endif %}
                             </dl>
                         </div>
+                        {% endif %}
+                        {#
 
                         <div class="col-sm-5  shadow pull-right">
                             <h4>Éléments différenciants<br />

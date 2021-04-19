@@ -158,6 +158,24 @@
                             </div>
                         </div>
 
+                        <div class="field-row validate-row mt-3">
+                            <label>Type(s) de prestation(s)</label>
+                            <ul style="list-style-type:none;margin:0;padding:0;">
+                                <li>
+                                {{ form_widget(form.prestaType_prest) }}
+                                {{ form_label(form.prestaType_prest, null, {'required': false}) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.prestaType_disp) }}
+                                {{ form_label(form.prestaType_disp, null, {'required': false}) }}
+                                </li>
+                                <li>
+                                {{ form_widget(form.prestaType_build) }}
+                                {{ form_label(form.prestaType_build, null, {'required': false}) }}
+                                </li>
+                            </ul>
+                        </div>
+
                         <div class="field-row validate-row">
                             <label>Perimètre d'intervention</label>
                             <ul id="pol_range_form">

@@ -55,6 +55,30 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                     'required' => false,
                     'attr' => ['rows'=> 10]
                 )
+            )
+            ->add(
+                'prestaType_disp',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Mise à disposition du personnel / Interim',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'prestaType_prest',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Prestation de service',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'prestaType_build',
+                CheckBoxType::class,
+                array(
+                    'label' => 'Fabrication et commercialisation de biens',
+                    'required' => false,
+                )
             );
     }
 

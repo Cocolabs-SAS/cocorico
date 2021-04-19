@@ -28,6 +28,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocorico\CoreBundle\Utils\Tracker;
 
 /**
  * Directory controller.
@@ -37,6 +38,15 @@ use Symfony\Component\HttpFoundation\Response;
 class DirectoryController extends Controller
 {
 
+    private $tracker;
+
+    private function fix()
+    {
+        // FIXME: Find a symfonian way to do this
+        if ($this->tracker === null) {
+            $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+        }
+    }
     /**
      * Search a directory entity to adopt
      *
@@ -51,6 +61,7 @@ class DirectoryController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function searchAction( Request $request) {
+        $this->fix();
         $formHandler = $this->get('cocorico.form.handler.directory');
         $directoryCheckRequest = $this->get('cocorico.directory_check_request');
 
@@ -65,6 +76,7 @@ class DirectoryController extends Controller
                 $directoryCheckRequest->getSiret()
             );
             $searched = true;
+            $this->tracker->track('backend', 'adopt_search', ['q' => $directoryCheckRequest->getSiret()], $request->getSession());
         }
     
         return $this->render(
@@ -117,6 +129,7 @@ class DirectoryController extends Controller
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function adoptAction( Request $request, Directory $directory) {
+        $this->fix();
         $formHandler = $this->get('cocorico.form.handler.directory');
         $form = $this->createDirectoryForm($directory);
         $directory = $formHandler->init($directory);
@@ -130,6 +143,7 @@ class DirectoryController extends Controller
                 'Structure attachéé avec succes'
             );
 
+            $this->tracker->track('backend', 'adopt', ['dir' => $directory->getId()], $request->getSession());
             return $this->redirect($url);
         }
 

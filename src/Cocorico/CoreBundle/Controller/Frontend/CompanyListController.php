@@ -72,6 +72,7 @@ class CompanyListController extends Controller
             $sort = $form->getData();
             // Hack, see model ListingSearchRequest for more
             $sectors = $request->query->get('sector');
+            $sectors = is_array($sectors) ? $sectors : array();
             $sort['sector'] = $sectors;
 
             $params = [
