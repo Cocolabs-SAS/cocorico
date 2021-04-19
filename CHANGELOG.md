@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Refactor champ types de prestation pour les structures (valeurs multiples)
 - Refactor moteur recherche types de prestation
 - Hotfix nom de structure (acheteur et partenaire)
+- Annonces publiées par défaut
 
 ### [3.5] - (2021-04-14)
 - Fix DB : champ source des données importées
