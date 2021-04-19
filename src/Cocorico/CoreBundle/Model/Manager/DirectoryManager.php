@@ -128,15 +128,15 @@ class DirectoryManager extends BaseManager
         }
 
         // Filter on prestation type
-        if ($params['prestaType'] != false) {
+        if ($params['prestaType'] > 1) {
             $value = $params['prestaType'];
-            $prestaName = Directory::$prestaTypeValues[$value];
-            $qB->andWhere('d.prestaType = :prestatype')
-               ->setParameter('prestatype', $prestaName);
+            $qB->andWhere('BIT_AND(d.prestaType, :prestatype) > 0')
+            // $qB->andWhere('d.prestaType & :prestatype = :prestatype')
+               ->setParameter('prestatype', $value);
         }
 
         // Filter on sector
-        if ($params['sector'] != false && count($params['sector'])) {
+        if ($params['sector'] != false && count($params['sector']) > 0) {
             $sectors = $params['sector'];
             $qB->andWhere('dlcat.category IN (:sectors)')
                ->setParameter('sectors', $sectors);

@@ -1607,6 +1607,22 @@ class Directory
         return $this->isPrestaTypeBuild();
     }
 
+    public function prestaTypeText()
+    {
+        $ret = array();
+        if ($this->isPrestaTypeDisp()) {
+            array_push($ret, self::$prestaTypeValues[self::PRESTA_DISP]);
+        }
+        if ($this->isPrestaTypePrest()) {
+            array_push($ret, self::$prestaTypeValues[self::PRESTA_PREST]);
+        }
+        if ($this->isPrestaTypeBuild()) {
+            array_push($ret, self::$prestaTypeValues[self::PRESTA_BUILD]);
+        }
+
+        return implode(' , ', $ret);
+    }
+
 
 
 }
