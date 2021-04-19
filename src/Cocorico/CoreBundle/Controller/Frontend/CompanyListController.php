@@ -82,6 +82,7 @@ class CompanyListController extends Controller
                 'postalCode' => null,
                 'region' => null,
             ];
+            dump($params);
             $withAntenna = $sort['withAntenna'];
             $params = $this->fixParams($sort, $params);
             $entries = $directoryManager->findByForm($page, $params);

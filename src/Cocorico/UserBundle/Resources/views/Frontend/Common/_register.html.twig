@@ -45,6 +45,23 @@ which acts on the person type choice.
             <h3><i class="icon-building" style="color:#006adc;"></i>
                 Contact et coordonnées de votre entreprise</h3>
             <div class="sub-form">
+
+                 <div class="field-row validate-row" data-only="partner classic">
+                    <div class="error-container">{{ form_errors(form_registration.companyName) }}</div>
+                    <span class="label">
+                        {{ form_label(form_registration.companyName, 'Nom de votre structure') }}
+                    </span>
+
+                    <div class="field-holder">
+                        {{ form_widget(form_registration.companyName, {
+                            'attr': {
+                                'class': 'form-control required',
+                                'data-parsley-required-message': 'cocorico_user.company_name.blank'|trans({},'validators')
+                            }
+                        }) }}
+                    </div>
+                </div>
+
                 <div class="field-row validate-row">
                     <div class="error-container">{{ form_errors(form_registration.lastName) }}</div>
                     <span class="label">

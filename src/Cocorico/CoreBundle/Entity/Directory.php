@@ -88,16 +88,26 @@ class Directory
     # const PRESTA_CHOICE = 'Choisir...';
     # const PRESTA_DISP = 'Mise à disposition';
     # const PRESTA_PREST = 'Prestation et/ou vente de biens';
-    public static $prestaTypeValues = array(
-        'N/A',
-        'N/A',
-        'N/A',
-    );
 
     const PRESTA_CHOICE = 1 << 0;
     const PRESTA_DISP = 1 << 1;
     const PRESTA_PREST = 1 << 2;
     const PRESTA_BUILD = 1 << 3;
+
+    public static $prestaTypeValues = array(
+        self::PRESTA_CHOICE => 'Choisir ...',
+        self::PRESTA_DISP => 'Mise à disposition / Interim',
+        self::PRESTA_PREST => 'Prestation de service',
+        self::PRESTA_BUILD => 'Fabrication et commercialisation de biens',
+    );
+
+    # public static $prestaTypeValues = array(
+    #     'choice' => self::PRESTA_CHOICE,
+    #     'disp' => self::PRESTA_DISP,
+    #     'prest' => self::PRESTA_PREST,
+    #     'build' => self::PRESTA_BUILD,
+    # );
+
 
     const STRUCT_CHOICE = 'Choisir...';
     const STRUCT_EI = 'EI';
