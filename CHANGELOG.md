@@ -8,7 +8,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 ### [3.6] - (2021-04-19)
-- Tracking opérations d'adoption de structures
+- Tracking opérations d'adoption de structures (recherche et adoption)
 - Refactor champ types de prestation pour les structures (valeurs multiples)
 - Refactor moteur recherche types de prestation
 - Hotfix nom de structure (acheteur et partenaire)

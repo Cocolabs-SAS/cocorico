@@ -96,7 +96,7 @@ class Directory
 
     public static $prestaTypeValues = array(
         self::PRESTA_CHOICE => 'Choisir ...',
-        self::PRESTA_DISP => 'Mise à disposition / Interim',
+        self::PRESTA_DISP => 'Mise à disposition - Interim',
         self::PRESTA_PREST => 'Prestation de service',
         self::PRESTA_BUILD => 'Fabrication et commercialisation de biens',
     );
