@@ -1501,7 +1501,7 @@ section.quote-quick-form fieldset {
  * DIRECTORY STYLES
  ******************/
 #dir_list {
-    background-color:#f2f8ff;
+    /* background-color:#f2f8ff; */
     display:flex;
     flex-direction: column;
     margin-top:3rem;
@@ -1526,6 +1526,26 @@ section.quote-quick-form fieldset {
 #dir_list tr {
     margin-bottom:1rem;
 }
+
+#dir_list .meta {
+    font-weight:bold;
+    padding: 1rem 0 3rem 1rem;
+}
+
+.siae-card-container {
+    text-decoration:none;
+    color:#000;
+    display:block;
+    border: 2px solid transparent;
+}   
+
+.siae-card-container:hover {
+    text-decoration:none;
+    color:#000;
+    display:block;
+    border-color:#000;
+}
+
 
 #csv_get {
     margin-top:3rem;
@@ -1590,11 +1610,6 @@ section.quote-quick-form fieldset {
 .dir_form #filter-submit {
     margin-top:1.625rem;
     height: 2.5rem;
-}
-
-#dir_list .meta {
-    font-weight:bold;
-    padding: 1rem 0 3rem 1rem;
 }
 
 
