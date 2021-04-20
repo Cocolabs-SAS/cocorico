@@ -171,11 +171,6 @@
                         {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                         {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
                         {% do dlform.address.setRendered() %}
-                        {#
-                        {% do dlform.postalCode.setRendered() %}
-                        {% do dlform.prestaType.setRendered() %}
-                        {% do dlform.structureType.setRendered() %}
-                        #}
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="title">
@@ -195,17 +190,6 @@
                             </div>
                         </div>
                     </div>
-                    {#
-                    <a 
-                        id="csv_get"
-                        class="btn btn-default"
-                        href="{{ path(csv_route, csv_params) }}" >
-                        Télécharger la liste
-                        <span style="font-family:fontello2;">
-                        &#128269;
-                        </span>
-                    </a>
-                    #}
                     {{ form_end(dlform) }}
     
                 {%- else -%}
