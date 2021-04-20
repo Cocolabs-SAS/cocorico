@@ -1,43 +1,53 @@
-<a href="#" class="siae-card-container">
+<a href="{{ path('cocorico_directory_show', {'id' : entry.id }) }}" class="siae-card-container">
     <div class="siae-card">
         <div class="sc-img">
             {# Logo #}
-            <img src="" />
+
+            {% if entry.images|length %}
+                    {% set image = entry.images[0] %}
+                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                         alt="{{ structure.name }}"/>
+            {% else %}
+                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
+                         alt="{{ structure.name }}"/>
+            {% endif %}
         </div>
-        <div class="sc-head">
-            <h3>
-                {% if entry.brand %}
-                    {{ entry.brand }}
-                {% else %}
-                    {{ entry.name }}
-                {% endif %}
-            </h3>
-            {#
-            - co-traitance
-            - favoris
-            #}
-        </div>
-        <div class="sc-body">
-            <div class="sc-profile">
-                <ul>
-                    <li>{{ entry.prestaTypeText}} </li>
-                    <li>{{ entry.getSectorString }}</li>
-                </ul>
+        <div class="sc-main container">
+            <div class="sc-head">
+                <h3>
+                    {% if entry.brand %}
+                        {{ entry.brand }}
+                    {% else %}
+                        {{ entry.name }}
+                    {% endif %}
+                </h3>
                 {#
-                aperçus :
-                - type de prestation
-                - secteurs d'activité 
+                - co-traitance
+                - favoris
                 #}
             </div>
-            <div class="sc-data">
-                <ul>
-                    <li><img src="{{ asset('images/siae_list_type.png')}}" style="height:15px">{{ entry.kind }}</li>
-                    <li><img src="{{ asset('images/siae_list_town.png')}}" style="height:18px">{{ entry.city }}</li>
-                </ul>
-                {#
-                - type
-                - address
-                #}
+            <div class="sc-body row">
+                <div class="sc-profile col-sm-6">
+                    <ul>
+                        <li>{{ entry.prestaTypeText}} </li>
+                        <li>{{ entry.getSectorString }}</li>
+                    </ul>
+                    {#
+                    aperçus :
+                    - type de prestation
+                    - secteurs d'activité 
+                    #}
+                </div>
+                <div class="sc-data col-sm-6">
+                    <ul>
+                        <li><img src="{{ asset('images/siae_list_type.png')}}" style="height:15px">{{ entry.kind }}</li>
+                        <li><img src="{{ asset('images/siae_list_town.png')}}" style="height:18px">{{ entry.city }}</li>
+                    </ul>
+                    {#
+                    - type
+                    - address
+                    #}
+                </div>
             </div>
         </div>
     </div>

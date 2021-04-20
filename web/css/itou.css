@@ -1528,8 +1528,11 @@ section.quote-quick-form fieldset {
 }
 
 #dir_list .meta {
-    font-weight:bold;
     padding: 1rem 0 3rem 1rem;
+    font-size:2rem;
+    font-family:roboto;
+    font-weight:300;
+    color:#000;
 }
 
 .siae-card-container {
@@ -1537,6 +1540,10 @@ section.quote-quick-form fieldset {
     color:#000;
     display:block;
     border: 2px solid transparent;
+    border-radius:9px;
+    box-shadow: 0px 9px 9px -8px rgba(0,0,0,0.2);
+    margin-bottom:2rem;
+    padding:1rem;
 }   
 
 .siae-card-container:hover {
@@ -1546,6 +1553,49 @@ section.quote-quick-form fieldset {
     border-color:#000;
 }
 
+.siae-card-container:active,
+.siae-card-container:focus {
+    text-decoration:none;
+    color:#000;
+    border-color:transparent;
+}
+
+.siae-card {
+    display:flex;
+    flex-direction: row;
+}
+
+.siae-info {
+    color:#000;
+    font-family:roboto;
+}
+
+.siae-info h3 {
+    color:#000;
+}
+
+.sc-main {
+    display:flex;
+    flex-direction: column;
+    margin-left:1rem;
+}
+
+.sc-main h3 {
+    margin:0;
+    padding:0;
+    color:#000;
+    font-size:1.25rem;
+    margin-bottom:1rem;
+}
+
+.sc-body {
+}
+
+.sc-body ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
 
 #csv_get {
     margin-top:3rem;
