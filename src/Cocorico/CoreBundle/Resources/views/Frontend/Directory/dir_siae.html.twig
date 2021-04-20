@@ -121,6 +121,11 @@
                 <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} identifiées
                 </div>
                 {%- if not entries is empty -%}
+                    {% for entry in entries.iterator %}
+                        {% include '@CocoricoCore/Frontend/Directory/_card.html.twig' with {
+                        'structure' : entry
+                        } %}
+                    {% endfor %}
                     <table>
                         <tr>
                             <th>Nom</th>
