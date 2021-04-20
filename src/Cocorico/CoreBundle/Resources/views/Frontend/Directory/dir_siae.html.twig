@@ -221,6 +221,24 @@
                     {%- endif -%}
                     </div>
                     <div class="col-sm-4 siae-info">
+                        <!-- maparea -->
+                        <div class="maparea">
+                            <div class="maparea">
+                                <div class="checkbox search-on-drag-cb-wrapper">
+                                    <input type="checkbox" name="search-on-drag" id="search-on-drag">
+                                    <label class="form-label" for="search-on-drag">
+                                        {{ 'search-on-map-drag'|trans }}
+                                    </label>
+                                </div>
+                                <div class="map-holder">
+                                    <div id="map-canvas"></div>
+                                    {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
+                                    'markers': '',
+                                    } only %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="si-separator"></div>
                         <div>
                             <h3>Idées reçues</h3>
                             <p> La structure est trop petite pour répondre à mon besoin...
@@ -254,6 +272,13 @@
     'auto_complete_elt': '#address'
     } only %}
 
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '#map-canvas',
+    'auto_complete_elt': '#location',
+    'default_lat': '',
+    'default_lng': '',
+    'extend_search': ''
+    } only %}
 
 {% endblock %}
 

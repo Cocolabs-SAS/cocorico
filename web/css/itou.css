@@ -1504,7 +1504,7 @@ section.quote-quick-form fieldset {
     /* background-color:#f2f8ff; */
     display:flex;
     flex-direction: column;
-    margin-top:3rem;
+    margin-top:1rem;
     padding:1rem 2rem 3rem;
 }
 
@@ -1568,10 +1568,16 @@ section.quote-quick-form fieldset {
 .siae-info {
     color:#000;
     font-family:roboto;
+    display:flex;
+    flex-direction:column;
 }
 
 .siae-info h3 {
     color:#000;
+}
+
+.siae-info .maparea .map-holder{
+    height:15rem
 }
 
 .sc-main {
@@ -1596,6 +1602,13 @@ section.quote-quick-form fieldset {
     margin:0;
     padding:0;
 }
+
+.si-separator {
+    padding:0 1rem 2rem;
+    border-bottom:5px solid #FE5455;
+}
+
+
 
 #csv_get {
     margin-top:3rem;
