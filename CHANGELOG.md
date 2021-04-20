@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.7] - (2021-04-XX)
+- Nouvelle page de résultats SIAE
+
 ### [3.6] - (2021-04-19)
 - Tracking opérations d'adoption de structures (recherche et adoption)
 - Refactor champ types de prestation pour les structures (valeurs multiples)
