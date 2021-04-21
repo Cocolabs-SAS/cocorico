@@ -165,33 +165,6 @@
                         {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
                         'pagination': pagination
                         } only %}
-                        {{ form_start(dlform) }}
-                        <div id="csv_form" class="dir_form">
-                            {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
-                            {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
-                            {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
-                            {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
-                            {% do dlform.address.setRendered() %}
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="title">
-                                        Format
-                                    </div>
-                                    <div class="field-holder">
-                                        {{form_widget(dlform.format,{
-                                            'id': 'format'
-                                        })}}
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <button id="csv-submit" type="submit" class="btn btn-default">
-                                        Télécharger la liste
-                                        <i class="icon-down"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        {{ form_end(dlform) }}
         
                     {%- else -%}
                         <div class="col-xs-12 form-confirm min-height justify-content-center" style="margin:-21px 0 30rem;">
@@ -263,6 +236,31 @@
                         </div>
                     </div>
                 </div>
+                {{ form_start(dlform) }}
+                <div id="csv_form" class="row dir_form" style="display:flex;justify-content:center" >
+                    {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
+                    {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
+                    {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
+                    {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
+                    {% do dlform.address.setRendered() %}
+                        <div class="col-sm-3">
+                            <div class="title">
+                                Format
+                            </div>
+                            <div class="field-holder">
+                                {{form_widget(dlform.format,{
+                                    'id': 'format'
+                                })}}
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <button id="csv-submit" type="submit" class="btn btn-default">
+                                Télécharger la liste
+                                <i class="icon-down"></i>
+                            </button>
+                        </div>
+                </div>
+                {{ form_end(dlform) }}
             </div>
         {% endblock %}
     {% endembed %}
