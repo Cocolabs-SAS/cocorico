@@ -29,8 +29,8 @@
             <div class="sc-body row">
                 <div class="sc-profile col-sm-6">
                     <ul>
-                        <li>{{ entry.prestaTypeText}} </li>
-                        <li>{{ entry.getSectorString }}</li>
+                        <li><img src="{{ asset('images/siae_list_kind.svg')}}" style="height:15px">{{ entry.prestaTypeText}} </li>
+                        <li><img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">{{ entry.getSectorString }}</li>
                     </ul>
                     {#
                     aperçus :
@@ -40,8 +40,8 @@
                 </div>
                 <div class="sc-data col-sm-6">
                     <ul>
-                        <li><img src="{{ asset('images/siae_list_type.png')}}" style="height:15px">{{ entry.kind }}</li>
-                        <li><img src="{{ asset('images/siae_list_town.png')}}" style="height:18px">{{ entry.city }}</li>
+                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ entry.kind }}</li>
+                        <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ entry.city }}</li>
                     </ul>
                     {#
                     - type
