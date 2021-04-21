@@ -505,16 +505,20 @@ class Directory
      *
      * @return string
      */
-    public function getSectorString()
+    public function getSectorString($max=1000)
     {
         $out = [];
         $cats = $this->getDirectoryListingCategories(); 
 
         foreach ($cats as $cat) {
             $out[] = $cat->getCategory()->getName();
+            if (count($out) > $max) {
+                $out[] = '...';
+                break;
+            }
         }
 
-        return implode(', ', $out);
+        return implode(' - ', $out);
     }
 
     /**

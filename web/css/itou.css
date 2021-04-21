@@ -1613,6 +1613,15 @@ section.quote-quick-form fieldset {
     border-bottom:5px solid #FE5455;
 }
 
+.si-ideas p {
+    display:flex;
+    flex-direction:row;
+}
+.si-ideas span {
+    display:block;
+    padding-left:.4rem;
+}
+
 
 
 #csv_get {
