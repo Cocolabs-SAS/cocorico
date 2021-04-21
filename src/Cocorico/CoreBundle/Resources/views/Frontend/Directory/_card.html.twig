@@ -5,10 +5,10 @@
 
             {% if entry.images|length %}
                     {% set image = entry.images[0] %}
-                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
                          alt="{{ structure.name }}"/>
             {% else %}
-                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
                          alt="{{ structure.name }}"/>
             {% endif %}
         </div>
