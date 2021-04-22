@@ -505,7 +505,7 @@ class Directory
      *
      * @return string
      */
-    public function getSectorString($max=1000)
+    public function getSectorString($max=1000, $separator=" - ")
     {
         $out = [];
         $cats = $this->getDirectoryListingCategories(); 
@@ -518,7 +518,7 @@ class Directory
             }
         }
 
-        return implode(' - ', $out);
+        return implode($separator, $out);
     }
 
     /**
@@ -1611,7 +1611,7 @@ class Directory
         return $this->isPrestaTypeBuild();
     }
 
-    public function prestaTypeText()
+    public function prestaTypeText($separator=' , ')
     {
         $ret = array();
         if ($this->isPrestaTypeDisp()) {
@@ -1624,7 +1624,7 @@ class Directory
             array_push($ret, self::$prestaTypeValues[self::PRESTA_BUILD]);
         }
 
-        return implode(' , ', $ret);
+        return implode($separator, $ret);
     }
 
 
