@@ -1240,7 +1240,7 @@ span.btn:focus {
 /* listing-post */
 .listing-post {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .listing-post .listing-box {
@@ -1263,7 +1263,7 @@ span.btn:focus {
 
 .listing-post .post-info {
     overflow: hidden;
-    min-height: 200px;
+    min-height: 150px;
     position: relative;
 }
 
@@ -1355,8 +1355,8 @@ span.btn:focus {
     color: #ffffff;
     font-weight: 600;
     text-align: center;
-    font-size: 18px;
-    line-height: 21px;
+    font-size: .8rem;
+    line-height: .8rem;
     background: rgba(0, 0, 0, 0.45);
 }
 
@@ -1476,7 +1476,7 @@ span.btn:focus {
 }
 
 .listing-post.small .post-info {
-    min-height: 150px;
+    min-height: 10px;
 }
 
 .listing-post.small .foot {
@@ -2599,7 +2599,7 @@ span.btn:focus {
 }
 
 .posts-holder .post-content {
-    margin: 0 4px 37px 0;
+    margin: 0 4px 27px 0;
 }
 
 .posts-holder .rating {

@@ -505,16 +505,27 @@ class Directory
      *
      * @return string
      */
-    public function getSectorString()
+    public function getSectorString($max=1000, $separator=" - ")
     {
         $out = [];
         $cats = $this->getDirectoryListingCategories(); 
 
         foreach ($cats as $cat) {
-            $out[] = $cat->getCategory()->getName();
+            $myname = $cat->getCategory()->getName();
+            if ($myname == 'Autre') {
+                $myname = $cat->getCategory()->getParent()->getName();
+            }
+            if ($myname == 'Autres' || $myname == 'Other' ){
+                continue;
+            }
+            $out[] = $myname;
+            if (count($out) > $max) {
+                $out[] = '...';
+                break;
+            }
         }
 
-        return implode(', ', $out);
+        return implode($separator, $out);
     }
 
     /**
@@ -1182,6 +1193,10 @@ class Directory
         return $this;
     }
 
+    public function hasDirectoryListingCategory()
+    {
+        return count($this->directoryListingCategories) > 0;
+    }
 
     /**
      * Remove category
@@ -1607,7 +1622,7 @@ class Directory
         return $this->isPrestaTypeBuild();
     }
 
-    public function prestaTypeText()
+    public function prestaTypeText($separator=' , ')
     {
         $ret = array();
         if ($this->isPrestaTypeDisp()) {
@@ -1620,7 +1635,7 @@ class Directory
             array_push($ret, self::$prestaTypeValues[self::PRESTA_BUILD]);
         }
 
-        return implode(' , ', $ret);
+        return implode($separator, $ret);
     }
 
 

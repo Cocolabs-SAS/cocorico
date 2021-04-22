@@ -1,0 +1,70 @@
+{% apply spaceless %}
+    {% trans_default_domain 'cocorico_listing' %}
+    {% autoescape 'html' %}
+        {#
+        HTML template used to create infobox content on map when a marker is clicked
+        Variable %var% are replaced by the listing data
+        @see Cocorico/GeoBundle/Resources/views/Common/js/_geocoding_js.html.twig
+        #}
+        <div class="info-box-tpl hidden">
+            <div class="popup">
+                <ul>
+                    <li class="listing-post small" data-id="info-box">
+                        {#Customisation start here#}
+                        <a href="%url%" class="listing-box">
+                            <div class="frame">
+                                <div class="post-info">
+
+                                    <!--
+                                    <div class="img-holder">
+                                        <img src="/images/img.png" alt="image description" data-src="%data-src%">
+                                    </div>
+                                    -->
+
+                                    <!--
+                                    <div class="box">
+                                        <div class="box-holder">
+                                            <div class="foot">
+                                                <strong class="title">%category%</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    -->
+                                </div>
+
+                                <div class="post-content">
+                                    <div class="textbox">
+                                        <h2>%title%</h2>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </a>
+                        {#End of customisation#}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        {#Above content are injected in %infoBoxContent% below#}
+        <div class="info-box-wrapper hidden">
+            <div>
+                <a class="close" href="javascript:void(0)">
+                    <span class="hidden">Close</span>
+                    <i class="icon-cancel"></i>
+                </a>
+
+                <div class="popup">
+                    <ul>
+                        %info_box_content%
+                    </ul>
+                </div>
+        </div>
+    </div>
+
+    {% endautoescape %}
+{% endapply %}
+
+{# Data Markers used to displayed markers on map#}
+<span id="data-markers"
+      data-markers="{{ markers|json_encode(constant('JSON_UNESCAPED_UNICODE') b-or constant('JSON_HEX_APOS') )|e('html') }}"></span>

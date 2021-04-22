@@ -49,13 +49,13 @@
                                         {% if structure_images|length %}
                                             {% for image in structure_images %}
                                                 <div class="slide">
-                                                    <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                                                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
                                                          alt="{{ structure.name }}"/>
                                                 </div>
                                             {% endfor %}
                                         {% else %}
                                             <div class="slide">
-                                                <img src="{{ (UserImageConstants.IMAGE_FOLDER ~ UserImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
                                                      alt="{{ structure.name }}"/>
                                             </div>
                                         {% endif %}

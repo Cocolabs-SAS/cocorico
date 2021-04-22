@@ -7,6 +7,14 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.7] - (2021-04-22)
+- Nouvelle page de résultats SIAE
+- Accès fiches SIAE via page de résultats
+- Correction dossier images clients et logo structure
+- Carte google maps interactive sur page de résultats SIAE
+- Plus besoin d'authentification pour accédér à la liste
+- Bug Fix champ description
+
 ### [3.6] - (2021-04-19)
 - Tracking opérations d'adoption de structures (recherche et adoption)
 - Refactor champ types de prestation pour les structures (valeurs multiples)

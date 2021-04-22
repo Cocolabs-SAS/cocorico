@@ -41,7 +41,8 @@
         translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
         geoLocateIPFunc;
 
-    $(function () {
+    // $(function () {
+    document.addEventListener("DOMContentLoaded", function(){
         //var maxZoom = 18;
         var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
         var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
@@ -485,7 +486,6 @@
                         var geometry = result.geometry;
 
                         if (geometry.viewport) {
-                            if (!mapDragMode) {
                                 var ne = geometry.viewport.northeast;
                                 var sw = geometry.viewport.southwest;
                                 ne = new google.maps.LatLng(ne.lat, ne.lng);
@@ -495,7 +495,6 @@
                                 map.fitBounds(viewport);
                                 map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
                                 drawZone(ne, sw);
-                            }
                         } else {
                             map.setCenter(geometry.location);
                             map.setZoom(17);
@@ -561,8 +560,8 @@
             };
 
             //Compute InfoBox Y Offset and height
-            var infoBoxHeight = 270;
-            var infoBoxWidth = 275;
+            var infoBoxHeight = 100;
+            var infoBoxWidth = 150;
             var offsetY = -infoBoxHeight - 54;
 
             //Remove markers before adding them

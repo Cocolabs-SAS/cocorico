@@ -1,0 +1,62 @@
+<a href="{{ path('cocorico_directory_show', {'id' : entry.id }) }}" class="siae-card-container">
+    <div class="siae-card">
+        <div class="sc-img">
+            {# Logo #}
+
+            {% if entry.images|length %}
+                    {% set image = entry.images[0] %}
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
+                         alt="{{ structure.name }}"/>
+            {% else %}
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
+                         alt="{{ structure.name }}"/>
+            {% endif %}
+        </div>
+        <div class="sc-main container">
+            <div class="sc-head">
+                <h3>
+                    {% if entry.brand %}
+                        {{ entry.brand }}
+                    {% else %}
+                        {{ entry.name }}
+                    {% endif %}
+                </h3>
+                {#
+                - co-traitance
+                - favoris
+                #}
+            </div>
+            <div class="sc-body row">
+                <div class="sc-profile">
+                    <ul>
+                        <li><img src="{{ asset('images/siae_list_kind.svg')}}" style="height:15px;">
+                            <span style="">
+                            {% if entry.kind == 'ETTI' %}
+                                intérim
+                            {% elseif entry.kind == 'AI' %}
+                                Mise à disposition du personnel
+                            {% else %}
+                                {{ entry.prestaTypeText('<br />') | raw}}
+                            {% endif %}
+                            </span>
+                        </li>
+                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ entry.kind }}</li>
+                        <li>
+                        {% if entry.hasDirectoryListingCategory %}
+                            <img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">
+                            <span>
+                                {{ entry.getSectorString(2, '<br />') | raw }}
+                            </span>
+                        {% endif %}
+                        </li>
+                        <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ entry.region }}</li>
+                    </ul>
+                    {#
+                    - type
+                    - address
+                    #}
+                </div>
+            </div>
+        </div>
+    </div>
+</a>

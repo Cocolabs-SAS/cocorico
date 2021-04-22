@@ -100,7 +100,8 @@ class DirectoryType extends AbstractType
                 'description',
                 TextareaType::class,
                 array(
-                    'required' => false,
+                    'empty_data' => '',
+                    'required' => true,
                     'attr' => ['rows'=> 6]
                 )
             )
