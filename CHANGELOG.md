@@ -7,6 +7,9 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
+### [3.8] - (2021-04-XX)
+- Update fiche structure SIAE
+
 ### [3.7] - (2021-04-22)
 - Nouvelle page de résultats SIAE
 - Accès fiches SIAE via page de résultats
