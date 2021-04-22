@@ -511,7 +511,14 @@ class Directory
         $cats = $this->getDirectoryListingCategories(); 
 
         foreach ($cats as $cat) {
-            $out[] = $cat->getCategory()->getName();
+            $myname = $cat->getCategory()->getName();
+            if ($myname == 'Autre') {
+                $myname = $cat->getCategory()->getParent()->getName();
+            }
+            if ($myname == 'Autres' || $myname == 'Other' ){
+                continue;
+            }
+            $out[] = $myname;
             if (count($out) > $max) {
                 $out[] = '...';
                 break;
