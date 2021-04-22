@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Correction dossier images clients et logo structure
 - Carte google maps interactive sur page de résultats SIAE
 - Plus besoin d'authentification pour accédér à la liste
+- Bug Fix champ description
 
 ### [3.6] - (2021-04-19)
 - Tracking opérations d'adoption de structures (recherche et adoption)
