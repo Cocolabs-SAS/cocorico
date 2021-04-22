@@ -1186,6 +1186,10 @@ class Directory
         return $this;
     }
 
+    public function hasDirectoryListingCategory()
+    {
+        return count($this->directoryListingCategories) > 0;
+    }
 
     /**
      * Remove category

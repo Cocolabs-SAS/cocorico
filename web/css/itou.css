@@ -1594,8 +1594,11 @@ section.quote-quick-form fieldset {
     margin-bottom:1rem;
 }
 
-.sc-body  li {
+.sc-body li {
     margin-bottom:1rem;
+    width:50%;
+    display:flex;
+    flex-direction:row;
 }
 
 .sc-body ul {
@@ -1607,6 +1610,19 @@ section.quote-quick-form fieldset {
 .sc-body li img {
     width:20px;
     margin-right:.7rem;
+    margin-top:5px;
+}
+
+.sc-body li span {
+    flex-grow:1;
+    display:block;
+}
+
+
+.sc-profile ul {
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
 }
 
 .si-separator {

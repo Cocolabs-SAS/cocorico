@@ -27,10 +27,10 @@
                 #}
             </div>
             <div class="sc-body row">
-                <div class="sc-profile col-sm-6">
+                <div class="sc-profile">
                     <ul>
                         <li><img src="{{ asset('images/siae_list_kind.svg')}}" style="height:15px;">
-                            <span style="display:inline-flex;">
+                            <span style="">
                             {% if entry.kind == 'ETTI' %}
                                 intérim
                             {% elseif entry.kind == 'AI' %}
@@ -40,23 +40,15 @@
                             {% endif %}
                             </span>
                         </li>
-                        {% if entry.sector %}
-                            <li><img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">
-                            <span style="display:inline-flex;">
+                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ entry.kind }}</li>
+                        <li>
+                        {% if entry.hasDirectoryListingCategory %}
+                            <img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">
+                            <span>
                                 {{ entry.getSectorString(5, '<br />') | raw }}
                             </span>
-                            </li>
                         {% endif %}
-                    </ul>
-                    {#
-                    aperçus :
-                    - type de prestation
-                    - secteurs d'activité 
-                    #}
-                </div>
-                <div class="sc-data col-sm-6">
-                    <ul>
-                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ entry.kind }}</li>
+                        </li>
                         <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ entry.region }}</li>
                     </ul>
                     {#

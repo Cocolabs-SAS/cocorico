@@ -386,7 +386,7 @@ class CompanyListController extends Controller
             if ($structure->getLatitude() == null) { continue; }
             $structuresIds[] = $structure->getId();
 
-            $imageName = count($structure->getImages()) ? $structure->getImages()[0]['name'] : ListingImage::IMAGE_DEFAULT;
+            $imageName = count($structure->getImages()) ? $structure->getImages()[0]->getName() : ListingImage::IMAGE_DEFAULT;
 
             $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_xsmall', array());
 
