@@ -197,16 +197,18 @@
                         <!-- maparea -->
                         <div class="maparea">
                             <div class="maparea">
+                                {#
                                 <div class="checkbox search-on-drag-cb-wrapper">
                                     <input type="checkbox" name="search-on-drag" id="search-on-drag">
                                     <label class="form-label" for="search-on-drag">
                                         {{ 'search-on-map-drag'|trans }}
                                     </label>
                                 </div>
+                                #}
                                 <div class="map-holder">
                                     <div id="map-canvas"></div>
-                                    {% include '@CocoricoCore/Frontend/ListingResult/_marker.html.twig'  with {
-                                    'markers': '',
+                                    {% include '@CocoricoCore/Frontend/Directory/_marker.html.twig'  with {
+                                    'markers': markers,
                                     } only %}
                                 </div>
                             </div>
@@ -272,10 +274,14 @@
 
     {#Geocoding #}
     {% include '@CocoricoCore/Frontend/Directory/js/_geocoding_js.html.twig' with {
-    'map_elt': '',
-    'auto_complete_elt': '#address'
+    'map_elt': '#map-canvas',
+    'auto_complete_elt': '#address',
+    'default_lat': '',
+    'default_lng': '',
+    'display_marker': false,
     } only %}
 
+    {#
     {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
     'map_elt': '#map-canvas',
     'auto_complete_elt': '#location',
@@ -283,7 +289,22 @@
     'default_lng': '',
     'extend_search': ''
     } only %}
-
+    #}
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            //Set listings markers on load
+            {%- if not entries is empty -%}
+                //Set listings markers on load through data-markers attribute
+                let myGreeting = setTimeout(function() {
+                    setMarkersFunc($("span#data-markers").data("markers"));
+                }, 1000)
+                // setMarkersFunc($("span#data-markers").data("markers"));
+                // Set default favourites in the listing
+                // common.application.setDefaultFavourites();
+            {% endif %}
+        });
+    </script>
+ 
 {% endblock %}
 
 

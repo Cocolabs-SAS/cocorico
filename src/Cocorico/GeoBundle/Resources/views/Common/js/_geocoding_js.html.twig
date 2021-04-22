@@ -41,7 +41,8 @@
         translateGeocodeResultFunc, refreshMapFunc, refreshMapJSONFunc, setMarkersFunc, extendSearchLocationFunc,
         geoLocateIPFunc;
 
-    $(function () {
+    // $(function () {
+    document.addEventListener("DOMContentLoaded", function(){
         //var maxZoom = 18;
         var defaultLat = '{{ (default_lat|default(46.227638))|e('js') }}';
         var defaultLng = '{{ (default_lng|default(2.213749000000007))|e('js') }}';
@@ -561,8 +562,8 @@
             };
 
             //Compute InfoBox Y Offset and height
-            var infoBoxHeight = 270;
-            var infoBoxWidth = 275;
+            var infoBoxHeight = 100;
+            var infoBoxWidth = 150;
             var offsetY = -infoBoxHeight - 54;
 
             //Remove markers before adding them

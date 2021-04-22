@@ -1144,7 +1144,7 @@ aside.profile {
 .listing-post .post-content {
     padding-top:9px;
     padding-bottom:9px;
-    height:9rem;
+    min-height:9rem;
 }
 
 .listing-post .frame {
@@ -1577,7 +1577,7 @@ section.quote-quick-form fieldset {
 }
 
 .siae-info .maparea .map-holder{
-    height:15rem
+    height:19rem
 }
 
 .sc-main {

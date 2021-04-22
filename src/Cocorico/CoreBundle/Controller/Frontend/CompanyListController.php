@@ -22,6 +22,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
 use Cocorico\CoreBundle\Model\DirectorySearchRequest;
+use Cocorico\CoreBundle\Entity\ListingImage;
 
 /**
  * Directory controller
@@ -68,6 +69,8 @@ class CompanyListController extends Controller
         $directoryManager = $this->get('cocorico.directory.manager');
         $withAntenna = true;
 
+        $markers = array('directoryIds' => array(), 'markers' => array());
+
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
             // Hack, see model ListingSearchRequest for more
@@ -97,8 +100,14 @@ class CompanyListController extends Controller
             $dlform->get('postalCode')->setData($params['postalCode']);
             $dlform->get('region')->setData($params['region']);
 
+            // Markers
+            $structures = $entries->getIterator();
+            $markers = $this->getMarkers($request, $entries, $structures);
+
         } else {
             $entries = $directoryManager->listSome($page);
+            $structures = $entries->getIterator();
+            $markers = $this->getMarkers($request, $entries, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
@@ -114,6 +123,7 @@ class CompanyListController extends Controller
             ),
             'columns' => $directoryManager->listColumns(),
             'withAntenna' => $withAntenna,
+            'markers' => $markers['markers'],
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
             // 'csv_params' => $request->query->all(),
         ]);
@@ -340,6 +350,79 @@ class CompanyListController extends Controller
 
         return $form;
     }
+
+    /**
+     * Get Markers
+     *
+     * @param  Request        $request
+     * @param  Paginator      $results
+     * @param  \ArrayIterator $resultsIterator
+     *
+     * @return array
+     *          array['markers'] markers data
+     *          array['listingsIds'] listings ids
+     */
+    protected function getMarkers(Request $request, $results, $resultsIterator)
+    {
+        //We get directory id of current page to change their marker aspect on the map
+        $resultsInPage = array();
+        foreach ($resultsIterator as $i => $result) {
+            $resultsInPage[] = $result->getId();
+        }
+
+        //We need to display all directories (without pagination) of the current search on the map
+        $results->getQuery()->setFirstResult(null);
+        //$results->getQuery()->setMaxResults(null);
+        $results->getQuery()->setMaxResults(12);
+        $nbResults = $results->count();
+
+        $imagePath = ListingImage::IMAGE_FOLDER;
+        $locale = $request->getLocale();
+        $liipCacheManager = $this->get('liip_imagine.cache.manager');
+        $markers = $structuresIds = array();
+
+        foreach ($results->getIterator() as $i => $result) {
+            $structure = $result;
+            if ($structure->getLatitude() == null) { continue; }
+            $structuresIds[] = $structure->getId();
+
+            $imageName = count($structure->getImages()) ? $structure->getImages()[0]['name'] : ListingImage::IMAGE_DEFAULT;
+
+            $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_xsmall', array());
+
+
+            $categories = count($structure->getDirectoryListingCategories()) ?
+                $structure->getDirectoryListingCategories()[0]->getCategory()->getName() : '';
+
+            $isInCurrentPage = in_array($structure->getId(), $resultsInPage);
+
+
+            //Allow to group markers with same location
+            $locIndex = $structure->getLatitude() . "-" . $structure->getLongitude();
+            $markers[$locIndex][] = array(
+                'id' => $structure->getId(),
+                'lat' => $structure->getLatitude(),
+                'lng' => $structure->getLongitude(),
+                'title' => $structure->getName(),
+                'category' => $categories,
+                'image' => $image,
+                'url' => $url = $this->generateUrl(
+                    'cocorico_directory_show',
+                    array('id' => $structure->getId())
+                ),
+                'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
+                'opacity' => $isInCurrentPage ? 1 : 0.4,
+
+            );
+        }
+
+        return array(
+            'markers' => $markers,
+            'directoryIds' => $structuresIds
+        );
+    }
+
+
 
 }
 ?>
