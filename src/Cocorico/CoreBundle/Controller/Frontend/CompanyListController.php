@@ -47,7 +47,6 @@ class CompanyListController extends Controller
      * List companies in Database
      *
      * @Route("/{page}", name="cocorico_itou_siae_directory", defaults={"page"=1})
-     * @Security("has_role('ROLE_USER')")
      * @Method("GET")
      *
      * @param Request $request
