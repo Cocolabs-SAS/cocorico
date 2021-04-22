@@ -486,7 +486,6 @@
                         var geometry = result.geometry;
 
                         if (geometry.viewport) {
-                            if (!mapDragMode) {
                                 var ne = geometry.viewport.northeast;
                                 var sw = geometry.viewport.southwest;
                                 ne = new google.maps.LatLng(ne.lat, ne.lng);
@@ -496,7 +495,6 @@
                                 map.fitBounds(viewport);
                                 map.setZoom(getBoundsZoomLevel(ne, sw, mapElt));
                                 drawZone(ne, sw);
-                            }
                         } else {
                             map.setCenter(geometry.location);
                             map.setZoom(17);

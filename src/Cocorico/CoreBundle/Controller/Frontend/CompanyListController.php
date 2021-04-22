@@ -101,12 +101,12 @@ class CompanyListController extends Controller
 
             // Markers
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $entries, $structures);
+            $markers = $this->getMarkers($request, $structures);
 
         } else {
             $entries = $directoryManager->listSome($page);
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $entries, $structures);
+            $markers = $this->getMarkers($request, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
@@ -123,6 +123,7 @@ class CompanyListController extends Controller
             'columns' => $directoryManager->listColumns(),
             'withAntenna' => $withAntenna,
             'markers' => $markers['markers'],
+            'request' => $directorySearchRequest,
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
             // 'csv_params' => $request->query->all(),
         ]);
@@ -361,7 +362,7 @@ class CompanyListController extends Controller
      *          array['markers'] markers data
      *          array['listingsIds'] listings ids
      */
-    protected function getMarkers(Request $request, $results, $resultsIterator)
+    protected function getMarkers(Request $request, $resultsIterator)
     {
         //We get directory id of current page to change their marker aspect on the map
         $resultsInPage = array();
@@ -370,17 +371,17 @@ class CompanyListController extends Controller
         }
 
         //We need to display all directories (without pagination) of the current search on the map
-        $results->getQuery()->setFirstResult(null);
-        //$results->getQuery()->setMaxResults(null);
-        $results->getQuery()->setMaxResults(12);
-        $nbResults = $results->count();
+        // $results->getQuery()->setFirstResult(null);
+        // //$results->getQuery()->setMaxResults(null);
+        // $results->getQuery()->setMaxResults(12);
+        // $nbResults = $results->count();
 
         $imagePath = ListingImage::IMAGE_FOLDER;
         $locale = $request->getLocale();
         $liipCacheManager = $this->get('liip_imagine.cache.manager');
         $markers = $structuresIds = array();
 
-        foreach ($results->getIterator() as $i => $result) {
+        foreach ($resultsIterator as $i => $result) {
             $structure = $result;
             if ($structure->getLatitude() == null) { continue; }
             $structuresIds[] = $structure->getId();
@@ -398,18 +399,19 @@ class CompanyListController extends Controller
 
             //Allow to group markers with same location
             $locIndex = $structure->getLatitude() . "-" . $structure->getLongitude();
+            $title = $structure->getBrand() ? $structure->getBrand() : $structure->getName();
             $markers[$locIndex][] = array(
                 'id' => $structure->getId(),
                 'lat' => $structure->getLatitude(),
                 'lng' => $structure->getLongitude(),
-                'title' => $structure->getName(),
+                'title' => $title,
                 'category' => $categories,
                 'image' => $image,
                 'url' => $url = $this->generateUrl(
                     'cocorico_directory_show',
                     array('id' => $structure->getId())
                 ),
-                'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
+                // 'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
                 'opacity' => $isInCurrentPage ? 1 : 0.4,
 
             );
