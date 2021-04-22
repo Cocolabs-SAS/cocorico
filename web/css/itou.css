@@ -1639,6 +1639,23 @@ section.quote-quick-form fieldset {
     padding-left:.4rem;
 }
 
+@media screen and (max-width:576px) {
+    .siae-card .sc-profile ul {
+        flex-direction:column;
+        flex-wrap:wrap;
+    }
+
+    .siae-card .sc-body li {
+        margin-bottom:1rem;
+        width:100%;
+        display:flex;
+        flex-direction:row;
+
+    }
+    .siae-card {
+        flex-direction: column !important;
+    }
+}
 
 
 #csv_get {
