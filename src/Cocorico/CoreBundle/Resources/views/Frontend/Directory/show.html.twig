@@ -157,9 +157,14 @@
                         <div class="col-sm-6">
                             <h3>Labels & certifications</h3>
                             Non renseigné
-                        </div>
+                        /div>
                     </div>
                     {% endif %}
+                    <div class="row">
+                        <div class="col-sm-12" style="margin-top:1rem">
+                            <small>* source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">informations en provenance de https://entreprise.api.gouv.fr</a></small>
+                        </div>
+                    </div>
 
 
                 </section>
@@ -181,7 +186,6 @@
                             <dd>{{ structure.dateConstitution | localizeddate('short', 'none', 'fr', user_timezone) }}</dd>
                         {% endif %}
                     </dl>
-                    <small>Source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">entreprise.api.gouv.fr</a></small>
                 </div>
                 <div class="profile_capsule">
                     <h3>Contact entreprise</h3>
