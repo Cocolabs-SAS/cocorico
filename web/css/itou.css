@@ -578,6 +578,7 @@ footer img.min_trav {
 .profile-detail {
     margin:0;
     padding-right:1rem;
+    color:#000638;
 }
 
 /*
@@ -602,6 +603,8 @@ footer img.min_trav {
 .deflist dt {
 }
 
+aside {
+}
 aside.profile {
     background-color:#FEEDEE;
     height:100%;
@@ -674,7 +677,6 @@ aside.profile {
 }
 
 .profile-detail .row > div {
-    min-height:7rem;
 }
 
 .equal {
@@ -683,10 +685,19 @@ aside.profile {
   flex-wrap: wrap;
 }
 
-#user_profile.gallery-small .slideset,
-#user_profile.gallery-small .slideset .slide {
+#user_profile .gallery-small .slideset,
+#user_profile .gallery-small .slideset .slide {
     width:150px;
     height:100px;
+}
+
+#user_profile {
+    background-color: #F2F3F5;
+    padding:1rem;
+}
+
+#user_profile .cell {
+    padding:0 0 1rem;
 }
 
 .active_sectors {

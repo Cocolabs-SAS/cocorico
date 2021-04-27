@@ -42,9 +42,9 @@
                 <section class="profile-detail">
                     <!-- First Row, company details -->
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-sm-12"  id="user_profile">
                             <!-- gallery-small -->
-                            <div id="user_profile" class="gallery-small slideshow">
+                            <div id="user_profile" class="gallery-small slideshow col-sm-3">
                                 <div class="slideset">
                                         {% if structure_images|length %}
                                             {% for image in structure_images %}
@@ -63,59 +63,48 @@
                                 <a href="#" class="btn-prev">previous</a>
                                 <a href="#" class="btn-next">next</a>
                             </div>
+                            <div class="col-sm-9">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3>
+                                                {% if structure.brand %}
+                                                    {{ structure.brand }}
+                                                {% else %}
+                                                    {{ structure.name }}
+                                                {% endif %}
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="cell col-sm-6">Siret : {{ structure.siret }}</div>
+                                    <div class="cell col-sm-6">{{ structure.prestaTypeText(', ') }}</div>
+                                    <div class="cell col-sm-6">Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
+                                    <div class="cell col-sm-6">{{ structure.kind }}</div>
+                                    <div class="cell col-sm-6">Date de création : non disponible</div>
+                                </div>
+                            </div>
+                            {#
                             <address>
                                 {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
                             </address>
-                        </div>
-                        <div class="col-sm-9 shadow">
-                            <h3>
-                                    {% if structure.brand %}
-                                        {{ structure.brand }}
-                                    {% else %}
-                                        {{ structure.name }}
-                                    {% endif %}
-                            </h3>
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <dl class="deflist">
-                                        <dt>Siret</dt>
-                                        <dd>
-                                        {% if structure.siretIsValid %}
-                                            {{ structure.siret }}
-                                        {% endif %}
-                                        </dd>
-                                        <dt>Type de structure</dt>
-                                        <dd>{{ structure.kind }}</dd>
-                                    </dl>
-                                </div>
-                                <div class="col-sm-6">
-                                    <h4>Secteurs d'activité</h4>
-                                    <ul class="active_sectors">
-                                        {% for cat in structure.directoryListingCategories %}
-                                            <li>{{ cat.getCategory().getName() }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
+                            #}
                         </div>
                     </div>
 
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
                         {% if structure.hasPrestaType %}
-                        <div class="col-sm-6 pull-left shadow">
-                            <h4>Type(s) de prestation(s)</h4>
+                        <div class="col-sm-6">
+                            <h4>Secteurs d'activité</h4>
                             <ul class="active_sectors">
-                                {% if structure.isPrestaTypePrest %}
-                                <li>Prestation de service</li>
-                                {% endif %}
-                                {% if structure.isPrestaTypeDisp %}
-                                <li>Mise à disposition du personnel / Interim</li>
-                                {% endif %}
-                                {% if structure.isPrestaTypeBuild %}
-                                <li>Fabrication et commercialisation de biens</li>
-                                {% endif %}
-                            </dl>
+                                {% for cat in structure.directoryListingCategories %}
+                                    <li>{{ cat.getCategory().getName() }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Élément différenciants (materiels, services particuliers...)</h4>
+                            Non renseigné
                         </div>
                         {% endif %}
                         {#
@@ -129,21 +118,35 @@
                     </div>
 
                     <!-- Third Row, Description -->
-                    {% if structure.description %}
                         <div class="row">
-                            <div class="col-sm-12 shadow">
+                            <div class="col-sm-12">
                                 <h3>Description de l'activité commerciale</h3>
                                 <div class="user_description">
-                                    {{ structure.description | nl2br }}
+                                    {% if structure.description %}
+                                        {{ structure.description | nl2br }}
+                                    {% else %}
+                                        Non renseigné
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
+
+                    <!-- Fourth Row -->
+                    {% if listings %}
+                    <div class="row ">
+                        <div class="col-sm-12">
+                            <h3>Les prestations proposées</h3>
+                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
+                            'listings': listings
+                            } only %}
+                        </div>
+                    </div>
                     {% endif %}
 
-                    <!-- Fourth Row, References -->
+                    <!-- Fifth Row -->
                     {% if structure.clientImages is not empty %}
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <h3>Références clients</h3>
                             {% for image in structure.clientImages %}
                                 <!-- slide -->
@@ -151,17 +154,9 @@
                                       class="client-ref"/>
                             {% endfor %}
                         </div>
-                    </div>
-                    {% endif %}
-
-                    {% if listings %}
-                    <!-- Fifth Row, Listings -->
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <h3>Détail des prestations / Liste des prestations</h3>
-                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_carousel.html.twig'  with {
-                            'listings': listings
-                            } only %}
+                        <div class="col-sm-6">
+                            <h3>Labels & certifications</h3>
+                            Non renseigné
                         </div>
                     </div>
                     {% endif %}
