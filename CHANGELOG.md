@@ -9,6 +9,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 ### [3.8] - (2021-04-XX)
 - Update fiche structure SIAE
+- Couleur du texte révisée
 
 ### [3.7] - (2021-04-22)
 - Nouvelle page de résultats SIAE
