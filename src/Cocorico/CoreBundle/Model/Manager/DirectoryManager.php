@@ -21,6 +21,7 @@ use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Cocorico\CoreBundle\Utils\ZPaginator;
 
 class DirectoryManager extends BaseManager
 {
@@ -103,13 +104,12 @@ class DirectoryManager extends BaseManager
 
         dump($query);
         // Paging
-        $perpage = $this->maxPerPage;
-        $offset = ($page * $perpage) - $perpage;
-        $query->setFirstResult($offset);
-        $query->setMaxResults($perpage);
+        // $perpage = $this->maxPerPage;
+        // $offset = ($page * $perpage) - $perpage;
+        // $query->setFirstResult($offset);
+        // $query->setMaxResults($perpage);
 
-        $fetchJoinCollection = true;
-        $paginator = new Paginator($query, $fetchJoinCollection);
+        $paginator = new ZPaginator($query);
         return $paginator;
     }
 

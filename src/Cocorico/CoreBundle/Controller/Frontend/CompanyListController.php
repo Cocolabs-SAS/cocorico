@@ -96,12 +96,12 @@ class CompanyListController extends Controller
             $dlform->get('serialSectors')->setData(implode('|', $params['sector']));
 
             // Markers
-            $structures = $entries->getIterator();
+            $structures = $entries->getItems($page, 10);
             $markers = $this->getMarkers($request, $structures);
 
         } else {
             $entries = $directoryManager->listSome($page);
-            $structures = $entries->getIterator();
+            $structures = $entries->getItems($page, 10);
             $markers = $this->getMarkers($request, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
