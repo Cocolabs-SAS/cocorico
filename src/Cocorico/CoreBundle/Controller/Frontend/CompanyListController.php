@@ -81,7 +81,7 @@ class CompanyListController extends Controller
                 'postalCode' => $sort->getPostalCode(),
                 'region' => $sort->getRegion(),
             ];
-            // dump($params);
+            dump($params);
             $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
             // $params = $this->fixParams($sort, $params);

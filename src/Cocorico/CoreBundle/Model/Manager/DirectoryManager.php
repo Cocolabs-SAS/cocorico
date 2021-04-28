@@ -16,6 +16,8 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -54,6 +56,11 @@ class DirectoryManager extends BaseManager
 
     public function findByForm($page, $params=[])
     {
+        if ($params['withRange'])
+        {
+            return $this->findWithPerimeter($page, $params);
+        }
+
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
@@ -65,14 +72,45 @@ class DirectoryManager extends BaseManager
 
     public function findWithPerimeter($page, $params=[])
     {
-        $conn = $this->em->getConnection();
+        // $conn = $this->em->getCononection();
+
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata('Cocorico\CoreBundle\Entity\Directory', 'd');
+        $rsm->addJoinedEntityFromClassMetadata(
+                'Cocorico\CoreBundle\Entity\DirectoryListingCategory'
+                , 'dlcat', 'd', 'id', array('id'=>'dlcat.id'));
+        $rsm->addJoinedEntityFromClassMetadata(
+                'Cocorico\CoreBundle\Entity\ListingCategory'
+                , 'ca', 'dlcat', 'listing_category_id', array('id'=>'ca.id'));
+
+        $selectClause = $rsm->generateSelectClause(array(
+            'd' => 'd',
+            'dlcat' => 'dlcat',
+            'ca' => 'ca',
+        ));
+
         # -> get those of the same department if department
         # -> get those of the region if region
         # -> get those of the country if country
         # -> get those in correct distance
-        $sql = '';
-        $res = $conn->prepare($sql);
-        $res->execute();
+
+        $sql = "SELECT" . $selectClause ." FROM
+            directory d
+            JOIN directory_listing_category dlcat ON d.id = dlcat.directory_id
+            JOIN listing_category ca on dlcat.listing_category_id = ca.id";
+
+        $query = $this->em->createNativeQuery($sql, $rsm);
+
+        dump($query);
+        // Paging
+        $perpage = $this->maxPerPage;
+        $offset = ($page * $perpage) - $perpage;
+        $query->setFirstResult($offset);
+        $query->setMaxResults($perpage);
+
+        $fetchJoinCollection = true;
+        $paginator = new Paginator($query, $fetchJoinCollection);
+        return $paginator;
     }
 
     public function findByUserId($c4Id)

@@ -142,12 +142,12 @@ class DirectorySearchRequest
         $isCity = $this->city != null && $this->postalCode != null;
         $isDep = $this->department != null;
         $isReg = $this->area != null;
-        //dump([
-        //    'zip'=>$isZip,
-        //    'city'=>$isCity,
-        //    'dep'=>$isDep,
-        //    'reg'=>$isReg,
-        //]);
+        dump([
+            'zip'=>$isZip,
+            'city'=>$isCity,
+            'dep'=>$isDep,
+            'reg'=>$isReg,
+        ]);
 
         switch(true) {
             case $isZip:
