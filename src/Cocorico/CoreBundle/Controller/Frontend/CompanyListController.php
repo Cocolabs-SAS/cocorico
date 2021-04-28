@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cocorico\CoreBundle\Utils\Tracker;
-use Cocorico\CoreBundle\Utils\Deps;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -32,14 +31,12 @@ use Cocorico\CoreBundle\Entity\ListingImage;
 class CompanyListController extends Controller
 {
     private $tracker;
-    private $deps;
 
     private function fix()
     {
         // FIXME: Find a symfonian way to do this
         if ($this->tracker === null) {
             $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
-            $this->deps = new Deps();
         }
     }
 
@@ -73,11 +70,7 @@ class CompanyListController extends Controller
         $markers = array('directoryIds' => array(), 'markers' => array());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sort = $form->getData();
-            // Hack, see model ListingSearchRequest for more
-            $sectors = $request->query->get('sector');
-            $sectors = is_array($sectors) ? $sectors : array();
-            $sort->setSectors($sectors);
+            $sort = $form->getData()->prepareData();
 
             $params = [
                 'type' => $sort->getStructureType(),
@@ -88,6 +81,7 @@ class CompanyListController extends Controller
                 'postalCode' => $sort->getPostalCode(),
                 'region' => $sort->getRegion(),
             ];
+            dump($params);
             $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
             // $params = $this->fixParams($sort, $params);
@@ -95,13 +89,11 @@ class CompanyListController extends Controller
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
+            foreach (['structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
                 $dlform->get($key)->setData($sort->getKeyValue($key));
             }
             // Hack
-            $dlform->get('serialSectors')->setData(implode('|', $sectors));
-            $dlform->get('postalCode')->setData($params['postalCode']);
-            $dlform->get('region')->setData($params['region']);
+            $dlform->get('serialSectors')->setData(implode('|', $params['sector']));
 
             // Markers
             $structures = $entries->getIterator();
@@ -132,65 +124,6 @@ class CompanyListController extends Controller
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
             // 'csv_params' => $request->query->all(),
         ]);
-    }
-
-    private function fixParams($data, $params)
-    {
-        $isZip = $data['zip'] != null;
-        $isCity = $data['city'] != null && $data['postalCode'] != null;
-        $isDep = $data['department'] != null;
-        $isReg = $data['area'] != null;
-
-        switch(true) {
-            case $isZip:
-                $params['postalCode'] = $data['zip'];
-                break;
-            case $isCity:
-                $needle = intval($data['postalCode']);
-                switch (true) {
-                    // Lyon
-                    case $needle >= 69001 and $needle <= 69009:
-                        $params['postalCode'] = '6900';
-                        break;
-                    // Marseille
-                    case $needle >= 13001 and $needle <= 13016:
-                        $params['postalCode'] = '130';
-                        break;
-                    // Marseille
-                    case $needle >= 75000 and $needle <= 75680:
-                        $params['postalCode'] = '75';
-                        break;
-                    default:
-                        $params['postalCode'] = substr($data['postalCode'], 0, 4);
-                }
-                break;
-            case $isDep:
-                $depNum = $this->deps->byName($data['department']);
-                if ($depNum) {
-                    $params['postalCode'] = $depNum;
-                } else {
-                    $params['postalCode'] = substr($data['postalCode'], 0, 2);
-                }
-                break;
-            case $isReg:
-                $region_idx = array_search($data['area'], Directory::$regions); 
-                $region_idx = $region_idx ? $region_idx : 0;
-                $params['region'] = $region_idx;
-                break;
-            default:
-                break;
-        }
-        //dump($data);
-        //dump($params);
-
-        // Special Rules
-        if ($data['zip'] == '84800') {
-            // Google maps mistakes Fontaine-de-vaucluse for Vaucluse (84)
-            // or Vaucluse (Doubs)
-            $params['postalCode'] = '84';
-        }
-
-        return $params;
     }
 
     /**

@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Model;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Cocorico\CoreBundle\Utils\Deps;
+use Cocorico\CoreBundle\Entity\Directory;
 
 /**
  * Class ListingSearchRequest
@@ -40,6 +42,7 @@ class DirectorySearchRequest
     protected $postalCode;
     protected $zip;
     protected $addressType;
+    private $deps;
 
     /**
      * @param RequestStack $requestStack
@@ -47,6 +50,8 @@ class DirectorySearchRequest
      */
     public function __construct(RequestStack $requestStack, $maxPerPage)
     {
+        //Init
+        $this->deps = new Deps();
         //Params
         $this->requestStack = $requestStack;
         $this->request = $this->requestStack->getCurrentRequest();
@@ -60,7 +65,7 @@ class DirectorySearchRequest
         $this->page = 1;
 
 
-        //Sectors (old categories)
+        // Shared CSV action fields
         $this->sectors = array();
         $sectors = $this->request->query->get("sector");
         $serialSectors = $this->request->query->get("serialSectors");
@@ -109,6 +114,88 @@ class DirectorySearchRequest
             $this->type = $type;
         }
 
+        // List action fields
+        $area = $this->request->query->get("area");
+        if ($area) {
+            $this->area = $area;
+        }
+
+        $city = $this->request->query->get("city");
+        if ($city) {
+            $this->city = $city;
+        }
+
+        $department = $this->request->query->get("department");
+        if ($department) {
+            $this->department = $department;
+        }
+
+        $this->prepareData();
+
+    }
+
+    public function prepareData() {
+        /*
+         * Some data fixes needed to facilitate querying
+         */
+        $isZip = $this->zip != null;
+        $isCity = $this->city != null && $this->postalCode != null;
+        $isDep = $this->department != null;
+        $isReg = $this->area != null;
+        dump([
+            'zip'=>$isZip,
+            'city'=>$isCity,
+            'dep'=>$isDep,
+            'reg'=>$isReg,
+        ]);
+
+        switch(true) {
+            case $isZip:
+                $this->postalCode = $this->zip;
+                break;
+            case $isCity:
+                $needle = intval($this->postalCode);
+                switch (true) {
+                    // Lyon
+                    case $needle >= 69001 and $needle <= 69009:
+                        $this->postalCode = '6900';
+                        break;
+                    // Marseille
+                    case $needle >= 13001 and $needle <= 13016:
+                        $this->postalCode = '130';
+                        break;
+                    // Marseille
+                    case $needle >= 75000 and $needle <= 75680:
+                        $this->postalCode = '75';
+                        break;
+                    default:
+                        $this->postalCode = substr($this->postalCode, 0, 4);
+                }
+                break;
+            case $isDep:
+                $depNum = $this->deps->byName($this->department);
+                if ($depNum) {
+                    $this->postalCode = $depNum;
+                } else {
+                    $this->postalCode = substr($this->postalCode, 0, 2);
+                }
+                break;
+            case $isReg:
+                $region_idx = array_search($this->area, Directory::$regions); 
+                $region_idx = $region_idx ? $region_idx : 0;
+                $this->setRegion($region_idx);
+                break;
+            default:
+                break;
+        }
+
+        // Special Rules
+        if ($this->zip == '84800') {
+            // Google maps mistakes Fontaine-de-vaucluse for Vaucluse (84)
+            // or Vaucluse (Doubs)
+            $this->postalCode = '84';
+        }
+        return $this;
     }
 
     public function getKeyValue($prop) {
