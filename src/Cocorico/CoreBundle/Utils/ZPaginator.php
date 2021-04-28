@@ -16,13 +16,18 @@ class ZPaginator implements AdapterInterface
      */
     protected $query;
     protected $count;
+    protected $limit;
+    protected $offset;
+    protected $results;
 
     /**
      * @param Doctrine\ORM\NativeQuery $query 
      */
-    public function __construct($query)
+    public function __construct($query, $page=0, $limit=10)
     {
         $this->query = $query;
+        $this->limit = $limit;
+        $this->offset = $page * $limit;
     }
 
     /**
@@ -34,13 +39,7 @@ class ZPaginator implements AdapterInterface
     {
         if(!$this->count)
         {
-            //change to a count query by changing the bit before the FROM
-            $sql = explode(' FROM ', $this->query->getSql());
-            $sql[0] = 'SELECT COUNT(*)';
-            $sql = implode(' FROM ', $sql);
-
-            $db = $this->query->getEntityManager()->getConnection();
-            $this->count = (int) $db->fetchColumn($sql, $this->query->getParameters());
+            $this->count = count($this->getAllItems());
         }
 
         return $this->count;
@@ -56,7 +55,7 @@ class ZPaginator implements AdapterInterface
     public function getItems($offset, $itemCountPerPage)
     {
         $cloneQuery = clone $this->query;
-        $cloneQuery->setParameters($this->query->getParameters(), $this->query->getParameterTypes());
+        $cloneQuery->setParameters($this->query->getParameters());
 
         foreach($this->query->getHints() as $name => $value)
         {
@@ -70,4 +69,24 @@ class ZPaginator implements AdapterInterface
 
         return $cloneQuery->getResult();
     }
+
+    /**
+     * Returns an collection of items for a page.
+     *
+     * @return array
+     */
+    public function getPageItems()
+    {
+        $results = $this->getAllItems();
+        return array_slice($results, $this->offset, $this->limit);
+    }
+
+    private function getAllItems()
+    {
+        if(!$this->results) {
+            $this->results = $this->query->getResult();
+        }
+        return $this->results;
+    }
+
 }

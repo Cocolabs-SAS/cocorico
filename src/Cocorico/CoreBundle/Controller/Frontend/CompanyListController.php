@@ -70,7 +70,7 @@ class CompanyListController extends Controller
         $markers = array('directoryIds' => array(), 'markers' => array());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $sort = $form->getData()->prepareData();
+            $sort = $form->getData();
 
             $params = [
                 'type' => $sort->getStructureType(),
@@ -81,11 +81,10 @@ class CompanyListController extends Controller
                 'postalCode' => $sort->getPostalCode(),
                 'region' => $sort->getRegion(),
             ];
-            dump($params);
             $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
             // $params = $this->fixParams($sort, $params);
-            $entries = $directoryManager->findByForm($page, $params);
+            $entries = $directoryManager->findByForm($sort, $page, $params);
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
@@ -96,12 +95,12 @@ class CompanyListController extends Controller
             $dlform->get('serialSectors')->setData(implode('|', $params['sector']));
 
             // Markers
-            $structures = $entries->getItems($page, 10);
+            $structures = $entries->getIterator();
             $markers = $this->getMarkers($request, $structures);
 
         } else {
             $entries = $directoryManager->listSome($page);
-            $structures = $entries->getItems($page, 10);
+            $structures = $entries->getIterator();
             $markers = $this->getMarkers($request, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }

@@ -85,6 +85,11 @@ class DirectorySearchRequest
             $this->prestaType = $prestaType;
         }
 
+        $structureType = $this->request->query->get("structureType");
+        if ($structureType) {
+            $this->structureType = $structureType;
+        }
+
         $withAntenna = $this->request->query->get("withAntenna");
         if ($withAntenna) {
             $this->withAntenna = $withAntenna == "1";
@@ -142,12 +147,12 @@ class DirectorySearchRequest
         $isCity = $this->city != null && $this->postalCode != null;
         $isDep = $this->department != null;
         $isReg = $this->area != null;
-        dump([
-            'zip'=>$isZip,
-            'city'=>$isCity,
-            'dep'=>$isDep,
-            'reg'=>$isReg,
-        ]);
+        //dump([
+        //    'zip'=>$isZip,
+        //    'city'=>$isCity,
+        //    'dep'=>$isDep,
+        //    'reg'=>$isReg,
+        //]);
 
         switch(true) {
             case $isZip:

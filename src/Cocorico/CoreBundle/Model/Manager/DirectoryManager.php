@@ -8,6 +8,7 @@ use Cocorico\CoreBundle\Repository\DirectoryRepository;
 use Cocorico\CoreBundle\Entity\DirectoryListingCategory;
 use Cocorico\CoreBundle\Entity\DirectoryImage;
 use Cocorico\CoreBundle\Entity\DirectoryClientImage;
+use Cocorico\CoreBundle\Model\DirectorySearchRequest;
 use DateInterval;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -55,17 +56,24 @@ class DirectoryManager extends BaseManager
         return new Paginator($query);
     }
 
-    public function findByForm($page, $params=[])
+    public function findByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
     {
-        if ($params['withRange'])
-        {
-            return $this->findWithPerimeter($page, $params);
-        }
+        // FIXME: Remove params, use directory search request
+        // if ($params['withRange'])
+        // {
+        //     return $this->findWithPerimeter($page, $params);
+        // }
 
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
-        $qB = $this->applyParams($qB, $params);
+
+        if ($directorySearchRequest->getWithRange()) {
+            $qB = $this->applyFilters($qB, $directorySearchRequest);
+            $qB = $this->applyGeo($qB, $directorySearchRequest);
+        } else {
+            $qB = $this->applyParams($qB, $params);
+        }
 
         $query = $qB->getQuery();
         return new Paginator($query);
@@ -73,16 +81,17 @@ class DirectoryManager extends BaseManager
 
     public function findWithPerimeter($page, $params=[])
     {
+        // FIXME: Make this work somehow ?
         // $conn = $this->em->getCononection();
 
         $rsm = new ResultSetMappingBuilder($this->em);
         $rsm->addRootEntityFromClassMetadata('Cocorico\CoreBundle\Entity\Directory', 'd');
         $rsm->addJoinedEntityFromClassMetadata(
                 'Cocorico\CoreBundle\Entity\DirectoryListingCategory'
-                , 'dlcat', 'd', 'id', array('id'=>'dlcat.id'));
-        $rsm->addJoinedEntityFromClassMetadata(
-                'Cocorico\CoreBundle\Entity\ListingCategory'
-                , 'ca', 'dlcat', 'listing_category_id', array('id'=>'ca.id'));
+                , 'dlcat', 'd', 'directoryListingCategories', array('id'=>'dlcat_id'));
+        # $rsm->addJoinedEntityFromClassMetadata(
+        #         'Cocorico\CoreBundle\Entity\ListingCategory'
+        #         , 'ca', 'd', 'directoryListingCategories', array('id'=>'ca_id'));
 
         $selectClause = $rsm->generateSelectClause(array(
             'd' => 'd',
@@ -95,21 +104,20 @@ class DirectoryManager extends BaseManager
         # -> get those of the country if country
         # -> get those in correct distance
 
-        $sql = "SELECT" . $selectClause ." FROM
-            directory d
-            JOIN directory_listing_category dlcat ON d.id = dlcat.directory_id
-            JOIN listing_category ca on dlcat.listing_category_id = ca.id";
+        $sql = "SELECT " . $selectClause ." FROM directory d
+            LEFT JOIN directory_listing_category dlcat ON d.id = dlcat.directory_id
+            LEFT JOIN listing_category ca on dlcat.listing_category_id = ca.id
+            ORDER BY name ASC";
 
         $query = $this->em->createNativeQuery($sql, $rsm);
 
-        dump($query);
         // Paging
         // $perpage = $this->maxPerPage;
         // $offset = ($page * $perpage) - $perpage;
         // $query->setFirstResult($offset);
         // $query->setMaxResults($perpage);
 
-        $paginator = new ZPaginator($query);
+        $paginator = new ZPaginator($query, $page, $this->maxPerPage );
         return $paginator;
     }
 
@@ -158,6 +166,60 @@ class DirectoryManager extends BaseManager
         $qB = $this->applyParams($qB, $params);
         $query = $qB->getQuery();
         return $query->getResult();
+    }
+
+    private function applyFilters($qB, $req) {
+       // Filter on type
+        if ($req->getStructureType() != null) {
+            $kindName = Directory::$kindValues[$req->getStructureType()];
+            $qB->andWhere('d.kind = :type')
+               ->setParameter('type', $kindName);
+        }
+
+        // Filter on prestation type
+        if ($req->getPrestaType() > 1) {
+            $qB->andWhere('BIT_AND(d.prestaType, :prestatype) > 0')
+               ->setParameter('prestatype', $req->getPrestaType());
+        }
+
+        // Filter on sector
+        if (count($req->getSectors()) > 0) {
+            $qB->andWhere('dlcat.category IN (:sectors)')
+               ->setParameter('sectors', $req->getSectors());
+        }
+
+        // Include antennas
+        if ($req->getWithAntenna() == false) {
+            $qB->andWhere('d.nature = \'siege\'');
+        }
+        return $qB;
+    }
+
+    private function applyGeo($qB, $request) {
+        // $searchLocation = $request->getLocation();
+        //Select distance
+        // dump($searchLocation->getRoute());
+        // dump($searchLocation->getArea());
+        // dump($searchLocation->getCity());
+        // dump($searchLocation->getDepartment());
+        // dump($searchLocation->getCountry());
+
+
+        $qB ->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
+            ->setParameter('lat', $request->getLat())
+            ->setParameter('lng', $request->getLng());
+
+        $qB //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+            ->where('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
+                case
+                    when d.polRange = 1 then 125
+                    when d.polRange = 2 then 450
+                    when d.polRange = 3 then 3000
+                    else d.range 
+                end)');
+
+        return $qB;
+    
     }
 
     private function applyParams($qB, $params)
