@@ -59,11 +59,6 @@ class DirectoryManager extends BaseManager
     public function findByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
     {
         // FIXME: Remove params, use directory search request
-        // if ($params['withRange'])
-        // {
-        //     return $this->findWithPerimeter($page, $params);
-        // }
-
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
@@ -205,9 +200,9 @@ class DirectoryManager extends BaseManager
         // dump($searchLocation->getCountry());
 
 
-        $qB ->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
-            ->setParameter('lat', $request->getLat())
-            ->setParameter('lng', $request->getLng());
+        // $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
+        //    ->setParameter('lat', $request->getLat())
+        //    ->setParameter('lng', $request->getLng());
 
         $qB //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
             ->where('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
@@ -216,7 +211,9 @@ class DirectoryManager extends BaseManager
                     when d.polRange = 2 then 450
                     when d.polRange = 3 then 3000
                     else d.range 
-                end)');
+                end)')
+             ->setParameter('lat', $request->getLat())
+             ->setParameter('lng', $request->getLng());
 
         return $qB;
     
