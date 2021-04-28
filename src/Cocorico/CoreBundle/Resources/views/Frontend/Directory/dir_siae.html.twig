@@ -100,6 +100,21 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-sm-4">
+                                <div class="label-container">
+                                    <div class="field-holder">
+                                    {{form_widget(form.withRange, {
+                                        'id': 'withRange',
+                                        'attr': {
+                                            'class': 'form-control',
+                                        }}
+                                    )}}
+                                    </div>
+                                    <div class="title">
+                                        {{ form_label(form.withRange, 'Appliquer les périmètres d\'activité')}}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -242,6 +257,7 @@
                 <div id="csv_form" class="row dir_form" style="display:flex;justify-content:center" >
                     {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
                     {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
+                    {{ form_widget(dlform.withRange, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
                     {% do dlform.address.setRendered() %}

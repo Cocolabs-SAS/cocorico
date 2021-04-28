@@ -66,7 +66,8 @@ class CompanyListController extends Controller
         $dlform = $this->csvCompaniesForm($directorySearchRequest);
 
         $directoryManager = $this->get('cocorico.directory.manager');
-        $withAntenna = true;
+        $withAntenna = false;
+        $withRange = true;
 
         $markers = array('directoryIds' => array(), 'markers' => array());
 
@@ -82,16 +83,18 @@ class CompanyListController extends Controller
                 'sector' => $sort['sector'],
                 'prestaType' => $sort['prestaType'],
                 'withAntenna' => $sort['withAntenna'],
+                'withRange' => $sort['withRange'],
                 'postalCode' => null,
                 'region' => null,
             ];
             $withAntenna = $sort['withAntenna'];
+            $withRange = $sort['withRange'];
             $params = $this->fixParams($sort, $params);
             $entries = $directoryManager->findByForm($page, $params);
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
+            foreach (['structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
                 $dlform->get($key)->setData($sort[$key]);
             }
             // Hack
@@ -122,6 +125,7 @@ class CompanyListController extends Controller
             ),
             'columns' => $directoryManager->listColumns(),
             'withAntenna' => $withAntenna,
+            'withRange' => $withRange,
             'markers' => $markers['markers'],
             'request' => $directorySearchRequest,
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
@@ -218,6 +222,7 @@ class CompanyListController extends Controller
                 'sector' => $sort->getSectors(),
                 'prestaType' => $sort->getPrestaType(),
                 'withAntenna' => $sort->getWithAntenna(),
+                'withRange' => $sort->getWithRange(),
                 'postalCode' => $sort->getPostalCode(),
                 'region' => $sort->getRegion(),
                 'format' => $sort->getFormat(),

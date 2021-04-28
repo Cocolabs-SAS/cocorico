@@ -28,6 +28,7 @@ class DirectorySearchRequest
     protected $structureType;
     protected $prestaType;
     protected $withAntenna;
+    protected $withRange;
     protected $address;
     protected $lat;
     protected $lng;
@@ -83,6 +84,12 @@ class DirectorySearchRequest
         if ($withAntenna) {
             $this->withAntenna = $withAntenna == "1";
         }
+
+        $withRange = $this->request->query->get("withRange");
+        if ($withRange) {
+            $this->withRange = $withRange == "1";
+        }
+
 
         $postalCode = $this->request->query->get("postalCode");
         $zip = $this->request->query->get("zip");
@@ -246,6 +253,16 @@ class DirectorySearchRequest
     public function setWithAntenna($withAntenna)
     {
         return $this->withAntenna = $withAntenna;
+    }
+
+    public function getWithRange()
+    {
+        return $this->withRange;
+    }
+
+    public function setWithRange($withRange)
+    {
+        return $this->withRange = $withRange;
     }
 
     public function getAddress()
