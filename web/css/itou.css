@@ -603,8 +603,7 @@ footer img.min_trav {
 .deflist dt {
 }
 
-aside {
-}
+
 aside.profile {
     background-color:#FEEDEE;
     height:100%;
@@ -619,6 +618,8 @@ aside.profile {
 }
 
 .profile_capsule {
+    top:10px;
+    position:sticky;
     margin:2rem 1rem;
     background-color:#fff;
     padding:0 1rem 2rem;
