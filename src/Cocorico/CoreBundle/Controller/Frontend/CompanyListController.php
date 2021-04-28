@@ -57,11 +57,12 @@ class CompanyListController extends Controller
     {
         $this->fix();
         $tracker_payload = ['dir' => 'siae'];
-        $form = $this->sortCompaniesForm();
-        $form->handleRequest($request);
 
         /** @var ListingSearchRequest $listingSearchRequest */
         $directorySearchRequest = $this->get('cocorico.directory_search_request');
+
+        $form = $this->sortCompaniesForm($directorySearchRequest);
+        $form->handleRequest($request);
 
         $dlform = $this->csvCompaniesForm($directorySearchRequest);
 
@@ -76,26 +77,26 @@ class CompanyListController extends Controller
             // Hack, see model ListingSearchRequest for more
             $sectors = $request->query->get('sector');
             $sectors = is_array($sectors) ? $sectors : array();
-            $sort['sector'] = $sectors;
+            $sort->setSectors($sectors);
 
             $params = [
-                'type' => $sort['structureType'],
-                'sector' => $sort['sector'],
-                'prestaType' => $sort['prestaType'],
-                'withAntenna' => $sort['withAntenna'],
-                'withRange' => $sort['withRange'],
-                'postalCode' => null,
-                'region' => null,
+                'type' => $sort->getStructureType(),
+                'sector' => $sort->getSectors(),
+                'prestaType' => $sort->getPrestaType(),
+                'withAntenna' => $sort->getWithAntenna(),
+                'withRange' => $sort->getWithRange(),
+                'postalCode' => $sort->getPostalCode(),
+                'region' => $sort->getRegion(),
             ];
-            $withAntenna = $sort['withAntenna'];
-            $withRange = $sort['withRange'];
-            $params = $this->fixParams($sort, $params);
+            $withAntenna = $sort->getWithAntenna();
+            $withRange = $sort->getWithRange();
+            // $params = $this->fixParams($sort, $params);
             $entries = $directoryManager->findByForm($page, $params);
             $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
 
             // Set download form data
             foreach (['structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
-                $dlform->get($key)->setData($sort[$key]);
+                $dlform->get($key)->setData($sort->getKeyValue($key));
             }
             // Hack
             $dlform->get('serialSectors')->setData(implode('|', $sectors));
@@ -304,12 +305,12 @@ class CompanyListController extends Controller
         return $response;
     }
 
-    private function sortCompaniesForm()
+    private function sortCompaniesForm(DirectorySearchRequest $directorySearchRequest)
     {
         $form = $this->get('form.factory')->createNamed(
             '',
             DirectoryFilterType::class,
-            null,
+            $directorySearchRequest,
             array(
                 'action' => $this->generateUrl(
                     'cocorico_itou_siae_directory',

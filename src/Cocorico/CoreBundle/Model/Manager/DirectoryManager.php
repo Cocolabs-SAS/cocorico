@@ -63,6 +63,18 @@ class DirectoryManager extends BaseManager
         return new Paginator($query);
     }
 
+    public function findWithPerimeter($page, $params=[])
+    {
+        $conn = $this->em->getConnection();
+        # -> get those of the same department if department
+        # -> get those of the region if region
+        # -> get those of the country if country
+        # -> get those in correct distance
+        $sql = '';
+        $res = $conn->prepare($sql);
+        $res->execute();
+    }
+
     public function findByUserId($c4Id)
     {
         $qB = $this->getRepository()->getFindByC4Id($C4Id);

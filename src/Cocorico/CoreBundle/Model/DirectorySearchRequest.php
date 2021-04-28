@@ -111,6 +111,10 @@ class DirectorySearchRequest
 
     }
 
+    public function getKeyValue($prop) {
+        return $this->$prop;
+    }
+
     /**
      * @return mixed
      */
