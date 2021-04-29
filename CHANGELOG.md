@@ -7,10 +7,11 @@ This project adheres to [Semantic Versioning](http://semver.org/)
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
-### [3.8] - (2021-04-28)
+### [3.8] - (2021-04-29)
 - Ajout paramètre périmêtre d'intervention dans le répertoire SIAE
 - Refactoring approfondi du moteur de recherche SIAE
 - Ajout marquer de campagne au tracker JS
+- Correction comportement incongru de Doctrine (`where` et `andwhere`)
 
 ### [3.7] - (2021-04-22)
 - Nouvelle page de résultats SIAE
