@@ -30,9 +30,19 @@ class ItouTrackingRequestListener
             // Skip if only reading cached media assets
             return;
         }
+        if (strpos($uri,'_wdt')) {
+            // Skip symfony debug
+            return;
+        }
 
         $payload = [
         ];
+
+        if (in_array('cmp', $request->query->keys())) {
+            // Add campaign marker
+            $campaign_id = $request->query->get('cmp');
+            $payload['cmp'] = $campaign_id; 
+        }
 
         $client_context = [
             'referer' => $request->headers->get('referer'),
@@ -45,6 +55,6 @@ class ItouTrackingRequestListener
             $payload,
             $session,
             $client_context,
-    );
+        );
     }
 }

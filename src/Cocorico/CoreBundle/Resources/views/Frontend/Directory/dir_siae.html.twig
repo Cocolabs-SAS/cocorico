@@ -100,6 +100,28 @@
                                     </div>
                                 </div>
                             </div>
+                            {#
+                            {% if request.searchType == 'city' %}
+                            <div class="col-sm-4">
+                                <div class="label-container">
+                                    <div class="field-holder">
+                                    {{form_widget(form.withRange, {
+                                        'id': 'withRange',
+                                        'data': false,
+                                        'attr': {
+                                            'class': 'form-control',
+                                        }}
+                                    )}}
+                                    </div>
+                                    <div class="title">
+                                        {{ form_label(form.withRange, 'Ajouter résultats à proximité')}}
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                                {% do form.withRange.setRendered() %}
+                            {% endif %}
+                            #}
                         </div>
                     </div>
                     <div class="col-sm-2">
@@ -125,7 +147,7 @@
                     {%- if not entries is empty -%}
                         {% for entry in entries.iterator %}
                             {% include '@CocoricoCore/Frontend/Directory/_card.html.twig' with {
-                            'structure' : entry
+                            'structure' : entry[0]
                             } %}
                         {% endfor %}
                         {#
@@ -242,6 +264,9 @@
                 <div id="csv_form" class="row dir_form" style="display:flex;justify-content:center" >
                     {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
                     {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
+                    {#
+                    {{ form_widget(dlform.withRange, {'attr': {'style': 'display:none'}}) }}
+                    #}
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
                     {% do dlform.address.setRendered() %}
