@@ -42,6 +42,7 @@ class DirectorySearchRequest
     protected $postalCode;
     protected $zip;
     protected $addressType;
+    protected $searchType;
     private $deps;
 
     /**
@@ -71,6 +72,7 @@ class DirectorySearchRequest
         $serialSectors = $this->request->query->get("serialSectors");
         if (is_array($sectors)) {
             $this->sectors = $sectors;
+            $this->serialSectors = implode('|', $sectors);
         } else if ($serialSectors) {
             $this->sectors = explode('|', $serialSectors);
         }
@@ -156,9 +158,11 @@ class DirectorySearchRequest
 
         switch(true) {
             case $isZip:
+                $this->searchType = 'zip';
                 $this->postalCode = $this->zip;
                 break;
             case $isCity:
+                $this->searchType = 'city';
                 $needle = intval($this->postalCode);
                 switch (true) {
                     // Lyon
@@ -178,6 +182,7 @@ class DirectorySearchRequest
                 }
                 break;
             case $isDep:
+                $this->searchType = 'department';
                 $depNum = $this->deps->byName($this->department);
                 if ($depNum) {
                     $this->postalCode = $depNum;
@@ -186,11 +191,13 @@ class DirectorySearchRequest
                 }
                 break;
             case $isReg:
+                $this->searchType = 'region';
                 $region_idx = array_search($this->area, Directory::$regions); 
                 $region_idx = $region_idx ? $region_idx : 0;
                 $this->setRegion($region_idx);
                 break;
             default:
+                $this->searchType = 'other';
                 break;
         }
 
@@ -228,6 +235,9 @@ class DirectorySearchRequest
      */
     public function getSerialSectors()
     {
+        if (! $this->serialSectors) {
+            return implode('|', $this->sectors);
+        }
         return $this->serialSectors;
     }
 
@@ -329,6 +339,16 @@ class DirectorySearchRequest
     public function setStructureType($structureType)
     {
         return $this->structureType = $structureType;
+    }
+
+    public function getSearchType()
+    {
+        return $this->searchType;
+    }
+
+    public function setSearchType($searchType)
+    {
+        return $this->searchType = $searchType;
     }
 
     public function getPrestaType()
@@ -471,7 +491,31 @@ class DirectorySearchRequest
     {
         return $this->addressType = $addressType;
     }
-
+    
+    public function getLegacyParams()
+    {
+        // Keys match previous params object
+        // changing them might impact tracking
+        // and older queries
+        return [
+            'type' => $this->structureType,
+            'sector' => $this->sectors,
+            'prestaType' => $this->prestaType,
+            'withAntenna' => $this->withAntenna,
+            'withRange' => $this->withRange,
+            'postalCode' => $this->postalCode,
+            'region' => $this->region,
+            'searchType' => $this->searchType,
+            'city' => $this->city,
+            'department' => $this->department,
+            'area' => $this->area,
+            'lat/lng' => "$this->lat / $this->lng",
+            'format' => $this->format,
+            // WHYYYYYYY ????
+            //'serialSectors' => $this->serialSectors,
+            'serialSectors' => implode('|', $this->sectors),
+        ];
+    }
     /**
      * Remove some Object properties while serialisation
      *

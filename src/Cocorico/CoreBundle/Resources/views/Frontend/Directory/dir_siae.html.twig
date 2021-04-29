@@ -100,22 +100,26 @@
                                     </div>
                                 </div>
                             </div>
+                            {% if request.searchType == 'city' %}
                             <div class="col-sm-4">
                                 <div class="label-container">
                                     <div class="field-holder">
                                     {{form_widget(form.withRange, {
                                         'id': 'withRange',
-                                        'data': true,
+                                        'data': false,
                                         'attr': {
                                             'class': 'form-control',
                                         }}
                                     )}}
                                     </div>
                                     <div class="title">
-                                        {{ form_label(form.withRange, 'Appliquer les périmètres d\'activité')}}
+                                        {{ form_label(form.withRange, 'Ajouter résultats à proximité')}}
                                     </div>
                                 </div>
                             </div>
+                            {% else %}
+                                {% do form.withRange.setRendered() %}
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-sm-2">

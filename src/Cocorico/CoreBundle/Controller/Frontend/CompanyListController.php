@@ -71,28 +71,21 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
+            $sort->prepareData();
 
-            $params = [
-                'type' => $sort->getStructureType(),
-                'sector' => $sort->getSectors(),
-                'prestaType' => $sort->getPrestaType(),
-                'withAntenna' => $sort->getWithAntenna(),
-                'withRange' => $sort->getWithRange(),
-                'postalCode' => $sort->getPostalCode(),
-                'region' => $sort->getRegion(),
-            ];
             $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
-            // $params = $this->fixParams($sort, $params);
-            $entries = $directoryManager->findByForm($sort, $page, $params);
-            $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
+            $entries = $directoryManager->findByForm($sort, $page, $sort->getLegacyParams());
+            // dump($sort->getLegacyParams());
+
+            $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
+            foreach (['serialSectors', 'structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
                 $dlform->get($key)->setData($sort->getKeyValue($key));
             }
-            // Hack
-            $dlform->get('serialSectors')->setData(implode('|', $params['sector']));
+            // Hack, weird PHP behaviour
+            $dlform->get('serialSectors')->setData(implode('|', $sort->getSectors()));
 
             // Markers
             $structures = $entries->getIterator();
@@ -150,20 +143,10 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            $params = [
-                'type' => $sort->getStructureType(),
-                'sector' => $sort->getSectors(),
-                'prestaType' => $sort->getPrestaType(),
-                'withAntenna' => $sort->getWithAntenna(),
-                'withRange' => $sort->getWithRange(),
-                'postalCode' => $sort->getPostalCode(),
-                'region' => $sort->getRegion(),
-                'format' => $sort->getFormat(),
-            ];
-            // $params = $this->fixParams($sort, $params);
-            $this->tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
-
-            $entries = $directoryManager->listByForm($params);
+            $sort->prepareData();
+            $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
+            $entries = $directoryManager->listByForm($sort->getLegacyParams());
+            //dump($sort->getLegacyParams());
         } else {
             $entries = $directoryManager->listbyForm();
         }

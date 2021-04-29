@@ -164,7 +164,7 @@ class DirectoryManager extends BaseManager
     }
 
     private function applyFilters($qB, $req) {
-       // Filter on type
+        // Filter on type
         if ($req->getStructureType() != null) {
             $kindName = Directory::$kindValues[$req->getStructureType()];
             $qB->andWhere('d.kind = :type')
@@ -182,6 +182,8 @@ class DirectoryManager extends BaseManager
             $qB->andWhere('dlcat.category IN (:sectors)')
                ->setParameter('sectors', $req->getSectors());
         }
+
+        
 
         // Include antennas
         if ($req->getWithAntenna() == false) {
@@ -205,7 +207,7 @@ class DirectoryManager extends BaseManager
         //    ->setParameter('lng', $request->getLng());
 
         $qB //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
-            ->where('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
+            ->andwhere('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
                 case
                     when d.polRange = 1 then 125
                     when d.polRange = 2 then 450

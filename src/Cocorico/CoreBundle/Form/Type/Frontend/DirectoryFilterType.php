@@ -130,7 +130,7 @@ class DirectoryFilterType extends AbstractType
                 array(
                     'label' => 'Appliquer les périmètres d\'activité',
                     'required'=> false,
-                    'data' => true,
+                    'data' => false,
                 )
             );
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
