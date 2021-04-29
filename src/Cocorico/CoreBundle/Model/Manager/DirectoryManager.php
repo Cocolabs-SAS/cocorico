@@ -68,10 +68,13 @@ class DirectoryManager extends BaseManager
             $qB = $this->applyGeo($qB, $directorySearchRequest);
         } else {
             $qB = $this->applyParams($qB, $params);
+            #FIXME : Bad doctrine ORM hack
+            $qB->addSelect('1 AS distance');
+            $qB->orderBy('d.name', 'ASC');
         }
 
         $query = $qB->getQuery();
-        $query->setHydrationMode(Query::HYDRATE_ARRAY);
+        $query->setHydrationMode(Query::HYDRATE_OBJECT);
         return new Paginator($query);
     }
 
@@ -203,9 +206,9 @@ class DirectoryManager extends BaseManager
         // dump($searchLocation->getCountry());
 
 
-        // $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
-        //    ->setParameter('lat', $request->getLat())
-        //    ->setParameter('lng', $request->getLng());
+        $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
+           ->setParameter('lat', $request->getLat())
+           ->setParameter('lng', $request->getLng());
 
         $qB //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
             ->andwhere('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
@@ -214,11 +217,9 @@ class DirectoryManager extends BaseManager
                     when d.polRange = 2 then 450
                     when d.polRange = 3 then 3000
                     else d.range 
-                end)')
-             ->setParameter('lat', $request->getLat())
-             ->setParameter('lng', $request->getLng());
+                end)');
 
-        //$qB->orderBy("distance", "ASC");
+        $qB->orderBy("distance", "ASC");
         return $qB;
     
     }

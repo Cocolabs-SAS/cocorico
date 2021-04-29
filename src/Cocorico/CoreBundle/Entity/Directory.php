@@ -89,10 +89,10 @@ class Directory
     # const PRESTA_DISP = 'Mise à disposition';
     # const PRESTA_PREST = 'Prestation et/ou vente de biens';
 
-    const PRESTA_CHOICE = 1 << 0;
-    const PRESTA_DISP = 1 << 1;
-    const PRESTA_PREST = 1 << 2;
-    const PRESTA_BUILD = 1 << 3;
+    const PRESTA_CHOICE = 1 << 0; # 1
+    const PRESTA_DISP = 1 << 1; # 2
+    const PRESTA_PREST = 1 << 2; # 4
+    const PRESTA_BUILD = 1 << 3; #8
 
     public static $prestaTypeValues = array(
         self::PRESTA_CHOICE => 'Choisir ...',
@@ -403,7 +403,6 @@ class Directory
      * @var integer|null
      */
     private $polRange;
-
 
     /**
      *

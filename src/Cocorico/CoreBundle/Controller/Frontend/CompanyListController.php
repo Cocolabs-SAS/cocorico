@@ -97,11 +97,13 @@ class CompanyListController extends Controller
             $markers = $this->getMarkers($request, $entries, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
+        $dir_test = new Directory();
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
             'dlform' => $dlform->createView(),
             'entries' => $entries,
+            'dir_func' => $dir_test,
             'pagination' => array(
                 'page'  => $page,
                 'pages_count' => ceil($entries->count() / $directoryManager->maxPerPage),
@@ -283,13 +285,12 @@ class CompanyListController extends Controller
      *          array['markers'] markers data
      *          array['listingsIds'] listings ids
      */
-    protected function getMarkers(Request $request, $results, $resultsIterator)
+    protected function getMarkers(Request $request, $resultsIterator)
     {
         //We get directory id of current page to change their marker aspect on the map
         $resultsInPage = array();
         foreach ($resultsIterator as $i => $result) {
-            dump($result);
-            $resultsInPage[] = $result['id'];
+            $resultsInPage[] = $result[0]->getId();
         }
 
         //We need to display all directories (without pagination) of the current search on the map
@@ -304,34 +305,34 @@ class CompanyListController extends Controller
         $markers = $structuresIds = array();
 
         foreach ($resultsIterator as $i => $result) {
-            $structure = $result;
-            if ($structure['latitude'] == null) { continue; }
-            $structuresIds[] = $structure['id'];
+            $structure = $result[0];
+            if ($structure->getLatitude() == null) { continue; }
+            $structuresIds[] = $structure->getId();
 
-            $imageName = count($structure['images']) ? $structure['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
+            $imageName = count($structure->getImages()) ? $structure->getImages()[0]->getName() : ListingImage::IMAGE_DEFAULT;
 
             $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_xsmall', array());
 
 
-            $categories = count($structure['directoryListingCategories']) ?
-                $structure['directoryListingCategories'][0]['category']['translations'][$locale]['name'] : '';
+            $categories = count($structure->getDirectoryListingCategories()) ?
+                $structure->getDirectoryListingCategories()[0]->getCategory()->getName() : '';
 
-            $isInCurrentPage = in_array($structure['id'], $resultsInPage);
+            $isInCurrentPage = in_array($structure->getId(), $resultsInPage);
 
 
             //Allow to group markers with same location
-            $locIndex = $structure['latitude'] . "-" . $structure['longitude'];
-            $title = $structure['brand'] ? $structure['brand'] : $structure['name'];
+            $locIndex = $structure->getLatitude() . "-" . $structure->getLongitude();
+            $title = $structure->getBrand() ? $structure->getBrand() : $structure->getName();
             $markers[$locIndex][] = array(
-                'id' => $structure['id'],
-                'lat' => $structure['latitude'],
-                'lng' => $structure['longitude'],
+                'id' => $structure->getId(),
+                'lat' => $structure->getLatitude(),
+                'lng' => $structure->getLongitude(),
                 'title' => $title,
                 'category' => $categories,
                 'image' => $image,
                 'url' => $url = $this->generateUrl(
                     'cocorico_directory_show',
-                    array('id' => $structure['id'])
+                    array('id' => $structure->getId())
                 ),
                 // 'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
                 'opacity' => $isInCurrentPage ? 1 : 0.4,
@@ -344,6 +345,7 @@ class CompanyListController extends Controller
             'directoryIds' => $structuresIds
         );
     }
+
 
 
 

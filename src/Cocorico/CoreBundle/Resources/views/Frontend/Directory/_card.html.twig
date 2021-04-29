@@ -1,10 +1,10 @@
-<a href="{{ path('cocorico_directory_show', {'id' : entry.id }) }}" class="siae-card-container">
+<a href="{{ path('cocorico_directory_show', {'id' : structure.id }) }}" class="siae-card-container">
     <div class="siae-card">
         <div class="sc-img">
             {# Logo #}
 
-            {% if entry.images|length %}
-                    {% set image = entry.images[0] %}
+            {% if structure.images|length %}
+                    {% set image = structure.images[0] %}
                     <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
                          alt="{{ structure.name }}"/>
             {% else %}
@@ -15,10 +15,10 @@
         <div class="sc-main container">
             <div class="sc-head">
                 <h3>
-                    {% if entry.brand %}
-                        {{ entry.brand }}
+                    {% if structure.brand %}
+                        {{ structure.brand }}
                     {% else %}
-                        {{ entry.name }}
+                        {{ structure.name }}
                     {% endif %}
                 </h3>
                 {#
@@ -31,25 +31,25 @@
                     <ul>
                         <li><img src="{{ asset('images/siae_list_kind.svg')}}" style="height:15px;">
                             <span style="">
-                            {% if entry.kind == 'ETTI' %}
+                            {% if structure.kind == 'ETTI' %}
                                 intérim
-                            {% elseif entry.kind == 'AI' %}
+                            {% elseif structure.kind == 'AI' %}
                                 Mise à disposition du personnel
                             {% else %}
-                                {{ entry.prestaTypeText('<br />') | raw}}
+                                {{ structure.prestaTypeText('<br />') | raw}}
                             {% endif %}
                             </span>
                         </li>
-                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ entry.kind }}</li>
+                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ structure.kind }}</li>
                         <li>
-                        {% if entry.hasDirectoryListingCategory %}
+                        {% if structure.hasDirectoryListingCategory %}
                             <img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">
                             <span>
-                                {{ entry.getSectorString(2, '<br />') | raw }}
+                                {{ structure.getSectorString(2, '<br />') | raw }}
                             </span>
                         {% endif %}
                         </li>
-                        <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ entry.region }}</li>
+                        <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ structure.region }}</li>
                     </ul>
                     {#
                     - type

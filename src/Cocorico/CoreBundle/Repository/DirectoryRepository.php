@@ -30,13 +30,13 @@ class DirectoryRepository extends EntityRepository
         $qB = $this->createQueryBuilder('d');
         $qB->addSelect("partial dlcat.{id, directory, category}")
            ->addSelect("partial i.{id, name}")
-           ->addSelect("partial ca.{id, lft, lvl, rgt, root}")
-           ->addSelect("partial cat.{id, locale, name}")
+           //->addSelect("partial ca.{id, lft, lvl, rgt, root}")
+           //->addSelect("partial cat.{id, locale, name}")
            ->leftJoin('d.directoryListingCategories', 'dlcat')
-           ->leftJoin('dlcat.category', 'ca')
-           ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
-           ->leftJoin('d.images', 'i')
-           ->setParameter('locale', 'fr');
+           // ->leftJoin('dlcat.category', 'ca')
+           // ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
+           ->leftJoin('d.images', 'i');
+           //->setParameter('locale', 'fr');
 
         return $qB;
     }
