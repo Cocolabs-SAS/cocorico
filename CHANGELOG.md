@@ -10,6 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [3.8] - (2021-04-28)
 - Ajout paramètre périmêtre d'intervention dans le répertoire SIAE
 - Refactoring approfondi du moteur de recherche SIAE
+- Ajout marquer de campagne au tracker JS
 
 ### [3.7] - (2021-04-22)
 - Nouvelle page de résultats SIAE
