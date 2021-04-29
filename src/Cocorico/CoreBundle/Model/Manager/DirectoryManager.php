@@ -63,7 +63,7 @@ class DirectoryManager extends BaseManager
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
 
-        if ($directorySearchRequest->getWithRange()) {
+        if ($directorySearchRequest->getSearchType() == 'city') {
             $qB = $this->applyFilters($qB, $directorySearchRequest);
             $qB = $this->applyGeo($qB, $directorySearchRequest);
         } else {
@@ -71,6 +71,7 @@ class DirectoryManager extends BaseManager
         }
 
         $query = $qB->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_ARRAY);
         return new Paginator($query);
     }
 
@@ -217,6 +218,7 @@ class DirectoryManager extends BaseManager
              ->setParameter('lat', $request->getLat())
              ->setParameter('lng', $request->getLng());
 
+        //$qB->orderBy("distance", "ASC");
         return $qB;
     
     }

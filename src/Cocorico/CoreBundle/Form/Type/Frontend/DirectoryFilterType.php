@@ -124,14 +124,6 @@ class DirectoryFilterType extends AbstractType
                     'required'=> false,
                     'data' => false,
                 )
-            )
-            ->add('withRange',
-                CheckboxType::class,
-                array(
-                    'label' => 'Appliquer les périmètres d\'activité',
-                    'required'=> false,
-                    'data' => false,
-                )
             );
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
             // ->add(

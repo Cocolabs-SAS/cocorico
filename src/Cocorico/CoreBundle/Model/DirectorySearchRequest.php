@@ -158,7 +158,8 @@ class DirectorySearchRequest
 
         switch(true) {
             case $isZip:
-                $this->searchType = 'zip';
+                // $this->searchType = 'zip';
+                $this->searchType = 'city';
                 $this->postalCode = $this->zip;
                 break;
             case $isCity:

@@ -404,6 +404,7 @@ class Directory
      */
     private $polRange;
 
+
     /**
      *
      * @ORM\OneToMany(targetEntity="DirectoryImage", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)

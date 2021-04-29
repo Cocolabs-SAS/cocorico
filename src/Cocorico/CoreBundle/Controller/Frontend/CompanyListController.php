@@ -65,7 +65,7 @@ class CompanyListController extends Controller
 
         $directoryManager = $this->get('cocorico.directory.manager');
         $withAntenna = false;
-        $withRange = true;
+        $withRange = false;
 
         $markers = array('directoryIds' => array(), 'markers' => array());
 
@@ -81,7 +81,7 @@ class CompanyListController extends Controller
             $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['serialSectors', 'structureType', 'withAntenna', 'withRange', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
+            foreach (['serialSectors', 'structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
                 $dlform->get($key)->setData($sort->getKeyValue($key));
             }
             // Hack, weird PHP behaviour
@@ -89,12 +89,12 @@ class CompanyListController extends Controller
 
             // Markers
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $structures);
+            $markers = $this->getMarkers($request, $entries, $structures);
 
         } else {
             $entries = $directoryManager->listSome($page);
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $structures);
+            $markers = $this->getMarkers($request, $entries, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
         return $this->render(
@@ -283,12 +283,13 @@ class CompanyListController extends Controller
      *          array['markers'] markers data
      *          array['listingsIds'] listings ids
      */
-    protected function getMarkers(Request $request, $resultsIterator)
+    protected function getMarkers(Request $request, $results, $resultsIterator)
     {
         //We get directory id of current page to change their marker aspect on the map
         $resultsInPage = array();
         foreach ($resultsIterator as $i => $result) {
-            $resultsInPage[] = $result->getId();
+            dump($result);
+            $resultsInPage[] = $result['id'];
         }
 
         //We need to display all directories (without pagination) of the current search on the map
@@ -304,33 +305,33 @@ class CompanyListController extends Controller
 
         foreach ($resultsIterator as $i => $result) {
             $structure = $result;
-            if ($structure->getLatitude() == null) { continue; }
-            $structuresIds[] = $structure->getId();
+            if ($structure['latitude'] == null) { continue; }
+            $structuresIds[] = $structure['id'];
 
-            $imageName = count($structure->getImages()) ? $structure->getImages()[0]->getName() : ListingImage::IMAGE_DEFAULT;
+            $imageName = count($structure['images']) ? $structure['images'][0]['name'] : ListingImage::IMAGE_DEFAULT;
 
             $image = $liipCacheManager->getBrowserPath($imagePath . $imageName, 'listing_xsmall', array());
 
 
-            $categories = count($structure->getDirectoryListingCategories()) ?
-                $structure->getDirectoryListingCategories()[0]->getCategory()->getName() : '';
+            $categories = count($structure['directoryListingCategories']) ?
+                $structure['directoryListingCategories'][0]['category']['translations'][$locale]['name'] : '';
 
-            $isInCurrentPage = in_array($structure->getId(), $resultsInPage);
+            $isInCurrentPage = in_array($structure['id'], $resultsInPage);
 
 
             //Allow to group markers with same location
-            $locIndex = $structure->getLatitude() . "-" . $structure->getLongitude();
-            $title = $structure->getBrand() ? $structure->getBrand() : $structure->getName();
+            $locIndex = $structure['latitude'] . "-" . $structure['longitude'];
+            $title = $structure['brand'] ? $structure['brand'] : $structure['name'];
             $markers[$locIndex][] = array(
-                'id' => $structure->getId(),
-                'lat' => $structure->getLatitude(),
-                'lng' => $structure->getLongitude(),
+                'id' => $structure['id'],
+                'lat' => $structure['latitude'],
+                'lng' => $structure['longitude'],
                 'title' => $title,
                 'category' => $categories,
                 'image' => $image,
                 'url' => $url = $this->generateUrl(
                     'cocorico_directory_show',
-                    array('id' => $structure->getId())
+                    array('id' => $structure['id'])
                 ),
                 // 'zindex' => $isInCurrentPage ? 2 * $nbResults - $i : $i,
                 'opacity' => $isInCurrentPage ? 1 : 0.4,
