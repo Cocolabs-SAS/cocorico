@@ -500,6 +500,15 @@ class Directory
         return '';
     }
 
+    public function getNiceSiret()
+    {
+        $s = $this->siret;
+        $srn =  substr($s,0,3) . " " . substr($s,3,3) . " " . substr($s,6,3);
+        if (strlen($s) == 9)
+            return $srn;
+        return $srn . " " . substr($s,9,5);
+    }
+
     /**
      * Get Sector String
      *

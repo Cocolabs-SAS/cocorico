@@ -76,11 +76,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="cell col-sm-6">Siret : {{ structure.siret }}</div>
-                                    <div class="cell col-sm-6">{{ structure.prestaTypeText(', ') }}</div>
-                                    <div class="cell col-sm-6">Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
-                                    <div class="cell col-sm-6">{{ structure.kind }}</div>
-                                    <div class="cell col-sm-6">Date de création : non disponible</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_siret.png')}}" />Siret : {{ structure.getNiceSiret }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_types.png')}}" />{{ structure.prestaTypeText(', ') }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_workers.png')}}" />Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_nature.png')}}" />{{ structure.kind }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_calendar.png')}}" />Date de création : non disponible</div>
                                 </div>
                             </div>
                             {#
@@ -95,6 +95,7 @@
                     <div class="row mb-3">
                         {% if structure.hasPrestaType %}
                         <div class="col-sm-6">
+                            <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
                             <h4>Secteurs d'activité</h4>
                             <ul class="active_sectors">
                                 {% for cat in structure.directoryListingCategories %}
@@ -103,6 +104,7 @@
                             </ul>
                         </div>
                         <div class="col-sm-6">
+                            <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
                             <h4>Élément différenciants (materiels, services particuliers...)</h4>
                             Non renseigné
                         </div>
@@ -120,6 +122,7 @@
                     <!-- Third Row, Description -->
                         <div class="row">
                             <div class="col-sm-12">
+                                <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
                                 <h3>Description de l'activité commerciale</h3>
                                 <div class="user_description">
                                     {% if structure.description %}
@@ -135,6 +138,7 @@
                     {% if listings %}
                     <div class="row ">
                         <div class="col-sm-12">
+                            <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
                             <h3>Les prestations proposées</h3>
                             {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
                             'listings': listings
@@ -147,6 +151,7 @@
                     {% if structure.clientImages is not empty %}
                     <div class="row">
                         <div class="col-sm-6">
+                            <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
                             <h3>Références clients</h3>
                             {% for image in structure.clientImages %}
                                 <!-- slide -->
@@ -155,9 +160,10 @@
                             {% endfor %}
                         </div>
                         <div class="col-sm-6">
+                            <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
                             <h3>Labels & certifications</h3>
                             Non renseigné
-                        /div>
+                        </div>
                     </div>
                     {% endif %}
                     <div class="row">
