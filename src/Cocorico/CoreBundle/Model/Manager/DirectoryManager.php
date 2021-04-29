@@ -8,6 +8,7 @@ use Cocorico\CoreBundle\Repository\DirectoryRepository;
 use Cocorico\CoreBundle\Entity\DirectoryListingCategory;
 use Cocorico\CoreBundle\Entity\DirectoryImage;
 use Cocorico\CoreBundle\Entity\DirectoryClientImage;
+use Cocorico\CoreBundle\Model\DirectorySearchRequest;
 use DateInterval;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,9 +17,12 @@ use Doctrine\ORM\Query;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Exception;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Cocorico\CoreBundle\Utils\ZPaginator;
 
 class DirectoryManager extends BaseManager
 {
@@ -45,22 +49,79 @@ class DirectoryManager extends BaseManager
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
         // Hack : by default to siege
-        $qB->andWhere('d.nature = :nature')
-           ->setParameter('nature', 'siege');
+        // $qB->andWhere('d.nature = :nature')
+        //    ->setParameter('nature', 'siege');
+
+        // Hack : force same return format as geo sort
+        $qB->addSelect('1 AS distance')
+            ->orderBy('d.name', 'ASC');
 
         $query = $qB->getQuery();
         return new Paginator($query);
     }
 
-    public function findByForm($page, $params=[])
+    public function findByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
     {
+        // FIXME: Remove params, use directory search request
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
-        $qB = $this->applyParams($qB, $params);
+
+        if ($directorySearchRequest->getSearchType() == 'city') {
+            $qB = $this->applyFilters($qB, $directorySearchRequest);
+            $qB = $this->applyGeo($qB, $directorySearchRequest);
+        } else {
+            $qB = $this->applyParams($qB, $params);
+            #FIXME : Bad doctrine ORM hack
+            $qB->addSelect('1 AS distance');
+            $qB->orderBy('d.name', 'ASC');
+        }
 
         $query = $qB->getQuery();
+        $query->setHydrationMode(Query::HYDRATE_OBJECT);
         return new Paginator($query);
+    }
+
+    public function findWithPerimeter($page, $params=[])
+    {
+        // FIXME: Make this work somehow ?
+        // $conn = $this->em->getCononection();
+
+        $rsm = new ResultSetMappingBuilder($this->em);
+        $rsm->addRootEntityFromClassMetadata('Cocorico\CoreBundle\Entity\Directory', 'd');
+        $rsm->addJoinedEntityFromClassMetadata(
+                'Cocorico\CoreBundle\Entity\DirectoryListingCategory'
+                , 'dlcat', 'd', 'directoryListingCategories', array('id'=>'dlcat_id'));
+        # $rsm->addJoinedEntityFromClassMetadata(
+        #         'Cocorico\CoreBundle\Entity\ListingCategory'
+        #         , 'ca', 'd', 'directoryListingCategories', array('id'=>'ca_id'));
+
+        $selectClause = $rsm->generateSelectClause(array(
+            'd' => 'd',
+            'dlcat' => 'dlcat',
+            'ca' => 'ca',
+        ));
+
+        # -> get those of the same department if department
+        # -> get those of the region if region
+        # -> get those of the country if country
+        # -> get those in correct distance
+
+        $sql = "SELECT " . $selectClause ." FROM directory d
+            LEFT JOIN directory_listing_category dlcat ON d.id = dlcat.directory_id
+            LEFT JOIN listing_category ca on dlcat.listing_category_id = ca.id
+            ORDER BY name ASC";
+
+        $query = $this->em->createNativeQuery($sql, $rsm);
+
+        // Paging
+        // $perpage = $this->maxPerPage;
+        // $offset = ($page * $perpage) - $perpage;
+        // $query->setFirstResult($offset);
+        // $query->setMaxResults($perpage);
+
+        $paginator = new ZPaginator($query, $page, $this->maxPerPage );
+        return $paginator;
     }
 
     public function findByUserId($c4Id)
@@ -102,12 +163,93 @@ class DirectoryManager extends BaseManager
     }
 
 
-    public function listByForm($params=[])
+    public function listByForm(directorySearchRequest $req, $params=[])
     {
         $qB = $this->getRepository()->getAll();
-        $qB = $this->applyParams($qB, $params);
+
+        if ($req->getSearchType() == 'city') {
+            $qB = $this->applyFilters($qB, $req);
+            $qB = $this->applyGeo($qB, $req);
+        } else {
+            $qB = $this->applyFilters($qB, $req, true);
+            #FIXME : Bad doctrine ORM hack
+            $qB->addSelect('1 AS distance');
+            $qB->orderBy('d.name', 'ASC');
+        }
         $query = $qB->getQuery();
         return $query->getResult();
+    }
+
+    private function applyFilters($qB, $req, $geo=False) {
+        // Filter on type
+        if ($req->getStructureType() != null) {
+            $kindName = Directory::$kindValues[$req->getStructureType()];
+            $qB->andWhere('d.kind = :type')
+               ->setParameter('type', $kindName);
+        }
+
+        // Filter on prestation type
+        if ($req->getPrestaType() > 1) {
+            $qB->andWhere('BIT_AND(d.prestaType, :prestatype) > 0')
+               ->setParameter('prestatype', $req->getPrestaType());
+        }
+
+        // Filter on sector
+        if (count($req->getSectors()) > 0) {
+            $qB->andWhere('dlcat.category IN (:sectors)')
+               ->setParameter('sectors', $req->getSectors());
+        }
+
+        // Include antennas
+        if ($req->getWithAntenna() == false) {
+            $qB->andWhere('d.nature = \'siege\'');
+        }
+
+        if ($geo) {
+            // Filter on postal code
+            if ($req->getPostalCode() != false) {
+                $qB->andWhere('d.postCode like :pcode')
+                   ->setParameter('pcode', addcslashes($req->getPostalCode(), '%_').'%');
+            }
+
+            // Filter on sector
+            if ($req->getRegion() != false) {
+                $region = $req->getRegion();
+                $regionName = Directory::$regions[$region];
+                $qB->andWhere('d.region = :region')
+                   ->setParameter('region', $regionName);
+            }
+        }
+
+        return $qB;
+    }
+
+    private function applyGeo($qB, $request) {
+        // $searchLocation = $request->getLocation();
+        //Select distance
+        // dump($searchLocation->getRoute());
+        // dump($searchLocation->getArea());
+        // dump($searchLocation->getCity());
+        // dump($searchLocation->getDepartment());
+        // dump($searchLocation->getCountry());
+
+
+        $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
+           ->setParameter('lat', $request->getLat())
+           ->setParameter('lng', $request->getLng());
+
+        $qB //->where('distance < (case when l.polRange = 2 then 100 when l.polRange = 2 then 400 when l.polRange = 3 then 1000 else l.range end)');
+            ->andwhere('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < (
+                case
+                    when d.polRange = 1 then 125
+                    when d.polRange = 2 then 450
+                    when d.polRange = 3 then 3000
+                    else d.range 
+                end)');
+
+        $qB->orderBy("distance", "ASC");
+        return $qB;
+    
     }
 
     private function applyParams($qB, $params)

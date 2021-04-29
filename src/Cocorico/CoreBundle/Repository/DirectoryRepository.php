@@ -29,8 +29,14 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->createQueryBuilder('d');
         $qB->addSelect("partial dlcat.{id, directory, category}")
-            ->leftJoin('d.directoryListingCategories', 'dlcat')
-            ->leftJoin('dlcat.category', 'ca');
+           ->addSelect("partial i.{id, name}")
+           //->addSelect("partial ca.{id, lft, lvl, rgt, root}")
+           //->addSelect("partial cat.{id, locale, name}")
+           ->leftJoin('d.directoryListingCategories', 'dlcat')
+           // ->leftJoin('dlcat.category', 'ca')
+           // ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
+           ->leftJoin('d.images', 'i');
+           //->setParameter('locale', 'fr');
 
         return $qB;
     }
@@ -41,8 +47,8 @@ class DirectoryRepository extends EntityRepository
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
            ->orderBy('d.name', 'asc')
-           ->where('d.nature != \'n/a\'')
-           ->where('d.isDelisted = false');
+           ->andwhere('d.nature != \'n/a\'')
+           ->andwhere('d.isDelisted = false');
 
         return $qB;
     }
@@ -51,8 +57,8 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->getFindQueryBuilder();
         $qB->orderBy('d.name', 'asc')
-           ->where('d.nature != \'n/a\'')
-           ->where('d.isDelisted = false');
+           ->andwhere('d.nature != \'n/a\'')
+           ->andwhere('d.isDelisted = false');
 
         return $qB;
     }
@@ -60,7 +66,7 @@ class DirectoryRepository extends EntityRepository
     public function getFindByC4Id($C4Id)
     {
         $qB = $this->getFindQueryBuilder();
-        $qB->where('d.c4Id = :c4Id')
+        $qB->andwhere('d.c4Id = :c4Id')
            ->setParameter('c4Id', $C4Id);
 
         return $qB;
@@ -69,7 +75,7 @@ class DirectoryRepository extends EntityRepository
     public function getFindBySiret($Siret)
     {
         $qB = $this->getFindQueryBuilder();
-        $qB->where('d.siret = :siret')
+        $qB->andwhere('d.siret = :siret')
            ->setParameter('siret', $siret);
 
         return $qB;
@@ -78,7 +84,7 @@ class DirectoryRepository extends EntityRepository
     public function getFindBySiretSiren($Siretn)
     {
         $qB = $this->getFindQueryBuilder();
-        $qB->where('d.siret = :siret')
+        $qB->andwhere('d.siret = :siret')
            ->orWhere('d.siret like :siren')
            ->setParameter('siret', $Siretn)
            ->setParameter('siren', $Siretn.'%');
@@ -91,7 +97,7 @@ class DirectoryRepository extends EntityRepository
         $qB = $this->getFindQueryBuilder();
         // FIXME: Do some real filtering here, please !
         $qB->leftJoin('d.users', 'u')
-           ->where("u = :user")
+           ->andwhere("u = :user")
            ->setParameter("user", $user);
 
         return $qB;

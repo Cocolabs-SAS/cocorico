@@ -13,6 +13,8 @@ namespace Cocorico\CoreBundle\Model;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Cocorico\CoreBundle\Utils\Deps;
+use Cocorico\CoreBundle\Entity\Directory;
 
 /**
  * Class ListingSearchRequest
@@ -28,6 +30,7 @@ class DirectorySearchRequest
     protected $structureType;
     protected $prestaType;
     protected $withAntenna;
+    protected $withRange;
     protected $address;
     protected $lat;
     protected $lng;
@@ -39,6 +42,8 @@ class DirectorySearchRequest
     protected $postalCode;
     protected $zip;
     protected $addressType;
+    protected $searchType;
+    private $deps;
 
     /**
      * @param RequestStack $requestStack
@@ -46,6 +51,8 @@ class DirectorySearchRequest
      */
     public function __construct(RequestStack $requestStack, $maxPerPage)
     {
+        //Init
+        $this->deps = new Deps();
         //Params
         $this->requestStack = $requestStack;
         $this->request = $this->requestStack->getCurrentRequest();
@@ -59,12 +66,13 @@ class DirectorySearchRequest
         $this->page = 1;
 
 
-        //Sectors (old categories)
+        // Shared CSV action fields
         $this->sectors = array();
         $sectors = $this->request->query->get("sector");
         $serialSectors = $this->request->query->get("serialSectors");
         if (is_array($sectors)) {
             $this->sectors = $sectors;
+            $this->serialSectors = implode('|', $sectors);
         } else if ($serialSectors) {
             $this->sectors = explode('|', $serialSectors);
         }
@@ -79,10 +87,21 @@ class DirectorySearchRequest
             $this->prestaType = $prestaType;
         }
 
+        $structureType = $this->request->query->get("structureType");
+        if ($structureType) {
+            $this->structureType = $structureType;
+        }
+
         $withAntenna = $this->request->query->get("withAntenna");
         if ($withAntenna) {
             $this->withAntenna = $withAntenna == "1";
         }
+
+        $withRange = $this->request->query->get("withRange");
+        if ($withRange) {
+            $this->withRange = $withRange == "1";
+        }
+
 
         $postalCode = $this->request->query->get("postalCode");
         $zip = $this->request->query->get("zip");
@@ -102,6 +121,98 @@ class DirectorySearchRequest
             $this->type = $type;
         }
 
+        // List action fields
+        $area = $this->request->query->get("area");
+        if ($area) {
+            $this->area = $area;
+        }
+
+        $city = $this->request->query->get("city");
+        if ($city) {
+            $this->city = $city;
+        }
+
+        $department = $this->request->query->get("department");
+        if ($department) {
+            $this->department = $department;
+        }
+
+        $this->prepareData();
+
+    }
+
+    public function prepareData() {
+        /*
+         * Some data fixes needed to facilitate querying
+         */
+        $isZip = $this->zip != null;
+        $isCity = $this->city != null && $this->postalCode != null;
+        $isDep = $this->department != null;
+        $isReg = $this->area != null;
+        //dump([
+        //    'zip'=>$isZip,
+        //    'city'=>$isCity,
+        //    'dep'=>$isDep,
+        //    'reg'=>$isReg,
+        //]);
+
+        switch(true) {
+            case $isZip:
+                // $this->searchType = 'zip';
+                $this->searchType = 'city';
+                $this->postalCode = $this->zip;
+                break;
+            case $isCity:
+                $this->searchType = 'city';
+                $needle = intval($this->postalCode);
+                switch (true) {
+                    // Lyon
+                    case $needle >= 69001 and $needle <= 69009:
+                        $this->postalCode = '6900';
+                        break;
+                    // Marseille
+                    case $needle >= 13001 and $needle <= 13016:
+                        $this->postalCode = '130';
+                        break;
+                    // Marseille
+                    case $needle >= 75000 and $needle <= 75680:
+                        $this->postalCode = '75';
+                        break;
+                    default:
+                        $this->postalCode = substr($this->postalCode, 0, 4);
+                }
+                break;
+            case $isDep:
+                $this->searchType = 'department';
+                $depNum = $this->deps->byName($this->department);
+                if ($depNum) {
+                    $this->postalCode = $depNum;
+                } else {
+                    $this->postalCode = substr($this->postalCode, 0, 2);
+                }
+                break;
+            case $isReg:
+                $this->searchType = 'region';
+                $region_idx = array_search($this->area, Directory::$regions); 
+                $region_idx = $region_idx ? $region_idx : 0;
+                $this->setRegion($region_idx);
+                break;
+            default:
+                $this->searchType = 'other';
+                break;
+        }
+
+        // Special Rules
+        if ($this->zip == '84800') {
+            // Google maps mistakes Fontaine-de-vaucluse for Vaucluse (84)
+            // or Vaucluse (Doubs)
+            $this->postalCode = '84';
+        }
+        return $this;
+    }
+
+    public function getKeyValue($prop) {
+        return $this->$prop;
     }
 
     /**
@@ -125,6 +236,9 @@ class DirectorySearchRequest
      */
     public function getSerialSectors()
     {
+        if (! $this->serialSectors) {
+            return implode('|', $this->sectors);
+        }
         return $this->serialSectors;
     }
 
@@ -228,6 +342,16 @@ class DirectorySearchRequest
         return $this->structureType = $structureType;
     }
 
+    public function getSearchType()
+    {
+        return $this->searchType;
+    }
+
+    public function setSearchType($searchType)
+    {
+        return $this->searchType = $searchType;
+    }
+
     public function getPrestaType()
     {
         return $this->prestaType;
@@ -246,6 +370,16 @@ class DirectorySearchRequest
     public function setWithAntenna($withAntenna)
     {
         return $this->withAntenna = $withAntenna;
+    }
+
+    public function getWithRange()
+    {
+        return $this->withRange;
+    }
+
+    public function setWithRange($withRange)
+    {
+        return $this->withRange = $withRange;
     }
 
     public function getAddress()
@@ -358,7 +492,31 @@ class DirectorySearchRequest
     {
         return $this->addressType = $addressType;
     }
-
+    
+    public function getLegacyParams()
+    {
+        // Keys match previous params object
+        // changing them might impact tracking
+        // and older queries
+        return [
+            'type' => $this->structureType,
+            'sector' => $this->sectors,
+            'prestaType' => $this->prestaType,
+            'withAntenna' => $this->withAntenna,
+            'withRange' => $this->withRange,
+            'postalCode' => $this->postalCode,
+            'region' => $this->region,
+            'searchType' => $this->searchType,
+            'city' => $this->city,
+            'department' => $this->department,
+            'area' => $this->area,
+            'lat/lng' => "$this->lat / $this->lng",
+            'format' => $this->format,
+            // WHYYYYYYY ????
+            //'serialSectors' => $this->serialSectors,
+            'serialSectors' => implode('|', $this->sectors),
+        ];
+    }
     /**
      * Remove some Object properties while serialisation
      *

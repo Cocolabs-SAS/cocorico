@@ -17,7 +17,6 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Cocorico\CoreBundle\Utils\Tracker;
-use Cocorico\CoreBundle\Utils\Deps;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
@@ -32,14 +31,12 @@ use Cocorico\CoreBundle\Entity\ListingImage;
 class CompanyListController extends Controller
 {
     private $tracker;
-    private $deps;
 
     private function fix()
     {
         // FIXME: Find a symfonian way to do this
         if ($this->tracker === null) {
             $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
-            $this->deps = new Deps();
         }
     }
 
@@ -57,63 +54,56 @@ class CompanyListController extends Controller
     {
         $this->fix();
         $tracker_payload = ['dir' => 'siae'];
-        $form = $this->sortCompaniesForm();
-        $form->handleRequest($request);
 
         /** @var ListingSearchRequest $listingSearchRequest */
         $directorySearchRequest = $this->get('cocorico.directory_search_request');
+
+        $form = $this->sortCompaniesForm($directorySearchRequest);
+        $form->handleRequest($request);
 
         $dlform = $this->csvCompaniesForm($directorySearchRequest);
 
         $directoryManager = $this->get('cocorico.directory.manager');
         $withAntenna = true;
+        $withRange = false;
 
         $markers = array('directoryIds' => array(), 'markers' => array());
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            // Hack, see model ListingSearchRequest for more
-            $sectors = $request->query->get('sector');
-            $sectors = is_array($sectors) ? $sectors : array();
-            $sort['sector'] = $sectors;
+            $sort->prepareData();
 
-            $params = [
-                'type' => $sort['structureType'],
-                'sector' => $sort['sector'],
-                'prestaType' => $sort['prestaType'],
-                'withAntenna' => $sort['withAntenna'],
-                'postalCode' => null,
-                'region' => null,
-            ];
-            $withAntenna = $sort['withAntenna'];
-            $params = $this->fixParams($sort, $params);
-            $entries = $directoryManager->findByForm($page, $params);
-            $this->tracker->track('backend', 'directory_search', array_merge($params, $tracker_payload), $request->getSession());
+            $withAntenna = $sort->getWithAntenna();
+            $withRange = $sort->getWithRange();
+            $entries = $directoryManager->findByForm($sort, $page, $sort->getLegacyParams());
+            // dump($sort->getLegacyParams());
+
+            $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip'] as $key) {
-                $dlform->get($key)->setData($sort[$key]);
+            foreach (['serialSectors', 'structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
+                $dlform->get($key)->setData($sort->getKeyValue($key));
             }
-            // Hack
-            $dlform->get('serialSectors')->setData(implode('|', $sectors));
-            $dlform->get('postalCode')->setData($params['postalCode']);
-            $dlform->get('region')->setData($params['region']);
+            // Hack, weird PHP behaviour
+            $dlform->get('serialSectors')->setData(implode('|', $sort->getSectors()));
 
             // Markers
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $structures);
+            $markers = $this->getMarkers($request, $entries, $structures);
 
         } else {
             $entries = $directoryManager->listSome($page);
             $structures = $entries->getIterator();
-            $markers = $this->getMarkers($request, $structures);
+            $markers = $this->getMarkers($request, $entries, $structures);
             $this->tracker->track('backend', 'directory_list', $tracker_payload, $request->getSession());
         }
+        $dir_test = new Directory();
         return $this->render(
             'CocoricoCoreBundle:Frontend\Directory:dir_siae.html.twig', [
             'form' => $form->createView(),
             'dlform' => $dlform->createView(),
             'entries' => $entries,
+            'dir_func' => $dir_test,
             'pagination' => array(
                 'page'  => $page,
                 'pages_count' => ceil($entries->count() / $directoryManager->maxPerPage),
@@ -122,70 +112,12 @@ class CompanyListController extends Controller
             ),
             'columns' => $directoryManager->listColumns(),
             'withAntenna' => $withAntenna,
+            'withRange' => $withRange,
             'markers' => $markers['markers'],
             'request' => $directorySearchRequest,
             // 'csv_route' => 'cocorico_itou_siae_directory_csv',
             // 'csv_params' => $request->query->all(),
         ]);
-    }
-
-    private function fixParams($data, $params)
-    {
-        $isZip = $data['zip'] != null;
-        $isCity = $data['city'] != null && $data['postalCode'] != null;
-        $isDep = $data['department'] != null;
-        $isReg = $data['area'] != null;
-
-        switch(true) {
-            case $isZip:
-                $params['postalCode'] = $data['zip'];
-                break;
-            case $isCity:
-                $needle = intval($data['postalCode']);
-                switch (true) {
-                    // Lyon
-                    case $needle >= 69001 and $needle <= 69009:
-                        $params['postalCode'] = '6900';
-                        break;
-                    // Marseille
-                    case $needle >= 13001 and $needle <= 13016:
-                        $params['postalCode'] = '130';
-                        break;
-                    // Marseille
-                    case $needle >= 75000 and $needle <= 75680:
-                        $params['postalCode'] = '75';
-                        break;
-                    default:
-                        $params['postalCode'] = substr($data['postalCode'], 0, 4);
-                }
-                break;
-            case $isDep:
-                $depNum = $this->deps->byName($data['department']);
-                if ($depNum) {
-                    $params['postalCode'] = $depNum;
-                } else {
-                    $params['postalCode'] = substr($data['postalCode'], 0, 2);
-                }
-                break;
-            case $isReg:
-                $region_idx = array_search($data['area'], Directory::$regions); 
-                $region_idx = $region_idx ? $region_idx : 0;
-                $params['region'] = $region_idx;
-                break;
-            default:
-                break;
-        }
-        //dump($data);
-        //dump($params);
-
-        // Special Rules
-        if ($data['zip'] == '84800') {
-            // Google maps mistakes Fontaine-de-vaucluse for Vaucluse (84)
-            // or Vaucluse (Doubs)
-            $params['postalCode'] = '84';
-        }
-
-        return $params;
     }
 
     /**
@@ -213,19 +145,10 @@ class CompanyListController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $sort = $form->getData();
-            $params = [
-                'type' => $sort->getStructureType(),
-                'sector' => $sort->getSectors(),
-                'prestaType' => $sort->getPrestaType(),
-                'withAntenna' => $sort->getWithAntenna(),
-                'postalCode' => $sort->getPostalCode(),
-                'region' => $sort->getRegion(),
-                'format' => $sort->getFormat(),
-            ];
-            // $params = $this->fixParams($sort, $params);
-            $this->tracker->track('backend', 'directory_csv', array_merge($params, $tracker_payload), $request->getSession());
-
-            $entries = $directoryManager->listByForm($params);
+            $sort->prepareData();
+            $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
+            $entries = $directoryManager->listByForm($sort);
+            //dump($sort->getLegacyParams());
         } else {
             $entries = $directoryManager->listbyForm();
         }
@@ -236,10 +159,12 @@ class CompanyListController extends Controller
         $fp = fopen($tmp_csv, 'w');
         fputcsv($fp, array_values(Directory::$exportColumns));
         $accessor = PropertyAccess::createPropertyAccessor();
-        foreach ($entries as $fields) {
+        foreach ($entries as $entry) {
             $el = [];
             foreach (Directory::$exportColumns as $key => $value) {
-                $el[$value] = $accessor->getValue($fields, $key);
+                $el[$value] = $accessor->getValue($entry[0], $key);
+                //$el[$value] = $entry[0]->getKeyValue($key);
+                //$dlform->get($key)->setData($sort->getKeyValue($key));
             }
             fputcsv($fp, $el);
         }
@@ -299,12 +224,12 @@ class CompanyListController extends Controller
         return $response;
     }
 
-    private function sortCompaniesForm()
+    private function sortCompaniesForm(DirectorySearchRequest $directorySearchRequest)
     {
         $form = $this->get('form.factory')->createNamed(
             '',
             DirectoryFilterType::class,
-            null,
+            $directorySearchRequest,
             array(
                 'action' => $this->generateUrl(
                     'cocorico_itou_siae_directory',
@@ -313,15 +238,6 @@ class CompanyListController extends Controller
                 'method' => 'GET',
             )
         );
-
-        //$form = $this->createFormBuilder($sort)
-        //    ->add('sector', TextType::class)
-        //    ->add('postalCode', TextType::class)
-        //    ->add('structureType', TextType::class)
-        //    ->add('prestaType', TextType::class)
-        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
-        //    ->getForm();
-
         return $form;
     }
 
@@ -339,14 +255,6 @@ class CompanyListController extends Controller
                 'method' => 'GET',
             )
         );
-
-        //$form = $this->createFormBuilder($sort)
-        //    ->add('sector', TextType::class)
-        //    ->add('postalCode', TextType::class)
-        //    ->add('structureType', TextType::class)
-        //    ->add('prestaType', TextType::class)
-        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
-        //    ->getForm();
 
         return $form;
     }
@@ -367,7 +275,7 @@ class CompanyListController extends Controller
         //We get directory id of current page to change their marker aspect on the map
         $resultsInPage = array();
         foreach ($resultsIterator as $i => $result) {
-            $resultsInPage[] = $result->getId();
+            $resultsInPage[] = $result[0]->getId();
         }
 
         //We need to display all directories (without pagination) of the current search on the map
@@ -382,7 +290,7 @@ class CompanyListController extends Controller
         $markers = $structuresIds = array();
 
         foreach ($resultsIterator as $i => $result) {
-            $structure = $result;
+            $structure = $result[0];
             if ($structure->getLatitude() == null) { continue; }
             $structuresIds[] = $structure->getId();
 
@@ -422,6 +330,7 @@ class CompanyListController extends Controller
             'directoryIds' => $structuresIds
         );
     }
+
 
 
 
