@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Refactoring approfondi du moteur de recherche SIAE
 - Ajout marquer de campagne au tracker JS
 - Correction comportement incongru de Doctrine (`where` et `andwhere`)
+- Antennes cochées par défaut
 
 ### [3.7] - (2021-04-22)
 - Nouvelle page de résultats SIAE

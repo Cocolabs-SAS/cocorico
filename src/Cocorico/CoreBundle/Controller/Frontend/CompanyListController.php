@@ -64,7 +64,7 @@ class CompanyListController extends Controller
         $dlform = $this->csvCompaniesForm($directorySearchRequest);
 
         $directoryManager = $this->get('cocorico.directory.manager');
-        $withAntenna = false;
+        $withAntenna = true;
         $withRange = false;
 
         $markers = array('directoryIds' => array(), 'markers' => array());
