@@ -52,6 +52,10 @@ class DirectoryManager extends BaseManager
         $qB->andWhere('d.nature = :nature')
            ->setParameter('nature', 'siege');
 
+        // Hack : force same return format as geo sort
+        $qB->addSelect('1 AS distance')
+            ->orderBy('d.name', 'ASC');
+
         $query = $qB->getQuery();
         return new Paginator($query);
     }
@@ -159,15 +163,24 @@ class DirectoryManager extends BaseManager
     }
 
 
-    public function listByForm($params=[])
+    public function listByForm(directorySearchRequest $req, $params=[])
     {
         $qB = $this->getRepository()->getAll();
-        $qB = $this->applyParams($qB, $params);
+
+        if ($req->getSearchType() == 'city') {
+            $qB = $this->applyFilters($qB, $req);
+            $qB = $this->applyGeo($qB, $req);
+        } else {
+            $qB = $this->applyFilters($qB, $req, true);
+            #FIXME : Bad doctrine ORM hack
+            $qB->addSelect('1 AS distance');
+            $qB->orderBy('d.name', 'ASC');
+        }
         $query = $qB->getQuery();
         return $query->getResult();
     }
 
-    private function applyFilters($qB, $req) {
+    private function applyFilters($qB, $req, $geo=False) {
         // Filter on type
         if ($req->getStructureType() != null) {
             $kindName = Directory::$kindValues[$req->getStructureType()];
@@ -187,12 +200,27 @@ class DirectoryManager extends BaseManager
                ->setParameter('sectors', $req->getSectors());
         }
 
-        
-
         // Include antennas
         if ($req->getWithAntenna() == false) {
             $qB->andWhere('d.nature = \'siege\'');
         }
+
+        if ($geo) {
+            // Filter on postal code
+            if ($req->getPostalCode() != false) {
+                $qB->andWhere('d.postCode like :pcode')
+                   ->setParameter('pcode', addcslashes($req->getPostalCode(), '%_').'%');
+            }
+
+            // Filter on sector
+            if ($req->getRegion() != false) {
+                $region = $req->getRegion();
+                $regionName = Directory::$regions[$region];
+                $qB->andWhere('d.region = :region')
+                   ->setParameter('region', $regionName);
+            }
+        }
+
         return $qB;
     }
 

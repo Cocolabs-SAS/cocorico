@@ -147,7 +147,7 @@ class CompanyListController extends Controller
             $sort = $form->getData();
             $sort->prepareData();
             $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
-            $entries = $directoryManager->listByForm($sort->getLegacyParams());
+            $entries = $directoryManager->listByForm($sort);
             //dump($sort->getLegacyParams());
         } else {
             $entries = $directoryManager->listbyForm();
@@ -159,10 +159,12 @@ class CompanyListController extends Controller
         $fp = fopen($tmp_csv, 'w');
         fputcsv($fp, array_values(Directory::$exportColumns));
         $accessor = PropertyAccess::createPropertyAccessor();
-        foreach ($entries as $fields) {
+        foreach ($entries as $entry) {
             $el = [];
             foreach (Directory::$exportColumns as $key => $value) {
-                $el[$value] = $accessor->getValue($fields, $key);
+                $el[$value] = $accessor->getValue($entry[0], $key);
+                //$el[$value] = $entry[0]->getKeyValue($key);
+                //$dlform->get($key)->setData($sort->getKeyValue($key));
             }
             fputcsv($fp, $el);
         }
@@ -236,15 +238,6 @@ class CompanyListController extends Controller
                 'method' => 'GET',
             )
         );
-
-        //$form = $this->createFormBuilder($sort)
-        //    ->add('sector', TextType::class)
-        //    ->add('postalCode', TextType::class)
-        //    ->add('structureType', TextType::class)
-        //    ->add('prestaType', TextType::class)
-        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
-        //    ->getForm();
-
         return $form;
     }
 
@@ -262,14 +255,6 @@ class CompanyListController extends Controller
                 'method' => 'GET',
             )
         );
-
-        //$form = $this->createFormBuilder($sort)
-        //    ->add('sector', TextType::class)
-        //    ->add('postalCode', TextType::class)
-        //    ->add('structureType', TextType::class)
-        //    ->add('prestaType', TextType::class)
-        //    // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
-        //    ->getForm();
 
         return $form;
     }
