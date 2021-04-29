@@ -35,7 +35,7 @@
             {{ '</div>' }}
 
             <!-- two-columns -->
-            {{ '<div class="twocolumns row">' }}
+            {{ '<div id="dir-profile" class="twocolumns row">' }}
             <!-- contain the main content of the page -->
             <div id="content" class="listing-area col-xs-12 col-sm-8">
                 <!-- profile-detail -->
@@ -94,19 +94,27 @@
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
                         {% if structure.hasPrestaType %}
-                        <div class="col-sm-6">
-                            <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
-                            <h4>Secteurs d'activité</h4>
-                            <ul class="active_sectors">
-                                {% for cat in structure.directoryListingCategories %}
-                                    <li>{{ cat.getCategory().getName() }}</li>
-                                {% endfor %}
-                            </ul>
+                        <div class="col-sm-6 img-left">
+                            <span class="il-l">
+                                <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
+                            </span>
+                            <span>
+                                <h3>Secteurs d'activité</h3>
+                                <ul class="active_sectors">
+                                    {% for cat in structure.directoryListingCategories %}
+                                        <li>{{ cat.getCategory().getName() }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </span>
                         </div>
-                        <div class="col-sm-6">
-                            <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
-                            <h4>Élément différenciants (materiels, services particuliers...)</h4>
-                            Non renseigné
+                        <div class="col-sm-6 img-left">
+                            <span class="il-l">
+                                <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
+                            </span>
+                            <span>
+                                <h3>Élément différenciants (materiels, services particuliers...)</h3>
+                                Non renseigné
+                            </span>
                         </div>
                         {% endif %}
                         {#
@@ -121,28 +129,36 @@
 
                     <!-- Third Row, Description -->
                         <div class="row">
-                            <div class="col-sm-12">
-                                <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
-                                <h3>Description de l'activité commerciale</h3>
-                                <div class="user_description">
-                                    {% if structure.description %}
-                                        {{ structure.description | nl2br }}
-                                    {% else %}
-                                        Non renseigné
-                                    {% endif %}
-                                </div>
+                            <div class="col-sm-12 img-left">
+                                <span class="il-l">
+                                    <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
+                                </span>
+                                <span class="il-r">
+                                    <h3>Description de l'activité commerciale</h3>
+                                    <div class="user_description">
+                                        {% if structure.description %}
+                                            {{ structure.description | nl2br }}
+                                        {% else %}
+                                            Non renseigné
+                                        {% endif %}
+                                    </div>
+                                </span>
                             </div>
                         </div>
 
                     <!-- Fourth Row -->
                     {% if listings %}
                     <div class="row ">
-                        <div class="col-sm-12">
-                            <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
-                            <h3>Les prestations proposées</h3>
-                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
-                            'listings': listings
-                            } only %}
+                        <div class="col-sm-12 img-left">
+                            <span class="il-l">
+                                <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
+                            </span>
+                            <span>
+                                <h3>Les prestations proposées</h3>
+                                {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
+                                'listings': listings
+                                } only %}
+                            </span>
                         </div>
                     </div>
                     {% endif %}
@@ -150,19 +166,27 @@
                     <!-- Fifth Row -->
                     {% if structure.clientImages is not empty %}
                     <div class="row">
-                        <div class="col-sm-6">
-                            <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
-                            <h3>Références clients</h3>
-                            {% for image in structure.clientImages %}
-                                <!-- slide -->
-                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
-                                      class="client-ref"/>
-                            {% endfor %}
+                        <div class="col-sm-6 img-left">
+                            <span class="il-l">
+                                <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
+                            </span>
+                            <span>
+                                <h3>Références clients</h3>
+                                {% for image in structure.clientImages %}
+                                    <!-- slide -->
+                                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}"
+                                          class="client-ref"/>
+                                {% endfor %}
+                            </span>
                         </div>
-                        <div class="col-sm-6">
-                            <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
-                            <h3>Labels & certifications</h3>
-                            Non renseigné
+                        <div class="col-sm-6 img-left">
+                            <span class="il-l">
+                                <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
+                            </span>
+                            <span>
+                                <h3>Labels & certifications</h3>
+                                Non renseigné
+                            </span>
                         </div>
                     </div>
                     {% endif %}
