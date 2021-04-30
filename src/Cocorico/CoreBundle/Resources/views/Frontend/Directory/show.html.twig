@@ -21,6 +21,7 @@
 
         {% block breadcrumbs %}
             <!-- breadcrumbs -->
+
             {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
                 request: app.request
             })) }}
@@ -201,52 +202,38 @@
             </div>
             <aside id="sidebar" class="profile col-xs-12 col-sm-4">
                 <div class="profile_capsule">
-                    <h3>Données en libre accès</h3>
-                    <dl class='deflist'>
-                        <dt>Nombre de salariés</dt>
-                        <dd>{{ not structure.employees ? "non disponible" :
-                        structure.employees }}</dd>
-                        {#
-                        <dt>CA de la structure</dt>
-                        <dd>{{ not structure.chiffreAffaire ? "non disponible"
-                        : structure.chiffreAffaire }}</dd>
-                        #}
-                        {% if structure.dateConstitution %}
-                            <dt>Date de création de la structure</dt>
-                            <dd>{{ structure.dateConstitution | localizeddate('short', 'none', 'fr', user_timezone) }}</dd>
-                        {% endif %}
-                    </dl>
-                </div>
-                {#
-                <div class="profile_capsule">
-                    <h3>Contact entreprise</h3>
-                    <dl class='deflist'>
-                        <dt>Site Web</dt>
-                        <dd><a id="company_website"
-                            href="{{structure.website}}" rel="nofollow" target="blank">{{ structure.website }}</a></dd>
-                        {% if user %}
-                            <dt>Adresse email de contact</dt>
-                            <dd>{{ user.email }}</dd>
-                            {% if user.phone %}
-                                <dt>N de téléphone</dt>
-                                <dd>{{ user.phone }}</dd>
+                    <div class="" style="display:flex;flex-direction:row;justify-content:flex-end;">
+                        <div class=""></div>
+                        <a id="contact" href="" class="button">Contacter l'entreprise <i class="icon-mail-alt"></i></a>
+                    </div>
+                    <a href="#" id="show_data">> Afficher les coordonnées</a>
+                    <div id="the_data" style="display:none">
+                        <dl class='deflist'>
+                            <dt>Site Web</dt>
+                            <dd><a id="company_website"
+                                href="{{structure.website}}" rel="nofollow" target="blank">{{ structure.website }}</a></dd>
+                            {% if user %}
+                                <dt>Adresse email de contact</dt>
+                                <dd>{{ user.email }}</dd>
+                                {% if user.phone %}
+                                    <dt>N de téléphone</dt>
+                                    <dd>{{ user.phone }}</dd>
+                                {% endif %}
+                                <dt>Personne à contacter</dt>
+                                <dd>{{ user.namebis }}</dd>
+                                <dt>Adresse</dt>
+                                <dd>{{ structure.postCode }}
+                                {{ structure.city }}</dd>
                             {% endif %}
-                            <dt>Personne à contacter</dt>
-                            <dd>{{ user.namebis }}</dd>
-                        {% endif %}
-                    </dl>
-                </div>
-                <div class="map_capsule">
+                        </dl>
+                    </div>
+                    <div class="separator"></div>
                     <div class="map-holder">
                         <div id="map-company" class="map-canvas"></div>
                     </div>
                     <div class="map_details">
                         <dl class='deflist'>
-                            <dt>Adresse</dt>
-                            <dd>{{ structure.postCode }}
-                            {{ structure.city }}</dd>
                             <dd>{{ structure.region }}</dd>
-                            <br />
                             {% if structure.polRange %}
                                 <dt>Périmètre d'intervention</dt>
                                 <dd>{{ structure.polRangeText | trans}}</dt>
@@ -256,6 +243,11 @@
                             {% endif %}
                         </dl>
                     </div>
+                </div>
+                {#
+                <div class="profile_capsule">
+                </div>
+                <div class="map_capsule">
                 </div>
                 #}
             </aside>
@@ -302,6 +294,10 @@
                 fillColor: '#0000EE',
                 fillOpacity: 0.1,
                 radius:  1000
+            });
+            $('#show_data').click(() => {
+                console.log('poulet');
+                $('#the_data').toggle('slow');
             });
         });
 

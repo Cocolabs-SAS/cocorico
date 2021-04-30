@@ -463,6 +463,14 @@ class Directory
         return $this->name;
     }
 
+    public function getNameOrBrand()
+    {
+        if ($this->brand) {
+            return $this->brand;
+        }
+        return $this->name;
+    }
+
     /**
      * Set siret.
      *

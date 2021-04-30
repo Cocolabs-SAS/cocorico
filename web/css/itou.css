@@ -613,6 +613,7 @@ footer img.min_trav {
     height:100%;
     position:sticky;
     top:10px;
+    box-shadow: 0 2px 19px 0 rgba(0, 0, 0, 0.09);
 }
 
 @media screen and (min-width:767px) {
@@ -628,6 +629,9 @@ footer img.min_trav {
     margin:2rem 1rem;
     background-color:#fff;
     padding:0 1rem 2rem;
+}
+
+.profile_capsule .separator {
     border-bottom:5px solid #FE5455;
     border-radius:4px;
 }
@@ -637,6 +641,40 @@ footer img.min_trav {
     padding-bottom:.4rem;
     padding-top:.6rem;
     border-bottom: 1px solid #999;
+}
+
+.profile_capsule #contact,
+.profile_capsule #contact:focus,
+.profile_capsule #contact:active {
+    display:block;
+    margin: 0 0 45px 20px;
+    padding: 15px 11px;
+    border-radius: 4px;
+    border: 2px solid #000638;
+    background-color: #000638;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.profile_capsule #contact:hover {
+  background-color:#fff;
+  background-color:#22285a;
+}
+
+.profile_capsule #show_data,
+.profile_capsule #show_data:focus,
+.profile_capsule #show_data:active {
+    display:block;
+    margin-bottom:1rem;
+    color:#000638;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.profile_capsule #show_data:hover {
+  color:#22285a;
+  background-color:#fff;
 }
 
 .map_capsule .deflist,
