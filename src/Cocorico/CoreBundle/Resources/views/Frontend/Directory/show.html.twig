@@ -104,9 +104,7 @@
                                     {% if structure.kind == 'ETTI' and structure.directoryListingCategories|length > 3 %}
                                         <li>Multisectoriel</li>
                                     {% else %}
-                                        {% for cat in structure.directoryListingCategories %}
-                                            <li>{{ cat.getCategory().getName() }}</li>
-                                        {% endfor %}
+                                        <li>{{ structure.getSectorString(6, '</li><li>')|raw}}</li>
                                     {% endif %}
                                 </ul>
                             </span>
@@ -116,7 +114,7 @@
                                 <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
                             </span>
                             <span>
-                                <h3>Élément différenciants (materiels, services particuliers...)</h3>
+                                <h3>Éléments différenciants (materiels, services particuliers...)</h3>
                                 Non renseigné
                             </span>
                         </div>
