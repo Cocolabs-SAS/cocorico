@@ -77,11 +77,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_siret.png')}}" />Siret : {{ structure.getNiceSiret }}</div>
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_types.png')}}" />{{ structure.prestaTypeText(', ') }}</div>
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_workers.png')}}" />Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_nature.png')}}" />{{ structure.kind }}</div>
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('images/prof_calendar.png')}}" />Date de création : non disponible</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />Siret : {{ structure.getNiceSiret }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_types.svg')}}" />{{ structure.prestaTypeText(', ') }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_workers.svg')}}" />Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_nature.svg')}}" />{{ structure.kind }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_calendar.svg')}}" />Date de création : non disponible</div>
                                 </div>
                             </div>
                             {#
@@ -94,7 +94,6 @@
 
                     <!-- Second Row, Company Details -->
                     <div class="row mb-3">
-                        {% if structure.hasPrestaType %}
                         <div class="col-sm-6 img-left">
                             <span class="il-l">
                                 <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
@@ -102,9 +101,13 @@
                             <span>
                                 <h3>Secteurs d'activité</h3>
                                 <ul class="active_sectors">
-                                    {% for cat in structure.directoryListingCategories %}
-                                        <li>{{ cat.getCategory().getName() }}</li>
-                                    {% endfor %}
+                                    {% if structure.kind == 'ETTI' and structure.directoryListingCategories|length > 3 %}
+                                        <li>Multisectoriel</li>
+                                    {% else %}
+                                        {% for cat in structure.directoryListingCategories %}
+                                            <li>{{ cat.getCategory().getName() }}</li>
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </span>
                         </div>
@@ -117,7 +120,6 @@
                                 Non renseigné
                             </span>
                         </div>
-                        {% endif %}
                         {#
 
                         <div class="col-sm-5  shadow pull-right">
@@ -132,7 +134,7 @@
                         <div class="row">
                             <div class="col-sm-12 img-left">
                                 <span class="il-l">
-                                    <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
+                                    <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
                                 </span>
                                 <span class="il-r">
                                     <h3>Description de l'activité commerciale</h3>
@@ -152,7 +154,7 @@
                     <div class="row ">
                         <div class="col-sm-12 img-left">
                             <span class="il-l">
-                                <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
+                                <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
                             </span>
                             <span>
                                 <h3>Les prestations proposées</h3>
@@ -169,7 +171,7 @@
                     <div class="row">
                         <div class="col-sm-6 img-left">
                             <span class="il-l">
-                                <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
+                                <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
                             </span>
                             <span>
                                 <h3>Références clients</h3>
@@ -182,7 +184,7 @@
                         </div>
                         <div class="col-sm-6 img-left">
                             <span class="il-l">
-                                <img class="cell_icon" src="{{ asset('images/prof_images.png')}}" />
+                                <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
                             </span>
                             <span>
                                 <h3>Labels & certifications</h3>
