@@ -236,18 +236,30 @@ body #wrapper {
 
 .btn-outline-primary {
     box-sizing: border-box;
-    border: 2px solid #0077FF;
+    color:#000638;
+    border: 2px solid #000638;
     border-radius: 5px;
 }
 
-.btn-outline-primary:hover { background-color: #007BFF; }
+.btn-outline-primary:hover { background-color: #000638; }
 
+.btn-default:active, .btn-primary:active,
+.btn-default, .btn-primary {
+    background-color:#000638;
+    border-color:#000638;
+}
+
+.btn-default:hover,
+.btn-primary:hover {
+  background-color:#22285a;
+  border-color:#22285a;
+}
 
 #form-registerlogin .btn-primary {
     box-sizing: border-box;
     border: 4px solid #0077FF;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: #000638;
 }
 
 #form-registerlogin .btn-primary:hover {
@@ -468,7 +480,7 @@ fieldset {
 }
 
 .navbar .navbar-nav li a {
-    color:#007bff;
+    color:#000638;
     display:block;
     padding:.5rem .3rem;
     font-size:1.1rem;
@@ -476,17 +488,17 @@ fieldset {
 
 .navbar .navbar-nav li a:hover {
     background-color:#e2f2ff;
-    color:#0056b3;
+    color:#00063b;
 }
 
 .navbar a#new_offer, .navbar a.c2action {
     margin-top:5px;
-    background-color:#007bff;
-    border-color:#007bff;
+    background-color:#000638;
+    border-color:#000638;
 }
 .navbar a#new_offer:hover, .navbar a.c2action:hover {
-    background-color:#0069d9;
-    border-color:#0062cc;
+    background-color:#22285a;
+    border-color:#22285a;
 }
 
 .navbar #dashboard-dropdown {
@@ -628,7 +640,7 @@ footer img.min_trav {
     position:sticky;
     margin:2rem 1rem;
     background-color:#fff;
-    padding:0 1rem 2rem;
+    padding:0 1rem 0rem;
 }
 
 .profile_capsule .separator {
@@ -699,7 +711,11 @@ footer img.min_trav {
     padding:2rem 1rem 2rem;
 }
 
-.map_capsule .map-holder{
+.map_details .prof_icon {
+    margin-right:1rem;
+}
+
+#sidebar .map-holder{
     height:225px;
     width:100%;
     top:10px;
@@ -1113,7 +1129,7 @@ footer img.min_trav {
 }
 
 #info_banner .textbox > div{
-    color:#007bff;
+    color:#000638;
     font-size:.875rem;
     text-transform:uppercase;
 }
@@ -1124,13 +1140,6 @@ footer img.min_trav {
 }
 
 
-#info_banner .btn-outline-primary {
-    box-sizing: border-box;
-    border: 1px solid #0077FF;
-    border-radius: 5px;
-}
-
-#info_banner .btn-outline-primary:hover { background-color: #007BFF; }
 
 @media screen and (min-width: 1100px) {
     #info_banner img {
@@ -1148,13 +1157,13 @@ footer img.min_trav {
         width:90%;
     }
     #info_banner h3 span {
-        border-bottom: 3px #007bff solid;
+        border-bottom: 3px #000638 solid;
         padding-bottom:1.5rem;
     }
 }
 @media screen and (max-width: 1099px) {
     #info_banner h3  {
-        border-bottom: 3px #007bff solid;
+        border-bottom: 3px #000638 solid;
         padding-bottom:1.5rem;
     }
     #info_banner {
@@ -1215,7 +1224,7 @@ footer img.min_trav {
   vertical-align: middle;
   line-height: 1.6em;
   font-size:2.4rem;
-  color: #007BFF;
+  color: #000638;
   font-weight:bold;
 }
 

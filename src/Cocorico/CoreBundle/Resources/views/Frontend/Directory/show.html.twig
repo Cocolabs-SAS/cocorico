@@ -232,6 +232,9 @@
                         <div id="map-company" class="map-canvas"></div>
                     </div>
                     <div class="map_details">
+                        <div class=""><img class="prof_icon" src="{{ asset('svg/geo_pos.svg')}}" />{{ structure.city }}</div>
+                        <div class=""><img class="prof_icon" src="{{ asset('svg/geo_pin.svg')}}" /> Département {{ structure.department }}</div>
+                        {#
                         <dl class='deflist'>
                             <dd>{{ structure.region }}</dd>
                             {% if structure.polRange %}
@@ -242,6 +245,7 @@
                                 <dd>{{ structure.range}} Km</dt>
                             {% endif %}
                         </dl>
+                        #}
                     </div>
                 </div>
                 {#
@@ -295,9 +299,11 @@
                 fillOpacity: 0.1,
                 radius:  1000
             });
-            $('#show_data').click(() => {
-                console.log('poulet');
+
+            $('#show_data').click((e) => {
+                e.preventDefault();
                 $('#the_data').toggle('slow');
+                return false;
             });
         });
 

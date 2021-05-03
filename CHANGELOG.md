@@ -10,7 +10,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### [3.9] - (2021-04-XX)
 - Update fiche structure SIAE
-- Couleur du texte révisée
+- Couleur du texte et boutons révisée
+- Wording page d'accueil
 
 ### [3.8] - (2021-04-29)
 - Ajout paramètre périmêtre d'intervention dans le répertoire SIAE
