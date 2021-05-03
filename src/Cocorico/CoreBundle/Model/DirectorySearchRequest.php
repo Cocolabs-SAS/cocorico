@@ -198,7 +198,7 @@ class DirectorySearchRequest
                 $this->setRegion($region_idx);
                 break;
             default:
-                $this->searchType = 'other';
+                $this->searchType = 'country';
                 break;
         }
 
@@ -500,6 +500,7 @@ class DirectorySearchRequest
         // and older queries
         return [
             'type' => $this->structureType,
+            'country' => $this->country,
             'sector' => $this->sectors,
             'prestaType' => $this->prestaType,
             'withAntenna' => $this->withAntenna,

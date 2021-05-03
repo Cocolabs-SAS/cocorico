@@ -56,7 +56,7 @@
 
 
         function fillAddressFields(result) {
-            //console.log(result);
+            console.log(result);
             var resultLocale = result[locale];
             var extendSearch = {{ extend_search|default('') ? 'true' : 'false' }};
             var $zip = $searchForm.find("#zip");

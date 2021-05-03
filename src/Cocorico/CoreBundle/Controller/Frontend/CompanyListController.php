@@ -76,7 +76,7 @@ class CompanyListController extends Controller
             $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
             $entries = $directoryManager->findByForm($sort, $page, $sort->getLegacyParams());
-            // dump($sort->getLegacyParams());
+            //dump($sort->getLegacyParams());
 
             $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
