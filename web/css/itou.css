@@ -761,6 +761,7 @@ footer img.min_trav {
 
 .img-left span.il-l {
     width:45px;
+    flex-shrink: 0;
 }
 
 .img-left span.il-r {
