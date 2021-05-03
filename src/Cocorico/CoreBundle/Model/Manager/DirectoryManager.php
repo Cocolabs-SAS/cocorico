@@ -263,7 +263,7 @@ class DirectoryManager extends BaseManager
         }
 
         // Filter on postal code
-        if ($params['searchType'] != 'country' && $params['postalCode'] != false) {
+        if (in_array($params['searchType'], ['city', 'department']) && $params['postalCode'] != false) {
             $value = $params['postalCode'];
             $qB->andWhere('d.postCode like :pcode')
                ->setParameter('pcode', addcslashes($value, '%_').'%');
