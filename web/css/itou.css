@@ -621,6 +621,9 @@ footer img.min_trav {
 
 
 #dir-profile aside.profile {
+    background-image:url('/svg/ronds_rose.svg');
+    background-repeat:no-repeat;
+    background-position: bottom 0px right 0px;
     background-color:#fff;
     height:100%;
     position:sticky;
@@ -714,6 +717,7 @@ footer img.min_trav {
 .map_details .prof_icon {
     margin-right:1rem;
 }
+
 
 #sidebar .map-holder{
     height:225px;
