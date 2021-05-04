@@ -36,10 +36,6 @@ ENV SQL_HOST=$SQL_HOST\
     SMTP_USER=$SMTP_USER \
     SYMFONY_ENV=dev 
 
-# Add Yarn
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
 RUN apt-get update
 
 RUN apt-get install -y \
@@ -47,12 +43,20 @@ RUN apt-get install -y \
         git \
         default-mysql-client \ 
         imagemagick \ 
+        gnupg \
+        apt-transport-https \
         unzip \
         wget \
-        screen \
-        yarn
+        vim-tiny \
+        screen
+
+# Add Yarn & PHP
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update
 
 RUN apt-get install -y \
+        yarn \
         php7.3 \
         php7.3-fpm \
         php7.3-curl \
@@ -67,7 +71,6 @@ RUN apt-get install -y \
 
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-RUN composer global require hirak/prestissimo 
 RUN  groupadd cocorico && useradd -g cocorico --create-home cocorico
 
 # COPY docker/nginx.default.conf /etc/nginx/conf.d/default.conf
@@ -97,5 +100,11 @@ RUN wget https://get.symfony.com/cli/installer -O - | bash
 
 COPY ./docker/run.sh ./run
 COPY ./docker/run_css.sh ./run_css
+COPY ./docker/run_all.sh ./run_all
+COPY ./docker/setup_local_db.sh ./setup
 
-CMD ["screen"]
+RUN composer install && yarn install
+RUN clevercloud/post_build_hook.sh
+RUN wget https://get.symfony.com/cli/installer -O - | bash
+
+ENTRYPOINT ["bash"]
