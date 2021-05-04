@@ -463,6 +463,14 @@ class Directory
         return $this->name;
     }
 
+    public function getNameOrBrand()
+    {
+        if ($this->brand) {
+            return $this->brand;
+        }
+        return $this->name;
+    }
+
     /**
      * Set siret.
      *
@@ -498,6 +506,15 @@ class Directory
             return substr($this->siret,0, 9);
         }
         return '';
+    }
+
+    public function getNiceSiret()
+    {
+        $s = $this->siret;
+        $srn =  substr($s,0,3) . " " . substr($s,3,3) . " " . substr($s,6,3);
+        if (strlen($s) == 9)
+            return $srn;
+        return $srn . " " . substr($s,9,5);
     }
 
     /**

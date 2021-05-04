@@ -2,6 +2,7 @@
 
 # Dashboard
 ## Booking
+
 cocorico_dashboard_booking_offerer:
     -   text: 'Bookings'
         route: 'cocorico_dashboard_booking_offerer'
@@ -70,6 +71,15 @@ cocorico_dashboard_directory_edit_categories:
         route: 'cocorico_dashboard_directory'
     -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Directory', 'entityMethod': 'getName'}
     -   text: "Secteurs d'Activité"
+
+cocorico_itou_siae_directory:
+    -   text : 'Directory'
+        route: 'cocorico_itou_siae_directory'
+
+cocorico_directory_show:
+    -   text: 'Liste'
+        route: 'cocorico_itou_siae_directory'
+    -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Directory', 'entityMethod': 'getNameOrBrand'}
 
 ##Listing
 cocorico_dashboard_listing:

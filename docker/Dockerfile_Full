@@ -1,5 +1,5 @@
-
-# docker run --name cocorico -ti -p 9090:9090 -p 3306:3306 -p 9001:9001 -p 27017:27017  -v `pwd`:/cocorico -v `pwd`/tmp/mysql:/var/lib/mysql -v `pwd`/tmp/mongo:/data/db -e HOST_UID=$UID cocolabs/cocorico
+# docker run --name cocorico -ti -p 9090:9090 -p 3306:3306 -p 9001:9001 -p 27017:27017  -v `pwd`:/cocorico -v `pwd`/tmp/mysql:/var/lib/mysql -e HOST_UID=$UID cocolabs/cocorico
+#
 from debian:buster-slim
 
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
@@ -20,8 +20,6 @@ ENV SQL_HOST=localhost \
     SQL_NAME=cocorico \
     SQL_USER=cocorico \
     SQL_PASS=cocorico \
-    MONGO_URL=mongodb://localhost:27017 \
-    MONGO_DB=cocorico \
     HOST_PORT=$HOST_PORT \
     GGL_KEY1=$GGL_KEY1 \
     GGL_KEY2=$GGL_KEY2 \
@@ -43,19 +41,6 @@ RUN apt-get install -y \
         mariadb-server \
         default-mysql-client
 
-# Install mongodb
-
-# RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add - && \
-#     echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/4.4 main" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list && \
-#     apt-get update && \
-#     apt-get install -y \
-#         mongodb-org
-
-RUN wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | apt-key add -
-RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-RUN apt-get update
-RUN apt-get install -y mongodb-org
-
 ENTRYPOINT ["bash"]
 RUN apt-get install -y \
         php7.3 \
@@ -68,7 +53,6 @@ RUN apt-get install -y \
         php7.3-gd \
         php-dom \
         php-imagick \
-        php-mongodb \
         php-mysql
 
 
@@ -88,8 +72,6 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%SQL_NAME%|'"$SQL_NAME"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%SQL_USER%|'"$SQL_USER"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%SQL_PASS%|'"$SQL_PASS"'|' /cocorico/app/config/parameters.yml \
-    && sed -i -e 's|%MONGO_URL%|'"$MONGO_URL"'|' /cocorico/app/config/parameters.yml \
-    && sed -i -e 's|%MONGO_DB%|'"$MONGO_DB"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%HOST_PORT%|'"$HOST_PORT"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY1%|'"$GGL_KEY1"'|' /cocorico/app/config/parameters.yml \
     && sed -i -e 's|%GGL_KEY2%|'"$GGL_KEY2"'|' /cocorico/app/config/parameters.yml \

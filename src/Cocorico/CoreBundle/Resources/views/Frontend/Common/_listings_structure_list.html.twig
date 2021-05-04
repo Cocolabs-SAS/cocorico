@@ -1,0 +1,16 @@
+<div class="prests-holder row">
+    {% if listings|length %}
+        {% for listing in listings %}
+            {% set listing_translation = listing.translations[app.request.locale] %}
+            <!-- listing-post -->
+
+            <article class="prests-post small col-sm-4">
+                <img class="cell_icon" src="{{ asset('images/prof_dot.png')}}" />
+                <h4>{{ listing_translation.title }}</h4>
+                <div>
+                    {{ listing_translation.description }}
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+</div>

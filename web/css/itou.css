@@ -65,7 +65,18 @@
 
 body {
     font-family:'roboto';
+    color:#000638;
 }
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    color:#000638;
+}
+
+body #wrapper {
+    overflow:initial;
+}
+
 /******************
  * CONFIRM STYLES
  ******************/
@@ -98,7 +109,6 @@ body {
 
 .form-confirm .no-results  {
     font-size:1.4rem;
-    color:#000;
 }
 
 
@@ -226,18 +236,30 @@ body {
 
 .btn-outline-primary {
     box-sizing: border-box;
-    border: 2px solid #0077FF;
+    color:#000638;
+    border: 2px solid #000638;
     border-radius: 5px;
 }
 
-.btn-outline-primary:hover { background-color: #007BFF; }
+.btn-outline-primary:hover { background-color: #000638; }
 
+.btn-default:active, .btn-primary:active,
+.btn-default, .btn-primary {
+    background-color:#000638;
+    border-color:#000638;
+}
+
+.btn-default:hover,
+.btn-primary:hover {
+  background-color:#22285a;
+  border-color:#22285a;
+}
 
 #form-registerlogin .btn-primary {
     box-sizing: border-box;
     border: 4px solid #0077FF;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: #000638;
 }
 
 #form-registerlogin .btn-primary:hover {
@@ -262,7 +284,6 @@ body {
 .login-like .sub-form {
     box-shadow: 4px 4px 20px 0 rgba(0,0,0,0.2);
     padding:2rem;
-    color:#000;
     font-size:1rem;
     border-radius:7px;
 }
@@ -270,13 +291,11 @@ body {
 #form-registerlogin .sub-form2,
 .login-like .sub-form2 {
     padding:2rem;
-    color:#000;
     font-size:1.125rem;
 }
 
 #form-registerlogin .sub-form3,
 .login-like .sub-form3 {
-    color:#000;
     font-size:1.125rem;
 }
 
@@ -289,14 +308,12 @@ body {
     font-size:1.375rem;
     text-align:center;
     text-transform:uppercase;
-    color:#000;
     font-weight:500;
 }
 
 .login_register h3 {
     font-size:1rem;
     text-transform:uppercase;
-    color:#000;
     font-weight:700;
     margin-bottom:1rem;
     margin-top:3rem;
@@ -463,7 +480,7 @@ fieldset {
 }
 
 .navbar .navbar-nav li a {
-    color:#007bff;
+    color:#000638;
     display:block;
     padding:.5rem .3rem;
     font-size:1.1rem;
@@ -471,17 +488,17 @@ fieldset {
 
 .navbar .navbar-nav li a:hover {
     background-color:#e2f2ff;
-    color:#0056b3;
+    color:#00063b;
 }
 
 .navbar a#new_offer, .navbar a.c2action {
     margin-top:5px;
-    background-color:#007bff;
-    border-color:#007bff;
+    background-color:#000638;
+    border-color:#000638;
 }
 .navbar a#new_offer:hover, .navbar a.c2action:hover {
-    background-color:#0069d9;
-    border-color:#0062cc;
+    background-color:#22285a;
+    border-color:#22285a;
 }
 
 .navbar #dashboard-dropdown {
@@ -577,13 +594,15 @@ footer img.min_trav {
 .profile-detail {
     margin:0;
     padding-right:1rem;
-    color:#000;
+    color:#000638;
 }
 
+/*
 .profile-detail h3,
 .profile-detail h4 {
     color:#000;
 }
+*/
 
 .shadow {
     box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 4px 4px 20px 0 rgba(0,0,0,0.05);
@@ -600,10 +619,16 @@ footer img.min_trav {
 .deflist dt {
 }
 
-aside.profile {
-    background-color:#FEEDEE;
+
+#dir-profile aside.profile {
+    background-image:url('/svg/ronds_rose.svg');
+    background-repeat:no-repeat;
+    background-position: bottom 0px left 0px;
+    background-color:#fff;
     height:100%;
-    position:relative;
+    position:sticky;
+    top:10px;
+    box-shadow: 0 2px 19px 0 rgba(0, 0, 0, 0.09);
 }
 
 @media screen and (min-width:767px) {
@@ -614,19 +639,57 @@ aside.profile {
 }
 
 .profile_capsule {
+    top:10px;
+    position:sticky;
     margin:2rem 1rem;
     background-color:#fff;
-    padding:0 1rem 2rem;
+    padding:0 1rem 0rem;
+}
+
+.profile_capsule .separator {
     border-bottom:5px solid #FE5455;
     border-radius:4px;
 }
 
 .profile_capsule h3 {
     margin:2rem 1rem;
-    color:#000;
     padding-bottom:.4rem;
     padding-top:.6rem;
     border-bottom: 1px solid #999;
+}
+
+.profile_capsule #contact,
+.profile_capsule #contact:focus,
+.profile_capsule #contact:active {
+    display:block;
+    margin: 0 0 45px 20px;
+    padding: 15px 11px;
+    border-radius: 4px;
+    border: 2px solid #000638;
+    background-color: #000638;
+    color:#fff;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.profile_capsule #contact:hover {
+  background-color:#fff;
+  background-color:#22285a;
+}
+
+.profile_capsule #show_data,
+.profile_capsule #show_data:focus,
+.profile_capsule #show_data:active {
+    display:block;
+    margin-bottom:1rem;
+    color:#000638;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.profile_capsule #show_data:hover {
+  color:#22285a;
+  background-color:#fff;
 }
 
 .map_capsule .deflist,
@@ -640,7 +703,6 @@ aside.profile {
 }
 
 .user_description {
-    color:#000;
     padding:1rem;
     font-size:1.2rem;
 }
@@ -652,7 +714,12 @@ aside.profile {
     padding:2rem 1rem 2rem;
 }
 
-.map_capsule .map-holder{
+.map_details .prof_icon {
+    margin-right:1rem;
+}
+
+
+#sidebar .map-holder{
     height:225px;
     width:100%;
     top:10px;
@@ -674,7 +741,47 @@ aside.profile {
 }
 
 .profile-detail .row > div {
-    min-height:7rem;
+}
+
+.profile-detail .img-left {
+    display:flex;
+    flex-direction:row;
+}
+
+.profile-detail h3 {
+    font-size:1.375em;
+}
+
+.img-left .il-l img {
+    height:auto;
+    max-width:100%;
+    margin-right:.7rem;
+    margin-top:5px;
+}
+
+.img-left span.il-l {
+    width:45px;
+    flex-shrink: 0;
+}
+
+.img-left span.il-r {
+    flex-grow:1;
+    display:block;
+}
+
+.prests-holder {
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.prests-post {
+    min-height:4rem;
+    margin-top:2rem;
+
+}
+
+.prests-post h4 {
+    display:inline;
 }
 
 .equal {
@@ -683,10 +790,25 @@ aside.profile {
   flex-wrap: wrap;
 }
 
-#user_profile.gallery-small .slideset,
-#user_profile.gallery-small .slideset .slide {
+#user_profile .gallery-small .slideset,
+#user_profile .gallery-small .slideset .slide {
     width:150px;
     height:100px;
+}
+
+#user_profile {
+    background-color: #F2F3F5;
+    padding:1rem;
+}
+
+#user_profile .cell {
+    padding:0 0 1rem;
+}
+
+
+.profile-detail .prof_icon {
+    width:24px;
+    padding-right:5px;
 }
 
 .active_sectors {
@@ -728,7 +850,6 @@ aside.profile {
 .home-page h1 {
     line-height:1.4em;
     max-width:none;
-    color: #000;
     font-size:2.5rem;
     max-width:800px;
 }
@@ -780,9 +901,11 @@ aside.profile {
 
 
 
+/*
 .multiselect-container > li.multiselect-group label {
     color:#000;
 }
+*/
 
 #itou-results-form {
     background-color:#F2F8FF;
@@ -833,7 +956,6 @@ aside.profile {
     text-align: left;
     width: 100%;
     font-weight:bold;
-    color:#000;
     margin:0;
     padding:0;
     padding-bottom:5px;
@@ -883,7 +1005,6 @@ aside.profile {
     padding: 1rem 1rem;
     margin: 1rem;
     font-size:1rem;
-    color:#000;
     box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 0 1px 3px 0 rgba(0,0,0,0.1), 4px 4px 18px 0 rgba(0,0,0,0.05);
 }
 
@@ -992,7 +1113,6 @@ aside.profile {
 #help_banner {
     margin:0 0rem 4rem 0;
     background-color:#F2F9FF;
-    color:#000;
     font-size:1rem;
     padding:2rem;
     font-weight:bold;
@@ -1006,7 +1126,6 @@ aside.profile {
     text-align:left;
     text-transform: None;
     font-weight:400;
-    color:#000;
 }
 /* info banner */
 #info_banner .textbox {
@@ -1015,25 +1134,17 @@ aside.profile {
 }
 
 #info_banner .textbox > div{
-    color:#007bff;
+    color:#000638;
     font-size:.875rem;
     text-transform:uppercase;
 }
 
 #info_banner h3 {
-    color:#000;
     font-weight:400;
     width:90%
 }
 
 
-#info_banner .btn-outline-primary {
-    box-sizing: border-box;
-    border: 1px solid #0077FF;
-    border-radius: 5px;
-}
-
-#info_banner .btn-outline-primary:hover { background-color: #007BFF; }
 
 @media screen and (min-width: 1100px) {
     #info_banner img {
@@ -1048,17 +1159,16 @@ aside.profile {
         padding-top: 2rem;
         font-size:1.1rem;
         line-height:1.8em;
-        color:#000;
         width:90%;
     }
     #info_banner h3 span {
-        border-bottom: 3px #007bff solid;
+        border-bottom: 3px #000638 solid;
         padding-bottom:1.5rem;
     }
 }
 @media screen and (max-width: 1099px) {
     #info_banner h3  {
-        border-bottom: 3px #007bff solid;
+        border-bottom: 3px #000638 solid;
         padding-bottom:1.5rem;
     }
     #info_banner {
@@ -1079,7 +1189,6 @@ aside.profile {
         padding-top: 2rem;
         font-size:1.4rem;
         line-height:1.8em;
-        color:#000;
         width:100%;
     }
 }
@@ -1097,7 +1206,6 @@ aside.profile {
 }
 
 #step_banner h3 {
-    color: #000;
     margin-left:3rem;
     margin-top:4rem;
     margin-bottom:3rem;
@@ -1108,7 +1216,6 @@ aside.profile {
     padding: 3rem;
     font-size:1.1rem;
     display: flex;
-    color:#000;
 }
 
 #step_banner .info-box .step-num {
@@ -1122,7 +1229,7 @@ aside.profile {
   vertical-align: middle;
   line-height: 1.6em;
   font-size:2.4rem;
-  color: #007BFF;
+  color: #000638;
   font-weight:bold;
 }
 
@@ -1165,9 +1272,11 @@ aside.profile {
     color:#655;
 }
 
+/*
 .listing-container h1 {
     color: #000;
 }
+*/
 
 .listing-container h2 {
     color:#655;
@@ -1186,7 +1295,6 @@ aside.profile {
 
 #main .nav-tabs > li > a {
     background-color: #d8d8d8;
-    color:#000;
     font-weight:bold;
 }
 
@@ -1207,7 +1315,6 @@ aside.profile {
     
 
 .listing-presentation {
-    color:#000;
     margin-top:2rem;
     margin-bottom:2rem;
     margin-bottom:50px;
@@ -1238,14 +1345,12 @@ aside.profile {
     margin:0;
     padding:0;
     margin-right:4rem;
-    color:#000;
 }
 
 .btns-area .btn-secondary:hover,
 .btns-area .btn-secondary:focus,
 .btns-area .btn-secondary:active {
     background-color: #ccc;
-    color:#000;
 }
     
 #pol_range_form {
@@ -1323,7 +1428,6 @@ ul.info-annonce h5 {
 
 ul.info-annonce b {
     font-weight:bold;
-    color:#000;
 }
 
 ul.info-annonce li {
@@ -1481,7 +1585,7 @@ section.quote-quick-form fieldset {
 
 #user_contact h2 a:hover {
     text-decoration:underline;
-    color:#000;
+    color:#000638;
 }
 
 
@@ -1532,12 +1636,10 @@ section.quote-quick-form fieldset {
     font-size:2rem;
     font-family:roboto;
     font-weight:300;
-    color:#000;
 }
 
 .siae-card-container {
     text-decoration:none;
-    color:#000;
     display:block;
     border: 2px solid transparent;
     border-radius:9px;
@@ -1548,7 +1650,7 @@ section.quote-quick-form fieldset {
 
 .siae-card-container:hover {
     text-decoration:none;
-    color:#000;
+    color:#000638;
     display:block;
     box-shadow: 0px 3px 11px 7px rgba(0,0,0,0.2);
 }
@@ -1556,7 +1658,7 @@ section.quote-quick-form fieldset {
 .siae-card-container:active,
 .siae-card-container:focus {
     text-decoration:none;
-    color:#000;
+    color:#000638;
     border-color:transparent;
 }
 
@@ -1566,14 +1668,9 @@ section.quote-quick-form fieldset {
 }
 
 .siae-info {
-    color:#000;
     font-family:roboto;
     display:flex;
     flex-direction:column;
-}
-
-.siae-info h3 {
-    color:#000;
 }
 
 .siae-info .maparea .map-holder{
@@ -1584,12 +1681,12 @@ section.quote-quick-form fieldset {
     display:flex;
     flex-direction: column;
     margin-left:1rem;
+    color:#000638;
 }
 
 .sc-main h3 {
     margin:0;
     padding:0;
-    color:#000;
     font-size:1.25rem;
     margin-bottom:1rem;
 }
@@ -1610,7 +1707,6 @@ section.quote-quick-form fieldset {
 .sc-body li img {
     width:20px;
     margin-right:.7rem;
-    margin-top:5px;
 }
 
 .sc-body li span {
@@ -1725,18 +1821,20 @@ section.quote-quick-form fieldset {
 
 
 .headlink h3 {
-    color:#000;
     margin-top:0;
 }
 
-.headlink p {
+.headlink ol {
+    margin:1rem 0 1rem 3rem;
+    padding:0;
     font-size:1.4rem;
+    font-weight:500;
 }
 
 #formlink a,
 #formlink a:active,
 #formlink a:focus {
-    color:#0069D9 !important; 
+    color:#000638 !important; 
 }
 
 #formlink a:hover {
@@ -1762,7 +1860,6 @@ section.quote-quick-form fieldset {
 .headlink {
     margin: 3rem 0 2rem;
     padding: .8rem 2rem 5rem;
-    color:#000;
     line-height:2.2rem;
     border-radius:8px;
     position:relative;
@@ -1834,10 +1931,12 @@ div.c4_multiselect li {
 }
 .multisel h1 { font-size: 1.5rem; margin-top:12px;}
 .multisel h2 { font-size: 1.3rem; }
+/*
 .multisel h1:hover,
 .multisel h2:hover {
     border-color:#000;
 }
+*/
 
 
 
