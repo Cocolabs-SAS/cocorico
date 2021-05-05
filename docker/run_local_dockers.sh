@@ -1,11 +1,10 @@
 #!/bin/bash
-docker stop some-mongo || true
-docker stop some-mariadb || true
-docker rm some-mongo some-mariadb || true
+# Database importation :
+# docker exec -i some-mariadb mysql -ucocorico -pcocorico cocorico < coco_dump.sql
+docker network create --driver bridge cocorico || true
 
-docker run --name some-mongo --network cocorico -d \
-    -e MONGO_INITDB_DATABASE=cocorico \
-    mongo:4.0-xenial 
+docker stop some-mariadb || true
+docker rm some-mariadb || true
 
 docker run --name some-mariadb --network cocorico \
     -e MYSQL_ROOT_PASSWORD=cocorico \
