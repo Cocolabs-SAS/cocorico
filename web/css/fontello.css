@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'fontello2';
-  src: url('../fonts/fontello2.woff?25201598') format('woff');
+  font-family: 'fontello';
+  src: url('../fonts/fontello.woff?86903366') format('woff');
   font-weight: normal;
   font-style: normal;
 }
@@ -9,14 +9,14 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'fontello2';
-    src: url('../font/fontello2.svg?25201598#fontello2') format('svg');
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?86903366#fontello') format('svg');
   }
 }
 */
  
  [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "fontello2";
+  font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: never;
@@ -97,6 +97,8 @@
 .icon-clipboard:before { content: '\e82c'; } /* '' */
 .icon-commerical-building:before { content: '\e82d'; } /* '' */
 .icon-lock-empty:before { content: '\e82e'; } /* '' */
+.icon-cw:before { content: '\e82f'; } /* '' */
+.icon-doc-text:before { content: '\e830'; } /* '' */
 .icon-building:before { content: '\f0f7'; } /* '' */
 .icon-map-signs:before { content: '\f277'; } /* '' */
 .icon-user-circle:before { content: '\f2bd'; } /* '' */

@@ -1,18 +1,17 @@
 <a href="{{ path('cocorico_directory_show', {'id' : structure.id }) }}" class="siae-card-container">
     <div class="siae-card">
-        <div class="sc-img">
+        <div class="sc-img mr-5">
             {# Logo #}
-
             {% if structure.images|length %}
                     {% set image = structure.images[0] %}
                     <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
                          alt="{{ structure.name }}"/>
             {% else %}
-                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_large') }}"
                          alt="{{ structure.name }}"/>
             {% endif %}
         </div>
-        <div class="sc-main container">
+        <div class="sc-main">
             <div class="sc-head">
                 <h3>
                     {% if structure.brand %}
@@ -26,11 +25,11 @@
                 - favoris
                 #}
             </div>
-            <div class="sc-body row">
+            <div class="sc-body">
                 <div class="sc-profile">
                     <ul>
-                        <li><img src="{{ asset('images/siae_list_kind.svg')}}" style="height:15px;">
-                            <span style="">
+                        {% if structure.kind is not null and structure.kind is not empty %}
+                        <li class="sc-profile-kind">
                             {% if structure.kind == 'ETTI' %}
                                 intérim
                             {% elseif structure.kind == 'AI' %}
@@ -38,18 +37,15 @@
                             {% else %}
                                 {{ structure.prestaTypeText('<br />') | raw}}
                             {% endif %}
-                            </span>
                         </li>
-                        <li><img src="{{ asset('images/siae_list_type.svg')}}" style="height:15px">{{ structure.kind }}</li>
-                        <li>
+                        {% endif %}
+                        <li class="sc-profile-type">{{ structure.kind }}</li>
+                        <li class="sc-profile-sectors">
                         {% if structure.hasDirectoryListingCategory %}
-                            <img src="{{ asset('images/siae_list_sectors.svg')}}" style="height:15px">
-                            <span>
-                                {{ structure.getSectorString(2, '<br />') | raw }}
-                            </span>
+                           {{ structure.getSectorString(2, '<br />') | raw }}
                         {% endif %}
                         </li>
-                        <li><img src="{{ asset('images/siae_list_town.svg')}}" style="height:21px">{{ structure.region }}</li>
+                        <li class="sc-profile-town">{{ structure.region }}</li>
                     </ul>
                     {#
                     - type
