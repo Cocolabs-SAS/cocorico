@@ -1077,9 +1077,9 @@ class Directory
         if (str_ends_with($this->siret, '99999')) {
             return false;
         }
-        return $this->siretIsValid == 0 ||
-                $this->siretIsValid == false ||
-                $this->siretIsValid == null;
+        return $this->siretIsValid != 0 &&
+                $this->siretIsValid != false &&
+                $this->siretIsValid != null;
     }
 
     /**
