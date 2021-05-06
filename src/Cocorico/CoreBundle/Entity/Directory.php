@@ -512,7 +512,7 @@ class Directory
     {
         $s = $this->siret;
         $srn =  substr($s,0,3) . " " . substr($s,3,3) . " " . substr($s,6,3);
-        if (! $this->siretIsValid)
+        if (! $this->siretIsValid || $this->siretIsValid == 0)
         #if (strlen($s) == 9)
             return $srn;
         return $srn . " " . substr($s,9,5);
