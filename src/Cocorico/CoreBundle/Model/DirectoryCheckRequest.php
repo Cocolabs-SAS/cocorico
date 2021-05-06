@@ -29,7 +29,7 @@ class DirectoryCheckRequest {
 
     public function setSiret($siret)
     {
-        return $this->siret = $siret;
+        return $this->siret = preg_replace('/\D+/', '', $siret);
     }
 
     public function getBrand()

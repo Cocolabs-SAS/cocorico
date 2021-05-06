@@ -77,7 +77,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />Siret : {{ structure.getNiceSiret }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />
+                                        {% if structure.siretIsValid %}
+                                        Siret :
+                                        {% else %}
+                                        Siren :
+                                        {% endif %}
+                                        {{ structure.getNiceSiret }}
+                                    </div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_types.svg')}}" />{{ structure.prestaTypeText(', ') }}</div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_workers.svg')}}" />Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_nature.svg')}}" />{{ structure.kind }}</div>
