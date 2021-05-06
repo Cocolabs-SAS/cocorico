@@ -142,7 +142,7 @@
             <div id="dir_list">
                 <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} correspondent à vos critères
                 </div>
-                <div class="row">
+                <div class="row dir_list-row">
                     <div class="col-sm-8">
                     {%- if not entries is empty -%}
                         {% for entry in entries.iterator %}
@@ -184,9 +184,7 @@
                             {% endfor %}
                         </table>
                         #}
-                        {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with {
-                        'pagination': pagination
-                        } only %}
+                        {% include '@CocoricoCore/Frontend/Common/_pagination.html.twig' with { 'pagination': pagination,  'alignment': 'text-center' } only %}
         
                     {%- else -%}
                         <div class="col-xs-12 form-confirm min-height justify-content-center" style="margin:-21px 0 30rem;">
@@ -204,8 +202,6 @@
                                         <b>Faites nous part de votre besoin et nous vous recontacterons rapidement</b>
                                     </div>
                                 </div>
-
-
                                 <div class="row" style="margin-top:4rem">
                                     <div class="buttonrow" style="display:flex">
                                         <a class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx">Déposez votre demande</a>
@@ -215,53 +211,55 @@
                         </div>
                     {%- endif -%}
                     </div>
-                    <div class="col-sm-4 siae-info">
-                        <!-- maparea -->
-                        <div class="maparea">
+                    <div class="col-sm-4 siae-info mt-6 mt-sm-0">
+                        <div class="siae-info-sticky">
+                            <!-- maparea -->
                             <div class="maparea">
-                                {#
-                                <div class="checkbox search-on-drag-cb-wrapper">
-                                    <input type="checkbox" name="search-on-drag" id="search-on-drag">
-                                    <label class="form-label" for="search-on-drag">
-                                        {{ 'search-on-map-drag'|trans }}
-                                    </label>
-                                </div>
-                                #}
-                                <div class="map-holder">
-                                    <div id="map-canvas"></div>
-                                    {% include '@CocoricoCore/Frontend/Directory/_marker.html.twig'  with {
-                                    'markers': markers,
-                                    } only %}
+                                <div class="maparea">
+                                    {#
+                                    <div class="checkbox search-on-drag-cb-wrapper">
+                                        <input type="checkbox" name="search-on-drag" id="search-on-drag">
+                                        <label class="form-label" for="search-on-drag">
+                                            {{ 'search-on-map-drag'|trans }}
+                                        </label>
+                                    </div>
+                                    #}
+                                    <div class="map-holder">
+                                        <div id="map-canvas"></div>
+                                        {% include '@CocoricoCore/Frontend/Directory/_marker.html.twig'  with {
+                                        'markers': markers,
+                                        } only %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="si-separator"></div>
-                        <div class="si-ideas">
-                            <h3>Idées reçues</h3>
-                            <p><img src="{{ asset('images/check.svg')}}" style="height:22px" /> 
-                                <span>La structure est trop petite pour répondre à mon besoin...
-                                <b>Mais elle est sûrement ouverte à la co-traitance.</b>
-                                </span>
-                            </p>
+                            <div class="si-separator"></div>
+                            <div class="si-ideas">
+                                <h3>Idées reçues</h3>
+                                <p><img src="{{ asset('images/check.svg')}}" style="height:22px" /> 
+                                    <span>La structure est trop petite pour répondre à mon besoin...
+                                    <b>Mais elle est sûrement ouverte à la co-traitance.</b>
+                                    </span>
+                                </p>
 
-                            <p><img src="{{ asset('images/check.svg')}}" style="height:22px" />
-                                <span>Son chiffre d’affaire est trop bas et je ne veux pas être
-                                son seul client... <b>Mais Vous pouvez commencer par lui confier
-                                un marché de plus faible périmètre, sans prendre de risque,
-                                puis faire grandir ce partenariat si vous en êtes satisfait.</b>
-                                </span>
-                            </p>
+                                <p><img src="{{ asset('images/check.svg')}}" style="height:22px" />
+                                    <span>Son chiffre d’affaire est trop bas et je ne veux pas être
+                                    son seul client... <b>Mais Vous pouvez commencer par lui confier
+                                    un marché de plus faible périmètre, sans prendre de risque,
+                                    puis faire grandir ce partenariat si vous en êtes satisfait.</b>
+                                    </span>
+                                </p>
 
-                            <p><img src="{{ asset('images/check.svg')}}" style="height:22px" />
-                                <span>L'offre ne correspond pas exactement à ce que je cherche...
-                                <b>Heureusement les entreprises sociales inclusives sont très
-                                innovantes et s'adaptent à vos besoins.</b>
-                                </span>
+                                <p><img src="{{ asset('images/check.svg')}}" style="height:22px" />
+                                    <span>L'offre ne correspond pas exactement à ce que je cherche...
+                                    <b>Heureusement les entreprises sociales inclusives sont très
+                                    innovantes et s'adaptent à vos besoins.</b>
+                                    </span>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {{ form_start(dlform) }}
-                <div id="csv_form" class="row dir_form" style="display:flex;justify-content:center" >
+                <div id="csv_form" class="row dir_form">
                     {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
                     {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                     {#
@@ -270,7 +268,7 @@
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
                     {% do dlform.address.setRendered() %}
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 col-sm-offset-1 mt-4">
                             <div class="title">
                                 Format
                             </div>
@@ -280,8 +278,8 @@
                                 })}}
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <button id="csv-submit" type="submit" class="btn btn-default">
+                        <div class="col-sm-3">
+                            <button id="csv-submit" type="submit" class="btn btn-block btn-default">
                                 Télécharger la liste
                                 <i class="icon-down"></i>
                             </button>

@@ -1656,6 +1656,19 @@ section.quote-quick-form fieldset {
     font-weight:300;
 }
 
+
+@media screen and (min-width:768px) {
+    .dir_list-row {
+    display: flex;
+    justify-content: stretch;
+    }
+
+    .dir_list-row .col-sm-8,
+    .dir_list-row .col-sm-4 {
+        float: none !important;
+    }
+}
+
 .siae-card-container {
     text-decoration:none;
     display:block;
@@ -1687,8 +1700,14 @@ section.quote-quick-form fieldset {
 
 .siae-info {
     font-family:roboto;
-    display:flex;
-    flex-direction:column;
+}
+
+@media screen and (min-width:768px) {
+    .siae-info-sticky {
+    position: sticky;
+    top: 150px;
+    z-index: 1;
+    }
 }
 
 .siae-info .maparea .map-holder {
@@ -1706,6 +1725,33 @@ section.quote-quick-form fieldset {
     flex: 1;
 }
 
+.sc-head {
+    position: relative;
+    padding-right: 40px;
+}
+
+.sc-fav {
+    position: absolute;
+    display: block;
+    width: 28px;
+    height: 25px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    line-height: 1;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    background-image: url('../images/sc-fav-star.svg');
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.sc-fav:hover,
+.sc-fav.is-active {
+    background-image: url('../images/sc-fav-star-active.svg');
+}
+
 .sc-main h3 {
     margin:0;
     padding:0;
@@ -1715,7 +1761,6 @@ section.quote-quick-form fieldset {
 
 .sc-body li {
     margin-bottom:1rem;
-    width:50%;
 }
 
 .sc-body ul {
@@ -1734,13 +1779,17 @@ section.quote-quick-form fieldset {
     display:block;
 }
 
-.sc-profile ul {
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
+@media screen and (min-width:768px) {
+    .sc-profile ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(3, 1fr);
+    }
 }
+
 .sc-profile li {
     padding-left: 2rem;
+    min-height:25px;
     background-position: left top;
     background-repeat: no-repeat;
 }
@@ -1753,9 +1802,13 @@ section.quote-quick-form fieldset {
 }
 .sc-profile li.sc-profile-sectors {
     background-image: url('../images/siae_list_sectors.svg');
+    grid-area: 2 / 1 / 4 / 2; 
 }
 .sc-profile li.sc-profile-town {
     background-image: url('../images/siae_list_town.svg');
+}
+.sc-profile li.sc-profile-town-work {
+    background-image: url('../images/siae_list_town_work.svg');
 }
 
 .si-separator {
@@ -1821,6 +1874,11 @@ section.quote-quick-form fieldset {
     width:100%;
 }
 
+
+#dir_form #address {
+    background-image: url('../images/dir_form_ico_map.png');
+}
+
 @media screen and (min-width: 767px) {
     .dir_form .first-row button.multiselect {
         border-top-right-radius: 0px !important;
@@ -1844,6 +1902,9 @@ section.quote-quick-form fieldset {
     color: #979797;
     border: 1px solid #979797;
     margin:0;
+    background-position: right 10px center;
+    background-repeat: no-repeat;    
+    background-image: url('../images/dir_form_ico_shape.png');    
 }
 
 #dir_form ul.multiselect-container a {
@@ -1859,6 +1920,7 @@ section.quote-quick-form fieldset {
     border-radius: 3px 5px 5px 3px;
     background-color: #FFFFFF;
     background-position: right 10px center;
+    background-repeat: no-repeat;
 }
 
 #dir_form ::placeholder {
@@ -1868,11 +1930,18 @@ section.quote-quick-form fieldset {
 .dir_form .reset,
 .dir_form .btn,
 .dir_form #filter-submit {
-    margin-top:2.5rem;
     height: 2.5rem;
     line-height: 1;
+    margin-top:1rem;
 }
 
+@media screen and (min-width: 767px) {
+    .dir_form .reset,
+    .dir_form .btn,
+    .dir_form #filter-submit {
+        margin-top:2.5rem;
+    }
+}
 
 .headlink h3 {
     margin-top:0;

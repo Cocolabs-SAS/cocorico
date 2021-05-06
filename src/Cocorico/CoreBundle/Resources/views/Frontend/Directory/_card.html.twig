@@ -5,10 +5,10 @@
             {% if structure.images|length %}
                     {% set image = structure.images[0] %}
                     <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
-                         alt="{{ structure.name }}"/>
+                         alt="{{ structure.name }}" class="img-responsive" />
             {% else %}
                     <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_large') }}"
-                         alt="{{ structure.name }}"/>
+                         alt="{{ structure.name }}" class="img-responsive" />
             {% endif %}
         </div>
         <div class="sc-main">
@@ -20,6 +20,7 @@
                         {{ structure.name }}
                     {% endif %}
                 </h3>
+                <button class="sc-fav"></button>
                 {#
                 - co-traitance
                 - favoris
@@ -46,6 +47,7 @@
                         {% endif %}
                         </li>
                         <li class="sc-profile-town">{{ structure.region }}</li>
+                        <li class="sc-profile-town-work">{{ structure.region }}</li>
                     </ul>
                     {#
                     - type
