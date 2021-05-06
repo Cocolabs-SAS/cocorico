@@ -116,15 +116,15 @@ class DirectoryFilterType extends AbstractType
                     'empty_data' => '',
                     'choices' => array_flip(Directory::$prestaTypeValues),
                 )
-            )
-            ->add('withAntenna',
-                CheckboxType::class,
-                array(
-                    'label' => 'Inclure les antennes',
-                    'required'=> false,
-                    'data' => true,
-                )
             );
+            //->add('withAntenna',
+            //    CheckboxType::class,
+            //    array(
+            //        'label' => 'Inclure les antennes',
+            //        'required'=> false,
+            //        'data' => true,
+            //    )
+            //);
             // ->add('save', SubmitType::class, ['label' => 'Filtrer'])
             // ->add(
             //     'status',

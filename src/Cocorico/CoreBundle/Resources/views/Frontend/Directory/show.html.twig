@@ -77,7 +77,14 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />Siret : {{ structure.getNiceSiret }}</div>
+                                    <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />
+                                        {% if structure.siretIsValid %}
+                                            Siret:
+                                        {% else %}
+                                            Siren:
+                                        {% endif %}
+                                        {{ structure.getNiceSiret }}
+                                    </div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_types.svg')}}" />{{ structure.prestaTypeText(', ') }}</div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_workers.svg')}}" />Salariés : {{ not structure.employees ? "non disponible" : structure.employees }}</div>
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_nature.svg')}}" />{{ structure.kind }}</div>
@@ -204,7 +211,7 @@
                 <div class="profile_capsule">
                     <div class="" style="display:flex;flex-direction:row;justify-content:flex-end;">
                         <div class=""></div>
-                        <a id="contact" href="https://itou.typeform.com/to/nxG0HlYx" class="button">Être recontacté<i class="icon-mail-alt"></i></a>
+                        <a id="contact" href="https://itou.typeform.com/to/nxG0HlYx#data={{ structure.id }}" class="button">Être recontacté<i class="icon-mail-alt"></i></a>
                     </div>
                     <a href="#" id="show_data">> Afficher les coordonnées</a>
                     <div id="the_data" style="display:none">
