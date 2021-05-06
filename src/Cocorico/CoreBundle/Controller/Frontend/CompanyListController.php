@@ -86,6 +86,7 @@ class CompanyListController extends Controller
             }
             // Hack, weird PHP behaviour
             $dlform->get('serialSectors')->setData(implode('|', $sort->getSectors()));
+            // $dlform->get('withAntenna')->setData(true);
 
             // Markers
             $structures = $entries->getIterator();
