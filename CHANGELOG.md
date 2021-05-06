@@ -11,6 +11,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [3.9] - (2021-05-06)
 - Correctif adoption siret (caractères non numériques)
 - Correctif siret invalide
+- Ajout indicateur typeform
 
 ### [3.9] - (2021-05-04)
 - Update fiche structure SIAE

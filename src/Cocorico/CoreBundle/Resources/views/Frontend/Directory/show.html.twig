@@ -78,11 +78,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="cell col-sm-6"><img class="prof_icon" src="{{ asset('svg/prof_siret.svg')}}" />
-                                        V"{{ structure.siretIsValid }}"
                                         {% if structure.siretIsValid %}
-                                            Siret a :
+                                            Siret:
                                         {% else %}
-                                            Siren b :
+                                            Siren:
                                         {% endif %}
                                         {{ structure.getNiceSiret }}
                                     </div>
