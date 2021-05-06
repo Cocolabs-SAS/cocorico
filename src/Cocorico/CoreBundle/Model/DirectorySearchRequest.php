@@ -29,7 +29,7 @@ class DirectorySearchRequest
     protected $format;
     protected $structureType;
     protected $prestaType;
-    protected $withAntenna;
+    protected $withAntenna = true;
     protected $withRange;
     protected $address;
     protected $lat;
