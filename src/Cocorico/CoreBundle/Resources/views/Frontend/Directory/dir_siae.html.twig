@@ -20,13 +20,13 @@
                 {{ form_start(form) }}
                 <div class="row">
                     <div class="col-sm-10">
-                        <div class="row">
+                        <div class="row first-row">
                             <div class="col-sm-4">
                                 <div class="title">
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                    <div class="multiselect listing-category" style="margin-top:0px">
+                                    <div class="multiselect listing-category">
                                     {{form_widget(form.sector, {
                                         'id': 'sector',
                                         'attr': {
@@ -83,45 +83,6 @@
                                 )}}
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="label-container">
-                                    <div class="field-holder">
-                                    {{form_widget(form.withAntenna, {
-                                        'id': 'withAntenna',
-                                        'attr': {
-                                            'class': 'form-control',
-                                        }}
-                                    )}}
-                                    </div>
-                                    <div class="title">
-                                        {{ form_label(form.withAntenna, 'Inclure les antennes')}}
-                                    </div>
-                                </div>
-                            </div>
-                            {#
-                            {% if request.searchType == 'city' %}
-                            <div class="col-sm-4">
-                                <div class="label-container">
-                                    <div class="field-holder">
-                                    {{form_widget(form.withRange, {
-                                        'id': 'withRange',
-                                        'data': false,
-                                        'attr': {
-                                            'class': 'form-control',
-                                        }}
-                                    )}}
-                                    </div>
-                                    <div class="title">
-                                        {{ form_label(form.withRange, 'Ajouter résultats à proximité')}}
-                                    </div>
-                                </div>
-                            </div>
-                            {% else %}
-                                {% do form.withRange.setRendered() %}
-                            {% endif %}
-                            #}
                         </div>
                     </div>
                     <div class="col-sm-2">
