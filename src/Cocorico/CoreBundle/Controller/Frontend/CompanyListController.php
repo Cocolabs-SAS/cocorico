@@ -73,7 +73,7 @@ class CompanyListController extends Controller
             $sort = $form->getData();
             $sort->prepareData();
 
-            $withAntenna = $sort->getWithAntenna();
+            // $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
             $entries = $directoryManager->findByForm($sort, $page, $sort->getLegacyParams());
             //dump($sort->getLegacyParams());
@@ -81,11 +81,12 @@ class CompanyListController extends Controller
             $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
             // Set download form data
-            foreach (['serialSectors', 'structureType', 'withAntenna', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
+            foreach (['serialSectors', 'structureType', 'postalCode', 'prestaType', 'area', 'city', 'department', 'zip', 'region'] as $key) {
                 $dlform->get($key)->setData($sort->getKeyValue($key));
             }
             // Hack, weird PHP behaviour
             $dlform->get('serialSectors')->setData(implode('|', $sort->getSectors()));
+            // $dlform->get('withAntenna')->setData(true);
 
             // Markers
             $structures = $entries->getIterator();

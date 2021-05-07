@@ -150,8 +150,9 @@ class Directory
 
     public static $exportColumns = array(
         'name' => 'Raison sociale',
+        'brand' => 'Enseigne',
         # 'siret' => 'Siret',
-        'validSiret' => 'Siret',
+        'getNiceSiret' => 'Siret',
         'natureText' => 'Établissement',
         'kind' => 'Type',
         'sectorString' => 'Secteur',
@@ -512,7 +513,8 @@ class Directory
     {
         $s = $this->siret;
         $srn =  substr($s,0,3) . " " . substr($s,3,3) . " " . substr($s,6,3);
-        if (strlen($s) == 9)
+        if (! $this->getSiretIsValid())
+        #if (strlen($s) == 9)
             return $srn;
         return $srn . " " . substr($s,9,5);
     }
@@ -1072,7 +1074,12 @@ class Directory
      */
     public function getSiretIsValid()
     {
-        return $this->siretIsValid;
+        if (str_ends_with($this->siret, '99999')) {
+            return false;
+        }
+        return $this->siretIsValid != 0 &&
+                $this->siretIsValid != false &&
+                $this->siretIsValid != null;
     }
 
     /**

@@ -26,7 +26,7 @@
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                    <div class="multiselect listing-category" style="margin-top:0px">
+                                    <div class="multiselect listing-category">
                                     {{form_widget(form.sector, {
                                         'id': 'sector',
                                         'attr': {
@@ -84,6 +84,7 @@
                             </div>
                         </div>
                         <div class="row">
+                            {#
                             <div class="col-sm-4 mt-4">
                                 <div class="label-container">
                                     <div class="field-holder">
@@ -99,7 +100,6 @@
                                     </div>
                                 </div>
                             </div>
-                            {#
                             {% if request.searchType == 'city' %}
                             <div class="col-sm-4">
                                 <div class="label-container">
@@ -261,8 +261,8 @@
                 {{ form_start(dlform) }}
                 <div id="csv_form" class="row dir_form">
                     {{ form_widget(dlform.sector, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
-                    {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                     {#
+                    {{ form_widget(dlform.withAntenna, {'attr': {'style': 'display:none'}}) }}
                     {{ form_widget(dlform.withRange, {'attr': {'style': 'display:none'}}) }}
                     #}
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}

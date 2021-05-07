@@ -8,6 +8,13 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [3.9] - (2021-05-06)
+- Correctif adoption siret (caractères non numériques)
+- Correctif siret invalide
+- Ajout indicateur typeform
+- Nouveau style multiselecteur secteur d'activité
+- Retrait champ "recherche antennes"
+
 ### [3.9] - (2021-05-04)
 - Update fiche structure SIAE
 - Couleur du texte et boutons révisée
