@@ -5,14 +5,15 @@
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
-    font-family: 'fontello2';
-    src: url('../font/fontello2.svg?33456996#fontello2') format('svg');
+    font-family: 'fontello';
+    src: url('../font/fontello2.svg?33456996#fontello') format('svg');
   }
 }
 */
  
-[class^="icon-f2"]:before, [class*=" icon-f2"]:before {
-  font-family: "fontello2";
+[class^="icon-f2"]:before, 
+[class*=" icon-f2"]:before {
+  font-family: "fontello";
   font-style: normal;
   font-weight: normal;
   speak: never;
@@ -257,6 +258,11 @@ body #wrapper {
 .btn-primary:hover {
   background-color:#22285a;
   border-color:#22285a;
+}
+
+.btn-link,
+.btn-link:hover {
+  color:#22285a;
 }
 
 #form-registerlogin .btn-primary {
@@ -615,53 +621,68 @@ footer img.min_trav {
     color:#000638;
 }
 
-/*
-.profile-detail h3,
-.profile-detail h4 {
-    color:#000;
-}
-*/
-
 .shadow {
     box-shadow: inset 0 1px 0 0 rgba(255,255,255,0.1), 4px 4px 20px 0 rgba(0,0,0,0.05);
 }
 
 .deflist {
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        padding-bottom:10px;
+    }
+
+    .prof_icon {
+        min-width: 30px
+	}
 }
 
-.deflist dd{
-    padding-left:0rem;
-    padding-bottom:1rem;
-}
+@media screen and (min-width:768px) {
+    .dir-profile-row {
+        display: flex;
+        justify-content: stretch;
+    }
 
-.deflist dt {
+    .dir-profile-row .col-sm-8,
+    .dir-profile-row .col-sm-4 {
+        float: none !important;
+    }
 }
 
 
 #dir-profile aside.profile {
     background-image:url('/svg/ronds_rose.svg');
     background-repeat:no-repeat;
-    background-position: bottom 0px left 0px;
+    background-position: bottom left;
     background-color:#fff;
-    height:100%;
-    position:sticky;
-    top:10px;
     box-shadow: 0 2px 19px 0 rgba(0, 0, 0, 0.09);
+    padding: 2rem 1rem;
+    border-radius: 5px;
 }
 
-@media screen and (min-width:767px) {
-    aside.profile {
-        margin-top:-5rem;
-        padding-top:3rem;
+@media screen and (min-width:768px) {
+    #dir-profile aside.profile {
+        position: sticky;
+        top: 150px;
+        z-index: 1;
     }
 }
 
 .profile_capsule {
-    top:10px;
-    position:sticky;
-    margin:2rem 1rem;
     background-color:#fff;
-    padding:0 1rem 0rem;
+    padding: 2rem 1rem;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.05), inset 0px 1px 0px rgba(255, 255, 255, 0.1);
+}
+
+.profile .btn-link {
+   text-align: left !important;
+}
+
+.profile .btn-link:hover i::before,
+.profile .btn-link.is-active i::before {
+    content:'\e81f';
 }
 
 .profile_capsule .separator {
@@ -676,30 +697,22 @@ footer img.min_trav {
     border-bottom: 1px solid #999;
 }
 
-.profile_capsule #contact,
-.profile_capsule #contact:focus,
-.profile_capsule #contact:active {
-    display:block;
-    margin: 0 0 45px 20px;
-    padding: 15px 11px;
-    border-radius: 4px;
-    border: 2px solid #000638;
-    background-color: #000638;
-    color:#fff;
-    text-decoration:none;
-    font-weight:bold;
-}
+.profile_capsule #show_data {
+    display: flex;
+    padding-bottom:10px;
+    
+    .prof_icon {
+        min-width: 20px
+    }
 
-.profile_capsule #contact:hover {
-  background-color:#fff;
-  background-color:#22285a;
+    &.is-open .prof_icon img {
+        transform: rotate(90deg);
+    }
 }
 
 .profile_capsule #show_data,
 .profile_capsule #show_data:focus,
 .profile_capsule #show_data:active {
-    display:block;
-    margin-bottom:1rem;
     color:#000638;
     text-decoration:none;
     font-weight:bold;
@@ -725,49 +738,49 @@ footer img.min_trav {
     font-size:1.2rem;
 }
 
-
 .map_details {
-    background-color:#fff;
-    border-radius: 0 4px 4px 0;
-    padding:2rem 1rem 2rem;
+	background-color: #fff;
+	border-radius: 0 4px 4px 0;
+
+    .prof_icon {
+        min-width: 30px
+	}
 }
 
-.map_details .prof_icon {
-    margin-right:1rem;
-}
-
-
-#sidebar .map-holder{
+#sidebar .map-holder {
     height:225px;
     width:100%;
     top:10px;
     border-radius:4px;
 }
 
-.profile-detail .listing-holder .listing-box {
-    width:380px;
-}
+.profile-detail {
+    
+	.listing-holder {
+		display: flex !important;
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+	}
+    
+    .listing-box { 
+        width: 380px; 
+    }
 
-.profile-detail .listing-holder {
-    display: flex !important;
-    flex-wrap:wrap;
-    justify-content:space-evenly;
-}
+	.img-left {
+		display: flex;
+		flex-direction: row;
+        justify-content: stretch;
+	}
 
-.profile-detail .row {
-    margin-bottom:1rem;
-}
+	h3 {
+		font-size: 1.375em;
+        margin-top: 10px;
+        margin-bottom: 1rem;
+	}
 
-.profile-detail .row > div {
-}
-
-.profile-detail .img-left {
-    display:flex;
-    flex-direction:row;
-}
-
-.profile-detail h3 {
-    font-size:1.375em;
+    .il-r {
+        flex: 1;
+    }
 }
 
 .img-left .il-l img {
@@ -794,8 +807,6 @@ footer img.min_trav {
 
 .prests-post {
     min-height:4rem;
-    margin-top:2rem;
-
 }
 
 .prests-post h4 {
@@ -812,21 +823,28 @@ footer img.min_trav {
 #user_profile .gallery-small .slideset .slide {
     width:150px;
     height:100px;
+    margin: 0 auto;
 }
 
 #user_profile {
     background-color: #F2F3F5;
-    padding:1rem;
+    padding: 20px;
+    border-radius: 5px;
 }
+
+#user_profile .cell,
+#user_profile h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
 
 #user_profile .cell {
-    padding:0 0 1rem;
+    display: flex;
 }
 
-
-.profile-detail .prof_icon {
-    width:24px;
-    padding-right:5px;
+#user_profile .cell .prof_icon {
+    min-width: 25px;
 }
 
 .active_sectors {
@@ -1346,7 +1364,7 @@ footer img.min_trav {
 }
 
 .info-pratiques h2 {
-    font-size:1..875rem;
+    font-size:1.875rem;
     font-weight:bold;
     text-align:center;
     margin-bottom:25px;
@@ -1659,8 +1677,8 @@ section.quote-quick-form fieldset {
 
 @media screen and (min-width:768px) {
     .dir_list-row {
-    display: flex;
-    justify-content: stretch;
+        display: flex;
+        justify-content: stretch;
     }
 
     .dir_list-row .col-sm-8,
@@ -1704,9 +1722,9 @@ section.quote-quick-form fieldset {
 
 @media screen and (min-width:768px) {
     .siae-info-sticky {
-    position: sticky;
-    top: 150px;
-    z-index: 1;
+        position: sticky;
+        top: 150px;
+        z-index: 1;
     }
 }
 
@@ -1909,6 +1927,7 @@ section.quote-quick-form fieldset {
 
 #dir_form ul.multiselect-container a {
     text-decoration:none;
+    cursor: pointer;
 }
 
 #csv_form .jcf-checkbox { display:none }
