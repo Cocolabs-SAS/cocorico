@@ -1383,7 +1383,7 @@ class Directory
                 return 'Département ('. $this->getDepartment() .')';
             default:
                 if ($this->getRange() != null) {
-                    return $this->getPolRangeText() . " km";
+                    return $this->getRange() . " km";
                 } else {
                     return 'non disponible';
                 }
