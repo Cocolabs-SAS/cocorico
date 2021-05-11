@@ -1372,6 +1372,24 @@ class Directory
         return self::$polRangeValues[$this->getPolRange()];
     }
 
+    public function getNiceRange()
+    {
+        switch ($this->getPolRange()) {
+            case 3:
+                return 'France entière';
+            case 2:
+                return 'Région ('. $this->getRegion() .')';
+            case 1:
+                return 'Département ('. $this->getDepartment() .')';
+            default:
+                if ($this->getRange() != null) {
+                    return $this->getPolRangeText() . " km";
+                } else {
+                    return 'non disponible';
+                }
+        }
+    }
+
 
     /**
      * Add images.

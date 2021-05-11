@@ -259,7 +259,7 @@
                                 </div>
                                 <div class="d-flex mb-3">
                                     <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
-                                    <span>Département {{ structure.department }}</span>
+                                    <span>{{ structure.getNiceRange }}</span>
                                 </div>
                                 {#
                                 <dl class='deflist'>
@@ -335,11 +335,9 @@
             });
 
             $('#show_data').click((e) => {
-                e.preventDefault();
                 var $this = $(e.currentTarget);
                 $this.toggleClass('is-open');
                 $('#the_data').toggle('slow');
-                return false;
             });
         });
 
