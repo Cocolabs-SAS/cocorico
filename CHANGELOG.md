@@ -6,7 +6,15 @@ This changelog references the relevant changes done in this project.
 This project adheres to [Semantic Versioning](http://semver.org/) 
 and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
+
 ## ITOU CHANGELOG
+
+### [4.1] - (2021-05-11)
+- Refactor visuel liste structure
+- Refactor visuel fiche structure
+- Refactor formulaire de recherche
+- Affichage périmètre d'intervention
+- Correctif tracking "affichage coordonnées"
 
 ### [4] - (2021-05-06)
 - Correctif adoption siret (caractères non numériques)
