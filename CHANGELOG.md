@@ -8,7 +8,14 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
-### [3.9] - (2021-05-06)
+### [4.1] - (2021-05-11)
+- Refactor visuel liste structure
+- Refactor visuel fiche structure
+- Refactor formulaire de recherche
+- Affichage périmêtre d'intervetion
+- Correctif tracking affichage coordonnées
+
+### [4] - (2021-05-06)
 - Correctif adoption siret (caractères non numériques)
 - Correctif siret invalide
 - Ajout indicateur typeform
