@@ -13,8 +13,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Refactor visuel liste structure
 - Refactor visuel fiche structure
 - Refactor formulaire de recherche
-- Affichage périmêtre d'intervetion
-- Correctif tracking affichage coordonnées
+- Affichage périmètre d'intervention
+- Correctif tracking "affichage coordonnées"
 
 ### [4] - (2021-05-06)
 - Correctif adoption siret (caractères non numériques)
