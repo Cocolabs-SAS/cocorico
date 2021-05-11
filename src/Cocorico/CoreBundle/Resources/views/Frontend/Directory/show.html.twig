@@ -118,10 +118,13 @@
                                     <ul class="active_sectors">
                                         {% if structure.kind == 'ETTI' and structure.directoryListingCategories|length > 3 %}
                                             <li>Multisectoriel</li>
-                                        {% else %}
+                                        {% elseif structure.hasDirectoryListingCategory %}
                                             <li>{{ structure.getSectorString(6, '</li><li>')|raw}}</li>
                                         {% endif %}
                                     </ul>
+                                    {% if not structure.hasDirectoryListingCategory %}
+                                        Non renseigné
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-sm-6 img-left mb-5 mb-md-7">

@@ -41,11 +41,13 @@
                         </li>
                         {% endif %}
                         <li class="sc-profile-type">{{ structure.kind }}</li>
-                        <li class="sc-profile-sectors">
                         {% if structure.hasDirectoryListingCategory %}
+                        <li class="sc-profile-sectors">
                            {{ structure.getSectorString(2, '<br />') | raw }}
-                        {% endif %}
                         </li>
+                        {% else %}
+                        <li class="sc-profile-sectors-empty"> </li>
+                        {% endif %}
                         <li class="sc-profile-town">{{ structure.city }}</li>
                         <li class="sc-profile-town-work">{{ structure.getNiceRange }}</li>
                     </ul>

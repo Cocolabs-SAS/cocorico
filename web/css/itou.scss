@@ -1843,6 +1843,10 @@ section.quote-quick-form fieldset {
     background-image: url('../images/siae_list_sectors.svg');
     grid-area: 2 / 1 / 4 / 2; 
 }
+.sc-profile li.sc-profile-sectors-empty {
+    grid-area: 2 / 1 / 4 / 2;
+}
+
 .sc-profile li.sc-profile-town {
     background-image: url('../images/siae_list_town.svg');
 }
