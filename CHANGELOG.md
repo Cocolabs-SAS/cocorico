@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [4.2] - (2021-05-17)
 - Fix recherche DROM-COM
 - Fix google map zoom automatique
+- Correctif latitude / longitude manquantes ( suppression support )
 
 ### [4.1] - (2021-05-11)
 - Refactor visuel liste structure
