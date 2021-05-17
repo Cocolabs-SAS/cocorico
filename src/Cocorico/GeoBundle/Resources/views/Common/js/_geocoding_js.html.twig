@@ -572,6 +572,7 @@
             markers = {};
 
             //Construct InfoBox for each marker with different location
+            var LatLng = new google.maps.LatLngBounds();
             $.each(markersGroupedByLocation, function (cptMarker, markersForOneLocation) {//cptMarker is of form lat-lng
                 var markerData = getMarkerData(markersForOneLocation);
                 var nbMarkersWithSameLocation = markerData["nbMarkersWithSameLocation"];
@@ -584,6 +585,7 @@
                 //Marker
                 var firstMarker = markersForOneLocation[0];
                 var myLatLng = new google.maps.LatLng(firstMarker['lat'], firstMarker['lng']);
+                LatLng.extend(myLatLng);
                 var marker = new MarkerWithLabel({
                     icon: image,
                     position: myLatLng,
@@ -669,7 +671,9 @@
                     });
                 });
 
-            });//end loop of info boxes construction
+            });//end loop of info boxes construction 
+            // Fitting map
+            map.fitBounds(LatLng);
 
             /**
              * Extend map to fit bounds on visible markers if we are not in map dragging mode
