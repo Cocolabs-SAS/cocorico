@@ -73,11 +73,17 @@ class DirectoryManager extends BaseManager
         } else if ($directorySearchRequest->getSearchType() == 'country') {
             // Can't use country code (FR, RE, YT, ...)
             $qB = $this->applyFilters($qB, $directorySearchRequest);
-            $qB = $this->applyCountryGeo($qB, $directorySearchRequest);
+
+            if ($directorySearchRequest->getCountry() != null)
+                {
+                $qB = $this->applyCountryGeo($qB, $directorySearchRequest);
+                }
+
             $qB->addSelect('1 AS distance');
             $qB->orderBy('d.name', 'ASC');
         } else {
-            $qB = $this->applyParams($qB, $params);
+            //$qB = $this->applyParams($qB, $params);
+            $qB = $this->applyFilters($qB, $directorySearchRequest, true);
             #FIXME : Bad doctrine ORM hack
             $qB->addSelect('1 AS distance');
             $qB->orderBy('d.name', 'ASC');
