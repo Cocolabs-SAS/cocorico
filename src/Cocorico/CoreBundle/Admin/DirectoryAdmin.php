@@ -129,6 +129,8 @@ class DirectoryAdmin extends AbstractAdmin
     {
         $datagridMapper
             ->add('id')
+            ->add('siret')
+            ->add('name')
             ->add(
                 'updatedAt',
                 'doctrine_orm_callback',
