@@ -2158,3 +2158,154 @@ div.c4_multiselect li {
     font-family: roboto, sans-serif;
     text-transform: uppercase;
 }
+
+/******************
+ * Page Filiere
+ ******************/
+#fil-recy {
+    padding:2rem;
+
+    .row {
+        margin-bottom:4rem;
+    }
+
+    a {
+        font-family:marianne;
+    }
+    
+    hr {
+        width:42px;
+        border: 5px solid #fe5455;
+        border-radius:5px 5px 5px 5px;
+        margin-left:0;
+    }
+
+    h2, h3 {
+        font-family:marianne;
+    }
+
+    .txt-med {
+        font-size:1.1rem;
+        font-family:marianne;
+    }
+
+}
+
+
+#fil-recy .r1 {
+    font-family:marianne;
+
+    h2 {
+        font-size: 2.3rem;
+    }
+
+    .c2 {
+        background:url('/images/recyclage_back_1.png');
+        background-repeat:no-repeat;
+        background-position:bottom 0px right 0px;
+        padding:2rem;
+        box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2);
+    }
+
+    .c2 div:first-child {
+        margin-bottom:2rem;
+    }
+
+}
+
+#fil-recy .r2 {
+    .focus {
+        font-family:roboto;
+        text-transform:uppercase;
+        color:#fe5455;
+        font-size:.7rem;
+    }
+
+    .c1 {
+        padding-right:3rem;
+    }
+
+    ul {
+        padding:0;
+        margin:0;
+        padding-left:1rem;
+    }
+
+}
+
+#fil-recy .r3 {
+    img {
+        width: 280px;
+    }
+}
+
+#fil-recy .r4 {
+    #recy-numbers {
+        margin:0;
+        padding:0;
+
+        display:flex;
+        justify-content:space-around;
+        flex-flow:row wrap;
+        
+        li {
+            list-style-type:none;
+            display:inline;
+            margin:0;
+            padding:0;
+            border-left:5px solid #fe5455;
+            box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2);
+            height:6rem;
+            width:30%;
+            flex:none;
+            margin: 1rem 0rem;
+
+            font-size:1.1rem;
+            font-family:marianne;
+
+            padding:1.2rem;
+        }
+    }
+}
+
+#fil-recy .r5 {
+
+    div:first-child {
+        margin-bottom:3rem;
+    }
+    
+    .company-prez {
+            
+        .r1 {
+            padding-top:1rem;
+            height:145px;
+            border-bottom:1px solid #ccc;
+            margin-bottom:1rem;
+
+            img {
+                display:block;
+                height:90%;
+                margin:auto;
+            }
+        }
+
+        .r2 {
+
+            min-height:300px;
+
+            h4 {
+                margin-bottom:1.5rem;
+            }
+        }
+
+        .r3 a {
+            margin-top:1rem;
+            display:block;
+            width:90%;
+            margin:auto;
+        }
+
+
+    }
+
+}
