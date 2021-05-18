@@ -9,6 +9,12 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.3] - (2021-05-18)
+- Page filière (recyclage)
+- Lien page filière sur page d'accueil
+- Fix recherche SIAE structures
+- Readme update
+
 ### [4.2] - (2021-05-17)
 - Fix recherche DROM-COM
 - Fix google map zoom automatique
