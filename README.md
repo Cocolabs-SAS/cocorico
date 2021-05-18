@@ -3,6 +3,7 @@
 <h1 align="center">
     <img src="https://lemarche.inclusion.beta.gouv.fr/images/Logo-marche.png" />
 </h1>
+
 # Le marché de l'inclusion
 
 Un projet de [ITOU](https://beta.gouv.fr/startups/itou.html) visant à
@@ -10,8 +11,22 @@ valoriser l’offre commerciale des employeurs solidaires afin de développer le
 
 Vous pouvez le consulter sur [https://lemarche.inclusion.beta.gouv.fr/fr/](https://lemarche.inclusion.beta.gouv.fr/fr/)
 
+Les statistiques sont [publiques](https://lemarche.inclusion.beta.gouv.fr/fr/stats).
+
 ## Remarques
 Le marché de l'inclusion est un fork lourdement modifié de [Cocorico](https://github.com/Cocolabs-SAS/cocorico), de [CocoLabs](https://www.cocolabs.com/en/?utm_source=google&utm_medium=cpc&utm_campaign=1485295889&utm_term=cocolabs&utm_content=284163607647&campaignid=1485295889&utm_source=google&utm_medium=cpc&gclid=CjwKCAjwy42FBhB2EiwAJY0yQlR2JYmQuW93jNtEG_mGi8SC_cscrJWef06jtCAudDm8AvtMWfY0oRoCiU0QAvD_BwE).
+
+Parmi les modifications :
+- Dernière version de la majorité des dépendances (bien que resté sous Symfony
+  3.4)
+- Utilisation de webpack / yarn au lieu d'assetic
+- Refactor JS (webpack / Encore) et dépendances
+- Retrait de MongoDB
+- Évolution vers un répertoire exhaustif de toutes les structures inclusives de
+  France, avec leurs offres
+- Plusieurs types d'utilisateurs : Structures inclusives, Acheteurs, Partenaires
+- Intégration tracker JS propre à ITOU
+
 
 ## Documentation
 La documentation initiale se trouve [ici](doc/index.md)
