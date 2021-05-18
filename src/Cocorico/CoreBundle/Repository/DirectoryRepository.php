@@ -48,6 +48,7 @@ class DirectoryRepository extends EntityRepository
            ->setFirstResult($offset)
            ->orderBy('d.name', 'asc')
            ->andwhere('d.nature != \'n/a\'')
+           ->andwhere('d.latitude is not null')
            ->andwhere('d.isDelisted = false');
 
         return $qB;

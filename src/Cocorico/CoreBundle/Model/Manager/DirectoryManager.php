@@ -70,6 +70,12 @@ class DirectoryManager extends BaseManager
         if ($directorySearchRequest->getSearchType() == 'city') {
             $qB = $this->applyFilters($qB, $directorySearchRequest);
             $qB = $this->applyGeo($qB, $directorySearchRequest);
+        } else if ($directorySearchRequest->getSearchType() == 'country') {
+            // Can't use country code (FR, RE, YT, ...)
+            $qB = $this->applyFilters($qB, $directorySearchRequest);
+            $qB = $this->applyCountryGeo($qB, $directorySearchRequest);
+            $qB->addSelect('1 AS distance');
+            $qB->orderBy('d.name', 'ASC');
         } else {
             $qB = $this->applyParams($qB, $params);
             #FIXME : Bad doctrine ORM hack
@@ -225,15 +231,6 @@ class DirectoryManager extends BaseManager
     }
 
     private function applyGeo($qB, $request) {
-        // $searchLocation = $request->getLocation();
-        //Select distance
-        // dump($searchLocation->getRoute());
-        // dump($searchLocation->getArea());
-        // dump($searchLocation->getCity());
-        // dump($searchLocation->getDepartment());
-        // dump($searchLocation->getCountry());
-
-
         $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
            ->setParameter('lat', $request->getLat())
            ->setParameter('lng', $request->getLng());
@@ -249,7 +246,17 @@ class DirectoryManager extends BaseManager
 
         $qB->orderBy("distance", "ASC");
         return $qB;
-    
+    }
+
+    private function applyCountryGeo($qB, $request) {
+        // $qB->addSelect('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) AS distance')
+        //    ->setParameter('lat', $request->getLat())
+        //    ->setParameter('lng', $request->getLng());
+
+        $qB->andwhere('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < 2000')
+           ->setParameter('lat', $request->getLat())
+           ->setParameter('lng', $request->getLng());
+        return $qB;
     }
 
     private function applyParams($qB, $params)

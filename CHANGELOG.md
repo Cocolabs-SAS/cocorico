@@ -9,12 +9,17 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.2] - (2021-05-17)
+- Fix recherche DROM-COM
+- Fix google map zoom automatique
+- Correctif latitude / longitude manquantes ( suppression support )
+
 ### [4.1] - (2021-05-11)
 - Refactor visuel liste structure
 - Refactor visuel fiche structure
 - Refactor formulaire de recherche
-- Affichage périmètre d'intervention
-- Correctif tracking "affichage coordonnées"
+- Affichage périmêtre d'intervetion
+- Correctif tracking affichage coordonnées
 
 ### [4] - (2021-05-06)
 - Correctif adoption siret (caractères non numériques)
