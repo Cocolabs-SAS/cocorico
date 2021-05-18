@@ -1,9 +1,8 @@
-# Le marché de l'inclusion
-Cette version de [cocorico](https://www.cocorico.io/) est adaptée pour les besoins
-spécifiques de la place de marché de l'inclusion, le _chantier 4_ de la start-up d'état
-[itou](https://beta.gouv.fr/startups/itou.html).
-
----
+[![Generic badge](https://img.shields.io/badge/ITOU-Oh_Oui-lightgreen.svg)](https://shields.io/)
+[![Generic badge](https://img.shields.io/badge/État-En_Construction-yellow.svg)](https://shields.io/)
+<h1 align="center">
+    <img src="https://lemarche.inclusion.beta.gouv.fr/images/Logo-marche.png" />
+</h1>
 # Le marché de l'inclusion
 
 Un projet de [ITOU](https://beta.gouv.fr/startups/itou.html) visant à
