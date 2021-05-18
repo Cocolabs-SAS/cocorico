@@ -1168,7 +1168,7 @@ footer img.min_trav {
 /* Help banner */
 
 #help_banner {
-    margin:0 0rem 4rem 0;
+    margin:0 0rem 0rem 0;
     background-color:#F2F9FF;
     font-size:1rem;
     padding:2rem;
@@ -1184,21 +1184,47 @@ footer img.min_trav {
     text-transform: None;
     font-weight:400;
 }
+/* filiere banner */
+#filiere_banner {
+    margin:4rem 0;
+
+    h3 {
+        font-weight:700;
+        width:90%
+    }
+
+    .c1 {
+        padding-right:4rem;
+    }
+
+    .textbox {
+        font-size:.875rem;
+        color:#000638;
+        font-size:1.2rem;
+        margin:1rem 0;
+    }
+
+}
+
 /* info banner */
-#info_banner .textbox {
-    padding-right:4rem;
-    font-size:.875rem;
-}
+#info_banner {
+    margin-top:4rem;
 
-#info_banner .textbox > div{
-    color:#000638;
-    font-size:.875rem;
-    text-transform:uppercase;
-}
+    .textbox {
+        padding-right:4rem;
+        font-size:.875rem;
+    }
 
-#info_banner h3 {
-    font-weight:400;
-    width:90%
+    .textbox > div {
+        color:#000638;
+        font-size:.875rem;
+        text-transform:uppercase;
+    }
+
+    h3 {
+        font-weight:400;
+        width:90%
+    }
 }
 
 
