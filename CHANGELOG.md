@@ -12,7 +12,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [4.3] - (2021-05-18)
 - Page filière (recyclage)
 - Lien page filière sur page d'accueil
+- Mise à jour page d'accueil
 - Fix recherche SIAE structures
+- Nouveau filtres admin structures
 - Readme update
 
 ### [4.2] - (2021-05-17)
