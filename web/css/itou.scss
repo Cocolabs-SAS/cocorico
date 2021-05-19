@@ -76,6 +76,7 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     color:#000638;
+    font-family:marianne;
 }
 
 body #wrapper {
@@ -1195,6 +1196,21 @@ footer img.min_trav {
 
     .c1 {
         padding-right:4rem;
+
+        span {
+            font-weight:400;
+            font-family:marianne;
+        }
+
+        ul {
+            margin:1rem 0 1rem 1rem;
+            padding:0;
+        }
+
+        li {
+            margin:.3rem 0 0;
+            padding:0;
+        }
     }
 
     .textbox {
@@ -1202,6 +1218,13 @@ footer img.min_trav {
         color:#000638;
         font-size:1.2rem;
         margin:1rem 0;
+    }
+    
+    hr {
+        width:42px;
+        border: 5px solid #fe5455;
+        border-radius:5px 5px 5px 5px;
+        margin-left:0;
     }
 
 }
