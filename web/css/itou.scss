@@ -76,6 +76,7 @@ body {
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
     color:#000638;
+    font-family:marianne;
 }
 
 body #wrapper {
@@ -1168,7 +1169,7 @@ footer img.min_trav {
 /* Help banner */
 
 #help_banner {
-    margin:0 0rem 4rem 0;
+    margin:0 0rem 0rem 0;
     background-color:#F2F9FF;
     font-size:1rem;
     padding:2rem;
@@ -1184,21 +1185,69 @@ footer img.min_trav {
     text-transform: None;
     font-weight:400;
 }
+/* filiere banner */
+#filiere_banner {
+    margin:4rem 0;
+
+    h3 {
+        font-weight:700;
+        width:90%
+    }
+
+    .c1 {
+        padding-right:4rem;
+
+        span {
+            font-weight:400;
+            font-family:marianne;
+        }
+
+        ul {
+            margin:1rem 0 1rem 1rem;
+            padding:0;
+        }
+
+        li {
+            margin:.3rem 0 0;
+            padding:0;
+        }
+    }
+
+    .textbox {
+        font-size:.875rem;
+        color:#000638;
+        font-size:1.2rem;
+        margin:1rem 0;
+    }
+    
+    hr {
+        width:42px;
+        border: 5px solid #fe5455;
+        border-radius:5px 5px 5px 5px;
+        margin-left:0;
+    }
+
+}
+
 /* info banner */
-#info_banner .textbox {
-    padding-right:4rem;
-    font-size:.875rem;
-}
+#info_banner {
+    margin-top:4rem;
 
-#info_banner .textbox > div{
-    color:#000638;
-    font-size:.875rem;
-    text-transform:uppercase;
-}
+    .textbox {
+        padding-right:4rem;
+        font-size:.875rem;
+    }
 
-#info_banner h3 {
-    font-weight:400;
-    width:90%
+    .textbox > div {
+        color:#000638;
+        font-size:.875rem;
+        text-transform:uppercase;
+    }
+
+    h3 {
+        font-weight:400;
+        width:90%
+    }
 }
 
 
@@ -2157,4 +2206,185 @@ div.c4_multiselect li {
     padding-top:1rem;
     font-family: roboto, sans-serif;
     text-transform: uppercase;
+}
+
+/******************
+ * Page Filiere
+ ******************/
+#fil-recy {
+    padding:2rem;
+
+    .row {
+        margin-bottom:4rem;
+    }
+
+    a {
+        font-family:marianne;
+    }
+    
+    hr {
+        width:42px;
+        border: 5px solid #fe5455;
+        border-radius:5px 5px 5px 5px;
+        margin-left:0;
+    }
+
+    h2, h3 {
+        font-family:marianne;
+    }
+
+    h2 {
+        font-size: 2.4rem;
+    }
+
+    h3 {
+        font-size:1.3rem;
+    }
+
+    .txt-med {
+        font-size:1.1rem;
+        font-family:marianne;
+    }
+
+}
+
+
+#fil-recy .r1 {
+    font-family:marianne;
+
+
+
+    .c2 {
+        background:url('/images/recyclage_back_1.png');
+        background-repeat:no-repeat;
+        background-position:bottom 0px right 0px;
+        padding:2rem;
+        box-shadow: 4px 4px 4px 0 rgba(0,0,0,0.2);
+    }
+
+    .c2 div:first-child {
+        margin-bottom:2rem;
+        padding-right:4rem;
+    }
+
+}
+
+#fil-recy .r2 {
+    .focus {
+        font-family:roboto;
+        text-transform:uppercase;
+        color:#fe5455;
+        font-size:.7rem;
+    }
+
+    .c1 {
+        padding-right:3rem;
+    }
+
+    ul {
+        padding:0;
+        margin:0;
+        padding-left:1rem;
+        margin-bottom:1rem;
+    }
+
+}
+
+#fil-recy .r3 {
+    .c1 {
+        height:100%;
+        overflow:hidden;
+    }
+    img {
+        width: auto;
+    }
+
+    .c2 {
+        background:url('/images/recy_angle_rond.png');
+        background-size:31%;
+        background-repeat:no-repeat;
+        background-position:bottom 0px right 0px;
+        padding-left:2rem;
+    }
+}
+
+#fil-recy .r4 {
+    #recy-numbers {
+        margin:0;
+        padding:0;
+
+        display:flex;
+        justify-content:space-around;
+        flex-flow:row wrap;
+        
+        li {
+            list-style-type:none;
+            display:inline;
+            margin:0;
+            padding:0;
+            border-left:5px solid #fe5455;
+            box-shadow: 2px 2px 2px 1px rgba(0,0,0,0.2);
+            height:6rem;
+            width:30%;
+            flex:none;
+            margin: 1rem 0rem;
+
+            font-size:1.2rem;
+            font-family:marianne;
+
+            padding:1.2rem;
+        }
+    }
+}
+
+#fil-recy .r5 {
+
+    .hr {
+        margin-bottom:3rem;
+    }
+    
+    .company-list {
+        display:flex;
+        justify-content:space-between;
+        flex-flow:row no-wrap;
+    }
+
+    .company-prez {
+        margin: 0 1rem;
+        box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.2);
+        padding: 0 2rem 2rem;
+        flex-grow:1;
+        width:28%;
+            
+        .r1 {
+            padding-top:1rem;
+            height:145px;
+            border-bottom:1px solid #ccc;
+            margin-bottom:1rem;
+
+            img {
+                display:block;
+                height:95%;
+                margin:auto;
+            }
+        }
+
+        .r2 {
+            min-height:329px;
+
+            h4 {
+                margin-bottom:1.5rem;
+            }
+        }
+
+        .r3 a {
+            margin-top:1rem;
+            display:block;
+            width:100%;
+            margin:auto;
+        }
+
+
+    }
+
 }

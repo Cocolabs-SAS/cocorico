@@ -1,0 +1,156 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block main %}
+            <div id="fil-recy">
+            <div class="r1 row">
+                <div class="c1 col-sm-7">
+                    <h2>Et si vous confiiez le recyclage de vos déchets à un prestataire inclusif ?</h2>
+                    <div class="txt-med">
+                        Il y a en France plus de 130 entreprises sociales inclusives qui proposent ces prestations ?
+                        Il y en a forcément une proche de chez vous !
+                    </div>
+                </div>
+                <div class="c1 col-sm-1">
+                </div>
+                <div class="c2 col-sm-4">
+                    <div>Entreprise sociale inclusive, complétez votre fiche entreprise pour être
+                        encore plus visible</div>
+                    <div>
+                        <a href="/fr/inscription" class="btn btn-default" style="width:100%">
+                            Je m'inscris
+                            <img src="{{ asset('svg/out-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r2 row">
+                <div class="c1 col-sm-6">
+                    <div class="focus">Focus sur</div>
+                    <h3>Les applications concrètes du recyclage</h3>
+                    <hr class="bloublou" />
+                    <ul>
+                        <li>Désarchiver et détruire vos documents obsolètes et confidentiels qui s'accumulent dans vos bureaux</li>
+                        <li>Collecter et trier vos papiers de bureaux pour leur donner une seconde vie</li>
+                        <li>Détruire vos déchets dangereux en toute sécurité (D.D.D et D.D.S)</li>
+                        <li>Disposer des corbeilles de tri ergonomiques au sein de vos bureaux</li>
+                        <li>Sensibiliser vos collaborateurs à la valorisation des déchets</li>
+                    </ul>
+                    <div>Qu'il s'agisse de déchets bureautiques, industriels, médicaux ou ménagers, nos prestataires inclusifs prennent en
+                        charge plus de 13 typologies de déchets (papier, plastique, canette, pile, cartouche, DEEE, DDD, huile, bois,
+                        verre, métaux, organique, textile ...)
+                    </div>
+                </div>
+                <div class="c2 col-sm-6" style="overflow:hidden">
+                    <img src="{{ asset('images/recyclage_1.png') }}" alt="recyclage" class="hidden-xs" style="";>
+                </div>
+            </div>
+
+
+            <div class="r3 row">
+                <div class="c1 col-sm-4">
+                    <img src="{{ asset('images/filiere_map.png') }}" alt="recyclage" class="hidden-xs" style="";>
+                </div>
+                <div class="c2 col-sm-8">
+                    <h2>Les structures  du recyclage présentes  sur le marché</h2>
+                    <hr class="bloublou" />
+                    <div class="txt-med">De nombreuses structures d’insertion et du handicap proposent des prestations
+                        très diversifiées dans le recyclage sur tout le territoire français. Grâce à
+                        notre moteur de recherche, elles sont désormais à portée de clics !</div>
+                    <div>
+                        <a href="/fr/repertoire/siae?sector%5B%5D=121&sector%5B%5D=86&sector%5B%5D=87&sector%5B%5D=88&sector%5B%5D=89&sector%5B%5D=138&address=&structureType=0&prestaType=1&lat=&lng=&country=&area=&department=&city=&region=&postalCode=&zip=&addressType=&serialSectors=" class="btn btn-default" style="margin-top:3rem">
+                        Accéder aux résultats
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r4 row">
+                <div class="col-sm-12">
+                    <h2>Le reçyclage, <br />en quelques chiffres</h2>
+                    <hr class="bloublou" />
+                    <ul id="recy-numbers">
+                        <li>Plus de 1 000 000 tonnes de déchets collectés et triés</li>
+                        <li>Une présence dans toutes les régions  de France</li>
+                        <li>Plus de  13 000 clients  satisfaits</li>
+                        <li>Plus de 130 prestataires inclusifs en France</li>
+                        <li>Plus de 20 ans d'expériences  dans les déchets</li>
+                        <li>Plus de  1000 emplois  stables créés</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="r5 row">
+                <div class="hr col-sm-12">
+                    <h3>Les groupements d’entreprises du recyclage</h3>
+                </div>
+
+                <div class="company-list col-sm-12">
+                    <div class="company-prez">
+                        <div class="r1">
+                            <img src="{{ asset('images/logo-recylliance-recyclage.png') }}" alt="recylliance" class="hidden-xs" style="";>
+                        </div>
+                        <div class="r2">
+                            <h4>Recylliance</h4>
+                            Composé de 19 entreprises françaises spécialisées dans le recyclage de déchets tertiaires, industriels et ménagers recyclables, le réseau Recylliance souhaite répondre collectivement aux enjeux de l’économie circulaire, en stimulant la création d’emplois locaux, les logiques de circuits courts et le recyclage de proximité. Au total c’est 75 000 tonnes de déchets recyclés et plus de 670 emplois créés.
+                        </div>
+                        <div class="r3">
+                            <a href="https://www.recylliance.fr/" target="_blank" class="btn btn-default" id="link-recylliance">
+                                Accèder au site
+                                <img src="{{ asset('svg/out-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="company-prez">
+                        <div class="r1">
+                            <img src="{{ asset('images/logo-elise-recyclage.png') }}" alt="elise" class="hidden-xs" style="";>
+                        </div>
+                        <div class="r2">
+                            <h4>Elise</h4>
+                            Avec ELISE, faites le choix de valoriser 100% des déchets de bureau en assurant leur recyclage et en créant des emplois solidaires. Pour cela, des corbeilles sont mises à la disposition des collaborateurs de votre entreprise. ELISE se charge de la collecte, du tri et du recyclage. Plus de 12 600 entreprises ont déjà pris l’initiative avec ELISE
+                        </div>
+                        <div class="r3">
+                            <a href="https://www.elise.com.fr/" target="_blank" class="btn btn-default" id="link-elise">
+                                Accèder au site
+                                <img src="{{ asset('svg/out-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="company-prez">
+                        <div class="r1">
+                            <img src="{{ asset('images/logo-envie-recyclage.png') }}" alt="envie" class="hidden-xs" style="";>
+                        </div>
+                        <div class="r2">
+                            <h4>Envie</h4>
+                            À travers la collecte et la valorisation des déchets, ainsi que la rénovation et le réutilisation des équipements électriques et électroniques, Envie participe depuis 1984 à la limitation des déchets et contribue à faire changer les modes de consommation.
+                            Un réseau dense de points de vente, d’ateliers de réparation et de centres de recyclage implanté dans toute la France. Plus de 50 entreprises autonomes fédérées !
+                        </div>
+                        <div class="r3">
+                            <a href="https://www.envie.org/" target="_blank" class="btn btn-default" id="link-envie">
+                                Accèder au site
+                                <img src="{{ asset('svg/out-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
