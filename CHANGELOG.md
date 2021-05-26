@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.4] - (2021-05-21)
+- Ajout fiche "consortium"
+
 ### [4.3] - (2021-05-18)
 - Page filière (recyclage)
 - Lien page filière sur page d'accueil
