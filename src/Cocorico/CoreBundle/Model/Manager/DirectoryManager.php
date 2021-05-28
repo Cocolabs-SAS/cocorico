@@ -218,19 +218,19 @@ class DirectoryManager extends BaseManager
         }
 
         if ($geo) {
-            // Filter on postal code
-            if ($req->getPostalCode() != false) {
-                $qB->andWhere('d.postCode like :pcode')
-                   ->setParameter('pcode', addcslashes($req->getPostalCode(), '%_').'%');
-            }
-
             // Filter on sector
-            if ($req->getRegion() != false) {
+            if ($req->getSearchType() == 'region') {
                 $region = $req->getRegion();
                 $regionName = Directory::$regions[$region];
                 $qB->andWhere('d.region = :region')
                    ->setParameter('region', $regionName);
             }
+            // Else Filter on postal code
+            else if ($req->getPostalCode() != false) {
+                $qB->andWhere('d.postCode like :pcode')
+                   ->setParameter('pcode', addcslashes($req->getPostalCode(), '%_').'%');
+            }
+
         }
 
         return $qB;

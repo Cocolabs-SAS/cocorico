@@ -9,6 +9,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.4] - (2021-05-28)
+- Fix recherche région
+- Ajout fiche "consortium"
+
 ### [4.3] - (2021-05-18)
 - Page filière (recyclage)
 - Lien page filière sur page d'accueil

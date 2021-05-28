@@ -219,6 +219,21 @@ class Directory
     private $isDelisted;
 
     /**
+     * @ORM\Column(name="sync_skip", type="boolean", nullable=true)
+     * @var bool
+     * Skip during synchronisation
+     */
+    private $syncSkip;
+
+    /**
+     * @ORM\Column(name="is_consortium", type="boolean", nullable=true)
+     * @var bool
+     * Is used as a "consortium" (group of structures)
+     * (C4 specific structure)
+     */
+    private $isConsortium;
+
+    /**
      * @ORM\Column(name="siret_is_valid", type="boolean", nullable=true)
      * @var bool
      * Whether siret is valid or not
@@ -969,6 +984,54 @@ class Directory
     public function getIsDelisted()
     {
         return $this->isDelisted;
+    }
+
+    /**
+     * Set SyncSkip.
+     *
+     * @param bool|null $syncSkip
+     *
+     * @return Directory
+     */
+    public function setSyncSkip($syncSkip = null)
+    {
+        $this->syncSkip = $syncSkip;
+
+        return $this;
+    }
+
+    /**
+     * Get SynSkip.
+     *
+     * @return bool|null
+     */
+    public function getSyncSkip()
+    {
+        return $this->syncSkip;
+    }
+
+    /**
+     * Set isConsortium.
+     *
+     * @param bool|null $isConsortium
+     *
+     * @return Directory
+     */
+    public function setIsConsortium($isConsortium = null)
+    {
+        $this->isConsortium = $isConsortium;
+
+        return $this;
+    }
+
+    /**
+     * Get isConsortium.
+     *
+     * @return bool|null
+     */
+    public function getIsConsortium()
+    {
+        return $this->isConsortium;
     }
 
     /**
