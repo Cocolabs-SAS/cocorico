@@ -38,10 +38,7 @@
     <meta name="theme-color" content="#ffffff">
 
     {% block stylesheets %}
-        {{ encore_entry_link_tags('common') }}
-        <!--
-        <link rel="stylesheet" href="assets/tarteaucitron/tarteaucitron.css">
-        -->
+        {{ encore_entry_link_tags('bs4_common') }}
     {% endblock %}
 
     {# Safely using .ready() before including jQuery #}
@@ -103,7 +100,7 @@
 </div>
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('common') }}
+    {{ encore_entry_script_tags('bs4_common') }}
 
     <script>
         //Global Javascript variables
@@ -116,7 +113,6 @@
         var timeUnitAllDay = {{ timeUnitAllDay ? 'true' : 'false' }};
         var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
         var isAuthenticated = {{ app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") ? 'true' : 'false' }};
-        window.isAuthenticated = isAuthenticated;
         var hoursAvailable = {{ timeHoursAvailable|json_encode|raw }};
         var sessId = '{{ app.session.get('uuid') }}';
         var isAdmin = {{ app.session.get('isAdmin') ? 'true' : 'false'}};
@@ -141,8 +137,8 @@
     </body>
 
     <script type="text/javascript">
-        window.addEventListener("load", function(event) {
-            if (window.isAuthenticated) {
+        $(function () {
+            if (isAuthenticated) {
                 //Unread messages
                 common.application.getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
             }

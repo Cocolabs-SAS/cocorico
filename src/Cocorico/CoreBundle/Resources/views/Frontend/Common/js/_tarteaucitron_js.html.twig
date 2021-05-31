@@ -1,0 +1,66 @@
+{% if cocorico_tarteaucitron %}
+<script src='/assets/tarteaucitron/tarteaucitron.js'></script>
+<script type="text/javascript">
+
+
+    tarteaucitron.init({
+      "privacyUrl": "", /* Privacy policy url */
+
+      "hashtag": '#test', /* Open the panel with this hashtag */
+      "cookieName": "cookie_c4_itou", /* Cookie name */
+
+      "orientation": "top", /* Banner position (top - bottom) */
+      "bodyposition": "top",
+
+      "groupServices": true, /* Group services by category */
+                       
+      "showAlertSmall": false, /* Show the small banner on bottom right */
+      "cookieslist": false, /* Show the cookie list */
+                       
+      "closePopup": true, /* Show a close X on the banner */
+
+      "showIcon": false, /* Show cookie icon to manage cookies */
+      //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+      "iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+      "adblocker": false, /* Show a Warning if an adblocker is detected */
+                       
+      "DenyAllCta" : false, /* Show the deny all button */
+      "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+      "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+                       
+      "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+      "removeCredit": true, /* Remove credit link */
+      "moreInfoLink": false, /* Show more info link */
+
+      "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+      "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+      "cookieDomain": ".inclusion.beta.gouv.fr", /* Shared cookie for multisite */
+      "readmoreLink": "", /* Change the default readmore link */
+      "mandatory": false, /* Show a message about mandatory cookies */
+      "forceLanguage": 'fr',
+    });
+
+  {% if cocorico_hotjar_id != '' %}
+    tarteaucitron.user.hotjarId = '{{cocorico_hotjar_id}}';
+    tarteaucitron.user.HotjarSv = 6;
+    (tarteaucitron.job = tarteaucitron.job || []).push('hotjar');
+  {% endif %}
+
+    (tarteaucitron.job = tarteaucitron.job || []).push('googlemapssearch');
+
+  {% if googlePlaceAPIKey != '' %}
+    tarteaucitron.user.googlemapsKey = '{{ googlePlaceAPIKey }}';
+    (tarteaucitron.job = tarteaucitron.job || []).push('googlemaps');
+  {% endif %}
+
+  {% if cocorico_matomo_siteid  != ''%}
+    tarteaucitron.user.matomoId = '{{ cocorico_matomo_siteid }}';
+    tarteaucitron.user.matomoHost = '{{ cocorico_matomo_host}}';
+    (tarteaucitron.job = tarteaucitron.job || []).push('matomo');
+  {% endif %}
+    window.tarteaucitronForceLanguage = 'fr';
+</script>
+{% endif %}
