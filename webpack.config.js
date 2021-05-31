@@ -34,7 +34,7 @@ Encore
         './web/js/date-time.js',
         './web/js/vendor/cookie-consent.js',
 
-        './node_modules/tarteaucitronjs/tarteaucitron.js',
+        //'./node_modules/tarteaucitronjs/tarteaucitron.js',
 
         './web/css/vendor/bootstrap-datetimepicker.css',
         './web/css/vendor/bootstrap-multiselect.css',
@@ -59,7 +59,7 @@ Encore
         './web/js/date-time.js',
         './web/js/vendor/cookie-consent.js',
 
-        './node_modules/tarteaucitronjs/tarteaucitron.js',
+        //'./node_modules/tarteaucitronjs/tarteaucitron.js',
 
         './web/css/vendor/unslider.css',
         './web/css/vendor/cookie-consent.css',
@@ -79,7 +79,7 @@ Encore
     ])
 
     .copyFiles([
-        {from: './node_modules/tarteaucitronjs/', to: 'tarteaucitron/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
+        {from: './node_modules/tarteaucitronjs/', to: 'tarteaucitron/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: true},
         {from: './node_modules/ckeditor/', to: 'ckeditor/[path][name].[ext]', pattern: /\.(js|css)$/, includeSubdirectories: false},
         {from: './node_modules/ckeditor/adapters', to: 'ckeditor/adapters/[path][name].[ext]'},
         {from: './node_modules/ckeditor/lang', to: 'ckeditor/lang/[path][name].[ext]'},
@@ -94,7 +94,7 @@ Encore
 	jQuery: 'jquery',
 	'window.jQuery': 'jquery',
 	'root.jQuery': 'jquery',
-    'tarteaucitron' : 'tarteaucitron',
+    	// 'tarteaucitron' : 'tarteaucitron',
 	// $: 'webpack-jquery-ui',
 	// jQuery: 'webpack-jquery-ui',
 	// 'window.jQuery': 'webpack-jquery-ui',
