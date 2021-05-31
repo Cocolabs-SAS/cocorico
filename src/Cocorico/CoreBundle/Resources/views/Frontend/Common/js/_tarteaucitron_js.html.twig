@@ -7,8 +7,8 @@
       "hashtag": '#test', /* Open the panel with this hashtag */
       "cookieName": "cookie_c4_itou", /* Cookie name */
 
-      "orientation": "top", /* Banner position (top - bottom) */
-      "bodyposition": "top",
+      "orientation": "bottom", /* Banner position (top - bottom) */
+      "bodyposition": "bottom",
 
       "groupServices": false, /* Group services by category */
                        
@@ -41,18 +41,24 @@
     });
 
   {% if cocorico_hotjar_id != '' %}
-    tarteaucitron.user.hotjarId = {{cocorico_hotjar_id}};
+    tarteaucitron.user.hotjarId = '{{cocorico_hotjar_id}}';
     tarteaucitron.user.HotjarSv = 6;
     (tarteaucitron.job = tarteaucitron.job || []).push('hotjar');
   {% endif %}
 
     (tarteaucitron.job = tarteaucitron.job || []).push('googlemapssearch');
 
-  {% if cocorico_matomo_siteid != '' %}
-    tarteaucitron.user.matomoId ={{ cocorico_matomo_siteid }};
-    tarteaucitron.user.matomoHost = {{ cocorico_matomo_host}};
+  {% if googlePlaceAPIKey != '' %}
+    tarteaucitron.user.googlemapsKey = '{{ googlePlaceAPIKey }}';
+    (tarteaucitron.job = tarteaucitron.job || []).push('googlemaps');
+  {% endif %}
+
+  {% if cocorico_matomo_siteid  != ''%}
+    tarteaucitron.user.matomoId = '{{ cocorico_matomo_siteid }}';
+    tarteaucitron.user.matomoHost = '{{ cocorico_matomo_host}}';
     (tarteaucitron.job = tarteaucitron.job || []).push('matomo');
   {% endif %}
+
     console.log('TarteAuCitron Loaded');
   });
 </script>
