@@ -40,15 +40,19 @@
       "mandatory": true, /* Show a message about mandatory cookies */
     });
 
+  {% if cocorico_hotjar_id != '' %}
     tarteaucitron.user.hotjarId = {{cocorico_hotjar_id}};
     tarteaucitron.user.HotjarSv = 6;
     (tarteaucitron.job = tarteaucitron.job || []).push('hotjar');
+  {% endif %}
 
     (tarteaucitron.job = tarteaucitron.job || []).push('googlemapssearch');
 
-    tarteaucitron.user.matomoId ={{ cocorico_matomo_siteid}};
+  {% if cocorico_matomo_siteid != '' %}
+    tarteaucitron.user.matomoId ={{ cocorico_matomo_siteid }};
     tarteaucitron.user.matomoHost = {{ cocorico_matomo_host}};
     (tarteaucitron.job = tarteaucitron.job || []).push('matomo');
+  {% endif %}
     console.log('TarteAuCitron Loaded');
   });
 </script>
