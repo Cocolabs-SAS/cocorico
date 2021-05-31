@@ -77,6 +77,54 @@ Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony e
 > ./run
 ```
 
+## Utilisation Bootstrap v4
+Un layout de base alternatif permet l'utilisation de Bootstrap 4 dans les pages du marché.
+
+Pour l'employer, il suffit de remplacer l'entête du fichier html en question (ie: utiliser un autre layout de base), comme ci-dessous.
+
+### Bootstrap v4
+```twig
+{% extends '::bs4_base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+```
+### Bootstrap v3
+```twig
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+```
+
+### Détails
+Tous les modules et add-ons bootstrap ou jquery ne sont pas importés : ils peuvent l'être au gré des besoins
+et des remplacements nécessaires.
+
+- `web/css/bs4_import.scss` remplace `web/css/full_import.scss`
+- `web/css/bs4_itou.scss` remplace `web/css/itou.scss`
+
+Pour plus de précisions, voir `webpack.config.js` (et comparer **common** et **bs4_common**) et `web/css/bs4_import.css`.
+
+
+## Changelog
+ - Fix similar listings session persisting
+
+[CHANGELOG.md](CHANGELOG.md) list the relevant changes done for each release.
+
+## License
+
+Built with Cocorico, an open source platform sponsored by [Cocolabs](https://www.cocolabs.com/en/?utm_source=github&utm_medium=cocorico-page&utm_campaign=organic) to create collaborative consumption marketplaces.
+Cocorico is released under the [MIT license](LICENSE).
+
+- `web/css/bs4_import.scss` remplace `web/css/full_import.scss`
+- `web/css/bs4_itou.scss` remplace `web/css/itou.scss`
+
+Pour en connaître les détails, voir `webpack.config.js` et `web/css/bs4_import.css`.
+
+
 ## Changelog
  - Fix similar listings session persisting
 

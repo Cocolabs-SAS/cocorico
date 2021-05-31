@@ -18,30 +18,51 @@ Encore
      * and one CSS file (e.g. app.css) if you JavaScript imports CSS.
      */
     .addEntry('common', [
-            './web/js/vendors.js',
-            './web/js/vendor/json2.js',
-            './web/js/vendor/hammer.js',
-            './web/js/vendor/bootstrap-multiselect.js',
-            './web/js/vendor/bootstrap-datetimepicker.js',
-            './web/js/vendor/parsley.min.js',
-            './web/js/vendor/jquery.unslider.js',
-            './web/js/vendor/jquery.caroufredsel.min.js',
-            './web/js/vendor/jquery.clearsearch.js',
+        './web/js/vendors.js',
+        './web/js/vendor/json2.js',
+        './web/js/vendor/hammer.js',
+        './web/js/vendor/bootstrap-multiselect.js',
+        './web/js/vendor/bootstrap-datetimepicker.js',
+        './web/js/vendor/parsley.min.js',
+        './web/js/vendor/jquery.unslider.js',
+        './web/js/vendor/jquery.caroufredsel.min.js',
+        './web/js/vendor/jquery.clearsearch.js',
 
-            './web/js/jquery.main.js',
-            './web/js/jquery.main-override.js',
-            './web/js/common.js',
-            './web/js/date-time.js',
-            './web/js/vendor/cookie-consent.js',
+        './web/js/jquery.main.js',
+        './web/js/jquery.main-override.js',
+        './web/js/common.js',
+        './web/js/date-time.js',
+        './web/js/vendor/cookie-consent.js',
 
-            './web/css/vendor/bootstrap-datetimepicker.css',
-            './web/css/vendor/bootstrap-multiselect.css',
-            './web/css/vendor/unslider.css',
-            './web/css/vendor/cookie-consent.css',
-            //'./web/css/all.css',
-            //'./web/css/all-override.css',
-            //'./web/css/itou.css',
-            './web/css/final_import.scss',
+        './web/css/vendor/bootstrap-datetimepicker.css',
+        './web/css/vendor/bootstrap-multiselect.css',
+        './web/css/vendor/unslider.css',
+        './web/css/vendor/cookie-consent.css',
+        //'./web/css/all.css',
+        //'./web/css/all-override.css',
+        //'./web/css/itou.css',
+        './web/css/final_import.scss',
+    ])
+
+    .addEntry('bs4_common', [
+        './web/js/vendors.js',
+        './web/js/vendor/json2.js',
+        './web/js/vendor/hammer.js',
+        './web/js/vendor/parsley.min.js',
+        './web/js/vendor/jquery.clearsearch.js',
+
+        './web/js/jquery.main.js',
+        './web/js/jquery.main-override.js',
+        './web/js/common.js',
+        './web/js/date-time.js',
+        './web/js/vendor/cookie-consent.js',
+
+        './web/css/vendor/unslider.css',
+        './web/css/vendor/cookie-consent.css',
+        //'./web/css/all.css',
+        //'./web/css/all-override.css',
+        //'./web/css/itou.css',
+        './web/css/bs4_import.scss',
     ])
 
     .addEntry('upload', [
@@ -49,8 +70,8 @@ Encore
     ])
 
     .addEntry('calendar', [
-            './web/js/vendor/fullcalendar/fullcalendar.min.js',
-            './web/js/vendor/fullcalendar/lang-all.js'
+        './web/js/vendor/fullcalendar/fullcalendar.min.js',
+        './web/js/vendor/fullcalendar/lang-all.js'
     ])
 
     .copyFiles([

@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.5] - (2021-05-31)
+- Intégration (au choix) de bootstrap 4
+
 ### [4.4] - (2021-05-28)
 - Fix recherche région
 - Ajout fiche "consortium"
