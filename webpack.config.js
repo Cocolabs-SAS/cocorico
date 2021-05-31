@@ -34,6 +34,8 @@ Encore
         './web/js/date-time.js',
         './web/js/vendor/cookie-consent.js',
 
+        './node_modules/tarteaucitronjs/tarteaucitron.js'
+
         './web/css/vendor/bootstrap-datetimepicker.css',
         './web/css/vendor/bootstrap-multiselect.css',
         './web/css/vendor/unslider.css',
