@@ -39,6 +39,9 @@
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('common') }}
+        <!--
+        <link rel="stylesheet" href="assets/tarteaucitron/tarteaucitron.css">
+        -->
     {% endblock %}
 
     {# Safely using .ready() before including jQuery #}
@@ -101,6 +104,8 @@
 
 {% block javascripts %}
     {{ encore_entry_script_tags('common') }}
+    <script src='/assets/tarteaucitron/tarteaucitron.js' />
+    <script src='/assets/tarteaucitron/tarteaucitron.services.js' />
 
     <script>
         //Global Javascript variables
@@ -113,6 +118,7 @@
         var timeUnitAllDay = {{ timeUnitAllDay ? 'true' : 'false' }};
         var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
         var isAuthenticated = {{ app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") ? 'true' : 'false' }};
+        window.isAuthenticated = isAuthenticated;
         var hoursAvailable = {{ timeHoursAvailable|json_encode|raw }};
         var sessId = '{{ app.session.get('uuid') }}';
         var isAdmin = {{ app.session.get('isAdmin') ? 'true' : 'false'}};
@@ -137,8 +143,8 @@
     </body>
 
     <script type="text/javascript">
-        $(function () {
-            if (isAuthenticated) {
+        window.addEventListener("load", function(event) {
+            if (window.isAuthenticated) {
                 //Unread messages
                 common.application.getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
             }
