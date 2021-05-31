@@ -1,0 +1,24 @@
+{% block layout %}
+    {% block header %}
+        {% include '@CocoricoCore/Frontend/Common/_bs4_header.html.twig' only %}
+    {% endblock %}
+
+    {% block sub_header %}{% endblock %}
+
+    <!-- contain main informative part of the site -->
+    <main id="main" role="main">
+        <div class="container">
+            <div class="row">
+                {% block breadcrumbs %}{% endblock %}
+
+                {% block main %}{% endblock %}
+            </div>
+        </div>
+        {#popin#}
+        {% block modal %}{% endblock %}
+    </main>
+
+    {% block footer %}
+        {% include '@CocoricoCore/Frontend/Common/_bs4_footer.html.twig' only %}
+    {% endblock %}
+{% endblock %}

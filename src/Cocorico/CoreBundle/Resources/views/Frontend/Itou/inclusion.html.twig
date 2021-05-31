@@ -1,0 +1,27 @@
+{% extends '::bs4_base.html.twig' %}
+{# This page uses bootstrap 4 #}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/bs4_layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block main %}
+            <div id="itou-inclusion">
+                <!-- Qu'il est bon le contenu ! -->
+                <h1>C'est quoi l'inclusion?</h1>
+            </div>
+        {% endblock %}
+    {% endembed %}
+
+{% endblock %}
