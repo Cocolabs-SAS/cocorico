@@ -1,0 +1,84 @@
+//  margin-right: calc(50% - 50vw);
+.skip {
+  @extend .sr-only;
+}
+
+.img-cover {
+  object-fit: cover;
+  width: 100%;
+}
+
+figure {
+  @extend .mb-0;
+}
+
+.btn-ico {
+
+  span {
+    @extend .d-inline-block;
+    @extend .mr-1;
+  }
+}
+
+.btn-primary {
+  transition: $transition-base;
+
+  &.hover,
+  &:hover {
+    color: $primary;
+    background-color: $white;
+    border-color: $primary;
+  }
+
+  &.focus,
+  &:focus {
+    box-shadow: $box-shadow;
+  }
+}
+
+.btn-link {
+
+  &.hover,
+  &:hover {
+    color: $primary;
+    text-decoration: none;
+  }
+
+  &.focus,
+  &:focus {
+    color: $primary;
+    box-shadow: none;
+    text-decoration: none;
+  }
+}
+
+h1 {
+  font-weight: $font-weight-normal;
+  font-size: $h2-font-size-xs;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $h2-font-size-sm;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: $h2-font-size;
+  }
+}
+
+h2 {
+  font-weight: $font-weight-bolder;
+  font-size: $h2-font-size-xs;
+
+  @include media-breakpoint-up(sm) {
+    font-size: $h2-font-size-sm;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: $h2-font-size;
+  }
+}
+
+[data-toggle],
+[data-btn] {
+  cursor: pointer;
+}

@@ -1,0 +1,203 @@
+.s-inclusion-01 {
+  padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 4);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		&--title {
+			h1 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+
+		&--grid {
+
+			> ul {
+				@extend .list-unstyled;
+				@extend .m-0;
+				display: grid;
+				grid-template-columns: 1fr;
+				grid-column-gap: 0;
+				grid-row-gap: map-get($spacers, 3);
+	
+				@include media-breakpoint-up(lg) {
+					grid-template-columns: repeat(2, 1fr);
+					grid-column-gap: map-get($spacers, 5);
+					grid-row-gap: map-get($spacers, 3);
+				}
+
+				span, 
+				a {
+					font-weight: $font-weight-bold;
+				}
+			}
+		}
+
+	}
+} 
+
+.s-inclusion-02 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		&--title {
+			h3 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+
+		&--figure {
+
+			figure {
+				margin-bottom: map-get($spacers, 3) !important;
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5) !important;
+				}
+			}
+		}
+
+		&--article {
+			article {
+				@extend .w-100;
+			}
+
+			p {
+				margin-bottom: map-get($spacers, 4);
+			}
+		}
+
+		&--card {
+			position: relative;
+
+			&::before {
+				content: '';
+				position: absolute;
+				width: 156px;
+				height: 260px;
+				z-index: -1;
+				bottom: -40px;
+				right: -55px;
+				background-image: url('/images/inclusion-02-illu-01.png');
+				background-repeat: no-repeat;
+				background-position: bottom right;
+			}
+			
+			> div {
+				background-color: $white;
+				position: relative;
+        @extend .px-5;
+        @extend .pb-5;
+        @extend .pt-3;
+        border-radius: $border-radius-lg;
+        box-shadow: $box-shadow-lg;
+			}
+
+			h5 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+	}
+
+	&__cta {
+		@extend .mb-0;
+		text-align: center;
+
+		@include media-breakpoint-up(lg) {
+			text-align: left;
+		}
+
+		a {
+			text-decoration: none !important;
+		}			
+	}	
+} 
+
+.s-inclusion-03 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		
+		&--title {
+			h3 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+
+    &--grid {
+      display: grid;
+      margin-bottom: map-get($spacers, 3);
+      grid-template-columns: 1fr;
+      grid-column-gap: 0;
+      grid-row-gap: map-get($spacers, 5);
+
+      @include media-breakpoint-up(lg) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-column-gap: map-get($spacers, 5);
+      }
+
+      > div {
+        @extend .px-3;
+        @extend .py-5;
+        border-radius: $border-radius-lg;
+        box-shadow: $box-shadow-lg;
+        transition: $transition-base;
+				border-bottom: 10px solid $pink;
+
+        &:hover {
+          box-shadow: $box-shadow-xl;
+        }
+      }
+    }
+	}
+
+	&__picto {
+		display: block;
+		text-align: center;
+		margin-bottom: map-get($spacers, 3);	
+	}
+} 

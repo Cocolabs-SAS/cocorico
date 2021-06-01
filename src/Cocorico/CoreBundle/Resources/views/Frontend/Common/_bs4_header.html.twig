@@ -1,139 +1,124 @@
 {% trans_default_domain 'cocorico' %}
 
+
+{% if app.environment == 'dev' %}
+    <div class="alert alert-warning fixed-top">DEV</div>
+{% endif %}
+{% if app.session.get('isAdmin') %}
+    <div class="alert alert-danger fixed-top">ADMIN MODE</div>
+{% endif %}
+
 <!-- header of the page -->
 <!-- BS4 migration -->
-<header id="header">
-    <!-- topbar -->
-    {#
-    <div class="topbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="tel:{{ cocorico_phone|replace({'(0)': '', ' ': ''}) }}"
-                               tabindex="10">
-                                <i class="icon-phone"></i>{{ cocorico_phone }}
-                            </a>
-                        </li>
-                        <li>
-                            <a tabindex="11" href="mailto:{{ cocorico_contact_mail_obfuscated|raw }}">
-                                <i class="icon-mail-alt"></i>{{ cocorico_contact_mail_obfuscated|raw }}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<header class="c-header" role="banner" id="header">
+  <section class="c-header__container container">
+    <div class="c-header__row row">
+      <div class="c-header__col c-header__col--logo col-auto d-flex align-items-center pr-0 pr-md-3">
+        <a href="#top" class="c-header__logo-ministere"><img src="/images/logo-ministere-travail.svg" alt="Ministère du travail"></a>
+      </div>
+      <div class="c-header__col c-header__col--logo col-auto d-flex align-items-center px-0 px-md-3">
+        <span><img src="/images/logo-marche.svg" alt="Le marché de l'inclusion" class="img-fluid"></span>
+      </div>
+      <div class="c-header__col c-header__col--nav col d-none d-xl-inline-flex d-xl-flex align-items-center justify-content-end">
+        <nav>
+          <ul>
+            <li class="is-current">
+                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener">
+                    <span>{{ 'nav.favorites.link'|trans }}</span>
+                    <span id="fav-count"></span>
+                </a>
+            </li>            
+            {# User info #}
+            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+                <li id="dashboard-dropdown" class="dropdown">
+                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                        <span>{{ 'nav.dashboard.link'|trans }}</span>
+                        <span id="nb-unread-msg"></span>
+                        <span class="icon-down-open-mini"></span>
+                    </a>
+                    {% include '@CocoricoCore/Frontend/Common/_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                </li>
+            {%- else -%}
+                <li>
+                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7" rel="noopener">
+                        {{ 'nav.login.link'|trans }}
+                    </a>
+                </li>
+            {%- endif -%}
+            {# New listing link #}
+            {% if app.session.get('canPublish') %}
+                <li>
+                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9" rel="noopener">
+                        <span>
+                            {{ 'nav.listing.new.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            {%- if app.user is null -%}
+                <li>
+                    <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-outline-primary" rel="noopener">
+                        <span>
+                            {{ 'nav.register.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      <div class="c-header__col c-header__col--burger col d-flex align-items-center justify-content-end d-xl-none" data-toggle="burger">
+        <span id="burger"><img src="/images/picto-burger.svg" alt="Menu" /></span>
+        <span id="close"><img src="/images/picto-close.svg" alt="Fermer" /></span>
+      </div>
+      <div id="burgerNav">
+        <nav>
+          <ul>
+            <li class="is-current">
+                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener">
+                    <span>{{ 'nav.favorites.link'|trans }}</span>
+                    <span id="fav-count"></span>
+                </a>
+            </li>            
+            {# User info #}
+            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+                <li id="dashboard-dropdown" class="dropdown">
+                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                        <span>{{ 'nav.dashboard.link'|trans }}</span>
+                        <span id="nb-unread-msg"></span>
+                        <span class="icon-down-open-mini"></span>
+                    </a>
+                    {% include '@CocoricoCore/Frontend/Common/_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                </li>
+            {%- else -%}
+                <li>
+                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7" rel="noopener">
+                        {{ 'nav.login.link'|trans }}
+                    </a>
+                </li>
+            {%- endif -%}
+            {# New listing link #}
+            {% if app.session.get('canPublish') %}
+                <li>
+                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9" rel="noopener">
+                        <span>
+                            {{ 'nav.listing.new.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            {%- if app.user is null -%}
+                <li>
+                    <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-outline-primary" rel="noopener">
+                        <span>
+                            {{ 'nav.register.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
     </div>
-    #}
-
-    {% if app.environment == 'dev' %}
-        <div style="background-color:blue;color:#fff;text-align:center;width:100%;font-size:10pt;font-weight:bold;">DEV</div>
-    {% endif %}
-    {% if app.session.get('isAdmin') %}
-        <div style="background-color:red;color:#fff;text-align:center;width:100%;font-size:10pt;font-weight:bold;">ADMIN MODE</div>
-    {% endif %}
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12">
-                <!-- main navigation of the page -->
-                <nav class="navbar navbar-default">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                                data-target="#bs-example-navbar-collapse-1" tabindex="2">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <!-- page logo -->
-                        <a class="navbar-brand" href="{{ path('cocorico_home') }}" tabindex="3">
-                            {#
-                            <img src="{{ asset('images/logo_inclusion.png') }}" alt="{{ 'nav.home.link'|trans }}" width="350" />
-                            #}
-                            <div id="bloc-marque">
-                                <div>
-                                    <img src="{{ asset('images/marianne_2.png') }}" alt="Ministère du Travail - Liberté Égalité Fraternité"/>
-                                </div>
-                                <div class="title">
-                                    <img src="{{ asset('images/Logo-marche.png') }}" alt="Le marché de l'inclusion" style="height:49px;margin-top:-10px"/>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            {#
-                            <li>
-                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}"
-                                   tabindex="4">{{ 'nav.who_we_are.link'|trans }}
-                                </a>
-                            </li>
-                            #}
-                            {#
-                            {%- if app.user is null -%}
-                            <li>
-                                <a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}"
-                                    tabindex="4">{{ 'footer.the_team.link'|trans }}
-                                </a>
-                            </li>
-                            {%- endif -%}
-                            #}
-                            <li>
-                                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}"
-                                   tabindex="5">{{ 'nav.favorites.link'|trans }}
-                                    <span id="fav-count"></span>
-                                </a>
-                            </li>
-
-                            {# User info #}
-                            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
-                                <li id="dashboard-dropdown" class="dropdown">
-                                    <a id="dashboard-link" class="dropdown-toggle"
-                                       href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6"
-                                       title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        {{ 'nav.dashboard.link'|trans }}
-                                        <span id="nb-unread-msg"></span>
-                                        <span class="icon-down-open-mini"></span>
-                                    </a>
-                                    {% include '@CocoricoCore/Frontend/Common/_nav.html.twig' with {'nav_dashboard_current':''} only %}
-                                </li>
-                            {%- else -%}
-                                <li>
-                                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7">
-                                        {{ 'nav.login.link'|trans }}
-                                    </a>
-                                </li>
-                            {%- endif -%}
-
-
-                            {# Language switcher. #}
-                            {{ render(controller('CocoricoCoreBundle:Frontend/Language:switch', {'request': app.request} )) }}
-
-                            {# Currency switcher #}
-                            {#
-                            {% include '@CocoricoCore/Frontend/Common/_currency_switcher.html.twig' only %}
-                            #}
-                        </ul>
-
-                        {# New listing link #}
-                        {% if app.session.get('canPublish') %}
-                            <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary navbar-right" tabindex="9">
-                                {{ 'nav.listing.new.link'|trans }}
-                            </a>
-                        {% endif %}
-                        {%- if app.user is null -%}
-                            <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary navbar-right c2action" >
-                                {{ 'nav.register.link'|trans }}
-                            </a>
-                        {% endif %}
-                    </div>
-                    <!-- /.navbar-collapse -->
-                </nav>
-            </div>
-        </div>
-    </div>
+  </section>
 </header>

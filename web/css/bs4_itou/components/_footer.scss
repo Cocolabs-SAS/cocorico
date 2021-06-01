@@ -1,0 +1,101 @@
+.c-footer-nav {
+  padding-top : map-get($spacers, 3);
+  border-top: 2px solid $gray-100;
+  color: $black;
+
+  @include media-breakpoint-up(lg) {
+    padding-top : map-get($spacers, 3);
+    padding-bottom : map-get($spacers, 3);
+  }
+
+  &__container {
+    max-width: map-get($container-max-widths, 'xl');
+  }
+
+  &__col {
+    margin-bottom: map-get($spacers, 3);
+
+    @include media-breakpoint-up(lg) {
+      margin-bottom: 0;
+    }
+  }
+
+  &__logo {
+    transform: translateX(-22px);
+  }
+
+  ul {
+    @extend .d-flex;
+    flex-direction: column;
+    @extend .list-unstyled;
+    @extend .list-inline;
+    @extend .mb-0;
+
+    @include media-breakpoint-up(md) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    li {
+      @extend .list-inline-item;
+      @extend .mb-2;
+    }
+  }
+
+  a,
+  a:hover,
+  a:focus,
+  a:link {
+    font-weight: $font-weight-bold;
+    color: $black;
+  }
+}
+
+
+.c-footer-legal {
+  padding: map-get($spacers, 3) 0;
+  border-top: 1px solid $gray-200;
+  font-size: $font-size-xs;
+  color: $gray-300;
+
+  &__container {
+    max-width: map-get($container-max-widths, 'xl');
+  }
+
+  a,
+  a:hover,
+  a:focus,
+  a:link {
+    color: $gray-300;
+    line-height: 1
+  }
+
+  ul {
+    @extend .list-unstyled;
+    @extend .list-inline;
+    @extend .mb-0;
+
+    li {
+      display: inline-block;
+      @extend .list-inline-item;
+      @extend .mr-3;
+      @extend .mb-3;
+
+      &:after {
+        content: '|';
+        display: inline-block;
+        @extend .ml-3;
+        color: $gray-200;
+      }
+
+      &:last-child:after {
+        display: none;
+      }
+    }
+
+    span {
+      display: inline-block;
+      @extend .mb-3;
+    }
+  }
+}

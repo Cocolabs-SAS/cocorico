@@ -1,0 +1,17 @@
+.c-main {
+position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 350px;
+    height: 260px;
+    background-image: url('/images/picto-rond.svg');
+    background-repeat: no-repeat;
+    background-size: 554px;
+    background-position: bottom right;
+  }
+}
