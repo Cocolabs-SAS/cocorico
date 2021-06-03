@@ -87,10 +87,6 @@
 			article {
 				@extend .w-100;
 			}
-
-			p {
-				margin-bottom: map-get($spacers, 4);
-			}
 		}
 
 		&--card {
@@ -107,6 +103,11 @@
 				background-image: url('/images/inclusion-02-illu-01.png');
 				background-repeat: no-repeat;
 				background-position: bottom right;
+				display: none;
+				
+				@include media-breakpoint-up(lg) {
+					display: block;
+				}
 			}
 			
 			> div {
@@ -199,5 +200,397 @@
 		display: block;
 		text-align: center;
 		margin-bottom: map-get($spacers, 3);	
+	}
+} 
+
+.s-inclusion-04 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		
+		&--title {
+			margin-bottom: map-get($spacers, 3);
+			
+			@include media-breakpoint-up(lg) {
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+
+			> div {
+				position: relative;
+				background-color: rgba($pink, 10%);
+				@extend .d-flex;
+				@extend .align-items-center;
+				@extend .h-100;
+				padding: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					padding-left: 0;
+				}				
+
+				&::before {
+					content: '';
+					position: absolute;
+					background-color: rgba($pink, 10%);
+					width: 50vw;
+					height: 100%;
+					left: -50vw;
+					top: 0;
+					display: none;
+					
+					@include media-breakpoint-up(lg) {
+						display: block;
+					}					
+				}
+			}
+
+			h2 {
+				position: relative;
+				margin: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+
+				&::after {
+					content: '';
+					display: block;
+					width: 50px;
+					height: 10px;
+					background-color: $pink;
+					border-radius: 5px;					
+					margin-top: map-get($spacers, 3);
+				}
+			}
+		}
+
+		&--article {
+
+			> article {
+				margin-bottom: map-get($spacers, 6);
+			}
+		}
+	}
+} 
+
+.s-inclusion-05 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+	
+  @include media-breakpoint-up(lg) {
+		padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+	
+	&__container {
+		position: relative;
+		max-width: map-get($container-max-widths, 'xl');
+
+		&::before {
+			content: '';
+			position: absolute;
+			z-index: -1;
+			bottom: 0;
+			right: 0;
+			width: 350px;
+			height: 260px;
+			background-size: 554px;
+			background-image: url('/images/picto-rond.svg');
+			background-repeat: no-repeat;
+			background-position: top left;
+		}
+	
+	}
+
+	&__col {
+		
+		&--title {
+			h3 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+
+		&--article {
+
+			> article {
+				margin-bottom: map-get($spacers, 6);
+			}
+
+			p + ul {
+				margin-top: - map-get($spacers, 3);
+			}
+		}
+	}
+} 
+
+.s-inclusion-06 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		
+		&--title {
+			margin-bottom: map-get($spacers, 3);
+			
+			@include media-breakpoint-up(lg) {
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+
+			> aside {
+				position: relative;
+				background-color: $pink;
+				@extend .d-flex;
+				@extend .align-items-center;
+				@extend .h-100;
+				padding: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					padding-left: 0;
+				}				
+
+				&::before {
+					content: '';
+					position: absolute;
+					background-color: $pink;
+					width: 50vw;
+					height: 100%;
+					left: -50vw;
+					top: 0;
+					display: none;
+					
+					@include media-breakpoint-up(lg) {
+						display: block;
+					}					
+				}
+			}
+
+			div {
+				margin: map-get($spacers, 3);
+				
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+			
+			h2 {
+				color: $white;
+			}
+			
+			h6 {
+				color: $white;
+				line-height: $line-height-base;
+			}
+		}
+
+		&--article {
+
+			> article {
+				margin: map-get($spacers, 3);
+				
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+	}
+	
+	&__stats {
+		@extend .d-flex;
+		@extend .align-items-center;
+		@extend .justify-content-center;
+
+		div {
+			z-index: 2;
+			position: relative;
+			@extend .d-flex;
+			@extend .align-items-center;
+			@extend .justify-content-center;			
+			padding: map-get($spacers, 2);
+			margin: map-get($spacers, 3);
+			background-color: $white;
+			min-height: 60px;
+			min-width: 220px;
+			box-shadow: $box-shadow;
+			border-radius: $border-radius;
+			border-bottom: 4px solid $pink;
+			text-align: center;
+
+			span,
+			strong {
+				display: block;
+				font-family: $font-family-heading;
+				font-size: $font-size-base;
+				line-height: $line-height-sm;			
+			}
+
+			&.has-relation-between {
+				z-index: 1;
+
+				&::before {
+					content: '';
+					position: absolute;
+					bottom: -58px;
+					left: 50%;
+					transform: translateX(-50%);
+					background-image: url('/images/inclusion-06-illu-01.svg');
+					width: 164px;
+					height: 58px;
+				}
+
+			}
+		}
+	}
+
+} 
+
+.s-inclusion-07 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+	
+  @include media-breakpoint-up(lg) {
+		padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+	
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__col {
+		
+		&--title {
+			h3 {
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+			}
+		}
+
+		&--article {
+
+			> article {
+				margin-bottom: map-get($spacers, 6);
+
+				h5 {
+					@include media-breakpoint-up(lg) {
+						min-height: 5rem;
+					}
+				}
+			}
+		}
+	}
+} 
+
+.s-inclusion-08 {
+	padding-top: map-get($spacers, 4);
+  padding-bottom: map-get($spacers, 4);
+
+  @include media-breakpoint-up(lg) {
+    padding-top: map-get($spacers, 6);
+    padding-bottom: map-get($spacers, 6);
+  }
+
+	&__container {
+		max-width: map-get($container-max-widths, 'xl');
+	}
+
+	&__row {
+		@extend .no-gutters;
+
+		&:nth-child(odd) {
+			@include media-breakpoint-up(lg) {
+				.s-inclusion-08__col--picture { 
+					order: 1; 
+				}
+				
+				.s-inclusion-08__col--article { 
+					order: 2; 
+				}
+			}
+		}
+
+		&:nth-child(even) {
+			@include media-breakpoint-up(lg) {
+				.s-inclusion-08__col--picture { 
+					order: 2; 
+				}
+
+				.s-inclusion-08__col--article { 
+					order: 1; 
+
+					article {
+						padding-left: 0;
+					}					
+				}
+			}
+		}
+	}
+
+	&__col {
+		
+		&--article {
+
+			h3 {
+				display: inline-block;
+				border-bottom: 2px solid $pink;
+				padding-bottom: map-get($spacers, 2);
+				margin-bottom: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					margin-bottom: map-get($spacers, 5);
+				}
+
+				&::before {
+					content: "S'INFORMER SUR";
+					font-size: $font-size-base;
+					line-height: $line-height-sm;
+					display: block;
+					color: $pink;
+					margin-bottom: map-get($spacers, 1);
+
+					@include media-breakpoint-up(lg) {
+						margin-bottom: map-get($spacers, 2);
+					}					
+				}
+			}
+
+			article {
+				padding-top: map-get($spacers, 3);
+
+				@include media-breakpoint-up(lg) {
+					padding: map-get($spacers, 5) map-get($spacers, 5) map-get($spacers, 3) map-get($spacers, 5);
+				}
+			}
+
+			p + ul {
+				margin-top: - map-get($spacers, 3);
+			}			
+		}
 	}
 } 

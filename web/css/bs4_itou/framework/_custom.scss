@@ -82,3 +82,7 @@ h2 {
 [data-btn] {
   cursor: pointer;
 }
+
+ul {
+  padding-left: map-get($spacers, 3);
+}
