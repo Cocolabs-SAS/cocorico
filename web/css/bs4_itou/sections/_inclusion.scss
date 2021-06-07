@@ -12,14 +12,27 @@
 	}
 
 	&__col {
+
 		&--title {
+
 			h1 {
+				position: relative;
 				margin-bottom: map-get($spacers, 3);
 
 				@include media-breakpoint-up(lg) {
 					margin-bottom: map-get($spacers, 5);
 				}
-			}
+
+				&::after {
+					content: '';
+					display: block;
+					width: 50px;
+					height: 10px;
+					background-color: $pink;
+					border-radius: 5px;					
+					margin-top: map-get($spacers, 3);
+				}				
+			}		
 		}
 
 		&--grid {
@@ -433,7 +446,7 @@
 			margin: map-get($spacers, 3);
 			background-color: $white;
 			min-height: 60px;
-			min-width: 220px;
+			min-width: 240px;
 			box-shadow: $box-shadow;
 			border-radius: $border-radius;
 			border-bottom: 4px solid $pink;

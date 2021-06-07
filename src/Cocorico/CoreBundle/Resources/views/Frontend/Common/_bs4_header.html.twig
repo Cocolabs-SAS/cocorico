@@ -2,10 +2,10 @@
 
 
 {% if app.environment == 'dev' %}
-    <div class="alert alert-warning fixed-bottom">DEV</div>
+    <div class="alert alert-warning fixed-top">DEV</div>
 {% endif %}
 {% if app.session.get('isAdmin') %}
-    <div class="alert alert-danger fixed-bottom">ADMIN MODE</div>
+    <div class="alert alert-danger fixed-top">ADMIN MODE</div>
 {% endif %}
 
 <!-- header of the page -->
