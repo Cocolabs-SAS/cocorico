@@ -53,14 +53,14 @@ $header-height: 100px;
 
     &--nav {
       nav {
-        ul {
+        > ul {
           @extend .list-inline;
           @extend .list-unstyled;
           @extend .m-0;
           @extend .p-0;
           width: 100%;
 
-          li {
+          > li {
             position: relative;
             @extend .list-inline-item;
             @extend .mr-5;
@@ -82,11 +82,19 @@ $header-height: 100px;
               background-color: $pink;
             }
 
+            &.has-no-separator {
+              @extend .ml-0;
+
+              &::before {
+                display: none;
+              }              
+            }
+
             &.is-current a::after {
               display: block;
             }
 
-            a {
+            > a {
               text-decoration: none;
               position: relative;
 
@@ -101,6 +109,27 @@ $header-height: 100px;
                 border-radius: 5px;
                 background-color: rgba($pink, 0.5);
               }
+            }
+
+            .dropdown-menu {
+              @extend .p-0;
+              @extend .m-0;
+              left: - map-get($spacers, 3) !important;
+              top: map-get($spacers, 3) !important;
+            }
+
+            .dropdown-toggle::after {
+              display: none;
+            }
+
+            .dropdown-item {
+              @extend .p-0;
+              border-bottom: 1px solid $gray-200;
+            }
+
+            .list-group-item {
+              @extend .px-3;
+              background-color: transparent;
             }
           }
         }
@@ -148,12 +177,12 @@ $header-height: 100px;
     box-shadow: 0 19px 19px 0 rgba($black, 0.1);
 
     nav {
-      ul {
+      > ul {
         @extend .list-unstyled;
         @extend .m-0;
         width: 100%;
 
-        li {
+        > li {
           position: relative;
           @extend .my-4;
           @extend .mr-4;
@@ -169,10 +198,41 @@ $header-height: 100px;
             border-radius: 2px;
             background-color: $pink;
           }
+          
+          &.has-no-separator {
 
-          a {
+            &::before {
+              display: none;
+            }              
+          }
+
+          > a {
             text-decoration: none;
           }
+
+          .dropdown-menu {
+            display: block !important;
+            position: relative !important;
+            float: none !important;
+            margin-bottom: 2rem !important;
+            left: - map-get($spacers, 3) !important;
+            top: map-get($spacers, 3) !important;
+            @extend .p-0;
+          }
+
+          .dropdown-toggle::after {
+            display: none;
+          }
+
+          .dropdown-item {
+            @extend .p-0;
+            border-bottom: 1px solid $dropdown-border-color;
+          }
+
+          .list-group-item {
+            @extend .px-3;
+            background-color: transparent;
+          }          
         }
       }
     }
