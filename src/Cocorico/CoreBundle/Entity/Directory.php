@@ -443,6 +443,26 @@ class Directory
      */
     private $description;
 
+    /**
+     * @ORM\Column(name="qpv_code", type="text", length=16, nullable=true)
+     *
+     * @var string
+     */
+    private $qpvCode;
+
+    /**
+     * @ORM\Column(name="qpv_name", type="text", length=256, nullable=true)
+     *
+     * @var string
+     */
+    private $qpvName;
+
+    /**
+     * @ORM\Column(name="is_qpv", type="boolean", nullable=true)
+     * @var bool
+     */
+    private $isQpv;
+
 
 
     /**
@@ -1546,6 +1566,76 @@ class Directory
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set qpvCode
+     *
+     * @param  string $qpvCode
+     * @return $this
+     */
+    public function setQpvCode($qpvCode)
+    {
+        $this->qpvCode = $qpvCode;
+
+        return $this;
+    }
+
+    /**
+     * Get qpvCode
+     *
+     * @return string
+     */
+    public function getQpvCode()
+    {
+        return $this->qpvCode;
+    }
+
+    /**
+     * Set qpvName
+     *
+     * @param  string $qpvName
+     * @return $this
+     */
+    public function setQpvName($qpvName)
+    {
+        $this->qpvName = $qpvName;
+
+        return $this;
+    }
+
+    /**
+     * Get qpvName
+     *
+     * @return string
+     */
+    public function getQpvName()
+    {
+        return $this->qpvName;
+    }
+
+    /**
+     * Set isQpv.
+     *
+     * @param bool $isQpv
+     *
+     * @return Directory
+     */
+    public function setIsQpv($isQpv)
+    {
+        $this->isQpv = $isQpv;
+
+        return $this;
+    }
+
+    /**
+     * Get isQpv.
+     *
+     * @return bool
+     */
+    public function getIsQpv()
+    {
+        return $this->isQpv;
     }
 
 

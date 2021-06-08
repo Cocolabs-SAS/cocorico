@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [4.6] - (2021-06-08)
+- Mise à jour DB pour intégration données QPV
+
 ### [4.5] - (2021-05-31)
 - Intégration (au choix) de bootstrap 4
 - Ajout tarteAuCitron (cookie policy)
