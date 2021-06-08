@@ -87,6 +87,10 @@ $header-height: 100px;
 
               &::before {
                 display: none;
+              }       
+              
+              a:hover::after {
+                display: none;
               }              
             }
 
@@ -102,12 +106,16 @@ $header-height: 100px;
                 display: none;
                 content: '';
                 position: absolute;
-                left: 0;
+                left: - map-get($spacers, 1);
                 bottom: -2.6rem;
                 height: 5px;
                 width: 100%;
-                border-radius: 5px;
+                border-radius: 5px 5px 0 0;
                 background-color: rgba($pink, 0.5);
+              }
+
+              &:hover::after {
+                display: block;
               }
             }
 

@@ -2,10 +2,10 @@
 
 
 {% if app.environment == 'dev' %}
-    <div class="alert alert-warning fixed-top">DEV</div>
+    <div class="alert alert-warning fixed-bottom">DEV</div>
 {% endif %}
 {% if app.session.get('isAdmin') %}
-    <div class="alert alert-danger fixed-top">ADMIN MODE</div>
+    <div class="alert alert-danger fixed-bottom">ADMIN MODE</div>
 {% endif %}
 
 <!-- header of the page -->
@@ -22,7 +22,7 @@
       <div class="c-header__col c-header__col--nav col d-none d-xl-inline-flex d-xl-flex align-items-center justify-content-end">
         <nav>
           <ul>
-            <li>
+            <li class="is-current">
                 <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
                     <span id="fav-count" class="badge badge-primary badge-pill"></span>
