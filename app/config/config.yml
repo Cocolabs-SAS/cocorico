@@ -38,6 +38,9 @@ framework:
         gc_probability: 0 #todo check in prod
     fragments:       ~
     http_method_override: true
+    session:
+        cookie_httponly: true
+        cookie_secure: true
 
 # Sentry configurtion
 sentry:
