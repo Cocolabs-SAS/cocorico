@@ -227,6 +227,8 @@ body #wrapper {
     flex: none;
 }
 
+#directory_images .jcf-file,
+#directory_clientImages .jcf-file,
 #listing_clientImages .jcf-file {
     display: none;
 }
@@ -1398,10 +1400,11 @@ footer img.min_trav {
 #main .nav-tabs > li.active > a:focus {
     background-color: #fff;
     border:0;
+    color:#224;
 }
 
 #main .nav-tabs > li > a {
-    background-color: #d8d8d8;
+    background-color: #a8a8a8;
     font-weight:bold;
 }
 

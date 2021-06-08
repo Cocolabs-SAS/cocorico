@@ -12,6 +12,7 @@
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Directory;
+use Cocorico\CoreBundle\Entity\DirectoryImage;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -22,9 +23,15 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Cocorico\CoreBundle\Form\Type\DirectoryClientImageType;
+use Cocorico\CoreBundle\Form\Type\DirectoryImageType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Cocorico\CoreBundle\Form\Type\ImageType;
 use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Validator\Constraints\Valid;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 
 class DirectoryEditType extends AbstractType implements TranslationContainerInterface
 //class DirectoryEditType extends AbstractType
@@ -40,11 +47,45 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
 
         $builder
             ->add(
+                'siret',
+                TextType::class,
+                array(
+                    'disabled' => 'disabled',
+                )
+            )
+            ->add(
                 'brand',
                 TextType::class,
                 array(
-                    'label' => 'directory.form.brand',
-                    'required' => false,
+                    'disabled' => 'disabled',
+                )
+            )
+            ->add(
+                'name',
+                TextType::class,
+                array(
+                    'disabled' => 'disabled',
+                )
+            )
+            ->add(
+                'kind',
+                TextType::class,
+                array(
+                    'disabled' => 'disabled',
+                )
+            )
+            ->add(
+                'region',
+                TextType::class,
+                array(
+                    'disabled' => 'disabled',
+                )
+            )
+            ->add(
+                'postCode',
+                TextType::class,
+                array(
+                    'disabled' => 'disabled',
                 )
             )
             ->add(
@@ -79,7 +120,84 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                     'label' => 'Fabrication et commercialisation de biens',
                     'required' => false,
                 )
+            )
+            ->add(
+                'website',
+                UrlType::class,
+                array(
+                    'label' => 'directory.form.url',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'range',
+                IntegerType::class,
+                array(
+                    'label' => 'directory.form.range',
+                    'required' => false,
+                )
+            )
+            ->add(
+                'polRange',
+                ChoiceType::class,
+                array(
+                    'choices' => array_flip(Directory::$polRangeValues),
+                    'label' => 'Périmètre intervention',
+                    'translation_domain' => 'cocorico_directory',
+                    'expanded' => true,
+                    'required' => true
+                )
+            )
+            ->add(
+                'image',
+                ImageType::class
+            )
+            ->add(
+                'images',
+                CollectionType::class,
+                array(
+                    'allow_delete' => true,
+                    'entry_type' => DirectoryImageType::class,
+                    /** @Ignore */
+                    'label' => false
+                )
             );
+
+        $builder->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
+                $data = $event->getData();
+                $data = $data ?: array();
+                if (array_key_exists('uploaded', $data["image"])) {
+                    // capture uploaded files and store them for onSubmit event
+                    $this->uploaded = $data["image"]['uploaded'];
+                }
+            }
+        );
+
+
+        $builder->addEventListener(
+            FormEvents::SUBMIT,
+            function (FormEvent $event) {
+                /** @var Directory $directory */
+                $directory = $event->getData();
+
+                if ($this->uploaded) {
+                    $nbImages = $directory->getImages()->count();
+                    //Add new images
+                    $imagesUploadedArray = explode(",", trim($this->uploaded, ","));
+                    foreach ($imagesUploadedArray as $i => $image) {
+                        $directoryImage = new DirectoryImage();
+                        $directoryImage->setDirectory($directory);
+                        $directoryImage->setName($image);
+                        $directoryImage->setPosition($nbImages + $i + 1);
+                        $directory->addImage($directoryImage);
+                    }
+
+                    $event->setData($directory);
+                }
+            }
+        );
     }
 
 

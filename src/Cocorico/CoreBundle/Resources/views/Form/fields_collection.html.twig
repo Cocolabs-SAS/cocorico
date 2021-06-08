@@ -253,6 +253,66 @@
     {% endapply %}
 {% endblock %}
 
+{% block _directory_images_widget %}
+    {% import _self as self %}
+
+    {% apply spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+            <!-- files-list -->
+            <div class="files-list collection">
+                {% for child_form in form %}
+                    {{ self.imagesCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </div>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-blocks">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endapply %}
+{% endblock %}
+
+
+
+{% block _directory_clientImages_widget %}
+    {% import _self as self %}
+
+    {% apply spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
+            <!-- files-list -->
+            <div class="files-list collection">
+                {% for child_form in form %}
+                    {{ self.imagesCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </div>
+
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center collection-add-blocks">
+                    <a class="add" title="Add" href="javascript:void(0)">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endapply %}
+{% endblock %}
+
+
+
 
 
 {#
