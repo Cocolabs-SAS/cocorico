@@ -33,21 +33,57 @@
                     -->
                     <div class="row" style="margin-top:15px;">
                         {% include 'CocoricoCoreBundle:Frontend/Common:from_to_alert.html.twig' %}
-                        <pre>En construction</pre>
+                        <h2>Données ASP de votre structure</h2>
                         <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.siret, 'Siret')}} </div>
                             <div class="col-sm-4">
-                                {{ form_label(form.brand)}}
-                            </div>
-                            <div class="col-sm-4">
-                                {{ form_widget(form.brand, { 'attr': { 'class': 'form-control required' }}) }}
+                                {{ form_widget(form.siret, { 'attr': { 'class': 'form-control' }}) }}
                             </div>
                         </div>
                         <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.name, 'Raison sociale')}} </div>
                             <div class="col-sm-4">
-                                {{ form_label(form.description)}}
+                                {{ form_widget(form.name, { 'attr': { 'class': 'form-control' }}) }}
                             </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.brand, 'Enseigne')}} </div>
+                            <div class="col-sm-4">
+                                {{ form_widget(form.brand, { 'attr': { 'class': 'form-control' }}) }}
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.kind, 'Type')}} </div>
+                            <div class="col-sm-4">
+                                {{ form_widget(form.kind, { 'attr': { 'class': 'form-control' }}) }}
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.postCode, 'Code Postal')}} </div>
+                            <div class="col-sm-4">
+                                {{ form_widget(form.postCode, { 'attr': { 'class': 'form-control' }}) }}
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.region, 'Region')}} </div>
+                            <div class="col-sm-4">
+                                {{ form_widget(form.region, { 'attr': { 'class': 'form-control' }}) }}
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row" style="margin-top:3rem;">
+                        <h2>Données modifiables </h2>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.website, 'Site internet')}} </div>
                             <div class="col-sm-8">
-                                {{ form_widget(form.description, { 'attr': { 'class': 'form-control required' }}) }}
+                                {{ form_widget(form.website, { 'attr': { 'class': 'form-control' }}) }}
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="col-sm-4"> {{ form_label(form.description)}} </div>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.description, { 'attr': { 'class': 'form-control' }}) }}
                             </div>
                         </div>
                         <div class="field-row">
@@ -66,6 +102,76 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" style="margin-top:3rem;">
+                        <h2>Périmètre d'activité</h2>
+                            <ul id="pol_range_form">
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[1].vars.id }}"
+                                        name="{{ form.polRange[1].vars.full_name }}"
+                                        value="{{ form.polRange[1].vars.value }}"
+                                    /> {{ form_label(form.polRange[1], null, {'required': false}) }}
+                                </li>
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[2].vars.id }}"
+                                        name="{{ form.polRange[2].vars.full_name }}"
+                                        value="{{ form.polRange[2].vars.value }}"
+                                    /> {{ form_label(form.polRange[2], null, {'required': false}) }}
+                                </li>
+                                <li>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[3].vars.id }}"
+                                        name="{{ form.polRange[3].vars.full_name }}"
+                                        value="{{ form.polRange[3].vars.value }}"
+                                    /> {{ form_label(form.polRange[3], null, {'required': false}) }}
+                                </li>
+                                <li>
+
+                                    <label>
+                                    <input 
+                                        type="radio"
+                                        id="{{ form.polRange[0].vars.id }}"
+                                        name="{{ form.polRange[0].vars.full_name }}"
+                                        value="{{ form.polRange[0].vars.value }}"
+                                    /> 
+                                        {{ form_widget(form.range, {
+                                            'attr': {
+                                                'class': 'numbers-only form-control',
+                                                'style': 'display:inline',
+                                                'placeholder': 'distance en kilomètres',
+                                                'onclick': '$("#listing_polRange_0").trigger("click");'
+                                            }
+                                        }) }}
+                                    </label>
+                                </li>
+                            </ul>
+                            {% do form.polRange.setRendered %}
+                    </div>
+                    <div class="row" style="margin-top:3rem;">
+                        <h2>Logo de la structure</h2>
+                        <div class="area">
+                            <div class="uploader">
+                                <div id="images-new">
+                                    {{ form_errors(form.image.new) }}
+                                    {{ form_widget(form.image.new) }}
+
+                                    {{ form_errors(form.image.uploaded) }}
+                                    {{ form_widget(form.image.uploaded ) }}
+                                </div>
+                            </div>
+                            <ul id="files-to-upload" class="upload-list images-list"></ul>
+                        </div>
+
+                        <!-- files-list -->
+                        <div class="files-list">
+                            {{ form_errors(form.images) }}
+                            {{ form_widget(form.images ) }}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="btn-block text-center">
@@ -78,4 +184,20 @@
     {{ form_end(form) }}
 {%- endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Files upload#}
+    {% include '@CocoricoCore/Frontend/Common/js/_upload_multi_js.html.twig' with {
+        'upload_el1': '#directory_image_new',
+        'upload_images1': '#directory_image_uploaded',
+        'upload_list1': '#files-to-upload',
+        'upload_el2': '#directory_clientImage_new',
+        'upload_list2': '#client-files-to-upload',
+        'upload_images2': '#directory_clientImage_uploaded',
+        'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=" ~ structure.id ,
+        'upload_max': 5,
+    } only %}
+
+{%- endblock %}
 

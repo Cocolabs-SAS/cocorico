@@ -10,7 +10,7 @@
 {% set gKey = googlePlaceAPIKey ? '&key=' ~ googlePlaceAPIKey : '' %}
 
 <script type="text/javascript"
-        src="//maps.googleapis.com/maps/api/js?libraries=places&language={{ app.request.locale }}{{ gKey|raw }}">
+        src="https:////maps.googleapis.com/maps/api/js?libraries=places&language={{ app.request.locale }}{{ gKey|raw }}">
 </script>
 <script type="text/javascript"
         src="{{ asset('js/vendor/gmap-infobox.js') }}">

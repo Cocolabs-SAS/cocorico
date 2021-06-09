@@ -17,7 +17,7 @@ class DirectoryImage
 {
 
     const IMAGE_DEFAULT = "default-user.png";
-    const IMAGE_FOLDER = "/uploads/users/images/";
+    const IMAGE_FOLDER = "/uploads/listings/images/";
 
     /**
      * @var integer

@@ -14,6 +14,7 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditClientImagesType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -296,6 +297,69 @@ class DirectoryController extends Controller
                     'cocorico_dashboard_directory_edit_categories',
                     array('id' => $structure->getId())
                 ),
+            )
+        );
+
+        return $form;
+    }
+
+    /**
+     * Edit Structure client images entities.
+     *
+     * @Route("/{id}/edit_client_images", name="cocorico_dashboard_directory_edit_client_images", requirements={"id" = "\d+"})
+     * @Security("is_granted('edit', directory)")
+     * @ParamConverter("directory", class="CocoricoCoreBundle:Directory")
+     *
+     * @Method({"GET", "PUT", "POST"})
+     *
+     * @param Request $request
+     * @param         $directory
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editClientImagesAction(Request $request, Directory $directory)
+    {
+        $editForm = $this->createEditClientImagesForm($directory);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->get("cocorico.directory.manager")->save($directory);
+
+            return $this->redirectToRoute(
+                'cocorico_dashboard_directory_edit_client_images',
+                array('id' => $directory->getId())
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Directory:edit_client_images.html.twig',
+            array(
+                'structure' => $directory,
+                'form' => $editForm->createView()
+            )
+        );
+
+    }
+
+    /**
+     * Creates a form to edit a Directiry entity.
+     *
+     * @param Directory $directory The entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createEditClientImagesForm(Directory $directory)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory',
+            DirectoryEditClientImagesType::class,
+            $directory,
+            array(
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_client_images',
+                    array('id' => $directory->getId())
+                ),
+                'method' => 'POST',
             )
         );
 
