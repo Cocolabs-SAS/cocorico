@@ -9,9 +9,14 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
-### [4.6] - (2021-06-xx)
+
+### [4.7] - (2021-06-xx)
 - Page C'est Quoi L'inclusion
 - Ajout de composants de page pour migration BS4
+
+### [4.6] - (2021-06-08)
+- Mise à jour DB pour intégration données QPV
+- Finalisation panneau de gestion (dashboard) des structures
 
 ### [4.5] - (2021-05-31)
 - Intégration (au choix) de bootstrap 4

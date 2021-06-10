@@ -604,6 +604,17 @@ common.application.initMultiSelect = function(elt, allSelectedText, noneSelected
 };
 
 
+/* Sticky Header av */
+var stickyNav = $('.bs4-page #header');
+stickyNav.data('top', stickyNav.offset().top);
+
+/* Toggle Header Nav */
+$('[data-toggle=burger]').on('click tap', function(e) {
+    e.preventDefault();
+    stickyNav.toggleClass('is-opened');
+});
+  
+
 
 // Dirty hack, but needed for outsite use of functions
 window.common = common;

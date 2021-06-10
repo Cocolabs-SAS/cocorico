@@ -1,0 +1,108 @@
+{% trans_default_domain 'cocorico' %}
+
+    {%- set offererItems = {
+    "quotes": {
+        "link": path('cocorico_dashboard_quote_offerer'),
+        "text": 'Demandes Contact'
+    },
+    "listings": {
+        "link": path('cocorico_dashboard_listing'),
+        "text": 'nav.dashboard.listings.link'|trans
+    },
+    "structures": {
+        "link": path('cocorico_dashboard_directory'),
+        "text": 'nav.dashboard.directory.link'|trans,
+    },
+    "profile": {
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+        "link": path('cocorico_user_logout'),
+        "text": 'nav.logout.link'|trans
+    },
+    } -%}
+
+    {%- set askerItems = {
+    "quotes": {
+        "link": path('cocorico_dashboard_quote_asker'),
+        "text": 'Demandes Contact'
+    },
+    "profile": {
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+        "link": path('cocorico_user_logout'),
+        "text": 'nav.logout.link'|trans
+    }
+    } -%}
+
+{%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+    <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-item">
+            <ul class="list-group list-group-flush">
+                {% if app.session.get('canSwitch')%}
+                    <li class="list-group-item active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                           data-id="asker">{{ 'nav.asker.link' | trans }}
+                            <span id="nb-unread-asker" class="badge badge-pink badge-pill"></span>
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="#" aria-expanded="false" class="dropdown-toggle"
+                           data-id="offerer">{{ 'nav.offerer.link' | trans }}
+                            <span id="nb-unread-offerer" class="badge badge-pink badge-pill"></span>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% if app.session.get('canAskForQuote') or is_granted('ROLE_SONATA_ADMIN') %}
+        <li class="dropdown-item" data-id="asker">
+            <ul class="list-group list-group-flush">
+                {% for name, menu in askerItems %}
+                    <li class="list-group-item">
+                        <a id="asker{{ menu.text }}" href="{{ menu.link }}">
+                            {{ menu.text }}
+                            {% if name == 'messages' %}
+                                <span id="askerMsg" class="badge badge-pink badge-pill"></span>
+                            {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                    <li class="list-group-item">
+                        <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
+                            {{ 'exit_impersonation'|trans }}
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </li>
+        {% endif %}
+        {% if app.session.get('canPublish')%}
+					<li class="dropdown-item" data-id="offerer">
+							<ul class="list-group list-group-flush">
+									{% for name, menu in offererItems %}
+											<li class="list-group-item">
+													<a id="offerer{{ menu.text }}" href="{{ menu.link }}">
+															{{ menu.text }}
+															{% if name == 'messages' %}
+																	<span id="offererMsg" class="badge badge-pink badge-pill"></span>
+															{% endif %}
+													</a>
+											</li>
+									{% endfor %}
+									{% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+											<li class="list-group-item">
+													<a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
+															{{ 'exit_impersonation'|trans }}
+													</a>
+											</li>
+									{% endif %}
+							</ul>
+					</li>
+        {% endif %}
+    </ul>
+{%- endif -%}

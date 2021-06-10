@@ -83,6 +83,7 @@ $theme-colors: map-merge(
     'danger': $danger,
     'light': $light,
     'dark': $dark,
+    'pink': $pink,
   ),
   $theme-colors
 );
@@ -110,7 +111,7 @@ $escaped-characters: (
 //
 // Quickly modify global styling by enabling or disabling optional features.
 
-$enable-caret: false;
+$enable-caret: true;
 $enable-rounded: true !default;
 $enable-shadows: false !default;
 $enable-gradients: false !default;
@@ -310,14 +311,9 @@ $embed-responsive-aspect-ratios: join(
 }
 
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
-  'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-  'Segoe UI Symbol', 'Noto Color Emoji';
-$font-family-heading: Marianne, Arial, 'Noto Sans', 'Liberation Sans',
-  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-  'Noto Color Emoji';
-$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-  'Liberation Mono', 'Courier New', monospace !default;
+$font-family-sans-serif: Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-heading: Marianne, Arial, 'Noto Sans', 'Liberation Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
 $font-family-base: $font-family-sans-serif;
 // stylelint-enable value-keyword-case
 
@@ -839,7 +835,7 @@ $dropdown-spacer: 0.125rem !default;
 $dropdown-font-size: $font-size-base !default;
 $dropdown-color: $body-color !default;
 $dropdown-bg: $white !default;
-$dropdown-border-color: rgba($black, 0.15) !default;
+$dropdown-border-color: rgba($black, 0.15);
 $dropdown-border-radius: $border-radius !default;
 $dropdown-border-width: $border-width !default;
 $dropdown-inner-border-radius: subtract(
@@ -852,7 +848,7 @@ $dropdown-box-shadow: 0 0.5rem 1rem rgba($black, 0.175) !default;
 
 $dropdown-link-color: $gray-900 !default;
 $dropdown-link-hover-color: darken($gray-900, 5%) !default;
-$dropdown-link-hover-bg: $gray-200 !default;
+$dropdown-link-hover-bg: rgba($black, 0.15);
 
 $dropdown-link-active-color: $component-active-color !default;
 $dropdown-link-active-bg: $component-active-bg !default;
