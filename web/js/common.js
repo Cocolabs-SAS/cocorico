@@ -491,25 +491,27 @@ common.application.setDefaultFavourites = function() {
 /**
  * Get Nb unread messages
  */
+/*
 common.application.getNbUnReadMessages = function(url) {
     $.ajax({
         type: 'GET',
         url: url,
         success: function (result) {
             if (result.total > 0) {
-                $('#nb-unread-msg').html(" (" + result.total + ")");
+                $('#nb-unread-msg').html(" " + result.total + "");
             }
             if (result.asker > 0) {
-                $('#askerMsg').html(" (" + result.asker + ")");
-                $('#nb-unread-asker').html(" (" + result.asker + ")");
+                $('#askerMsg').html(" " + result.asker + "");
+                $('#nb-unread-asker').html(" " + result.asker + "");
             }
             if (result.offerer > 0) {
-                $('#offererMsg').html(" (" + result.offerer + ")");
-                $('#nb-unread-offerer').html(" (" + result.offerer + ")");
+                $('#offererMsg').html(" " + result.offerer + "");
+                $('#nb-unread-offerer').html(" " + result.offerer + "");
             }
         }
     });
 }
+*/
 
 
 /**
@@ -601,6 +603,17 @@ common.application.initMultiSelect = function(elt, allSelectedText, noneSelected
     });
 };
 
+
+/* Sticky Header av */
+var stickyNav = $('.bs4-page #header');
+stickyNav.data('top', stickyNav.offset().top);
+
+/* Toggle Header Nav */
+$('[data-toggle=burger]').on('click tap', function(e) {
+    e.preventDefault();
+    stickyNav.toggleClass('is-opened');
+});
+  
 
 
 // Dirty hack, but needed for outsite use of functions

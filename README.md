@@ -68,13 +68,17 @@ Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony e
 > ./setup
 
 # Lancer toute la solution
-> ./run_all
+> ./run\_all
 
 # Lancer webpack (css, js & assets)
-> ./run_css
+> ./run\_css
 
 # Lancer symfony
 > ./run
+
+# Provoquer une mise à jour du schéma de la base de données
+# (et valider avec 'y')
+> ./docker/update\_db.sh
 ```
 
 ## Utilisation Bootstrap v4

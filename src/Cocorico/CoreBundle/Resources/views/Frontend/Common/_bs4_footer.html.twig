@@ -1,0 +1,82 @@
+{% trans_default_domain 'cocorico' %}
+
+<footer class="c-footer" role="contentinfo">
+  <section class="c-footer-nav">
+    <div class="c-footer-nav__container container">
+      <div class="c-footer-nav__row row">
+        <div class="c-footer-nav__col col-12 col-lg-auto d-flex align-content-center">
+          <div class="c-footer-nav__logo">
+            <img src="/images/logo-rf.svg" alt="Rébublique Française">
+          </div>
+        </div>
+        <div class="c-footer-nav__col col-12 col-lg d-flex align-items-center">
+          <div>
+            <img src="/images/logo-generique-plateforme.svg" height="60" alt="Plateforme de l'inclusion">
+          </div>
+        </div>
+        <div class="c-footer-nav__col col-12 col-lg-6 d-flex align-items-center">
+          <div>
+            <p> Notre mantra issu du Pacte Ambition IAE : Permettre à chacun de trouver sa place. Libérons notre potentiel d'inclusion pour créer 100 000 emplois de plus.</p>
+            <nav role="navigation">
+              <ul>
+                <li><a href="https://emplois.inclusion.beta.gouv.fr" rel="noopener" target="_blank">Les emplois</a></li>
+                <li><a href="https://communaute.inclusion.beta.gouv.fr" rel="noopener" target="_blank">La communauté</a></li>
+                <li><a href="https://pilotage.inclusion.beta.gouv.fr" rel="noopener" target="_blank">Le pilotage</a></li>
+                <li><a href="https://lemarche.inclusion.beta.gouv.fr" rel="noopener" target="_blank">Le marché</a></li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    {{ render(controller('CocoricoCMSBundle:Frontend/Footer:index',{
+        request: app.request
+    })) }}
+
+  <section class="c-footer-legal">
+    <div class="c-footer-legal__container container">
+      <div class="c-footer-legal__row row">
+        <div class="c-footer-legal__col col-12 col-lg">
+          <nav role="navigation">
+            <ul>
+                <li>
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}">
+                        {{ 'footer.how_it_works.link'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}">
+                        {{ 'footer.the_team.link'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}">
+                        {{ 'footer.who_we_are.link'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('cocorico_contact_new') }}">
+                        {{ 'footer.contact_us.link'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('cocorico_page_show', { 'slug': 'nav.legal_notices.slug'|trans }) }}">
+                        {{ 'footer.legal_notices.link'|trans }}
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/betagouv/itou-cocorico/"
+                    class="by pull-right credit" target="_blank">
+                        {{ 'Github' }}
+                    </a>
+                </li>
+          </nav>
+          </ul>
+        </div>
+        <div class="c-footer-legal__col col-12 col-lg-auto"><span>Marché de l'inclusion, service en expérimentation</span></div>
+      </div>
+    </div>
+  </section>
+</footer>

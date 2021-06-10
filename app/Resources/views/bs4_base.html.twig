@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
 <head>
     <title>
@@ -12,22 +12,8 @@
         <meta property="og:image" content="{{ asset('facebook.png') }}"/>
     {%- endblock %}
 
-    <meta charset="utf-8">
-    <!-- set the viewport width and initial-scale on mobile devices -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- include the Open and Raleway Sans google font -->
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic'
-          rel='stylesheet' type='text/css'>
-    <!-- include the Raleway google font -->
-    <link href='//fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900' rel='stylesheet'
-          type='text/css'>
-
-    <!-- include HTML5 IE enabling script and stylesheet for IE -->
-    <!--[if lt IE 9]>
-    <link type="text/css" media="all" rel="stylesheet" href="{{ asset('css/ie.css') }}">
-    <script type="text/javascript" src="{{ asset('js/vendor/ie.js') }}"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
@@ -80,7 +66,7 @@
     {% include '@CocoricoCore/Frontend/Common/_cookie_consent_js.html.twig' only %}
 </head>
 
-<body class="loading {% block theme %}{% endblock %}">
+<body id="top" class="loading {% block theme %}{% endblock %}">
 <!-- allow a user to go to the main content of the page -->
 <noscript>Javascript must be enabled for the correct page display</noscript>
 
@@ -90,9 +76,8 @@
     <a tabindex="1" href="#main">skip to content</a>
 </div>
 
-<div id="wrapper">
-    {% block layout %}{% endblock %}
-</div>
+{% block layout %}{% endblock %}
+
 
 <!-- allow a user to go to the top of the page -->
 <div class="skip">

@@ -1,4 +1,4 @@
- from debian:buster-slim
+FROM --platform=linux/amd6 debian:buster-slim
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/home/cocorico \
