@@ -491,25 +491,27 @@ common.application.setDefaultFavourites = function() {
 /**
  * Get Nb unread messages
  */
+/*
 common.application.getNbUnReadMessages = function(url) {
     $.ajax({
         type: 'GET',
         url: url,
         success: function (result) {
             if (result.total > 0) {
-                $('#nb-unread-msg').html(" (" + result.total + ")");
+                $('#nb-unread-msg').html(" " + result.total + "");
             }
             if (result.asker > 0) {
-                $('#askerMsg').html(" (" + result.asker + ")");
-                $('#nb-unread-asker').html(" (" + result.asker + ")");
+                $('#askerMsg').html(" " + result.asker + "");
+                $('#nb-unread-asker').html(" " + result.asker + "");
             }
             if (result.offerer > 0) {
-                $('#offererMsg').html(" (" + result.offerer + ")");
-                $('#nb-unread-offerer').html(" (" + result.offerer + ")");
+                $('#offererMsg').html(" " + result.offerer + "");
+                $('#nb-unread-offerer').html(" " + result.offerer + "");
             }
         }
     });
 }
+*/
 
 
 /**
