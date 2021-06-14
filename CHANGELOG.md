@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [4.7] - (2021-06-10)
 - Page C'est Quoi L'inclusion
 - Ajout de composants de page pour migration BS4
++ Hotfix JS BS4
 
 ### [4.6] - (2021-06-08)
 - Mise à jour DB pour intégration données QPV
