@@ -10,6 +10,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
+### [4.8] - (2021-06-21)
+- Masquer bouton "afficher les donnéés" si pas de données
+
 ### [4.7] - (2021-06-10)
 - Page C'est Quoi L'inclusion
 - Ajout de composants de page pour migration BS4

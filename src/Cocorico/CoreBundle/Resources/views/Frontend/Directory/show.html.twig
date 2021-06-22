@@ -219,41 +219,43 @@
                             </div>
                         </div>
                         <div class="profile_capsule">
-                            <a href="#" id="show_data">
-                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-chevron.svg')}}" /></span>
-                                <span>Afficher les coordonnées</span>
-                            </a>
-                            <div id="the_data" style="display:none">
-                                <ul class='deflist'>
-                                    {% if structure.website %}
-                                        <li>
-                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-web.svg')}}" /></span>
-                                            <a id="company_website" href="{{structure.website}}" rel="nofollow" target="_blank">{{ structure.website }}</a>
-                                        </li>
-                                    {% endif %}                                
-                                    {% if user %}
-                                        <li>
-                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-@.svg')}}" /></span>
-                                            <span>{{ user.email }}</span>
-                                        </li>
-                                        {% if user.phone %}
+                            {% if structure.website != '' or user %}
+                                <a href="#" id="show_data">
+                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-chevron.svg')}}" /></span>
+                                    <span>Afficher les coordonnées</span>
+                                </a>
+                                <div id="the_data" style="display:none">
+                                    <ul class='deflist'>
+                                        {% if structure.website %}
                                             <li>
-                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-phone.svg')}}" /></span>
-                                                <span>{{ user.phone }}</span>
+                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-web.svg')}}" /></span>
+                                                <a id="company_website" href="{{structure.website}}" rel="nofollow" target="_blank">{{ structure.website }}</a>
+                                            </li>
+                                        {% endif %}                                
+                                        {% if user %}
+                                            <li>
+                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-@.svg')}}" /></span>
+                                                <span>{{ user.email }}</span>
+                                            </li>
+                                            {% if user.phone %}
+                                                <li>
+                                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-phone.svg')}}" /></span>
+                                                    <span>{{ user.phone }}</span>
+                                                </li>
+                                            {% endif %}
+                                            <li>
+                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-user.svg')}}" /></span>
+                                                <span>{{ user.namebis }}</span>
+                                            </li>
+                                            <li>
+                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
+                                                <span>{{ structure.postCode }} {{ structure.city }}</span>
                                             </li>
                                         {% endif %}
-                                        <li>
-                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-user.svg')}}" /></span>
-                                            <span>{{ user.namebis }}</span>
-                                        </li>
-                                        <li>
-                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
-                                            <span>{{ structure.postCode }} {{ structure.city }}</span>
-                                        </li>
-                                    {% endif %}
-                                </ul>
-                            </div>
+                                    </ul>
+                                </div>
                             <div class="separator mb-3 mb-md-6"></div>
+                            {% endif %}
                             <div class="map-holder mb-3 mb-md-7">
                                 <div id="map-company" class="map-canvas"></div>
                             </div>
