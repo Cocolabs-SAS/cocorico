@@ -90,6 +90,7 @@
                                     <tr><th>Raison sociale</th><td>{{ structure.name | capitalize }}</td></tr>
                                     <tr><th>Enseigne</th><td>{{ structure.brand | capitalize }}</td></tr>
                                     <tr><th>Siret</th><td>{{ structure.siret }}</td></tr>
+                                    <tr><th>Localisation</th><td>{{ structure.city}} {{ structure.postCode }}</td></tr>
                                 </table>
                                 {% if structure.hasUsers %}
                                     <p class="text-muted">Cette structure est déjà enregistrée sur le marché, par 
