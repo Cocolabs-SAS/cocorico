@@ -73,11 +73,11 @@ cocorico_dashboard_directory_edit_categories:
     -   text: "Secteurs d'Activité"
 
 cocorico_itou_siae_directory:
-    -   text : 'Directory'
+    -   text : 'Liste structures'
         route: 'cocorico_itou_siae_directory'
 
 cocorico_directory_show:
-    -   text: 'Liste'
+    -   text: 'Liste structures'
         route: 'cocorico_itou_siae_directory'
     -   text: {'entityId': 'id', 'entityName': 'CocoricoCoreBundle:Directory', 'entityMethod': 'getNameOrBrand'}
 

@@ -10,6 +10,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
+### [4.9] - (2021-06-XX)
+- Ajout fil d'ariane sur page liste des structures
+
 ### [4.8] - (2021-06-21)
 - Masquer bouton "afficher les donnéés" si pas de données
 

@@ -13,7 +13,15 @@
 {% block layout %}
     {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
 
-        {% trans_default_domain 'cocorico_home' %}
+        {% trans_default_domain 'cocorico_directory' %}
+
+        {% block breadcrumbs %}
+            <!-- breadcrumbs -->
+
+            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                request: app.request
+            })) }}
+        {% endblock %}
 
         {% block main %}
             <div id="dir_form" class="dir_form">
