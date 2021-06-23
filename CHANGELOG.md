@@ -14,6 +14,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Ajout fil d'ariane sur page liste des structures
 - Utilisateur orienté vers fiche (dashboard) structure après création/adoption
 - Recherche par Siren si aucun résultat par Siret
+- Wording fiche structure (localisation et périmètre) plus clair
 
 ### [4.8] - (2021-06-21)
 - Masquer bouton "afficher les donnéés" si pas de données

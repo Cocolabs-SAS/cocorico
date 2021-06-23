@@ -1461,9 +1461,9 @@ class Directory
             case 3:
                 return 'France entière';
             case 2:
-                return 'Région ('. $this->getRegion() .')';
+                return 'région ('. $this->getRegion() .')';
             case 1:
-                return 'Département ('. $this->getDepartment() .')';
+                return 'département ('. $this->getDepartment() .')';
             default:
                 if ($this->getRange() != null) {
                     return $this->getRange() . " km";
