@@ -232,6 +232,103 @@ class DirectoryController extends Controller
 
         return $form;
     }
+
+    /**
+     * Edit Directory listings.
+     *
+     * @Route("/{id}/edit_listings", name="cocorico_dashboard_directory_edit_listings", requirements={"id" = "\d+"})
+     * @Security("is_granted('edit', structure)")
+     * @ParamConverter("structure", class="CocoricoCoreBundle:Directory")
+     *
+     * @Method({"POST", "GET"})
+     *
+     * @param Request $request
+     * @param         $structure
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editListingsAction(Request $request, Directory $structure)
+    {
+        $form = $this->createCategoriesForm($structure);
+        $form->handleRequest($request);
+
+        $formIsValid = $form->isSubmitted() && $form->isValid();
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
+
+            //Tmp solution to resolve the problem of fields values not removed from Form when category is removed from
+            // listing, whereas fields values are removed from database.
+            //todo: Avoid this and see why it is not done in form
+//            $form = $this->createCategoriesForm($listing);
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+
+            return $this->redirectToRoute(
+                'cocorico_dashboard_directory_edit_categories',
+                array('id' => $structure->getId())
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Directory:edit_categories.html.twig',
+            array(
+                'structure' => $structure,
+                'form' => $form->createView()
+            )
+        );
+    }
+
+    /**
+     * Edit Directory networks.
+     *
+     * @Route("/{id}/edit_networks", name="cocorico_dashboard_directory_edit_networks", requirements={"id" = "\d+"})
+     * @Security("is_granted('edit', structure)")
+     * @ParamConverter("structure", class="CocoricoCoreBundle:Directory")
+     *
+     * @Method({"POST", "GET"})
+     *
+     * @param Request $request
+     * @param         $structure
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editNetworksAction(Request $request, Directory $structure)
+    {
+        $form = $this->createCategoriesForm($structure);
+        $form->handleRequest($request);
+
+        $formIsValid = $form->isSubmitted() && $form->isValid();
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
+
+            //Tmp solution to resolve the problem of fields values not removed from Form when category is removed from
+            // listing, whereas fields values are removed from database.
+            //todo: Avoid this and see why it is not done in form
+//            $form = $this->createCategoriesForm($listing);
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+
+            return $this->redirectToRoute(
+                'cocorico_dashboard_directory_edit_categories',
+                array('id' => $structure->getId())
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Directory:edit_categories.html.twig',
+            array(
+                'structure' => $structure,
+                'form' => $form->createView()
+            )
+        );
+    }
+
     /**
      * Edit Directory categories.
      *

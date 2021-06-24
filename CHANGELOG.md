@@ -14,6 +14,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Ajout donnée et concept "Réseaux"
 - Ajout tuyauterie Réseau-Structure
 - Ajout tuyauterie Annonce-Structure
+- Écran administration des réseaux
+- Correctifs interface administration
+- Écrans d'administration pour le structures : réseaux et offres de prestation
 
 ### [4.9] - (2021-06-24)
 - Ajout fil d'ariane sur page liste des structures

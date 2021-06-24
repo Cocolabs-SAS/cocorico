@@ -35,6 +35,24 @@
                         {{ 'nav.directory.categories.link'|trans }}
                     </a>
                 </li>
+                <li role="presentation" class="{{ nav_side_dashboard_current == "listings" ? 'active' : '' }}">
+                    <a data-text="{{ 'nav.directory.listings.link'|trans }}"
+                       aria-controls="presentation"
+                       href="{{
+                       path('cocorico_dashboard_directory_edit_listings', {
+                       'id': structure.id }) }}">
+                        {{ 'nav.directory.listings.link'|trans }}
+                    </a>
+                </li>
+                <li role="presentation" class="{{ nav_side_dashboard_current == "networks" ? 'active' : '' }}">
+                    <a data-text="{{ 'nav.directory.networks.link'|trans }}"
+                       aria-controls="presentation"
+                       href="{{
+                       path('cocorico_dashboard_directory_edit_networks', {
+                       'id': structure.id }) }}">
+                        {{ 'nav.directory.networks.link'|trans }}
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
