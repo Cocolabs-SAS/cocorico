@@ -10,8 +10,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
-### [4.9] - (2021-06-XX)
-- Ajout fil d'ariane sur page liste des structures
+### [4.9] - (2021-06-24)
+ Ajout fil d'ariane sur page liste des structures
 - Utilisateur orienté vers fiche (dashboard) structure après création/adoption
 - Recherche par Siren si aucun résultat par Siret
 - Wording fiche structure (localisation et périmètre) plus clair
