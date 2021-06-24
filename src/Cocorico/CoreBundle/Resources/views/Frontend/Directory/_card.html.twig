@@ -45,14 +45,14 @@
                         {% endif %}
                         <li class="sc-profile-type">{{ structure.kind }}</li>
                         {% if structure.hasDirectoryListingCategory %}
-                        <li class="sc-profile-sectors">
-                           {{ structure.getSectorString(2, '<br />') | raw }}
-                        </li>
+                            <li class="sc-profile-sectors">
+                               {{ structure.getSectorString(2, '<br />') | raw }}
+                            </li>
                         {% else %}
-                        <li class="sc-profile-sectors-empty"> </li>
+                            <li class="sc-profile-sectors-empty"> </li>
                         {% endif %}
-                        <li class="sc-profile-town">{{ structure.city }}</li>
-                        <li class="sc-profile-town-work">{{ structure.getNiceRange }}</li>
+                        <li class="sc-profile-town">Situé à {{ structure.city }}</li>
+                        <li class="sc-profile-town-work">Intervient sur : {{ structure.getNiceRange }}</li>
                     </ul>
                     {#
                     - type

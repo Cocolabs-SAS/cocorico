@@ -148,16 +148,28 @@ class DirectoryManager extends BaseManager
         }
     }
 
-    public function findBySiretn($siretn)
+    public function findBySiretn($siretn, $retry=true)
     {
+        $siretn = preg_replace('/\D+/', '', $siretn);
+
+        if (strlen($siretn) < 1) {
+            return [];
+        }
+
         $qB = $this->getRepository()->getFindBySiretSiren($siretn);
         $query = $qB->getQuery();
         $resp =  $query->getResult();
-        if ($resp){
+        if ($resp) {
             return $resp;
-        } else {
-            return [];
         }
+
+        # Note : Retrying search with siret only, because
+        # some users have bad siret information
+        if ($retry and strlen($siretn > 9)) {
+            return $this->findBySiretn(substr($siretn, 0, 9), false);
+        }
+
+        return [];
     }
 
     public function findByOwner($User, $page)

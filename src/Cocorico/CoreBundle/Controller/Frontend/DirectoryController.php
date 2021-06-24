@@ -126,7 +126,7 @@ class DirectoryController extends Controller
         $success = $formHandler->process($form);
 
         if ($success) {
-            $url = $this->generateUrl('cocorico_directory_show', ['id' => $directory->getId()]);
+            $url = $this->generateUrl('cocorico_dashboard_directory_edit_presentation', ['id' => $directory->getId()]);
 
             $this->get('session')->getFlashBag()->add(
                 'success',
