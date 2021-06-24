@@ -71,6 +71,14 @@ class Listing extends BaseListing
     private $user;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"createdAt" = "desc"})
+     *
+     * @var Structures[]
+     */
+    private $structures;
+
+    /**
      * @ORM\OneToOne(targetEntity="ListingLocation", inversedBy="listing", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\JoinColumn(name="location_id", referencedColumnName="id", onDelete="CASCADE")
      *
@@ -769,5 +777,42 @@ class Listing extends BaseListing
     public function getImpersonating()
     {
         return $this->getUser();
+    }
+
+    /**
+     * Add structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return Listing
+     */
+    public function addStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        $this->structures[] = $structure;
+        $structure->addListing($this); // Directory owns
+
+        return $this;
+    }
+
+    /**
+     * Remove structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        return $this->structures->removeElement($structure);
+    }
+
+    /**
+     * Get structures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStructures()
+    {
+        return $this->structures;
     }
 }

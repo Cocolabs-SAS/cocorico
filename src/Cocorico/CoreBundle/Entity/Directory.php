@@ -407,6 +407,24 @@ class Directory
     private $users;
 
     /**
+     *
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Listing", inversedBy="structures", cascade={"persist"})
+     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @var Listings
+     */
+    private $listings;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Network", inversedBy="structures", cascade={"persist"})
+     * @ORM\JoinColumn(name="network_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @var Networks
+     */
+    private $networks;
+
+    /**
      * @ORM\Column(name="geo_range", type="integer", nullable=true)
      *
      * @var integer|null
@@ -1337,6 +1355,8 @@ class Directory
     {
         $this->directoryListingCategories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->networks = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->clientImages = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -1392,6 +1412,111 @@ class Directory
     {
         return count($this->users);
     }
+
+    /**
+     * Add listing
+     *
+     * @param \Cocorico\CoreBundle\Entity\Listing $listing
+     *
+     * @return Directory
+     */
+    public function addListing(\Cocorico\CoreBundle\Entity\Listing $listing)
+    {
+        $this->listings[] = $listing;
+        // $listing->addStructure($this); // It's the listing
+
+        return $this;
+    }
+
+    /**
+     * Remove listing.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Listing $listing
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeListing(\Cocorico\CoreBundle\Entity\Listing $listing)
+    {
+        return $this->listings->removeElement($listing);
+    }
+
+    /**
+     * Get listings.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListings()
+    {
+        return $this->listings;
+    }
+
+    public function getFirstListing()
+    {
+        return $this->listings[0];
+    }
+
+    public function hasListing($listing)
+    {
+        return $this->listings->contains($listing);
+    }
+
+    public function hasListings()
+    {
+        return count($this->listings);
+    }
+
+    /**
+     * Add network
+     *
+     * @param \Cocorico\CoreBundle\Entity\Network $network
+     *
+     * @return Directory
+     */
+    public function addNetwork(\Cocorico\CoreBundle\Entity\Network $network)
+    {
+        $this->networks[] = $network;
+        // $network->addStructure($this); // It's the network
+
+        return $this;
+    }
+
+    /**
+     * Remove network.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Network $network
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeNetwork(\Cocorico\CoreBundle\Entity\Network $network)
+    {
+        return $this->networks->removeElement($network);
+    }
+
+    /**
+     * Get networks.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNetworks()
+    {
+        return $this->networks;
+    }
+
+    public function getFirstNetwork()
+    {
+        return $this->networks[0];
+    }
+
+    public function hasNetwork($network)
+    {
+        return $this->networks->contains($network);
+    }
+
+    public function hasNetworks()
+    {
+        return count($this->networks);
+    }
+
 
     /**
      * Set range

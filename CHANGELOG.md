@@ -12,6 +12,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### [5] - (2021-06-XX)
 - Ajout donnée et concept "Réseaux"
+- Ajout tuyauterie Réseau-Structure
+- Ajout tuyauterie Annonce-Structure
 
 ### [4.9] - (2021-06-24)
 - Ajout fil d'ariane sur page liste des structures

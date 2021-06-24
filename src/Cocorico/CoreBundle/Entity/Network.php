@@ -63,6 +63,14 @@ class Network
      */
     private $siret;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"createdAt" = "desc"})
+     *
+     * @var Structures[]
+     */
+    private $structures;
+
 
     /**
      * Get id.
@@ -192,5 +200,41 @@ class Network
     public function getSiret()
     {
         return $this->siret;
+    }
+    /**
+     * Add structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return Network
+     */
+    public function addStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        $this->structures[] = $structure;
+        $structure->addNetwork($this); // Directory owns
+
+        return $this;
+    }
+
+    /**
+     * Remove structure.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Directory $structure
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeStructure(\Cocorico\CoreBundle\Entity\Directory $structure)
+    {
+        return $this->structures->removeElement($structure);
+    }
+
+    /**
+     * Get structures.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStructures()
+    {
+        return $this->structures;
     }
 }
