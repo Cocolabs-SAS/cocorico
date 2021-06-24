@@ -112,8 +112,20 @@
       </trans-unit>     
       <trans-unit id="135230c7beadb48dd31d1567028d035584fb41f3" resname="Directory">
         <source>Directory</source>
-        <target>Répertoire SIAE</target>
+        <target>Structures</target>
       </trans-unit>     
+      <trans-unit id="135230c7beadb48dd31d1567028d035584fb41f3" resname="Siae_List">
+        <source>Siae_List</source>
+        <target>Liste</target>
+      </trans-unit>     
+      <trans-unit id="135230c7beadb48dd31d1567028d035584fb41f3" resname="Network">
+        <source>Network</source>
+        <target>Réseau</target>
+      </trans-unit>
+      <trans-unit id="135230c7beadb48dd34d1567028d035584fb41f3" resname="Networks">
+        <source>Networks</source>
+        <target>Réseaux</target>
+      </trans-unit>
       <trans-unit id="a3c686e711e4720f99b4562bb3dbaae7ab658cf2" resname="Category">
         <source>Category</source>
         <target state="new">Secteurs d'activité</target>
@@ -1288,6 +1300,10 @@
       <trans-unit id="" resname="admin.quote.title">
         <source>admin.booking.asker.label</source>
         <target>Devis</target>
+      </trans-unit>
+      <trans-unit id="" resname="admin.network.title">
+        <source>Network</source>
+        <target>Réseau</target>
       </trans-unit>
     </body>
   </file>
