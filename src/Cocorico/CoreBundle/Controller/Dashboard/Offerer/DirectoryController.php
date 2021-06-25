@@ -14,6 +14,8 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditNetworksType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditListingsType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditClientImagesType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -253,32 +255,50 @@ class DirectoryController extends Controller
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        if ($formIsValid) {
-            $structure = $this->get("cocorico.directory.manager")->save($structure);
+        //if ($formIsValid) {
+        //    $structure = $this->get("cocorico.directory.manager")->save($structure);
 
-            //Tmp solution to resolve the problem of fields values not removed from Form when category is removed from
-            // listing, whereas fields values are removed from database.
-            //todo: Avoid this and see why it is not done in form
-//            $form = $this->createCategoriesForm($listing);
+        //    $this->get('session')->getFlashBag()->add(
+        //        'success',
+        //        $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+        //    );
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
-            );
-
-            return $this->redirectToRoute(
-                'cocorico_dashboard_directory_edit_categories',
-                array('id' => $structure->getId())
-            );
-        }
+        //    return $this->redirectToRoute(
+        //        'cocorico_dashboard_directory_edit_listings',
+        //        array('id' => $structure->getId())
+        //    );
+        //}
 
         return $this->render(
-            'CocoricoCoreBundle:Dashboard/Directory:edit_categories.html.twig',
+            'CocoricoCoreBundle:Dashboard/Directory:edit_listings.html.twig',
             array(
                 'structure' => $structure,
                 'form' => $form->createView()
             )
         );
+    }
+
+    /**
+     * @param Directory $structure
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createListingsForm(Directory $structure)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory_listings',
+            DirectoryEditListingsType::class,
+            $structure,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_listings',
+                    array('id' => $structure->getId())
+                ),
+            )
+        );
+
+        return $form;
     }
 
     /**
@@ -297,36 +317,54 @@ class DirectoryController extends Controller
      */
     public function editNetworksAction(Request $request, Directory $structure)
     {
-        $form = $this->createCategoriesForm($structure);
+        $form = $this->createNetworksForm($structure);
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        if ($formIsValid) {
-            $structure = $this->get("cocorico.directory.manager")->save($structure);
+        // if ($formIsValid) {
+        //     $structure = $this->get("cocorico.directory.manager")->save($structure);
 
-            //Tmp solution to resolve the problem of fields values not removed from Form when category is removed from
-            // listing, whereas fields values are removed from database.
-            //todo: Avoid this and see why it is not done in form
-//            $form = $this->createCategoriesForm($listing);
+        //     $this->get('session')->getFlashBag()->add(
+        //         'success',
+        //         $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+        //     );
 
-            $this->get('session')->getFlashBag()->add(
-                'success',
-                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
-            );
-
-            return $this->redirectToRoute(
-                'cocorico_dashboard_directory_edit_categories',
-                array('id' => $structure->getId())
-            );
-        }
+        //     return $this->redirectToRoute(
+        //         'cocorico_dashboard_directory_edit_categories',
+        //         array('id' => $structure->getId())
+        //     );
+        // }
 
         return $this->render(
-            'CocoricoCoreBundle:Dashboard/Directory:edit_categories.html.twig',
+            'CocoricoCoreBundle:Dashboard/Directory:edit_networks.html.twig',
             array(
                 'structure' => $structure,
                 'form' => $form->createView()
             )
         );
+    }
+
+    /**
+     * @param Directory $structure
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createNetworksForm(Directory $structure)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory_networks',
+            DirectoryEditNetworksType::class,
+            $structure,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_networks',
+                    array('id' => $structure->getId())
+                ),
+            )
+        );
+
+        return $form;
     }
 
     /**

@@ -159,6 +159,16 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.directory_edit_listings:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditListingsType
+        tags:
+            - { name: form.type }
+
+    cocorico.form.type.directory_edit_networks:
+        class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditNetworksType
+        tags:
+            - { name: form.type }
+
     cocorico.form.type.directory_edit_categories_ajax:
         class: Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesAjaxType
         arguments:

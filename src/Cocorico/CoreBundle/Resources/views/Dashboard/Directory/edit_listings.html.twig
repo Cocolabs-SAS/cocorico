@@ -1,0 +1,47 @@
+{% extends 'CocoricoCoreBundle:Dashboard/Directory:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'listings' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    <div class="form-area">
+        {# FIXME: Enable completion notice screen
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice', {'directory': directory})) }}
+        #}
+
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="info">
+
+                <div class="form-holder">
+                    <h2>Offres de prestations</h2>
+
+                    <div class="form-selection">
+                    </div>
+
+                </div>
+                <!-- form-holder -->
+            </div>
+        </div>
+        <!-- tab-content -->
+    </div>
+{%- endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // $(function () {
+
+        // });
+    </script>
+{% endblock %}
