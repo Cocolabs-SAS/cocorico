@@ -2393,3 +2393,24 @@ div.c4_multiselect li {
     }
 
 }
+
+
+/******************
+ * DASHBOARD STYLES
+ ******************/
+
+#directory_listings_listings {
+    margin-top:2rem;
+    display: grid;
+    width:100%;
+    grid-template-columns: repeat(2, 20px 1fr);
+    grid-gap: 10px;
+}
+
+#directory_networks_networks {
+    margin-top:2rem;
+    display: grid;
+    width:100%;
+    grid-template-columns: repeat(1, 20px 1fr);
+    grid-gap: 10px;
+}

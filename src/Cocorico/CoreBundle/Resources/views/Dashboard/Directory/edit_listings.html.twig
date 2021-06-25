@@ -12,7 +12,8 @@
 {%- endblock %}
 
 {% block content_dashboard -%}
-    <div class="form-area">
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
+    <fieldset>
         {# FIXME: Enable completion notice screen
         {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice', {'directory': directory})) }}
         #}
@@ -25,7 +26,15 @@
                 <div class="form-holder">
                     <h2>Offres de prestations</h2>
 
-                    <div class="form-selection">
+
+                    <div class="row" style="margin-top:15px;">
+                        <p>Sélectionnez les offres proposées par la structure</p>
+                        {{ form_errors(form.listings) }}
+                        {{ form_widget(form.listings, {'attr': {'class': ''}} ) }}
+                    </div>
+
+                    <div class="btn-block text-center">
+                        <button type="submit" class="btn btn-default">Enregistrer</button>
                     </div>
 
                 </div>
@@ -33,7 +42,8 @@
             </div>
         </div>
         <!-- tab-content -->
-    </div>
+    </fieldset>
+    {{ form_end(form) }}
 {%- endblock %}
 
 

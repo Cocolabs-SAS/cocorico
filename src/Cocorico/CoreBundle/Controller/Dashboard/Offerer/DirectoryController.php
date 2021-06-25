@@ -251,23 +251,18 @@ class DirectoryController extends Controller
      */
     public function editListingsAction(Request $request, Directory $structure)
     {
-        $form = $this->createCategoriesForm($structure);
+        $form = $this->createListingsForm($structure);
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        //if ($formIsValid) {
-        //    $structure = $this->get("cocorico.directory.manager")->save($structure);
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
 
-        //    $this->get('session')->getFlashBag()->add(
-        //        'success',
-        //        $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
-        //    );
-
-        //    return $this->redirectToRoute(
-        //        'cocorico_dashboard_directory_edit_listings',
-        //        array('id' => $structure->getId())
-        //    );
-        //}
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+        }
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Directory:edit_listings.html.twig',
@@ -293,8 +288,9 @@ class DirectoryController extends Controller
                 'method' => 'POST',
                 'action' => $this->generateUrl(
                     'cocorico_dashboard_directory_edit_listings',
-                    array('id' => $structure->getId())
+                    array('id' => $structure->getId()),
                 ),
+                'user_id' => $this->getUser()->getId(),
             )
         );
 
@@ -321,19 +317,14 @@ class DirectoryController extends Controller
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
-        // if ($formIsValid) {
-        //     $structure = $this->get("cocorico.directory.manager")->save($structure);
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
 
-        //     $this->get('session')->getFlashBag()->add(
-        //         'success',
-        //         $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
-        //     );
-
-        //     return $this->redirectToRoute(
-        //         'cocorico_dashboard_directory_edit_categories',
-        //         array('id' => $structure->getId())
-        //     );
-        // }
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+        }
 
         return $this->render(
             'CocoricoCoreBundle:Dashboard/Directory:edit_networks.html.twig',

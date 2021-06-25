@@ -5,12 +5,28 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
+use Cocorico\CoreBundle\Entity\Network;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+# See here :
+# https://symfony.com/doc/current/reference/forms/types/entity.html#using-a-custom-query-for-the-entities
 class DirectoryEditNetworksType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
+
+        $builder
+            ->add(
+                'networks',
+                EntityType::class,
+                array(
+                    'class' => Network::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded' => true,
+                )
+            );
     }
 
     /**
