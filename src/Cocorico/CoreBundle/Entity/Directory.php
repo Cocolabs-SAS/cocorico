@@ -481,6 +481,15 @@ class Directory
      */
     private $isQpv;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DirectoryLabel", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $labels;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DirectoryOffer", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $offers;
 
 
     /**
@@ -1960,4 +1969,76 @@ class Directory
 
 
 
+
+    /**
+     * Add label.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryLabel $label
+     *
+     * @return Directory
+     */
+    public function addLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
+    {
+        $this->labels[] = $label;
+
+        return $this;
+    }
+
+    /**
+     * Remove label.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryLabel $label
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
+    {
+        return $this->labels->removeElement($label);
+    }
+
+    /**
+     * Get labels.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLabels()
+    {
+        return $this->labels;
+    }
+
+    /**
+     * Add offer.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryOffer $offer
+     *
+     * @return Directory
+     */
+    public function addOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
+    {
+        $this->offers[] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Remove offer.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryOffer $offer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
+    {
+        return $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Get offers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
+    }
 }
