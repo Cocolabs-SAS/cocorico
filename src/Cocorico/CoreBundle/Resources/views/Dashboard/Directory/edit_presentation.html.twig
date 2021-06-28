@@ -111,6 +111,9 @@
                                         id="{{ form.polRange[1].vars.id }}"
                                         name="{{ form.polRange[1].vars.full_name }}"
                                         value="{{ form.polRange[1].vars.value }}"
+                                        {% if form.polRange.vars.value == 1 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[1], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -119,6 +122,9 @@
                                         id="{{ form.polRange[2].vars.id }}"
                                         name="{{ form.polRange[2].vars.full_name }}"
                                         value="{{ form.polRange[2].vars.value }}"
+                                        {% if form.polRange.vars.value == 2 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[2], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -127,6 +133,9 @@
                                         id="{{ form.polRange[3].vars.id }}"
                                         name="{{ form.polRange[3].vars.full_name }}"
                                         value="{{ form.polRange[3].vars.value }}"
+                                        {% if form.polRange.vars.value == 3 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[3], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -137,6 +146,9 @@
                                         id="{{ form.polRange[0].vars.id }}"
                                         name="{{ form.polRange[0].vars.full_name }}"
                                         value="{{ form.polRange[0].vars.value }}"
+                                        {% if form.polRange.vars.value == 0 %}
+                                            checked
+                                        {% endif %}
                                     /> 
                                         {{ form_widget(form.range, {
                                             'attr': {
