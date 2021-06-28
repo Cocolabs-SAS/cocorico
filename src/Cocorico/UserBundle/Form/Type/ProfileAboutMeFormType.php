@@ -199,7 +199,8 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             function (FormEvent $event) {
                 $data = $event->getData();
                 $data = $data ?: array();
-                if (array_key_exists('uploaded', $data["image"])) {
+                //if (array_key_exists('uploaded', $data["image"])) {
+                if (array_key_exists('image', $data) and array_key_exists('uploaded', $data["image"])) {
                     // capture uploaded files and store them for onSubmit event
                     $this->uploaded = $data["image"]['uploaded'];
                 }

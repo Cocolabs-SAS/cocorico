@@ -94,7 +94,7 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 array(
                     'label' => 'directory.form.description',
                     'required' => true,
-                    'empty_date' => '',
+                    'empty_data' => '',
                     'attr' => ['rows'=> 10, 'required' => 'required']
                 )
             )

@@ -37,6 +37,7 @@
                                 <span class="label">{{ form_label(form.lastName) }}</span>
                                 <div class="field-holder">{{ form_widget(form.lastName) }}</div>
                             </div>
+                            {% if not user.isSIAE  %}
                             <div class="field-row">
                                 {{ form_errors(form.companyName) }}
                                 <span class="label">{{ form_label(form.companyName) }}</span>
@@ -52,7 +53,14 @@
                                 <span class="label">{{ form_label(form.website) }}</span>
                                 <div class="field-holder">{{ form_widget(form.website) }}</div>
                             </div>
+                            {% else %}
+
+                                {% do form.companyName.setRendered %}
+                                {% do form.siret.setRendered %}
+                                {% do form.website.setRendered %}
+                            {% endif %}
                         </div>
+                        {% if not user.isSIAE  %}
                         <div id="images-new" class="column">
                             {{ form_errors(form.image.new) }}
                             <div class="image-upload-holder">
@@ -86,6 +94,13 @@
                                 {{ form_widget(form.images ) }}
                             </div>
                         </div>
+                        {% else %}
+                            <div class="column">
+                                <p style="color:#000">L'onglet "Mes Structures" ci-dessus vous permet de gérer les données de la structure (ou des structures) que vous représentez.</p>
+                            </div>
+                            {% do form.image.setRendered %}
+                            {% do form.images.setRendered %}
+                        {% endif %}
                     </div>
 
                     <br />
