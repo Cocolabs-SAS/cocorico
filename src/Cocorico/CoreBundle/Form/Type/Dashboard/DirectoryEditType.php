@@ -93,8 +93,9 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 TextareaType::class,
                 array(
                     'label' => 'directory.form.description',
-                    'required' => false,
-                    'attr' => ['rows'=> 10]
+                    'required' => true,
+                    'empty_date' => '',
+                    'attr' => ['rows'=> 10, 'required' => 'required']
                 )
             )
             ->add(
