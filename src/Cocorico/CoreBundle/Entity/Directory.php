@@ -1366,6 +1366,8 @@ class Directory
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
         $this->networks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->labels = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->clientImages = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -1977,7 +1979,10 @@ class Directory
      */
     public function addLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
     {
-        $this->labels[] = $label;
+        if (!$this->labels->contains($label)) {
+            $label->setDirectory($this);
+            $this->labels->add($label);
+        }
 
         return $this;
     }
@@ -1991,7 +1996,11 @@ class Directory
      */
     public function removeLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
     {
-        return $this->labels->removeElement($label);
+        if ($this->labels->contains($label)) {
+            $this->labels->removeElement($label);
+        }
+
+        return $this;
     }
 
     /**

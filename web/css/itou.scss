@@ -2414,3 +2414,16 @@ div.c4_multiselect li {
     grid-template-columns: repeat(1, 20px 1fr);
     grid-gap: 10px;
 }
+
+#directory_labels li {
+    list-style-type:none;
+}
+
+#directory_labels .close {
+    position:relative;
+    display:inline-block;
+    padding-left:0px;
+    margin-left:3px;
+    top:0;
+    right:0;
+}

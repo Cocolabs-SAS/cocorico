@@ -186,6 +186,8 @@ class DirectoryController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $data = $editForm->getData();
+            // dump($data);
             $this->get("cocorico.directory.manager")->save($structure);
 
             $this->get('session')->getFlashBag()->add(

@@ -7,7 +7,12 @@
      {{ parent() }}
  {%- endblock %}
 
+{%- block _directory_label_labels_entry_widget -%}
+    Coucou :
+{%- endblock -%}
+
 {% block content_dashboard -%}
+    {% form_theme form 'CocoricoCoreBundle:Form:fields_directory.html.twig' %}
     {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
     <fieldset>
         <legend class="hidden">form area</legend>
@@ -184,6 +189,24 @@
                             {{ form_widget(form.images ) }}
                         </div>
                     </div>
+                    <div class="row" style="margin-top:3rem;">
+                        <h2>Labels et certifications</h2>
+                        {{ form_errors(form.labels) }}
+                        {{ form_widget(form.labels) }}
+                        {#
+                        <ul id="label-cert-list"
+                            data-prototype="{{ form_widget(form.labels.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}"
+                            data-widget-counter="{{ form.labels|length }}"
+                            >
+                        {% for labelField in form.labels %}
+                            <li>
+                                {{ form_errors(labelField) }}
+                                {{ form_widget(labelField) }}
+                            </li>
+                        {% endfor %}
+                        #}
+                    </div>
                 </div>
 
                 <div class="btn-block text-center">
@@ -210,6 +233,34 @@
         'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=" ~ structure.id ,
         'upload_max': 5,
     } only %}
+
+
+    <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        console.log("Listener loaded");
+        $('.add-directory-item').click(function (e) {
+             console.log('Click!');
+             var list = $($(this).attr('data-list-selector'));
+             // Try to find the counter of the list or use the length of the list
+             var counter = list.data('counter') || list.children().length;
+
+             // grab the prototype template
+             var newWidget = list.attr('data-prototype');
+             // replace the "__name__" used in the id and name of the prototype
+             // with a number that's unique to your emails
+             // end name attribute looks like name="contact[emails][2]"
+             newWidget = newWidget.replace(/__name__/g, counter);
+             // Increase the counter
+             counter++;
+             // And store it, the length cannot be used if deleting widgets is allowed
+             list.data('counter', counter);
+             // create a new list element and add it to the list
+             var newElem = $(newWidget);
+             newElem.appendTo(list);
+         });
+      });
+    </script>
+
 
 {%- endblock %}
 

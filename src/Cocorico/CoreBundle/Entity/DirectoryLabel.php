@@ -36,6 +36,7 @@ class DirectoryLabel
 
     /**
      * @ORM\ManyToOne(targetEntity="Directory", inversedBy="labels")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $directory;
 

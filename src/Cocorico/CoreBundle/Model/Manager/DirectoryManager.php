@@ -347,6 +347,10 @@ class DirectoryManager extends BaseManager
      */
     public function save(Directory $directory)
     {
+        // foreach ($directory->getLabels() as $label) {
+        //     $label->setDirectory($directory);
+        // }
+
         $directory->prestaTypeToInt();
         $this->persistAndFlush($directory);
 
