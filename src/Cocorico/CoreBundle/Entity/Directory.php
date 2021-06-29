@@ -357,6 +357,12 @@ class Directory
     private $isActive;
 
     /**
+     * @ORM\Column(name="is_cocontracting", type="boolean", nullable=true)
+     * @var bool
+     */
+    private $isCoContracting;
+
+    /**
      * @ORM\Column(name="brand", type="string", nullable=true)
      * @var string|null
      */
@@ -2053,5 +2059,29 @@ class Directory
     public function getOffers()
     {
         return $this->offers;
+    }
+
+    /**
+     * Set isCoContracting.
+     *
+     * @param bool|null $isCoContracting
+     *
+     * @return Directory
+     */
+    public function setIsCoContracting($isCoContracting = null)
+    {
+        $this->isCoContracting = $isCoContracting;
+
+        return $this;
+    }
+
+    /**
+     * Get isCoContracting.
+     *
+     * @return bool|null
+     */
+    public function getIsCoContracting()
+    {
+        return $this->isCoContracting;
     }
 }

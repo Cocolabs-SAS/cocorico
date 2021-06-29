@@ -22,6 +22,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Modification lien 'annonces' : orientation vers structure au lieu de l'annonce
 - Retrait du bouton "publiez votre offre de prestation"
 - Ajout champ "nom" aux logos références clients
+- Ajout champt ouverture à la co-traitance pour les structures
 
 ### [4.9] - (2021-06-24)
 - Ajout fil d'ariane sur page liste des structures
