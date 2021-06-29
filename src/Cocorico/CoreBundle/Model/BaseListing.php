@@ -156,7 +156,7 @@ abstract class BaseListing
     /**
      * @ORM\Column(name="type", type="smallint", nullable=true)
      *
-     * @var integer
+     criar integer
      */
     protected $type;
 

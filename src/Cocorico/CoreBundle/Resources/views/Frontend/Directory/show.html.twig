@@ -163,6 +163,28 @@
                             </div>
                         </div>
                         <!-- Fourth Row -->
+                        {% if structure.offers %}
+                        <div class="row ">
+                            <div class="col-sm-12 img-left mb-5 mb-md-7">
+                                <div class="il-l">
+                                    <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
+                                </div>
+                                <div class="il-r">
+                                    <h3>Les prestations proposées</h3>
+                                    {% for offer in structure.offers %}
+                                        <article class="prests-post col-xs-12 col-md-4 mb-3 mb-md-5">
+                                            <img class="cell_icon" src="{{ asset('images/prof_dot.png')}}" />
+                                            <h4>{{ offer.title }}</h4>
+                                            <div>
+                                                {{ offer.description }}
+                                            </div>
+                                        </article>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {#
                         {% if listings %}
                         <div class="row ">
                             <div class="col-sm-12 img-left mb-5 mb-md-7">
@@ -178,6 +200,7 @@
                             </div>
                         </div>
                         {% endif %}
+                        #}
                         <!-- Fifth Row -->
                         <div class="row">
                             {% if structure.clientImages is not empty %}

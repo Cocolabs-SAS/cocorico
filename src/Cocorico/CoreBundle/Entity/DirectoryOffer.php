@@ -35,6 +35,12 @@ class DirectoryOffer
     private $title;
 
     /**
+     * @ORM\Column(name="source", type="string", nullable=true)
+     * @var string|null
+     */
+    private $source;
+
+    /**
      * @ORM\Column(name="description", type="text", length=65535, nullable=false)
      *
      * @var string
@@ -127,5 +133,29 @@ class DirectoryOffer
     public function getDirectory()
     {
         return $this->directory;
+    }
+
+    /**
+     * Set source.
+     *
+     * @param string|null $source
+     *
+     * @return DirectoryOffer
+     */
+    public function setSource($source = null)
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    /**
+     * Get source.
+     *
+     * @return string|null
+     */
+    public function getSource()
+    {
+        return $this->source;
     }
 }
