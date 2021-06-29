@@ -11,6 +11,9 @@
                         {% set listing_location = listing.location %}
                         {% set listing_user = listing.user %}
                         {% set listing_image = listing.images|length ? listing.images[0].name : ListingImageConstants.IMAGE_DEFAULT %}
+                        {% set struct_id = listing.structures|length ? listing.structures[0].id : false %}
+
+                        {% if struct_id != false %}
 
                         <article class="listing-post col-sm-4 col-xs-12">
                             <div class="listing-content">
@@ -18,7 +21,7 @@
                                     <i class="icon-heart"></i>
                                     <span class="hidden">favourit</span>
                                 </a>
-                                <a href="{{ path('cocorico_listing_show', { 'slug': listing_translation.slug }) }}"
+                                <a href="{{ path('cocorico_directory_show', { 'id': struct_id }) }}"
                                    class="listing-box">
                                     <div class="frame">
                                         <div class="post-info">
@@ -88,6 +91,7 @@
                                 </a>
                             </div>
                         </article>
+                        {% endif %}
                     {%- endfor -%}
                 </ul>
             </div>{# slider-clip #}

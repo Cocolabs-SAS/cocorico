@@ -101,6 +101,7 @@
                 </li>
             {%- endif -%}
             {# New listing link #}
+            {# New listing disabled
             {% if app.session.get('canPublish') %}
                 <li class="has-no-separator">
                     <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary" tabindex="9" rel="noopener">
@@ -110,6 +111,7 @@
                     </a>
                 </li>
             {% endif %}
+            #}
             {%- if app.user is null -%}
                 <li class="has-no-separator">
                     <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary" rel="noopener">

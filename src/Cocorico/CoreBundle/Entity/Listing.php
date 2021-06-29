@@ -71,8 +71,8 @@ class Listing extends BaseListing
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"createdAt" = "desc"})
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="listings", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *
      * @var Structures[]
      */
@@ -156,6 +156,7 @@ class Listing extends BaseListing
         $this->discounts = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->threads = new ArrayCollection();
+        $this->structures = new ArrayCollection();
         $this->options = new ArrayCollection();
     }
 

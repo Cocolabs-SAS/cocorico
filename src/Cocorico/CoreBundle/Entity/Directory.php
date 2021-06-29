@@ -409,7 +409,7 @@ class Directory
     /**
      *
      * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Listing", inversedBy="structures", cascade={"persist"})
-     * @ORM\JoinColumn(name="listing_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="directory_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      *
      * @var Listings
      */

@@ -17,6 +17,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Écran administration des réseaux
 - Correctifs interface administration
 - Écrans d'administration pour le structures : réseaux et offres de prestation
+- Refactor des offres proposés par les structures : on repart sur du propre
+- Ajout donnée labels et certifications
+- Modification lien 'annonces' : orientation vers structure au lieu de l'annonce
+- Retrait du bouton "publiez votre offre de prestation"
 
 ### [4.9] - (2021-06-24)
 - Ajout fil d'ariane sur page liste des structures

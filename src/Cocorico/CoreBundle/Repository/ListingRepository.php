@@ -38,12 +38,14 @@ class ListingRepository extends EntityRepository
             ->addSelect("partial ln.{id, city, route, country}")
             ->addSelect("partial co.{id, lat, lng}")
             ->addSelect("partial ui.{id, name}")
+            ->addSelect("partial ls.{id}")
             ->addSelect("'' AS DUMMY")//To maintain fields on same array level when extra fields are added
 
             //From
             ->from('CocoricoCoreBundle:Listing', 'l')
             ->leftJoin('l.translations', 't')
             ->leftJoin('l.listingListingCategories', 'llcat')
+            ->leftJoin('l.structures', 'ls')
             ->leftJoin('llcat.category', 'ca')
             //Join::WITH: Avoid exclusion of listings with no categories (disable inner join)
             ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
