@@ -1,0 +1,77 @@
+{% extends 'CocoricoCoreBundle:Dashboard/Directory:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'offers' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    {% form_theme form 'CocoricoCoreBundle:Form:fields_directory.html.twig' %}
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
+    <fieldset>
+        {# FIXME: Enable completion notice screen
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice', {'directory': directory})) }}
+        #}
+
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="info">
+
+                <div class="form-holder">
+                    <h2>Offres de prestations</h2>
+
+
+                    <div class="row" style="margin-top:15px;">
+                        <p>Sélectionnez les offres proposées par la structure</p>
+                        {{ form_errors(form.offers) }}
+                        {{ form_widget(form.offers) }}
+                    </div>
+
+                    <div class="btn-block text-center">
+                        <button type="submit" class="btn btn-default">Enregistrer</button>
+                    </div>
+
+                </div>
+                <!-- form-holder -->
+            </div>
+        </div>
+        <!-- tab-content -->
+    </fieldset>
+    {{ form_end(form) }}
+{%- endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        $('.add-directory-item').click(function (e) {
+             console.log('Click!');
+             var list = $($(this).attr('data-list-selector'));
+             // Try to find the counter of the list or use the length of the list
+             var counter = list.data('counter') || list.children().length;
+
+             // grab the prototype template
+             var newWidget = list.attr('data-prototype');
+             // replace the "__name__" used in the id and name of the prototype
+             // with a number that's unique to your emails
+             // end name attribute looks like name="contact[emails][2]"
+             newWidget = newWidget.replace(/__name__/g, counter);
+             // Increase the counter
+             counter++;
+             // And store it, the length cannot be used if deleting widgets is allowed
+             list.data('counter', counter);
+             // create a new list element and add it to the list
+             var newElem = $(newWidget);
+             newElem.appendTo(list);
+         });
+      });
+    </script>
+{% endblock %}

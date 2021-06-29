@@ -2022,7 +2022,10 @@ class Directory
      */
     public function addOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
     {
-        $this->offers[] = $offer;
+        if (!$this->offers->contains($offer)) {
+            $offer->setDirectory($this);
+            $this->offers->add($offer);
+        }
 
         return $this;
     }
@@ -2036,7 +2039,10 @@ class Directory
      */
     public function removeOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
     {
-        return $this->offers->removeElement($offer);
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+        }
+        return $this;
     }
 
     /**

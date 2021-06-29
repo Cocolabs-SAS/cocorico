@@ -2427,3 +2427,22 @@ div.c4_multiselect li {
     top:0;
     right:0;
 }
+
+#directory_offers_offers .close {
+    position:relative;
+    display:inline-block;
+    padding-left:0px;
+    margin-left:3px;
+    top:0;
+    right:0;
+}
+
+#directory_offers_offers table {
+    width:80%;
+    border-bottom: 1px solid #ccc;
+    padding:2rem 0;
+}
+
+#directory_offers_offers table:last-child {
+    border-bottom-width: 0px;
+}

@@ -7,10 +7,6 @@
      {{ parent() }}
  {%- endblock %}
 
-{%- block _directory_label_labels_entry_widget -%}
-    Coucou :
-{%- endblock -%}
-
 {% block content_dashboard -%}
     {% form_theme form 'CocoricoCoreBundle:Form:fields_directory.html.twig' %}
     {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
@@ -237,7 +233,6 @@
 
     <script>
     window.addEventListener("DOMContentLoaded", (event) => {
-        console.log("Listener loaded");
         $('.add-directory-item').click(function (e) {
              console.log('Click!');
              var list = $($(this).attr('data-list-selector'));

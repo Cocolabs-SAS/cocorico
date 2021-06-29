@@ -35,11 +35,11 @@
                         {{ 'nav.directory.categories.link'|trans }}
                     </a>
                 </li>
-                <li role="presentation" class="{{ nav_side_dashboard_current == "listings" ? 'active' : '' }}">
+                <li role="presentation" class="{{ nav_side_dashboard_current == "offers" ? 'active' : '' }}">
                     <a data-text="{{ 'nav.directory.listings.link'|trans }}"
                        aria-controls="presentation"
                        href="{{
-                       path('cocorico_dashboard_directory_edit_listings', {
+                       path('cocorico_dashboard_directory_edit_offers', {
                        'id': structure.id }) }}">
                         {{ 'nav.directory.listings.link'|trans }}
                     </a>

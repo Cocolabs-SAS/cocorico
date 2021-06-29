@@ -43,6 +43,7 @@ class DirectoryOffer
 
     /**
      * @ORM\ManyToOne(targetEntity="Directory", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $directory;
 

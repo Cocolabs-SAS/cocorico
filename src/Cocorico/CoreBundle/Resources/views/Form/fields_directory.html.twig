@@ -6,6 +6,10 @@
 {#
     Directory widgets
 #}
+
+{# ##########################################
+    Directory Labels
+########################################## #}
 {% macro labelsCollectionItem(child_form, allow_delete) %}
     {% apply spaceless %}
         <tr>
@@ -23,24 +27,6 @@
                 </td>
             {% endif %}
         </tr>
-    {#
-        <div class="img-thumbnail">
-
-
-            {% set fieldNum = 1 %}
-            {% for field in child_form %}
-                {% if "hidden" not in field.vars.block_prefixes %}
-                    {{ form_errors(field) }}
-                    {{ form_label(field) }}
-                    <!-- img-thumbnail -->
-                    {{ form_widget(field) }}
-                    {% set fieldNum = fieldNum + 1 %}
-                {% else %}
-                    {{ form_widget(field) }}
-                {% endif %}
-            {% endfor %}
-        </div>
-    #}
     {% endapply %}
 {% endmacro %}
 
@@ -79,6 +65,60 @@
 
 {% endblock %}
 
+{# ##########################################
+    Directory Offers
+########################################## #}
+{% macro offersCollectionItem(child_form, allow_delete) %}
+    {% apply spaceless %}
+        <table>
+            <tr><td> {{ form_label(child_form.title, 'titre') }}</td>
+                <td> {{ form_widget(child_form.title) }} </td>
+                <td> {% if allow_delete|default(null) is not null %}
+                    <a href="javascript:void(0)" onclick="$(this).parents('table').remove();" title="Remove"
+                       class="close remove"
+                       data-dismiss="alert" aria-label="Close">
+                        <span class="hidden">Éffacer</span>
+                        <i class="icon-cancel"></i>
+                    </a> {% endif %}
+                </td>
+            </tr>
+            <tr><td colspan=4> {{ form_label(child_form.description, 'description') }}</td></tr>
+            <tr><td colspan=4> {{ form_widget(child_form.description) }} </td></tr>
+        </table>
+    {% endapply %}
+{% endmacro %}
 
+{% block _directory_offers_offers_widget %}
+   {% import _self as self %}
 
+    {% apply spaceless %}
+        {% set data_prototype = "" %}
+        {% if prototype is defined %}
+            {% set data_prototype =  self.offersCollectionItem(form.vars.prototype, allow_delete) %}
+        {% endif %}
+        <div>
+            <!-- files-list -->
+            <div
+                class="offers-list collection"
+                {{ block('widget_container_attributes') }}
+                data-prototype="{{ data_prototype|e }}"
+                data-counter="{{ form|length }}"
+                data-tags="{{ '<li></li>'|e }}"
+            >
+                {% for child_form in form %}
+                    {{ self.offersCollectionItem(child_form, allow_delete) }}
+                {% endfor %}
+            </div>
 
+            {% if allow_add|default(null) is not null %}
+                <div class="btn-block text-center directory-add-blocks">
+                    <a class="add-directory-item" title="Add" href="javascript:void(0)" data-list-selector=".offers-list">
+                        <div style="display: none;"></div>
+                        <span>{{ 'collection.add_item'|trans }}</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    {% endapply %}
+
+{% endblock %}

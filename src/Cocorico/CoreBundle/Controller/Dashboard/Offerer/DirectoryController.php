@@ -15,7 +15,7 @@ use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditNetworksType;
-use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditListingsType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditOffersType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditClientImagesType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -238,9 +238,9 @@ class DirectoryController extends Controller
     }
 
     /**
-     * Edit Directory listings.
+     * Edit Directory offers.
      *
-     * @Route("/{id}/edit_listings", name="cocorico_dashboard_directory_edit_listings", requirements={"id" = "\d+"})
+     * @Route("/{id}/edit_offers", name="cocorico_dashboard_directory_edit_offers", requirements={"id" = "\d+"})
      * @Security("is_granted('edit', structure)")
      * @ParamConverter("structure", class="CocoricoCoreBundle:Directory")
      *
@@ -251,9 +251,9 @@ class DirectoryController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
-    public function editListingsAction(Request $request, Directory $structure)
+    public function editOffersAction(Request $request, Directory $structure)
     {
-        $form = $this->createListingsForm($structure);
+        $form = $this->createOffersForm($structure);
         $form->handleRequest($request);
 
         $formIsValid = $form->isSubmitted() && $form->isValid();
@@ -267,7 +267,7 @@ class DirectoryController extends Controller
         }
 
         return $this->render(
-            'CocoricoCoreBundle:Dashboard/Directory:edit_listings.html.twig',
+            'CocoricoCoreBundle:Dashboard/Directory:edit_offers.html.twig',
             array(
                 'structure' => $structure,
                 'form' => $form->createView()
@@ -280,19 +280,18 @@ class DirectoryController extends Controller
      *
      * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
      */
-    private function createListingsForm(Directory $structure)
+    private function createOffersForm(Directory $structure)
     {
         $form = $this->get('form.factory')->createNamed(
-            'directory_listings',
-            DirectoryEditListingsType::class,
+            'directory_offers',
+            DirectoryEditOffersType::class,
             $structure,
             array(
                 'method' => 'POST',
                 'action' => $this->generateUrl(
-                    'cocorico_dashboard_directory_edit_listings',
+                    'cocorico_dashboard_directory_edit_offers',
                     array('id' => $structure->getId()),
                 ),
-                'user_id' => $this->getUser()->getId(),
             )
         );
 
