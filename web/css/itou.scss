@@ -2450,3 +2450,27 @@ div.c4_multiselect li {
 #directory_offers_offers textarea {
     height:10rem;
 }
+
+.directory_clientimage {
+    position:relative;
+    border:1px solid #ccc;
+}
+
+.directory_clientimage .img-thumbnail {
+    float:none;
+    display:flex;
+    overflow:hidden;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    padding:0;
+    margin:0;
+}
+.directory_clientimage .img-thumbnail img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}
+
+.directory_clientimage .close {
+}
