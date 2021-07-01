@@ -118,6 +118,7 @@ class Directory
     const STRUCT_AI = 'AI';
     const STRUCT_ACI = 'ACI';
     const STRUCT_GEIQ = 'GEIQ';
+
     public static $kindValues = array(
         self::STRUCT_CHOICE,
         self::STRUCT_EI,
@@ -146,6 +147,19 @@ class Directory
         self::PR_DEPARTEMENT => 'entity.directory.polrange.departement',
         self::PR_REGION => 'entity.directory.polrange.region',
         self::PR_FRANCE => 'entity.directory.polrange.france',
+    );
+
+    public static $kindFullString = array (
+        self::STRUCT_CHOICE => self::STRUCT_CHOICE,
+        self::STRUCT_EI => 'Entreprise d\'insertion',
+        self::STRUCT_EA => 'Entreprise adaptée',
+        self::STRUCT_EITI => 'Entreprise d\'insertion par le travail indépendant',
+        self::STRUCT_ETTI => 'Entreprise de travail temporaire d\'insertion',
+        self::STRUCT_EATT => 'Enterprises adaptées de travail temporaire',
+        self::STRUCT_ACI => 'Atelier et chantier d\'insertion',
+        self::STRUCT_AI => 'Assocation intermédiaire',
+        self::STRUCT_GEIQ => 'Groupement d\'employeurs pour l\'insertion et la qualification',
+    
     );
 
     public static $exportColumns = array(
@@ -676,6 +690,12 @@ class Directory
     public function getKind()
     {
         return $this->kind;
+    }
+
+    public function getKindString()
+    {
+        return  self::$kindFullString[$this->kind];
+    
     }
 
     /**

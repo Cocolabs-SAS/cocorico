@@ -17,11 +17,10 @@
             <div class="listing-holder row">
                 <h1 class="hidden">{{ 'listing.index.title'|trans }}</h1>
                 <!-- post -->
-                <div style="background-color:#f2d227;color:#000;padding:2rem;">
-                    <h2>Attention</h2>
-                    Suite au développement de la partie "structures" du marché de l'inclusion,
-                    la gestion de vos offres de prestation se fait désormais dans la partie "Offres de prestation"
-                    des données de <a href="{{ path('cocorico_dashboard_directory') }}">vos structures</a>.
+                <div style="background-color:#ddf2f3;color:#495057;padding:2rem;">
+                    <h2>Info déploiement</h2>
+                    Suite à l’évolution du profil utilisateur  et de la partie “structures”, toutes les données liées à vos structures sont désormais accessibles depuis l’onglet
+                    <a href="{{ path('cocorico_dashboard_directory') }}">"Mes Structures"</a>.
                 </div>
                 {% for listing in listings.iterator %}
                     {% set translation = listing.translations[app.request.locale] %}
