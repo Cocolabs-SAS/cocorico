@@ -19,13 +19,6 @@
                         {{ 'nav.directory.presentation.link'|trans }}
                     </a>
                 </li>
-                <li role="presentation" class="{{ nav_side_dashboard_current == "client_image" ? 'active' : '' }}">
-                    <a aria-controls="presentation"
-                       href="{{
-                       path('cocorico_dashboard_directory_edit_client_images', { 'id': structure.id }) }}">
-                        Références Client
-                    </a>
-                </li>
                 <li role="presentation" class="{{ nav_side_dashboard_current == "categories" ? 'active' : '' }}">
                     <a data-text="{{ 'nav.directory.categories.link'|trans }}"
                        aria-controls="presentation"
@@ -42,6 +35,13 @@
                        path('cocorico_dashboard_directory_edit_offers', {
                        'id': structure.id }) }}">
                         {{ 'nav.directory.listings.link'|trans }}
+                    </a>
+                </li>
+                <li role="presentation" class="{{ nav_side_dashboard_current == "client_image" ? 'active' : '' }}">
+                    <a aria-controls="presentation"
+                       href="{{
+                       path('cocorico_dashboard_directory_edit_client_images', { 'id': structure.id }) }}">
+                        Références Client
                     </a>
                 </li>
                 <li role="presentation" class="{{ nav_side_dashboard_current == "networks" ? 'active' : '' }}">
