@@ -296,11 +296,11 @@
     {% apply spaceless %}
         {% set data_prototype = "" %}
         {% if prototype is defined %}
-            {% set data_prototype =  self.labelsCollectionItem(form.vars.prototype, allow_delete) %}
+            {% set data_prototype =  self.imagesCollectionItem(form.vars.prototype, allow_delete) %}
         {% endif %}
         <ul {{ block('widget_container_attributes') }} data-prototype="{{ data_prototype|e }}">
             {% for child_form in form %}
-                {{ self.labelsCollectionItem(child_form, allow_delete) }}
+                {{ self.imagesCollectionItem(child_form, allow_delete) }}
             {% endfor %}
         </ul>
 
