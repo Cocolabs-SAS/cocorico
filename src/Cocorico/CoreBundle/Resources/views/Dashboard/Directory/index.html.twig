@@ -15,11 +15,11 @@
     <div role="tabpanel" class="tab-pane active" id="properties">
         <div class="directory-area">
             <a style="position:absolute;right:10px; top:-3rem; margin-bottom: 2rem;" href="{{ path('cocorico_directory_adopt_search')}}" class="btn btn-success">Ajouter une structure</a>
-            <div class="directory-holder row">
+            <div class="directory-holder">
                 <h1 class="hidden">{{ 'directory.index.title'|trans }}</h1>
                 <!-- post -->
                 {% for structure in structures.iterator %}
-                    <article class="structure-post col-sm-4 col-xs-12">
+                    <article class="structure-post">
                             <div class="box">
                             <h3>{{ structure.name}} </h3>
                             <dl>

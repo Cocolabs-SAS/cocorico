@@ -2399,6 +2399,20 @@ div.c4_multiselect li {
  * DASHBOARD STYLES
  ******************/
 
+.directory-holder {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+.structure-post {
+    flex: 1 0 auto;
+    height:auto;
+    width:30%;
+    margin: 5px;
+    padding:2rem;
+}
+
 #directory_listings_listings {
     margin-top:2rem;
     display: grid;
@@ -2451,6 +2465,21 @@ div.c4_multiselect li {
     height:10rem;
 }
 
+#directory_clientImages .files-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+#directory_clientImages table {
+    flex: 1 0 auto;
+    height:auto;
+    width:200px;
+    margin: 5px;
+    padding:2rem;
+}
+
+
 .directory_clientimage {
     position:relative;
     border:1px solid #ccc;
@@ -2462,14 +2491,15 @@ div.c4_multiselect li {
     overflow:hidden;
     justify-content: center;
     align-items: center;
-    width:100%;
+    width:60%;
     padding:0;
     margin:0;
+    width:auto;
+    border:0;
 }
 .directory_clientimage .img-thumbnail img {
-    flex-shrink: 0;
-    min-width: 100%;
-    min-height: 100%
+    flex-shrink: 1;
+    width:auto;
 }
 
 .directory_clientimage .close {
