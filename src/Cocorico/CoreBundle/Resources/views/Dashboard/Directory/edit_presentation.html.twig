@@ -102,6 +102,18 @@
                                 {{ form_label(form.prestaType_build)}}
                             </div>
                         </div>
+                        <div class="field-row">
+                            <div class="col-sm-4">
+                                Ouvert à la co-traitance
+                            </div>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.isCoContracting[0], { 'attr': { 'class': 'form-control' }}) }}
+                                {{ form_label(form.isCoContracting[0])}}
+                                <br />
+                                {{ form_widget(form.isCoContracting[1], { 'attr': { 'class': 'form-control' }}) }}
+                                {{ form_label(form.isCoContracting[1])}}
+                            </div>
+                        </div>
                     </div>
                     <div class="row" style="margin-top:3rem;">
                         <h2>Périmètre d'activité</h2>

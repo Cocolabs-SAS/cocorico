@@ -101,6 +101,19 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 )
             )
             ->add(
+                'isCoContracting',
+                ChoiceType::class,
+                array(
+                    'expanded' => true,
+                    'multiple' => false,
+                    'required' => false,
+                    'choices' => [
+                        'Oui' => true,
+                        'Non' => false,
+                    ],
+                )
+            )
+            ->add(
                 'prestaType_disp',
                 CheckBoxType::class,
                 array(
