@@ -13,7 +13,10 @@
 {% macro labelsCollectionItem(child_form, allow_delete) %}
     {% apply spaceless %}
         <tr>
-        <td style="width:90%">
+            <td style="width:7rem">
+                Intitulé
+            </td>
+        <td>
             {{ form_widget(child_form.name) }}
         </td>
             {% if allow_delete|default(null) is not null %}
