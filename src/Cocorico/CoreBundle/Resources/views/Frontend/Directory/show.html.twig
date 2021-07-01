@@ -136,7 +136,12 @@
                                         <h3>Références clients</h3>
                                         {% for image in structure.clientImages %}
                                             <!-- slide -->
-                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" class="client-ref"/>
+                                            <img
+                                                src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" 
+                                                class="client-ref"
+                                                alt="{{ image.description }}"
+                                                title="{{ image.description }}"
+                                            />
                                         {% endfor %}
                                     </div>
                                 </div>
