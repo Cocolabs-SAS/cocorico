@@ -17,6 +17,12 @@
             <div class="listing-holder row">
                 <h1 class="hidden">{{ 'listing.index.title'|trans }}</h1>
                 <!-- post -->
+                <div style="background-color:#f2d227;color:#000;padding:2rem;">
+                    <h2>Attention</h2>
+                    Suite au développement de la partie "structures" du marché de l'inclusion,
+                    la gestion de vos offres de prestation se fait désormais dans la partie "Offres de prestation"
+                    des données de <a href="{{ path('cocorico_dashboard_directory') }}">vos structures</a>.
+                </div>
                 {% for listing in listings.iterator %}
                     {% set translation = listing.translations[app.request.locale] %}
                     {# {% set price = listing.priceDecimal | format_price(app.request.locale, 0) %} #}

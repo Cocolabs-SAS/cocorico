@@ -1714,6 +1714,19 @@ section.quote-quick-form fieldset {
 /******************
  * DIRECTORY STYLES
  ******************/
+.network_link {
+    text-decoration:none;
+    border:1px solid transparent;
+    color:#000638;
+    padding: 0 .2rem;
+}
+
+.network_link:hover {
+    text-decoration:none;
+    border-bottom-color:#000638;
+    color:#000638;
+}
+
 #dir_list {
     /* background-color:#f2f8ff; */
     display:flex;
@@ -2477,6 +2490,10 @@ div.c4_multiselect li {
     width:200px;
     margin: 5px;
     padding:2rem;
+}
+
+#directory_networks_networks label {
+    margin-top:-5px;
 }
 
 

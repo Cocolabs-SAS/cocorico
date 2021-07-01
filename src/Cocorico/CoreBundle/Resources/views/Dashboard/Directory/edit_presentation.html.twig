@@ -113,6 +113,7 @@
                                 {{ form_widget(form.isCoContracting[1], { 'attr': { 'class': 'form-control' }}) }}
                                 {{ form_label(form.isCoContracting[1])}}
                             </div>
+                            {% do form.isCoContracting.setRendered %}
                         </div>
                     </div>
                     <div class="row" style="margin-top:3rem;">

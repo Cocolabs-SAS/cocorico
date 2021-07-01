@@ -127,15 +127,20 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
+                            {% if structure.clientImages is not empty %}
+                                <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                    <div class="il-l">
+                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                    </div>
+                                    <div class="il-r">
+                                        <h3>Références clients</h3>
+                                        {% for image in structure.clientImages %}
+                                            <!-- slide -->
+                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" class="client-ref"/>
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                                <div class="il-r">
-                                    <h3>Éléments différenciants (materiels, services particuliers...)</h3>
-                                    <p>Non renseigné</p>
-                                </div>
-                            </div>
+                            {% endif %}
                             {#
                             <div class="col-sm-5  shadow pull-right">
                                 <h4>Éléments différenciants<br />
@@ -203,17 +208,18 @@
                         #}
                         <!-- Fifth Row -->
                         <div class="row">
-                            {% if structure.clientImages is not empty %}
+                            {% if structure.networks is not empty %}
                                 <div class="col-sm-6 img-left mb-5 mb-md-7">
                                     <div class="il-l">
-                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                        <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
                                     </div>
                                     <div class="il-r">
-                                        <h3>Références clients</h3>
-                                        {% for image in structure.clientImages %}
-                                            <!-- slide -->
-                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" class="client-ref"/>
+                                        <h3>Réseaux</h3>
+                                        <ul>
+                                        {% for network in structure.networks %}
+                                            <li><a class="network_link" href="{{ network.website}}">{{ network.brand }}</a></li>
                                         {% endfor %}
+                                        </ul>
                                     </div>
                                 </div>
                             {% endif %}
