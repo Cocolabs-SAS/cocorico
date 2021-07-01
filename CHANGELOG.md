@@ -25,6 +25,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Ajout champ ouverture à la co-traitance pour les structures, et intégration dashboard
 - Ajout notification saisie offres de prestation (obsolescence de la partie "offres de prestation")
 - Début changement acronymes de l'inlusion par leur nom complet
+- Correction écran réinitialisation de mot de passe
 
 ### [4.9] - (2021-06-24)
 - Ajout fil d'ariane sur page liste des structures
