@@ -21,6 +21,7 @@ use JMS\TranslationBundle\Translation\TranslationContainerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\LanguageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -83,6 +84,13 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                 TextType::class,
                 array(
                     'label' => 'form.last_name',
+                )
+            )
+            ->add(
+                'email',
+                EmailType::class,
+                array(
+                    'label' => 'form.user.email'
                 )
             )
             ->add(
@@ -199,7 +207,8 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             function (FormEvent $event) {
                 $data = $event->getData();
                 $data = $data ?: array();
-                if (array_key_exists('uploaded', $data["image"])) {
+                //if (array_key_exists('uploaded', $data["image"])) {
+                if (array_key_exists('image', $data) and array_key_exists('uploaded', $data["image"])) {
                     // capture uploaded files and store them for onSubmit event
                     $this->uploaded = $data["image"]['uploaded'];
                 }

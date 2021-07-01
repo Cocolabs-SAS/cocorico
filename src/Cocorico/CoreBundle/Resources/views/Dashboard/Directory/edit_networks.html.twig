@@ -1,0 +1,57 @@
+{% extends 'CocoricoCoreBundle:Dashboard/Directory:layout.html.twig' %}
+
+{% trans_default_domain 'cocorico_directory' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block nav_side_dashboard -%}
+    {% set nav_side_dashboard_current = 'networks' %}
+    {{ parent() }}
+{%- endblock %}
+
+{% block content_dashboard -%}
+    {{ form_start(form, {'attr': {'class': 'form-area'}}) }}
+    <fieldset>
+        {# FIXME: Enable completion notice screen
+        {{ render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice', {'directory': directory})) }}
+        #}
+
+        {{ form_errors(form) }}
+        {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="info">
+
+                <div class="form-holder">
+                    <h2>Réseaux</h2>
+
+                    <div class="row" style="margin-top:15px;">
+                        <p>Sélectionnez les réseaux dont la structure fait partie</p>
+                        {{ form_errors(form.networks) }}
+                        {{ form_widget(form.networks ) }}
+                    </div>
+
+                    <div class="btn-block text-center">
+                        <button type="submit" class="btn btn-default">Enregistrer</button>
+                    </div>
+
+                </div>
+                <!-- form-holder -->
+            </div>
+        </div>
+        <!-- tab-content -->
+    </fieldset>
+    {{ form_end(form) }}
+{%- endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        // $(function () {
+
+        // });
+    </script>
+{% endblock %}

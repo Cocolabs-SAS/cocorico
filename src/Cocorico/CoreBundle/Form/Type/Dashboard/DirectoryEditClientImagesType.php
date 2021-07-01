@@ -40,6 +40,7 @@ class DirectoryEditClientImagesType extends DirectoryEditType
                 CollectionType::class,
                 array(
                     'allow_delete' => true,
+                    'by_reference' => false,
                     'entry_type' => DirectoryClientImageType::class,
                     /** @Ignore */
                     'label' => false

@@ -33,6 +33,14 @@ class DirectoryClientImage extends BaseListingImage
     private $directory;
 
     /**
+     * @ORM\Column(name="description", type="string", nullable=true)
+     * @var string
+     */
+    private $description;
+
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -70,5 +78,29 @@ class DirectoryClientImage extends BaseListingImage
         if ($this->id) {
             $this->id = null;
         }
+    }
+
+    /**
+     * Set description.
+     *
+     * @param string|null $description
+     *
+     * @return DirectoryClientImage
+     */
+    public function setDescription($description = null)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description.
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 }

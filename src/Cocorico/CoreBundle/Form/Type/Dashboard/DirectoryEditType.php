@@ -12,6 +12,8 @@
 namespace Cocorico\CoreBundle\Form\Type\Dashboard;
 
 use Cocorico\CoreBundle\Entity\Directory;
+use Cocorico\CoreBundle\Entity\DirectoryLabel;
+use Cocorico\CoreBundle\Form\Type\DirectoryLabelType;
 use Cocorico\CoreBundle\Entity\DirectoryImage;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -93,8 +95,22 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 TextareaType::class,
                 array(
                     'label' => 'directory.form.description',
+                    'required' => true,
+                    'empty_data' => '',
+                    'attr' => ['rows'=> 10, 'required' => 'required']
+                )
+            )
+            ->add(
+                'isCoContracting',
+                ChoiceType::class,
+                array(
+                    'expanded' => true,
+                    'multiple' => false,
                     'required' => false,
-                    'attr' => ['rows'=> 10]
+                    'choices' => [
+                        'Oui' => true,
+                        'Non' => false,
+                    ],
                 )
             )
             ->add(
@@ -151,6 +167,19 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
             ->add(
                 'image',
                 ImageType::class
+            )
+            ->add(
+                'labels',
+                CollectionType::class,
+                array(
+                    'allow_delete' => true,
+                    'allow_add' => true,
+                    'by_reference' => false,
+                    'entry_type' => DirectoryLabelType::class,
+                    'entry_options' => [
+                        'attr' => ['class' => 'dir-label'],
+                    ],
+                )
             )
             ->add(
                 'images',

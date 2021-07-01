@@ -105,6 +105,7 @@ class User extends BaseUser implements ParticipantInterface
         self::PERSON_TYPE_PARTNER => 'entity.user.person_type.partner',
     );
 
+
     public static $offererTypes = array (
         self::PERSON_TYPE_INCLUSIVE,
         self::PERSON_TYPE_ADMIN
@@ -2084,6 +2085,11 @@ class User extends BaseUser implements ParticipantInterface
     public function canAskForQuote()
     {
         return in_array($this->personType, self::$askerTypes);
+    }
+
+    public function isSIAE()
+    {
+        return $this->personType == 4;
     }
 
     /**

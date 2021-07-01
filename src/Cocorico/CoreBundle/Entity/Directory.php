@@ -118,6 +118,7 @@ class Directory
     const STRUCT_AI = 'AI';
     const STRUCT_ACI = 'ACI';
     const STRUCT_GEIQ = 'GEIQ';
+
     public static $kindValues = array(
         self::STRUCT_CHOICE,
         self::STRUCT_EI,
@@ -146,6 +147,19 @@ class Directory
         self::PR_DEPARTEMENT => 'entity.directory.polrange.departement',
         self::PR_REGION => 'entity.directory.polrange.region',
         self::PR_FRANCE => 'entity.directory.polrange.france',
+    );
+
+    public static $kindFullString = array (
+        self::STRUCT_CHOICE => self::STRUCT_CHOICE,
+        self::STRUCT_EI => 'Entreprise d\'insertion',
+        self::STRUCT_EA => 'Entreprise adaptée',
+        self::STRUCT_EITI => 'Entreprise d\'insertion par le travail indépendant',
+        self::STRUCT_ETTI => 'Entreprise de travail temporaire d\'insertion',
+        self::STRUCT_EATT => 'Enterprises adaptées de travail temporaire',
+        self::STRUCT_ACI => 'Atelier et chantier d\'insertion',
+        self::STRUCT_AI => 'Assocation intermédiaire',
+        self::STRUCT_GEIQ => 'Groupement d\'employeurs pour l\'insertion et la qualification',
+    
     );
 
     public static $exportColumns = array(
@@ -357,6 +371,12 @@ class Directory
     private $isActive;
 
     /**
+     * @ORM\Column(name="is_cocontracting", type="boolean", nullable=true)
+     * @var bool
+     */
+    private $isCoContracting;
+
+    /**
      * @ORM\Column(name="brand", type="string", nullable=true)
      * @var string|null
      */
@@ -405,6 +425,24 @@ class Directory
      * @var Users
      */
     private $users;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Listing", inversedBy="structures", cascade={"persist"})
+     * @ORM\JoinColumn(name="directory_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @var Listings
+     */
+    private $listings;
+
+    /**
+     *
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Network", inversedBy="structures", cascade={"persist"})
+     * @ORM\JoinColumn(name="network_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
+     *
+     * @var Networks
+     */
+    private $networks;
 
     /**
      * @ORM\Column(name="geo_range", type="integer", nullable=true)
@@ -463,6 +501,15 @@ class Directory
      */
     private $isQpv;
 
+    /**
+     * @ORM\OneToMany(targetEntity="DirectoryLabel", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $labels;
+
+    /**
+     * @ORM\OneToMany(targetEntity="DirectoryOffer", mappedBy="directory", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    protected $offers;
 
 
     /**
@@ -643,6 +690,12 @@ class Directory
     public function getKind()
     {
         return $this->kind;
+    }
+
+    public function getKindString()
+    {
+        return  self::$kindFullString[$this->kind];
+    
     }
 
     /**
@@ -1337,6 +1390,10 @@ class Directory
     {
         $this->directoryListingCategories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->listings = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->networks = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->labels = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
         $this->clientImages = new \Doctrine\Common\Collections\ArrayCollection();
     }
@@ -1392,6 +1449,111 @@ class Directory
     {
         return count($this->users);
     }
+
+    /**
+     * Add listing
+     *
+     * @param \Cocorico\CoreBundle\Entity\Listing $listing
+     *
+     * @return Directory
+     */
+    public function addListing(\Cocorico\CoreBundle\Entity\Listing $listing)
+    {
+        $this->listings[] = $listing;
+        // $listing->addStructure($this); // It's the listing
+
+        return $this;
+    }
+
+    /**
+     * Remove listing.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Listing $listing
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeListing(\Cocorico\CoreBundle\Entity\Listing $listing)
+    {
+        return $this->listings->removeElement($listing);
+    }
+
+    /**
+     * Get listings.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getListings()
+    {
+        return $this->listings;
+    }
+
+    public function getFirstListing()
+    {
+        return $this->listings[0];
+    }
+
+    public function hasListing($listing)
+    {
+        return $this->listings->contains($listing);
+    }
+
+    public function hasListings()
+    {
+        return count($this->listings);
+    }
+
+    /**
+     * Add network
+     *
+     * @param \Cocorico\CoreBundle\Entity\Network $network
+     *
+     * @return Directory
+     */
+    public function addNetwork(\Cocorico\CoreBundle\Entity\Network $network)
+    {
+        $this->networks[] = $network;
+        // $network->addStructure($this); // It's the network
+
+        return $this;
+    }
+
+    /**
+     * Remove network.
+     *
+     * @param \Cocorico\CoreBundle\Entity\Network $network
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeNetwork(\Cocorico\CoreBundle\Entity\Network $network)
+    {
+        return $this->networks->removeElement($network);
+    }
+
+    /**
+     * Get networks.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNetworks()
+    {
+        return $this->networks;
+    }
+
+    public function getFirstNetwork()
+    {
+        return $this->networks[0];
+    }
+
+    public function hasNetwork($network)
+    {
+        return $this->networks->contains($network);
+    }
+
+    public function hasNetworks()
+    {
+        return count($this->networks);
+    }
+
 
     /**
      * Set range
@@ -1834,5 +1996,112 @@ class Directory
     }
 
 
+    /**
+     * Add label.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryLabel $label
+     *
+     * @return Directory
+     */
+    public function addLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
+    {
+        if (!$this->labels->contains($label)) {
+            $label->setDirectory($this);
+            $this->labels->add($label);
+        }
 
+        return $this;
+    }
+
+    /**
+     * Remove label.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryLabel $label
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeLabel(\Cocorico\CoreBundle\Entity\DirectoryLabel $label)
+    {
+        if ($this->labels->contains($label)) {
+            $this->labels->removeElement($label);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get labels.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLabels()
+    {
+        return $this->labels;
+    }
+
+    /**
+     * Add offer.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryOffer $offer
+     *
+     * @return Directory
+     */
+    public function addOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
+    {
+        if (!$this->offers->contains($offer)) {
+            $offer->setDirectory($this);
+            $this->offers->add($offer);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Remove offer.
+     *
+     * @param \Cocorico\CoreBundle\Entity\DirectoryOffer $offer
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeOffer(\Cocorico\CoreBundle\Entity\DirectoryOffer $offer)
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+        }
+        return $this;
+    }
+
+    /**
+     * Get offers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
+    }
+
+    /**
+     * Set isCoContracting.
+     *
+     * @param bool|null $isCoContracting
+     *
+     * @return Directory
+     */
+    public function setIsCoContracting($isCoContracting = null)
+    {
+        $this->isCoContracting = $isCoContracting;
+
+        return $this;
+    }
+
+    /**
+     * Get isCoContracting.
+     *
+     * @return bool|null
+     */
+    public function getIsCoContracting()
+    {
+        return $this->isCoContracting;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Cocorico\CoreBundle\Admin;
 
+use Cocorico\CoreBundle\Entity\Network;
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Entity\Listing;
 use Cocorico\CoreBundle\Form\Type\PriceType;
@@ -17,10 +18,10 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 
-class DirectoryAdmin extends AbstractAdmin
+class NetworkAdmin extends AbstractAdmin
 {
     protected $translationDomain = 'SonataAdminBundle';
-    protected $baseRoutePattern = 'directory';
+    protected $baseRoutePattern = 'network';
     protected $locales;
     protected $timeUnit;
     protected $timeUnitIsDay;
@@ -56,63 +57,52 @@ class DirectoryAdmin extends AbstractAdmin
     /** @inheritdoc */
     protected function configureFormFields(FormMapper $formMapper)
     {
-        /** @var Directory $quote */
-        $Directory = $this->getSubject();
-
-        $askerQuery = $offererQuery = $listingQuery = null;
+        /** @var Network $network */
+        $Network = $this->getSubject();
 
         $formMapper
-            ->with('admin.quote.title')
+            ->with('admin.network.title')
             ->add(
                 'name',
                 null,
                 array(
-                    'label' => 'Nom',
-                    'disabled' => true,
+                    'label' => 'Raison sociale',
+                    'disabled' => false,
                 )
             )
+            ->add(
+                'brand',
+                null,
+                array(
+                    'label' => 'Enseigne',
+                    'disabled' => false,
+                )
+            )            
+            ->add(
+                'accronym',
+                null,
+                array(
+                    'label' => 'Sigle',
+                    'disabled' => false,
+                )
+            )            
+            ->add(
+                'website',
+                null,
+                array(
+                    'label' => 'Site Web',
+                    'disabled' => false,
+                )
+            )            
             ->add(
                 'siret',
                 null,
                 array(
                     'label' => 'Siret',
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'sector',
-                null,
-                array(
-                    'label' => 'Secteurs',
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'c1Id',
-                null,
-                array(
-                    'label' => 'C1 Identifier',
-                    'disabled' => true,
+                    'disabled' => false,
                 )
             );
 
-
-        if ($Directory->getC4Id()) {
-            /** @var UserRepository $userRepository */
-            $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
-                ->getRepository('CocoricoUserBundle:User');
-
-            $user = $userRepository->getFindOneQueryBuilder($Directory->getC4Id());
-            $formMapper->add(
-                'user',
-                'sonata_type_model',
-                array(
-                    'query' => $user,
-                    'disabled' => true,
-                    'label' => 'Utilisateur'
-                )
-            );
-        }
         $formMapper->end();
     }
 
@@ -123,6 +113,7 @@ class DirectoryAdmin extends AbstractAdmin
             ->add('id')
             ->add('siret')
             ->add('name')
+            ->add('brand')
             ->add(
                 'updatedAt',
                 'doctrine_orm_callback',
@@ -154,64 +145,19 @@ class DirectoryAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add(
-                'c1Id',
-                null,
-                array(
-                    'label' => 'C1 Identifier',
-                )
-            )
-            ->add(
-                'name',
-                null,
-                array(
-                    'label' => 'Nom',
-                )
-            )
-            ->add(
-                'kind',
-                null,
-                array(
-                    'label' => 'Type',
-                )
-            )
-            ->add(
-                'c1Source',
-                null,
-                array(
-                    'label' => 'Source',
-                )
-            )
-            ->add(
-                'siret',
-                null,
-                array(
-                    'label' => 'siret',
-                )
-            )
-            ->add(
-                'siret_is_valid',
-                null,
-                array(
-                    'label' => 'siret valide',
-                )
-            )
-            ->add(
-                'isDelisted',
-                null,
-                array(
-                    'label' => 'Delisted'
-                )
-            );
+            ->add( 'name', null, array( 'label' => 'Nom',))
+            ->add( 'brand', null, array( 'label' => 'Enseigne'))
+            ->add( 'accronym', null, array( 'label' => 'Sigle'))
+            ->add( 'siret', null, array( 'label' => 'siret'));
 
         $listMapper->add(
             '_action',
             'actions',
             array(
                 'actions' => array(
-                    'view' => [
-                        'template' => 'CocoricoSonataAdminBundle::directory_action_list_user_view.html.twig',
-                    ],
+                    # 'view' => [
+                    #     'template' => 'CocoricoSonataAdminBundle::network_action_list_user_view.html.twig',
+                    # ],
                     'edit' => array(),
                 )
             )
@@ -230,12 +176,6 @@ class DirectoryAdmin extends AbstractAdmin
     {
         return array(
             'Id' => 'id',
-            'Listing Id' => 'listing.id',
-            'Status' => 'statusText',
-            'Validated' => 'validated',
-            'Asker' => 'user.fullname',
-            'Offerer' => 'listing.user.fullname',
-            'Listing' => 'listing.title',
         );
     }
 
@@ -252,7 +192,8 @@ class DirectoryAdmin extends AbstractAdmin
 
     protected function configureRoutes(RouteCollection $collection)
     {
-        $collection->remove('create');
+        // $collection->remove('create');
         $collection->remove('delete');
     }
+
 }

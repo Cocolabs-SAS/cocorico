@@ -91,7 +91,7 @@
                                         </div>
                                         <div class="cell col-sm-6">
                                             <span class="prof_icon"><img src="{{ asset('svg/prof_nature.svg')}}" /></span>
-                                            <span>{{ structure.kind }}</span>
+                                            <span>{{ structure.getKindString }} ({{ structure.kind }})</span>
                                         </div>
                                         <div class="clearfix visible-md-block"></div>
                                         <div class="cell col-sm-6">
@@ -127,15 +127,25 @@
                                     {% endif %}
                                 </div>
                             </div>
-                            <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
+                            {% if structure.clientImages is not empty %}
+                                <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                    <div class="il-l">
+                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                    </div>
+                                    <div class="il-r">
+                                        <h3>Références clients</h3>
+                                        {% for image in structure.clientImages %}
+                                            <!-- slide -->
+                                            <img
+                                                src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" 
+                                                class="client-ref"
+                                                alt="{{ image.description }}"
+                                                title="{{ image.description }}"
+                                            />
+                                        {% endfor %}
+                                    </div>
                                 </div>
-                                <div class="il-r">
-                                    <h3>Éléments différenciants (materiels, services particuliers...)</h3>
-                                    <p>Non renseigné</p>
-                                </div>
-                            </div>
+                            {% endif %}
                             {#
                             <div class="col-sm-5  shadow pull-right">
                                 <h4>Éléments différenciants<br />
@@ -163,6 +173,28 @@
                             </div>
                         </div>
                         <!-- Fourth Row -->
+                        {% if structure.offers %}
+                        <div class="row ">
+                            <div class="col-sm-12 img-left mb-5 mb-md-7">
+                                <div class="il-l">
+                                    <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
+                                </div>
+                                <div class="il-r">
+                                    <h3>Les prestations proposées</h3>
+                                    {% for offer in structure.offers %}
+                                        <article class="prests-post col-xs-12 col-md-4 mb-3 mb-md-5">
+                                            <img class="cell_icon" src="{{ asset('images/prof_dot.png')}}" />
+                                            <h4>{{ offer.title }}</h4>
+                                            <div>
+                                                {{ offer.description }}
+                                            </div>
+                                        </article>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {#
                         {% if listings %}
                         <div class="row ">
                             <div class="col-sm-12 img-left mb-5 mb-md-7">
@@ -178,32 +210,40 @@
                             </div>
                         </div>
                         {% endif %}
+                        #}
                         <!-- Fifth Row -->
-                        {% if structure.clientImages is not empty %}
                         <div class="row">
-                            <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                            {% if structure.networks is not empty %}
+                                <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                    <div class="il-l">
+                                        <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
+                                    </div>
+                                    <div class="il-r">
+                                        <h3>Réseaux</h3>
+                                        <ul>
+                                        {% for network in structure.networks %}
+                                            <li><a class="network_link" href="{{ network.website}}">{{ network.brand }}</a></li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="il-r">
-                                    <h3>Références clients</h3>
-                                    {% for image in structure.clientImages %}
-                                        <!-- slide -->
-                                        <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" class="client-ref"/>
-                                    {% endfor %}
+                            {% endif %}
+                            {% if structure.labels is not empty %}
+                                <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                    <div class="il-l">
+                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                    </div>
+                                    <div class="il-r">
+                                        <h3>Labels & certifications</h3>
+                                        <ul>
+                                        {% for label in structure.labels %}
+                                            <li>{{ label.name }}</li>
+                                        {% endfor %}
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
-                                </div>
-                                <div class="il-r">
-                                    <h3>Labels & certifications</h3>
-                                    <p>Non renseigné</p>
-                                </div>
-                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </section>
                 </div>
                 <div class="col-xs-12 col-sm-4">

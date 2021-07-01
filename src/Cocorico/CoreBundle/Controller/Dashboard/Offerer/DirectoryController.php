@@ -14,6 +14,8 @@ namespace Cocorico\CoreBundle\Controller\Dashboard\Offerer;
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditCategoriesType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditNetworksType;
+use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditOffersType;
 use Cocorico\CoreBundle\Form\Type\Dashboard\DirectoryEditClientImagesType;
 use Cocorico\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -184,6 +186,8 @@ class DirectoryController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $data = $editForm->getData();
+            // dump($data);
             $this->get("cocorico.directory.manager")->save($structure);
 
             $this->get('session')->getFlashBag()->add(
@@ -232,6 +236,129 @@ class DirectoryController extends Controller
 
         return $form;
     }
+
+    /**
+     * Edit Directory offers.
+     *
+     * @Route("/{id}/edit_offers", name="cocorico_dashboard_directory_edit_offers", requirements={"id" = "\d+"})
+     * @Security("is_granted('edit', structure)")
+     * @ParamConverter("structure", class="CocoricoCoreBundle:Directory")
+     *
+     * @Method({"POST", "GET"})
+     *
+     * @param Request $request
+     * @param         $structure
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editOffersAction(Request $request, Directory $structure)
+    {
+        $form = $this->createOffersForm($structure);
+        $form->handleRequest($request);
+
+        $formIsValid = $form->isSubmitted() && $form->isValid();
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Directory:edit_offers.html.twig',
+            array(
+                'structure' => $structure,
+                'form' => $form->createView()
+            )
+        );
+    }
+
+    /**
+     * @param Directory $structure
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createOffersForm(Directory $structure)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory_offers',
+            DirectoryEditOffersType::class,
+            $structure,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_offers',
+                    array('id' => $structure->getId()),
+                ),
+            )
+        );
+
+        return $form;
+    }
+
+    /**
+     * Edit Directory networks.
+     *
+     * @Route("/{id}/edit_networks", name="cocorico_dashboard_directory_edit_networks", requirements={"id" = "\d+"})
+     * @Security("is_granted('edit', structure)")
+     * @ParamConverter("structure", class="CocoricoCoreBundle:Directory")
+     *
+     * @Method({"POST", "GET"})
+     *
+     * @param Request $request
+     * @param         $structure
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function editNetworksAction(Request $request, Directory $structure)
+    {
+        $form = $this->createNetworksForm($structure);
+        $form->handleRequest($request);
+
+        $formIsValid = $form->isSubmitted() && $form->isValid();
+        if ($formIsValid) {
+            $structure = $this->get("cocorico.directory.manager")->save($structure);
+
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                $this->get('translator')->trans('directory.edit.success', array(), 'cocorico_directory')
+            );
+        }
+
+        return $this->render(
+            'CocoricoCoreBundle:Dashboard/Directory:edit_networks.html.twig',
+            array(
+                'structure' => $structure,
+                'form' => $form->createView()
+            )
+        );
+    }
+
+    /**
+     * @param Directory $structure
+     *
+     * @return \Symfony\Component\Form\Form|\Symfony\Component\Form\FormInterface
+     */
+    private function createNetworksForm(Directory $structure)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            'directory_networks',
+            DirectoryEditNetworksType::class,
+            $structure,
+            array(
+                'method' => 'POST',
+                'action' => $this->generateUrl(
+                    'cocorico_dashboard_directory_edit_networks',
+                    array('id' => $structure->getId())
+                ),
+            )
+        );
+
+        return $form;
+    }
+
     /**
      * Edit Directory categories.
      *

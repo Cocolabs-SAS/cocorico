@@ -24,7 +24,7 @@
 
                 <!-- form-holder -->
                 <div class="form-holder columns-holder alt">
-                    <h2>Données Utilisateur</h2>
+                    <h2>Profil Utilisateur</h2>
                     <div class="about-info">
                         <div class="column">
                             <div class="field-row">
@@ -37,6 +37,12 @@
                                 <span class="label">{{ form_label(form.lastName) }}</span>
                                 <div class="field-holder">{{ form_widget(form.lastName) }}</div>
                             </div>
+                            <div class="field-row">
+                                {{ form_errors(form.email) }}
+                                <span class="label">{{ form_label(form.email) }}</span>
+                                <div class="field-holder">{{ form_widget(form.email) }}</div>
+                            </div>
+                            {% if not user.isSIAE  %}
                             <div class="field-row">
                                 {{ form_errors(form.companyName) }}
                                 <span class="label">{{ form_label(form.companyName) }}</span>
@@ -52,7 +58,14 @@
                                 <span class="label">{{ form_label(form.website) }}</span>
                                 <div class="field-holder">{{ form_widget(form.website) }}</div>
                             </div>
+                            {% else %}
+
+                                {% do form.companyName.setRendered %}
+                                {% do form.siret.setRendered %}
+                                {% do form.website.setRendered %}
+                            {% endif %}
                         </div>
+                        {% if not user.isSIAE  %}
                         <div id="images-new" class="column">
                             {{ form_errors(form.image.new) }}
                             <div class="image-upload-holder">
@@ -86,63 +99,16 @@
                                 {{ form_widget(form.images ) }}
                             </div>
                         </div>
+                        {% else %}
+                            {% do form.image.setRendered %}
+                            {% do form.images.setRendered %}
+                        {% endif %}
                     </div>
 
                     <br />
+                    {% if not user.isSIAE  %}
                     <div class="about-info">
                         <div class="row">
-                            {#
-                            <h3>{{ 'profile.languages.title'|trans }}</h3>
-
-                            <div class="field-row from">
-                                <span class="label">{{ form_label(form.motherTongue) }}:</span>
-                                <div class="select-holder">
-                                    {{ form_widget(form.motherTongue, {'attr': {
-                                        'class': 'no-arrow'
-                                    }}) }}
-                                </div>
-                            </div>
-
-                            <div class="languages-block">
-                                <div class="field-holder language">
-                                    <span class="label">
-                                        {{ form_label(form.language) }}:
-                                    </span>
-                                    <div class="field-holder">
-                                        <div class="select-holder">
-                                            {{ form_widget(form.language, {'attr': {
-                                                'class': 'no-arrow'
-                                            }}) }}
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-default btn-add">
-                                        {{ 'profile.languages.add'|trans }}
-                                    </button>
-                                </div>
-
-                                <ul class="list-inline btns-list languages"
-                                    data-prototype="{{ form_widget(form.languages.vars.prototype)|e }}">
-                                    {% if form.languages %}
-                                        {% for language in form.languages %}
-                                            <li>
-                                                <a href="#" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <i class="icon-cancel"></i>
-                                                    <span class="hidden">close</span>
-                                                </a>
-                                                <a href="#" class="btn btn-default">
-                                                    {{ language.code.vars.value | language_name(app.request.locale) }}
-                                                </a>
-                                                {{ form_row(language) }}
-                                            </li>
-                                        {% endfor %}
-                                    {% else %}
-                                        {{ form_row(languages) }}
-                                    {% endif %}
-                                </ul>
-
-                            </div>
-                            #}
-
                             <div class="message-area">
                                 <h3>{{ 'profile.moreinfo.title'|trans }}</h3>
 
@@ -195,8 +161,17 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+                    {% else %}
+                        <div style="background-color:#ddf2f3;color:#495057;padding:2rem;">
+                            <h2>Info déploiement</h2>
+                            Suite à l’évolution du profil utilisateur  et de la partie “structures”, toutes les données liées à vos structures sont désormais accessibles depuis l’onglet
+                            <a href="{{ path('cocorico_dashboard_directory') }}">"Mes Structures"</a>.
+                        </div>
+                        {% do form.translations.setRendered %}
+                        {% do form.toLang.setRendered %}
+                        {% do form.fromLang.setRendered %}
+                    {% endif %}
                 </div>
                 <div class="btn-block text-center">
                     <button type="submit" class="btn btn-default">{{ 'profile.edit.submit'|trans }}</button>

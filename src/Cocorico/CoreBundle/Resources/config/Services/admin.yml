@@ -48,7 +48,7 @@ services:
     sonata.admin.directory:
         class: Cocorico\CoreBundle\Admin\DirectoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Directory", label: "Directory" }
+            - { name: sonata.admin, manager_type: orm, group: "Directory", label: "Siae_List" }
         arguments:
             - ~
             - Cocorico\CoreBundle\Entity\Directory
@@ -58,6 +58,22 @@ services:
             - [ setLocales, ["%cocorico.locales%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
             - [ setTimezone, ["%cocorico.time_zone%"]]
+
+    sonata.admin.network:
+        class: Cocorico\CoreBundle\Admin\NetworkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Directory", label: "Networks" }
+        arguments:
+            - ~
+            - Cocorico\CoreBundle\Entity\Network
+            - ~
+        calls:
+            - [ setTranslationDomain, [SonataAdminBundle]]
+            - [ setLocales, ["%cocorico.locales%"]]
+            - [ setBundlesEnabled, ["%kernel.bundles%"]]
+            - [ setTimezone, ["%cocorico.time_zone%"]]
+
+
 
     sonata.admin.listing_characteristic:
         class: Cocorico\CoreBundle\Admin\ListingCharacteristicAdmin

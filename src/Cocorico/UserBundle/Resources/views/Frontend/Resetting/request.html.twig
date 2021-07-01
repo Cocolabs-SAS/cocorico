@@ -6,6 +6,7 @@
         {% trans_default_domain 'cocorico_user' %}
 
         {% block main %}
+            {#
             <div class="col-xs-12">
                 {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
                 <form id="form-registerlogin" class="form form-signup form-reset-password"
@@ -34,7 +35,42 @@
                     </div>
                 </form>
             </div>
-        {% endblock %}
+        #}
+
+
+    <div class="login_register">
+        <div class="">
+            {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
+            <form id="form-registerlogin" class="form form-signup form-reset-password"
+                  action="{{ path('cocorico_user_resetting_send_email') }}" method="POST">
+            <div class="col">
+                <h3><i class="icon-user-circle-o" style="color:#006adc;"></i> Demande de réinitialisation de mot de passe</h3>
+
+
+                <div class="sub-form">
+                    <div class="field-row">
+                        <div class="label">
+                            <label for="username">{{ 'resetting.request.username'|trans }} *</label>
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-holder">
+                            <input type="text" id="username" name="username" required="required"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="btn btn-default">
+                            {{ 'resetting.request.submit'|trans }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
 
     {% endembed %}
 {% endblock layout %}

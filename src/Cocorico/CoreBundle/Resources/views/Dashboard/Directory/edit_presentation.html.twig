@@ -8,6 +8,7 @@
  {%- endblock %}
 
 {% block content_dashboard -%}
+    {% form_theme form 'CocoricoCoreBundle:Form:fields_directory.html.twig' %}
     {{ form_start(form, {'attr': {'id': 'edit-presentation-form', 'class': 'form-area'}}) }}
     <fieldset>
         <legend class="hidden">form area</legend>
@@ -81,9 +82,9 @@
                             </div>
                         </div>
                         <div class="field-row">
-                            <div class="col-sm-4"> {{ form_label(form.description)}} </div>
+                            <div class="col-sm-4"> Description offre commerciale </div>
                             <div class="col-sm-8">
-                                {{ form_widget(form.description, { 'attr': { 'class': 'form-control' }}) }}
+                                {{ form_widget(form.description, { 'attr': { 'class': 'form-control required' }}) }}
                             </div>
                         </div>
                         <div class="field-row">
@@ -101,6 +102,19 @@
                                 {{ form_label(form.prestaType_build)}}
                             </div>
                         </div>
+                        <div class="field-row">
+                            <div class="col-sm-4">
+                                Ouvert à la co-traitance
+                            </div>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.isCoContracting[0], { 'attr': { 'class': 'form-control' }}) }}
+                                {{ form_label(form.isCoContracting[0])}}
+                                <br />
+                                {{ form_widget(form.isCoContracting[1], { 'attr': { 'class': 'form-control' }}) }}
+                                {{ form_label(form.isCoContracting[1])}}
+                            </div>
+                            {% do form.isCoContracting.setRendered %}
+                        </div>
                     </div>
                     <div class="row" style="margin-top:3rem;">
                         <h2>Périmètre d'activité</h2>
@@ -111,6 +125,9 @@
                                         id="{{ form.polRange[1].vars.id }}"
                                         name="{{ form.polRange[1].vars.full_name }}"
                                         value="{{ form.polRange[1].vars.value }}"
+                                        {% if form.polRange.vars.value == 1 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[1], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -119,6 +136,9 @@
                                         id="{{ form.polRange[2].vars.id }}"
                                         name="{{ form.polRange[2].vars.full_name }}"
                                         value="{{ form.polRange[2].vars.value }}"
+                                        {% if form.polRange.vars.value == 2 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[2], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -127,6 +147,9 @@
                                         id="{{ form.polRange[3].vars.id }}"
                                         name="{{ form.polRange[3].vars.full_name }}"
                                         value="{{ form.polRange[3].vars.value }}"
+                                        {% if form.polRange.vars.value == 3 %}
+                                            checked
+                                        {% endif %}
                                     /> {{ form_label(form.polRange[3], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -137,6 +160,9 @@
                                         id="{{ form.polRange[0].vars.id }}"
                                         name="{{ form.polRange[0].vars.full_name }}"
                                         value="{{ form.polRange[0].vars.value }}"
+                                        {% if form.polRange.vars.value == 0 %}
+                                            checked
+                                        {% endif %}
                                     /> 
                                         {{ form_widget(form.range, {
                                             'attr': {
@@ -172,6 +198,24 @@
                             {{ form_widget(form.images ) }}
                         </div>
                     </div>
+                    <div class="row" style="margin-top:3rem;">
+                        <h2>Labels et certifications</h2>
+                        {{ form_errors(form.labels) }}
+                        {{ form_widget(form.labels) }}
+                        {#
+                        <ul id="label-cert-list"
+                            data-prototype="{{ form_widget(form.labels.vars.prototype)|e }}"
+                            data-widget-tags="{{ '<li></li>'|e }}"
+                            data-widget-counter="{{ form.labels|length }}"
+                            >
+                        {% for labelField in form.labels %}
+                            <li>
+                                {{ form_errors(labelField) }}
+                                {{ form_widget(labelField) }}
+                            </li>
+                        {% endfor %}
+                        #}
+                    </div>
                 </div>
 
                 <div class="btn-block text-center">
@@ -198,6 +242,32 @@
         'upload_url': oneup_uploader_endpoint('listing_images') ~ "?listing_id=" ~ structure.id ,
         'upload_max': 5,
     } only %}
+
+
+    <script>
+    window.addEventListener("DOMContentLoaded", (event) => {
+        $('.add-directory-item').click(function (e) {
+             var list = $($(this).attr('data-list-selector'));
+             // Try to find the counter of the list or use the length of the list
+             var counter = list.data('counter') || list.children().length;
+
+             // grab the prototype template
+             var newWidget = list.attr('data-prototype');
+             // replace the "__name__" used in the id and name of the prototype
+             // with a number that's unique to your emails
+             // end name attribute looks like name="contact[emails][2]"
+             newWidget = newWidget.replace(/__name__/g, counter);
+             // Increase the counter
+             counter++;
+             // And store it, the length cannot be used if deleting widgets is allowed
+             list.data('counter', counter);
+             // create a new list element and add it to the list
+             var newElem = $(newWidget);
+             newElem.appendTo(list);
+         });
+      });
+    </script>
+
 
 {%- endblock %}
 

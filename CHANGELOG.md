@@ -10,8 +10,25 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
+### [5] - (2021-06-XX)
+- Ajout donnée et concept "Réseaux"
+- Ajout tuyauterie Réseau-Structure
+- Ajout tuyauterie Annonce-Structure
+- Écran administration des réseaux
+- Correctifs interface administration
+- Écrans d'administration pour le structures : réseaux et offres de prestation
+- Refactor des offres proposés par les structures : on repart sur du propre
+- Ajout donnée labels et certifications
+- Modification lien 'annonces' : orientation vers structure au lieu de l'annonce
+- Retrait du bouton "publiez votre offre de prestation"
+- Ajout champ "nom" aux logos références clients
+- Ajout champ ouverture à la co-traitance pour les structures, et intégration dashboard
+- Ajout notification saisie offres de prestation (obsolescence de la partie "offres de prestation")
+- Début changement acronymes de l'inlusion par leur nom complet
+- Correction écran réinitialisation de mot de passe
+
 ### [4.9] - (2021-06-24)
- Ajout fil d'ariane sur page liste des structures
+- Ajout fil d'ariane sur page liste des structures
 - Utilisateur orienté vers fiche (dashboard) structure après création/adoption
 - Recherche par Siren si aucun résultat par Siret
 - Wording fiche structure (localisation et périmètre) plus clair

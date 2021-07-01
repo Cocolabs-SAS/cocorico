@@ -69,6 +69,7 @@ twig:
             - 'CocoricoCoreBundle:Form:fields_collection.html.twig'
             - 'CocoricoCoreBundle:Form:fields_category.html.twig'
             - 'CocoricoCoreBundle:Form:fields_price.html.twig'
+            - 'CocoricoCoreBundle:Form:fields_directory.html.twig'
             - 'SonataCoreBundle:Form:datepicker.html.twig'
             - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
 

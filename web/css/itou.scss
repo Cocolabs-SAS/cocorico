@@ -1398,9 +1398,9 @@ footer img.min_trav {
 #main .nav-tabs > li.active > a,
 #main .nav-tabs > li.active > a:hover,
 #main .nav-tabs > li.active > a:focus {
-    background-color: #fff;
+    background-color: #22285a;
     border:0;
-    color:#224;
+    color:#fff;
 }
 
 #main .nav-tabs > li > a {
@@ -1714,6 +1714,19 @@ section.quote-quick-form fieldset {
 /******************
  * DIRECTORY STYLES
  ******************/
+.network_link {
+    text-decoration:none;
+    border:1px solid transparent;
+    color:#000638;
+    padding: 0 .2rem;
+}
+
+.network_link:hover {
+    text-decoration:none;
+    border-bottom-color:#000638;
+    color:#000638;
+}
+
 #dir_list {
     /* background-color:#f2f8ff; */
     display:flex;
@@ -2392,4 +2405,123 @@ div.c4_multiselect li {
 
     }
 
+}
+
+
+/******************
+ * DASHBOARD STYLES
+ ******************/
+
+.directory-holder {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+.structure-post {
+    flex: 1 0 auto;
+    height:auto;
+    width:30%;
+    margin: 5px;
+    padding:2rem;
+}
+
+#directory_listings_listings {
+    margin-top:2rem;
+    display: grid;
+    width:100%;
+    grid-template-columns: repeat(2, 20px 1fr);
+    grid-gap: 10px;
+}
+
+#directory_networks_networks {
+    margin-top:2rem;
+    display: grid;
+    width:100%;
+    grid-template-columns: repeat(1, 20px 1fr);
+    grid-gap: 10px;
+}
+
+#directory_labels {
+    width:60%;
+}
+
+#directory_labels li {
+    list-style-type:none;
+}
+
+#directory_labels .close {
+    position:relative;
+    display:inline-block;
+    padding-left:0px;
+    margin-left:3px;
+    top:0;
+    right:0;
+}
+
+#directory_offers_offers .close {
+    position:relative;
+    display:inline-block;
+    padding-left:0px;
+    margin-left:3px;
+    top:0;
+    right:0;
+}
+
+#directory_offers_offers table {
+    width:80%;
+    border-bottom: 1px solid #ccc;
+    padding:2rem 0;
+}
+
+#directory_offers_offers table:last-child {
+    border-bottom-width: 0px;
+}
+
+#directory_offers_offers textarea {
+    height:10rem;
+}
+
+#directory_clientImages .files-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap:wrap;
+}
+
+#directory_clientImages table {
+    flex: 1 0 auto;
+    height:auto;
+    width:200px;
+    margin: 5px;
+    padding:2rem;
+}
+
+#directory_networks_networks label {
+    margin-top:-5px;
+}
+
+
+.directory_clientimage {
+    position:relative;
+    border:1px solid #ccc;
+}
+
+.directory_clientimage .img-thumbnail {
+    float:none;
+    display:flex;
+    overflow:hidden;
+    justify-content: center;
+    align-items: center;
+    width:60%;
+    padding:0;
+    margin:0;
+    width:auto;
+    border:0;
+}
+.directory_clientimage .img-thumbnail img {
+    flex-shrink: 1;
+    width:auto;
+}
+
+.directory_clientimage .close {
 }
