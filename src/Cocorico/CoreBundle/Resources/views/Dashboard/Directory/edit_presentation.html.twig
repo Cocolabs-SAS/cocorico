@@ -247,7 +247,6 @@
     <script>
     window.addEventListener("DOMContentLoaded", (event) => {
         $('.add-directory-item').click(function (e) {
-             console.log('Click!');
              var list = $($(this).attr('data-list-selector'));
              // Try to find the counter of the list or use the length of the list
              var counter = list.data('counter') || list.children().length;
