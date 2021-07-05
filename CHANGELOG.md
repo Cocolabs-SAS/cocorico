@@ -10,7 +10,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
-### [5] - (2021-06-XX)
+### [5] - (2021-07-01)
 - Ajout donnée et concept "Réseaux"
 - Ajout tuyauterie Réseau-Structure
 - Ajout tuyauterie Annonce-Structure
