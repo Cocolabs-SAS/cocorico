@@ -80,13 +80,10 @@ class DirectoryManager extends BaseManager
                 }
 
             $qB->addSelect('1 AS distance');
-            $qB->orderBy('d.name', 'ASC');
         } else {
-            //$qB = $this->applyParams($qB, $params);
             $qB = $this->applyFilters($qB, $directorySearchRequest, true);
             #FIXME : Bad doctrine ORM hack
             $qB->addSelect('1 AS distance');
-            $qB->orderBy('d.name', 'ASC');
         }
 
         $query = $qB->getQuery();
@@ -274,55 +271,6 @@ class DirectoryManager extends BaseManager
         $qB->andwhere('GEO_DISTANCE(d.latitude = :lat, d.longitude = :lng) < 2000')
            ->setParameter('lat', $request->getLat())
            ->setParameter('lng', $request->getLng());
-        return $qB;
-    }
-
-    private function applyParams($qB, $params)
-    {
-        // Filter on type
-        if ($params['type'] != false) {
-            $value = $params['type'];
-            $kindName = Directory::$kindValues[$value];
-            $qB->andWhere('d.kind = :type')
-               ->setParameter('type', $kindName);
-        }
-
-        // Filter on postal code
-        if (in_array($params['searchType'], ['city', 'department']) && $params['postalCode'] != false) {
-            $value = $params['postalCode'];
-            $qB->andWhere('d.postCode like :pcode')
-               ->setParameter('pcode', addcslashes($value, '%_').'%');
-        }
-
-        // Filter on prestation type
-        if ($params['prestaType'] > 1) {
-            $value = $params['prestaType'];
-            $qB->andWhere('BIT_AND(d.prestaType, :prestatype) > 0')
-            // $qB->andWhere('d.prestaType & :prestatype = :prestatype')
-               ->setParameter('prestatype', $value);
-        }
-
-        // Filter on sector
-        if ($params['sector'] != false && count($params['sector']) > 0) {
-            $sectors = $params['sector'];
-            $qB->andWhere('dlcat.category IN (:sectors)')
-               ->setParameter('sectors', $sectors);
-        }
-
-        // Filter on sector
-        if ($params['region'] != false) {
-            $region = $params['region'];
-            $regionName = Directory::$regions[$region];
-            $qB->andWhere('d.region = :region')
-               ->setParameter('region', $regionName);
-        }
-
-        // Include antennas
-        if ($params['withAntenna'] == false) {
-            $qB->andWhere('d.nature = :nature')
-               ->setParameter('nature', 'siege');
-        }
-
         return $qB;
     }
 

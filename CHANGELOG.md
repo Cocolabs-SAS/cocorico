@@ -11,6 +11,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ### [5.1] - (2021-07-06)
 - wording signature email
+- Ajout info zone QPV liste excel
+- Essai boost dans l'ordre des résultats de la liste
 
 ### [5] - (2021-07-01)
 - Ajout donnée et concept "Réseaux"

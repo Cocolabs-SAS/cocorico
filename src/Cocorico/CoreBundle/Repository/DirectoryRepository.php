@@ -29,10 +29,12 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->createQueryBuilder('d');
         $qB->addSelect("partial dlcat.{id, directory, category}")
+           ->addSelect("partial u.{id}")
            ->addSelect("partial i.{id, name}")
            //->addSelect("partial ca.{id, lft, lvl, rgt, root}")
            //->addSelect("partial cat.{id, locale, name}")
            ->leftJoin('d.directoryListingCategories', 'dlcat')
+           ->leftJoin('d.users', 'u')
            // ->leftJoin('dlcat.category', 'ca')
            // ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
            ->leftJoin('d.images', 'i');
@@ -43,10 +45,16 @@ class DirectoryRepository extends EntityRepository
 
     public function getSome($limit= 10, $offset=0)
     {
+        # Using a hidden CASE to boost final order
         $qB = $this->getFindQueryBuilder();
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
-           ->orderBy('d.name', 'asc')
+           ->addSelect("(CASE 
+            WHEN u.id IS NULL THEN 0
+            ELSE 1
+           END) AS HIDDEN BOOST_ORDER")
+           ->addOrderBy("BOOST_ORDER", "DESC")
+           ->addOrderBy("d.name", "ASC")
            ->andwhere('d.nature != \'n/a\'')
            ->andwhere('d.latitude is not null')
            ->andwhere('d.isDelisted = false');
