@@ -43,10 +43,21 @@ class DirectoryRepository extends EntityRepository
         return $qB;
     }
 
+    public function getFastQueryBuilder()
+    {
+        $qB = $this->createQueryBuilder('d');
+        $qB->addSelect("partial us.{id}")
+           #->addSelect("partial i.{id, name}")
+           ->leftJoin('d.users', 'us');
+           #->leftJoin('d.images', 'i');
+
+        return $qB;
+    }
+
     public function getSome($limit= 10, $offset=0)
     {
         # Using a hidden CASE to boost final order
-        $qB = $this->getFindQueryBuilder();
+        $qB = $this->getFastQueryBuilder();
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
            ->addSelect("(CASE 

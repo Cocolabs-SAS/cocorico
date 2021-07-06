@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - wording signature email
 - Ajout info zone QPV liste excel
 - Essai boost dans l'ordre des résultats de la liste
+- Optimisation requête SQL liste SIAE
 
 ### [5] - (2021-07-01)
 - Ajout donnée et concept "Réseaux"

@@ -16,7 +16,20 @@ use BitMask\BitMaskInterface;
  *    @ORM\Index(name="siret_idx", columns={"siret"}),
  *    @ORM\Index(name="nature_idx", columns={"nature"}),
  *    @ORM\Index(name="created_at_idx", columns={"createdAt"}),
- *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"})
+ *    @ORM\Index(name="updated_at_idx", columns={"updatedAt"}),
+ *    @ORM\Index(name="range_idx", columns={"geo_range"}),
+ *    @ORM\Index(name="polrange_idx", columns={"pol_range"}),
+ *    @ORM\Index(name="presta_type_idx", columns={"presta_type"}),
+ *    @ORM\Index(name="siret_is_valid_idx", columns={"siret_is_valid"}),
+ *    @ORM\Index(name="kind_idx", columns={"kind"}),
+ *    @ORM\Index(name="name_idx", columns={"name"}),
+ *    @ORM\Index(name="region_idx", columns={"region"}),
+ *    @ORM\Index(name="post_code_idx", columns={"post_code"}),
+ *    @ORM\Index(name="is_active_idx", columns={"is_active"}),
+ *    @ORM\Index(name="is_delisted_idx", columns={"is_delisted"}),
+ *    @ORM\Index(name="latitude_idx", columns={"latitude"}),
+ *    @ORM\Index(name="is_qpv_idx", columns={"is_qpv"}),
+ *    @ORM\Index(name="some_list_idx", columns={"nature","is_delisted", "latitude"})
  *  })
  *
  */
