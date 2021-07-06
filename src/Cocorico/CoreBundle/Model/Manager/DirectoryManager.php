@@ -53,8 +53,7 @@ class DirectoryManager extends BaseManager
         //    ->setParameter('nature', 'siege');
 
         // Hack : force same return format as geo sort
-        $qB->addSelect('1 AS distance')
-            ->orderBy('d.name', 'ASC');
+        $qB->addSelect('1 AS distance');
 
         $query = $qB->getQuery();
         return new Paginator($query);
