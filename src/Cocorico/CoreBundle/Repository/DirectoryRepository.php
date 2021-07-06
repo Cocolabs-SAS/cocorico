@@ -29,12 +29,12 @@ class DirectoryRepository extends EntityRepository
     {
         $qB = $this->createQueryBuilder('d');
         $qB->addSelect("partial dlcat.{id, directory, category}")
-           ->addSelect("partial u.{id}")
+           ->addSelect("partial us.{id}")
            ->addSelect("partial i.{id, name}")
            //->addSelect("partial ca.{id, lft, lvl, rgt, root}")
            //->addSelect("partial cat.{id, locale, name}")
            ->leftJoin('d.directoryListingCategories', 'dlcat')
-           ->leftJoin('d.users', 'u')
+           ->leftJoin('d.users', 'us')
            // ->leftJoin('dlcat.category', 'ca')
            // ->leftJoin('ca.translations', 'cat', Query\Expr\Join::WITH, 'cat.locale = :locale')
            ->leftJoin('d.images', 'i');
@@ -50,7 +50,7 @@ class DirectoryRepository extends EntityRepository
         $qB->setMaxResults($limit)
            ->setFirstResult($offset)
            ->addSelect("(CASE 
-            WHEN u.id IS NULL THEN 0
+            WHEN us.id IS NULL THEN 0
             ELSE 1
            END) AS HIDDEN BOOST_ORDER")
            ->addOrderBy("BOOST_ORDER", "DESC")
