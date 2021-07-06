@@ -177,6 +177,7 @@ class Directory
         'department' => 'Département',
         'region' => 'Région',
         'postCode' => 'Code postal',
+        'getONQpv' => 'En zone QPV',
     );
 
     public static $regions = array(
@@ -1799,7 +1800,16 @@ class Directory
     {
         return $this->isQpv;
     }
-
+ 
+    /**
+     * Get nice.
+     *
+     * @return bool
+     */
+    public function getONQpv()
+    {
+        return  $this->isQpv ? 'Oui' : 'Non';
+    } 
 
     /*
      * Presta Type Logic (bitmask type)
