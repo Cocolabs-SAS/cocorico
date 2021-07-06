@@ -9,6 +9,8 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [5.1] - (2021-07-06)
+- wording signature email
 
 ### [5] - (2021-07-01)
 - Ajout donnée et concept "Réseaux"
