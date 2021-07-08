@@ -51,10 +51,12 @@
 
     (tarteaucitron.job = tarteaucitron.job || []).push('googlemapssearch');
 
+  {#
   {% if googlePlaceAPIKey != '' %}
     tarteaucitron.user.googlemapsKey = '{{ googlePlaceAPIKey }}';
     (tarteaucitron.job = tarteaucitron.job || []).push('googlemaps');
   {% endif %}
+  #}
 
   {% if cocorico_matomo_siteid  != ''%}
     tarteaucitron.user.matomoId = '{{ cocorico_matomo_siteid }}';
