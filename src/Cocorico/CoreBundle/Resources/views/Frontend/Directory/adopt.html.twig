@@ -159,6 +159,7 @@
                         </div>
 
                         <div class="field-row validate-row mt-3">
+                            <div class="text-danger mb-3 form-err">Choissisez un ou plusieurs type(s) de prestation(s)</div>
                             <label>Type(s) de prestation(s) <abbr title="Ce champ est obligatoire">*</abbr></label>
                             <ul id="presta_type_form" style="list-style-type:none;margin:0;padding:0;">
                                 <li>
@@ -177,6 +178,7 @@
                         </div>
 
                         <div class="field-row validate-row">
+                            <div class="text-danger mb-3 form-err">Choissisez un périmètre d'intervention</div>
                             <label>Perimètre d'intervention <abbr title="Ce champ est obligatoire">*</abbr></label>
                             <ul id="pol_range_form">
                                 <li>
@@ -257,6 +259,7 @@
                     <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Secteur(s) d'activité</h3>
                     <div class="sub-form">
                         <div class="sub-form3">
+                            <div class="text-danger mb-3 form-err">Définissez un ou plusieurs secteur(s) d'activité</div>
                             Sélectionnez vos 3 secteurs d'activité principaux <abbr title="Ce champ est obligatoire">*</abbr>
                         </div>
                         {#
@@ -431,7 +434,7 @@
                 }
 
                 if (!sectors) {
-                    $('#category-form').addClass('missing-data')
+                    $('#category-form').parents('.sub-form').addClass('missing-data')
                 }
 
             } else {

@@ -125,6 +125,13 @@ body #wrapper {
     padding:1rem;
 }
 
+.form-err {
+    display:none;
+}
+
+.missing-data .form-err {
+    display:block;
+}
 
 /******************
  * BODY STYLES
