@@ -24,7 +24,7 @@
 {% block main %}
 <div class="col-xs-12">
 
-    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+    {{ form_start(form, {'attr': {'id': 'form_adopt', 'class': 'form', 'novalidate-off': 'novalidate'} }) }}
     <div id="form-adoptstructure" class="form-signup login-like validate-form">
         <div class="col-sm-6">
         <div id="home" class="login_register">
@@ -159,8 +159,9 @@
                         </div>
 
                         <div class="field-row validate-row mt-3">
-                            <label>Type(s) de prestation(s)</label>
-                            <ul style="list-style-type:none;margin:0;padding:0;">
+                            <div class="text-danger mb-3 form-err">Choisissez un ou plusieurs type(s) de prestation(s)</div>
+                            <label>Type(s) de prestation(s) <abbr title="Ce champ est obligatoire">*</abbr></label>
+                            <ul id="presta_type_form" style="list-style-type:none;margin:0;padding:0;">
                                 <li>
                                 {{ form_widget(form.prestaType_prest) }}
                                 {{ form_label(form.prestaType_prest, null, {'required': false}) }}
@@ -177,7 +178,8 @@
                         </div>
 
                         <div class="field-row validate-row">
-                            <label>Perimètre d'intervention</label>
+                            <div class="text-danger mb-3 form-err">Choisissez un périmètre d'intervention</div>
+                            <label>Perimètre d'intervention <abbr title="Ce champ est obligatoire">*</abbr></label>
                             <ul id="pol_range_form">
                                 <li>
                                     <input 
@@ -185,6 +187,7 @@
                                         id="{{ form.polRange[1].vars.id }}"
                                         name="{{ form.polRange[1].vars.full_name }}"
                                         value="{{ form.polRange[1].vars.value }}"
+                                        required
                                     /> {{ form_label(form.polRange[1], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -193,6 +196,7 @@
                                         id="{{ form.polRange[2].vars.id }}"
                                         name="{{ form.polRange[2].vars.full_name }}"
                                         value="{{ form.polRange[2].vars.value }}"
+                                        required
                                     /> {{ form_label(form.polRange[2], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -201,6 +205,7 @@
                                         id="{{ form.polRange[3].vars.id }}"
                                         name="{{ form.polRange[3].vars.full_name }}"
                                         value="{{ form.polRange[3].vars.value }}"
+                                        required
                                     /> {{ form_label(form.polRange[3], null, {'required': false}) }}
                                 </li>
                                 <li>
@@ -211,6 +216,7 @@
                                         id="{{ form.polRange[0].vars.id }}"
                                         name="{{ form.polRange[0].vars.full_name }}"
                                         value="{{ form.polRange[0].vars.value }}"
+                                        required
                                     /> 
                                         {{ form_widget(form.range, {
                                             'attr': {
@@ -253,7 +259,8 @@
                     <h3><i class="icon-user-circle-o" style="color:#006adc;"></i>Secteur(s) d'activité</h3>
                     <div class="sub-form">
                         <div class="sub-form3">
-                            Sélectionnez vos 3 secteurs d'activité principaux
+                            <div class="text-danger mb-3 form-err">Définissez un ou plusieurs secteur(s) d'activité</div>
+                            Sélectionnez vos 3 secteurs d'activité principaux <abbr title="Ce champ est obligatoire">*</abbr>
                         </div>
                         {#
                         <div class="itou-info">
@@ -271,6 +278,9 @@
 
         <div class="btns-area new-directory">
             <div id="buttons_nav">
+                <div class="btn-block text-center text-danger" style="display:none">
+                    Données manquantes (voir ci-dessus)
+                </div>
                 <div class="btn-block text-center">
                     <input id="directory-new-save" type="submit" class="btn btn-default"
                            style="width:15rem"
@@ -380,6 +390,56 @@
         $(document).ready(() => {
             pager.init();
             $("#buttons_submit").hide();
+        });
+
+        $('form#form_adopt').submit(function(e){
+            // Stop the form submitting
+            e.preventDefault();
+
+            // Remove loading
+            var parent = $(this).parent('div');
+            parent.find('img.loading').remove();
+            parent.find('br').remove();
+            $('.missing-data').removeClass('missing-data')
+            $('#buttons_nav .text-danger').hide();
+
+            // perim
+            var perim = false;
+            if ($(this).find('input[name="directory[polRange]"]:checked').val()) {
+                var perim = true;
+            }
+
+            // type
+            var prestaType = false;
+            if ($('#directory_prestaType_prest').is(':checked') || 
+                $('#directory_prestaType_disp').is(':checked') ||
+                $('#directory_prestaType_build').is(':checked')) {
+                prestaType = true;
+            }
+
+            // sector
+            var sectors = false;
+            if ($(this).find('input[name="directory_categories[directoryListingCategories][]"]:checked').val()) {
+                var sectors = true;
+            }
+
+            if (!(sectors && perim && prestaType)) {
+                $('#buttons_nav .text-danger').show();
+                if (!perim) {
+                    $('ul#pol_range_form').parents('.field-row').addClass('missing-data')
+                }
+
+                if (!prestaType) {
+                    $('ul#presta_type_form').parents('.field-row').addClass('missing-data')
+                }
+
+                if (!sectors) {
+                    $('#category-form').parents('.sub-form').addClass('missing-data')
+                }
+
+            } else {
+                e.currentTarget.submit();
+            }
         });
     </script>
 

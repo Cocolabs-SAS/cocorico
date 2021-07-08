@@ -83,8 +83,9 @@ body #wrapper {
     overflow:initial;
 }
 
+
 /******************
- * CONFIRM STYLES
+ * CONFIRM AND FORM STYLES
  ******************/
 .form-confirm {
     height:400px;
@@ -117,6 +118,20 @@ body #wrapper {
     font-size:1.4rem;
 }
 
+.missing-data {
+    border-color:#a94442;
+    border-width:2px;
+    border-style:solid;
+    padding:1rem;
+}
+
+.form-err {
+    display:none;
+}
+
+.missing-data .form-err {
+    display:block;
+}
 
 /******************
  * BODY STYLES

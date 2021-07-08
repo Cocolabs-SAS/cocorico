@@ -23,6 +23,7 @@ use Exception;
 use stdClass;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Cocorico\CoreBundle\Utils\ZPaginator;
+use Doctrine\ORM\Tools\Pagination\CountWalker;
 
 class DirectoryManager extends BaseManager
 {
@@ -47,15 +48,13 @@ class DirectoryManager extends BaseManager
     {
         // Fixme: use max_per_page
         $perpage = $this->maxPerPage;
-        $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
-        // Hack : by default to siege
-        // $qB->andWhere('d.nature = :nature')
-        //    ->setParameter('nature', 'siege');
+        $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage), true);
 
         // Hack : force same return format as geo sort
         $qB->addSelect('1 AS distance');
 
         $query = $qB->getQuery();
+        $query->setHint(CountWalker::HINT_DISTINCT, false);
         return new Paginator($query);
     }
 
@@ -87,6 +86,7 @@ class DirectoryManager extends BaseManager
 
         $query = $qB->getQuery();
         $query->setHydrationMode(Query::HYDRATE_OBJECT);
+        $query->setHint(CountWalker::HINT_DISTINCT, false);
         return new Paginator($query);
     }
 
