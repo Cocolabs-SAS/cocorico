@@ -49,9 +49,6 @@ class DirectoryManager extends BaseManager
         // Fixme: use max_per_page
         $perpage = $this->maxPerPage;
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage), true);
-        // Hack : by default to siege
-        // $qB->andWhere('d.nature = :nature')
-        //    ->setParameter('nature', 'siege');
 
         // Hack : force same return format as geo sort
         $qB->addSelect('1 AS distance');

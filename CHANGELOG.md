@@ -9,11 +9,14 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [5.2] - (2021-07-08)
+- Optimisation requête SQL liste SIAE
+- Champs obligatoires adoption structure
+
 ### [5.1] - (2021-07-06)
 - wording signature email
 - Ajout info zone QPV liste excel
 - Essai boost dans l'ordre des résultats de la liste
-- Optimisation requête SQL liste SIAE
 
 ### [5] - (2021-07-01)
 - Ajout donnée et concept "Réseaux"

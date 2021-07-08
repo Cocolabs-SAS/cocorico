@@ -137,14 +137,6 @@ class DirectoryController extends Controller
             return $this->redirect($url);
         }
 
-        // if ($checkForm->isSubmitted()) {
-        //     $directoryCheckRequest = $checkForm->getData();
-        //     $results = $this->get("cocorico.directory.manager")->findBySiretn(
-        //         $directoryCheckRequest->getSiret()
-        //     );
-        // }
-        //$success = $formHandler->process($form);
-    
         return $this->render(
             'CocoricoCoreBundle:Frontend/Directory:adopt.html.twig',
             array(
