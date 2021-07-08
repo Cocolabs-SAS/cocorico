@@ -48,14 +48,16 @@ class DirectoryManager extends BaseManager
     {
         // Fixme: use max_per_page
         $perpage = $this->maxPerPage;
-        $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage), true);
+        $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage), false);
 
         // Hack : force same return format as geo sort
         $qB->addSelect('1 AS distance');
 
         $query = $qB->getQuery();
         $query->setHint(CountWalker::HINT_DISTINCT, false);
-        return new Paginator($query);
+        $paginator = new Paginator($query);
+        $paginator->setUseOutputWalkers(false);
+        return $paginator;
     }
 
     public function findByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
