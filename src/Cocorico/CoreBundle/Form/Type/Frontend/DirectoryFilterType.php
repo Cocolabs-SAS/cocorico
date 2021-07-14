@@ -104,6 +104,7 @@ class DirectoryFilterType extends AbstractType
                 ChoiceType::class,
                 array(
                     'expanded' => false,
+                    'multiple' => true,
                     'empty_data' => '',
                     'choices' => array_flip(Directory::$kindValues),
                 )
