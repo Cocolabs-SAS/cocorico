@@ -205,15 +205,14 @@ class DirectoryManager extends BaseManager
     private function applyFilters($qB, $req, $geo=False) {
         // Filter on type
         if ($req->getStructureType() != null) {
-            dump($req->getStructureType());
             $kinds = $req->getStructureType();
             if (is_array($kinds)) {
-                $kindNames = array_map(function($x) { return Directory::$kindValues[$x]; }, $kinds);
-                dump($kindNames);
+                $kindNames = array_map(function($x) { return array_keys(Directory::$kindFullString)[$x]; }, $kinds);
                 $qB->andWhere('d.kind IN (:types)')
                    ->setParameter('types', $kindNames);
             } else {
-                $kindName = Directory::$kindValues[$req->getStructureType()];
+                $rev_list = array_keys(Directory::$kindFullString);
+                $kindName = $rev_list[$req->getStructureType()];
                 $qB->andWhere('d.kind = :type')
                    ->setParameter('type', $kindName);
             }

@@ -106,7 +106,8 @@ class DirectoryFilterType extends AbstractType
                     'expanded' => false,
                     'multiple' => true,
                     'empty_data' => '',
-                    'choices' => array_flip(Directory::$kindValues),
+                    'block_name' => 'structure_type',
+                    'choices' => array_flip(array_values(Directory::$kindFullString)),
                 )
             )
             // FIXME: Fix presta type search field

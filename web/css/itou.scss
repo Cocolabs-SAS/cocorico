@@ -428,7 +428,7 @@ fieldset {
     display:inline-block !important;
 }
 
-.listing-category button.btn.multiselect {
+.itou-multiselect button.btn.multiselect {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -436,22 +436,22 @@ fieldset {
     padding: 0 .4em 0;
 }
 
-.listing-category .multiselect-container .multiselect-option, 
-.listing-category .multiselect-container .multiselect-group, 
-.listing-category .multiselect-container .multiselect-all {
+.itou-multiselect .multiselect-container .multiselect-option, 
+.itou-multiselect .multiselect-container .multiselect-group, 
+.itou-multiselect .multiselect-container .multiselect-all {
     padding: 0.25rem 0;
 }
 
-.listing-category .multiselect-container .multiselect-group {
+.itou-multiselect .multiselect-container .multiselect-group {
     margin-top: 0.50rem;
 }
 
-.listing-category .multiselect-container .multiselect-group > a,
-.listing-category .multiselect-container .multiselect-group > a *  {
+.itou-multiselect .multiselect-container .multiselect-group > a,
+.itou-multiselect .multiselect-container .multiselect-group > a *  {
     font-weight: bold;
 }
 
-.listing-category .multiselect-container.dropdown-menu {
+.itou-multiselect .multiselect-container.dropdown-menu {
     background-color:#fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     width:auto;
@@ -460,25 +460,25 @@ fieldset {
     padding: 0 4px 0;
 }
 
-.listing-category .multiselect-container.dropdown-menu > li > a * {
+.itou-multiselect .multiselect-container.dropdown-menu > li > a * {
     margin: 0;
 } 
 
-.listing-category .multiselect-container.dropdown-menu > li > a  {
+.itou-multiselect .multiselect-container.dropdown-menu > li > a  {
     white-space: normal;
     border-radius: 0;
     color: #000638;
 }
 
-.listing-category .multiselect-container.dropdown-menu > .active > a, 
-.listing-category .multiselect-container .dropdown-menu > .active > a:hover, 
-.listing-category .multiselect-container .dropdown-menu > .active > a:focus,
-.listing-category .multiselect-container.dropdown-menu > li > a:hover {
+.itou-multiselect .multiselect-container.dropdown-menu > .active > a, 
+.itou-multiselect .multiselect-container .dropdown-menu > .active > a:hover, 
+.itou-multiselect .multiselect-container .dropdown-menu > .active > a:focus,
+.itou-multiselect .multiselect-container.dropdown-menu > li > a:hover {
     background-color: rgba(0, 6, 56, 0.05);
     font-weight: bold;
 }
 
-.listing-category .multiselect-container.dropdown-menu > li > a:hover * {
+.itou-multiselect .multiselect-container.dropdown-menu > li > a:hover * {
     font-weight: bold;
 }
 
@@ -486,6 +486,9 @@ fieldset {
     text-transform: initial;
 }
 
+.structure-type .checkbox {
+    padding:0;    
+}
 
 /******************
  * HEADER STYLES
@@ -1114,7 +1117,7 @@ footer img.min_trav {
         margin-right:4rem;
     }
 
-    .listing-category .multiselect-container.dropdown-menu {
+    .itou-multiselect .multiselect-container.dropdown-menu {
         width:200%;
         max-width:none;
         min-width:none;
