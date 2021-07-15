@@ -9,6 +9,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [5.3] - (2021-07-15)
+- Multiselection type de structure
+- Meilleur descriptif type de structure (verbosité)
+
 ### [5.2] - (2021-07-08)
 - Optimisation requête SQL liste SIAE
 - Champs obligatoires adoption structure

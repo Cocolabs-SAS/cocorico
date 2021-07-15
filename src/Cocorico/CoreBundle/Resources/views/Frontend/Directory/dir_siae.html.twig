@@ -34,7 +34,7 @@
                                     Secteur d'activité
                                 </div>
                                 <div class="field-holder">
-                                    <div class="multiselect listing-category">
+                                    <div class="multiselect itou-multiselect listing-category">
                                     {{form_widget(form.sector, {
                                         'id': 'sector',
                                         'attr': {
@@ -67,13 +67,25 @@
                                     Type de structure
                                 </div>
                                 <div class="field-holder">
+                                {#
                                 {{form_widget(form.structureType, {
-                                    'id': 'sector',
+                                    'id': 'structure_type',
                                     'attr': {
                                         'class': 'form-control',
                                         'placeholder': 'AI, ACI, ETTI'
                                     }}
                                 )}}
+                                #}
+                                    <div class="multiselect itou-multiselect structure-type">
+                                    {{form_widget(form.structureType, {
+                                        'id': 'structureType',
+                                        'attr': {
+                                            'class': 'form-control jcf-ignore',
+                                            'name': 'structureType',
+                                            'placeholder': 'xxx'
+                                        }}
+                                    )}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-5 mt-4">

@@ -43,7 +43,7 @@
                             {% endif %}
                         </li>
                         {% endif %}
-                        <li class="sc-profile-type">{{ structure.getKindString }} ({{ structure.kind }})</li>
+                        <li class="sc-profile-type">{{ structure.getKindString }}</li>
                         {% if structure.hasDirectoryListingCategory %}
                             <li class="sc-profile-sectors">
                                {{ structure.getSectorString(2, '<br />') | raw }}

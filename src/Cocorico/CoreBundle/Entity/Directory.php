@@ -144,6 +144,18 @@ class Directory
         self::STRUCT_GEIQ,
     );
 
+    public static $kindFullString = array (
+        self::STRUCT_CHOICE => self::STRUCT_CHOICE,
+        self::STRUCT_EI => 'Entreprise d\'insertion (EI)',
+        self::STRUCT_EA => 'Entreprise adaptée (EA)',
+        self::STRUCT_EITI => 'Entreprise d\'insertion par le travail indépendant (EITI)',
+        self::STRUCT_ETTI => 'Entreprise de travail temporaire d\'insertion (ETTI)',
+        self::STRUCT_EATT => 'Enterprises adaptées de travail temporaire (EATT)',
+        self::STRUCT_ACI => 'Atelier et chantier d\'insertion (ACI)',
+        self::STRUCT_AI => 'Assocation intermédiaire (AI)',
+        self::STRUCT_GEIQ => 'Groupement d\'employeurs pour l\'insertion et la qualification (GEIQ)',
+    );
+
     const natureValues = array(
         'siege' => 'Conventionné avec la Direccte',
         'antenne' => 'Rattaché à un autre conventionnement'
@@ -162,18 +174,7 @@ class Directory
         self::PR_FRANCE => 'entity.directory.polrange.france',
     );
 
-    public static $kindFullString = array (
-        self::STRUCT_CHOICE => self::STRUCT_CHOICE,
-        self::STRUCT_EI => 'Entreprise d\'insertion',
-        self::STRUCT_EA => 'Entreprise adaptée',
-        self::STRUCT_EITI => 'Entreprise d\'insertion par le travail indépendant',
-        self::STRUCT_ETTI => 'Entreprise de travail temporaire d\'insertion',
-        self::STRUCT_EATT => 'Enterprises adaptées de travail temporaire',
-        self::STRUCT_ACI => 'Atelier et chantier d\'insertion',
-        self::STRUCT_AI => 'Assocation intermédiaire',
-        self::STRUCT_GEIQ => 'Groupement d\'employeurs pour l\'insertion et la qualification',
-    
-    );
+
 
     public static $exportColumns = array(
         'name' => 'Raison sociale',
