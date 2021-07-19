@@ -42,7 +42,8 @@ $ ./docker/run_local_dockers.sh
 
 Démarrage du docker cocorico :
 ```
-$ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
+$ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
+        --target dev-default \
         --build-arg SQL_HOST=some-mariadb \
         --build-arg SQL_PORT=3306 \
         --build-arg SQL_USER=cocorico \
@@ -62,6 +63,7 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
         -v `pwd`/app/Resources:/cocorico/app/Resources \
         cocorico_local
 ```
+
 Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
 ```
 # Mise en place premier lancement

@@ -1,9 +1,13 @@
-FROM --platform=linux/amd6 debian:buster-slim
+# ----------------------------------------------------
+# Base-image
+# ----------------------------------------------------
+FROM debian:bullseye-slim AS common-base
 
 ENV COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/home/cocorico \
     HOME=/home/cocorico \
-    HOST_UID=1000
+    HOST_UID=1000 \
+    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1
 
 ARG SQL_HOST=localhost
 ARG SQL_PORT=3306
@@ -37,7 +41,6 @@ ENV SQL_HOST=$SQL_HOST\
     SYMFONY_ENV=dev 
 
 
-
 RUN apt-get update
 
 RUN apt-get install -y \
@@ -53,21 +56,21 @@ RUN apt-get install -y \
         ca-certificates \
         screen
 
-# Add Yarn
+# Adding Yarn and PHP
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update
 
 RUN apt-get install -y \
         yarn \
-        php7.3 \
-        php7.3-fpm \
-        php7.3-curl \
-        php7.3-zip \
-        php7.3-mbstring \
-        php7.3-xml \
-        php7.3-intl \
-        php7.3-gd \
+        php7.4 \
+        php7.4-fpm \
+        php7.4-curl \
+        php7.4-zip \
+        php7.4-mbstring \
+        php7.4-xml \
+        php7.4-intl \
+        php7.4-gd \
         php-dom \
         php-imagick \
         php-mysql
@@ -100,18 +103,47 @@ RUN sed -i -e 's|%SQL_HOST%|'"$SQL_HOST"'|' /cocorico/app/config/parameters.yml 
     && sed -i -e 's|%ITOU_ENV%|local_dev|' /cocorico/app/config/parameters.yml \
     && cat /cocorico/app/config/parameters.yml
 
-
-#CMD ["bash"]
 RUN composer install && yarn install
 RUN clevercloud/post_build_hook.sh
 RUN wget https://get.symfony.com/cli/installer -O - | bash
-# RUN useradd -ms /bin/bash _www && chown -R _www:_www ./var
-# RUN service nginx restart && service php7.3-fpm start
+
+# ----------------------------------------------------
+# Run Dev Default
+# ----------------------------------------------------
+FROM common-base AS dev-default
+COPY ./docker/run.sh ./run
+COPY ./docker/run_css.sh ./run_css
+COPY ./docker/run_all.sh ./run_all
+COPY ./docker/setup_local_db.sh ./setup
+
+RUN clevercloud/post_build_hook.sh
+
+ENTRYPOINT ["bash"]
+
+# ----------------------------------------------------
+# Run Dev Screen
+# ----------------------------------------------------
+FROM common-base AS dev-screen
 COPY ./docker/run.sh ./run
 COPY ./docker/run_css.sh ./run_css
 RUN echo "Start Symfony server with:\n\
 /home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80\n\
 "
-#CMD ["bash"]
 CMD ["screen", "-c", "docker/screen"]
-# CMD ["/home/cocorico/.symfony/bin/symfony", "server:start", "--no-tls", "--port 80"]
+
+
+# ----------------------------------------------------
+# Run Full Auto
+# ----------------------------------------------------
+FROM common-base AS dev-auto
+COPY ./docker/docker_full_init.sh ./init_services
+VOLUME /data/db
+
+# Init database and other stuff
+RUN ./init_services
+
+RUN clevercloud/post_build_hook.sh
+
+COPY ./docker/run_all.sh ./run
+
+CMD ["./run"]

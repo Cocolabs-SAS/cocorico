@@ -106,8 +106,6 @@ COPY ./docker/run_css.sh ./run_css
 COPY ./docker/run_all.sh ./run_all
 COPY ./docker/setup_local_db.sh ./setup
 
-RUN composer install && yarn install
 RUN clevercloud/post_build_hook.sh
-RUN wget https://get.symfony.com/cli/installer -O - | bash
 
 ENTRYPOINT ["bash"]

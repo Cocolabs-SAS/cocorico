@@ -1,0 +1,58 @@
+version: "3.9"
+   
+services:
+  mariadb:
+    container_name: bitoubi_mysql
+    image: mariadb:10
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./config/dev/postgres/psql_init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
+    environment:
+        - MYSQL_ROOT_PASSWORD=cocorico
+        - MYSQL_PASSWORD=cocorico
+        - MYSQL_USER=cocorico
+        - MYSQL_DATABASE=cocorico
+    ports:
+      - "9306:3306"
+    networks:
+      - cocorico 
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  bitoubi:
+    container_name: bitoubi_symfony
+    build:
+        context: .
+        target: dev-auto
+        dockerfile: ./Dockerfile
+    volumes:
+      - ./src:/cocorico/src
+      - ./web:/cocorico/web
+      - ./app/Resources:/cocorico/app/Resources
+    environment:
+      - SQL_HOST=bitoubi_mysql
+      - SQL_PORT=3306
+      - SQL_USER=cocorico
+      - SQL_PASS=cocorico
+      - GGL_KEY1 = ''
+      - GGL_KEY2 = ''
+      - SMTP_HOST = ''
+      - SMTP_PORT = '25'
+      - SMTP_USER = ''
+      - SMTP_PASSWORD = ''
+    env_file:
+      - env.docker.local
+    networks:
+      - cocorico 
+    ports:
+      - "9098:9090"
+    depends_on:
+      - mariadb
+
+volumes:
+    mariadb_data:
+
+networks:
+    cocorico:
+        driver: bridge
