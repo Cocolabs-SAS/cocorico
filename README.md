@@ -70,15 +70,15 @@ Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony e
 
 # Optionnellement : mettre à jour le schéma de la base de données
 # (et valider avec 'y')
-> ./docker/update\_db.sh
+> ./docker/update_db.sh
 
 # Au choix: 1 ou 2 et 3 
 # 1 - Lancer toute la solution
-> ./run\_all
+> ./run_all
 
 # Attention 2 & 3: utiliser screen pour avoir un double terminal
 # 2 - Lancer webpack (css, js & assets)
-> ./run\_css
+> ./run_css
 
 # 3 - Lancer symfony
 > ./run
