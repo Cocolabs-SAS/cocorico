@@ -5,9 +5,6 @@ services:
     container_name: bitoubi_mysql
     image: mariadb:10.5
     restart: always
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-      - ./config/dev/postgres/psql_init.sh:/docker-entrypoint-initdb.d/postgres-init.sh
     environment:
         - MYSQL_ROOT_PASSWORD=cocorico
         - MYSQL_PASSWORD=cocorico
