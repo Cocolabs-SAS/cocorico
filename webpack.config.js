@@ -69,6 +69,30 @@ Encore
         './web/css/bs4_import.scss',
     ])
 
+    .addEntry('itou_common', [
+        './web/js/vendors.js',
+        './web/js/vendor/json2.js',
+        './web/js/vendor/hammer.js',
+        './web/js/vendor/parsley.min.js',
+        './web/js/vendor/jquery.clearsearch.js',
+
+        './web/js/jquery.main.js',
+        './web/js/jquery.main-override.js',
+        './web/js/common.js',
+        './web/js/date-time.js',
+        './web/js/vendor/cookie-consent.js',
+
+        //'./node_modules/tarteaucitronjs/tarteaucitron.js',
+
+        './web/css/vendor/unslider.css',
+        './web/css/vendor/cookie-consent.css',
+
+        '/web/itou/javascripts/app.js',
+        '/web/itou/stylesheets/app.css',
+
+        './web/css/itou_import.scss',
+    ])
+
     .addEntry('upload', [
 	   './web/js/upload.main.js'
     ])

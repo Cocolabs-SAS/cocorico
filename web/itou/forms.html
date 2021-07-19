@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <title>Itou Theme</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="title" content="Itou Theme">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Itou Theme">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Itou Theme">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:image" content="">
+
+    <link rel="shortcut icon" href="images/favico.ico" type="image/ico">
+    <link rel="stylesheet" href="stylesheets/app.css" />
+  </head>
+
+  <body id="top">
+
+    <header class="bg-primary py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <a href="https://betagouv.github.io/itou-theme/" class="lead text-white mb-0 text-decoration-none">Itou Theme</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="s-main" role="main">
+
+      <section id="content">
+          <div class="container">
+
+            <article class="row py-5" id="forms">
+              <div class="col-12 col-lg-3">
+                <h3>Forms</h3>
+                <a href="https://getbootstrap.com/docs/4.6/components/forms/" target="_blank">Documentation</a>
+              </div>
+              <div class="col-12 col-lg-9">
+                <div class="mb-5">
+                  <h6>Form controls</h6>
+                  <p>Textual form controls—like <code>&lt;input&gt;</code>s, <code>&lt;select&gt;</code>s, and <code>&lt;textarea&gt;</code>s—are styled with the <code>.form-control</code> class. Included are styles for general appearance, focus state, sizing, and more.</p>
+                  <p>Be sure to explore our <a href="https://getbootstrap.com/docs/4.6/components/forms/#custom-forms" target="_blank">custom forms</a> to further style <code>&lt;select&gt;</code>s.</p>
+                  <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Placeholder text">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleFormControlTextarea1">Example textarea</label>
+                      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Sizing</h6>
+                  <p>Set heights using classes like <code>.form-control-lg</code> and <code>.form-control-sm</code>.</p>
+                  <input class="form-control form-control-lg mb-3" type="text" placeholder=".form-control-lg">
+                  <input class="form-control mb-3" type="text" placeholder="Default input">
+                  <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm">
+                </div>
+                <div class="mb-5">
+                  <h6>Readonly</h6>
+                  <p>Add the <code>readonly</code> boolean attribute on an input to prevent modification of the input’s value. Read-only inputs appear lighter (just like disabled inputs), but retain the standard cursor.</p>
+                  <input class="form-control mb-5" type="text" placeholder="Readonly input here..." readonly>
+                  <p>If you want to have <code>&lt;input readonly&gt;</code> elements in your form styled as plain text, use the <code>.form-control-plaintext</code> class to remove the default form field styling and preserve the correct margin and padding.</p>
+                  <form>
+                    <div class="form-group row">
+                      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                      <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Checkboxes</h6>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1">Check this custom checkbox</label>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <h6>Radios</h6>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Or toggle this other custom radio</label>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <h6>Disabled</h6>
+                  <p>Custom checkboxes and radios can also be disabled. Add the <code>disabled</code> boolean attribute to the <code>&lt;input&gt;</code> and the custom indicator and label description will be automatically styled.</p>
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="customCheckDisabled1" disabled>
+                    <label class="custom-control-label" for="customCheckDisabled1">Check this custom checkbox</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" name="radioDisabled" id="customRadioDisabled2" class="custom-control-input" disabled>
+                    <label class="custom-control-label" for="customRadioDisabled2">Toggle this custom radio</label>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <h6>Switches</h6>
+                  <p>A switch has the markup of a custom checkbox but uses the <code>.custom-switch</code> class to render a toggle switch. Switches also support the <code>disabled</code> attribute.</p>
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                    <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                  </div>
+                  <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+                    <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <h6>Select menu</h6>
+                  <p>Custom <code>&lt;select&gt;</code> menus need only a custom class, <code>.custom-select</code> to trigger the custom styles. Custom styles are limited to the <code>&lt;select&gt;</code>’s initial appearance and cannot modify the <code>&lt;option&gt;</code>s due to browser limitations.</p>
+                  <p>You may also choose from small and large custom selects to match our similarly sized text inputs.</p>
+                  <select class="custom-select mb-3">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <br>
+                  <select class="custom-select custom-select-lg mb-3">
+                    <option selected>Open this select menu lg</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <br>
+                  <select class="custom-select custom-select-sm mb-3">
+                    <option selected>Open this select menu sm</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                  <br>
+                  <p>The <code>multiple</code> attribute is also supported:</p>
+                  <select class="custom-select" multiple>
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+                <div class="mb-5">
+                  <h6>Form Layout</h6>
+                  <p>The <code>.form-group</code> class is the easiest way to add some structure to forms. It provides a flexible class that encourages proper grouping of labels, controls, optional help text, and form validation messaging. By default it only applies <code>margin-bottom</code>, but it picks up additional styles in <code>.form-inline</code> as needed. Use it with <code>&lt;fieldset&gt;</code>s, <code>&lt;div&gt;</code>s, or nearly any other element.</p>
+                  <form>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput">Example label</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                      <label for="formGroupExampleInput2">Another label</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                    </div>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <p>More complex layouts can also be created with the grid system.</p>
+                  <form>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputEmail4">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4">
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label for="inputPassword4">Password</label>
+                        <input type="password" class="form-control" id="inputPassword4">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAddress">Address</label>
+                      <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                    </div>
+                    <div class="form-group">
+                      <label for="inputAddress2">Address 2</label>
+                      <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <label for="inputCity">City</label>
+                        <input type="text" class="form-control" id="inputCity">
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label for="inputState">State</label>
+                        <select class="custom-select mb-3">
+                          <option selected="">This select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-2">
+                        <label for="inputZip">Zip</label>
+                        <input type="text" class="form-control" id="inputZip">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="custom-control custom-radio">
+                        <input type="radio" id="customRadio20" name="customRadio" class="custom-control-input">
+                        <label class="custom-control-label" for="customRadio20">Check me out</label>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Inline forms</h6>
+                  <p>Use the <code>.form-inline</code> class to display a series of labels, form controls, and buttons on a single horizontal row. Form controls within inline forms vary slightly from their default states.</p>
+                  <form class="form-inline">
+                    <label class="sr-only" for="inlineFormInputName2">Name</label>
+                    <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+                    <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                    <div class="input-group mb-2 mr-sm-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">@</div>
+                      </div>
+                      <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                    </div>
+                    <div class="form-check mb-2 mr-sm-2">
+                      <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Remember me
+                      </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Help text</h6>
+                  <p>Block-level help text in forms can be created using <code>.form-text</code> (previously known as <code>.help-block</code> in v3). Inline help text can be flexibly implemented using any inline HTML element and utility classes like <code>.text-muted</code>.</p>
+                  <form>
+                    <label for="inputPassword5">Password</label>
+                    <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                    <small id="passwordHelpBlock" class="form-text text-muted">
+                      Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+                    </small>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Disabled forms</h6>
+                  <p>Add the <code>disabled</code> boolean attribute on an input to prevent user interactions and make it appear lighter.</p>
+                  <form>
+                    <fieldset disabled>
+                      <legend>Disabled fieldset example</legend>
+                      <div class="form-group">
+                        <label for="disabledTextInput">Disabled input</label>
+                        <input type="text" id="disabledTextInput" class="form-control" placeholder="Disabled input">
+                      </div>
+                      <div class="form-group">
+                        <label for="disabledSelect">Disabled select menu</label>
+                        <select class="custom-select">
+                          <option selected="">Disabled select menu</option>
+                          <option value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </fieldset>
+                  </form>
+                </div>
+                <div class="mb-5">
+                  <h6>Validation</h6>
+                  <p>For custom Bootstrap form validation messages, you’ll need to add the <code>novalidate</code> boolean attribute to your <code>&lt;form&gt;</code>. This disables the browser default feedback tooltips, but still provides access to the form validation APIs in JavaScript. Try to submit the form below; our JavaScript will intercept the submit button and relay feedback to you. When attempting to submit, you’ll see the <code>:invalid</code> and <code>:valid</code> styles applied to your form controls.</p>
+                  <p>Custom feedback styles apply custom colors, borders, focus styles, and background icons to better communicate feedback. Background icons for <code>&lt;select&gt;</code>s are only available with <code>.custom-select</code>, and not <code>.form-control</code>.</p>
+                  <form class="needs-validation" novalidate>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom01">First name</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom02">Last name</label>
+                        <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-md-6 mb-3">
+                        <label for="validationCustom03">City</label>
+                        <input type="text" class="form-control" id="validationCustom03" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid city.
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationCustom04">State</label>
+                        <select class="custom-select" id="validationCustom04" required>
+                          <option selected disabled value="">Choose...</option>
+                          <option>...</option>
+                        </select>
+                        <div class="invalid-feedback">
+                          Please select a valid state.
+                        </div>
+                      </div>
+                      <div class="col-md-3 mb-3">
+                        <label for="validationCustom05">Zip</label>
+                        <input type="text" class="form-control" id="validationCustom05" required>
+                        <div class="invalid-feedback">
+                          Please provide a valid zip.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <label class="form-check-label" for="invalidCheck">
+                          Agree to terms and conditions
+                        </label>
+                        <div class="invalid-feedback">
+                          You must agree before submitting.
+                        </div>
+                      </div>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Submit form</button>
+                  </form>
+
+                  <script>
+                  // Example starter JavaScript for disabling form submissions if there are invalid fields
+                  (function() {
+                    'use strict';
+                    window.addEventListener('load', function() {
+                      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                      var forms = document.getElementsByClassName('needs-validation');
+                      // Loop over them and prevent submission
+                      var validation = Array.prototype.filter.call(forms, function(form) {
+                        form.addEventListener('submit', function(event) {
+                          if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                          }
+                          form.classList.add('was-validated');
+                        }, false);
+                      });
+                    }, false);
+                  })();
+                  </script>
+                </div>
+              </div>
+            </article>
+
+            <article class="row py-5" id="input-group">
+              <div class="col-12 col-lg-3">
+                <h3>Input group</h3>
+                <a href="https://getbootstrap.com/docs/4.6/components/input-group/" target="_blank">Documentation</a>
+              </div>
+              <div class="col-12 col-lg-9">
+                <div class="mb-5">
+                  <h6>Basic</h6>
+                  <p>Place one add-on or button on either side of an input. You may also place one on both sides of an input. Remember to place <code>&lt;label&gt;</code>s outside the input group.</p>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="basic-addon2">@example.com</span>
+                    </div>
+                  </div>
+
+                  <label for="basic-url">Your vanity URL</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+                    </div>
+                    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">$</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                    <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">With textarea</span>
+                    </div>
+                    <textarea class="form-control" aria-label="With textarea"></textarea>
+                  </div>
+                </div>
+                <div class="mb-5">
+                  <h6>Button addons</h6>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon1">Button</button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button" id="button-addon2">Button</button>
+                    </div>
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend" id="button-addon3">
+                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                    <input type="text" class="form-control" placeholder="" aria-label="Example text with two button addons" aria-describedby="button-addon3">
+                  </div>
+
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username with two button addons" aria-describedby="button-addon4">
+                    <div class="input-group-append" id="button-addon4">
+                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                      <button class="btn btn-outline-secondary" type="button">Button</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+    </main>
+
+    <script src="javascripts/app.js" defer></script>
+  </body>
+
+</html>

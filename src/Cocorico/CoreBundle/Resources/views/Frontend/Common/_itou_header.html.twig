@@ -1,0 +1,132 @@
+{% trans_default_domain 'cocorico' %}
+
+
+{% if app.environment == 'dev' %}
+    <div class="alert alert-warning fixed-bottom">DEV</div>
+{% endif %}
+{% if app.session.get('isAdmin') %}
+    <div class="alert alert-danger fixed-bottom">ADMIN MODE</div>
+{% endif %}
+
+<!-- header of the page -->
+<!-- ITOU migration -->
+<header class="c-header" role="banner" id="header">
+  <section class="c-header__container container">
+    <div class="c-header__row row">
+      <div class="c-header__col c-header__col--logo col-auto d-flex align-items-center pr-0 pr-md-3">
+        <a href="{{ path('cocorico_home') }}" class="c-header__logo-ministere"><img src="/images/logo-ministere-travail.svg" alt="Ministère du travail"></a>
+      </div>
+      <div class="c-header__col c-header__col--logo col-auto d-flex align-items-center px-0 px-md-3">
+        <span><img src="/images/logo-marche.svg" alt="Le marché de l'inclusion" class="img-fluid"></span>
+      </div>
+      <div class="c-header__col c-header__col--nav col d-none d-xl-inline-flex d-xl-flex align-items-center justify-content-end">
+        <nav>
+          <ul>
+            <li class="is-current">
+                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener">
+                    <span>{{ 'nav.favorites.link'|trans }}</span>
+                    <span id="fav-count" class="badge badge-primary badge-pill"></span>
+                </a>
+            </li>            
+            {# User info #}
+            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+                <li id="dashboard-dropdown" class="dropdown">
+                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                        <span>{{ 'nav.dashboard.link'|trans }}</span>
+                        <span id="nb-unread-msg" class="badge badge-primary badge-pill"></span>
+                    </a>
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                </li>
+            {%- else -%}
+                <li>
+                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7" rel="noopener">
+                        <span>{{ 'nav.login.link'|trans }}</span>
+                        <img src="/images/common-ico-user.svg" alt="">
+                    </a>
+                </li>
+            {%- endif -%}
+            {# New listing link #}
+            {% if app.session.get('canPublish') %}
+                <li class="has-no-separator">
+                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary" tabindex="9" rel="noopener">
+                        <span>
+                            {{ 'nav.listing.new.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            {%- if app.user is null -%}
+                <li class="has-no-separator">
+                    <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary" rel="noopener">
+                        <span>
+                            {{ 'nav.register.link'|trans }}
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                    </a>
+                </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+      <div class="c-header__col c-header__col--burger col d-flex align-items-center justify-content-end d-xl-none" data-toggle="burger">
+        <span id="burger"><img src="/images/picto-burger.svg" alt="Menu" /></span>
+        <span id="close"><img src="/images/picto-close.svg" alt="Fermer" /></span>
+      </div>
+      <div id="burgerNav">
+        <nav>
+          <ul>
+            <li>
+                <a id="h_fav" href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener">
+                    <span>{{ 'nav.favorites.link'|trans }}</span>
+                    <span id="fav-count" class="badge badge-primary badge-pill"></span>
+                </a>
+            </li>            
+            {# User info #}
+            {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+                <li id="dashboard-dropdown" class="dropdown">
+                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                        <span>{{ 'nav.dashboard.link'|trans }}</span>
+                        <span id="nb-unread-msg" class="badge badge-primary badge-pill"></span>
+                    </a>
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                </li>
+            {%- else -%}
+                <li>
+                    <a id="h_login" href="{{ path('cocorico_user_login') }}" tabindex="7" rel="noopener">
+                        <span>{{ 'nav.login.link'|trans }}</span>
+                        <img src="/images/common-ico-user.svg" alt="">
+                    </a>
+                </li>
+            {%- endif -%}
+            {# New listing link #}
+            {# New listing disabled
+            {% if app.session.get('canPublish') %}
+                <li class="has-no-separator">
+                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary" tabindex="9" rel="noopener">
+                        <span>
+                            {{ 'nav.listing.new.link'|trans }}
+                        </span>
+                    </a>
+                </li>
+            {% endif %}
+            #}
+            {%- if app.user is null -%}
+                <li class="has-no-separator">
+                    <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary" rel="noopener">
+                        <span>
+                            {{ 'nav.register.link'|trans }}
+                        </span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>                        
+                    </a>
+                </li>
+            {% endif %}
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</header>
