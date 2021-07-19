@@ -33,14 +33,24 @@ La documentation initiale se trouve [ici](doc/index.md)
 
 ## Déploiement
 ### Démarrage des dockers
-Plusieurs options sont possibles (du docker tout inclus au docker qui utilise un serveur mysql distant), la plus simple étant la combinaison docker Cocorico + docker MariaDB.
-Depuis le répertoire racine de cociroco :
-```
-# Démarrage du docker mariadb
-$ ./docker/run_local_dockers.sh
+#### Docker compose
+L'option la plus aisée est d'utiliser docker compose (voir [docker-compose.yml](docker-compose.yml) pour plus d'infos). Ce dernier démarre la base de données (mariadb) et le docker symfony.
+
+```bash
+# A partir de la racine du projet
+$ docker-compose up
+
+# Attacher un shell
+$ docker exec -it bitoubi_symfony /bin/bash
+
+# Se connecter à MariaDB depuis le shell ci-dessus
+$ mysql -h $SQL_HOST -u $SQL_USER -p cocorico
 ```
 
-Démarrage du docker cocorico :
+#### Autres options
+D'autres options sont possibles, surtout si vous avez un server mysql de disponible.
+
+Il suffit pour se faire de modifier le script suivant selon votre configuration, et de définir le `target` du build (`dev-default` ou `dev-screen`, le second permettant d'ouvrir un terminal sur webpack et un autre sur symfony)
 ```
 $ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
         --target dev-default \
@@ -51,9 +61,9 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
         --build-arg GGL_KEY1=[CleGoogleMaps] \
         --build-arg GGL_KEY2=[CleGoogleSpaces] \
         --build-arg SMTP_HOST="localhost" \
-        --build-arg SMTP_PASSWORD="boudin_patates" \
+        --build-arg SMTP_PASSWORD="SMTP_PASS" \
         --build-arg SMTP_PORT="25" \
-        --build-arg SMTP_USER="mayonnaise" \
+        --build-arg SMTP_USER="SMTP_USER" \
 && docker run --rm -it \
         -p 9090:80 \
         --network cocorico \
@@ -64,29 +74,41 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
         cocorico_local
 ```
 
-Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
+Le docker démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
+
 ```
 # Mise en place premier lancement
 > ./setup
 
-# Lancer toute la solution
-> ./run\_all
-
-# Lancer webpack (css, js & assets)
-> ./run\_css
-
-# Lancer symfony
-> ./run
-
-# Provoquer une mise à jour du schéma de la base de données
+# Optionnellement : mettre à jour le schéma de la base de données
 # (et valider avec 'y')
-> ./docker/update\_db.sh
+> ./docker/update_db.sh
+
+# Au choix: 1 ou 2 et 3 
+# 1 - Lancer toute la solution
+> ./run_all
+
+# Attention 2 & 3: utiliser screen pour avoir un double terminal
+# 2 - Lancer webpack (css, js & assets)
+> ./run_css
+
+# 3 - Lancer symfony
+> ./run
 ```
 
-## Utilisation Bootstrap v4
+## Utilisation Bootstrap v4 ou du thème ITOU
 Un layout de base alternatif permet l'utilisation de Bootstrap 4 dans les pages du marché.
 
 Pour l'employer, il suffit de remplacer l'entête du fichier html en question (ie: utiliser un autre layout de base), comme ci-dessous.
+
+### Theme ITOU
+```twig
+{% extends '::itou_base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+```
 
 ### Bootstrap v4
 ```twig
@@ -96,6 +118,7 @@ Pour l'employer, il suffit de remplacer l'entête du fichier html en question (i
     {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 ```
+
 ### Bootstrap v3
 ```twig
 {% extends '::base.html.twig' %}
@@ -125,15 +148,8 @@ Pour plus de précisions, voir `webpack.config.js` (et comparer **common** et **
 Built with Cocorico, an open source platform sponsored by [Cocolabs](https://www.cocolabs.com/en/?utm_source=github&utm_medium=cocorico-page&utm_campaign=organic) to create collaborative consumption marketplaces.
 Cocorico is released under the [MIT license](LICENSE).
 
-- `web/css/bs4_import.scss` remplace `web/css/full_import.scss`
-- `web/css/bs4_itou.scss` remplace `web/css/itou.scss`
-
-Pour en connaître les détails, voir `webpack.config.js` et `web/css/bs4_import.css`.
-
 
 ## Changelog
- - Fix similar listings session persisting
-
 [CHANGELOG.md](CHANGELOG.md) list the relevant changes done for each release.
 
 ## License

@@ -161,4 +161,7 @@ config.output.libraryTarget = 'window';
 config.output.libraryExport = 'default';
 // console.log(config);
 
-module.exports = config;
+module.exports = {
+    stats: 'errors-only',
+    ...config
+}

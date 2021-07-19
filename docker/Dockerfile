@@ -57,7 +57,7 @@ RUN apt-get install -y \
         screen
 
 # Adding Yarn and PHP
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn apt-key add - && \
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt-get update
 
@@ -136,14 +136,6 @@ CMD ["screen", "-c", "docker/screen"]
 # Run Full Auto
 # ----------------------------------------------------
 FROM common-base AS dev-auto
-COPY ./docker/docker_full_init.sh ./init_services
-VOLUME /data/db
 
-# Init database and other stuff
-RUN ./init_services
-
-RUN clevercloud/post_build_hook.sh
-
-COPY ./docker/run_all.sh ./run
-
-CMD ["./run"]
+COPY ./docker/entrypoint.sh ./entrypoint.sh
+CMD ["./entrypoint.sh"]
