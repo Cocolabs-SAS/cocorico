@@ -50,6 +50,7 @@ RUN apt-get install -y \
         unzip \
         wget \
         vim-tiny \
+        ca-certificates \
         screen
 
 # Add Yarn

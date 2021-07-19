@@ -36,9 +36,9 @@ ENV SQL_HOST=$SQL_HOST\
     SMTP_USER=$SMTP_USER \
     SYMFONY_ENV=dev 
 
-RUN apt-get update
+RUN apt-get update -y
 
-RUN apt-get install -y \
+RUN apt-get install -y --no-install-recommends \
         curl \
         git \
         default-mysql-client \ 
@@ -48,6 +48,7 @@ RUN apt-get install -y \
         unzip \
         wget \
         vim-tiny \
+        ca-certificates \
         screen
 
 # Add Yarn & PHP
