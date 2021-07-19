@@ -62,23 +62,26 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
         -v `pwd`/app/Resources:/cocorico/app/Resources \
         cocorico_local
 ```
+
 Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
 ```
 # Mise en place premier lancement
 > ./setup
 
-# Lancer toute la solution
-> ./run\_all
-
-# Lancer webpack (css, js & assets)
-> ./run\_css
-
-# Lancer symfony
-> ./run
-
-# Provoquer une mise à jour du schéma de la base de données
+# Optionnellement : mettre à jour le schéma de la base de données
 # (et valider avec 'y')
 > ./docker/update\_db.sh
+
+# Au choix: 1 ou 2 et 3 
+# 1 - Lancer toute la solution
+> ./run\_all
+
+# Attention 2 & 3: utiliser screen pour avoir un double terminal
+# 2 - Lancer webpack (css, js & assets)
+> ./run\_css
+
+# 3 - Lancer symfony
+> ./run
 ```
 
 ## Utilisation Bootstrap v4
