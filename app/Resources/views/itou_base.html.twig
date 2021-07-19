@@ -8,19 +8,9 @@
     </title>
     <meta name="description" content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
 
-    {% block open_graph_data -%}
-        <meta property="og:image" content="{{ asset('facebook.png') }}"/>
-    {%- endblock %}
-
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ asset('manifest.json') }}">
-    <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#d61022">
     <meta name="theme-color" content="#ffffff">
 
     {% block stylesheets %}

@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.0] - (2021-07-X)
+- Intégration du thème ITOU
+
 ### [5.3] - (2021-07-15)
 - Multiselection type de structure
 - Meilleur descriptif type de structure (verbosité)
