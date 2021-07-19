@@ -50,9 +50,9 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
         --build-arg GGL_KEY1=[CleGoogleMaps] \
         --build-arg GGL_KEY2=[CleGoogleSpaces] \
         --build-arg SMTP_HOST="localhost" \
-        --build-arg SMTP_PASSWORD="boudin_patates" \
+        --build-arg SMTP_PASSWORD="smtp_pass" \
         --build-arg SMTP_PORT="25" \
-        --build-arg SMTP_USER="mayonnaise" \
+        --build-arg SMTP_USER="smtp_user" \
 && docker run --rm -it \
         -p 9090:80 \
         --network cocorico \
