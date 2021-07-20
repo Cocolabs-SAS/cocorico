@@ -90,7 +90,7 @@ Encore
         '/web/itou/javascripts/app.js',
         '/web/itou/stylesheets/app.css',
 
-        './web/css/itou_import.scss',
+        './web/css/itou_marche.scss',
     ])
 
     .addEntry('upload', [
