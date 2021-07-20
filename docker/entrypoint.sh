@@ -23,5 +23,5 @@ chmod -R 777 /cocorico/var
 export ITOU_ENV=local_dev
 
 # Run server & watch CSS updates
-/home/cocorico/.symfony/bin/symfony server:start --no-tls --port 80 &
+/home/cocorico/.symfony/bin/symfony server:start --no-tls --port $HOST_PORT &
 yarn encore dev --watch

@@ -34,6 +34,7 @@ services:
           - SMTP_PORT=25
           - SMTP_USER=
           - SMTP_PASSWORD=
+          - HOST_PORT=9090
     volumes:
       - ./src:/cocorico/src
       - ./web:/cocorico/web
@@ -43,7 +44,7 @@ services:
     networks:
       - cocorico 
     ports:
-      - "9090:80"
+      - "9090:9090"
     depends_on:
       - mariadb
 
