@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [5.3] - (2021-07-15)
 - Multiselection type de structure
 - Meilleur descriptif type de structure (verbosité)
+- Quickfix téléchargement CSV
 
 ### [5.2] - (2021-07-08)
 - Optimisation requête SQL liste SIAE

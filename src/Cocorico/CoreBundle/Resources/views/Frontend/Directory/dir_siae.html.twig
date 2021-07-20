@@ -26,6 +26,7 @@
         {% block main %}
             <div id="dir_form" class="dir_form">
                 {{ form_start(form) }}
+                {{ form_errors(form) }}
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="row first-row">
@@ -286,7 +287,8 @@
                     {{ form_widget(dlform.withRange, {'attr': {'style': 'display:none'}}) }}
                     #}
                     {{ form_widget(dlform.prestaType, {'attr': {'style': 'display:none'}}) }}
-                    {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none'}}) }}
+                    {{ form_widget(dlform.structureType, {'attr': {'style': 'display:none', 'class': 'jcf-ignore'}}) }}
+                    {% do dlform.structureType.setRendered() %}
                     {% do dlform.address.setRendered() %}
                         <div class="col-sm-3 col-sm-offset-1 mt-4">
                             <div class="title">
