@@ -65,6 +65,7 @@ class DirectoryFilterType extends AbstractType
                     'mapped' => false,
                     'expanded' => false,
                     'empty_data' => 'xlsx',
+                    'required' => false,
                     'choices' => [
                         'Excel' => 'xlsx',
                         'Open Office' => 'ods',
@@ -90,6 +91,7 @@ class DirectoryFilterType extends AbstractType
                     'block_name' => 'listing_categories',
                     'multiple' => true,
                     'placeholder' => 'listing_search.form.categories.empty_value',
+                    'required' => false,
                 )
             )
             //->add('region',
@@ -105,9 +107,9 @@ class DirectoryFilterType extends AbstractType
                 array(
                     'expanded' => false,
                     'multiple' => true,
-                    'empty_data' => '',
                     'block_name' => 'structure_type',
                     'choices' => array_flip(array_values(Directory::$kindFullString)),
+                    'required' => false,
                 )
             )
             // FIXME: Fix presta type search field
@@ -116,6 +118,7 @@ class DirectoryFilterType extends AbstractType
                 array(
                     'expanded' => false,
                     'empty_data' => '',
+                    'required' => false,
                     'choices' => array_flip(Directory::$prestaTypeValues),
                 )
             );

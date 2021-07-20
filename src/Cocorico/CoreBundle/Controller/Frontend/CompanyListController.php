@@ -69,7 +69,10 @@ class CompanyListController extends Controller
 
         $markers = array('directoryIds' => array(), 'markers' => array());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
+            # if (!$form->isValid()) {
+            #     dump("Form is not valid !");
+            # }
             $sort = $form->getData();
             $sort->prepareData();
 
