@@ -149,9 +149,8 @@ class CompanyListController extends Controller
             $sort->prepareData();
             $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
             $entries = $directoryManager->listByForm($sort);
-            //dump($sort->getLegacyParams());
         } else {
-            $entries = $directoryManager->listbyForm();
+            $entries = $directoryManager->listByForm($directorySearchRequest);
         }
         $format = $form['format']->getData();
 
