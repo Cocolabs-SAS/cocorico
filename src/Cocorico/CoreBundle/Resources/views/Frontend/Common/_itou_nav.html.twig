@@ -39,70 +39,52 @@
     } -%}
 
 {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
-    <ul class="dropdown-menu" role="menu">
-        <li class="dropdown-item">
-            <ul class="list-group list-group-flush">
-                {% if app.session.get('canSwitch')%}
-                    <li class="list-group-item active">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                           data-id="asker">{{ 'nav.asker.link' | trans }}
-                            <span id="nb-unread-asker" class="badge badge-pink badge-pill"></span>
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" aria-expanded="false" class="dropdown-toggle"
-                           data-id="offerer">{{ 'nav.offerer.link' | trans }}
-                            <span id="nb-unread-offerer" class="badge badge-pink badge-pill"></span>
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </li>
+    <div class="dropdown-menu {{ dropdown_extra_class }}" role="menu">
+        {% if app.session.get('canSwitch')%}
+            <a href="#" data-id="asker" class="dropdown-item">
+                <span>{{ 'nav.asker.link' | trans }}</span>
+                <span id="nb-unread-asker" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+            </a>
+            <a href="#" aria-expanded="false" data-id="offerer" class="dropdown-item">
+                <span>{{ 'nav.offerer.link' | trans }}</span>
+                <span id="nb-unread-offerer" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+            </a>
+        {% endif %}
         {% if app.session.get('canAskForQuote') or is_granted('ROLE_SONATA_ADMIN') %}
-        <li class="dropdown-item" data-id="asker">
-            <ul class="list-group list-group-flush">
-                {% for name, menu in askerItems %}
-                    <li class="list-group-item">
-                        <a id="asker{{ menu.text }}" href="{{ menu.link }}">
-                            {{ menu.text }}
-                            {% if name == 'messages' %}
-                                <span id="askerMsg" class="badge badge-pink badge-pill"></span>
-                            {% endif %}
-                        </a>
-                    </li>
-                {% endfor %}
-                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                    <li class="list-group-item">
-                        <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
-                            {{ 'exit_impersonation'|trans }}
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </li>
+        <div class="dropdown-divider"></div>
+        <div data-id="asker">
+             {% for name, menu in askerItems %}
+                <a id="asker{{ menu.text }}" href="{{ menu.link }}" class="dropdown-item">
+                    <span>{{ menu.text }}</span>
+                    {% if name == 'messages' %}
+                        <span id="askerMsg" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}" class="dropdown-item">
+                    <span>{{ 'exit_impersonation'|trans }}</span>
+                </a>
+            {% endif %}
+        </div>
         {% endif %}
         {% if app.session.get('canPublish')%}
-					<li class="dropdown-item" data-id="offerer">
-							<ul class="list-group list-group-flush">
-									{% for name, menu in offererItems %}
-											<li class="list-group-item">
-													<a id="offerer{{ menu.text }}" href="{{ menu.link }}">
-															{{ menu.text }}
-															{% if name == 'messages' %}
-																	<span id="offererMsg" class="badge badge-pink badge-pill"></span>
-															{% endif %}
-													</a>
-											</li>
-									{% endfor %}
-									{% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-											<li class="list-group-item">
-													<a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}">
-															{{ 'exit_impersonation'|trans }}
-													</a>
-											</li>
-									{% endif %}
-							</ul>
-					</li>
+        <div class="dropdown-divider"></div>
+        <div data-id="offerer">
+            {% for name, menu in offererItems %}
+                <a id="offerer{{ menu.text }}" href="{{ menu.link }}" class="dropdown-item">
+                    <span>{{ menu.text }}</span>
+                    {% if name == 'messages' %}
+                        <span id="offererMsg" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}" class="dropdown-item">
+                    <span>{{ 'exit_impersonation'|trans }}</span>
+                </a>
+            {% endif %}
+        </div>
         {% endif %}
-    </ul>
+    </div>
 {%- endif -%}

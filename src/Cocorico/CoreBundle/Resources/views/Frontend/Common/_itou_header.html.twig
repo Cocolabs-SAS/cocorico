@@ -30,11 +30,11 @@
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
-                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                    <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
                         <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
                     </a>
-                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':''} only %}
                 </li>
             {%- else -%}
                 <li>
@@ -53,7 +53,7 @@
                 </li>
             {% endif %}            
             {%- if app.user is null -%}
-                <li class="has-no-separator">
+                <li>
                     <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary btn-ico" rel="noopener">
                         <span>
                             {{ 'nav.register.link'|trans }}
@@ -83,11 +83,11 @@
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
-                    <a id="dashboard-link" class="dropdown-toggle" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
+                    <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
                         <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
                     </a>
-                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':''} only %}
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':'position-static d-block'} only %}
                 </li>
             {%- else -%}
                 <li>
@@ -106,7 +106,7 @@
                 </li>
             {% endif %}            
             {%- if app.user is null -%}
-                <li class="has-no-separator">
+                <li>
                     <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary btn-ico" rel="noopener">
                         <span>
                             {{ 'nav.register.link'|trans }}
