@@ -40,6 +40,26 @@ class FiliereController extends Controller
     
     }
 
+    /**
+     * Route filière restauration
+     *
+     * @Route("/restauration", name="cocorico_filiere_restauration")
+     *
+     * @Method("GET")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function RestaurationPage( Request $request) {
+        return $this->render(
+            'CocoricoCoreBundle:Frontend/Filiere:restauration.html.twig',
+            array(
+            )
+        );
+    
+    }
+
+
+
     /*
      * @Route("/", name="cocorico_filiere_home")
      *
