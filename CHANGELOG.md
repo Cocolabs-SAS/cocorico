@@ -9,10 +9,16 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [5.5] - (2021-07-20)
+- Ajout page filière restauration
+
+### [5.4] - (2021-07-20)
+- Correctif formulaire recherche SIAE
+- Quickfix téléchargement CSV
+
 ### [5.3] - (2021-07-15)
 - Multiselection type de structure
 - Meilleur descriptif type de structure (verbosité)
-- Quickfix téléchargement CSV
 
 ### [5.2] - (2021-07-08)
 - Optimisation requête SQL liste SIAE

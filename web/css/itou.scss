@@ -1206,7 +1206,7 @@ footer img.min_trav {
     font-weight:400;
 }
 /* filiere banner */
-#filiere_banner {
+.filiere_banner {
     margin:4rem 0;
 
     h3 {
@@ -2246,7 +2246,7 @@ div.c4_multiselect li {
 /******************
  * Page Filiere
  ******************/
-#fil-recy {
+.fil-page {
     padding:2rem;
 
     .row {
@@ -2254,7 +2254,16 @@ div.c4_multiselect li {
     }
 
     a {
+        text-decoration:underline;
+        font-weight:bold;
+        color:#000638;
+    }
+
+    a.btn {
+        color:#fff;
         font-family:marianne;
+        font-weight:normal;
+        text-decoration:none;
     }
     
     hr {
@@ -2285,7 +2294,7 @@ div.c4_multiselect li {
 }
 
 
-#fil-recy .r1 {
+.fil-page .r1 {
     font-family:marianne;
 
 
@@ -2305,7 +2314,7 @@ div.c4_multiselect li {
 
 }
 
-#fil-recy .r2 {
+.fil-page .r2 {
     .focus {
         font-family:roboto;
         text-transform:uppercase;
@@ -2326,7 +2335,7 @@ div.c4_multiselect li {
 
 }
 
-#fil-recy .r3 {
+.fil-page .r3 {
     .c1 {
         height:100%;
         overflow:hidden;
@@ -2344,7 +2353,7 @@ div.c4_multiselect li {
     }
 }
 
-#fil-recy .r4 {
+.fil-page .r4 {
     #recy-numbers {
         margin:0;
         padding:0;
@@ -2373,7 +2382,7 @@ div.c4_multiselect li {
     }
 }
 
-#fil-recy .r5 {
+.fil-page .r5 {
 
     .hr {
         margin-bottom:3rem;
