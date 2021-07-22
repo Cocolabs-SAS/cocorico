@@ -69,7 +69,10 @@ class CompanyListController extends Controller
 
         $markers = array('directoryIds' => array(), 'markers' => array());
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
+            # if (!$form->isValid()) {
+            #     dump("Form is not valid !");
+            # }
             $sort = $form->getData();
             $sort->prepareData();
 
@@ -149,9 +152,8 @@ class CompanyListController extends Controller
             $sort->prepareData();
             $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
             $entries = $directoryManager->listByForm($sort);
-            //dump($sort->getLegacyParams());
         } else {
-            $entries = $directoryManager->listbyForm();
+            $entries = $directoryManager->listByForm($directorySearchRequest);
         }
         $format = $form['format']->getData();
 

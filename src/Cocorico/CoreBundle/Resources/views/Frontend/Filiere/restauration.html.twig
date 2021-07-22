@@ -1,0 +1,97 @@
+{% extends '::base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block main %}
+            <div id="fil-resto" class="fil-page">
+            <div class="r1 row">
+                <div class="c1 col-sm-7">
+                    <h2>Restaurants, trouvez des renforts du personnel</h2>
+                    <div class="txt-med">
+                        Il y a en France plus de 6000 personnes en insertion qui sont accompagnées chaque année sur
+                        les métiers de la restauration et sont mobilisables par les employeurs.
+                    </div>
+                </div>
+                <div class="c1 col-sm-1">
+                </div>
+                <div class="c2 col-sm-4">
+                    <div>Entreprise sociale inclusive, complétez votre fiche entreprise pour être
+                        encore plus visible</div>
+                    <div>
+                        <a href="/fr/inscription" class="btn btn-default" style="width:100%">
+                            Je m'inscris
+                            <img src="{{ asset('svg/out-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="r2 row">
+                <div class="c1 col-sm-6">
+                    <div class="focus">Focus sur</div>
+                    <h3>La proposition du gouvernement</h3>
+                    <hr class="bloublou" />
+                    <div>
+                        <b>Le Gouvernement renforce son soutien financier pour favoriser le recrutement de salariés en insertion dans les métiers de la restauration.</b>
+                    </div>
+                    <br />
+                    <div> Ainsi, à compter du <b>1er juillet et jusqu’au 30 septembre 2021</b>, l’Etat apportera <b>un soutien
+                    financier de 1,5 euro supplémentaires pour chaque heure effectuée par un salarié en structure d’insertion</b>
+                        disposant d’une expérience sur les métiers de la restauration et <b>mis à disposition par des</b>
+                    <a href="https://travail-emploi.gouv.fr/emploi/insertion-activite-economique/article/associations-intermediaires-ai">
+                    associations intermédiaires (AI)</a> ou par des entreprises de travail
+                    <a href="https://travail-emploi.gouv.fr/emploi/insertion-activite-economique/article/entreprises-de-travail-temporaire-d-insertion-etti">
+                        temporaire d’insertion (ETTI).</a>
+                    </div>
+                </div>
+                <div class="c2 col-sm-6" style="overflow:hidden">
+                    <img src="{{ asset('images/restauration_1.png') }}" alt="restauration" class="hidden-xs" style="";>
+                </div>
+            </div>
+
+
+            <div class="r3 row">
+                <div class="c1 col-sm-4">
+                    <img src="{{ asset('images/filiere_map.png') }}" alt="restauration" class="hidden-xs" style="";>
+                </div>
+                <div class="c2 col-sm-8">
+                    <h2>Mise à disposition  de personnel pour  les restaurants !</h2>
+                    <hr class="bloublou" />
+                    <div class="">A travers le pays, de nombreuses expériences locales illustrent combien les relations nouées entre les structures
+                    d’insertion et les restaurants participent utilement à la relance par l’inclusion :
+                    </div>
+                    <ul class="mt-3">
+                        <li><a href="https://latabledecana.com/">Le réseau de restaurants d’insertion «la Table de Canal»</a>, présent dans 10 villes et en relation avec plusieurs dizaines de restaurants.</li>
+                        <li><a href="http://www.grafie.org/">Le Grafie</a> (groupement francilien de structures d’insertion) ayant organisé une collaboration avec Hippopotamus</li>
+                        <li><a href="https://www.resto-passerelle.org/">Resto-passerelle</a> : un groupement d’une vingtaine de structures d’insertion de Paris, Seine Saint Denis et Val de Marne (soit 350 salariés en insertion) </li>
+                    </ul>
+                    <div><b>Grâce au marché, trouver du personnel qualifié. Retrouvez la liste des structures qui mettent à disposition du personnel
+                    ( AI &amp; ETTI )</b>
+                    </div>
+                    <div>
+                        <a id="filiere_restauration_siae"
+                           href="/fr/repertoire/siae?sector%5B%5D=111&address=&structureType%5B%5D=4&structureType%5B%5D=7&prestaType=&lat=&lng=&country=&area=&department=&city=&region=&postalCode=&zip=&addressType=&serialSectors="
+                           class="btn btn-default"
+                           style="margin-top:1rem">
+                        Accéder aux résultats
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

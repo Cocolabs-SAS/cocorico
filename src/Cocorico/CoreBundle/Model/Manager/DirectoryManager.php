@@ -424,9 +424,5 @@ class DirectoryManager extends BaseManager
         return $directory;
     }
 
-
-
-
-
 }
 ?>

@@ -64,6 +64,7 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
         --build-arg SMTP_PASSWORD="SMTP_PASS" \
         --build-arg SMTP_PORT="25" \
         --build-arg SMTP_USER="SMTP_USER" \
+
 && docker run --rm -it \
         -p 9090:80 \
         --network cocorico \
@@ -74,8 +75,8 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
         cocorico_local
 ```
 
-Le docker démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
 
+Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
 ```
 # Mise en place premier lancement
 > ./setup

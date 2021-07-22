@@ -27,7 +27,7 @@ class DirectorySearchRequest
     protected $sectors;
     protected $serialSectors;
     protected $format;
-    protected $structureType;
+    protected $structureType = null;
     protected $prestaType;
     protected $withAntenna = true;
     protected $withRange;
@@ -88,7 +88,7 @@ class DirectorySearchRequest
         }
 
         $structureType = $this->request->query->get("structureType");
-        if ($structureType) {
+        if (is_array($structureType)) {
             $this->structureType = $structureType;
         }
 

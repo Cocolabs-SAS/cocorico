@@ -9,11 +9,19 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+
 ### [6.0] - (2021-07-X)
 - Intégration du thème ITOU
 - Utilisation d'un docker compose complet
 - Optimisation dockerfile (unique)
 - Migration dockerfile vers debian-bullseye (erreur ARM)
+
+### [5.5] - (2021-07-22)
+- Ajout page filière restauration
+
+### [5.4] - (2021-07-20)
+- Correctif formulaire recherche SIAE
+- Quickfix téléchargement CSV
 
 ### [5.3] - (2021-07-15)
 - Multiselection type de structure
