@@ -313,7 +313,7 @@
 
         {% block modal %}
             {# {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %} #}
-            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true"
+            <div class="modal fade modal-siae" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                  data-keyboard="false" style="z-index:3000">
                 <div class="modal-dialog">
                     <div class="modal-content ">
@@ -326,7 +326,7 @@
                             <strong class="title">
                             Plus de {{ entries.count }} prestataires inclusifs répondent à votre recherche.
                             </strong>
-                            <p>Pour accéder aux résultats, dites-nous si vous êtes :
+                            <p class="mt-2">Pour accéder aux résultats, dites-nous si vous êtes :
                             <ul>
                                 <li><a href="#" data-usr="buyer">Je suis une entreprise ou une institution qui souhaite augmenter ses achats inclusifs</a></li>
                                 <li><a href="#" data-usr="siae">Je suis une structure d’insertion ou du handicap</a></li>
@@ -365,13 +365,6 @@
     #}
 
     <script>
-        var modalMessage = `
-        Plus de « nb de résultats » prestataires inclusifs répondent à votre recherche.
-    Pour accéder aux résultats, dites-nous si vous êtes :
-        - Je suis une entreprise ou une institution qui souhaite augmenter ses achats inclusifs
-        - Je suis une structure d’insertion ou du handicap
-        - Je suis un acteur de l’inclusion (facilitateurs, réseaux...)
-        `;
         document.addEventListener("DOMContentLoaded", function(){
             $(document).on('shown.bs.modal', '.modal', function () {
                 $('.modal-backdrop').before($(this));
@@ -384,17 +377,11 @@
                     setMarkersFunc($("span#data-markers").data("markers"));
                     refreshMapFunc(false, '{{ request.lat }}', '{{ request.lng }}');
                 }, 1000)
-                // setMarkersFunc($("span#data-markers").data("markers"));
-                // Set default favourites in the listing
-                // common.application.setDefaultFavourites();
             {% endif %}
 
-            var isBuyer = () => track('', steps.META, {'type':'buyer'} );
-            var isSIAE = () => track('', steps.META, {'type':'siae'} );
-            var isActor = () => track('', steps.META, {'type':'actor'} );
-
-            //if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
-            if (true) {
+            // For testing: 
+            // if (true) {
+            if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
                 document.cookie = "leMarcheTypeUsager=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure";
 
                 var modal = $("#modal");
@@ -402,8 +389,13 @@
                  modal.modal('show');
 
                 modal.on('click', (e) => {
-                    let type = e.data('usr');
-                    console.log('click on ', e , 'user:', usr);
+                    let type = $(e.target).data('usr');
+
+                    if (typeof track === "function") {
+                        track('', steps.META, {'type': type});
+                    }
+
+                    modal.modal('hide');
                 })
             }
         });
