@@ -34,7 +34,7 @@
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
                         <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
                     </a>
-                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':''} only %}
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':'dropdown-menu'} only %}
                 </li>
             {%- else -%}
                 <li>
@@ -47,7 +47,7 @@
             {# New listing link #}
             {% if app.session.get('canPublish') %}
                 <li>
-                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-outline-primary" tabindex="9" rel="noopener">
+                    <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary" tabindex="9" rel="noopener">
                         <span>{{ 'nav.listing.new.link'|trans }}</span>
                     </a>
                 </li>
@@ -87,7 +87,7 @@
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
                         <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
                     </a>
-                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':'position-static d-block'} only %}
+                    {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':''} only %}
                 </li>
             {%- else -%}
                 <li>
