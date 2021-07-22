@@ -9,8 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
-### [5.5] - (2021-07-20)
+### [5.5] - (2021-07-22)
 - Ajout page filière restauration
+- Ajout modale type utilisateur
 
 ### [5.4] - (2021-07-20)
 - Correctif formulaire recherche SIAE

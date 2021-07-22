@@ -310,6 +310,34 @@
                 {{ form_end(dlform) }}
             </div>
         {% endblock %}
+
+        {% block modal %}
+            {# {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %} #}
+            <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true"
+                 data-keyboard="false" style="z-index:3000">
+                <div class="modal-dialog">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body home-content-body">
+                            <strong class="title">
+                            Plus de {{ entries.count }} prestataires inclusifs répondent à votre recherche.
+                            </strong>
+                            <p>Pour accéder aux résultats, dites-nous si vous êtes :
+                            <ul>
+                                <li><a href="#" data-usr="buyer">Je suis une entreprise ou une institution qui souhaite augmenter ses achats inclusifs</a></li>
+                                <li><a href="#" data-usr="siae">Je suis une structure d’insertion ou du handicap</a></li>
+                                <li><a href="#" data-usr="actor">Je suis un acteur de l’inclusion (facilitateurs, réseaux...)</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     {% endembed %}
 {% endblock %}
 
@@ -335,8 +363,20 @@
     'extend_search': ''
     } only %}
     #}
+
     <script>
+        var modalMessage = `
+        Plus de « nb de résultats » prestataires inclusifs répondent à votre recherche.
+    Pour accéder aux résultats, dites-nous si vous êtes :
+        - Je suis une entreprise ou une institution qui souhaite augmenter ses achats inclusifs
+        - Je suis une structure d’insertion ou du handicap
+        - Je suis un acteur de l’inclusion (facilitateurs, réseaux...)
+        `;
         document.addEventListener("DOMContentLoaded", function(){
+            $(document).on('shown.bs.modal', '.modal', function () {
+                $('.modal-backdrop').before($(this));
+            });
+
             //Set listings markers on load
             {%- if not entries is empty -%}
                 //Set listings markers on load through data-markers attribute
@@ -348,6 +388,24 @@
                 // Set default favourites in the listing
                 // common.application.setDefaultFavourites();
             {% endif %}
+
+            var isBuyer = () => track('', steps.META, {'type':'buyer'} );
+            var isSIAE = () => track('', steps.META, {'type':'siae'} );
+            var isActor = () => track('', steps.META, {'type':'actor'} );
+
+            //if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
+            if (true) {
+                document.cookie = "leMarcheTypeUsager=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure";
+
+                var modal = $("#modal");
+                modal.find('.close').remove();
+                 modal.modal('show');
+
+                modal.on('click', (e) => {
+                    let type = e.data('usr');
+                    console.log('click on ', e , 'user:', usr);
+                })
+            }
         });
     </script>
  
