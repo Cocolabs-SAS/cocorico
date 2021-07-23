@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <title>
+        {%- block meta_title -%}
+            {{ app.request.requestUri|slice(4)|replace({'/': " > ", '-': " ", '_': " "})|ucwords ~ " - " ~ cocorico_site_name }}
+        {%- endblock -%}
+    </title>
+    <meta charset="utf-8" />
+    <meta name="description" content="{%- block meta_description -%}{{ cocorico_short_description }}{%- endblock -%}">
+
+    {% block open_graph_data -%}
+        <meta property="og:image" content="{{ asset('facebook.png') }}"/>
+    {%- endblock %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#FE5455">
+    <meta name="theme-color" content="#ffffff">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('itou_common') }}
+    {% endblock %}
+
+    {# Safely using .ready() before including jQuery #}
+    <script>
+        (function (w, d, u) {
+            w.readyQ = [];
+            w.bindReadyQ = [];
+
+            function p(x, y) {
+                if (x == "ready") {
+                    w.bindReadyQ.push(y);
+                } else {
+                    w.readyQ.push(x);
+                }
+            }
+
+            var a = {ready: p, bind: p};
+            w.$ = w.jQuery = function (f) {
+                if (f === d || f === u) {
+                    return a
+                } else {
+                    p(f)
+                }
+            }
+        })(window, document);
+    </script>
+
+    {% include '@CocoricoCore/Frontend/Common/js/_google_analytics_js.html.twig' only %}
+    {% include '@CocoricoCore/Frontend/Common/js/_matomo_analytics_js.html.twig' only %}
+    {% include '@CocoricoCore/Frontend/Common/js/_hotjar_analytics_js.html.twig' only %}
+    {% include '@CocoricoCore/Frontend/Common/js/_itou_tracker_js.html.twig' only %}
+    {% include '@CocoricoCore/Frontend/Common/js/_tarteaucitron_js.html.twig' only %}
+
+    {#Rich snippets used by search engines like google  #}
+    {%- block markup_jsonld -%}
+        {% include 'CocoricoSeoBundle:Frontend:Common/_markup.jsonld.twig' ignore missing only %}
+    {%- endblock -%}
+
+    {% include '@CocoricoCore/Frontend/Common/_cookie_consent_js.html.twig' only %}
+</head>
+
+<body id="top" class="loading {% block theme %}{% endblock %}">
+<!-- allow a user to go to the main content of the page -->
+<noscript>Javascript must be enabled for the correct page display</noscript>
+
+{% include '@CocoricoCore/Frontend/Common/js/_google_tag_manager_js.html.twig' only %}
+
+<div class="sr-only">
+    <a tabindex="1" href="#main">skip to content</a>
+</div>
+
+{% block layout %}{% endblock %}
+
+
+<!-- allow a user to go to the top of the page -->
+<div class="sr-only">
+    <a href="#header">back to top</a>
+</div>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('itou_common') }}
+
+    <script>
+        //Global Javascript variables
+        var locale = '{{ app.request.locale }}';
+        var locales = {{ locales|json_encode|raw }};
+        var defaultCurrency = '{{ defaultCurrency }}';
+        var currentCurrency = '{{ currentCurrency }}';
+        //Does the app is in day mode or time mode
+        var timeUnitIsDay = {{ timeUnitIsDay ? 'true' : 'false' }};
+        var timeUnitAllDay = {{ timeUnitAllDay ? 'true' : 'false' }};
+        var endDayIncluded = {{ endDayIncluded ? 'true' : 'false' }};
+        var isAuthenticated = {{ app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") ? 'true' : 'false' }};
+        var hoursAvailable = {{ timeHoursAvailable|json_encode|raw }};
+        var sessId = '{{ app.session.get('uuid') }}';
+        var isAdmin = {{ app.session.get('isAdmin') ? 'true' : 'false'}};
+        var uType = '{{ app.session.get('userType') }}';
+    </script>
+
+
+    {#Safely using .ready() before including jQuery #}
+    <!--
+    <script>
+        (function ($, d) {
+            $.each(readyQ, function (i, f) {
+                $(f)
+            });
+            $.each(bindReadyQ, function (i, f) {
+                $(d).bind("ready", f)
+            })
+        })(jQuery, document)
+    </script>
+    -->
+
+    </body>
+
+    <script type="text/javascript">
+        $(function () {
+            if (isAuthenticated) {
+                //Unread messages
+                //Deactivated !
+                //common.application.getNbUnReadMessages("{{ path('cocorico_dashboard_message_nb_unread') }}");
+            }
+            //Handle Ajax Unauthorised access
+            common.application.handleUnauthorisedAjaxAccess("{{ path("cocorico_user_login") }}");
+        });
+    </script>
+{% endblock %}
+
+</body>
+</html>

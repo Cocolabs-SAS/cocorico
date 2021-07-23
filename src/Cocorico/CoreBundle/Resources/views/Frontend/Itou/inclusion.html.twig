@@ -1,4 +1,4 @@
-{% extends '::bs4_base.html.twig' %}
+{% extends '::itou_base.html.twig' %}
 {# This page uses bootstrap 4 #}
 
 {%- block meta_title -%}
@@ -9,23 +9,23 @@
     {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
 {%- endblock -%}
 
-{% block theme %}bs4-page{% endblock %}
+{% block theme %}itou-page{% endblock %}
 
 {% block layout %}
-    {% embed '@CocoricoCore/Frontend/bs4_layout.html.twig' %}
+    {% embed '@CocoricoCore/Frontend/itou_layout.html.twig' %}
 
         {% trans_default_domain 'cocorico_home' %}
 
         {% block main %}
                   
-        <section class="s-inclusion-01">
-          <div class="s-inclusion-01__container container">
-            <div class="s-inclusion-01__row row align-items-center">
-                <div class="s-inclusion-01__col s-inclusion-01__col--title col-12 col-lg-5">
-                  <h1><strong>Les <br class="d-none d-lg-inline">thématiques<br class="d-none d-lg-inline"> abordées</strong></h1>
-                </div>
-              <div class="s-inclusion-01__col s-inclusion-01__col--grid col-12 col-lg-7">
-                <ul>
+          <section class="s-page-menu-01 s-page-menu-01--marche">
+            <div class="s-page-menu-01__container container">
+              <div class="s-page-menu-01__row row align-items-center">
+                  <div class="s-page-menu-01__col s-page-menu-01__col--title col-12 col-lg-5">
+                    <h1 class="h1"><strong>Les <br class="d-none d-lg-inline">thématiques<br class="d-none d-lg-inline"> abordées</strong></h1>
+                  </div>
+                <div class="s-page-menu-01__col s-page-menu-01__col--grid col-12 col-lg-7">
+                  <ul>
                     <li><a href="#definition">Définition</a><img src="/images/inclusion-01-picto-01.svg" class="ml-2" alt=""></li>
                     <li><a href="#avantages">Les avantages de l’achat inclusif</a></li>
                     <li><a href="#faq">Les questions fréquentes</a><img src="/images/inclusion-01-picto-04.svg" class="ml-2" alt=""></li>
@@ -34,422 +34,456 @@
                     <li><a href="#clauses">Les clauses sociales</a><img src="/images/inclusion-01-picto-02.svg" class="ml-2" alt=""></li>
                     <li><a href="#rse">RSE</a><img src="/images/inclusion-01-picto-02.svg" class="ml-2" alt=""></li>
                     <li><a href="#agefiph">AGEFIPH</a><img src="/images/inclusion-01-picto-02.svg" class="ml-2" alt=""></li>
-                </ul>
-              </div>                            
-            </div>
-          </div>
-        </section>
-
-        <section class="s-inclusion-02" id="definition">
-          <div class="s-inclusion-02__container container">
-            <div class="s-inclusion-02__row row">
-                <div class="s-inclusion-02__col s-inclusion-02__col--title col-12">
-                  <h3><strong>L'inclusion dans l'emploi, qu’est-ce que c’est ?</strong></h3>
+                  </ul>
                 </div>
-            </div>
-            <div class="s-inclusion-02__row row">
-              <div class="s-inclusion-02__col s-inclusion-02__col--figure col-12 col-lg-4">
-                <figure>
-                  <img src="/images/inclusion-02-visuel-01.jpg" class="img-fluid img-cover" alt="">
-                </figure>
-              </div>            
-              <div class="s-inclusion-02__col s-inclusion-02__col--article col-12 col-lg-4">
-                <article>
-                  <p>Aujourd'hui, plus de deux millions de personnes sont en situation d'exclusion. Pourtant elles souhaitent travailler, mais pour différentes raisons elles ne retrouvent plus le chemin de l'emploi (âge, santé, mobilité, origine, qualification, interruption de carrière, etc).</p>
-                  <p>L'inclusion dans l'emploi, c'est agir pour que ces personnes retrouvent espoir, résolvent leurs difficultés, décrochent à nouveau un travail, touchent un salaire et se projettent durablement dans la vie active.</p>   
-                </article>
               </div>
-              <div class="s-inclusion-02__col s-inclusion-02__col--card col-12 col-lg-4">
-                <div class="d-flex flex-column justify-content-between h-100 w-100">
-                    <div>
-                        <h5>Des collaborations inspirantes à découvrir.</h5>
+            </div>
+          </section>
+
+          <section class="s-inclusion-01" id="definition">
+            <div class="s-inclusion-01__container container">
+              <div class="s-inclusion-01__row row">
+                  <div class="s-inclusion-01__col s-inclusion-01__col--title col-12">
+                    <h3 class="h2 mb-3 mb-lg-5"><strong>L'inclusion dans l'emploi, qu’est-ce que c’est ?</strong></h3>
+                  </div>
+              </div>
+              <div class="s-inclusion-01__row row">
+                <div class="s-inclusion-01__col s-inclusion-01__col--figure col-12 col-lg-4">
+                  <figure class="mb-3 mb-lg-0">
+                    <img src="/images/inclusion-02-visuel-01.jpg" class="img-fluid img-fitcover" alt="">
+                  </figure>
+                </div>            
+                <div class="s-inclusion-01__col s-inclusion-01__col--article w-100 col-12 col-lg-4">
+                  <article>
+                    <p>Aujourd'hui, plus de deux millions de personnes sont en situation d'exclusion. Pourtant elles souhaitent travailler, mais pour différentes raisons elles ne retrouvent plus le chemin de l'emploi (âge, santé, mobilité, origine, qualification, interruption de carrière, etc).</p>
+                    <p>L'inclusion dans l'emploi, c'est agir pour que ces personnes retrouvent espoir, résolvent leurs difficultés, décrochent à nouveau un travail, touchent un salaire et se projettent durablement dans la vie active.</p>   
+                  </article>
+                </div>
+                <div class="s-inclusion-01__col s-inclusion-01__col--card col-12 col-lg-4">
+                  <div class="d-flex flex-column justify-content-between h-100 w-100 p-5 pt-3 shadow-lg rounded-lg bg-white position-relative">
+                      <div>
+                        <h5 class="h3 mb-3 mb-lg-5">Des collaborations inspirantes à découvrir.</h5>
                         <p>Aujourd'hui, des entreprises ont déjà  franchis le pas de travailler avec le secteur inclusif . Des exemples de  belles collaborations</p>
+                      </div>
+                      <p class="s-inclusion-01__col__cta">
+                          <a href="https://campus-inclusion.fr/bibliin/" target="_blank" rel="noopener" class="btn btn-lg btn-block btn-primary btn-ico">
+                            <span>Je découvre</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                                <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                            </svg>
+                          </a>
+                      </p>
+                  </div>
+                </div>                  
+              </div>
+            </div>
+          </section>
+
+          <section class="s-cards-grid-01" id="avantages">
+            <div class="s-cards-grid-01__container container">
+              <div class="s-cards-grid-01__row row">
+                  <div class="s-cards-grid-01__col s-cards-grid-01__col--title col-12">
+                    <h3 class="h2 mb-3 mb-lg-5"><strong>Quels sont les avantages à travailler avec les structures inclusives ?</strong></h3>
+                  </div>
+              </div>
+              <div class="s-cards-grid-01__row row row-cols-1 row-cols-md-2 row-cols-lg-3">
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-01.svg" height="80" alt="">
                     </div>
-                    <p class="s-inclusion-02__col__cta">
-                        <a href="https://campus-inclusion.fr/bibliin/" target="_blank" rel="noopener" class="btn btn-lg btn-block btn-primary btn-ico">
-                          <span>Je découvre</span>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                              <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                          </svg>
-                        </a>
+                    <div class="card-body mb-3">
+                      <p>Prestations de qualité et de proximité pour contribuer à la dynamique de votre territoire</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-02.svg" height="80" alt="">
+                    </div>
+                    <div class="card-body mb-3">
+                      <p>Collaboration avec près de 5000 structures qui interviennent sur des secteurs innovants (écoconstruction, valorisation des déchets, restauration circuits courts, conciergerie...)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-03.svg" height="80" alt="">
+                    </div>
+                    <div class="card-body mb-3">
+                      <p>Solution RH souple et réactive pour vos métiers en tension, vos hausses d’activité, vos démarches de recrutement ou de sous-traitance.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-04.svg" height="80" alt="">
+                    </div>
+                    <div class="card-body mb-3">
+                      <p>Savoir-faire spécifique en matière de clauses sociales pour assurer vos appels d’offres publics et optimiser vos chances</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-05.svg" height="80" alt="">
+                    </div>
+                    <div class="card-body mb-3">
+                      <p>Soutien de l’emploi en situation de handicap  tout en réduisant vos contributions Agefiph/Fiphfp</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="s-cards-grid-01__col col mb-3 mb-md-5">
+                  <div class="card c-card c-card--marche h-100 w-100">
+                    <div class="card-header text-center">
+                      <img src="/images/inclusion-03-picto-06.svg" height="80" alt="">
+                    </div>
+                    <div class="card-body mb-3">
+                      <p>Incarnation de votre démarche RSE et valorisation de votre image via des achats responsables, à impact positif</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="s-inclusion-02" id="faq">
+            <div class="s-inclusion-02__container container">
+              <div class="s-inclusion-02__row row">
+                <div class="s-inclusion-02__col s-inclusion-02__col--title col-12 col-lg-4">
+                  <div class="position-relative d-flex align-items-center h-100 p-3 pl-xl-0 bg-marche-lighter">
+                    <h2 class="h1"><strong>Les questions fréquentes</strong></h2>
+                  </div>
+                </div>                  
+                <div class="s-inclusion-02__col s-inclusion-02__col--article col-12 col-lg-4">
+                  <article class="mb-5">
+                    <h5 class="h3 mb-3 mb-lg-5"><strong>Par qui être accompagné lorsqu’on débute ses achats ?</strong></h5>
+                    <p>En fonction de vos besoins, différentes structures sont là pour vous aider. Retrouvez bientôt ces acteurs sur le marché de l'inclusion.</p>
+                  </article>
+                  <article class="mb-5">
+                    <h5 class="h3 mb-3 mb-lg-5"><strong>Qu’est ce que la loi OETH ?</strong></h5>
+                    <p>Les SIAE recrutent des personnes en difficulté d’insertion sociale et professionnelle. Ces personnes employées sont très encadrées par leur structure , ce qui permet de délivrer des prestations de même qualité que les entreprises classiques.</p>
+                  </article>
+                  <article class="mb-5">
+                    <h5 class="h3 mb-3 mb-lg-5"><strong>Quelle différence avec l’ESS ?</strong></h5>
+                    <p>L'économie sociale et solidaire désigne un ensemble d'entreprises organisées sous forme de coopératives, mutuelles, associations, ou fondations, dont le fonctionnement interne et les activités sont fondés sur un principe de solidarité et d'utilité sociale (hébergement, action sociale, économie circulaire...). L’IAE et le secteur du handicap font bien partie de l'Économie Sociale et Solidaire (ESS).  Ils ont une place à part en raison de leur relation étroite avec les politiques publiques de l'emploi, de leurs modèles économiques et de leur place dans le tissu économique et social. </p>
+                    <p>
+                      <a href="https://ess-france.org/fr/ressources/decouvrez-les-infographies-de-latlas-national-de-less" target="_blank" class="text-decoration-none">
+                        <strong>Pour plus d’information sur l’ESS</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
                     </p>
-                </div>
-              </div>                  
-            </div>
-          </div>
-        </section>
-
-        <section class="s-inclusion-03" id="avantages">
-          <div class="s-inclusion-03__container container">
-            <div class="s-inclusion-03__row row">
-                <div class="s-inclusion-03__col s-inclusion-03__col--title col-12">
-                  <h3><strong>Quels sont les avantages à travailler avec les structures inclusives ?</strong></h3>
-                </div>
-            </div>
-            <div class="s-inclusion-03__row row">
-              <div class="s-inclusion-03__col s-inclusion-03__col--grid col-12">
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-01.svg" alt=""></span>
-                    <p>Prestations de qualité et de proximité pour contribuer à la dynamique de votre territoire</p>
-                </div>
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-02.svg" alt=""></span>
-                    <p>Collaboration avec près de 5000 structures qui interviennent sur des secteurs innovants (écoconstruction, valorisation des déchets, restauration circuits courts, conciergerie...)</p>
-                </div>
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-03.svg" alt=""></span>
-                    <p>Solution RH souple et réactive pour vos métiers en tension, vos hausses d’activité, vos démarches de recrutement ou de sous-traitance.</p>
-                </div>
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-04.svg" alt=""></span>
-                    <p>Savoir-faire spécifique en matière de clauses sociales pour assurer vos appels d’offres publics et optimiser vos chances</p>
-                </div>
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-05.svg" alt=""></span>
-                    <p>Soutien de l’emploi en situation de handicap  tout en réduisant vos contributions Agefiph/Fiphfp</p>
-                </div>
-                <div class="h-100 w-100">
-                    <span class="s-inclusion-03__picto"><img src="/images/inclusion-03-picto-06.svg" alt=""></span>
-                    <p>Incarnation de votre démarche RSE et valorisation de votre image via des achats responsables, à impact positif</p>
-                </div>
-              </div>                  
-            </div>
-          </div>
-        </section>
-
-        <section class="s-inclusion-04" id="faq">
-          <div class="s-inclusion-04__container container">
-            <div class="s-inclusion-04__row row">
-              <div class="s-inclusion-04__col s-inclusion-04__col--title col-12 col-lg-4">
-                <div>
-                  <h2><strong>Les questions fréquentes</strong></h2>
-                </div>
-              </div>                  
-              <div class="s-inclusion-04__col s-inclusion-04__col--article col-12 col-lg-4">
-                <article>
-                  <h5><strong>Par qui être accompagné lorsqu’on débute ses achats ?</strong></h5>
-                  <p>En fonction de vos besoins, différentes structures sont là pour vous aider. Retrouvez bientôt ces acteurs sur le marché de l'inclusion.</p>
-                </article>
-                <article>
-                  <h5><strong>Qu’est ce que la loi OETH ?</strong></h5>
-                  <p>Les SIAE recrutent des personnes en difficulté d’insertion sociale et professionnelle. Ces personnes employées sont très encadrées par leur structure , ce qui permet de délivrer des prestations de même qualité que les entreprises classiques.</p>
-                </article>
-                <article>
-                  <h5><strong>Quelle différence avec l’ESS ?</strong></h5>
-                  <p>L'économie sociale et solidaire désigne un ensemble d'entreprises organisées sous forme de coopératives, mutuelles, associations, ou fondations, dont le fonctionnement interne et les activités sont fondés sur un principe de solidarité et d'utilité sociale (hébergement, action sociale, économie circulaire...). L’IAE et le secteur du handicap font bien partie de l'Économie Sociale et Solidaire (ESS).  Ils ont une place à part en raison de leur relation étroite avec les politiques publiques de l'emploi, de leurs modèles économiques et de leur place dans le tissu économique et social. </p>
-                  <p>
-                    <a href="https://ess-france.org/fr/ressources/decouvrez-les-infographies-de-latlas-national-de-less" target="_blank">
-                      <strong>Pour plus d’information sur l’ESS</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                  </article>
+                </div>                  
+                <div class="s-inclusion-02__col l s-inclusion-02__col--article col-12 col-lg-4">
+                  <article class="mb-5">
+                    <h5 class="h3 mb-3 mb-lg-5"><strong>Comment fonctionne la contribution agefiph ?</strong></h5>
+                    <p>L'article L5212-2 du Code du Travail prévoit que tout employeur doit employer, dans la proportion de 6 % de l'effectif total de ses salariés, des personnes en situation de handicap. Une entreprise concernée par l’obligation d’emploi peut s'en acquitter en sous-traitant auprès du secteur adapté, du secteur protégé ou auprès de travailleurs handicapés indépendants.</p>
+                    <p>
+                      <a href="https://www.unea.fr/lobligation-demploi-de-travailleurs-handicapes" target="_blank" class="text-decoration-none">
+                        <strong>Pour plus d’information sur l’agefiph</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
                           <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>
-                </article>
-              </div>                  
-              <div class="s-inclusion-04__col l s-inclusion-04__col--article col-12 col-lg-4">
-                <article>
-                  <h5><strong>Comment fonctionne la contribution agefiph ?</strong></h5>
-                  <p>L'article L5212-2 du Code du Travail prévoit que tout employeur doit employer, dans la proportion de 6 % de l'effectif total de ses salariés, des personnes en situation de handicap. Une entreprise concernée par l’obligation d’emploi peut s'en acquitter en sous-traitant auprès du secteur adapté, du secteur protégé ou auprès de travailleurs handicapés indépendants.</p>
-                  <p>
-                    <a href="https://www.unea.fr/lobligation-demploi-de-travailleurs-handicapes" target="_blank">
-                      <strong>Pour plus d’information sur l’agefiph</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                        <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>
-                </article>
-                <article>
-                  <h5><strong>Est-ce différent de travailler avec un prestataire classique ou inclusif ?</strong></h5>
-                  <p>Si votre entreprise atteint ou dépasse l’effectif de 20 salariés, vous devez compter au minimum 6% de personnes handicapées dans votre effectif. Pour répondre à cette obligation, vous pouvez notamment sous-traiter avec le secteur protégé (ESAT) ou adapté (EA).</p>
-                  <p>
-                    <a href="https://www.oeth.org/" target="_blank">
-                      <strong>Pour plus d’information sur l’OETH</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                        <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>                  
-                </article>                                
-              </div>                  
+                        </svg>
+                      </a>
+                    </p>
+                  </article>
+                  <article class="mb-5">
+                    <h5 class="h3 mb-3 mb-lg-5"><strong>Est-ce différent de travailler avec un prestataire classique ou inclusif ?</strong></h5>
+                    <p>Si votre entreprise atteint ou dépasse l’effectif de 20 salariés, vous devez compter au minimum 6% de personnes handicapées dans votre effectif. Pour répondre à cette obligation, vous pouvez notamment sous-traiter avec le secteur protégé (ESAT) ou adapté (EA).</p>
+                    <p>
+                      <a href="https://www.oeth.org/" target="_blank" class="text-decoration-none">
+                        <strong>Pour plus d’information sur l’OETH</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
+                    </p>                  
+                  </article>                                
+                </div>                  
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="s-inclusion-05" id="acteurs">
-          <div class="s-inclusion-05__container container">
-            <div class="s-inclusion-05__row row">
-                <div class="s-inclusion-05__col s-inclusion-05__col--title col-12">
-                  <h3><strong>Les acteurs de l’inclusion dans l’emploi</strong></h3>
+          <section class="s-articles-cols-01 s-articles-cols-01--marche" id="acteurs">
+            <div class="s-articles-cols-01__container container">
+              <div class="s-articles-cols-01__row row">
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--title col-12">
+                  <h3 class="h2"><strong>Les acteurs de l’inclusion dans l’emploi</strong></h3>
                 </div>
+              </div>
+              <div class="s-articles-cols-01__row row">
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h5 class="h3"><strong>Les réseaux de L’IAE</strong></h5>
+                    <p>Les réseaux de l’Insertion par l’Activité Economique sont des unions de structures qui défendent les intérêts de leurs adhérents et qui les accompagnent sur plusieurs missions : </p>
+                    <ul>
+                      <li>L’animation du réseau de l’Insertion par l’Activité Economique</li>
+                      <li>Mise en valeur des Structures de l’Insertion par l’Activité Économique et de promotion des valeurs de l'Économie Sociale et Solidaire.</li>
+                      <li>Intermédiation avec les acheteurs et articulation avec les facilitateurs</li>
+                      <li>Création de groupement de prestataires (co-traitance)</li>
+                    </ul>
+                    <p>Chaque réseau a ses propres spécificités mais se rejoignent autour d’ambitions communes :</p>
+                    <ul>
+                      <li>Valoriser les initiatives existantes</li>
+                      <li>Capitaliser les savoir-faire des adhérents, partenaires et réseaux</li>
+                      <li>Respecter les valeurs de l'Économie Sociale et Solidaire en plaçant les hommes et les femmes au coeur de l’économie : la personne et l’objet social priment sur le capital.</li>
+                    </ul>
+                  </article>
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h5 class="h3"><strong>Les facilitateurs</strong></h5>
+                    <p>Le facilitateur offre un appui pour mettre en oeuvre des clauses sociales dans la commande publique. Il vise à développer l’insertion des personnes éloignées de l’emploi en s’assurant auprès des entreprises qu’elles en recrutent un pourcentage afin de répondre aux besoins des marchés publics. Crée en 2007, cette fonction est exercée par plus de 300 professionnels.</p>
+                    <p>
+                      <a href="https://docs.google.com/presentation/d/e/2PACX-1vRd5lfQWHNEiUNw8yQqBfBnkGyaud5g440IsBvZm9XLEuawQNOfG91MwBlP24Z66A/pub?start=false&loop=false&delayms=3000&slide=id.p1" target="_blank" class="text-decoration-none">
+                        <strong>Accéder à une documentation sur les facilitateurs</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
+                    </p>
+                  </article>
+                </div>
+              </div>
+              <div class="s-articles-cols-01__row row">
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h5 class="h3"><img src="/images/inclusion-logo-france-chance.svg" alt="France Chance" height="56"></h5>
+                    <p>La communauté Les entreprises s’engagent fédère partout en France les entreprises  qui œuvrent pour une société plus inclusive au sein de leurs territoires d’ancrage.</p>
+                    <p>
+                      <a href="https://lesentreprises-sengagent.fr" target="_blank" class="text-decoration-none">
+                        <strong>Accéder à la communauté Les entreprises s’engagent</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
+                    </p>                  
+                  </article>  
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h5 class="h3"><img src="/images/inclusion-logo-campus-inclusion.png" alt="Campus de l'inclusion"></h5>
+                    <p>Le Campus vous accompagne dans le développement de pratiques inclusives dans votre entreprise. Acheter / Recruter / Partager / Innover plus inclusif. Un programme résolument pragmatique de 6 mois, 4 rencontres, 1 plan d’action et 1 suivi individuel par un expert</p>
+                    <p>
+                      <a href="https://campus-inclusion.fr" target="_blank" class="text-decoration-none">
+                        <strong>Accéder au campus de l'inclusion</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>                
+                  </article>   
+                </div>
+              </div>
             </div>
-            <div class="s-inclusion-05__row row">
-              <div class="s-inclusion-05__col s-inclusion-05__col--article col-12 col-lg-6">
-                <article>
-                  <h5><strong>Les réseaux de L’IAE</strong></h5>
-                  <p>Les réseaux de l’Insertion par l’Activité Economique sont des unions de structures qui défendent les intérêts de leurs adhérents et qui les accompagnent sur plusieurs missions : </p>
-                  <ul>
-                    <li>L’animation du réseau de l’Insertion par l’Activité Economique</li>
-                    <li>Mise en valeur des Structures de l’Insertion par l’Activité Économique et de promotion des valeurs de l'Économie Sociale et Solidaire.</li>
-                    <li>Intermédiation avec les acheteurs et articulation avec les facilitateurs</li>
-                    <li>Création de groupement de prestataires (co-traitance)</li>
-                  </ul>
-                  <p>Chaque réseau a ses propres spécificités mais se rejoignent autour d’ambitions communes :</p>
-                  <ul>
-                    <li>Valoriser les initiatives existantes</li>
-                    <li>Capitaliser les savoir-faire des adhérents, partenaires et réseaux</li>
-                    <li>Respecter les valeurs de l'Économie Sociale et Solidaire en plaçant les hommes et les femmes au coeur de l’économie : la personne et l’objet social priment sur le capital.</li>
-                  </ul>
-                </article>
-              </div>                  
-              <div class="s-inclusion-05__col s-inclusion-05__col--article col-12 col-lg-6">
-                <article>
-                  <h5><strong>Les facilitateurs</strong></h5>
-                  <p>Le facilitateur offre un appui pour mettre en oeuvre des clauses sociales dans la commande publique. Il vise à développer l’insertion des personnes éloignées de l’emploi en s’assurant auprès des entreprises qu’elles en recrutent un pourcentage afin de répondre aux besoins des marchés publics. Crée en 2007, cette fonction est exercée par plus de 300 professionnels.</p>
-                  <p>
-                    <a href="https://docs.google.com/presentation/d/e/2PACX-1vRd5lfQWHNEiUNw8yQqBfBnkGyaud5g440IsBvZm9XLEuawQNOfG91MwBlP24Z66A/pub?start=false&loop=false&delayms=3000&slide=id.p1" target="_blank">
-                      <strong>Accéder à une documentation sur les facilitateurs</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>
-                </article>
-              </div>                  
-            </div>
-            <div class="s-inclusion-05__row row">
-              <div class="s-inclusion-05__col s-inclusion-05__col--article col-12 col-lg-6">
-                <article>
-                  <h5><img src="/images/inclusion-logo-france-chance.svg" alt="France Chance" height="56"></h5>
-                  <p>La communauté Les entreprises s’engagent fédère partout en France les entreprises  qui œuvrent pour une société plus inclusive au sein de leurs territoires d’ancrage.</p>
-                  <p>
-                    <a href="https://lesentreprises-sengagent.fr" target="_blank">
-                      <strong>Accéder à la communauté Les entreprises s’engagent</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>                  
-                </article>  
-              </div>                  
-              <div class="s-inclusion-05__col s-inclusion-05__col--article col-12 col-lg-6">
-                <article>
-                  <h5><img src="/images/inclusion-logo-campus-inclusion.png" alt="Campus de l'inclusion"></h5>
-                  <p>Le Campus vous accompagne dans le développement de pratiques inclusives dans votre entreprise. Acheter / Recruter / Partager / Innover plus inclusif. Un programme résolument pragmatique de 6 mois, 4 rencontres, 1 plan d’action et 1 suivi individuel par un expert</p>
-                  <p>
-                    <a href="https://campus-inclusion.fr" target="_blank">
-                      <strong>Accéder au campus de l'inclusion</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>                
-                </article>   
-              </div>                  
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="s-inclusion-06" id="structures">
-          <div class="s-inclusion-06__container container">
-            <div class="s-inclusion-06__row row">
-              <div class="s-inclusion-06__col s-inclusion-06__col--title col-12 col-lg-6">
-                <aside>
-                  <div>
-                    <h2><strong>Les différents types de structures de l’inclusion dans l’emploi</strong></h2>
-                    <h6>Accompagner, former, faire travailler des personnes qui en ont perdu l'habitude ne s'improvise pas. Heureusement une très grande communauté d'employeurs s’est spécialisée depuis de nombreuses années dans l'inclusion dans l'emploi ; ils sont les bons partenaires pour vous aider à démarrer et ont besoin de vous pour démultiplier leur impact social.</h6>
+          <section class="s-inclusion-03" id="structures">
+            <div class="s-inclusion-03__container container">
+              <div class="s-inclusion-03__row row">
+                <div class="s-inclusion-03__col s-inclusion-03__col--title col-12 col-lg-6">
+                  <aside class="position-relative d-flex align-items-center h-100 p-3 pl-xl-0 bg-marche">
+                    <div class="m-3 mb-lg-0">
+                      <h2 class="h1 text-white"><strong>Les différents types de structures de l’inclusion dans l’emploi</strong></h2>
+                      <h6 class="h3 text-white lh-base">Accompagner, former, faire travailler des personnes qui en ont perdu l'habitude ne s'improvise pas. Heureusement une très grande communauté d'employeurs s’est spécialisée depuis de nombreuses années dans l'inclusion dans l'emploi ; ils sont les bons partenaires pour vous aider à démarrer et ont besoin de vous pour démultiplier leur impact social.</h6>
+                    </div>
+                  </aside>
+                </div>                  
+                <div class="s-inclusion-03__col s-inclusion-03__col--article col-12 col-lg-6">
+                  <article class="m-3 mb-lg-5">
+                    <h3 class="h2"><strong>SIAE ou Structure d’Insertion par l’Activité Économique.</strong></h3>
+                    <p>L’IAE est un accompagnement dans l'emploi proposé par certaines structures à des personnes très éloignées de l'emploi pour faciliter leur insertion sociale et professionnelle.</p>
+                    <p>L'IAE s'adresse aux personnes particulièrement éloignées de l'emploi : Chômeurs de longue durée, personnes bénéficiaires des  minimas sociaux (RSA, ...), Jeunes de moins de 26 ans en grande difficulté, Travailleurs reconnus handicapés.</p>
+                    <p>
+                      <a href="https://www.service-public.fr/particuliers/vosdroits/F2284" target="_blank" class="text-decoration-none">
+                        <strong>Source service public .fr</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>                      
+                      </a>
+                    </p>
+                    <div class="s-inclusion-03__stats">
+                      <div class="shadow rounded">
+                        <strong class="d-block fs-base lh-sm ff-heading">4178 SIAE en France</strong>
+                      </div>
+                      <div class="shadow rounded">
+                        <strong>140 000 salariés en insertion</strong>
+                      </div>
+                    </div>
+                  </article>
+                  <article class="m-3 mb-lg-5">
+                    <h3 class="h2"><strong>Secteur du Handicap ou STPA</strong></h3>
+                    <p><strong>STPA</strong> est un accompagnement dans l'emploi proposé par certaines structures à des personnes en situation de handicap.</p>
+                    <p>2 types de structures : les <strong>ESAT</strong> (Etablissements et Services d’Aide par le Travail) et les EA (Entreprises Adaptées)</p>
+                    <div class="s-inclusion-03__stats">
+                      <div class="has-relation-between shadow rounded">
+                        <strong class="d-block fs-base lh-sm ff-heading">2 250 structures du STPA </strong>
+                      </div>
+                    </div>
+                    <div class="s-inclusion-03__stats">
+                      <div class="shadow rounded">
+                        <span class="d-block fs-base lh-sm ff-heading"><strong class="d-block fs-base lh-sm ff-heading">26 000</strong> travailleurs handicapés<br>en EA</span>
+                      </div>
+                      <div class="shadow rounded">
+                        <span class="d-block fs-base lh-sm ff-heading"><strong class="d-block fs-base lh-sm ff-heading">+120 000</strong> travailleurs handicapés<br>en ESAT</span>
+                      </div>
+                    </div>                                    
+                  </article>
+                </div>                                   
+              </div>
+            </div>
+          </section>    
+
+          <section class="s-articles-cols-01 s-articles-cols-01--marche" id="typologies">
+            <div class="s-articles-cols-01__container container">
+              <div class="s-articles-cols-01__row row">
+                  <div class="s-articles-cols-01__col s-articles-cols-01__col--title col-12">
+                    <h3 class="h2"><strong>Les typologies de structures</strong></h3>
                   </div>
-                </aside>
-              </div>                  
-              <div class="s-inclusion-06__col s-inclusion-06__col--article col-12 col-lg-6">
-                <article>
-                  <h3><strong>SIAE ou Structure d’Insertion par l’Activité Économique.</strong></h3>
-                  <p>L’IAE est un accompagnement dans l'emploi proposé par certaines structures à des personnes très éloignées de l'emploi pour faciliter leur insertion sociale et professionnelle.</p>
-                  <p>L'IAE s'adresse aux personnes particulièrement éloignées de l'emploi : Chômeurs de longue durée, personnes bénéficiaires des  minimas sociaux (RSA, ...), Jeunes de moins de 26 ans en grande difficulté, Travailleurs reconnus handicapés.</p>
-                  <p>
-                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2284">
-                      <strong>Source service public .fr</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>                      
-                    </a>
-                  </p>
-                  <div class="s-inclusion-06__stats">
-                    <div>
-                      <strong>4178 SIAE en France</strong>
-                    </div>
-                    <div>
-                      <strong>140 000 salariés en insertion</strong>
-                    </div>
-                  </div>
-                </article>
-                <article>
-                  <h3><strong>Secteur du Handicap ou STPA</strong></h3>
-                  <p><strong>STPA</strong> est un accompagnement dans l'emploi proposé par certaines structures à des personnes en situation de handicap.</p>
-                  <p>2 types de structures : les <strong>ESAT</strong> (Etablissements et Services d’Aide par le Travail) et les EA (Entreprises Adaptées)</p>
-                  <div class="s-inclusion-06__stats">
-                    <div class="has-relation-between">
-                      <strong>2 250 structures du STPA </strong>
-                    </div>
-                  </div>
-                  <div class="s-inclusion-06__stats">
-                    <div>
-                      <span><strong>26 000</strong> travailleurs handicapés<br>en EA</span>
-                    </div>
-                    <div>
-                      <span><strong>+120 000</strong> travailleurs handicapés<br>en ESAT</span>
-                    </div>
-                  </div>                                    
-                </article>
-              </div>                                   
-            </div>
-          </div>
-        </section>    
-
-        <section class="s-inclusion-07">
-          <div class="s-inclusion-07__container container">
-            <div class="s-inclusion-07__row row">
-                <div class="s-inclusion-07__col s-inclusion-07__col--title col-12">
-                  <h3><strong>Les typologies de structures</strong></h3>
+              </div>
+              <div class="s-articles-cols-01__row row">
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Ateliers et chantiers d’insertion (ACI)</strong></h5>
+                    <p>Les ateliers et chantiers d’insertion proposent un accompagnement et une activité professionnelle à des personnes en parcours d’insertion. Ces activités s’inscrivent dans le champ de l’utilité sociale, ce qui permet de ne pas distordre la concurrence. La commercialisation de leurs biens est encadrée : les recettes engendrées ne peuvent couvrir qu’une part inférieure à 30% des charges liées à leurs activités (50% dans certains cas).</p>
+                    <p>
+                      <strong>Source Avise</strong>                   
+                    </p>
+                  </article>
                 </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Entreprises d’insertion (EI)</strong></h5>
+                    <p>Les entreprises d’insertion s’inscrivent dans le secteur marchand. Elles fonctionnent comme des entreprises classiques, leur chiffre d’affaires étant en grande partie le fruit de la commercialisation de leur offre de biens et services. Elles ont pour spécificité d’embaucher des personnes en parcours d’insertion.</p>
+                  </article>
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Entreprises de travail temporaire d’insertion (ETTI)</strong></h5>
+                    <p>Les entreprises de travail temporaire d’insertion œuvrent dans le champ de l’intérim en ayant pour spécificité de proposer des missions auprès d’entreprises utilisatrices à des personnes en parcours d’insertion.</p>
+                  </article>
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Associations intermédiaires (AI)</strong></h5>
+                    <p>Les associations intermédiaires assurent l’accueil, le recrutement et le suivi de personnes en parcours d’insertion et mettent à disposition ces dernières auprès d’utilisateurs (entreprises, associations, collectivités locales ou particuliers) dans le cadre de contrats de mise à disposition. Leur activité est ainsi le prêt de main d’œuvre à titre onéreux mais à but non lucratif.</p>
+                  </article>
+                </div>
+              </div>
+              <div class="s-articles-cols-01__row row">
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>GEIQ</strong></h5>
+                    <p>Le Geiq est un Groupement d’Employeurs pour l’Insertion et la Qualification, une association pilotée et gérée par ses entreprises adhérentes, mobilisées pour favoriser l’insertion des personnes éloignées du marché du travail grâce à l'alternance.</p>
+                    <p>
+                      <strong>Source les GEIQ</strong>
+                    </p>
+                  </article>
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Entreprises adaptées (EA)</strong></h5>
+                    <p>Les entreprises adaptées permettent à des personnes en situation de handicap d’accéder à l’emploi dans des conditions adaptées à leurs capacités. Elles les accompagnent dans leur projet professionnel et peuvent être une passerelle vers d’autres employeurs privés et publics.</p>
+                    <p>
+                      <strong>Source Unea</strong>
+                    </p>
+                  </article>
+                </div>
+                <div class="s-articles-cols-01__col s-articles-cols-01__col--article col-12 col-lg-3">
+                  <article>
+                    <h5 class="h3 mh-5"><strong>Établissements ou services d'aide par le travail (ESAT)</strong></h5>
+                    <p>Les établissements ou services d'aide par le travail (ESAT) (couramment encore appelés « centres d'aide par le travail » ou CAT) sont des établissements médico-sociaux qui relèvent, pour l'essentiel, des dispositions figurant dans le code de l'action sociale et des familles.</p>
+                    <p>
+                      <strong>Source travail-emploi.gouv</strong>
+                    </p>
+                  </article>
+                </div>
+              </div>
             </div>
-            <div class="s-inclusion-07__row row">
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Ateliers et chantiers d’insertion (ACI)</strong></h5>
-                  <p>Les ateliers et chantiers d’insertion proposent un accompagnement et une activité professionnelle à des personnes en parcours d’insertion. Ces activités s’inscrivent dans le champ de l’utilité sociale, ce qui permet de ne pas distordre la concurrence. La commercialisation de leurs biens est encadrée : les recettes engendrées ne peuvent couvrir qu’une part inférieure à 30% des charges liées à leurs activités (50% dans certains cas).</p>
-                  <p>
-                    <strong>Source Avise</strong>                   
-                  </p>
-                </article>
-              </div>                  
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Entreprises d’insertion (EI)</strong></h5>
-                  <p>Les entreprises d’insertion s’inscrivent dans le secteur marchand. Elles fonctionnent comme des entreprises classiques, leur chiffre d’affaires étant en grande partie le fruit de la commercialisation de leur offre de biens et services. Elles ont pour spécificité d’embaucher des personnes en parcours d’insertion.</p>
-                </article>
-              </div>                  
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Entreprises de travail temporaire d’insertion (ETTI)</strong></h5>
-                  <p>Les entreprises de travail temporaire d’insertion œuvrent dans le champ de l’intérim en ayant pour spécificité de proposer des missions auprès d’entreprises utilisatrices à des personnes en parcours d’insertion.</p>
-                </article>
-              </div>                  
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Associations intermédiaires (AI)</strong></h5>
-                  <p>Les associations intermédiaires assurent l’accueil, le recrutement et le suivi de personnes en parcours d’insertion et mettent à disposition ces dernières auprès d’utilisateurs (entreprises, associations, collectivités locales ou particuliers) dans le cadre de contrats de mise à disposition. Leur activité est ainsi le prêt de main d’œuvre à titre onéreux mais à but non lucratif.</p>
-                </article>
-              </div>                  
-            </div>
-            <div class="s-inclusion-07__row row">
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>GEIQ</strong></h5>
-                  <p>Le Geiq est un Groupement d’Employeurs pour l’Insertion et la Qualification, une association pilotée et gérée par ses entreprises adhérentes, mobilisées pour favoriser l’insertion des personnes éloignées du marché du travail grâce à l'alternance.</p>
-                  <p>
-                    <strong>Source les GEIQ</strong>
-                  </p>
-                </article>
-              </div>                
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Entreprises adaptées (EA)</strong></h5>
-                  <p>Les entreprises adaptées permettent à des personnes en situation de handicap d’accéder à l’emploi dans des conditions adaptées à leurs capacités. Elles les accompagnent dans leur projet professionnel et peuvent être une passerelle vers d’autres employeurs privés et publics.</p>
-                  <p>
-                    <strong>Source Unea</strong>
-                  </p>
-                </article>
-              </div>                
-              <div class="s-inclusion-07__col s-inclusion-07__col--article col-12 col-lg-3">
-                <article>
-                  <h5><strong>Établissements ou services d'aide par le travail (ESAT)</strong></h5>
-                  <p>Les établissements ou services d'aide par le travail (ESAT) (couramment encore appelés « centres d'aide par le travail » ou CAT) sont des établissements médico-sociaux qui relèvent, pour l'essentiel, des dispositions figurant dans le code de l'action sociale et des familles.</p>
-                  <p>
-                    <strong>Source travail-emploi.gouv</strong>
-                  </p>
-                </article>
-              </div>                
-            </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="s-inclusion-08">
-          <div class="s-inclusion-08__container container">
-            <div class="s-inclusion-08__row row" id="clauses">
-              <div class="s-inclusion-08__col s-inclusion-08__col--picture col-12 col-lg-6">
-                <picture>
-                  <img src="/images/inclusion-08-visuel-01.jpg" class="img-fluid img-cover" alt="">
-                </picture>
+          <section class="s-article-picture-group-01 s-article-picture-group-01--marche">
+            <div class="s-article-picture-group-01__container container">
+              <div class="s-article-picture-group-01__row row" id="clauses">
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--picture col-12 col-lg-6">
+                  <picture>
+                    <img src="/images/inclusion-08-visuel-01.jpg" class="img-fluid img-fitcover" alt="">
+                  </picture>
+                </div>
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h3 class="h2"><strong>Les clauses sociales</strong></h3>
+                    <p>Les clauses sociales <strong>conditionnent l’exécution ou l’attribution d’un marché en fonction des critères liés à l’emploi ou à la lutte contre les exclusions</strong>.</p>
+                    <p>Imposée par l'acheteur, elle s'impose à l'entreprise qui doit respecter le cahier des charges.</p>
+                    <p><strong>Source Code des Marchés Publics, article 14, 53,30,15, 5</strong></p>
+                  </article>
+                </div>
               </div>
-              <div class="s-inclusion-08__col s-inclusion-08__col--article col-12 col-lg-6">
-                <article>
-                  <h3><strong>Les clauses sociales</strong></h3>
-                  <p>Les clauses sociales <strong>conditionnent l’exécution ou l’attribution d’un marché en fonction des critères liés à l’emploi ou à la lutte contre les exclusions</strong>.</p>
-                  <p>Imposée par l'acheteur, elle s'impose à l'entreprise qui doit respecter le cahier des charges.</p>
-                  <p><strong>Source Code des Marchés Publics, article 14, 53,30,15, 5</strong></p>
-                </article>
+              <div class="s-article-picture-group-01__row row" id="rse">
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--picture col-12 col-lg-6">
+                  <picture>
+                    <img src="/images/inclusion-08-visuel-02.jpg" class="img-fluid img-fitcover" alt="">
+                  </picture>
+                </div>
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h3 class="h2"><strong>Responsabilité sociale des entreprises</strong></h3>
+                    <p>
+                      <strong>Travailler avec les structures d’insertion et des structures du STPA est un excellent moyen  pour engager une démarche RSE</strong>. <br>
+                      Cela permet de contribuer activement à l’insertion de personnes éloignées de l’emploi ou en situation de handicap, tout en répondant à un besoin réel de l’entreprise. Le recours à ces prestataires permet ainsi d’allier impact positif et performance.
+                    </p> 
+                  </article>
+                </div>
+              </div>
+              <div class="s-article-picture-group-01__row row" id="agefiph">
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--picture col-12 col-lg-6">
+                  <picture>
+                    <img src="/images/inclusion-08-visuel-03.jpg" class="img-fluid img-fitcover" alt="">
+                  </picture>
+                </div>
+                <div class="s-article-picture-group-01__col s-article-picture-group-01__col--article col-12 col-lg-6">
+                  <article>
+                    <h3 class="h2"><strong>Contribution Agefiph /Fiph</strong></h3>
+                    <p>Il existe plusieurs solutions pour réduire votre contribution Agefiph/FIPH, dont :</p>
+                    <ul>
+                      <li>Recruter directement des salariés handicapés.</li>
+                      <li>Sous-traiter au secteur protégé ou adaptéInformation FIPHP : La mise à disposition par une association ne peut donner lieu à déduction. </li>
+                    </ul>
+                    <p>Information FIPHP : La mise à disposition par une association ne peut donner lieu à déduction.</p>
+                    <p>
+                      <a href="http://www.fiphfp.fr/FAQ/Peut-on-deduire-les-frais-de-mise-a-disposition-de-personnel-handicape-via-une-association-hors-ESAT-ou-EA" target="_blank" class="text-decoration-none">
+                        <strong>Pour plus d’information sur le Fiph</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
+                    </p>
+                    <p>En effet, l'employeur peut s'acquitter partiellement de ses obligations en passant des contrats de fourniture, de sous-traitance ou de prestations de services avec :</p>                  
+                    <ul>
+                      <li>des entreprises adaptées (EA)</li>
+                      <li>des centres de distribution de travail à domicile (CDTD)</li>
+                      <li>des établissements ou services d’aide par le travail (ESAT)</li>
+                      <li>des travailleurs indépendants handicapés</li>
+                    </ul>
+                    <p>
+                      <a href="https://www.agefiph.fr/articles/conseil-pratiques/pourquoi-sous-traiter-aux-secteurs-adapte-et-protege" target="_blank" class="text-decoration-none">
+                        <strong>Pour plus d’information sur le Agefiph</strong>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
+                            <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
+                        </svg>
+                      </a>
+                    </p>
+                  </article>
+                </div>
               </div>
             </div>
-            <div class="s-inclusion-08__row row" id="rse">
-              <div class="s-inclusion-08__col s-inclusion-08__col--picture col-12 col-lg-6">
-                <picture>
-                  <img src="/images/inclusion-08-visuel-02.jpg" class="img-fluid img-cover" alt="">
-                </picture>
-              </div>
-              <div class="s-inclusion-08__col s-inclusion-08__col--article col-12 col-lg-6">
-                <article>
-                  <h3><strong>Responsabilité sociale des entreprises</strong></h3>
-                  <p>
-                    <strong>Travailler avec les structures d’insertion et des structures du STPA est un excellent moyen  pour engager une démarche RSE</strong>. <br>
-                    Cela permet de contribuer activement à l’insertion de personnes éloignées de l’emploi ou en situation de handicap, tout en répondant à un besoin réel de l’entreprise. Le recours à ces prestataires permet ainsi d’allier impact positif et performance.
-                  </p> 
-                </article>
-              </div>
-            </div>
-            <div class="s-inclusion-08__row row" id="agefiph">
-              <div class="s-inclusion-08__col s-inclusion-08__col--picture col-12 col-lg-6">
-                <picture>
-                  <img src="/images/inclusion-08-visuel-03.jpg" class="img-fluid img-cover" alt="">
-                </picture>
-              </div>
-              <div class="s-inclusion-08__col s-inclusion-08__col--article col-12 col-lg-6">
-                <article>
-                  <h3><strong>Contribution Agefiph /Fiph</strong></h3>
-                  <p>Il existe plusieurs solutions pour réduire votre contribution Agefiph/FIPH, dont :</p>
-                  <ul>
-                    <li>Recruter directement des salariés handicapés.</li>
-                    <li>Sous-traiter au secteur protégé ou adaptéInformation FIPHP : La mise à disposition par une association ne peut donner lieu à déduction. </li>
-                  </ul>
-                  <p>Information FIPHP : La mise à disposition par une association ne peut donner lieu à déduction.</p>
-                  <p>
-                    <a href="http://www.fiphfp.fr/FAQ/Peut-on-deduire-les-frais-de-mise-a-disposition-de-personnel-handicape-via-une-association-hors-ESAT-ou-EA" target="_blank">
-                      <strong>Pour plus d’information sur le Fiph</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>
-                  <p>En effet, l'employeur peut s'acquitter partiellement de ses obligations en passant des contrats de fourniture, de sous-traitance ou de prestations de services avec :</p>                  
-                  <ul>
-                    <li>des entreprises adaptées (EA)</li>
-                    <li>des centres de distribution de travail à domicile (CDTD)</li>
-                    <li>des établissements ou services d’aide par le travail (ESAT)</li>
-                    <li>des travailleurs indépendants handicapés</li>
-                  </ul>
-                  <p>
-                    <a href="des travailleurs indépendants handicapés" target="_blank">
-                      <strong>Pour plus d’information sur le Agefiph</strong>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="19" viewBox="0 0 20 19">
-                          <path fill="currentColor" d="M8.66517015,2.82577407 C8.34562066,3.18534827 8.34130426,3.73389577 8.67429909,4.0990571 L11.359,7.039 L1.46428571,7.03948778 C0.93400271,7.03948778 0.5,7.46464861 0.5,7.99431466 L0.506519822,8.10609811 C0.562491613,8.58254879 0.971880067,8.94914154 1.46428571,8.94914154 L11.354,8.949 L8.64311662,11.8995038 C8.28105469,12.2965343 8.31618249,12.9073498 8.7191121,13.2599671 C9.11604213,13.6073339 9.72177649,13.5739032 10.0771295,13.184224 L14.2544508,8.63732099 L14.3103844,8.56958432 L14.3728703,8.47818478 L14.4352531,8.3399089 L14.4491817,8.28987794 L14.462,8.193 L14.4705425,8.17556014 C14.4890266,8.12237865 14.5,8.06201568 14.5,7.99431466 L14.5,7.84422179 L14.4816817,7.71012206 L14.4677531,7.6600911 L14.4094639,7.52822311 L14.3908925,7.49865936 L14.3296866,7.41519605 L10.1084913,2.81453208 C9.75427649,2.42609678 9.14854213,2.39266615 8.7516121,2.74003295 L8.66517015,2.82577407 Z" transform="rotate(-45 10.56 5.732)"></path>
-                      </svg>
-                    </a>
-                  </p>
-                </article>
-              </div>
-            </div>
-          </div>
-        </section>        
+          </section>
 
         {% endblock %}
     {% endembed %}

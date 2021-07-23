@@ -1,0 +1,90 @@
+{% trans_default_domain 'cocorico' %}
+
+    {%- set offererItems = {
+    "quotes": {
+        "link": path('cocorico_dashboard_quote_offerer'),
+        "text": 'Demandes Contact'
+    },
+    "listings": {
+        "link": path('cocorico_dashboard_listing'),
+        "text": 'nav.dashboard.listings.link'|trans
+    },
+    "structures": {
+        "link": path('cocorico_dashboard_directory'),
+        "text": 'nav.dashboard.directory.link'|trans,
+    },
+    "profile": {
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+        "link": path('cocorico_user_logout'),
+        "text": 'nav.logout.link'|trans
+    },
+    } -%}
+
+    {%- set askerItems = {
+    "quotes": {
+        "link": path('cocorico_dashboard_quote_asker'),
+        "text": 'Demandes Contact'
+    },
+    "profile": {
+        "link": path('cocorico_user_dashboard_profile_edit_about_me') ,
+        "text": 'nav.dashboard.profile.link'|trans
+    },
+    "logout": {
+        "link": path('cocorico_user_logout'),
+        "text": 'nav.logout.link'|trans
+    }
+    } -%}
+
+{%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
+    <div class="{{ dropdown_extra_class }}" role="menu">
+        {% if app.session.get('canSwitch')%}
+            <a href="#" data-id="asker" class="dropdown-item">
+                <span>{{ 'nav.asker.link' | trans }}</span>
+                <span id="nb-unread-asker" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+            </a>
+            <a href="#" aria-expanded="false" data-id="offerer" class="dropdown-item">
+                <span>{{ 'nav.offerer.link' | trans }}</span>
+                <span id="nb-unread-offerer" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+            </a>
+            <div class="dropdown-divider"></div>
+        {% endif %}
+        {% if app.session.get('canAskForQuote') or is_granted('ROLE_SONATA_ADMIN') %}
+        <div data-id="asker">
+             {% for name, menu in askerItems %}
+                <a id="asker{{ menu.text }}" href="{{ menu.link }}" class="dropdown-item">
+                    <span>{{ menu.text }}</span>
+                    {% if name == 'messages' %}
+                        <span id="askerMsg" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}" class="dropdown-item">
+                    <span>{{ 'exit_impersonation'|trans }}</span>
+                </a>
+            {% endif %}
+        </div>
+        <div class="dropdown-divider"></div>
+        {% endif %}
+        {% if app.session.get('canPublish')%}
+        <div data-id="offerer">
+            {% for name, menu in offererItems %}
+                <a id="offerer{{ menu.text }}" href="{{ menu.link }}" class="dropdown-item">
+                    <span>{{ menu.text }}</span>
+                    {% if name == 'messages' %}
+                        <span id="offererMsg" class="fs-xs badge badge-primary badge-pill ml-1"></span>
+                    {% endif %}
+                </a>
+            {% endfor %}
+            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                <a href="{{ path('cocorico_home', {'_become_who_you_are': '_exit'}) }}" class="dropdown-item">
+                    <span>{{ 'exit_impersonation'|trans }}</span>
+                </a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{%- endif -%}

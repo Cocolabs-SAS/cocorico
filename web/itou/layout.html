@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <title>Itou Theme</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="title" content="Itou Theme">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Itou Theme">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Itou Theme">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:image" content="">
+
+    <link rel="shortcut icon" href="images/favico.ico" type="image/ico">
+    <link rel="stylesheet" href="stylesheets/app.css" />
+  </head>
+
+  <body id="top">
+
+    <header class="bg-primary py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <a href="https://betagouv.github.io/itou-theme/" class="lead text-white mb-0 text-decoration-none">Itou Theme</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="s-main" role="main">
+
+      <section id="content">
+          <div class="container">
+
+            <article class="row py-5" id="grid">
+              <div class="col-12 col-lg-3">
+                <h3>Grid</h3>
+                <a href="https://getbootstrap.com/docs/4.6/layout/grid/" target="_blank">Documentation</a>
+               </div>
+              <div class="col-12 col-lg-9">
+                <div class="mb-5">
+                  <h6>Our default <code>.container</code> for a full width container, spanning the entire width of the viewport. Default max-width of <code>.container</code> is based on the <u>xl</u> max-width value (1140px).</h6>
+                  <table class="table table-sm table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th class="text-center">
+                          Extra small<br>
+                          <small>&lt;576px</small>
+                        </th>
+                        <th class="text-center">
+                          Small<br>
+                          <small>≥576px</small>
+                        </th>
+                        <th class="text-center">
+                          Medium<br>
+                          <small>≥768px</small>
+                        </th>
+                        <th class="text-center">
+                          Large<br>
+                          <small>≥992px</small>
+                        </th>
+                        <th class="text-center">
+                          Extra large<br>
+                          <small>≥1200px</small>
+                        </th>
+                        <th class="text-center">
+                          Extra Extra large<br>
+                          <small>≥1500px</small>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Max container width</th>
+                        <td>None (auto)</td>
+                        <td>540px</td>
+                        <td>720px</td>
+                        <td>960px</td>
+                        <td>1140px</td>
+                        <td>1440px</td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Class suffix</th>
+                        <td><code>.container</code></td>
+                        <td><code>.container .container-max-sm</code></td>
+                        <td><code>.container .container-max-md</code></td>
+                        <td><code>.container .container-max-lg</code></td>
+                        <td><code>.container .container-max-xl</code></td>
+                        <td><code>.container .container-max-xxl</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <pre class="bg-gray-100 p-3">&lt;div class=&quot;container&quot;&gt;&#10;  ...&#10;&lt;/div&gt;</pre>
+                </div>
+                <div class="mb-5">
+                  <h6>Grid options responsive</h6>
+                  <table class="table table-sm table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th class="text-center">
+                          Extra small<br>
+                          <small>&lt;576px</small>
+                        </th>
+                        <th class="text-center">
+                          Small<br>
+                          <small>≥576px</small>
+                        </th>
+                        <th class="text-center">
+                          Medium<br>
+                          <small>≥768px</small>
+                        </th>
+                        <th class="text-center">
+                          Large<br>
+                          <small>≥992px</small>
+                        </th>
+                        <th class="text-center">
+                          Extra large<br>
+                          <small>≥1200px</small>
+                        </th>
+                        <th class="text-center">
+                          Extra Extra large<br>
+                          <small>≥1500px</small>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Max container width</th>
+                        <td>None (auto)</td>
+                        <td>540px</td>
+                        <td>720px</td>
+                        <td>960px</td>
+                        <td>1140px</td>
+                        <td>1440px</td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Class prefix</th>
+                        <td><code>.col-</code></td>
+                        <td><code>.col-sm-</code></td>
+                        <td><code>.col-md-</code></td>
+                        <td><code>.col-lg-</code></td>
+                        <td><code>.col-xl-</code></td>
+                        <td><code>.col-xxl-</code></td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row"># of columns</th>
+                        <td colspan="6">12</td>
+                      </tr>
+                      <tr>
+                        <th class="text-nowrap" scope="row">Gutter width</th>
+                        <td colspan="6">32px (2rem)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="mb-5">
+                  <pre class="bg-gray-100 p-3">&lt;div class=&quot;container&quot;&gt;&#10;  &lt;div class=&quot;row&quot;&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;1/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;2/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;3/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;4/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;5/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;6/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;7/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;8/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;9/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;10/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;11/12&lt;/div&gt;&#10;    &lt;div class=&quot;col-12 col-lg-1&quot;&gt;12/12&lt;/div&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;</pre>
+                </div>
+                <div class="mb-5">
+                  <div class="row fs-xs" style="height: 300px;">
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">1/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">2/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">3/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">4/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">5/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">6/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">7/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">8/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">9/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">10/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">11/12</div>
+                    </div>
+                    <div class="col-12 col-md-1 mb-3">
+                      <div class="d-flex h-100 w-100 justify-content-center align-items-center bg-gray-100">12/12</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="row py-5" id="utilities">
+              <div class="col-12 col-lg-3">
+                <h3>Utilities for layout</h3>
+                <a href="https://getbootstrap.com/docs/4.6/layout/utilities-for-layout/" target="_blank">Documentation</a>
+               </div>
+              <div class="col-12 col-lg-9">
+                <div class="mb-5">
+                  <h6>Display</h6>
+                  <p>Use our <a href="https://getbootstrap.com/docs/4.6/utilities/display/" target="_blank">display utilities</a> for responsively toggling common values of the <code>display</code> property. Mix it with our grid system, content, or components to show or hide them across specific viewports.</p>
+                </div>
+                <div class="mb-5">
+                  <h6>Flexbox</h6>
+                  <p>Should you need to add <code>display: flex</code> to an element, do so with <code>.d-flex</code> or one of the responsive variants. You’ll need this class or display value to allow the use of our extra <a href="https://getbootstrap.com/docs/4.6/utilities/flex/">flexbox utilities</a> for sizing, alignment, spacing, and more.</p>
+                </div>
+                <div class="mb-5">
+                  <h6>Spacing</h6>
+                  <p>Use the <code>margin</code> and <code>padding</code> <a href="/docs/4.6/utilities/spacing/" target="_blank">spacing utilities</a> to control how elements and components are spaced and sized. Bootstrap 4 includes a five-level scale for spacing utilities, based on a <code>1rem</code> value default <code>$spacer</code> variable. Choose values for all viewports (e.g., <code>.mr-3</code> for <code>margin-right: 1rem</code>), or pick responsive variants to target specific viewports (e.g., <code>.mr-md-3</code> for <code>margin-right: 1rem</code> starting at the <code>md</code> breakpoint).</p>
+                </div>
+                <div class="mb-5">
+                  <h6>Visibility</h6>
+                  <p>When toggling <code>display</code> isn’t needed, you can toggle the <code>visibility</code> of an element with our <a href="/docs/4.6/utilities/visibility/" target="_blank">visibility utilities</a>. Invisible elements will still affect the layout of the page, but are visually hidden from visitors.</p>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+    </main>
+
+    <script src="javascripts/app.js" defer></script>
+  </body>
+
+</html>
