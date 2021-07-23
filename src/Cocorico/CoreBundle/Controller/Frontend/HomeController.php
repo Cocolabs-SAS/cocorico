@@ -45,6 +45,29 @@ class HomeController extends Controller
         );
     }
 
+    /**
+     * @Route("/home_itou", name="cocorico_home_itou")
+     * @param Request $request
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexItouAction(Request $request)
+    {
+        $listings = $this->get("cocorico.listing_search.manager")->getHighestRanked(
+            $this->get('cocorico.listing_search_request'),
+            42,
+            $request->getLocale(),
+            $this->getParameter('cocorico.listing_highestrank_cache_age')
+        );
+
+        return $this->render(
+            'CocoricoCoreBundle:Frontend\Home:index_itou.html.twig',
+            array(
+                'listings' => $listings->getIterator(),
+            )
+        );
+    }
+
 
     /**
      *

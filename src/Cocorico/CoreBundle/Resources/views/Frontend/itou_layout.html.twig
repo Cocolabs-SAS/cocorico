@@ -1,0 +1,23 @@
+{% block layout %}
+    {% block header %}
+        {% include '@CocoricoCore/Frontend/Common/_itou_header.html.twig' only %}
+    {% endblock %}
+
+    {% block sub_header %}{% endblock %}
+
+    <!-- contain main informative part of the site -->
+    <main id="main" role="main" class="s-main">
+
+        {% block breadcrumbs %}{% endblock %}
+
+        {% block main %}{% endblock %}
+
+    </main>
+
+    {% block footer %}
+        {% include '@CocoricoCore/Frontend/Common/_itou_footer.html.twig' only %}
+    {% endblock %}
+
+    {#popin#}
+    {% block modal %}{% endblock %}    
+{% endblock %}
