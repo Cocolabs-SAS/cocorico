@@ -9,8 +9,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.1] - (2021-07-23)
+- Ajout modale type utilisateur
 
-### [6.0] - (2021-07-X)
+### [6.0] - (2021-07-23)
 - Intégration du thème ITOU
 - Utilisation d'un docker compose complet
 - Optimisation dockerfile (unique)

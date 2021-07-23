@@ -310,6 +310,34 @@
                 {{ form_end(dlform) }}
             </div>
         {% endblock %}
+
+        {% block modal %}
+            {# {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %} #}
+            <div class="modal fade modal-siae" id="user_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                 data-keyboard="false" style="z-index:3000">
+                <div class="modal-dialog">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body home-content-body">
+                            <strong class="title">
+                            Plus de {{ entries.count }} prestataires inclusifs répondent à votre recherche.
+                            </strong>
+                            <p class="mt-2">Pour accéder aux résultats, dites-nous  vous êtes :
+                            <ul>
+                                <li><a href="#" data-usr="buyer">Une entreprise ou une institution qui souhaite augmenter ses achats inclusifs</a></li>
+                                <li><a href="#" data-usr="siae">Une structure d’insertion ou du handicap</a></li>
+                                <li><a href="#" data-usr="actor">Un acteur de l’inclusion (facilitateurs, réseaux...)</a></li>
+                            </ul>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
     {% endembed %}
 {% endblock %}
 
@@ -335,8 +363,13 @@
     'extend_search': ''
     } only %}
     #}
+
     <script>
         document.addEventListener("DOMContentLoaded", function(){
+            $(document).on('shown.bs.modal', '.modal', function () {
+                $('.modal-backdrop').before($(this));
+            });
+
             //Set listings markers on load
             {%- if not entries is empty -%}
                 //Set listings markers on load through data-markers attribute
@@ -344,10 +377,26 @@
                     setMarkersFunc($("span#data-markers").data("markers"));
                     refreshMapFunc(false, '{{ request.lat }}', '{{ request.lng }}');
                 }, 1000)
-                // setMarkersFunc($("span#data-markers").data("markers"));
-                // Set default favourites in the listing
-                // common.application.setDefaultFavourites();
             {% endif %}
+
+            // For testing: 
+            // if (true) {
+            if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
+                var modal = $("#user_modal");
+                modal.find('.close').remove();
+                modal.modal('show');
+
+                modal.on('click', (e) => {
+                    // Only set cookie if button clicked
+                    document.cookie = "leMarcheTypeUsager=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure";
+                    let type = $(e.target).data('usr');
+
+                    if (typeof track === "function") {
+                        track('', Steps.USER_TYPE, {'type': type});
+                    }
+                    modal.modal('hide');
+                })
+            }
         });
     </script>
  
