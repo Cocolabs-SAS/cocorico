@@ -313,7 +313,7 @@
 
         {% block modal %}
             {# {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %} #}
-            <div class="modal fade modal-siae" id="modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+            <div class="modal fade modal-siae" id="user_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                  data-keyboard="false" style="z-index:3000">
                 <div class="modal-dialog">
                     <div class="modal-content ">
@@ -384,7 +384,7 @@
             // if (true) {
             if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
                 console.log('Showing Modal');
-                var modal = $("#modal");
+                var modal = $("#user_modal");
                 modal.find('.close').remove();
                 modal.modal('show');
 
