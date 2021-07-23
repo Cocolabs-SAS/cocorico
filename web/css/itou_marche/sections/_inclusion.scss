@@ -1,0 +1,171 @@
+.mh-5 {
+	@media (min-width:992px) {
+		min-height: 5rem;
+	}
+}
+
+.s-inclusion-01 {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+
+	@media (min-width:992px) {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
+
+	&__col {
+
+		&--card {
+			position: relative;
+
+			&::before {
+				content: "";
+				position: absolute;
+				width: 156px;
+				height: 260px;
+				z-index: -1;
+				bottom: -40px;
+				right: -55px;
+				background-image: url('/images/inclusion-02-illu-01.png');
+				background-repeat: no-repeat;
+				background-position: 100% 100%;
+				display: none;
+
+				@media (min-width:1200px) {
+					display: block;
+				}				
+			}	
+		}	
+	}
+} 
+
+.s-inclusion-02 {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+
+	@media (min-width:992px) {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
+
+	&__col {
+		
+		&--title {
+			margin-bottom: 1rem;
+			
+			@media (min-width:992px) {
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+
+			> div {
+	
+				&::before {
+					content: '';
+					position: absolute;
+					background-color: #FFEEEE;
+					width: 50vw;
+					height: 100%;
+					left: -50vw;
+					top: 0;
+					display: none;
+					
+					@media (min-width:992px) {
+						display: block;
+					}					
+				}
+			}
+
+			h2 {
+				position: relative;
+
+				&::after {
+					content: '';
+					display: block;
+					width: 50px;
+					height: 10px;
+					background-color: #FE5455;
+					border-radius: 5px;					
+					margin-top: 1rem;
+				}
+			}
+		}
+	}
+} 
+
+.s-inclusion-03 {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+
+	@media (min-width:992px) {
+		padding-top: 3rem;
+		padding-bottom: 3rem;
+	}
+
+	&__col {
+		
+		&--title {
+			margin-bottom: 1rem;
+			
+			@media (min-width:992px) {
+				margin-bottom: 0;
+				padding-left: 0;
+			}
+
+			> aside {
+
+				&::before {
+					content: '';
+					position: absolute;
+					background-color: #FE5455;
+					width: 50vw;
+					height: 100%;
+					left: -50vw;
+					top: 0;
+					display: none;
+					
+					@media (min-width:992px) {
+						display: block;
+					}					
+				}
+			}
+		}
+	}
+	
+	&__stats {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		div {
+			z-index: 2;
+			position: relative;
+			display: flex;
+			justify-content: center;
+			align-items: center;		
+			padding: 0.5rem;
+			margin: 1rem;
+			background-color: #fff;
+			min-height: 60px;
+			min-width: 240px;
+			border-bottom: 4px solid #FE5455;
+			text-align: center;
+
+			&.has-relation-between {
+				z-index: 1;
+
+				&::before {
+					content: '';
+					position: absolute;
+					bottom: -58px;
+					left: 50%;
+					transform: translateX(-50%);
+					background-image: url('/images/inclusion-06-illu-01.svg');
+					width: 164px;
+					height: 58px;
+				}
+
+			}
+		}
+	}
+}

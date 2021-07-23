@@ -1,0 +1,265 @@
+{% extends '::itou_base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+
+{%- block meta_description -%}
+    {{ 'home.meta_desc'|trans({}, 'cocorico_meta') }}
+{%- endblock -%}
+
+{% block theme %}home-page{% endblock %}
+
+{% block layout %}
+    {% embed '@CocoricoCore/Frontend/itou_layout.html.twig' %}
+
+        {% trans_default_domain 'cocorico_home' %}
+
+        {% block sub_header %}
+        {#
+            <div class="visual text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-10 col-lg-push-1">
+                            <div class="title-holder">
+                                <div class="title-frame">
+                                    <h1>
+                                        {{ 'home.header.title'|trans|raw }}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                        {{ render(controller('CocoricoCoreBundle:Frontend/ListingSearch:searchHomeForm')) }}
+                    </div>
+                </div>
+            </div>
+        #}
+        {% endblock %}
+        {% block main %}
+
+            <!-- infoarea -->
+            <div id="c4_temp_head" style="">
+                <div id="formlink" class="headlink">
+                            <img src="{{ asset('svg/enveloppe.svg') }}" alt="icon description" class="icon hidden-xs" style="width:90px";>
+                            <h3><span>Vous avez un besoin de sourcing ?</span></h3>
+                            <p>
+                            Déposez votre demande et nous vous recontacterons avec une liste de prestataires
+                            </p>
+                            <a id="h_sl" class="btn btn-outline-primary" href="https://itou.typeform.com/to/nxG0HlYx" target="_blank" style="margin-top:18px;">
+                                Faire une demande
+                                <i class="icon-right-small"></i>
+                            </a>
+                </div>
+                <div id="dirlink" class="headlink">
+                            <img src="{{ asset('images/oeil-ouvert.svg') }}" alt="icon description" class="icon hidden-xs" style="width:90px";>
+                            <h3><span>Accédez à toutes les structures d'insertion et entreprises adaptées de France</span></h3>
+                            <ol>
+                                <li>Choisissez le lieu d'intervention et le secteur d'activité</li>
+                                <li>Identifiez les structures qui correspondent à votre besoin</li>
+                                <li>Contactez ces structures</li>
+                            </ol>
+                            <a id="h_sl" class="btn btn-default" href="/fr/repertoire/siae" style="margin-top:18px;">
+                                Accéder à la liste
+                                <i class="icon-right-small"></i>
+                            </a>
+                </div>
+            </div>
+            <div id="filiere_banner" class="row">
+                <div class="c1 col-xs-12 col-md-6">
+                    <h3>Acheteurs, alliez impact social et environnemental !</h3>
+                    <hr />
+                    <div class="textbox">
+                        <span>
+                        Quels que soient les déchets que produit votre entreprise, vous trouverez forcément un prestataire capable de répondre à vos besoins pour : 
+                        </span>
+                        <ul>
+                            <li>Désarchiver et détruire vos documents obsolètes et
+                                confidentiels</li>
+                            <li>Collecter et trier vos papiers de bureaux</li>
+                            <li>Détruire vos déchets dangereux en toute sécurité (D.D.D et
+                                D.D.S)</li>
+                        </ul>
+                    </div>
+                    <div class="c2">
+                        <a href="/fr/filiere/recyclage" class="btn
+                            btn-default" style="">
+                            Découvrez le recyclage
+                            <img src="{{ asset('svg/right-arrow.svg') }}" class="icon hidden-xs" style="width:11px";>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6" style="overflow:hidden">
+                    <img src="{{ asset('images/recyclage_home.png') }}" alt="icon
+                    description" class="icon hidden-xs" style="width:100%";>
+                </div>
+            </div>
+            <div id="help_banner" class="row" style="">
+                <div style="" class="hidden-xs col-md-2">
+                    <img src="{{ asset('svg/help.svg') }}" style="height:84px;" alt="icon description" class="icon">
+                </div>
+                <div class="col-md-7 col-sm-12">
+                    <span style="line-height:1.4em;font-size:1.4em">Vous n’avez pas trouvé la prestation que vous cherchez ?<br />Vous avez un besoin spécifique ? </span>
+                </div>
+                <div style="" class="col-md-3 col-sm-12">
+                    <a id="h_cu" class="btn btn-default" href="https://itou.typeform.com/to/nxG0HlYx" style="margin-top:18px;">
+                        Contactez-nous
+                        <i class="icon-right-small"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="borat" class="infoarea container">
+                <div class="row">
+                    <!-- info-box -->
+                    <h3>Pourquoi acheter <strong>inclusif ?</strong></h3>
+                <div class="container">
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/illu-ouvrier.svg') }}" alt="icon description" class="icon">
+                        <br />
+
+                        <div class="textbox">
+                            <p>
+                                Palliez efficacement vos besoins de main-d’oeuvre, métiers en tension, saisonnalité,  et vos besoins de services.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- info-box -->
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/illu-local.svg') }}" alt="icon description" class="icon">
+                        <br />
+
+                        <div class="textbox">
+                            <p>
+                                Participez à la dynamique économique et sociale de votre territoire avec des partenaires de proximité
+                            </p>
+                        </div>
+                    </div>
+                    <!-- info-box -->
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/illu-recyclage.svg') }}" alt="icon description" class="icon">
+                        <br />
+
+                        <div class="textbox">
+                            <p>
+                                Renforcez votre politique d’achats responsables et valorisez votre image d’entreprise.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- info-box -->
+                    <div class="col-xs-11 col-sm-4 col-md-3 info-box">
+                        <img src="{{ asset('images/illu-augmentation.svg') }}" alt="icon description" class="icon">
+                        <br />
+
+                        <div class="textbox">
+                            <p>
+                                Augmentez  vos chances d’obtenir des marchés publics  par votre capacité à réaliser les clauses sociales
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+
+            <div id="info_banner" class="row" style="">
+                <div class="container">
+                    <div class="textbox col-xs-12 col-md-6">
+                        <div>S'INFORMER</div>
+                        <h3><span>Être acteur de <strong>l'inclusion dans l'emploi</strong></span></h3>
+                        <p>
+                            Être acteur d’une société juste aujourd’hui c’est possible en orientant votre politique d’achat vers des partenaires locaux. Ces structures participent aux développement économique et social de votre territoire en travaillant avec des personnes éloignées de l'emploi.
+                        </p>
+                        <a class="btn btn-outline-primary" href="{{ path('cocorico_page_inclusion') }}" style="margin-top:18px;">
+                            Découvrir l'inclusion dans l'emploi
+                            <i class="icon-right-small"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-12 col-md-6" style="overflow:hidden">
+                        <img src="{{ asset('images/info_banner_illustration.jpg') }}" style="" alt="Photo de deux personnes qui travaillent ensemble">
+                    </div>
+                </div>
+            </div>
+
+            <div id="step_banner" class="row" style="">
+                <h3>Comment <strong>ça marche ?</strong></h3>
+                <div class="container">
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            1
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Cherchez une ou plusieurs offres de prestations parmi les prestataires présents sur la plateforme.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            2
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Faites une demande devis en fonction de vos besoins et de votre budget.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-4 info-box">
+                        <div class="step-num">
+                            3
+                        </div>
+                        <div class="textbox">
+                            <p>
+                                Le prestataire traite votre demande le plus rapidement possible et peut vous contacter en direct pour plus d’informations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% include 'CocoricoCoreBundle:Frontend/Home:_high_rank.html.twig'  with {
+            'listings': listings
+            } only %}
+
+            {{ render(controller('CocoricoCoreBundle:Frontend/Home:rssFeeds')) }}
+
+        {% endblock %}
+
+        {% block modal %}
+            {% include 'CocoricoCoreBundle:Frontend/Common:_modal.html.twig' only %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {#Geocoding #}
+    {% include '@CocoricoCore/Frontend/ListingResult/js/_geocoding_js.html.twig' with {
+    'map_elt': '',
+    'auto_complete_elt': '#location'
+    } only %}
+
+    <script>
+        // Categories
+        $(function () {
+
+            // Set default favourites in the listing
+            common.application.setDefaultFavourites();
+
+            common.application.initMultiSelect(
+                    '#categories',
+                    '{{ "multiselect.all_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.none_selected"|trans({}, "cocorico")|e('js') }}',
+                    '{{ "multiselect.num_selected"|trans({}, "cocorico")|e('js') }}'
+            );
+        });
+    </script>
+{% endblock %}
+
+{% block markup_jsonld %}
+    {{ parent() }}
+
+    {% include 'CocoricoSeoBundle:Frontend:Home/_index_markup.jsonld.twig' ignore missing with {
+    'listings': listings
+    } only %}
+{% endblock %}

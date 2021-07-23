@@ -33,16 +33,37 @@ La documentation initiale se trouve [ici](doc/index.md)
 
 ## Déploiement
 ### Démarrage des dockers
-Plusieurs options sont possibles (du docker tout inclus au docker qui utilise un serveur mysql distant), la plus simple étant la combinaison docker Cocorico + docker MariaDB.
-Depuis le répertoire racine de cociroco :
-```
-# Démarrage du docker mariadb
-$ ./docker/run_local_dockers.sh
+#### Docker compose
+L'option la plus aisée est d'utiliser docker compose (voir [docker-compose.yml](docker-compose.yml) pour plus d'infos). Ce dernier démarre la base de données (mariadb) et le docker symfony.
+
+```bash
+# A partir de la racine du projet
+$ docker-compose up
+
+# Deux dockers sont ainsi lancés :
+# bitoubi_symfony pour la partie symfony/cocorico
+# bitoubi_mysql pour la base de donnéés
+# L'accès web se faisant sur http://127.0.0.1:9090/fr et http://127.0.0.1:9090/admin
+
+# Autres opérations :
+
+# Charger un dump SQL sur la base de données, depuis votre ligne de commande
+$ docker exec -i bitoubi_mysql mysql -ucocorico -pcocorico cocorico < coco_dump.sql
+
+# Attacher un shell
+$ docker exec -it bitoubi_symfony /bin/bash
+
+# Se connecter à MariaDB depuis le shell ci-dessus
+$ mysql -h $SQL_HOST -u $SQL_USER -p cocorico
 ```
 
-Démarrage du docker cocorico :
+#### Autres options
+D'autres options sont possibles, surtout si vous avez un server mysql de disponible.
+
+Il suffit pour se faire de modifier le script suivant selon votre configuration, et de définir le `target` du build (`dev-default` ou `dev-screen`, le second permettant d'ouvrir un terminal sur webpack et un autre sur symfony)
 ```
-$ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
+$ docker build -t "cocorico_local" -f ./docker/Dockerfile . \
+        --target dev-default \
         --build-arg SQL_HOST=some-mariadb \
         --build-arg SQL_PORT=3306 \
         --build-arg SQL_USER=cocorico \
@@ -50,9 +71,10 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
         --build-arg GGL_KEY1=[CleGoogleMaps] \
         --build-arg GGL_KEY2=[CleGoogleSpaces] \
         --build-arg SMTP_HOST="localhost" \
-        --build-arg SMTP_PASSWORD="smtp_pass" \
+        --build-arg SMTP_PASSWORD="SMTP_PASS" \
         --build-arg SMTP_PORT="25" \
-        --build-arg SMTP_USER="smtp_user" \
+        --build-arg SMTP_USER="SMTP_USER" \
+
 && docker run --rm -it \
         -p 9090:80 \
         --network cocorico \
@@ -62,6 +84,7 @@ $ docker build -t "cocorico_local" -f ./docker/Dockerfile_Local . \
         -v `pwd`/app/Resources:/cocorico/app/Resources \
         cocorico_local
 ```
+
 
 Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony et effectuer l'installation suite au premier lancement (screen est disponible pour ouvrir plusieurs terminaux simultanés)
 ```
@@ -84,10 +107,19 @@ Le docker cocorico démarre sur un shell, ou l'on peut lancer webpack, symfony e
 > ./run
 ```
 
-## Utilisation Bootstrap v4
+## Utilisation Bootstrap v4 ou du thème ITOU
 Un layout de base alternatif permet l'utilisation de Bootstrap 4 dans les pages du marché.
 
 Pour l'employer, il suffit de remplacer l'entête du fichier html en question (ie: utiliser un autre layout de base), comme ci-dessous.
+
+### Theme ITOU
+```twig
+{% extends '::itou_base.html.twig' %}
+
+{%- block meta_title -%}
+    {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
+{%- endblock -%}
+```
 
 ### Bootstrap v4
 ```twig
@@ -97,6 +129,7 @@ Pour l'employer, il suffit de remplacer l'entête du fichier html en question (i
     {{ 'home.meta_title'|trans({}, 'cocorico_meta') ~ " - " ~ cocorico_site_name }}
 {%- endblock -%}
 ```
+
 ### Bootstrap v3
 ```twig
 {% extends '::base.html.twig' %}
@@ -126,15 +159,8 @@ Pour plus de précisions, voir `webpack.config.js` (et comparer **common** et **
 Built with Cocorico, an open source platform sponsored by [Cocolabs](https://www.cocolabs.com/en/?utm_source=github&utm_medium=cocorico-page&utm_campaign=organic) to create collaborative consumption marketplaces.
 Cocorico is released under the [MIT license](LICENSE).
 
-- `web/css/bs4_import.scss` remplace `web/css/full_import.scss`
-- `web/css/bs4_itou.scss` remplace `web/css/itou.scss`
-
-Pour en connaître les détails, voir `webpack.config.js` et `web/css/bs4_import.css`.
-
 
 ## Changelog
- - Fix similar listings session persisting
-
 [CHANGELOG.md](CHANGELOG.md) list the relevant changes done for each release.
 
 ## License

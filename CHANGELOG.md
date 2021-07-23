@@ -9,9 +9,17 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.1] - (2021-07-23)
+- Ajout modale type utilisateur
+
+### [6.0] - (2021-07-23)
+- Intégration du thème ITOU
+- Utilisation d'un docker compose complet
+- Optimisation dockerfile (unique)
+- Migration dockerfile vers debian-bullseye (erreur ARM)
+
 ### [5.5] - (2021-07-22)
 - Ajout page filière restauration
-- Ajout modale type utilisateur
 
 ### [5.4] - (2021-07-20)
 - Correctif formulaire recherche SIAE
