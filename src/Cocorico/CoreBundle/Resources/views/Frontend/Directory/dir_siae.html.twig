@@ -366,6 +366,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function(){
+            console.log('DomLoaded');
             $(document).on('shown.bs.modal', '.modal', function () {
                 $('.modal-backdrop').before($(this));
             });
@@ -382,6 +383,7 @@
             // For testing: 
             // if (true) {
             if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
+                console.log('Showing Modal');
                 var modal = $("#modal");
                 modal.find('.close').remove();
                 modal.modal('show');
@@ -395,6 +397,7 @@
                         track('', Steps.USER_TYPE, {'type': type});
                     }
 
+                    console.log('Hiding Modal');
                     modal.modal('hide');
                 })
             }
