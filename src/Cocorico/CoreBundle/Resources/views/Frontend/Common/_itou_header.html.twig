@@ -24,7 +24,7 @@
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
-                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
             {# User info #}
@@ -32,7 +32,7 @@
                 <li id="dashboard-dropdown" class="dropdown">
                     <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
-                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                     </a>
                     {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':'dropdown-menu'} only %}
                 </li>
@@ -77,7 +77,7 @@
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
-                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
             {# User info #}
@@ -85,7 +85,7 @@
                 <li id="dashboard-dropdown" class="dropdown">
                     <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
-                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                     </a>
                     {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':''} only %}
                 </li>
