@@ -46,18 +46,45 @@
                                 <h2 class="s-article-picture-01__col--article__title h1"><strong>Vos prestations de qualité, socialement engagée et locale</strong></h2>
                             </article>
                         </div>
+                        {{ form_start(form) }}
+                        {{ form_errors(form) }}
                         <div class="s-article-picture-01__col col-12 col-lg-6 pl-lg-6">
                             <form class="s-hp-01__form bg-white w-100 rounded-lg shadow-lg p-3 p-lg-5">
                                 <fieldset>
                                     <legend class="s-hp-01__form__legend ff-extra-01">Que cherchez-vous ?</legend>
                                     <div class="form-group">
                                         <label class="h4" for="inputSecteur">Secteur d’activité</label>
+                                        <!--
                                         <input type="text" class="form-control" id="inputSecteur" placeholder="Région, département, ville">
+                                        -->
+                                        <div class="multiselect itou-multiselect">
+                                        {{form_widget(form.sector, {
+                                            'id': 'sector',
+                                            'attr': {
+                                                'class': 'form-control jcf-ignore',
+                                                'name': 'sector',
+                                                'placeholder': 'xxx'
+                                            }}
+                                        )}}
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="h4" for="inputLieu">Lieu d’intervention</label>
                                         <div class="input-group">
+                                            <!--
                                             <input type="text" class="form-control" id="inputLieu" placeholder="Tous">
+                                            -->
+
+                                            <div class="field-holder">
+                                            {{form_widget(form.address, {
+                                                'id': 'address',
+                                                'attr': {
+                                                    'class': 'form-control',
+                                                    'placeholder': 'Région, département, code postal'
+                                                }}
+                                            )}}
+                                            </div>
+                                            
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><img src="/itou/images/ico-geo-alt.svg" alt=""></span>
                                             </div>
@@ -74,6 +101,7 @@
                                 </fieldset>
                             </form>
                         </div>
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </section>
