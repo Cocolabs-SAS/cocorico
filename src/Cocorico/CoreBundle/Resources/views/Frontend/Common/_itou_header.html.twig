@@ -21,12 +21,14 @@
       <div class="s-header__col s-header__col--nav col d-none d-xl-inline-flex d-xl-flex align-items-center justify-content-end">
         <nav role="navigation">
           <ul>
+            {# NOT YET ! :D
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
                     <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
+            #}
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
@@ -74,12 +76,14 @@
       <div id="burgerNav">
         <nav role="navigation">
           <ul>
+            {# NOT YET ! :D
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
                     <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
+            #}
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
