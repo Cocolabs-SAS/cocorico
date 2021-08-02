@@ -46,6 +46,12 @@ class HomeController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+            return new RedirectResponse(
+                $this->generateUrl(
+                    'cocorico_itou_siae_directory',
+                    $form->getData()
+                )
+            );
         }
 
         return $this->render(

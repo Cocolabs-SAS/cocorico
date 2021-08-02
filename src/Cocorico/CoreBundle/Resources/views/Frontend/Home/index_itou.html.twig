@@ -53,8 +53,10 @@
                                 <fieldset>
                                     <legend class="s-hp-01__form__legend ff-extra-01">Que cherchez-vous ?</legend>
                                     <div id="dir_form" class="form-group">
-                                        <label class="h4" for="inputSecteur">Secteur d’activité</label>
-                                        {# <input type="text" class="form-control" id="inputSecteur" placeholder="Région, département, ville"> #}
+                                        <label class="h4" for="sector">Secteur d’activité</label>
+                                        <!--
+                                        <input type="text" class="form-control" id="inputSecteur" placeholder="Région, département, ville">
+                                        -->
                                         <div class="multiselect itou-multiselect listing-category">
                                         {{form_widget(form.sector, {
                                             'id': 'sector',
@@ -67,11 +69,10 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="h4" for="inputLieu">Lieu d’intervention</label>
+                                        <label class="h4" for="address">Lieu d’intervention</label>
                                         <div class="input-group">
                                             {# <input type="text" class="form-control" id="inputLieu" placeholder="Tous"> #}
 
-                                            <div class="field-holder">
                                             {{form_widget(form.address, {
                                                 'id': 'address',
                                                 'attr': {
@@ -79,7 +80,6 @@
                                                     'placeholder': 'Région, département, code postal'
                                                 }}
                                             )}}
-                                            </div>
                                             
                                             <div class="input-group-append">
                                                 <span class="input-group-text"><img src="/itou/images/ico-geo-alt.svg" alt=""></span>
