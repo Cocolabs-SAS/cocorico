@@ -42,3 +42,11 @@
 		}
 	}
 }
+
+#main .s-article-picture-01.has-illustration-bg-01 {
+    /* 
+        Force overide theme setting to avoid negative
+        effect on homepage sector dropdown
+    */
+    overflow:visible;
+}

@@ -1,13 +1,19 @@
 .multiselect {
     width:100%;
-}
 
-.multiselect .btn-group.show {
-    display:inline-block !important;
+    .btn-group.show {
+        display:block;
+    }
 }
 
 .itou-multiselect {
-     button.btn.multiselect {
+    display:block;
+
+    .btn-group {
+        display:block;
+    }
+
+    button.btn.multiselect {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -16,6 +22,8 @@
     }
 
     .multiselect-container {
+        width:100%;
+
         .multiselect-option, 
         .multiselect-group, 
         .multiselect-all {
@@ -34,7 +42,10 @@
         &.dropdown-menu {
             background-color:#fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            width:100%;
+            width:auto;
+            max-width: 150%;
+            min-width:100%;
+            min-width:16rem;
             padding: 0 4px 0;
 
 
@@ -71,7 +82,7 @@
 
 #dir_form button.multiselect {
     display: block;
-    width: 442px;
+    width:100%;
     height:50px;
     text-align: left;
     background-color: #fff;
