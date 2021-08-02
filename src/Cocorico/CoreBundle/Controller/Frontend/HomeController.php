@@ -39,6 +39,9 @@ class HomeController extends Controller
             $this->getParameter('cocorico.listing_highestrank_cache_age')
         );
 
+        $structures = $this->get("cocorico.directory.manager")->getSomeRandom(4);
+
+        
 
         $directorySearchRequest = $this->get('cocorico.directory_search_request');
 
@@ -57,7 +60,7 @@ class HomeController extends Controller
         return $this->render(
             'CocoricoCoreBundle:Frontend\Home:index_itou.html.twig', [
             'form' => $form->createView(),
-            'listings' => $listings->getIterator(),
+            'structures' => $structures,
             ]
         );
     }

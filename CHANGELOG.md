@@ -10,7 +10,12 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ## ITOU CHANGELOG
 
 
-### [6.0] - (2021-07-X)
+### [6.1] - (2021-08-2)
+- Page d'accueil thème ITOU
+- Moteur de recherche sur page d'accueil
+- Liste de structures (à la une) sur page d'accueil
+
+### [6.0] - (2021-07-30)
 - Intégration du thème ITOU
 - Utilisation d'un docker compose complet
 - Optimisation dockerfile (unique)
