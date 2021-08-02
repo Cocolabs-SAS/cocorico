@@ -40,6 +40,16 @@ L'option la plus aisée est d'utiliser docker compose (voir [docker-compose.yml]
 # A partir de la racine du projet
 $ docker-compose up
 
+# Deux dockers sont ainsi lancés :
+# bitoubi_symfony pour la partie symfony/cocorico
+# bitoubi_mysql pour la base de donnéés
+# L'accès web se faisant sur http://127.0.0.1:9090/fr et http://127.0.0.1:9090/admin
+
+# Autres opérations :
+
+# Charger un dump SQL sur la base de données, depuis votre ligne de commande
+$ docker exec -i bitoubi_mysql mysql -ucocorico -pcocorico cocorico < coco_dump.sql
+
 # Attacher un shell
 $ docker exec -it bitoubi_symfony /bin/bash
 
