@@ -1,0 +1,106 @@
+<div class="s-cards-grid-01__col col mb-3 mb-md-5">
+    {#
+    <div class="siae-card">
+        <div class="sc-img mr-5">
+            {% if structure.images|length %}
+                    {% set image = structure.images[0] %}
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
+                         alt="{{ structure.name }}" class="img-responsive" />
+            {% else %}
+                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_large') }}"
+                         alt="{{ structure.name }}" class="img-responsive" />
+            {% endif %}
+        </div>
+        <div class="sc-main">
+            <div class="sc-head">
+                <h3>
+                    {% if structure.brand %}
+                        {{ structure.brand }}
+                    {% else %}
+                        {{ structure.name }}
+                    {% endif %}
+                </h3>
+                <!-- FIXME: établir la fonctionnalité
+                <button class="sc-fav"></button>
+                -->
+            </div>
+
+            <div class="sc-body">
+                <div class="sc-profile">
+                    <ul>
+                        {% if structure.kind is not null and structure.kind is not empty %}
+                        <li class="sc-profile-kind">
+                            {% if structure.kind == 'ETTI' %}
+                                intérim
+                            {% elseif structure.kind == 'AI' %}
+                                Mise à disposition du personnel
+                            {% else %}
+                                {{ structure.prestaTypeText('<br />') | raw}}
+                            {% endif %}
+                        </li>
+                        {% endif %}
+                        <li class="sc-profile-type">{{ structure.getKindString }}</li>
+                        {% if structure.hasDirectoryListingCategory %}
+                            <li class="sc-profile-sectors">
+                               {{ structure.getSectorString(2, '<br />') | raw }}
+                            </li>
+                        {% else %}
+                            <li class="sc-profile-sectors-empty"> </li>
+                        {% endif %}
+                        <li class="sc-profile-town">Situé à {{ structure.city }}</li>
+                        <li class="sc-profile-town-work">Intervient sur : {{ structure.getNiceRange }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    #}
+
+        <div class="card c-card c-card--mini h-100">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    {% if structure.images|length %}
+                            {% set image = structure.images[0] %}
+                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_xsmall') }}"
+                                 height="40"
+                                 alt="{{ structure.name }}"
+                                 class="rounded-circle mr-2" />
+                    {% else %}
+                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('listing_xsmall') }}"
+                                 height="40"
+                                 alt="{{ structure.name }}"s
+                                 class="rounded-circle mr-2" />
+                    {% endif %}
+                    <a href="{{ path('cocorico_directory_show', {'id' : structure.id }) }}" target="_blank" rel="noopener" class="d-block font-weight-bold text-decoration-none lh-sm stretched-link">
+                        {% if structure.brand %}
+                            {{ structure.brand }}
+                        {% else %}
+                            {{ structure.name }}
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                <li class="d-flex lh-sm mb-2">
+                    <img src="/itou/images/ico-bicro-marche-geo.svg" alt="" class="mr-2" height="25">
+                    <span>Situé à {{ structure.city }}</span>
+                </li>
+                {% if structure.kind is not null and structure.kind is not empty %}
+                <li class="d-flex lh-sm mb-2">
+                    <img src="/itou/images/ico-bicro-marche-secteur.svg" alt="" class="mr-2" height="25">
+                    <span>
+                            {% if structure.kind == 'ETTI' %}
+                                Intérim
+                            {% elseif structure.kind == 'AI' %}
+                                Mise à disposition du personnel
+                            {% else %}
+                                {{ structure.prestaTypeText('<br />') | raw}}
+                            {% endif %}
+                    </span>
+                </li>
+                {% endif %}
+                </ul>
+            </div>
+        </div>
+</div>                    

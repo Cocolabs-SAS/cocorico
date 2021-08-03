@@ -21,18 +21,20 @@
       <div class="s-header__col s-header__col--nav col d-none d-xl-inline-flex d-xl-flex align-items-center justify-content-end">
         <nav role="navigation">
           <ul>
+            {# NOT YET ! :D
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
-                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
+            #}
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
                     <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
-                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                     </a>
                     {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':'dropdown-menu'} only %}
                 </li>
@@ -45,6 +47,7 @@
                 </li>
             {%- endif -%}
             {# New listing link #}
+            {# Obsolete
             {% if app.session.get('canPublish') %}
                 <li>
                     <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-primary" tabindex="9" rel="noopener">
@@ -52,6 +55,7 @@
                     </a>
                 </li>
             {% endif %}            
+            #}
             {%- if app.user is null -%}
                 <li>
                     <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary btn-ico" rel="noopener">
@@ -74,18 +78,20 @@
       <div id="burgerNav">
         <nav role="navigation">
           <ul>
+            {# NOT YET ! :D
             <li>
                 <a href="{{ path('cocorico_listing_favourite') }}" tabindex="5" rel="noopener" id="h_fav">
                     <span>{{ 'nav.favorites.link'|trans }}</span>
-                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                    <span id="fav-count" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                 </a>                
             </li>
+            #}
             {# User info #}
             {%- if app.user is not null and is_granted("IS_AUTHENTICATED_FULLY") -%}
                 <li id="dashboard-dropdown" class="dropdown">
                     <a id="dashboard-link" class="btn btn-outline-primary" href="{{ path('cocorico_user_dashboard_profile_edit_about_me') }}" tabindex="6" title="My Dashboard" data-toggle="dropdown" role="button" aria-expanded="false" rel="noopener">
                         <span>{{ 'nav.dashboard.link'|trans }}</span>
-                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1"></span>
+                        <span id="nb-unread-msg" class="fs-xs badge badge-marche badge-pill ml-1 hidden-if-empty"></span>
                     </a>
                     {% include '@CocoricoCore/Frontend/Common/_itou_nav.html.twig' with {'nav_dashboard_current':'', 'dropdown_extra_class':''} only %}
                 </li>
@@ -98,6 +104,7 @@
                 </li>
             {%- endif -%}
             {# New listing link #}
+            {# Obsolete
             {% if app.session.get('canPublish') %}
                 <li>
                     <a id="new_offer" href="{{ path('cocorico_listing_new') }}" class="btn btn-outline-primary" tabindex="9" rel="noopener">
@@ -105,6 +112,7 @@
                     </a>
                 </li>
             {% endif %}            
+            #}
             {%- if app.user is null -%}
                 <li>
                     <a id="h_connect" href="{{ path('cocorico_user_register') }}" tabindex="6"  class="btn btn-primary btn-ico" rel="noopener">

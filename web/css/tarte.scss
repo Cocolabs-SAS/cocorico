@@ -47,9 +47,8 @@
 /***
  * Common value
  */
-#tarteaucitron * {
+#tarteaucitron * {  
     zoom: 1;
-    font-family:helvetica
 }
 
 #tarteaucitron .clear {
@@ -87,7 +86,7 @@
 #tarteaucitronRoot * {
     box-sizing: initial;
     color: #333;
-    font-family: sans-serif;
+    font-family: Roboto !important;
     font-size: 14px;
     vertical-align: initial;
 }

@@ -15,6 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Cocorico\CoreBundle\Model\DirectorySearchRequest;
+use Cocorico\CoreBundle\Form\Type\Frontend\DirectoryQuickFilterType;
 
 /**
  * Class HomeController
@@ -37,12 +39,47 @@ class HomeController extends Controller
             $this->getParameter('cocorico.listing_highestrank_cache_age')
         );
 
+        $structures = $this->get("cocorico.directory.manager")->getSomeRandom(4);
+
+        
+
+        $directorySearchRequest = $this->get('cocorico.directory_search_request');
+
+        $form = $this->sortCompaniesForm($directorySearchRequest);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            return new RedirectResponse(
+                $this->generateUrl(
+                    'cocorico_itou_siae_directory',
+                    $form->getData()
+                )
+            );
+        }
+
         return $this->render(
-            'CocoricoCoreBundle:Frontend\Home:index.html.twig',
+            'CocoricoCoreBundle:Frontend\Home:index_itou.html.twig', [
+            'form' => $form->createView(),
+            'structures' => $structures,
+            ]
+        );
+    }
+
+    private function sortCompaniesForm(DirectorySearchRequest $directorySearchRequest)
+    {
+        $form = $this->get('form.factory')->createNamed(
+            '',
+            DirectoryQuickFilterType::class,
+            $directorySearchRequest,
             array(
-                'listings' => $listings->getIterator(),
+                'action' => $this->generateUrl(
+                    'cocorico_itou_siae_directory',
+                    array('page' => 1)
+                ),
+                'method' => 'GET',
             )
         );
+        return $form;
     }
 
     /**

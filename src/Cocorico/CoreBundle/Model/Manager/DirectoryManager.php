@@ -43,6 +43,15 @@ class DirectoryManager extends BaseManager
         $this->maxPerPage = $parameters["directory_max_per_page"];
     }
 
+    public function getSomeRandom($amount)
+    {
+        // Fixme: Make really random
+        $qB = $this->getRepository()
+            ->getSome($amount, rand(0,20), false);
+        $query = $qB->getQuery();
+        return $query->getResult();
+    
+    }
 
     public function listSome($page)
     {

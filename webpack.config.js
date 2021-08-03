@@ -75,6 +75,7 @@ Encore
         './web/js/vendor/hammer.js',
         './web/js/vendor/parsley.min.js',
         './web/js/vendor/jquery.clearsearch.js',
+        './web/js/vendor/bootstrap-multiselect.js',
 
         './web/js/jquery.main.js',
         './web/js/jquery.main-override.js',
@@ -84,6 +85,7 @@ Encore
 
         //'./node_modules/tarteaucitronjs/tarteaucitron.js',
 
+        './web/css/vendor/bootstrap-multiselect.css',
         './web/css/vendor/unslider.css',
         './web/css/vendor/cookie-consent.css',
 

@@ -133,6 +133,15 @@ services:
         tags:
             - { name: form.type }
 
+    cocorico.form.type.directory_quick_search:
+        class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryQuickFilterType
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@event_dispatcher"
+            - parameters:
+        tags:
+            - { name: form.type }
+
     cocorico.form.type.directory_new:
         class: Cocorico\CoreBundle\Form\Type\Frontend\DirectoryType
         arguments:

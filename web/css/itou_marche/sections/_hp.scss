@@ -1,0 +1,52 @@
+.s-hp-01 {
+
+	&__form {
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			left: -30px;
+			top: 50%;
+			width: 100px;
+			height: 100px;
+			border-radius: 100%;
+			background-color: #FFDDDD;
+			z-index: -1;
+			display: none;
+
+			@media (min-width:992px) {
+				display: inline-block;
+			}			
+		}
+
+		&__legend {
+			width: auto;
+			display: inline-block;
+			position: absolute;
+			white-space: nowrap;
+			right: 50%;
+			bottom: -80px;
+			font-size: 27px;
+			background-image: url('/itou/images/ico-hand-arrow-up.svg');
+			background-repeat: no-repeat;
+			background-position: center right;
+			padding-right: 60px;
+			padding-top: 20px;
+			transform: rotate(-5deg);
+			display: none;
+
+			@media (min-width:576px) {
+				display: inline-block;
+			}					
+		}
+	}
+}
+
+#main .s-article-picture-01.has-illustration-bg-01 {
+    /* 
+        Force overide theme setting to avoid negative
+        effect on homepage sector dropdown
+    */
+    overflow:visible;
+}
