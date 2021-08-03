@@ -53,6 +53,10 @@ class DirectoryOffer
      */
     private $directory;
 
+    public function __toString() {
+        return $this->title;
+    }
+
     /**
      * Get id.
      *

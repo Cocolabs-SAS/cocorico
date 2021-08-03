@@ -40,9 +40,6 @@ class HomeController extends Controller
         );
 
         $structures = $this->get("cocorico.directory.manager")->getSomeRandom(4);
-        dump($structures);
-
-        
 
         $directorySearchRequest = $this->get('cocorico.directory_search_request');
 
