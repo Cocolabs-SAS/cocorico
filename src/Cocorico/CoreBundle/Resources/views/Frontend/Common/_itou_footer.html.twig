@@ -14,7 +14,7 @@
       <div class="s-prefooter__col col-12 col-lg-6 d-flex align-items-center">
         <ul class="s-prefooter__gridlist">
           <li><a href="{{ path('cocorico_page_show', { 'slug': 'nav.faq.slug'|trans }) }}" rel="noopener" target="_blank">{{ 'footer.how_it_works.link'|trans }}</a></li>
-          <li><a href="{{ path('cocorico_page_show', { 'slug': 'nav.the_team.slug'|trans }) }}" rel="noopener" target="_blank">{{ 'footer.the_team.link'|trans }}</a></li>
+          <li><a href="/fr/itou/inclusion" rel="noopener" target="_blank">{{ 'footer.the_team.link'|trans }}</a></li>
           <li><a href="{{ path('cocorico_page_show', { 'slug': 'nav.who_we_are.slug'|trans }) }}">{{ 'footer.who_we_are.link'|trans }}</a></li>
           <li><a href="https://github.com/betagouv/itou-cocorico/" rel="noopener" target="_blank" class="is-external">{{ 'Github' }}</a></li>          
         </ul>
@@ -30,9 +30,13 @@
         <div class="s-footer-help__col col-12 col-lg">
           <nav role="navigation">
             <ul>
+              <!-- En attente de page
               <li><a href="#" rel="noopener" target="_blank" class="is-external">Besoin d'aide ?</a></li>
+              -->
               <li><a href="{{ path('cocorico_contact_new') }}" rel="noopener" target="_blank" class="is-external">{{ 'footer.contact_us.link'|trans }}</a></li>
+              <!-- En attente de lien
               <li><a href="#" rel="noopener" target="_blank" class="is-external">Inscription Newsletter</a></li>
+              -->
             </ul>
           </nav>
         </div>
