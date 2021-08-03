@@ -126,14 +126,6 @@ class UserAdmin extends SonataUserAdmin
                     'required' => (!$subject || is_null($subject->getId())),
                 )
             )
-            // ->add(
-            //     'motherTongue',
-            //     'language',
-            //     array(
-            //         'required' => true,
-            //         'disabled' => true
-            //     )
-            // )
             ->end();
 
         //Translations fields
@@ -163,15 +155,6 @@ class UserAdmin extends SonataUserAdmin
                     'label' => false,
                 )
             )
-            // ->add(
-            //     'birthday',
-            //     'birthday',
-            //     array(
-            //         'format' => 'dd - MMMM - yyyy',
-            //         'years' => range(date('Y') - 18, date('Y') - 80),
-            //         'disabled' => true,
-            //     )
-            // )
             ->add(
                 'phonePrefix',
                 null,
@@ -186,93 +169,6 @@ class UserAdmin extends SonataUserAdmin
                     'required' => false,
                 )
             )
-            // ->add(
-            //     'timeZone',
-            //     'timezone',
-            //     array(
-            //         'label' => 'form.time_zone',
-            //         'required' => true,
-            //         'disabled' => true
-            //     ),
-            //     array(
-            //         'translation_domain' => 'cocorico_user',
-            //     )
-            // )
-            // ->add(
-            //     'nationality',
-            //     'country',
-            //     array(
-            //         'disabled' => true,
-            //     )
-            // )
-            // ->add(
-            //     'profession',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //     )
-            // )
-            // ->add(
-            //     'iban',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //         'disabled' => true,
-            //     )
-            // )
-            // ->add(
-            //     'bic',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //         'disabled' => true,
-            //     )
-            // )
-            // ->add(
-            //     'bankOwnerName',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //         'disabled' => true,
-            //     )
-            // )
-            // ->add(
-            //     'bankOwnerAddress',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //         'disabled' => true,
-            //     )
-            // )
-            // ->add(
-            //     'annualIncome',
-            //     null,
-            //     array(
-            //         'required' => false,
-            //     )
-            // )
-            // ->add(
-            //     'feeAsAsker',//Percent
-            //     'integer',
-            //     array(
-            //         'attr' => array(
-            //             'min' => 0,
-            //             'max' => 100,
-            //         ),
-            //         'required' => false,
-            //     )
-            // )
-            // ->add(
-            //     'feeAsOfferer', //Percent
-            //     'integer',
-            //     array(
-            //         'attr' => array(
-            //             'min' => 0,
-            //             'max' => 100,
-            //         ),
-            //         'required' => false,
-            //     )
-            // )
             ->add(
                 'phoneVerified',
                 null,

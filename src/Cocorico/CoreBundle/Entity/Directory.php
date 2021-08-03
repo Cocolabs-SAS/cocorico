@@ -386,6 +386,12 @@ class Directory
     private $isActive;
 
     /**
+     * @ORM\Column(name="is_first_page", type="boolean", nullable=true, options={"default":"0"})
+     * @var bool
+     */
+    private $isFirstPage;
+
+    /**
      * @ORM\Column(name="is_cocontracting", type="boolean", nullable=true)
      * @var bool
      */
@@ -975,6 +981,30 @@ class Directory
     public function getIsActive()
     {
         return $this->isActive;
+    }
+
+    /**
+     * Set isFirstPage.
+     *
+     * @param bool $isFirstPage
+     *
+     * @return Directory
+     */
+    public function setIsFirstPage($isFirstPage)
+    {
+        $this->isFirstPage = $isFirstPage;
+
+        return $this;
+    }
+
+    /**
+     * Get isFirstPage.
+     *
+     * @return bool
+     */
+    public function getIsFirstPage()
+    {
+        return $this->isFirstPage;
     }
 
     /**

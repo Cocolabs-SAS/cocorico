@@ -4,7 +4,6 @@ namespace Cocorico\CoreBundle\Admin;
 
 use Cocorico\CoreBundle\Entity\Directory;
 use Cocorico\CoreBundle\Entity\Listing;
-use Cocorico\CoreBundle\Form\Type\PriceType;
 use Cocorico\CoreBundle\Repository\ListingRepository;
 use Cocorico\UserBundle\Repository\UserRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -16,6 +15,8 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
+use Sonata\AdminBundle\Admin\FieldDescriptionInterface;
+
 
 class DirectoryAdmin extends AbstractAdmin
 {
@@ -62,39 +63,28 @@ class DirectoryAdmin extends AbstractAdmin
         $askerQuery = $offererQuery = $listingQuery = null;
 
         $formMapper
-            ->with('admin.quote.title')
-            ->add(
-                'name',
-                null,
-                array(
-                    'label' => 'Nom',
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'siret',
-                null,
-                array(
-                    'label' => 'Siret',
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'sector',
-                null,
-                array(
-                    'label' => 'Secteurs',
-                    'disabled' => true,
-                )
-            )
-            ->add(
-                'c1Id',
-                null,
-                array(
-                    'label' => 'C1 Identifier',
-                    'disabled' => true,
-                )
-            );
+            ->with('Données Structure SIAE')
+            ->add('isDelisted', null, [ 'label' => 'Masqué' ])
+            ->add('isActive', null, [ 'label' => 'Actif' ])
+            ->add('isFirstPage', null, [ 'label' => 'A la une' ])
+            ->add( 'name', null, [ 'label' => 'Raison sociale', 'disabled' => true])
+            ->add( 'brand', null, ['label' => 'Enseigne', 'disabled' => true])
+            ->add( 'siret', null, ['label' => 'Siret', 'disabled' => true])
+            ->add( 'naf', null, ['label' => 'Naf', 'disabled' => true])
+            ->add( 'nature', null, [ 'label' => 'Type', 'disabled' => true])
+            ->add( 'c1Id', null, ['label' => 'Identifiant C1', 'disabled' => true])
+            ->add( 'city', null, [ 'label' => 'Ville', 'disabled' => true])
+            ->add( 'postCode', null, [ 'label' => 'Code postal', 'disabled' => true])
+            //->add( 'latitude', null, [ 'label' => 'Latitude', 'disabled' => true])
+            //->add( 'longitude', null, [ 'label' => 'Longitude', 'disabled' => true])
+            ->add('employees', null, [ 'label' => 'Employés' ])
+            ->add('range', null, [ 'label' => 'Périmètre Geographique' ])
+            ->add('polRange', null, [ 'label' => 'Périmètre Politique' ])
+            ->add('description', null, [ 'label' => 'Description' ])
+            ->add('users', null, [ 'label' => 'Gestionnaires' ])
+            ->add('labels', null, [ 'label' => 'Labels' ])
+            ->add('offers', null, [ 'label' => 'Offres' ])
+            ;
 
 
         if ($Directory->getC4Id()) {
@@ -123,6 +113,9 @@ class DirectoryAdmin extends AbstractAdmin
             ->add('id')
             ->add('siret')
             ->add('name')
+            ->add('isDelisted', null, ['label'=> 'Masqué'])
+            ->add('isActive', null, ['label'=> 'Actif'])
+            ->add('isFirstPage', null, [ 'label' => 'A la une'])
             ->add(
                 'updatedAt',
                 'doctrine_orm_callback',
@@ -154,55 +147,13 @@ class DirectoryAdmin extends AbstractAdmin
     {
         $listMapper
             ->addIdentifier('id')
-            ->add(
-                'c1Id',
-                null,
-                array(
-                    'label' => 'C1 Identifier',
-                )
-            )
-            ->add(
-                'name',
-                null,
-                array(
-                    'label' => 'Nom',
-                )
-            )
-            ->add(
-                'kind',
-                null,
-                array(
-                    'label' => 'Type',
-                )
-            )
-            ->add(
-                'c1Source',
-                null,
-                array(
-                    'label' => 'Source',
-                )
-            )
-            ->add(
-                'siret',
-                null,
-                array(
-                    'label' => 'siret',
-                )
-            )
-            ->add(
-                'siret_is_valid',
-                null,
-                array(
-                    'label' => 'siret valide',
-                )
-            )
-            ->add(
-                'isDelisted',
-                null,
-                array(
-                    'label' => 'Delisted'
-                )
-            );
+            ->add( 'name', null, [ 'label' => 'Raison sociale'])
+            ->add( 'siret', null, [ 'label' => 'Siret'])
+            ->add( 'nature', null, [ 'label' => 'Type'])
+            ->add( 'isActive', null, [ 'label' => 'Actif'])
+            ->add( 'isDelisted', null, [ 'label' => 'Masqué'])
+            ->add( 'users', null, [ 'label' => 'Gestionnaires'])
+        ;
 
         $listMapper->add(
             '_action',

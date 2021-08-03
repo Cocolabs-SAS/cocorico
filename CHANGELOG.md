@@ -9,6 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.3] - (2021-08-02)
+- Refactor interface administration : liste structures SIAE
+- Refactor interface administration : fiche structures SIAE
+- Ajout colonne "à la une" pour structures SIAE
+
 ### [6.2] - (2021-08-02)
 - Page d'accueil thème ITOU
 - Moteur de recherche sur page d'accueil
