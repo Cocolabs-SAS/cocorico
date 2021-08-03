@@ -84,6 +84,7 @@ class DirectoryAdmin extends AbstractAdmin
             ->add('users', null, [ 'label' => 'Gestionnaires' ])
             ->add('labels', null, [ 'label' => 'Labels' ])
             ->add('offers', null, [ 'label' => 'Offres' ])
+            ->add('networks', null, [ 'label' => 'Réseaux' ])
             ;
 
 

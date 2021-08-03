@@ -72,6 +72,13 @@ class Network
     private $structures;
 
 
+    public function __toString() {
+        if ($this->brand) {
+            return $this->brand;
+        }
+        return $this->name;
+    }
+
     /**
      * Get id.
      *
