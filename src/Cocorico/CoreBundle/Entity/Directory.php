@@ -218,6 +218,10 @@ class Directory
         "Anciens territoires d'outre-mer",
     );
 
+    public function __toString() {
+        return $this->name;
+    }
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer", nullable=false)

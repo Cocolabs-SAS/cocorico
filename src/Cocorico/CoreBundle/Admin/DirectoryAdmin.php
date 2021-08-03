@@ -113,33 +113,35 @@ class DirectoryAdmin extends AbstractAdmin
         $datagridMapper
             ->add('id')
             ->add('siret')
-            ->add('name')
+            ->add('name', null, ['label'=>'raison sociale'])
+            ->add('kind', 'doctrine_orm_string', ['label'=>'type'], 'choice', ['choices'=> array_flip(Directory::$kindFullString)])
             ->add('isDelisted', null, ['label'=> 'Masqué'])
             ->add('isActive', null, ['label'=> 'Actif'])
             ->add('isFirstPage', null, [ 'label' => 'A la une'])
-            ->add(
-                'updatedAt',
-                'doctrine_orm_callback',
-                array(
-                    'label' => 'admin.quote.updated_at.label',
-                    'callback' => function ($queryBuilder, $alias, $field, $value) {
-                        /** @var \DateTime $date */
-                        $date = $value['value'];
-                        if (!$date) {
-                            return false;
-                        }
+            //->add(
+            //    'updatedAt',
+            //    'doctrine_orm_callback',
+            //    array(
+            //        'label' => 'admin.quote.updated_at.label',
+            //        'callback' => function ($queryBuilder, $alias, $field, $value) {
+            //            /** @var \DateTime $date */
+            //            $date = $value['value'];
+            //            if (!$date) {
+            //                return false;
+            //            }
 
-                        $queryBuilder
-                            ->andWhere("DATE_FORMAT($alias.updatedAt,'%Y-%m-%d') = :updatedAt")
-                            ->setParameter('updatedAt', $date->format('Y-m-d'));
+            //            $queryBuilder
+            //                ->andWhere("DATE_FORMAT($alias.updatedAt,'%Y-%m-%d') = :updatedAt")
+            //                ->setParameter('updatedAt', $date->format('Y-m-d'));
 
-                        return true;
-                    },
-                    'field_type' => 'sonata_type_date_picker',
-                    'field_options' => array('format' => 'dd/MM/yyyy'),
-                ),
-                null
-            );
+            //            return true;
+            //        },
+            //        'field_type' => 'sonata_type_date_picker',
+            //        'field_options' => array('format' => 'dd/MM/yyyy'),
+            //    ),
+            //    null
+            //)
+            ;
 
     }
 
@@ -150,7 +152,7 @@ class DirectoryAdmin extends AbstractAdmin
             ->addIdentifier('id')
             ->add( 'name', null, [ 'label' => 'Raison sociale'])
             ->add( 'siret', null, [ 'label' => 'Siret'])
-            ->add( 'nature', null, [ 'label' => 'Type'])
+            ->add( 'kind', null, [ 'label' => 'Type'])
             ->add( 'isActive', null, [ 'label' => 'Actif'])
             ->add( 'isDelisted', null, [ 'label' => 'Masqué'])
             ->add( 'users', null, [ 'label' => 'Gestionnaires'])
