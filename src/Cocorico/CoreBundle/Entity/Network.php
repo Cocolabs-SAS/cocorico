@@ -64,13 +64,20 @@ class Network
     private $siret;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="networks", cascade={"persist", "remove"})
      * @ORM\OrderBy({"createdAt" = "desc"})
      *
      * @var Structures[]
      */
     private $structures;
 
+
+    public function __toString() {
+        if ($this->brand) {
+            return $this->brand;
+        }
+        return $this->name;
+    }
 
     /**
      * Get id.

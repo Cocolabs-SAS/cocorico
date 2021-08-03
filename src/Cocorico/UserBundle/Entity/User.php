@@ -510,7 +510,7 @@ class User extends BaseUser implements ParticipantInterface
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Cocorico\CoreBundle\Entity\Directory", mappedBy="users", cascade={"persist", "remove"})
      * @ORM\OrderBy({"createdAt" = "desc"})
      *
      * @var Structures[]

@@ -136,37 +136,37 @@ services:
             - [ setLocales, ["%cocorico.locales%"]]
             - [ setBundlesEnabled, ["%kernel.bundles%"]]
 
-    sonata.admin.booking_bank_wire:
-        class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bank Wires"}
-        arguments:
-            - ~
-            - Cocorico\CoreBundle\Entity\BookingBankWire
-            - ~
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, ["%cocorico.locales%"]]
-            - [ setTimeUnit, ["%cocorico.time_unit%"]]
-            - [ setCurrency, ["%cocorico.currency%"]]
-            - [ setBookingBankWireManager, ["@cocorico.booking_bank_wire.manager"]]
-            - [ setBundlesEnabled, ["%kernel.bundles%"]]
-            - [ setTimezone, ["%cocorico.time_zone%"]]
+              # sonata.admin.booking_bank_wire:
+              #     class: Cocorico\CoreBundle\Admin\BookingBankWireAdmin
+              #     tags:
+              #         - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Bank Wires"}
+              #     arguments:
+              #         - ~
+              #         - Cocorico\CoreBundle\Entity\BookingBankWire
+              #         - ~
+              #     calls:
+              #         - [ setTranslationDomain, [SonataAdminBundle]]
+              #         - [ setLocales, ["%cocorico.locales%"]]
+              #         - [ setTimeUnit, ["%cocorico.time_unit%"]]
+              #         - [ setCurrency, ["%cocorico.currency%"]]
+              #         - [ setBookingBankWireManager, ["@cocorico.booking_bank_wire.manager"]]
+              #         - [ setBundlesEnabled, ["%kernel.bundles%"]]
+              #         - [ setTimezone, ["%cocorico.time_zone%"]]
 
-    sonata.admin.booking_payin_refund:
-        class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Payin Refunds" }
-        arguments:
-            - ~
-            - Cocorico\CoreBundle\Entity\BookingPayinRefund
-            - ~
-        calls:
-            - [ setTranslationDomain, [SonataAdminBundle]]
-            - [ setLocales, ["%cocorico.locales%"]]
-            - [ setTimeUnit, ["%cocorico.time_unit%"]]
-            - [ setBundlesEnabled, ["%kernel.bundles%"]]
-            - [ setTimezone, ["%cocorico.time_zone%"]]
+              # sonata.admin.booking_payin_refund:
+              #     class: Cocorico\CoreBundle\Admin\BookingPayinRefundAdmin
+              #     tags:
+              #         - { name: sonata.admin, manager_type: orm, group: "Bookings", label: "Payin Refunds" }
+              #     arguments:
+              #         - ~
+              #         - Cocorico\CoreBundle\Entity\BookingPayinRefund
+              #         - ~
+              #     calls:
+              #         - [ setTranslationDomain, [SonataAdminBundle]]
+              #         - [ setLocales, ["%cocorico.locales%"]]
+              #         - [ setTimeUnit, ["%cocorico.time_unit%"]]
+              #         - [ setBundlesEnabled, ["%kernel.bundles%"]]
+              #         - [ setTimezone, ["%cocorico.time_zone%"]]
 
     sonata.admin.booking_user_address:
         class: Cocorico\CoreBundle\Admin\BookingUserAddressAdmin

@@ -45,11 +45,22 @@ class DirectoryManager extends BaseManager
 
     public function getSomeRandom($amount)
     {
-        // Fixme: Make really random
+        // Any structure beyond 3*[amount] will
+        // never be selected : if displaying 4
+        // structures, don't set more then 12 to
+        // be displayed (this is to avoid overloading DB)
+        // (Doctrine doesn't provide random queries)
         $qB = $this->getRepository()
-            ->getSome($amount, rand(0,20), false);
+            ->getSome($amount * 3, 0, false)
+            ->andwhere('d.isFirstPage = true');
         $query = $qB->getQuery();
-        return $query->getResult();
+        $full_list = $query->getResult();
+        $keys = array_rand($full_list, $amount);
+        $output = [];
+        foreach ($keys as $key) {
+            $output[] = $full_list[$key];
+        }
+        return $output;
     
     }
 
