@@ -137,34 +137,30 @@ class DirectoryController extends Controller
 
     # }
 
-    # /**
-    #  * @param  Listing $listing
-    #  * @return \Symfony\Component\HttpFoundation\Response
-    #  */
-    # public function completionNoticeAction(Listing $listing)
-    # {
-    #     $listingCompletion = $listing->getCompletionInformations(
-    #         $this->getParameter("cocorico.listing_img_min")
-    #     );
-    #     $userCompletion = $listing->getUser()->getCompletionInformations(
-    #         $this->getParameter("cocorico.user_img_min")
-    #     );
-
-    #     return $this->render(
-    #         '@CocoricoCore/Dashboard/Listing/_completion_notice.html.twig',
-    #         array(
-    #             'listing_id' => $listing->getId(),
-    #             'listing_title' => $listingCompletion["title"],
-    #             'listing_desc' => $listingCompletion["description"],
-    #             // 'listing_price' => $listingCompletion["price"],
-    #             'listing_price' => 1,
-    #             'listing_image' => $listingCompletion["image"],
-    #             'listing_characteristics' => $listingCompletion["characteristic"],
-    #             'profile_photo' => $userCompletion["image"],
-    #             'profile_desc' => $userCompletion["description"],
-    #         )
-    #     );
-    # }
+    /**
+     * @param  Directory $directory
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function completionNoticeAction(Directory $directory)
+    {
+        $directoryCompletion = $directory->getCompletionInformations();
+        return $this->render(
+            '@CocoricoCore/Dashboard/Directory/_completion_notice.html.twig',
+            array(
+                'directory_id' => $directory->getId(),
+                'directory_desc' => $directoryCompletion["description"],
+                'directory_website' => $directoryCompletion["website"],
+                'directory_prestaType' => $directoryCompletion["prestaType"],
+                'directory_cocontracting' => $directoryCompletion["cocontracting"],
+                'directory_range' => $directoryCompletion["range"],
+                'directory_logos' => $directoryCompletion["logos"],
+                'directory_clientImages' => $directoryCompletion["clientImages"],
+                'directory_labels' => $directoryCompletion["labels"],
+                'directory_offers' => $directoryCompletion["offers"],
+                'directory_sectors' => $directoryCompletion["sectors"],
+            )
+        );
+    }
 
     /**
      * Edits Directory presentation.

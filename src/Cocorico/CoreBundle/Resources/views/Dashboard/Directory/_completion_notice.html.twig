@@ -1,0 +1,71 @@
+{% trans_default_domain 'cocorico_listing' %}
+
+{% if directory_website == 0 or directory_desc == 0 or directory_prestaType == 0 or directory_logos == 0 or directory_clientImages == 0 or directory_cocontracting == 0 or directory_labels == 0  or directory_offers == 0 or directory_sectors == 0 or directory_range == 0 %}
+    <div role="alert" class="alert alert-warning list-comma">
+        <i class="ico exclamation">!</i>
+
+        <p>
+            Améliorez la visibilité de votre structure en renseignant ces informations :
+
+            {% if directory_website == 0 %}
+                <span>
+                Site web
+                </span>
+            {% endif %}
+
+            {% if directory_desc == 0 %}
+                <span>
+                    Présentation
+                </span>
+            {% endif %}
+
+            {% if directory_prestaType == 0 %}
+                <span>
+                    Type(s) de prestation(s)
+                </span>
+            {% endif %}
+
+            {% if directory_logos == 0 %}
+                <span>
+                    Logo de la structure
+                </span>
+            {% endif %}
+
+            {% if directory_clientImages == 0 %}
+                <span>
+                    Références client
+                </span>
+            {% endif %}
+
+            {% if directory_cocontracting == 0 %}
+                <span>
+                    Co-traitance
+                </span>
+            {% endif %}
+
+            {% if directory_labels == 0 %}
+                <span>
+                    Labels et certifications
+                </span>
+            {% endif %}
+
+            {% if directory_offers == 0 %}
+                <span>
+                    Offres de prestation
+                </span>
+            {% endif %}
+
+            {% if directory_sectors == 0 %}
+                <span>
+                    Secteurs d'activité
+                </span>
+            {% endif %}
+
+            {% if directory_range == 0 %}
+                <span>
+                    Périmètre d'activité
+                </span>
+            {% endif %}
+        </p>
+    </div>
+{% endif %}

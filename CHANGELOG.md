@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.4] - (2021-08-0x)
+- Indicateur complétion fiche structure
+
 ### [6.3] - (2021-08-03)
 - Refactor interface administration : Liste structures SIAE
 - Refactor interface administration : Fiche structures SIAE
