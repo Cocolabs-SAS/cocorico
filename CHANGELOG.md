@@ -9,7 +9,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
-### [6.4] - (2021-08-0x)
+### [6.4] - (2021-08-05)
 - Indicateur complétion fiche structure
 - Wording recherche "structures interviennent sur"
 - Correction modale intrusive
