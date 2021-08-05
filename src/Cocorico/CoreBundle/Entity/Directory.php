@@ -2162,4 +2162,29 @@ class Directory
     {
         return $this->isCoContracting;
     }
+
+    /**
+     * @param int  $minImages
+     * @param bool $strict
+     *
+     * @return array
+     */
+    public function getCompletionInformations($strict = true)
+    {
+        return [
+            "description" => $this->getDescription() ? 1 : 0,
+            "website" => $this->getWebsite() ? 1 : 0,
+            "prestaType" => $this->getPrestaType()->get() ? 1 : 0,
+            "cocontracting" => $this->getIsCoContracting() ? 1 : 0,
+            "range" => $this->getPolRange() || $this->getRange() ? 1 : 0,
+            "logos" => count($this->getImages()) > 0,
+            "clientImages" => count($this->getClientImages()) > 0,
+            "labels" => count($this->getLabels()) > 0,
+            "offers" => count($this->getOffers()) > 0,
+            "sectors" => count($this->getDirectoryListingCategories()) > 0,
+
+        ];
+    }
+
+
 }

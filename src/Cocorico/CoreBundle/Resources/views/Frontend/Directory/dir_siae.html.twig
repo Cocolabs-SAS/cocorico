@@ -161,7 +161,15 @@
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
-                <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} correspondent à vos critères
+                <div class="meta">
+                    {% if request.city %}
+                        {{ entries.count }} structures interviennent sur {{ request.city }}
+                    {% elseif request.area %}
+                        {{ entries.count }} structures interviennent sur/en "{{ request.area }}"
+                    {% else %}
+                        {{ entries.count }} structures{% if withAntenna %}
+                        et leurs antennes{% endif %} correspondent à vos critères
+                    {% endif %}
                 </div>
                 <div class="row dir_list-row">
                     <div class="col-sm-8">
@@ -326,7 +334,7 @@
                             <strong class="title">
                             Plus de {{ entries.count }} prestataires inclusifs répondent à votre recherche.
                             </strong>
-                            <p class="mt-2">Pour accéder aux résultats, dites-nous  vous êtes :
+                            <p class="mt-2">Pour accéder aux résultats, dites-nous si vous êtes :
                             <ul>
                                 <li><a href="#" data-usr="buyer">Une entreprise ou une institution qui souhaite augmenter ses achats inclusifs</a></li>
                                 <li><a href="#" data-usr="siae">Une structure d’insertion ou du handicap</a></li>

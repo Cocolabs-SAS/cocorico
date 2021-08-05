@@ -16,12 +16,10 @@
         {{ form_errors(form) }}
         {% include 'CocoricoCoreBundle:Frontend/Common:_flash.html.twig' %}
 
-    {# FIXME: Build the completition notice
         {{
         render(controller('CocoricoCoreBundle:Dashboard/Offerer/Directory:completionNotice',
-        {'structure': structure})) }}
+        {'directory': structure})) }}
 
-    #}
         <!-- Tab panes -->
         <div class="tab-content">
             <!-- tab presentation -->

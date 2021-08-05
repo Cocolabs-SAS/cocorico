@@ -9,6 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.4] - (2021-08-05)
+- Indicateur complétion fiche structure
+- Wording recherche "structures interviennent sur"
+- Correction modale intrusive
+
 ### [6.3] - (2021-08-03)
 - Refactor interface administration : Liste structures SIAE
 - Refactor interface administration : Fiche structures SIAE
