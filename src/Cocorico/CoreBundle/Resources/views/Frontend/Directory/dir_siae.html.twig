@@ -161,7 +161,15 @@
                 {{ form_end(form) }}
             </div>
             <div id="dir_list">
-                <div class="meta">{{ entries.count }} structures{% if withAntenna %} et leurs antennes{% endif %} correspondent à vos critères
+                <div class="meta">
+                    {% if request.city %}
+                        {{ entries.count }} structures interviennent sur {{ request.city }}
+                    {% elseif request.area %}
+                        {{ entries.count }} structures interviennent sur/en "{{ request.area }}"
+                    {% else %}
+                        {{ entries.count }} structures{% if withAntenna %}
+                        et leurs antennes{% endif %} correspondent à vos critères
+                    {% endif %}
                 </div>
                 <div class="row dir_list-row">
                     <div class="col-sm-8">
