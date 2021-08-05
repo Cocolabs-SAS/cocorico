@@ -2171,7 +2171,6 @@ class Directory
      */
     public function getCompletionInformations($strict = true)
     {
-        dump($this->getPrestaType());
         return [
             "description" => $this->getDescription() ? 1 : 0,
             "website" => $this->getWebsite() ? 1 : 0,
