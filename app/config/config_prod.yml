@@ -53,9 +53,9 @@ monolog:
 #            level: debug
 #            channels: [!mangopay]
         console:
-            type:  console
-            level:    info
-            channels: ["!event", "!doctrine"]
+            type: console
+            level: info
+            channels: ["!event", "!doctrine", "!console"]
 
 
 swiftmailer:
