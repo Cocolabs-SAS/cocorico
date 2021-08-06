@@ -19,6 +19,9 @@ monolog:
             type:               fingers_crossed
             action_level:       critical
             handler:            grouped
+        clever_logs:
+            type:   error_log
+            level:  info
         grouped:
             type:               group
             members:            [rotated, swift]
