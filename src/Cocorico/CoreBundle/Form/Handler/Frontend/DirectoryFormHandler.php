@@ -125,14 +125,19 @@ class DirectoryFormHandler
     {
         //Files to upload
         $imagesUploaded = $this->request->request->get("directory");
-        $imagesUploaded = $imagesUploaded["clientImage"]["uploaded"];
 
-        if ($imagesUploaded) {
-            $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));
-            $directory = $this->directoryManager->addClientImages(
-                $directory,
-                $imagesUploadedArray
-            );
+        if (array_key_exists('clientImage', $imagesUploaded) &&
+            array_key_exists('uploaded', $imagesUploaded['clientImage'])
+        ) {
+            $imagesUploaded = $imagesUploaded["clientImage"]["uploaded"];
+
+            if ($imagesUploaded) {
+                $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));
+                $directory = $this->directoryManager->addClientImages(
+                    $directory,
+                    $imagesUploadedArray
+                );
+            }
         }
 
         return $directory;

@@ -36,7 +36,7 @@ monolog:
             level:  debug
             channels: ["!event"]
         console:
-            type:   console
+            type:     console
             channels: ["!event", "!doctrine"]
         # uncomment to get logging in your browser
         # you may have to allow bigger header sizes in your Web server configuration
