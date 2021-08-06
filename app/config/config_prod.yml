@@ -54,6 +54,8 @@ monolog:
 #            channels: [!mangopay]
         console:
             type:  console
+            level:    info
+            channels: ["!event", "!doctrine"]
 
 
 swiftmailer:

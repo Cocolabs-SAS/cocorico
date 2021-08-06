@@ -9,6 +9,10 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.5] - (2021-08-06)
+- Correctif formulaire structure siae
+- Ajout log drain kibana pour test
+
 ### [6.4] - (2021-08-05)
 - Indicateur complétion fiche structure
 - Wording recherche "structures interviennent sur"
