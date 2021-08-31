@@ -17,8 +17,8 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        width:80%;
-        padding: 0 .4em 0;
+        padding: .8rem 1rem;
+        font-size: 1rem;
     }
 
     .multiselect-container {
@@ -41,12 +41,10 @@
 
         &.dropdown-menu {
             background-color:#fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             width:auto;
             max-width: 150%;
-            min-width:100%;
-            min-width:16rem;
-            padding: 0 4px 0;
+            min-width:100% !important;
+            padding: 0 1rem;
 
 
             > li > a  {
@@ -82,14 +80,8 @@
 
 #dir_form button.multiselect {
     display: block;
-    width:100%;
-    height:50px;
     text-align: left;
-    background-color: #fff;
-    color: #3f3e62;
-    border: 1px solid #999baf;
-    margin:0;
-    background-position: right 10px center;
+    background-position: right 1rem center;
     background-repeat: no-repeat;    
-    background-image: url('/images/dir_form_ico_shape.png');    
+    background-image: url('/itou/images/ico-file-list-2-line.svg');    
 }
