@@ -12022,55 +12022,6 @@
             "time": "2020-12-11T09:56:16+00:00"
         },
         {
-            "name": "hpatoio/deploy-bundle",
-            "version": "1.5.3",
-            "target-dir": "Hpatoio/DeployBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/hpatoio/DeployBundle.git",
-                "reference": "018e48c0c26bf15486c7e159f5f5a160c67b5de3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/hpatoio/DeployBundle/zipball/018e48c0c26bf15486c7e159f5f5a160c67b5de3",
-                "reference": "018e48c0c26bf15486c7e159f5f5a160c67b5de3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.0|~3.0"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-0": {
-                    "Hpatoio\\DeployBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "CC-BY-SA-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Simone Fumagalli",
-                    "email": "simone@iliveinperego.com",
-                    "homepage": "http://www.iliveinperego.com/",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Easy deploy via rsync. Porting of Symfony 1 project:deploy command.",
-            "homepage": "http://github.com/hpatoio/DeployBundle",
-            "keywords": [
-                "command",
-                "deploy"
-            ],
-            "support": {
-                "issues": "https://github.com/hpatoio/DeployBundle/issues",
-                "source": "https://github.com/hpatoio/DeployBundle/tree/master"
-            },
-            "time": "2016-02-18T22:01:11+00:00"
-        },
-        {
             "name": "instaclick/php-webdriver",
             "version": "1.4.7",
             "source": {

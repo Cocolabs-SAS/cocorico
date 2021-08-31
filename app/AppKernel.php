@@ -67,7 +67,6 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Hpatoio\DeployBundle\DeployBundle();
             $bundles[] = new \Symfony\Bundle\MakerBundle\MakerBundle();
 
             if ('dev' === $this->getEnvironment()) {
