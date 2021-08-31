@@ -67,7 +67,7 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), array('dev', 'test', 'staging'), true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
+            // $bundles[] = new Symfony\Bundle\MakerBundle\MakerBundle();
 
             if ('dev' === $this->getEnvironment()) {
                 # $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
