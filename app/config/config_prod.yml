@@ -19,21 +19,17 @@ monolog:
             type:               fingers_crossed
             action_level:       critical
             handler:            grouped
-        clever_logs:
-            type:   error_log
-            level:  info
+            # Disabling logs, testing container stability
+            # clever_logs:
+            #     type:   error_log
+            #     level:  info
         grouped:
             type:               group
             members:            [rotated, swift]
-#            members:            [streamed, swift]
         rotated:
             type:               rotating_file
             path:               "%kernel.logs_dir%/%kernel.environment%.log"
             level:              debug
-#        streamed:
-#            type:               stream
-#            path:               "%kernel.logs_dir%/%kernel.environment%.log"
-#            level:              debug
         swift:
             type:               swift_mailer
             from_email:         "%cocorico.from_email%"

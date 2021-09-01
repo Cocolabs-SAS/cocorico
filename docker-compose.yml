@@ -1,5 +1,8 @@
 version: "3.7"
    
+volumes:
+    mariadb-data:
+
 services:
   mariadb:
     container_name: bitoubi_mysql
@@ -15,7 +18,7 @@ services:
     networks:
       - cocorico 
     volumes:
-      - mariadb_data:/var/lib/mysql
+      - mariadb-data:/var/lib/mysql:rw
 
   bitoubi:
     container_name: bitoubi_symfony
@@ -47,9 +50,6 @@ services:
       - "9090:9090"
     depends_on:
       - mariadb
-
-volumes:
-    mariadb_data:
 
 networks:
     cocorico:

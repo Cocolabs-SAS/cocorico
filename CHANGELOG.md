@@ -9,6 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.6] - (2021-09-01)
+- Correction des dépendances
+- README mis à jour (détails docker)
+- Correctif crash DB vide
+
 ### [6.5] - (2021-08-06)
 - Correctif formulaire structure siae
 - Ajout log drain kibana pour test
