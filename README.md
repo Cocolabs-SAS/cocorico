@@ -57,6 +57,19 @@ $ docker exec -it bitoubi_symfony /bin/bash
 $ mysql -h $SQL_HOST -u $SQL_USER -p cocorico
 ```
 
+##### :danger: En cas de comportement inattendu de docker :
+Certains fichiers de configuration de l'environnement ne sont pas dynamiquement partagées entre l'hôte et le docker.
+
+Pour raffraîchir entièrement les conteneurs docker, il convient de les reconstruire :
+```
+# Reconstruire l'ensemble
+$ docker-compose build --parallel
+
+# Reconstruire un conteneur en particulier
+$ docker-compose build bitoubi
+
+```
+
 #### Autres options
 D'autres options sont possibles, surtout si vous avez un server mysql de disponible.
 
