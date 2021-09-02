@@ -9,6 +9,13 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.7] - (2021-09-02)
+- Ajout Chatbot CRISP
+- Correctif bug adoption de structure
+- Retrait mentions régions XP
+- Retrait lien vers les offres (anciennes annonces)
+- Correction erreur typo
+
 ### [6.6] - (2021-09-01)
 - Correction des dépendances
 - README mis à jour (détails docker)

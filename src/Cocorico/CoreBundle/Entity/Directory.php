@@ -152,7 +152,7 @@ class Directory
         self::STRUCT_ETTI => 'Entreprise de travail temporaire d\'insertion (ETTI)',
         self::STRUCT_EATT => 'Enterprises adaptées de travail temporaire (EATT)',
         self::STRUCT_ACI => 'Atelier et chantier d\'insertion (ACI)',
-        self::STRUCT_AI => 'Assocation intermédiaire (AI)',
+        self::STRUCT_AI => 'Association intermédiaire (AI)',
         self::STRUCT_GEIQ => 'Groupement d\'employeurs pour l\'insertion et la qualification (GEIQ)',
     );
 
