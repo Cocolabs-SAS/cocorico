@@ -22,6 +22,8 @@ yarn install && yarn encore production
 chmod -R 777 /cocorico/var
 export ITOU_ENV=local_dev
 
+sleep 1
+
 # Run server & watch CSS updates
 /home/cocorico/.symfony/bin/symfony server:start --no-tls --port $HOST_PORT &
 yarn encore dev --watch
