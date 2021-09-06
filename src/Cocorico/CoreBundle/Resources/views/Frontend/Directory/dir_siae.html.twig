@@ -398,17 +398,14 @@
                 modal.find('a').on('click', (e) => {
                     // Only set cookie if button clicked
                     let type = $(e.target).data('usr');
-                    document.cookie = `${COOKIE_NAME}=${type}; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure`;
+                    document.cookie = `${COOKIE_NAME}=${type}; expires=Fri, 31 Dec 9999 23:59:59 GMT; path=/; Secure`;
 
                     if (typeof track === "function") {
                         track('', Steps.USER_TYPE, {'type': type});
                     }
                     modal.modal('hide');
                 })
-            } else {
-                const cookieValue = document.cookie.split('; ').find(row => row.startsWith(`${COOKIE_NAME}=`)).split('=')[1];
-
-            }
+            } 
         });
     </script>
  
