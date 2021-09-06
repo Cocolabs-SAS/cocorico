@@ -9,6 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.8] - (2021-09-06)
+- Correctif theme itou et tarteaucitron
+- Correctif bouton recherche sur page d'accueil
+- Modale : valeur cookie récupérable et intégré au tracker
+
 ### [6.7] - (2021-09-02)
 - Ajout Chatbot CRISP
 - Correctif bug adoption de structure

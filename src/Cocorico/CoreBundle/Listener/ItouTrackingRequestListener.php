@@ -23,6 +23,8 @@ class ItouTrackingRequestListener
 
         $request = $event->getRequest();
         $session = $request->getSession();
+        $cookies = $request->cookies;
+
 
 
         $uri = $request->getPathInfo();
@@ -44,9 +46,18 @@ class ItouTrackingRequestListener
             $payload['cmp'] = $campaign_id; 
         }
 
+        if ($cookies->has('leMarcheTypeUsagerV2'))
+        {
+            $payload['user_cookie_type'] = $cookies->get('leMarcheTypeUsagerV2');
+        }
+
         $client_context = [
             'referer' => $request->headers->get('referer'),
             'user_agent' => $request->headers->get('User-Agent'),
+        ];
+
+        $server_context = [
+            'client_ip' => $request->headers->get('X-Forwarded-For'),
         ];
 
         $this->tracker->track(
@@ -55,6 +66,7 @@ class ItouTrackingRequestListener
             $payload,
             $session,
             $client_context,
+            $server_context,
         );
     }
 }

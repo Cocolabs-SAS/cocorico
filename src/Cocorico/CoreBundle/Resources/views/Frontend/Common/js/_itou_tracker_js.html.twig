@@ -40,6 +40,12 @@ function computeRequestBody(page, action, metaIn) {
     meta['is_admin'] = window.isAdmin;
     meta['user_type'] = window.uType;
 
+    const COOKIE_NAME = 'leMarcheTypeUsagerV2';
+    if (document.cookie.split('; ').find(row => row.startsWith(COOKIE_NAME))) {
+        const cookieValue = document.cookie.split('; ').find(row => row.startsWith(`${COOKIE_NAME}=`)).split('=')[1];
+        meta['user_cookie_type'] = cookieValue;
+    }
+
     return {
         _v:VERSION,
         timestamp: timeNow.toISOString(),
