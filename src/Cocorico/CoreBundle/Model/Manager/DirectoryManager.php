@@ -55,11 +55,15 @@ class DirectoryManager extends BaseManager
             ->andwhere('d.isFirstPage = true');
         $query = $qB->getQuery();
         $full_list = $query->getResult();
-        $keys = array_rand($full_list, $amount);
         $output = [];
-        foreach ($keys as $key) {
-            $output[] = $full_list[$key];
+
+        if (count($full_list) > 0) {
+            $keys = array_rand($full_list, $amount);
+            foreach ($keys as $key) {
+                $output[] = $full_list[$key];
+            }
         }
+
         return $output;
     
     }

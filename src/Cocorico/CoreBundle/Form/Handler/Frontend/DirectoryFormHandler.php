@@ -103,9 +103,11 @@ class DirectoryFormHandler
     {
         //Files to upload
         $imagesUploaded = $this->request->request->get("directory");
-        $imagesUploaded = $imagesUploaded["image"]["uploaded"];
 
-        if ($imagesUploaded) {
+        if ($imagesUploaded && array_key_exists('image', $imagesUploaded) &&
+            array_key_exists('uploaded', $imagesUploaded['image'])
+        ) {
+            $imagesUploaded = $imagesUploaded["image"]["uploaded"];
             $imagesUploadedArray = explode(",", trim($imagesUploaded, ","));
             $directory = $this->directoryManager->addImages(
                 $directory,
@@ -126,7 +128,7 @@ class DirectoryFormHandler
         //Files to upload
         $imagesUploaded = $this->request->request->get("directory");
 
-        if (array_key_exists('clientImage', $imagesUploaded) &&
+        if ($imagesUploaded && array_key_exists('clientImage', $imagesUploaded) &&
             array_key_exists('uploaded', $imagesUploaded['clientImage'])
         ) {
             $imagesUploaded = $imagesUploaded["clientImage"]["uploaded"];

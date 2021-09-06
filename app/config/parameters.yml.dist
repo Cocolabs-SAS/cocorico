@@ -49,13 +49,16 @@ parameters:
     #Google analytics code
     cocorico.google_analytics: UA-64445856-1
 
-    #Hotjar analytics parmeters
+    #Hotjar analytics parameters
     cocorico.hotjar_id: ~
+
+    #Crisp chat parameters
+    cocorico.crisp_id: ~
 
     #Tarteaucitron integration
     cocorico.tarteaucitron: ~
 
-    #Matomo analytics parmeters
+    #Matomo analytics parameters
     cocorico.matomo_host: ~
     cocorico.matomo_siteid: ~
 
