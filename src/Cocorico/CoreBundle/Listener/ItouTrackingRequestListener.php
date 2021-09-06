@@ -23,6 +23,8 @@ class ItouTrackingRequestListener
 
         $request = $event->getRequest();
         $session = $request->getSession();
+        $cookies = $request->cookies;
+
 
 
         $uri = $request->getPathInfo();
@@ -42,6 +44,11 @@ class ItouTrackingRequestListener
             // Add campaign marker
             $campaign_id = $request->query->get('cmp');
             $payload['cmp'] = $campaign_id; 
+        }
+
+        if ($cookies->has('leMarcheTypeUsagerV2'))
+        {
+            $payload['user_cookie_type'] = $cookies->get('leMarcheTypeUsagerV2');
         }
 
         $client_context = [

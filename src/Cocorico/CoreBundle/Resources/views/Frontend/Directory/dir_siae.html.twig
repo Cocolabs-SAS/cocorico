@@ -374,6 +374,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function(){
+            const COOKIE_NAME = 'leMarcheTypeUsagerV2';
             $(document).on('shown.bs.modal', '.modal', function () {
                 $('.modal-backdrop').before($(this));
             });
@@ -389,21 +390,24 @@
 
             // For testing: 
             // if (true) {
-            if (!document.cookie.split('; ').find(row => row.startsWith('leMarcheTypeUsager'))) {
+            if (!document.cookie.split('; ').find(row => row.startsWith(COOKIE_NAME))) {
                 var modal = $("#user_modal");
                 modal.find('.close').remove();
                 modal.modal('show');
 
                 modal.find('a').on('click', (e) => {
                     // Only set cookie if button clicked
-                    document.cookie = "leMarcheTypeUsager=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure";
                     let type = $(e.target).data('usr');
+                    document.cookie = `${COOKIE_NAME}=${type}; expires=Fri, 31 Dec 9999 23:59:59 GMT; Secure`;
 
                     if (typeof track === "function") {
                         track('', Steps.USER_TYPE, {'type': type});
                     }
                     modal.modal('hide');
                 })
+            } else {
+                const cookieValue = document.cookie.split('; ').find(row => row.startsWith(`${COOKIE_NAME}=`)).split('=')[1];
+
             }
         });
     </script>
