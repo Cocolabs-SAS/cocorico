@@ -248,6 +248,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-4">
                     <aside id="sidebar" class="profile">
+                        {% if (not structure.website) and (not user) %}
                         <div class="row mb-3 mb-md-6">
                             <div class="col-xs-5 col-sm-12 col-md-5 mb-3">
                                 <!-- FIXME: établir la fonctionnalité
@@ -258,6 +259,7 @@
                                 <a id="contact" href="https://itou.typeform.com/to/nxG0HlYx#data={{ structure.id }}" class="btn btn-sm btn-primary btn-block">Être recontacté<i class="ml-2 icon-mail-alt"></i></a>
                             </div>
                         </div>
+                        {% endif %}
                         <div class="profile_capsule">
                             {% if structure.website != '' or user %}
                                 <a href="#" id="show_data">

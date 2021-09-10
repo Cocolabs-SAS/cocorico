@@ -9,6 +9,11 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.8] - (2021-09-10)
+- Masquer bouton "être recontacté" si coordonnéés présentes
+- Champ description structure optionnel
+- Correction bug image logo phantôme
+
 ### [6.8] - (2021-09-06)
 - Correctif theme itou et tarteaucitron
 - Correctif bouton recherche sur page d'accueil
