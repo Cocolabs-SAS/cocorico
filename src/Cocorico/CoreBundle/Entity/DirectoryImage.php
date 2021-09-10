@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * DirectoryImage
  *
  * @ORM\Table(name="directory_image", indexes={
- *    @ORM\Index(name="position_u_idx", columns={"position"})
+ *    @ORM\Index(name="position_di_idx", columns={"position"})
  *  })
  * @ORM\Entity
  */
@@ -45,7 +45,7 @@ class DirectoryImage
     private $position;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Cocorico\CoreBundle\Entity\Directory", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="Directory", inversedBy="images")
      * @ORM\JoinColumn(name="directory_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
     private $directory;

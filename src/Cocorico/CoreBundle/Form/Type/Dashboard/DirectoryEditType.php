@@ -95,9 +95,9 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 TextareaType::class,
                 array(
                     'label' => 'directory.form.description',
-                    'required' => true,
+                    'required' => false,
                     'empty_data' => '',
-                    'attr' => ['rows'=> 10, 'required' => 'required']
+                    'attr' => ['rows'=> 10]
                 )
             )
             ->add(
@@ -186,6 +186,7 @@ class DirectoryEditType extends AbstractType implements TranslationContainerInte
                 CollectionType::class,
                 array(
                     'allow_delete' => true,
+                    'by_reference' => false,
                     'entry_type' => DirectoryImageType::class,
                     /** @Ignore */
                     'label' => false
