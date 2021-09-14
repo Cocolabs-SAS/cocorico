@@ -514,6 +514,7 @@ common.application.getNbUnReadMessages = function(url) {
 */
 
 
+
 /**
  * Init Multi Select Box
  * See fields.html > listing_category_widget_options_tree for indentation management

@@ -2,13 +2,16 @@
 
 // Base
 @import 'itou_marche/base/mixins';
-//@import 'itou_marche/base/variables';
+@import 'itou_marche/base/variables';
 
 // Components
 @import 'itou_marche/components/multiselect';
+@import 'itou_marche/components/maparea';
+@import 'itou_marche/components/jcf';
 
 // Sections
 @import 'itou_marche/sections/hp';
 @import 'itou_marche/sections/inclusion';
+@import 'itou_marche/sections/siae';
 
 // Layout

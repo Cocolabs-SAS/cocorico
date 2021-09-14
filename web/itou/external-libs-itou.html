@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <title>Itou Theme</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <meta name="title" content="Itou Theme">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Itou Theme">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="">
+    <meta property="twitter:title" content="Itou Theme">
+    <meta property="twitter:description" content="">
+    <meta property="twitter:image" content="">
+
+    <link rel="shortcut icon" href="images/favico.ico" type="image/ico">
+    <link rel="stylesheet" href="stylesheets/app.css" />
+  </head>
+
+  <body id="top">
+
+    <header class="bg-primary py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <a href="https://betagouv.github.io/itou-theme/" class="lead text-white mb-0 text-decoration-none">Itou Theme</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="s-main" role="main">
+
+      <section id="content">
+          <div class="container">
+
+            <article class="row py-5" id="tac">
+              <div class="col-12">
+                <h3>Tarte au citron 1.9.3</h3>
+                <p>Pour utiliser <i>Tarte au citron 1.9.3</i> il suffit d'ajouter l'appel au cdn du js <code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://cdn.jsdelivr.net/gh/AmauriC/tarteaucitron.js@1.9.3/tarteaucitron.js&quot;&gt;&lt;/script&gt;</code> puis la configuration ci-dessous.</p>
+                <pre class="bg-gray-100 p-3">
+                  &lt;script type=&quot;text/javascript&quot;&gt;&#10;                    tarteaucitron.init({&#10;                    &quot;privacyUrl&quot;: &quot;&quot;, /* Privacy policy url */&#10;                    &quot;hashtag&quot;: &quot;#tarteaucitron&quot;, /* Open the panel with this hashtag */&#10;                    &quot;cookieName&quot;: &quot;tarteaucitron&quot;, /* Cookie name */&#10;                    &quot;orientation&quot;: &quot;bottom&quot;, /* Banner position (top - bottom) */&#10;                    &quot;groupServices&quot;: false, /* Group services by category */&#10;                    &quot;showAlertSmall&quot;: false, /* Show the small banner on bottom right */&#10;                    &quot;cookieslist&quot;: false, /* Show the cookie list */&#10;                    &quot;closePopup&quot;: false, /* Show a close X on the banner */&#10;                    &quot;showIcon&quot;: true, /* Show cookie icon to manage cookies */&#10;                    //&quot;iconSrc&quot;: &quot;&quot;, /* Optionnal: URL or base64 encoded image */&#10;                    &quot;iconPosition&quot;: &quot;BottomRight&quot;, /* BottomRight, BottomLeft, TopRight and TopLeft */&#10;                    &quot;adblocker&quot;: false, /* Show a Warning if an adblocker is detected */&#10;                    &quot;DenyAllCta&quot; : true, /* Show the deny all button */&#10;                    &quot;AcceptAllCta&quot; : true, /* Show the accept all button when highPrivacy on */&#10;                    &quot;highPrivacy&quot;: true, /* HIGHLY RECOMMANDED Disable auto consent */&#10;                    &quot;handleBrowserDNTRequest&quot;: false, /* If Do Not Track == 1, disallow all */&#10;                    &quot;removeCredit&quot;: true, /* Remove credit link */&#10;                    &quot;moreInfoLink&quot;: true, /* Show more info link */&#10;                    &quot;useExternalCss&quot;: true, /* If false, the tarteaucitron.css file will be loaded */&#10;                    &quot;useExternalJs&quot;: false, /* If false, the tarteaucitron.js file will be loaded */&#10;                    //&quot;cookieDomain&quot;: &quot;.my-multisite-domaine.fr&quot;, /* Shared cookie for multisite */&#10;                    &quot;readmoreLink&quot;: &quot;&quot;, /* Change the default readmore link */&#10;                    &quot;mandatory&quot;: true, /* Show a message about mandatory cookies */&#10;                    });&#10;                  &lt;/script&gt;
+                </pre>
+                <p>Les styles seront automatiquement chargés par le thème itou, il est donc inutile d'inclure les styles par défaut.</p>
+               </div>
+
+            </article>
+
+            <hr>
+          </div>
+        </section>
+
+        <section id="content">
+          <div class="container">
+
+            <article class="row py-5" id="ddp">
+              <div class="col-12">
+                <h3>Duet Date Picker 1.4.0</h3>
+                <p>Pour utiliser <a href="https://github.com/duetds/date-picker" target="_blank">Duet Date Picker 1.4.0</a> il suffit d'ajouter l'appel aux cdn du js
+                  <code>
+                    &lt;script type=&quot;module&quot; src=&quot;https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js&quot;&gt;&lt;/script&gt;&#10;                    &lt;script nomodule src=&quot;https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js&quot;&gt;&lt;/script&gt;
+                  </code> puis de copier le code nécessaire à la création du Web Components. Par exemple :
+                </p>
+                <pre class="bg-gray-100 p-3">
+                  &lt;label for=&quot;date&quot;&gt;Choisir une date&lt;/label&gt;&#10;                  &lt;duet-date-picker identifier=&quot;date&quot;&gt;&lt;/duet-date-picker&gt;
+                </pre>
+                <p>
+                  Vous pouvez ensuite personnaliser la configuration, par exemple la localisation
+                </p>
+                <pre class="bg-gray-100 p-3">
+                  &quot;use strict&quot;&#10;&#10;                  const picker = document.querySelectorAll(&quot;duet-date-picker&quot;)&#10;                  const DATE_FORMAT = /^(\d{2})\/(\d{2})\/(\d{4})$/&#10;                  &#10;                  picker.forEach(pickerInstance =&gt; {&#10;                  &#10;                    pickerInstance.dateAdapter = {&#10;                  &#10;                      parse(value = &quot;&quot;, createDate) {&#10;                        const matches = value.match(DATE_FORMAT)&#10;                        if (matches) {&#10;                          return createDate(matches[3], matches[2], matches[1])&#10;                        }&#10;                      },&#10;                  &#10;                      format(date) {&#10;                        const day = (&apos;0&apos; + date.getDate()).slice(-2)&#10;                        const month = (&apos;0&apos; + `${date.getMonth() + 1}`).slice(-2)&#10;                        return `${day}/${month}/${date.getFullYear()}`&#10;                      },&#10;                  &#10;                    }&#10;                  &#10;                    // Automatically insert slashes &apos;/&apos; in date fields.&#10;                    pickerInstance.addEventListener(&quot;keyup&quot;, event =&gt; {&#10;                      // Do nothing when backspace was pressed.&#10;                      if (event.which !== 8) {&#10;                        const numChars = event.target.value.length&#10;                        if (numChars === 2 || numChars === 5) {&#10;                          event.target.value = `${event.target.value}/`&#10;                        }&#10;                      }&#10;                    })&#10;                  &#10;                    pickerInstance.localization = {&#10;                      buttonLabel: &quot;Choisir une date&quot;,&#10;                      placeholder: &quot;JJ/MM/AAAA&quot;,&#10;                      selectedDateMessage: &quot;La date s&eacute;lectionn&eacute;e est&quot;,&#10;                      prevMonthLabel: &quot;Mois pr&eacute;c&eacute;dent&quot;,&#10;                      nextMonthLabel: &quot;Mois suivant&quot;,&#10;                      monthSelectLabel: &quot;Mois&quot;,&#10;                      yearSelectLabel: &quot;Ann&eacute;e&quot;,&#10;                      closeLabel: &quot;Fermer la fen&ecirc;tre&quot;,&#10;                      calendarHeading: &quot;Choisir une date&quot;,&#10;                      dayNames: [&quot;Dimanche&quot;, &quot;Lundi&quot;, &quot;Mardi&quot;, &quot;Mercredi&quot;, &quot;Jeudi&quot;, &quot;Vendredi&quot;, &quot;Samedi&quot;],&#10;                      monthNames: [&#10;                        &quot;Janvier&quot;,&#10;                        &quot;F&eacute;vrier&quot;,&#10;                        &quot;Mars&quot;,&#10;                        &quot;Avril&quot;,&#10;                        &quot;Mai&quot;,&#10;                        &quot;Juin&quot;,&#10;                        &quot;Juillet&quot;,&#10;                        &quot;Ao&ucirc;t&quot;,&#10;                        &quot;Septembre&quot;,&#10;                        &quot;Octobre&quot;,&#10;                        &quot;Novembre&quot;,&#10;                        &quot;D&eacute;cembre&quot;,&#10;                      ],&#10;                      monthNamesShort: [&quot;Jan&quot;, &quot;F&eacute;v&quot;, &quot;Mar&quot;, &quot;Avr&quot;, &quot;Mai&quot;, &quot;Jun&quot;, &quot;Jui&quot;, &quot;Ao&ucirc;&quot;, &quot;Sep&quot;, &quot;Oct&quot;, &quot;Nov&quot;, &quot;D&eacute;c&quot;],&#10;                      locale: &quot;fr-FR&quot;,&#10;                    }&#10;                  &#10;                  })
+                </pre>
+                <div class="mb-5">
+                  <label for="date">Choisir une date</label>
+                  <duet-date-picker identifier="date"></duet-date-picker>
+                </div>
+                <p>Les styles seront automatiquement chargés par le thème itou, il est donc inutile d'inclure les styles par défaut.</p>
+               </div>
+            </article>
+          </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="javascripts/app.js"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/AmauriC/tarteaucitron.js@1.9.3/tarteaucitron.js"></script>
+    <script type="text/javascript">
+      tarteaucitron.init({
+      "privacyUrl": "", /* Privacy policy url */
+      "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+      "cookieName": "tarteaucitron", /* Cookie name */
+      "orientation": "bottom", /* Banner position (top - bottom) */
+      "groupServices": false, /* Group services by category */
+      "showAlertSmall": false, /* Show the small banner on bottom right */
+      "cookieslist": false, /* Show the cookie list */
+      "closePopup": false, /* Show a close X on the banner */
+      "showIcon": true, /* Show cookie icon to manage cookies */
+      //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+      "iconPosition": "BottomRight", /* BottomRight, BottomLeft, TopRight and TopLeft */
+      "adblocker": false, /* Show a Warning if an adblocker is detected */
+      "DenyAllCta" : true, /* Show the deny all button */
+      "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+      "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+      "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+      "removeCredit": true, /* Remove credit link */
+      "moreInfoLink": true, /* Show more info link */
+      "useExternalCss": true, /* If false, the tarteaucitron.css file will be loaded */
+      "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+      //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+      "readmoreLink": "", /* Change the default readmore link */
+      "mandatory": true, /* Show a message about mandatory cookies */
+      });
+    </script>
+    <script type="text/javascript">
+      (tarteaucitron.job = tarteaucitron.job || []).push('youtube');
+    </script>
+
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@duetds/date-picker@1.4.0/dist/duet/duet.js"></script>
+
+    <script>
+      "use strict"
+
+      const picker = document.querySelectorAll("duet-date-picker")
+      const DATE_FORMAT = /^(\d{2})\/(\d{2})\/(\d{4})$/
+
+      picker.forEach(pickerInstance => {
+
+        pickerInstance.dateAdapter = {
+
+          parse(value = "", createDate) {
+            const matches = value.match(DATE_FORMAT)
+            if (matches) {
+              return createDate(matches[3], matches[2], matches[1])
+            }
+          },
+
+          format(date) {
+            const day = ('0' + date.getDate()).slice(-2)
+            const month = ('0' + `${date.getMonth() + 1}`).slice(-2)
+            return `${day}/${month}/${date.getFullYear()}`
+          },
+
+        }
+
+        // Automatically insert slashes '/' in date fields.
+        pickerInstance.addEventListener("keyup", event => {
+          // Do nothing when backspace was pressed.
+          if (event.which !== 8) {
+            const numChars = event.target.value.length
+            if (numChars === 2 || numChars === 5) {
+              event.target.value = `${event.target.value}/`
+            }
+          }
+        })
+
+        pickerInstance.localization = {
+          buttonLabel: "Choisir une date",
+          placeholder: "JJ/MM/AAAA",
+          selectedDateMessage: "La date sélectionnée est",
+          prevMonthLabel: "Mois précédent",
+          nextMonthLabel: "Mois suivant",
+          monthSelectLabel: "Mois",
+          yearSelectLabel: "Année",
+          closeLabel: "Fermer la fenêtre",
+          calendarHeading: "Choisir une date",
+          dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+          monthNames: [
+            "Janvier",
+            "Février",
+            "Mars",
+            "Avril",
+            "Mai",
+            "Juin",
+            "Juillet",
+            "Août",
+            "Septembre",
+            "Octobre",
+            "Novembre",
+            "Décembre",
+          ],
+          monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Jun", "Jui", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+          locale: "fr-FR",
+        }
+
+      })
+    </script>
+  </body>
+
+</html>
