@@ -13,6 +13,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Correction orthographique
 - Correction bug nombre résultats, refactor manager répertoire
 - Refactor page admin utilisateur (renommage + filtre type utilisateur)
+- Ajout lien vers mentions légales ITOU / Plateforme de l'inclusion
 
 ### [6.8] - (2021-09-10)
 - Masquer bouton "être recontacté" si coordonnéés présentes
