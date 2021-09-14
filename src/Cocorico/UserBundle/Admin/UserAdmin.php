@@ -249,7 +249,7 @@ class UserAdmin extends SonataUserAdmin
             ->addIdentifier('fullname')
 //            ->add('email')
             ->add('companyName', null, array('editable' => true, 'label' => 'Raison sociale'))
-            ->add('personType', 'choice', array('choices' => User::$personTypeValuesFrench))
+            ->add('personType', 'choice', array('label' => 'Type Utilisateur', 'choices' => User::$personTypeValuesFrench))
             ->add('enabled', null, array('editable' => true))
             ->add('idCardVerified', null, array('editable' => true))
 //            ->add('locked', null, array('editable' => true))
