@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.9] - (2021-09-11)
+- Correction orthographique
+
 ### [6.8] - (2021-09-10)
 - Masquer bouton "être recontacté" si coordonnéés présentes
 - Champ description structure optionnel
