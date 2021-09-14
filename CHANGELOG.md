@@ -12,6 +12,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 ### [6.9] - (2021-09-11)
 - Correction orthographique
 - Correction bug nombre résultats, refactor manager répertoire
+- Refactor page admin utilisateur (renommage + filtre type utilisateur)
 
 ### [6.8] - (2021-09-10)
 - Masquer bouton "être recontacté" si coordonnéés présentes

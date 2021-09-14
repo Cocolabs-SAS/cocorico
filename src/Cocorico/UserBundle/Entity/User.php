@@ -92,6 +92,15 @@ class User extends BaseUser implements ParticipantInterface
         self::PERSON_TYPE_PARTNER => 'entity.user.person_type.partner',
     );
 
+    public static $personTypeValuesFrench = array(
+        self::PERSON_TYPE_NATURAL => 'Utilisateur',
+        self::PERSON_TYPE_LEGAL => 'Entreprise',
+        self::PERSON_TYPE_CLASSIC => 'Acheteur (classique)',
+        self::PERSON_TYPE_INCLUSIVE => 'SIAE',
+        self::PERSON_TYPE_ADMIN => 'Administrateur',
+        self::PERSON_TYPE_PARTNER => 'Partenaire',
+    );
+
     public static $legalTypes = array(
         # self::PERSON_TYPE_LEGAL,
         self::PERSON_TYPE_CLASSIC,
