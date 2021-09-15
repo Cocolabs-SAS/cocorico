@@ -249,7 +249,7 @@ class UserAdmin extends SonataUserAdmin
             ->addIdentifier('fullname')
 //            ->add('email')
             ->add('companyName', null, array('editable' => true, 'label' => 'Raison sociale'))
-            ->add('personType', 'choice', array('choices' => array(1=> 'personne', 2 => 'entreprise', 3 => 'classique', 4 => 'inclusive', 5 => 'admin', 6=>'partenaire'), 'editable' => true))
+            ->add('personType', 'choice', array('label' => 'Type Utilisateur', 'choices' => User::$personTypeValuesFrench))
             ->add('enabled', null, array('editable' => true))
             ->add('idCardVerified', null, array('editable' => true))
 //            ->add('locked', null, array('editable' => true))
@@ -305,12 +305,18 @@ class UserAdmin extends SonataUserAdmin
                 )
             )
 //            ->add('locked')
-            ->add('companyName')
+            ->add('companyName', null, ['label' => 'Nom Entreprise'])
+            ->add('personType',
+                'doctrine_orm_number',
+                ['label'=> 'Type Utilisateur'],
+                'choice',
+                ['choices' => array_flip( User::$personTypeValuesFrench)]
+            )
             ->add('idCardVerified')
             ->add('enabled')
             ->add('email')
             ->add('groups')
-            ->add('structures', null, ['label' => 'Nom Structures']);
+            ->add('structures', null, ['label' => 'Gestion structures']);
     }
 
     public function getFullNameFilter($queryBuilder, $alias, $field, $value)

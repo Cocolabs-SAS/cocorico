@@ -72,6 +72,7 @@ class DirectoryRepository extends EntityRepository
         $qB = $this->getFindQueryBuilder();
         $qB->orderBy('d.name', 'asc')
            ->andwhere('d.nature != \'n/a\'')
+           ->andwhere('d.latitude is not null')
            ->andwhere('d.isDelisted = false');
 
         return $qB;
