@@ -1,0 +1,117 @@
+
+/* gallery-small */
+.gallery-small {
+	margin: 0 0 20px;
+	overflow: hidden;
+	border-radius: 0.25rem;
+	position: relative;
+}
+
+.gallery-small .slideset .slide img {
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	width: auto;
+}
+
+.gallery-small .slideset {
+	position: relative;
+}
+
+.gallery-small .slide {
+	top: 0;
+	left: 0;
+	width: 100%;
+	position: absolute;
+}
+
+.gallery-small .slide.active {
+	z-index: 2;
+}
+
+.gallery-small .slide img {
+	width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+
+.gallery-small .btn-prev,
+.gallery-small .btn-next {
+	top: 50%;
+	left: 17px;
+	z-index: 3;
+	width: 24px;
+	height: 24px;
+	margin: -7px 0 0;
+	position: absolute;
+	overflow: hidden;
+	text-indent: -9999px;
+	text-decoration: none;
+}
+
+.gallery-small .btn-prev::after,
+.gallery-small .btn-next::after,
+.gallery-small .btn-prev::before,
+.gallery-small .btn-next::before {
+	content: '';
+	top: 0;
+	left: 0;
+	margin: 3px 0;
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+	width: 100%;
+	height: 2px;
+	position: absolute;
+	background: $gray-600;
+}
+
+.gallery-small .btn-prev::after,
+.gallery-small .btn-next::after {
+	top: auto;
+	bottom: 0;
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.gallery-small .btn-prev {
+	left: 10px;
+}
+
+.gallery-small .btn-next {
+	left: auto;
+	right:0;
+}
+
+.gallery-small .btn-next::after {
+	-webkit-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.gallery-small .btn-next::before {
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.gallery-small .btn-next span,
+.gallery-small .btn-prev span {
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 29px;
+    position: absolute;
+    margin: -13px 0 0 -7px;
+    background-position: -39px 0;
+    background: url('../../../images/arrows.png') no-repeat -39px 0;
+}
+
+.gallery-small .btn-next span {
+    background-position: -63px 0;
+}
