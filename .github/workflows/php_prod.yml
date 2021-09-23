@@ -66,3 +66,26 @@ jobs:
       env:
         CLEVER_TOKEN: ${{ secrets.CLEVER_TOKEN }}
         CLEVER_SECRET: ${{ secrets.CLEVER_SECRET }}
+
+    # Notify Slack on failure or success
+    # https://github.com/marketplace/actions/slack-notify-deployment
+    - name: Notify slack success
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: Discontract/github-action-slack-notify-deployment@v1
+      with:
+        # Updates existing message from the first step
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: c4-business
+        status: SUCCESS
+        color: good
+    - name: Notify slack fail
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: Discontract/github-action-slack-notify-deployment@v1
+      with:
+        channel: c4-business
+        status: FAILED
+        color: danger
