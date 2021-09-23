@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends '::itou_base.html.twig' %}
 
 {#
 <h1>Page Structure</h1>
@@ -15,16 +15,24 @@
 {% set structure_images = structure.images %}
 
 {% block layout %}
-    {% embed '@CocoricoCore/Frontend/layout.html.twig' %}
+    {% embed '@CocoricoCore/Frontend/itou_layout.html.twig' %}
 
         {% trans_default_domain 'cocorico_directory' %}
 
         {% block breadcrumbs %}
-            <!-- breadcrumbs -->
-
-            {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
-                request: app.request
-            })) }}
+        <!-- breadcrumbs -->
+        <section class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- breadcrumbs -->
+                     <nav aria-label="breadcrumb">
+                    {{ render(controller('CocoricoBreadcrumbBundle:Breadcrumbs:index',{
+                        request: app.request
+                    })) }}
+                    </nav>
+                </div>
+            </div>
+        </section>        
         {% endblock %}
 
         {% block main %}
@@ -34,309 +42,317 @@
             {# close previous .row #}
             {{ '</div>' }}
 
-            <!-- two-columns -->
-            {{ '<div id="dir-profile" class="dir-profile-row row">' }}
-                <!-- contain the main content of the page -->
-                <div id="content" class="listing-area col-xs-12 col-sm-8">
-                    <!-- profile-detail -->
-                    <section class="profile-detail">
-                        <!-- First Row, company details -->
-                        <div class="row">
-                            <div class="col-sm-12 mb-5 mb-md-8" id="user_profile">
-                                <!-- gallery-small -->
-                                <div class="gallery-small slideshow col-sm-3">
-                                    <div class="slideset">
-                                            {% if structure_images|length %}
-                                                {% for image in structure_images %}
-                                                    <div class="slide">
-                                                        <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
-                                                            alt="{{ structure.name }}"/>
-                                                    </div>
-                                                {% endfor %}
-                                            {% else %}
-                                                <div class="slide">
-                                                    <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
-                                                        alt="{{ structure.name }}"/>
+            <section class="s-siae-03">
+                <div class="container">
+                    <!-- two-columns -->
+                    {{ '<div id="dir-profile" class="dir-profile-row row">' }}
+                        <!-- contain the main content of the page -->
+                        <div class="col-12 col-md-8 listing-area" id="content">
+                            <!-- profile-detail -->
+                            <section class="profile-detail">
+                                <!-- First Row, company details -->
+   
+                                        <!-- gallery-small -->
+                                        <div class="row mb-5 mb-md-6 align-items-start" id="user_profile">
+                                            <div class="gallery-small slideshow col-12 col-lg-3">
+                                                <div class="slideset">
+                                                    {% if structure_images|length %}
+                                                        {% for image in structure_images %}
+                                                            <div class="slide">
+                                                                <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('user_profile') }}"
+                                                                    alt="{{ structure.name }}"/>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div class="slide">
+                                                            <img src="{{ (ListingImageConstants.IMAGE_FOLDER ~ ListingImageConstants.IMAGE_DEFAULT) | imagine_filter('user_profile') }}"
+                                                                alt="{{ structure.name }}"/>
+                                                        </div>
+                                                    {% endif %}
                                                 </div>
-                                            {% endif %}
-                                    </div>
-                                    <a href="#" class="btn-prev">previous</a>
-                                    <a href="#" class="btn-next">next</a>
-                                </div>
-                                <div class="col-sm-9 pl-md-5">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <h3>
-                                                {% if structure.brand %}
-                                                    {{ structure.brand }}
-                                                {% else %}
-                                                    {{ structure.name }}
-                                                {% endif %}
-                                            </h3>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="cell col-sm-6">
-                                            <span class="prof_icon"><img src="{{ asset('svg/prof_siret.svg')}}" /></span>
-                                            <span>Siret : {{ structure.getNiceSiret }}</span>
-                                        </div>
-                                        <div class="cell col-sm-6">
-                                            <span class="prof_icon"><img src="{{ asset('svg/prof_types.svg')}}" /></span>
-                                            <span>{{ structure.prestaTypeText(', ') }}</span>
-                                        </div>
-                                        <div class="clearfix visible-md-block"></div>
-                                        <div class="cell col-sm-6">
-                                            <span class="prof_icon"><img src="{{ asset('svg/prof_workers.svg')}}" /></span>
-                                            <span>Salariés<sup>*</sup> : {{ not structure.employees ? "non disponible" : structure.employees }}</span>
-                                        </div>
-                                        <div class="cell col-sm-6">
-                                            <span class="prof_icon"><img src="{{ asset('svg/prof_nature.svg')}}" /></span>
-                                            <span>{{ structure.getKindString }}</span>
-                                        </div>
-                                        <div class="clearfix visible-md-block"></div>
-                                        <div class="cell col-sm-6">
-                                            <span class="prof_icon"><img src="{{ asset('svg/prof_calendar.svg')}}" /></span>
-                                            <span>Date de création<sup>*</sup> : non disponible</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {#
-                                <address>
-                                    {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
-                                </address>
-                                #}
-                            </div>
-                        </div>
-                        <!-- Second Row, Company Details -->
-                        <div class="row mb-3">
-                            <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
-                                </div>
-                                <div class="il-r">
-                                    <h3>Secteurs d'activité</h3>
-                                    <ul class="active_sectors">
-                                        {% if structure.kind == 'ETTI' and structure.directoryListingCategories|length > 3 %}
-                                            <li>Multisectoriel</li>
-                                        {% elseif structure.hasDirectoryListingCategory %}
-                                            <li>{{ structure.getSectorString(6, '</li><li>')|raw}}</li>
-                                        {% endif %}
-                                    </ul>
-                                    {% if not structure.hasDirectoryListingCategory %}
-                                        Non renseigné
-                                    {% endif %}
-                                </div>
-                            </div>
-                            {% if structure.clientImages is not empty %}
-                                <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                    <div class="il-l">
-                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
-                                    </div>
-                                    <div class="il-r">
-                                        <h3>Références clients</h3>
-                                        {% for image in structure.clientImages %}
-                                            <!-- slide -->
-                                            <img
-                                                src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" 
-                                                class="client-ref"
-                                                alt="{{ image.description }}"
-                                                title="{{ image.description }}"
-                                            />
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            {% endif %}
-                            {#
-                            <div class="col-sm-5  shadow pull-right">
-                                <h4>Éléments différenciants<br />
-                                (matériels, services particuliers, …)
-                                </h4>
-                            </div>
-                            #}
-                        </div>
-                        <!-- Third Row, Description -->
-                        <div class="row">
-                            <div class="col-sm-12 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
-                                </div>
-                                <div class="il-r">
-                                    <h3>Description de l'activité commerciale</h3>
-                                    <div>
-                                        {% if structure.description %}
-                                            {{ structure.description | nl2br }}
-                                        {% else %}
-                                            Non renseigné
-                                        {% endif %}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Fourth Row -->
-                        {% if structure.offers %}
-                        <div class="row ">
-                            <div class="col-sm-12 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
-                                </div>
-                                <div class="il-r">
-                                    <h3>Les prestations proposées</h3>
-                                    {% for offer in structure.offers %}
-                                        <article class="prests-post col-xs-12 col-md-6 mb-3 mb-md-5">
-                                            <img class="cell_icon" src="{{ asset('images/prof_dot.png')}}" />
-                                            <h4>{{ offer.title }}</h4>
-                                            <div>
-                                                {{ offer.description }}
+                                                <a href="#" class="btn-prev">précédent</a>
+                                                <a href="#" class="btn-next">suivant</a>
                                             </div>
-                                        </article>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        {#
-                        {% if listings %}
-                        <div class="row ">
-                            <div class="col-sm-12 img-left mb-5 mb-md-7">
-                                <div class="il-l">
-                                    <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
-                                </div>
-                                <div class="il-r">
-                                    <h3>Les prestations proposées</h3>
-                                    {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
-                                    'listings': listings
-                                    } only %}
-                                </div>
-                            </div>
-                        </div>
-                        {% endif %}
-                        #}
-                        <!-- Fifth Row -->
-                        <div class="row">
-                            {% if structure.networks is not empty %}
-                                <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                    <div class="il-l">
-                                        <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
-                                    </div>
-                                    <div class="il-r">
-                                        <h3>Réseaux</h3>
-                                        <ul>
-                                        {% for network in structure.networks %}
-                                            <li><a class="network_link" href="{{ network.website}}">{{ network.brand }}</a></li>
-                                        {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            {% endif %}
-                            {% if structure.labels is not empty %}
-                                <div class="col-sm-6 img-left mb-5 mb-md-7">
-                                    <div class="il-l">
-                                        <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
-                                    </div>
-                                    <div class="il-r">
-                                        <h3>Labels & certifications</h3>
-                                        <ul>
-                                        {% for label in structure.labels %}
-                                            <li>{{ label.name }}</li>
-                                        {% endfor %}
-                                        </ul>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </section>
-                </div>
-                <div class="col-xs-12 col-sm-4">
-                    <aside id="sidebar" class="profile">
-                        {% if (not structure.website) and (not user) %}
-                        <div class="row mb-3 mb-md-6">
-                            <div class="col-xs-5 col-sm-12 col-md-5 mb-3">
-                                <!-- FIXME: établir la fonctionnalité
-                                <button class="btn btn-sm btn-link btn-block pl-0">Enregistrer<i class="ml-2 icon-star-empty"></i></button>
-                                -->
-                            </div>
-                            <div class="col-xs-7 col-sm-12 col-md-7 mb-3">
-                                <a id="contact" href="https://itou.typeform.com/to/nxG0HlYx#data={{ structure.id }}" class="btn btn-sm btn-primary btn-block">Être recontacté<i class="ml-2 icon-mail-alt"></i></a>
-                            </div>
-                        </div>
-                        {% endif %}
-                        <div class="profile_capsule">
-                            {% if structure.website != '' or user %}
-                                <a href="#" id="show_data">
-                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-chevron.svg')}}" /></span>
-                                    <span>Afficher les coordonnées</span>
-                                </a>
-                                <div id="the_data" style="display:none">
-                                    <ul class='deflist'>
-                                        {% if structure.website %}
-                                            <li>
-                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-web.svg')}}" /></span>
-                                                <a id="company_website" href="{{structure.website}}" rel="nofollow" target="_blank">{{ structure.website }}</a>
-                                            </li>
-                                        {% endif %}                                
-                                        {% if user %}
-                                            <li>
-                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-@.svg')}}" /></span>
-                                                <span>{{ user.email }}</span>
-                                            </li>
-                                            {% if user.phone %}
-                                                <li>
-                                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-phone.svg')}}" /></span>
-                                                    <span>{{ user.phone }}</span>
-                                                </li>
+                                            <div class="col-12 col-lg-9 pl-md-5">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <h3 class="h3 mb-3 mt-1">
+                                                            {% if structure.brand %}
+                                                                {{ structure.brand }}
+                                                            {% else %}
+                                                                {{ structure.name }}
+                                                            {% endif %}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <span class="prof_icon mr-1"><img src="{{ asset('svg/prof_siret.svg')}}" /></span>
+                                                        <span>Siret : {{ structure.getNiceSiret }}</span>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <span class="prof_icon mr-1"><img src="{{ asset('svg/prof_types.svg')}}" /></span>
+                                                        <span>{{ structure.prestaTypeText(', ') }}</span>
+                                                    </div>
+                                                    <div class="clearfix visible-md-block"></div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <span class="prof_icon mr-1"><img src="{{ asset('svg/prof_workers.svg')}}" /></span>
+                                                        <span>Salariés<sup>*</sup> : {{ not structure.employees ? "non disponible" : structure.employees }}</span>
+                                                    </div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <span class="prof_icon mr-1"><img src="{{ asset('svg/prof_nature.svg')}}" /></span>
+                                                        <span>{{ structure.getKindString }}</span>
+                                                    </div>
+                                                    <div class="clearfix visible-md-block"></div>
+                                                    <div class="col-12 col-md-6 mb-3">
+                                                        <span class="prof_icon mr-1"><img src="{{ asset('svg/prof_calendar.svg')}}" /></span>
+                                                        <span>Date de création<sup>*</sup> : non disponible</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {#
+                                            <address>
+                                                {{ structure.nature == 'siege' ? "Conventionné avec la Direccte" : "Rattaché à un autre conventionnement" }}
+                                            </address>
+                                            #}
+                                        </div>
+  
+                                <!-- Second Row, Company Details -->
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                        <div class="il-l">
+                                            <img class="cell_icon" src="{{ asset('svg/prof_sectors.svg')}}" />
+                                        </div>
+                                        <div class="il-r">
+                                            <h3 class="h3 mb-1 mt-1">Secteurs d'activité</h3>
+                                            <ul>
+                                                {% if structure.kind == 'ETTI' and structure.directoryListingCategories|length > 3 %}
+                                                    <li>Multisectoriel</li>
+                                                {% elseif structure.hasDirectoryListingCategory %}
+                                                    <li>{{ structure.getSectorString(6, '</li><li>')|raw}}</li>
+                                                {% endif %}
+                                            </ul>
+                                            {% if not structure.hasDirectoryListingCategory %}
+                                                <p>Non renseigné</p>
                                             {% endif %}
-                                            <li>
-                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-user.svg')}}" /></span>
-                                                <span>{{ user.namebis }}</span>
-                                            </li>
-                                            <li>
-                                                <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
-                                                <span>{{ structure.postCode }} {{ structure.city }}</span>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
+                                        </div>
+                                    </div>
+                                    {% if structure.clientImages is not empty %}
+                                        <div class="col-sm-6 img-left mb-5 mb-md-7">
+                                            <div class="il-l">
+                                                <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                            </div>
+                                            <div class="il-r">
+                                                <h3 class="h3 mb-1 mt-1">Références clients</h3>
+                                                {% for image in structure.clientImages %}
+                                                    <!-- slide -->
+                                                    <img
+                                                        src="{{ (ListingImageConstants.IMAGE_FOLDER ~ image.name) | imagine_filter('listing_small') }}" 
+                                                        class="client-ref"
+                                                        alt="{{ image.description }}"
+                                                        title="{{ image.description }}"
+                                                    />
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {#
+                                    <div class="col-sm-5  shadow pull-right">
+                                        <h4>Éléments différenciants<br />
+                                        (matériels, services particuliers, …)
+                                        </h4>
+                                    </div>
+                                    #}
                                 </div>
-                            <div class="separator mb-3 mb-md-6"></div>
-                            {% endif %}
-                            <div class="map-holder mb-3 mb-md-7">
-                                <div id="map-company" class="map-canvas"></div>
-                            </div>
-                            <div class="map_details">
-                                <div class="d-flex mb-3">
-                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-geo.svg')}}" /></span>
-                                    <span>Situé à {{ structure.city }}</span>
+                                <!-- Third Row, Description -->
+                                <div class="row">
+                                    <div class="col-sm-12 img-left mb-5 mb-md-7">
+                                        <div class="il-l">
+                                            <img class="cell_icon" src="{{ asset('images/prof_discuss.png')}}" />
+                                        </div>
+                                        <div class="il-r">
+                                            <h3 class="h3 mb-1 mt-1">Description de l'activité commerciale</h3>
+                                            <div>
+                                                {% if structure.description %}
+                                                    {{ structure.description | nl2br }}
+                                                {% else %}
+                                                    Non renseigné
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="d-flex mb-3">
-                                    <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
-                                    <span>Intervient sur : {{ structure.getNiceRange }}</span>
+                                <!-- Fourth Row -->
+                                {% if structure.offers %}
+                                <div class="row">
+                                    <div class="col-sm-12 img-left mb-5 mb-md-7">
+                                        <div class="il-l">
+                                            <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
+                                        </div>
+                                        <div class="il-r">
+                                            <h3 class="h3 mb-1 mt-1">Les prestations proposées</h3>
+                                            <div class="row">
+                                            {% for offer in structure.offers %}
+                                                <article class="prests-post col-12 col-lg-6 mt-2">
+                                                    <img class="cell_icon" src="{{ asset('images/prof_dot.png')}}" />
+                                                    <h4>{{ offer.title }}</h4>
+                                                    <div>
+                                                        {{ offer.description }}
+                                                    </div>
+                                                </article>
+                                            {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {#
+                                {% if listings %}
+                                <div class="row ">
+                                    <div class="col-sm-12 img-left mb-5 mb-md-7">
+                                        <div class="il-l">
+                                            <img class="cell_icon" src="{{ asset('svg/prof_discuss.svg')}}" />
+                                        </div>
+                                        <div class="il-r">
+                                            <h3 class="h3 mb-1 mt-1">Les prestations proposées</h3>
+                                            {% include 'CocoricoCoreBundle:Frontend/Common:_listings_structure_list.html.twig'  with {
+                                            'listings': listings
+                                            } only %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                #}
+                                <!-- Fifth Row -->
+                                <div class="row">
+                                    {% if structure.networks is not empty %}
+                                        <div class="col-12 col-md-6 img-left mt-2 mt-md-3">
+                                            <div class="il-l">
+                                                <img class="cell_icon" src="{{ asset('svg/prof_elements.svg')}}" />
+                                            </div>
+                                            <div class="il-r">
+                                                <h3 class="h3 mb-1 mt-1">Réseaux</h3>
+                                                <ul>
+                                                {% for network in structure.networks %}
+                                                    <li><a class="network_link" href="{{ network.website}}">{{ network.brand }}</a></li>
+                                                {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                    {% if structure.labels is not empty %}
+                                        <div class="col-12 col-md-6 img-left mt-2 mt-md-3">
+                                            <div class="il-l">
+                                                <img class="cell_icon" src="{{ asset('svg/prof_images.svg')}}" />
+                                            </div>
+                                            <div class="il-r">
+                                                <h3 class="h3 mb-1 mt-1">Labels & certifications</h3>
+                                                <ul>
+                                                {% for label in structure.labels %}
+                                                    <li>{{ label.name }}</li>
+                                                {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </section>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <aside id="sidebar" class="profile">
+                                {% if (not structure.website) and (not user) %}
+                                <div class="row mb-3 mb-md-6">
+                                    <div class="col-xs-5 col-sm-12 col-md-5 mb-3">
+                                        <!-- FIXME: établir la fonctionnalité
+                                        <button class="btn btn-sm btn-link btn-block pl-0">Enregistrer<i class="ml-2 icon-star-empty"></i></button>
+                                        -->
+                                    </div>
+                                    <div class="col-xs-7 col-sm-12 col-md-7 mb-3">
+                                        <a id="contact" href="https://itou.typeform.com/to/nxG0HlYx#data={{ structure.id }}" class="btn btn-sm btn-primary btn-block">Être recontacté<i class="ml-2 icon-mail-alt"></i></a>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="profile_capsule">
+                                    {% if structure.website != '' or user %}
+                                        <a href="#" id="show_data">
+                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-chevron.svg')}}" /></span>
+                                            <span>Afficher les coordonnées</span>
+                                        </a>
+                                        <div id="the_data" style="display:none">
+                                            <ul class='deflist'>
+                                                {% if structure.website %}
+                                                    <li>
+                                                        <span class="prof_icon"><img src="{{ asset('svg/profile-ico-web.svg')}}" /></span>
+                                                        <a id="company_website" href="{{structure.website}}" rel="nofollow" target="_blank">{{ structure.website }}</a>
+                                                    </li>
+                                                {% endif %}                                
+                                                {% if user %}
+                                                    <li>
+                                                        <span class="prof_icon"><img src="{{ asset('svg/profile-ico-@.svg')}}" /></span>
+                                                        <span>{{ user.email }}</span>
+                                                    </li>
+                                                    {% if user.phone %}
+                                                        <li>
+                                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-phone.svg')}}" /></span>
+                                                            <span>{{ user.phone }}</span>
+                                                        </li>
+                                                    {% endif %}
+                                                    <li>
+                                                        <span class="prof_icon"><img src="{{ asset('svg/profile-ico-user.svg')}}" /></span>
+                                                        <span>{{ user.namebis }}</span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
+                                                        <span>{{ structure.postCode }} {{ structure.city }}</span>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    <div class="separator mb-3 mb-md-6"></div>
+                                    {% endif %}
+                                    <div class="map-holder mb-3 mb-md-7">
+                                        <div id="map-company" class="map-canvas"></div>
+                                    </div>
+                                    <div class="map_details">
+                                        <div class="d-flex mb-3">
+                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-geo.svg')}}" /></span>
+                                            <span>Situé à {{ structure.city }}</span>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <span class="prof_icon"><img src="{{ asset('svg/profile-ico-pin.svg')}}" /></span>
+                                            <span>Intervient sur : {{ structure.getNiceRange }}</span>
+                                        </div>
+                                        {#
+                                        <dl class='deflist'>
+                                            <dd>{{ structure.region }}</dd>
+                                            {% if structure.polRange %}
+                                                <dt>Périmètre d'intervention</dt>
+                                                <dd>{{ structure.polRangeText | trans}}</dt>
+                                            {% elseif structure.range %}
+                                                <dt>Périmètre d'intervention</dt>
+                                                <dd>{{ structure.range}} Km</dt>
+                                            {% endif %}
+                                        </dl>
+                                        #}
+                                    </div>
                                 </div>
                                 {#
-                                <dl class='deflist'>
-                                    <dd>{{ structure.region }}</dd>
-                                    {% if structure.polRange %}
-                                        <dt>Périmètre d'intervention</dt>
-                                        <dd>{{ structure.polRangeText | trans}}</dt>
-                                    {% elseif structure.range %}
-                                        <dt>Périmètre d'intervention</dt>
-                                        <dd>{{ structure.range}} Km</dt>
-                                    {% endif %}
-                                </dl>
+                                <div class="profile_capsule">
+                                </div>
+                                <div class="map_capsule">
+                                </div>
                                 #}
-                            </div>
+                            </aside>            
                         </div>
-                        {#
-                        <div class="profile_capsule">
-                        </div>
-                        <div class="map_capsule">
-                        </div>
-                        #}
-                    </aside>            
-                </div>
-            {{ '</div>' }}
 
-            <div class="row">
-                <div class="col-sm-12 mt-5 mb-6">
-                    <small><sup>*</sup>source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">informations en provenance de https://entreprise.api.gouv.fr</a></small>
+
+                    {{ '</div>' }}
+
+                    <div class="row">
+                        <div class="col-12 mt-5 mb-6">
+                            <small><sup>*</sup>source: <a href="https://entreprise.api.gouv.fr/" rel="nofollow" target="_blank">informations en provenance de https://entreprise.api.gouv.fr</a></small>
+                        </div>
+                    </div>
                 </div>
             </div>
         {% endblock %}
@@ -375,10 +391,10 @@
             var circle = new google.maps.Circle({
                 map: map,
                 center: latlng,
-                strokeColor: '#0000EE',
+                strokeColor: '#0c2c78',
                 strokeOpacity: 0.8,
                 strokeWeight: 2,
-                fillColor: '#0000EE',
+                fillColor: '#0c2c78',
                 fillOpacity: 0.1,
                 radius:  1000
             });

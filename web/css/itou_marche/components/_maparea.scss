@@ -1,0 +1,311 @@
+/* maparea */
+.map-canvas,
+#map-canvas {
+	width:100%;
+	height:100%;
+}
+
+.maparea .map-holder {
+	height: 1111px;
+	overflow: hidden;
+	position: relative;
+	border-radius: 5px;
+	border: $gray-500 solid 1px;
+}
+
+.maparea iframe {
+	border: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 1130px;
+}
+
+.maparea .holder {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+}
+
+/* listing-area */
+.listing-area {
+	position: relative;
+}
+
+.listing-area .listing-holder {
+	margin-bottom: 0;
+}
+
+/* listing-post */
+.listing-post {
+	position: relative;
+	margin-bottom: 10px;
+}
+
+.listing-post .listing-box {
+	color: $black;
+	display: block;
+	position: relative;
+	text-decoration: none;
+}
+
+.listing-post .listing-box:hover {
+	text-decoration: none;
+}
+
+.listing-post .frame {
+	overflow: hidden;
+	border-radius: 5px;
+	background: #ffffff;
+	border: $gray-100 solid 1px;
+}
+
+.listing-post .post-info {
+	overflow: hidden;
+	min-height: 150px;
+	position: relative;
+}
+
+.listing-post .img-holder {
+	position: relative;
+}
+
+.listing-post .img-holder img {
+	width: 100%;
+	height: auto;
+	vertical-align: top;
+}
+
+.listing-post .box {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+}
+
+.listing-post .box-holder {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+
+.listing-post .head {
+	overflow: hidden;
+}
+
+.listing-post .foot {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+.listing-post .time-price {
+	float: left;
+	width: 70px;
+	color: $black;
+	line-height: 1.241;
+	margin: 15px 10px 0 16px;
+}
+
+.listing-post .time-price p {
+	margin: 0;
+}
+
+.listing-post .price {
+	display: block;
+	margin: 0 0 -3px;
+	font-size: 36px;
+	line-height: 39px;
+}
+
+.listing-post .favourit {
+	top: 0;
+	right: 0;
+	z-index: 2;
+	width: 46px;
+	height: 46px;
+	color: $gray-100;
+	position: absolute;
+	text-align: center;
+	border-radius: 100%;
+	background: $gray-700;
+	margin: 20px 31px 0 0;
+	font-size: 26px;
+	line-height: 46px;
+	text-decoration: none;
+}
+
+.listing-post .favourit:hover {
+	text-decoration: none;
+	background: $marche;
+}
+
+.listing-post .area {
+	overflow: hidden;
+	padding: 1px 21px 10px 10px;
+}
+
+.listing-post .title {
+	padding: 11px;
+	display: block;
+	color: #ffffff;
+	font-weight: 600;
+	text-align: center;
+	font-size: .8rem;
+	line-height: .8rem;
+	background: rgba(0, 0, 0, 0.45);
+}
+
+.listing-post .post-content {
+	overflow: hidden;
+	padding: 16px 18px;
+}
+
+.listing-post .alignleft {
+	float: left;
+	border-radius: 5px;
+	margin: 4px 10px 0 0;
+	border: $gray-100 solid 1px;
+}
+
+.listing-post .textbox {
+	overflow: hidden;
+}
+
+.listing-post h2 {
+	margin: 0;
+	color: $black;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.listing-post p {
+	margin: 0 0 5px;
+}
+
+.listing-post .info-btns {
+	margin: 0;
+	z-index: 3;
+	left: 44px;
+	right: 44px;
+	bottom: 132px;
+	position: absolute;
+}
+
+.listing-post .info-btns li {
+	z-index: 2;
+	float: left;
+	padding: 0 5px;
+	width: 30.733%;
+	position: relative;
+}
+
+.listing-post .info-btns li.select-holder {
+	width: 38.3%;
+}
+
+.listing-post .info-btns .btn {
+	display: block;
+	padding: 8px 5px;
+	background: none;
+	position: relative;
+	min-width: inherit;
+	border-radius: 3px;
+	text-transform: none;
+	font-size: 14px;
+	line-height: 18px;
+	border-color: $black;
+}
+
+.listing-post .info-btns .btn:before {
+	z-index: -1;
+	content: '';
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	background: $black;
+	-webkit-transition: all 0.35s ease;
+	transition: all 0.35s ease;
+}
+
+.listing-post .info-btns .btn:hover:before {
+	background: $gray-200;
+}
+
+.listing-post .info-btns .jcf-select {
+	height: 36px;
+}
+
+.listing-post .info-btns .jcf-select .jcf-select-opener {
+	width: 29px;
+}
+
+.listing-post .info-btns .jcf-select .jcf-select-text {
+	margin: 4px 34px 0 9px;
+}
+
+.listing-post .info-btns .jcf-select .jcf-select-text img {
+	width: 20px;
+	height: auto;
+	margin: -2px 3px 0 0;
+}
+
+.listing-post.small {
+	margin: 0;
+}
+
+.listing-post.small .rating {
+	margin: 15px 10px 0 15px;
+}
+
+.listing-post.small .time-price {
+	float: right;
+	margin: 8px 15px 0 0;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+.listing-post.small .price {
+	margin: 0 0 -5px;
+}
+
+.listing-post.small .post-info {
+	min-height: 10px;
+}
+
+.listing-post.small .foot {
+	height: 29px;
+}
+
+.listing-post.small .certified {
+	float: none;
+	font-size: 14px;
+	line-height: 17px;
+}
+
+.listing-post.small .post-content {
+	padding: 15px 16px 9px;
+}
+
+.listing-post.small .title {
+	padding: 4px 5px;
+}
+
+.listing-post.small .rating {
+	margin: 13px 10px 0 18px;
+}
+
+.listing-post.small .rating li {
+	font-size: 17px;
+	margin: 0 -6px 0 0;
+}
+
+.listing-post.small .textbox {
+	overflow: visible;
+}
