@@ -88,22 +88,31 @@ class DirectoryAdmin extends AbstractAdmin
             ;
 
 
+        /*
+         * TODO: Legacy code, scrap on next iteration
+         */
         if ($Directory->getC4Id()) {
-            /** @var UserRepository $userRepository */
             $userRepository = $this->modelManager->getEntityManager('CocoricoUserBundle:User')
                 ->getRepository('CocoricoUserBundle:User');
 
-            $user = $userRepository->getFindOneQueryBuilder($Directory->getC4Id());
+            $userQuery = $userRepository->getFindOneQueryBuilder($Directory->getC4Id());
+
+            $formMapper->add('c4Id', null, ['label'=> 'User C4 Synchro', 'disabled'=>true]);
+
+            /*
             $formMapper->add(
                 'user',
                 'sonata_type_model',
                 array(
-                    'query' => $user,
+                    'query' => $userQuery,
                     'disabled' => true,
                     'label' => 'Utilisateur'
                 )
             );
+             */
         }
+        /*
+        */
         $formMapper->end();
     }
 

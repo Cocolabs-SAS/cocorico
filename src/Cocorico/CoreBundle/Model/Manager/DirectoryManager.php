@@ -84,31 +84,15 @@ class DirectoryManager extends BaseManager
         return $paginator;
     }
 
-    public function findByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
+    public function findSomeByForm(DirectorySearchRequest $directorySearchRequest, $page, $params=[])
     {
+        /* Function used by HTML search form, pagination */
         // FIXME: Remove params, use directory search request
         $perpage = $this->maxPerPage;
+        /* We only get some because "hydrating" them all takes too much time */
         $qB = $this->getRepository()->getSome($perpage, (($page - 1) * $perpage));
 
-
-        if ($directorySearchRequest->getSearchType() == 'city') {
-            $qB = $this->applyFilters($qB, $directorySearchRequest);
-            $qB = $this->applyGeo($qB, $directorySearchRequest);
-        } else if ($directorySearchRequest->getSearchType() == 'country') {
-            // Can't use country code (FR, RE, YT, ...)
-            $qB = $this->applyFilters($qB, $directorySearchRequest);
-
-            if ($directorySearchRequest->getCountry() != null)
-                {
-                $qB = $this->applyCountryGeo($qB, $directorySearchRequest);
-                }
-
-            $qB->addSelect('1 AS distance');
-        } else {
-            $qB = $this->applyFilters($qB, $directorySearchRequest, true);
-            #FIXME : Bad doctrine ORM hack
-            $qB->addSelect('1 AS distance');
-        }
+        $this->filter($directorySearchRequest, $qB);
 
         $query = $qB->getQuery();
         $query->setHydrationMode(Query::HYDRATE_OBJECT);
@@ -209,21 +193,35 @@ class DirectoryManager extends BaseManager
     }
 
 
-    public function listByForm(directorySearchRequest $req, $params=[])
+    public function listAllByForm(directorySearchRequest $directorySearchRequest, $params=[])
     {
+        /* Function used for CSV listing, no pagination */
         $qB = $this->getRepository()->getAll();
 
-        if ($req->getSearchType() == 'city') {
-            $qB = $this->applyFilters($qB, $req);
-            $qB = $this->applyGeo($qB, $req);
-        } else {
-            $qB = $this->applyFilters($qB, $req, true);
-            #FIXME : Bad doctrine ORM hack
-            $qB->addSelect('1 AS distance');
-            $qB->orderBy('d.name', 'ASC');
-        }
+        $this->filter($directorySearchRequest, $qB);
+
         $query = $qB->getQuery();
         return $query->getResult();
+    }
+
+    private function filter(directorySearchRequest $directorySearchRequest, &$qB) {
+        if ($directorySearchRequest->getSearchType() == 'city') {
+            $qB = $this->applyFilters($qB, $directorySearchRequest);
+            $qB = $this->applyGeo($qB, $directorySearchRequest);
+        } else if ($directorySearchRequest->getSearchType() == 'country') {
+            $qB = $this->applyFilters($qB, $directorySearchRequest);
+
+            if ($directorySearchRequest->getCountry() != null)
+                {
+                $qB = $this->applyCountryGeo($qB, $directorySearchRequest);
+                }
+
+            $qB->addSelect('1 AS distance');
+        } else {
+            $qB = $this->applyFilters($qB, $directorySearchRequest, true);
+            #FIXME : doctrine ORM hack
+            $qB->addSelect('1 AS distance');
+        }
     }
 
     private function applyFilters($qB, $req, $geo=False) {

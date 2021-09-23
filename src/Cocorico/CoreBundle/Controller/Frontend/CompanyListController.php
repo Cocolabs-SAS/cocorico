@@ -78,8 +78,7 @@ class CompanyListController extends Controller
 
             // $withAntenna = $sort->getWithAntenna();
             $withRange = $sort->getWithRange();
-            $entries = $directoryManager->findByForm($sort, $page, $sort->getLegacyParams());
-            //dump($sort->getLegacyParams());
+            $entries = $directoryManager->findSomeByForm($sort, $page, $sort->getLegacyParams());
 
             $this->tracker->track('backend', 'directory_search', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
 
@@ -151,9 +150,9 @@ class CompanyListController extends Controller
             $sort = $form->getData();
             $sort->prepareData();
             $this->tracker->track('backend', 'directory_csv', array_merge($sort->getLegacyParams(), $tracker_payload), $request->getSession());
-            $entries = $directoryManager->listByForm($sort);
+            $entries = $directoryManager->listAllByForm($sort);
         } else {
-            $entries = $directoryManager->listByForm($directorySearchRequest);
+            $entries = $directoryManager->listAllByForm($directorySearchRequest);
         }
         $format = $form['format']->getData();
 
