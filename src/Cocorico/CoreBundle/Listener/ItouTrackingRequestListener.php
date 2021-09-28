@@ -69,7 +69,7 @@ class ItouTrackingRequestListener
                 $payload,
                 $session,
                 $client_context,
-                $server_context,
+                // $server_context,
             );
             error_log("Log Sent");
         } catch (Exception $e) {
