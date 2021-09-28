@@ -29,7 +29,6 @@ framework:
         #assets_version: SomeVersionScheme
     assets:
         json_manifest_path: '%kernel.project_dir%/web/assets/manifest.json'
-        version: 'v6'
     default_locale:  "%cocorico.locale%"
     session:
         # handler_id set to null will use default session handler from php.ini
