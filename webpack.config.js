@@ -146,14 +146,13 @@ Encore
     .enableBuildNotifications()
 
     // enables hashed filenames (e.g. app.abc123.css)
-    .enableVersioning(Encore.isProduction())
+    .enableVersioning()
 
     // Other options.
     //.enableEslintLoader()
     .enableSassLoader()
     .cleanupOutputBeforeBuild()
     .enableSourceMaps(!Encore.isProduction())
-    .enableVersioning(Encore.isProduction())
 ;
 
 config = Encore.getWebpackConfig();
