@@ -48,6 +48,7 @@
                             </div>
 
 
+                            {#
                             <div class="field-row">
                                 {{ form_errors(form.phonePrefix) }}
                                 <span class="label">{{ form_label(form.phonePrefix) }}</span>
@@ -70,6 +71,7 @@
                                     </span>
                                 </div>
                             </div>
+                            #}
 
                             <div class="field-row">
                                 {{ form_errors(form.phone) }}
@@ -94,6 +96,7 @@
                                 </div>
                             </div>
 
+                            {#
                             {% if not timeUnitIsDay %}
                                 <div class="field-row">
                                     {{ form_errors(form.timeZone) }}
@@ -110,6 +113,7 @@
                                     </div>
                                 </div>
                             {% endif %}
+                            #}
 
                             <div class="field-row">
                                 <div class="error-container">{{ form_errors(form.plainPassword.first) }}</div>
@@ -118,6 +122,7 @@
                                 <div class="field-holder">
                                     {{ form_widget(form.plainPassword.first, {
                                         'attr': {
+                                            'autocomplete' : 'new-password',
                                             'class': "form-control required",
                                             'data-parsley-invalid-message': 'cocorico_user.plainPassword.first.invalid'|trans({}, 'validators')
                                         }
@@ -132,6 +137,7 @@
                                 <div class="field-holder">
                                     {{ form_widget(form.plainPassword.second , {
                                         'attr': {
+                                            'autocomplete' : 'false',
                                             'class': "form-control required",
                                             'data-parsley-equalto': "#"~ form.plainPassword.first.vars.id,
                                             'data-parsley-equalto-message': 'fos_user.password.mismatch'|trans({},'validators'),
@@ -142,6 +148,8 @@
                             </div>
                         </div>
 
+                        
+                        {#
                         <div class="column">
                             {% for address in form.addresses %}
                                 <h4>{{ address.vars.data.getTypeText()|trans }}</h4>
@@ -208,6 +216,7 @@
                                 <br/>
                             {% endfor %}
                         </div>
+                        #}
                     </div>
                 </div>
                 <div class="btn-block text-center">

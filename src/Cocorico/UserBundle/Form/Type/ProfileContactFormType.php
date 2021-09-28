@@ -48,6 +48,7 @@ class ProfileContactFormType extends AbstractType
                     'label' => 'form.user.email'
                 )
             )
+            /*
             ->add(
                 'phonePrefix',
                 TextType::class,
@@ -57,6 +58,7 @@ class ProfileContactFormType extends AbstractType
                     'empty_data' => '+33'
                 )
             )
+             */
             ->add(
                 'phone',
                 TelType::class,
@@ -82,18 +84,20 @@ class ProfileContactFormType extends AbstractType
                     'invalid_message' => 'fos_user.password.mismatch',
                     'required' => false
                 )
-            )
+            );
+            /*
             ->add(
                 'addresses',
                 CollectionType::class,
                 array(
                     'entry_type' => UserAddressFormType::class,
-                    /** @Ignore */
                     'label' => false,
                     'required' => false,
                 )
             );
+            */
 
+        /*
         if (!$this->timeUnitIsDay) {
             $builder
                 ->add(
@@ -105,6 +109,7 @@ class ProfileContactFormType extends AbstractType
                     )
                 );
         }
+         */
 
 
     }

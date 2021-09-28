@@ -12,6 +12,18 @@
 {% block main_dashboard %}
     <div class="tab-content no-border">
         <!-- quotes -->
+        <div style="background-color:#ddf2f3;color:#495057;padding:2rem;">
+            <h2>Info déploiement</h2>
+            Suite à l’évolution du marché de l'inclusion, cette fonctionnalité est désormais obsolète.<br/>
+            {% if user.isSIAE  %}
+                Les personnes intéressées peuvent désormais utiliser directement vos coordonnées pour vous contacter.
+            {% else %}
+                Il vous est possible de contacter directement les structures à partir de leur fiche de présentation.
+            {% endif %}
+        </div>
+        <br />
+        <br />
+        <br />
         <div role="tabpanel" class="tab-pane active" id="quotes">
             <!-- postarea -->
             <section class="postarea alt">
