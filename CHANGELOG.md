@@ -14,6 +14,7 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 - Correctif modification données utilisateur
 - Correctif champ mot de passe non pré-rempli
 - Ajustement du versionnage des assets
+- Ajout image metatags
 
 ### [6.10] - (2021-09-23)
 - Page formulaire recherche SIAE convertie en thème itou

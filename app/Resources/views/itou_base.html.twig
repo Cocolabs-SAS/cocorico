@@ -24,6 +24,17 @@
     <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#FE5455">
     <meta name="theme-color" content="#ffffff">
 
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Le marché de l'inclusion">
+    <meta property="og:description" content="Le marché de l'inclusion est un service numérique permettant de trouver un prestataire sociale inclusif proposant des produits ou services professionnels.">
+    <meta property="og:image" content="{% static "https://lemarche.inclusion.beta.gouv.fr/images/meta_itou_marche_inclusion.png" %}">
+    {# https://metatags.io Twitter #}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://lemarche.inclusion.beta.gouv.fr">
+    <meta property="twitter:title" content="Le marché de l'inclusion">
+    <meta property="twitter:description" content="Le marché de l'inclusion est un service numérique permettant de trouver un prestataire sociale inclusif proposant des produits ou services professionnels.">
+    <meta property="twitter:image" content="{% static "https://lemarche.inclusion.beta.gouv.fr/images/meta_itou_marche_inclusion.png" %}">
     {% block stylesheets %}
         {{ encore_entry_link_tags('itou_common') }}
     {% endblock %}
