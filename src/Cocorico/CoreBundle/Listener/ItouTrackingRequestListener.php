@@ -13,6 +13,7 @@ class ItouTrackingRequestListener
     public function __construct()
     {
         $this->tracker = new Tracker($_SERVER['ITOU_ENV'], "test");
+
     }
 
     public function onKernelRequest(GetResponseEvent $event)
@@ -70,10 +71,10 @@ class ItouTrackingRequestListener
                 $client_context,
                 $server_context,
             );
-
+            error_log("Log Sent");
         } catch (Exception $e) {
-            echo 'Exception Tracker :', $e->getMessage(), "\n";
-        
+            error_log("!!!!!!!!!!!!!!!!!!!!!");
+            error_log($e->getMessage());
         }
     }
 }
