@@ -71,9 +71,7 @@ class ItouTrackingRequestListener
                 $client_context,
                 // $server_context,
             );
-            error_log("Log Sent");
         } catch (Exception $e) {
-            error_log("!!!!!!!!!!!!!!!!!!!!!");
             error_log($e->getMessage());
         }
     }
