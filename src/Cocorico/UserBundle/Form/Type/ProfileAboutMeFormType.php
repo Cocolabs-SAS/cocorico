@@ -119,6 +119,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             );
 
 
+        /*
         $builder->add(
             'translations',
             TranslationsType::class,
@@ -131,10 +132,10 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                         'locale_options' => $descriptions,
                     ),
                 ),
-                /** @Ignore */
                 'label' => false
             )
         );
+         */
 
         $builder
             ->add(
@@ -150,7 +151,7 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
                     /** @Ignore */
                     'label' => false
                 )
-            )
+            );
             //->add(
             //    'language',
             //    LanguageType::class,
@@ -183,24 +184,24 @@ class ProfileAboutMeFormType extends AbstractType implements TranslationContaine
             //        'data' => $user->getMotherTongue() ? $user->getMotherTongue() : $this->locale
             //    )
             //)
-            ->add(
-                'fromLang',
-                LanguageFilteredType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'cocorico.from',
-                    'data' => $this->locale
-                )
-            )
-            ->add(
-                'toLang',
-                LanguageFilteredType::class,
-                array(
-                    'mapped' => false,
-                    'label' => 'cocorico.to',
-                    'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
-                )
-            );
+            //->add(
+            //    'fromLang',
+            //    LanguageFilteredType::class,
+            //    array(
+            //        'mapped' => false,
+            //        'label' => 'cocorico.from',
+            //        'data' => $this->locale
+            //    )
+            //)
+            //->add(
+            //    'toLang',
+            //    LanguageFilteredType::class,
+            //    array(
+            //        'mapped' => false,
+            //        'label' => 'cocorico.to',
+            //        'data' => LanguageFilteredType::getLocaleTo($this->locales, $this->locale),
+            //    )
+            //);
 
         $builder->addEventListener(
             FormEvents::PRE_SUBMIT,

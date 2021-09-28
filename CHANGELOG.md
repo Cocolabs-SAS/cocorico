@@ -9,6 +9,12 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.11] - (2021-09-28)
+- Message déploiement sur l'ancienne fonctionnalité "Demandes de contact"
+- Correctif modification données utilisateur
+- Correctif champ mot de passe non pré-rempli
+- Ajustement du versionnage des assets
+
 ### [6.10] - (2021-09-23)
 - Page formulaire recherche SIAE convertie en thème itou
 - Page fiche SIAE convertie en thème itou

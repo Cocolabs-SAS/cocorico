@@ -54,6 +54,7 @@ class QuoteController extends Controller
             'CocoricoCoreBundle:Dashboard/Quote:index.html.twig',
             array(
                 'quotes' => $quotes,
+                'user' => $this->getUser(),
                 'pagination' => array(
                     'page' => $page,
                     'pages_count' => ceil($quotes->count() / $quoteManager->maxPerPage),
