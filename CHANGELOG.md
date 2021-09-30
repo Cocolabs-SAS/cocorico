@@ -9,6 +9,9 @@ and to the [CHANGELOG recommendations](http://keepachangelog.com/).
 
 ## ITOU CHANGELOG
 
+### [6.12] - (2021-09-30)
+- Wording dasbhoard SIAE
+
 ### [6.11] - (2021-09-28)
 - Message déploiement sur l'ancienne fonctionnalité "Demandes de contact"
 - Correctif modification données utilisateur
